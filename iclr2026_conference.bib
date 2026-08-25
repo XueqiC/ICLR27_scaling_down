@@ -1,0 +1,183 @@
+% T1 reference library (PARC, budget-aware per-role compression for MAS).
+% Entries marked "VERIFY" have arXiv ids the author should confirm before submission;
+% all others are standard, well-known references with checked venues.
+
+% ---------------------------------------------------------------------------
+% Multi-agent system frameworks / orchestrations
+% ---------------------------------------------------------------------------
+@inproceedings{wu2023autogen,
+  title     = {AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation},
+  author    = {Wu, Qingyun and Bansal, Gagan and Zhang, Jieyu and Wu, Yiran and Li, Beibin and Zhu, Erkang and Jiang, Li and Zhang, Xiaoyun and Zhang, Shaokun and Liu, Jiale and Awadallah, Ahmed and White, Ryen W. and Burger, Doug and Wang, Chi},
+  booktitle = {arXiv preprint arXiv:2308.08155},
+  year      = {2023},
+}
+
+@inproceedings{hong2023metagpt,
+  title     = {MetaGPT: Meta Programming for a Multi-Agent Collaborative Framework},
+  author    = {Hong, Sirui and Zhuge, Mingchen and Chen, Jonathan and Zheng, Xiawu and Cheng, Yuheng and Zhang, Ceyao and Wang, Jinlin and Wang, Zili and Yau, Steven Ka Shing and Lin, Zijuan and Zhou, Liyang and Ran, Chenyu and Xiao, Lingfeng and Wu, Chenglin and Schmidhuber, J{\"u}rgen},
+  booktitle = {ICLR},
+  year      = {2024},
+  note      = {arXiv:2308.00352},
+}
+
+% ---------------------------------------------------------------------------
+% Specialized small models / teams can match or beat a single large base in MAS
+% ---------------------------------------------------------------------------
+@inproceedings{shen2024aumi,
+  title     = {Small LLMs Are Weak Tool Learners: A Multi-LLM Agent},
+  author    = {Shen, Weizhou and Li, Chenliang and Chen, Hongzhan and Yan, Ming and Quan, Xiaojun and Chen, Hehong and Zhang, Ji and Huang, Fei},
+  booktitle = {EMNLP},
+  year      = {2024},
+  note      = {alpha-UMi; arXiv:2401.07324},
+}
+
+@article{wang2024moa,
+  title   = {Mixture-of-Agents Enhances Large Language Model Capabilities},
+  author  = {Wang, Junlin and Wang, Jue and Athiwaratkun, Ben and Zhang, Ce and Zou, James},
+  journal = {arXiv preprint arXiv:2406.04692},
+  year    = {2024},
+}
+
+@article{belcak2025slm,
+  title   = {Small Language Models are the Future of Agentic AI},
+  author  = {Belcak, Peter and Heinrich, Greg and Diao, Shizhe and Fu, Yonggan and Dong, Xin and Muralidharan, Saurav and Lin, Yingyan Celine and Molchanov, Pavlo},
+  journal = {arXiv preprint arXiv:2506.02153},
+  year    = {2025},
+}
+
+% ---------------------------------------------------------------------------
+% Cost / scaling motivation for MAS and small-model agents
+% ---------------------------------------------------------------------------
+@article{li2024moreagents,
+  title   = {More Agents Is All You Need},
+  author  = {Li, Junyou and Zhang, Qin and Yu, Yangbin and Fu, Qiang and Ye, Deheng},
+  journal = {arXiv preprint arXiv:2402.05120},
+  year    = {2024},
+  note    = {VERIFY arXiv id},
+}
+
+@article{zhu2024survey,
+  title   = {A Survey on Model Compression for Large Language Models},
+  author  = {Zhu, Xunyu and Li, Jian and Liu, Yong and Ma, Can and Wang, Weiping},
+  journal = {Transactions of the Association for Computational Linguistics (TACL)},
+  year    = {2024},
+  note    = {arXiv:2308.07633},
+}
+
+% ---------------------------------------------------------------------------
+% Distillation
+% ---------------------------------------------------------------------------
+@article{hinton2015distilling,
+  title   = {Distilling the Knowledge in a Neural Network},
+  author  = {Hinton, Geoffrey and Vinyals, Oriol and Dean, Jeff},
+  journal = {arXiv preprint arXiv:1503.02531},
+  year    = {2015},
+}
+
+@inproceedings{gu2024minillm,
+  title     = {MiniLLM: Knowledge Distillation of Large Language Models},
+  author    = {Gu, Yuxian and Dong, Li and Wei, Furu and Huang, Minlie},
+  booktitle = {ICLR},
+  year      = {2024},
+  note      = {arXiv:2306.08543},
+}
+
+@inproceedings{ko2024distillm,
+  title     = {DistiLLM: Towards Streamlined Distillation for Large Language Models},
+  author    = {Ko, Jongwoo and Kim, Sungnyun and Chen, Tianyi and Yun, Se-Young},
+  booktitle = {ICML},
+  year      = {2024},
+  note      = {arXiv:2402.03898},
+}
+
+% ---------------------------------------------------------------------------
+% Pruning
+% ---------------------------------------------------------------------------
+@inproceedings{sun2024wanda,
+  title     = {A Simple and Effective Pruning Approach for Large Language Models},
+  author    = {Sun, Mingjie and Liu, Zhuang and Bair, Anna and Kolter, J. Zico},
+  booktitle = {ICLR},
+  year      = {2024},
+  note      = {Wanda; arXiv:2306.11695},
+}
+
+@inproceedings{frantar2023sparsegpt,
+  title     = {SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot},
+  author    = {Frantar, Elias and Alistarh, Dan},
+  booktitle = {ICML},
+  year      = {2023},
+  note      = {arXiv:2301.00774},
+}
+
+% ---------------------------------------------------------------------------
+% Low-rank factorization as compression
+% ---------------------------------------------------------------------------
+@inproceedings{li2023losparse,
+  title     = {LoSparse: Structured Compression of Large Language Models Based on Low-Rank and Sparse Approximation},
+  author    = {Li, Yixiao and Yu, Yifan and Zhang, Qingru and Liang, Chen and He, Pengcheng and Chen, Weizhu and Zhao, Tuo},
+  booktitle = {ICML},
+  year      = {2023},
+  note      = {arXiv:2306.11222},
+}
+
+@article{wang2024svdllm,
+  title   = {SVD-LLM: Truncation-Aware Singular Value Decomposition for Large Language Model Compression},
+  author  = {Wang, Xin and Zheng, Yu and Wan, Zhongwei and Zhang, Mi},
+  journal = {arXiv preprint arXiv:2403.07378},
+  year    = {2024},
+}
+
+% ---------------------------------------------------------------------------
+% Unified sparse-plus-low-rank and measure-level unifications (scaffold; cited, not claimed)
+% ---------------------------------------------------------------------------
+@inproceedings{makni2025hassle,
+  title     = {HASSLE-free: A Unified Framework for Sparse plus Low-Rank Matrix Decomposition for LLMs},
+  author    = {Makni, Mehdi and Behdin, Kayhan and Ponomareva, Natalia and Mazumder, Rahul},
+  booktitle = {Conference on Parsimony and Learning (CPAL/PMLR)},
+  year      = {2025},
+}
+
+@article{authors2026big2small,
+  title   = {Big2Small: A Unifying Framework for Model Compression (VERIFY arXiv id)},
+  author  = {Authors, Big2Small},
+  journal = {arXiv preprint arXiv:2603.29768},
+  year    = {2026},
+  note    = {VERIFY: confirm exact title, authors, and arXiv id before submission},
+}
+
+% ---------------------------------------------------------------------------
+% Embedding-and-select mechanism lineage
+% ---------------------------------------------------------------------------
+@inproceedings{achille2019task2vec,
+  title     = {Task2Vec: Task Embedding for Meta-Learning},
+  author    = {Achille, Alessandro and Lam, Michael and Tewari, Rahul and Ravichandran, Avinash and Maji, Subhransu and Fowlkes, Charless C. and Soatto, Stefano and Perona, Pietro},
+  booktitle = {ICCV},
+  year      = {2019},
+  note      = {arXiv:1902.03545},
+}
+
+% ---------------------------------------------------------------------------
+% Lifelong / RL optimization for MAS (method-paragraph inspiration)
+% ---------------------------------------------------------------------------
+@article{unitymaso2026,
+  title   = {UnityMAS-O: A General RL Optimization Framework for LLM-Based Multi-Agent Systems (VERIFY arXiv id)},
+  author  = {Authors, UnityMAS-O},
+  journal = {arXiv preprint},
+  year    = {2026},
+  note    = {VERIFY: author-provided title; confirm authors and arXiv id before submission},
+}
+
+@article{lifelongmas2025,
+  title   = {Lifelong Learning for LLM-Based Multi-Agent Systems (VERIFY arXiv id)},
+  author  = {Authors, Lifelong-MAS},
+  journal = {arXiv preprint},
+  year    = {2025},
+  note    = {VERIFY: confirm exact title, authors, and arXiv id before submission},
+}
+
+@article{busbridge2025scaling,
+  title   = {Distillation Scaling Laws},
+  author  = {Busbridge, Dan and Shidani, Amitis and Weers, Floris and Ramapuram, Jason and Littwin, Etai and Webb, Russ},
+  journal = {arXiv preprint arXiv:2502.08606},
+  year    = {2025},
+}
