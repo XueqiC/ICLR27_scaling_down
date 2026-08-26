@@ -1,1 +1,121 @@
-\section{Experiments}\label{sec:exp}
+\section{Experiments}
+\label{sec:exp}
+
+We report two kinds of evidence: (a) a forensic re-analysis of a large
+prior ability-space compression grid, which motivates the measurement layer;
+and (b) preliminary instantiations of capability geometry on the Qwen3
+family. The full pre-registered grid (methods $\times$ sizes $\times$
+recovery) is in progress; this section will be extended as it lands.
+
+\subsection{Setup}
+\label{sec:setup}
+
+\textbf{Models.} Qwen3 dense checkpoints at 0.6B, 1.7B, 4B (reported here)
+and 8B, 14B, 32B (in progress). \textbf{Probes.} Per capability, prompts
+with reference completions from held-out benchmark splits chosen to be
+cross-benchmark disjoint from all transfer data: MATH-500 (math), MBPP
+(code), 2WikiMultihopQA (multi-hop QA); estimation and measurement halves
+are disjoint. \textbf{Compression.} Global magnitude pruning at ten
+densities $\dens\in[0.3,0.9]$; round-to-nearest weight quantization
+(int8/int4, in progress). \textbf{Geometry.} $\gbar{c}$ and $\Fc{c}$
+estimated from 64 per-sample gradients per capability at $\wz$
+(\S\ref{sec:geometry}); quadratic forms computed exactly by streaming
+$g_i^{\top}\dw$; spectra accumulated in $2\times10^5$ magnitude-quantile
+bins.
+
+\subsection{Re-analysis of a prior ability-space grid}
+\label{sec:reanalysis}
+
+A prior internal study fit compression laws directly on Rasch abilities
+estimated from $\sim$100-item panels over a 774-cell Qwen3 grid
+(distillation $\times$ teachers $\times$ sizes $\times$ seeds; pruning;
+quantization), and reported the headline negative result that no derived law
+had held-out predictive power. Our re-analysis attributes much of this to
+the measurement and testing layer rather than to compression itself:
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{A recipe artifact drove the falsification.} The
+pre-registered $r{=}1$ self-distillation anchor (same-size student must not
+move) failed only when answer-only distillation---a known, capability-
+selective data-composition effect---was pooled with standard recipes.
+Stratified, the anchor holds for standard recipes (math: $-3.22$ ability
+units for answer-only alone versus $-0.13$ pooled without it), and held-out
+transfer-law error drops from $9.0\times$ to $1.8\times$ the noise floor.
+\item \textbf{Same-benchmark evaluation inflated gains.} Each domain panel
+mixed items from the distillation-trace benchmark with a never-trained
+sibling benchmark. Splitting them shows QA distillation gains concentrated
+on the trained half (e.g.\ $+0.198$ vs.\ $+0.127$ accuracy for soft
+KD)---roughly one third of the headline gain was distribution fit. Math and
+code showed no split.
+\item \textbf{Interval-scale ability was unsupported.} Item discrimination
+is strongly heterogeneous (2PL preferred by $\Delta$AIC $196$--$348$), so
+equal-discrimination ability differences are not interval-scaled;
+rank-level conclusions survive (1PL/2PL rank correlation $\ge 0.98$).
+\item \textbf{Item-level damage is smooth pre-cliff.} Comparing a
+uniform-logit-shift model against a discrete item-deletion mixture on
+pruning ladders with item-level records, the shift model wins or ties
+almost everywhere before the cliff: capability damage does not proceed by
+deleting individual testable skills, consistent with distributed
+representations and with our smooth pre-cliff loss curves.
+\end{enumerate}
+These findings fix the design of \S\ref{sec:prelim}: continuous
+capability-conditional loss as primary $y$, cross-benchmark probes, and
+rank-only use of latent abilities.
+
+\subsection{Capability geometry on Qwen3: preliminary results}
+\label{sec:geom-results}
+
+\paragraph{E1: Compression is capability-selective at first order.}
+Magnitude pruning improves multi-hop QA loss over a wide range while math
+and code degrade: at 4B, $\Delta\Lc{\text{qa}}$ reaches $-1.96$ nats/token
+at $\dens=0.55$ and remains negative through $\dens=0.45$, while
+$\Delta\Lc{\text{math}}$ rises monotonically. The effect exists at 0.6B
+only for mild pruning and strengthens with scale ($-0.25$ at 0.6B,
+$-0.79$ at 1.7B, $-1.96$ at 4B). Capability selectivity is thus a
+first-order phenomenon that any scalar law must miss.
+
+\paragraph{E2: The signed first-order term predicts the pre-cliff regime.}
+The alignment term $\gbar{c}^{\top}\dw$ is negative for pruning across
+capabilities (deleting small weights moves downhill on average), and alone
+reproduces the QA improvement quantitatively at 4B: predicted $-0.83$
+vs.\ measured $-0.79$ at $\dens=0.7$; $-2.43$ vs.\ $-1.76$ at
+$\dens=0.6$. Mild-regime math/code effects are likewise tracked at 0.6B--4B.
+The full-Fisher quadratic term is currently inflated for long-context
+probes by gradient outliers; a trimmed estimator is pre-registered for the
+full grid.
+
+\paragraph{E3: The cliff is non-perturbative.}
+At $\dens\le 0.5$ (0.6B) and $\dens\le 0.45$ (4B), measured math/code
+damage exceeds the full second-order prediction by two orders of magnitude
+(e.g.\ 0.6B math at $\dens=0.5$: predicted $-0.19$, measured $+4.68$).
+This is not an estimator failure---the same estimator succeeds pre-cliff---
+but a regime boundary: collapse is invisible to local geometry, confirming
+the two-regime structure of \eqref{eq:tworegime} in loss space itself
+(the cliff is not an artifact of discrete metrics or link nonlinearity).
+
+\paragraph{E4: Top-concentration tracks prunability across scale.}
+The concentration statistic $\kappa_c(1\%)$---the share of capability
+Fisher mass in the top 1\% of coordinates by weight magnitude---rises
+monotonically with model size (means $\approx$10\% at 0.6B, 13.6\% at
+1.7B, 17.5\% at 4B), while the math cliff onset deepens
+($\dens^{*}\approx0.62\to0.60\to0.50$) and the QA-improvement region
+widens. Because magnitude pruning deletes bottom coordinates first,
+top-concentrated geometry loses less mass at fixed density.
+\textbf{Pre-registered prediction:} if concentration governs robustness,
+the anomalously prune-robust 14B checkpoint (observed in the prior grid to
+be more robust than both 8B and 32B) must show higher $\kappa$ than 32B.
+The 8B/14B/32B measurements are queued.
+
+\subsection{Planned full grid}
+\label{sec:planned}
+
+The pre-registered grid crosses: sizes 0.6B--32B $\times$
+\{magnitude pruning (10 densities), int8/int4 PTQ, distillation onto
+smaller Qwen3 students with recipe and $\Ds$ axes\} $\times$ recovery
+$\Dr\in\{0, 10\text{M}, 100\text{M}, 1\text{B}\}$ tokens, with all
+capability-geometry statistics measured at each source. Analysis follows
+the protocol of \S\ref{sec:claims}: pre-registered forms committed with
+timestamps before fitting; keep/reject decisions by cell-level paired
+bootstrap; cluster bootstrap and measurement-error-weighted fits; repeated
+held-out extrapolation on the largest size, deepest compression, and
+largest recovery budget; and positive/negative controls (synthetic law
+recovery; shuffled capability labels).

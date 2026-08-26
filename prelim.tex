@@ -1,2 +1,63 @@
-\section{Preliminary}\label{sec:prelim}
+\section{Preliminaries and Measurement Layer}
+\label{sec:prelim}
 
+\paragraph{Objects.}
+A \emph{source model} has weights $\wz$, family $f$, and parameter count
+$N_0$. A \emph{compression operator} $\comp{m}{s}$ maps the source to a
+smaller or cheaper model, where $m\in\{\text{prune},\text{quant},
+\text{distill}\}$ and $s$ is the method's strength parameter: remaining
+density $\dens\in(0,1]$ for magnitude pruning, bit-width $\bits$ for
+post-training quantization, and student size $N_S$ with transfer set size
+$\Ds$ and recipe for distillation. A \emph{recovery operator} $R_{\Dr}$
+performs $\Dr$ tokens of continued training on a compressed model. For
+same-architecture methods (pruning, quantization) we write the induced
+weight perturbation $\dw = \comp{m}{s}(\wz)-\wz$; for pruning
+$\dw=-\wz\odot \maskdens_{\dens}$ where $\maskdens_{\dens}$ masks the
+$(1-\dens)$ fraction of smallest-magnitude weights, and for round-to-nearest
+quantization $\dw$ is the rounding error.
+
+\paragraph{Capability vector.}
+We fix a capability set $\capset$ (here: mathematical reasoning, code
+generation, multi-hop QA; the framework extends to knowledge,
+instruction-following, and tool use). Each capability $c$ has a
+\emph{probe set} $\probeset{c}$ of prompt--reference pairs drawn from
+benchmarks that are \emph{cross-benchmark disjoint} from any data used for
+distillation or recovery---a hard constraint motivated by our re-analysis of
+prior evaluations, in which same-benchmark evaluation inflated apparent
+distillation gains on QA by roughly one third (\S\ref{sec:exp}). The primary
+observable is the \emph{capability-conditional task loss}
+\begin{equation}
+\Lc{c}(w) \;=\; \frac{1}{T_c}\sum_{(x,y)\in\probeset{c}}
+\sum_{t=1}^{|y|} -\log p_w\!\left(y_t \mid x, y_{<t}\right),
+\label{eq:taskloss}
+\end{equation}
+the mean cross-entropy over reference-completion tokens ($T_c$ is the total
+token count). Being an average over thousands of tokens, $\Lc{c}$ is a
+low-variance, continuous measurement; this choice follows the evidence that
+discrete accuracy metrics destroy the statistical regularity needed for
+extrapolation \citep{schaeffer2024predicting,gadre2024language,
+bhagia2024establishing}. Probe sets are split once into an
+\emph{estimation half} (used for measuring geometry, \S\ref{sec:method}) and
+a \emph{measurement half} (used for evaluating compressed models), so
+predictions and measurements never share sampling noise.
+
+\paragraph{Link layer.}
+Task success is a separately measured, capability-specific link
+$A_c = g_c(\Lc{c})$ with pre-registered qualitative constraints
+(monotone, saturating at both ends). Item-level responses are retained for
+diagnostics, but no law is fit in accuracy space or in latent-ability (IRT)
+space; when an IRT summary is used at all, it is restricted to rank-level
+statements, since discrimination heterogeneity invalidates interval-scale
+use while leaving rankings intact (Spearman $\rho\ge 0.98$ between 1PL and
+2PL abilities in our re-analysis).
+
+\paragraph{Target laws.}
+A \emph{scaling-down law} is a predictive map
+\begin{equation}
+(N_0, f, m, s, \Dr) \;\longmapsto\; \vec{L} = \left(\Lc{c}\right)_{c\in\capset},
+\label{eq:sdlaw}
+\end{equation}
+reported in two forms: a \emph{mechanism form}, whose terms are functionals
+of measured capability geometry, and a \emph{reduced form} containing only
+basic parameters, obtained by fitting the geometry statistics themselves as
+smooth functions of $N_0$. Only the reduced form is needed to use the law.

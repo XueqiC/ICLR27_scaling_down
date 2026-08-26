@@ -1,2 +1,94 @@
-\section{Introduction}\label{sec:intro}
+\section{Introduction}
+\label{sec:intro}
 
+Frontier language models are large and expensive because they are general.
+Deployed agentic systems are the opposite: a coding agent, a retrieval
+assistant, or a tool-calling workflow exercises a narrow, stable
+\emph{combination} of capabilities, and its economics are dominated by
+inference cost. The practical question of the small-model era is therefore
+not ``how good can an $N$-parameter model be?'' but ``what is the cheapest
+model whose \emph{capability profile} covers this workload?'' The standard
+route to such models starts from a strong source model and scales it
+\emph{down}---by knowledge distillation, pruning, or quantization, usually
+followed by some recovery training.
+
+Scaling \emph{up} is governed by well-established laws
+\citep{kaplan2020scaling,hoffmann2022training}. Scaling \emph{down} is not.
+The laws that do exist for compression---for sparsity
+\citep{frantar2023scaling}, for numerical precision
+\citep{kumar2024scaling}, for distillation
+\citep{busbridge2025distillation}, and for unified compressed formats
+\citep{panferov2025unified}---are laws of \emph{pretraining loss}. They are
+accurate in that space, but they are silent about the quantity practitioners
+actually care about: which capabilities a compressed model retains.
+Meanwhile, a growing body of empirical work shows that compression damage is
+strongly capability-\emph{selective}: pruning preferentially destroys
+knowledge-intensive behavior \citep{jaiswal2023compressing}, low-bit
+quantization preferentially harms reasoning \citep{liu2025quantization},
+and the two do not share a common damage coordinate. A single scalar loss
+cannot express any of this.
+
+This paper develops \emph{scaling-down laws}: predictive relationships
+between the \emph{basic parameters} of compression---source size $N_0$,
+pruning density $\dens$, bit-width $\bits$, distillation data $\Ds$,
+recovery tokens $\Dr$---and a \emph{vector} $\vec{L}=(\Lc{c})_{c\in\capset}$
+of capability-conditional losses, each linked to task success by a separately
+measured link function. Two design principles distinguish our approach from
+curve fitting. First, \textbf{functional forms are derived, not selected}:
+every term in our laws has a mechanistic origin, and the mechanisms are
+pre-registered with discriminating experiments before the fits are run.
+Second, \textbf{the $y$-axis is continuous}: a long line of work shows that
+downstream accuracy is predictable only through continuous log-likelihood
+based measurements \citep{schaeffer2023emergent,schaeffer2024predicting,
+gadre2024language,bhagia2024establishing}; we measure capability-conditional
+task loss and treat discrete accuracy as a link layer.
+
+\paragraph{Framework: scaling-down as selective deletion.}
+Our unifying view is that all three compression families \emph{delete} parts
+of the source model, each in a different basis: pruning deletes
+\emph{weight coordinates} in magnitude order; quantization deletes
+\emph{bit-planes}; distillation deletes \emph{function components}---those
+the student's capacity cannot hold and those the transfer data never
+exercises. Recovery training is the framework's only \emph{addition}
+operator. What a capability loses under a given method is then determined by
+how that capability's ``mass'' is distributed over the basis being
+deleted. We call this distribution the source model's \emph{capability
+geometry}: the capability-conditional mean gradient $\gbar{c}$ and Fisher
+structure $\Fc{c}$ at the dense checkpoint $\wz$ (\S\ref{sec:method}). The
+geometry is measurable with forward--backward passes only, and immediately
+explains why no single compression coordinate can be universal: different
+methods integrate different functionals of the same geometry.
+
+\paragraph{Preliminary findings.}
+Instantiating the framework on the Qwen3 family (0.6B--32B), with
+capability probes drawn from held-out benchmark splits, we find:
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{Capability selectivity is first-order, not a correction.}
+Magnitude-pruning a Qwen3-4B to half density \emph{improves} multi-hop QA
+loss (by up to $-1.96$ nats/token) while math and code degrade
+monotonically; the effect strengthens with scale.
+\item \textbf{The signed first-order term predicts the pre-cliff regime.}
+The capability-conditional mean gradient is non-zero---a pretrained model is
+not at any single capability's optimum---and the alignment term
+$\gbar{c}^{\top}\dw$ quantitatively reproduces both sign and magnitude of
+mild-compression effects, including the QA improvement.
+\item \textbf{The cliff is non-perturbative.} Beyond a density threshold,
+measured damage exceeds any first- plus second-order prediction by orders of
+magnitude: local geometry cannot see the collapse. Scaling-down laws are
+therefore \emph{two-regime} laws, and we characterize the boundary.
+\item \textbf{A spectral statistic tracks robustness.} The share of
+capability Fisher mass concentrated in high-magnitude coordinates rises
+monotonically with model size (0.6B$\to$4B) and co-moves with prunability,
+yielding a falsifiable, pre-registered prediction for larger models.
+\end{enumerate}
+
+\paragraph{Contributions.}
+(1) A unified \emph{selective-deletion} framework for compression with a
+measurable central object, capability geometry, and derived (not fitted)
+damage laws; (2) a measurement layer for capability-vector scaling laws that
+repairs known failure modes of discrete-metric and IRT-based evaluation;
+(3) preliminary laws and mechanisms on Qwen3, including the two-regime
+structure and capability-selective sign effects; and (4) the
+\emph{method-selection map}: reduced-form laws in basic parameters only,
+composable into practitioner guidance for choosing a compression route given
+a target capability profile and budget.

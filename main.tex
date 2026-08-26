@@ -31,8 +31,21 @@
 
 \newtheorem{proposition}{Proposition}
 
+% notation for the capability-geometry framework
+\newcommand{\wz}{w_0}
+\newcommand{\dw}{\delta w}
+\newcommand{\Fc}[1]{F_{#1}}
+\newcommand{\gbar}[1]{\bar{g}_{#1}}
+\newcommand{\Lc}[1]{L_{#1}}
+\newcommand{\capset}{\mathcal{C}}
+\newcommand{\probeset}[1]{\mathcal{P}_{#1}}
+\newcommand{\comp}[2]{C_{#1,#2}}
+\newcommand{\dens}{d}
+\newcommand{\bits}{b}
+\newcommand{\Ds}{D_S}
+\newcommand{\Dr}{D_R}
 
-\title{The Scaling-down Law of Multi-agent System}
+\title{Scaling-Down Laws for LLM Compression}
 
 % Authors must not appear in the submitted version. They should be hidden
 % as long as the \iclrfinalcopy macro remains commented out below.
@@ -76,7 +89,32 @@ Address \\
 \maketitle
 
 \begin{abstract}
-
+Agentic applications rarely need frontier-scale generality: they need small,
+economical models whose \emph{specific combination} of capabilities is good
+enough. The standard route to such models is compressing a large source
+model---distillation, pruning, quantization---yet existing scaling laws for
+compression live almost entirely in pretraining-loss space and say nothing
+about which capabilities survive. We develop \emph{scaling-down laws}:
+predictive relationships between the basic parameters of compression (source
+size $N_0$, pruning density $\dens$, bit-width $\bits$, distillation data
+$\Ds$, recovery tokens $\Dr$) and a \emph{vector} of capability-conditional
+losses. Our framework treats scaling-down as \emph{selective deletion} in
+three bases---weight coordinates (pruning), bit-planes (quantization), and
+function components (distillation)---and its central object is the source
+model's \emph{capability geometry}: capability-conditional gradient and
+Fisher structure at the dense checkpoint. This yields testable, pre-registered
+mechanisms rather than curve fitting. Across the Qwen3 family (0.6B--32B) we
+find: (i) compression effects are strongly capability-selective---multi-hop QA
+loss \emph{improves} while pruning up to half of all weights, whereas math and
+code degrade; (ii) the signed first-order term of capability geometry
+quantitatively predicts this pre-cliff regime; (iii) the collapse ("cliff") at
+$\dens\!\approx\!0.4$--$0.6$ is non-perturbative and inaccessible to any local
+expansion, defining a two-regime law; and (iv) a simple spectral statistic of
+the geometry---the share of capability Fisher mass concentrated in
+high-magnitude coordinates---tracks prunability across model sizes. The
+framework culminates in reduced-form laws in basic parameters only, and a
+\emph{method-selection map} that tells practitioners which compression route
+preserves a required capability profile at the lowest cost.
 \end{abstract}
 
 
@@ -87,7 +125,7 @@ Address \\
 \input{related}
 \input{con}
 
-\bibliography{iclr2027_conference}
+\bibliography{references}
 \bibliographystyle{iclr2027_conference}
 
 \appendix
