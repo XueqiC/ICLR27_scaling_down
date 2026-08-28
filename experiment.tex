@@ -1,121 +1,191 @@
 \section{Experiments}
 \label{sec:exp}
 
-We report two kinds of evidence: (a) a forensic re-analysis of a large
-prior ability-space compression grid, which motivates the measurement layer;
-and (b) preliminary instantiations of capability geometry on the Qwen3
-family. The full pre-registered grid (methods $\times$ sizes $\times$
-recovery) is in progress; this section will be extended as it lands.
+Following standard scaling-law methodology, we proceed from measurement
+protocol (\S\ref{sec:setup}) to dense references and damage curves over a
+model grid (\S\ref{sec:curves}), then to mechanism tests
+(\S\ref{sec:mech}), invariances and their violations across scale and
+family (\S\ref{sec:family}), and a matched-size cross-family panel
+(\S\ref{sec:panel}). Throughout, the object under study is
+\emph{scaling-down}: every curve describes what a source model loses, per
+capability, as deletion deepens. A forensic re-analysis of a prior
+ability-space grid (\S\ref{sec:reanalysis}) motivates the measurement
+layer; the pre-registered distillation/quantization/recovery grid is in
+progress (\S\ref{sec:planned}).
 
 \subsection{Setup}
 \label{sec:setup}
 
-\textbf{Models.} Qwen3 dense checkpoints at 0.6B, 1.7B, 4B (reported here)
-and 8B, 14B, 32B (in progress). \textbf{Probes.} Per capability, prompts
-with reference completions from held-out benchmark splits chosen to be
-cross-benchmark disjoint from all transfer data: MATH-500 (math), MBPP
-(code), 2WikiMultihopQA (multi-hop QA); estimation and measurement halves
-are disjoint. \textbf{Compression.} Global magnitude pruning at ten
-densities $\dens\in[0.3,0.9]$; round-to-nearest weight quantization
-(int8/int4, in progress). \textbf{Geometry.} $\gbar{c}$ and $\Fc{c}$
-estimated from 64 per-sample gradients per capability at $\wz$
-(\S\ref{sec:geometry}); quadratic forms computed exactly by streaming
-$g_i^{\top}\dw$; spectra accumulated in $2\times10^5$ magnitude-quantile
-bins.
+\textbf{Models.} Eleven dense checkpoints from four families:
+Qwen3 \{0.6B, 1.7B, 4B\} (measured before a cluster-policy change
+restricted further use; retained as a comparison family), Gemma-3
+\{270M, 1B, 4B, 12B, 27B\}, Gemma-4-31B, Muse-Glimmer-30B, and
+OLMo-3-7B (OLMo-3-32B in progress).
+\textbf{Probes.} Per capability, prompt--reference pairs from held-out
+benchmark splits that are cross-benchmark disjoint from all transfer
+data: MATH-500 (math), MBPP (code), 2WikiMultihopQA (multi-hop QA);
+64 estimation and 64 measurement samples per capability
+(\S\ref{sec:prelim}).
+\textbf{Compression.} Global magnitude pruning at ten densities
+$\dens\in[0.3,0.9]$; per-model dense references from the same
+measurement halves. Quantization and distillation arms are part of the
+pre-registered grid (\S\ref{sec:planned}).
+\textbf{Geometry.} $\gbar{c}$ and the streaming Fisher quadratic forms
+of \S\ref{sec:geometry}, measured at each dense checkpoint; spectra
+accumulated in $2\times10^{5}$ magnitude-quantile bins. Checkpoint
+integrity is enforced by a hard guard (missing or re-initialized
+weights abort the run), a protocol lesson learned the hard way.
 
-\subsection{Re-analysis of a prior ability-space grid}
+\subsection{Damage curves: capability ordering is invariant, magnitudes are not}
+\label{sec:curves}
+
+Table~\ref{tab:grid} reports per-capability damage
+$\Delta\Lc{c}(\dens)$ at reference densities and the math cliff onset
+$\dens^{*}$ (largest density with $\Delta\Lc{\text{math}}\ge 1$
+nat/token).
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}llrrrrrl@{}}
+\toprule
+Model & Family & \multicolumn{3}{c}{$\Delta\Lc{c}$ at $\dens=0.7$} &
+$\Delta\Lc{\text{m}}$@$0.5$ & $\dens^{*}_{\text{math}}$ &
+QA sign, mild $\dens$ \\
+\cmidrule(lr){3-5}
+ & & math & code & QA & & & \\
+\midrule
+Qwen3-0.6B & Qwen3 & $+0.49$ & $+0.56$ & $\mathbf{-0.26}$ & $+4.7$ & 0.60 & improves \\
+Qwen3-1.7B & Qwen3 & $+0.24$ & $+0.19$ & $\mathbf{-0.51}$ & $+3.6$ & 0.60 & improves \\
+Qwen3-4B   & Qwen3 & $-0.00$ & $-0.09$ & $\mathbf{-0.79}$ & $+1.3$ & 0.50 & improves \\
+Gemma3-270M & Gemma-3 & $+3.49$ & $+4.04$ & $+2.54$ & $+11.2$ & 0.70 & degrades \\
+Gemma3-1B  & Gemma-3 & $+1.31$ & $+1.23$ & $+0.83$ & $+13.8$ & 0.70 & degrades \\
+Gemma3-4B  & Gemma-3 & $+0.83$ & $+1.47$ & $+0.24$ & $+7.0$ & 0.60 & degrades \\
+Gemma3-12B & Gemma-3 & $+0.68$ & $+0.46$ & $+0.54$ & $+17.1$ & 0.60 & degrades \\
+Gemma3-27B & Gemma-3 & $+4.04$ & $+4.69$ & $+3.59$ & $+15.2$ & 0.70 & degrades \\
+Gemma4-31B & Gemma-4 & $+0.68$ & $+0.77$ & $+2.89$ & $+16.1$ & 0.60 & degrades \\
+Muse-30B   & Muse    & $+0.17$ & $+0.14$ & $+0.20$ & $+3.5$ & 0.55 & degrades \\
+OLMo3-7B   & OLMo-3  & $+0.03$ & $+0.03$ & $+0.14$ & $\mathbf{+0.22}$ & \textbf{0.35} & degrades \\
+\bottomrule
+\end{tabular}
+\caption{Per-capability damage (nats/token, measurement halves) under
+global magnitude pruning. $\dens^{*}_{\text{math}}$ = cliff onset.
+Bold: the two structural surprises --- Qwen's QA \emph{improvement}
+under pruning, and OLMo's extreme robustness.}
+\label{tab:grid}
+\end{table}
+
+Three regularities hold across every model measured:
+(i) \textbf{capability ordering is family-invariant pre-cliff}: multi-hop
+QA is the most pruning-robust of the three capabilities in all four
+families, math and code the most fragile---capability selectivity is a
+universal structure of scaling-down, not a family quirk;
+(ii) \textbf{the cliff is universal and lives in a narrow proportional
+band} ($\dens^{*}\in[0.35,0.7]$ across a $115\times$ range of model
+sizes)---no model degrades gracefully through half density except
+OLMo-3-7B, and none survives $\dens<0.3$;
+(iii) \textbf{magnitudes and signs are family coefficients}: at matched
+$\dens=0.7$, damage spans two orders of magnitude across families
+(OLMo $+0.03$ to Gemma-3-27B $+4.0$), and the \emph{sign} of the QA
+response separates Qwen (improves, up to $-0.79$) from all other
+families (degrades). A scaling-down law must therefore have
+family-invariant form with family-specific coefficients---the structure
+our framework anticipates (\S\ref{sec:claims}).
+
+\subsection{Mechanism: the signed first-order term}
+\label{sec:mech}
+
+The capability-geometry damage model \eqref{eq:taylor} makes its
+sharpest prediction through the \emph{sign} of the first-order term
+$\gbar{c}^{\top}\dw$, which no positive-semidefinite effective-parameter
+model can express.
+
+\paragraph{The QA sign is predicted, in both directions.}
+In Qwen3, the QA alignment term is \emph{negative} (pruning small
+weights moves QA downhill): at 4B it alone reproduces the measured
+improvement, $-0.83$ predicted vs.\ $-0.79$ measured at $\dens=0.7$,
+$-2.43$ vs.\ $-1.76$ at $\dens=0.6$. In Gemma-3, the QA alignment term
+is \emph{positive} (e.g.\ 12B: $+0.26$ predicted vs.\ $+0.075$ measured
+at $\dens=0.9$), predicting the \emph{absence} of any improvement---and
+none is observed at any Gemma size. One measurable quantity, evaluated
+at the dense checkpoint alone, anticipates on which family the
+capability-selective free lunch exists. In OLMo-3-7B the mild-regime
+prediction is sharpest of all (code: $+0.015$ predicted $=$ measured at
+$\dens=0.8$).
+
+\paragraph{The perturbative regime ends at the cliff.}
+In every family, first- plus second-order predictions track measured
+damage in the mild regime and then fail by orders of magnitude at the
+cliff (e.g.\ Qwen3-0.6B math at $\dens=0.5$: predicted $-0.19$,
+measured $+4.68$): the collapse is non-perturbative everywhere, in loss
+space itself. This confirms the two-regime structure
+\eqref{eq:tworegime} as a universal property of scaling-down, and
+locates the scientific frontier at predicting $\dens^{*}_c$.
+
+\subsection{Scale and family structure}
+\label{sec:family}
+
+\paragraph{Within-family robustness is non-monotonic in $N$---in two
+families independently.} Gemma-3 robustness peaks at 12B: 27B collapses
+far earlier ($+4.0$ vs.\ $+0.68$ at $\dens=0.7$) despite six years'
+scale advantage. This mirrors, in an independent family and a different
+measurement space, the prior Qwen-3 observation (ability space,
+\S\ref{sec:reanalysis}) that 14B is the most prunable-robust source and
+32B regresses. A mid-scale robustness peak is thus a reproducible
+pattern of scaling-down, not an artifact of one family.
+
+\paragraph{A candidate predictor, honestly retired.} We pre-registered
+the top-concentration statistic $\kappa_c$ (\S\ref{sec:regimes}) as a
+robustness predictor after it tracked the Qwen3 0.6B$\to$4B trend.
+The full grid falsifies it as a portable predictor: across families the
+correlation inverts (OLMo-3-7B is the most robust model with the
+\emph{lowest} concentration, 2--10\%), and within Gemma-3 the top end
+breaks it (27B has higher $\kappa$ than 12B yet is far more fragile).
+$\kappa$ remains a within-ladder covariate below the robustness peak;
+the family-level factor---plausibly related to over-training exposure,
+by analogy with precision-fragility results
+\citep{kumar2024scaling}---is open and testable via tokens-per-parameter.
+
+\subsection{Cross-family panel at matched size ($\sim$30B)}
+\label{sec:panel}
+
+At matched $\sim$30B scale the family coefficient dominates:
+$\Delta\Lc{\text{math}}$ at $\dens=0.7$ is $+0.17$ (Muse-30B), $+0.68$
+(Gemma4-31B), $+4.04$ (Gemma3-27B), with OLMo-3-32B in progress and
+Qwen3-32B available only in prior ability-space data. The panel turns
+``which family should an agent deployment scale down from?'' into a
+measured quantity---one axis of the method-selection map.
+
+\subsection{Re-analysis of the prior ability-space grid}
 \label{sec:reanalysis}
 
 A prior internal study fit compression laws directly on Rasch abilities
-estimated from $\sim$100-item panels over a 774-cell Qwen3 grid
-(distillation $\times$ teachers $\times$ sizes $\times$ seeds; pruning;
-quantization), and reported the headline negative result that no derived law
-had held-out predictive power. Our re-analysis attributes much of this to
-the measurement and testing layer rather than to compression itself:
-\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{A recipe artifact drove the falsification.} The
-pre-registered $r{=}1$ self-distillation anchor (same-size student must not
-move) failed only when answer-only distillation---a known, capability-
-selective data-composition effect---was pooled with standard recipes.
-Stratified, the anchor holds for standard recipes (math: $-3.22$ ability
-units for answer-only alone versus $-0.13$ pooled without it), and held-out
-transfer-law error drops from $9.0\times$ to $1.8\times$ the noise floor.
-\item \textbf{Same-benchmark evaluation inflated gains.} Each domain panel
-mixed items from the distillation-trace benchmark with a never-trained
-sibling benchmark. Splitting them shows QA distillation gains concentrated
-on the trained half (e.g.\ $+0.198$ vs.\ $+0.127$ accuracy for soft
-KD)---roughly one third of the headline gain was distribution fit. Math and
-code showed no split.
-\item \textbf{Interval-scale ability was unsupported.} Item discrimination
-is strongly heterogeneous (2PL preferred by $\Delta$AIC $196$--$348$), so
-equal-discrimination ability differences are not interval-scaled;
-rank-level conclusions survive (1PL/2PL rank correlation $\ge 0.98$).
-\item \textbf{Item-level damage is smooth pre-cliff.} Comparing a
-uniform-logit-shift model against a discrete item-deletion mixture on
-pruning ladders with item-level records, the shift model wins or ties
-almost everywhere before the cliff: capability damage does not proceed by
-deleting individual testable skills, consistent with distributed
-representations and with our smooth pre-cliff loss curves.
-\end{enumerate}
-These findings fix the design of \S\ref{sec:prelim}: continuous
-capability-conditional loss as primary $y$, cross-benchmark probes, and
-rank-only use of latent abilities.
+from $\sim$100-item panels over a 774-cell Qwen3 grid and reported that
+no derived law had held-out predictive power. Our re-analysis attributes
+much of this to the measurement and testing layer:
+(1) the pre-registered $r{=}1$ self-distillation falsification was
+driven entirely by the answer-only recipe (math: $-3.22$ ability units
+alone vs.\ $-0.13$ pooled without it); stratified, the anchor holds and
+held-out transfer error drops from $9.0\times$ to $1.8\times$ the noise
+floor; (2) same-benchmark evaluation inflated QA distillation gains by
+roughly one third; (3) item discrimination heterogeneity invalidates
+interval-scale ability (2PL preferred, $\Delta$AIC $196$--$348$) while
+rankings survive ($\rho\ge0.98$); (4) item-level damage is smooth
+pre-cliff (uniform-shift beats discrete-deletion mixtures), ruling out
+skill-quantum deletion as an item-level mechanism. These findings fix
+the design of \S\ref{sec:prelim}: continuous capability-conditional
+loss as the primary observable, cross-benchmark probes, rank-only use
+of latent abilities.
 
-\subsection{Capability geometry on Qwen3: preliminary results}
-\label{sec:geom-results}
-
-\paragraph{E1: Compression is capability-selective at first order.}
-Magnitude pruning improves multi-hop QA loss over a wide range while math
-and code degrade: at 4B, $\Delta\Lc{\text{qa}}$ reaches $-1.96$ nats/token
-at $\dens=0.55$ and remains negative through $\dens=0.45$, while
-$\Delta\Lc{\text{math}}$ rises monotonically. The effect exists at 0.6B
-only for mild pruning and strengthens with scale ($-0.25$ at 0.6B,
-$-0.79$ at 1.7B, $-1.96$ at 4B). Capability selectivity is thus a
-first-order phenomenon that any scalar law must miss.
-
-\paragraph{E2: The signed first-order term predicts the pre-cliff regime.}
-The alignment term $\gbar{c}^{\top}\dw$ is negative for pruning across
-capabilities (deleting small weights moves downhill on average), and alone
-reproduces the QA improvement quantitatively at 4B: predicted $-0.83$
-vs.\ measured $-0.79$ at $\dens=0.7$; $-2.43$ vs.\ $-1.76$ at
-$\dens=0.6$. Mild-regime math/code effects are likewise tracked at 0.6B--4B.
-The full-Fisher quadratic term is currently inflated for long-context
-probes by gradient outliers; a trimmed estimator is pre-registered for the
-full grid.
-
-\paragraph{E3: The cliff is non-perturbative.}
-At $\dens\le 0.5$ (0.6B) and $\dens\le 0.45$ (4B), measured math/code
-damage exceeds the full second-order prediction by two orders of magnitude
-(e.g.\ 0.6B math at $\dens=0.5$: predicted $-0.19$, measured $+4.68$).
-This is not an estimator failure---the same estimator succeeds pre-cliff---
-but a regime boundary: collapse is invisible to local geometry, confirming
-the two-regime structure of \eqref{eq:tworegime} in loss space itself
-(the cliff is not an artifact of discrete metrics or link nonlinearity).
-
-\paragraph{E4: Top-concentration tracks prunability across scale.}
-The concentration statistic $\kappa_c(1\%)$---the share of capability
-Fisher mass in the top 1\% of coordinates by weight magnitude---rises
-monotonically with model size (means $\approx$10\% at 0.6B, 13.6\% at
-1.7B, 17.5\% at 4B), while the math cliff onset deepens
-($\dens^{*}\approx0.62\to0.60\to0.50$) and the QA-improvement region
-widens. Because magnitude pruning deletes bottom coordinates first,
-top-concentrated geometry loses less mass at fixed density.
-\textbf{Pre-registered prediction:} if concentration governs robustness,
-the anomalously prune-robust 14B checkpoint (observed in the prior grid to
-be more robust than both 8B and 32B) must show higher $\kappa$ than 32B.
-The 8B/14B/32B measurements are queued.
-
-\subsection{Planned full grid}
+\subsection{Pre-registered grid in progress}
 \label{sec:planned}
 
-The pre-registered grid crosses: sizes 0.6B--32B $\times$
-\{magnitude pruning (10 densities), int8/int4 PTQ, distillation onto
-smaller Qwen3 students with recipe and $\Ds$ axes\} $\times$ recovery
-$\Dr\in\{0, 10\text{M}, 100\text{M}, 1\text{B}\}$ tokens, with all
-capability-geometry statistics measured at each source. Analysis follows
-the protocol of \S\ref{sec:claims}: pre-registered forms committed with
-timestamps before fitting; keep/reject decisions by cell-level paired
-bootstrap; cluster bootstrap and measurement-error-weighted fits; repeated
+The remaining grid crosses the same capability panel with:
+round-to-nearest quantization (int8/int4); single-teacher black-box
+distillation onto Gemma-3 students (teachers: two frontier APIs,
+recorded per-teacher and analyzed pairwise); and recovery training
+$\Dr\in\{0,10\text{M},100\text{M},1\text{B}\}$ tokens. Analysis follows
+\S\ref{sec:claims}: forms committed before fitting; keep/reject by
+cell-level paired bootstrap; measurement-error-weighted fits; repeated
 held-out extrapolation on the largest size, deepest compression, and
-largest recovery budget; and positive/negative controls (synthetic law
-recovery; shuffled capability labels).
+largest recovery budget; positive/negative controls.

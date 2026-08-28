@@ -1,17 +1,23 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We introduced scaling-down laws: capability-vector predictive laws for LLM
-compression, organized by a selective-deletion view of pruning,
-quantization, and distillation, and grounded in a measurable central
-object---the source model's capability geometry. Preliminary evidence on
-Qwen3 establishes that compression effects are capability-selective at
-first order, that the signed alignment term of the geometry predicts the
-perturbative regime quantitatively, that the collapse regime is
-non-perturbative and must be treated as a separate law, and that a simple
-concentration statistic of the geometry tracks prunability across scale.
-The completed program delivers reduced-form laws in basic parameters and a
-method-selection map for practitioners, together with an open-source
-measurement suite. Beyond compression, capability geometry offers a
-general lens on how heterogeneous abilities coexist in one network---and on
-what, exactly, a small model must give up.
+We introduced scaling-down laws: capability-vector predictive laws for
+LLM compression in the standard scaling-law format, organized by a
+selective-deletion view of pruning, quantization, and distillation, and
+grounded in a measurable mechanism object---the source model's
+capability geometry. Across four families and eleven models, the
+evidence supports a specific law structure: form is family-invariant
+(universal capability ordering; a universal, proportional,
+non-perturbative collapse band; a perturbative regime governed by the
+signed first-order geometry term), while magnitudes and signs are
+family coefficients---the sharpest being the sign of the QA alignment
+term, which predicts on which family pruning improves retrieval-style
+capability. Two findings frame the road ahead: the mid-scale
+robustness peak reproduced in two families, whose mechanism our
+retired concentration predictor does not explain, and the collapse
+boundary $\dens^{*}_c(N_0,f)$, which the completed
+distillation-and-recovery grid will attack with the same pre-registered
+discipline. The deliverables---reduced-form laws in basic parameters
+and the method-selection map---aim to make ``what should this agent
+scale down from, and how?'' a computed answer rather than a folklore
+one.

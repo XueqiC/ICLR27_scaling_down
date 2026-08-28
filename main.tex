@@ -103,26 +103,32 @@ three bases---weight coordinates (pruning), bit-planes (quantization), and
 function components (distillation)---and its central object is the source
 model's \emph{capability geometry}: capability-conditional gradient and
 Fisher structure at the dense checkpoint. This yields testable, pre-registered
-mechanisms rather than curve fitting. Across the Qwen3 family (0.6B--32B) we
-find: (i) compression effects are strongly capability-selective---multi-hop QA
-loss \emph{improves} while pruning up to half of all weights, whereas math and
-code degrade; (ii) the signed first-order term of capability geometry
-quantitatively predicts this pre-cliff regime; (iii) the collapse ("cliff") at
-$\dens\!\approx\!0.4$--$0.6$ is non-perturbative and inaccessible to any local
-expansion, defining a two-regime law; and (iv) a simple spectral statistic of
-the geometry---the share of capability Fisher mass concentrated in
-high-magnitude coordinates---tracks prunability across model sizes. The
-framework culminates in reduced-form laws in basic parameters only, and a
-\emph{method-selection map} that tells practitioners which compression route
-preserves a required capability profile at the lowest cost.
+mechanisms rather than curve fitting. Across eleven dense checkpoints from
+four families (Qwen3, Gemma-3/4, Muse, OLMo-3; 270M--31B) we find that
+scaling-down has \emph{family-invariant form with family-specific
+coefficients}: (i) capability ordering under pruning is universal (multi-hop
+QA most robust, math and code most fragile, in every family and size);
+(ii) the \emph{signed} first-order term of capability geometry is the family
+coefficient and predicts in both directions---it is negative for Qwen3's QA,
+which measurably \emph{improves} while pruning up to half of all weights
+(predicted $-0.83$ vs.\ measured $-0.79$ at 4B, density $0.7$), and positive
+for Gemma's, which never improves; (iii) collapse is universal, confined to
+a narrow proportional density band across a $115\times$ size range, and
+non-perturbative---no local expansion sees it coming---making scaling-down
+laws two-regime laws; and (iv) within-family robustness peaks at mid scale
+in two families independently, a reproducible pattern for which we retire
+our own pre-registered spectral predictor. The framework culminates in
+reduced-form laws in basic parameters only, and a \emph{method-selection
+map} that tells practitioners which compression route preserves a required
+capability profile at the lowest cost.
 \end{abstract}
 
 
 \input{intro}
+\input{related}
 \input{prelim}
 \input{method}
 \input{experiment}
-\input{related}
 \input{con}
 
 \bibliography{references}

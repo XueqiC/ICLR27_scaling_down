@@ -1,63 +1,104 @@
-\section{Preliminaries and Measurement Layer}
+\section{Setup: Objects, Basic Parameters, and Observables}
 \label{sec:prelim}
 
-\paragraph{Objects.}
-A \emph{source model} has weights $\wz$, family $f$, and parameter count
-$N_0$. A \emph{compression operator} $\comp{m}{s}$ maps the source to a
-smaller or cheaper model, where $m\in\{\text{prune},\text{quant},
-\text{distill}\}$ and $s$ is the method's strength parameter: remaining
-density $\dens\in(0,1]$ for magnitude pruning, bit-width $\bits$ for
-post-training quantization, and student size $N_S$ with transfer set size
-$\Ds$ and recipe for distillation. A \emph{recovery operator} $R_{\Dr}$
-performs $\Dr$ tokens of continued training on a compressed model. For
-same-architecture methods (pruning, quantization) we write the induced
-weight perturbation $\dw = \comp{m}{s}(\wz)-\wz$; for pruning
-$\dw=-\wz\odot \maskdens_{\dens}$ where $\maskdens_{\dens}$ masks the
-$(1-\dens)$ fraction of smallest-magnitude weights, and for round-to-nearest
-quantization $\dw$ is the rounding error.
+Scaling laws earn their usefulness from the discipline of their setup:
+a small set of \emph{basic parameters} anyone can plug in, a continuous
+observable with known statistics, and a fixed fitting-and-validation
+protocol declared before the fits. This section fixes all three for
+scaling-down.
 
-\paragraph{Capability vector.}
-We fix a capability set $\capset$ (here: mathematical reasoning, code
-generation, multi-hop QA; the framework extends to knowledge,
-instruction-following, and tool use). Each capability $c$ has a
-\emph{probe set} $\probeset{c}$ of prompt--reference pairs drawn from
-benchmarks that are \emph{cross-benchmark disjoint} from any data used for
-distillation or recovery---a hard constraint motivated by our re-analysis of
-prior evaluations, in which same-benchmark evaluation inflated apparent
-distillation gains on QA by roughly one third (\S\ref{sec:exp}). The primary
-observable is the \emph{capability-conditional task loss}
+\subsection{Objects}
+
+A \emph{source model} has weights $\wz$, family $f$, and parameter
+count $N_0$. A \emph{compression operator} $\comp{m}{s}$ maps the
+source to a smaller or cheaper model, where
+$m\in\{\text{prune},\text{quant},\text{distill}\}$ and $s$ is the
+method's strength. A \emph{recovery operator} $R_{\Dr}$ performs
+$\Dr$ tokens of continued training on the compressed model. For
+same-architecture methods the induced weight perturbation is
+$\dw=\comp{m}{s}(\wz)-\wz$: magnitude pruning at density $\dens$ gives
+$\dw=-\wz\odot\maskdens_{\dens}$ (masking the $(1-\dens)$ fraction of
+smallest-magnitude weights), and round-to-nearest quantization at
+bit-width $\bits$ gives the rounding error. Distillation replaces the
+architecture: a student of size $N_S$ is trained on $\Ds$ tokens of
+teacher traces under a \emph{recipe} $\rho$ (which parts of the trace
+supervise the student).
+
+\subsection{Basic parameters}
+\label{sec:params}
+
+Every law in this paper is ultimately expressed in the parameters of
+Table~\ref{tab:params}---quantities a practitioner knows before running
+anything. Internal geometry statistics (\S\ref{sec:method}) appear only
+in mechanism forms and are eliminated from the published laws by
+fitting them once as smooth functions of $(N_0,f)$.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Parameter & Meaning & Arm & Range studied \\
+\midrule
+$N_0$ & source model size & all & 270M--32B \\
+$f$ & source family & all & Qwen3, Gemma-3/4, Muse, OLMo-3 \\
+$\dens$ & remaining weight density & pruning & $0.3$--$1.0$ \\
+$\bits$ & weight bit-width & quantization & $\{4,8,16\}$ \\
+$N_S$ & student size & distillation & 270M--12B \\
+$\Ds$, $\rho$ & transfer tokens; recipe & distillation & grid \\
+$\Dr$ & recovery tokens & recovery & $0$--$10^{9}$ \\
+\bottomrule
+\end{tabular}
+\caption{Basic parameters of scaling-down. Published (reduced-form)
+laws contain these and nothing else.}
+\label{tab:params}
+\end{table}
+
+\subsection{Observables: a capability vector, measured in loss}
+\label{sec:observables}
+
+We fix a capability set $\capset$ (here mathematical reasoning, code
+generation, multi-hop QA; the protocol extends to further capabilities)
+and give each capability $c$ a \emph{probe set} $\probeset{c}$ of
+prompt--reference pairs. The primary observable is the
+capability-conditional task loss
 \begin{equation}
 \Lc{c}(w) \;=\; \frac{1}{T_c}\sum_{(x,y)\in\probeset{c}}
 \sum_{t=1}^{|y|} -\log p_w\!\left(y_t \mid x, y_{<t}\right),
 \label{eq:taskloss}
 \end{equation}
-the mean cross-entropy over reference-completion tokens ($T_c$ is the total
-token count). Being an average over thousands of tokens, $\Lc{c}$ is a
-low-variance, continuous measurement; this choice follows the evidence that
-discrete accuracy metrics destroy the statistical regularity needed for
-extrapolation \citep{schaeffer2024predicting,gadre2024language,
-bhagia2024establishing}. Probe sets are split once into an
-\emph{estimation half} (used for measuring geometry, \S\ref{sec:method}) and
-a \emph{measurement half} (used for evaluating compressed models), so
-predictions and measurements never share sampling noise.
+the mean cross-entropy over reference-completion tokens. Three
+protocol rules, each forced by evidence:
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{Continuous loss, not accuracy.} Downstream metrics are
+predictable essentially only through continuous log-likelihood
+measurements \citep{schaeffer2023emergent,schaeffer2024predicting,
+gadre2024language,bhagia2024establishing}; laws are fit in $\vec{L}$
+space, and task success enters only through a separately measured,
+monotone saturating link $A_c=g_c(\Lc{c})$.
+\item \textbf{Cross-benchmark probes.} Probe benchmarks are disjoint
+at the \emph{benchmark} level (not merely the split level) from all
+transfer and recovery data. Our re-analysis of a prior evaluation
+(\S\ref{sec:reanalysis}) found that same-benchmark evaluation inflated
+apparent distillation gains on QA by roughly one third.
+\item \textbf{Split estimation from measurement.} Each probe set is
+halved once; geometry statistics are estimated on one half, compressed
+models are measured on the other, so predictions and measurements never
+share sampling noise. Latent-ability (IRT) summaries, when used at all,
+are restricted to rank statements (discrimination heterogeneity leaves
+rankings intact, $\rho\ge0.98$, but voids interval-scale use).
+\end{enumerate}
 
-\paragraph{Link layer.}
-Task success is a separately measured, capability-specific link
-$A_c = g_c(\Lc{c})$ with pre-registered qualitative constraints
-(monotone, saturating at both ends). Item-level responses are retained for
-diagnostics, but no law is fit in accuracy space or in latent-ability (IRT)
-space; when an IRT summary is used at all, it is restricted to rank-level
-statements, since discrimination heterogeneity invalidates interval-scale
-use while leaving rankings intact (Spearman $\rho\ge 0.98$ between 1PL and
-2PL abilities in our re-analysis).
+\subsection{Target}
 
-\paragraph{Target laws.}
 A \emph{scaling-down law} is a predictive map
 \begin{equation}
-(N_0, f, m, s, \Dr) \;\longmapsto\; \vec{L} = \left(\Lc{c}\right)_{c\in\capset},
+(N_0, f, m, s, \Dr) \;\longmapsto\; \vec{L}=\left(\Lc{c}\right)_{c\in\capset},
 \label{eq:sdlaw}
 \end{equation}
-reported in two forms: a \emph{mechanism form}, whose terms are functionals
-of measured capability geometry, and a \emph{reduced form} containing only
-basic parameters, obtained by fitting the geometry statistics themselves as
-smooth functions of $N_0$. Only the reduced form is needed to use the law.
+reported in two forms: a \emph{mechanism form} whose coefficients are
+independently measured functionals of the source model
+(\S\ref{sec:method}), and a \emph{reduced form} in the basic parameters
+of Table~\ref{tab:params} alone. Validation is by held-out
+extrapolation---largest size, deepest compression, largest recovery
+budget---never by in-sample fit quality.
