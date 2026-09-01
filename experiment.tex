@@ -149,9 +149,15 @@ follows a power law in the deleted capability mass $m_c(\dens)$:
 \label{eq:fitlaw}
 \end{equation}
 with in-sample $R^2 = 0.82$--$0.996$ over 24 capability$\times$model
-fits \preliminary{in-sample; the held-out battery---fit-shallow/%
-predict-deep, leave-largest-model-out, leave-one-family-out, and
-baseline comparisons---is running (A2)}
+fits. The held-out battery (1000-resample cell bootstrap) gives the
+form its teeth: in \emph{leave-one-family-out} transfer the
+shared-$\gamma$ mechanism form attains MAE $2.17$ nats versus $10.3$
+for per-capability raw sparsity and $8.2$ for the direct-damage
+baseline (both CIs exclude zero)---the deleted-mass coordinate is what
+transfers across families; it also beats the direct-damage baseline in
+fit-shallow/predict-deep ($3.11$ vs.\ $4.24$) and raw sparsity in
+leave-largest-model-out ($1.41$ vs.\ $2.15$), while its edge over raw
+sparsity within-model does not reach significance
 (without the first-order term, QA is unfittable, $R^2\!\le\!0.67$;
 with it, QA joins the law). Two structural results:
 (i) in the deleted-mass coordinate the exponent concentrates at
@@ -176,9 +182,11 @@ $-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); Gemma's QA term is
 positive and no improvement exists at any size; OLMo-3-7B's is
 positive (mild degradation, prediction $+0.015$ $=$ measurement at
 $\dens=0.8$, code) while OLMo-3-32B's is negative---and deep-pruning
-QA improvement duly appears. Four families, and a within-family sign
-flip, all called in advance by one quantity measured on the dense
-checkpoint. Beyond the mild regime, first- plus second-order
+QA improvement duly appears. At the level of individual model$\times$capability$\times$density
+cells in the mild regime, sign prediction accuracy is $67.6\%$
+(Wilson 95\% CI $[58.3,75.7]$, $n{=}108$)---above chance, with the
+family-level pattern (Qwen and OLMo-32B QA improvements, Gemma
+none, an OLMo size flip) called in advance. Beyond the mild regime, first- plus second-order
 predictions fail by orders of magnitude at the cliff in every family:
 the collapse is non-perturbative in loss space, confirming the
 two-regime structure of \eqref{eq:prune}.
@@ -206,15 +214,15 @@ into a measurable, smoothly-evolving order parameter.
 Across nine models measured at $\bits\in\{8,6,4,3\}$: int8 and int6
 are within noise of dense everywhere; int4 damages small models
 (Gemma3-270M math $+2.3$) and barely touches large ones
-(Gemma3-27B math $+0.33$); and $\bits=3$ is a universal cliff
-($+5$ to $+18$ nats across every model and capability)---the bit
-axis has its own collapse, at a family-independent location.
+(Gemma3-27B math $+0.33$); and $\bits=3$ collapses every model measured ($+5$ to $+18$ nats).
+In leave-one-bit-out validation a learned exponential $q_ce^{-k\bits}$
+beats the fixed $q_c4^{-\bits}$ candidate (pooled MAE $6.73$ vs.\
+$7.63$): bit decay is exponential, with a fitted base.
 Capability selectivity transfers to this basis: QA improves under
-int4 for Qwen3-1.7B ($-0.21$), OLMo-3-7B ($-0.07$), and
-Gemma3-27B ($-0.67$)---the same signed, capability-specific structure as pruning, in a
-different deletion basis. \preliminary{descriptive; functional-form
-fitting and held-out prediction are running (A3), and improvements
-await the noise-scale screen (A6)}
+int4 for Qwen3-1.7B ($-0.21$) and Gemma3-27B ($-0.67$), both clearing
+the mildest-perturbation noise screen ($29$ of $62$ nominal
+improvement cells across all arms survive that screen; the rest are
+within noise and not claimed).
 
 \subsection{Distillation arm (in progress)}
 \label{sec:distill}
@@ -241,9 +249,11 @@ $\beta'_{\text{math}}=1.23$, $\beta'_{\text{code}}=1.02$, with
 $\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$, of $1.21$ (math) and $1.93$
 (code) nats---about $80\%$ of this pruning damage is redeemed within
 8M tokens and the remainder persists under this recipe; QA recovers
-completely. \preliminary{one model, one density, one recipe; the
-divergence-free saturating form \eqref{eq:recovery} refit and the
-multi-model recovery grid are running/queued (A4, B7)} Two mechanism results:
+completely. \preliminary{one model, one density, one recipe; with three-point
+ladders the saturating form's largest-budget extrapolation beats a
+carry-forward baseline in only 4 of 9 fits---the ladder is too sparse
+to claim extrapolation, and the denser multi-model grid (B7) is
+queued} Two mechanism results:
 recovery on \emph{aligned} data (teacher traces) heals substantially
 faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
 as the gradient-overlap prediction requires---but over-training on

@@ -1,0 +1,1162 @@
+{
+  "generated_at_utc": "2026-09-01T21:10:18.868584+00:00",
+  "noise_scale_screen": {
+    "median_abs_damage_at_d_0.9": 0.012646521216743811,
+    "n_exceeding": 29,
+    "n_improvement_cells": 62,
+    "n_mild_pruning_cells": 36,
+    "threshold_2x_median": 0.025293042433487622
+  },
+  "parts": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "pruning": {
+    "n_families": 5,
+    "n_fits": 156,
+    "n_measured_cells": 360,
+    "n_models": 12,
+    "n_precliff_cells": 180,
+    "n_successful_fits": 154,
+    "sign_accuracy": {
+      "accuracy": 0.6759259259259259,
+      "ci95": [
+        0.5829333238469441,
+        0.7568333458718599
+      ],
+      "n_cells": 108,
+      "n_correct": 73
+    },
+    "validation": {
+      "V-a": {
+        "best_form": "P3_shared_gamma",
+        "forms": {
+          "P1_raw_sparsity": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.612607496859755,
+              5.226748679635719
+            ],
+            "mae_nats": 3.1796399742113715,
+            "n_cells": 56,
+            "relative_error": 0.9172481809972199,
+            "relative_error_ci95": [
+              0.5406320657427853,
+              1.3191425829603407
+            ]
+          },
+          "P2_deleted_mass": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.5173517791099203,
+              5.255940142603281
+            ],
+            "mae_nats": 3.183626665472661,
+            "n_cells": 56,
+            "relative_error": 0.9183982436889944,
+            "relative_error_ci95": [
+              0.5391590632677985,
+              1.3259678232949963
+            ]
+          },
+          "P3_shared_gamma": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.0934686014747614,
+              4.57538527550863
+            ],
+            "mae_nats": 2.526010125783266,
+            "n_cells": 63,
+            "relative_error": 0.7718431633238066,
+            "relative_error_ci95": [
+              0.4111475816584223,
+              1.1771366347464383
+            ]
+          },
+          "baseline_P1_direct": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              0.8893489657283902,
+              7.485221513074712
+            ],
+            "mae_nats": 3.903138093438848,
+            "n_cells": 45,
+            "relative_error": 1.0976529279331413,
+            "relative_error_ci95": [
+              0.33659903732736,
+              1.805123691507091
+            ]
+          },
+          "baseline_P2_direct": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.1694320979925474,
+              8.323235338676472
+            ],
+            "mae_nats": 4.235923783254633,
+            "n_cells": 45,
+            "relative_error": 1.1912399796991513,
+            "relative_error_ci95": [
+              0.43481574621363145,
+              1.9072493587314494
+            ]
+          }
+        },
+        "paired_comparisons": {
+          "P2_vs_P1": {
+            "baseline": "P1_raw_sparsity",
+            "baseline_mae_nats": 3.1796399742113715,
+            "bootstrap_resamples": 1000,
+            "candidate": "P2_deleted_mass",
+            "candidate_mae_nats": 3.183626665472661,
+            "candidate_wins": false,
+            "mae_difference_candidate_minus_baseline": 0.003986691261289429,
+            "mae_difference_ci95": [
+              -0.2513900882270688,
+              0.2761719663200115
+            ],
+            "n_paired_cells": 56
+          },
+          "P2_vs_direct_P2": {
+            "baseline": "baseline_P2_direct",
+            "baseline_mae_nats": 4.235923783254633,
+            "bootstrap_resamples": 1000,
+            "candidate": "P2_deleted_mass",
+            "candidate_mae_nats": 3.0687395993033744,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -1.16718418395126,
+            "mae_difference_ci95": [
+              -3.607051592187761,
+              1.0864539705265839
+            ],
+            "n_paired_cells": 45
+          },
+          "P3_vs_P1": {
+            "baseline": "P1_raw_sparsity",
+            "baseline_mae_nats": 3.1796399742113715,
+            "bootstrap_resamples": 1000,
+            "candidate": "P3_shared_gamma",
+            "candidate_mae_nats": 2.6760061510146795,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -0.5036338231966914,
+            "mae_difference_ci95": [
+              -1.9308685751893204,
+              0.7545136912862227
+            ],
+            "n_paired_cells": 56
+          },
+          "P3_vs_direct_P2": {
+            "baseline": "baseline_P2_direct",
+            "baseline_mae_nats": 4.235923783254633,
+            "bootstrap_resamples": 1000,
+            "candidate": "P3_shared_gamma",
+            "candidate_mae_nats": 3.1122297572152213,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -1.1236940260394124,
+            "mae_difference_ci95": [
+              -2.5125365880347483,
+              -0.1087620047897005
+            ],
+            "n_paired_cells": 45
+          }
+        }
+      },
+      "V-b": {
+        "best_form": "baseline_P2_direct",
+        "forms": {
+          "P1_raw_sparsity": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.227569292437116,
+              3.2147583430694033
+            ],
+            "mae_nats": 2.1505385928734455,
+            "n_cells": 40,
+            "relative_error": 1.4879816364779233,
+            "relative_error_ci95": [
+              0.8142823993395214,
+              2.8672026725284536
+            ]
+          },
+          "P2_deleted_mass": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.2539154538216364,
+              3.374696444660816
+            ],
+            "mae_nats": 2.2232746247871953,
+            "n_cells": 40,
+            "relative_error": 1.5383085081539718,
+            "relative_error_ci95": [
+              0.7494098467390319,
+              3.2569338387819013
+            ]
+          },
+          "P3_shared_gamma": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              0.8791815461936459,
+              2.005057282220053
+            ],
+            "mae_nats": 1.4080184498089707,
+            "n_cells": 40,
+            "relative_error": 0.9742236684711072,
+            "relative_error_ci95": [
+              0.5717013878784635,
+              1.7284956878248914
+            ]
+          },
+          "baseline_P1_direct": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              0.7447665902593571,
+              1.587671696098406
+            ],
+            "mae_nats": 1.1447757263216984,
+            "n_cells": 40,
+            "relative_error": 0.8043811542138458,
+            "relative_error_ci95": [
+              0.5900442297498186,
+              1.1315961727204662
+            ]
+          },
+          "baseline_P2_direct": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              0.7401779837720225,
+              1.552963771150194
+            ],
+            "mae_nats": 1.1285335403812873,
+            "n_cells": 40,
+            "relative_error": 0.7929685185566565,
+            "relative_error_ci95": [
+              0.565738092625969,
+              1.1702946262870781
+            ]
+          }
+        },
+        "paired_comparisons": {
+          "P2_vs_P1": {
+            "baseline": "P1_raw_sparsity",
+            "baseline_mae_nats": 2.150538592873445,
+            "bootstrap_resamples": 1000,
+            "candidate": "P2_deleted_mass",
+            "candidate_mae_nats": 2.2232746247871953,
+            "candidate_wins": false,
+            "mae_difference_candidate_minus_baseline": 0.07273603191375014,
+            "mae_difference_ci95": [
+              -0.08716407532440809,
+              0.27963203917341833
+            ],
+            "n_paired_cells": 40
+          },
+          "P2_vs_direct_P2": {
+            "baseline": "baseline_P2_direct",
+            "baseline_mae_nats": 1.1937722724167719,
+            "bootstrap_resamples": 1000,
+            "candidate": "P2_deleted_mass",
+            "candidate_mae_nats": 2.2640745043855057,
+            "candidate_wins": false,
+            "mae_difference_candidate_minus_baseline": 1.070302231968734,
+            "mae_difference_ci95": [
+              0.18278048634669897,
+              2.2697451445255847
+            ],
+            "n_paired_cells": 37
+          },
+          "P3_vs_P1": {
+            "baseline": "P1_raw_sparsity",
+            "baseline_mae_nats": 2.150538592873445,
+            "bootstrap_resamples": 1000,
+            "candidate": "P3_shared_gamma",
+            "candidate_mae_nats": 1.4080184498089707,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -0.7425201430644746,
+            "mae_difference_ci95": [
+              -1.3320658908585996,
+              -0.265801773222478
+            ],
+            "n_paired_cells": 40
+          },
+          "P3_vs_direct_P2": {
+            "baseline": "baseline_P2_direct",
+            "baseline_mae_nats": 1.1937722724167719,
+            "bootstrap_resamples": 1000,
+            "candidate": "P3_shared_gamma",
+            "candidate_mae_nats": 1.378512954057465,
+            "candidate_wins": false,
+            "mae_difference_candidate_minus_baseline": 0.18474068164069393,
+            "mae_difference_ci95": [
+              -0.1877418017724038,
+              0.6387828467929169
+            ],
+            "n_paired_cells": 37
+          }
+        }
+      },
+      "V-c": {
+        "best_form": "P3_shared_gamma",
+        "forms": {
+          "P1_raw_sparsity": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              5.575395493047012,
+              16.38617670525403
+            ],
+            "mae_nats": 10.323529172996322,
+            "n_cells": 144,
+            "relative_error": 3.586902173876581,
+            "relative_error_ci95": [
+              1.9272198965023126,
+              6.022107222350435
+            ]
+          },
+          "P2_deleted_mass": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              2.744646451732391,
+              6.213456384761229
+            ],
+            "mae_nats": 4.225233935212946,
+            "n_cells": 144,
+            "relative_error": 1.4680542412758693,
+            "relative_error_ci95": [
+              0.9410166972387547,
+              2.2379087069222487
+            ]
+          },
+          "P3_shared_gamma": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              1.6559265323405057,
+              3.2144872662362864
+            ],
+            "mae_nats": 2.3104889660364103,
+            "n_cells": 144,
+            "relative_error": 0.8027775924411393,
+            "relative_error_ci95": [
+              0.5494651316095848,
+              1.166741958362827
+            ]
+          },
+          "baseline_P1_direct": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              5.18425316715409,
+              17.070465348484404
+            ],
+            "mae_nats": 10.49203667157231,
+            "n_cells": 144,
+            "relative_error": 3.675208839883624,
+            "relative_error_ci95": [
+              1.9220493780956138,
+              5.894157957085142
+            ]
+          },
+          "baseline_P2_direct": {
+            "bootstrap_resamples": 1000,
+            "mae_ci95": [
+              4.508980534384314,
+              11.604950914424625
+            ],
+            "mae_nats": 7.740061798462638,
+            "n_cells": 144,
+            "relative_error": 2.711231806883547,
+            "relative_error_ci95": [
+              1.646869018585509,
+              4.0246408536978
+            ]
+          }
+        },
+        "paired_comparisons": {
+          "P2_vs_P1": {
+            "baseline": "P1_raw_sparsity",
+            "baseline_mae_nats": 10.323529172996318,
+            "bootstrap_resamples": 1000,
+            "candidate": "P2_deleted_mass",
+            "candidate_mae_nats": 4.225233935212947,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -6.098295237783372,
+            "mae_difference_ci95": [
+              -9.995881889124162,
+              -3.048900504509392
+            ],
+            "n_paired_cells": 144
+          },
+          "P2_vs_direct_P2": {
+            "baseline": "baseline_P2_direct",
+            "baseline_mae_nats": 8.185450734676527,
+            "bootstrap_resamples": 1000,
+            "candidate": "P2_deleted_mass",
+            "candidate_mae_nats": 3.891328816570523,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -4.294121918106003,
+            "mae_difference_ci95": [
+              -8.378764942445585,
+              -0.629219878837129
+            ],
+            "n_paired_cells": 136
+          },
+          "P3_vs_P1": {
+            "baseline": "P1_raw_sparsity",
+            "baseline_mae_nats": 10.323529172996318,
+            "bootstrap_resamples": 1000,
+            "candidate": "P3_shared_gamma",
+            "candidate_mae_nats": 2.3104889660364107,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -8.013040206959907,
+            "mae_difference_ci95": [
+              -12.754982036669972,
+              -4.036901470971442
+            ],
+            "n_paired_cells": 144
+          },
+          "P3_vs_direct_P2": {
+            "baseline": "baseline_P2_direct",
+            "baseline_mae_nats": 8.185450734676527,
+            "bootstrap_resamples": 1000,
+            "candidate": "P3_shared_gamma",
+            "candidate_mae_nats": 2.167091293763739,
+            "candidate_wins": true,
+            "mae_difference_candidate_minus_baseline": -6.0183594409127865,
+            "mae_difference_ci95": [
+              -10.149877002787266,
+              -2.4520149901014654
+            ],
+            "n_paired_cells": 136
+          }
+        }
+      }
+    }
+  },
+  "quantization": {
+    "n_eligible_model_capability_cells": 16,
+    "n_fits": 48,
+    "n_heldout_predictions": 96,
+    "n_models": 9,
+    "winners": {
+      "gemma3": {
+        "mae_nats": {
+          "fixed_4^-b": 9.885395240959241,
+          "learned_exponential": 7.949278127741766,
+          "quadratic_b": 13.695949037097142
+        },
+        "winner": "learned_exponential"
+      },
+      "muse_glimmer": {
+        "mae_nats": {
+          "fixed_4^-b": 2.434603042392978,
+          "learned_exponential": 6.76697605768021,
+          "quadratic_b": 5.948768316446939
+        },
+        "winner": "fixed_4^-b"
+      },
+      "olmo3": {
+        "mae_nats": {
+          "fixed_4^-b": 2.3744022811574115,
+          "learned_exponential": 1.5099564452055416,
+          "quadratic_b": 3.2543009828750566
+        },
+        "winner": "learned_exponential"
+      },
+      "pooled": {
+        "mae_nats": {
+          "fixed_4^-b": 7.630708067603073,
+          "learned_exponential": 6.727273390076048,
+          "quadratic_b": 10.887305234041337
+        },
+        "winner": "learned_exponential"
+      },
+      "qwen3": {
+        "mae_nats": {
+          "fixed_4^-b": 5.33125610203779,
+          "learned_exponential": 4.366561467744378,
+          "quadratic_b": 7.361851919307013
+        },
+        "winner": "learned_exponential"
+      }
+    }
+  },
+  "recovery": {
+    "fits": [
+      {
+        "D0": 150296.34081101257,
+        "beta": 1.2188637857049138,
+        "capability": "code",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.13499922165304556,
+          "beats_carry_forward": true,
+          "carry_forward_absolute_error": 0.20792736935341005,
+          "carry_forward_prediction": 2.203304915854739,
+          "fit": {
+            "D0": 474540.7252934451,
+            "at_numerical_bound": false,
+            "beta": 2.69068207160641,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.012199999999996e-07,
+                2.0051559999999936e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 3.0580919986488753,
+                "tokens": 501220.0
+              },
+              {
+                "damage": 2.203263027106498,
+                "tokens": 2005156.0
+              }
+            ],
+            "r2": 0.99999998878997,
+            "residual_fraction": 0.24738983244553078,
+            "status": "ok"
+          },
+          "observed_damage": 1.9953775465013288,
+          "predicted_damage": 2.1303767681543744,
+          "status": "ok_underidentified",
+          "tokens": 8004309.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 1.0,
+        "residual_fraction": 0.2260628098772998,
+        "run": "prune_0.6_c4"
+      },
+      {
+        "D0": 227222.1824964242,
+        "beta": 1.5631028903326556,
+        "capability": "math",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.07272816145091077,
+          "beats_carry_forward": true,
+          "carry_forward_absolute_error": 0.14085467495075044,
+          "carry_forward_prediction": 1.3858539172601911,
+          "fit": {
+            "D0": 477791.95678190957,
+            "at_numerical_bound": false,
+            "beta": 2.6594658930656063,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.012199999999996e-07,
+                2.0051559999999936e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 2.156233477304212,
+                "tokens": 501220.0
+              },
+              {
+                "damage": 1.385823680415184,
+                "tokens": 2005156.0
+              }
+            ],
+            "r2": 0.9999999926549462,
+            "residual_fraction": 0.1883087131636833,
+            "status": "ok"
+          },
+          "observed_damage": 1.2449992423094407,
+          "predicted_damage": 1.3177274037603515,
+          "status": "ok_underidentified",
+          "tokens": 8004309.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 1.0,
+        "residual_fraction": 0.17526489644187918,
+        "run": "prune_0.6_c4"
+      },
+      {
+        "D0": 137518907.3399799,
+        "beta": 1111.984575727195,
+        "capability": "qa",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.16574329094425336,
+          "beats_carry_forward": false,
+          "carry_forward_absolute_error": 0.009711155378486325,
+          "carry_forward_prediction": -0.17545443227091706,
+          "fit": {
+            "D0": 814893.9462127455,
+            "at_numerical_bound": true,
+            "beta": 8.446733105097003,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.012199999999996e-07,
+                2.0051559999999936e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 0.13362313419765334,
+                "tokens": 501220.0
+              },
+              {
+                "damage": 0.00021395523385867306,
+                "tokens": 2005156.0
+              }
+            ],
+            "r2": 0.3559921384035799,
+            "residual_fraction": 5.212479725789705e-27,
+            "status": "ok"
+          },
+          "observed_damage": -0.16574327689243074,
+          "predicted_damage": 1.4051822614456345e-08,
+          "status": "ok_underidentified",
+          "tokens": 8004309.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 0.05963056774600106,
+        "residual_fraction": 2.0339265731710945e-213,
+        "run": "prune_0.6_c4"
+      },
+      {
+        "D0": 2125.8568532778336,
+        "beta": 8.033614364728365,
+        "capability": "code",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.3275388769545644,
+          "beats_carry_forward": false,
+          "carry_forward_absolute_error": 0.3263950398582818,
+          "carry_forward_prediction": 1.3457982728077946,
+          "fit": {
+            "D0": 353296.2311884885,
+            "at_numerical_bound": false,
+            "beta": 4.744702751529378,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.000050000000003e-07,
+                2.0002890000000023e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 1.4552189673781022,
+                "tokens": 500005.0
+              },
+              {
+                "damage": 1.3455496175089006,
+                "tokens": 2000289.0
+              }
+            ],
+            "r2": 0.999978857153156,
+            "residual_fraction": 0.15635078462307572,
+            "status": "ok"
+          },
+          "observed_damage": 1.6721933126660764,
+          "predicted_damage": 1.344654435711512,
+          "status": "ok_underidentified",
+          "tokens": 8000749.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 0.0,
+        "residual_fraction": 0.17336586109114663,
+        "run": "prune_0.6_traces"
+      },
+      {
+        "D0": 84019705.18514672,
+        "beta": 644.6288803808187,
+        "capability": "math",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.09620366235495359,
+          "beats_carry_forward": false,
+          "carry_forward_absolute_error": 0.09332853462645874,
+          "carry_forward_prediction": 1.2715373541445671,
+          "fit": {
+            "D0": 378168.14490980975,
+            "at_numerical_bound": false,
+            "beta": 4.1492688690654145,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.000050000000003e-07,
+                2.0002890000000023e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 1.441946854937497,
+                "tokens": 500005.0
+              },
+              {
+                "damage": 1.2714228230769924,
+                "tokens": 2000289.0
+              }
+            ],
+            "r2": 0.9999981260805517,
+            "residual_fraction": 0.18166695036709865,
+            "status": "ok"
+          },
+          "observed_damage": 1.3648658887710259,
+          "predicted_damage": 1.2686622264160723,
+          "status": "ok_underidentified",
+          "tokens": 8000749.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 0.7005499980545464,
+        "residual_fraction": 0.18876304833749044,
+        "run": "prune_0.6_traces"
+      },
+      {
+        "D0": 6643.182805075142,
+        "beta": 46.072623235507585,
+        "capability": "qa",
+        "largest_budget_extrapolation": {
+          "absolute_error": 4.057805920122123,
+          "beats_carry_forward": false,
+          "carry_forward_absolute_error": 3.3147410358565734,
+          "carry_forward_prediction": 1.161510209163346,
+          "fit": {
+            "D0": 233605.5342030662,
+            "at_numerical_bound": false,
+            "beta": 11.450762586131422,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.000050000000003e-07,
+                2.0002890000000023e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 0.41846008923536104,
+                "tokens": 500005.0
+              },
+              {
+                "damage": 0.418445324940618,
+                "tokens": 2000289.0
+              }
+            ],
+            "r2": -1.9869715436326985e-05,
+            "residual_fraction": 0.054602362175500144,
+            "status": "ok"
+          },
+          "observed_damage": 4.4762512450199194,
+          "predicted_damage": 0.41844532489779684,
+          "status": "ok_underidentified",
+          "tokens": 8000749.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 0.0,
+        "residual_fraction": 0.23110206733769617,
+        "run": "prune_0.6_traces"
+      },
+      {
+        "D0": 108935.1998799306,
+        "beta": 1.3400112560513826,
+        "capability": "code",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.29763787003252906,
+          "beats_carry_forward": true,
+          "carry_forward_absolute_error": 0.39548272807794493,
+          "carry_forward_prediction": 3.3099258193091226,
+          "fit": {
+            "D0": 432818.3054793303,
+            "at_numerical_bound": false,
+            "beta": 3.1941820670991112,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.000050000000003e-07,
+                2.0002890000000023e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 5.338239849936222,
+                "tokens": 500005.0
+              },
+              {
+                "damage": 3.309753607498218,
+                "tokens": 2000289.0
+              }
+            ],
+            "r2": 0.9999999676931305,
+            "residual_fraction": 0.11489669490919205,
+            "status": "ok"
+          },
+          "observed_damage": 2.9144430912311776,
+          "predicted_damage": 3.2120809612637067,
+          "status": "ok_underidentified",
+          "tokens": 8000749.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 1.0,
+        "residual_fraction": 0.10152354944332063,
+        "run": "quant_3_traces"
+      },
+      {
+        "D0": 335296.2623632391,
+        "beta": 2.5222194393164736,
+        "capability": "math",
+        "largest_budget_extrapolation": {
+          "absolute_error": 0.04775019559050575,
+          "beats_carry_forward": true,
+          "carry_forward_absolute_error": 0.16866191847249645,
+          "carry_forward_prediction": 2.8206925291710867,
+          "fit": {
+            "D0": 442006.4885075661,
+            "at_numerical_bound": false,
+            "beta": 3.069079020051354,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.000050000000003e-07,
+                2.0002890000000023e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 4.995955621507195,
+                "tokens": 500005.0
+              },
+              {
+                "damage": 2.8205505822956933,
+                "tokens": 2000289.0
+              }
+            ],
+            "r2": 0.9999999805511743,
+            "residual_fraction": 0.10315633654264558,
+            "status": "ok"
+          },
+          "observed_damage": 2.6520306106985903,
+          "predicted_damage": 2.699780806289096,
+          "status": "ok_underidentified",
+          "tokens": 8000749.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 1.0,
+        "residual_fraction": 0.10116340663171515,
+        "run": "quant_3_traces"
+      },
+      {
+        "D0": 144188645700.5559,
+        "beta": 795608.2562761483,
+        "capability": "qa",
+        "largest_budget_extrapolation": {
+          "absolute_error": 2.822283031951584,
+          "beats_carry_forward": false,
+          "carry_forward_absolute_error": 2.627116533864541,
+          "carry_forward_prediction": 0.6628797310756971,
+          "fit": {
+            "D0": 457453.8458637519,
+            "at_numerical_bound": false,
+            "beta": 2.8804068203676483,
+            "identifiability": "weak deterministic tiebreak: ridge 1e-6 toward r=0.25, D0=geometric mean budget, beta=1",
+            "n_points": 2,
+            "numerical_safety_bounds": {
+              "D0": [
+                5.000050000000003e-07,
+                2.0002890000000023e+18
+              ],
+              "beta": [
+                9.999999999999982e-09,
+                999999.9999999995
+              ],
+              "residual_fraction": [
+                0.0,
+                1.0
+              ]
+            },
+            "predictions": [
+              {
+                "damage": 3.495799693979948,
+                "tokens": 500005.0
+              },
+              {
+                "damage": 0.6627738051041665,
+                "tokens": 2000289.0
+              }
+            ],
+            "r2": 0.9999999932381055,
+            "residual_fraction": 0.01781940643276881,
+            "status": "ok"
+          },
+          "observed_damage": 3.289996264940238,
+          "predicted_damage": 0.46771323298865414,
+          "status": "ok_underidentified",
+          "tokens": 8000749.0,
+          "warning": "Two nonzero budgets cannot identify r, D0, and beta; the numeric extrapolation uses the documented weak tiebreak and is diagnostic only."
+        },
+        "model": "gemma3-270m",
+        "r2": 0.30818225177974734,
+        "residual_fraction": 0.07624812212657005,
+        "run": "quant_3_traces"
+      }
+    ],
+    "n_capability_fits": 9,
+    "n_ladders": 3,
+    "n_models": 1
+  },
+  "verdicts": [
+    {
+      "claim": "V-a: shared-gamma first-order + deleted-mass law beats the direct-damage deleted-mass baseline",
+      "decision_rule": "PASS only when the paired cell-bootstrap 95% CI for candidate-minus-baseline MAE is entirely below zero.",
+      "numbers": {
+        "baseline": "baseline_P2_direct",
+        "baseline_mae_nats": 4.235923783254633,
+        "bootstrap_resamples": 1000,
+        "candidate": "P3_shared_gamma",
+        "candidate_mae_nats": 3.1122297572152213,
+        "candidate_wins": true,
+        "mae_difference_candidate_minus_baseline": -1.1236940260394124,
+        "mae_difference_ci95": [
+          -2.5125365880347483,
+          -0.1087620047897005
+        ],
+        "n_paired_cells": 45
+      },
+      "status": "PASS"
+    },
+    {
+      "claim": "V-a: shared-gamma deleted mass is more portable than per-capability raw sparsity",
+      "decision_rule": "PASS only when the paired cell-bootstrap 95% CI for candidate-minus-baseline MAE is entirely below zero.",
+      "numbers": {
+        "baseline": "P1_raw_sparsity",
+        "baseline_mae_nats": 3.1796399742113715,
+        "bootstrap_resamples": 1000,
+        "candidate": "P3_shared_gamma",
+        "candidate_mae_nats": 2.6760061510146795,
+        "candidate_wins": true,
+        "mae_difference_candidate_minus_baseline": -0.5036338231966914,
+        "mae_difference_ci95": [
+          -1.9308685751893204,
+          0.7545136912862227
+        ],
+        "n_paired_cells": 56
+      },
+      "status": "FAIL"
+    },
+    {
+      "claim": "V-b: shared-gamma first-order + deleted-mass law beats the direct-damage deleted-mass baseline",
+      "decision_rule": "PASS only when the paired cell-bootstrap 95% CI for candidate-minus-baseline MAE is entirely below zero.",
+      "numbers": {
+        "baseline": "baseline_P2_direct",
+        "baseline_mae_nats": 1.1937722724167719,
+        "bootstrap_resamples": 1000,
+        "candidate": "P3_shared_gamma",
+        "candidate_mae_nats": 1.378512954057465,
+        "candidate_wins": false,
+        "mae_difference_candidate_minus_baseline": 0.18474068164069393,
+        "mae_difference_ci95": [
+          -0.1877418017724038,
+          0.6387828467929169
+        ],
+        "n_paired_cells": 37
+      },
+      "status": "FAIL"
+    },
+    {
+      "claim": "V-b: shared-gamma deleted mass is more portable than per-capability raw sparsity",
+      "decision_rule": "PASS only when the paired cell-bootstrap 95% CI for candidate-minus-baseline MAE is entirely below zero.",
+      "numbers": {
+        "baseline": "P1_raw_sparsity",
+        "baseline_mae_nats": 2.150538592873445,
+        "bootstrap_resamples": 1000,
+        "candidate": "P3_shared_gamma",
+        "candidate_mae_nats": 1.4080184498089707,
+        "candidate_wins": true,
+        "mae_difference_candidate_minus_baseline": -0.7425201430644746,
+        "mae_difference_ci95": [
+          -1.3320658908585996,
+          -0.265801773222478
+        ],
+        "n_paired_cells": 40
+      },
+      "status": "PASS"
+    },
+    {
+      "claim": "V-c: shared-gamma first-order + deleted-mass law beats the direct-damage deleted-mass baseline",
+      "decision_rule": "PASS only when the paired cell-bootstrap 95% CI for candidate-minus-baseline MAE is entirely below zero.",
+      "numbers": {
+        "baseline": "baseline_P2_direct",
+        "baseline_mae_nats": 8.185450734676527,
+        "bootstrap_resamples": 1000,
+        "candidate": "P3_shared_gamma",
+        "candidate_mae_nats": 2.167091293763739,
+        "candidate_wins": true,
+        "mae_difference_candidate_minus_baseline": -6.0183594409127865,
+        "mae_difference_ci95": [
+          -10.149877002787266,
+          -2.4520149901014654
+        ],
+        "n_paired_cells": 136
+      },
+      "status": "PASS"
+    },
+    {
+      "claim": "V-c: shared-gamma deleted mass is more portable than per-capability raw sparsity",
+      "decision_rule": "PASS only when the paired cell-bootstrap 95% CI for candidate-minus-baseline MAE is entirely below zero.",
+      "numbers": {
+        "baseline": "P1_raw_sparsity",
+        "baseline_mae_nats": 10.323529172996318,
+        "bootstrap_resamples": 1000,
+        "candidate": "P3_shared_gamma",
+        "candidate_mae_nats": 2.3104889660364107,
+        "candidate_wins": true,
+        "mae_difference_candidate_minus_baseline": -8.013040206959907,
+        "mae_difference_ci95": [
+          -12.754982036669972,
+          -4.036901470971442
+        ],
+        "n_paired_cells": 144
+      },
+      "status": "PASS"
+    },
+    {
+      "claim": "V-d: signed first-order term predicts the sign of mild-density measured damage above chance",
+      "numbers": {
+        "accuracy": 0.6759259259259259,
+        "ci95": [
+          0.5829333238469441,
+          0.7568333458718599
+        ],
+        "n_cells": 108,
+        "n_correct": 73
+      },
+      "status": "PASS"
+    },
+    {
+      "claim": "The fixed q*4^(-b) quantization form wins pooled leave-one-bit-out validation",
+      "numbers": {
+        "mae_nats": {
+          "fixed_4^-b": 7.630708067603073,
+          "learned_exponential": 6.727273390076048,
+          "quadratic_b": 10.887305234041337
+        },
+        "winner": "learned_exponential"
+      },
+      "status": "FAIL"
+    },
+    {
+      "caveat": "The two-point three-parameter extrapolation is underidentified and diagnostic.",
+      "claim": "Saturating recovery extrapolation beats carrying forward the second budget",
+      "numbers": {
+        "n_fits": 9,
+        "wins": 4
+      },
+      "status": "FAIL"
+    },
+    {
+      "caveat": "The two-point three-parameter extrapolation is underidentified and diagnostic.",
+      "claim": "Recovery ladder prune_0.6_c4: saturating-form largest-budget prediction beats carry-forward in every capability",
+      "numbers": {
+        "n_capabilities": 3,
+        "wins": 2
+      },
+      "status": "FAIL"
+    },
+    {
+      "caveat": "The two-point three-parameter extrapolation is underidentified and diagnostic.",
+      "claim": "Recovery ladder prune_0.6_traces: saturating-form largest-budget prediction beats carry-forward in every capability",
+      "numbers": {
+        "n_capabilities": 3,
+        "wins": 0
+      },
+      "status": "FAIL"
+    },
+    {
+      "caveat": "The two-point three-parameter extrapolation is underidentified and diagnostic.",
+      "claim": "Recovery ladder quant_3_traces: saturating-form largest-budget prediction beats carry-forward in every capability",
+      "numbers": {
+        "n_capabilities": 3,
+        "wins": 2
+      },
+      "status": "FAIL"
+    },
+    {
+      "caveat": "This is not a significance test.",
+      "claim": "Reported negative-damage cells clear the descriptive noise-scale screen",
+      "numbers": {
+        "n_exceeding": 29,
+        "n_improvement_cells": 62,
+        "threshold": 0.025293042433487622
+      },
+      "status": "SCREEN_ONLY"
+    }
+  ]
+}
