@@ -31,6 +31,11 @@
 
 \newtheorem{proposition}{Proposition}
 
+% evidence-status macros (searchable; remove before camera-ready)
+\newcommand{\resultpending}[1]{\textcolor{orange}{[RESULT PENDING: #1]}}
+\newcommand{\verifyclaim}[1]{\textcolor{red}{[VERIFY CLAIM: #1]}}
+\newcommand{\preliminary}[1]{\textcolor{blue}{[PRELIMINARY: #1]}}
+
 % notation for the capability-geometry framework
 \newcommand{\wz}{w_0}
 \newcommand{\dw}{\delta w}
@@ -89,44 +94,41 @@ Address \\
 \maketitle
 
 \begin{abstract}
-Agentic applications rarely need frontier-scale generality: they need small,
-economical models whose \emph{specific combination} of capabilities is good
-enough. The standard route to such models is compressing a large source
-model---distillation, pruning, quantization---yet existing scaling laws for
-compression live almost entirely in pretraining-loss space and say nothing
-about which capabilities survive. We develop \emph{scaling-down laws}:
-predictive relationships between the basic parameters of compression (source
-size $N_0$, pruning density $\dens$, bit-width $\bits$, distillation data
-$\Ds$, recovery tokens $\Dr$) and a \emph{vector} of capability-conditional
-losses. Our framework treats scaling-down as \emph{selective deletion} in
-three bases---weight coordinates (pruning), bit-planes (quantization), and
-function components (distillation)---and its central object is the source
-model's \emph{capability geometry}: capability-conditional gradient and
-Fisher structure at the dense checkpoint. This yields testable, pre-registered
-mechanisms rather than curve fitting. Across twelve dense checkpoints from
-four families (Qwen3, Gemma-3/4, Muse, OLMo-3; 270M--32B) we establish:
-(i) capabilities are \emph{real regions of gradient space}---independent
-benchmarks of the same skill share gradient signatures that anti-align
-across skills in every model tested, and zeroing a capability's exclusive
-$0.05\%$ of coordinates destroys that capability alone (a near-diagonal
-causal ablation matrix); (ii) pre-cliff pruning damage obeys
-$\Delta L_c = \bar g_c^{\top}\delta w + B\,m_c^{\gamma}$, where the signed
-alignment term and the deleted capability mass $m_c$ are \emph{measured},
-$\gamma$ is shared across capabilities within a model, and the sign of the
-alignment term alone predicts on which families pruning \emph{improves}
-retrieval-style capability (four families called correctly, including a
-within-family sign flip); (iii) the behavioral collapse
-(``cliff'')---non-perturbative in loss---is a smooth threshold crossing in
-geometry: capability-region mass retention decays smoothly and the cliff
-sits at a family-specific critical retention; and (iv) the quantization,
-distillation, and recovery arms inherit the same structure, including a
-universal bit-width cliff at $3$ bits, a confirmed coverage-deletion
-prediction for distillation recipes, and a recovery law whose
-unrecoverable residual---about $20\%$ of pruning damage---is the true
-price of scaling-down. The framework culminates in reduced-form laws in
-basic parameters only, and a \emph{method-selection map} that tells
-practitioners which compression route preserves a required capability
-profile at the lowest cost.
+Capability-specialized agents rarely need frontier-scale generality: a
+coding or retrieval agent needs a specific \emph{capability profile} at the
+lowest deployment cost. The standard route is compressing a dense source
+model---pruning, quantization, or distillation, usually with recovery
+training---but choosing among methods today means expensive grid search,
+because compression changes capabilities anisotropically and existing
+compression scaling laws predict only aggregate pretraining loss. We
+develop \emph{predictive scaling-down laws}: from a dense source state
+that is observable \emph{before} compression (an observed capability
+anchor plus public source descriptors), common compression coordinates,
+and a small number of method-specific controls, predict the
+post-compression capability vector---and from it, workload performance
+and the cheapest configuration meeting a requirement. Across twelve dense
+checkpoints from four families (Qwen3, Gemma-3/4, Muse, OLMo-3;
+270M--32B) we find: (i) capability ordering under pruning is invariant
+(multi-hop QA most robust, math and code most fragile in every model),
+while magnitudes and signs are family coefficients---on some families
+pruning measurably \emph{improves} retrieval-style capability;
+(ii) independent benchmarks of the same skill share gradient signatures
+that anti-align across skills in all seven models tested, and in a first
+single-model test, zeroing a capability's exclusive $0.05\%$ of
+coordinates selectively destroys that capability---mechanism evidence
+that capability-conditioned prediction targets real structure;
+(iii) every model meets a collapse cliff in a narrow proportional density
+band that local expansions do not anticipate, while a geometric retention
+statistic decays smoothly and crosses a family-consistent critical value
+at the cliff; and (iv) quantization shows the same selective structure
+with a collapse at 3 bits in all nine models measured, distillation
+recipes that strip chains of thought selectively damage math, and
+recovery training follows a saturating law whose asymptotic residual
+under a fixed recipe quantifies what compression cost cannot buy back.
+We organize these observations into an anchored, shared-plus-%
+method-specific law hierarchy with held-out validation, and into a
+\emph{method-selection map} for practitioners; components still under
+validation are explicitly marked throughout.
 \end{abstract}
 
 

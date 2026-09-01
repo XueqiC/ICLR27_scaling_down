@@ -1,184 +1,136 @@
-\section{Scaling-Down Laws}
+\section{Predictive Scaling-Down Framework}
 \label{sec:method}
 
-\subsection{Framework: scaling-down is selective deletion}
-\label{sec:deletion}
+\subsection{Dense reference candidates}
+\label{sec:denseref}
 
-Scaling \emph{up} adds capacity and data; the laws of
-\citet{kaplan2020scaling,hoffmann2022training} describe what is gained.
-Scaling \emph{down} deletes, and the three compression families delete
-in three different bases:
+The dense reference is a capability-conditioned specialization and
+validation of established scaling laws \citep{kaplan2020scaling,
+hoffmann2022training,gadre2024language}, not a contribution of this
+paper. We compare, by held-out prediction error:
+D1, size-only $E_c+A_cN^{-\alpha_c}$;
+D2, Chinchilla-style $E_c+A_cN^{-\alpha_c}+B_cD^{-\beta_c}$;
+D3, family-conditioned D2 with offsets $u_{c,f}$; and
+D4, the observed dense capability anchor $\mathbf L_0^{\mathrm{obs}}$
+used directly per \eqref{eq:anchored}. D2/D3 are claimed only where
+$N$, $D$, and $f$ vary independently enough to identify them;
+$D$--family collinearity is reported rather than hidden.
+\resultpending{D1--D4 comparison; controlled $(N,D)$ grid}
+The paper's practical setting is D4: anchored prediction of
+compression-induced change.
 
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{@{}llll@{}}
-\toprule
-Method & Deleted basis & Deletion order & Geometry \\
-\midrule
-Pruning & weight coordinates & magnitude, ascending & $\Fc{c,ii}\,w_i^2$ \\
-Quantization & bit-planes & low-order bits first & $\operatorname{tr}\Fc{c}$ \\
-Distillation & function components & capacity \& coverage cutoffs & teacher spectrum \\
-\bottomrule
-\end{tabular}
-\caption{Compression as selective deletion. Recovery training is the
-framework's only addition operator.}
-\label{tab:bases}
-\end{table}
-
-What a capability loses under a method is determined by how that
-capability's mass is distributed over the basis being deleted. Two
-structural consequences follow immediately, both borne out by data:
-no scalar compression ratio can be a universal damage coordinate
-across methods (equal ratios in different bases delete different
-capability mass), and distillation-recipe effects are \emph{coverage}
-deletions of the training signal (removing chain-of-thought tokens
-deletes the reasoning components; the prior grid shows exactly this
-signature, \S\ref{sec:reanalysis}).
-
-\subsection{Capability geometry: the mechanism object}
-\label{sec:geometry}
-
-All mechanism forms are functionals of two measurable objects at the
-dense checkpoint, estimated from per-sample completion-loss gradients
-$g_i$ over the estimation half of $\probeset{c}$:
-\begin{equation}
-\gbar{c}=\mathbb{E}_{i\sim c}[g_i], \qquad
-\Fc{c}=\mathbb{E}_{i\sim c}[g_i g_i^{\top}].
-\label{eq:geometry}
-\end{equation}
-Both are streamable at 30B scale: diagonal spectra are accumulated in
-magnitude-quantile bins, and full quadratic forms with any $\dw$ follow
-from streaming the scalars $g_i^{\top}\dw$
-($\dw^{\top}\Fc{c}\dw=\mathbb{E}_i[(g_i^{\top}\dw)^2]$), so no large
-object is ever stored. The first-order term is \emph{signed}: a
-pretrained model is not at any single capability's optimum
-($\gbar{c}\neq0$), so deletion can move a capability downhill---a
-prediction unavailable to any positive-semidefinite
-effective-parameter model \citep{frantar2023scaling,kumar2024scaling,
-panferov2025unified} and, empirically, the term that separates families
-(\S\ref{sec:mech}).
-
-\subsection{The laws}
-\label{sec:laws}
-
-\paragraph{Dense reference.} Per capability, a Chinchilla-style
-decomposition \citep{hoffmann2022training} anchors every arm:
-\begin{equation}
-\Lc{c}^{\text{dense}}(N)\;=\;E_c \;+\; A_c\,N^{-\alpha_c},
-\label{eq:dense}
-\end{equation}
-with the exponent spectrum $\{\alpha_c\}$ itself a result: capabilities
-that scale up differently should scale down differently.
-
-\paragraph{Pruning (two regimes).} With deleted capability mass
-$m_c(\dens)=\sum_{i\in\text{pruned}(\dens)}\Fc{c,ii}w_i^2$ and alignment
-$a_c(\dens)=\gbar{c}^{\top}\dw_{\dens}$,
-\begin{equation}
-\Delta\Lc{c}(\dens)=
-\begin{cases}
-\varphi\big(a_c(\dens),\,m_c(\dens)\big), & \dens>\dens_c^{*}
-\quad\text{(perturbative)}\\[2pt]
-\text{collapse toward } \Lc{c}^{\varnothing}, & \dens\le\dens_c^{*}
-\quad\text{(non-perturbative)},
-\end{cases}
-\label{eq:prune}
-\end{equation}
-where $\varphi$ is an empirical transfer function (second-order Taylor
-is its leading form but is \emph{not} assumed exact
-\citep{gong2025identifying}), and the collapse boundary
-$\dens_c^{*}(N_0,f)$ is a fitted--and, we argue, ultimately
-predictable--function. Empirically $\dens^{*}$ occupies a narrow
-proportional band across a $115\times$ size range
-(\S\ref{sec:curves}); its family dependence is the open frontier
-(\S\ref{sec:family}).
-
-\paragraph{Quantization.} Round-to-nearest at bit-width $\bits$ acts as
-bit-plane noise:
-\begin{equation}
-\Delta\Lc{c}(\bits)\;=\;q_c\,4^{-\bits}, \qquad
-q_c\propto\operatorname{tr}\Fc{c}\ \text{(mechanism form)},
-\label{eq:quant}
-\end{equation}
-predicting exponential decay in bits with a capability-dependent
-prefactor---and, jointly with \eqref{eq:prune}, explaining why pruning
-and quantization share no common damage coordinate: one integrates the
-spectrum's tail, the other its trace.
-
-\paragraph{Distillation.} Per capability, a Busbridge-style axiomatic
-template \citep{busbridge2025distillation} with two scaling-down
-specifics: the teacher enters as a capability \emph{vector}
-$\vec{L}^{\mathcal{T}}$ (prior data rejects any scalar teacher
-sufficiency, \S\ref{sec:reanalysis}), and the recipe enters as a
-coverage factor $\chi_c(\rho)\in[0,1]$---the fraction of capability-$c$
-signal the recipe retains:
-\begin{equation}
-\Lc{c}^{S}(N_S,\Ds,\rho)\;=\;
-\max\!\big(\Lc{c}^{\mathcal{T}},\,\Lc{c}^{\text{dense}}(N_S)\big)
-\;+\;B_c\,\big(\chi_c(\rho)\,\Ds\big)^{-\beta_c}
-\;+\;\Delta_c^{\text{gap}},
-\label{eq:distill}
-\end{equation}
-where $\Delta_c^{\text{gap}}$ carries the capacity-gap correction. The
-answer-only recipe's teacher-independent math deficit in prior data
-($\chi_{\text{math}}\!\approx\!0$ when chains are stripped) is the
-identifying observation.
-
-\paragraph{Recovery.} The single addition operator obeys a
-post-compression law \citep{zhang2024scaling,muralidharan2024compact}:
-\begin{equation}
-\Lc{c}(\Dr)\;=\;\Lc{c}^{\infty}\;+\;B'_c\,\Dr^{-\beta'_c},
-\label{eq:recovery}
-\end{equation}
-with the mechanism-level prediction that $\beta'_c$ grows with the
-overlap between recovery-data gradients and the deleted directions,
-and a pre-registered \emph{state-function} hypothesis: the recovered
-model depends on the damage geometry and $\Dr$, not the compression
-path.
-
-\paragraph{Link layer.} Task success is reported through
-$A_c=g_c(\Lc{c})$, monotone and saturating, fit separately per
-capability \citep{gadre2024language,bhagia2024establishing}; no law is
-fit in accuracy space.
-
-\subsection{Claim hierarchy}
+\subsection{Shared-plus-method-specific law hierarchy}
 \label{sec:claims}
 
-\textbf{T1 (strong):} with deleted capability mass as the common
-coordinate, one transfer function $\varphi$ covers pruning and
-quantization, and distillation joins through the function basis.
-\textbf{T2 (fallback):} the common coordinate holds but $\varphi$
-splits by method---a unified framework producing a family of laws.
-Either tier differs from single-method loss-space laws
-\citep{frantar2023scaling,kumar2024scaling,busbridge2025distillation}
-in five pre-registered respects: capability-vector $y$; a measured link
-to task success; a recovery axis; coefficients constrained by
-independently measured geometry; and cross-method comparability at
-matched deleted mass. Falsifiers are declared with each mechanism
-claim; \S\ref{sec:family} reports one pre-registered candidate
-(top-concentration as a robustness predictor) that the data retired.
+We do not presume that methods unify. The general form is
+\begin{equation}
+\hat{\mathbf L}^{(m)}
+=\mathbf L_0^{\mathrm{obs}}
++F_{\mathrm{shared}}(\mathbf x_0,\mathbf z_m)
++F_m(\mathbf x_0,\mathbf z_m,\boldsymbol\theta_m),
+\label{eq:hierarchy}
+\end{equation}
+and three hypotheses are compared by held-out prediction error (never
+by in-sample $R^2$):
+\textbf{M1}, fully shared: after transformation to common coordinates
+$\mathbf z_m$, one response function covers all methods;
+\textbf{M2}, hierarchical: shared macro-structure with capability,
+family, and method corrections;
+\textbf{M3}, method-specific functional forms unified only by the
+capability-vector output, source interface, validation protocol,
+uncertainty reporting, cost model, and agent-performance link.
+\resultpending{M1/M2/M3 held-out comparison, including
+leave-one-method-out and matched-storage / matched-active-parameter /
+matched-initial-damage tests}
+If unification fails at M1/M2, the method-selection map built from M3
+laws is the paper's central practical result.
+
+\subsection{Candidate functional forms per arm}
+\label{sec:laws}
+
+\paragraph{Pruning (two regimes).} Pre-cliff candidates, fit on the
+positive-damage branch and compared by the held-out battery
+(fit-shallow-predict-deep, leave-largest-model-out,
+leave-one-family-out, sign prediction, cliff-density prediction;
+baselines: raw sparsity, remaining parameters, removed weight norm,
+anchor-only, size-plus-density, family-conditioned reduced form):
+simple reduced forms in $(\dens; N_0, f)$, and---as mechanism
+comparators only---the measured-alignment-plus-deleted-mass form
+$\Delta\Lc{c}=a_c(\dens)+B\,m_c(\dens)^{\gamma}$ whose in-sample fits
+motivated this study (\S\ref{sec:law}). Cliff modeling compares a hard
+threshold against a smooth sigmoid in $\dens$ and, following the
+geometric order-parameter evidence (\S\ref{sec:orderparam}), a
+family-level critical-retention parameterization of
+$\dens^{*}_c(N_0,f)$. \resultpending{held-out battery results}
+
+\paragraph{Quantization.} Candidates at bit-width $\bits$: $q_c4^{-\bits}$,
+a learned exponential $q_ce^{-k\bits}$, polynomial degradation, and an
+effective-parameter multiplier; validated by leave-one-bit-out and
+held-out model/family, with a matched-storage comparison against
+pruning. \resultpending{functional-form comparison}
+
+\paragraph{Distillation.} Per capability, a template with student
+capacity floor, teacher capability vector $\mathbf L^{\mathcal T}$,
+a data power law in trace tokens, and a supervision-dependent coverage
+factor $\chi_c(\rho)$ computed from data composition (never inferred
+post hoc from results); capacity-gap corrections follow
+\citet{busbridge2025distillation}. Confounds (total tokens, update
+count, answer format, teacher identity) are controlled by
+token-matched and update-matched runs. \resultpending{full
+capacity$\times$teacher$\times$data$\times$recipe grid}
+
+\paragraph{Recovery.} The saturating transform, anchored at
+$\Dr{=}0$:
+\begin{equation}
+\Delta\hat L_c^{(m)}(\Dr)=\Delta L_c^{(m)}(0)\,
+\Big[r_{m,c}+(1-r_{m,c})\big(1+\Dr/D_{0,m,c}\big)^{-\beta_{m,c}}\Big],
+\label{eq:recovery}
+\end{equation}
+where $r_{m,c}$ is the \emph{asymptotic residual fraction under the
+fixed recovery recipe}---not claimed to be fundamentally
+unrecoverable capability. Recovery-source dependence (general vs.\
+capability-aligned vs.\ mixed data) is an explicit axis.
+
+\paragraph{Uncertainty.} Configuration-level cluster bootstrap for
+fitted coefficients; benchmark bootstrap for deterministic
+compression; multiple seeds for training-based arms at small scale;
+calibration coverage reported alongside MAE and relative error.
+
+\subsection{Mechanism analysis: capability geometry}
+\label{sec:geometry}
+
+As supporting evidence---not a prediction interface---we measure the
+capability-conditional mean gradient $\gbar{c}$ and Fisher structure
+$\Fc{c}=\mathbb{E}_{i\sim c}[g_ig_i^{\top}]$ at the dense checkpoint,
+streamable at 30B scale (diagonal spectra in magnitude-quantile bins;
+quadratic forms via $\dw^{\top}\Fc{c}\dw=\mathbb{E}_i[(g_i^{\top}\dw)^2]$).
+Three uses: (i) testing whether capabilities occupy distinct,
+partially separable parameter regions (\S\ref{sec:regions});
+(ii) the \emph{signed} first-order term $\gbar{c}^{\top}\dw$, which no
+positive-semidefinite effective-parameter model can express and which
+anticipates capability-selective sign effects (\S\ref{sec:mech}); and
+(iii) upper-bound comparators for reduced-form laws---if a reduced
+form approaches the mechanism form's accuracy without gradient access,
+the practical interface loses nothing.
 
 \subsection{Fitting and validation protocol}
 \label{sec:protocol}
 
-Functional forms and keep/reject rules are committed (with timestamps)
-before fits; model comparison uses repeated held-out
-\emph{extrapolation} error---largest $N_0$, deepest compression,
-largest $\Dr$---never in-sample fit indices
-\citep{li2025misfitting,besiroglu2024chinchilla}; fits are weighted by
-measurement error and uncertainty is reported from cluster bootstrap
-at the configuration level; positive controls (synthetic laws must be
-recovered) and negative controls (shuffled capability labels must
-yield no structure) run alongside every fit.
+Functional forms and keep/reject rules are committed before fits;
+model comparison uses repeated held-out extrapolation (largest size,
+deepest compression, largest recovery budget, leave-one-family-out),
+never in-sample fit indices \citep{li2025misfitting,
+besiroglu2024chinchilla}; manuscript counts of models, benchmarks, and
+fits are generated from result files, not typed by hand; negative
+results are reported, not tuned away.
 
 \subsection{Deliverable: the method-selection map}
 \label{sec:map}
 
-Intersecting the per-method reduced-form laws at matched compression
-cost partitions the (compression ratio $\times$ capability
-requirement) plane into regions where pruning, quantization,
-distillation, or a composition is the cheapest way to retain a required
-capability profile---including the measured region where mild pruning
-is better than free for retrieval-style capabilities on some families.
-This map, in basic parameters only, is the practitioner-facing output
-of scaling-down laws.
+Intersecting per-method laws at matched cost coordinates partitions
+the (compression budget $\times$ capability requirement) space into
+regions where pruning, quantization, distillation, or a composition
+is cheapest, with uncertainty bands; evaluation against exhaustive
+search reports constraint-satisfaction rate, cost regret, selected-%
+method accuracy, and the number of compression experiments avoided.
+\resultpending{held-out agent method-selection validation}

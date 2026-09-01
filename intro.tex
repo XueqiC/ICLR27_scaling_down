@@ -1,100 +1,108 @@
 \section{Introduction}
 \label{sec:intro}
 
-Frontier language models are large and expensive because they are
-general. Deployed agentic systems are the opposite: a coding agent, a
-retrieval assistant, or a tool-calling workflow exercises a narrow,
-stable \emph{combination} of capabilities, and its economics are
-dominated by inference cost. The practical question of the small-model
-era is therefore not ``how good can an $N$-parameter model be?'' but
-``what is the cheapest model whose \emph{capability profile} covers
-this workload?'' The standard route to such a model starts from a
-strong source and scales it \emph{down}---by pruning, quantization, or
+Deployed LLM-based agents are specialists. A coding agent lives on code
+synthesis, debugging, and tool use; a retrieval assistant lives on
+multi-hop question answering; neither needs frontier-scale generality,
+and both are billed by inference cost. The practical question of the
+small-model era is therefore not ``how good can an $N$-parameter model
+be?'' but ``what is the cheapest model whose \emph{capability profile}
+covers this workload?'' The standard route to such a model starts from a
+strong dense source and scales it \emph{down}: pruning, quantization, or
 distillation, usually followed by recovery training.
 
-Scaling up is governed by laws
-\citep{kaplan2020scaling,hoffmann2022training} whose usefulness comes
-from a strict format: few basic parameters, a continuous observable,
-declared functional forms, validation by extrapolation. Scaling down
-has no such laws. What exists are compression laws of
-\emph{pretraining loss}---for sparsity \citep{frantar2023scaling},
-precision \citep{kumar2024scaling}, distillation
-\citep{busbridge2025distillation}, and unified compressed formats
-\citep{panferov2025unified}---which are accurate in their space but
-silent about the quantity practitioners buy small models for: which
-capabilities survive. Meanwhile the empirical record shows compression
-damage is strongly capability-selective \citep{jaiswal2023compressing,
-liu2025quantization,yin2023junk}, and a single scalar loss cannot
-express selectivity at all.
+Choosing among these routes is currently guesswork or grid search.
+Compression does not shrink all capabilities uniformly: at equal size,
+memory, or theoretical compute, different methods preserve different
+capabilities, improve some while collapsing others, hit cliffs at
+different strengths, and recover differently under continued training
+(\S\ref{sec:exp}). Aggregate perplexity, average benchmark scores, and
+effective parameter counts do not reveal whether the capabilities an
+agent needs survive. The full search space---source model $\times$
+method $\times$ strength $\times$ recipe $\times$ recovery
+budget---must today be explored by running every configuration through
+capability benchmarks and agent evaluations: expensive, and still prone
+to missing sign flips, non-monotonicities, and collapse cliffs.
 
-This paper develops \emph{scaling-down laws} in the standard format,
-with two deliberate choices. First, the observable is a
-\emph{vector} of capability-conditional losses
-$\vec{L}=(\Lc{c})_{c\in\capset}$, continuous by construction
-(\S\ref{sec:prelim}), because a decade of downstream-predictability
-results shows accuracy-space fitting destroys the regularity laws need
-\citep{schaeffer2024predicting,gadre2024language}. Second, functional
-forms are \emph{derived from a mechanism, then validated by
-extrapolation}, not selected by fit quality. The mechanism is the
-\emph{selective-deletion} view: pruning deletes weight coordinates,
-quantization deletes bit-planes, distillation deletes function
-components the student cannot hold or the transfer data never
-exercises; recovery training is the sole addition operator. What each
-capability loses is governed by the source model's \emph{capability
-geometry}---the capability-conditional mean gradient $\gbar{c}$ and
-Fisher structure $\Fc{c}$ at the dense checkpoint, measurable with
-forward--backward passes only (\S\ref{sec:method}).
+This paper develops \emph{predictive scaling-down laws} to replace that
+search. The target map is
+\begin{equation}
+\big(\underbrace{\text{dense source state}}_{\mathbf x_0},\;
+\underbrace{\text{common compression coordinates}}_{\mathbf z_m},\;
+\underbrace{\text{method-specific controls}}_{\boldsymbol\theta_m}\big)
+\;\longmapsto\;
+\underbrace{\text{post-compression capability vector}}_{\hat{\mathbf L}^{(m)}},
+\label{eq:target}
+\end{equation}
+followed by a workload link $S_W = G_W(\hat{\mathbf L},\mathbf r_W)$ and
+the deployment decision
+$\arg\min_{m,\theta_m} C_m(\theta_m;H)$ subject to
+$G_W(\hat{\mathbf L}^{(m)},\mathbf r_W)\ge S_W^{\min}$, where $H$ is the
+hardware environment, $\mathbf r_W$ the workload's capability
+requirement, and $C_m$ the deployment-plus-recovery cost. Three design
+rules keep the laws usable. First, \textbf{prediction-time inputs must be
+observable before compression}: public source descriptors and an
+\emph{observed dense capability anchor}
+$\mathbf L_0^{\mathrm{obs}}$---which absorbs unknown data quality,
+optimization, and post-training history---so predictions take the form
+$L_{c,0}^{\mathrm{obs}}+\widehat{\Delta L}_c^{(m)}$. Gradient and Fisher
+quantities serve as \emph{mechanism evidence}, not as prediction inputs.
+Second, the observable is a \emph{vector} of continuous
+capability-conditional losses (\S\ref{sec:prelim}), because a decade of
+downstream-predictability results shows accuracy-space fitting destroys
+the regularity laws need \citep{schaeffer2024predicting,
+gadre2024language,bhagia2024establishing}. Third, \textbf{cross-method
+unification is a hypothesis to test, not an assumption}: we compare a
+fully shared law, a hierarchical shared-plus-corrections law, and
+method-specific laws by held-out prediction error
+(\S\ref{sec:claims}), and if unification fails, the method-selection
+map is the central deliverable rather than an appendix.
 
-Instantiating the laws on twelve dense checkpoints from four model
-families (Qwen3, Gemma-3/4, Muse, OLMo-3; 270M--32B), we find that
-scaling-down has law-like structure of a specific kind---%
-\textbf{family-invariant form with family-specific coefficients}:
+\paragraph{What the evidence shows so far.}
+Across twelve dense checkpoints from four model families (Qwen3,
+Gemma-3/4, Muse, OLMo-3; 270M--32B):
 \begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{Capability regions are real and causal.} Independent
-benchmarks of the same skill share gradient signatures that
-\emph{anti-align} across skills (block structure in seven models,
-three families), and zeroing a capability's exclusive $0.05\%$ of
-weight coordinates---selected from gradients alone---destroys exactly
-that capability (near-diagonal ablation matrix; the off-target effect
-of the QA ablation on code is $+0.0001$ nats). The capability vector
-of our laws indexes measured objects, not benchmark conventions.
-\item \textbf{The pre-cliff law is two measurements plus two
-parameters.} $\Delta\Lc{c} = \gbar{c}^{\top}\dw + B\,m_c^{\gamma}$
-fits 24 capability$\times$model curves at $R^2\ge0.82$ (mostly
-$\ge0.95$); the exponent concentrates at $\gamma\in[1.2,2.2]$ in the
-deleted-mass coordinate and is shared across capabilities within a
-model. The \emph{sign} of the measured alignment term predicts on
-which families pruning improves retrieval-style QA---four families
-called correctly, including a sign flip \emph{within} OLMo-3 between
-7B and 32B.
-\item \textbf{The cliff is a geometric threshold crossing.} Collapse
-is universal and non-perturbative in loss (no local expansion sees it
-coming), but capability-region mass retention decays \emph{smoothly}
-from the first densities, and the cliff sits where retention crosses
-a family-specific critical value---reducing the two-regime law's
-boundary to one measured constant per family.
-\item \textbf{The other arms inherit the structure.} Quantization
-shows the same capability selectivity in a different basis and a
-universal cliff at $3$ bits; distillation confirms the pre-registered
-coverage-deletion prediction (stripping chains-of-thought selectively
-damages math); recovery training obeys a clean power law whose
-unrecoverable residual ($\approx20\%$ of pruning damage) is the true
-price of scaling-down---and aligned recovery data heals faster but
-re-damages under over-training, a practical trade-off the
-method-selection map encodes. Within-family robustness is
-non-monotonic in size in two families independently; our
-pre-registered spectral predictor for this is honestly retired.
+\item \textbf{Capability responses to compression are anisotropic with
+an invariant ordering.} Multi-hop QA is the most pruning-robust
+capability and math/code the most fragile in every model measured,
+while magnitudes and signs are family-specific---Qwen3 and OLMo-3-32B
+QA \emph{improves} under substantial pruning, Gemma's never does.
+Sign, cliff location, and family identity all matter to method choice.
+\item \textbf{Capability-conditioned prediction targets real
+structure.} Independent benchmarks of the same skill share gradient
+signatures that anti-align across skills (seven models, three
+families); in a first single-model test, zeroing one capability's
+exclusive $0.05\%$ of coordinates selectively removed that capability
+(near-diagonal ablation matrix). Multi-model control ablations are in
+progress before stronger causal language is warranted.
+\item \textbf{The collapse cliff is real, proportional, and
+non-perturbative in loss}---but a geometric retention statistic decays
+smoothly and crosses a family-consistent critical value at the cliff,
+suggesting the cliff boundary can be carried by one constant per
+family rather than fitted per model. \preliminary{three models, two
+families so far}
+\item \textbf{The other arms echo the structure.} Quantization is
+capability-selective in the same directions with a collapse at 3 bits
+in all nine models measured; distillation recipes that strip
+chains of thought selectively damage math (paired early runs);
+recovery training follows a saturating law whose asymptotic residual
+under a fixed recipe separates redeemable from persistent damage, and
+capability-aligned recovery data heals faster at small budgets but
+re-damages under over-training.
 \end{enumerate}
 
 \paragraph{Contributions.}
-(1) The scaling-down-law format: basic parameters, capability-vector
-observable, and derived two-regime forms for pruning, quantization,
-distillation, and recovery (\S\ref{sec:prelim}--\S\ref{sec:method});
-(2) capability geometry as the measurable mechanism object, with the
-signed first-order term as its sharpest validated prediction;
-(3) a four-family, eleven-model empirical grid establishing the
-invariances and family coefficients above, plus a forensic re-analysis
-of a prior ability-space grid that fixes the measurement protocol
-(\S\ref{sec:exp}); and (4) the \emph{method-selection map} as the
-practitioner-facing deliverable (\S\ref{sec:map}), with the
-distillation and recovery arms of the pre-registered grid in progress.
+(1) A problem formulation for compression-method selection under
+capability requirements, with a three-layer taxonomy of prediction
+inputs (observable source state, common compression coordinates,
+method-specific controls) and an anchored prediction setting
+(\S\ref{sec:prelim}); (2) a predictive framework with a
+shared-plus-method-specific law hierarchy, explicit cliff and recovery
+transformations, and a held-out validation protocol
+(\S\ref{sec:method}); (3) a twelve-model, four-family empirical grid
+across pruning, quantization, distillation, and recovery, with
+capability-region mechanism evidence and a forensic re-analysis of a
+prior ability-space grid (\S\ref{sec:exp}); and (4) the
+method-selection map as the practitioner-facing output.
+\resultpending{cross-method fitting (M1/M2/M3) and agent-workload
+validation; the corresponding claims are marked throughout}

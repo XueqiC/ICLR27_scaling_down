@@ -1,104 +1,93 @@
-\section{Setup: Objects, Basic Parameters, and Observables}
+\section{Problem Formulation}
 \label{sec:prelim}
 
-Scaling laws earn their usefulness from the discipline of their setup:
-a small set of \emph{basic parameters} anyone can plug in, a continuous
-observable with known statistics, and a fixed fitting-and-validation
-protocol declared before the fits. This section fixes all three for
-scaling-down.
-
-\subsection{Objects}
-
-A \emph{source model} has weights $\wz$, family $f$, and parameter
-count $N_0$. A \emph{compression operator} $\comp{m}{s}$ maps the
-source to a smaller or cheaper model, where
-$m\in\{\text{prune},\text{quant},\text{distill}\}$ and $s$ is the
-method's strength. A \emph{recovery operator} $R_{\Dr}$ performs
-$\Dr$ tokens of continued training on the compressed model. For
-same-architecture methods the induced weight perturbation is
-$\dw=\comp{m}{s}(\wz)-\wz$: magnitude pruning at density $\dens$ gives
-$\dw=-\wz\odot\maskdens_{\dens}$ (masking the $(1-\dens)$ fraction of
-smallest-magnitude weights), and round-to-nearest quantization at
-bit-width $\bits$ gives the rounding error. Distillation replaces the
-architecture: a student of size $N_S$ is trained on $\Ds$ tokens of
-teacher traces under a \emph{recipe} $\rho$ (which parts of the trace
-supervise the student).
-
-\subsection{Basic parameters}
-\label{sec:params}
-
-Every law in this paper is ultimately expressed in the parameters of
-Table~\ref{tab:params}---quantities a practitioner knows before running
-anything. Internal geometry statistics (\S\ref{sec:method}) appear only
-in mechanism forms and are eliminated from the published laws by
-fitting them once as smooth functions of $(N_0,f)$.
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{@{}llll@{}}
-\toprule
-Parameter & Meaning & Arm & Range studied \\
-\midrule
-$N_0$ & source model size & all & 270M--32B \\
-$f$ & source family & all & Qwen3, Gemma-3/4, Muse, OLMo-3 \\
-$\dens$ & remaining weight density & pruning & $0.3$--$1.0$ \\
-$\bits$ & weight bit-width & quantization & $\{4,8,16\}$ \\
-$N_S$ & student size & distillation & 270M--12B \\
-$\Ds$, $\rho$ & transfer tokens; recipe & distillation & grid \\
-$\Dr$ & recovery tokens & recovery & $0$--$10^{9}$ \\
-\bottomrule
-\end{tabular}
-\caption{Basic parameters of scaling-down. Published (reduced-form)
-laws contain these and nothing else.}
-\label{tab:params}
-\end{table}
-
-\subsection{Observables: a capability vector, measured in loss}
-\label{sec:observables}
+\subsection{Capability vector and observables}
 
 We fix a capability set $\capset$ (here mathematical reasoning, code
-generation, multi-hop QA; the protocol extends to further capabilities)
-and give each capability $c$ a \emph{probe set} $\probeset{c}$ of
-prompt--reference pairs. The primary observable is the
-capability-conditional task loss
+generation, multi-hop QA) and give each capability $c$ a probe set
+$\probeset{c}$ of prompt--reference pairs from held-out benchmark
+splits, cross-benchmark disjoint from all transfer and recovery data
+(math: GSM8K/MATH-500/SVAMP; QA: HotpotQA/2Wiki/TriviaQA; code:
+HumanEval/MBPP, with a third independent benchmark planned). The
+primary observable is the capability-conditional task loss
 \begin{equation}
 \Lc{c}(w) \;=\; \frac{1}{T_c}\sum_{(x,y)\in\probeset{c}}
 \sum_{t=1}^{|y|} -\log p_w\!\left(y_t \mid x, y_{<t}\right),
 \label{eq:taskloss}
 \end{equation}
-the mean cross-entropy over reference-completion tokens. Three
-protocol rules, each forced by evidence:
-\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{Continuous loss, not accuracy.} Downstream metrics are
-predictable essentially only through continuous log-likelihood
-measurements \citep{schaeffer2023emergent,schaeffer2024predicting,
-gadre2024language,bhagia2024establishing}; laws are fit in $\vec{L}$
-space, and task success enters only through a separately measured,
-monotone saturating link $A_c=g_c(\Lc{c})$.
-\item \textbf{Cross-benchmark probes.} Probe benchmarks are disjoint
-at the \emph{benchmark} level (not merely the split level) from all
-transfer and recovery data. Our re-analysis of a prior evaluation
-(\S\ref{sec:reanalysis}) found that same-benchmark evaluation inflated
-apparent distillation gains on QA by roughly one third.
-\item \textbf{Split estimation from measurement.} Each probe set is
-halved once; geometry statistics are estimated on one half, compressed
-models are measured on the other, so predictions and measurements never
-share sampling noise. Latent-ability (IRT) summaries, when used at all,
-are restricted to rank statements (discrimination heterogeneity leaves
-rankings intact, $\rho\ge0.98$, but voids interval-scale use).
-\end{enumerate}
+continuous by construction \citep{schaeffer2024predicting,
+gadre2024language}. Within-model compression deltas
+$\Delta\Lc{c}$ compare a model to itself and are tokenizer-consistent;
+any cross-family comparison of absolute levels uses tokenizer-normalized
+units (bits or nats per byte). Task success enters only through a
+separately validated monotone link $A_c=g_c(\Lc{c})$
+\resultpending{held-out validation of $g_c$ on compression
+configurations}. Probe sets are split once into estimation and
+measurement halves so mechanism statistics and evaluations never share
+sampling noise.
 
-\subsection{Target}
+\subsection{Three layers of prediction inputs}
+\label{sec:params}
 
-A \emph{scaling-down law} is a predictive map
+All prediction-time inputs must be available before compression, cheap
+to obtain, well defined, and public for open models.
+
+\paragraph{1. Source-model descriptors.}
+$\mathbf x_0=(N_0,\,D_0,\,f,\,a,\,\mathbf L_0^{\mathrm{obs}})$:
+non-embedding parameter count, pretraining tokens where disclosed,
+family, a few architecture descriptors, and the \emph{observed dense
+capability anchor} $\mathbf L_0^{\mathrm{obs}}$---the capability vector
+measured once on the dense model. The anchor absorbs data quality,
+optimization, and post-training history that metadata cannot capture;
+the practical prediction setting is
 \begin{equation}
-(N_0, f, m, s, \Dr) \;\longmapsto\; \vec{L}=\left(\Lc{c}\right)_{c\in\capset},
-\label{eq:sdlaw}
+\hat L_c^{(m)} \;=\; L_{c,0}^{\mathrm{obs}}
+\;+\; \widehat{\Delta L}_c^{(m)}(\mathbf x_0,\mathbf z_m,
+\boldsymbol\theta_m).
+\label{eq:anchored}
 \end{equation}
-reported in two forms: a \emph{mechanism form} whose coefficients are
-independently measured functionals of the source model
-(\S\ref{sec:method}), and a \emph{reduced form} in the basic parameters
-of Table~\ref{tab:params} alone. Validation is by held-out
-extrapolation---largest size, deepest compression, largest recovery
-budget---never by in-sample fit quality.
+Descriptors with insufficient independent variation in the grid
+($D_0$ is largely confounded with $f$ in public families) are kept
+only if they improve held-out prediction.
+\resultpending{dense-reference comparison D1--D4 and the
+$(N,D)$-identification grid}
+
+\paragraph{2. Common compression coordinates.}
+$\mathbf z_m=(r_{\text{active}},\,r_{\text{storage}},\,
+r_{\text{compute}},\,D_A)$: active-parameter ratio, storage ratio,
+theoretical inference-compute ratio, and post-compression adaptation
+tokens---computable from the configuration alone, and the coordinates
+on which cross-method comparison and any shared law must live.
+
+\paragraph{3. Method-specific controls.}
+$\boldsymbol\theta_m$: pruning (density $\dens$; pattern and criterion
+fixed to global magnitude as the canonical protocol), quantization
+(bit-width $\bits$; per-output-channel symmetric RTN, weights only),
+distillation (student size $N_S$, trace tokens $\Ds$, teacher
+capability vector $\mathbf L^{\mathcal T}$, supervision recipe
+$\rho$), recovery (tokens $\Dr$, data source $\rho_R$, fixed LoRA
+update recipe). Algorithmic choices that are not axes of the law are
+frozen, not fitted.
+
+Gradient, Fisher, deleted-mass, and alignment quantities appear in
+this paper only as \emph{mechanism analysis} (\S\ref{sec:geometry})
+and as upper-bound comparators for the reduced-form laws; they are
+not prediction-time inputs.
+
+\subsection{Workloads and the selection problem}
+
+A workload $W$ specifies a requirement vector $\mathbf r_W$ over
+$\capset$ and a link $S_W=G_W(\mathbf L,\mathbf r_W)$ from capability
+losses to agent success, calibrated on a subset of workloads and
+tested on held-out tasks and configurations
+\resultpending{agent-level validation}. The decision problem the laws
+serve is
+\begin{equation}
+\arg\min_{m,\boldsymbol\theta_m} C_m(\boldsymbol\theta_m;H)
+\quad\text{s.t.}\quad
+G_W\!\big(\hat{\mathbf L}^{(m)},\mathbf r_W\big)\ge S_W^{\min},
+\label{eq:decision}
+\end{equation}
+with $C_m$ covering storage, inference compute, measured latency where
+supported, and recovery training cost; unstructured-pruning parameter
+reductions are not assumed to yield real latency gains.

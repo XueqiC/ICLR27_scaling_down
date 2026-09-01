@@ -2,7 +2,7 @@
 \label{sec:exp}
 
 The experiments build the argument in logical order: capabilities
-correspond to real, causally separable regions of the source model's
+occupy distinct, causally implicated regions of the source model's
 gradient space (\S\ref{sec:regions}); pruning damage follows a law whose
 coefficients are carried by that geometry (\S\ref{sec:curves}--%
 \S\ref{sec:law}); the signed first-order term predicts
@@ -26,9 +26,9 @@ further use; retained as a comparison family), Gemma-3 \{270M, 1B, 4B,
 12B, 27B\}, Gemma-4-31B, Muse-Glimmer-30B, OLMo-3 \{7B, 32B\}.
 \textbf{Probes.} Three capabilities (math, code, multi-hop QA), each
 probed by held-out splits of benchmarks cross-benchmark disjoint from
-all transfer data; for capability-region tests, three independent
-benchmarks per capability (math: GSM8K/MATH-500/SVAMP; code:
-HumanEval/MBPP; QA: HotpotQA/2Wiki/TriviaQA) plus a C4 control.
+all transfer data; for capability-region tests, independent benchmarks per capability
+(math: GSM8K/MATH-500/SVAMP; QA: HotpotQA/2Wiki/TriviaQA; code:
+HumanEval/MBPP, a third planned) plus a C4 control.
 \textbf{Compression.} Global magnitude pruning (ten densities,
 $\dens\in[0.3,0.9]$); per-output-channel round-to-nearest weight
 quantization ($\bits\in\{8,6,4,3\}$); black-box distillation from two
@@ -38,7 +38,7 @@ general (C4) or teacher-trace data. \textbf{Geometry.} Estimated as in
 disjoint throughout, and a checkpoint-integrity guard aborts any run
 with missing or re-initialized weights.
 
-\subsection{Capabilities are regions of gradient space---and causally so}
+\subsection{Capabilities occupy distinct regions of gradient space}
 \label{sec:regions}
 
 \paragraph{Convergent validity (block structure).} For each of nine
@@ -48,7 +48,9 @@ shared across benchmarks, signatures of same-capability benchmarks are
 positively aligned (cosine $+0.36$ to $+0.45$) while signatures of
 different capabilities are \emph{anti-aligned} ($-0.23$ to $-0.25$),
 in every one of seven models across three families
-(Fig.~\ref{fig:blocks}); the C4 control sits between blocks. The
+(Fig.~\ref{fig:blocks}); the C4 control sits between blocks.
+\preliminary{point estimates; example-bootstrap, permutation, and
+prompt-stability tests are queued (B2)} The
 mathematics benchmarks cluster regardless of format, and within-block
 fine structure matches intuition (SVAMP, grade-school word problems,
 is the loosest member of the math block). A projected-gradient SVD
@@ -60,7 +62,7 @@ $2$--$4\times$.
 \centering
 \includegraphics[width=\linewidth]{figs/v9_blocks.png}
 \caption{Capability regions in gradient space. Pairwise similarity of
-per-benchmark gradient signatures (rows: five models from three
+per-benchmark gradient signatures (rows: seven models from three
 families; columns: four metrics). In the shared-component-removed
 metric (third column), same-capability benchmarks align and different
 capabilities anti-align---the block structure that licenses
@@ -68,7 +70,7 @@ gradient-defined capability regions.}
 \label{fig:blocks}
 \end{figure}
 
-\paragraph{Causal separability (ablation).} The gold-standard test:
+\paragraph{Selective ablation \preliminary{single model; random, magnitude-matched, and global-Fisher controls pending (B1)}.} A first targeted test:
 select the top $0.05\%$ of weight coordinates by each capability's
 \emph{residual} Fisher signature (excluding coordinates shared with
 other capabilities) and zero them. The damage matrix is nearly
@@ -87,11 +89,13 @@ QA   & $+0.01$ & $+0.00$ & $\mathbf{+2.29}$ \\
 \end{tabular}
 \end{center}
 
-Zeroing $0.05\%$ of weights, selected from gradients alone, destroys
-exactly one capability and leaves the others essentially untouched
-(the QA ablation moves code by $+0.0001$). Capability regions are not
-a correlational artifact: they are the causal carriers, and ablation
-itself is a form of \emph{targeted} scaling-down.
+Zeroing $0.05\%$ of weights, selected from gradients alone, selectively
+removes one capability while leaving the others essentially untouched
+(the QA ablation moves code by $+0.0001$). Pending multi-model
+replication and the control ablations above, we describe the regions as
+causally implicated and partially separable rather than as proven
+causal carriers; if confirmed, ablation itself is a form of
+\emph{targeted} scaling-down.
 
 \subsection{Pruning damage curves}
 \label{sec:curves}
@@ -144,7 +148,10 @@ follows a power law in the deleted capability mass $m_c(\dens)$:
 \;+\;B\,\big[\underbrace{m_c(\dens)}_{\text{measured}}\big]^{\gamma},
 \label{eq:fitlaw}
 \end{equation}
-with $R^2 = 0.82$--$0.996$ over 24 capability$\times$model fits
+with in-sample $R^2 = 0.82$--$0.996$ over 24 capability$\times$model
+fits \preliminary{in-sample; the held-out battery---fit-shallow/%
+predict-deep, leave-largest-model-out, leave-one-family-out, and
+baseline comparisons---is running (A2)}
 (without the first-order term, QA is unfittable, $R^2\!\le\!0.67$;
 with it, QA joins the law). Two structural results:
 (i) in the deleted-mass coordinate the exponent concentrates at
@@ -191,6 +198,7 @@ within a family across sizes and capabilities: the cliff boundary
 $\dens_c^{*}(N_0,f)$ reduces to one critical-retention constant per
 family, turning the two-regime law's least elegant fitted parameter
 into a measurable, smoothly-evolving order parameter.
+\preliminary{three models, two families; multi-model extension queued}
 
 \subsection{Quantization arm}
 \label{sec:quant}
@@ -203,9 +211,10 @@ are within noise of dense everywhere; int4 damages small models
 axis has its own collapse, at a family-independent location.
 Capability selectivity transfers to this basis: QA improves under
 int4 for Qwen3-1.7B ($-0.21$), OLMo-3-7B ($-0.07$), and
-Gemma3-27B ($-0.67$)---the same signed, capability-specific structure
-as pruning, in a different deletion basis, consistent with the
-trace-vs-tail mechanism separation of \eqref{eq:quant}.
+Gemma3-27B ($-0.67$)---the same signed, capability-specific structure as pruning, in a
+different deletion basis. \preliminary{descriptive; functional-form
+fitting and held-out prediction are running (A3), and improvements
+await the noise-scale screen (A6)}
 
 \subsection{Distillation arm (in progress)}
 \label{sec:distill}
@@ -213,34 +222,37 @@ trace-vs-tail mechanism separation of \eqref{eq:quant}.
 Black-box traces from two frontier teachers (GPT-5.6-luna,
 Claude-Sonnet-4-6; 600 per domain each; single-teacher runs, paired
 design) train Gemma-3 students under coverage recipes. Early paired
-results confirm the pre-registered coverage-deletion prediction: the
-answer-only recipe (chain-of-thought stripped, $\chi_{\text{math}}$
-reduced) hurts math systematically more than full-trace training
-($+0.19$ to $+0.22$ vs.\ $+0.09$ to $+0.12$), while QA improves in
-every configuration ($-0.58$ to $-1.44$)---retrieval-style teacher
-behavior transfers efficiently even to sub-billion students. The full
-capacity$\times$teacher$\times$coverage$\times\Ds$ grid is running.
+results are directionally consistent with the pre-registered
+coverage-deletion prediction: the answer-only recipe hurts math more
+than full-trace training ($+0.19$ to $+0.22$ vs.\ $+0.09$ to
+$+0.12$), while QA improves in every configuration ($-0.58$ to
+$-1.44$). \preliminary{token-matched and update-matched controls are
+required before attributing the gap to reasoning-coverage loss; the
+full capacity$\times$teacher$\times$coverage$\times\Ds$ grid with
+those controls is running}
 
-\subsection{Recovery arm: the price that cannot be bought back}
+\subsection{Recovery arm: redeemable damage and the asymptotic residual}
 \label{sec:recovery}
 
 Recovery training on general text fits the recovery law cleanly
 (Gemma3-270M pruned to $\dens=0.6$; $R^2\approx1.0$):
 $\beta'_{\text{math}}=1.23$, $\beta'_{\text{code}}=1.02$, with
-\emph{unrecoverable residuals} $\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$
-of $1.21$ (math) and $1.93$ (code) nats---about $80\%$ of pruning
-damage is redeemable and the remainder is the true price of
-scaling-down; QA recovers completely. Two mechanism results:
+\emph{asymptotic residuals under the fixed LoRA recipe},
+$\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$, of $1.21$ (math) and $1.93$
+(code) nats---about $80\%$ of this pruning damage is redeemed within
+8M tokens and the remainder persists under this recipe; QA recovers
+completely. \preliminary{one model, one density, one recipe; the
+divergence-free saturating form \eqref{eq:recovery} refit and the
+multi-model recovery grid are running/queued (A4, B7)} Two mechanism results:
 recovery on \emph{aligned} data (teacher traces) heals substantially
 faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
 as the gradient-overlap prediction requires---but over-training on
 narrow aligned data \emph{re-damages} the model (QA $4.95\to9.75$
 from $0.5$M to $8$M tokens), while general-text recovery is monotone.
 Aligned recovery is fast but risky; general recovery is slow but safe;
-the optimal recovery budget is finite for narrow data. Quantization
-damage past the bit cliff is markedly less redeemable (residuals
-$\approx2.6$--$2.8$ after int3) than pruning damage at matched
-severity.
+the optimal recovery budget is finite for narrow data. Quantization damage past the bit cliff is markedly less redeemable
+under the same recipe (residuals $\approx2.6$--$2.8$ after int3) than
+pruning damage at matched severity.
 
 \subsection{Scale and family structure}
 \label{sec:family}
