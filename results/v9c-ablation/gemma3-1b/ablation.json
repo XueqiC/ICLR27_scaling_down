@@ -1,0 +1,75 @@
+{
+  "version": "9c",
+  "model": "google/gemma-3-1b-pt",
+  "model_dtype": "bf16",
+  "n_probe_requested": 64,
+  "measurement_half": "odd-indexed samples",
+  "top_fraction": 0.0005,
+  "log_eps": 1e-12,
+  "n_parameters": 999751680,
+  "fisher_artifact_dir": "/home/xueqi/hq/projects/scaling-down-law/results/v9-capability-regions/gemma3-1b",
+  "top_coordinate_counts": {
+    "math": 499875,
+    "code": 499875,
+    "qa": 499875
+  },
+  "exclusive_coordinate_counts": {
+    "math": 497408,
+    "code": 497408,
+    "qa": 499875
+  },
+  "exclusive_coordinate_fractions": {
+    "math": 0.0004975315470337594,
+    "code": 0.0004975315470337594,
+    "qa": 0.0004999991597913594
+  },
+  "measurement_samples": {
+    "math": 96,
+    "code": 64,
+    "qa": 96
+  },
+  "dense_losses": {
+    "math": 1.2662572855953371,
+    "code": 0.8485739312361363,
+    "qa": 5.8178080424174174
+  },
+  "ablated_losses": {
+    "math": {
+      "math": 5.898384159034138,
+      "code": 1.280200771324864,
+      "qa": 5.864788616741742
+    },
+    "code": {
+      "math": 1.6886448792672772,
+      "code": 7.9892115345835855,
+      "qa": 5.818998686186186
+    },
+    "qa": {
+      "math": 1.2725905495420482,
+      "code": 0.8486653055051422,
+      "qa": 8.106512762762764
+    }
+  },
+  "damage": {
+    "math": {
+      "math": 4.632126873438801,
+      "code": 0.43162684008872765,
+      "qa": 0.046980574324324564
+    },
+    "code": {
+      "math": 0.4223875936719401,
+      "code": 7.140637603347449,
+      "qa": 0.001190643768768318
+    },
+    "qa": {
+      "math": 0.006333263946711076,
+      "code": 9.137426900585055e-05,
+      "qa": 2.288704720345346
+    }
+  },
+  "diagonal_dominance": {
+    "math": true,
+    "code": true,
+    "qa": true
+  }
+}

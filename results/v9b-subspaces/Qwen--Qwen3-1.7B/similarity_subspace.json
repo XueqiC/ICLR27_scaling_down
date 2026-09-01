@@ -1,0 +1,415 @@
+{
+  "version": "9b",
+  "model": "Qwen/Qwen3-1.7B",
+  "feature_dim": 50432,
+  "requested_subspace_rank": 8,
+  "benchmarks": [
+    "gsm8k",
+    "math500",
+    "svamp",
+    "humaneval",
+    "mbpp",
+    "2wiki",
+    "hotpotqa",
+    "triviaqa",
+    "c4"
+  ],
+  "benchmark_capability": {
+    "gsm8k": "math",
+    "math500": "math",
+    "svamp": "math",
+    "humaneval": "code",
+    "mbpp": "code",
+    "2wiki": "qa",
+    "hotpotqa": "qa",
+    "triviaqa": "qa",
+    "c4": "control"
+  },
+  "effective_ranks": {
+    "gsm8k": 8,
+    "math500": 8,
+    "svamp": 8,
+    "humaneval": 8,
+    "mbpp": 8,
+    "2wiki": 8,
+    "hotpotqa": 8,
+    "triviaqa": 8,
+    "c4": 8
+  },
+  "matrix": {
+    "gsm8k": {
+      "gsm8k": 1.0,
+      "math500": 0.09105323988061259,
+      "svamp": 0.08356909993184777,
+      "humaneval": 0.01916876880579085,
+      "mbpp": 0.02781529144542244,
+      "2wiki": 0.01933387603903556,
+      "hotpotqa": 0.028195201871038012,
+      "triviaqa": 0.013449451799155831,
+      "c4": 0.007276473323039191
+    },
+    "math500": {
+      "gsm8k": 0.09105323988061259,
+      "math500": 1.0,
+      "svamp": 0.08243424107814161,
+      "humaneval": 0.031243633087659064,
+      "mbpp": 0.047411323314298794,
+      "2wiki": 0.024027132885604967,
+      "hotpotqa": 0.037321069614569165,
+      "triviaqa": 0.009718610813553642,
+      "c4": 0.010152100343673323
+    },
+    "svamp": {
+      "gsm8k": 0.08356909993184777,
+      "math500": 0.08243424107814161,
+      "svamp": 1.0,
+      "humaneval": 0.010845702858367497,
+      "mbpp": 0.01727054420200417,
+      "2wiki": 0.010693026212532517,
+      "hotpotqa": 0.014076809099514533,
+      "triviaqa": 0.014872526761791852,
+      "c4": 0.005973243143434252
+    },
+    "humaneval": {
+      "gsm8k": 0.01916876880579085,
+      "math500": 0.031243633087659064,
+      "svamp": 0.010845702858367497,
+      "humaneval": 1.0,
+      "mbpp": 0.04572156670471378,
+      "2wiki": 0.0164795865524462,
+      "hotpotqa": 0.02042797057242332,
+      "triviaqa": 0.00752010280860909,
+      "c4": 0.007105494965384397
+    },
+    "mbpp": {
+      "gsm8k": 0.02781529144542244,
+      "math500": 0.047411323314298794,
+      "svamp": 0.01727054420200417,
+      "humaneval": 0.04572156670471378,
+      "mbpp": 1.0,
+      "2wiki": 0.02277692968453607,
+      "hotpotqa": 0.029273253252192783,
+      "triviaqa": 0.012812776169652576,
+      "c4": 0.010056505610066777
+    },
+    "2wiki": {
+      "gsm8k": 0.01933387603903556,
+      "math500": 0.024027132885604967,
+      "svamp": 0.010693026212532517,
+      "humaneval": 0.0164795865524462,
+      "mbpp": 0.02277692968453607,
+      "2wiki": 1.0,
+      "hotpotqa": 0.056564316789215335,
+      "triviaqa": 0.010306745127659379,
+      "c4": 0.011357183880049058
+    },
+    "hotpotqa": {
+      "gsm8k": 0.028195201871038012,
+      "math500": 0.037321069614569165,
+      "svamp": 0.014076809099514533,
+      "humaneval": 0.02042797057242332,
+      "mbpp": 0.029273253252192783,
+      "2wiki": 0.056564316789215335,
+      "hotpotqa": 1.0,
+      "triviaqa": 0.012519401182637332,
+      "c4": 0.011144892737469096
+    },
+    "triviaqa": {
+      "gsm8k": 0.013449451799155831,
+      "math500": 0.009718610813553642,
+      "svamp": 0.014872526761791852,
+      "humaneval": 0.00752010280860909,
+      "mbpp": 0.012812776169652576,
+      "2wiki": 0.010306745127659379,
+      "hotpotqa": 0.012519401182637332,
+      "triviaqa": 1.0,
+      "c4": 0.0040910370013229145
+    },
+    "c4": {
+      "gsm8k": 0.007276473323039191,
+      "math500": 0.010152100343673323,
+      "svamp": 0.005973243143434252,
+      "humaneval": 0.007105494965384397,
+      "mbpp": 0.010056505610066777,
+      "2wiki": 0.011357183880049058,
+      "hotpotqa": 0.011144892737469096,
+      "triviaqa": 0.0040910370013229145,
+      "c4": 1.0
+    }
+  },
+  "pairs": [
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "math500",
+      "capability_a": "math",
+      "capability_b": "math",
+      "mean_cos2_principal_angles": 0.09105323988061259
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "svamp",
+      "capability_a": "math",
+      "capability_b": "math",
+      "mean_cos2_principal_angles": 0.08356909993184777
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "humaneval",
+      "capability_a": "math",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.01916876880579085
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "mbpp",
+      "capability_a": "math",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.02781529144542244
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "2wiki",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.01933387603903556
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.028195201871038012
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "triviaqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.013449451799155831
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "c4",
+      "capability_a": "math",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.007276473323039191
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "svamp",
+      "capability_a": "math",
+      "capability_b": "math",
+      "mean_cos2_principal_angles": 0.08243424107814161
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "humaneval",
+      "capability_a": "math",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.031243633087659064
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "mbpp",
+      "capability_a": "math",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.047411323314298794
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "2wiki",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.024027132885604967
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.037321069614569165
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "triviaqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.009718610813553642
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "c4",
+      "capability_a": "math",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.010152100343673323
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "humaneval",
+      "capability_a": "math",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.010845702858367497
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "mbpp",
+      "capability_a": "math",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.01727054420200417
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "2wiki",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.010693026212532517
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.014076809099514533
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "triviaqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.014872526761791852
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "c4",
+      "capability_a": "math",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.005973243143434252
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "mbpp",
+      "capability_a": "code",
+      "capability_b": "code",
+      "mean_cos2_principal_angles": 0.04572156670471378
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "2wiki",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.0164795865524462
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.02042797057242332
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "triviaqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.00752010280860909
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "c4",
+      "capability_a": "code",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.007105494965384397
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "2wiki",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.02277692968453607
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.029273253252192783
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "triviaqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.012812776169652576
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "c4",
+      "capability_a": "code",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.010056505610066777
+    },
+    {
+      "benchmark_a": "2wiki",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "qa",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.056564316789215335
+    },
+    {
+      "benchmark_a": "2wiki",
+      "benchmark_b": "triviaqa",
+      "capability_a": "qa",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.010306745127659379
+    },
+    {
+      "benchmark_a": "2wiki",
+      "benchmark_b": "c4",
+      "capability_a": "qa",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.011357183880049058
+    },
+    {
+      "benchmark_a": "hotpotqa",
+      "benchmark_b": "triviaqa",
+      "capability_a": "qa",
+      "capability_b": "qa",
+      "mean_cos2_principal_angles": 0.012519401182637332
+    },
+    {
+      "benchmark_a": "hotpotqa",
+      "benchmark_b": "c4",
+      "capability_a": "qa",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.011144892737469096
+    },
+    {
+      "benchmark_a": "triviaqa",
+      "benchmark_b": "c4",
+      "capability_a": "qa",
+      "capability_b": "control",
+      "mean_cos2_principal_angles": 0.0040910370013229145
+    }
+  ],
+  "summary": {
+    "mean_within_capability": 0.05459551581354683,
+    "mean_cross_capability": 0.017306569615677173,
+    "std_all_pairs": 0.022073344389150457,
+    "block_score": 1.6893201836781022
+  },
+  "joint_clustering": {
+    "adjusted_rand_index": 0.0038576423211927717,
+    "n_samples": 512,
+    "n_samples_svd": 573,
+    "n_samples_clustered": 512,
+    "n_components": 10,
+    "k": 3,
+    "kmeans_seed": 0,
+    "inertia": 6636.250667556213,
+    "cluster_sizes": [
+      465,
+      8,
+      39
+    ]
+  }
+}

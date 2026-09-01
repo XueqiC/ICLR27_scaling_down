@@ -1,0 +1,824 @@
+{
+  "version": 9,
+  "model": "Qwen/Qwen3-0.6B",
+  "n_parameters": 595984384,
+  "log_eps": 1e-12,
+  "top_fraction": 0.001,
+  "benchmarks": [
+    "gsm8k",
+    "math500",
+    "svamp",
+    "humaneval",
+    "mbpp",
+    "2wiki",
+    "hotpotqa",
+    "triviaqa",
+    "c4"
+  ],
+  "benchmark_capability": {
+    "gsm8k": "math",
+    "math500": "math",
+    "svamp": "math",
+    "humaneval": "code",
+    "mbpp": "code",
+    "2wiki": "qa",
+    "hotpotqa": "qa",
+    "triviaqa": "qa",
+    "c4": "control"
+  },
+  "matrices": {
+    "raw_cosine": {
+      "gsm8k": {
+        "gsm8k": 1.0,
+        "math500": 0.7667014229988718,
+        "svamp": 0.6125304910877793,
+        "humaneval": 0.582033888375573,
+        "mbpp": 0.652664132487245,
+        "2wiki": 0.7381045881254994,
+        "hotpotqa": 0.6508385078933482,
+        "triviaqa": 0.7198672583022718,
+        "c4": 0.7781537246599328
+      },
+      "math500": {
+        "gsm8k": 0.7667014229988718,
+        "math500": 1.0,
+        "svamp": 0.5479880661855512,
+        "humaneval": 0.5701231586652855,
+        "mbpp": 0.7387835157352571,
+        "2wiki": 0.6874817508558593,
+        "hotpotqa": 0.5474558372510762,
+        "triviaqa": 0.6551202819375095,
+        "c4": 0.8290333955914538
+      },
+      "svamp": {
+        "gsm8k": 0.6125304910877793,
+        "math500": 0.5479880661855512,
+        "svamp": 1.0,
+        "humaneval": 0.4184975097065585,
+        "mbpp": 0.4610021333026213,
+        "2wiki": 0.5841097080979567,
+        "hotpotqa": 0.4782843042333413,
+        "triviaqa": 0.5436179024541322,
+        "c4": 0.5530325157244691
+      },
+      "humaneval": {
+        "gsm8k": 0.582033888375573,
+        "math500": 0.5701231586652855,
+        "svamp": 0.4184975097065585,
+        "humaneval": 1.0,
+        "mbpp": 0.568688083924531,
+        "2wiki": 0.5027799524235724,
+        "hotpotqa": 0.4298045442627162,
+        "triviaqa": 0.49885028140012516,
+        "c4": 0.5572121680699742
+      },
+      "mbpp": {
+        "gsm8k": 0.652664132487245,
+        "math500": 0.7387835157352571,
+        "svamp": 0.4610021333026213,
+        "humaneval": 0.568688083924531,
+        "mbpp": 1.0,
+        "2wiki": 0.5929984225606595,
+        "hotpotqa": 0.460509709030229,
+        "triviaqa": 0.5590998703414682,
+        "c4": 0.7727265285288453
+      },
+      "2wiki": {
+        "gsm8k": 0.7381045881254994,
+        "math500": 0.6874817508558593,
+        "svamp": 0.5841097080979567,
+        "humaneval": 0.5027799524235724,
+        "mbpp": 0.5929984225606595,
+        "2wiki": 1.0,
+        "hotpotqa": 0.6577147755033921,
+        "triviaqa": 0.6119012665204849,
+        "c4": 0.6839705897342389
+      },
+      "hotpotqa": {
+        "gsm8k": 0.6508385078933482,
+        "math500": 0.5474558372510762,
+        "svamp": 0.4782843042333413,
+        "humaneval": 0.4298045442627162,
+        "mbpp": 0.460509709030229,
+        "2wiki": 0.6577147755033921,
+        "hotpotqa": 1.0,
+        "triviaqa": 0.602541226380573,
+        "c4": 0.5596230091524704
+      },
+      "triviaqa": {
+        "gsm8k": 0.7198672583022718,
+        "math500": 0.6551202819375095,
+        "svamp": 0.5436179024541322,
+        "humaneval": 0.49885028140012516,
+        "mbpp": 0.5590998703414682,
+        "2wiki": 0.6119012665204849,
+        "hotpotqa": 0.602541226380573,
+        "triviaqa": 1.0,
+        "c4": 0.6655086552509455
+      },
+      "c4": {
+        "gsm8k": 0.7781537246599328,
+        "math500": 0.8290333955914538,
+        "svamp": 0.5530325157244691,
+        "humaneval": 0.5572121680699742,
+        "mbpp": 0.7727265285288453,
+        "2wiki": 0.6839705897342389,
+        "hotpotqa": 0.5596230091524704,
+        "triviaqa": 0.6655086552509455,
+        "c4": 1.0
+      }
+    },
+    "log_cosine": {
+      "gsm8k": {
+        "gsm8k": 1.0,
+        "math500": 0.9980416614359161,
+        "svamp": 0.9845592817695217,
+        "humaneval": 0.9969019067937096,
+        "mbpp": 0.9965335224633334,
+        "2wiki": 0.9762591365449809,
+        "hotpotqa": 0.9727397088017057,
+        "triviaqa": 0.9707195322297684,
+        "c4": 0.9944297783572755
+      },
+      "math500": {
+        "gsm8k": 0.9980416614359161,
+        "math500": 1.0,
+        "svamp": 0.9809273034669748,
+        "humaneval": 0.997081818390648,
+        "mbpp": 0.9966618345840532,
+        "2wiki": 0.9731801636971649,
+        "hotpotqa": 0.969233608209184,
+        "triviaqa": 0.9668369307234383,
+        "c4": 0.9943050768107516
+      },
+      "svamp": {
+        "gsm8k": 0.9845592817695217,
+        "math500": 0.9809273034669748,
+        "svamp": 1.0,
+        "humaneval": 0.9844317200953797,
+        "mbpp": 0.9856611747781213,
+        "2wiki": 0.9898495676610829,
+        "hotpotqa": 0.9887647983763816,
+        "triviaqa": 0.9908750182019304,
+        "c4": 0.9813312170259553
+      },
+      "humaneval": {
+        "gsm8k": 0.9969019067937096,
+        "math500": 0.997081818390648,
+        "svamp": 0.9844317200953797,
+        "humaneval": 1.0,
+        "mbpp": 0.9981387002866687,
+        "2wiki": 0.977107996570057,
+        "hotpotqa": 0.9735150431726441,
+        "triviaqa": 0.9720398361594503,
+        "c4": 0.9932434825104312
+      },
+      "mbpp": {
+        "gsm8k": 0.9965335224633334,
+        "math500": 0.9966618345840532,
+        "svamp": 0.9856611747781213,
+        "humaneval": 0.9981387002866687,
+        "mbpp": 1.0,
+        "2wiki": 0.9787975528480483,
+        "hotpotqa": 0.9752918321459114,
+        "triviaqa": 0.9741106411763555,
+        "c4": 0.993565390359575
+      },
+      "2wiki": {
+        "gsm8k": 0.9762591365449809,
+        "math500": 0.9731801636971649,
+        "svamp": 0.9898495676610829,
+        "humaneval": 0.977107996570057,
+        "mbpp": 0.9787975528480483,
+        "2wiki": 1.0,
+        "hotpotqa": 0.9934419698833387,
+        "triviaqa": 0.9915350107457014,
+        "c4": 0.97939062337385
+      },
+      "hotpotqa": {
+        "gsm8k": 0.9727397088017057,
+        "math500": 0.969233608209184,
+        "svamp": 0.9887647983763816,
+        "humaneval": 0.9735150431726441,
+        "mbpp": 0.9752918321459114,
+        "2wiki": 0.9934419698833387,
+        "hotpotqa": 1.0,
+        "triviaqa": 0.9917555534845705,
+        "c4": 0.9761253034433449
+      },
+      "triviaqa": {
+        "gsm8k": 0.9707195322297684,
+        "math500": 0.9668369307234383,
+        "svamp": 0.9908750182019304,
+        "humaneval": 0.9720398361594503,
+        "mbpp": 0.9741106411763555,
+        "2wiki": 0.9915350107457014,
+        "hotpotqa": 0.9917555534845705,
+        "triviaqa": 1.0,
+        "c4": 0.9727005364898503
+      },
+      "c4": {
+        "gsm8k": 0.9944297783572755,
+        "math500": 0.9943050768107516,
+        "svamp": 0.9813312170259553,
+        "humaneval": 0.9932434825104312,
+        "mbpp": 0.993565390359575,
+        "2wiki": 0.97939062337385,
+        "hotpotqa": 0.9761253034433449,
+        "triviaqa": 0.9727005364898503,
+        "c4": 1.0
+      }
+    },
+    "shared_component_removed_cosine": {
+      "gsm8k": {
+        "gsm8k": 1.0,
+        "math500": 0.8910377705471797,
+        "svamp": -0.5690700120908639,
+        "humaneval": 0.7751667157380321,
+        "mbpp": 0.7227443275096145,
+        "2wiki": -0.8469828561107465,
+        "hotpotqa": -0.8555293704675719,
+        "triviaqa": -0.8644703922316257,
+        "c4": 0.5128677106514765
+      },
+      "math500": {
+        "gsm8k": 0.8910377705471797,
+        "math500": 1.0,
+        "svamp": -0.6600094252846057,
+        "humaneval": 0.8228682343123872,
+        "mbpp": 0.7821663238459704,
+        "2wiki": -0.8565789611006771,
+        "hotpotqa": -0.8731980418850007,
+        "triviaqa": -0.8907532017790061,
+        "c4": 0.5577499951698179
+      },
+      "svamp": {
+        "gsm8k": -0.5690700120908639,
+        "math500": -0.6600094252846057,
+        "svamp": 1.0,
+        "humaneval": -0.6012376959397355,
+        "mbpp": -0.5832232691887828,
+        "2wiki": 0.4838356499047835,
+        "hotpotqa": 0.5073848648965649,
+        "triviaqa": 0.6337557577297122,
+        "c4": -0.6895407249106044
+      },
+      "humaneval": {
+        "gsm8k": 0.7751667157380321,
+        "math500": 0.8228682343123872,
+        "svamp": -0.6012376959397355,
+        "humaneval": 1.0,
+        "mbpp": 0.842217608636224,
+        "2wiki": -0.8192857137217886,
+        "hotpotqa": -0.8352754456909168,
+        "triviaqa": -0.8224951210944702,
+        "c4": 0.40695241886326305
+      },
+      "mbpp": {
+        "gsm8k": 0.7227443275096145,
+        "math500": 0.7821663238459704,
+        "svamp": -0.5832232691887828,
+        "humaneval": 0.842217608636224,
+        "mbpp": 1.0,
+        "2wiki": -0.7930169387871564,
+        "hotpotqa": -0.8123117601550078,
+        "triviaqa": -0.786810279577747,
+        "c4": 0.3954316959158184
+      },
+      "2wiki": {
+        "gsm8k": -0.8469828561107465,
+        "math500": -0.8565789611006771,
+        "svamp": 0.4838356499047835,
+        "humaneval": -0.8192857137217886,
+        "mbpp": -0.7930169387871564,
+        "2wiki": 1.0,
+        "hotpotqa": 0.8036883144200198,
+        "triviaqa": 0.7607942481427815,
+        "c4": -0.5064127125726212
+      },
+      "hotpotqa": {
+        "gsm8k": -0.8555293704675719,
+        "math500": -0.8731980418850007,
+        "svamp": 0.5073848648965649,
+        "humaneval": -0.8352754456909168,
+        "mbpp": -0.8123117601550078,
+        "2wiki": 0.8036883144200198,
+        "hotpotqa": 1.0,
+        "triviaqa": 0.7836910016869532,
+        "c4": -0.5253447862193146
+      },
+      "triviaqa": {
+        "gsm8k": -0.8644703922316257,
+        "math500": -0.8907532017790061,
+        "svamp": 0.6337557577297122,
+        "humaneval": -0.8224951210944702,
+        "mbpp": -0.786810279577747,
+        "2wiki": 0.7607942481427815,
+        "hotpotqa": 0.7836910016869532,
+        "triviaqa": 1.0,
+        "c4": -0.6119375157753053
+      },
+      "c4": {
+        "gsm8k": 0.5128677106514765,
+        "math500": 0.5577499951698179,
+        "svamp": -0.6895407249106044,
+        "humaneval": 0.40695241886326305,
+        "mbpp": 0.3954316959158184,
+        "2wiki": -0.5064127125726212,
+        "hotpotqa": -0.5253447862193146,
+        "triviaqa": -0.6119375157753053,
+        "c4": 1.0
+      }
+    },
+    "top_0.1pct_jaccard": {
+      "gsm8k": {
+        "gsm8k": 1.0,
+        "math500": 0.5280446016401281,
+        "svamp": 0.37521704668825695,
+        "humaneval": 0.3491370723845053,
+        "mbpp": 0.33206679287369834,
+        "2wiki": 0.37734802544002366,
+        "hotpotqa": 0.3383320028249444,
+        "triviaqa": 0.3209114090136893,
+        "c4": 0.4027905925772497
+      },
+      "math500": {
+        "gsm8k": 0.5280446016401281,
+        "math500": 1.0,
+        "svamp": 0.3156045707448928,
+        "humaneval": 0.376503425760937,
+        "mbpp": 0.35524831726396217,
+        "2wiki": 0.3551235162306546,
+        "hotpotqa": 0.3000205042295427,
+        "triviaqa": 0.2731354793505126,
+        "c4": 0.38223387514799695
+      },
+      "svamp": {
+        "gsm8k": 0.37521704668825695,
+        "math500": 0.3156045707448928,
+        "svamp": 1.0,
+        "humaneval": 0.24088880005330135,
+        "mbpp": 0.2508518508801847,
+        "2wiki": 0.28456870417808566,
+        "hotpotqa": 0.28454378612202846,
+        "triviaqa": 0.3177090703268714,
+        "c4": 0.2884385478302415
+      },
+      "humaneval": {
+        "gsm8k": 0.3491370723845053,
+        "math500": 0.376503425760937,
+        "svamp": 0.24088880005330135,
+        "humaneval": 1.0,
+        "mbpp": 0.47561700273343105,
+        "2wiki": 0.2765414223109447,
+        "hotpotqa": 0.2522263859166974,
+        "triviaqa": 0.2299615110771739,
+        "c4": 0.29267655214821064
+      },
+      "mbpp": {
+        "gsm8k": 0.33206679287369834,
+        "math500": 0.35524831726396217,
+        "svamp": 0.2508518508801847,
+        "humaneval": 0.47561700273343105,
+        "mbpp": 1.0,
+        "2wiki": 0.27873667723369216,
+        "hotpotqa": 0.2491608285344498,
+        "triviaqa": 0.2318389306689623,
+        "c4": 0.2957300634837812
+      },
+      "2wiki": {
+        "gsm8k": 0.37734802544002366,
+        "math500": 0.3551235162306546,
+        "svamp": 0.28456870417808566,
+        "humaneval": 0.2765414223109447,
+        "mbpp": 0.27873667723369216,
+        "2wiki": 1.0,
+        "hotpotqa": 0.37279060580618484,
+        "triviaqa": 0.28265007785421514,
+        "c4": 0.43244896463126065
+      },
+      "hotpotqa": {
+        "gsm8k": 0.3383320028249444,
+        "math500": 0.3000205042295427,
+        "svamp": 0.28454378612202846,
+        "humaneval": 0.2522263859166974,
+        "mbpp": 0.2491608285344498,
+        "2wiki": 0.37279060580618484,
+        "hotpotqa": 1.0,
+        "triviaqa": 0.3239396258437287,
+        "c4": 0.3369554732523212
+      },
+      "triviaqa": {
+        "gsm8k": 0.3209114090136893,
+        "math500": 0.2731354793505126,
+        "svamp": 0.3177090703268714,
+        "humaneval": 0.2299615110771739,
+        "mbpp": 0.2318389306689623,
+        "2wiki": 0.28265007785421514,
+        "hotpotqa": 0.3239396258437287,
+        "triviaqa": 1.0,
+        "c4": 0.2877523041337743
+      },
+      "c4": {
+        "gsm8k": 0.4027905925772497,
+        "math500": 0.38223387514799695,
+        "svamp": 0.2884385478302415,
+        "humaneval": 0.29267655214821064,
+        "mbpp": 0.2957300634837812,
+        "2wiki": 0.43244896463126065,
+        "hotpotqa": 0.3369554732523212,
+        "triviaqa": 0.2877523041337743,
+        "c4": 1.0
+      }
+    }
+  },
+  "pairs": [
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "math500",
+      "capability_a": "math",
+      "capability_b": "math",
+      "raw_cosine": 0.7667014229988718,
+      "log_cosine": 0.9980416614359161,
+      "shared_component_removed_cosine": 0.8910377705471797,
+      "top_0.1pct_jaccard": 0.5280446016401281
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "svamp",
+      "capability_a": "math",
+      "capability_b": "math",
+      "raw_cosine": 0.6125304910877793,
+      "log_cosine": 0.9845592817695217,
+      "shared_component_removed_cosine": -0.5690700120908639,
+      "top_0.1pct_jaccard": 0.37521704668825695
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "humaneval",
+      "capability_a": "math",
+      "capability_b": "code",
+      "raw_cosine": 0.582033888375573,
+      "log_cosine": 0.9969019067937096,
+      "shared_component_removed_cosine": 0.7751667157380321,
+      "top_0.1pct_jaccard": 0.3491370723845053
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "mbpp",
+      "capability_a": "math",
+      "capability_b": "code",
+      "raw_cosine": 0.652664132487245,
+      "log_cosine": 0.9965335224633334,
+      "shared_component_removed_cosine": 0.7227443275096145,
+      "top_0.1pct_jaccard": 0.33206679287369834
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "2wiki",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.7381045881254994,
+      "log_cosine": 0.9762591365449809,
+      "shared_component_removed_cosine": -0.8469828561107465,
+      "top_0.1pct_jaccard": 0.37734802544002366
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.6508385078933482,
+      "log_cosine": 0.9727397088017057,
+      "shared_component_removed_cosine": -0.8555293704675719,
+      "top_0.1pct_jaccard": 0.3383320028249444
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "triviaqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.7198672583022718,
+      "log_cosine": 0.9707195322297684,
+      "shared_component_removed_cosine": -0.8644703922316257,
+      "top_0.1pct_jaccard": 0.3209114090136893
+    },
+    {
+      "benchmark_a": "gsm8k",
+      "benchmark_b": "c4",
+      "capability_a": "math",
+      "capability_b": "control",
+      "raw_cosine": 0.7781537246599328,
+      "log_cosine": 0.9944297783572755,
+      "shared_component_removed_cosine": 0.5128677106514765,
+      "top_0.1pct_jaccard": 0.4027905925772497
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "svamp",
+      "capability_a": "math",
+      "capability_b": "math",
+      "raw_cosine": 0.5479880661855512,
+      "log_cosine": 0.9809273034669748,
+      "shared_component_removed_cosine": -0.6600094252846057,
+      "top_0.1pct_jaccard": 0.3156045707448928
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "humaneval",
+      "capability_a": "math",
+      "capability_b": "code",
+      "raw_cosine": 0.5701231586652855,
+      "log_cosine": 0.997081818390648,
+      "shared_component_removed_cosine": 0.8228682343123872,
+      "top_0.1pct_jaccard": 0.376503425760937
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "mbpp",
+      "capability_a": "math",
+      "capability_b": "code",
+      "raw_cosine": 0.7387835157352571,
+      "log_cosine": 0.9966618345840532,
+      "shared_component_removed_cosine": 0.7821663238459704,
+      "top_0.1pct_jaccard": 0.35524831726396217
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "2wiki",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.6874817508558593,
+      "log_cosine": 0.9731801636971649,
+      "shared_component_removed_cosine": -0.8565789611006771,
+      "top_0.1pct_jaccard": 0.3551235162306546
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.5474558372510762,
+      "log_cosine": 0.969233608209184,
+      "shared_component_removed_cosine": -0.8731980418850007,
+      "top_0.1pct_jaccard": 0.3000205042295427
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "triviaqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.6551202819375095,
+      "log_cosine": 0.9668369307234383,
+      "shared_component_removed_cosine": -0.8907532017790061,
+      "top_0.1pct_jaccard": 0.2731354793505126
+    },
+    {
+      "benchmark_a": "math500",
+      "benchmark_b": "c4",
+      "capability_a": "math",
+      "capability_b": "control",
+      "raw_cosine": 0.8290333955914538,
+      "log_cosine": 0.9943050768107516,
+      "shared_component_removed_cosine": 0.5577499951698179,
+      "top_0.1pct_jaccard": 0.38223387514799695
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "humaneval",
+      "capability_a": "math",
+      "capability_b": "code",
+      "raw_cosine": 0.4184975097065585,
+      "log_cosine": 0.9844317200953797,
+      "shared_component_removed_cosine": -0.6012376959397355,
+      "top_0.1pct_jaccard": 0.24088880005330135
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "mbpp",
+      "capability_a": "math",
+      "capability_b": "code",
+      "raw_cosine": 0.4610021333026213,
+      "log_cosine": 0.9856611747781213,
+      "shared_component_removed_cosine": -0.5832232691887828,
+      "top_0.1pct_jaccard": 0.2508518508801847
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "2wiki",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.5841097080979567,
+      "log_cosine": 0.9898495676610829,
+      "shared_component_removed_cosine": 0.4838356499047835,
+      "top_0.1pct_jaccard": 0.28456870417808566
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.4782843042333413,
+      "log_cosine": 0.9887647983763816,
+      "shared_component_removed_cosine": 0.5073848648965649,
+      "top_0.1pct_jaccard": 0.28454378612202846
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "triviaqa",
+      "capability_a": "math",
+      "capability_b": "qa",
+      "raw_cosine": 0.5436179024541322,
+      "log_cosine": 0.9908750182019304,
+      "shared_component_removed_cosine": 0.6337557577297122,
+      "top_0.1pct_jaccard": 0.3177090703268714
+    },
+    {
+      "benchmark_a": "svamp",
+      "benchmark_b": "c4",
+      "capability_a": "math",
+      "capability_b": "control",
+      "raw_cosine": 0.5530325157244691,
+      "log_cosine": 0.9813312170259553,
+      "shared_component_removed_cosine": -0.6895407249106044,
+      "top_0.1pct_jaccard": 0.2884385478302415
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "mbpp",
+      "capability_a": "code",
+      "capability_b": "code",
+      "raw_cosine": 0.568688083924531,
+      "log_cosine": 0.9981387002866687,
+      "shared_component_removed_cosine": 0.842217608636224,
+      "top_0.1pct_jaccard": 0.47561700273343105
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "2wiki",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "raw_cosine": 0.5027799524235724,
+      "log_cosine": 0.977107996570057,
+      "shared_component_removed_cosine": -0.8192857137217886,
+      "top_0.1pct_jaccard": 0.2765414223109447
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "raw_cosine": 0.4298045442627162,
+      "log_cosine": 0.9735150431726441,
+      "shared_component_removed_cosine": -0.8352754456909168,
+      "top_0.1pct_jaccard": 0.2522263859166974
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "triviaqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "raw_cosine": 0.49885028140012516,
+      "log_cosine": 0.9720398361594503,
+      "shared_component_removed_cosine": -0.8224951210944702,
+      "top_0.1pct_jaccard": 0.2299615110771739
+    },
+    {
+      "benchmark_a": "humaneval",
+      "benchmark_b": "c4",
+      "capability_a": "code",
+      "capability_b": "control",
+      "raw_cosine": 0.5572121680699742,
+      "log_cosine": 0.9932434825104312,
+      "shared_component_removed_cosine": 0.40695241886326305,
+      "top_0.1pct_jaccard": 0.29267655214821064
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "2wiki",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "raw_cosine": 0.5929984225606595,
+      "log_cosine": 0.9787975528480483,
+      "shared_component_removed_cosine": -0.7930169387871564,
+      "top_0.1pct_jaccard": 0.27873667723369216
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "raw_cosine": 0.460509709030229,
+      "log_cosine": 0.9752918321459114,
+      "shared_component_removed_cosine": -0.8123117601550078,
+      "top_0.1pct_jaccard": 0.2491608285344498
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "triviaqa",
+      "capability_a": "code",
+      "capability_b": "qa",
+      "raw_cosine": 0.5590998703414682,
+      "log_cosine": 0.9741106411763555,
+      "shared_component_removed_cosine": -0.786810279577747,
+      "top_0.1pct_jaccard": 0.2318389306689623
+    },
+    {
+      "benchmark_a": "mbpp",
+      "benchmark_b": "c4",
+      "capability_a": "code",
+      "capability_b": "control",
+      "raw_cosine": 0.7727265285288453,
+      "log_cosine": 0.993565390359575,
+      "shared_component_removed_cosine": 0.3954316959158184,
+      "top_0.1pct_jaccard": 0.2957300634837812
+    },
+    {
+      "benchmark_a": "2wiki",
+      "benchmark_b": "hotpotqa",
+      "capability_a": "qa",
+      "capability_b": "qa",
+      "raw_cosine": 0.6577147755033921,
+      "log_cosine": 0.9934419698833387,
+      "shared_component_removed_cosine": 0.8036883144200198,
+      "top_0.1pct_jaccard": 0.37279060580618484
+    },
+    {
+      "benchmark_a": "2wiki",
+      "benchmark_b": "triviaqa",
+      "capability_a": "qa",
+      "capability_b": "qa",
+      "raw_cosine": 0.6119012665204849,
+      "log_cosine": 0.9915350107457014,
+      "shared_component_removed_cosine": 0.7607942481427815,
+      "top_0.1pct_jaccard": 0.28265007785421514
+    },
+    {
+      "benchmark_a": "2wiki",
+      "benchmark_b": "c4",
+      "capability_a": "qa",
+      "capability_b": "control",
+      "raw_cosine": 0.6839705897342389,
+      "log_cosine": 0.97939062337385,
+      "shared_component_removed_cosine": -0.5064127125726212,
+      "top_0.1pct_jaccard": 0.43244896463126065
+    },
+    {
+      "benchmark_a": "hotpotqa",
+      "benchmark_b": "triviaqa",
+      "capability_a": "qa",
+      "capability_b": "qa",
+      "raw_cosine": 0.602541226380573,
+      "log_cosine": 0.9917555534845705,
+      "shared_component_removed_cosine": 0.7836910016869532,
+      "top_0.1pct_jaccard": 0.3239396258437287
+    },
+    {
+      "benchmark_a": "hotpotqa",
+      "benchmark_b": "c4",
+      "capability_a": "qa",
+      "capability_b": "control",
+      "raw_cosine": 0.5596230091524704,
+      "log_cosine": 0.9761253034433449,
+      "shared_component_removed_cosine": -0.5253447862193146,
+      "top_0.1pct_jaccard": 0.3369554732523212
+    },
+    {
+      "benchmark_a": "triviaqa",
+      "benchmark_b": "c4",
+      "capability_a": "qa",
+      "capability_b": "control",
+      "raw_cosine": 0.6655086552509455,
+      "log_cosine": 0.9727005364898503,
+      "shared_component_removed_cosine": -0.6119375157753053,
+      "top_0.1pct_jaccard": 0.2877523041337743
+    }
+  ],
+  "summary": {
+    "raw_cosine": {
+      "mean_within_capability": 0.6240093332287405,
+      "mean_cross_capability": 0.6024582015225737,
+      "std_all_pairs": 0.10241865430605565,
+      "block_score": 0.21042193780213148
+    },
+    "log_cosine": {
+      "mean_within_capability": 0.9911999258675274,
+      "mean_cross_capability": 0.9824718879998063,
+      "std_all_pairs": 0.009828995526951684,
+      "block_score": 0.8879887923224947
+    },
+    "shared_component_removed_cosine": {
+      "mean_within_capability": 0.40747850086538406,
+      "mean_cross_capability": -0.24046486526450475,
+      "std_all_pairs": 0.7140408490028104,
+      "block_score": 0.9074317905407937
+    },
+    "top_0.1pct_jaccard": {
+      "mean_within_capability": 0.38198050447297677,
+      "mean_cross_capability": 0.310133823651024,
+      "std_all_pairs": 0.06597854825348565,
+      "block_score": 1.0889400073781879
+    }
+  },
+  "strongest_block_metric": "top_0.1pct_jaccard"
+}

@@ -1,0 +1,66 @@
+{
+  "loss_curve": [
+    {
+      "step": 1,
+      "epoch": 1,
+      "loss": 1.6131576895713806,
+      "tokens": 2952,
+      "completion_tokens": 1664,
+      "tokens_seen": 2952,
+      "completion_tokens_seen": 1664,
+      "lr": 0.0
+    }
+  ],
+  "tokens_seen": 2952,
+  "completion_tokens_seen": 1664,
+  "wall_time_seconds": 6.768707147799432,
+  "optimizer_steps": 1,
+  "total_updates_planned": 1,
+  "warmup_steps": 0,
+  "effective_batch_size_sequences": 16,
+  "max_len": 1024,
+  "seed": 0,
+  "epochs": 1,
+  "learning_rate": 0.0001,
+  "optimizer": "AdamW",
+  "scheduler": "cosine",
+  "warmup_ratio": 0.03,
+  "dtype": "bfloat16",
+  "student": "gemma3-270m",
+  "resolved_student": "google/gemma-3-270m",
+  "student_tag": "gemma3-270m",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "domains": [
+    "math"
+  ],
+  "n_per_domain": 16,
+  "trace_counts": {
+    "math": {
+      "source_rows": 16,
+      "training_rows": 16,
+      "coverage_deleted_rows": 0
+    }
+  },
+  "tokenization_deleted_rows": {
+    "math": 0
+  },
+  "training_examples": 16,
+  "training_mode": "lora",
+  "trainable_parameters": 3796992,
+  "total_parameters": 271895168,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  }
+}

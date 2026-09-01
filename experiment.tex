@@ -1,48 +1,104 @@
 \section{Experiments}
 \label{sec:exp}
 
-Following standard scaling-law methodology, we proceed from measurement
-protocol (\S\ref{sec:setup}) to dense references and damage curves over a
-model grid (\S\ref{sec:curves}), then to mechanism tests
-(\S\ref{sec:mech}), invariances and their violations across scale and
-family (\S\ref{sec:family}), and a matched-size cross-family panel
-(\S\ref{sec:panel}). Throughout, the object under study is
-\emph{scaling-down}: every curve describes what a source model loses, per
-capability, as deletion deepens. A forensic re-analysis of a prior
-ability-space grid (\S\ref{sec:reanalysis}) motivates the measurement
-layer; the pre-registered distillation/quantization/recovery grid is in
-progress (\S\ref{sec:planned}).
+The experiments build the argument in logical order: capabilities
+correspond to real, causally separable regions of the source model's
+gradient space (\S\ref{sec:regions}); pruning damage follows a law whose
+coefficients are carried by that geometry (\S\ref{sec:curves}--%
+\S\ref{sec:law}); the signed first-order term predicts
+capability-selective effects in both directions across families
+(\S\ref{sec:mech}); the behavioral cliff, non-perturbative in loss,
+becomes a smooth threshold crossing in geometry
+(\S\ref{sec:orderparam}); the quantization, distillation, and recovery
+arms extend the same structure to the remaining deletion bases and to
+the framework's single addition operator
+(\S\ref{sec:quant}--\S\ref{sec:recovery}); and the family axis exposes
+which quantities are universal and which are family coefficients
+(\S\ref{sec:family}). A forensic re-analysis of a prior ability-space
+grid (\S\ref{sec:reanalysis}) motivated the measurement protocol.
 
 \subsection{Setup}
 \label{sec:setup}
 
-\textbf{Models.} Eleven dense checkpoints from four families:
-Qwen3 \{0.6B, 1.7B, 4B\} (measured before a cluster-policy change
-restricted further use; retained as a comparison family), Gemma-3
-\{270M, 1B, 4B, 12B, 27B\}, Gemma-4-31B, Muse-Glimmer-30B, and
-OLMo-3-7B (OLMo-3-32B in progress).
-\textbf{Probes.} Per capability, prompt--reference pairs from held-out
-benchmark splits that are cross-benchmark disjoint from all transfer
-data: MATH-500 (math), MBPP (code), 2WikiMultihopQA (multi-hop QA);
-64 estimation and 64 measurement samples per capability
-(\S\ref{sec:prelim}).
-\textbf{Compression.} Global magnitude pruning at ten densities
-$\dens\in[0.3,0.9]$; per-model dense references from the same
-measurement halves. Quantization and distillation arms are part of the
-pre-registered grid (\S\ref{sec:planned}).
-\textbf{Geometry.} $\gbar{c}$ and the streaming Fisher quadratic forms
-of \S\ref{sec:geometry}, measured at each dense checkpoint; spectra
-accumulated in $2\times10^{5}$ magnitude-quantile bins. Checkpoint
-integrity is enforced by a hard guard (missing or re-initialized
-weights abort the run), a protocol lesson learned the hard way.
+\textbf{Models.} Twelve dense checkpoints from four families: Qwen3
+\{0.6B, 1.7B, 4B\} (measured before a cluster-policy change restricted
+further use; retained as a comparison family), Gemma-3 \{270M, 1B, 4B,
+12B, 27B\}, Gemma-4-31B, Muse-Glimmer-30B, OLMo-3 \{7B, 32B\}.
+\textbf{Probes.} Three capabilities (math, code, multi-hop QA), each
+probed by held-out splits of benchmarks cross-benchmark disjoint from
+all transfer data; for capability-region tests, three independent
+benchmarks per capability (math: GSM8K/MATH-500/SVAMP; code:
+HumanEval/MBPP; QA: HotpotQA/2Wiki/TriviaQA) plus a C4 control.
+\textbf{Compression.} Global magnitude pruning (ten densities,
+$\dens\in[0.3,0.9]$); per-output-channel round-to-nearest weight
+quantization ($\bits\in\{8,6,4,3\}$); black-box distillation from two
+frontier API teachers onto Gemma-3 students; LoRA recovery training on
+general (C4) or teacher-trace data. \textbf{Geometry.} Estimated as in
+\S\ref{sec:geometry}; estimation and measurement probe halves are
+disjoint throughout, and a checkpoint-integrity guard aborts any run
+with missing or re-initialized weights.
 
-\subsection{Damage curves: capability ordering is invariant, magnitudes are not}
+\subsection{Capabilities are regions of gradient space---and causally so}
+\label{sec:regions}
+
+\paragraph{Convergent validity (block structure).} For each of nine
+benchmarks we measure a gradient signature (the benchmark-conditional
+diagonal Fisher) and compare all pairs. After removing the component
+shared across benchmarks, signatures of same-capability benchmarks are
+positively aligned (cosine $+0.36$ to $+0.45$) while signatures of
+different capabilities are \emph{anti-aligned} ($-0.23$ to $-0.25$),
+in every one of seven models across three families
+(Fig.~\ref{fig:blocks}); the C4 control sits between blocks. The
+mathematics benchmarks cluster regardless of format, and within-block
+fine structure matches intuition (SVAMP, grade-school word problems,
+is the loosest member of the math block). A projected-gradient SVD
+version gives the same verdict in subspace terms: principal-angle
+similarity within capability exceeds cross-capability similarity by
+$2$--$4\times$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figs/v9_blocks.png}
+\caption{Capability regions in gradient space. Pairwise similarity of
+per-benchmark gradient signatures (rows: five models from three
+families; columns: four metrics). In the shared-component-removed
+metric (third column), same-capability benchmarks align and different
+capabilities anti-align---the block structure that licenses
+gradient-defined capability regions.}
+\label{fig:blocks}
+\end{figure}
+
+\paragraph{Causal separability (ablation).} The gold-standard test:
+select the top $0.05\%$ of weight coordinates by each capability's
+\emph{residual} Fisher signature (excluding coordinates shared with
+other capabilities) and zero them. The damage matrix is nearly
+diagonal (Gemma-3-1B; rows ablate, columns measure, nats/token):
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Ablated region & math & code & QA \\
+\midrule
+math & $\mathbf{+4.63}$ & $+0.43$ & $+0.05$ \\
+code & $+0.42$ & $\mathbf{+7.14}$ & $+0.00$ \\
+QA   & $+0.01$ & $+0.00$ & $\mathbf{+2.29}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Zeroing $0.05\%$ of weights, selected from gradients alone, destroys
+exactly one capability and leaves the others essentially untouched
+(the QA ablation moves code by $+0.0001$). Capability regions are not
+a correlational artifact: they are the causal carriers, and ablation
+itself is a form of \emph{targeted} scaling-down.
+
+\subsection{Pruning damage curves}
 \label{sec:curves}
 
-Table~\ref{tab:grid} reports per-capability damage
-$\Delta\Lc{c}(\dens)$ at reference densities and the math cliff onset
-$\dens^{*}$ (largest density with $\Delta\Lc{\text{math}}\ge 1$
-nat/token).
+Table~\ref{tab:grid} reports per-capability damage at reference
+densities and the math cliff onset $\dens^{*}$ (largest density with
+$\Delta\Lc{\text{math}}\ge1$).
 
 \begin{table}[t]
 \centering
@@ -65,127 +121,171 @@ Gemma3-12B & Gemma-3 & $+0.68$ & $+0.46$ & $+0.54$ & $+17.1$ & 0.60 & degrades \
 Gemma3-27B & Gemma-3 & $+4.04$ & $+4.69$ & $+3.59$ & $+15.2$ & 0.70 & degrades \\
 Gemma4-31B & Gemma-4 & $+0.68$ & $+0.77$ & $+2.89$ & $+16.1$ & 0.60 & degrades \\
 Muse-30B   & Muse    & $+0.17$ & $+0.14$ & $+0.20$ & $+3.5$ & 0.55 & degrades \\
-OLMo3-7B   & OLMo-3  & $+0.03$ & $+0.03$ & $+0.14$ & $\mathbf{+0.22}$ & \textbf{0.35} & degrades \\
+OLMo3-7B   & OLMo-3  & $+0.03$ & $+0.03$ & $+0.14$ & $+0.22$ & \textbf{0.35} & degrades \\
+OLMo3-32B  & OLMo-3  & $+0.02$ & $+0.03$ & $+0.02$ & $+0.09$ & $<$\textbf{0.30} & \textbf{improves (deep)} \\
 \bottomrule
 \end{tabular}
-\caption{Per-capability damage (nats/token, measurement halves) under
-global magnitude pruning. $\dens^{*}_{\text{math}}$ = cliff onset.
-Bold: the two structural surprises --- Qwen's QA \emph{improvement}
-under pruning, and OLMo's extreme robustness.}
+\caption{Per-capability pruning damage (nats/token). Three invariances
+hold everywhere: QA is the most robust capability pre-cliff; every
+model meets a cliff in a narrow proportional band (OLMo-3-32B has not
+met one by $\dens=0.3$, where its QA \emph{improves} by $-0.24$); and
+magnitudes and signs are family coefficients.}
 \label{tab:grid}
 \end{table}
 
-Three regularities hold across every model measured:
-(i) \textbf{capability ordering is family-invariant pre-cliff}: multi-hop
-QA is the most pruning-robust of the three capabilities in all four
-families, math and code the most fragile---capability selectivity is a
-universal structure of scaling-down, not a family quirk;
-(ii) \textbf{the cliff is universal and lives in a narrow proportional
-band} ($\dens^{*}\in[0.35,0.7]$ across a $115\times$ range of model
-sizes)---no model degrades gracefully through half density except
-OLMo-3-7B, and none survives $\dens<0.3$;
-(iii) \textbf{magnitudes and signs are family coefficients}: at matched
-$\dens=0.7$, damage spans two orders of magnitude across families
-(OLMo $+0.03$ to Gemma-3-27B $+4.0$), and the \emph{sign} of the QA
-response separates Qwen (improves, up to $-0.79$) from all other
-families (degrades). A scaling-down law must therefore have
-family-invariant form with family-specific coefficients---the structure
-our framework anticipates (\S\ref{sec:claims}).
+\subsection{The pruning law}
+\label{sec:law}
 
-\subsection{Mechanism: the signed first-order term}
+The mechanism form of \S\ref{sec:laws} fits the entire pre-cliff grid.
+With the measured alignment term subtracted, the curvature residual
+follows a power law in the deleted capability mass $m_c(\dens)$:
+\begin{equation}
+\Delta\Lc{c}(\dens)\;=\;\underbrace{\gbar{c}^{\top}\dw_\dens}_{\text{measured}}
+\;+\;B\,\big[\underbrace{m_c(\dens)}_{\text{measured}}\big]^{\gamma},
+\label{eq:fitlaw}
+\end{equation}
+with $R^2 = 0.82$--$0.996$ over 24 capability$\times$model fits
+(without the first-order term, QA is unfittable, $R^2\!\le\!0.67$;
+with it, QA joins the law). Two structural results:
+(i) in the deleted-mass coordinate the exponent concentrates at
+$\gamma\in[1.2,2.2]$ across all families, versus $3.2$--$8.7$ in the
+raw $(1-\dens)$ coordinate---the mechanism coordinate is what makes
+the form portable; and (ii) \emph{within a model, $\gamma$ is shared
+across capabilities} (e.g.\ Qwen3-0.6B: $1.41/1.56/1.43$;
+Gemma3-4B: $1.66/1.71$): capability differences are carried entirely
+by the two measured quantities, and the fitted structure is two
+parameters per model. Published (reduced) forms substitute the
+geometry's own smooth dependence on $(N_0,f)$, leaving only basic
+parameters in the interface.
+
+\subsection{The signed first-order term predicts, in both directions}
 \label{sec:mech}
 
-The capability-geometry damage model \eqref{eq:taylor} makes its
-sharpest prediction through the \emph{sign} of the first-order term
-$\gbar{c}^{\top}\dw$, which no positive-semidefinite effective-parameter
-model can express.
+The alignment term $\gbar{c}^{\top}\dw$ is the family coefficient with
+teeth. Its sign predicts the presence or absence of the
+capability-selective ``free lunch'' in every case measured:
+Qwen3's QA term is negative and QA improves under pruning (predicted
+$-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); Gemma's QA term is
+positive and no improvement exists at any size; OLMo-3-7B's is
+positive (mild degradation, prediction $+0.015$ $=$ measurement at
+$\dens=0.8$, code) while OLMo-3-32B's is negative---and deep-pruning
+QA improvement duly appears. Four families, and a within-family sign
+flip, all called in advance by one quantity measured on the dense
+checkpoint. Beyond the mild regime, first- plus second-order
+predictions fail by orders of magnitude at the cliff in every family:
+the collapse is non-perturbative in loss space, confirming the
+two-regime structure of \eqref{eq:prune}.
 
-\paragraph{The QA sign is predicted, in both directions.}
-In Qwen3, the QA alignment term is \emph{negative} (pruning small
-weights moves QA downhill): at 4B it alone reproduces the measured
-improvement, $-0.83$ predicted vs.\ $-0.79$ measured at $\dens=0.7$,
-$-2.43$ vs.\ $-1.76$ at $\dens=0.6$. In Gemma-3, the QA alignment term
-is \emph{positive} (e.g.\ 12B: $+0.26$ predicted vs.\ $+0.075$ measured
-at $\dens=0.9$), predicting the \emph{absence} of any improvement---and
-none is observed at any Gemma size. One measurable quantity, evaluated
-at the dense checkpoint alone, anticipates on which family the
-capability-selective free lunch exists. In OLMo-3-7B the mild-regime
-prediction is sharpest of all (code: $+0.015$ predicted $=$ measured at
-$\dens=0.8$).
+\subsection{The cliff is a geometric threshold crossing}
+\label{sec:orderparam}
 
-\paragraph{The perturbative regime ends at the cliff.}
-In every family, first- plus second-order predictions track measured
-damage in the mild regime and then fail by orders of magnitude at the
-cliff (e.g.\ Qwen3-0.6B math at $\dens=0.5$: predicted $-0.19$,
-measured $+4.68$): the collapse is non-perturbative everywhere, in loss
-space itself. This confirms the two-regime structure
-\eqref{eq:tworegime} as a universal property of scaling-down, and
-locates the scientific frontier at predicting $\dens^{*}_c$.
+Measuring the capability geometry \emph{of the pruned models}
+resolves the cliff's apparent unpredictability. The capability-region
+mass retention (the fraction of the dense model's capability-exclusive
+top coordinates still prominent after pruning) declines smoothly from
+the first densities---no cliff in geometry---while loss is still flat;
+the behavioral cliff occurs where retention crosses a critical value.
+The critical value is family-specific (Gemma: $0.035$--$0.10$ across
+1B/4B and all capabilities; Qwen: $0.13$--$0.23$) but consistent
+within a family across sizes and capabilities: the cliff boundary
+$\dens_c^{*}(N_0,f)$ reduces to one critical-retention constant per
+family, turning the two-regime law's least elegant fitted parameter
+into a measurable, smoothly-evolving order parameter.
+
+\subsection{Quantization arm}
+\label{sec:quant}
+
+Across nine models measured at $\bits\in\{8,6,4,3\}$: int8 and int6
+are within noise of dense everywhere; int4 damages small models
+(Gemma3-270M math $+2.3$) and barely touches large ones
+(Gemma3-27B math $+0.33$); and $\bits=3$ is a universal cliff
+($+5$ to $+18$ nats across every model and capability)---the bit
+axis has its own collapse, at a family-independent location.
+Capability selectivity transfers to this basis: QA improves under
+int4 for Qwen3-1.7B ($-0.21$), OLMo-3-7B ($-0.07$), and
+Gemma3-27B ($-0.67$)---the same signed, capability-specific structure
+as pruning, in a different deletion basis, consistent with the
+trace-vs-tail mechanism separation of \eqref{eq:quant}.
+
+\subsection{Distillation arm (in progress)}
+\label{sec:distill}
+
+Black-box traces from two frontier teachers (GPT-5.6-luna,
+Claude-Sonnet-4-6; 600 per domain each; single-teacher runs, paired
+design) train Gemma-3 students under coverage recipes. Early paired
+results confirm the pre-registered coverage-deletion prediction: the
+answer-only recipe (chain-of-thought stripped, $\chi_{\text{math}}$
+reduced) hurts math systematically more than full-trace training
+($+0.19$ to $+0.22$ vs.\ $+0.09$ to $+0.12$), while QA improves in
+every configuration ($-0.58$ to $-1.44$)---retrieval-style teacher
+behavior transfers efficiently even to sub-billion students. The full
+capacity$\times$teacher$\times$coverage$\times\Ds$ grid is running.
+
+\subsection{Recovery arm: the price that cannot be bought back}
+\label{sec:recovery}
+
+Recovery training on general text fits the recovery law cleanly
+(Gemma3-270M pruned to $\dens=0.6$; $R^2\approx1.0$):
+$\beta'_{\text{math}}=1.23$, $\beta'_{\text{code}}=1.02$, with
+\emph{unrecoverable residuals} $\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$
+of $1.21$ (math) and $1.93$ (code) nats---about $80\%$ of pruning
+damage is redeemable and the remainder is the true price of
+scaling-down; QA recovers completely. Two mechanism results:
+recovery on \emph{aligned} data (teacher traces) heals substantially
+faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
+as the gradient-overlap prediction requires---but over-training on
+narrow aligned data \emph{re-damages} the model (QA $4.95\to9.75$
+from $0.5$M to $8$M tokens), while general-text recovery is monotone.
+Aligned recovery is fast but risky; general recovery is slow but safe;
+the optimal recovery budget is finite for narrow data. Quantization
+damage past the bit cliff is markedly less redeemable (residuals
+$\approx2.6$--$2.8$ after int3) than pruning damage at matched
+severity.
 
 \subsection{Scale and family structure}
 \label{sec:family}
 
-\paragraph{Within-family robustness is non-monotonic in $N$---in two
-families independently.} Gemma-3 robustness peaks at 12B: 27B collapses
-far earlier ($+4.0$ vs.\ $+0.68$ at $\dens=0.7$) despite six years'
-scale advantage. This mirrors, in an independent family and a different
-measurement space, the prior Qwen-3 observation (ability space,
-\S\ref{sec:reanalysis}) that 14B is the most prunable-robust source and
-32B regresses. A mid-scale robustness peak is thus a reproducible
-pattern of scaling-down, not an artifact of one family.
-
-\paragraph{A candidate predictor, honestly retired.} We pre-registered
-the top-concentration statistic $\kappa_c$ (\S\ref{sec:regimes}) as a
-robustness predictor after it tracked the Qwen3 0.6B$\to$4B trend.
-The full grid falsifies it as a portable predictor: across families the
-correlation inverts (OLMo-3-7B is the most robust model with the
-\emph{lowest} concentration, 2--10\%), and within Gemma-3 the top end
-breaks it (27B has higher $\kappa$ than 12B yet is far more fragile).
-$\kappa$ remains a within-ladder covariate below the robustness peak;
-the family-level factor---plausibly related to over-training exposure,
-by analogy with precision-fragility results
-\citep{kumar2024scaling}---is open and testable via tokens-per-parameter.
-
-\subsection{Cross-family panel at matched size ($\sim$30B)}
-\label{sec:panel}
-
-At matched $\sim$30B scale the family coefficient dominates:
-$\Delta\Lc{\text{math}}$ at $\dens=0.7$ is $+0.17$ (Muse-30B), $+0.68$
-(Gemma4-31B), $+4.04$ (Gemma3-27B), with OLMo-3-32B in progress and
-Qwen3-32B available only in prior ability-space data. The panel turns
-``which family should an agent deployment scale down from?'' into a
-measured quantity---one axis of the method-selection map.
+\paragraph{Within-family robustness is non-monotonic---in two families
+independently.} Gemma-3 robustness peaks at 12B (27B collapses far
+earlier, $+4.0$ vs.\ $+0.68$ at $\dens=0.7$), mirroring the prior
+ability-space observation of a Qwen3 14B peak. A mid-scale robustness
+peak is a reproducible pattern of scaling-down.
+\paragraph{A candidate predictor, honestly retired.} The
+top-concentration statistic $\kappa_c$ tracked robustness within the
+Qwen3 ladder and was pre-registered as a predictor; the full grid
+retires it (cross-family inversion: OLMo, the most robust family,
+has the lowest concentration; within-Gemma top-end violation).
+\paragraph{Matched-size panel ($\sim$30B).} At matched scale the
+family coefficient dominates: $\Delta\Lc{\text{math}}$ at $\dens=0.7$
+spans $+0.02$ (OLMo-3-32B), $+0.17$ (Muse-30B), $+0.68$ (Gemma4-31B),
+$+4.04$ (Gemma3-27B). OLMo-3-32B survives $70\%$ pruning with
+$\le+0.63$ nats on every capability---family provenance (data
+recency, over-training exposure) is a first-order determinant of
+prunability, and ``which family should an agent scale down from?''
+is a measured quantity.
 
 \subsection{Re-analysis of the prior ability-space grid}
 \label{sec:reanalysis}
 
-A prior internal study fit compression laws directly on Rasch abilities
-from $\sim$100-item panels over a 774-cell Qwen3 grid and reported that
-no derived law had held-out predictive power. Our re-analysis attributes
-much of this to the measurement and testing layer:
-(1) the pre-registered $r{=}1$ self-distillation falsification was
-driven entirely by the answer-only recipe (math: $-3.22$ ability units
-alone vs.\ $-0.13$ pooled without it); stratified, the anchor holds and
-held-out transfer error drops from $9.0\times$ to $1.8\times$ the noise
-floor; (2) same-benchmark evaluation inflated QA distillation gains by
-roughly one third; (3) item discrimination heterogeneity invalidates
-interval-scale ability (2PL preferred, $\Delta$AIC $196$--$348$) while
+A prior internal study fit compression laws directly on Rasch
+abilities from $\sim$100-item panels over a 774-cell Qwen3 grid and
+reported that no derived law had held-out predictive power. Our
+re-analysis attributes much of this to the measurement layer:
+(1) the $r{=}1$ falsification anchor was driven entirely by the
+answer-only recipe (stratified, the anchor holds and held-out error
+drops from $9.0\times$ to $1.8\times$ the noise floor); (2)
+same-benchmark evaluation inflated QA gains by roughly one third;
+(3) discrimination heterogeneity voids interval-scale ability while
 rankings survive ($\rho\ge0.98$); (4) item-level damage is smooth
-pre-cliff (uniform-shift beats discrete-deletion mixtures), ruling out
-skill-quantum deletion as an item-level mechanism. These findings fix
-the design of \S\ref{sec:prelim}: continuous capability-conditional
-loss as the primary observable, cross-benchmark probes, rank-only use
-of latent abilities.
+pre-cliff, ruling out discrete skill deletion at the item level.
+These findings fixed the protocol of \S\ref{sec:prelim}.
 
 \subsection{Pre-registered grid in progress}
 \label{sec:planned}
 
-The remaining grid crosses the same capability panel with:
-round-to-nearest quantization (int8/int4); single-teacher black-box
-distillation onto Gemma-3 students (teachers: two frontier APIs,
-recorded per-teacher and analyzed pairwise); and recovery training
-$\Dr\in\{0,10\text{M},100\text{M},1\text{B}\}$ tokens. Analysis follows
-\S\ref{sec:claims}: forms committed before fitting; keep/reject by
-cell-level paired bootstrap; measurement-error-weighted fits; repeated
-held-out extrapolation on the largest size, deepest compression, and
-largest recovery budget; positive/negative controls.
+Remaining: the distillation grid's capacity and $\Ds$ ladders; the
+recovery grid across sizes, densities, and sources; large-model
+geometric order parameters (14B--32B class); and the held-out
+extrapolation validation of every reduced-form law (largest size,
+deepest compression, largest recovery budget), with positive and
+negative controls, per \S\ref{sec:protocol}.

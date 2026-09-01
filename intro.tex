@@ -45,34 +45,45 @@ geometry}---the capability-conditional mean gradient $\gbar{c}$ and
 Fisher structure $\Fc{c}$ at the dense checkpoint, measurable with
 forward--backward passes only (\S\ref{sec:method}).
 
-Instantiating the laws on eleven dense checkpoints from four model
-families (Qwen3, Gemma-3/4, Muse, OLMo-3; 270M--31B), we find that
+Instantiating the laws on twelve dense checkpoints from four model
+families (Qwen3, Gemma-3/4, Muse, OLMo-3; 270M--32B), we find that
 scaling-down has law-like structure of a specific kind---%
 \textbf{family-invariant form with family-specific coefficients}:
 \begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
-\item \textbf{Capability ordering is universal.} Multi-hop QA is the
-most pruning-robust capability, math and code the most fragile, in
-every family and at every size measured: capability selectivity is a
-structure of scaling-down itself.
-\item \textbf{The signed first-order term of capability geometry is
-the family coefficient---and it predicts.} In Qwen3 the QA alignment
-term $\gbar{c}^{\top}\dw$ is negative and pruning \emph{improves} QA
-loss (predicted $-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); in
-Gemma-3 it is positive and no improvement exists at any size. One
-quantity, measured on the dense model alone, anticipates on which
-family the capability-selective free lunch exists.
-\item \textbf{Collapse is universal, proportional, and
-non-perturbative.} Every model meets a cliff at
-$\dens^{*}\in[0.35,0.7]$ across a $115\times$ size range; beyond it,
-damage exceeds any local (first- plus second-order) prediction by
-orders of magnitude. Scaling-down laws are therefore two-regime laws,
-and predicting $\dens^{*}_c(N_0,f)$ is their frontier.
-\item \textbf{Within-family robustness is non-monotonic in size---in
-two families independently.} Gemma-3 robustness peaks at 12B (27B
-collapses far earlier), mirroring the prior Qwen3 observation of a
-14B peak; a mid-scale robustness peak is a reproducible pattern, and
-our pre-registered candidate predictor (spectral top-concentration)
-is honestly retired by the same data that suggested it.
+\item \textbf{Capability regions are real and causal.} Independent
+benchmarks of the same skill share gradient signatures that
+\emph{anti-align} across skills (block structure in seven models,
+three families), and zeroing a capability's exclusive $0.05\%$ of
+weight coordinates---selected from gradients alone---destroys exactly
+that capability (near-diagonal ablation matrix; the off-target effect
+of the QA ablation on code is $+0.0001$ nats). The capability vector
+of our laws indexes measured objects, not benchmark conventions.
+\item \textbf{The pre-cliff law is two measurements plus two
+parameters.} $\Delta\Lc{c} = \gbar{c}^{\top}\dw + B\,m_c^{\gamma}$
+fits 24 capability$\times$model curves at $R^2\ge0.82$ (mostly
+$\ge0.95$); the exponent concentrates at $\gamma\in[1.2,2.2]$ in the
+deleted-mass coordinate and is shared across capabilities within a
+model. The \emph{sign} of the measured alignment term predicts on
+which families pruning improves retrieval-style QA---four families
+called correctly, including a sign flip \emph{within} OLMo-3 between
+7B and 32B.
+\item \textbf{The cliff is a geometric threshold crossing.} Collapse
+is universal and non-perturbative in loss (no local expansion sees it
+coming), but capability-region mass retention decays \emph{smoothly}
+from the first densities, and the cliff sits where retention crosses
+a family-specific critical value---reducing the two-regime law's
+boundary to one measured constant per family.
+\item \textbf{The other arms inherit the structure.} Quantization
+shows the same capability selectivity in a different basis and a
+universal cliff at $3$ bits; distillation confirms the pre-registered
+coverage-deletion prediction (stripping chains-of-thought selectively
+damages math); recovery training obeys a clean power law whose
+unrecoverable residual ($\approx20\%$ of pruning damage) is the true
+price of scaling-down---and aligned recovery data heals faster but
+re-damages under over-training, a practical trade-off the
+method-selection map encodes. Within-family robustness is
+non-monotonic in size in two families independently; our
+pre-registered spectral predictor for this is honestly retired.
 \end{enumerate}
 
 \paragraph{Contributions.}

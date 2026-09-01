@@ -1,0 +1,98 @@
+[
+ {
+  "student": "gemma3-270m",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-270m",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "answer_only",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-270m",
+  "teacher": "claude-sonnet-4-6",
+  "recipe": "full",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-270m",
+  "teacher": "claude-sonnet-4-6",
+  "recipe": "answer_only",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "answer_only",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "claude-sonnet-4-6",
+  "recipe": "full",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "claude-sonnet-4-6",
+  "recipe": "answer_only",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "n_per_domain": 75,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "n_per_domain": 150,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "n_per_domain": 300,
+  "epochs": 2,
+  "device": "cuda:0"
+ },
+ {
+  "student": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "no_code_fence",
+  "n_per_domain": 600,
+  "epochs": 2,
+  "device": "cuda:0"
+ }
+]
