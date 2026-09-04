@@ -1,6 +1,6 @@
 # Unified held-out law-fit report
 
-Generated 2026-09-03 by `analysis/v18_law_fit.py` from committed/local result artifacts only. This was a CPU-only refit: no inference, training, GPU use, or result-input mutation occurred.
+Generated 2026-09-04 by `analysis/v18_law_fit.py` from committed/local result artifacts only. This was a CPU-only refit: no inference, training, GPU use, or result-input mutation occurred.
 
 ## Decision rule and scope
 
@@ -19,6 +19,21 @@ Status `OK` means the declared fold produced predictions for every held-out elig
 - **Distillation is PARTIAL:** the real four-rotation size-held-out MAE is 0.165 nats, but only one family/teacher/data budget is available; cross-family and D-ladder rows remain PLANNED.
 - **Recovery is PARTIAL:** C4 has a diagnostic QA-only held-out-budget score after filtering; aligned traces have no estimable held-out law because only one budget per capability remains below the 1-nat cap.
 - **Cliffs are separately held out:** pruning cliff-density MAE is 0.078 for largest-model holdout and 0.146 for family holdout; quantization bit-cliff MAE is 0.238 bits for model holdout and 0.422 bits for family holdout.
+
+## Paired law-versus-baseline bootstrap
+
+The comparison below resamples common held-out cells and recomputes `candidate MAE - baseline MAE` in each resample. Negative favors the candidate. It is conditional on the displayed candidates having been selected by pooled MAE and therefore does not correct selection bias. A CI containing zero supplies no evidence that added form complexity improves prediction.
+
+| Method | Protocol | Candidate | Baseline | Paired cells | Paired bootstrap ΔMAE candidate−baseline (95% CI) | Simplicity decision |
+|---|---|---|---|---|---|---|
+| Pruning | fit d>=0.55 -> deeper pre-cliff | density_only (0.333) | baseline_raw_sparsity (0.326) | 28 | 0.007 [-0.032, 0.043] | unresolved; prefer density_only |
+| Pruning | leave-largest-model-out | hierarchical_capability_family (0.283) | baseline_anchor_only (0.289) | 55 | -0.006 [-0.074, 0.062] | unresolved; prefer density_only |
+| Pruning | leave-one-family-out | density_only (0.339) | baseline_removed_weight_norm (0.304) | 174 | 0.036 [0.026, 0.046] | baseline lower error; prefer density_only |
+| Quantization | leave-one-bit-out (pre-cliff only) | family_conditioned_smooth_cliff (0.121) | categorical baseline not estimable | 0 | n/a | categorical baseline cannot predict unseen bit |
+| Quantization | leave-largest-model-out | family_conditioned_smooth_cliff (0.091) | baseline `bit_width_categorical_baseline` 0.106 | 26 | -0.043 [-0.087, -0.007] | candidate lower error |
+| Quantization | leave-one-family-out | fixed_4^-b (0.133) | baseline `bit_width_categorical_baseline` 0.109 | 103 | 0.011 [-0.006, 0.027] | unresolved; prefer fixed_4^-b |
+
+**Simplicity verdict.** Where the paired interval includes zero, use the continuous `density_only` pruning law and `fixed_4^-b` quantization law as the default reduced forms rather than a more complex family/size/cliff extension. The bit-width categorical baseline cannot extrapolate to a globally unseen bit at all; thus a continuous bit law has scaling-law value even when its MAE ties a categorical baseline on seen-bit model/family holdouts.
 
 ## 1. Pruning
 
@@ -132,8 +147,8 @@ The same Gemma-3 1B prune-0.6 anchor feeds both sources. Recovery is fitted to n
 
 | Method | Inputs | Candidate law | Fit points | Held-out split | MAE | Relative error | Sign accuracy | Cliff error | Calibration |
 |---|---|---|---|---|---|---|---|---|---|
-| Recovery [PARTIAL] | Delta L_c(0), D_R, source, capability | r_c+(1-r_c)(1+D_R/D0)^(-beta) | 2/fold; 3 held-out | leave-one-budget-out (c4); PARTIAL: only QA retains 3 pre-cliff budgets; math/code retain 2/1 | 0.168 [0.014, 0.245] | 0.996 [0.876, 1.000] | 0.333 [0.061, 0.792] | n/a | 95% PI cover 0.667 [0.208, 0.939], width 0.490 |
-| Recovery [NON-DECISIONAL] | Delta L_c(0), D_R, source, capability | r_c+(1-r_c)(1+D_R/D0)^(-beta) | 6 | NON-DECISIONAL in-sample (c4; underidentified) | 0.082 [0.000, 0.163] | 0.166 [0.000, 0.603] | 0.667 [0.300, 0.903] | n/a | n/a |
+| Recovery [PARTIAL] | Delta L_c(0), D_R, source, capability | r_c+(1-r_c)(1+D_R/D0)^(-beta) | 2/fold; 3 held-out | leave-one-budget-out (c4); PARTIAL: only QA retains 3 pre-cliff budgets; math/code retain 2/1 | 0.232 [0.007, 0.621] | 1.018 [0.999, 1.239] | 0.667 [0.208, 0.939] | n/a | 95% PI cover 0.333 [0.061, 0.792], width 0.075 |
+| Recovery [NON-DECISIONAL] | Delta L_c(0), D_R, source, capability | r_c+(1-r_c)(1+D_R/D0)^(-beta) | 3 | NON-DECISIONAL in-sample (c4; underidentified) | 0.021 [0.000, 0.056] | 0.093 [0.000, 1.016] | 0.667 [0.208, 0.939] | n/a | n/a |
 | Recovery [PARTIAL] | Delta L_c(0), D_R, source, capability | r_c+(1-r_c)(1+D_R/D0)^(-beta) | 0 | leave-one-budget-out (traces); PARTIAL: only the 1M point is pre-cliff in each capability; 4M/16M exceed 1 nat | n/a | n/a | n/a | n/a | n/a |
 | Recovery [NON-DECISIONAL] | Delta L_c(0), D_R, source, capability | r_c+(1-r_c)(1+D_R/D0)^(-beta) | 3 | NON-DECISIONAL in-sample (traces; underidentified) | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 1.000 [0.439, 1.000] | n/a | n/a |
 | Recovery [PARTIAL] | Delta L_c(0), D_R, source, capability | 1+a log(1+D_R/1M)+c[log(1+D_R/1M)-tau]_+ | 0 | leave-one-budget-out (traces); PARTIAL: only the 1M point is pre-cliff in each capability; 4M/16M exceed 1 nat | n/a | n/a | n/a | n/a | n/a |
@@ -143,7 +158,7 @@ The same Gemma-3 1B prune-0.6 anchor feeds both sources. Recovery is fitted to n
 
 Aligned availability audit (not fitted): all three requested budgets exist for math/code/QA; at 1M all three are pre-cliff, while every 4M/16M capability cell exceeds the 1-nat cap. Thus each aligned candidate row is emitted as `PARTIAL` with no held-out estimate, rather than fitting forbidden points or presenting a three-point interpolation as prediction.
 
-Eligible recovery counts after the 1-nat cap: c4: math=2, code=1, qa=3; traces: math=1, code=1, qa=1. A defensible aligned held-out comparison needs at least three pre-cliff training budgets plus one held-out budget per capability, denser sampling around the early optimum, and another seed/model. The existing late points remain descriptive evidence of non-monotonicity, not fit points.
+Eligible recovery counts after the 1-nat cap: c4: math=0, code=0, qa=3; traces: math=1, code=1, qa=1. A defensible aligned held-out comparison needs at least three pre-cliff training budgets plus one held-out budget per capability, denser sampling around the early optimum, and another seed/model. The existing late points remain descriptive evidence of non-monotonicity, not fit points.
 
 ## Provenance and limitations
 
