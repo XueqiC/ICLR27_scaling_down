@@ -91,18 +91,30 @@ capability-aligned recovery data heals faster at small budgets but
 re-damages under over-training.
 \end{enumerate}
 
+\paragraph{Central thesis.}
+Capability loss is a common \emph{outcome} coordinate---its map to
+behavioral accuracy shares a form across tested families---but
+compression ratio is \emph{not} a common \emph{intervention} coordinate:
+laws using only resource ratios fail to extrapolate across methods.
+The outcome space can therefore be unified through capabilities even
+where the intervention laws cannot be unified across compression methods,
+so we unify at the decision layer rather than by forcing one curve.
+
 \paragraph{Contributions.}
-(1) A problem formulation for compression-method selection under
-capability requirements, with a three-layer taxonomy of prediction
-inputs (observable source state, common compression coordinates,
-method-specific controls) and an anchored prediction setting
-(\S\ref{sec:prelim}); (2) a predictive framework with a
-shared-plus-method-specific law hierarchy, explicit cliff and recovery
-transformations, and a held-out validation protocol
-(\S\ref{sec:method}); (3) a twelve-model, four-family empirical grid
-across pruning, quantization, distillation, and recovery, with
-capability-region mechanism evidence and a forensic re-analysis of a
-prior ability-space grid (\S\ref{sec:exp}); and (4) the
-method-selection map as the practitioner-facing output.
-\resultpending{cross-method fitting (M1/M2/M3) and agent-workload
-validation; the corresponding claims are marked throughout}
+(1) A capability-conditioned scaling-down formulation: predict a
+multidimensional post-compression capability profile from observable
+source state, common compression coordinates, and method-specific
+controls, anchored at the observed dense capability
+(\S\ref{sec:prelim}). (2) Observable-input, method-specific predictive
+laws for pruning, quantization, and distillation (plus recovery), each
+reported by held-out prediction error rather than in-sample fit
+(\S\ref{sec:method},\S\ref{sec:exp}). (3) A demonstration of
+cross-method \emph{non-equivalence} on tested storage/active coordinates
+alongside a shared capability interface (the loss-to-accuracy link),
+adjudicated by leave-one-method/family/size-out tests. (4) A capability-
+and cost-aware method-selection map as the practitioner-facing output.
+Dense-reference scaling and Fisher-implementation optimization are
+\emph{not} claimed as contributions.
+\resultpending{held-out method-specific law fits, cross-method
+(M1/M2/M3) comparison, and method-selection / agent-workload validation
+are in progress and marked throughout}

@@ -95,40 +95,40 @@ Address \\
 
 \begin{abstract}
 Capability-specialized agents rarely need frontier-scale generality: a
-coding or retrieval agent needs a specific \emph{capability profile} at the
-lowest deployment cost. The standard route is compressing a dense source
-model---pruning, quantization, or distillation, usually with recovery
-training---but choosing among methods today means expensive grid search,
-because compression changes capabilities anisotropically and existing
-compression scaling laws predict only aggregate pretraining loss. We
-develop \emph{predictive scaling-down laws}: from a dense source state
-that is observable \emph{before} compression (an observed capability
-anchor plus public source descriptors), common compression coordinates,
-and a small number of method-specific controls, predict the
-post-compression capability vector---and from it, workload performance
-and the cheapest configuration meeting a requirement. Across twelve dense
-checkpoints from four families (Qwen3, Gemma-3/4, Muse, OLMo-3;
-270M--32B) we find: (i) capability ordering under pruning is invariant
-(multi-hop QA most robust, math and code most fragile in every model),
-while magnitudes and signs are family coefficients---on some families
-pruning measurably \emph{improves} retrieval-style capability;
-(ii) independent benchmarks of the same skill share gradient signatures
-that anti-align across skills in all seven models tested, and in a first
-single-model test, zeroing a capability's exclusive $0.05\%$ of
-coordinates selectively destroys that capability---mechanism evidence
-that capability-conditioned prediction targets real structure;
-(iii) every model meets a collapse cliff in a narrow proportional density
-band that local expansions do not anticipate, while a geometric retention
-statistic decays smoothly and crosses a family-consistent critical value
-at the cliff; and (iv) quantization shows the same selective structure
-with a collapse at 3 bits in all nine models measured, distillation
-recipes that strip chains of thought selectively damage math, and
-recovery training follows a saturating law whose asymptotic residual
-under a fixed recipe quantifies what compression cost cannot buy back.
-We organize these observations into an anchored, shared-plus-%
-method-specific law hierarchy with held-out validation, and into a
-\emph{method-selection map} for practitioners; components still under
-validation are explicitly marked throughout.
+coding or retrieval agent needs a specific \emph{capability profile} at
+the lowest deployment cost. The standard route is compressing a dense
+source model---pruning, quantization, or distillation, usually with
+recovery training---but choosing among methods today means expensive
+grid search, because compression changes capabilities anisotropically
+and existing compression scaling laws predict mainly aggregate loss
+within a single method. We formulate \emph{capability-conditioned
+predictive scaling-down laws}: from a dense source state observable
+\emph{before} compression (an observed capability anchor plus public
+source descriptors), common compression coordinates, and a few
+method-specific controls, predict the post-compression capability vector,
+and from it workload performance and the cheapest configuration meeting a
+requirement. Our central finding is an asymmetry: \textbf{capability loss
+serves as a common \emph{outcome} coordinate---its map to behavioral
+accuracy has a shared form across tested families---but compression ratio
+is \emph{not} a common \emph{intervention} coordinate.} Concretely, across
+dense checkpoints from four families (Gemma-3/4, Muse, OLMo-3, and Qwen-3
+on a compliant host; 270M--32B): (i) the loss-to-accuracy link is a steep
+capability-specific transition whose location is shared across five
+tested models (math near $L_{1/2}\!\approx\!1.0\text{--}1.2$);
+(ii) method-agnostic laws using only tested storage and active-parameter
+ratios \emph{fail} to extrapolate across pruning, quantization, and
+distillation on held-out tests---at matched nominal storage the same
+budget is near-lossless under quantization yet catastrophic under
+pruning; (iii) method-specific laws instead reveal family-dependent
+low-bit and density cliffs, capability-specific transfer (a scalar
+teacher descriptor is insufficient), and strongly data-dependent
+recovery; and (iv) residualized gradient signatures show capability
+block structure across nine models including two near 30B, evidence that
+the prediction targets real structure. Because the intervention laws do
+not unify, we unify instead at the decision layer: a capability- and
+cost-aware \emph{method-selection map}. Held-out law fits and selection
+validation still in progress are marked as such; no unverified result is
+stated as fact.
 \end{abstract}
 
 
