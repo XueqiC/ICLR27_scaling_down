@@ -16,7 +16,7 @@ Status `OK` means the declared fold produced predictions for every held-out elig
 
 - **Pruning remains on probation.** Best candidate-versus-baseline held-out MAEs are `fit d>=0.55 -> deeper pre-cliff`: candidate `density_only` 0.333 vs baseline `baseline_raw_sparsity` 0.326; `leave-largest-model-out`: candidate `hierarchical_capability_family` 0.283 vs baseline `baseline_anchor_only` 0.289; `leave-one-family-out`: candidate `density_only` 0.339 vs baseline `baseline_removed_weight_norm` 0.304. No candidate clears the directive's no-held-out-sign-error rule.
 - **Quantization remains on probation.** Best held-out comparisons are `leave-one-bit-out (pre-cliff only)`: candidate `family_conditioned_smooth_cliff` 0.121 vs categorical baseline not estimable; `leave-largest-model-out`: candidate `family_conditioned_smooth_cliff` 0.091 vs baseline `bit_width_categorical_baseline` 0.106; `leave-one-family-out`: candidate `fixed_4^-b` 0.133 vs baseline `bit_width_categorical_baseline` 0.109. No candidate clears the no-held-out-sign-error rule.
-- **Distillation is PARTIAL; cross-family verdict: HIERARCHICAL.** Gemma-only→Qwen no-refit MAE is 0.475 nats with 4/6 signs; a held-out Qwen family intercept lowers MAE to 0.106 with 6/6 signs. The D-only/separable held-out MAEs are 0.615/0.632, but all three D sequences are non-monotone, so no clean D exponent is supported.
+- **Distillation is PARTIAL / EXPLORATORY (V22 reassessment).** The V21 total-gap MAEs remain 0.475 without Qwen calibration and 0.106 with one held-out offset per capability. About 99%/90% of Gemma math/code size slopes are dense baseline effects; reference/coordinate differences partly account for offsets. A distillation-specific hierarchical family law is not established. See the Stage A / V22 section below.
 - **Recovery is PARTIAL:** C4 has a diagnostic QA-only held-out-budget score after filtering; aligned traces have no estimable held-out law because only one budget per capability remains below the 1-nat cap.
 - **Cliffs are separately held out:** pruning cliff-density MAE is 0.078 for largest-model holdout and 0.146 for family holdout; quantization bit-cliff MAE is 0.238 bits for model holdout and 0.422 bits for family holdout.
 
@@ -156,7 +156,7 @@ Family-specific coefficients below are descriptive only because the Qwen line ha
 | code | -0.013 | 0.137 | -0.289 | 0.216 | yes |
 | qa† | -1.657 | 0.135 | -2.928 | 0.286 | yes |
 
-**Cross-family verdict: HIERARCHICAL.** The uncorrected Gemma law has MAE 0.475 nats and misses the sign of Qwen-3 1.7B math and code (4/6 signs correct). A held-out Qwen intercept lowers MAE to 0.106 and gets 6/6 signs, while all three observed Qwen size trends have the same sign as the Gemma exponent. Thus the supported reduced form is a shared exponent with a family intercept. A family-specific exponent remains untested, not disproved.
+**V21 recorded verdict: HIERARCHICAL; superseded in interpretation by V22 below.** The 0.475→0.106 held-out MAE and 4/6→6/6 signs remain reproducible for the source-referenced total gap. These do not isolate the distillation effect or establish an intrinsic family offset. The family-specific exponent remains untested.
 
 This cross-family claim is limited: Gemma uses a 27B dense source whereas Qwen uses a 4B dense source. Their absolute source capabilities and source sizes differ, so equal nominal `r_storage` does not represent a perfectly matched capacity gap.
 
@@ -214,3 +214,97 @@ Eligible recovery counts after the 1-nat cap: c4: math=0, code=0, qa=3; traces: 
 - Recovery: `results/v13-recovery/gemma3-1b/prune_0.6_{c4,traces}/recovery.json`; traces records seed 0, while the salvaged C4 compact artifact does not record a seed.
 - There are no repeated measurement seeds for these law cells. Consequently the calibration/MAE intervals are cell-sampling diagnostics and cannot estimate seed or benchmark-item uncertainty.
 - No post-cliff loss magnitude contributes to any law coefficient or headline damage metric. Cliff-location models use only observed threshold-crossing coordinates; censored trajectories stay censored.
+
+<!-- V22_DISTILL_DECOMP_START -->
+## Stage A / V22: distillation decomposition and C21 reassessment
+
+**Verdict: PARTIAL / EXPLORATORY.** The held-out 0.106 calculation is reproducible, but it supports a calibrated predictor of the combined baseline-plus-training gap. It does not establish a distillation-specific hierarchical family law.
+
+### Paired loss accounting
+
+`L(S_KD)-L(B_ref) = [L(S0)-L(B_ref)] + [L(S_KD)-L(S0)]`.
+
+The first term is the student's own dense baseline gap: pre-existing size/quality, not distillation. The signed DISTILLATION GAIN is negative when training lowers loss and positive when it damages loss. B_ref is a same-family comparison checkpoint, not the API teacher. References are Gemma-3 27B and Qwen-3 4B; the single OLMo student is included separately against OLMo-3 32B and excluded from C21 fits.
+
+Coverage: 23 V12 runs and 16 V16 remeasurements; all three capabilities for each. `decomposition.csv` and `summary.json` contain every term and its artifact paths. V12 reproduces C21; V16 pairs are retained as separate measurements. No V16 generic residual is substituted for capability loss.
+
+The following table is the C21 GPT/full/600 slice; all other teachers, recipes and budgets are in the complete table below.
+
+| Student | Capability | BASELINE GAP | DISTILLATION GAIN | Total source gap |
+|---|---|---:|---:|---:|
+| Qwen3-0.6B | math | +0.092546 | +0.000569 | +0.093115 |
+| Qwen3-0.6B | code | +0.044785 | +0.076495 | +0.121280 |
+| Qwen3-0.6B | qa | -1.103231 | -1.281884 | -2.385115 |
+| Qwen3-1.7B | math | +0.096167 | -0.130148 | -0.033980 |
+| Qwen3-1.7B | code | +0.056342 | -0.160322 | -0.103980 |
+| Qwen3-1.7B | qa | -0.337837 | -2.345076 | -2.682913 |
+| gemma3-12b | math | +0.042478 | +0.099220 | +0.141698 |
+| gemma3-12b | code | +0.016580 | +0.138424 | +0.155004 |
+| gemma3-12b | qa | -0.354971 | -1.186239 | -1.541210 |
+| gemma3-1b | math | +0.618626 | +0.119412 | +0.738038 |
+| gemma3-1b | code | +0.326146 | +0.138314 | +0.464460 |
+| gemma3-1b | qa | -0.218641 | -0.747323 | -0.965964 |
+| gemma3-270m | math | +0.714114 | +0.094332 | +0.808446 |
+| gemma3-270m | code | +0.456350 | +0.173134 | +0.629484 |
+| gemma3-270m | qa | -0.510692 | -0.653293 | -1.163985 |
+| gemma3-4b | math | +0.138818 | +0.081423 | +0.220242 |
+| gemma3-4b | code | +0.067842 | +0.085695 | +0.153537 |
+| gemma3-4b | qa | -0.312578 | -1.218003 | -1.530581 |
+
+### Where the fitted size slope comes from
+
+Identical OLS designs imply `alpha_total = alpha_baseline + alpha_gain` exactly. These are descriptive fits on the four Gemma sizes, not new held-out exponent estimates.
+
+| Capability | Total alpha | Baseline alpha | Gain alpha | Baseline / total |
+|---|---:|---:|---:|---:|
+| math | 0.198289 | 0.196089 | 0.002200 | 98.9% |
+| code | 0.137244 | 0.124011 | 0.013232 | 90.4% |
+| qa | 0.134813 | -0.029674 | 0.164487 | -22.0% |
+
+The negative QA baseline fraction means opposing components, not an explained-variance share. Math/code slopes largely reflect dense size/quality. The QA total slope hides cancellation.
+
+| Response fitted and tested | Gemma→Qwen no-refit MAE | Rotating per-capability intercept MAE |
+|---|---:|---:|
+| source_referenced_gap | 0.475053 | 0.106379 |
+| baseline_gap | 0.194437 | 0.361013 |
+| distillation_gain | 0.324245 | 0.414450 |
+
+Baseline and gain prediction errors can cancel in their sum; success on the total therefore does not validate prediction of the training effect.
+
+### Reference and coordinate accounting before a family interpretation
+
+Let `x=-log(r_storage)`. Moving Qwen to the Gemma 27B coordinate gives `x_common=x_Q+log(27/4)`; moving its loss gap to the Gemma source gives `y_common=y_Q+L_ref,Q-L_ref,G`. Thus a reference-corrected prediction in the original Qwen units is `p_Q + k_c`, where `k_c=(L_ref,G-L_ref,Q)+alpha_c*log(27/4)`. This uses only dense reference losses and Gemma-fitted alpha, no Qwen student outcomes. It retains V21's registered ratios (.010/.036/.157/.445 and .150/.425); these are not exactly nominal student B/27 (implied Gemma sizes .270/.972/4.239/12.015B). This is a coordinate-origin sensitivity, not a harmonized parameter-count refit.
+
+| Capability | Ref-loss shift | Log-coordinate shift | Known correction k | Mean original offset* | Mean remaining offset* | No-refit MAE after correction |
+|---|---:|---:|---:|---:|---:|---:|
+| math | -0.309941 | +0.378641 | +0.068699 | -0.195463 | -0.264162 | 0.264162 |
+| code | -0.811850 | +0.262073 | -0.549777 | -0.167500 | +0.382278 | 0.382278 |
+| qa | -0.943125 | +0.257431 | -0.685693 | -1.062197 | -0.376504 | 0.376504 |
+
+*Means use both Qwen sizes and are descriptive calibration summaries, not held-out estimates. Actual fold offsets are listed below. Reference-loss differences include size, quality, and tokenizer/evaluation effects; the residual cannot be identified as an intrinsic family effect from these data.
+
+The uncalibrated pooled MAE changes 0.475053→0.340981, a 28.2% reduction in error, not a causal percentage of a family effect. The correction overshoots code and moves math in the wrong direction; it accounts for part of the large QA offset. The three capabilities do not support one scalar explained fraction. With a freely calibrated intercept this constant correction is absorbed, so the rotated total-gap MAE remains 0.106.
+
+| Calibration → held-out size | Capability | Total offset | Baseline contribution | Gain contribution | Known correction | Remaining offset |
+|---|---|---:|---:|---:|---:|---:|
+| Qwen3-1.7B → Qwen3-0.6B | math | -0.155756 | +0.069046 | -0.224802 | +0.068699 | -0.224455 |
+| Qwen3-1.7B → Qwen3-0.6B | code | -0.208663 | +0.061839 | -0.270502 | -0.549777 | +0.341114 |
+| Qwen3-1.7B → Qwen3-0.6B | qa | -1.140895 | -0.041791 | -1.099104 | -0.685693 | -0.455202 |
+| Qwen3-0.6B → Qwen3-1.7B | math | -0.235169 | -0.138793 | -0.096376 | +0.068699 | -0.303869 |
+| Qwen3-0.6B → Qwen3-1.7B | code | -0.126336 | -0.078871 | -0.047465 | -0.549777 | +0.423441 |
+| Qwen3-0.6B → Qwen3-1.7B | qa | -0.983499 | -0.776282 | -0.207217 | -0.685693 | -0.297806 |
+
+### What 0.106 does and does not test
+
+V21 fits the Gemma floor/exponent on four sizes, calibrates Qwen offsets on 0.6B and predicts 1.7B, then reverses those roles. 0.106 is pooled **held-out prediction MAE**, not the zero calibration-fit residual. Each fold adds **one offset per capability**, three parameters total, not one shared offset. The exponent is also capability-specific. There are only two Qwen sizes: each capability supplies one independent size contrast. Its two rotated absolute errors are identical; six scores are not six independent size tests. Shared Qwen-4B reference and probe items remain in both folds. This is within-Qwen size transfer after calibration, not a second strict family holdout. Two Qwen points saturate a separate slope/intercept fit; they cannot validate that alternative.
+
+Using complete V16 Gemma pairs where available and the V12 Qwen pairs gives total-gap rotated MAE 0.107302 as a labeled measurement-version sensitivity. V16 and V12 discrepancies are recorded in `measurement_comparison.csv`; missing checkpoint/revision hashes prevent attributing them to numerical error alone. V12 records mixed LoRA/full training modes, including a mode switch at D=600 for Gemma 4B. D is examples per domain, not supervised tokens. Neither size nor D is an isolated training intervention here.
+
+All values are completion-token-weighted CE nats per model-token. Cross-family token units are not invariant. Per-byte/per-character NLL on frozen common text is TO-DO; none was measured. QA loss changes are not claims of QA accuracy improvement.
+
+### Suggested C21 replacement (proposal only; ledger claim unchanged)
+
+C21 — PARTIAL / EXPLORATORY. On the six GPT full-600 students, a Gemma fit of the source-referenced post-training loss gap predicts Qwen with MAE 0.475 nats/token (4/6 signs). Calibrating one Qwen offset per capability on one size and predicting the other, in both rotations, gives MAE 0.106 (6/6 signs). This is a calibrated two-size transfer diagnostic, with three offsets per fold and only one independent size contrast per capability. About 99%/90% of the Gemma math/code log-size slopes are dense baseline-gap effects; they are not distillation gains. Unequal reference losses and 27B-versus-4B coordinates partly account for the offsets in recorded token units. A distillation-specific shared exponent or intrinsic family intercept is not established. A family-specific exponent has no held-out test with two Qwen sizes. D ladders are non-monotone and the 4B ladder changes training mode; no clean D exponent is supported. QA findings are loss-space only. Evidence: results/v22-distill-decomp/report.md and V21 recorded folds.
+
+Complete decomposition: `results/v22-distill-decomp/decomposition.csv`; provenance and folds: `summary.json` in that directory.
+<!-- V22_DISTILL_DECOMP_END -->
