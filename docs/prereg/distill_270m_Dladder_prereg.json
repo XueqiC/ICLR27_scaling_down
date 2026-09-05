@@ -1,0 +1,24 @@
+{
+ "target": "gemma3-270m distillation GAIN (KD post \u2212 own dense) at D=75/150/300",
+ "predictor": "mean of gemma3-1b & gemma3-4b gains at same D (cross-size transfer, no 270m compression outcome used)",
+ "frozen_at_commit": "40384a8",
+ "timestamp": "2026-09-05T08:21:08",
+ "predictions": {
+  "math": {
+   "75": 0.0475,
+   "150": 0.1053,
+   "300": 0.1301
+  },
+  "code": {
+   "75": 0.0158,
+   "150": 0.0941,
+   "300": 0.1622
+  },
+  "qa": {
+   "75": -1.2586,
+   "150": -1.4724,
+   "300": -1.2027
+  }
+ },
+ "note": "D-response is non-monotone/weak; this tests whether 270m gain matches larger-model gain at matched D"
+}
