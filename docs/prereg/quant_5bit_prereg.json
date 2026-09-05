@@ -1,0 +1,67 @@
+{
+ "law": "\u0394L_c(b)=q_c*(4^-b - 4^-16), fit on bits {8,6,4} (exclude 3-bit collapse), predict UNSEEN 5-bit",
+ "frozen_at_commit": "cba1fe5",
+ "timestamp": "2026-09-04T20:49:33",
+ "predictions": {
+  "Qwen--Qwen3-0.6B": {
+   "math": 0.1396,
+   "code": 0.1819,
+   "qa": 0.0529
+  },
+  "Qwen--Qwen3-1.7B": {
+   "math": 0.0996,
+   "code": 0.0399,
+   "qa": -0.0528
+  },
+  "Qwen--Qwen3-4B": {
+   "math": 0.0329,
+   "code": 0.048,
+   "qa": 0.0968
+  },
+  "gemma3-12b": {
+   "math": 0.1009,
+   "code": 0.0808,
+   "qa": -0.1064
+  },
+  "gemma3-1b": {
+   "math": 0.2364,
+   "code": 0.1478,
+   "qa": 0.2212
+  },
+  "gemma3-270m": {
+   "math": 0.4977,
+   "code": 0.587,
+   "qa": 0.2196
+  },
+  "gemma3-27b": {
+   "math": 0.0817,
+   "code": 0.0566,
+   "qa": -0.1663
+  },
+  "gemma3-4b": {
+   "math": 0.1804,
+   "code": 0.125,
+   "qa": -0.0664
+  },
+  "gemma4-31b": {
+   "math": 0.2338,
+   "code": 0.1443,
+   "qa": 0.319
+  },
+  "muse-30b": {
+   "math": 0.3944,
+   "code": 0.513,
+   "qa": -0.0282
+  },
+  "olmo3-32b": {
+   "math": 0.009,
+   "code": 0.0153,
+   "qa": 0.0056
+  },
+  "olmo3-7b": {
+   "math": 0.0395,
+   "code": 0.0521,
+   "qa": -0.0178
+  }
+ }
+}
