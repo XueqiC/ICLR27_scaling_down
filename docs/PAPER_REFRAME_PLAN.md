@@ -55,3 +55,55 @@ M1/M2/M3 decision; agent workload validation + method-selection map.
 Block-structure figure regenerated with all 7 models; ablation matrix with
 controls; per-arm damage tables with bootstrap CIs; held-out error tables
 (law vs baselines); recovery curves (saturating form); method-selection map.
+
+## Three-parallel-arms structure (directive 2026-09-05, §11)
+
+**Positioning (fixed):** a systematic investigation aimed at developing
+capability-specific predictive scaling-down laws for LLM compression.
+Pruning, distillation, quantization are THREE CO-EQUAL main arms, same
+evidence standard, experiment count allocated by each arm's variables and gaps.
+Dense reference = inherited/validated base. Recovery = cross-method training-budget
+axis. Capability geometry/Fisher = explanatory/diagnostic. No presupposition that
+the three share a form, a cliff, or a capability-improvement; openness kept.
+
+### Section order
+1. Motivation & research questions (workload capability needs are selective;
+   average performance + single compression ratio insufficient).
+2. Common formulation / measurement / validation (interface
+   L̂^(m)=F_m(x_base,z_shared,z_m;η̂), Â_c=g_c(L̂_c); three information conditions:
+   meta-only / +dense-cap / +k-model calibration).
+3. **Pruning** (co-equal) ┐
+4. **Distillation** (co-equal) ├ each: Inputs & candidate forms → Fit & simple
+5. **Quantization** (co-equal) ┘ baseline → Independent prediction → Domain of validity.
+6. Shared structure & transfer (M1/M2/M3; what travels, what is family-specific).
+7. Training-budget analysis (recovery as common budget across methods).
+8. Behavior & method selection (loss→accuracy links; preregistered held-out selection).
+9. Mechanistic evidence & limitations (Fisher block structure, ablation, nulls).
+
+### Per-arm section template (identical across the three)
+- **Observable inputs & information budget**: base descriptors (real params,
+  family, checkpoint/stage, disclosed pretraining tokens, cost-labeled dense
+  capability), shared vars (target size, precision, adapt-data, budget, recipe),
+  method vars (density/pattern/criterion | bit/group/quantizer | Ns/Ds/teacher).
+  Separate prediction-time-known inputs from dev-estimated frozen coefficients.
+- **Candidate forms & simple baselines**: list actual formulas+parameter counts
+  (not code names like density_only); include the trivial baseline.
+- **Independent prediction**: held-out tables (shallow→deep, leave-size-out,
+  leave-family-out, leave-bit-out), MAE + behavioral error + PI coverage/width;
+  label each split as interpolation / extrapolation / calibration-transfer.
+- **Domain of validity & failure**: where it holds, boundary/cliff prediction,
+  input ablation, algorithm-transfer mini-panel (Wanda / GPTQ).
+
+### Main figures
+- Three-column figure, one column per method, unified capability color scheme.
+- Each method keeps its NATIVE x-axis (density / bit-width / student-size). Do NOT
+  transform coordinates to manufacture spurious curve overlap across methods.
+- Show measured, predicted, and held-out points per panel.
+
+### Delivery rules per arm
+Actual formula + coefficient table, input availability, validity domain,
+parameter-identifiability note, held-out prediction table, behavioral link,
+failure cases. A simple law CAN be the final answer if its error and domain are
+shown useful. Unified form / shared-partial-params / independent forms are all
+acceptable final answers. Negative results edit the affected claim in place, not
+only appended to the ledger tail.
