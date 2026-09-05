@@ -107,3 +107,23 @@ failure cases. A simple law CAN be the final answer if its error and domain are
 shown useful. Unified form / shared-partial-params / independent forms are all
 acceptable final answers. Negative results edit the affected claim in place, not
 only appended to the ledger tail.
+
+## Scope re-prioritization (user, 2026-09-05): capability LOSS is the prediction endpoint
+- **Prediction endpoint = capability losses** (L̂_math, L̂_code, L̂_QA), NOT accuracy.
+  Operational def: L_c(M)=E_{(x,y)~D_c}[−log p_M(y|x)/len(y)], fixed target span + length unit.
+- **Accuracy grid PAUSED**; keep existing accuracy as a metric-BOUNDARY caveat in the appendix
+  ("compression lowered QA-conditioned loss but no corresponding generation-accuracy gain observed").
+- **Unified loss→accuracy link MOVED OUT of core** (still reported as boundary, not headline).
+- **Method-selection map is LOSS-CONSTRAINED**: (m*,z*)=argmin C_m(z) s.t. L̂_c^(m)(z) ≤ τ_c for
+  c∈C_W (τ_c = capability-loss tolerance, optionally relative to a fixed reference). Validate with
+  measured loss: constraint satisfaction + cost gap. Agent/behavior link only if requirements are
+  later written as success-rate thresholds.
+- **270M stays in the main distillation loss grid** (measurable loss response; near-zero accuracy
+  is not a reason to exclude). Larger models = size-transfer validation.
+- **Loss-validity checks KEPT (small, targeted)**: cross-benchmark stability per capability,
+  reference-answer/format effects (esp. distillation), unified measurement + cross-tokenizer per-byte.
+- **Highest priority**: three methods' formula+coefficient prediction with independent (held-out)
+  validation, targeting loss response directly; distillation baseline/transfer decomposition + size×data.
+- Next resource priority: loss-definition reliability, distillation transfer response, zero-compression
+  calibration prediction on NEW models. 5-bit was interpolation-adjacent; whether coefficients depend
+  on target's own compression results is still open.
