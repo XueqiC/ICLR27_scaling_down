@@ -1,0 +1,8 @@
+{
+ "law": "4^-b predicts \u0394L_c(5)=r\u00b7\u0394L_c(4), r=(4^-5-4^-16)/(4^-4-4^-16)",
+ "r": 0.25,
+ "test": "measure \u0394L(4),\u0394L(5) at 512 probes; check ratio\u2248r vs alternatives (transition form / near-zero)",
+ "frozen_at_commit": "efaf03d",
+ "timestamp": "2026-09-06T01:55:10",
+ "note": "high-precision independent measurement validation, NOT unseen-config prediction"
+}
