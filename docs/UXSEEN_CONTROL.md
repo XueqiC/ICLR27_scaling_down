@@ -40,6 +40,42 @@ dramatically (repetition sends QA loss to +5.2, diversity IMPROVES it to −0.62
 earlier "code has data-dependence" observation, which came from a fixed-epoch ladder in which
 unique-data and seen-tokens moved together.
 
+## Token accounting, reuse count, and the confound (advisor)
+
+D_U = one-pass tokenized pool tokens: **U=75 → 67,027** (223 examples), **U=600 → 533,869** (1781),
+ratio ≈ 7.97. Reuse count E = T/D_U:
+
+| | T≈500k | T≈1000k |
+|---|---:|---:|
+| U=75 | E=7.46 | E=14.92 |
+| U=600 | E=0.94 | E=1.87 |
+
+So at matched T the two pools differ ~8× in reuse count — the matched-T contrast above **confounds
+pool size with reuse count**. It does not yet separate a genuine 2-D response from a response that
+depends only on E. **Same-E control (running):** U=75 checkpoints at T=62,775 and 125,550 match
+U=600's E (0.94, 1.87); if same-E responses coincide, a reuse-count law is preferred; if they still
+differ, unique-data/volume are needed beyond E.
+
+## T-direction paired CIs (per pool, δ(1000k)−δ(500k), n=3)
+
+| pool | math | code | qa |
+|---|---|---|---|
+| U=75 | +0.678 [+0.609,+0.748] | +0.413 [+0.298,+0.527] | +2.819 [+2.256,+3.383] |
+| U=600 | +0.020 [+0.010,+0.029] | +0.040 [+0.031,+0.048] | +0.619 [+0.167,+1.071] |
+
+All exclude 0: both pools respond to more training, but the U=75 (heavy-reuse) T-response is ~10× larger.
+
+## Interaction I_c = [δ(T2,U75)−δ(T1,U75)] − [δ(T2,U600)−δ(T1,U600)] (per-seed, n=3)
+
+math **+0.658 [+0.586,+0.731]**, code **+0.373 [+0.267,+0.480]**, qa **+2.200 [+1.572,+2.829]** — all
+exclude 0: the training-volume effect is much stronger in the small pool (training and pool size interact).
+
+## Seed caveat
+
+`data_selection = "first n rows"` with per-seed shuffle only ⇒ **all 3 seeds share the same U-subset**;
+the intervals reflect training/shuffle randomness on a FIXED subset, not data-subset resampling. Next
+round: stratified pool resample by domain+length, with separate data-subset seed and training seed.
+
 **Caveat.** At matched seen-tokens the U=75 arm is heavily overtrained (≈15 epochs on 75 examples),
 so "low diversity" and "high repetition/overfitting" are the same axis in this design; the control
 establishes that diversity/repetition matters beyond cumulative tokens, not the mechanism. Single

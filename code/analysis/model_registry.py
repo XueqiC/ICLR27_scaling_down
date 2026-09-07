@@ -72,6 +72,11 @@ MODEL_REGISTRY: dict[str, dict[str, str]] = {
         "family": "qwen3",
         "notes": "PRC-developed Base; RAI-only (SDL_ALLOW_PRC=1); NEW-SOURCE prospective test.",
     },
+    "Qwen3-14B": {
+        "hf_id": "Qwen/Qwen3-14B",
+        "family": "qwen3",
+        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1); NEW-SOURCE prospective (pruning+quant).",
+    },
 }
 
 

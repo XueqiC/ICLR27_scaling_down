@@ -111,7 +111,56 @@ def main():
                 "excludes_zero": bool((mp - hp) * (mp + hp) > 0),
                 "n_seeds": len(pair),
             }
-        out["milestones"][str(T)] = block
+            out["milestones"][str(T)] = block
+
+    # --- D_U pool-token accounting and reuse count E = T / D_U (advisor) ---
+    du = {}
+    for U in POOLS:
+        tl = BASE / f"gpt-5.6-luna_full_{U}_uxseen" / "train_log.json"
+        d = json.load(open(tl)) if tl.exists() else {}
+        du[U] = {"D_U_pool_tokens": d.get("unique_data_pool_tokens"),
+                 "pool_examples": d.get("unique_data_pool_examples"),
+                 "processed_tokens_total": d.get("tokens_seen"),
+                 "supervised_tokens_total": d.get("completion_tokens_seen")}
+    out["D_U_accounting"] = du
+    out["reuse_count_E"] = {str(U): {str(T): (T / du[U]["D_U_pool_tokens"] if du[U]["D_U_pool_tokens"] else None)
+                                     for T in MILESTONES} for U in POOLS}
+    out["same_E_U75_milestones"] = {str(T): round((T / du[600]["D_U_pool_tokens"]) * du[75]["D_U_pool_tokens"])
+                                     for T in MILESTONES}
+    out["seed_subset_caveat"] = ("data_selection='first n rows' with per-seed shuffle only -> all 3 seeds "
+                                 "SHARE the same U-subset; intervals reflect training/shuffle randomness on a "
+                                 "FIXED subset, not data-subset resampling. Next round: stratified pool resample "
+                                 "by domain+length, separate data-subset seed from training seed.")
+
+    # --- T-direction paired CI per pool: delta(1000k)-delta(500k) ---
+    Tlo, Thi = MILESTONES
+    tdir = {}
+    for U in POOLS:
+        tdir[str(U)] = {}
+        for cap in CAPS:
+            vals = []
+            for s in (0, 1, 2):
+                p = runs[(U, s)]
+                a, b = _delta(p[nearest(p, Thi)], cap), _delta(p[nearest(p, Tlo)], cap)
+                if a is not None and b is not None:
+                    vals.append(a - b)
+            m, sd, h = ci(vals)
+            tdir[str(U)][cap] = {"mean": m, "ci95": [m - h, m + h],
+                                 "excludes_zero": bool((m - h) * (m + h) > 0)}
+    out["T_direction_paired"] = tdir
+
+    # --- interaction I_c = [dU75(Thi)-dU75(Tlo)] - [dU600(Thi)-dU600(Tlo)] per-seed ---
+    inter = {}
+    for cap in CAPS:
+        vals = []
+        for s in (0, 1, 2):
+            p7, p6 = runs[(75, s)], runs[(600, s)]
+            d7 = _delta(p7[nearest(p7, Thi)], cap) - _delta(p7[nearest(p7, Tlo)], cap)
+            d6 = _delta(p6[nearest(p6, Thi)], cap) - _delta(p6[nearest(p6, Tlo)], cap)
+            vals.append(d7 - d6)
+        m, sd, h = ci(vals)
+        inter[cap] = {"mean": m, "ci95": [m - h, m + h], "excludes_zero": bool((m - h) * (m + h) > 0)}
+    out["interaction_I_c"] = inter
 
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "summary.json").write_text(json.dumps(out, indent=2))
