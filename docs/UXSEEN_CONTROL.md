@@ -76,6 +76,27 @@ exclude 0: the training-volume effect is much stronger in the small pool (traini
 the intervals reflect training/shuffle randomness on a FIXED subset, not data-subset resampling. Next
 round: stratified pool resample by domain+length, with separate data-subset seed and training seed.
 
+## Matched-reuse-count control (v31b) — the decisive test
+
+U=75 checkpoints at T=62,775 / 125,550 (E≈0.94 / 1.87) vs U=600 at T=500k / 1000k (same E).
+δ_c = L_c(KD) − L_c(S0), U75 − U600, per-seed paired (n=3):
+
+| E | math | code | qa |
+|---|---|---|---|
+| ≈0.94 | −0.083 [−0.115,−0.050] | −0.096 [−0.119,−0.073] | +0.250 [−0.183,+0.682] |
+| ≈1.87 | −0.089 [−0.122,−0.056] | −0.127 [−0.151,−0.104] | −0.619 [−1.244,+0.006] |
+
+**Matching E collapses the pool-size effect.** The matched-T gap (U75−U600 = +0.30/+0.66 for
+code, up to +5.8 for QA) shrinks at matched E to −0.08…−0.13 (math/code) with QA non-significant.
+So **reuse count E = T/D_U is the dominant coordinate** — it removes ~85–90% of the matched-T
+effect, favoring a simpler reuse-count law over an irreducible 2-D (unique × volume) response.
+A small residual remains (at matched E, U75 is slightly *lower* for math/code, CI excludes 0 — i.e.
+at equal reuse the larger token budget causes marginally more change), so E is not the complete
+story, but it is the primary axis. QA differences vanish at matched E.
+
+**Do not constrain the law to monotonic worsening:** U=600 QA goes negative (improves) then
+partially recovers with more training (δ(500k)=−1.24 → δ(1000k)=−0.62).
+
 **Caveat.** At matched seen-tokens the U=75 arm is heavily overtrained (≈15 epochs on 75 examples),
 so "low diversity" and "high repetition/overfitting" are the same axis in this design; the control
 establishes that diversity/repetition matters beyond cumulative tokens, not the mechanism. Single
