@@ -11,12 +11,20 @@ Example:
       --teacher gpt-5.6-luna --recipe full --device cuda:0
 
 Artifacts are written under
-``results/v12-distill/<student_tag>/<teacher>_<recipe>_<n>/``.
+``results/v12-distill/<student_tag>/<teacher>_<recipe>_<n>[_seedN]/``.
+``--seed`` controls training and data shuffling; measurement probes stay fixed.
+``--save-trajectory --trajectory-tokens 250000 500000 1000000`` saves a dense
+baseline plus eval/adapter snapshots at completed updates within this same run.
+Processed tokens include repeated prompt+target exposure; unique encountered
+tokens and fixed-pool tokens are recorded separately in every eval.json.
+Snapshots share one seed and schedule and are not independent replicates.
+``--dry-run`` prints the design without loading data/models or writing outputs.
 """
 from __future__ import annotations
 
 import argparse
 import gc
+import hashlib
 import json
 import math
 import random
@@ -24,9 +32,9 @@ import re
 import tempfile
 import time
 import warnings
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
-from typing import Iterable, Mapping, Sequence
+from typing import Callable, Iterable, Mapping, Sequence
 
 import numpy as np
 import torch
@@ -87,6 +95,15 @@ DEFAULT_N_PROBE = 128
 LORA_LR = 1e-4
 FULL_LR = 1e-5
 WARMUP_RATIO = 0.03
+DEFAULT_TRAJECTORY_TOKENS = (250000, 500000, 1000000, 2000000, 4000000)
+TOKEN_ACCOUNTING = {
+    "version": "v12-token-accounting-v1",
+    "processed_tokens": "seen_tokens: cumulative non-padding input tokens, prompt + target + BOS, after truncation; includes repetitions",
+    "unique_data_tokens": "sum of input lengths of distinct training examples encountered so far, counted once",
+    "unique_data_pool_tokens": "sum of input lengths of distinct examples in the fixed selected/tokenized pool",
+    "identity": "SHA256 of source prompt/completion; fallback to tokenized input_ids and labels for direct _train callers",
+    "completion_tokens_seen": "cumulative supervised target tokens, separately from processed input tokens",
+}
 
 _FENCED_CODE_RE = re.compile(
     r"```[^\r\n]*\r?\n(?P<body>.*?)```", re.DOTALL
@@ -168,15 +185,16 @@ def make_run_name(
     recipe: str,
     n_per_domain: int,
     output_suffix: str = "",
+    seed: int = SEED,
 ) -> str:
     """Return the stable run directory name shared with the sweep driver."""
     base = f"{teacher}_{recipe}_{n_per_domain}"
-    if not output_suffix:
-        return base
-    safe_suffix = re.sub(r"[^A-Za-z0-9._-]+", "--", output_suffix).strip(".-_")
-    if not safe_suffix:
-        raise ValueError("--output-suffix must contain a path-safe character")
-    return f"{base}_{safe_suffix}"
+    if output_suffix:
+        safe_suffix = re.sub(r"[^A-Za-z0-9._-]+", "--", output_suffix).strip(".-_")
+        if not safe_suffix:
+            raise ValueError("--output-suffix must contain a path-safe character")
+        base = f"{base}_{safe_suffix}"
+    return f"{base}_seed{seed}" if seed != 0 else base
 
 
 def load_sft_records(
@@ -185,6 +203,7 @@ def load_sft_records(
     n_per_domain: int,
     recipe: str,
     trace_base: Path = TRACE_BASE,
+    seed: int = SEED,
 ) -> tuple[list[dict[str, str]], dict[str, dict[str, int]]]:
     """Load exactly ``n_per_domain`` source rows and apply the SFT recipe.
 
@@ -256,7 +275,7 @@ def load_sft_records(
 
     # One seeded shuffle avoids capability blocks while remaining invariant
     # across machines and Python invocations.
-    random.Random(SEED).shuffle(records)
+    random.Random(seed).shuffle(records)
     return records, counts
 
 
@@ -563,7 +582,7 @@ def _save_full_delta(
         initial = torch.load(
             snapshot_dir / entry["file"], map_location="cpu", weights_only=True
         )
-        delta = current[name].detach().to(device="cpu", dtype=torch.float32)
+        delta = current[name].detach().to(device="cpu", dtype=torch.float32, copy=True)
         delta.sub_(initial.to(dtype=torch.float32))
         filename = f"delta-{index:05d}.pt"
         torch.save(delta, adapter_dir / filename)
@@ -609,17 +628,93 @@ def masked_causal_loss(
     return loss, n_tokens
 
 
+def validate_trajectory_tokens(tokens: Sequence[int]) -> tuple[int, ...]:
+    milestones = tuple(tokens)
+    if any(type(value) is not int or value <= 0 for value in milestones):
+        raise ValueError("--trajectory-tokens must be positive integers")
+    if tuple(sorted(set(milestones))) != milestones:
+        raise ValueError("--trajectory-tokens must be strictly increasing and unique")
+    return milestones
+
+
+class TokenAccounting:
+    """Track the fixed pool, distinct encountered examples, and repeated exposure."""
+
+    def __init__(self, examples: Sequence[Mapping]):
+        self.keys = []
+        self.lengths = []
+        pool = {}
+        for example in examples:
+            identity = example.get("example_id")
+            if identity is None:
+                identity = hashlib.sha256(json.dumps({
+                    key: example[key].tolist() for key in ("input_ids", "labels")
+                    if key in example
+                }, sort_keys=True).encode()).hexdigest()
+            length = int(example["attention_mask"].sum()) if "attention_mask" in example else int(example["input_ids"].numel())
+            if identity in pool and pool[identity] != length:
+                raise ValueError("One example identity has inconsistent token lengths")
+            pool[identity] = length
+            self.keys.append(identity)
+            self.lengths.append(length)
+        self.pool_tokens = sum(pool.values())
+        self.pool_examples = len(pool)
+        self.encountered: set[str] = set()
+        self.processed = self.unique = 0
+
+    def observe(self, index: int) -> None:
+        self.processed += self.lengths[index]
+        if self.keys[index] not in self.encountered:
+            self.unique += self.lengths[index]
+            self.encountered.add(self.keys[index])
+
+    def snapshot(self) -> dict:
+        return {"processed_tokens": self.processed, "seen_tokens": self.processed,
+                "unique_data_tokens": self.unique,
+                "unique_data_pool_tokens": self.pool_tokens,
+                "unique_examples_seen": len(self.encountered),
+                "unique_data_pool_examples": self.pool_examples}
+
+
+@contextmanager
+def preserve_training_state(model):
+    """Evaluation must not change the training RNG stream or module modes."""
+    modes = [(module, module.training) for module in model.modules()]
+    python_state, numpy_state = random.getstate(), np.random.get_state()
+    cpu_state = torch.get_rng_state()
+    cuda_states = torch.cuda.get_rng_state_all() if torch.cuda.is_initialized() else None
+    try:
+        yield
+    finally:
+        random.setstate(python_state)
+        np.random.set_state(numpy_state)
+        torch.set_rng_state(cpu_state)
+        if cuda_states is not None:
+            torch.cuda.set_rng_state_all(cuda_states)
+        for module, training in modes:
+            module.training = training
+
+
 def _train(
     model: torch.nn.Module,
     examples: Sequence[Mapping[str, torch.Tensor | int]],
     device: str,
     epochs: int,
     learning_rate: float,
+    seed: int = SEED,
+    data_sampling_seed: int | None = None,
+    trajectory_tokens: Sequence[int] = (),
+    trajectory_callback: Callable[[Mapping], None] | None = None,
 ) -> dict:
+    milestones = validate_trajectory_tokens(trajectory_tokens)
+    if milestones and trajectory_callback is None:
+        raise ValueError("Trajectory milestones require an evaluation callback")
+    if data_sampling_seed is None:
+        data_sampling_seed = seed
     if epochs <= 0:
         raise ValueError("epochs must be positive")
-    if learning_rate <= 0:
-        raise ValueError("learning rate must be positive")
+    if not math.isfinite(learning_rate) or learning_rate <= 0:
+        raise ValueError("learning rate must be finite and positive")
     parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
     if not parameters:
         raise ValueError("No trainable parameters")
@@ -644,10 +739,13 @@ def _train(
     completion_tokens_seen = 0
     optimizer_step = 0
     loss_curve = []
+    accounting = TokenAccounting(examples)
+    next_milestone = 0
+    trajectory = []
 
     for epoch in range(epochs):
         order = list(range(len(examples)))
-        random.Random(SEED + epoch).shuffle(order)
+        random.Random(data_sampling_seed + epoch).shuffle(order)
         for group_start in range(0, len(order), EFFECTIVE_BATCH_SIZE):
             group = order[group_start : group_start + EFFECTIVE_BATCH_SIZE]
             optimizer.zero_grad(set_to_none=True)
@@ -664,7 +762,8 @@ def _train(
                 (loss / len(group)).backward()
                 group_losses.append(float(loss.detach()))
                 group_completion_tokens += n_tokens
-                group_tokens += int(example["input_ids"].numel())
+                group_tokens += accounting.lengths[example_index]
+                accounting.observe(example_index)
                 del loss
             if not group_losses:
                 continue
@@ -683,13 +782,33 @@ def _train(
                     "tokens_seen": tokens_seen,
                     "completion_tokens_seen": completion_tokens_seen,
                     "lr": float(scheduler.get_last_lr()[0]),
+                    **accounting.snapshot(),
                 }
             )
+            crossed = []
+            while next_milestone < len(milestones) and accounting.processed >= milestones[next_milestone]:
+                crossed.append(milestones[next_milestone])
+                next_milestone += 1
+            if crossed:
+                snapshot = {**accounting.snapshot(), "updates": optimizer_step,
+                            "epoch": epoch + 1, "requested_token_milestones": crossed,
+                            "milestone_overshoot_tokens": [accounting.processed - t for t in crossed],
+                            "completion_tokens_seen": completion_tokens_seen,
+                            "lr": float(scheduler.get_last_lr()[0])}
+                with preserve_training_state(model), torch.no_grad():
+                    trajectory_callback(snapshot)
+                trajectory.append(snapshot)
 
     wall_time = time.monotonic() - start_time
     return {
         "loss_curve": loss_curve,
         "tokens_seen": tokens_seen,
+        **accounting.snapshot(),
+        "token_accounting": TOKEN_ACCOUNTING,
+        "updates": optimizer_step,
+        "trajectory": trajectory,
+        "trajectory_tokens_requested": list(milestones),
+        "trajectory_tokens_unreached": list(milestones[next_milestone:]),
         "completion_tokens_seen": completion_tokens_seen,
         "wall_time_seconds": wall_time,
         "optimizer_steps": optimizer_step,
@@ -697,7 +816,9 @@ def _train(
         "warmup_steps": warmup_steps,
         "effective_batch_size_sequences": EFFECTIVE_BATCH_SIZE,
         "max_len": MAX_LEN,
-        "seed": SEED,
+        "seed": seed,
+        "training_seed": seed,
+        "data_sampling_seed": data_sampling_seed,
         "epochs": epochs,
         "learning_rate": learning_rate,
         "optimizer": "AdamW",
@@ -744,15 +865,48 @@ def run_distillation(
     device: str,
     learning_rate: float | None,
     output_suffix: str = "",
+    seed: int = SEED,
+    save_trajectory: bool = False,
+    trajectory_tokens: Sequence[int] | None = None,
+    dry_run: bool = False,
 ) -> dict:
     """Run dense evaluation, SFT, post-training evaluation, and persistence."""
-    seed_everything()
+    if not 0 <= seed < 2**32:
+        raise ValueError("--seed must be in [0, 2**32)")
+    if epochs <= 0 or n_per_domain <= 0:
+        raise ValueError("--epochs and --n-per-domain must be positive")
+    if learning_rate is not None and (not math.isfinite(learning_rate) or learning_rate <= 0):
+        raise ValueError("--lr must be finite and positive")
+    if trajectory_tokens is not None and not save_trajectory:
+        raise ValueError("--trajectory-tokens requires --save-trajectory")
+    milestones = validate_trajectory_tokens(
+        (DEFAULT_TRAJECTORY_TOKENS if trajectory_tokens is None else trajectory_tokens)
+        if save_trajectory else ()
+    )
     parsed_domains = parse_domains(domains)
-    model_name = require_compliant(student)
+    model_name = require_compliant(require_compliant(student))
     student_tag = model_output_tag(student, model_name)
-    run_name = make_run_name(teacher, recipe, n_per_domain, output_suffix)
+    run_name = make_run_name(teacher, recipe, n_per_domain, output_suffix, seed)
     out = OUT_BASE / student_tag / run_name
     adapter_dir = out / "adapter"
+    if dry_run:
+        plan = {"dry_run": True, "student": model_name, "teacher": teacher,
+                "recipe": recipe, "domains": list(parsed_domains),
+                "n_per_domain": n_per_domain, "epochs": epochs, "seed": seed,
+                "output": str(out), "save_trajectory": save_trajectory,
+                "trajectory_tokens": list(milestones),
+                "trajectory_policy": "baseline plus first completed optimizer update crossing each milestone; group crossings share one snapshot; no schedule restart or extension",
+                "token_accounting": TOKEN_ACCOUNTING,
+                "independent_replicates": "one continuous run/seed; snapshots are dependent repeated measurements",
+                "probe_seed": SEED, "probe_half": "measurement v[1::2]",
+                "status": "plan only; no model, tokenizer, data, CUDA, or output writes"}
+        print(json.dumps(plan, indent=2))
+        return plan
+    if save_trajectory and ((out / "eval.json").exists() or (out / "trajectory").exists()):
+        raise FileExistsError(
+            f"Trajectory requires a fresh run directory: {out}; choose a new --output-suffix"
+        )
+    seed_everything(seed)
     out.mkdir(parents=True, exist_ok=True)
 
     records, trace_counts = load_sft_records(
@@ -760,6 +914,7 @@ def run_distillation(
         domains=parsed_domains,
         n_per_domain=n_per_domain,
         recipe=recipe,
+        seed=seed,
     )
     all_probes = build_probes(DEFAULT_N_PROBE, seed=SEED)
     probes = {
@@ -793,6 +948,9 @@ def run_distillation(
         if int(example["n_completion_tokens"]) == 0:
             tokenization_deleted[record["domain"]] += 1
             continue
+        example["example_id"] = hashlib.sha256(json.dumps(
+            [record["prompt"], record["completion"]], ensure_ascii=False
+        ).encode("utf-8")).hexdigest()
         tokenized.append(example)
     if not tokenized:
         raise RuntimeError("Tokenization produced no completion tokens")
@@ -801,6 +959,57 @@ def run_distillation(
         parameter.numel() for parameter in model.parameters() if parameter.requires_grad
     )
     total_parameters = sum(parameter.numel() for parameter in model.parameters())
+    initial_accounting = TokenAccounting(tokenized).snapshot()
+    trajectory_run_id = str(out.relative_to(OUT_BASE))
+    eval_metadata = {
+        "version": 12, "student": student, "resolved_student": model_name,
+        "student_tag": student_tag, "teacher": teacher, "recipe": recipe,
+        "domains": list(parsed_domains), "n_per_domain": n_per_domain,
+        "output_suffix": output_suffix, "run_name": run_name,
+        "seed": seed, "training_seed": seed, "data_sampling_seed": seed,
+        "training_mode": training_mode, "probe_seed": SEED,
+        "data_selection": "first n_per_domain rows; seeded initial and epoch shuffles",
+        "training_benchmarks": {c: TRAINING_BENCHMARKS[c] for c in parsed_domains},
+        "data_pool_sha256": hashlib.sha256(json.dumps(sorted(
+            (example["example_id"], int(example["input_ids"].numel()))
+            for example in tokenized
+        )).encode()).hexdigest(),
+        "epochs": epochs, "learning_rate": selected_lr,
+        "optimizer": "AdamW", "scheduler": "cosine", "warmup_ratio": WARMUP_RATIO,
+        "total_updates_planned": epochs * math.ceil(len(tokenized) / EFFECTIVE_BATCH_SIZE),
+        "probe_source": "analysis.v6_capability_geometry.build_probes",
+        "n_probe_requested": DEFAULT_N_PROBE,
+        "probe_half": "measurement (odd indices, v[1::2])",
+        "measurement_benchmarks": MEASUREMENT_BENCHMARKS,
+        "measurement_samples": {c: len(probes[c]) for c in CAPABILITIES},
+        "measurement_tokens": measurement_tokens, "dense": dense_losses,
+        "token_accounting": TOKEN_ACCOUNTING,
+        "trajectory_run_id": trajectory_run_id,
+        "trajectory_tokens_requested": list(milestones),
+        "independent_seed_unit": trajectory_run_id,
+        "trajectory_note": "Snapshots share one run, fixed data pool, optimizer and cosine schedule; never independent seeds. Adapter snapshots are for evaluation, not optimizer resume.",
+        "loss_definition": "sum_target_CE / sum_target_tokens (nats/token, legacy V12)",
+    }
+
+    def save_trajectory_snapshot(progress):
+        snapshot_losses, snapshot_tokens = measure_capability_losses(model, tokenizer, probes, device)
+        if snapshot_tokens != measurement_tokens:
+            raise RuntimeError("Trajectory evaluation changed measurement tokens")
+        destination = out / "trajectory" / f"update-{progress['updates']:08d}"
+        if training_mode == "lora":
+            (destination / "adapter").mkdir(parents=True, exist_ok=True)
+            model.save_pretrained(destination / "adapter")
+        else:
+            _save_full_delta(model, snapshot_dir, snapshot_manifest,
+                             destination / "adapter", model_name)
+        write_json_atomic(destination / "eval.json", {
+            **eval_metadata, **progress, "snapshot_kind": "trajectory",
+            "is_independent_seed": False, "post_training": snapshot_losses,
+            "capability_losses": snapshot_losses,
+            "delta": {c: snapshot_losses[c] - dense_losses[c] for c in CAPABILITIES},
+        })
+        print(f"[trajectory] updates={progress['updates']} processed_tokens={progress['processed_tokens']} losses={snapshot_losses}", flush=True)
+
     snapshot_manifest: list[dict[str, str]] = []
     with tempfile.TemporaryDirectory(prefix=".full-snapshot-", dir=out) as temporary:
         snapshot_dir = Path(temporary)
@@ -808,12 +1017,26 @@ def run_distillation(
             snapshot_manifest = _snapshot_full_parameters(
                 model, trainable_names, snapshot_dir
             )
+        if save_trajectory:
+            write_json_atomic(out / "trajectory" / "update-00000000" / "eval.json", {
+                **eval_metadata, **initial_accounting,
+                "updates": 0, "completion_tokens_seen": 0,
+                "requested_token_milestones": [], "snapshot_kind": "trajectory_baseline",
+                "is_independent_seed": False, "post_training": dense_losses,
+                "capability_losses": dense_losses,
+                "delta": {c: 0.0 for c in CAPABILITIES},
+                "checkpoint": "unmodified resolved_student (no adapter)",
+            })
         train_log = _train(
             model=model,
             examples=tokenized,
             device=device,
             epochs=epochs,
             learning_rate=selected_lr,
+            seed=seed,
+            data_sampling_seed=seed,
+            trajectory_tokens=milestones,
+            trajectory_callback=save_trajectory_snapshot if save_trajectory else None,
         )
         if training_mode == "lora":
             adapter_dir.mkdir(parents=True, exist_ok=True)
@@ -867,33 +1090,16 @@ def run_distillation(
         for capability in CAPABILITIES
     }
     eval_payload = {
-        "version": 12,
-        "student": student,
-        "resolved_student": model_name,
-        "student_tag": student_tag,
-        "teacher": teacher,
-        "recipe": recipe,
-        "domains": list(parsed_domains),
-        "n_per_domain": n_per_domain,
-        "output_suffix": output_suffix,
-        "run_name": run_name,
-        "training_mode": training_mode,
-        "training_benchmarks": {
-            capability: TRAINING_BENCHMARKS[capability]
-            for capability in parsed_domains
-        },
-        "measurement_benchmarks": MEASUREMENT_BENCHMARKS,
-        "probe_source": "analysis.v6_capability_geometry.build_probes",
-        "probe_seed": SEED,
-        "n_probe_requested": DEFAULT_N_PROBE,
-        "probe_half": "measurement (odd indices, v[1::2])",
-        "measurement_samples": {
-            capability: len(probes[capability]) for capability in CAPABILITIES
-        },
-        "measurement_tokens": measurement_tokens,
-        "dense": dense_losses,
+        **eval_metadata,
         "post_training": post_losses,
         "delta": delta,
+        "capability_losses": post_losses,
+        "snapshot_kind": "final",
+        **{key: train_log[key] for key in initial_accounting},
+        "updates": train_log["updates"],
+        "completion_tokens_seen": train_log["completion_tokens_seen"],
+        "save_trajectory": save_trajectory,
+        "trajectory_tokens_unreached": train_log["trajectory_tokens_unreached"],
     }
     # eval.json is written last and atomically; its existence is the sweep's
     # completion marker.
@@ -924,6 +1130,8 @@ def main() -> None:
     )
     parser.add_argument("--n-per-domain", type=int, default=600)
     parser.add_argument("--epochs", type=int, default=2)
+    parser.add_argument("--seed", type=int, default=SEED,
+                        help="training and data-shuffle seed (default: 0; probes fixed)")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument(
         "--lr",
@@ -932,6 +1140,12 @@ def main() -> None:
         help="override learning rate (defaults: LoRA 1e-4, full 1e-5)",
     )
     parser.add_argument("--output-suffix", default="")
+    parser.add_argument("--save-trajectory", action="store_true",
+                        help="save evals and adapters during one continuous training run")
+    parser.add_argument("--trajectory-tokens", type=int, nargs="+", default=None,
+                        help="strictly increasing processed-input-token milestones (not unique tokens)")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="print the protocol without data/model loads or writes")
     args = parser.parse_args()
 
     run_distillation(
@@ -944,6 +1158,10 @@ def main() -> None:
         device=args.device,
         learning_rate=args.lr,
         output_suffix=args.output_suffix,
+        seed=args.seed,
+        save_trajectory=args.save_trajectory,
+        trajectory_tokens=args.trajectory_tokens,
+        dry_run=args.dry_run,
     )
 
 

@@ -1,0 +1,195 @@
+{
+  "N0_definition": "Non-embedding 2-D language weights: V6 n_params minus token embedding and separately stored output head. Excludes 1-D norm/bias parameters and non-language towers; never substitutes nominal size or embedding-inclusive count. Target uses the identical matrix convention.",
+  "models": {
+    "gemma3-270m": {
+      "hf_id": "google/gemma-3-270m",
+      "family": "gemma3",
+      "hidden_size": 640,
+      "vocab_size": 262144,
+      "dimension_source": "https://huggingface.co/google/gemma-3-270m/blob/9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/config.json",
+      "cached_config_sha256": "8983343e5bfbf8e336d222a522a1d781443491e9de2d081b8856f8fd26ab6046",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 100270080,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "gemma3-1b": {
+      "hf_id": "google/gemma-3-1b-pt",
+      "family": "gemma3",
+      "hidden_size": 1152,
+      "vocab_size": 262144,
+      "dimension_source": "https://huggingface.co/google/gemma-3-1b-pt/blob/fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/config.json",
+      "cached_config_sha256": "4dd5218cebc4fdea9004b944d34672a2d47f9ef930e3bb16a3fc4bbbe0fcee81",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 697761792,
+      "training_stage": "Base/pretrained (HF pt checkpoint)",
+      "pretraining_tokens": null
+    },
+    "gemma3-4b": {
+      "hf_id": "google/gemma-3-4b-pt",
+      "family": "gemma3",
+      "hidden_size": 2560,
+      "vocab_size": 262208,
+      "dimension_source": "https://huggingface.co/google/gemma-3-4b-pt/blob/cc012e0a6d0787b4adcc0fa2c4da74402494554d/config.json",
+      "cached_config_sha256": "ae75620513f4a95fb36bcf6c09eeab02938e58051871cfe47ead2a7e79a43848",
+      "vocab_size_source": "Omitted by HF text_config; Gemma3TextConfig default 262208. Cached configuration_gemma3.py SHA256 0d8ae326766161f38d211397d70ba422ce77a0dc69db85c2338f8c5d4260d993",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 3208642560,
+      "training_stage": "Base/pretrained (HF pt checkpoint)",
+      "pretraining_tokens": null
+    },
+    "gemma3-12b": {
+      "hf_id": "google/gemma-3-12b-pt",
+      "family": "gemma3",
+      "hidden_size": 3840,
+      "vocab_size": 262208,
+      "dimension_source": "https://huggingface.co/google/gemma-3-12b-pt/blob/295efb63d01a7017928f273a94ebb86105c9526f/config.json",
+      "cached_config_sha256": "61501b2259b5efa7c5bb50a9eea9fd195c449b6e995b16bf8e3f52d3b80b2f77",
+      "vocab_size_source": "Omitted by HF text_config; Gemma3TextConfig default 262208. Cached configuration_gemma3.py SHA256 0d8ae326766161f38d211397d70ba422ce77a0dc69db85c2338f8c5d4260d993",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 10758389760,
+      "training_stage": "Base/pretrained (HF pt checkpoint)",
+      "pretraining_tokens": null
+    },
+    "gemma3-27b": {
+      "hf_id": "google/gemma-3-27b-pt",
+      "family": "gemma3",
+      "hidden_size": 5376,
+      "vocab_size": 262208,
+      "dimension_source": "https://huggingface.co/google/gemma-3-27b-pt/blob/9fe3c4ebc93fbadb14913801536d022054ef11cc/config.json",
+      "cached_config_sha256": "019693e921a854e19b380463c77e71f655484523cafc59ba8a4c5fce7fbfcfe7",
+      "vocab_size_source": "Omitted by HF text_config; Gemma3TextConfig default 262208. Cached configuration_gemma3.py SHA256 0d8ae326766161f38d211397d70ba422ce77a0dc69db85c2338f8c5d4260d993",
+      "excluded_matrices": [
+        "language_model.embed_tokens.weight"
+      ],
+      "N0": 25598361600,
+      "training_stage": "Base/pretrained (HF pt checkpoint)",
+      "pretraining_tokens": null
+    },
+    "gemma4-31b": {
+      "hf_id": "google/gemma-4-31B",
+      "family": "gemma4",
+      "hidden_size": 5376,
+      "vocab_size": 262144,
+      "dimension_source": "https://huggingface.co/google/gemma-4-31B/blob/5bbc2fb1c1b2c611d06e3d9f23c170ba21659d89/config.json",
+      "cached_config_sha256": "6a81841cad2b6ba06841e23c6afb5f0a27827bc12c64328ffa6338831a21267e",
+      "excluded_matrices": [
+        "language_model.embed_tokens.weight"
+      ],
+      "N0": 29286727680,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "muse-30b": {
+      "hf_id": "meta-models/Muse-Glimmer-30B",
+      "family": "muse_glimmer",
+      "hidden_size": 6656,
+      "vocab_size": 202048,
+      "dimension_source": "https://huggingface.co/meta-models/Muse-Glimmer-30B/blob/main/config.json",
+      "source_accessed_utc_date": "2026-09-06",
+      "excluded_matrices": [
+        "language_model.embed_tokens.weight",
+        "lm_head.weight"
+      ],
+      "N0": 25163726848,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "olmo3-7b": {
+      "hf_id": "allenai/Olmo-3-1025-7B",
+      "family": "olmo3",
+      "hidden_size": 4096,
+      "vocab_size": 100278,
+      "dimension_source": "https://huggingface.co/allenai/Olmo-3-1025-7B/blob/a81bae42db3975be1671e27b9c9a56da1a9f980f/config.json",
+      "cached_config_sha256": "277d7ea5c6159d4c2d6986a8a23757d1ef06acaa7abc2c40e0513446f7db0f85",
+      "excluded_matrices": [
+        "model.embed_tokens.weight",
+        "lm_head.weight"
+      ],
+      "N0": 6476005376,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "olmo3-32b": {
+      "hf_id": "allenai/Olmo-3-1125-32B",
+      "family": "olmo3",
+      "hidden_size": 5120,
+      "vocab_size": 100278,
+      "dimension_source": "https://huggingface.co/allenai/Olmo-3-1125-32B/blob/dfbd5efb08351e982c00238f8f6703f123b4f60b/config.json",
+      "source_accessed_utc_date": "2026-09-06",
+      "excluded_matrices": [
+        "model.embed_tokens.weight",
+        "lm_head.weight"
+      ],
+      "N0": 31205621760,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "Qwen3-0.6B": {
+      "hf_id": "Qwen/Qwen3-0.6B",
+      "family": "qwen3",
+      "hidden_size": 1024,
+      "vocab_size": 151936,
+      "dimension_source": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/config.json",
+      "cached_config_sha256": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 440401920,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "Qwen3-1.7B": {
+      "hf_id": "Qwen/Qwen3-1.7B",
+      "family": "qwen3",
+      "hidden_size": 2048,
+      "vocab_size": 151936,
+      "dimension_source": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/config.json",
+      "cached_config_sha256": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 1409286144,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    },
+    "Qwen3-4B": {
+      "hf_id": "Qwen/Qwen3-4B",
+      "family": "qwen3",
+      "hidden_size": 2560,
+      "vocab_size": 151936,
+      "dimension_source": "https://huggingface.co/Qwen/Qwen3-4B/blob/1cfa9a7208912126459214e8b04321603b3df60c/config.json",
+      "cached_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+      "excluded_matrices": [
+        "model.embed_tokens.weight"
+      ],
+      "N0": 3633315840,
+      "training_stage": "undisclosed_in_v6_artifact",
+      "pretraining_tokens": null
+    }
+  },
+  "qwen3_8b": {
+    "N0": 6945767424,
+    "formula": "layers * (2*h*n_heads*head_dim + 2*h*n_kv_heads*head_dim + 3*h*intermediate_size)",
+    "architecture": {
+      "hidden_size": 4096,
+      "head_dim": 128,
+      "num_attention_heads": 32,
+      "num_key_value_heads": 8,
+      "intermediate_size": 12288,
+      "num_hidden_layers": 36
+    },
+    "dimension_source": "https://huggingface.co/Qwen/Qwen3-8B/blob/9c925d64d72725edaf899c6cb9c377fd0709d9c5/config.json",
+    "cached_config_sha256": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "base_config_source": "https://huggingface.co/Qwen/Qwen3-8B-Base/blob/main/config.json",
+    "checkpoint_identity_note": "Qwen/Qwen3-8B model card declares Pretraining & Post-training; Qwen/Qwen3-8B-Base is the separate base checkpoint. Shared architecture does not establish shared training stage."
+  }
+}

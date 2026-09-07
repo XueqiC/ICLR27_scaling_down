@@ -9,6 +9,7 @@ similarities and asks whether same-capability benchmarks form blocks.
 Examples:
   python3 analysis/v9_capability_regions.py --model gemma3-1b --stage fisher
   python3 analysis/v9_capability_regions.py --model gemma3-1b --stage analyze
+  python3 analysis/v9_capability_regions.py --model gemma4-31b --analyze-only
 
 Artifacts are written under results/v9-capability-regions/<model_tag>/.
 """
@@ -488,28 +489,91 @@ def _check_vectors(vectors: Sequence[torch.Tensor]) -> int:
     return n
 
 
-def _product_sum(left: torch.Tensor, right: torch.Tensor) -> float:
-    # The product stays fp32 to bound temporary memory; reduction is fp64.
-    return float(torch.sum(left * right, dtype=torch.float64))
+def _resolve_analyze_device(device: str | torch.device) -> torch.device:
+    """Resolve ``auto`` and reject unavailable analysis devices clearly."""
+    if isinstance(device, str) and device.lower() == "auto":
+        return torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    try:
+        resolved = torch.device(device)
+    except (RuntimeError, ValueError) as exc:
+        raise ValueError(f"Invalid analysis device {device!r}") from exc
+    if resolved.type not in ("cpu", "cuda"):
+        raise ValueError(
+            "Analysis device must be 'auto', 'cpu', or a CUDA device; "
+            f"got {device!r}."
+        )
+    if resolved.type == "cuda":
+        if not torch.cuda.is_available():
+            raise RuntimeError(
+                f"Analysis device {device!r} requested, but CUDA is unavailable."
+            )
+        if resolved.index is not None and resolved.index >= torch.cuda.device_count():
+            raise RuntimeError(
+                f"Analysis device {device!r} requested, but only "
+                f"{torch.cuda.device_count()} CUDA device(s) are visible."
+            )
+    return resolved
+
+
+def _chunk_matrix(
+    vectors: Sequence[torch.Tensor],
+    start: int,
+    end: int,
+    device: torch.device,
+) -> torch.Tensor:
+    """Copy one coordinate chunk from each mmap-backed vector to ``device``."""
+    chunks = torch.empty(
+        (len(vectors), end - start), dtype=torch.float32, device=device
+    )
+    for index, vector in enumerate(vectors):
+        chunks[index].copy_(vector[start:end])
+    return chunks
+
+
+def _accumulate_symmetric_gram(
+    rows: torch.Tensor,
+    accumulator: torch.Tensor,
+    product_buffer: torch.Tensor,
+) -> None:
+    """Accumulate fp32 products with fp64 reductions on the working device."""
+    for left in range(rows.shape[0]):
+        for right in range(left, rows.shape[0]):
+            torch.mul(rows[left], rows[right], out=product_buffer)
+            accumulator[left, right].add_(
+                torch.sum(product_buffer, dtype=torch.float64)
+            )
+
+
+def _finish_symmetric_gram(gram: torch.Tensor) -> np.ndarray:
+    gram.add_(torch.triu(gram, diagonal=1).T)
+    return gram.cpu().numpy().copy()
 
 
 def chunked_cosine(
     left: torch.Tensor,
     right: torch.Tensor,
     chunk_size: int = DEFAULT_CHUNK_SIZE,
+    device: str | torch.device = "cpu",
 ) -> float:
-    """Cosine similarity without allocating full-size temporary tensors."""
+    """Cosine similarity from fixed-size chunks reduced on ``device``."""
     n = _check_vectors([left, right])
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
-    dot = left_norm = right_norm = 0.0
-    for start in range(0, n, chunk_size):
-        end = min(start + chunk_size, n)
-        left_chunk = left[start:end]
-        right_chunk = right[start:end]
-        dot += _product_sum(left_chunk, right_chunk)
-        left_norm += _product_sum(left_chunk, left_chunk)
-        right_norm += _product_sum(right_chunk, right_chunk)
+    analyze_device = _resolve_analyze_device(device)
+    gram = torch.zeros((2, 2), dtype=torch.float64, device=analyze_device)
+    with torch.no_grad():
+        for start in range(0, n, chunk_size):
+            end = min(start + chunk_size, n)
+            rows = _chunk_matrix([left, right], start, end, analyze_device)
+            product_buffer = torch.empty(
+                end - start, dtype=torch.float32, device=analyze_device
+            )
+            _accumulate_symmetric_gram(rows, gram, product_buffer)
+            del product_buffer, rows
+    gram_array = _finish_symmetric_gram(gram)
+    dot = float(gram_array[0, 1])
+    left_norm = float(gram_array[0, 0])
+    right_norm = float(gram_array[1, 1])
     denominator = math.sqrt(max(left_norm, 0.0) * max(right_norm, 0.0))
     return dot / denominator if denominator > 0 else 0.0
 
@@ -518,60 +582,55 @@ def _chunked_raw_log_grams(
     vectors: Sequence[torch.Tensor],
     eps: float = LOG_EPS,
     chunk_size: int = DEFAULT_CHUNK_SIZE,
+    device: str | torch.device = "cpu",
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Accumulate raw, log, and centered-log Gram matrices in chunks."""
+    """Accumulate raw, log, and centered-log Gram matrices on ``device``."""
     n = _check_vectors(vectors)
     if eps <= 0:
         raise ValueError("eps must be positive")
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
     count = len(vectors)
-    raw_gram = np.zeros((count, count), dtype=np.float64)
-    log_gram = np.zeros((count, count), dtype=np.float64)
-    residual_gram = np.zeros((count, count), dtype=np.float64)
+    analyze_device = _resolve_analyze_device(device)
+    grams = [
+        torch.zeros((count, count), dtype=torch.float64, device=analyze_device)
+        for _ in range(3)
+    ]
 
-    for start in range(0, n, chunk_size):
-        end = min(start + chunk_size, n)
-        raw_chunks = [vector[start:end] for vector in vectors]
-        for index, chunk in enumerate(raw_chunks):
-            if not bool(torch.isfinite(chunk).all()):
+    with torch.no_grad():
+        for start in range(0, n, chunk_size):
+            end = min(start + chunk_size, n)
+            rows = _chunk_matrix(vectors, start, end, analyze_device)
+            finite = torch.stack(
+                [torch.isfinite(rows[index]).all() for index in range(count)]
+            )
+            nonnegative = torch.stack(
+                [(rows[index] >= 0).all() for index in range(count)]
+            )
+            if not bool(finite.all()):
+                index = int(torch.nonzero(~finite, as_tuple=False)[0].item())
                 raise ValueError(f"Fisher vector {index} contains non-finite values")
-            if bool((chunk < 0).any()):
+            if not bool(nonnegative.all()):
+                index = int(torch.nonzero(~nonnegative, as_tuple=False)[0].item())
                 raise ValueError(f"Fisher vector {index} contains negative values")
-        log_chunks = []
-        for chunk in raw_chunks:
-            logged = chunk.to(dtype=torch.float32, device="cpu", copy=True)
-            logged.add_(eps).log_()
-            log_chunks.append(logged)
-        for left_index in range(count):
-            for right_index in range(left_index, count):
-                raw_value = _product_sum(
-                    raw_chunks[left_index], raw_chunks[right_index]
-                )
-                log_value = _product_sum(
-                    log_chunks[left_index], log_chunks[right_index]
-                )
-                raw_gram[left_index, right_index] += raw_value
-                log_gram[left_index, right_index] += log_value
-                if left_index != right_index:
-                    raw_gram[right_index, left_index] += raw_value
-                    log_gram[right_index, left_index] += log_value
-        shared_log = torch.zeros_like(log_chunks[0])
-        for logged in log_chunks:
-            shared_log.add_(logged)
-        shared_log.div_(count)
-        for logged in log_chunks:
-            logged.sub_(shared_log)
-        for left_index in range(count):
-            for right_index in range(left_index, count):
-                residual_value = _product_sum(
-                    log_chunks[left_index], log_chunks[right_index]
-                )
-                residual_gram[left_index, right_index] += residual_value
-                if left_index != right_index:
-                    residual_gram[right_index, left_index] += residual_value
-        del shared_log, log_chunks, raw_chunks
-    return raw_gram, log_gram, residual_gram
+
+            product_buffer = torch.empty(
+                end - start, dtype=torch.float32, device=analyze_device
+            )
+            _accumulate_symmetric_gram(rows, grams[0], product_buffer)
+
+            # Reuse the raw work matrix for log-space and residual reductions.
+            rows.add_(eps).log_()
+            _accumulate_symmetric_gram(rows, grams[1], product_buffer)
+            product_buffer.zero_()
+            for index in range(count):
+                product_buffer.add_(rows[index])
+            product_buffer.div_(count)
+            rows.sub_(product_buffer.unsqueeze(0))
+            _accumulate_symmetric_gram(rows, grams[2], product_buffer)
+            del product_buffer, rows, finite, nonnegative
+
+    return tuple(_finish_symmetric_gram(gram) for gram in grams)
 
 
 def _cosine_matrix_from_gram(gram: np.ndarray) -> np.ndarray:
@@ -586,9 +645,12 @@ def chunked_log_residual_cosine(
     vectors: Sequence[torch.Tensor],
     eps: float = LOG_EPS,
     chunk_size: int = DEFAULT_CHUNK_SIZE,
+    device: str | torch.device = "cpu",
 ) -> np.ndarray:
     """Cosines after removing the all-benchmark geometric-mean component."""
-    _, _, residual_gram = _chunked_raw_log_grams(vectors, eps, chunk_size)
+    _, _, residual_gram = _chunked_raw_log_grams(
+        vectors, eps, chunk_size, device
+    )
     return _cosine_matrix_from_gram(residual_gram)
 
 
@@ -596,54 +658,111 @@ def chunked_topk_indices(
     vector: torch.Tensor,
     fraction: float = TOP_FRACTION,
     chunk_size: int = DEFAULT_CHUNK_SIZE,
+    device: str | torch.device = "cpu",
 ) -> torch.Tensor:
-    """Return sorted indices of the exact top fraction via streaming top-k."""
+    """Return exact top-fraction indices using a two-pass streamed threshold."""
     n = _check_vectors([vector])
     if not 0 < fraction <= 1:
         raise ValueError("fraction must be in (0, 1]")
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
     k = max(1, int(math.floor(n * fraction)))
-    candidate_values = torch.empty(0, dtype=vector.dtype, device="cpu")
-    candidate_indices = torch.empty(0, dtype=torch.int64, device="cpu")
-    for start in range(0, n, chunk_size):
-        end = min(start + chunk_size, n)
-        chunk = vector[start:end]
-        local_k = min(k, chunk.numel())
-        values, indices = torch.topk(chunk, local_k, largest=True, sorted=False)
-        values = values.to(device="cpu")
-        indices = indices.to(device="cpu", dtype=torch.int64).add_(start)
-        candidate_values = torch.cat((candidate_values, values))
-        candidate_indices = torch.cat((candidate_indices, indices))
-        if candidate_values.numel() > k:
-            candidate_values, keep = torch.topk(
-                candidate_values, k, largest=True, sorted=False
+    analyze_device = _resolve_analyze_device(device)
+    if k == n:
+        return torch.arange(n, dtype=torch.int64, device=analyze_device)
+
+    candidate_values: torch.Tensor | None = None
+    finite = torch.ones((), dtype=torch.bool, device=analyze_device)
+    with torch.no_grad():
+        # Pass one keeps values only.  Any global top-k value must occur in the
+        # local top-k of its chunk, so this produces the exact global threshold
+        # while retaining O(k + chunk_size) values rather than O(n) values.
+        for start in range(0, n, chunk_size):
+            end = min(start + chunk_size, n)
+            chunk = vector[start:end].to(device=analyze_device, copy=True)
+            finite.logical_and_(torch.isfinite(chunk).all())
+            local_k = min(k, chunk.numel())
+            local_values = torch.topk(
+                chunk, local_k, largest=True, sorted=False
+            ).values
+            if candidate_values is None:
+                candidate_values = local_values
+            else:
+                merged = torch.cat((candidate_values, local_values))
+                candidate_values = torch.topk(
+                    merged, min(k, merged.numel()), largest=True, sorted=False
+                ).values
+                del merged
+            del chunk, local_values
+
+        if not bool(finite):
+            raise ValueError("Top-k vector contains non-finite values")
+        assert candidate_values is not None
+        threshold = candidate_values.min()
+        greater_count = int((candidate_values > threshold).sum().item())
+        remaining_equal = k - greater_count
+
+        # Pass two emits indices.  Taking equal-threshold coordinates in source
+        # order makes boundary ties deterministic across CPU and CUDA.
+        result = torch.empty(k, dtype=torch.int64, device=analyze_device)
+        offset = 0
+        for start in range(0, n, chunk_size):
+            end = min(start + chunk_size, n)
+            chunk = vector[start:end].to(device=analyze_device, copy=True)
+            greater = torch.nonzero(chunk > threshold, as_tuple=False).flatten()
+            n_greater = greater.numel()
+            if n_greater:
+                result[offset : offset + n_greater].copy_(greater)
+                result[offset : offset + n_greater].add_(start)
+                offset += n_greater
+            if remaining_equal:
+                equal = torch.nonzero(chunk == threshold, as_tuple=False).flatten()
+                take = min(remaining_equal, equal.numel())
+                if take:
+                    result[offset : offset + take].copy_(equal[:take])
+                    result[offset : offset + take].add_(start)
+                    offset += take
+                    remaining_equal -= take
+                del equal
+            del chunk, greater
+
+        if offset != k or remaining_equal != 0:
+            raise RuntimeError(
+                f"Streaming top-k selected {offset} coordinates; expected {k}."
             )
-            candidate_indices = candidate_indices[keep]
-    return torch.sort(candidate_indices).values
+        del candidate_values, finite, threshold
+        return torch.sort(result).values
 
 
 def chunked_jaccard(
     left_indices: torch.Tensor,
     right_indices: torch.Tensor,
     chunk_size: int = DEFAULT_CHUNK_SIZE,
+    device: str | torch.device = "cpu",
 ) -> float:
-    """Jaccard similarity of two sorted, unique index tensors."""
+    """Jaccard similarity of sorted index tensors, reduced on ``device``."""
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
-    left = left_indices.to(device="cpu", dtype=torch.int64).reshape(-1)
-    right = right_indices.to(device="cpu", dtype=torch.int64).reshape(-1)
+    analyze_device = _resolve_analyze_device(device)
+    left = left_indices.to(device=analyze_device, dtype=torch.int64).reshape(-1)
+    right = right_indices.to(device=analyze_device, dtype=torch.int64).reshape(-1)
     if left.numel() == 0 and right.numel() == 0:
         return 1.0
-    intersection = 0
-    for start in range(0, left.numel(), chunk_size):
-        chunk = left[start : start + chunk_size]
-        positions = torch.searchsorted(right, chunk)
-        valid = positions < right.numel()
-        if bool(valid.any()):
-            intersection += int(
-                (right[positions[valid]] == chunk[valid]).sum().item()
+    if left.numel() == 0 or right.numel() == 0:
+        return 0.0
+    intersection_accumulator = torch.zeros(
+        (), dtype=torch.int64, device=analyze_device
+    )
+    with torch.no_grad():
+        for start in range(0, left.numel(), chunk_size):
+            chunk = left[start : start + chunk_size]
+            positions = torch.searchsorted(right, chunk)
+            valid = positions < right.numel()
+            positions.clamp_max_(right.numel() - 1)
+            intersection_accumulator.add_(
+                ((right[positions] == chunk) & valid).sum(dtype=torch.int64)
             )
+    intersection = int(intersection_accumulator.item())
     union = left.numel() + right.numel() - intersection
     return intersection / union if union else 1.0
 
@@ -653,12 +772,13 @@ def chunked_topk_jaccard(
     right: torch.Tensor,
     fraction: float = TOP_FRACTION,
     chunk_size: int = DEFAULT_CHUNK_SIZE,
+    device: str | torch.device = "cpu",
 ) -> float:
     """Jaccard overlap between exact top-fraction coordinate sets."""
     _check_vectors([left, right])
-    left_top = chunked_topk_indices(left, fraction, chunk_size)
-    right_top = chunked_topk_indices(right, fraction, chunk_size)
-    return chunked_jaccard(left_top, right_top, chunk_size)
+    left_top = chunked_topk_indices(left, fraction, chunk_size, device)
+    right_top = chunked_topk_indices(right, fraction, chunk_size, device)
+    return chunked_jaccard(left_top, right_top, chunk_size, device)
 
 
 def _load_tensor_mmap(path: Path) -> torch.Tensor:
@@ -681,7 +801,9 @@ def _load_tensor_mmap(path: Path) -> torch.Tensor:
     return tensor
 
 
-def _analysis_inventory(out: Path) -> tuple[list[dict], dict]:
+def _analysis_inventory(
+    out: Path, require_all: bool = False
+) -> tuple[list[dict], dict]:
     metadata_path = out / "fisher_meta.json"
     has_metadata = metadata_path.exists()
     if has_metadata:
@@ -693,17 +815,26 @@ def _analysis_inventory(out: Path) -> tuple[list[dict], dict]:
         metadata = {"model": out.name, "benchmarks": []}
         by_name = {}
     inventory = []
+    missing: list[Path] = []
     for spec in PROBE_REGISTRY:
-        if has_metadata and spec.name not in by_name:
+        if has_metadata and spec.name not in by_name and not require_all:
             continue
         item = dict(by_name.get(spec.name, {}))
         path = out / item.get("file", f"fisher_{spec.name}.pt")
         if not path.exists():
+            if require_all:
+                missing.append(path)
             continue
         item.update(
             {"name": spec.name, "capability": spec.capability, "path": path}
         )
         inventory.append(item)
+    if missing:
+        missing_list = "\n".join(f"  - {path.name}" for path in missing)
+        raise FileNotFoundError(
+            "--analyze-only requires every expected Fisher artifact; missing:\n"
+            f"{missing_list}"
+        )
     _require_probe_coverage(item["capability"] for item in inventory)
     return inventory, metadata
 
@@ -856,9 +987,17 @@ def _write_report(
     return strongest
 
 
-def stage_analyze(out: Path, chunk_size: int = DEFAULT_CHUNK_SIZE) -> None:
+def stage_analyze(
+    out: Path,
+    chunk_size: int = DEFAULT_CHUNK_SIZE,
+    analyze_device: str | torch.device = "auto",
+    require_all: bool = False,
+) -> None:
     """Read saved Fishers and emit pairwise similarity JSON + Markdown."""
-    inventory, metadata = _analysis_inventory(out)
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be positive")
+    device = _resolve_analyze_device(analyze_device)
+    inventory, metadata = _analysis_inventory(out, require_all=require_all)
     names = [item["name"] for item in inventory]
     capabilities = [item["capability"] for item in inventory]
     vectors = [_load_tensor_mmap(item["path"]) for item in inventory]
@@ -871,11 +1010,12 @@ def stage_analyze(out: Path, chunk_size: int = DEFAULT_CHUNK_SIZE) -> None:
 
     print(
         f"[analyze] {len(vectors)} mmap-backed vectors, "
-        f"{n_parameters:,} coordinates each",
+        f"{n_parameters:,} coordinates each; device={device}, "
+        f"chunk_size={chunk_size:,}",
         flush=True,
     )
     raw_gram, log_gram, residual_gram = _chunked_raw_log_grams(
-        vectors, eps=LOG_EPS, chunk_size=chunk_size
+        vectors, eps=LOG_EPS, chunk_size=chunk_size, device=device
     )
     matrices = {
         "raw_cosine": _cosine_matrix_from_gram(raw_gram),
@@ -889,13 +1029,13 @@ def stage_analyze(out: Path, chunk_size: int = DEFAULT_CHUNK_SIZE) -> None:
     for name, vector in zip(names, vectors):
         print(f"[analyze] selecting top 0.1% coordinates for {name}", flush=True)
         top_indices.append(
-            chunked_topk_indices(vector, TOP_FRACTION, chunk_size)
+            chunked_topk_indices(vector, TOP_FRACTION, chunk_size, device)
         )
     jaccard = np.eye(len(vectors), dtype=np.float64)
     for left in range(len(vectors)):
         for right in range(left + 1, len(vectors)):
             value = chunked_jaccard(
-                top_indices[left], top_indices[right], chunk_size
+                top_indices[left], top_indices[right], chunk_size, device
             )
             jaccard[left, right] = jaccard[right, left] = value
     matrices["top_0.1pct_jaccard"] = jaccard
@@ -959,10 +1099,25 @@ def main() -> None:
         "--stage", choices=("fisher", "analyze", "all"), default="all"
     )
     parser.add_argument(
+        "--analyze-chunk",
         "--chunk-size",
+        dest="analyze_chunk",
         type=int,
         default=DEFAULT_CHUNK_SIZE,
         help="coordinates per analysis chunk (default: 50,000,000)",
+    )
+    parser.add_argument(
+        "--analyze-device",
+        default="auto",
+        help="analysis reduction device (default: auto; CUDA when available)",
+    )
+    parser.add_argument(
+        "--analyze-only",
+        action="store_true",
+        help=(
+            "skip Fisher computation and require all existing fisher_*.pt "
+            "artifacts"
+        ),
     )
     args = parser.parse_args()
 
@@ -970,7 +1125,7 @@ def main() -> None:
     tag = model_output_tag(args.model, model_name)
     out = OUT_BASE / tag
     out.mkdir(parents=True, exist_ok=True)
-    if args.stage in ("fisher", "all"):
+    if not args.analyze_only and args.stage in ("fisher", "all"):
         stage_fisher(
             model_name,
             args.device,
@@ -978,8 +1133,13 @@ def main() -> None:
             out,
             model_dtype=args.model_dtype,
         )
-    if args.stage in ("analyze", "all"):
-        stage_analyze(out, chunk_size=args.chunk_size)
+    if args.analyze_only or args.stage in ("analyze", "all"):
+        stage_analyze(
+            out,
+            chunk_size=args.analyze_chunk,
+            analyze_device=args.analyze_device,
+            require_all=args.analyze_only,
+        )
 
 
 if __name__ == "__main__":

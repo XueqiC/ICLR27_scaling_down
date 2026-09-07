@@ -1,5 +1,8 @@
 from types import SimpleNamespace
 
+import json
+import random
+
 import torch
 
 from analysis import v12_distill as distill
@@ -124,3 +127,126 @@ def test_sweep_skips_existing_eval_and_runs_only_incomplete_config(tmp_path):
     assert cwd == sweep.ROOT
     assert command[command.index("--teacher") + 1] == "claude-sonnet-4-6"
     assert command[command.index("--n-per-domain") + 1] == "20"
+
+
+def test_training_seeds_get_distinct_paths_and_are_written_to_eval(tmp_path, monkeypatch):
+    class Model(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.weight = torch.nn.Parameter(torch.ones(1))
+
+        def save_pretrained(self, path):
+            (path / "adapter_config.json").write_text("{}")
+
+    seeded, data_seeds, training_seeds, probe_seeds = [], [], [], []
+    monkeypatch.setattr(distill, "OUT_BASE", tmp_path)
+    monkeypatch.setattr(distill, "seed_everything", seeded.append)
+
+    def load_records(**kwargs):
+        data_seeds.append(kwargs["seed"])
+        return [{"prompt": "ab", "completion": "XY", "domain": "math"}], {}
+
+    def probes(n, seed):
+        probe_seeds.append(seed)
+        return {c: [{"prompt": "ab", "completion": "XY"}] * 4
+                for c in distill.CAPABILITIES}
+
+    def train(**kwargs):
+        training_seeds.append((kwargs["seed"], kwargs["data_sampling_seed"]))
+        accounting = distill.TokenAccounting(kwargs["examples"])
+        for index in range(len(kwargs["examples"])):
+            accounting.observe(index)
+        return {**accounting.snapshot(), "updates": 1, "completion_tokens_seen": 2,
+                "trajectory_tokens_unreached": []}
+
+    monkeypatch.setattr(distill, "load_sft_records", load_records)
+    monkeypatch.setattr(distill, "build_probes", probes)
+    monkeypatch.setattr(distill, "load_text_causal_lm", lambda *a: (Model(), TinyTokenizer()))
+    monkeypatch.setattr(distill, "configure_training", lambda m: (m, "lora", ["weight"]))
+    monkeypatch.setattr(distill, "_train", train)
+    monkeypatch.setattr(distill, "measure_capability_losses",
+                        lambda *a: ({c: 2.0 for c in distill.CAPABILITIES},
+                                    {c: 4 for c in distill.CAPABILITIES}))
+    paths = []
+    for seed in (0, 7):
+        payload = distill.run_distillation(
+            "gemma3-270m", "gpt-5.6-luna", "full", ["math"], 1, 1,
+            "cpu", None, seed=seed,
+        )
+        path = tmp_path / "gemma3-270m" / payload["run_name"] / "eval.json"
+        saved = json.loads(path.read_text())
+        assert saved["seed"] == saved["training_seed"] == saved["data_sampling_seed"] == seed
+        assert saved["probe_seed"] == 0
+        paths.append(path)
+    assert paths[0] != paths[1]
+    assert paths[0].parent.name == "gpt-5.6-luna_full_1"
+    assert paths[1].parent.name == "gpt-5.6-luna_full_1_seed7"
+    assert distill.make_run_name("teacher", "full", 1, "control", seed=7) == (
+        "teacher_full_1_control_seed7"
+    )
+    assert seeded == data_seeds == [0, 7]
+    assert training_seeds == [(0, 0), (7, 7)]
+    assert probe_seeds == [0, 0]
+
+
+def test_trace_shuffle_uses_requested_seed_without_changing_selected_rows(tmp_path):
+    rows = [{"prompt": str(i), "response": "answer"} for i in range(12)]
+    (tmp_path / "gpt-5.6-luna_math.jsonl").write_text(
+        "\n".join(json.dumps(row) for row in rows)
+    )
+    orders = []
+    for seed in (0, 7):
+        records, _ = distill.load_sft_records(
+            "gpt-5.6-luna", ["math"], 10, "full", tmp_path, seed=seed,
+        )
+        orders.append([r["prompt"] for r in records])
+        expected = [str(i) for i in range(10)]
+        random.Random(seed).shuffle(expected)
+        assert orders[-1] == expected
+    assert orders[0] != orders[1]
+
+
+def test_epoch_shuffle_uses_data_sampling_seed(monkeypatch):
+    import transformers
+
+    class Scheduler:
+        def step(self):
+            pass
+
+        def get_last_lr(self):
+            return [1e-4]
+
+    monkeypatch.setattr(transformers, "get_cosine_schedule_with_warmup",
+                        lambda *a, **kw: Scheduler())
+    examples = [{"index": i, "input_ids": torch.tensor([0, 1])} for i in range(8)]
+    model = torch.nn.Linear(1, 1)
+    seen = []
+
+    def loss(model, example, device):
+        seen.append(example["index"])
+        return model.weight.square().sum(), 1
+
+    monkeypatch.setattr(distill, "masked_causal_loss", loss)
+    log = distill._train(model, examples, "cpu", 2, 1e-4,
+                         seed=7, data_sampling_seed=13)
+    expected = []
+    for epoch in range(2):
+        order = list(range(8))
+        random.Random(13 + epoch).shuffle(order)
+        expected.extend(order)
+    assert seen == expected
+    assert log["seed"] == log["training_seed"] == 7
+    assert log["data_sampling_seed"] == 13
+
+
+def test_seed_cli_default_and_override(monkeypatch):
+    import sys
+
+    calls = []
+    monkeypatch.setattr(distill, "run_distillation", lambda **kw: calls.append(kw))
+    argv = ["v12_distill.py", "--teacher", "gpt-5.6-luna", "--recipe", "full"]
+    monkeypatch.setattr(sys, "argv", argv)
+    distill.main()
+    monkeypatch.setattr(sys, "argv", [*argv, "--seed", "7"])
+    distill.main()
+    assert [call["seed"] for call in calls] == [0, 7]

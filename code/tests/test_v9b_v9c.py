@@ -49,9 +49,7 @@ def test_residual_log_fisher_selection_removes_other_capability_top_sets():
         name: torch.exp(torch.tensor(values, dtype=torch.float32))
         for name, values in log_fishers.items()
     }
-    capabilities = {
-        name: name.split("_", maxsplit=1)[0] for name in log_fishers
-    }
+    capabilities = {name: name.split("_", maxsplit=1)[0] for name in log_fishers}
 
     selected = ablation.select_exclusive_residual_top_coordinates(
         fishers,
@@ -63,6 +61,40 @@ def test_residual_log_fisher_selection_removes_other_capability_top_sets():
     assert selected["math"].tolist() == [0]
     assert selected["code"].tolist() == [1]
     assert selected["qa"].tolist() == [2, 4]
+
+
+def test_magnitude_matched_sampler_preserves_quantile_bin_counts():
+    capability_coordinates = torch.arange(40, dtype=torch.int64)
+    weights = torch.cat(
+        [
+            torch.arange(1, 41, dtype=torch.float32),
+            torch.arange(1, 41, dtype=torch.float32).repeat(5),
+        ]
+    )
+
+    sampled = ablation.sample_magnitude_matched_coordinates(
+        weights,
+        capability_coordinates,
+        n_bins=20,
+        seed=17,
+        chunk_size=19,
+    )
+
+    reference = weights[capability_coordinates].abs()
+    target_bins = ablation.magnitude_quantile_bin_indices(
+        reference, reference, n_bins=20
+    )
+    sampled_bins = ablation.magnitude_quantile_bin_indices(
+        weights[sampled].abs(), reference, n_bins=20
+    )
+    torch.testing.assert_close(
+        torch.bincount(sampled_bins, minlength=20),
+        torch.bincount(target_bins, minlength=20),
+        rtol=0,
+        atol=0,
+    )
+    assert sampled.numel() == capability_coordinates.numel()
+    assert not bool(torch.isin(sampled, capability_coordinates).any())
 
 
 def test_adjusted_rand_index_known_partitions():

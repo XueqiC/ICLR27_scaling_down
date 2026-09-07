@@ -312,8 +312,14 @@ def run_quantization(
     finally:
         _restore_dense_weights(parameters, dense_weights)
 
-    (out / "quant_losses.json").write_text(
-        json.dumps(results, indent=2) + "\n"
+    _ql = out / "quant_losses.json"
+    _merged = {}
+    if _ql.exists():
+        try: _merged.update(json.loads(_ql.read_text()))
+        except Exception: pass
+    _merged.update(results)  # new bits/dense overwrite same keys only
+    (_ql).write_text(
+        json.dumps(_merged, indent=2) + "\n"
     )
     write_report(out, model_name, bits, results)
     del dense_weights, parameters, model, tokenizer
@@ -332,6 +338,7 @@ def main() -> None:
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--model-dtype", choices=("fp32", "bf16"), default="fp32")
     parser.add_argument("--n-probe", type=int, default=128)
+    parser.add_argument("--output-base", default=None, help="override output dir (keeps canonical grid clean)")
     parser.add_argument(
         "--bits",
         type=parse_bits,
@@ -342,7 +349,7 @@ def main() -> None:
 
     model_name = require_compliant(args.model)
     tag = model_output_tag(args.model, model_name)
-    out = OUT_BASE / tag
+    out = (Path(args.output_base) if args.output_base else OUT_BASE) / tag
     out.mkdir(parents=True, exist_ok=True)
     run_quantization(
         model_name=model_name,

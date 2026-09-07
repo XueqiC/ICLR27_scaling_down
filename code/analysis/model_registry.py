@@ -52,6 +52,26 @@ MODEL_REGISTRY: dict[str, dict[str, str]] = {
         "family": "olmo3",
         "notes": "Cross-family 30B panel checkpoint.",
     },
+    "Qwen3-0.6B": {
+        "hf_id": "Qwen/Qwen3-0.6B",
+        "family": "qwen3",
+        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1), never on HiPerGator.",
+    },
+    "Qwen3-1.7B": {
+        "hf_id": "Qwen/Qwen3-1.7B",
+        "family": "qwen3",
+        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1), never on HiPerGator.",
+    },
+    "Qwen3-4B": {
+        "hf_id": "Qwen/Qwen3-4B",
+        "family": "qwen3",
+        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1), never on HiPerGator.",
+    },
+    "Qwen3-8B": {
+        "hf_id": "Qwen/Qwen3-8B",
+        "family": "qwen3",
+        "notes": "PRC-developed Base; RAI-only (SDL_ALLOW_PRC=1); NEW-SOURCE prospective test.",
+    },
 }
 
 

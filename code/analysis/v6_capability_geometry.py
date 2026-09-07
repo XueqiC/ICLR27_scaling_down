@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import gc
 import json
+import math
 import re
 from pathlib import Path
 from types import SimpleNamespace
@@ -80,7 +81,10 @@ class _TextCausalLMAdapter(torch.nn.Module):
         softcap = getattr(self.config, "final_logit_softcapping", None)
         if softcap is not None:
             logits = torch.tanh(logits / softcap) * softcap
-        return SimpleNamespace(logits=logits)
+        return SimpleNamespace(
+            logits=logits,
+            past_key_values=getattr(outputs, "past_key_values", None),
+        )
 
 
 def _language_only_view(model):
@@ -272,8 +276,108 @@ def language_weight_parameters(model) -> list[tuple[str, torch.Tensor]]:
             if param.dim() >= 2]
 
 
-def build_probes(n: int, seed: int = 0) -> dict[str, list[dict]]:
-    """Probe sets from the uncontaminated benchmark halves."""
+def apply_global_magnitude_pruning(
+    model,
+    density: float,
+    *,
+    seed: int = 0,
+    reference_weights: list[torch.Tensor] | None = None,
+    threshold: float | None = None,
+) -> float:
+    """Apply V6 sampled-threshold global magnitude pruning in place.
+
+    ``density`` is the retained weight fraction.  Optional reference weights
+    let callers apply several densities to the same dense checkpoint, as the
+    V6 pruning ladder does.  Supplying its precomputed threshold avoids
+    resampling that checkpoint for every rung.
+    """
+    if not 0.0 < density <= 1.0:
+        raise ValueError("prune density must be in (0, 1]")
+    parameters = language_weight_parameters(model)
+    if not parameters:
+        raise ValueError("No language weight matrices found for pruning")
+    if reference_weights is None:
+        reference_weights = [parameter.detach() for _, parameter in parameters]
+    if len(reference_weights) != len(parameters):
+        raise ValueError("reference weights do not match pruning parameters")
+    if any(reference.shape != parameter.shape
+           for (_, parameter), reference in zip(parameters, reference_weights)):
+        raise ValueError("reference weight shapes do not match pruning parameters")
+
+    if density == 1.0:
+        pruning_threshold = -math.inf
+    elif threshold is None:
+        sample_parameters = [
+            (name, reference)
+            for (name, _), reference in zip(parameters, reference_weights)
+        ]
+        absolute_sample = _sample_abs_weights(sample_parameters, seed=seed)
+        pruning_threshold = float(np.quantile(absolute_sample, 1.0 - density))
+    else:
+        pruning_threshold = float(threshold)
+
+    with torch.no_grad():
+        for (_, parameter), reference in zip(parameters, reference_weights):
+            parameter.copy_(reference * (reference.abs() > pruning_threshold))
+    return pruning_threshold
+
+
+SECONDARY_BENCHMARKS = {
+    "math_gsm8k": ("openai/gsm8k", "main", "test"),
+    "code_humaneval": ("openai/openai_humaneval", None, "test"),
+    "qa_hotpotqa": ("hotpotqa/hotpot_qa", "distractor", "validation"),
+}
+
+
+def secondary_probe(key: str, row: dict) -> dict:
+    """Render held-out references without generation, answer leakage or code tests.
+
+    Math retains the entire worked solution, matching MATH-500's target span.
+    HumanEval retains the canonical continuation verbatim (including indentation).
+    QA uses the supplied context and a short reference answer, as in 2Wiki.
+    """
+    if key == "math_gsm8k":
+        solution = str(row["answer"])
+        if "####" not in solution:
+            raise ValueError("GSM8K reference answer must contain the #### delimiter")
+        answer = solution.rsplit("####", 1)[1].strip()
+        if not answer:
+            raise ValueError("GSM8K reference has an empty final answer")
+        return {"prompt": f"Problem: {row['question']}\nSolution:",
+                "completion": " " + solution, "answer": answer}
+    if key == "code_humaneval":
+        return {"prompt": str(row["prompt"]),
+                "completion": str(row["canonical_solution"]),
+                "task_id": str(row["task_id"])}
+    if key == "qa_hotpotqa":
+        context = row["context"]
+        if isinstance(context, dict):
+            pairs = zip(context.get("title", []),
+                        context.get("sentences", context.get("content", [])))
+        elif isinstance(context, (list, tuple)):
+            pairs = context
+        else:
+            raise ValueError("HotpotQA context must contain title/sentence pairs")
+        parts = []
+        for title, sentences in pairs:
+            body = (" ".join(str(s) for s in sentences)
+                    if isinstance(sentences, (list, tuple)) else str(sentences))
+            parts.append(f"{title}: {body}")
+        context_text = "\n".join(parts)[:4000]
+        answer = str(row["answer"])
+        return {"prompt": (f"Context:\n{context_text}\n\nQuestion: "
+                           f"{row['question']}\nAnswer:"),
+                "completion": " " + answer, "answer": answer}
+    raise ValueError(f"Unknown secondary benchmark {key!r}")
+
+
+def build_probes(n: int, seed: int = 0, *,
+                 include_secondary: bool = False) -> dict[str, list[dict]]:
+    """Build deterministic probes; consumers select calibration/measurement halves.
+
+    Opt-in secondary keys are appended after the original math/code/qa keys.
+    Their independent RNGs never change the legacy sampling sequence or prompts.
+    """
     from datasets import load_dataset
     rng = np.random.default_rng(seed)
     probes: dict[str, list[dict]] = {}
@@ -282,7 +386,8 @@ def build_probes(n: int, seed: int = 0) -> dict[str, list[dict]]:
     idx = rng.choice(len(ds), size=min(n, len(ds)), replace=False)
     probes["math"] = [
         {"prompt": f"Problem: {ds[int(i)]['problem']}\nSolution:",
-         "completion": " " + ds[int(i)]["solution"]}
+         "completion": " " + ds[int(i)]["solution"],
+         "answer": ds[int(i)]["answer"]}
         for i in idx]
 
     ds = load_dataset("google-research-datasets/mbpp", "full",
@@ -291,7 +396,10 @@ def build_probes(n: int, seed: int = 0) -> dict[str, list[dict]]:
     probes["code"] = [
         {"prompt": (f"# Task: {ds[int(i)]['text']}\n# Write a Python "
                     f"function.\n"),
-         "completion": ds[int(i)]["code"]}
+         "completion": ds[int(i)]["code"],
+         "test_list": ds[int(i)].get("test_list", []),
+         "test_setup_code": ds[int(i)].get("test_setup_code", ""),
+         "challenge_test_list": ds[int(i)].get("challenge_test_list", [])}
         for i in idx]
 
     ds = load_dataset("framolfese/2WikiMultihopQA", split="validation")
@@ -312,8 +420,16 @@ def build_probes(n: int, seed: int = 0) -> dict[str, list[dict]]:
             ctx_text = str(ctx)[:4000]
         qa.append({"prompt": (f"Context:\n{ctx_text}\n\nQuestion: "
                               f"{row['question']}\nAnswer:"),
-                   "completion": " " + str(row["answer"])})
+                   "completion": " " + str(row["answer"]),
+                   "answer": str(row["answer"])})
     probes["qa"] = qa
+    if include_secondary:
+        for key, (dataset, config, split) in SECONDARY_BENCHMARKS.items():
+            ds = (load_dataset(dataset, config, split=split) if config is not None
+                  else load_dataset(dataset, split=split))
+            secondary_rng = np.random.default_rng(seed)
+            idx = secondary_rng.choice(len(ds), size=min(n, len(ds)), replace=False)
+            probes[key] = [secondary_probe(key, ds[int(i)]) for i in idx]
     return probes
 
 
@@ -457,7 +573,7 @@ def stage_fisher(model_name: str, device: str, n_probe: int,
     torch.cuda.empty_cache() if device.startswith("cuda") else None
 
 
-def stage_prune(model_name: str, device: str, n_probe: int,
+def stage_prune(model_name: str, device: str, n_probe: int,  # noqa: C901
                 out: Path) -> None:
     """Measure per-capability CE loss on dense + pruned variants."""
     model, tok = load_text_causal_lm(model_name, torch.bfloat16)
@@ -490,14 +606,24 @@ def stage_prune(model_name: str, device: str, n_probe: int,
 
     for d in DENSITIES:
         thresh = thresholds[d]
-        with torch.no_grad():
-            for (_, p), w0 in zip(params, dense_weights):
-                mask = w0.abs() > thresh
-                p.copy_(w0 * mask)
+        apply_global_magnitude_pruning(
+            model,
+            d,
+            reference_weights=dense_weights,
+            threshold=thresh,
+        )
         results[str(d)] = measure()
         print(f"[prune] d={d}:", results[str(d)], flush=True)
 
-    (out / "prune_losses.json").write_text(json.dumps(results, indent=1))
+    merged = {}
+    prev_path = out / "prune_losses.json"
+    if prev_path.exists():
+        try:
+            merged.update(json.loads(prev_path.read_text()))
+        except Exception:
+            pass
+    merged.update(results)
+    prev_path.write_text(json.dumps(merged, indent=1))
     del dense_weights, params, model, tok
     gc.collect()
     torch.cuda.empty_cache() if device.startswith("cuda") else None
@@ -577,6 +703,8 @@ def main() -> None:
                     help="registry tag or raw Hugging Face model id")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--n-probe", type=int, default=128)
+    ap.add_argument("--densities", default="",
+                    help="comma list overriding the default density grid")
     ap.add_argument("--stage", default="all",
                     choices=["fisher", "prune", "report", "all"])
     ap.add_argument("--fisher-device", default="",
@@ -584,6 +712,9 @@ def main() -> None:
     ap.add_argument("--model-dtype", default="fp32",
                     choices=["fp32", "bf16"])
     args = ap.parse_args()
+    if args.densities:
+        global DENSITIES
+        DENSITIES = [float(x) for x in args.densities.split(",") if x]
     model_name = require_compliant(args.model)
     tag = model_output_tag(args.model, model_name)
     out = OUT_BASE / tag
