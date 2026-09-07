@@ -496,13 +496,21 @@ def evaluate_lomo(rows, versions=VERSIONS, n_boot=10000):
     return {"records": records, "folds": folds, "metrics": summarize(records, n_boot)}
 
 
-def load_panel(metadata, descriptor_dir, versions, root=ROOT):
-    """Fixed 12-model dev whitelist. Missing requested groups fail, never shrink cohorts."""
+def load_panel(metadata, descriptor_dir, versions, root=ROOT, exclude=()):
+    """Fixed 12-model dev whitelist. Missing requested groups fail, never shrink cohorts.
+
+    ``exclude`` explicitly drops named dev models from the cohort (e.g. cross-family
+    30B checkpoints un-loadable in this transformers version); the reduced cohort is
+    reported so the change is never silent.
+    """
+    exclude = set(exclude)
     panels = {c: [] for c in audit.CAPABILITIES}
     target_rows, costs, paths, protocols = {}, {}, [], []
     specs = {**metadata["models"], TARGET: {"family": "qwen3", "N0": metadata["qwen3_8b"]["N0"],
                                         "hf_id": registry.MODEL_REGISTRY[TARGET]["hf_id"]}}
     for model, info in specs.items():
+        if model in exclude:
+            continue
         path = loss_path(model, root)
         if path is None:
             if model == TARGET:
@@ -654,7 +662,7 @@ def render_report(summary):
 
 def predict(args):
     metadata = audit.read_json(v28.METADATA)
-    panels, target, costs, paths = load_panel(metadata, args.descriptor_dir, args.versions)
+    panels, target, costs, paths = load_panel(metadata, args.descriptor_dir, args.versions, exclude=getattr(args, "exclude_models", []))
     inputs = {str(p.resolve()): hashlib.sha256(p.read_bytes()).hexdigest() for p in [v28.METADATA, *paths]}
     summary = {"schema_version": SCHEMA_VERSION, "versions": args.versions, "n_boot": args.n_boot,
                "coefficient_definition": "v28 signed a_c; shape=v28.shape('pruning', d, gamma_c)",
@@ -699,6 +707,8 @@ def parser():
     pr.add_argument("--report", type=Path, default=REPORT)
     pr.add_argument("--versions", nargs="+", choices=VERSIONS, default=list(VERSIONS))
     pr.add_argument("--n-boot", type=int, default=10000)
+    pr.add_argument("--exclude-models", nargs="*", default=[],
+                    help="dev models to drop from the cohort (e.g. gemma4-31b muse-30b un-loadable here)")
     return ap
 
 
