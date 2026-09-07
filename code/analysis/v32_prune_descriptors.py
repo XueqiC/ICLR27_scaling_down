@@ -200,11 +200,14 @@ def activation_descriptors(model, batches, *, protocol):
                      "seconds": time.perf_counter()-started}}
 
 
-def load_dense_weights(hf_id, dtype):
+def load_dense_weights(hf_id, dtype, device_map=None):
     """V6 loader conventions and integrity checks, without its mandatory forward.
 
     Load on host first (like V6). Multimodal fallback is reduced to the text LM.
     No tokenizer/dataset is loaded unless activations are requested.
+    ``device_map`` (e.g. "auto") enables accelerate CPU/GPU offload so 27B+
+    models fit on a single card; weights stay materialized (CPU or GPU) and the
+    forward-only descriptors read them identically.
     """
     import transformers
     v6 = geometry()
@@ -220,8 +223,10 @@ def load_dense_weights(hf_id, dtype):
     errors = []
     for loader, cfg, primary in candidates:
         try:
+            _extra = {"device_map": device_map} if device_map else {}
             model, info = loader.from_pretrained(hf_id, config=cfg, dtype=dtype,
-                                                low_cpu_mem_usage=True, output_loading_info=True)
+                                                low_cpu_mem_usage=True, output_loading_info=True,
+                                                **_extra)
         except (KeyError, ValueError) as exc:
             errors.append(str(exc))
             continue
@@ -320,8 +325,13 @@ def extract(args):
         raise RuntimeError("extract requires a GPU; use synthetic unit tests in a CPU sandbox")
     started = time.perf_counter()
     dtype = {"bf16": torch.bfloat16, "fp16": torch.float16, "fp32": torch.float32}[args.dtype]
-    model = load_dense_weights(hf_id, dtype).to(args.device)
-    torch.cuda.synchronize()
+    if getattr(args, "offload", False):
+        # Full CPU residency (materialized, no meta/disk) so weight-descriptor reads work for 27B+.
+        # rai has ~1TB RAM; retention needs only weights. Activations (if requested) run on CPU.
+        model = load_dense_weights(hf_id, dtype, device_map={"": "cpu"})
+    else:
+        model = load_dense_weights(hf_id, dtype).to(args.device)
+        torch.cuda.synchronize()
     load_seconds = time.perf_counter()-started
     revision = getattr(getattr(model, "config", None), "_commit_hash", None)
     if upgrading and previous.get("revision") and previous["revision"] != revision:
@@ -678,6 +688,9 @@ def parser():
     ex.add_argument("--output-dir", type=Path, default=OUT)
     ex.add_argument("--prune-losses", type=Path)
     ex.add_argument("--with-activations", action="store_true")
+    ex.add_argument("--offload", action="store_true",
+                    help="load with device_map='auto' (accelerate CPU/GPU offload) so 27B+ models "
+                         "fit on one card; forward-only, results identical")
     ex.add_argument("--activation-forwards", type=int, default=12)
     ex.add_argument("--activation-max-length", type=int, default=512)
     pr = modes.add_parser("predict", help="CPU LOMO from saved JSON")
