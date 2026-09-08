@@ -112,3 +112,32 @@ these 9 states, NOT a population of independent models. Two-of-three folds carry
 - **No compression-axis law** — indicators, not g(d)/g(b). A real scaling-down law must predict across
   unseen d/b, not just unseen (size,step) at seen d/b.
 - **Extrapolation to higher D0 unverified** — every gain leans on interpolation between the 3 steps.
+
+## 7. P1 FROZEN PROSPECTIVE (step96000, never fit) — result
+
+Coefficients frozen from the 9-state fit (register.json sha 58dd81d…) BEFORE measuring the new step.
+Test = pythia-{160m,1.4b}@step96000, forward-only, 8 points per arm/capability (2 sizes × 4 configs).
+Point-estimate MAE (no CI at this n); "✓" = full model lower error than the reference.
+
+| arm   | cap  | full MAE | no-D0 | baseline(cfg-median) | beats baseline | beats no-D0 |
+|-------|------|----------|-------|----------------------|----------------|-------------|
+| prune | math | 0.090    | 0.343 | 0.367                | ✓              | ✓           |
+| prune | code | 0.128    | 0.179 | 0.438                | ✓              | ✓           |
+| prune | qa   | 0.426    | 0.438 | 0.832                | ✓              | ✓           |
+| quant | math | 0.569    | 0.658 | 0.691                | ✓ (int3-driven)| ✓           |
+| quant | code | 0.781    | 0.734 | **0.348**            | ✗ FAIL         | ✗           |
+| quant | qa   | 0.303    | 0.173 | 0.717                | ✓              | ✗ (noD0 better) |
+
+**Read:**
+- **Pruning generalizes prospectively.** On a genuinely new, never-fit training step the frozen
+  full-input predictor beats both the strongest simple baseline AND the no-D0 model for ALL THREE
+  capabilities — including QA, which had failed the in-panel leave-one-out. The gain grows with
+  aggressiveness (d=0.6 largest) but the full model is at least tied in the mild region too. This is
+  the round's strongest positive: the controlled pruning relationship is real and prospective.
+- **Quantization does NOT generalize.** quant-code FAILS (full 0.78 > baseline 0.35): the frozen
+  predictor over-predicts the int3 collapse for code on the new step (by_config int3 2.70 vs base 1.07).
+  quant-math "wins" only because of int3; quant-qa is beaten by the no-D0 model. Consistent with the
+  in-panel finding that the quant gain is an int3-collapse artifact — it does not transfer cleanly.
+- **Caveat:** 8 points per arm/cap, point estimates only; one new step, two sizes; still source-transfer
+  at fixed d/b (indicators), not a compression-axis law. But as a frozen prospective it is far stronger
+  evidence than in-sample leave-one-out.
