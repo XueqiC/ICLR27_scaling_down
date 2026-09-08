@@ -82,3 +82,14 @@ seed 0). Predict delta_c = L_c(S_KD)-L_c(S0) from {N0,L0,[D0]} (no config indica
 direction inconsistent across sizes; delta_qa noisy with a sign-flip outlier at 160m@143k). Distillation
 gives a WEAKER, capability-specific source-transfer relationship than pruning (C28). n=9, point MAE only.
 See DISTILL_CONTROLLED.md.
+
+
+### C30 — Pruning source × compression-strength (round-6 SECOND AXIS, v40)
+Frozen shared-shape candidate ΔL̂_c(x,d)=A_c(x)·((1−d)/0.3)^γ_c (A_c amplitude linear in {1,z logN0,z L0,z logD0},
+γ_c shared), fit on DEV (9-state grid, seen d={0.9..0.6}), predicts UNSEEN densities on a small source×strength
+panel incl. NEW source 410m@96k. **Beats every compression-strength-only baseline decisively**: aggregate MAE
+math 0.371 / code 0.524 / qa 0.759 vs strength-only 1.37/1.64/1.61, median-curve 1.48/1.87/1.92, zero 2.37/2.73/1.77.
+Win driven by source-conditioned amplitude (source-blind curves miss that 160m@143k is ~4× more fragile).
+Interpolation (d=0.65) strong incl. new source (math err 0.03, code 0.13); deeper extrap (d=0.55) systematically
+UNDER-predicts near the cliff (pre-declared domain edge, not dropped); QA amplitude over-predicted (doesn't transfer).
+FIRST result predicting UNSEEN compression strength, not just source-transfer at fixed d. See PRUNE_STRENGTH_AXIS.md.
