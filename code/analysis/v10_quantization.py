@@ -34,6 +34,7 @@ try:
         load_text_causal_lm,
         model_output_tag,
         require_compliant,
+        resolve_model_and_revision,
     )
 except ImportError:  # direct execution: python analysis/v10_quantization.py
     from v6_capability_geometry import (
@@ -43,6 +44,7 @@ except ImportError:  # direct execution: python analysis/v10_quantization.py
         load_text_causal_lm,
         model_output_tag,
         require_compliant,
+        resolve_model_and_revision,
     )
 
 
@@ -283,10 +285,11 @@ def run_quantization(
     bits: Sequence[int],
     out: Path,
     reference_device: str = "cuda",
+    revision: str | None = None,
 ) -> None:
     """Load one model and run dense plus fake-quantized measurements."""
     dtype = torch.float32 if model_dtype == "fp32" else torch.bfloat16
-    model, tokenizer = load_text_causal_lm(model_name, dtype)
+    model, tokenizer = load_text_causal_lm(model_name, dtype, revision)
     model.to(device).eval()
     probes = {
         capability: capability_probes[1::2]
@@ -324,7 +327,8 @@ def run_quantization(
     (_ql).write_text(
         json.dumps(_merged, indent=2) + "\n"
     )
-    write_report(out, model_name, bits, results)
+    checkpoint = f"{model_name}@{revision}" if revision is not None else model_name
+    write_report(out, checkpoint, bits, results)
     del dense_weights, parameters, model, tokenizer
     gc.collect()
     if device.startswith("cuda"):
@@ -336,7 +340,7 @@ def main() -> None:
     parser.add_argument(
         "--model",
         default="gemma3-270m",
-        help="model-registry tag or raw Hugging Face model id",
+        help="model-registry tag or raw Hugging Face model id, optionally @revision",
     )
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--reference-device", default="cuda", choices=["cuda","cpu"],
@@ -353,6 +357,7 @@ def main() -> None:
     args = parser.parse_args()
 
     model_name = require_compliant(args.model)
+    _, revision = resolve_model_and_revision(args.model)
     tag = model_output_tag(args.model, model_name)
     out = (Path(args.output_base) if args.output_base else OUT_BASE) / tag
     out.mkdir(parents=True, exist_ok=True)
@@ -363,6 +368,7 @@ def main() -> None:
         n_probe=args.n_probe,
         bits=args.bits,
         reference_device=args.reference_device,
+        revision=revision,
         out=out,
     )
 

@@ -52,6 +52,26 @@ MODEL_REGISTRY: dict[str, dict[str, str]] = {
         "family": "olmo3",
         "notes": "Cross-family 30B panel checkpoint.",
     },
+    "pythia-160m": {
+        "hf_id": "EleutherAI/pythia-160m",
+        "family": "pythia",
+        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible; 3rd (smallest) panel size.",
+    },
+    "pythia-410m": {
+        "hf_id": "EleutherAI/pythia-410m",
+        "family": "pythia",
+        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible.",
+    },
+    "pythia-1.4b": {
+        "hf_id": "EleutherAI/pythia-1.4b",
+        "family": "pythia",
+        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible.",
+    },
+    "pythia-2.8b": {
+        "hf_id": "EleutherAI/pythia-2.8b",
+        "family": "pythia",
+        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible.",
+    },
     "Qwen3-0.6B": {
         "hf_id": "Qwen/Qwen3-0.6B",
         "family": "qwen3",
@@ -86,15 +106,25 @@ _PRC_PATTERN = re.compile(
 )
 
 
+def resolve_model_and_revision(model: str) -> tuple[str, str | None]:
+    """Resolve a registry tag or raw HF id with an optional ``@revision``."""
+    base, separator, revision = model.partition("@")
+    if separator and (not base or not revision):
+        raise ValueError("Expected a model tag/id followed by a non-empty @revision")
+    entry = MODEL_REGISTRY.get(base)
+    return (entry["hf_id"] if entry is not None else base,
+            revision if separator else None)
+
+
 def resolve_model(model: str) -> str:
-    """Resolve a registry tag, leaving a raw Hugging Face id unchanged."""
-    entry = MODEL_REGISTRY.get(model)
-    return entry["hf_id"] if entry is not None else model
+    """Resolve a registry tag or raw HF id, stripping any ``@revision``."""
+    return resolve_model_and_revision(model)[0]
 
 
 def is_prc_model(hf_id_or_tag: str) -> bool:
     """Return whether a tag/id belongs to a known PRC-developed family."""
-    candidate = f"{hf_id_or_tag} {resolve_model(hf_id_or_tag)}"
+    base = hf_id_or_tag.partition("@")[0]
+    candidate = f"{base} {resolve_model(base)}"
     return _PRC_PATTERN.search(candidate) is not None
 
 

@@ -20,8 +20,10 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   over-predicted ~14× and **QA sign-flips** (loss drops under pruning). Failure is amplitude/sign, not shape (C25/C25b).
 - **Calibration**: one point at d=0.9 is CATASTROPHIC (near-zero response → 934× amplification); shrinkage
   stabilizes the dev set but doesn't beat zero on new sources. K1 (d=0.9) worsens math/QA (C26).
-- **Controlled panel (Pythia)**: adding D_0 to {N0,L0} helps math (pruning-math LOSO 0.62→0.15); combined
-  {N0,D0,L0} beats the per-config baseline for math/code (C27/C27b). QA remains hard.
+- **Controlled panel (Pythia)**: adding D_0 to {N0,L0} lowers held-out error (leave-one-size-out prune-math +0.47 CI excl 0), but vs the
+  STRONGEST per-config baseline the full model significantly wins only for CODE; nearly all gain is in the
+  aggressive region (d=0.6) — mild d>=0.8 ~0. Config-indicator model = source-transfer at fixed d, not a law
+  over d. See CONTROLLED_PANEL_PREDICTOR.md. QA remains hard.
 
 ## Quantization
 
@@ -35,7 +37,8 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   (−0.23), int3 collapse.
 - **Calibration**: Qwen3-14B shape pre-check INCONCLUSIVE (4/5-bit candidate predictions coincide < measurement
   precision); K1 (4-bit) worsens all (C26). q_c is a per-model 3-bit calibration, not basic-parameter.
-- **Controlled panel**: D_0 predicts quant-code fragility — combined {N0,D0,L0} beats baseline (quant-code 1.55→0.63) (C27b).
+- **Controlled panel**: D_0 predicts quant-code fragility (full-vs-baseline +0.93 CI excl 0); but BY-BIT this is ~entirely int3
+  collapse (b>=4 improvement ~0) — no smooth-region predictive value. Source-transfer at fixed b, not a g(b) law.
 
 ## Distillation
 
@@ -64,8 +67,9 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   instability; quantization = no predictive value in the measurable region (collapse-region artifact) + inconclusive
   shape; distillation = reuse-count-dominated with an exposure-confounded residual.
 - On **heterogeneous finished models**, per-model amplitude/sign does not transfer from {N0, family, dense L_c}.
-- On the **controlled Pythia series**, training history D_0 provides real predictive power beyond dense loss for
-  MATH/CODE (combined model beats baseline; leave-one-size/step-out), QA excepted.
+- On the **controlled Pythia series**, D_0 adds incremental value beyond dense loss (4/12 CIs excl 0), but vs the
+  strongest per-config baseline the full model significantly wins ONLY for CODE, concentrated in the aggressive
+  configs (pruning d=0.6 / quant int3); QA excepted; and it is source-transfer at fixed d/b, not a compression-axis law.
 - Qwen-family QA IMPROVES under pruning and int4 quant (Qwen-specific); under distillation QA improves in all families.
 
 ## Open (next round)

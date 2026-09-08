@@ -38,9 +38,11 @@ import torch
 from torch.nn import functional as F
 
 try:
-    from .model_registry import MODEL_REGISTRY, require_compliant
+    from .model_registry import (MODEL_REGISTRY, require_compliant,
+                                 resolve_model_and_revision)
 except ImportError:  # direct execution: python analysis/v6_capability_geometry.py
-    from model_registry import MODEL_REGISTRY, require_compliant
+    from model_registry import (MODEL_REGISTRY, require_compliant,
+                                resolve_model_and_revision)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_BASE = ROOT / "results/v6-capability-geometry"
@@ -53,9 +55,15 @@ SANITY_CE_LIMIT = 12.0
 _TIED_WEIGHT_MISSING_ALLOWLIST = frozenset({"lm_head.weight"})
 
 
-def model_output_tag(requested: str, resolved: str) -> str:
-    """Return a safe single-directory tag for a registry tag or raw HF id."""
-    source = requested if requested in MODEL_REGISTRY else resolved
+def model_output_tag(requested: str, resolved: str,
+                     revision: str | None = None) -> str:
+    """Return a safe directory tag, including the checkpoint revision if set."""
+    _, requested_revision = resolve_model_and_revision(requested)
+    base = requested.partition("@")[0]
+    source = base if base in MODEL_REGISTRY else resolved
+    revision = revision if revision is not None else requested_revision
+    if revision is not None:
+        source = f"{source}@{revision}"
     tag = re.sub(r"[^A-Za-z0-9._-]+", "--", source).strip(".-_")
     return tag or "model"
 
@@ -165,7 +173,8 @@ def _checkpoint_sanity_forward(model, tok, model_name: str) -> float:
     return mean_ce
 
 
-def load_text_causal_lm(model_name: str, dtype: torch.dtype):
+def load_text_causal_lm(model_name: str, dtype: torch.dtype,
+                        revision: str | None = None):
     """Load only the causal text LM, including from multimodal checkpoints.
 
     AutoModelForCausalLM gets first chance with the checkpoint's text config.
@@ -176,11 +185,12 @@ def load_text_causal_lm(model_name: str, dtype: torch.dtype):
     import transformers
     from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
 
-    config = AutoConfig.from_pretrained(model_name)
+    revision_kwargs = {"revision": revision} if revision is not None else {}
+    config = AutoConfig.from_pretrained(model_name, **revision_kwargs)
     text_config = getattr(config, "text_config", config)
     load_kwargs = {"config": text_config, "dtype": dtype,
                    "low_cpu_mem_usage": True,
-                   "output_loading_info": True}
+                   "output_loading_info": True, **revision_kwargs}
     first_error: Exception | None = None
     try:
         model, loading_info = AutoModelForCausalLM.from_pretrained(
@@ -204,7 +214,7 @@ def load_text_causal_lm(model_name: str, dtype: torch.dtype):
     if model is None:
         fallback_kwargs = {"config": config, "dtype": dtype,
                            "low_cpu_mem_usage": True,
-                           "output_loading_info": True}
+                           "output_loading_info": True, **revision_kwargs}
         loaders = []
         for auto_name in ("AutoModelForMultimodalLM",
                           "AutoModelForImageTextToText",
@@ -244,7 +254,7 @@ def load_text_causal_lm(model_name: str, dtype: torch.dtype):
             f"Refusing to analyze {model_name!r}: a non-language tower "
             "remained in the Fisher/pruning parameter scope."
         )
-    tok = AutoTokenizer.from_pretrained(model_name)
+    tok = AutoTokenizer.from_pretrained(model_name, **revision_kwargs)
     _checkpoint_sanity_forward(model, tok, model_name)
     gc.collect()
     return model, tok
@@ -469,10 +479,10 @@ def completion_loss(model, tok, prompt: str, completion: str,
 
 def stage_fisher(model_name: str, device: str, n_probe: int,
                  out: Path, fisher_device: str = "",
-                 model_dtype: str = "fp32") -> None:
+                 model_dtype: str = "fp32", revision: str | None = None) -> None:
     fisher_device = fisher_device or device
     dtype = torch.float32 if model_dtype == "fp32" else torch.bfloat16
-    model, tok = load_text_causal_lm(model_name, dtype)
+    model, tok = load_text_causal_lm(model_name, dtype, revision)
     model.to(device).train()  # train mode but we only need grads
     model.requires_grad_(False)
     params = language_weight_parameters(model)
@@ -514,6 +524,8 @@ def stage_fisher(model_name: str, device: str, n_probe: int,
     meta = {"model": model_name, "n_params": int(n_tot),
             "param_names": [n for n, _ in params], "counts": {},
             "n_bins": int(len(edges) + 1)}
+    if revision is not None:
+        meta["revision"] = revision
     masses = {}
 
     # one capability at a time: single Fisher buffer, bin, free
@@ -574,9 +586,16 @@ def stage_fisher(model_name: str, device: str, n_probe: int,
 
 
 def stage_prune(model_name: str, device: str, n_probe: int,  # noqa: C901
-                out: Path) -> None:
-    """Measure per-capability CE loss on dense + pruned variants."""
-    model, tok = load_text_causal_lm(model_name, torch.bfloat16)
+                out: Path, reference_device: str = "cuda",
+                revision: str | None = None) -> None:
+    """Measure per-capability CE loss on dense + pruned variants.
+
+    ``reference_device='cpu'`` holds the dense-weight reference on CPU to halve
+    peak GPU memory (needed to fit 14B+ models on a shared card); results are
+    numerically identical because the per-parameter restore copies CPU->GPU
+    in place. Default 'cuda' preserves the original behavior exactly.
+    """
+    model, tok = load_text_causal_lm(model_name, torch.bfloat16, revision)
     model.to(device).eval()
     probes = {c: v[1::2] for c, v in build_probes(n_probe).items()}
 
@@ -602,7 +621,9 @@ def stage_prune(model_name: str, device: str, n_probe: int,  # noqa: C901
 
     results = {"1.0": measure()}
     print("[prune] dense:", results["1.0"], flush=True)
-    dense_weights = [p.detach().clone() for _, p in params]
+    _ref_dev = "cpu" if str(reference_device).startswith("cpu") else device
+    dense_weights = [p.detach().clone().to(_ref_dev) for _, p in params]
+    print(f"[prune] reference_device={_ref_dev}", flush=True)
 
     for d in DENSITIES:
         thresh = thresholds[d]
@@ -700,7 +721,7 @@ def stage_report(out: Path) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="gemma3-270m",
-                    help="registry tag or raw Hugging Face model id")
+                    help="registry tag or raw Hugging Face model id, optionally @revision")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--n-probe", type=int, default=128)
     ap.add_argument("--densities", default="",
@@ -709,6 +730,11 @@ def main() -> None:
                     choices=["fisher", "prune", "report", "all"])
     ap.add_argument("--fisher-device", default="",
                     help="device for Fisher accumulators (cpu for big models)")
+    ap.add_argument("--reference-device", default="cuda",
+                    choices=["cuda", "cpu"],
+                    help="device holding the dense-weight reference during "
+                         "pruning; 'cpu' halves peak GPU memory for 14B+ "
+                         "models (identical results). Default 'cuda'.")
     ap.add_argument("--model-dtype", default="fp32",
                     choices=["fp32", "bf16"])
     args = ap.parse_args()
@@ -716,14 +742,16 @@ def main() -> None:
         global DENSITIES
         DENSITIES = [float(x) for x in args.densities.split(",") if x]
     model_name = require_compliant(args.model)
+    _, revision = resolve_model_and_revision(args.model)
     tag = model_output_tag(args.model, model_name)
     out = OUT_BASE / tag
     out.mkdir(parents=True, exist_ok=True)
     if args.stage in ("fisher", "all"):
         stage_fisher(model_name, args.device, args.n_probe, out,
-                     args.fisher_device, args.model_dtype)
+                     args.fisher_device, args.model_dtype, revision=revision)
     if args.stage in ("prune", "all"):
-        stage_prune(model_name, args.device, args.n_probe, out)
+        stage_prune(model_name, args.device, args.n_probe, out,
+                    reference_device=args.reference_device, revision=revision)
     if args.stage in ("report", "all"):
         stage_report(out)
 
