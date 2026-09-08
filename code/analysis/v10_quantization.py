@@ -282,6 +282,7 @@ def run_quantization(
     n_probe: int,
     bits: Sequence[int],
     out: Path,
+    reference_device: str = "cuda",
 ) -> None:
     """Load one model and run dense plus fake-quantized measurements."""
     dtype = torch.float32 if model_dtype == "fp32" else torch.bfloat16
@@ -295,7 +296,9 @@ def run_quantization(
     if not parameters:
         raise ValueError("No language weight matrices found for quantization")
 
-    dense_weights = [parameter.detach().clone() for _, parameter in parameters]
+    _ref_dev = "cpu" if str(reference_device).startswith("cpu") else device
+    dense_weights = [parameter.detach().clone().to(_ref_dev) for _, parameter in parameters]
+    print(f"[quantize] reference_device={_ref_dev}", flush=True)
     results: dict[str, dict[str, float]] = {
         "dense": _measure_capability_losses(model, tokenizer, probes, device)
     }
@@ -336,6 +339,8 @@ def main() -> None:
         help="model-registry tag or raw Hugging Face model id",
     )
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--reference-device", default="cuda", choices=["cuda","cpu"],
+                        help="device for the dense-weight reference; cpu halves GPU mem for 14B+ (identical results)")
     parser.add_argument("--model-dtype", choices=("fp32", "bf16"), default="fp32")
     parser.add_argument("--n-probe", type=int, default=128)
     parser.add_argument("--output-base", default=None, help="override output dir (keeps canonical grid clean)")
@@ -357,6 +362,7 @@ def main() -> None:
         model_dtype=args.model_dtype,
         n_probe=args.n_probe,
         bits=args.bits,
+        reference_device=args.reference_device,
         out=out,
     )
 
