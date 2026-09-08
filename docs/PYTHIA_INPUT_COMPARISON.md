@@ -33,32 +33,32 @@ All predictor models directly fit the raw signed configuration-level ΔL by the 
 
 | Capability | Inputs | MAE [95%] | Improvement over strongest simple [paired 95%] |
 |---|---|---:|---:|
-| math | Strongest simple (config_median) | 0.41400 [0.09592, 0.88822] | 0.00000 [0.00000, 0.00000] |
-| math | {N0, D0} | 0.80331 [0.49741, 1.21051] | -0.38932 [-0.95266, 0.18621] |
-| math | {N0, L0} | 0.61667 [0.10618, 0.93482] | -0.20267 [-0.55115, -0.01026] |
-| math | {N0, D0, L0} | 0.25539 [0.14354, 0.41856] | 0.15861 [-0.04762, 0.46966] |
-| code | Strongest simple (config_median) | 0.51756 [0.15525, 1.08860] | 0.00000 [0.00000, 0.00000] |
-| code | {N0, D0} | 0.95286 [0.57001, 1.41397] | -0.43531 [-1.10514, 0.21398] |
-| code | {N0, L0} | 0.69997 [0.10246, 1.11884] | -0.18241 [-0.56978, 0.05279] |
-| code | {N0, D0, L0} | 0.29796 [0.11123, 0.50305] | 0.21960 [0.02923, 0.58555] |
-| qa | Strongest simple (zero) | 0.49759 [0.13808, 1.05202] | 0.00000 [0.00000, 0.00000] |
-| qa | {N0, D0} | 0.93713 [0.52051, 1.40232] | -0.43953 [-1.26424, 0.16348] |
-| qa | {N0, L0} | 0.76506 [0.39030, 0.98763] | -0.26746 [-0.77916, 0.06439] |
-| qa | {N0, D0, L0} | 0.79629 [0.42889, 1.02247] | -0.29869 [-0.88440, 0.11452] |
+| math | Strongest simple (config_median) | 0.41309 [0.09629, 0.88515] | 0.00000 [0.00000, 0.00000] |
+| math | {N0, D0} | 0.79981 [0.49476, 1.20553] | -0.38671 [-0.94769, 0.18602] |
+| math | {N0, L0} | 0.61277 [0.10373, 0.93197] | -0.19968 [-0.54478, -0.00744] |
+| math | {N0, D0, L0} | 0.25307 [0.14294, 0.41064] | 0.16003 [-0.04665, 0.47452] |
+| code | Strongest simple (config_median) | 0.51586 [0.15502, 1.08374] | 0.00000 [0.00000, 0.00000] |
+| code | {N0, D0} | 0.94717 [0.56645, 1.40522] | -0.43131 [-1.09639, 0.21389] |
+| code | {N0, L0} | 0.69287 [0.09902, 1.11728] | -0.17701 [-0.55349, 0.05600] |
+| code | {N0, D0, L0} | 0.29159 [0.10973, 0.48824] | 0.22428 [0.03204, 0.59551] |
+| qa | Strongest simple (zero) | 0.49968 [0.13808, 1.05897] | 0.00000 [0.00000, 0.00000] |
+| qa | {N0, D0} | 0.94412 [0.52432, 1.41240] | -0.44445 [-1.27432, 0.16331] |
+| qa | {N0, L0} | 0.77419 [0.39469, 0.99373] | -0.27451 [-0.79606, 0.06524] |
+| qa | {N0, D0, L0} | 0.80567 [0.43360, 1.03952] | -0.30600 [-0.90144, 0.11507] |
 
 Zero-change MAE is the mean |ΔL|: it shows the response magnitude available to model. The reference row has zero improvement by definition; its gain over zero is shown here.
 
 | Capability | Zero MAE | Config mean MAE | Config median MAE | Selected reference | Reference gain over zero [paired 95%] |
 |---|---:|---:|---:|---|---:|
-| math | 0.55917 | 0.58898 | 0.41400 | config_median | 0.14517 [-0.07717, 0.25992] |
-| code | 0.66918 | 0.71474 | 0.51756 | config_median | 0.15162 [-0.11028, 0.29243] |
-| qa | 0.49759 | 0.67374 | 0.52453 | zero | 0.00000 [0.00000, 0.00000] |
+| math | 0.55789 | 0.58679 | 0.41309 | config_median | 0.14479 [-0.07717, 0.25952] |
+| code | 0.66769 | 0.71155 | 0.51586 | config_median | 0.15182 [-0.11028, 0.29257] |
+| qa | 0.49968 | 0.67771 | 0.52651 | zero | 0.00000 [0.00000, 0.00000] |
 
 | Capability | L0 model gain over D0 model [paired 95%] | Combined gain over D0 model [paired 95%] | Combined gain over L0 model [paired 95%] |
 |---|---:|---:|---:|
-| math | 0.18665 [-0.23281, 0.40151] | 0.54792 [0.28345, 1.00645] | 0.36128 [-0.03735, 0.60493] |
-| code | 0.25290 [-0.24423, 0.53537] | 0.65491 [0.37157, 1.13437] | 0.40201 [-0.00877, 0.61580] |
-| qa | 0.17207 [-0.09908, 0.48508] | 0.14084 [-0.04896, 0.37984] | -0.03123 [-0.10524, 0.05012] |
+| math | 0.18703 [-0.23284, 0.40291] | 0.54674 [0.28849, 0.99990] | 0.35970 [-0.03921, 0.59699] |
+| code | 0.25431 [-0.24742, 0.54291] | 0.65559 [0.38162, 1.12843] | 0.40128 [-0.01072, 0.62904] |
+| qa | 0.16994 [-0.09807, 0.47826] | 0.13845 [-0.04824, 0.37288] | -0.03149 [-0.10538, 0.04983] |
 
 **math:** Both standalone predictors fail to beat the simple reference in point MAE; their comparison cannot demonstrate information redundancy. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
 
@@ -109,15 +109,15 @@ All values are native-token MAE. The simple reference is fixed across the three 
 
 | Arm | Capability | Held-out step | Simple | N0,D0 | N0,L0 | Combined | Combined condition number |
 |---|---|---:|---:|---:|---:|---:|---:|
-| pruning | math | 16000 | 0.25784 | 1.21051 | 0.80900 | 0.20406 | 4.33 |
-| pruning | math | 64000 | 0.09592 | 0.49741 | 0.10618 | 0.14354 | 3.69 |
-| pruning | math | 143000 | 0.88822 | 0.70202 | 0.93482 | 0.41856 | 14.19 |
-| pruning | code | 16000 | 0.30883 | 1.41397 | 0.87860 | 0.27960 | 3.56 |
-| pruning | code | 64000 | 0.15525 | 0.57001 | 0.10246 | 0.11123 | 3.29 |
-| pruning | code | 143000 | 1.08860 | 0.87462 | 1.11884 | 0.50305 | 7.40 |
-| pruning | qa | 16000 | 0.13808 | 1.40232 | 0.91724 | 1.02247 | 1.78 |
-| pruning | qa | 64000 | 0.30268 | 0.52051 | 0.39030 | 0.42889 | 2.21 |
-| pruning | qa | 143000 | 1.05202 | 0.88855 | 0.98763 | 0.93751 | 2.48 |
+| pruning | math | 16000 | 0.25784 | 1.20553 | 0.80262 | 0.20563 | 4.32 |
+| pruning | math | 64000 | 0.09629 | 0.49476 | 0.10373 | 0.14294 | 3.68 |
+| pruning | math | 143000 | 0.88515 | 0.69913 | 0.93197 | 0.41064 | 14.21 |
+| pruning | code | 16000 | 0.30883 | 1.40522 | 0.86231 | 0.27679 | 3.53 |
+| pruning | code | 64000 | 0.15502 | 0.56645 | 0.09902 | 0.10973 | 3.26 |
+| pruning | code | 143000 | 1.08374 | 0.86985 | 1.11728 | 0.48824 | 7.40 |
+| pruning | qa | 16000 | 0.13808 | 1.41240 | 0.93414 | 1.03952 | 1.79 |
+| pruning | qa | 64000 | 0.30199 | 0.52432 | 0.39469 | 0.43360 | 2.21 |
+| pruning | qa | 143000 | 1.05897 | 0.89566 | 0.99373 | 0.94390 | 2.48 |
 | quantization | math | 16000 | 1.17917 | 3.63021 | 2.57075 | 0.90007 | 4.33 |
 | quantization | math | 64000 | 0.17899 | 1.35328 | 0.33542 | 0.46978 | 3.69 |
 | quantization | math | 143000 | 2.87191 | 2.10663 | 3.06177 | 2.06359 | 14.19 |
@@ -134,18 +134,18 @@ Pearson correlations use unique dense cells (not four repetitions per compressio
 
 | Arm | Capability | Cells | n | corr(D0,L0) | corr(log D0,L0) |
 |---|---|---|---:|---:|---:|
-| pruning | math | all sizes | 9 | 0.01617 | -0.04048 |
-| pruning | math | 160m | 3 | 0.86051 | 0.67720 |
+| pruning | math | all sizes | 9 | 0.01723 | -0.03938 |
+| pruning | math | 160m | 3 | 0.86091 | 0.67777 |
 | pruning | math | 410m | 3 | -0.91862 | -0.99352 |
-| pruning | math | 1.4b | 3 | -0.94328 | -0.99894 |
-| pruning | code | all sizes | 9 | 0.06478 | 0.00100 |
-| pruning | code | 160m | 3 | 0.85142 | 0.66415 |
+| pruning | math | 1.4b | 3 | -0.94450 | -0.99910 |
+| pruning | code | all sizes | 9 | 0.07177 | 0.00762 |
+| pruning | code | 160m | 3 | 0.85416 | 0.66806 |
 | pruning | code | 410m | 3 | -0.86669 | -0.97368 |
-| pruning | code | 1.4b | 3 | -0.94629 | -0.99932 |
-| pruning | qa | all sizes | 9 | 0.60771 | 0.60631 |
-| pruning | qa | 160m | 3 | 0.99795 | 0.93718 |
+| pruning | code | 1.4b | 3 | -0.94617 | -0.99930 |
+| pruning | qa | all sizes | 9 | 0.60702 | 0.60605 |
+| pruning | qa | 160m | 3 | 0.99809 | 0.93793 |
 | pruning | qa | 410m | 3 | -0.93971 | -0.99839 |
-| pruning | qa | 1.4b | 3 | 0.80875 | 0.94393 |
+| pruning | qa | 1.4b | 3 | 0.80913 | 0.94414 |
 | quantization | math | all sizes | 9 | 0.01617 | -0.04048 |
 | quantization | math | 160m | 3 | 0.86051 | 0.67720 |
 | quantization | math | 410m | 3 | -0.91862 | -0.99352 |
@@ -171,24 +171,24 @@ Pearson correlations use unique dense cells (not four repetitions per compressio
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
-| 160m | 1.80064 → 1.73044 → 2.16527 | +0.36463 | nonmonotonic |
+| 160m | 1.80064 → 1.73044 → 2.16737 | +0.36672 | nonmonotonic |
 | 410m | 1.61204 → 1.49905 → 1.45855 | -0.15348 | decreasing |
-| 1.4b | 1.46994 → 1.31300 → 1.23713 | -0.23282 | decreasing |
+| 1.4b | 1.46994 → 1.31377 → 1.23713 | -0.23282 | decreasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
-| 160m | 0.9 | 0.00888 → 0.00890 → 0.12457 | 1.80952 → 1.73934 → 2.28984 | +0.11570 | +0.48033 | increasing / nonmonotonic |
-| 160m | 0.8 | 0.07326 → 0.10789 → 0.74128 | 1.87390 → 1.83833 → 2.90655 | +0.66802 | +1.03265 | increasing / nonmonotonic |
-| 160m | 0.7 | 0.25706 → 0.44436 → 2.39037 | 2.05770 → 2.17480 → 4.55564 | +2.13331 | +2.49794 | increasing / increasing |
-| 160m | 0.6 | 0.87210 → 1.42177 → 6.49027 | 2.67274 → 3.15222 → 8.65554 | +5.61817 | +5.98280 | increasing / increasing |
+| 160m | 0.9 | 0.00888 → 0.00890 → 0.11880 | 1.80952 → 1.73934 → 2.28617 | +0.10992 | +0.47665 | increasing / nonmonotonic |
+| 160m | 0.8 | 0.07326 → 0.10789 → 0.73384 | 1.87390 → 1.83833 → 2.90121 | +0.66058 | +1.02731 | increasing / nonmonotonic |
+| 160m | 0.7 | 0.25706 → 0.44436 → 2.38808 | 2.05770 → 2.17480 → 4.55545 | +2.13102 | +2.49775 | increasing / increasing |
+| 160m | 0.6 | 0.87210 → 1.42177 → 6.46413 | 2.67274 → 3.15222 → 8.63150 | +5.59203 | +5.95875 | increasing / increasing |
 | 410m | 0.9 | 0.00225 → 0.00825 → 0.03411 | 1.61429 → 1.50730 → 1.49266 | +0.03186 | -0.12163 | increasing / decreasing |
 | 410m | 0.8 | 0.02064 → 0.04742 → 0.19665 | 1.63268 → 1.54647 → 1.65520 | +0.17601 | +0.02252 | increasing / nonmonotonic |
 | 410m | 0.7 | 0.10061 → 0.19637 → 0.61281 | 1.71265 → 1.69542 → 2.07136 | +0.51220 | +0.35872 | increasing / nonmonotonic |
 | 410m | 0.6 | 0.37365 → 0.71237 → 1.66246 | 1.98568 → 2.21142 → 3.12102 | +1.28882 | +1.13533 | increasing / increasing |
-| 1.4b | 0.9 | 0.00105 → 0.00708 → 0.01010 | 1.47099 → 1.32008 → 1.24723 | +0.00906 | -0.22376 | increasing / decreasing |
-| 1.4b | 0.8 | 0.01505 → 0.03838 → 0.07063 | 1.48499 → 1.35138 → 1.30776 | +0.05558 | -0.17723 | increasing / decreasing |
-| 1.4b | 0.7 | 0.07811 → 0.19738 → 0.29481 | 1.54805 → 1.51038 → 1.53193 | +0.21670 | -0.01612 | increasing / nonmonotonic |
-| 1.4b | 0.6 | 0.36538 → 0.99409 → 1.14965 | 1.83532 → 2.30709 → 2.38678 | +0.78427 | +0.55145 | increasing / increasing |
+| 1.4b | 0.9 | 0.00105 → 0.00643 → 0.01010 | 1.47099 → 1.32020 → 1.24723 | +0.00906 | -0.22376 | increasing / decreasing |
+| 1.4b | 0.8 | 0.01505 → 0.03775 → 0.07063 | 1.48499 → 1.35152 → 1.30776 | +0.05558 | -0.17723 | increasing / decreasing |
+| 1.4b | 0.7 | 0.07811 → 0.19548 → 0.29481 | 1.54805 → 1.50925 → 1.53193 | +0.21670 | -0.01612 | increasing / nonmonotonic |
+| 1.4b | 0.6 | 0.36538 → 0.99284 → 1.14965 | 1.83532 → 2.30661 → 2.38678 | +0.78427 | +0.55145 | increasing / increasing |
 
 For example, 410m at config 0.9: the increment rises by 0.03186, while dense loss changes by -0.15348 and absolute compressed loss changes by -0.12163 nats/native token. This is increased fragility alongside improved absolute compressed loss.
 
@@ -200,24 +200,24 @@ For example, 410m at config 0.9: the increment rises by 0.03186, while dense los
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
-| 160m | 1.75261 → 1.67346 → 2.11594 | +0.36332 | nonmonotonic |
+| 160m | 1.75261 → 1.67346 → 2.12913 | +0.37652 | nonmonotonic |
 | 410m | 1.54582 → 1.43594 → 1.41627 | -0.12955 | decreasing |
-| 1.4b | 1.46524 → 1.35025 → 1.29255 | -0.17269 | decreasing |
+| 1.4b | 1.46524 → 1.35019 → 1.29255 | -0.17269 | decreasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
-| 160m | 0.9 | 0.01361 → 0.01652 → 0.22986 | 1.76622 → 1.68998 → 2.34579 | +0.21625 | +0.57957 | increasing / nonmonotonic |
-| 160m | 0.8 | 0.07565 → 0.18481 → 1.09395 | 1.82826 → 1.85827 → 3.20989 | +1.01830 | +1.38163 | increasing / increasing |
-| 160m | 0.7 | 0.27799 → 0.61380 → 3.39036 | 2.03060 → 2.28726 → 5.50630 | +3.11237 | +3.47570 | increasing / increasing |
-| 160m | 0.6 | 1.13365 → 2.00446 → 7.29148 | 2.88626 → 3.67792 → 9.40742 | +6.15783 | +6.52116 | increasing / increasing |
+| 160m | 0.9 | 0.01361 → 0.01652 → 0.23794 | 1.76622 → 1.68998 → 2.36707 | +0.22433 | +0.60084 | increasing / nonmonotonic |
+| 160m | 0.8 | 0.07565 → 0.18481 → 1.08444 | 1.82826 → 1.85827 → 3.21357 | +1.00879 | +1.38531 | increasing / increasing |
+| 160m | 0.7 | 0.27799 → 0.61380 → 3.38026 | 2.03060 → 2.28726 → 5.50939 | +3.10227 | +3.47879 | increasing / increasing |
+| 160m | 0.6 | 1.13365 → 2.00446 → 7.24643 | 2.88626 → 3.67792 → 9.37556 | +6.11279 | +6.48930 | increasing / increasing |
 | 410m | 0.9 | 0.00184 → 0.00618 → 0.00957 | 1.54766 → 1.44212 → 1.42584 | +0.00773 | -0.12182 | increasing / decreasing |
 | 410m | 0.8 | 0.00499 → 0.06216 → 0.21613 | 1.55081 → 1.49810 → 1.63240 | +0.21114 | +0.08159 | increasing / nonmonotonic |
 | 410m | 0.7 | 0.11320 → 0.16817 → 0.80604 | 1.65902 → 1.60411 → 2.22231 | +0.69283 | +0.56329 | increasing / nonmonotonic |
 | 410m | 0.6 | 0.34550 → 0.99287 → 2.30550 | 1.89131 → 2.42881 → 3.72177 | +1.96001 | +1.83046 | increasing / increasing |
-| 1.4b | 0.9 | 0.00006 → 0.00398 → 0.02110 | 1.46530 → 1.35423 → 1.31364 | +0.02104 | -0.15165 | increasing / decreasing |
-| 1.4b | 0.8 | 0.01254 → 0.01795 → 0.05152 | 1.47778 → 1.36820 → 1.34407 | +0.03898 | -0.13371 | increasing / decreasing |
-| 1.4b | 0.7 | 0.04956 → 0.08533 → 0.17406 | 1.51480 → 1.43558 → 1.46660 | +0.12449 | -0.04819 | increasing / nonmonotonic |
-| 1.4b | 0.6 | 0.35399 → 0.97938 → 0.98277 | 1.81923 → 2.32963 → 2.27531 | +0.62877 | +0.45609 | increasing / nonmonotonic |
+| 1.4b | 0.9 | 0.00006 → 0.00505 → 0.02110 | 1.46530 → 1.35524 → 1.31364 | +0.02104 | -0.15165 | increasing / decreasing |
+| 1.4b | 0.8 | 0.01254 → 0.01860 → 0.05152 | 1.47778 → 1.36879 → 1.34407 | +0.03898 | -0.13371 | increasing / decreasing |
+| 1.4b | 0.7 | 0.04956 → 0.08807 → 0.17406 | 1.51480 → 1.43826 → 1.46660 | +0.12449 | -0.04819 | increasing / nonmonotonic |
+| 1.4b | 0.6 | 0.35399 → 0.97766 → 0.98277 | 1.81923 → 2.32785 → 2.27531 | +0.62877 | +0.45609 | increasing / nonmonotonic |
 
 For example, 410m at config 0.9: the increment rises by 0.00773, while dense loss changes by -0.12955 and absolute compressed loss changes by -0.12182 nats/native token. This is increased fragility alongside improved absolute compressed loss.
 
@@ -229,24 +229,24 @@ For example, 410m at config 0.9: the increment rises by 0.00773, while dense los
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
-| 160m | 4.77070 → 4.91647 → 5.22505 | +0.45434 | increasing |
+| 160m | 4.77070 → 4.91647 → 5.22231 | +0.45161 | increasing |
 | 410m | 5.07539 → 5.01889 → 4.99275 | -0.08264 | decreasing |
-| 1.4b | 4.91249 → 5.11214 → 5.12034 | +0.20785 | increasing |
+| 1.4b | 4.91249 → 5.11199 → 5.12034 | +0.20785 | increasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
-| 160m | 0.9 | 0.01209 → -0.04396 → 0.14734 | 4.78279 → 4.87250 → 5.37239 | +0.13525 | +0.58959 | nonmonotonic / increasing |
-| 160m | 0.8 | -0.02718 → -0.11122 → 0.75665 | 4.74352 → 4.80525 → 5.98170 | +0.78383 | +1.23818 | nonmonotonic / increasing |
-| 160m | 0.7 | -0.17363 → 0.26675 → 2.89057 | 4.59708 → 5.18322 → 8.11561 | +3.06419 | +3.51854 | increasing / increasing |
-| 160m | 0.6 | 0.34847 → 1.52519 → 6.21186 | 5.11918 → 6.44166 → 11.43691 | +5.86339 | +6.31773 | increasing / increasing |
+| 160m | 0.9 | 0.01209 → -0.04396 → 0.22065 | 4.78279 → 4.87250 → 5.44297 | +0.20856 | +0.66017 | nonmonotonic / increasing |
+| 160m | 0.8 | -0.02718 → -0.11122 → 0.95247 | 4.74352 → 4.80525 → 6.17479 | +0.97965 | +1.43126 | nonmonotonic / increasing |
+| 160m | 0.7 | -0.17363 → 0.26675 → 2.81000 | 4.59708 → 5.18322 → 8.03232 | +2.98363 | +3.43524 | increasing / increasing |
+| 160m | 0.6 | 0.34847 → 1.52519 → 6.10658 | 5.11918 → 6.44166 → 11.32890 | +5.75811 | +6.20972 | increasing / increasing |
 | 410m | 0.9 | -0.01646 → -0.01444 → -0.11538 | 5.05894 → 5.00446 → 4.87738 | -0.09892 | -0.18156 | nonmonotonic / decreasing |
 | 410m | 0.8 | -0.03274 → -0.11811 → -0.16683 | 5.04266 → 4.90078 → 4.82593 | -0.13409 | -0.21673 | decreasing / decreasing |
 | 410m | 0.7 | -0.18102 → -0.29004 → 0.12773 | 4.89437 → 4.72885 → 5.12048 | +0.30876 | +0.22612 | nonmonotonic / nonmonotonic |
 | 410m | 0.6 | -0.39134 → -0.24774 → 1.25677 | 4.68405 → 4.77115 → 6.24952 | +1.64811 | +1.56547 | increasing / increasing |
-| 1.4b | 0.9 | 0.00986 → -0.02665 → 0.02822 | 4.92235 → 5.08549 → 5.14856 | +0.01836 | +0.22621 | nonmonotonic / increasing |
-| 1.4b | 0.8 | -0.00250 → -0.05980 → -0.06381 | 4.90999 → 5.05234 → 5.05653 | -0.06131 | +0.14654 | decreasing / increasing |
-| 1.4b | 0.7 | -0.14169 → -0.42666 → -0.41394 | 4.77079 → 4.68548 → 4.70639 | -0.27225 | -0.06440 | nonmonotonic / nonmonotonic |
-| 1.4b | 0.6 | -0.31993 → -0.50163 → -0.44519 | 4.59256 → 4.61050 → 4.67514 | -0.12527 | +0.08258 | nonmonotonic / increasing |
+| 1.4b | 0.9 | 0.00986 → -0.02368 → 0.02822 | 4.92235 → 5.08831 → 5.14856 | +0.01836 | +0.22621 | nonmonotonic / increasing |
+| 1.4b | 0.8 | -0.00250 → -0.06675 → -0.06381 | 4.90999 → 5.04524 → 5.05653 | -0.06131 | +0.14654 | nonmonotonic / increasing |
+| 1.4b | 0.7 | -0.14169 → -0.41641 → -0.41394 | 4.77079 → 4.69558 → 4.70639 | -0.27225 | -0.06440 | nonmonotonic / nonmonotonic |
+| 1.4b | 0.6 | -0.31993 → -0.49958 → -0.44519 | 4.59256 → 4.61240 → 4.67514 | -0.12527 | +0.08258 | nonmonotonic / increasing |
 
 ### quantization: math
 

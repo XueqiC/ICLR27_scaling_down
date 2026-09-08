@@ -77,6 +77,16 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   configs (pruning d=0.6 / quant int3); QA excepted; and it is source-transfer at fixed d/b, not a compression-axis law.
 - Qwen-family QA IMPROVES under pruning and int4 quant (Qwen-specific); under distillation QA improves in all families.
 
+## Compression-strength axis (round-6, SECOND AXIS)
+- **Pruning (C30)**: frozen shared-shape ΔL̂_c(x,d)=A_c(x)·((1−d)/0.3)^γ_c predicts UNSEEN densities and
+  beats every strength-only baseline for math/code (MAE ~0.4–0.5 vs ~1.4–1.6), incl. a new source-state;
+  interpolation strong, deep extrapolation under-predicts at cliff, QA amplitude doesn't transfer. First
+  real unseen-strength law. See PRUNE_STRENGTH_AXIS.md.
+- **Quantization (QUANT_PARTITION.md)**: no unseen-bit axis; >=4bit region has ~nothing to predict (tiny
+  errors), int3 collapse magnitude is UNSTABLE (helps on some new sources, fails on others). Predicts the
+  RISK of large-damage entry, not a smooth magnitude law. No clean second-axis result. Confirms C28.
+- **Distillation**: P3 (hpg, new pool U=225) pending.
+
 ## Open (next round)
 - A per-arm frozen prospective on a fresh source with the full {N0,D0,L0} model (Qwen3-14B pruning/quant already run;
   a distillation new-student with matched LoRA recipe pending).

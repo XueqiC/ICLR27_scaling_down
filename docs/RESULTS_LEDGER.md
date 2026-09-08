@@ -93,3 +93,6 @@ Win driven by source-conditioned amplitude (source-blind curves miss that 160m@1
 Interpolation (d=0.65) strong incl. new source (math err 0.03, code 0.13); deeper extrap (d=0.55) systematically
 UNDER-predicts near the cliff (pre-declared domain edge, not dropped); QA amplitude over-predicted (doesn't transfer).
 FIRST result predicting UNSEEN compression strength, not just source-transfer at fixed d. See PRUNE_STRENGTH_AXIS.md.
+
+### C30b — Quant partition on new sources (QUANT_PARTITION.md)
+Quant has no unseen-bit axis; on 3 new @96k sources, >=4bit errors are tiny (nothing to predict), int3 collapse magnitude UNSTABLE (candidate wins on 410m/1.4b math, fails 160m-code/410m-qa). Predicts int3-collapse RISK, not a smooth magnitude law. Confirms C28. No clean second-axis win (contrast pruning C30).
