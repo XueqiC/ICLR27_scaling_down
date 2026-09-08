@@ -70,3 +70,14 @@ code 0.128 vs 0.438; qa 0.426 vs 0.832). **QUANTIZATION does NOT** — quant-cod
 0.35, over-predicts int3 collapse); quant-math win is int3-driven; quant-qa beaten by no-D0. n=8/arm/cap,
 point estimates. See CONTROLLED_PANEL_PREDICTOR.md §7. This is the round's strongest positive (a real
 frozen prospective, not in-sample) AND a clean negative for the quant arm.
+
+
+### C29 — P2 distillation controlled source-transfer (LoRA panel, 9 cells)
+Full 3-size x 3-step LoRA distillation panel (fixed teacher gpt-5.6-luna, recipe full, pool 600, E=2,
+seed 0). Predict delta_c = L_c(S_KD)-L_c(S0) from {N0,L0,[D0]} (no config indicators), leave-one-size/step-out.
+**MATH: source-transfer works** — {N0,L0,D0} beats no-D0 AND the constant-delta baseline in both splits
+(MAE ~halved, e.g. 0.016 vs baseline 0.038); delta_math grows smoothly/monotonically with D0.
+**CODE/QA: fail** — a per-capability CONSTANT delta is as good or better; D0 adds nothing (delta_code
+direction inconsistent across sizes; delta_qa noisy with a sign-flip outlier at 160m@143k). Distillation
+gives a WEAKER, capability-specific source-transfer relationship than pruning (C28). n=9, point MAE only.
+See DISTILL_CONTROLLED.md.

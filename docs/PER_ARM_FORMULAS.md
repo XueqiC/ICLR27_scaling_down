@@ -58,8 +58,10 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   residual → exposure is a WEAK driver, not a confound. E is dominant and sufficient at the coarse scale; a small
   matched-E residual remains (attribution: unique-data volume vs sampling, minor open). Adding log D_U (additive or
   low-DOF interaction) does not help held-out (v37/v37b). No matched-optimizer-step rerun needed.
-- **Controlled panel**: D_0 modulates the distillation response (LoRA confirms; recipe changes magnitude not
-  direction). Pythia distill = LoRA (rai) and full-FT (hpg) — cross-recipe comparison limited.
+- **Controlled panel (P2, full 3x3 LoRA)**: delta_c source-transfer works ONLY for MATH ({N0,L0,D0} beats
+  no-D0 AND constant baseline, MAE ~halved; delta_math grows monotonically with D0). CODE/QA: a per-capability
+  CONSTANT delta is as good or better, D0 adds nothing (code direction size-inconsistent; qa noisy w/ outlier).
+  Weaker & capability-specific vs pruning's all-cap prospective generalization (C28/C29). See DISTILL_CONTROLLED.md.
 
 ---
 
@@ -69,6 +71,7 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   instability; quantization = no predictive value in the measurable region (collapse-region artifact) + inconclusive
   shape; distillation = reuse-count-dominated with an exposure-confounded residual.
 - On **heterogeneous finished models**, per-model amplitude/sign does not transfer from {N0, family, dense L_c}.
+- On the **controlled panel**, arms differ: PRUNING generalizes prospectively across all caps (C28); QUANT fails (int3 artifact); DISTILLATION source-transfer is math-only, code/qa best fit by a constant (C29).
 - On the **controlled Pythia series**, D_0 adds incremental value beyond dense loss (4/12 CIs excl 0), but vs the
   strongest per-config baseline the full model significantly wins ONLY for CODE, concentrated in the aggressive
   configs (pruning d=0.6 / quant int3); QA excepted; and it is source-transfer at fixed d/b, not a compression-axis law.
