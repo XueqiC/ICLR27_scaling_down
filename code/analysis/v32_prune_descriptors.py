@@ -357,7 +357,9 @@ def extract(args):
         write_json(destination, previous)  # Preserve completed weights if activation extraction fails.
     if args.with_activations:
         from transformers import AutoTokenizer
-        batches, protocol = shared_probe_batches(AutoTokenizer.from_pretrained(hf_id), args.device,
+        # With --offload the model is CPU-resident (device_map cpu); inputs must match its device.
+        input_device = "cpu" if getattr(args, "offload", False) else args.device
+        batches, protocol = shared_probe_batches(AutoTokenizer.from_pretrained(hf_id), input_device,
                                                 args.activation_forwards, args.activation_max_length)
         previous["activations"] = activation_descriptors(model, batches, protocol=protocol)
         previous["activations"]["cost"]["reload_seconds"] = load_seconds if upgrading else 0.
