@@ -11,7 +11,9 @@ Example:
       --teacher gpt-5.6-luna --recipe full --device cuda:0
 
 Artifacts are written under
-``results/v12-distill/<student_tag>/<teacher>_<recipe>_<n>[_seedN]/``.
+``results/v12-distill/<student_tag>/<teacher>_<recipe>_<n>_<lora|full>[_seedN]/``.
+``--training-mode`` defaults to strict LoRA (requires PEFT); ``full`` opts into
+the original full matrix fine-tuning protocol, and ``auto`` permits fallback.
 ``--seed`` controls training and data shuffling; measurement probes stay fixed.
 ``--save-trajectory --trajectory-tokens 250000 500000 1000000`` saves a dense
 baseline plus eval/adapter snapshots at completed updates within this same run.
@@ -31,7 +33,6 @@ import random
 import re
 import tempfile
 import time
-import warnings
 from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from typing import Callable, Iterable, Mapping, Sequence
@@ -48,6 +49,7 @@ try:
         load_text_causal_lm,
         model_output_tag,
         require_compliant,
+        resolve_model_and_revision,
     )
 except ImportError:  # direct execution: python analysis/v12_distill.py
     from v6_capability_geometry import (
@@ -57,6 +59,7 @@ except ImportError:  # direct execution: python analysis/v12_distill.py
         load_text_causal_lm,
         model_output_tag,
         require_compliant,
+        resolve_model_and_revision,
     )
 
 
@@ -68,6 +71,7 @@ TEACHERS = ("gpt-5.6-luna", "claude-sonnet-4-6")
 DOMAINS = ("math", "qa", "code")
 CAPABILITIES = ("math", "code", "qa")
 RECIPES = ("full", "answer_only", "no_code_fence")
+TRAINING_MODES = ("lora", "full", "auto")
 TRAINING_BENCHMARKS = {
     "math": "GSM8K",
     "code": "CodeAlpaca",
@@ -186,14 +190,19 @@ def make_run_name(
     n_per_domain: int,
     output_suffix: str = "",
     seed: int = SEED,
+    training_mode: str = "lora",
 ) -> str:
-    """Return the stable run directory name shared with the sweep driver."""
+    """Label the actual mode; preserve existing explicit ``_lora`` suffixes."""
+    if training_mode not in ("lora", "full"):
+        raise ValueError("Run names require an actual training mode: lora or full")
     base = f"{teacher}_{recipe}_{n_per_domain}"
     if output_suffix:
         safe_suffix = re.sub(r"[^A-Za-z0-9._-]+", "--", output_suffix).strip(".-_")
         if not safe_suffix:
             raise ValueError("--output-suffix must contain a path-safe character")
         base = f"{base}_{safe_suffix}"
+    if not base.endswith(f"_{training_mode}"):
+        base = f"{base}_{training_mode}"
     return f"{base}_seed{seed}" if seed != 0 else base
 
 
@@ -503,23 +512,48 @@ def measure_capability_losses(
     return losses, token_counts
 
 
-def configure_training(
-    model,
-    *,
-    allow_full_fallback: bool = True,
-) -> tuple[torch.nn.Module, str, list[str]]:
-    """Configure LoRA when PEFT imports, otherwise full matrix fine-tuning."""
+def lora_target_modules(model) -> tuple[str, ...]:
+    """Select GPT-NeoX projections for Pythia; retain other families' targets."""
+    if getattr(getattr(model, "config", None), "model_type", None) == "gpt_neox":
+        return ("query_key_value", "dense", "dense_h_to_4h", "dense_4h_to_h")
+    return LORA_TARGET_MODULES
+
+
+def resolve_training_mode(training_mode: str) -> str:
+    """Check PEFT before loading data/models; only explicit auto may fall back."""
+    if training_mode not in TRAINING_MODES:
+        raise ValueError(f"Unknown training mode {training_mode!r}; expected {TRAINING_MODES}")
+    if training_mode == "full":
+        return "full"
     try:
         from peft import LoraConfig, get_peft_model
     except ImportError as exc:
-        if not allow_full_fallback:
-            raise RuntimeError("peft is required for LoRA training") from exc
-        warnings.warn(
-            "peft is unavailable; falling back to full fine-tuning of all "
-            "language weight matrices",
-            RuntimeWarning,
-            stacklevel=2,
-        )
+        if training_mode == "lora":
+            raise RuntimeError(
+                "--training-mode lora requires peft, but its import failed. "
+                "Install a working peft environment or explicitly request "
+                "--training-mode full (intentional full-FT) or auto (allow fallback). "
+                "Aborting; no full fine-tuning fallback is allowed."
+            ) from exc
+        print(f"!!! TRAINING MODE AUTO -> FULL: peft import failed ({exc}); "
+              "FULL MATRIX FINE-TUNING SELECTED !!!", flush=True)
+        return "full"
+    if training_mode == "auto":
+        print("!!! TRAINING MODE AUTO -> LORA: peft available; LoRA SELECTED !!!", flush=True)
+    return "lora"
+
+
+def configure_training(
+    model,
+    training_mode: str = "lora",
+    *,
+    allow_full_fallback: bool = False,
+) -> tuple[torch.nn.Module, str, list[str]]:
+    """Configure the requested protocol; retain legacy strict callers' keyword."""
+    if allow_full_fallback:
+        raise ValueError("Use training_mode='auto' to explicitly allow full-FT fallback")
+    training_mode = resolve_training_mode(training_mode)
+    if training_mode == "full":
         model.requires_grad_(False)
         parameters = language_weight_parameters(model)
         if not parameters:
@@ -528,21 +562,53 @@ def configure_training(
             parameter.requires_grad_(True)
         return model, "full", [name for name, _ in parameters]
 
+    from peft import LoraConfig, get_peft_model
+
     config = LoraConfig(
         r=16,
         lora_alpha=32,
         lora_dropout=0.0,
         bias="none",
-        target_modules=list(LORA_TARGET_MODULES),
+        target_modules=list(lora_target_modules(model)),
     )
     model = get_peft_model(model, config)
     trainable = [name for name, parameter in model.named_parameters() if parameter.requires_grad]
     if not trainable:
         raise RuntimeError(
             "PEFT found no LoRA targets; expected attention/MLP projections "
-            f"named {', '.join(LORA_TARGET_MODULES)}"
+            f"named {', '.join(lora_target_modules(model))}"
         )
     return model, "lora", trainable
+
+
+def build_training_manifest(model, requested_mode: str, configured_mode: str) -> dict:
+    """Assert the protocol from actual parameters, before any optimizer update."""
+    if requested_mode not in TRAINING_MODES:
+        raise ValueError(f"Unknown training mode {requested_mode!r}")
+    parameters = dict(model.named_parameters())
+    trainable = {name for name, parameter in parameters.items() if parameter.requires_grad}
+    adapters = {name for name in parameters if ".lora_" in name}
+    actual_mode = "lora" if adapters else "full"
+    if configured_mode != actual_mode or requested_mode not in ("auto", actual_mode):
+        raise RuntimeError(
+            f"Training protocol mismatch: requested={requested_mode}, "
+            f"configured={configured_mode}, actual={actual_mode}"
+        )
+    trainable_parameters = sum(parameters[name].numel() for name in trainable)
+    total_parameters = sum(parameter.numel() for parameter in parameters.values())
+    if not 0 < trainable_parameters <= total_parameters:
+        raise RuntimeError("Training protocol requires a positive trainable-parameter count")
+    if actual_mode == "lora" and (not trainable & adapters or trainable - adapters):
+        raise RuntimeError("LoRA protocol requires trainable adapters and frozen base parameters")
+    return {
+        "version": "v12-training-protocol-v1",
+        "requested_training_mode": requested_mode,
+        "training_mode": actual_mode,
+        "trainable_parameters": trainable_parameters,
+        "total_parameters": total_parameters,
+        # Fully qualified module names reflect injected adapters, not a target wish list.
+        "target_modules": sorted({name.split(".lora_", 1)[0] for name in adapters}),
+    }
 
 
 def _snapshot_full_parameters(
@@ -572,6 +638,7 @@ def _save_full_delta(
     snapshot_manifest: Sequence[Mapping[str, str]],
     adapter_dir: Path,
     base_model: str,
+    revision: str | None = None,
 ) -> None:
     """Write fp32 delta shards and a name-to-file manifest."""
     adapter_dir.mkdir(parents=True, exist_ok=True)
@@ -590,9 +657,13 @@ def _save_full_delta(
             {"name": name, "file": filename, "shape": list(delta.shape), "dtype": "float32"}
         )
         del initial, delta
+    metadata = {"format": "v12-full-finetune-delta-v1", "base_model": base_model,
+                "parameters": delta_manifest}
+    if revision is not None:
+        metadata["revision"] = revision
     write_json_atomic(
         adapter_dir / "delta_manifest.json",
-        {"format": "v12-full-finetune-delta-v1", "base_model": base_model, "parameters": delta_manifest},
+        metadata,
     )
 
 
@@ -869,6 +940,8 @@ def run_distillation(
     save_trajectory: bool = False,
     trajectory_tokens: Sequence[int] | None = None,
     dry_run: bool = False,
+    revision: str | None = None,
+    training_mode: str = "lora",
 ) -> dict:
     """Run dense evaluation, SFT, post-training evaluation, and persistence."""
     if not 0 <= seed < 2**32:
@@ -877,6 +950,8 @@ def run_distillation(
         raise ValueError("--epochs and --n-per-domain must be positive")
     if learning_rate is not None and (not math.isfinite(learning_rate) or learning_rate <= 0):
         raise ValueError("--lr must be finite and positive")
+    if training_mode not in TRAINING_MODES:
+        raise ValueError(f"Unknown training mode {training_mode!r}; expected {TRAINING_MODES}")
     if trajectory_tokens is not None and not save_trajectory:
         raise ValueError("--trajectory-tokens requires --save-trajectory")
     milestones = validate_trajectory_tokens(
@@ -884,24 +959,40 @@ def run_distillation(
         if save_trajectory else ()
     )
     parsed_domains = parse_domains(domains)
-    model_name = require_compliant(require_compliant(student))
-    student_tag = model_output_tag(student, model_name)
-    run_name = make_run_name(teacher, recipe, n_per_domain, output_suffix, seed)
-    out = OUT_BASE / student_tag / run_name
-    adapter_dir = out / "adapter"
+    model_name = require_compliant(student)
+    _, requested_revision = resolve_model_and_revision(student)
+    if revision is not None and requested_revision not in (None, revision):
+        raise ValueError("revision conflicts with the student's @revision")
+    revision = revision if revision is not None else requested_revision
+    student_tag = model_output_tag(student, model_name, revision)
+    output_paths = {
+        mode: OUT_BASE / student_tag / make_run_name(
+            teacher, recipe, n_per_domain, output_suffix, seed, training_mode=mode
+        ) for mode in ("lora", "full")
+    }
     if dry_run:
         plan = {"dry_run": True, "student": model_name, "teacher": teacher,
                 "recipe": recipe, "domains": list(parsed_domains),
                 "n_per_domain": n_per_domain, "epochs": epochs, "seed": seed,
-                "output": str(out), "save_trajectory": save_trajectory,
+                "requested_training_mode": training_mode,
+                "output": str(output_paths[training_mode]) if training_mode != "auto" else None,
+                "output_candidates": {mode: str(path) for mode, path in output_paths.items()},
+                "save_trajectory": save_trajectory,
                 "trajectory_tokens": list(milestones),
                 "trajectory_policy": "baseline plus first completed optimizer update crossing each milestone; group crossings share one snapshot; no schedule restart or extension",
                 "token_accounting": TOKEN_ACCOUNTING,
                 "independent_replicates": "one continuous run/seed; snapshots are dependent repeated measurements",
                 "probe_seed": SEED, "probe_half": "measurement v[1::2]",
                 "status": "plan only; no model, tokenizer, data, CUDA, or output writes"}
+        if revision is not None:
+            plan["revision"] = revision
         print(json.dumps(plan, indent=2))
         return plan
+    requested_training_mode = training_mode
+    selected_mode = resolve_training_mode(requested_training_mode)
+    out = output_paths[selected_mode]
+    run_name = out.name
+    adapter_dir = out / "adapter"
     if save_trajectory and ((out / "eval.json").exists() or (out / "trajectory").exists()):
         raise FileExistsError(
             f"Trajectory requires a fresh run directory: {out}; choose a new --output-suffix"
@@ -923,14 +1014,21 @@ def run_distillation(
     if any(not probes[capability] for capability in CAPABILITIES):
         raise RuntimeError("V6 measurement-half probes must be non-empty")
 
-    model, tokenizer = load_text_causal_lm(model_name, torch.bfloat16)
+    model, tokenizer = load_text_causal_lm(model_name, torch.bfloat16, revision)
     model.to(device).eval()
     dense_losses, measurement_tokens = measure_capability_losses(
         model, tokenizer, probes, device
     )
     print(f"[eval dense] {dense_losses}", flush=True)
 
-    model, training_mode, trainable_names = configure_training(model)
+    model, training_mode, trainable_names = configure_training(model, training_mode=selected_mode)
+    training_manifest = build_training_manifest(model, requested_training_mode, training_mode)
+    if training_mode != selected_mode:
+        raise RuntimeError(f"Training mode changed after output path selection: {selected_mode} -> {training_mode}")
+    print("[TRAINING PROTOCOL] " + json.dumps(training_manifest, sort_keys=True), flush=True)
+    if revision is not None and training_mode == "lora":
+        for config in model.peft_config.values():
+            config.revision = revision
     selected_lr = (
         learning_rate
         if learning_rate is not None
@@ -955,10 +1053,6 @@ def run_distillation(
     if not tokenized:
         raise RuntimeError("Tokenization produced no completion tokens")
 
-    trainable_parameters = sum(
-        parameter.numel() for parameter in model.parameters() if parameter.requires_grad
-    )
-    total_parameters = sum(parameter.numel() for parameter in model.parameters())
     initial_accounting = TokenAccounting(tokenized).snapshot()
     trajectory_run_id = str(out.relative_to(OUT_BASE))
     eval_metadata = {
@@ -968,6 +1062,7 @@ def run_distillation(
         "output_suffix": output_suffix, "run_name": run_name,
         "seed": seed, "training_seed": seed, "data_sampling_seed": seed,
         "training_mode": training_mode, "probe_seed": SEED,
+        "training_manifest": training_manifest,
         "data_selection": "first n_per_domain rows; seeded initial and epoch shuffles",
         "training_benchmarks": {c: TRAINING_BENCHMARKS[c] for c in parsed_domains},
         "data_pool_sha256": hashlib.sha256(json.dumps(sorted(
@@ -990,6 +1085,40 @@ def run_distillation(
         "trajectory_note": "Snapshots share one run, fixed data pool, optimizer and cosine schedule; never independent seeds. Adapter snapshots are for evaluation, not optimizer resume.",
         "loss_definition": "sum_target_CE / sum_target_tokens (nats/token, legacy V12)",
     }
+    if revision is not None:
+        eval_metadata["revision"] = revision
+
+    train_metadata = {
+        "student": student,
+        "resolved_student": model_name,
+        "student_tag": student_tag,
+        "teacher": teacher,
+        "recipe": recipe,
+        "domains": list(parsed_domains),
+        "n_per_domain": n_per_domain,
+        "run_name": run_name,
+        "trace_counts": trace_counts,
+        "tokenization_deleted_rows": tokenization_deleted,
+        "training_examples": len(tokenized),
+        "training_mode": training_mode,
+        "requested_training_mode": requested_training_mode,
+        "trainable_parameters": training_manifest["trainable_parameters"],
+        "total_parameters": training_manifest["total_parameters"],
+        "training_manifest": training_manifest,
+        "lora": (
+            {"r": 16, "alpha": 32, "dropout": 0.0,
+             "target_modules": list(lora_target_modules(model))}
+            if training_mode == "lora" else None
+        ),
+    }
+    if revision is not None:
+        train_metadata["revision"] = revision
+    # Persist the asserted protocol even if training crashes. eval.json remains
+    # the completion marker and receives this same manifest only after success.
+    write_json_atomic(out / "train_log.json", {
+        **train_metadata, **initial_accounting, "status": "configured",
+        "seed": seed, "training_seed": seed, "data_sampling_seed": seed,
+    })
 
     def save_trajectory_snapshot(progress):
         snapshot_losses, snapshot_tokens = measure_capability_losses(model, tokenizer, probes, device)
@@ -1001,7 +1130,7 @@ def run_distillation(
             model.save_pretrained(destination / "adapter")
         else:
             _save_full_delta(model, snapshot_dir, snapshot_manifest,
-                             destination / "adapter", model_name)
+                             destination / "adapter", model_name, revision)
         write_json_atomic(destination / "eval.json", {
             **eval_metadata, **progress, "snapshot_kind": "trajectory",
             "is_independent_seed": False, "post_training": snapshot_losses,
@@ -1048,35 +1177,11 @@ def run_distillation(
                 snapshot_manifest=snapshot_manifest,
                 adapter_dir=adapter_dir,
                 base_model=model_name,
+                revision=revision,
             )
 
-    train_log.update(
-        {
-            "student": student,
-            "resolved_student": model_name,
-            "student_tag": student_tag,
-            "teacher": teacher,
-            "recipe": recipe,
-            "domains": list(parsed_domains),
-            "n_per_domain": n_per_domain,
-            "trace_counts": trace_counts,
-            "tokenization_deleted_rows": tokenization_deleted,
-            "training_examples": len(tokenized),
-            "training_mode": training_mode,
-            "trainable_parameters": trainable_parameters,
-            "total_parameters": total_parameters,
-            "lora": (
-                {
-                    "r": 16,
-                    "alpha": 32,
-                    "dropout": 0.0,
-                    "target_modules": list(LORA_TARGET_MODULES),
-                }
-                if training_mode == "lora"
-                else None
-            ),
-        }
-    )
+    train_log.update(train_metadata)
+    train_log["status"] = "trained"
     write_json_atomic(out / "train_log.json", train_log)
 
     model.eval()
@@ -1118,10 +1223,12 @@ def main() -> None:
     parser.add_argument(
         "--student",
         default="gemma3-270m",
-        help="model-registry tag or raw Hugging Face model id",
+        help="model-registry tag or raw Hugging Face model id, optionally @revision",
     )
     parser.add_argument("--teacher", required=True, choices=TEACHERS)
     parser.add_argument("--recipe", required=True, choices=RECIPES)
+    parser.add_argument("--training-mode", choices=TRAINING_MODES, default="lora",
+                        help="lora requires peft (default); full intentionally trains language weight matrices; auto allows a loudly logged fallback")
     parser.add_argument(
         "--domains",
         type=parse_domains,
@@ -1152,6 +1259,7 @@ def main() -> None:
         student=args.student,
         teacher=args.teacher,
         recipe=args.recipe,
+        training_mode=args.training_mode,
         domains=args.domains,
         n_per_domain=args.n_per_domain,
         epochs=args.epochs,
