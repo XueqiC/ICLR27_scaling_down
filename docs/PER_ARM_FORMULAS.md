@@ -52,10 +52,12 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   (U600 QA improves then partially recovers).
 - **K0 error**: dev-LOMO basic-parameter prediction MET (beats δ=0). New STUDENT Qwen3-4B: math/code sign
   DIFFERS from gemma (gemma δ>0 / Qwen δ<0); QA improves under KD in BOTH families (not Qwen-specific) (C25).
-- **Sufficiency of E**: E-only NOT sufficient at 0.05 nat; adding additive OR low-DOF-interaction log D_U does NOT
-  help held-out (v37/v37b). The matched-E residual is CONFOUNDED with an ~8× training-exposure gap (optimizer
-  steps 28 vs 224; supervised tokens 39k vs 317k, since T=E·D_U) — causal attribution (exposure vs unique-data)
-  UNRESOLVED; not a new latent capability variable.
+- **Sufficiency / attribution of E**: matched-T ALREADY controls optimizer steps (107≈108, 214=214), processed
+  tokens and supervised tokens to ~1-3% (DISTILL_STEP_CONTROL.md) — the large matched-T pool-size gap is driven by
+  reuse count E, NOT steps/exposure. At matched-E an ~8× step/exposure swing (28 vs 224) yields only a small
+  residual → exposure is a WEAK driver, not a confound. E is dominant and sufficient at the coarse scale; a small
+  matched-E residual remains (attribution: unique-data volume vs sampling, minor open). Adding log D_U (additive or
+  low-DOF interaction) does not help held-out (v37/v37b). No matched-optimizer-step rerun needed.
 - **Controlled panel**: D_0 modulates the distillation response (LoRA confirms; recipe changes magnitude not
   direction). Pythia distill = LoRA (rai) and full-FT (hpg) — cross-recipe comparison limited.
 
