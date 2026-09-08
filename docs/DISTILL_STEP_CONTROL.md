@@ -25,17 +25,20 @@ forces matched steps:
   steps, matched processed tokens, and matched supervised tokens. It is therefore attributable to
   **reuse count E = T/D_U**, NOT to optimizer-step count or training exposure. This is exactly the
   matched-optimizer-step evidence the advisor wanted — it already exists in the data.
-- Symmetrically, matched-E holds E fixed while steps/T vary ~8× (28 vs 224), and the gap collapses to a
-  small residual (math −0.01/−0.04). So an 8× exposure/step swing at fixed E barely moves the response:
-  **training exposure is a WEAK driver**; it does not "explain" the residual.
+- Symmetrically, matched-E holds E fixed while steps/T vary ~8× (28 vs 224) and the gap collapses. This
+  supports **E as an effective candidate coordinate** — but does NOT establish "exposure is weak" or "E is
+  sufficient at coarse scale": at fixed E the pool still differs in independent-data volume, sample
+  composition/coverage AND repetition together, and by T=E·D_U these move jointly, so the design cannot
+  attribute to one alone; offsetting effects are possible.
 
-## Corrected E-residual statement (replaces "confounded with exposure, unresolved")
+## Corrected E-residual statement (C21)
 
-> On matched-T (steps, processed tokens and supervised tokens all matched to ~1-3%), the pool-size
-> response gap is driven by reuse count E, not by optimizer steps or exposure. On matched-E, an ~8×
-> step/exposure swing produces only a small residual. Together: E is the dominant distillation
-> coordinate and step/exposure is controlled and weak; a small matched-E residual remains whose
-> attribution (unique-data volume vs sampling) is a minor open item, NOT an exposure confound.
+> After matching cumulative supervised volume AND update steps (matched-T: 107≈108, 214=214; supervised
+> tokens ~3%), data-pool / reuse differences STILL significantly affect the response — so the effect is not
+> "just more tokens or more steps". E explains the main variation and is the effective candidate coordinate,
+> but its predictive SUFFICIENCY is NOT established: the v37 0.05-nat insufficiency stands (it does not
+> disappear by switching to a relative-difference framing), and QA left an ~0.5–0.8 nat residual whose
+> importance depends on a pre-declared use/error budget. Sufficiency needs NEW-CONFIG validation (P3).
 
 ## What P3 should actually do (rerun no longer needed for the step question)
 The step/exposure question is answered. The remaining open item is whether the small matched-E residual

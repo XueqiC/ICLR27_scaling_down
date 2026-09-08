@@ -66,10 +66,11 @@ This addendum supersedes the earlier audit's cross-tokenizer assertion. Existing
 ### C28 — P1 frozen prospective (step96000, never-fit source-state)
 Frozen 9-state predictor tested on pythia-{160m,1.4b}@step96000 (forward-only, pre-registered coeffs):
 **PRUNING generalizes** — full-input beats baseline AND no-D0 for math/code/QA (math 0.090 vs 0.367;
-code 0.128 vs 0.438; qa 0.426 vs 0.832). **QUANTIZATION does NOT** — quant-code FAILS (0.78 > baseline
-0.35, over-predicts int3 collapse); quant-math win is int3-driven; quant-qa beaten by no-D0. n=8/arm/cap,
+code 0.128 vs 0.438; qa 0.426 vs 0.832). **QUANTIZATION is MIXED** (not whole-arm failure) — quant-math beats both controls; quant-qa beats constant
+but not no-D0; quant-code FAILS (0.78 > baseline 0.35). Honest problem: advantage concentrated in aggressive
+(int3) quant + damage-MAGNITUDE prediction unstable there — int3 response is a REAL target, not an 'artifact'. n=8/arm/cap,
 point estimates. See CONTROLLED_PANEL_PREDICTOR.md §7. This is the round's strongest positive (a real
-frozen prospective, not in-sample) AND a clean negative for the quant arm.
+frozen prospective, not in-sample) and a MIXED quant result (aggressive-region-concentrated, magnitude-unstable).
 
 
 ### C29 — P2 distillation controlled source-transfer (LoRA panel, 9 cells)

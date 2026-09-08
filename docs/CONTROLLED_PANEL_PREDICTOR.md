@@ -16,9 +16,11 @@ For each arm, one unweighted OLS solve on all signed config-level ΔL observatio
   entered as an INDICATOR interacted with every continuous term. So each d/b gets its **own** intercept
   and slopes — this is effectively a **separate linear model per compression config**.
 - Continuous inputs z-scored on train. No regularization (plain lstsq). No a_c labels — ΔL fit directly.
-- Coefficient count per arm/capability: **3 configs-worth** — with D0, 4 coeffs × 4 configs = 16 fit to
-  16 train cells in leave-one-out → **saturated** (full-rank but zero residual DOF); without D0, 12 coeffs.
-  This saturation is disclosed in v36b metadata and is why held-out (not train) error is the only honest read.
+- Coefficient count per arm/capability: with D0, 4 coeffs × 4 configs = **16**. Each leave-one-out fold
+  trains on **6 source-states → 24 cells** (6 states × 4 configs), so 24 observations / 16 coeffs: full rank
+  16, condition number 3.1 (leave-one-size-out) / 14.2 (leave-one-step-out), **8 residual DOF — thin but NOT
+  saturated** (my earlier "16 cells / saturated" claim was wrong: the train set is 6 states, not 4). Held-out
+  error remains the only honest read given the thin fit; without D0, 12 coeffs.
 
 **Consequence (answers the advisor's key question directly):** because d/b enters as indicators, this
 model predicts **source-state transfer AT EACH FIXED compression setting** — "given a new (size, step),
@@ -134,10 +136,16 @@ Point-estimate MAE (no CI at this n); "✓" = full model lower error than the re
   capabilities — including QA, which had failed the in-panel leave-one-out. The gain grows with
   aggressiveness (d=0.6 largest) but the full model is at least tied in the mild region too. This is
   the round's strongest positive: the controlled pruning relationship is real and prospective.
-- **Quantization does NOT generalize.** quant-code FAILS (full 0.78 > baseline 0.35): the frozen
+- **Quantization is MIXED, not a whole-arm failure.** quant-math beats both controls; quant-qa beats the
+  constant but not no-D0; quant-code FAILS (full 0.78 > baseline 0.35): the frozen
   predictor over-predicts the int3 collapse for code on the new step (by_config int3 2.70 vs base 1.07).
   quant-math "wins" only because of int3; quant-qa is beaten by the no-D0 model. Consistent with the
   in-panel finding that the quant gain is an int3-collapse artifact — it does not transfer cleanly.
-- **Caveat:** 8 points per arm/cap, point estimates only; one new step, two sizes; still source-transfer
+- **Per-size P1 errors** (advisor: 8 points = 2 source-states, not 8 independent):
+- pruning full MAE — math 160m 0.108 / 1.4b 0.073; code 160m 0.199 / 1.4b 0.057; qa 160m 0.607 / 1.4b 0.244.
+- quant full MAE — math 160m 0.725 / 1.4b 0.412; code 160m 1.357 / 1.4b 0.204; qa 160m 0.482 / 1.4b 0.124.
+  (Errors are larger on the smaller 160m; quant-code fails mostly on 160m.)
+
+**Caveat:** 8 points per arm/cap = 2 source-states (not 8 independent); point estimates only; one new step, two sizes; still source-transfer
   at fixed d/b (indicators), not a compression-axis law. But as a frozen prospective it is far stronger
   evidence than in-sample leave-one-out.

@@ -54,9 +54,9 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   DIFFERS from gemma (gemma δ>0 / Qwen δ<0); QA improves under KD in BOTH families (not Qwen-specific) (C25).
 - **Sufficiency / attribution of E**: matched-T ALREADY controls optimizer steps (107≈108, 214=214), processed
   tokens and supervised tokens to ~1-3% (DISTILL_STEP_CONTROL.md) — the large matched-T pool-size gap is driven by
-  reuse count E, NOT steps/exposure. At matched-E an ~8× step/exposure swing (28 vs 224) yields only a small
-  residual → exposure is a WEAK driver, not a confound. E is dominant and sufficient at the coarse scale; a small
-  matched-E residual remains (attribution: unique-data volume vs sampling, minor open). Adding log D_U (additive or
+  reuse count E, NOT steps/exposure. matched-E supports E as the effective candidate coordinate, but does NOT establish 'exposure weak' or
+  'E sufficient': U75/U600 co-vary independent-data volume, composition and repetition (T=E·D_U couples them);
+  v37 0.05-nat insufficiency stands, QA ~0.5-0.8 nat residual. Sufficiency needs NEW-CONFIG validation (P3). Adding log D_U (additive or
   low-DOF interaction) does not help held-out (v37/v37b). No matched-optimizer-step rerun needed.
 - **Controlled panel (P2, full 3x3 LoRA)**: delta_c source-transfer works ONLY for MATH ({N0,L0,D0} beats
   no-D0 AND constant baseline, MAE ~halved; delta_math grows monotonically with D0). CODE/QA: a per-capability
@@ -71,7 +71,7 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   instability; quantization = no predictive value in the measurable region (collapse-region artifact) + inconclusive
   shape; distillation = reuse-count-dominated with an exposure-confounded residual.
 - On **heterogeneous finished models**, per-model amplitude/sign does not transfer from {N0, family, dense L_c}.
-- On the **controlled panel**, arms differ: PRUNING generalizes prospectively across all caps (C28); QUANT fails (int3 artifact); DISTILLATION source-transfer is math-only, code/qa best fit by a constant (C29).
+- On the **controlled panel**, arms differ: PRUNING generalizes prospectively across all caps (C28); QUANT mixed (advantage concentrated in aggressive int3, magnitude-unstable; NOT an artifact); DISTILLATION source-transfer is math-only, code/qa best fit by a constant (C29).
 - On the **controlled Pythia series**, D_0 adds incremental value beyond dense loss (4/12 CIs excl 0), but vs the
   strongest per-config baseline the full model significantly wins ONLY for CODE, concentrated in the aggressive
   configs (pruning d=0.6 / quant int3); QA excepted; and it is source-transfer at fixed d/b, not a compression-axis law.
