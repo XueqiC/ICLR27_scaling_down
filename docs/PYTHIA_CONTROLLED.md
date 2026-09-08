@@ -1,6 +1,6 @@
 # Pythia controlled training-history analysis (V36)
 
-On the supplied grid, adding D₀ lowers point-estimate MAE in 4 of 12 arm/capability/holdout comparisons; 0 improvement intervals lie wholly above zero. The tables keep the arms and capabilities separate; this count is descriptive and is not a pooled score.
+On the supplied grid, adding D₀ lowers point-estimate MAE in 7 of 12 arm/capability/holdout comparisons; 4 improvement intervals lie wholly above zero. The tables keep the arms and capabilities separate; this count is descriptive and is not a pooled score.
 
 The headline question is whether training history D₀ reduces held-out prediction error for capability **loss** damage beyond model size N₀ and measured dense loss L₀. The target is the observed signed response ΔL_c = L_c(config) − L₀,c. This is a loss endpoint; it does not by itself establish changes in task accuracy.
 
@@ -16,6 +16,7 @@ N₀ is computed from official GPT-NeoX architecture configs: `layers × (4h² +
 
 | Size label | Layers | h | m | N₀ matrix parameters |
 |---|---:|---:|---:|---:|
+| [160m](https://huggingface.co/EleutherAI/pythia-160m/blob/b56d9bee36300031aeea723b73c4d62ac7fa71a2/config.json) | 12 | 768 | 3072 | 84,934,656 |
 | [410m](https://huggingface.co/EleutherAI/pythia-410m/blob/bba6a464f54bbf08fc174cfb351d9794d58af21d/config.json) | 24 | 1024 | 4096 | 301,989,888 |
 | [1.4b](https://huggingface.co/EleutherAI/pythia-1.4b/blob/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/config.json) | 24 | 2048 | 8192 | 1,207,959,552 |
 | [2.8b](https://huggingface.co/EleutherAI/pythia-2.8b/blob/dbe7ae300a54abcdc475a33907b3dff81d25709f/config.json) | 32 | 2560 | 10240 | 2,516,582,400 |
@@ -49,16 +50,26 @@ MAE weights all 36 held-out observations equally within a capability/arm. Positi
 
 | Arm | Capability | Holdout | A MAE [95%] | B MAE [95%] | A−B [95%] | Assessment |
 |---|---|---|---:|---:|---:|---|
-| pruning | math | step | 0.16534 [0.11483, 0.19752] | 0.17962 [0.10409, 0.23344] | -0.01429 [-0.03592, 0.01073] | inconclusive |
-| pruning | code | step | 0.23842 [0.17444, 0.30378] | 0.21689 [0.09708, 0.30071] | 0.02153 [-0.06367, 0.07736] | inconclusive |
-| pruning | qa | step | 0.90475 [0.17295, 2.26890] | 0.78448 [0.21911, 1.85351] | 0.12027 [-0.04615, 0.41539] | inconclusive |
-| quantization | math | step | 0.78871 [0.46844, 1.22732] | 0.62262 [0.38925, 0.78874] | 0.16609 [-0.11837, 0.53746] | inconclusive |
-| quantization | code | step | 0.61390 [0.40428, 0.89691] | 1.35934 [0.35735, 3.35359] | -0.74544 [-2.81310, 0.53956] | inconclusive |
-| quantization | qa | step | 2.12044 [0.21989, 5.14867] | 1.48716 [0.42306, 3.55695] | 0.63327 [-0.20317, 1.59172] | inconclusive |
+| pruning | math | size | 0.61546 [0.36748, 1.04180] | 0.14694 [0.06532, 0.26660] | 0.46851 [0.30217, 0.77519] | lower error throughout interval |
+| pruning | math | step | 0.61667 [0.10618, 0.93482] | 0.25539 [0.14354, 0.41856] | 0.36128 [-0.03735, 0.60493] | inconclusive |
+| pruning | code | size | 0.93939 [0.58566, 1.46607] | 0.99983 [0.27479, 2.23603] | -0.06044 [-0.76996, 0.31087] | inconclusive |
+| pruning | code | step | 0.69997 [0.10246, 1.11884] | 0.29796 [0.11123, 0.50305] | 0.40201 [-0.00877, 0.61580] | inconclusive |
+| pruning | qa | size | 0.92703 [0.56219, 1.14662] | 1.09827 [1.04947, 1.13770] | -0.17124 [-0.57551, 0.03899] | inconclusive |
+| pruning | qa | step | 0.76506 [0.39030, 0.98763] | 0.79629 [0.42889, 1.02247] | -0.03123 [-0.10524, 0.05012] | inconclusive |
+| quantization | math | size | 2.02839 [1.06915, 3.43045] | 0.77131 [0.25473, 1.53985] | 1.25708 [0.81442, 1.89060] | lower error throughout interval |
+| quantization | math | step | 1.98931 [0.33542, 3.06177] | 1.14448 [0.46978, 2.06359] | 0.84483 [-0.13436, 1.67069] | inconclusive |
+| quantization | code | size | 2.85022 [1.25874, 5.46418] | 1.26701 [0.33478, 2.69135] | 1.58321 [0.92396, 2.77283] | lower error throughout interval |
+| quantization | code | step | 2.07693 [0.37423, 3.24288] | 0.62600 [0.22094, 1.14772] | 1.45094 [0.15329, 2.10435] | lower error throughout interval |
+| quantization | qa | size | 2.27202 [1.40639, 2.97373] | 2.61091 [2.32588, 2.85237] | -0.33889 [-1.24809, 0.12136] | inconclusive |
+| quantization | qa | step | 1.96411 [0.92058, 2.62249] | 1.98938 [1.12520, 2.70581] | -0.02527 [-0.35654, 0.48535] | inconclusive |
 
-For **pruning, held-out step**, D₀ lowers point-estimate MAE for code, qa; the descriptive improvement interval lies wholly above zero for no capability. This answers the conditional question for the stated model class and panel.
+For **pruning, held-out size**, D₀ lowers point-estimate MAE for math; the descriptive improvement interval lies wholly above zero for math. This answers the conditional question for the stated model class and panel.
 
-For **quantization, held-out step**, D₀ lowers point-estimate MAE for math, qa; the descriptive improvement interval lies wholly above zero for no capability. This answers the conditional question for the stated model class and panel.
+For **pruning, held-out step**, D₀ lowers point-estimate MAE for math, code; the descriptive improvement interval lies wholly above zero for no capability. This answers the conditional question for the stated model class and panel.
+
+For **quantization, held-out size**, D₀ lowers point-estimate MAE for math, code; the descriptive improvement interval lies wholly above zero for math, code. This answers the conditional question for the stated model class and panel.
+
+For **quantization, held-out step**, D₀ lowers point-estimate MAE for math, code; the descriptive improvement interval lies wholly above zero for code. This answers the conditional question for the stated model class and panel.
 
 A strong raw checkpoint trend alone does not establish a D₀ gain beyond dense L₀. Conversely, failure of this simple B model does not rule out a nonlinear history effect. D₀ and dense L₀ are strongly related during training; coefficient signs should not be interpreted causally. Training-design condition numbers and D₀/L₀ correlations are retained for every fold.
 
@@ -66,24 +77,42 @@ A strong raw checkpoint trend alone does not establish a D₀ gain beyond dense 
 
 | Arm | Capability | Axis | Held out | A MAE | B MAE | A−B | B design condition number |
 |---|---|---|---|---:|---:|---:|---:|
-| pruning | math | step | 16000 | 0.19752 | 0.23344 | -0.03592 | 24.00 |
-| pruning | math | step | 64000 | 0.11483 | 0.10409 | 0.01073 | 13.45 |
-| pruning | math | step | 143000 | 0.18367 | 0.20134 | -0.01767 | 19.38 |
-| pruning | code | step | 16000 | 0.23704 | 0.30071 | -0.06367 | 11.82 |
-| pruning | code | step | 64000 | 0.17444 | 0.09708 | 0.07736 | 16.97 |
-| pruning | code | step | 143000 | 0.30378 | 0.25289 | 0.05089 | 109.45 |
-| pruning | qa | step | 16000 | 2.26890 | 1.85351 | 0.41539 | 12.98 |
-| pruning | qa | step | 64000 | 0.17295 | 0.21911 | -0.04615 | 1.54 |
-| pruning | qa | step | 143000 | 0.27239 | 0.28081 | -0.00842 | 1.80 |
-| quantization | math | step | 16000 | 1.22732 | 0.68986 | 0.53746 | 24.00 |
-| quantization | math | step | 64000 | 0.46844 | 0.38925 | 0.07919 | 13.45 |
-| quantization | math | step | 143000 | 0.67037 | 0.78874 | -0.11837 | 19.38 |
-| quantization | code | step | 16000 | 0.89691 | 0.35735 | 0.53956 | 11.82 |
-| quantization | code | step | 64000 | 0.40428 | 0.36707 | 0.03721 | 16.97 |
-| quantization | code | step | 143000 | 0.54050 | 3.35359 | -2.81310 | 109.45 |
-| quantization | qa | step | 16000 | 5.14867 | 3.55695 | 1.59172 | 12.98 |
-| quantization | qa | step | 64000 | 0.21989 | 0.42306 | -0.20317 | 1.54 |
-| quantization | qa | step | 143000 | 0.99275 | 0.48148 | 0.51127 | 1.80 |
+| pruning | math | size | 160m | 1.04180 | 0.26660 | 0.77519 | 14.20 |
+| pruning | math | size | 410m | 0.36748 | 0.06532 | 0.30217 | 3.97 |
+| pruning | math | size | 1.4b | 0.43709 | 0.10891 | 0.32818 | 3.07 |
+| pruning | math | step | 16000 | 0.80900 | 0.20406 | 0.60493 | 4.33 |
+| pruning | math | step | 64000 | 0.10618 | 0.14354 | -0.03735 | 3.69 |
+| pruning | math | step | 143000 | 0.93482 | 0.41856 | 0.51626 | 14.19 |
+| pruning | code | size | 160m | 1.46607 | 2.23603 | -0.76996 | 12.96 |
+| pruning | code | size | 410m | 0.58566 | 0.27479 | 0.31087 | 3.65 |
+| pruning | code | size | 1.4b | 0.76644 | 0.48867 | 0.27777 | 3.14 |
+| pruning | code | step | 16000 | 0.87860 | 0.27960 | 0.59901 | 3.56 |
+| pruning | code | step | 64000 | 0.10246 | 0.11123 | -0.00877 | 3.29 |
+| pruning | code | step | 143000 | 1.11884 | 0.50305 | 0.61580 | 7.40 |
+| pruning | qa | size | 160m | 1.07227 | 1.04947 | 0.02280 | 1.54 |
+| pruning | qa | size | 410m | 0.56219 | 1.13770 | -0.57551 | 4.36 |
+| pruning | qa | size | 1.4b | 1.14662 | 1.10763 | 0.03899 | 1.87 |
+| pruning | qa | step | 16000 | 0.91724 | 1.02247 | -0.10524 | 1.78 |
+| pruning | qa | step | 64000 | 0.39030 | 0.42889 | -0.03858 | 2.21 |
+| pruning | qa | step | 143000 | 0.98763 | 0.93751 | 0.05012 | 2.48 |
+| quantization | math | size | 160m | 3.43045 | 1.53985 | 1.89060 | 14.20 |
+| quantization | math | size | 410m | 1.06915 | 0.25473 | 0.81442 | 3.97 |
+| quantization | math | size | 1.4b | 1.58556 | 0.51934 | 1.06622 | 3.07 |
+| quantization | math | step | 16000 | 2.57075 | 0.90007 | 1.67069 | 4.33 |
+| quantization | math | step | 64000 | 0.33542 | 0.46978 | -0.13436 | 3.69 |
+| quantization | math | step | 143000 | 3.06177 | 2.06359 | 0.99818 | 14.19 |
+| quantization | code | size | 160m | 5.46418 | 2.69135 | 2.77283 | 12.96 |
+| quantization | code | size | 410m | 1.25874 | 0.33478 | 0.92396 | 3.65 |
+| quantization | code | size | 1.4b | 1.82775 | 0.77491 | 1.05284 | 3.14 |
+| quantization | code | step | 16000 | 2.61369 | 0.50934 | 2.10435 | 3.56 |
+| quantization | code | step | 64000 | 0.37423 | 0.22094 | 0.15329 | 3.29 |
+| quantization | code | step | 143000 | 3.24288 | 1.14772 | 2.09517 | 7.40 |
+| quantization | qa | size | 160m | 2.43593 | 2.32588 | 0.11005 | 1.54 |
+| quantization | qa | size | 410m | 1.40639 | 2.65447 | -1.24809 | 4.36 |
+| quantization | qa | size | 1.4b | 2.97373 | 2.85237 | 0.12136 | 1.87 |
+| quantization | qa | step | 16000 | 2.34927 | 2.70581 | -0.35654 | 1.78 |
+| quantization | qa | step | 64000 | 0.92058 | 1.12520 | -0.20461 | 2.21 |
+| quantization | qa | step | 143000 | 2.62249 | 2.13714 | 0.48535 | 2.48 |
 
 ### Configuration contributions
 
@@ -91,30 +120,30 @@ These are slices of the same primary out-of-fold predictions, with no refitting 
 
 | Arm | Capability | Config | Size A / B / A−B | Step A / B / A−B |
 |---|---|---:|---:|---:|
-| pruning | math | 0.9 | 0.01181 / 0.01066 / 0.00114 |
-| pruning | math | 0.8 | 0.08375 / 0.05908 / 0.02467 |
-| pruning | math | 0.7 | 0.21729 / 0.16963 / 0.04766 |
-| pruning | math | 0.6 | 0.34849 / 0.47912 / -0.13063 |
-| pruning | code | 0.9 | 0.01456 / 0.01620 / -0.00164 |
-| pruning | code | 0.8 | 0.07988 / 0.07661 / 0.00327 |
-| pruning | code | 0.7 | 0.33142 / 0.11354 / 0.21788 |
-| pruning | code | 0.6 | 0.52782 / 0.66122 / -0.13340 |
-| pruning | qa | 0.9 | 0.22892 / 0.25061 / -0.02169 |
-| pruning | qa | 0.8 | 0.09325 / 0.06377 / 0.02948 |
-| pruning | qa | 0.7 | 0.69312 / 0.62859 / 0.06452 |
-| pruning | qa | 0.6 | 2.60372 / 2.19494 / 0.40877 |
-| quantization | math | 8 | 0.00249 / 0.00344 / -0.00095 |
-| quantization | math | 6 | 0.00641 / 0.00911 / -0.00269 |
-| quantization | math | 4 | 0.30539 / 0.19246 / 0.11292 |
-| quantization | math | 3 | 2.84056 / 2.28546 / 0.55510 |
-| quantization | code | 8 | 0.00689 / 0.00871 / -0.00182 |
-| quantization | code | 6 | 0.00807 / 0.02914 / -0.02108 |
-| quantization | code | 4 | 0.40666 / 0.14627 / 0.26039 |
-| quantization | code | 3 | 2.03397 / 5.25322 / -3.21925 |
-| quantization | qa | 8 | 0.04785 / 0.09417 / -0.04632 |
-| quantization | qa | 6 | 0.01595 / 0.04703 / -0.03108 |
-| quantization | qa | 4 | 1.22495 / 1.12926 / 0.09569 |
-| quantization | qa | 3 | 7.19300 / 4.67819 / 2.51481 |
+| pruning | math | 0.9 | 0.03484 / 0.02259 / 0.01225 | 0.03409 / 0.02852 / 0.00558 |
+| pruning | math | 0.8 | 0.18474 / 0.09434 / 0.09039 | 0.19012 / 0.12380 / 0.06632 |
+| pruning | math | 0.7 | 0.58467 / 0.16147 / 0.42320 | 0.59999 / 0.28505 / 0.31494 |
+| pruning | math | 0.6 | 1.65758 / 0.30937 / 1.34821 | 1.64246 / 0.58418 / 1.05828 |
+| pruning | code | 0.9 | 0.06762 / 0.05629 / 0.01133 | 0.05030 / 0.03061 / 0.01969 |
+| pruning | code | 0.8 | 0.33524 / 0.34127 / -0.00602 | 0.24885 / 0.13393 / 0.11492 |
+| pruning | code | 0.7 | 1.02473 / 1.40477 / -0.38004 | 0.75742 / 0.48786 / 0.26956 |
+| pruning | code | 0.6 | 2.32997 / 2.19700 / 0.13297 | 1.74330 / 0.53944 / 1.20387 |
+| pruning | qa | 0.9 | 0.12644 / 0.13205 / -0.00560 | 0.09503 / 0.08936 / 0.00568 |
+| pruning | qa | 0.8 | 0.35997 / 0.41375 / -0.05379 | 0.31582 / 0.30907 / 0.00675 |
+| pruning | qa | 0.7 | 1.05103 / 1.29245 / -0.24142 | 0.91070 / 0.94993 / -0.03923 |
+| pruning | qa | 0.6 | 2.17067 / 2.55482 / -0.38415 | 1.73867 / 1.83680 / -0.09813 |
+| quantization | math | 8 | 0.00810 / 0.00506 / 0.00304 | 0.00871 / 0.00647 / 0.00224 |
+| quantization | math | 6 | 0.04694 / 0.02368 / 0.02326 | 0.04842 / 0.03137 / 0.01705 |
+| quantization | math | 4 | 0.72107 / 0.23281 / 0.48826 | 0.71489 / 0.51893 / 0.19596 |
+| quantization | math | 3 | 7.33743 / 2.82368 / 4.51376 | 7.18522 / 4.02114 / 3.16408 |
+| quantization | code | 8 | 0.01918 / 0.02061 / -0.00142 | 0.01336 / 0.01479 / -0.00143 |
+| quantization | code | 6 | 0.08027 / 0.06478 / 0.01549 | 0.06034 / 0.04478 / 0.01556 |
+| quantization | code | 4 | 1.15040 / 1.17455 / -0.02414 | 0.84376 / 0.65575 / 0.18801 |
+| quantization | code | 3 | 10.15104 / 3.80812 / 6.34292 | 7.39028 / 1.78867 / 5.60160 |
+| quantization | qa | 8 | 0.01585 / 0.01997 / -0.00412 | 0.02224 / 0.02199 / 0.00025 |
+| quantization | qa | 6 | 0.12103 / 0.14200 / -0.02097 | 0.11839 / 0.12610 / -0.00770 |
+| quantization | qa | 4 | 1.19087 / 1.60496 / -0.41409 | 1.28921 / 1.42944 / -0.14023 |
+| quantization | qa | 3 | 7.76032 / 8.67671 / -0.91639 | 6.42660 / 6.37999 / 0.04661 |
 
 ## Raw D₀ trend at fixed size and configuration
 
@@ -122,12 +151,12 @@ Fragility here means **signed loss damage**: higher ΔL is worse. Negative ΔL m
 
 | Arm | Capability | Late > early / 12 | Increasing / decreasing / flat / nonmonotonic | Positive-damage ratio median [range]; eligible n |
 |---|---|---:|---|---|
-| pruning | math | 8 / 12 | 8 / 0 / 0 / 0 | 4.57 [3.15, 9.53]; n=6 |
-| pruning | code | 8 / 12 | 8 / 0 / 0 / 0 | 4.11 [2.78, 7.12]; n=5 |
-| pruning | qa | 3 / 12 | 1 / 2 / 0 / 5 | N/A; n=0 |
-| quantization | math | 7 / 12 | 6 / 0 / 0 / 2 | 6.80 [3.53, 9.07]; n=4 |
-| quantization | code | 8 / 12 | 6 / 0 / 0 / 2 | 6.88 [5.43, 13.73]; n=4 |
-| quantization | qa | 6 / 12 | 3 / 1 / 0 / 4 | 10.20 [10.18, 10.22]; n=2 |
+| pruning | math | 12 / 12 | 12 / 0 / 0 / 0 | 6.09 [3.15, 10.12]; n=9 |
+| pruning | code | 12 / 12 | 12 / 0 / 0 / 0 | 6.67 [2.78, 16.89]; n=9 |
+| pruning | qa | 7 / 12 | 3 / 2 / 0 / 7 | 15.01 [12.19, 17.83]; n=2 |
+| quantization | math | 11 / 12 | 10 / 0 / 0 / 2 | 8.08 [3.53, 21.76]; n=6 |
+| quantization | code | 12 / 12 | 8 / 0 / 0 / 4 | 11.69 [5.43, 21.48]; n=7 |
+| quantization | qa | 9 / 12 | 4 / 1 / 0 / 7 | 10.66 [10.18, 64.24]; n=5 |
 
 At pruning config 0.6, the late/early damage ratios are 410m math 4.45× (increasing); 1.4b math 3.15× (increasing); 410m code 6.67× (increasing); 1.4b code 2.78× (increasing).
 
@@ -142,6 +171,10 @@ Steps are 16000 → 64000 → 143000. Flags apply if any step is near zero (`Z`)
 
 | Arm | Capability | Size | Config | ΔL at three steps | Late−early | Monotonicity | Late/early | Flags |
 |---|---|---|---:|---|---:|---|---:|---|
+| pruning | math | 160m | 0.9 | 0.00888 → 0.00890 → 0.12457 | 0.11570 | increasing | N/A | Z |
+| pruning | math | 160m | 0.8 | 0.07326 → 0.10789 → 0.74128 | 0.66802 | increasing | 10.11822 | none |
+| pruning | math | 160m | 0.7 | 0.25706 → 0.44436 → 2.39037 | 2.13331 | increasing | 9.29892 | H |
+| pruning | math | 160m | 0.6 | 0.87210 → 1.42177 → 6.49027 | 5.61817 | increasing | 7.44209 | H |
 | pruning | math | 410m | 0.9 | 0.00225 → 0.00825 → 0.03411 | 0.03186 | increasing | N/A | Z |
 | pruning | math | 410m | 0.8 | 0.02064 → 0.04742 → 0.19665 | 0.17601 | increasing | 9.52586 | none |
 | pruning | math | 410m | 0.7 | 0.10061 → 0.19637 → 0.61281 | 0.51220 | increasing | 6.09100 | none |
@@ -150,6 +183,10 @@ Steps are 16000 → 64000 → 143000. Flags apply if any step is near zero (`Z`)
 | pruning | math | 1.4b | 0.8 | 0.01505 → 0.03838 → 0.07063 | 0.05558 | increasing | 4.69382 | none |
 | pruning | math | 1.4b | 0.7 | 0.07811 → 0.19738 → 0.29481 | 0.21670 | increasing | 3.77443 | none |
 | pruning | math | 1.4b | 0.6 | 0.36538 → 0.99409 → 1.14965 | 0.78427 | increasing | 3.14644 | H |
+| pruning | code | 160m | 0.9 | 0.01361 → 0.01652 → 0.22986 | 0.21625 | increasing | 16.89083 | none |
+| pruning | code | 160m | 0.8 | 0.07565 → 0.18481 → 1.09395 | 1.01830 | increasing | 14.46112 | H |
+| pruning | code | 160m | 0.7 | 0.27799 → 0.61380 → 3.39036 | 3.11237 | increasing | 12.19602 | H |
+| pruning | code | 160m | 0.6 | 1.13365 → 2.00446 → 7.29148 | 6.15783 | increasing | 6.43188 | H |
 | pruning | code | 410m | 0.9 | 0.00184 → 0.00618 → 0.00957 | 0.00773 | increasing | N/A | Z |
 | pruning | code | 410m | 0.8 | 0.00499 → 0.06216 → 0.21613 | 0.21114 | increasing | N/A | Z |
 | pruning | code | 410m | 0.7 | 0.11320 → 0.16817 → 0.80604 | 0.69283 | increasing | 7.12021 | none |
@@ -158,6 +195,10 @@ Steps are 16000 → 64000 → 143000. Flags apply if any step is near zero (`Z`)
 | pruning | code | 1.4b | 0.8 | 0.01254 → 0.01795 → 0.05152 | 0.03898 | increasing | 4.10900 | none |
 | pruning | code | 1.4b | 0.7 | 0.04956 → 0.08533 → 0.17406 | 0.12449 | increasing | 3.51199 | none |
 | pruning | code | 1.4b | 0.6 | 0.35399 → 0.97938 → 0.98277 | 0.62877 | increasing | 2.77623 | none |
+| pruning | qa | 160m | 0.9 | 0.01209 → -0.04396 → 0.14734 | 0.13525 | nonmonotonic | 12.18673 | − |
+| pruning | qa | 160m | 0.8 | -0.02718 → -0.11122 → 0.75665 | 0.78383 | nonmonotonic | N/A | − |
+| pruning | qa | 160m | 0.7 | -0.17363 → 0.26675 → 2.89057 | 3.06419 | increasing | N/A | −H |
+| pruning | qa | 160m | 0.6 | 0.34847 → 1.52519 → 6.21186 | 5.86339 | increasing | 17.82593 | H |
 | pruning | qa | 410m | 0.9 | -0.01646 → -0.01444 → -0.11538 | -0.09892 | nonmonotonic | N/A | − |
 | pruning | qa | 410m | 0.8 | -0.03274 → -0.11811 → -0.16683 | -0.13409 | decreasing | N/A | − |
 | pruning | qa | 410m | 0.7 | -0.18102 → -0.29004 → 0.12773 | 0.30876 | nonmonotonic | N/A | − |
@@ -166,6 +207,10 @@ Steps are 16000 → 64000 → 143000. Flags apply if any step is near zero (`Z`)
 | pruning | qa | 1.4b | 0.8 | -0.00250 → -0.05980 → -0.06381 | -0.06131 | decreasing | N/A | Z− |
 | pruning | qa | 1.4b | 0.7 | -0.14169 → -0.42666 → -0.41394 | -0.27225 | nonmonotonic | N/A | − |
 | pruning | qa | 1.4b | 0.6 | -0.31993 → -0.50163 → -0.44519 | -0.12527 | nonmonotonic | N/A | − |
+| quantization | math | 160m | 8 | -0.00028 → 0.00000 → 0.03164 | 0.03191 | increasing | N/A | Z− |
+| quantization | math | 160m | 6 | 0.00210 → 0.00716 → 0.18777 | 0.18568 | increasing | N/A | Z |
+| quantization | math | 160m | 4 | 0.13039 → 0.22157 → 2.83742 | 2.70703 | increasing | 21.76130 | H |
+| quantization | math | 160m | 3 | 1.55355 → 3.86182 → 23.03002 | 21.47647 | increasing | 14.82415 | H3 |
 | quantization | math | 410m | 8 | 0.00063 → 0.00119 → 0.00275 | 0.00212 | increasing | N/A | Z |
 | quantization | math | 410m | 6 | 0.00431 → 0.00799 → 0.02343 | 0.01912 | increasing | N/A | Z |
 | quantization | math | 410m | 4 | 0.07884 → 0.11957 → 0.55946 | 0.48062 | increasing | 7.09631 | none |
@@ -174,6 +219,10 @@ Steps are 16000 → 64000 → 143000. Flags apply if any step is near zero (`Z`)
 | quantization | math | 1.4b | 6 | 0.00075 → 0.00686 → 0.00473 | 0.00397 | nonmonotonic | N/A | Z |
 | quantization | math | 1.4b | 4 | 0.07544 → 0.11843 → 0.26627 | 0.19084 | increasing | 3.52975 | none |
 | quantization | math | 1.4b | 3 | 0.83101 → 4.41752 → 7.53381 | 6.70280 | increasing | 9.06582 | H3 |
+| quantization | code | 160m | 8 | 0.00095 → -0.00155 → 0.05408 | 0.05313 | nonmonotonic | N/A | Z− |
+| quantization | code | 160m | 6 | 0.01349 → 0.00351 → 0.26866 | 0.25517 | nonmonotonic | 19.91630 | Z |
+| quantization | code | 160m | 4 | 0.16407 → 0.31953 → 3.52359 | 3.35952 | increasing | 21.47591 | H |
+| quantization | code | 160m | 3 | 2.12461 → 5.99828 → 24.84104 | 22.71643 | increasing | 11.69203 | H3 |
 | quantization | code | 410m | 8 | 0.00053 → -0.00101 → 0.00808 | 0.00755 | nonmonotonic | N/A | Z− |
 | quantization | code | 410m | 6 | 0.00256 → 0.00053 → 0.00939 | 0.00683 | nonmonotonic | N/A | Z |
 | quantization | code | 410m | 4 | 0.04914 → 0.12081 → 0.67471 | 0.62556 | increasing | 13.72914 | none |
@@ -182,6 +231,10 @@ Steps are 16000 → 64000 → 143000. Flags apply if any step is near zero (`Z`)
 | quantization | code | 1.4b | 6 | -0.00897 → 0.00178 → 0.00909 | 0.01807 | increasing | N/A | Z− |
 | quantization | code | 1.4b | 4 | 0.05473 → 0.08700 → 0.30455 | 0.24982 | increasing | 5.56460 | none |
 | quantization | code | 1.4b | 3 | 1.06566 → 5.86415 → 8.73502 | 7.66936 | increasing | 8.19679 | H3 |
+| quantization | qa | 160m | 8 | -0.00478 → 0.00737 → -0.00927 | -0.00449 | nonmonotonic | N/A | Z− |
+| quantization | qa | 160m | 6 | 0.03357 → 0.00440 → 0.35789 | 0.32432 | nonmonotonic | 10.66195 | Z |
+| quantization | qa | 160m | 4 | 0.05665 → -0.11478 → 3.63926 | 3.58261 | nonmonotonic | 64.24331 | −H |
+| quantization | qa | 160m | 3 | 1.33433 → 3.91124 → 23.95342 | 22.61909 | increasing | 17.95160 | H3 |
 | quantization | qa | 410m | 8 | -0.00796 → 0.01046 → 0.01248 | 0.02044 | increasing | N/A | Z− |
 | quantization | qa | 410m | 6 | 0.01972 → -0.00974 → -0.00291 | -0.02264 | nonmonotonic | N/A | Z− |
 | quantization | qa | 410m | 4 | -0.06197 → -0.13563 → 0.53024 | 0.59221 | nonmonotonic | N/A | − |

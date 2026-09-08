@@ -39,8 +39,8 @@ MODELS = tuple(k for k in INPUT_SETS if k != "simple")
 
 def load_grid(root=ROOT):
     """Respect V36's size environment, exclude 2.8B, require the clean 2x3 panel."""
-    if len(SIZES) != 2 or set(SIZES) != {"410m", "1.4b"}:
-        raise ValueError("V36b requires SDL_V36_SIZES=410m,1.4b (2.8b is excluded)")
+    if len(SIZES) < 2 or not set(SIZES) <= {"160m", "410m", "1.4b"}:
+        raise ValueError("V36b sizes must be a subset of {160m,410m,1.4b}; 2.8b excluded (upstream revision duplication)")
     return v36.load_grid(root, sizes=SIZES)
 
 
@@ -396,7 +396,7 @@ def plot_curves(summary, output):
     colors = ("#0072B2", "#009E73", "#E69F00", "#D55E00")
     for arm, cap in itertools.product(ARMS, CAPS):
         c = summary["results"][arm][cap]["curves"]
-        fig, axes = plt.subplots(2, 3, figsize=(13.5, 7), sharex=True, sharey="col", layout="constrained")
+        fig, axes = plt.subplots(len(SIZES), 3, figsize=(13.5, 3.5*len(SIZES)), sharex=True, sharey="col", layout="constrained")
         for i, size in enumerate(SIZES):
             ts = [t for t in c["trajectories"] if t["size"] == size]
             x = np.array(ts[0]["D0"])/1e9

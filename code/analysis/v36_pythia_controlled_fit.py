@@ -52,6 +52,9 @@ PYTHIA_REPO = "https://github.com/EleutherAI/pythia"
 # three cached step configs were checked to have these same dimensions per size.
 # Embed the transcription so reproduction needs only the 18 loss JSON files.
 ARCHITECTURES = {
+    "160m": {"hidden_size": 768, "intermediate_size": 3072, "num_hidden_layers": 12,
+             "revision": "b56d9bee36300031aeea723b73c4d62ac7fa71a2",
+             "config_sha256": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f"},
     "410m": {"hidden_size": 1024, "intermediate_size": 4096, "num_hidden_layers": 24,
              "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
              "config_sha256": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6"},
@@ -110,13 +113,20 @@ def parse_losses(table, arm):
     return dense, compressed
 
 
-def load_grid(root=ROOT):
-    """Load exactly the requested 18 files, hash bytes before parsing, retain all deltas."""
+def load_grid(root=ROOT, *, sizes=None):
+    """Load the requested panel, hash bytes before parsing, retain all deltas.
+
+    An explicit subset lets downstream analyses reuse the loader without
+    mutating the environment-derived SIZES or other callers' fold conventions.
+    """
     root = Path(root)
+    sizes = SIZES if sizes is None else tuple(sizes)
+    if not sizes or len(set(sizes)) != len(sizes) or not set(sizes) <= set(ARCHITECTURES):
+        raise ValueError("Need distinct known Pythia sizes")
     rows, hashes = [], {}
     for arm in ARMS:
         directory, filename, _ = FILES[arm]
-        for size, step in itertools.product(SIZES, STEPS):
+        for size, step in itertools.product(sizes, STEPS):
             cell = f"pythia-{size}--step{step}"
             relative = f"results/{directory}/{cell}/{filename}"
             raw = (root / relative).read_bytes()
@@ -134,16 +144,17 @@ def load_grid(root=ROOT):
     return rows, hashes
 
 
-def checkpoint_integrity(rows, hashes):
+def checkpoint_integrity(rows, hashes, *, sizes=None):
     """Flag identical full dense/compressed panels across differently named steps.
 
     Numerical payload comparison catches duplicates even if JSON formatting
     differs. This is an integrity annotation, never an exclusion rule.
     """
+    sizes = SIZES if sizes is None else tuple(sizes)
     duplicates, unique = [], {}
     for arm in ARMS:
         unique[arm] = 0
-        for size in SIZES:
+        for size in sizes:
             signatures = {}
             for step in STEPS:
                 cell_rows = sorted([r for r in rows if (r['arm'], r['size'], r['step']) ==
@@ -178,32 +189,38 @@ def folds(rows, group_key):
             for value in expected]
 
 
-def basic_input(row, with_d0):
-    return {k: row[k] for k in ("N0", "L0", "config", *(('D0',) if with_d0 else ()))}
+def predictor_fields(with_d0=False, input_fields=None):
+    """Legacy A/B defaults, or an explicit subset for direct-input ablations."""
+    fields = ("N0", "L0", *(("D0",) if with_d0 else ())) if input_fields is None else tuple(input_fields)
+    if len(set(fields)) != len(fields) or not set(fields) <= {"N0", "L0", "D0"}:
+        raise ValueError("Predictor fields must be a distinct subset of N0/L0/D0")
+    return fields
 
 
-def covariates(inputs, with_d0):
-    expected = {"N0", "L0", "config"} | ({"D0"} if with_d0 else set())
+def basic_input(row, with_d0=False, *, input_fields=None):
+    return {k: row[k] for k in (*predictor_fields(with_d0, input_fields), "config")}
+
+
+def covariates(inputs, with_d0=False, *, input_fields=None):
+    fields = predictor_fields(with_d0, input_fields)
+    expected = set(fields) | {"config"}
     values = []
     for row in inputs:
         if set(row) != expected:
-            raise ValueError("Predictors require exactly N0/L0/config and, for B only, D0; no outcomes")
-        n0, l0 = audit.finite(row["N0"]), audit.finite(row["L0"])
-        if n0 <= 0 or l0 < 0:
-            raise ValueError("N0 must be positive and L0 nonnegative")
-        value = [np.log(n0/1e9), l0]
-        if with_d0:
-            d0 = audit.finite(row["D0"])
-            if d0 <= 0:
-                raise ValueError("D0 must be positive")
-            value.append(np.log(d0/1e9))
+            raise ValueError("Predictors require exactly the selected inputs plus config; no outcomes")
+        value = []
+        for field in fields:
+            raw = audit.finite(row[field])
+            if raw < 0 or (field != "L0" and raw == 0):
+                raise ValueError("N0/D0 must be positive and L0 nonnegative")
+            value.append(raw if field == "L0" else np.log(raw/1e9))
         values.append(value)
     return np.asarray(values, dtype=float)
 
 
-def design_matrix(inputs, arm, with_d0, center, scale):
+def design_matrix(inputs, arm, with_d0, center, scale, *, input_fields=None):
     """Config indicators interacted with [1, z(log N0), z(L0), optional z(log D0)]."""
-    continuous = (covariates(inputs, with_d0) - np.asarray(center)) / np.asarray(scale)
+    continuous = (covariates(inputs, with_d0, input_fields=input_fields) - np.asarray(center)) / np.asarray(scale)
     base = np.column_stack([np.ones(len(inputs)), continuous])
     configs = CONFIGS[arm]
     if any(r["config"] not in configs for r in inputs):
@@ -213,23 +230,24 @@ def design_matrix(inputs, arm, with_d0, center, scale):
     return np.concatenate([base[:, j, None] * indicator for j in range(base.shape[1])], axis=1)
 
 
-def fit_direct(rows, with_d0):
+def fit_direct(rows, with_d0=False, *, input_fields=None):
     """One OLS solve on all config-level signed Delta L observations, never a_c labels."""
     if not rows or len({(r["arm"], r["capability"]) for r in rows}) != 1:
         raise ValueError("Fit exactly one arm and capability at a time")
     arm, cap = rows[0]["arm"], rows[0]["capability"]
-    inputs = [basic_input(r, with_d0) for r in rows]
-    raw = covariates(inputs, with_d0)
+    fields = predictor_fields(with_d0, input_fields)
+    inputs = [basic_input(r, with_d0, input_fields=input_fields) for r in rows]
+    raw = covariates(inputs, with_d0, input_fields=input_fields)
     center, scale = raw.mean(axis=0), raw.std(axis=0)
     if np.any(scale <= 0):
         raise ValueError("Training covariate has no variation")
-    x = design_matrix(inputs, arm, with_d0, center, scale)
+    x = design_matrix(inputs, arm, with_d0, center, scale, input_fields=input_fields)
     y = np.array([audit.finite(r["observed"]) for r in rows])
     coefficients, _, rank, singular = np.linalg.lstsq(x, y, rcond=None)
     if rank != x.shape[1]:
         raise ValueError("Rank-deficient direct-response fit")
-    terms = ["intercept", "z_log_N0", "z_L0", *(["z_log_D0"] if with_d0 else [])]
-    return {"model": "B" if with_d0 else "A", "with_d0": with_d0,
+    terms = ["intercept", *("z_L0" if k == "L0" else f"z_log_{k}" for k in fields)]
+    result = {"model": "B" if with_d0 else "A", "with_d0": "D0" in fields,
             "arm": arm, "capability": cap,
             "target": "observed signed config-level Delta L", "objective": "unweighted OLS",
             "n_observations": len(y), "n_cells": len({r["cell"] for r in rows}),
@@ -239,14 +257,19 @@ def fit_direct(rows, with_d0):
             "center": center.tolist(), "scale": scale.tolist(),
             "feature_names": [f"{t}:config={q:g}" for t in terms for q in CONFIGS[arm]],
             "coefficients": coefficients.tolist(),
-            "training_mse": float(np.mean((x @ coefficients - y)**2)),
-            "log_D0_L0_correlation": float(np.corrcoef(
-                np.log([r["D0"] for r in rows]), [r["L0"] for r in rows])[0, 1])}
+            "training_mse": float(np.mean((x @ coefficients - y)**2))}
+    if input_fields is None:
+        result["log_D0_L0_correlation"] = float(np.corrcoef(
+            np.log([r["D0"] for r in rows]), [r["L0"] for r in rows])[0, 1])
+    else:
+        result.update(model="inputs_" + "_".join(fields), input_fields=list(fields))
+    return result
 
 
 def predict(fit, inputs):
     """Target interface receives only basic inputs, with no compressed outcomes."""
-    return design_matrix(inputs, fit["arm"], fit["with_d0"], fit["center"], fit["scale"]) @ np.array(fit["coefficients"])
+    return design_matrix(inputs, fit["arm"], fit["with_d0"], fit["center"], fit["scale"],
+                         input_fields=fit.get("input_fields")) @ np.array(fit["coefficients"])
 
 
 def paired_metrics(records, group_key):

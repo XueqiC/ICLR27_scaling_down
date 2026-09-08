@@ -12,7 +12,7 @@ The [V36 analysis](PYTHIA_CONTROLLED.md) supplies the loader, architecture/token
 | 64000 | 134,217,728,000 |
 | 143000 | 299,892,736,000 |
 
-N0 transformer-matrix counts: 410m: 301,989,888; 1.4b: 1,207,959,552.
+N0 transformer-matrix counts: 160m: 84,934,656; 410m: 301,989,888; 1.4b: 1,207,959,552.
 
 **Same held-out set:** three leave-one-step-out folds, each with 16 training and 8 test observations per arm/capability. All configurations and both sizes at the held-out step travel together; every one of the 24 observations is scored once by every model. The middle step is interpolation and endpoints are extrapolation. There is no leave-one-size-out analysis on this two-size panel.
 
@@ -33,34 +33,34 @@ All predictor models directly fit the raw signed configuration-level ΔL by the 
 
 | Capability | Inputs | MAE [95%] | Improvement over strongest simple [paired 95%] |
 |---|---|---:|---:|
-| math | Strongest simple (config_median) | 0.19545 [0.03692, 0.32248] | 0.00000 [0.00000, 0.00000] |
-| math | {N0, D0} | 0.16765 [0.11236, 0.23884] | 0.02780 [-0.07544, 0.17074] |
-| math | {N0, L0} | 0.16534 [0.11483, 0.19752] | 0.03012 [-0.07790, 0.13882] |
-| math | {N0, D0, L0} | 0.17962 [0.10409, 0.23344] | 0.01583 [-0.06717, 0.12115] |
-| code | Strongest simple (config_median) | 0.22203 [0.09559, 0.37481] | 0.00000 [0.00000, 0.00000] |
-| code | {N0, D0} | 0.24098 [0.14699, 0.30582] | -0.01895 [-0.11012, 0.10466] |
-| code | {N0, L0} | 0.23842 [0.17444, 0.30378] | -0.01639 [-0.07885, 0.07103] |
-| code | {N0, D0, L0} | 0.21689 [0.09708, 0.30071] | 0.00514 [-0.10501, 0.12192] |
-| qa | Strongest simple (config_median) | 0.16345 [0.07923, 0.31567] | 0.00000 [0.00000, 0.00000] |
-| qa | {N0, D0} | 0.33179 [0.19190, 0.49534] | -0.16833 [-0.41611, 0.00754] |
-| qa | {N0, L0} | 0.90475 [0.17295, 2.26890] | -0.74129 [-2.18967, 0.04328] |
-| qa | {N0, D0, L0} | 0.78448 [0.21911, 1.85351] | -0.62102 [-1.77428, 0.03485] |
+| math | Strongest simple (config_median) | 0.41400 [0.09592, 0.88822] | 0.00000 [0.00000, 0.00000] |
+| math | {N0, D0} | 0.80331 [0.49741, 1.21051] | -0.38932 [-0.95266, 0.18621] |
+| math | {N0, L0} | 0.61667 [0.10618, 0.93482] | -0.20267 [-0.55115, -0.01026] |
+| math | {N0, D0, L0} | 0.25539 [0.14354, 0.41856] | 0.15861 [-0.04762, 0.46966] |
+| code | Strongest simple (config_median) | 0.51756 [0.15525, 1.08860] | 0.00000 [0.00000, 0.00000] |
+| code | {N0, D0} | 0.95286 [0.57001, 1.41397] | -0.43531 [-1.10514, 0.21398] |
+| code | {N0, L0} | 0.69997 [0.10246, 1.11884] | -0.18241 [-0.56978, 0.05279] |
+| code | {N0, D0, L0} | 0.29796 [0.11123, 0.50305] | 0.21960 [0.02923, 0.58555] |
+| qa | Strongest simple (zero) | 0.49759 [0.13808, 1.05202] | 0.00000 [0.00000, 0.00000] |
+| qa | {N0, D0} | 0.93713 [0.52051, 1.40232] | -0.43953 [-1.26424, 0.16348] |
+| qa | {N0, L0} | 0.76506 [0.39030, 0.98763] | -0.26746 [-0.77916, 0.06439] |
+| qa | {N0, D0, L0} | 0.79629 [0.42889, 1.02247] | -0.29869 [-0.88440, 0.11452] |
 
 Zero-change MAE is the mean |ΔL|: it shows the response magnitude available to model. The reference row has zero improvement by definition; its gain over zero is shown here.
 
 | Capability | Zero MAE | Config mean MAE | Config median MAE | Selected reference | Reference gain over zero [paired 95%] |
 |---|---:|---:|---:|---|---:|
-| math | 0.29955 | 0.21321 | 0.19545 | config_median | 0.10410 [-0.10736, 0.23824] |
-| code | 0.32352 | 0.24732 | 0.22203 | config_median | 0.10148 [-0.08549, 0.19603] |
-| qa | 0.22494 | 0.20589 | 0.16345 | config_median | 0.06148 [0.01157, 0.11517] |
+| math | 0.55917 | 0.58898 | 0.41400 | config_median | 0.14517 [-0.07717, 0.25992] |
+| code | 0.66918 | 0.71474 | 0.51756 | config_median | 0.15162 [-0.11028, 0.29243] |
+| qa | 0.49759 | 0.67374 | 0.52453 | zero | 0.00000 [0.00000, 0.00000] |
 
 | Capability | L0 model gain over D0 model [paired 95%] | Combined gain over D0 model [paired 95%] | Combined gain over L0 model [paired 95%] |
 |---|---:|---:|---:|
-| math | 0.00231 [-0.03192, 0.04132] | -0.01197 [-0.04959, 0.00827] | -0.01429 [-0.03592, 0.01073] |
-| code | 0.00256 [-0.03363, 0.06878] | 0.02409 [0.00511, 0.04990] | 0.02153 [-0.06367, 0.07736] |
-| qa | -0.57296 [-1.77356, 0.03573] | -0.45269 [-1.35817, 0.02731] | 0.12027 [-0.04615, 0.41539] |
+| math | 0.18665 [-0.23281, 0.40151] | 0.54792 [0.28345, 1.00645] | 0.36128 [-0.03735, 0.60493] |
+| code | 0.25290 [-0.24423, 0.53537] | 0.65491 [0.37157, 1.13437] | 0.40201 [-0.00877, 0.61580] |
+| qa | 0.17207 [-0.09908, 0.48508] | 0.14084 [-0.04896, 0.37984] | -0.03123 [-0.10524, 0.05012] |
 
-**math:** Both standalone predictors beat the simple reference in point MAE; this provides a predictive signal against which to assess their overlap. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
+**math:** Both standalone predictors fail to beat the simple reference in point MAE; their comparison cannot demonstrate information redundancy. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
 
 **code:** Both standalone predictors fail to beat the simple reference in point MAE; their comparison cannot demonstrate information redundancy. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
 
@@ -70,38 +70,38 @@ Zero-change MAE is the mean |ΔL|: it shows the response magnitude available to 
 
 | Capability | Inputs | MAE [95%] | Improvement over strongest simple [paired 95%] |
 |---|---|---:|---:|
-| math | Strongest simple (config_mean) | 0.90812 [0.22367, 1.32426] | 0.00000 [0.00000, 0.00000] |
-| math | {N0, D0} | 0.65348 [0.37000, 1.00585] | 0.25464 [-0.14633, 0.73968] |
-| math | {N0, L0} | 0.78871 [0.46844, 1.22732] | 0.11941 [-0.24477, 0.65389] |
-| math | {N0, D0, L0} | 0.62262 [0.38925, 0.78874] | 0.28551 [-0.16558, 0.53552] |
-| code | Strongest simple (config_mean) | 0.99411 [0.31063, 1.35016] | 0.00000 [0.00000, 0.00000] |
-| code | {N0, D0} | 0.37451 [0.22751, 0.56711] | 0.61961 [0.08312, 0.99266] |
-| code | {N0, L0} | 0.61390 [0.40428, 0.89691] | 0.38022 [-0.09365, 0.78105] |
-| code | {N0, D0, L0} | 1.35934 [0.35735, 3.35359] | -0.36523 [-2.03205, 0.99281] |
-| qa | Strongest simple (config_mean) | 0.84993 [0.37508, 1.10438] | 0.00000 [0.00000, 0.00000] |
-| qa | {N0, D0} | 0.43557 [0.33893, 0.57593] | 0.41436 [-0.01675, 0.76545] |
-| qa | {N0, L0} | 2.12044 [0.21989, 5.14867] | -1.27051 [-4.07835, 0.15519] |
-| qa | {N0, D0, L0} | 1.48716 [0.42306, 3.55695] | -0.63724 [-2.48663, 0.62290] |
+| math | Strongest simple (config_median) | 1.41002 [0.17899, 2.87191] | 0.00000 [0.00000, 0.00000] |
+| math | {N0, D0} | 2.36337 [1.35328, 3.63021] | -0.95335 [-2.45104, 0.76528] |
+| math | {N0, L0} | 1.98931 [0.33542, 3.06177] | -0.57929 [-1.39158, -0.15643] |
+| math | {N0, D0, L0} | 1.14448 [0.46978, 2.06359] | 0.26554 [-0.29079, 0.80832] |
+| code | Strongest simple (config_median) | 1.55326 [0.33163, 3.02429] | 0.00000 [0.00000, 0.00000] |
+| code | {N0, D0} | 2.19509 [1.37136, 3.25745] | -0.64183 [-1.95359, 1.06782] |
+| code | {N0, L0} | 2.07693 [0.37423, 3.24288] | -0.52368 [-1.30983, -0.04260] |
+| code | {N0, D0, L0} | 0.62600 [0.22094, 1.14772] | 0.92726 [0.11069, 1.87657] |
+| qa | Strongest simple (config_median) | 1.47288 [0.27836, 2.96807] | 0.00000 [0.00000, 0.00000] |
+| qa | {N0, D0} | 2.45683 [1.59639, 3.65270] | -0.98395 [-2.48049, 0.84666] |
+| qa | {N0, L0} | 1.96411 [0.92058, 2.62249] | -0.49123 [-1.17706, 0.34558] |
+| qa | {N0, D0, L0} | 1.98938 [1.12520, 2.70581] | -0.51650 [-1.53360, 0.83093] |
 
 Zero-change MAE is the mean |ΔL|: it shows the response magnitude available to model. The reference row has zero improvement by definition; its gain over zero is shown here.
 
 | Capability | Zero MAE | Config mean MAE | Config median MAE | Selected reference | Reference gain over zero [paired 95%] |
 |---|---:|---:|---:|---|---:|
-| math | 1.04287 | 0.90812 | 0.94382 | config_mean | 0.13474 [-0.91794, 0.72091] |
-| code | 1.20640 | 0.99411 | 1.02752 | config_mean | 0.21229 [-1.04223, 0.91423] |
-| qa | 0.89433 | 0.84993 | 0.94759 | config_mean | 0.04440 [-0.90361, 0.52926] |
+| math | 1.58035 | 1.87723 | 1.41002 | config_median | 0.17032 [-0.86631, 0.79161] |
+| code | 1.84075 | 1.94157 | 1.55326 | config_median | 0.28749 [-0.90664, 1.01185] |
+| qa | 1.52474 | 1.89536 | 1.47288 | config_median | 0.05187 [-0.94195, 0.66101] |
 
 | Capability | L0 model gain over D0 model [paired 95%] | Combined gain over D0 model [paired 95%] | Combined gain over L0 model [paired 95%] |
 |---|---:|---:|---:|
-| math | -0.13523 [-0.22147, -0.08578] | 0.03086 [-0.20415, 0.31599] | 0.16609 [-0.11837, 0.53746] |
-| code | -0.23939 [-0.32980, -0.17677] | -0.98483 [-3.02470, 0.20976] | -0.74544 [-2.81310, 0.53956] |
-| qa | -1.68487 [-4.57274, 0.17194] | -1.05160 [-2.98102, -0.03123] | 0.63327 [-0.20317, 1.59172] |
+| math | 0.37406 [-0.95514, 1.05945] | 1.21889 [0.04304, 2.73014] | 0.84483 [-0.13436, 1.67069] |
+| code | 0.11816 [-1.28641, 0.99713] | 1.56909 [0.80876, 2.74811] | 1.45094 [0.15329, 2.10435] |
+| qa | 0.49272 [-0.50109, 1.30343] | 0.46745 [-0.01573, 0.94689] | -0.02527 [-0.35654, 0.48535] |
 
-**math:** Both standalone predictors beat the simple reference in point MAE; this provides a predictive signal against which to assess their overlap. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
+**math:** Both standalone predictors fail to beat the simple reference in point MAE; their comparison cannot demonstrate information redundancy. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
 
-**code:** Both standalone predictors beat the simple reference in point MAE; this provides a predictive signal against which to assess their overlap. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
+**code:** Both standalone predictors fail to beat the simple reference in point MAE; their comparison cannot demonstrate information redundancy. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
 
-**qa:** Only {N0, D0} beats the simple reference in point MAE; the inputs are not interchangeable in this fitted model class. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
+**qa:** Both standalone predictors fail to beat the simple reference in point MAE; their comparison cannot demonstrate information redundancy. Read the paired intervals alongside these point comparisons; a non-significant combined gain alone establishes neither redundancy nor absence of signal.
 
 ## Fold stability
 
@@ -109,24 +109,24 @@ All values are native-token MAE. The simple reference is fixed across the three 
 
 | Arm | Capability | Held-out step | Simple | N0,D0 | N0,L0 | Combined | Combined condition number |
 |---|---|---:|---:|---:|---:|---:|---:|
-| pruning | math | 16000 | 0.22695 | 0.23884 | 0.19752 | 0.23344 | 24.00 |
-| pruning | math | 64000 | 0.03692 | 0.11236 | 0.11483 | 0.10409 | 13.45 |
-| pruning | math | 143000 | 0.32248 | 0.15174 | 0.18367 | 0.20134 | 19.38 |
-| pruning | code | 16000 | 0.19570 | 0.30582 | 0.23704 | 0.30071 | 11.82 |
-| pruning | code | 64000 | 0.09559 | 0.14699 | 0.17444 | 0.09708 | 16.97 |
-| pruning | code | 143000 | 0.37481 | 0.27015 | 0.30378 | 0.25289 | 109.45 |
-| pruning | qa | 16000 | 0.07923 | 0.49534 | 2.26890 | 1.85351 | 12.98 |
-| pruning | qa | 64000 | 0.09547 | 0.19190 | 0.17295 | 0.21911 | 1.54 |
-| pruning | qa | 143000 | 0.31567 | 0.30812 | 0.27239 | 0.28081 | 1.80 |
-| quantization | math | 16000 | 1.17644 | 1.00585 | 1.22732 | 0.68986 | 24.00 |
-| quantization | math | 64000 | 0.22367 | 0.37000 | 0.46844 | 0.38925 | 13.45 |
-| quantization | math | 143000 | 1.32426 | 0.58458 | 0.67037 | 0.78874 | 19.38 |
-| quantization | code | 16000 | 1.35016 | 0.56711 | 0.89691 | 0.35735 | 11.82 |
-| quantization | code | 64000 | 0.31063 | 0.22751 | 0.40428 | 0.36707 | 16.97 |
-| quantization | code | 143000 | 1.32155 | 0.32889 | 0.54050 | 3.35359 | 109.45 |
-| quantization | qa | 16000 | 1.07032 | 0.57593 | 5.14867 | 3.55695 | 12.98 |
-| quantization | qa | 64000 | 0.37508 | 0.39183 | 0.21989 | 0.42306 | 1.54 |
-| quantization | qa | 143000 | 1.10438 | 0.33893 | 0.99275 | 0.48148 | 1.80 |
+| pruning | math | 16000 | 0.25784 | 1.21051 | 0.80900 | 0.20406 | 4.33 |
+| pruning | math | 64000 | 0.09592 | 0.49741 | 0.10618 | 0.14354 | 3.69 |
+| pruning | math | 143000 | 0.88822 | 0.70202 | 0.93482 | 0.41856 | 14.19 |
+| pruning | code | 16000 | 0.30883 | 1.41397 | 0.87860 | 0.27960 | 3.56 |
+| pruning | code | 64000 | 0.15525 | 0.57001 | 0.10246 | 0.11123 | 3.29 |
+| pruning | code | 143000 | 1.08860 | 0.87462 | 1.11884 | 0.50305 | 7.40 |
+| pruning | qa | 16000 | 0.13808 | 1.40232 | 0.91724 | 1.02247 | 1.78 |
+| pruning | qa | 64000 | 0.30268 | 0.52051 | 0.39030 | 0.42889 | 2.21 |
+| pruning | qa | 143000 | 1.05202 | 0.88855 | 0.98763 | 0.93751 | 2.48 |
+| quantization | math | 16000 | 1.17917 | 3.63021 | 2.57075 | 0.90007 | 4.33 |
+| quantization | math | 64000 | 0.17899 | 1.35328 | 0.33542 | 0.46978 | 3.69 |
+| quantization | math | 143000 | 2.87191 | 2.10663 | 3.06177 | 2.06359 | 14.19 |
+| quantization | code | 16000 | 1.30386 | 3.25745 | 2.61369 | 0.50934 | 3.56 |
+| quantization | code | 64000 | 0.33163 | 1.37136 | 0.37423 | 0.22094 | 3.29 |
+| quantization | code | 143000 | 3.02429 | 1.95647 | 3.24288 | 1.14772 | 7.40 |
+| quantization | qa | 16000 | 1.17221 | 3.65270 | 2.34927 | 2.70581 | 1.78 |
+| quantization | qa | 64000 | 0.27836 | 1.59639 | 0.92058 | 1.12520 | 2.21 |
+| quantization | qa | 143000 | 2.96807 | 2.12140 | 2.62249 | 2.13714 | 2.48 |
 
 ## Training trajectory correlation
 
@@ -134,22 +134,28 @@ Pearson correlations use unique dense cells (not four repetitions per compressio
 
 | Arm | Capability | Cells | n | corr(D0,L0) | corr(log D0,L0) |
 |---|---|---|---:|---:|---:|
-| pruning | math | all sizes | 6 | -0.61288 | -0.65449 |
+| pruning | math | all sizes | 9 | 0.01617 | -0.04048 |
+| pruning | math | 160m | 3 | 0.86051 | 0.67720 |
 | pruning | math | 410m | 3 | -0.91862 | -0.99352 |
 | pruning | math | 1.4b | 3 | -0.94328 | -0.99894 |
-| pruning | code | all sizes | 6 | -0.72559 | -0.78684 |
+| pruning | code | all sizes | 9 | 0.06478 | 0.00100 |
+| pruning | code | 160m | 3 | 0.85142 | 0.66415 |
 | pruning | code | 410m | 3 | -0.86669 | -0.97368 |
 | pruning | code | 1.4b | 3 | -0.94629 | -0.99932 |
-| pruning | qa | all sizes | 6 | 0.31106 | 0.38634 |
+| pruning | qa | all sizes | 9 | 0.60771 | 0.60631 |
+| pruning | qa | 160m | 3 | 0.99795 | 0.93718 |
 | pruning | qa | 410m | 3 | -0.93971 | -0.99839 |
 | pruning | qa | 1.4b | 3 | 0.80875 | 0.94393 |
-| quantization | math | all sizes | 6 | -0.61288 | -0.65449 |
+| quantization | math | all sizes | 9 | 0.01617 | -0.04048 |
+| quantization | math | 160m | 3 | 0.86051 | 0.67720 |
 | quantization | math | 410m | 3 | -0.91862 | -0.99352 |
 | quantization | math | 1.4b | 3 | -0.94328 | -0.99894 |
-| quantization | code | all sizes | 6 | -0.72559 | -0.78684 |
+| quantization | code | all sizes | 9 | 0.06478 | 0.00100 |
+| quantization | code | 160m | 3 | 0.85142 | 0.66415 |
 | quantization | code | 410m | 3 | -0.86669 | -0.97368 |
 | quantization | code | 1.4b | 3 | -0.94629 | -0.99932 |
-| quantization | qa | all sizes | 6 | 0.31106 | 0.38634 |
+| quantization | qa | all sizes | 9 | 0.60771 | 0.60631 |
+| quantization | qa | 160m | 3 | 0.99795 | 0.93718 |
 | quantization | qa | 410m | 3 | -0.93971 | -0.99839 |
 | quantization | qa | 1.4b | 3 | 0.80875 | 0.94393 |
 
@@ -165,11 +171,16 @@ Pearson correlations use unique dense cells (not four repetitions per compressio
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
+| 160m | 1.80064 → 1.73044 → 2.16527 | +0.36463 | nonmonotonic |
 | 410m | 1.61204 → 1.49905 → 1.45855 | -0.15348 | decreasing |
 | 1.4b | 1.46994 → 1.31300 → 1.23713 | -0.23282 | decreasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
+| 160m | 0.9 | 0.00888 → 0.00890 → 0.12457 | 1.80952 → 1.73934 → 2.28984 | +0.11570 | +0.48033 | increasing / nonmonotonic |
+| 160m | 0.8 | 0.07326 → 0.10789 → 0.74128 | 1.87390 → 1.83833 → 2.90655 | +0.66802 | +1.03265 | increasing / nonmonotonic |
+| 160m | 0.7 | 0.25706 → 0.44436 → 2.39037 | 2.05770 → 2.17480 → 4.55564 | +2.13331 | +2.49794 | increasing / increasing |
+| 160m | 0.6 | 0.87210 → 1.42177 → 6.49027 | 2.67274 → 3.15222 → 8.65554 | +5.61817 | +5.98280 | increasing / increasing |
 | 410m | 0.9 | 0.00225 → 0.00825 → 0.03411 | 1.61429 → 1.50730 → 1.49266 | +0.03186 | -0.12163 | increasing / decreasing |
 | 410m | 0.8 | 0.02064 → 0.04742 → 0.19665 | 1.63268 → 1.54647 → 1.65520 | +0.17601 | +0.02252 | increasing / nonmonotonic |
 | 410m | 0.7 | 0.10061 → 0.19637 → 0.61281 | 1.71265 → 1.69542 → 2.07136 | +0.51220 | +0.35872 | increasing / nonmonotonic |
@@ -189,11 +200,16 @@ For example, 410m at config 0.9: the increment rises by 0.03186, while dense los
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
+| 160m | 1.75261 → 1.67346 → 2.11594 | +0.36332 | nonmonotonic |
 | 410m | 1.54582 → 1.43594 → 1.41627 | -0.12955 | decreasing |
 | 1.4b | 1.46524 → 1.35025 → 1.29255 | -0.17269 | decreasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
+| 160m | 0.9 | 0.01361 → 0.01652 → 0.22986 | 1.76622 → 1.68998 → 2.34579 | +0.21625 | +0.57957 | increasing / nonmonotonic |
+| 160m | 0.8 | 0.07565 → 0.18481 → 1.09395 | 1.82826 → 1.85827 → 3.20989 | +1.01830 | +1.38163 | increasing / increasing |
+| 160m | 0.7 | 0.27799 → 0.61380 → 3.39036 | 2.03060 → 2.28726 → 5.50630 | +3.11237 | +3.47570 | increasing / increasing |
+| 160m | 0.6 | 1.13365 → 2.00446 → 7.29148 | 2.88626 → 3.67792 → 9.40742 | +6.15783 | +6.52116 | increasing / increasing |
 | 410m | 0.9 | 0.00184 → 0.00618 → 0.00957 | 1.54766 → 1.44212 → 1.42584 | +0.00773 | -0.12182 | increasing / decreasing |
 | 410m | 0.8 | 0.00499 → 0.06216 → 0.21613 | 1.55081 → 1.49810 → 1.63240 | +0.21114 | +0.08159 | increasing / nonmonotonic |
 | 410m | 0.7 | 0.11320 → 0.16817 → 0.80604 | 1.65902 → 1.60411 → 2.22231 | +0.69283 | +0.56329 | increasing / nonmonotonic |
@@ -213,11 +229,16 @@ For example, 410m at config 0.9: the increment rises by 0.00773, while dense los
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
+| 160m | 4.77070 → 4.91647 → 5.22505 | +0.45434 | increasing |
 | 410m | 5.07539 → 5.01889 → 4.99275 | -0.08264 | decreasing |
 | 1.4b | 4.91249 → 5.11214 → 5.12034 | +0.20785 | increasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
+| 160m | 0.9 | 0.01209 → -0.04396 → 0.14734 | 4.78279 → 4.87250 → 5.37239 | +0.13525 | +0.58959 | nonmonotonic / increasing |
+| 160m | 0.8 | -0.02718 → -0.11122 → 0.75665 | 4.74352 → 4.80525 → 5.98170 | +0.78383 | +1.23818 | nonmonotonic / increasing |
+| 160m | 0.7 | -0.17363 → 0.26675 → 2.89057 | 4.59708 → 5.18322 → 8.11561 | +3.06419 | +3.51854 | increasing / increasing |
+| 160m | 0.6 | 0.34847 → 1.52519 → 6.21186 | 5.11918 → 6.44166 → 11.43691 | +5.86339 | +6.31773 | increasing / increasing |
 | 410m | 0.9 | -0.01646 → -0.01444 → -0.11538 | 5.05894 → 5.00446 → 4.87738 | -0.09892 | -0.18156 | nonmonotonic / decreasing |
 | 410m | 0.8 | -0.03274 → -0.11811 → -0.16683 | 5.04266 → 4.90078 → 4.82593 | -0.13409 | -0.21673 | decreasing / decreasing |
 | 410m | 0.7 | -0.18102 → -0.29004 → 0.12773 | 4.89437 → 4.72885 → 5.12048 | +0.30876 | +0.22612 | nonmonotonic / nonmonotonic |
@@ -235,11 +256,16 @@ For example, 410m at config 0.9: the increment rises by 0.00773, while dense los
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
+| 160m | 1.80064 → 1.73044 → 2.16527 | +0.36463 | nonmonotonic |
 | 410m | 1.61204 → 1.49905 → 1.45855 | -0.15348 | decreasing |
 | 1.4b | 1.46994 → 1.31300 → 1.23713 | -0.23282 | decreasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
+| 160m | 8 | -0.00028 → 0.00000 → 0.03164 | 1.80036 → 1.73044 → 2.19691 | +0.03191 | +0.39654 | increasing / nonmonotonic |
+| 160m | 6 | 0.00210 → 0.00716 → 0.18777 | 1.80274 → 1.73760 → 2.35304 | +0.18568 | +0.55030 | increasing / nonmonotonic |
+| 160m | 4 | 0.13039 → 0.22157 → 2.83742 | 1.93103 → 1.95201 → 5.00269 | +2.70703 | +3.07166 | increasing / increasing |
+| 160m | 3 | 1.55355 → 3.86182 → 23.03002 | 3.35419 → 5.59226 → 25.19529 | +21.47647 | +21.84110 | increasing / increasing |
 | 410m | 8 | 0.00063 → 0.00119 → 0.00275 | 1.61267 → 1.50024 → 1.46130 | +0.00212 | -0.15137 | increasing / decreasing |
 | 410m | 6 | 0.00431 → 0.00799 → 0.02343 | 1.61635 → 1.50704 → 1.48199 | +0.01912 | -0.13436 | increasing / decreasing |
 | 410m | 4 | 0.07884 → 0.11957 → 0.55946 | 1.69088 → 1.61862 → 2.01801 | +0.48062 | +0.32714 | increasing / nonmonotonic |
@@ -259,11 +285,16 @@ For example, 410m at config 8: the increment rises by 0.00212, while dense loss 
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
+| 160m | 1.75261 → 1.67346 → 2.11594 | +0.36332 | nonmonotonic |
 | 410m | 1.54582 → 1.43594 → 1.41627 | -0.12955 | decreasing |
 | 1.4b | 1.46524 → 1.35025 → 1.29255 | -0.17269 | decreasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
+| 160m | 8 | 0.00095 → -0.00155 → 0.05408 | 1.75357 → 1.67192 → 2.17001 | +0.05313 | +0.41645 | nonmonotonic / nonmonotonic |
+| 160m | 6 | 0.01349 → 0.00351 → 0.26866 | 1.76610 → 1.67697 → 2.38460 | +0.25517 | +0.61849 | nonmonotonic / nonmonotonic |
+| 160m | 4 | 0.16407 → 0.31953 → 3.52359 | 1.91669 → 1.99299 → 5.63953 | +3.35952 | +3.72284 | increasing / increasing |
+| 160m | 3 | 2.12461 → 5.99828 → 24.84104 | 3.87723 → 7.67174 → 26.95698 | +22.71643 | +23.07975 | increasing / increasing |
 | 410m | 8 | 0.00053 → -0.00101 → 0.00808 | 1.54635 → 1.43493 → 1.42435 | +0.00755 | -0.12200 | nonmonotonic / decreasing |
 | 410m | 6 | 0.00256 → 0.00053 → 0.00939 | 1.54837 → 1.43647 → 1.42566 | +0.00683 | -0.12271 | nonmonotonic / decreasing |
 | 410m | 4 | 0.04914 → 0.12081 → 0.67471 | 1.59496 → 1.55675 → 2.09098 | +0.62556 | +0.49602 | increasing / nonmonotonic |
@@ -283,11 +314,16 @@ For example, 410m at config 8: the increment rises by 0.00755, while dense loss 
 
 | Size | Dense L0 at the three steps | Dense late−early | Dense shape |
 |---|---|---:|---|
+| 160m | 4.77070 → 4.91647 → 5.22505 | +0.45434 | increasing |
 | 410m | 5.07539 → 5.01889 → 4.99275 | -0.08264 | decreasing |
 | 1.4b | 4.91249 → 5.11214 → 5.12034 | +0.20785 | increasing |
 
 | Size | Config | ΔL at the three steps | Absolute compressed L at the three steps | ΔL late−early | L late−early | ΔL / L shape |
 |---|---:|---|---|---:|---:|---|
+| 160m | 8 | -0.00478 → 0.00737 → -0.00927 | 4.76592 → 4.92384 → 5.21578 | -0.00449 | +0.44986 | nonmonotonic / increasing |
+| 160m | 6 | 0.03357 → 0.00440 → 0.35789 | 4.80427 → 4.92087 → 5.58294 | +0.32432 | +0.77867 | nonmonotonic / increasing |
+| 160m | 4 | 0.05665 → -0.11478 → 3.63926 | 4.82735 → 4.80169 → 8.86431 | +3.58261 | +4.03695 | nonmonotonic / nonmonotonic |
+| 160m | 3 | 1.33433 → 3.91124 → 23.95342 | 6.10504 → 8.82771 → 29.17847 | +22.61909 | +23.07343 | increasing / increasing |
 | 410m | 8 | -0.00796 → 0.01046 → 0.01248 | 5.06743 → 5.02935 → 5.00523 | +0.02044 | -0.06220 | increasing / decreasing |
 | 410m | 6 | 0.01972 → -0.00974 → -0.00291 | 5.09512 → 5.00915 → 4.98984 | -0.02264 | -0.10528 | nonmonotonic / decreasing |
 | 410m | 4 | -0.06197 → -0.13563 → 0.53024 | 5.01343 → 4.88326 → 5.52299 | +0.59221 | +0.50957 | nonmonotonic / nonmonotonic |
