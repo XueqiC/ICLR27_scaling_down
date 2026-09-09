@@ -13,7 +13,7 @@ admit post-training recovery laws \citep{zhang2024scaling}, and pruning
 plus distillation-based recovery is highly effective in practice
 \citep{muralidharan2024compact,xia2023sheared}. None of these validate
 their forms on downstream capabilities. Empirical claims of
-``compression laws'' with downstream metrics exist
+\emph{compression laws} with downstream metrics exist
 \citep{sengupta2025compression} but report no held-out predictive
 validation and no capability stratification; task-stratified PTQ laws
 \citep{zhou2025task} are the closest antecedent, limited to quantization
@@ -22,7 +22,7 @@ derives per-capability forms from measured geometry and validates them by
 extrapolation.
 
 \paragraph{Predictability of downstream capabilities.}
-Downstream accuracy is predictable essentially only through continuous
+Downstream accuracy is predictable, as far as current evidence shows, only through continuous
 log-likelihood measurements: emergent jumps are largely metric artifacts
 \citep{schaeffer2023emergent}, accuracy-space prediction degrades through a
 chain of information-destroying transforms \citep{schaeffer2024predicting},

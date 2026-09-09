@@ -8,24 +8,22 @@ and distillation, testing source-state transfer and unseen-configuration
 prediction separately with the per-capability conditional loss vector as
 the common prediction endpoint. On a controlled panel, a
 source-conditioned pruning predictor predicts unseen compression
-densities and clearly outperforms strength-only baselines, while a
+densities with far lower error than strength-only baselines. A
 same-input comparison shows no additional advantage for a shared power
 form. The predictive gain of the quantization candidate depends on the
 precision regime, and damage-magnitude transfer under aggressive
-quantization remains unstable. The distillation reuse-count coordinate
-improves QA-loss prediction on an unseen data pool but does not beat a
-constant baseline for math and code and carries a budget-dependent
-bias. Across the heterogeneous panel, capability responses are
+quantization remains unstable. For distillation, the reuse-count coordinate improves QA-loss
+prediction on an unseen data pool; for math and code it does no better
+than a constant baseline, and it carries a budget-dependent bias. Across the heterogeneous panel, capability responses are
 anisotropic with an invariant ordering and family-specific magnitudes
 and signs, the capability geometry of the source model supports the
-measurement layer as mechanism evidence, and laws using only resource
-ratios fail to extrapolate across the methods tested, which negates
-those models while leaving open whether another single form unifies
+measurement layer as mechanism evidence, and laws that use only resource
+ratios did not extrapolate across the methods tested. That rules out
+those models and leaves open whether another single form could unify
 the arms. These results delimit the information the current predictors
 need, the range over which they transfer, and their limits, providing
 tested candidate relations and an evaluation basis for developing
 capability-conditioned scaling-down laws. How such predictors would
 enter a capability- and cost-aware method-selection map is left to
 future use (\S\ref{sec:map}); the controlled panels are small and their
-intervals panel-conditional, and these limits are stated rather than
-filled in.
+intervals panel-conditional, and we state these limits explicitly.

@@ -68,7 +68,7 @@ OLMo3-32B  & OLMo-3  & $+0.02$ & $+0.03$ & $+0.02$ & $+0.09$ & $<$\textbf{0.30} 
 \bottomrule
 \end{tabular}
 \caption{Per-capability pruning damage (nats/token). Three invariances
-hold everywhere: QA is the most robust capability pre-cliff; every
+hold across the panel: QA is the most robust capability pre-cliff; each
 model meets a cliff in a narrow proportional band (OLMo-3-32B has not
 met one by $\dens=0.3$, where its QA \emph{improves} by $-0.24$); and
 magnitudes and signs are family coefficients.}
@@ -81,7 +81,7 @@ magnitudes and signs are family coefficients.}
 Across nine models measured at $\bits\in\{8,6,4,3\}$: int8 and int6
 are within noise of dense everywhere; int4 damages small models
 (Gemma3-270M math $+2.3$) and barely touches large ones
-(Gemma3-27B math $+0.33$); and $\bits=3$ collapses every model measured ($+5$ to $+18$ nats).
+(Gemma3-27B math $+0.33$); and $\bits=3$ collapses each model we measured ($+5$ to $+18$ nats).
 In leave-one-bit-out validation a learned exponential $q_ce^{-k\bits}$
 beats the fixed $q_c4^{-\bits}$ candidate (pooled MAE $6.73$ vs.\
 $7.63$): bit decay is exponential, with a fitted base.
@@ -100,7 +100,7 @@ design) train Gemma-3 students under coverage recipes. The paired
 results are directionally consistent with the pre-registered
 coverage-deletion prediction: the answer-only recipe hurts math more
 than full-trace training ($+0.19$ to $+0.22$ vs.\ $+0.09$ to
-$+0.12$), while QA improves in every configuration ($-0.58$ to
+$+0.12$), while QA improves in each configuration ($-0.58$ to
 $-1.44$). We do not attribute that gap to reasoning-coverage loss on
 this evidence alone, because the recipes differ in supervised tokens
 and update counts; the controlled comparisons that hold those
@@ -114,14 +114,14 @@ transfer relative to the student's own dense loss.
 The heterogeneous panel above tests how far a law transfers across
 finished models; it cannot separate the effect of training history from
 that of architecture and data, because those co-vary across public
-families. We therefore add a controlled panel, Pythia \{160M, 410M,
+families. We add a controlled panel, Pythia \{160M, 410M,
 1.4B\} at pretraining steps \{16k, 64k, 143k\} (33.6B, 134B, and 300B
 tokens), on which the source state $\mathbf x_0=(N_0,D_0,L_{c,0})$
 varies along known axes, and we ask two questions separately: whether
 source-state information predicts the compression response at a fixed
 intervention (the source axis), and whether a relation fit at seen
 intervention strengths predicts unseen ones (the strength axis).
-Table~\ref{tab:main} collects every registered test. Predictions marked
+Table~\ref{tab:main} collects each registered test. Predictions marked
 P were frozen before the corresponding measurement, L are leave-one-out
 on an existing panel, and R are baselines added at closeout with the
 original prediction untouched. All three arms use the same K0 budget
@@ -146,8 +146,7 @@ and for the reported capabilities and splits it is absent when the
 most-trained checkpoint is held out; we do not generalize this to all
 latest-stage extrapolation. Because the predictor uses configuration
 indicators, it is a source-transfer model at a fixed density or
-bit-width, not a law over the intervention axis. On a never-fit
-training stage (step 96k, a frozen prospective stage interpolation
+bit-width, not a law over the intervention axis. On a training stage that had not entered any fit (step 96k, a frozen prospective stage interpolation
 between 64k and 143k), the frozen pruning predictor beat both the
 baseline and the
 no-$D_0$ model for all three capabilities (math 0.090 vs.\ 0.367; code
@@ -162,7 +161,7 @@ with source-conditioned amplitude
 $A_c(\mathbf x)=\boldsymbol\beta_c\cdot(1,\log N_0,L_{c,0},\log D_0)$
 was frozen on the panel at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at
 unseen $d=0.65$ (interpolation) and $d=0.55$ (deeper extrapolation),
-including a new source (410M at step 96k). It beats every
+including a new source (410M at step 96k). It beats each
 strength-only baseline by a wide margin (MAE 0.371, 0.524, and 0.759
 for math, code, and QA against 1.37, 1.63, and 1.61 for a strength-only
 curve), because a source-blind curve cannot see that one state (160M at
@@ -174,7 +173,7 @@ has better point estimates than the candidate for math (0.283 vs.\
 0.371) and code (0.279 vs.\ 0.524) and is within noise for QA (0.818
 vs.\ 0.759); whether these differences are significant is not
 established on a panel of three sources. The candidate beats only the
-variant with $\gamma_c$ fixed to one. On the tested panel, therefore,
+variant with $\gamma_c$ fixed to one. On the tested panel,
 the source-informed candidate outperforms strength-only baselines, and
 the added same-input comparison shows no additional advantage for the
 shared power form. This does not mean that only the inputs matter,
@@ -203,20 +202,20 @@ collapse-risk law.
 
 \paragraph{New-source frozen prospective (pruning and quantization).}
 To test the retrospective same-input comparison on an independent
-source, we froze and committed every candidate's prediction for
+source, we froze and committed each candidate's prediction for
 Pythia-1B at step 96k, a new size inside the 160M--1.4B range at an
-interpolated training stage that had never entered any fit or
+interpolated training stage that had not entered any fit or
 selection, before measuring it, using only its measured dense loss and
 public descriptors. At the interpolated density $d=0.65$ the
 source-conditioned forms succeed and are indistinguishable (MAE 0.149
 for the $\gamma=1$ variant, 0.172 for the per-density baseline, and
 0.193 for the shared power form, against 0.704 for strength-only and
 0.657 for zero change), with math and code errors of 0.02 to 0.09 and
-QA the weakest capability. At the extrapolated density $d=0.55$ every
+QA the weakest capability. At the extrapolated density $d=0.55$ each
 source-conditioned candidate fails (1.14 to 1.69), under-predicting the
 collapse of this source by 1 to 1.5 nats and missing the sign of the QA
 response, while the source-blind strength-only curve is closest (0.273);
-the transfer range of the source-conditioned family is therefore the
+the transfer range of the source-conditioned family appears to be the
 interpolation regime. For quantization the frozen full-input predictor
 is best at both bits on this source (int4 MAE 0.074 against 0.211
 without $D_0$ and 0.111 for the per-bit median; int3 0.397 against
@@ -245,13 +244,13 @@ before the U225 measurement; the per-capability recommendation of
 reuse-only for QA and a constant for math and code is a selection made
 after seeing those results and is labeled as such in
 Table~\ref{tab:main}. The prediction residual is dominated by systematic
-bias rather than by pool variation: math and code show a small
+bias, with little from pool variation: math and code show a small
 over-prediction bias with little spread, and the QA reuse-count
 predictor carries a bias that changes sign across the two budgets
-($-0.87$ then $+0.48$), a form misfit rather than pool sensitivity.
+($-0.87$ then $+0.48$), a form misfit more than pool sensitivity.
 Around that bias, variation across pools exceeds variation across
 training seeds, but with three pools and two seeds this describes the
-design rather than decomposing a population variance, and we make no
+design and does not decompose a population variance, and we make no
 causal claim about the residual.
 
 \paragraph{Reading across arms.}
@@ -266,7 +265,7 @@ suffices for math and code. The cross-method tests reported here cover the
 resource-ratio models of \S\ref{sec:claims} at matched storage and
 active-parameter coordinates; the full M1/M2/M3 held-out comparison was
 not completed (\S\ref{sec:planned}). Whether any single response form
-unifies the arms therefore remains open. How these predictors would
+unifies the arms remains open. How these predictors would
 enter a capability- and cost-aware method-selection map is discussed in
 \S\ref{sec:map}; the existing Pareto and mis-ranking analyses are
 implications of prediction error, not a validated selector.
@@ -275,13 +274,13 @@ implications of prediction error, not a validated selector.
 \label{sec:planned}
 
 The controlled panels have three size, step, and pool clusters, so all
-intervals are panel-conditional rather than population estimates. The
+intervals are panel-conditional and should not be read as population estimates. The
 shared pruning form is not independently necessary, since a per-density
 fit ties it. No held-out agent or method-selection validation was run,
-so the selection map is a framework deliverable rather than a validated
+so the selection map remains a framework deliverable and not a validated
 selector. The full capacity$\times$teacher$\times$data distillation
 grid, large-model geometric order parameters, the cross-method M1/M2/M3
 held-out comparison of \S\ref{sec:claims}, agent-workload selection
-validation, and the held-out extrapolation battery for every reduced
+validation, and the held-out extrapolation battery for each reduced
 form (\S\ref{sec:protocol}) were not completed in this work and are
-stated as such rather than filled in.
+stated as such.

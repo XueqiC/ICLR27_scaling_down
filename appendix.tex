@@ -5,14 +5,14 @@
 \label{sec:app_probes}
 Each capability is measured on a fixed probe set of prompt--reference
 pairs drawn once, with a fixed seed, from held-out benchmark splits that
-are disjoint from every training and recovery source used in the paper.
+are disjoint from each training and recovery source used in the paper.
 The primary measurement benchmarks are MATH-500 for mathematical
 reasoning, MBPP for code generation, and 2WikiMultihopQA for multi-hop
 question answering. For each capability we draw 128 probes and split
 them by index parity into an estimation half, used only for gradient
 and Fisher statistics, and a measurement half of 64 probes on which
-every reported loss is computed, so that mechanism statistics and
-evaluations never share sampling noise. The measurement check of
+each reported loss is computed, so that mechanism statistics and
+evaluations do not share sampling noise. The measurement check of
 Appendix~\ref{sec:app_support} adds one independent secondary
 benchmark per capability (SVAMP, HumanEval, and TriviaQA; 128 probes
 each, same seed); these were chosen to exclude the benchmarks from
@@ -25,7 +25,7 @@ given the prompt, summed over completion tokens and divided by the
 number of completion tokens, as in Eq.~\eqref{eq:taskloss}. Prompts and
 references are tokenized with the model's own tokenizer and truncated to
 1024 tokens; prompt tokens are masked out of the loss. All within-model
-responses $\Delta L_c$ are therefore differences in native-token nats
+responses $\Delta L_c$ are differences in native-token nats
 on identical token sequences. Because native-token units differ across
 tokenizers, cross-family comparisons of absolute levels use per-byte
 normalization or are reported separately, and no cross-tokenizer
@@ -39,7 +39,7 @@ weights across all transformer matrices (attention and MLP projections;
 embeddings, output head, biases, and norms are excluded) to a target
 retained density $\dens$. The global threshold is estimated from a
 seeded sample of absolute weights so that the same procedure scales to
-30B-parameter models; every density is applied to the same dense
+30B-parameter models; each density is applied to the same dense
 reference weights, which are held on the CPU for the largest models so
 that a single 80~GB device suffices.
 
@@ -49,7 +49,7 @@ range $[-(2^{\bits-1}-1),\,2^{\bits-1}-1]$ and a per-channel scale set
 by the channel's maximum absolute value; activations are left in
 bfloat16. The dense weights are restored between bit-widths. Because the
 symmetric range uses $2^{\bits-1}-1$ levels, the step-size ratio between
-consecutive bit-widths is $(7/15)^2\approx0.22$ rather than $0.25$,
+consecutive bit-widths is $(7/15)^2\approx0.22$, not $0.25$,
 which is why the fixed $4^{-\bits}$ shape is not the natural reference
 for this quantizer.
 
@@ -59,9 +59,9 @@ prompts; 600 traces per domain) under the full-trace recipe, with
 strict LoRA adapters of rank 16 and scaling 32 on the query, key, value,
 output, gate, up, and down projections, AdamW at learning rate
 $10^{-4}$, an effective batch of 16 sequences, and a cosine schedule
-with 3\% warmup. A run aborts rather than silently falling back to full
-fine-tuning if the adapter library is unavailable, and the actual
-training mode and trainable parameter count are recorded in every
+with 3\% warmup. A run aborts if the adapter library is unavailable and does not fall
+back to full fine-tuning silently, and the actual
+training mode and trainable parameter count are recorded in each
 manifest. Token accounting distinguishes processed tokens (all input
 tokens seen, including repetitions), unique pool tokens, and supervised
 completion tokens. The data pool of $U$ examples per domain is either
@@ -71,8 +71,8 @@ training seed; pools are identified by the sorted hashes of their
 samples and pairwise overlaps are reported. The historical schedule
 spanned a fixed number of epochs, so its cosine horizon varied with
 pool size; the controlled matrix of \S\ref{sec:twoaxes} uses a schedule
-defined on the same absolute processed-token budget for every pool, and
-the two protocols are never mixed in one fit.
+defined on the same absolute processed-token budget for each pool, and
+the two protocols are kept apart in fitting.
 
 \subsection{The controlled Pythia panel}
 \label{sec:app_pythia}
@@ -81,7 +81,7 @@ The panel uses the public Pythia checkpoints at sizes 160M, 410M, and
 correspond to 33.6B, 134.2B, and 299.9B processed tokens at the
 published batch of $1024\times2048$ tokens per step. The size
 coordinate $N_0$ counts transformer-matrix parameters only (the query,
-key, value, output, and MLP matrices of every layer), computed from the
+key, value, output, and MLP matrices of each layer), computed from the
 architecture configuration, and the training-tokens coordinate is
 $D_0=\text{step}\times 2{,}097{,}152$. Each checkpoint's weight identity
 was verified before use: the 2.8B revisions published for different
@@ -89,17 +89,17 @@ steps were found to load identical weights and were excluded, and an
 integrity guard now rejects any pair of nominally different checkpoints
 with identical measured panels. New sources added for the prospective
 tests (Pythia-1B at steps 32{,}000, 96{,}000, and 112{,}000;
-Pythia-6.9B at 32{,}000 and 112{,}000) were confirmed to have never
+Pythia-6.9B at 32{,}000 and 112{,}000) were confirmed to have not
 entered any fit or model selection before their predictions were
 frozen.
 
 \subsection{Registration, freezing, and labels}
 \label{sec:app_register}
-Every prediction test in Table~\ref{tab:main} follows one order. The
-functional forms, the development set, and every standardization and
+Each prediction test in Table~\ref{tab:main} follows one order. The
+functional forms, the development set, and each standardization and
 coefficient are fixed and committed first. For a new source the dense
 capability loss is then measured, since it is a permitted
-pre-compression input; the predictions for every configuration and
+pre-compression input; the predictions for each configuration and
 candidate are written to a versioned file and committed to the
 repository, with the commit hash recorded; and only then is the
 compressed or distilled outcome measured. Information budgets are
@@ -112,7 +112,7 @@ diagnostic added after a test with the original prediction left
 untouched, and P/R when a set of candidates was frozen but the
 per-capability choice among them was made after seeing the result.
 When a diagnostic overturns an earlier headline, the earlier claim is
-downgraded in the text rather than the prediction being rewritten.
+downgraded in the text, and the prediction itself stays as committed.
 
 \subsection{Reproduction}
 \label{sec:app_repro}
@@ -135,7 +135,7 @@ diagonal Fisher) and compare all pairs. After removing the component
 shared across benchmarks, signatures of same-capability benchmarks are
 positively aligned (cosine $+0.36$ to $+0.45$) while signatures of
 different capabilities are \emph{anti-aligned} ($-0.23$ to $-0.25$),
-in every one of seven models across three families
+in each of the seven models across three families
 (Figs.~\ref{fig:blocks}--\ref{fig:blocks_olmo3_7b}); the C4 control sits between blocks.
 \preliminary{point estimates; example-bootstrap, permutation, and
 prompt-stability tests are left to future work} The
@@ -168,10 +168,10 @@ QA   & $+0.01$ & $+0.00$ & $\mathbf{+2.29}$ \\
 \end{center}
 
 Zeroing $0.05\%$ of weights, selected from gradients alone, selectively
-removes one capability while leaving the others essentially untouched
+removes one capability while leaving the others nearly untouched
 (the QA ablation moves code by $+0.0001$). Pending multi-model
 replication and the control ablations above, we describe the regions as
-causally implicated and partially separable rather than as proven
+causally implicated and partially separable; we do not call them proven
 causal carriers; if confirmed, ablation itself is a form of
 \emph{targeted} scaling-down.
 
@@ -188,7 +188,7 @@ follows a power law in the deleted capability mass $m_c(\dens)$:
 \end{equation}
 with in-sample $R^2 = 0.82$--$0.996$ over 24 capability$\times$model
 fits. The held-out battery (1000-resample cell bootstrap) is where the
-form proves itself: in \emph{leave-one-family-out} transfer the
+form is tested: in \emph{leave-one-family-out} transfer the
 shared-$\gamma$ mechanism form attains MAE $2.17$ nats versus $10.3$
 for per-capability raw sparsity and $8.2$ for the direct-damage
 baseline (both CIs exclude zero), so the deleted-mass coordinate is what
@@ -203,7 +203,7 @@ $\gamma\in[1.2,2.2]$ across all families, versus $3.2$--$8.7$ in the
 raw $(1-\dens)$ coordinate, which is what makes
 the form portable; and (ii) \emph{within a model, $\gamma$ is shared
 across capabilities} (e.g.\ Qwen3-0.6B: $1.41/1.56/1.43$;
-Gemma3-4B: $1.66/1.71$): capability differences are carried entirely
+Gemma3-4B: $1.66/1.71$): capability differences appear to be carried
 by the two measured quantities, and the fitted structure is two
 parameters per model. Published (reduced) forms substitute the
 smooth dependence of the geometry itself on $(N_0,f)$, leaving only basic
@@ -214,7 +214,7 @@ parameters in the interface.
 
 The alignment term $\gbar{c}^{\top}\dw$ is the decisive family
 coefficient. Its sign predicts the presence or absence of the
-capability-selective ``free lunch'' in every case measured:
+capability-selective improvement in each case measured:
 the QA term of Qwen3 is negative and QA improves under pruning (predicted
 $-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); the QA term of Gemma is
 positive and no improvement exists at any size; the term for OLMo-3-7B is
@@ -225,7 +225,7 @@ cells in the mild regime, sign prediction accuracy is $67.6\%$
 (Wilson 95\% CI $[58.3,75.7]$, $n{=}108$), above chance, with the
 family-level pattern (Qwen and OLMo-32B QA improvements, Gemma
 none, an OLMo size flip) called in advance. Beyond the mild regime, first- plus second-order
-predictions fail by orders of magnitude at the cliff in every family:
+predictions fail by orders of magnitude at the cliff in each family:
 the collapse is non-perturbative in loss space, confirming the
 two-regime structure of \eqref{eq:fitlaw}.
 
@@ -288,9 +288,9 @@ has the lowest concentration; within-Gemma top-end violation).
 family coefficient dominates: $\Delta\Lc{\text{math}}$ at $\dens=0.7$
 spans $+0.02$ (OLMo-3-32B), $+0.17$ (Muse-30B), $+0.68$ (Gemma4-31B),
 $+4.04$ (Gemma3-27B). OLMo-3-32B survives $70\%$ pruning with
-$\le+0.63$ nats on every capability. Family provenance (data
+$\le+0.63$ nats on each capability. Family provenance (data
 recency, over-training exposure) is a first-order determinant of
-prunability, and ``which family should an agent scale down from?''
+prunability, and the question of which family an agent should scale down from
 is a measured quantity.
 
 \subsection{Re-analysis of the prior ability-space grid}
@@ -300,7 +300,7 @@ A prior internal study fit compression laws directly on Rasch
 abilities from $\sim$100-item panels over a 774-cell Qwen3 grid and
 reported that no derived law had held-out predictive power. Our
 re-analysis attributes much of this to the measurement layer:
-(1) the $r{=}1$ falsification anchor was driven entirely by the
+(1) the $r{=}1$ falsification anchor was driven almost entirely by the
 answer-only recipe (stratified, the anchor holds and held-out error
 drops from $9.0\times$ to $1.8\times$ the noise floor); (2)
 same-benchmark evaluation inflated QA gains by roughly one third;

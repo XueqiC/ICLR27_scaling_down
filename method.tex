@@ -14,7 +14,7 @@ D3, family-conditioned D2 with offsets $u_{c,f}$; and
 D4, the observed dense capability anchor $\mathbf L_0^{\mathrm{obs}}$
 used directly per \eqref{eq:anchored}. D2/D3 are claimed only where
 $N$, $D$, and $f$ vary independently enough to identify them;
-$D$--family collinearity is reported rather than hidden.
+$D$--family collinearity is reported explicitly.
 \resultpending{D1--D4 comparison; controlled $(N,D)$ grid}
 The practical setting in this paper is D4: anchored prediction of
 compression-induced change.
@@ -30,7 +30,7 @@ We do not presume that methods unify. The general form is
 +F_m(\mathbf x_0,\mathbf z_m,\boldsymbol\theta_m),
 \label{eq:hierarchy}
 \end{equation}
-and three hypotheses are compared by held-out prediction error (never
+and three hypotheses are compared by held-out prediction error (and not
 by in-sample $R^2$):
 \textbf{M1}, fully shared: after transformation to common coordinates
 $\mathbf z_m$, one response function covers all methods;
@@ -76,7 +76,7 @@ pruning. \resultpending{functional-form comparison}
 \paragraph{Distillation.} Per capability, a template with student
 capacity floor, teacher capability vector $\mathbf L^{\mathcal T}$,
 a data power law in trace tokens, and a supervision-dependent coverage
-factor $\chi_c(\rho)$ computed from data composition (never inferred
+factor $\chi_c(\rho)$ computed from data composition (not inferred
 post hoc from results); capacity-gap corrections follow
 \citet{busbridge2025distillation}. Confounds (total tokens, update
 count, answer format, teacher identity) are controlled by
@@ -91,7 +91,7 @@ $\Dr{=}0$:
 \label{eq:recovery}
 \end{equation}
 where $r_{m,c}$ is the \emph{asymptotic residual fraction under the
-fixed recovery recipe}, not a claim of fundamentally unrecoverable
+fixed recovery recipe}, not a claim of unrecoverable in principle
 capability. Recovery-source dependence (general vs.\
 capability-aligned vs.\ mixed data) is an explicit axis.
 
@@ -103,7 +103,7 @@ calibration coverage reported alongside MAE and relative error.
 \subsection{Mechanism analysis: capability geometry}
 \label{sec:geometry}
 
-As supporting evidence rather than a prediction interface, we measure the
+Purely as supporting evidence, we measure the
 capability-conditional mean gradient $\gbar{c}$ and Fisher structure
 $\Fc{c}=\mathbb{E}_{i\sim c}[g_ig_i^{\top}]$ at the dense checkpoint,
 streamable at 30B scale (diagonal spectra in magnitude-quantile bins;
@@ -123,7 +123,7 @@ access, the practical interface loses nothing.
 Functional forms and keep/reject rules are committed before fits;
 model comparison uses repeated held-out extrapolation (largest size,
 deepest compression, largest recovery budget, leave-one-family-out),
-never in-sample fit indices \citep{li2025misfitting,
+and not in-sample fit indices \citep{li2025misfitting,
 besiroglu2024chinchilla}; manuscript counts of models, benchmarks, and
 fits are generated from result files, not typed by hand; negative
 results are reported, not tuned away.
@@ -140,5 +140,5 @@ selected-method accuracy, and the number of compression experiments
 avoided. This is how the predictors of this paper would be used, not a
 result of it: no held-out agent or method-selection validation was run
 (\S\ref{sec:planned}), and the Pareto and mis-ranking analyses we
-report are implications of prediction error rather than a validated
+report are consequences of prediction error and do not amount to a validated
 selector.
