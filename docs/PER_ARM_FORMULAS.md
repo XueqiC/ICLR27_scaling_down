@@ -95,3 +95,14 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
   a distillation new-student with matched LoRA recipe pending).
 - Disentangle the distillation reuse residual from training exposure with a matched-optimizer-step design.
 - Prediction intervals per arm reflect the small model count (≤12); widen probes improve measurement, not model count.
+
+## Round v2 update (2026-09-09 17:20 EDT): P1-v2 frozen prospectives on two new Pythia sizes (C33, C34)
+- 1B @32k/@112k (in-range size): the source-conditioned per-density regression (A2) is the best pruning predictor in the
+  interpolation regime at the late stage (protocol A: 0.112 vs median 0.173, strength-only 0.365), on par or slightly
+  behind the source-free median curve at the early stage (0.261 vs 0.204 under A; 0.218 vs 0.224 under B). Density
+  extrapolation to 0.55 fails under both protocols. Quantization class-indicator: helps only at 3-bit; >=4-bit the
+  per-bit median is as good or better.
+- 6.9B @32k/@112k (~5x size extrapolation): R in both arms and both protocols. The panel size trend for QA does not
+  continue (predicted 1-3 nats improvement vs measured <0.65, reversing at d=0.55/112k); math/code over-predicted ~2x.
+- Transfer range of the current source-conditioned predictors: roughly the development size range x the interpolation
+  density range. Neither axis extrapolates. Tables: paper/tables/p1v2.tex (per stage, per protocol), tab:main (+8 rows).

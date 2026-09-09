@@ -86,3 +86,14 @@ Dense scaling/reference and prior compression/distillation laws — attributed t
    source-conditioned family with the power shape as a non-necessary variant.
 3. No held-out agent/method-selection validation; the selection map is a framework deliverable, not a
    validated selector. (External: PDF compile on Overleaf; 7.1G model backup awaits a Drive upload path.)
+
+## Round v2 update (2026-09-09 17:20 EDT): P1-v2 frozen prospectives on two new Pythia sizes (C33, C34)
+- 1B @32k/@112k (in-range size): the source-conditioned per-density regression (A2) is the best pruning predictor in the
+  interpolation regime at the late stage (protocol A: 0.112 vs median 0.173, strength-only 0.365), on par or slightly
+  behind the source-free median curve at the early stage (0.261 vs 0.204 under A; 0.218 vs 0.224 under B). Density
+  extrapolation to 0.55 fails under both protocols. Quantization class-indicator: helps only at 3-bit; >=4-bit the
+  per-bit median is as good or better.
+- 6.9B @32k/@112k (~5x size extrapolation): R in both arms and both protocols. The panel size trend for QA does not
+  continue (predicted 1-3 nats improvement vs measured <0.65, reversing at d=0.55/112k); math/code over-predicted ~2x.
+- Transfer range of the current source-conditioned predictors: roughly the development size range x the interpolation
+  density range. Neither axis extrapolates. Tables: paper/tables/p1v2.tex (per stage, per protocol), tab:main (+8 rows).

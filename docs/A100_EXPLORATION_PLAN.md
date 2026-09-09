@@ -117,3 +117,9 @@ capability responses at matched settings. No GPTQ law; no latency/storage claims
   reading is not a clean solo; pairing decisions use per-run completion time (runs/hour), logged per run.
 - Pending: P1-v2 compares (1B, 6.9B); P2 dev completion → v50 freeze → FREEZE2_COMMITTED → test lanes.
 - GPU-hours used at start of v2: ≈0.3 (probes 0.1, P1 0.02, old-protocol run ≈0.2 in flight).
+- 16:12 EDT: 1B pair measured (15:47-16:12, 22 GPU-min) and compared -> C33. 6.9B predictions had been committed at
+  15:55:58 (950312f); 6.9B measurement started 16:12:04 (reference on CPU).
+- 16:49 EDT: 6.9B pair measured (36 GPU-min) and compared -> C34: ~5x size extrapolation refuted in both arms under both
+  protocols. Paper updated (abstract/conclusion qualified; new paragraphs; tab:p1v2; tab:main +8 rows). GPU-h ≈1.0.
+- P3 decision unchanged (only if >=6 h remain after P2 tests); it is also held back until the solo-throughput baseline of
+  the first dev run is recorded, so it cannot contaminate the solo-vs-paired measurement.
