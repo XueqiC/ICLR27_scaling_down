@@ -56,3 +56,6 @@ never-fit middle pool U=225 (E 2.34–4.70, interpolation), 6 runs = 3 pool-seed
 > over-extrapolates). Response variability across seeds is dominated by pool SAMPLING, not training
 > randomness (QA ~10×, code ~4×) — the distillation residual is a data-selection effect. Small panel (6 runs,
 > 18 endpoint checkpoints), single teacher/recipe; endpoint pools first-U vs U=225 sampled.
+
+## Package B correction (see DISTILL_RESIDUALS.md)
+The U225 error is dominated by SYSTEMATIC BIAS of the frozen predictors, not pool variation. QA E-only bias sign-flips across budget (-0.87 -> +0.48) = form misfit; it beats a constant but does not cleanly transfer. The pool>training split describes only the small variation around the bias. Endpoints are first-U prefixes, U225 is random-sampled (protocol also changes). Drop the 'variability is a data-selection effect (~10x)' causal wording.
