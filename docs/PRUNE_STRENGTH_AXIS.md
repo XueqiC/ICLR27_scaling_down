@@ -67,5 +67,6 @@ the candidate wins decisively on UNSEEN densities:
 **Honest headline**: on pruning, a low-DOF shared-shape law with source-conditioned amplitude predicts
 UNSEEN compression strengths — including on a new training state — far better than any strength-only
 baseline for math/code (MAE ~0.4–0.5 vs ~1.4–1.6); interpolation is strong, deep extrapolation degrades at
-the cliff, and QA amplitude does not transfer. This is the first real result on the COMPRESSION-STRENGTH
+the cliff (signed errors MIXED, not systematic under-prediction — see PRUNE_SAMEINPUT.md), and QA amplitude
+does not transfer. Package A shows the win is source-information, not the specific power exponent (A2 ties/beats). This is the first real result on the COMPRESSION-STRENGTH
 axis (not just source-transfer at fixed d). Small panel, point estimates, single frozen candidate.
