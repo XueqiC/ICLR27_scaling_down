@@ -150,7 +150,7 @@ def main():
             L.append(r"\midrule")
         prev = r["method"]
         _DN = {"A1_gamma1": "A1 (gamma=1)", "strength_only": "strength-only", "median_curve": "median curve", "noD0_N0_L0": "no-D0",
-               "per_bit_median": "per-bit median", "full_N0_L0_D0": "full", "config_median": "median", "mean_base": "mean", "med_base": "median"}
+               "per_bit_median": "per-bit median", "per_bit_mean": "per-bit mean", "full_N0_L0_D0": "full", "config_median": "median", "mean_base": "mean", "med_base": "median"}
         dn = lambda t: __import__("functools").reduce(lambda acc, kv: acc.replace(kv[0], kv[1]), _DN.items(), str(t)).replace("_", r"\_")
         esc = lambda s: str(s).replace("_", r"\_").replace("&", r"\&").replace(">=", r"$\ge$").replace("^", r"\^{}")
         st = ("P-new" if r["improvement"] > 0 else "R") if r["status"].startswith("P-NEW") else "P/R" if r["status"].startswith("P (4") else ("P" if r["status"].startswith("FROZEN") else ("L" if r["status"].startswith("LOO") else "R"))
