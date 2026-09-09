@@ -1,32 +1,31 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We introduced capability-conditioned scaling-down laws: predict a
-vector of capability losses after compression from a dense source state
-observable before compression, common compression coordinates, and
-method-specific controls, with pruning, quantization, and distillation
-as parallel arms held to one evidence standard. Two axes carry the
-evidence. On the source axis, a controlled Pythia panel shows that
-source-state information, including training tokens, predicts the
-compression response beyond dense loss for math and code but not QA,
-and a frozen pruning predictor generalized to a never-fit training
-stage. On the strength axis, source-conditioned inputs predict pruning
-damage at unseen densities far better than any strength-only curve,
-although a per-density fit ties the shared power form, so the inputs
-rather than a particular exponent carry that result; quantization is
-validated per configuration, with an unstable collapse magnitude at
-three bits and no demonstrated gain in the near-lossless region; and
-distillation shows capability-specific transfer in which the reuse
-coordinate helps QA on an unseen pool while a constant suffices for
-math and code, with a bias-dominated residual. Across the heterogeneous
-panel, capability responses are anisotropic with an invariant ordering
-and family-specific magnitudes and signs, the capability geometry of
-the source model supports the measurement layer as mechanism evidence,
-and capability loss remains a common outcome coordinate while
-compression ratio does not serve as a common intervention coordinate.
-Whether one response form unifies the arms remains open; the evidence
-negates only the resource-ratio models we tested, so we unify at the
-decision layer through a capability- and cost-aware method-selection
-map, offered as a framework deliverable rather than a validated
-selector. The controlled panels are small and their intervals
-panel-conditional; these limits are stated rather than filled in.
+We systematically investigated whether the model state observable
+before compression, together with the intervention configuration, can
+predict the capability-conditioned loss after pruning, quantization,
+and distillation, testing source-state transfer and unseen-configuration
+prediction separately with the per-capability conditional loss vector as
+the common prediction endpoint. On a controlled panel, a
+source-conditioned pruning predictor predicts unseen compression
+densities and clearly outperforms strength-only baselines, while a
+same-input comparison shows no additional advantage for a shared power
+form. The predictive gain of the quantization candidate depends on the
+precision regime, and damage-magnitude transfer under aggressive
+quantization remains unstable. The distillation reuse coordinate
+improves QA-loss prediction on an unseen data pool but does not beat a
+constant baseline for math and code and carries a budget-dependent
+bias. Across the heterogeneous panel, capability responses are
+anisotropic with an invariant ordering and family-specific magnitudes
+and signs, the capability geometry of the source model supports the
+measurement layer as mechanism evidence, and laws using only resource
+ratios fail to extrapolate across the methods tested, which negates
+those models while leaving open whether another single form unifies
+the arms. These results delimit the information the current predictors
+need, the range over which they transfer, and their limits, providing
+tested candidate relations and an evaluation basis for developing
+capability-conditioned scaling-down laws. How such predictors would
+enter a capability- and cost-aware method-selection map is a matter for
+future use (\S\ref{sec:map}); the controlled panels are small and their
+intervals panel-conditional, and these limits are stated rather than
+filled in.

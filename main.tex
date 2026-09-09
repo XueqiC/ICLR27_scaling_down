@@ -103,25 +103,27 @@ source model through pruning, quantization, or distillation with recovery
 training. Choosing among these methods is today an expensive grid search,
 because compression changes capabilities anisotropically and existing
 scaling laws predict only aggregate loss within a single method. We
-formulate \emph{capability-conditioned predictive scaling-down laws}: from
-a dense source state observable \emph{before} compression (an observed
-capability anchor plus public descriptors), common compression
-coordinates, and a few method-specific controls, we predict the
-post-compression capability vector and, from it, the cheapest
-configuration meeting a workload requirement. Our central finding is an
-asymmetry: \textbf{capability loss is a common \emph{outcome} coordinate,
-with a map to behavioral accuracy shared across tested families, whereas
-compression ratio is \emph{not} a common \emph{intervention} coordinate.}
-Across twelve checkpoints from four families (Gemma-3/4, Muse, OLMo-3,
-Qwen-3; 270M--32B), method-agnostic laws on storage and active-parameter
-ratios fail to extrapolate across methods (at matched storage, a budget
-near-lossless under quantization is catastrophic under pruning), whereas
-method-specific laws reveal family-dependent cliffs, capability-specific
-transfer, and data-dependent recovery. We therefore unify not the
-interventions but the decision layer, as a capability- and cost-aware
-\emph{method-selection map}. Held-out law fits and selection validation
-are in progress and marked as such; no unverified result is stated as
-fact.
+systematically investigate whether the model state observable
+\emph{before} compression, together with the intervention configuration,
+can predict the capability-conditioned loss after pruning, quantization,
+and distillation, testing source-state transfer and unseen-configuration
+prediction separately, with the per-capability conditional loss vector
+as the common prediction endpoint. On a controlled panel, a
+source-conditioned pruning predictor predicts unseen compression
+densities and clearly outperforms strength-only baselines, while a
+same-input comparison shows no additional advantage for a shared power
+form. The predictive gain of the quantization candidate depends on the
+precision regime, and damage-magnitude transfer under aggressive
+quantization remains unstable. The distillation reuse coordinate
+improves QA-loss prediction on an unseen data pool but does not beat a
+constant baseline for math and code and carries a budget-dependent
+bias. Across twelve checkpoints from four families (270M--32B),
+method-agnostic laws on storage and active-parameter ratios fail to
+extrapolate across the methods tested. These results delimit the
+information the current predictors need, the range over which they
+transfer, and their limits, providing tested candidate relations and an
+evaluation basis for developing capability-conditioned scaling-down
+laws.
 \end{abstract}
 
 

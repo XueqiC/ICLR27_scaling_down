@@ -327,18 +327,24 @@ the same information budget.
 \input{tables/main_prediction}
 
 \paragraph{Source axis.}
-On the $3\times3$ panel, adding $D_0$ to $\{N_0, L_{c,0}\}$ lowers
+Three statements are kept separate here: whether adding $D_0$ improves
+on the model without it, whether the full-input model improves on the
+strongest simple baseline, and whether a frozen model succeeds on a new
+source state. On the $3\times3$ panel, adding $D_0$ to $\{N_0, L_{c,0}\}$ lowers
 held-out error in 4 of 12 arm$\times$capability$\times$split comparisons
 with a bootstrap interval excluding zero, for math and code but not QA.
 Against the strongest simple baseline, a per-configuration median, the
 full predictor wins with an interval excluding zero only for code; for
 math the point improvement is positive but the interval includes zero.
-The gain concentrates in aggressive settings (pruning $d=0.6$, int3) and
-vanishes when the most-trained checkpoint is held out. Because the
-predictor uses configuration indicators, it is a source-transfer model
-at a fixed density or bit-width, not a law over the intervention axis.
-On a never-fit training stage (step 96k, an interpolation between 64k
-and 143k), the frozen pruning predictor beat both the baseline and the
+The gain concentrates in aggressive settings (pruning $d=0.6$, int3),
+and for the reported capabilities and splits it is absent when the
+most-trained checkpoint is held out; we do not generalize this to all
+latest-stage extrapolation. Because the predictor uses configuration
+indicators, it is a source-transfer model at a fixed density or
+bit-width, not a law over the intervention axis. On a never-fit
+training stage (step 96k, a frozen prospective stage interpolation
+between 64k and 143k), the frozen pruning predictor beat both the
+baseline and the
 no-$D_0$ model for all three capabilities (math 0.090 vs.\ 0.367; code
 0.128 vs.\ 0.438; QA 0.426 vs.\ 0.832), whereas the quantization
 predictor was mixed (math and QA above baseline, code below), a pattern
@@ -359,11 +365,16 @@ step 143k) is several times more fragile than another. Two closeout
 baselines at the same information budget, however, change what this
 shows. A per-density source regression with linear interpolation and
 extrapolation in $d$, which uses the same inputs and no shared exponent,
-ties or beats the candidate for math (0.283) and code (0.279) and is
-within noise for QA; the candidate beats only the variant with
-$\gamma_c$ fixed to one. The evidence therefore supports
-source-conditioned inputs as the carrier of unseen-density prediction
-and does not single out the particular exponent. At $d=0.55$ the signed
+has better point estimates than the candidate for math (0.283 vs.\
+0.371) and code (0.279 vs.\ 0.524) and is within noise for QA (0.818
+vs.\ 0.759); whether these differences are significant is not
+established on a panel of three sources. The candidate beats only the
+variant with $\gamma_c$ fixed to one. On the tested panel, therefore,
+the source-informed candidate outperforms strength-only baselines, and
+the added same-input comparison shows no additional advantage for the
+shared power form. This does not reduce to inputs alone mattering,
+since the per-density baseline also uses the response structure across
+the measured strengths. At $d=0.55$ the signed
 errors are mixed (six under-predictions, three over-predictions), with
 the most fragile source over-predicted, so we do not describe the deep
 regime as systematically under-predicted. QA amplitude does not follow
@@ -399,7 +410,12 @@ interpolation, and because the endpoints are pool prefixes while U225 is
 randomly sampled, the sampling protocol also changes. A reuse-count law
 beats a constant only for QA (0.706 vs.\ 1.449); for math and code a
 constant is best (0.122 and 0.069) and the endpoint-fit forms
-over-extrapolate. The prediction residual is dominated by systematic
+over-extrapolate. All four frozen candidates (a constant, a budget-only
+form, a reuse-only form, and a two-variable form) were registered
+before the U225 measurement; the per-capability recommendation of
+reuse-only for QA and a constant for math and code is a selection made
+after seeing those results and is labeled as such in
+Table~\ref{tab:main}. The prediction residual is dominated by systematic
 bias rather than by pool variation: math and code show a small
 over-prediction bias with little spread, and the QA reuse-count
 predictor carries a bias that changes sign across the two budgets
@@ -410,15 +426,21 @@ design rather than decomposing a population variance, and we make no
 causal claim about the residual.
 
 \paragraph{Reading across arms.}
-The three arms share the endpoint, the information budget, and the
-evaluation rule, and they deliver different things: pruning a
+The three arms share the prediction endpoint, the information budget,
+and the validation standard, and the response form and its range of
+validity are determined for each arm by evidence: pruning yields a
 source-conditioned prediction that extends to unseen densities,
 quantization a per-configuration validation whose only large signal is
 an unstable collapse magnitude, and distillation a capability-specific
 transfer in which the reuse coordinate helps QA and a constant suffices
-for math and code. Whether any single response form unifies remains
-open; the results negate only the resource-ratio models actually
-tested.
+for math and code. The cross-method tests reported here cover the
+resource-ratio models of \S\ref{sec:claims} at matched storage and
+active-parameter coordinates; the full M1/M2/M3 held-out comparison was
+not completed (\S\ref{sec:planned}). Whether any single response form
+unifies the arms therefore remains open. How these predictors would
+enter a capability- and cost-aware method-selection map is discussed in
+\S\ref{sec:map}; the existing Pareto and mis-ranking analyses are
+implications of prediction error, not a validated selector.
 
 \subsection{Remaining limitations}
 \label{sec:planned}

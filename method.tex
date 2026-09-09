@@ -42,8 +42,12 @@ uncertainty reporting, cost model, and agent-performance link.
 \resultpending{M1/M2/M3 held-out comparison, including
 leave-one-method-out and matched-storage / matched-active-parameter /
 matched-initial-damage tests}
-If unification fails at M1/M2, the method-selection map built from M3
-laws is the paper's central practical result.
+If unification fails at M1/M2, the M3 laws are reported separately,
+and their use in a method-selection map is left to discussion
+(\S\ref{sec:map}). The cross-method tests completed in this paper cover
+the resource-ratio models at matched storage and active-parameter
+coordinates; the full M1/M2/M3 held-out comparison is a stated
+limitation (\S\ref{sec:planned}).
 
 \subsection{Candidate functional forms per arm}
 \label{sec:laws}
@@ -124,13 +128,17 @@ besiroglu2024chinchilla}; manuscript counts of models, benchmarks, and
 fits are generated from result files, not typed by hand; negative
 results are reported, not tuned away.
 
-\subsection{Deliverable: the method-selection map}
+\subsection{Discussion: toward a method-selection map}
 \label{sec:map}
 
-Intersecting per-method laws at matched cost coordinates partitions
-the (compression budget $\times$ capability requirement) space into
-regions where pruning, quantization, distillation, or a composition
-is cheapest, with uncertainty bands; evaluation against exhaustive
-search reports constraint-satisfaction rate, cost regret, selected-%
-method accuracy, and the number of compression experiments avoided.
-\resultpending{held-out agent method-selection validation}
+Intersecting per-method predictors at matched cost coordinates would
+partition the (compression budget $\times$ capability requirement)
+space into regions where pruning, quantization, distillation, or a
+composition is cheapest, with uncertainty bands, and would be evaluated
+against exhaustive search by constraint-satisfaction rate, cost regret,
+selected-method accuracy, and the number of compression experiments
+avoided. This is how the predictors of this paper would be used, not a
+result of it: no held-out agent or method-selection validation was run
+(\S\ref{sec:planned}), and the Pareto and mis-ranking analyses we
+report are implications of prediction error rather than a validated
+selector.

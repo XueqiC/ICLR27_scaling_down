@@ -93,13 +93,13 @@ re-damages under over-training.
 \end{enumerate}
 
 \paragraph{Central thesis.}
-Capability loss is a common \emph{outcome} coordinate, with a map to
-behavioral accuracy that shares a form across tested families, whereas
-compression ratio is \emph{not} a common \emph{intervention} coordinate:
-laws using only resource ratios fail to extrapolate across methods.
-The outcome space can therefore be unified through capabilities even
-where the intervention laws cannot be unified across compression methods,
-so we unify at the decision layer rather than by forcing one curve.
+The per-capability conditional loss vector serves as the common
+prediction endpoint for all three arms, and the arms share one
+information budget and one validation standard; the response form and
+its range of validity are then determined separately for each arm by
+evidence. Laws using only resource ratios fail to extrapolate across
+the methods we tested, which negates the tested resource-ratio models
+but leaves open whether some other single form unifies the arms.
 
 \paragraph{Contributions.}
 (1) A capability-conditioned scaling-down formulation: predict a
@@ -113,9 +113,12 @@ reported by held-out prediction error rather than in-sample fit
 test over source state and intervention strength with frozen
 predictions and same-budget baselines (\S\ref{sec:twoaxes}). (3) A demonstration of
 cross-method \emph{non-equivalence} on tested storage/active coordinates
-alongside a shared capability interface (the loss-to-accuracy link),
-adjudicated by leave-one-method/family/size-out tests. (4) A capability-
-and cost-aware method-selection map as the practitioner-facing output.
+alongside a shared capability interface (the per-capability loss
+endpoint), adjudicated by leave-one-method/family/size-out tests. (4) A
+discussion of how these predictors would enter a capability- and
+cost-aware method-selection map, with the existing Pareto and
+mis-ranking analyses as implications of prediction error rather than a
+validated selector.
 Dense-reference scaling and Fisher-implementation optimization are
 \emph{not} claimed as contributions. Items not completed in this round
 (the cross-method M1/M2/M3 comparison and agent-workload selection
