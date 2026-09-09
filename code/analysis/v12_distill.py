@@ -191,6 +191,7 @@ def make_run_name(
     output_suffix: str = "",
     seed: int = SEED,
     training_mode: str = "lora",
+    data_seed: int | None = None,
 ) -> str:
     """Label the actual mode; preserve existing explicit ``_lora`` suffixes."""
     if training_mode not in ("lora", "full"):
@@ -203,6 +204,8 @@ def make_run_name(
         base = f"{base}_{safe_suffix}"
     if not base.endswith(f"_{training_mode}"):
         base = f"{base}_{training_mode}"
+    if data_seed is not None:  # keep pool-seed runs in distinct dirs (default None preserves old paths)
+        base = f"{base}_dseed{data_seed}"
     return f"{base}_seed{seed}" if seed != 0 else base
 
 
@@ -213,8 +216,14 @@ def load_sft_records(
     recipe: str,
     trace_base: Path = TRACE_BASE,
     seed: int = SEED,
+    data_seed: int | None = None,
 ) -> tuple[list[dict[str, str]], dict[str, dict[str, int]]]:
     """Load exactly ``n_per_domain`` source rows and apply the SFT recipe.
+
+    Pool selection: when ``data_seed`` is None the pool is the FIRST ``n_per_domain`` non-empty rows
+    (unchanged, reproducible default). When ``data_seed`` is set, the pool is a RANDOM sample of
+    ``n_per_domain`` rows per domain drawn with ``random.Random(f"{data_seed}-{domain}")`` — this is the
+    pool-SAMPLING seed, independent of the training ``seed``, so pool-selection variance can be estimated.
 
     Empty completions created by coverage deletion are intentionally omitted:
     they contain no target token on which a causal-LM objective can train.
@@ -234,23 +243,27 @@ def load_sft_records(
         path = trace_base / f"{teacher}_{domain}.jsonl"
         if not path.is_file():
             raise FileNotFoundError(f"Teacher trace file does not exist: {path}")
-        selected: list[Mapping] = []
+        eligible: list[Mapping] = []
         with path.open(encoding="utf-8") as handle:
             for line_number, line in enumerate(handle, start=1):
-                if len(selected) == n_per_domain:
-                    break
+                if data_seed is None and len(eligible) == n_per_domain:
+                    break  # first-U default: stop early
                 if not line.strip():
                     continue
                 try:
                     row = json.loads(line)
                 except json.JSONDecodeError as exc:
                     raise ValueError(f"Invalid JSON in {path}:{line_number}: {exc}") from exc
-                selected.append(row)
-        if len(selected) < n_per_domain:
+                eligible.append(row)
+        if len(eligible) < n_per_domain:
             raise ValueError(
-                f"{path} contains only {len(selected)} non-empty rows; "
+                f"{path} contains only {len(eligible)} non-empty rows; "
                 f"requested {n_per_domain}"
             )
+        if data_seed is None:
+            selected = eligible[:n_per_domain]
+        else:
+            selected = random.Random(f"{data_seed}-{domain}").sample(eligible, n_per_domain)
 
         retained = 0
         for row_index, row in enumerate(selected, start=1):
@@ -776,6 +789,7 @@ def _train(
     data_sampling_seed: int | None = None,
     trajectory_tokens: Sequence[int] = (),
     trajectory_callback: Callable[[Mapping], None] | None = None,
+    schedule_updates: int | None = None,
 ) -> dict:
     milestones = validate_trajectory_tokens(trajectory_tokens)
     if milestones and trajectory_callback is None:
@@ -795,7 +809,15 @@ def _train(
     from transformers import get_cosine_schedule_with_warmup
 
     updates_per_epoch = math.ceil(len(examples) / EFFECTIVE_BATCH_SIZE)
-    total_updates = epochs * updates_per_epoch
+    if schedule_updates is not None:
+        # absolute-exposure protocol: the cosine horizon and the stop point are a fixed update budget
+        # (derived from a fixed processed-token budget), identical for every pool size U.
+        if schedule_updates <= 0:
+            raise ValueError("schedule_updates must be positive")
+        total_updates = int(schedule_updates)
+        epochs = math.ceil(total_updates / updates_per_epoch)
+    else:
+        total_updates = epochs * updates_per_epoch
     warmup_steps = int(WARMUP_RATIO * total_updates)
     optimizer = torch.optim.AdamW(parameters, lr=learning_rate)
     scheduler = get_cosine_schedule_with_warmup(
@@ -841,6 +863,7 @@ def _train(
             optimizer.step()
             scheduler.step()
             optimizer_step += 1
+            budget_exhausted = schedule_updates is not None and optimizer_step >= total_updates
             tokens_seen += group_tokens
             completion_tokens_seen += group_completion_tokens
             loss_curve.append(
@@ -869,6 +892,10 @@ def _train(
                 with preserve_training_state(model), torch.no_grad():
                     trajectory_callback(snapshot)
                 trajectory.append(snapshot)
+            if budget_exhausted:
+                break
+        if schedule_updates is not None and optimizer_step >= total_updates:
+            break
 
     wall_time = time.monotonic() - start_time
     return {
@@ -942,10 +969,16 @@ def run_distillation(
     dry_run: bool = False,
     revision: str | None = None,
     training_mode: str = "lora",
+    data_seed: int | None = None,
+    schedule_tokens: int | None = None,
 ) -> dict:
     """Run dense evaluation, SFT, post-training evaluation, and persistence."""
     if not 0 <= seed < 2**32:
         raise ValueError("--seed must be in [0, 2**32)")
+    if data_seed is not None and not 0 <= data_seed < 2**32:
+        raise ValueError("--data-seed must be in [0, 2**32)")
+    # Pool-sampling seed governs WHICH examples are drawn and their shuffle; independent of training seed.
+    data_sampling_seed = data_seed if data_seed is not None else seed
     if epochs <= 0 or n_per_domain <= 0:
         raise ValueError("--epochs and --n-per-domain must be positive")
     if learning_rate is not None and (not math.isfinite(learning_rate) or learning_rate <= 0):
@@ -967,7 +1000,7 @@ def run_distillation(
     student_tag = model_output_tag(student, model_name, revision)
     output_paths = {
         mode: OUT_BASE / student_tag / make_run_name(
-            teacher, recipe, n_per_domain, output_suffix, seed, training_mode=mode
+            teacher, recipe, n_per_domain, output_suffix, seed, training_mode=mode, data_seed=data_seed
         ) for mode in ("lora", "full")
     }
     if dry_run:
@@ -1005,7 +1038,8 @@ def run_distillation(
         domains=parsed_domains,
         n_per_domain=n_per_domain,
         recipe=recipe,
-        seed=seed,
+        seed=data_sampling_seed,
+        data_seed=data_seed,
     )
     all_probes = build_probes(DEFAULT_N_PROBE, seed=SEED)
     probes = {
@@ -1060,10 +1094,13 @@ def run_distillation(
         "student_tag": student_tag, "teacher": teacher, "recipe": recipe,
         "domains": list(parsed_domains), "n_per_domain": n_per_domain,
         "output_suffix": output_suffix, "run_name": run_name,
-        "seed": seed, "training_seed": seed, "data_sampling_seed": seed,
+        "seed": seed, "training_seed": seed, "data_sampling_seed": data_sampling_seed,
+        "data_seed": data_seed, "schedule_tokens": schedule_tokens,
         "training_mode": training_mode, "probe_seed": SEED,
         "training_manifest": training_manifest,
-        "data_selection": "first n_per_domain rows; seeded initial and epoch shuffles",
+        "data_selection": ("first n_per_domain rows; seeded initial and epoch shuffles"
+                           if data_seed is None else
+                           f"random sample of n_per_domain rows per domain via data_seed={data_seed}; seeded shuffles"),
         "training_benchmarks": {c: TRAINING_BENCHMARKS[c] for c in parsed_domains},
         "data_pool_sha256": hashlib.sha256(json.dumps(sorted(
             (example["example_id"], int(example["input_ids"].numel()))
@@ -1117,7 +1154,8 @@ def run_distillation(
     # the completion marker and receives this same manifest only after success.
     write_json_atomic(out / "train_log.json", {
         **train_metadata, **initial_accounting, "status": "configured",
-        "seed": seed, "training_seed": seed, "data_sampling_seed": seed,
+        "seed": seed, "training_seed": seed, "data_sampling_seed": data_sampling_seed,
+        "data_seed": data_seed,
     })
 
     def save_trajectory_snapshot(progress):
@@ -1156,6 +1194,13 @@ def run_distillation(
                 "delta": {c: 0.0 for c in CAPABILITIES},
                 "checkpoint": "unmodified resolved_student (no adapter)",
             })
+        schedule_updates = None
+        if schedule_tokens is not None:
+            if schedule_tokens <= 0:
+                raise ValueError("--schedule-tokens must be positive")
+            _pool_processed = sum(int(e["input_ids"].numel()) for e in tokenized)
+            _upe = math.ceil(len(tokenized) / EFFECTIVE_BATCH_SIZE)
+            schedule_updates = math.ceil(schedule_tokens / (_pool_processed / _upe))
         train_log = _train(
             model=model,
             examples=tokenized,
@@ -1163,7 +1208,8 @@ def run_distillation(
             epochs=epochs,
             learning_rate=selected_lr,
             seed=seed,
-            data_sampling_seed=seed,
+            data_sampling_seed=data_sampling_seed,
+            schedule_updates=schedule_updates,
             trajectory_tokens=milestones,
             trajectory_callback=save_trajectory_snapshot if save_trajectory else None,
         )
@@ -1237,6 +1283,12 @@ def main() -> None:
     )
     parser.add_argument("--n-per-domain", type=int, default=600)
     parser.add_argument("--epochs", type=int, default=2)
+    parser.add_argument("--schedule-tokens", type=int, default=None,
+                        help="absolute-exposure protocol: cosine horizon AND stop point = this many processed tokens "
+                             "(converted to an update budget from the pool); --epochs is then only an upper bound")
+    parser.add_argument("--data-seed", type=int, default=None,
+                        help="pool-SAMPLING seed (which examples are drawn), independent of --seed; "
+                             "default None = deterministic first-n_per_domain pool")
     parser.add_argument("--seed", type=int, default=SEED,
                         help="training and data-shuffle seed (default: 0; probes fixed)")
     parser.add_argument("--device", default="cuda:0")
@@ -1267,6 +1319,8 @@ def main() -> None:
         learning_rate=args.lr,
         output_suffix=args.output_suffix,
         seed=args.seed,
+        data_seed=args.data_seed,
+        schedule_tokens=args.schedule_tokens,
         save_trajectory=args.save_trajectory,
         trajectory_tokens=args.trajectory_tokens,
         dry_run=args.dry_run,

@@ -120,7 +120,7 @@ def main():
     with (OUT_DIR / "main_table.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rs[0].keys())); w.writeheader(); w.writerows(rs)
     TEX.parent.mkdir(parents=True, exist_ok=True)
-    L = [r"\begin{table}[t]", r"\centering", r"\scriptsize", r"\setlength{\tabcolsep}{2pt}",
+    L = [r"\begin{table}[t]", r"\centering", r"\scriptsize", r"\setlength{\tabcolsep}{1.5pt}",
          r"\begin{tabular}{@{}llp{3.2cm}lrp{2.0cm}rrl@{}}", r"\toprule",
          r"Method & Cap. & Test & Split & Cand. & Strongest same-budget baseline & Base. & Impr. & St. \\",
          r"\midrule"]

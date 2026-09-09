@@ -52,6 +52,8 @@ MODEL_REGISTRY: dict[str, dict[str, str]] = {
         "family": "olmo3",
         "notes": "Cross-family 30B panel checkpoint.",
     },
+    "pythia-6.9b": {"hf_id": "EleutherAI/pythia-6.9b", "family": "pythia", "params": "6.9b"},
+    "pythia-1b": {"hf_id": "EleutherAI/pythia-1b", "family": "pythia", "params": "1b"},
     "pythia-160m": {
         "hf_id": "EleutherAI/pythia-160m",
         "family": "pythia",
