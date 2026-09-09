@@ -60,13 +60,15 @@ $2$--$4\times$.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figs/v9_blocks.png}
+\includegraphics[width=0.92\linewidth]{figs/v9_blocks_main.pdf}
 \caption{Capability regions in gradient space. Pairwise similarity of
-per-benchmark gradient signatures (rows: seven models from three
-families; columns: four metrics). In the shared-component-removed
-metric (third column), same-capability benchmarks align and different
-capabilities anti-align, the block structure that licenses
-gradient-defined capability regions.}
+per-benchmark gradient signatures for four representative models, one
+per family plus a 30B model (rows), under the two decisive metrics
+(columns): the shared-component-removed log-Fisher cosine, in which
+same-capability benchmarks align and different capabilities
+anti-align, and the top-0.1\% coordinate Jaccard overlap. Black lines
+separate the math, code, QA, and control blocks. The full seven-model,
+four-metric grid is in Appendix~\ref{sec:appendix} (Fig.~\ref{fig:blocks_full}).}
 \label{fig:blocks}
 \end{figure}
 

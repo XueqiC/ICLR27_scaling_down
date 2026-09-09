@@ -4,12 +4,15 @@ Every main claim with its evidence path, validity range, counterexample, and the
 closeout Package A/B/C diagnostics. Numbers trace to results/v*/summary.json (see paths). Frozen prospective
 predictions (v38/v40/v41) are unchanged; A/B/C are retrospective diagnostics.
 
-## Central thesis (retained, unchanged)
-Capability loss is a common OUTCOME coordinate (its map to behavioral accuracy shares a form across tested
-families), whereas compression ratio is NOT a common INTERVENTION coordinate (method-agnostic resource-ratio
-laws fail to extrapolate across methods). Evidence: v6/v10/v12 heterogeneous panel; loss-to-accuracy link
-(v15/v23); matched-storage non-equivalence. Scope: 12 checkpoints, 4 families, 270M–32B. Unification of a
-single functional form remains OPEN (only tested resource-ratio models are negated).
+## Central thesis (round-7 wording; accuracy link removed from the core)
+The per-capability conditional loss vector is the common prediction endpoint for all three arms ("common" =
+evaluation interface; not cross-tokenizer NLL comparability, not proven independence of the three losses);
+the arms share one information budget (K0/K1/Oracle) and one validation standard; the response form and its
+range of validity are determined separately per arm by evidence. Laws using only resource ratios fail to
+extrapolate across the methods tested (matched-storage non-equivalence), which negates the tested
+resource-ratio models but leaves open whether some other single form unifies the arms. Behavioral
+(loss-to-accuracy) results are appendix-level support (v15/v23), not a central claim. Scope: 12 checkpoints,
+4 families, 270M–32B; controlled Pythia panel + one new source (P1).
 
 ## Pruning
 - CLAIM: source-conditioned inputs {N0, L0, D0} predict per-capability pruning damage at UNSEEN densities,
@@ -60,10 +63,15 @@ single functional form remains OPEN (only tested resource-ratio models are negat
   "E is universally sufficient". matched-T controls optimizer steps + supervised tokens (C21/DISTILL_STEP_CONTROL),
   so the pool-size gap is not "just more tokens/steps", but E-sufficiency still needs new-config validation.
 
-## Cross-arm conclusion (retained, corrected emphasis)
-Output space, evaluation, and information budgets are shared; whether the response FORM unifies is decided by
-evidence and currently does not, so we unify at the decision layer (method-selection map). This is NOT a
-"unified three-arm negative", and it is NOT a claim that all three arms established a universal law.
+## Cross-arm conclusion (round-7 wording)
+The three arms share the prediction endpoint, the information budget, and the validation standard; response
+form and validity range are determined per arm by evidence: pruning = source-conditioned prediction valid in
+the density-interpolation regime (independently confirmed on a new source; extrapolation fails), quantization
+= per-configuration validation (near-zero region without demonstrated gain; int3 real, magnitude transfer
+source-dependent), distillation = capability-specific transfer (reuse coordinate helps QA; constant suffices
+for math/code; bias-dominated residual). Whether one response form unifies remains open. The method-selection
+map is DISCUSSION (future use), not a delivered/validated selector; Pareto and mis-ranking analyses are
+implications of prediction error. This is neither a "unified three-arm negative" nor a claim of universal laws.
 
 ## Supporting results (appendix-level, not core predictors)
 Capability geometry/ablation (v9/regions) — motivation/mechanism, appendix. capability-specificity math/QA vs
