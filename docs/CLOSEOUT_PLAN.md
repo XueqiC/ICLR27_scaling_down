@@ -54,9 +54,12 @@ disclosed and downgraded, never overwritten while still called a "frozen prospec
 - [x] Package A — pruning same-input baselines (v42 / PRUNE_SAMEINPUT.md).
 - [x] Package B — distillation residuals + pool/protocol audit (v43 / DISTILL_RESIDUALS.md).
 - [x] Package C — quantization partition table (v44 / QUANT_PARTITION.md).
-- [ ] Manuscript sections updated to corrected conclusions + main table/figures.
-- [ ] FINAL_EVIDENCE_SUMMARY consistency with main table.
+- [x] Manuscript sections updated to corrected conclusions + main table (experiment.tex \S twoaxes,
+      tables/main_prediction.tex via v45; intro/con updated; placeholders -> explicit limitations).
+- [x] FINAL_EVIDENCE_SUMMARY consistent with main table (numbers checked against results JSONs).
 - [ ] PDF compile (requires Overleaf; no LaTeX toolchain on rai — flagged as external step).
+- [ ] Figures: existing figs reused (fig:blocks); the three main-figure groups of the closeout spec were NOT
+      regenerated this round (main table carries the comparison) — listed as a remaining item.
 
 ## Stop conditions
 Each package stops when its specified outputs exist; no new function classes, densities, bits, pools,
