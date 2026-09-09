@@ -1,144 +1,125 @@
-\section{Predictive Scaling-Down Framework}
+\section{Study Design and Predictive Models}
 \label{sec:method}
 
-\subsection{Dense reference candidates}
-\label{sec:denseref}
+\subsection{Panels}
+\label{sec:panels}
 
-The dense reference is a capability-conditioned specialization and
-validation of established scaling laws \citep{kaplan2020scaling,
-hoffmann2022training,gadre2024language}, not a contribution of this
-paper. We compare, by held-out prediction error:
-D1, size-only $E_c+A_cN^{-\alpha_c}$;
-D2, Chinchilla-style $E_c+A_cN^{-\alpha_c}+B_cD^{-\beta_c}$;
-D3, family-conditioned D2 with offsets $u_{c,f}$; and
-D4, the observed dense capability anchor $\mathbf L_0^{\mathrm{obs}}$
-used directly per \eqref{eq:anchored}. D2/D3 are claimed only where
-$N$, $D$, and $f$ vary independently enough to identify them;
-$D$--family collinearity is reported explicitly.
-\resultpending{D1--D4 comparison; controlled $(N,D)$ grid}
-The practical setting in this paper is D4: anchored prediction of
-compression-induced change.
+Three kinds of panel serve three purposes (Appendix Table~\ref{tab:panels}).
+The \emph{heterogeneous panel} of finished public models tests how far
+a relation carries across families whose training history, data, and
+architecture all differ at once; it establishes the phenomena and the
+range of responses, and its family and data provenance are confounded
+by construction. The \emph{controlled Pythia panel} varies the source
+state along known axes, size and pretraining stage, with architecture
+and data held fixed, and is the development set of every predictor.
+The \emph{distillation panels} vary the student, the data pool, and the
+exposure with the teacher fixed.
 
-\subsection{Shared-plus-method-specific law hierarchy}
-\label{sec:claims}
 
-We do not presume that methods unify. The general form is
-\begin{equation}
-\hat{\mathbf L}^{(m)}
-=\mathbf L_0^{\mathrm{obs}}
-+F_{\mathrm{shared}}(\mathbf x_0,\mathbf z_m)
-+F_m(\mathbf x_0,\mathbf z_m,\boldsymbol\theta_m),
-\label{eq:hierarchy}
-\end{equation}
-and three hypotheses are compared by held-out prediction error (and not
-by in-sample $R^2$):
-\textbf{M1}, fully shared: after transformation to common coordinates
-$\mathbf z_m$, one response function covers all methods;
-\textbf{M2}, hierarchical: shared macro-structure with capability,
-family, and method corrections;
-\textbf{M3}, method-specific functional forms unified only by the
-capability-vector output, source interface, validation protocol,
-uncertainty reporting, cost model, and agent-performance link.
-\resultpending{M1/M2/M3 held-out comparison, including
-leave-one-method-out and matched-storage / matched-active-parameter /
-matched-initial-damage tests}
-If unification fails at M1/M2, the M3 laws are reported separately,
-and their use in a method-selection map is left to discussion
-(\S\ref{sec:map}). The cross-method tests completed in this paper cover
-the resource-ratio models at matched storage and active-parameter
-coordinates; the full M1/M2/M3 held-out comparison is a stated
-limitation (\S\ref{sec:planned}).
+\subsection{Predictors that were actually tested}
+\label{sec:predictors}
 
-\subsection{Candidate functional forms per arm}
-\label{sec:laws}
+Every predictor below was fit on the development set only, with its
+standardization constants, coefficients, and keep rules committed to a
+register file before any test measurement (paths in
+Appendix~\ref{sec:app_register}). Parameter counts are per capability.
 
-\paragraph{Pruning (two regimes).} Pre-cliff candidates, fit on the
-positive-damage branch and compared by the held-out battery
-(fit-shallow-predict-deep, leave-largest-model-out,
-leave-one-family-out, sign prediction, cliff-density prediction;
-baselines: raw sparsity, remaining parameters, removed weight norm,
-anchor-only, size-plus-density, family-conditioned reduced form):
-simple reduced forms in $(\dens; N_0, f)$, and, as mechanism
-comparators only, the measured-alignment-plus-deleted-mass form
-$\Delta\Lc{c}=a_c(\dens)+B\,m_c(\dens)^{\gamma}$ whose in-sample fits
-motivated this study (\S\ref{sec:law}). Cliff modeling compares a hard
-threshold against a smooth sigmoid in $\dens$ and, following the
-geometric order-parameter evidence (\S\ref{sec:orderparam}), a
-family-level critical-retention parameterization of
-$\dens^{*}_c(N_0,f)$. \resultpending{held-out battery results}
+\paragraph{Configuration-indicator source regression (source axis).}
+At each intervention configuration $q$, a density or a bit-width, a
+separate linear model in the standardized inputs,
+$\widehat{\Delta L}_{c}(q)=\beta_{c,q}\cdot(1,\,\tilde{\log N_0},\,\tilde L_{0,c},\,\tilde{\log D_0})$,
+four coefficients per configuration (16 for four densities). It
+predicts a new source state at a \emph{seen} configuration and is not a
+law over the intervention axis. Its same-input comparator drops
+$\tilde{\log D_0}$ (three coefficients per configuration). This is the
+predictor frozen for the step-96k tests (register \texttt{v38}) and,
+per bit-width, the quantization predictor throughout.
 
-\paragraph{Quantization.} Candidates at bit-width $\bits$: $q_c4^{-\bits}$,
-a learned exponential $q_ce^{-k\bits}$, polynomial degradation, and an
-effective-parameter multiplier; validated by leave-one-bit-out and
-held-out model/family, with a matched-storage comparison against
-pruning. \resultpending{functional-form comparison}
+\paragraph{Shared power form (pruning, configuration axis).}
+$\widehat{\Delta L}_c(\mathbf x,d)=A_c(\mathbf x)\,((1-d)/0.3)^{\gamma_c}$
+with $A_c(\mathbf x)=\beta_c\cdot(1,\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_0})$,
+five parameters, fit on the nine development states at
+$d\in\{0.9,0.8,0.7,0.6\}$ (108 rows; register \texttt{v40}, refrozen
+with the same form in \texttt{v49}). It is the headline candidate for
+unseen densities.
 
-\paragraph{Distillation.} Per capability, a template with student
-capacity floor, teacher capability vector $\mathbf L^{\mathcal T}$,
-a data power law in trace tokens, and a supervision-dependent coverage
-factor $\chi_c(\rho)$ computed from data composition (not inferred
-post hoc from results); capacity-gap corrections follow
-\citet{busbridge2025distillation}. Confounds (total tokens, update
-count, answer format, teacher identity) are controlled by
-token-matched and update-matched runs. \resultpending{full
-capacity$\times$teacher$\times$data$\times$recipe grid}
+\paragraph{Same-input alternatives for pruning.} Three forms use
+exactly the inputs of the shared power form and a different strength
+structure: A1, the power form with $\gamma_c$ fixed to one (four
+parameters); A2, the configuration-indicator regression at the four
+development densities followed by a fixed rule, linear interpolation
+between adjacent predicted anchors and linear extension beyond the
+boundary pair; and a continuous two-term polynomial in $s=1-d$ with
+source-dependent coefficients. They test whether the power structure
+itself adds anything.
 
-\paragraph{Recovery.} The saturating transform, anchored at
-$\Dr{=}0$:
-\begin{equation}
-\Delta\hat L_c^{(m)}(\Dr)=\Delta L_c^{(m)}(0)\,
-\Big[r_{m,c}+(1-r_{m,c})\big(1+\Dr/D_{0,m,c}\big)^{-\beta_{m,c}}\Big],
-\label{eq:recovery}
-\end{equation}
-where $r_{m,c}$ is the \emph{asymptotic residual fraction under the
-fixed recovery recipe}, and not a claim that the capability is unrecoverable
-in principle. Recovery-source dependence (general vs.\
-capability-aligned vs.\ mixed data) is an explicit axis.
+\paragraph{Source-free baselines for pruning.} A strength-only curve
+$A\,((1-d)/0.3)^{\gamma}$ fit on all development rows (two
+parameters); the median development curve, the per-density median of
+the development responses extended by the same power rule; and zero
+change. They answer whether the source state is worth reading at all.
 
-\paragraph{Uncertainty.} Configuration-level cluster bootstrap for
-fitted coefficients; benchmark bootstrap for deterministic
-compression; multiple seeds for training-based arms at small scale;
-calibration coverage reported alongside MAE and relative error.
+\paragraph{Quantization baselines.} For each bit-width, the per-bit
+mean and median of the development responses and zero change. The
+5-bit prediction of every candidate is a fixed rule, the average of its
+committed 4- and 6-bit predictions, so that no 5-bit measurement enters
+any fit.
 
-\subsection{Mechanism analysis: capability geometry}
-\label{sec:geometry}
+\paragraph{Distillation predictors.} On the source axis, a linear model
+in $(\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_0})$ (four
+parameters), its no-$D_0$ variant, and per-capability constants (mean
+and median of the development responses). On the pool axis, four forms
+fit on the 18 endpoint checkpoints of pools U75 and U600: a constant,
+$a+b\log T$, $a+b\log E$, and $a+b\log T+c\log E$; all four were
+frozen and applied to the six U225 runs (register \texttt{v41}).
 
-Purely as supporting evidence, we measure the
-capability-conditional mean gradient $\gbar{c}$ and Fisher structure
-$\Fc{c}=\mathbb{E}_{i\sim c}[g_ig_i^{\top}]$ at the dense checkpoint,
-streamable at 30B scale (diagonal spectra in magnitude-quantile bins;
-quadratic forms via $\dw^{\top}\Fc{c}\dw=\mathbb{E}_i[(g_i^{\top}\dw)^2]$).
-Three uses: (i) testing whether capabilities occupy distinct,
-partially separable parameter regions (\S\ref{sec:regions});
-(ii) the \emph{signed} first-order term $\gbar{c}^{\top}\dw$, which no
-positive-semidefinite effective-parameter model can express and which
-anticipates capability-selective sign effects (\S\ref{sec:mech}); and
-(iii) upper-bound comparators for reduced-form laws: if a reduced
-form approaches the accuracy of the mechanism form without gradient
-access, the practical interface loses nothing.
-
-\subsection{Fitting and validation protocol}
+\subsection{Validation protocol and labels}
 \label{sec:protocol}
 
-Functional forms and keep/reject rules are committed before fits;
-model comparison uses repeated held-out extrapolation (largest size,
-deepest compression, largest recovery budget, leave-one-family-out),
-and not in-sample fit indices \citep{li2025misfitting,
-besiroglu2024chinchilla}; manuscript counts of models, benchmarks, and
-fits are generated from result files, not typed by hand; negative
-results are reported, not tuned away.
+Two axes are tested separately. On the \emph{source axis} the
+intervention setting is seen and the source state is not, either
+through leave-one-step-out folds on the nine-state panel or through a
+frozen prospective on a new source. On the \emph{configuration axis}
+the intervention setting is unseen: densities, bit-widths, or pools
+outside the fitted set, with or without a new source. For the
+new-source tests the order is fixed. Forms and standardization are
+committed; the dense capability vector of the new source is measured,
+since it is a permitted input; every candidate's predictions are
+written to a versioned file and committed with the hash recorded; only
+then is the compressed or distilled outcome measured. Two fitting
+protocols are used in the last round: protocol A fits on all nine
+development states, protocol B only on states at step 64k or below, so
+that a 112k test stage is a stage extrapolation under B and a stage
+interpolation under A.
 
-\subsection{Discussion: toward a method-selection map}
-\label{sec:map}
+Each reported comparison carries a four-part origin code (defined with
+Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}): whether the
+candidate prediction was frozen before the measurement or is a
+leave-one-out estimate, whether the same-input baseline and the simple
+baseline were pre-specified with the candidate or computed afterwards,
+and whether all pre-specified forms are reported. A frozen prediction
+keeps its label whatever the outcome. When several baselines exist,
+the strongest per capability is shown and that choice is marked as
+retrospective. The only post-test selection in this paper is the
+per-capability reading of the four distillation forms, and it is
+labeled as such.
 
-Intersecting per-method predictors at matched cost coordinates would
-partition the (compression budget $\times$ capability requirement)
-space into regions where pruning, quantization, distillation, or a
-composition is cheapest, with uncertainty bands, and would be evaluated
-against exhaustive search by constraint-satisfaction rate, cost regret,
-selected-method accuracy, and the number of compression experiments
-avoided. This is how the predictors of this paper would be used, not a
-result of it: no held-out agent or method-selection validation was run
-(\S\ref{sec:planned}), and the Pareto and mis-ranking analyses we
-report are consequences of prediction error and do not amount to a validated
-selector.
+\paragraph{Which baseline answers which question.} Whether the
+response is worth predicting at all: zero change and the per-capability
+constant. Whether the source state helps beyond the strength curve:
+strength-only and per-configuration constants against the
+source-conditioned model. Whether $D_0$ adds information once $N_0$ and
+$L_0$ are known: the full model against its no-$D_0$ variant on the
+same split. Whether a particular strength structure helps: the shared
+power form against A1, A2, and the continuous form on the same inputs.
+``Same budget'' means the same admitted information; a baseline need
+not use all of it.
+
+\paragraph{Statistics.} Errors are mean absolute errors in nats per
+token per capability, and improvement is baseline MAE minus candidate
+MAE (positive means the candidate is better). Bootstrap intervals are
+computed only on the leave-one-out panels, resampling source states as
+clusters; the frozen prospectives cover one or two source states and
+are reported as point values with the number of independent sources.
+Repeated probes, checkpoints of one run, and stages of one source are
+never counted as independent sources.

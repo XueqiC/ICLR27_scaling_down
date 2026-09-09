@@ -364,55 +364,68 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enit@inbox=\box58
 \enit@count@id=\count294
 \enitdp@description=\count295
+) (rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+(ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@proposition=\count296
-LaTeX Font Info:    Trying to load font information for TU+ptm on input line 93
+\c@r@tfl@t=\count296
+\rotFPtop=\skip72
+\rotFPbot=\skip73
+\rot@float@box=\box59
+\rot@mess@toks=\toks32
+) (placeins.sty
+Package: placeins 2005/04/18  v 2.2
+) (tables/counts)
+\c@proposition=\count297
+LaTeX Font Info:    Trying to load font information for TU+ptm on input line 98
 .
-LaTeX Font Info:    No file TUptm.fd. on input line 93.
+LaTeX Font Info:    No file TUptm.fd. on input line 98.
 
 
 LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 93.
+(Font)              using `TU/lmr/m/n' instead on input line 98.
 
 (l3backend-xetex.def
 File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
-\c__kernel_sys_dvipdfmx_version_int=\count297
-\l__color_backend_stack_int=\count298
-\g__color_backend_stack_int=\count299
-\g__graphics_track_int=\count300
-\l__pdf_internal_box=\box59
-\g__pdf_backend_object_int=\count301
-\g__pdf_backend_annotation_int=\count302
-\g__pdf_backend_link_int=\count303
+\c__kernel_sys_dvipdfmx_version_int=\count298
+\l__color_backend_stack_int=\count299
+\g__color_backend_stack_int=\count300
+\g__graphics_track_int=\count301
+\l__pdf_internal_box=\box60
+\g__pdf_backend_object_int=\count302
+\g__pdf_backend_annotation_int=\count303
+\g__pdf_backend_link_int=\count304
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 98.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 9
-3.
+8.
  (ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-Package hyperref Info: Link coloring OFF on input line 93.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 98.
+LaTeX Font Info:    ... okay on input line 98.
+Package hyperref Info: Link coloring OFF on input line 98.
  (nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (refcount.sty
@@ -421,23 +434,23 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count304
+\c@section@level=\count305
 )
-LaTeX Info: Redefining \ref on input line 93.
-LaTeX Info: Redefining \pageref on input line 93.
-LaTeX Info: Redefining \nameref on input line 93.
+LaTeX Info: Redefining \ref on input line 98.
+LaTeX Info: Redefining \pageref on input line 98.
+LaTeX Info: Redefining \nameref on input line 98.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 93.
-Package microtype Info: Applying patch `item' on input line 93.
-Package microtype Info: Applying patch `toc' on input line 93.
+LaTeX Info: Redefining \microtypecontext on input line 98.
+Package microtype Info: Applying patch `item' on input line 98.
+Package microtype Info: Applying patch `toc' on input line 98.
 
 
-Package microtype Warning: Unable to apply patch `eqnum' on input line 93.
+Package microtype Warning: Unable to apply patch `eqnum' on input line 98.
 
-Package microtype Info: Applying patch `footnote' on input line 93.
+Package microtype Info: Applying patch `footnote' on input line 98.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -453,10 +466,10 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 LaTeX Font Warning: Font shape `TU/ptm/m/sc' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 97.
+(Font)              using `TU/ptm/m/n' instead on input line 102.
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 97--97
+Underfull \hbox (badness 2809) in paragraph at lines 102--102
 []\TU/ptm/m/n/17.28 Capability-Conditioned Scaling-Down Laws for LLM
  []
 
@@ -464,15 +477,15 @@ Underfull \hbox (badness 2809) in paragraph at lines 97--97
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 97.
-
+LaTeX Font Info:    Trying to load font information for U+msa on input line 102
+.
  (umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 97.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 102
+.
  (umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (mt-msb.cfg
@@ -480,234 +493,35 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
 LaTeX Font Warning: Font shape `TU/ptm/b/n' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 97.
-
-
-LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 100.
+(Font)              using `TU/ptm/m/n' instead on input line 102.
 
 (intro
-Overfull \hbox (141.01909pt too wide) detected at line 36
-[][][] []\OML/cmm/m/it/10 ;  [];  [] []  \OMS/cmsy/m/n/10 7[][]!  []\OML/cmm/m/
-it/10 ;
- []
+Underfull \vbox (badness 1331) has occurred while \output is active []
 
-[1
+ [1
 
-]
-Underfull \hbox (badness 3547) in paragraph at lines 36--60
-\TU/ptm/b/n/10 followed by a workload link $\OML/cmm/m/it/10 S[] \OT1/cmr/m/n/1
-0 = \OML/cmm/m/it/10 G[]\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 
-r[]\OT1/cmr/m/n/10 )$ \TU/ptm/b/n/10 and the deployment decision
- []
-
-) (related [2]) (prelim [3] [4]) (method [5]) (experiment [6]
-File: figs/v9_blocks.png Graphic file (type bmp)
-<figs/v9_blocks.png>
-
-Underfull \vbox (badness 6675) has occurred while \output is active []
-
- [7]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
-
-LaTeX Warning: Reference `eq:prune' on page 9 undefined on input line 192.
-
-[9] [10] (tables/main_prediction
-Underfull \hbox (badness 2698) in paragraph at lines 9--9
-\TU/ptm/m/n/7 (3x3 Pythia, leave-one-
+])
+(related [2]) (prelim [3]
+Underfull \hbox (badness 1852) in paragraph at lines 61--61
+[]|\TU/ptm/m/n/9 K0 + dense an-
  []
 
 
-Underfull \hbox (badness 2698) in paragraph at lines 10--10
-\TU/ptm/m/n/7 (3x3 Pythia, leave-one-
+Underfull \hbox (badness 1082) in paragraph at lines 61--62
+[]|\TU/ptm/m/n/9 the above plus the dense capability
  []
 
+) (method [4]
 
-Underfull \hbox (badness 2698) in paragraph at lines 11--11
-\TU/ptm/m/n/7 (3x3 Pythia, leave-one-
- []
+LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 8.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--12
-[]|\TU/ptm/m/n/7 UNSEEN density
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 13--13
-[]|\TU/ptm/m/n/7 UNSEEN density
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 14--14
-[]|\TU/ptm/m/n/7 UNSEEN density
- []
-
-
-Underfull \hbox (badness 3128) in paragraph at lines 16--16
-[]|\TU/ptm/m/n/7 source-transfer @ fixed
- []
-
-
-Underfull \hbox (badness 3128) in paragraph at lines 17--17
-[]|\TU/ptm/m/n/7 source-transfer @ fixed
- []
-
-
-Underfull \hbox (badness 1142) in paragraph at lines 17--17
-\TU/ptm/m/n/7 bit, int3 (3 new @96k
- []
-
-
-Underfull \hbox (badness 3128) in paragraph at lines 18--18
-[]|\TU/ptm/m/n/7 source-transfer @ fixed
- []
-
-
-Underfull \hbox (badness 3128) in paragraph at lines 19--19
-[]|\TU/ptm/m/n/7 source-transfer @ fixed
- []
-
-
-Underfull \hbox (badness 1142) in paragraph at lines 19--19
-\TU/ptm/m/n/7 bit, int3 (3 new @96k
- []
-
-
-Underfull \hbox (badness 3128) in paragraph at lines 20--20
-[]|\TU/ptm/m/n/7 source-transfer @ fixed
- []
-
-
-Underfull \hbox (badness 3128) in paragraph at lines 21--21
-[]|\TU/ptm/m/n/7 source-transfer @ fixed
- []
-
-
-Underfull \hbox (badness 1142) in paragraph at lines 21--21
-\TU/ptm/m/n/7 bit, int3 (3 new @96k
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|\TU/ptm/m/n/7 delta source-transfer
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-\TU/ptm/m/n/7 (3x3 LoRA, leave-one-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]|\TU/ptm/m/n/7 linear $\OMS/cmsy/m/n/7 f\OML/cmm/m/it/7 N[]; L[]; D[]\OMS/cms
-y/m/n/7 g$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]|\TU/ptm/m/n/7 delta source-transfer
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-\TU/ptm/m/n/7 (3x3 LoRA, leave-one-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]|\TU/ptm/m/n/7 linear $\OMS/cmsy/m/n/7 f\OML/cmm/m/it/7 N[]; L[]; D[]\OMS/cms
-y/m/n/7 g$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--25
-[]|\TU/ptm/m/n/7 delta source-transfer
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--25
-\TU/ptm/m/n/7 (3x3 LoRA, leave-one-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--25
-[]|\TU/ptm/m/n/7 linear $\OMS/cmsy/m/n/7 f\OML/cmm/m/it/7 N[]; L[]; D[]\OMS/cms
-y/m/n/7 g$
- []
-
-
-Underfull \hbox (badness 6575) in paragraph at lines 26--26
-[]|\TU/ptm/m/n/7 UNSEEN pool U=225
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--26
-\TU/ptm/m/n/7 from U75/U600 end-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--26
-[]|\TU/ptm/m/n/7 constant (4 candi-
- []
-
-
-Underfull \hbox (badness 3668) in paragraph at lines 26--26
-\TU/ptm/m/n/7 dates frozen = P;
- []
-
-
-Underfull \hbox (badness 6575) in paragraph at lines 27--27
-[]|\TU/ptm/m/n/7 UNSEEN pool U=225
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--27
-\TU/ptm/m/n/7 from U75/U600 end-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--27
-[]|\TU/ptm/m/n/7 constant (4 candi-
- []
-
-
-Underfull \hbox (badness 3668) in paragraph at lines 27--27
-\TU/ptm/m/n/7 dates frozen = P;
- []
-
-
-Underfull \hbox (badness 6575) in paragraph at lines 28--28
-[]|\TU/ptm/m/n/7 UNSEEN pool U=225
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--28
-\TU/ptm/m/n/7 from U75/U600 end-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--28
-[]|\TU/ptm/m/n/7 E (4 candidates
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--28
-\TU/ptm/m/n/7 choice made after
- []
-
-
-Overfull \hbox (271.16922pt too wide) in paragraph at lines 5--31
- [][] 
- []
-
-LaTeX Font Info:    Trying to load font information for TU+pcr on input line 31
+LaTeX Font Info:    Trying to load font information for TU+pcr on input line 35
 .
-LaTeX Font Info:    No file TUpcr.fd. on input line 31.
+LaTeX Font Info:    No file TUpcr.fd. on input line 35.
 
 LaTeX Font Warning: Font shape `TU/pcr/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 31.
+(Font)              using `TU/lmr/m/n' instead on input line 35.
 
 (mt-LatinModernRoman.cfg
 File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
@@ -717,13 +531,285 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-) [11] [12]) (con) (main.bbl [13] [14]
-Underfull \hbox (badness 1448) in paragraph at lines 222--226
+ [5]) (experiment (tables/panel_prune [6])
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+(tables/pred_main
+
+LaTeX Warning: Float too large for page by 375.1703pt on input line 40.
+
+) [8] [9] [10] [11]) (con) [12
+
+] (main.bbl [13]
+Underfull \hbox (badness 1448) in paragraph at lines 214--218
 \TU/pcr/m/n/10 aware LLM compression via fisher-aligned subspace diagnostics.  
 arXiv preprint
  []
 
-[15]) (appendix) [16] [17] (main.aux)
+[14]) (appendix [15]
+Underfull \hbox (badness 1325) in paragraph at lines 77--95
+\TU/pcr/m/n/10 bfloat16. The dense weights are restored between bit-widths. The
+ quantizer is
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
+[]|\TU/ptm/b/n/9 Heterogeneous
+ []
+
+
+Underfull \hbox (badness 1147) in paragraph at lines 123--125
+\TU/ptm/b/n/9 series from 4 families:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--125
+\TU/ptm/b/n/9 Qwen3 0.6B/1.7B/4B,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--125
+\TU/ptm/b/n/9 Gemma-3 270M–27B,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--125
+\TU/ptm/b/n/9 Gemma-4-31B, Muse-
+ []
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 123--125
+\TU/ptm/b/n/9 30B, OLMo-3 7B/32B
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+[]|\TU/ptm/b/n/9 global magnitude
+ []
+
+
+Underfull \hbox (badness 7613) in paragraph at lines 126--127
+\TU/ptm/b/n/9 in $\OT1/cmr/m/n/9 [0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 3\OML/cmm/m/
+it/9 ; \OT1/cmr/m/n/9 0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 9]$\TU/ptm/b/n/9 ; RTN
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
+[]|\TU/ptm/b/n/9 64 per ca-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
+\TU/ptm/b/n/9 pability,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
+\TU/ptm/b/n/9 primary
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--129
+[]|\TU/ptm/b/n/9 phenomena;
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--129
+\TU/ptm/b/n/9 cross-family
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--129
+\TU/ptm/b/n/9 transfer; noise
+ []
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 129--131
+\OMS/cmsy/m/n/9 ^^B$ \TU/ptm/b/n/9 steps 16k/64k/143k
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--131
+\TU/ptm/b/n/9 (9 states); new
+ []
+
+
+Underfull \hbox (badness 7613) in paragraph at lines 129--131
+\TU/ptm/b/n/9 sources 160M, 410M,
+ []
+
+
+Underfull \hbox (badness 3138) in paragraph at lines 129--131
+\TU/ptm/b/n/9 1.4B at 96k; 1B at
+ []
+
+
+Underfull \hbox (badness 1852) in paragraph at lines 131--132
+\TU/ptm/b/n/9 0.75/0.65/0.55; bits
+ []
+
+
+Underfull \hbox (badness 6575) in paragraph at lines 132--134
+\TU/ptm/b/n/9 source-axis and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
+\TU/ptm/b/n/9 configuration-
+ []
+
+
+Underfull \hbox (badness 6412) in paragraph at lines 134--134
+[]|\TU/ptm/b/n/9 Distillation, con-
+ []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 136--137
+[]|$\OML/cmm/m/it/9 ^^N[]$ \TU/ptm/b/n/9 source trans-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
+[]|\TU/ptm/b/n/9 Gemma-3-1B student;
+ []
+
+
+Underfull \hbox (badness 3019) in paragraph at lines 137--138
+\TU/ptm/b/n/9 pools U75 and U600
+ []
+
+
+Underfull \hbox (badness 3849) in paragraph at lines 138--139
+\TU/ptm/b/n/9 reuse count $\OML/cmm/m/it/9 E \OT1/cmr/m/n/9 =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+[]|\TU/ptm/b/n/9 configuration
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
+[]|\TU/ptm/b/n/9 Distillation, het-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+[]|\TU/ptm/b/n/9 Gemma-3 270M–12B,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+\TU/ptm/b/n/9 OLMo-3-7B, Qwen3
+ []
+
+
+Overfull \hbox (4.93628pt too wide) in paragraph at lines 119--149
+ [][] 
+ []
+
+
+Underfull \hbox (badness 1983) in paragraph at lines 149--149
+[]\TU/pcr/m/n/10 Table 4: []Cohorts and their roles. Counts are generated from 
+the result files
+ []
+
+(tables/panel_quant) [16]
+
+LaTeX Warning: Reference `tab:main' on page 17 undefined on input line 176.
+
+
+Underfull \hbox (badness 1092) in paragraph at lines 176--200
+\TU/pcr/m/n/10 prospective/register.json (frozen step-96k coefficients), v40-pr
+une-strength/register.json
+ []
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 176--200
+\TU/pcr/m/n/10 (shared power form and source-free curves), v41-distill-newpool/
+summary.json (the
+ []
+
+
+Underfull \hbox (badness 3965) in paragraph at lines 176--200
+\TU/pcr/m/n/10 four frozen pool forms), v46-p1-newsource/predictions_frozen.jso
+n (1B@96k), v49-
+ []
+
+(figs/appendix_blocks
+File: figs/v9_blocks_Qwen-Qwen3-0.6B.pdf Graphic file (type pdf)
+<use figs/v9_blocks_Qwen-Qwen3-0.6B.pdf>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_Qwen-Qwen3-1.7B.pdf Graphic file (type pdf)
+<use figs/v9_blocks_Qwen-Qwen3-1.7B.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_Qwen-Qwen3-4B.pdf Graphic file (type pdf)
+<use figs/v9_blocks_Qwen-Qwen3-4B.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_gemma3-12b.pdf Graphic file (type pdf)
+<use figs/v9_blocks_gemma3-12b.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_gemma3-1b.pdf Graphic file (type pdf)
+<use figs/v9_blocks_gemma3-1b.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_gemma3-270m.pdf Graphic file (type pdf)
+<use figs/v9_blocks_gemma3-270m.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_gemma3-4b.pdf Graphic file (type pdf)
+<use figs/v9_blocks_gemma3-4b.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_gemma4-31b.pdf Graphic file (type pdf)
+<use figs/v9_blocks_gemma4-31b.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_muse-30b.pdf Graphic file (type pdf)
+<use figs/v9_blocks_muse-30b.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figs/v9_blocks_olmo3-7b.pdf Graphic file (type pdf)
+<use figs/v9_blocks_olmo3-7b.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
+Underfull \vbox (badness 2384) has occurred while \output is active []
+
+ [17]
+[18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19]
+[20] [21] [22] (tables/pred_source
+Overfull \hbox (0.73257pt too wide) in paragraph at lines 2--35
+ [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 56.72333pt on input line 36.
+
+) (tables/pred_config_prune) (tables/pred_config_qd) (tables/pred_config_full
+
+LaTeX Warning: Float too large for page by 727.57492pt on input line 70.
+
+) (tables/p1v2)) [23] [24] [25] [26] [27] [28] [29] (main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -731,6 +817,6 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 4DBFE6E7A87FDD887DCDCD9AB2436E90;6479.
+(rerunfilecheck)             Checksum: 086F5B255632A862D7B84A59F3C8843D;6263.
  )
-Output written on main.xdv (17 pages, 638164 bytes).
+Output written on main.xdv (29 pages, 1020708 bytes).

@@ -15,6 +15,10 @@
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{rotating}
+\usepackage{array}
+\usepackage{placeins}
+\renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.6}\renewcommand{\textfraction}{0.07}\renewcommand{\floatpagefraction}{0.75}
+\input{tables/counts}
 
 \newcommand{\Tteacher}{\mathcal{T}}
 \newcommand{\maskdens}{m}
@@ -97,34 +101,32 @@ Address \\
 \maketitle
 
 \begin{abstract}
-Capability-specialized agents rarely need frontier-scale generality: a
-coding or retrieval agent needs a specific \emph{capability profile} at
-the lowest deployment cost, usually obtained by compressing a dense
-source model through pruning, quantization, or distillation with recovery
-training. Choosing among these methods today usually means an expensive grid
-search: compression changes capabilities anisotropically, and existing
-scaling laws predict aggregate loss within a single method. We
-systematically investigate whether the model state observable
-\emph{before} compression, together with the intervention configuration,
-can predict the capability-conditioned loss after pruning, quantization,
-and distillation, testing source-state transfer and unseen-configuration
-prediction separately, with the per-capability conditional loss vector
-as the common prediction endpoint. On a controlled panel, a
-source-conditioned pruning predictor predicts unseen compression
-densities with far lower error than strength-only baselines, and the
-advantage carries to a new source of in-range size; at a source five
-times larger it loses to a source-free median curve. A same-input
-comparison shows no additional advantage for a shared power form. The predictive gain of the quantization candidate depends on the
-precision regime, and damage-magnitude transfer under aggressive
-quantization remains unstable. For distillation, the reuse-count coordinate improves QA-loss
-prediction on an unseen data pool; for math and code it does no better
-than a constant baseline, and it carries a budget-dependent bias. Across twelve checkpoints from four families (270M--32B),
-method-agnostic laws on storage and active-parameter ratios did not
-extrapolate across the methods we tested. These results delimit the
-information the current predictors need, the range over which they
-transfer, and their limits, providing tested candidate relations and an
-evaluation basis for developing capability-conditioned scaling-down
-laws.
+We systematically investigate whether information observable before
+compression can predict capability-conditioned loss after pruning,
+quantization, and distillation. The endpoint is a per-capability
+conditional loss (math, code, multi-hop QA) measured relative to the
+dense source or, for distillation, the initial student; the inputs are
+the source size, its pretraining tokens, its dense capability losses,
+and the intervention setting. We separate transfer across source-model
+states from prediction at unseen intervention settings, evaluate each
+candidate against baselines with the same information budget, and
+freeze predictions before new sources are measured. On a heterogeneous
+panel of 12 public models from five series, responses are strongly
+capability- and series-specific: QA is the least-damaged capability in
+Qwen3 and OLMo-3-32B and the most-damaged one in Gemma at mild pruning,
+and 3-bit quantization collapses 12 of 14 models but not OLMo-3-32B. On
+a controlled Pythia panel, the dense capability vector carries the
+prediction; source-conditioned pruning predictors beat source-free
+curves at seen densities and at interpolated densities on the
+development sources, match them at a new in-range size, and fail at
+density $0.55$ and at a source five times larger; a shared power form
+adds nothing over a per-density regression. Quantization
+gains appear only in the collapse regime and depend on the fitting
+protocol; for distillation a reuse-count coordinate helps QA on an
+unseen pool with a budget-dependent bias, and a constant is best for
+math and code. The results identify conditional predictive
+relationships and their tested limits, providing an empirical basis for
+developing capability-conditioned scaling-down laws.
 \end{abstract}
 
 

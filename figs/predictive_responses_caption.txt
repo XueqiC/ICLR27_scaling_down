@@ -1,0 +1,93 @@
+Measured capability responses and frozen predictions. Rows: math, code, QA. Pythia pruning/quantization use protocol A at step112000: 1B in dark circles, 6.9B in lighter squares. Shading marks density below 0.6. Quantization uses categorical integer bits; thin guides do not assert a continuous law, and 5-bit predictions are the frozen interpolation rule between 4 and 6 bits. Distillation uses Gemma-3-1B U75/U600 endpoint checkpoints (filled) and U225 held-out checkpoints (hollow); lines are the saved constant and log(E) fits. QA annotations give mean prediction-minus-observation bias at the two measured U225 completion-token budgets. Raw loss changes are in nats per native token, compressed minus dense; axes are not shared across tokenizers. All checkpoints are measured, with no new fitting or smoothing.
+
+Exact JSON files read:
+results/v49-p1v2/compare_pythia-1b@step112000.json
+results/v49-p1v2/compare_pythia-6.9b@step112000.json
+results/v41-distill-newpool/summary.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000105/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000209/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000014/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000027/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000013/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000027/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000014/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000027/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000105/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000209/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000105/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000209/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000105/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000209/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000104/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000210/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000105/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000210/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000098/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000196/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000098/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000196/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000098/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000198/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000098/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000198/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000099/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000197/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/train_log.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000000/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000099/eval.json
+results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000197/eval.json
+
+Selection rules:
+Distillation cohort exactly follows v41: gpt-5.6-luna_full_75_uxseen*, gpt-5.6-luna_full_600_uxseen*, gpt-5.6-luna_full_225_lora_dseed*; 18 endpoint and 12 U225 nonzero trajectory snapshots. Final evals supply/verify dense anchors; final training endpoints and other recipes are not added to the frozen-fit cohort. E = matching train_log.loss_curve.tokens_seen / unique_data_pool_tokens; delta = snapshot.post_training[cap] - snapshot.dense[cap].
+Constant = fits.constant[0]; E-only = fits.E[0] + fits.E[1] * natural_log(E). Coefficients are read unchanged, never refitted. Recovered E ranges and U225 MAEs are checked against v41. U75 uxseenE low-budget runs are included in its 18-point fit cohort.
+Pruning and quantization: protocol A, Pythia 1B and 6.9B at step112000; rows selected by cap without pooling capabilities. Density points 0.9, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55; shade d < 0.6. Plot recorded actual and pred fields. 6.9B uses squares and lighter opacity; its power curve is omitted per the requested overlay.
+Integer bits are equally spaced categories [8, 6, 5, 4, 3]. Measured points are filled; full predictions are hollow, with thin dashed guides only; per-bit median uses dotted guides. Every 5-bit row must have rule='interp(4,6)'. No continuous bit-width law is drawn.
+QA U225 budget 1: mean completion tokens=139829.0, n=6 snapshots; E-only bias (prediction minus observed)=+0.868039339 nats/token.
+QA U225 budget 2: mean completion tokens=280059.0, n=6 snapshots; E-only bias (prediction minus observed)=-0.477500431 nats/token.
+
+Limitations:
+There is no measured density 0.85 in the selected v49 files; no point is interpolated there. The displayed median_curve is the specifically requested baseline, not claimed best for every source/regime.
+Trajectory checkpoints within a run share training and probes; no independent-seed error bars are inferred. T-only and 2D curves are not requested and are not reduced to an E curve by inventing a token budget.
