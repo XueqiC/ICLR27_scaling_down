@@ -13,7 +13,9 @@ scripts mirrored to `paper/code/analysis/`, result JSONs to `paper/data_mirror/`
 ## Load / throughput probe (recorded BEFORE scheduling)
 - pythia-1b@step96000 dense eval (main protocol, 128-probe measurement half): load 35 s, eval 13 s,
   peak VRAM 2.3 GB, 1.33k tok/s. P1 (dense + 2 densities + 2 bits) ≈ minutes.
-- Gemma3-1B LoRA 1-epoch U75 probe: see appended line below (elapsed / peak memory / updates).
+- Gemma3-1B LoRA 1-epoch U75 probe: 14 updates / 66k processed tokens, 5 min 22 s wall including dense +
+  post evals, peak GPU ≈14 GB, RSS 2.8 GB. Estimate per 1.0M-processed run ≈ 35 min (training ≈ 30 min +
+  four evals) → nine P2 runs ≈ 5.3 GPU-h, well inside the 16 h allocation; P1 ≈ 0.2 GPU-h.
 
 ## P1 — new source frozen prediction (pruning + quantization)
 - Target: **pythia-1b@step96000** (EleutherAI/pythia-1b, revision `134b25682ad4`, config sha `302d6702…`).
