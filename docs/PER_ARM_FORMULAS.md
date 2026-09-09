@@ -85,7 +85,10 @@ where an INDEPENDENT prospective test supports it — post-hoc oracle rescale is
 - **Quantization (QUANT_PARTITION.md)**: no unseen-bit axis; >=4bit region has ~nothing to predict (tiny
   errors), int3 collapse magnitude is UNSTABLE (helps on some new sources, fails on others). Predicts the
   RISK of large-damage entry, not a smooth magnitude law. No clean second-axis result. Confirms C28.
-- **Distillation**: P3 (hpg, new pool U=225) pending.
+- **Distillation (P3/C31)**: predicting unseen pool U=225 from endpoint pools — reuse-count E law transfers
+  ONLY for QA (E-only 0.71 vs constant 1.45); math/code best fit by a constant (E/T over-extrapolate).
+  Variability dominated by POOL-SAMPLING not training noise (QA ~10×, code ~4×) — the residual is a
+  data-selection effect. See DISTILL_NEWPOOL.md.
 
 ## Open (next round)
 - A per-arm frozen prospective on a fresh source with the full {N0,D0,L0} model (Qwen3-14B pruning/quant already run;

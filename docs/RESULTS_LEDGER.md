@@ -96,3 +96,12 @@ FIRST result predicting UNSEEN compression strength, not just source-transfer at
 
 ### C30b — Quant partition on new sources (QUANT_PARTITION.md)
 Quant has no unseen-bit axis; on 3 new @96k sources, >=4bit errors are tiny (nothing to predict), int3 collapse magnitude UNSTABLE (candidate wins on 410m/1.4b math, fails 160m-code/410m-qa). Predicts int3-collapse RISK, not a smooth magnitude law. Confirms C28. No clean second-axis win (contrast pruning C30).
+
+
+### C31 — Distillation new-pool prediction (P3, v41)
+Predictors frozen on U75/U600 endpoint trajectories (18 ckpts), predict unseen middle pool U=225 (6 runs =
+3 pool-seeds × 2 train-seeds; v12 --data-seed). **QA: reuse-count E law transfers** (E-only MAE 0.706 vs
+constant 1.449). **math/code: per-capability CONSTANT wins** (E/T/2D over-extrapolate; δ small & pool-invariant).
+**Variability dominated by POOL-SAMPLING not training noise**: QA pool-std 0.427 vs train-std 0.043 (~10×),
+code ~4× — the distillation residual is a data-SELECTION effect, not optimization stochasticity. Answers the
+advisor's pool-vs-training question. Small (6 runs); endpoint pools first-U vs U=225 sampled. See DISTILL_NEWPOOL.md.
