@@ -129,11 +129,14 @@ def main():
         if prev and prev != r["method"]:
             L.append(r"\midrule")
         prev = r["method"]
+        _DN = {"A1_gamma1": "A1 (gamma=1)", "strength_only": "strength-only", "median_curve": "median curve", "noD0_N0_L0": "no-D0",
+               "per_bit_median": "per-bit median", "full_N0_L0_D0": "full", "config_median": "median", "mean_base": "mean", "med_base": "median"}
+        dn = lambda t: __import__("functools").reduce(lambda acc, kv: acc.replace(kv[0], kv[1]), _DN.items(), str(t)).replace("_", r"\_")
         esc = lambda s: str(s).replace("_", r"\_").replace("&", r"\&").replace(">=", r"$\ge$").replace("^", r"\^{}")
         st = "P-new" if r["status"].startswith("P-NEW") else "P/R" if r["status"].startswith("P (4") else ("P" if r["status"].startswith("FROZEN") else ("L" if r["status"].startswith("LOO") else "R"))
         ab = {"pruning": "prune", "quantization": "quant", "distillation": "distill"}
         L.append(f"{ab[r['method']]} & {r['capability']} & {r['test']} & "
-                 f"{esc(r['split'])}/{esc(r['ie']).replace('interp(0.65)+extrap(0.55)','int.+ext.').replace('interp (E in range)','interp')} & {r['cand_mae']:.3f} & {r['base_name']} & {r['base_mae']:.3f} & "
+                 f"{esc(r['split'])}/{esc(r['ie']).replace('interp(0.65)+extrap(0.55)','int.+ext.').replace('interp (E in range)','interp')} & {r['cand_mae']:.3f} & {dn(r['base_name'])} & {r['base_mae']:.3f} & "
                  f"{r['improvement']:+.3f} & {st} \\\\")
     L += [r"\bottomrule", r"\end{tabular}",
           r"\caption{Main prediction table (capability loss, nats/token); candidate forms and inputs (all K0) are given in \S\ref{sec:twoaxes}. Impr.\ $=$ baseline MAE $-$ candidate MAE "
