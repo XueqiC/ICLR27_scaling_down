@@ -104,5 +104,10 @@ capability responses at matched settings. No GPTQ law; no latency/storage claims
 - 2026-09-09 15:50 EDT: sources/revisions/architectures registered (v36 ARCHITECTURES 1b, 6.9b;
   registry pythia-1b, pythia-6.9b); v12 `--schedule-tokens` implemented (absolute-exposure protocol); P3
   secondary benchmarks fixed to non-training sets.
-- Pending: P1 freeze per source; P2 pool registration v2 (paired); contamination audit; throughput pairing.
+- 16:00 EDT: P1-v2 mapping frozen (6f2e63a); 1B@32k/112k dense measured, predictions committed (cd9ed8f),
+  compressed measurement running. Contamination audit clean. P2 v2 pools registered (v47 register['v2']).
+  Concurrency note: card briefly at 3-4 my processes (old run + schedule test + measurement); throughput
+  pairing to be measured on the P2 dev launch. A premature duplicate v6 run was killed and its partial output
+  quarantined (results not used).
+- Pending: 6.9B dense/predict/measure; P2 dev launch (after schedule test) with 2-way pairing.
 - GPU-hours used at start of v2: ≈0.3 (probes 0.1, P1 0.02, old-protocol run ≈0.2 in flight).
