@@ -1,0 +1,267 @@
+\begin{thebibliography}{38}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bahri et~al.(2024)Bahri, Dyer, Kaplan, Lee, and
+  Sharma]{bahri2021explaining}
+Yasaman Bahri, Ethan Dyer, Jared Kaplan, Jaehoon Lee, and Utkarsh Sharma.
+\newblock Explaining neural scaling laws.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 121\penalty0
+  (27):\penalty0 e2311878121, 2024.
+
+\bibitem[Besiroglu et~al.(2024)Besiroglu, Erdil, Barnett, and
+  You]{besiroglu2024chinchilla}
+Tamay Besiroglu, Ege Erdil, Matthew Barnett, and Josh You.
+\newblock Chinchilla scaling: A replication attempt.
+\newblock \emph{arXiv preprint arXiv:2404.10102}, 2024.
+
+\bibitem[Bhagia et~al.(2025)Bhagia, Liu, Wettig, Heineman, Tafjord, Jha,
+  Soldaini, Smith, Groeneveld, Koh, Dodge, and
+  Hajishirzi]{bhagia2024establishing}
+Akshita Bhagia, Jiacheng Liu, Alexander Wettig, David Heineman, Oyvind Tafjord,
+  Ananya~Harsh Jha, Luca Soldaini, Noah~A. Smith, Dirk Groeneveld, Pang~Wei
+  Koh, Jesse Dodge, and Hannaneh Hajishirzi.
+\newblock Establishing task scaling laws via compute-efficient model ladders.
+\newblock In \emph{Conference on Language Modeling (COLM)}, 2025.
+
+\bibitem[Busbridge et~al.(2025)Busbridge, Shidani, Weers, Ramapuram, Littwin,
+  and Webb]{busbridge2025distillation}
+Dan Busbridge, Amitis Shidani, Floris Weers, Jason Ramapuram, Etai Littwin, and
+  Russ Webb.
+\newblock Distillation scaling laws.
+\newblock In \emph{International Conference on Machine Learning}, 2025.
+
+\bibitem[Chen et~al.(2025)Chen, Hu, Zhang, Wang, Li, Chen, and
+  Zhang]{zhang2024scaling}
+Xiaodong Chen, Yuxuan Hu, Xiaokang Zhang, Yanling Wang, Cuiping Li, Hong Chen,
+  and Jing Zhang.
+\newblock P$^2$ law: Scaling law for post-training after model pruning.
+\newblock In \emph{Proceedings of the 63rd Annual Meeting of the Association
+  for Computational Linguistics}, 2025.
+
+\bibitem[Dettmers \& Zettlemoyer(2023)Dettmers and
+  Zettlemoyer]{dettmers2023case}
+Tim Dettmers and Luke Zettlemoyer.
+\newblock The case for 4-bit precision: {k}-bit inference scaling laws.
+\newblock In \emph{International Conference on Machine Learning}, 2023.
+
+\bibitem[Frantar \& Alistarh(2023)Frantar and Alistarh]{frantar2023sparsegpt}
+Elias Frantar and Dan Alistarh.
+\newblock Sparsegpt: Massive language models can be accurately pruned in
+  one-shot.
+\newblock In \emph{International Conference on Machine Learning}, 2023.
+
+\bibitem[Frantar et~al.(2024)Frantar, Riquelme, Houlsby, Alistarh, and
+  Evci]{frantar2023scaling}
+Elias Frantar, Carlos Riquelme, Neil Houlsby, Dan Alistarh, and Utku Evci.
+\newblock Scaling laws for sparsely-connected foundation models.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Gadre et~al.(2025)Gadre, Smyrnis, Shankar, Gururangan, Wortsman, Shao,
+  Mercat, Fang, Li, Keh, Xin, Nezhurina, Vasiljevic, Soldaini, Jitsev, Dimakis,
+  Ilharco, Koh, Song, Kollar, Carmon, Dave, Heckel, Muennighoff, and
+  Schmidt]{gadre2024language}
+Samir~Yitzhak Gadre, Georgios Smyrnis, Vaishaal Shankar, Suchin Gururangan,
+  Mitchell Wortsman, Rulin Shao, Jean Mercat, Alex Fang, Jeffrey Li, Sedrick
+  Keh, Rui Xin, Marianna Nezhurina, Igor Vasiljevic, Luca Soldaini, Jenia
+  Jitsev, Alex Dimakis, Gabriel Ilharco, Pang~Wei Koh, Shuran Song, Thomas
+  Kollar, Yair Carmon, Achal Dave, Reinhard Heckel, Niklas Muennighoff, and
+  Ludwig Schmidt.
+\newblock Language models scale reliably with over-training and on downstream
+  tasks.
+\newblock In \emph{International Conference on Learning Representations}, 2025.
+
+\bibitem[Gur-Ari et~al.(2018)Gur-Ari, Roberts, and Dyer]{gurari2018gradient}
+Guy Gur-Ari, Daniel~A. Roberts, and Ethan Dyer.
+\newblock Gradient descent happens in a tiny subspace.
+\newblock \emph{arXiv preprint arXiv:1812.04754}, 2018.
+
+\bibitem[Hassibi \& Stork(1992)Hassibi and Stork]{hassibi1992second}
+Babak Hassibi and David~G. Stork.
+\newblock Second order derivatives for network pruning: Optimal brain surgeon.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 1992.
+
+\bibitem[Hoffmann et~al.(2022)Hoffmann, Borgeaud, Mensch, Buchatskaya, Cai,
+  Rutherford, de~Las~Casas, Hendricks, Welbl, Clark, Hennigan, Noland,
+  Millican, van~den Driessche, Damoc, Guy, Osindero, Simonyan, Elsen, Vinyals,
+  Rae, and Sifre]{hoffmann2022training}
+Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor
+  Cai, Eliza Rutherford, Diego de~Las~Casas, Lisa~Anne Hendricks, Johannes
+  Welbl, Aidan Clark, Thomas Hennigan, Eric Noland, Katherine Millican, George
+  van~den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Kar{\'e}n
+  Simonyan, Erich Elsen, Oriol Vinyals, Jack Rae, and Laurent Sifre.
+\newblock An empirical analysis of compute-optimal large language model
+  training.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem[Ilharco et~al.(2023)Ilharco, Ribeiro, Wortsman, Gururangan, Schmidt,
+  Hajishirzi, and Farhadi]{ilharco2023editing}
+Gabriel Ilharco, Marco~Tulio Ribeiro, Mitchell Wortsman, Suchin Gururangan,
+  Ludwig Schmidt, Hannaneh Hajishirzi, and Ali Farhadi.
+\newblock Editing models with task arithmetic.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+
+\bibitem[Jaiswal et~al.(2024)Jaiswal, Gan, Du, Zhang, Wang, and
+  Yang]{jaiswal2023compressing}
+Ajay Jaiswal, Zhe Gan, Xianzhi Du, Bowen Zhang, Zhangyang Wang, and Yinfei
+  Yang.
+\newblock Compressing llms: The truth is rarely pure and never simple.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu, and Amodei]{kaplan2020scaling}
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom~B. Brown, Benjamin Chess, Rewon
+  Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei.
+\newblock Scaling laws for neural language models.
+\newblock \emph{arXiv preprint arXiv:2001.08361}, 2020.
+
+\bibitem[Kumar et~al.(2025)Kumar, Ankner, Spector, Bordelon, Muennighoff, Paul,
+  Pehlevan, R{\'e}, and Raghunathan]{kumar2024scaling}
+Tanishq Kumar, Zachary Ankner, Benjamin~F. Spector, Blake Bordelon, Niklas
+  Muennighoff, Mansheej Paul, Cengiz Pehlevan, Christopher R{\'e}, and Aditi
+  Raghunathan.
+\newblock Scaling laws for precision.
+\newblock In \emph{International Conference on Learning Representations}, 2025.
+
+\bibitem[LeCun et~al.(1989)LeCun, Denker, and Solla]{lecun1989optimal}
+Yann LeCun, John~S. Denker, and Sara~A. Solla.
+\newblock Optimal brain damage.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 1989.
+
+\bibitem[Li et~al.(2025)Li, Kudugunta, and Zettlemoyer]{li2025misfitting}
+Margaret Li, Sneha Kudugunta, and Luke Zettlemoyer.
+\newblock (mis)fitting: A survey of scaling laws.
+\newblock In \emph{International Conference on Learning Representations}, 2025.
+
+\bibitem[Liu et~al.(2025)Liu, Sun, Zhang, Bai, Yu, Yu, Yuan, and
+  Hou]{liu2025quantization}
+Ruikang Liu, Yuxuan Sun, Manyi Zhang, Haoli Bai, Xianzhi Yu, Tiezheng Yu, Chun
+  Yuan, and Lu~Hou.
+\newblock Quantization hurts reasoning? an empirical study on quantized
+  reasoning models.
+\newblock In \emph{Conference on Language Modeling (COLM)}, 2025.
+
+\bibitem[Lourie et~al.(2025)Lourie, Hu, and Cho]{lourie2025scaling}
+Nicholas Lourie, Michael~Y. Hu, and Kyunghyun Cho.
+\newblock Scaling laws are unreliable for downstream tasks: A reality check.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2025}, 2025.
+
+\bibitem[Maloney et~al.(2022)Maloney, Roberts, and Sully]{maloney2022solvable}
+Alexander Maloney, Daniel~A. Roberts, and James Sully.
+\newblock A solvable model of neural scaling laws.
+\newblock \emph{arXiv preprint arXiv:2210.16859}, 2022.
+
+\bibitem[Michaud et~al.(2023)Michaud, Liu, Girit, and
+  Tegmark]{michaud2023quantization}
+Eric~J. Michaud, Ziming Liu, Uzay Girit, and Max Tegmark.
+\newblock The quantization model of neural scaling.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+
+\bibitem[Muralidharan et~al.(2024)Muralidharan, Sreenivas, Joshi, Chochowski,
+  Patwary, Shoeybi, Catanzaro, Kautz, and Molchanov]{muralidharan2024compact}
+Saurav Muralidharan, Sharath~Turuvekere Sreenivas, Raviraj Joshi, Marcin
+  Chochowski, Mostofa Patwary, Mohammad Shoeybi, Bryan Catanzaro, Jan Kautz,
+  and Pavlo Molchanov.
+\newblock Compact language models via pruning and knowledge distillation.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem[Owen(2024)]{owen2024how}
+David Owen.
+\newblock How predictable is language model benchmark performance?
+\newblock \emph{arXiv preprint arXiv:2401.04757}, 2024.
+
+\bibitem[Panferov et~al.(2025)Panferov, Volkova, Modoranu, Egiazarian,
+  Safaryan, and Alistarh]{panferov2025unified}
+Andrei Panferov, Alexandra Volkova, Ionut-Vlad Modoranu, Vage Egiazarian, Mher
+  Safaryan, and Dan Alistarh.
+\newblock Unified scaling laws for compressed representations.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2025.
+
+\bibitem[Ruan et~al.(2024)Ruan, Maddison, and Hashimoto]{ruan2024observational}
+Yangjun Ruan, Chris~J. Maddison, and Tatsunori Hashimoto.
+\newblock Observational scaling laws and the predictability of language model
+  performance.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem[Schaeffer et~al.(2023)Schaeffer, Miranda, and
+  Koyejo]{schaeffer2023emergent}
+Rylan Schaeffer, Brando Miranda, and Sanmi Koyejo.
+\newblock Are emergent abilities of large language models a mirage?
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+
+\bibitem[Schaeffer et~al.(2025)Schaeffer, Schoelkopf, Miranda, Mukobi, Madan,
+  Ibrahim, Bradley, Biderman, and Koyejo]{schaeffer2024predicting}
+Rylan Schaeffer, Hailey Schoelkopf, Brando Miranda, Gabriel Mukobi, Varun
+  Madan, Adam Ibrahim, Herbie Bradley, Stella Biderman, and Sanmi Koyejo.
+\newblock Why has predicting downstream capabilities of frontier ai models with
+  scale remained elusive?
+\newblock In \emph{International Conference on Machine Learning}, 2025.
+
+\bibitem[Sengupta et~al.(2025)Sengupta, Chaudhary, and
+  Chakraborty]{sengupta2025compression}
+Ayan Sengupta, Siddhant Chaudhary, and Tanmoy Chakraborty.
+\newblock Compression laws for large language models.
+\newblock \emph{arXiv preprint arXiv:2504.04342}, 2025.
+
+\bibitem[Sharma et~al.(2024)Sharma, Ash, and Misra]{sharma2023laser}
+Pratyusha Sharma, Jordan~T. Ash, and Dipendra Misra.
+\newblock The truth is in there: Improving reasoning in language models with
+  layer-selective rank reduction.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Sharma \& Kaplan(2020)Sharma and Kaplan]{sharma2020neural}
+Utkarsh Sharma and Jared Kaplan.
+\newblock A neural scaling law from the dimension of the data manifold.
+\newblock \emph{arXiv preprint arXiv:2004.10802}, 2020.
+
+\bibitem[Shihab et~al.(2026)Shihab, Akter, and Sharma]{fasc2026}
+Ibne~Farabi Shihab, Sanjeda Akter, and Anuj Sharma.
+\newblock Beyond variance: Knowledge-aware {LLM} compression via fisher-aligned
+  subspace diagnostics.
+\newblock \emph{arXiv preprint arXiv:2601.07197}, 2026.
+
+\bibitem[Sun et~al.(2024)Sun, Liu, Bair, and Kolter]{sun2023simple}
+Mingjie Sun, Zhuang Liu, Anna Bair, and J.~Zico Kolter.
+\newblock A simple and effective pruning approach for large language models.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Xia et~al.(2024)Xia, Gao, Zeng, and Chen]{xia2023sheared}
+Mengzhou Xia, Tianyu Gao, Zhiyuan Zeng, and Danqi Chen.
+\newblock Sheared llama: Accelerating language model pre-training via
+  structured pruning.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Yin et~al.(2024)Yin, Jaiswal, Liu, Kundu, and Wang]{yin2023junk}
+Lu~Yin, Ajay Jaiswal, Shiwei Liu, Souvik Kundu, and Zhangyang Wang.
+\newblock Junk {DNA} hypothesis: Pruning small pre-trained weights irreversibly
+  and monotonically impairs ``difficult'' downstream tasks in {LLM}s.
+\newblock In \emph{International Conference on Machine Learning}, 2024.
+
+\bibitem[Zhang et~al.(2026)Zhang, Cheng, Feng, Luo, Yang, An, Xu, and
+  Zhang]{fisher3d2026}
+Yipu Zhang, Jintao Cheng, Weilun Feng, Jiehao Luo, Chuanguang Yang, Zhulin An,
+  Yongjun Xu, and Wei Zhang.
+\newblock Not all tasks quantize equally: Fisher-guided quantization for visual
+  geometry transformer.
+\newblock \emph{arXiv preprint arXiv:2605.15828}, 2026.
+
+\bibitem[Zhao et~al.(2024)Zhao, Zhang, Chen, Wang, Anandkumar, and
+  Tian]{zhao2024galore}
+Jiawei Zhao, Zhenyu Zhang, Beidi Chen, Zhangyang Wang, Anima Anandkumar, and
+  Yuandong Tian.
+\newblock Galore: Memory-efficient llm training by gradient low-rank
+  projection.
+\newblock In \emph{International Conference on Machine Learning}, 2024.
+
+\bibitem[Zhou et~al.(2026)Zhou, Cao, Li, Yu, Ye, Zhao, and Liu]{zhou2025task}
+Chenxi Zhou, Pengfei Cao, Jiang Li, Bohan Yu, Jinyu Ye, Jun Zhao, and Kang Liu.
+\newblock Task-stratified knowledge scaling laws for post-training quantized
+  large language models.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  ACL 2026}, 2026.
+
+\end{thebibliography}

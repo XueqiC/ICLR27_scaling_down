@@ -189,7 +189,7 @@ family-level pattern (Qwen and OLMo-32B QA improvements, Gemma
 none, an OLMo size flip) called in advance. Beyond the mild regime, first- plus second-order
 predictions fail by orders of magnitude at the cliff in every family:
 the collapse is non-perturbative in loss space, confirming the
-two-regime structure of \eqref{eq:prune}.
+two-regime structure of \eqref{eq:fitlaw}.
 
 \subsection{The cliff is a geometric threshold crossing}
 \label{sec:orderparam}
@@ -322,7 +322,7 @@ on an existing panel, and R are baselines added at closeout with the
 original prediction untouched. All three arms use the same K0 budget
 (pre-compression information only), the same endpoint, and the same
 rule: a candidate is credited only against the strongest baseline at
-the same information budget.
+the same information budget, that is, one built from the same inputs.
 
 \input{tables/main_prediction}
 
@@ -372,7 +372,7 @@ established on a panel of three sources. The candidate beats only the
 variant with $\gamma_c$ fixed to one. On the tested panel, therefore,
 the source-informed candidate outperforms strength-only baselines, and
 the added same-input comparison shows no additional advantage for the
-shared power form. This does not reduce to inputs alone mattering,
+shared power form. This does not mean that only the inputs matter,
 since the per-density baseline also uses the response structure across
 the measured strengths. At $d=0.55$ the signed
 errors are mixed (six under-predictions, three over-predictions), with
@@ -399,7 +399,8 @@ collapse-risk law.
 \paragraph{Distillation: source and pool axes.}
 With the reference fixed to the initial student,
 $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$, a controlled LoRA panel (the
-same $3\times3$ sources with fixed teacher, pool, and reuse count)
+same $3\times3$ sources with fixed teacher, pool, and reuse count
+$E=T/D_U$, the ratio of processed tokens to pool tokens)
 admits a source-transfer predictor only for math, where a linear model
 in $\{N_0,L_{c,0},D_0\}$ halves the held-out error of a constant (0.014
 vs.\ 0.031); for code the two are within noise (0.057 vs.\ 0.061) and
@@ -407,7 +408,7 @@ for QA a per-capability constant is better (0.159 vs.\ 0.263). On the pool axis,
 U600) were tested on an unseen middle pool (U225). Its reuse count of
 2.3--4.7 lies inside the endpoint range, so this is a configuration
 interpolation, and because the endpoints are pool prefixes while U225 is
-randomly sampled, the sampling protocol also changes. A reuse-count law
+randomly sampled, the sampling protocol also changes. The reuse-count predictor
 beats a constant only for QA (0.706 vs.\ 1.449); for math and code a
 constant is best (0.122 and 0.069) and the endpoint-fit forms
 over-extrapolate. All four frozen candidates (a constant, a budget-only
@@ -432,8 +433,8 @@ validity are determined for each arm by evidence: pruning yields a
 source-conditioned prediction that extends to unseen densities,
 quantization a per-configuration validation whose only large signal is
 an unstable collapse magnitude, and distillation a capability-specific
-transfer in which the reuse coordinate helps QA and a constant suffices
-for math and code. The cross-method tests reported here cover the
+transfer in which the reuse-count predictor helps QA and a constant
+suffices for math and code. The cross-method tests reported here cover the
 resource-ratio models of \S\ref{sec:claims} at matched storage and
 active-parameter coordinates; the full M1/M2/M3 held-out comparison was
 not completed (\S\ref{sec:planned}). Whether any single response form
