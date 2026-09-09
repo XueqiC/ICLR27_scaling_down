@@ -109,5 +109,11 @@ capability responses at matched settings. No GPTQ law; no latency/storage claims
   Concurrency note: card briefly at 3-4 my processes (old run + schedule test + measurement); throughput
   pairing to be measured on the P2 dev launch. A premature duplicate v6 run was killed and its partial output
   quarantined (results not used).
-- Pending: 6.9B dense/predict/measure; P2 dev launch (after schedule test) with 2-way pairing.
+- 16:00 EDT: 6.9B dense measured (peak 14 GB, 81 s each); predictions committed (950312f); compressed measurement
+  queued behind the 1B pair with --reference-device cpu. Schedule protocol test PASSED (270M, 30k tokens: 7/7
+  updates, LR 9.5e-5 -> 0.0 at budget, 3 snapshots; overshoot ≈1 batch recorded); test run quarantined.
+  P2-v2 dev lanes launched 15:58: lane A gemma3-1b (U75/U450 × 11–13), lane B gemma3-270m gated on PAIR_OK.
+  Concurrency note: lane A's first run overlaps the old-protocol run and the 1B measurement, so its throughput
+  reading is not a clean solo; pairing decisions use per-run completion time (runs/hour), logged per run.
+- Pending: P1-v2 compares (1B, 6.9B); P2 dev completion → v50 freeze → FREEZE2_COMMITTED → test lanes.
 - GPU-hours used at start of v2: ≈0.3 (probes 0.1, P1 0.02, old-protocol run ≈0.2 in flight).
