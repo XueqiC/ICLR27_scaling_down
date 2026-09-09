@@ -1,0 +1,60 @@
+{
+  "version": 12,
+  "student": "gemma3-4b",
+  "resolved_student": "google/gemma-3-4b-pt",
+  "student_tag": "gemma3-4b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "domains": [
+    "math",
+    "qa",
+    "code"
+  ],
+  "n_per_domain": 600,
+  "output_suffix": "",
+  "run_name": "gpt-5.6-luna_full_600_seed1",
+  "seed": 1,
+  "training_seed": 1,
+  "data_sampling_seed": 1,
+  "data_selection": "first n_per_domain rows; seeded initial and epoch shuffles",
+  "training_mode": "full",
+  "training_benchmarks": {
+    "math": "GSM8K",
+    "qa": "HotpotQA",
+    "code": "CodeAlpaca"
+  },
+  "measurement_benchmarks": {
+    "math": "MATH-500",
+    "code": "MBPP",
+    "qa": "2WikiMultihopQA"
+  },
+  "probe_source": "analysis.v6_capability_geometry.build_probes",
+  "probe_seed": 0,
+  "n_probe_requested": 128,
+  "probe_half": "measurement (odd indices, v[1::2])",
+  "measurement_samples": {
+    "math": 64,
+    "code": 64,
+    "qa": 64
+  },
+  "measurement_tokens": {
+    "math": 13198,
+    "code": 4516,
+    "qa": 251
+  },
+  "dense": {
+    "math": 0.7406993483861191,
+    "code": 0.80178808680248,
+    "qa": 5.473854581673307
+  },
+  "post_training": {
+    "math": 0.8185899378693742,
+    "code": 0.8816153675819309,
+    "qa": 4.283428784860558
+  },
+  "delta": {
+    "math": 0.07789058948325511,
+    "code": 0.0798272807794509,
+    "qa": -1.1904257968127494
+  }
+}

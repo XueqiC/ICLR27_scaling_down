@@ -1,0 +1,108 @@
+{
+  "version": 12,
+  "student": "Qwen3-4B",
+  "resolved_student": "Qwen/Qwen3-4B",
+  "student_tag": "Qwen3-4B",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "domains": [
+    "math",
+    "qa",
+    "code"
+  ],
+  "n_per_domain": 75,
+  "output_suffix": "_uxseen",
+  "run_name": "gpt-5.6-luna_full_75_uxseen_seed2",
+  "seed": 2,
+  "training_seed": 2,
+  "data_sampling_seed": 2,
+  "training_mode": "lora",
+  "probe_seed": 0,
+  "data_selection": "first n_per_domain rows; seeded initial and epoch shuffles",
+  "training_benchmarks": {
+    "math": "GSM8K",
+    "qa": "HotpotQA",
+    "code": "CodeAlpaca"
+  },
+  "data_pool_sha256": "23e41b2b06e4e431f60c667955ba471984b60c2fea928e3db2eb49308a8b6e11",
+  "epochs": 16,
+  "learning_rate": 0.0001,
+  "optimizer": "AdamW",
+  "scheduler": "cosine",
+  "warmup_ratio": 0.03,
+  "total_updates_planned": 224,
+  "probe_source": "analysis.v6_capability_geometry.build_probes",
+  "n_probe_requested": 128,
+  "probe_half": "measurement (odd indices, v[1::2])",
+  "measurement_benchmarks": {
+    "math": "MATH-500",
+    "code": "MBPP",
+    "qa": "2WikiMultihopQA"
+  },
+  "measurement_samples": {
+    "math": 64,
+    "code": 64,
+    "qa": 64
+  },
+  "measurement_tokens": {
+    "math": 13392,
+    "code": 3461,
+    "qa": 271
+  },
+  "dense": {
+    "math": 0.9101515830346476,
+    "code": 1.5458682461716267,
+    "qa": 6.728966068957565
+  },
+  "token_accounting": {
+    "version": "v12-token-accounting-v1",
+    "processed_tokens": "seen_tokens: cumulative non-padding input tokens, prompt + target + BOS, after truncation; includes repetitions",
+    "unique_data_tokens": "sum of input lengths of distinct training examples encountered so far, counted once",
+    "unique_data_pool_tokens": "sum of input lengths of distinct examples in the fixed selected/tokenized pool",
+    "identity": "SHA256 of source prompt/completion; fallback to tokenized input_ids and labels for direct _train callers",
+    "completion_tokens_seen": "cumulative supervised target tokens, separately from processed input tokens"
+  },
+  "trajectory_run_id": "Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2",
+  "trajectory_tokens_requested": [
+    62800,
+    125500,
+    500000,
+    1000000
+  ],
+  "independent_seed_unit": "Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2",
+  "trajectory_note": "Snapshots share one run, fixed data pool, optimizer and cosine schedule; never independent seeds. Adapter snapshots are for evaluation, not optimizer resume.",
+  "loss_definition": "sum_target_CE / sum_target_tokens (nats/token, legacy V12)",
+  "processed_tokens": 65476,
+  "seen_tokens": 65476,
+  "unique_data_tokens": 65476,
+  "unique_data_pool_tokens": 65476,
+  "unique_examples_seen": 223,
+  "unique_data_pool_examples": 223,
+  "updates": 14,
+  "epoch": 1,
+  "requested_token_milestones": [
+    62800
+  ],
+  "milestone_overshoot_tokens": [
+    2676
+  ],
+  "completion_tokens_seen": 18254,
+  "lr": 9.966808593197959e-05,
+  "snapshot_kind": "trajectory",
+  "is_independent_seed": false,
+  "post_training": {
+    "math": 0.7701799581839904,
+    "code": 1.3230280265819128,
+    "qa": 4.583890682656826
+  },
+  "capability_losses": {
+    "math": 0.7701799581839904,
+    "code": 1.3230280265819128,
+    "qa": 4.583890682656826
+  },
+  "delta": {
+    "math": -0.13997162485065717,
+    "code": -0.2228402195897139,
+    "qa": -2.1450753863007384
+  }
+}

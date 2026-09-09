@@ -1,0 +1,56 @@
+{
+  "version": 12,
+  "student": "gemma3-1b",
+  "resolved_student": "google/gemma-3-1b-pt",
+  "student_tag": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "domains": [
+    "math",
+    "qa",
+    "code"
+  ],
+  "n_per_domain": 150,
+  "output_suffix": "",
+  "run_name": "gpt-5.6-luna_full_150",
+  "training_mode": "lora",
+  "training_benchmarks": {
+    "math": "GSM8K",
+    "qa": "HotpotQA",
+    "code": "CodeAlpaca"
+  },
+  "measurement_benchmarks": {
+    "math": "MATH-500",
+    "code": "MBPP",
+    "qa": "2WikiMultihopQA"
+  },
+  "probe_source": "analysis.v6_capability_geometry.build_probes",
+  "probe_seed": 0,
+  "n_probe_requested": 128,
+  "probe_half": "measurement (odd indices, v[1::2])",
+  "measurement_samples": {
+    "math": 64,
+    "code": 64,
+    "qa": 64
+  },
+  "measurement_tokens": {
+    "math": 13198,
+    "code": 4516,
+    "qa": 251
+  },
+  "dense": {
+    "math": 1.2210562206394908,
+    "code": 1.0608115589016829,
+    "qa": 5.567137699203188
+  },
+  "post_training": {
+    "math": 1.2941923018639188,
+    "code": 1.1386736049601418,
+    "qa": 4.081237549800797
+  },
+  "delta": {
+    "math": 0.07313608122442794,
+    "code": 0.07786204605845892,
+    "qa": -1.485900149402391
+  }
+}

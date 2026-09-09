@@ -1,0 +1,56 @@
+{
+  "version": 12,
+  "student": "gemma3-270m",
+  "resolved_student": "google/gemma-3-270m",
+  "student_tag": "gemma3-270m",
+  "teacher": "claude-sonnet-4-6",
+  "recipe": "full",
+  "domains": [
+    "math",
+    "qa",
+    "code"
+  ],
+  "n_per_domain": 600,
+  "output_suffix": "",
+  "run_name": "claude-sonnet-4-6_full_600",
+  "training_mode": "lora",
+  "training_benchmarks": {
+    "math": "GSM8K",
+    "qa": "HotpotQA",
+    "code": "CodeAlpaca"
+  },
+  "measurement_benchmarks": {
+    "math": "MATH-500",
+    "code": "MBPP",
+    "qa": "2WikiMultihopQA"
+  },
+  "probe_source": "analysis.v6_capability_geometry.build_probes",
+  "probe_seed": 0,
+  "n_probe_requested": 128,
+  "probe_half": "measurement (odd indices, v[1::2])",
+  "measurement_samples": {
+    "math": 64,
+    "code": 64,
+    "qa": 64
+  },
+  "measurement_tokens": {
+    "math": 13198,
+    "code": 4516,
+    "qa": 251
+  },
+  "dense": {
+    "math": 1.3159948477041976,
+    "code": 1.1902956155890168,
+    "qa": 5.27574078685259
+  },
+  "post_training": {
+    "math": 1.4110660706167601,
+    "code": 1.3137178919397696,
+    "qa": 4.903386454183267
+  },
+  "delta": {
+    "math": 0.09507122291256254,
+    "code": 0.12342227635075287,
+    "qa": -0.37235433266932283
+  }
+}
