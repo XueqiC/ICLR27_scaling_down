@@ -1,8 +1,8 @@
-\begin{table}[t]
+\begin{sidewaystable}[p]
 \centering
-\scriptsize
-\setlength{\tabcolsep}{1.5pt}
-\begin{tabular}{@{}llp{3.2cm}lrp{2.0cm}rrl@{}}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llp{4.6cm}lrp{3.2cm}rrl@{}}
 \toprule
 Method & Cap. & Test & Split & Cand. & Strongest same-budget baseline & Base. & Impr. & St. \\
 \midrule
@@ -36,4 +36,4 @@ quant & all & NEW source pythia-1b@96k, int3 (seen bit) & source/interp & 0.397 
 \end{tabular}
 \caption{Main prediction table (capability loss, nats/token); candidate forms and inputs (all K0) are given in \S\ref{sec:twoaxes}. Impr.\ $=$ baseline MAE $-$ candidate MAE (positive $=$ candidate better) against the strongest baseline at the \emph{same} information budget (K0). Three statements are kept separate: whether adding $D_0$ improves on the model without it, whether the full-input model improves on the strongest same-budget baseline, and whether a frozen model succeeds on a new source state; Impr.\ reports point-estimate error reduction, and significance is stated in the text. Status: P $=$ frozen prospective (prediction registered before measurement); L $=$ leave-one-out on an existing panel (retrospective); R $=$ baseline/diagnostic added at closeout with the original prediction untouched; P/R $=$ the four candidates were frozen (P) but the per-capability choice among them was made after the test (R). Every number is generated from \texttt{results/v*/summary.json} by \texttt{analysis/v45\_main\_table.py}; per-source, per-density, and per-pool breakdowns are in the corresponding docs. Point estimates; the controlled panels have three size/step/pool clusters, so intervals are panel-conditional (see text).}
 \label{tab:main}
-\end{table}
+\end{sidewaystable}

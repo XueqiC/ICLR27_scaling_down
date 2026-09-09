@@ -1,31 +1,312 @@
 \section{Appendix}
 \label{sec:appendix}
 
-\subsection{Full capability-region grid}
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figs/v9_blocks.pdf}
-\caption{Full version of Fig.~\ref{fig:blocks}: pairwise similarity of
-per-benchmark gradient signatures for seven models from three families
-(rows) under four metrics (columns): raw Fisher cosine, log-Fisher
-cosine, shared-component-removed log-Fisher cosine, and top-0.1\%
-Jaccard overlap. The block structure of the residual metric holds in
-every model.}
-\label{fig:blocks_full}
-\end{figure}
+\subsection{Probes and the capability-conditioned loss}
+\label{sec:app_probes}
+Each capability is measured on a fixed probe set of prompt--reference
+pairs drawn once, with a fixed seed, from held-out benchmark splits that
+are disjoint from every training and recovery source used in the paper.
+The primary measurement benchmarks are MATH-500 for mathematical
+reasoning, MBPP for code generation, and 2WikiMultihopQA for multi-hop
+question answering. For each capability we draw 128 probes and split
+them by index parity into an estimation half, used only for gradient
+and Fisher statistics, and a measurement half of 64 probes on which
+every reported loss is computed, so that mechanism statistics and
+evaluations never share sampling noise. The measurement check of
+Appendix~\ref{sec:app_support} adds one independent secondary
+benchmark per capability (SVAMP, HumanEval, and TriviaQA; 128 probes
+each, same seed); these were chosen to exclude the benchmarks from
+which the distillation traces were derived (GSM8K, CodeAlpaca, and
+HotpotQA), and a sample-level audit found no overlap between any
+measurement probe and the training pool.
 
-\subsection{Measurement details}
-Probe construction, tokenization and truncation rules, estimation/measurement
-splits, and streaming estimators for $\gbar{c}$, $\Fc{c}$ quadratic forms,
-and binned spectra will be documented here, together with the full
-per-density loss tables for each model size.
+The loss is the conditional cross-entropy of the reference completion
+given the prompt, summed over completion tokens and divided by the
+number of completion tokens, as in Eq.~\eqref{eq:taskloss}. Prompts and
+references are tokenized with the model's own tokenizer and truncated to
+1024 tokens; prompt tokens are masked out of the loss. All within-model
+responses $\Delta L_c$ are therefore differences in native-token nats
+on identical token sequences. Because native-token units differ across
+tokenizers, cross-family comparisons of absolute levels use per-byte
+normalization or are reported separately, and no cross-tokenizer
+quantity is treated as a common numerical scale. Negative responses are
+retained as measured; nothing is clipped at zero.
 
-\subsection{Re-analysis details}
-Recipe-stratified anchor tables, held-out transfer-law errors, the
-trained/transfer split analysis, 1PL/2PL comparisons, and the item-level
-shift-versus-deletion likelihood tests.
+\subsection{Compression protocols}
+\label{sec:app_compress}
+\paragraph{Pruning.} Global magnitude pruning removes the smallest
+weights across all transformer matrices (attention and MLP projections;
+embeddings, output head, biases, and norms are excluded) to a target
+retained density $\dens$. The global threshold is estimated from a
+seeded sample of absolute weights so that the same procedure scales to
+30B-parameter models; every density is applied to the same dense
+reference weights, which are held on the CPU for the largest models so
+that a single 80~GB device suffices.
 
-\subsection{Pre-registration}
-Timestamped commits of functional forms, claim hierarchy (T1/T2),
-discriminating experiments, and the falsifiable concentration prediction
-for 8B/14B/32B.
+\paragraph{Quantization.} Weights are fake-quantized per output channel
+with symmetric round-to-nearest at bit-width $\bits$, using the integer
+range $[-(2^{\bits-1}-1),\,2^{\bits-1}-1]$ and a per-channel scale set
+by the channel's maximum absolute value; activations are left in
+bfloat16. The dense weights are restored between bit-widths. Because the
+symmetric range uses $2^{\bits-1}-1$ levels, the step-size ratio between
+consecutive bit-widths is $(7/15)^2\approx0.22$ rather than $0.25$,
+which is why the fixed $4^{-\bits}$ shape is not the natural reference
+for this quantizer.
+
+\paragraph{Distillation.} Students are fine-tuned on black-box teacher
+traces (a frontier API teacher answering GSM8K, HotpotQA, and CodeAlpaca
+prompts; 600 traces per domain) under the full-trace recipe, with
+strict LoRA adapters of rank 16 and scaling 32 on the query, key, value,
+output, gate, up, and down projections, AdamW at learning rate
+$10^{-4}$, an effective batch of 16 sequences, and a cosine schedule
+with 3\% warmup. A run aborts rather than silently falling back to full
+fine-tuning if the adapter library is unavailable, and the actual
+training mode and trainable parameter count are recorded in every
+manifest. Token accounting distinguishes processed tokens (all input
+tokens seen, including repetitions), unique pool tokens, and supervised
+completion tokens. The data pool of $U$ examples per domain is either
+the first $U$ rows of the trace file (the historical protocol) or a
+random sample drawn with a pool-sampling seed that is independent of the
+training seed; pools are identified by the sorted hashes of their
+samples and pairwise overlaps are reported. The historical schedule
+spanned a fixed number of epochs, so its cosine horizon varied with
+pool size; the controlled matrix of \S\ref{sec:twoaxes} uses a schedule
+defined on the same absolute processed-token budget for every pool, and
+the two protocols are never mixed in one fit.
+
+\subsection{The controlled Pythia panel}
+\label{sec:app_pythia}
+The panel uses the public Pythia checkpoints at sizes 160M, 410M, and
+1.4B and pretraining steps 16{,}000, 64{,}000, and 143{,}000, which
+correspond to 33.6B, 134.2B, and 299.9B processed tokens at the
+published batch of $1024\times2048$ tokens per step. The size
+coordinate $N_0$ counts transformer-matrix parameters only (the query,
+key, value, output, and MLP matrices of every layer), computed from the
+architecture configuration, and the training-tokens coordinate is
+$D_0=\text{step}\times 2{,}097{,}152$. Each checkpoint's weight identity
+was verified before use: the 2.8B revisions published for different
+steps were found to load identical weights and were excluded, and an
+integrity guard now rejects any pair of nominally different checkpoints
+with identical measured panels. New sources added for the prospective
+tests (Pythia-1B at steps 32{,}000, 96{,}000, and 112{,}000;
+Pythia-6.9B at 32{,}000 and 112{,}000) were confirmed to have never
+entered any fit or model selection before their predictions were
+frozen.
+
+\subsection{Registration, freezing, and labels}
+\label{sec:app_register}
+Every prediction test in Table~\ref{tab:main} follows one order. The
+functional forms, the development set, and every standardization and
+coefficient are fixed and committed first. For a new source the dense
+capability loss is then measured, since it is a permitted
+pre-compression input; the predictions for every configuration and
+candidate are written to a versioned file and committed to the
+repository, with the commit hash recorded; and only then is the
+compressed or distilled outcome measured. Information budgets are
+reported separately: K0 uses pre-compression information only, K1 adds
+one pre-specified target-side calibration point, and post-hoc rescaling
+on target outcomes is reported only as an oracle diagnostic. Rows are
+labeled P when the prediction was frozen before measurement in this
+work, L for leave-one-out on an existing panel, R for a baseline or
+diagnostic added after a test with the original prediction left
+untouched, and P/R when a set of candidates was frozen but the
+per-capability choice among them was made after seeing the result.
+When a diagnostic overturns an earlier headline, the earlier claim is
+downgraded in the text rather than the prediction being rewritten.
+
+\subsection{Reproduction}
+\label{sec:app_repro}
+All tables are generated from machine-readable result files by
+CPU-only scripts that run in seconds and require neither model weights
+nor a GPU; the repository mirrors the scripts and the result files
+they read, and the main prediction table is produced by a single
+command. Model measurements are reproducible from the recorded
+revisions, probe seeds, and protocols above.
+
+\section{Supporting analyses}
+\label{sec:app_support}
+
+\subsection{Capabilities occupy distinct regions of gradient space}
+\label{sec:regions}
+
+\paragraph{Convergent validity (block structure).} For each of nine
+benchmarks we measure a gradient signature (the benchmark-conditional
+diagonal Fisher) and compare all pairs. After removing the component
+shared across benchmarks, signatures of same-capability benchmarks are
+positively aligned (cosine $+0.36$ to $+0.45$) while signatures of
+different capabilities are \emph{anti-aligned} ($-0.23$ to $-0.25$),
+in every one of seven models across three families
+(Figs.~\ref{fig:blocks}--\ref{fig:blocks_olmo3_7b}); the C4 control sits between blocks.
+\preliminary{point estimates; example-bootstrap, permutation, and
+prompt-stability tests are queued (B2)} The
+mathematics benchmarks cluster regardless of format, and within-block
+fine structure matches intuition (SVAMP, grade-school word problems,
+is the loosest member of the math block). A projected-gradient SVD
+version gives the same verdict in subspace terms: principal-angle
+similarity within capability exceeds cross-capability similarity by
+$2$--$4\times$.
+
+\input{figs/appendix_blocks}
+
+\paragraph{Selective ablation \preliminary{single model; random, magnitude-matched, and global-Fisher controls pending (B1)}.} A first targeted test:
+select the top $0.05\%$ of weight coordinates by each capability's
+\emph{residual} Fisher signature (excluding coordinates shared with
+other capabilities) and zero them. The damage matrix is nearly
+diagonal (Gemma-3-1B; rows ablate, columns measure, nats/token):
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Ablated region & math & code & QA \\
+\midrule
+math & $\mathbf{+4.63}$ & $+0.43$ & $+0.05$ \\
+code & $+0.42$ & $\mathbf{+7.14}$ & $+0.00$ \\
+QA   & $+0.01$ & $+0.00$ & $\mathbf{+2.29}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Zeroing $0.05\%$ of weights, selected from gradients alone, selectively
+removes one capability while leaving the others essentially untouched
+(the QA ablation moves code by $+0.0001$). Pending multi-model
+replication and the control ablations above, we describe the regions as
+causally implicated and partially separable rather than as proven
+causal carriers; if confirmed, ablation itself is a form of
+\emph{targeted} scaling-down.
+
+\subsection{The pruning law}
+\label{sec:law}
+
+The mechanism form of \S\ref{sec:laws} fits the entire pre-cliff grid.
+With the measured alignment term subtracted, the curvature residual
+follows a power law in the deleted capability mass $m_c(\dens)$:
+\begin{equation}
+\Delta\Lc{c}(\dens)\;=\;\underbrace{\gbar{c}^{\top}\dw_\dens}_{\text{measured}}
+\;+\;B\,\big[\underbrace{m_c(\dens)}_{\text{measured}}\big]^{\gamma},
+\label{eq:fitlaw}
+\end{equation}
+with in-sample $R^2 = 0.82$--$0.996$ over 24 capability$\times$model
+fits. The held-out battery (1000-resample cell bootstrap) is where the
+form proves itself: in \emph{leave-one-family-out} transfer the
+shared-$\gamma$ mechanism form attains MAE $2.17$ nats versus $10.3$
+for per-capability raw sparsity and $8.2$ for the direct-damage
+baseline (both CIs exclude zero), so the deleted-mass coordinate is what
+transfers across families; it also beats the direct-damage baseline in
+fit-shallow/predict-deep ($3.11$ vs.\ $4.24$) and raw sparsity in
+leave-largest-model-out ($1.41$ vs.\ $2.15$), while its edge over raw
+sparsity within-model does not reach significance
+(without the first-order term, QA is unfittable, $R^2\!\le\!0.67$;
+with it, QA joins the law). Two structural results:
+(i) in the deleted-mass coordinate the exponent concentrates at
+$\gamma\in[1.2,2.2]$ across all families, versus $3.2$--$8.7$ in the
+raw $(1-\dens)$ coordinate, which is what makes
+the form portable; and (ii) \emph{within a model, $\gamma$ is shared
+across capabilities} (e.g.\ Qwen3-0.6B: $1.41/1.56/1.43$;
+Gemma3-4B: $1.66/1.71$): capability differences are carried entirely
+by the two measured quantities, and the fitted structure is two
+parameters per model. Published (reduced) forms substitute the
+smooth dependence of the geometry itself on $(N_0,f)$, leaving only basic
+parameters in the interface.
+
+\subsection{The signed first-order term predicts, in both directions}
+\label{sec:mech}
+
+The alignment term $\gbar{c}^{\top}\dw$ is the decisive family
+coefficient. Its sign predicts the presence or absence of the
+capability-selective ``free lunch'' in every case measured:
+the QA term of Qwen3 is negative and QA improves under pruning (predicted
+$-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); the QA term of Gemma is
+positive and no improvement exists at any size; the term for OLMo-3-7B is
+positive (mild degradation, prediction $+0.015$ $=$ measurement at
+$\dens=0.8$, code) while the term for OLMo-3-32B is negative, and
+deep-pruning QA improvement duly appears. At the level of individual model$\times$capability$\times$density
+cells in the mild regime, sign prediction accuracy is $67.6\%$
+(Wilson 95\% CI $[58.3,75.7]$, $n{=}108$), above chance, with the
+family-level pattern (Qwen and OLMo-32B QA improvements, Gemma
+none, an OLMo size flip) called in advance. Beyond the mild regime, first- plus second-order
+predictions fail by orders of magnitude at the cliff in every family:
+the collapse is non-perturbative in loss space, confirming the
+two-regime structure of \eqref{eq:fitlaw}.
+
+\subsection{The cliff is a geometric threshold crossing}
+\label{sec:orderparam}
+
+Measuring the capability geometry \emph{of the pruned models}
+resolves the apparent unpredictability of the cliff. The
+capability-region mass retention (the fraction of the
+capability-exclusive top coordinates of the dense model still
+prominent after pruning) declines smoothly from the first densities
+(no cliff in geometry) while loss is still flat;
+the behavioral cliff occurs where retention crosses a critical value.
+The critical value is family-specific (Gemma: $0.035$--$0.10$ across
+1B/4B and all capabilities; Qwen: $0.13$--$0.23$) but consistent
+within a family across sizes and capabilities: the cliff boundary
+$\dens_c^{*}(N_0,f)$ reduces to one critical-retention constant per
+family, turning the least elegant fitted parameter of the two-regime
+law into a measurable, smoothly evolving order parameter.
+\preliminary{three models, two families; multi-model extension queued}
+
+\subsection{Recovery arm: redeemable damage and the asymptotic residual}
+\label{sec:recovery}
+
+Recovery training on general text fits the recovery law cleanly
+(Gemma3-270M pruned to $\dens=0.6$; $R^2\approx1.0$):
+$\beta'_{\text{math}}=1.23$, $\beta'_{\text{code}}=1.02$, with
+\emph{asymptotic residuals under the fixed LoRA recipe},
+$\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$, of $1.21$ (math) and $1.93$
+(code) nats; about $80\%$ of this pruning damage is redeemed within
+8M tokens and the remainder persists under this recipe, while QA
+recovers completely. \preliminary{one model, one density, one recipe; with three-point
+ladders the largest-budget extrapolation of the saturating form beats a
+carry-forward baseline in only 4 of 9 fits, so the ladder is too sparse
+to claim extrapolation, and the denser multi-model grid (B7) is
+queued} Two mechanism results:
+recovery on \emph{aligned} data (teacher traces) heals substantially
+faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
+as the gradient-overlap prediction requires, but over-training on
+narrow aligned data \emph{re-damages} the model (QA $4.95\to9.75$
+from $0.5$M to $8$M tokens), while general-text recovery is monotone.
+Aligned recovery is fast but risky; general recovery is slow but safe;
+the optimal recovery budget is finite for narrow data. Quantization damage past the bit cliff is markedly less redeemable
+under the same recipe (residuals $\approx2.6$--$2.8$ after int3) than
+pruning damage at matched severity.
+
+\subsection{Scale and family structure}
+\label{sec:family}
+
+\paragraph{Within-family robustness is non-monotonic in two families
+independently.} Gemma-3 robustness peaks at 12B (27B collapses far
+earlier, $+4.0$ vs.\ $+0.68$ at $\dens=0.7$), mirroring the prior
+ability-space observation of a Qwen3 14B peak. A mid-scale robustness
+peak is a reproducible pattern of scaling-down.
+\paragraph{A candidate predictor, honestly retired.} The
+top-concentration statistic $\kappa_c$ tracked robustness within the
+Qwen3 ladder and was pre-registered as a predictor; the full grid
+retires it (cross-family inversion: OLMo, the most robust family,
+has the lowest concentration; within-Gemma top-end violation).
+\paragraph{Matched-size panel ($\sim$30B).} At matched scale the
+family coefficient dominates: $\Delta\Lc{\text{math}}$ at $\dens=0.7$
+spans $+0.02$ (OLMo-3-32B), $+0.17$ (Muse-30B), $+0.68$ (Gemma4-31B),
+$+4.04$ (Gemma3-27B). OLMo-3-32B survives $70\%$ pruning with
+$\le+0.63$ nats on every capability. Family provenance (data
+recency, over-training exposure) is a first-order determinant of
+prunability, and ``which family should an agent scale down from?''
+is a measured quantity.
+
+\subsection{Re-analysis of the prior ability-space grid}
+\label{sec:reanalysis}
+
+A prior internal study fit compression laws directly on Rasch
+abilities from $\sim$100-item panels over a 774-cell Qwen3 grid and
+reported that no derived law had held-out predictive power. Our
+re-analysis attributes much of this to the measurement layer:
+(1) the $r{=}1$ falsification anchor was driven entirely by the
+answer-only recipe (stratified, the anchor holds and held-out error
+drops from $9.0\times$ to $1.8\times$ the noise floor); (2)
+same-benchmark evaluation inflated QA gains by roughly one third;
+(3) discrimination heterogeneity voids interval-scale ability while
+rankings survive ($\rho\ge0.98$); (4) item-level damage is smooth
+pre-cliff, ruling out discrete skill deletion at the item level.
+These findings fixed the protocol of \S\ref{sec:prelim}.
+

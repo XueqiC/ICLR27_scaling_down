@@ -1,21 +1,18 @@
 \section{Experiments}
 \label{sec:exp}
 
-The experiments build the argument in logical order: capabilities
-occupy distinct, causally implicated regions of the gradient space of
-the source model (\S\ref{sec:regions}); pruning damage follows a law whose
-coefficients are carried by that geometry (\S\ref{sec:curves}--%
-\S\ref{sec:law}); the signed first-order term predicts
-capability-selective effects in both directions across families
-(\S\ref{sec:mech}); the behavioral cliff, non-perturbative in loss,
-becomes a smooth threshold crossing in geometry
-(\S\ref{sec:orderparam}); the quantization, distillation, and recovery
-arms extend the same structure to the remaining deletion bases and to
-the framework's single addition operator
-(\S\ref{sec:quant}--\S\ref{sec:recovery}); and the family axis exposes
-which quantities are universal and which are family coefficients
-(\S\ref{sec:family}). A forensic re-analysis of a prior ability-space
-grid (\S\ref{sec:reanalysis}) motivated the measurement protocol.
+The experiments follow the prediction problem of \S\ref{sec:prelim}. We
+first describe the panel and protocol (\S\ref{sec:setup}), then the
+capability-conditioned responses of the heterogeneous panel under
+pruning (\S\ref{sec:curves}), quantization (\S\ref{sec:quant}), and
+distillation (\S\ref{sec:distill}), and then the controlled two-axis
+prediction tests that carry the main claims (\S\ref{sec:twoaxes}), ending
+with the limitations that remain (\S\ref{sec:planned}). Mechanism evidence
+(capability regions and selective ablation, the gradient-alignment law,
+the signed first-order term, the geometric cliff order parameter), the
+recovery arm, scale and family structure, and the re-analysis of the
+prior ability-space grid are supporting material and are given in full in
+Appendix~\ref{sec:app_support}.
 
 \subsection{Setup}
 \label{sec:setup}
@@ -37,67 +34,6 @@ general (C4) or teacher-trace data. \textbf{Geometry.} Estimated as in
 \S\ref{sec:geometry}; estimation and measurement probe halves are
 disjoint throughout, and a checkpoint-integrity guard aborts any run
 with missing or re-initialized weights.
-
-\subsection{Capabilities occupy distinct regions of gradient space}
-\label{sec:regions}
-
-\paragraph{Convergent validity (block structure).} For each of nine
-benchmarks we measure a gradient signature (the benchmark-conditional
-diagonal Fisher) and compare all pairs. After removing the component
-shared across benchmarks, signatures of same-capability benchmarks are
-positively aligned (cosine $+0.36$ to $+0.45$) while signatures of
-different capabilities are \emph{anti-aligned} ($-0.23$ to $-0.25$),
-in every one of seven models across three families
-(Fig.~\ref{fig:blocks}); the C4 control sits between blocks.
-\preliminary{point estimates; example-bootstrap, permutation, and
-prompt-stability tests are queued (B2)} The
-mathematics benchmarks cluster regardless of format, and within-block
-fine structure matches intuition (SVAMP, grade-school word problems,
-is the loosest member of the math block). A projected-gradient SVD
-version gives the same verdict in subspace terms: principal-angle
-similarity within capability exceeds cross-capability similarity by
-$2$--$4\times$.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.92\linewidth]{figs/v9_blocks_main.pdf}
-\caption{Capability regions in gradient space. Pairwise similarity of
-per-benchmark gradient signatures for four representative models, one
-per family plus a 30B model (rows), under the two decisive metrics
-(columns): the shared-component-removed log-Fisher cosine, in which
-same-capability benchmarks align and different capabilities
-anti-align, and the top-0.1\% coordinate Jaccard overlap. Black lines
-separate the math, code, QA, and control blocks. The full seven-model,
-four-metric grid is in Appendix~\ref{sec:appendix} (Fig.~\ref{fig:blocks_full}).}
-\label{fig:blocks}
-\end{figure}
-
-\paragraph{Selective ablation \preliminary{single model; random, magnitude-matched, and global-Fisher controls pending (B1)}.} A first targeted test:
-select the top $0.05\%$ of weight coordinates by each capability's
-\emph{residual} Fisher signature (excluding coordinates shared with
-other capabilities) and zero them. The damage matrix is nearly
-diagonal (Gemma-3-1B; rows ablate, columns measure, nats/token):
-
-\begin{center}
-\small
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-Ablated region & math & code & QA \\
-\midrule
-math & $\mathbf{+4.63}$ & $+0.43$ & $+0.05$ \\
-code & $+0.42$ & $\mathbf{+7.14}$ & $+0.00$ \\
-QA   & $+0.01$ & $+0.00$ & $\mathbf{+2.29}$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Zeroing $0.05\%$ of weights, selected from gradients alone, selectively
-removes one capability while leaving the others essentially untouched
-(the QA ablation moves code by $+0.0001$). Pending multi-model
-replication and the control ablations above, we describe the regions as
-causally implicated and partially separable rather than as proven
-causal carriers; if confirmed, ablation itself is a form of
-\emph{targeted} scaling-down.
 
 \subsection{Pruning damage curves}
 \label{sec:curves}
@@ -139,78 +75,6 @@ magnitudes and signs are family coefficients.}
 \label{tab:grid}
 \end{table}
 
-\subsection{The pruning law}
-\label{sec:law}
-
-The mechanism form of \S\ref{sec:laws} fits the entire pre-cliff grid.
-With the measured alignment term subtracted, the curvature residual
-follows a power law in the deleted capability mass $m_c(\dens)$:
-\begin{equation}
-\Delta\Lc{c}(\dens)\;=\;\underbrace{\gbar{c}^{\top}\dw_\dens}_{\text{measured}}
-\;+\;B\,\big[\underbrace{m_c(\dens)}_{\text{measured}}\big]^{\gamma},
-\label{eq:fitlaw}
-\end{equation}
-with in-sample $R^2 = 0.82$--$0.996$ over 24 capability$\times$model
-fits. The held-out battery (1000-resample cell bootstrap) is where the
-form proves itself: in \emph{leave-one-family-out} transfer the
-shared-$\gamma$ mechanism form attains MAE $2.17$ nats versus $10.3$
-for per-capability raw sparsity and $8.2$ for the direct-damage
-baseline (both CIs exclude zero), so the deleted-mass coordinate is what
-transfers across families; it also beats the direct-damage baseline in
-fit-shallow/predict-deep ($3.11$ vs.\ $4.24$) and raw sparsity in
-leave-largest-model-out ($1.41$ vs.\ $2.15$), while its edge over raw
-sparsity within-model does not reach significance
-(without the first-order term, QA is unfittable, $R^2\!\le\!0.67$;
-with it, QA joins the law). Two structural results:
-(i) in the deleted-mass coordinate the exponent concentrates at
-$\gamma\in[1.2,2.2]$ across all families, versus $3.2$--$8.7$ in the
-raw $(1-\dens)$ coordinate, which is what makes
-the form portable; and (ii) \emph{within a model, $\gamma$ is shared
-across capabilities} (e.g.\ Qwen3-0.6B: $1.41/1.56/1.43$;
-Gemma3-4B: $1.66/1.71$): capability differences are carried entirely
-by the two measured quantities, and the fitted structure is two
-parameters per model. Published (reduced) forms substitute the
-smooth dependence of the geometry itself on $(N_0,f)$, leaving only basic
-parameters in the interface.
-
-\subsection{The signed first-order term predicts, in both directions}
-\label{sec:mech}
-
-The alignment term $\gbar{c}^{\top}\dw$ is the decisive family
-coefficient. Its sign predicts the presence or absence of the
-capability-selective ``free lunch'' in every case measured:
-the QA term of Qwen3 is negative and QA improves under pruning (predicted
-$-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); the QA term of Gemma is
-positive and no improvement exists at any size; the term for OLMo-3-7B is
-positive (mild degradation, prediction $+0.015$ $=$ measurement at
-$\dens=0.8$, code) while the term for OLMo-3-32B is negative, and
-deep-pruning QA improvement duly appears. At the level of individual model$\times$capability$\times$density
-cells in the mild regime, sign prediction accuracy is $67.6\%$
-(Wilson 95\% CI $[58.3,75.7]$, $n{=}108$), above chance, with the
-family-level pattern (Qwen and OLMo-32B QA improvements, Gemma
-none, an OLMo size flip) called in advance. Beyond the mild regime, first- plus second-order
-predictions fail by orders of magnitude at the cliff in every family:
-the collapse is non-perturbative in loss space, confirming the
-two-regime structure of \eqref{eq:fitlaw}.
-
-\subsection{The cliff is a geometric threshold crossing}
-\label{sec:orderparam}
-
-Measuring the capability geometry \emph{of the pruned models}
-resolves the apparent unpredictability of the cliff. The
-capability-region mass retention (the fraction of the
-capability-exclusive top coordinates of the dense model still
-prominent after pruning) declines smoothly from the first densities
-(no cliff in geometry) while loss is still flat;
-the behavioral cliff occurs where retention crosses a critical value.
-The critical value is family-specific (Gemma: $0.035$--$0.10$ across
-1B/4B and all capabilities; Qwen: $0.13$--$0.23$) but consistent
-within a family across sizes and capabilities: the cliff boundary
-$\dens_c^{*}(N_0,f)$ reduces to one critical-retention constant per
-family, turning the least elegant fitted parameter of the two-regime
-law into a measurable, smoothly evolving order parameter.
-\preliminary{three models, two families; multi-model extension queued}
-
 \subsection{Quantization arm}
 \label{sec:quant}
 
@@ -227,83 +91,22 @@ the mildest-perturbation noise screen ($29$ of $62$ nominal
 improvement cells across all arms survive that screen; the rest are
 within noise and not claimed).
 
-\subsection{Distillation arm (in progress)}
+\subsection{Distillation arm}
 \label{sec:distill}
 
-Black-box traces from two frontier teachers (GPT-5.6-luna,
-Claude-Sonnet-4-6; 600 per domain each; single-teacher runs, paired
-design) train Gemma-3 students under coverage recipes. Early paired
+Black-box traces from two frontier teachers (GPT-5.6-luna and
+Claude-Sonnet-4-6; 600 per domain each; single-teacher runs in a paired
+design) train Gemma-3 students under coverage recipes. The paired
 results are directionally consistent with the pre-registered
 coverage-deletion prediction: the answer-only recipe hurts math more
 than full-trace training ($+0.19$ to $+0.22$ vs.\ $+0.09$ to
 $+0.12$), while QA improves in every configuration ($-0.58$ to
-$-1.44$). \preliminary{token-matched and update-matched controls are
-required before attributing the gap to reasoning-coverage loss; the
-full capacity$\times$teacher$\times$coverage$\times\Ds$ grid with
-those controls is running}
-
-\subsection{Recovery arm: redeemable damage and the asymptotic residual}
-\label{sec:recovery}
-
-Recovery training on general text fits the recovery law cleanly
-(Gemma3-270M pruned to $\dens=0.6$; $R^2\approx1.0$):
-$\beta'_{\text{math}}=1.23$, $\beta'_{\text{code}}=1.02$, with
-\emph{asymptotic residuals under the fixed LoRA recipe},
-$\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$, of $1.21$ (math) and $1.93$
-(code) nats; about $80\%$ of this pruning damage is redeemed within
-8M tokens and the remainder persists under this recipe, while QA
-recovers completely. \preliminary{one model, one density, one recipe; with three-point
-ladders the largest-budget extrapolation of the saturating form beats a
-carry-forward baseline in only 4 of 9 fits, so the ladder is too sparse
-to claim extrapolation, and the denser multi-model grid (B7) is
-queued} Two mechanism results:
-recovery on \emph{aligned} data (teacher traces) heals substantially
-faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
-as the gradient-overlap prediction requires, but over-training on
-narrow aligned data \emph{re-damages} the model (QA $4.95\to9.75$
-from $0.5$M to $8$M tokens), while general-text recovery is monotone.
-Aligned recovery is fast but risky; general recovery is slow but safe;
-the optimal recovery budget is finite for narrow data. Quantization damage past the bit cliff is markedly less redeemable
-under the same recipe (residuals $\approx2.6$--$2.8$ after int3) than
-pruning damage at matched severity.
-
-\subsection{Scale and family structure}
-\label{sec:family}
-
-\paragraph{Within-family robustness is non-monotonic in two families
-independently.} Gemma-3 robustness peaks at 12B (27B collapses far
-earlier, $+4.0$ vs.\ $+0.68$ at $\dens=0.7$), mirroring the prior
-ability-space observation of a Qwen3 14B peak. A mid-scale robustness
-peak is a reproducible pattern of scaling-down.
-\paragraph{A candidate predictor, honestly retired.} The
-top-concentration statistic $\kappa_c$ tracked robustness within the
-Qwen3 ladder and was pre-registered as a predictor; the full grid
-retires it (cross-family inversion: OLMo, the most robust family,
-has the lowest concentration; within-Gemma top-end violation).
-\paragraph{Matched-size panel ($\sim$30B).} At matched scale the
-family coefficient dominates: $\Delta\Lc{\text{math}}$ at $\dens=0.7$
-spans $+0.02$ (OLMo-3-32B), $+0.17$ (Muse-30B), $+0.68$ (Gemma4-31B),
-$+4.04$ (Gemma3-27B). OLMo-3-32B survives $70\%$ pruning with
-$\le+0.63$ nats on every capability. Family provenance (data
-recency, over-training exposure) is a first-order determinant of
-prunability, and ``which family should an agent scale down from?''
-is a measured quantity.
-
-\subsection{Re-analysis of the prior ability-space grid}
-\label{sec:reanalysis}
-
-A prior internal study fit compression laws directly on Rasch
-abilities from $\sim$100-item panels over a 774-cell Qwen3 grid and
-reported that no derived law had held-out predictive power. Our
-re-analysis attributes much of this to the measurement layer:
-(1) the $r{=}1$ falsification anchor was driven entirely by the
-answer-only recipe (stratified, the anchor holds and held-out error
-drops from $9.0\times$ to $1.8\times$ the noise floor); (2)
-same-benchmark evaluation inflated QA gains by roughly one third;
-(3) discrimination heterogeneity voids interval-scale ability while
-rankings survive ($\rho\ge0.98$); (4) item-level damage is smooth
-pre-cliff, ruling out discrete skill deletion at the item level.
-These findings fixed the protocol of \S\ref{sec:prelim}.
+$-1.44$). We do not attribute that gap to reasoning-coverage loss on
+this evidence alone, because the recipes differ in supervised tokens
+and update counts; the controlled comparisons that hold those
+quantities fixed are the reuse-count and pool experiments of
+\S\ref{sec:twoaxes}, where the response is modeled as a signed
+transfer relative to the student's own dense loss.
 
 \subsection{Controlled prediction on two axes}
 \label{sec:twoaxes}
