@@ -138,7 +138,7 @@ different capabilities are \emph{anti-aligned} ($-0.23$ to $-0.25$),
 in every one of seven models across three families
 (Figs.~\ref{fig:blocks}--\ref{fig:blocks_olmo3_7b}); the C4 control sits between blocks.
 \preliminary{point estimates; example-bootstrap, permutation, and
-prompt-stability tests are queued (B2)} The
+prompt-stability tests are left to future work} The
 mathematics benchmarks cluster regardless of format, and within-block
 fine structure matches intuition (SVAMP, grade-school word problems,
 is the loosest member of the math block). A projected-gradient SVD
@@ -148,7 +148,7 @@ $2$--$4\times$.
 
 \input{figs/appendix_blocks}
 
-\paragraph{Selective ablation \preliminary{single model; random, magnitude-matched, and global-Fisher controls pending (B1)}.} A first targeted test:
+\paragraph{Selective ablation (preliminary evidence: single model; random, magnitude-matched, and global-Fisher controls are left to future work).} A first targeted test:
 select the top $0.05\%$ of weight coordinates by each capability's
 \emph{residual} Fisher signature (excluding coordinates shared with
 other capabilities) and zero them. The damage matrix is nearly
@@ -245,7 +245,7 @@ within a family across sizes and capabilities: the cliff boundary
 $\dens_c^{*}(N_0,f)$ reduces to one critical-retention constant per
 family, turning the least elegant fitted parameter of the two-regime
 law into a measurable, smoothly evolving order parameter.
-\preliminary{three models, two families; multi-model extension queued}
+\preliminary{three models, two families; a multi-model extension is left to future work}
 
 \subsection{Recovery arm: redeemable damage and the asymptotic residual}
 \label{sec:recovery}
@@ -260,8 +260,7 @@ $\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$, of $1.21$ (math) and $1.93$
 recovers completely. \preliminary{one model, one density, one recipe; with three-point
 ladders the largest-budget extrapolation of the saturating form beats a
 carry-forward baseline in only 4 of 9 fits, so the ladder is too sparse
-to claim extrapolation, and the denser multi-model grid (B7) is
-queued} Two mechanism results:
+to claim extrapolation, and a denser multi-model grid is left to future work} Two mechanism results:
 recovery on \emph{aligned} data (teacher traces) heals substantially
 faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
 as the gradient-overlap prediction requires, but over-training on
