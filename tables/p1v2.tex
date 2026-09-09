@@ -1,0 +1,31 @@
+\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lllrrrrrrl@{}}
+\toprule
+Source & Prot. & Regime & power & A2 & A1 & cont & str.-only & zero & best \\
+\midrule
+1b@32000 & A & prune interp d0.9-0.6 & 0.254 & 0.261 & 0.393 & 0.275 & 0.363 & 0.412 & median-curve \\
+1b@32000 & A & prune extrap d0.55 & 2.272 & 2.130 & 2.394 & 2.221 & 0.637 & 2.434 & strength-only \\
+1b@32000 & B & prune interp d0.9-0.6 & 0.249 & 0.218 & 0.321 & 0.239 & 0.236 & 0.412 & A2 \\
+1b@32000 & B & prune extrap d0.55 & 1.772 & 1.777 & 2.151 & 1.863 & 1.531 & 2.434 & strength-only \\
+1b@112000 & A & prune interp d0.9-0.6 & 0.191 & 0.112 & 0.300 & 0.175 & 0.365 & 0.400 & A2 \\
+1b@112000 & A & prune extrap d0.55 & 1.398 & 1.235 & 1.838 & 1.356 & 0.311 & 2.237 & strength-only \\
+1b@112000 & B & prune interp d0.9-0.6 & 0.223 & 0.177 & 0.355 & 0.235 & 0.219 & 0.400 & A2 \\
+1b@112000 & B & prune extrap d0.55 & 0.957 & 0.995 & 1.685 & 1.127 & 1.333 & 2.237 & power \\
+\midrule
+Source & Prot. & Regime & full & no-D0 & mean & median & zero & & best \\
+\midrule
+1b@32000 & A & quant $\ge$4-bit & 0.103 & 0.174 & 0.197 & 0.031 & 0.046 & & per-bit-median \\
+1b@32000 & A & quant int3 & 1.050 & 2.648 & 2.903 & 1.438 & 3.108 & & full \\
+1b@32000 & A & quant int5 (interp-rule) & 0.179 & 0.272 & 0.254 & 0.044 & 0.017 & & zero \\
+1b@32000 & B & quant $\ge$4-bit & 0.028 & 0.032 & 0.027 & 0.026 & 0.046 & & per-bit-median \\
+1b@32000 & B & quant int3 & 0.606 & 1.004 & 0.627 & 0.803 & 3.108 & & full \\
+1b@32000 & B & quant int5 (interp-rule) & 0.025 & 0.013 & 0.035 & 0.034 & 0.017 & & noD0 \\
+1b@112000 & A & quant $\ge$4-bit & 0.071 & 0.111 & 0.183 & 0.036 & 0.063 & & per-bit-median \\
+1b@112000 & A & quant int3 & 0.676 & 3.805 & 0.802 & 1.231 & 5.777 & & full \\
+1b@112000 & A & quant int5 (interp-rule) & 0.151 & 0.138 & 0.251 & 0.035 & 0.025 & & zero \\
+1b@112000 & B & quant $\ge$4-bit & 0.038 & 0.042 & 0.038 & 0.039 & 0.063 & & per-bit-mean \\
+1b@112000 & B & quant int3 & 1.120 & 1.981 & 3.106 & 3.472 & 5.777 & & full \\
+1b@112000 & B & quant int5 (interp-rule) & 0.046 & 0.019 & 0.027 & 0.025 & 0.025 & & noD0 \\
+\bottomrule\end{tabular}
+\caption{P1-v2 new-source frozen prospectives (MAE over three capabilities, nats/token). Protocol A fits on the full nine-state development panel; protocol B on step$\le$64k only, so its 112k rows are training-stage extrapolations. The 1B source is an in-range size. Predictions were committed before measurement; per-capability and per-point values are in the results ledger.}
+\label{tab:p1v2}\end{table}

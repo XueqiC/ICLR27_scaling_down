@@ -1,0 +1,21 @@
+best,protocol,regime,size,source,stage,A1,A2,best_same_input_alt,cont,full,full_minus_bestbase,median_curve,noD0,per_bit_mean,per_bit_median,power,power_minus_bestalt,strength_only,strength_only_vs_best,zero
+median_curve,A,prune interp d0.9-0.6,size in-range,pythia-1b@step32000,stage interp,0.3934,0.2613,A2,0.2754,,,0.2038,,,,0.2542,-0.0071,0.3628,0.159,0.4124
+strength_only,A,prune extrap d0.55,size in-range,pythia-1b@step32000,stage interp,2.3943,2.13,A2,2.2213,,,1.5087,,,,2.2717,0.1417,0.6368,0.0,2.4345
+per_bit_median,A,quant >=4-bit,size in-range,pythia-1b@step32000,stage interp,,,,,0.1033,0.0724,,0.1742,0.1967,0.0309,,,,,0.0459
+full,A,quant int3,size in-range,pythia-1b@step32000,stage interp,,,,,1.05,-0.3876,,2.6483,2.9032,1.4376,,,,,3.1081
+zero,A,quant int5 (interp-rule),size in-range,pythia-1b@step32000,stage interp,,,,,0.1786,0.1621,,0.2723,0.2537,0.0438,,,,,0.0166
+A2,B,prune interp d0.9-0.6,size in-range,pythia-1b@step32000,stage interp,0.3214,0.218,A2,0.2393,,,0.224,,,,0.2488,0.0308,0.2358,0.0178,0.4124
+strength_only,B,prune extrap d0.55,size in-range,pythia-1b@step32000,stage interp,2.1505,1.7774,A2,1.8631,,,1.6446,,,,1.7724,-0.005,1.5311,0.0,2.4345
+per_bit_median,B,quant >=4-bit,size in-range,pythia-1b@step32000,stage interp,,,,,0.0278,0.0017,,0.0318,0.0269,0.026,,,,,0.0459
+full,B,quant int3,size in-range,pythia-1b@step32000,stage interp,,,,,0.6056,-0.0214,,1.0035,0.627,0.8034,,,,,3.1081
+noD0,B,quant int5 (interp-rule),size in-range,pythia-1b@step32000,stage interp,,,,,0.0247,0.0114,,0.0133,0.0353,0.0338,,,,,0.0166
+A2,A,prune interp d0.9-0.6,size in-range,pythia-1b@step112000,stage interp,0.3005,0.1122,A2,0.1746,,,0.1727,,,,0.1908,0.0786,0.3655,0.2532,0.4004
+strength_only,A,prune extrap d0.55,size in-range,pythia-1b@step112000,stage interp,1.8383,1.2354,A2,1.3561,,,1.3109,,,,1.3976,0.1621,0.3106,0.0,2.2367
+per_bit_median,A,quant >=4-bit,size in-range,pythia-1b@step112000,stage interp,,,,,0.0714,0.035,,0.1107,0.183,0.0363,,,,,0.0632
+full,A,quant int3,size in-range,pythia-1b@step112000,stage interp,,,,,0.6765,-0.1252,,3.8051,0.8017,1.2312,,,,,5.777
+zero,A,quant int5 (interp-rule),size in-range,pythia-1b@step112000,stage interp,,,,,0.1513,0.1263,,0.1378,0.2512,0.0354,,,,,0.025
+A2,B,prune interp d0.9-0.6,size in-range,pythia-1b@step112000,stage EXTRAPOLATION (fit on <=64k),0.3546,0.1767,A2,0.2346,,,0.1951,,,,0.223,0.0463,0.2188,0.0421,0.4004
+power,B,prune extrap d0.55,size in-range,pythia-1b@step112000,stage EXTRAPOLATION (fit on <=64k),1.6852,0.9951,A2,1.1269,,,1.4468,,,,0.9565,-0.0386,1.3333,0.3767,2.2367
+per_bit_mean,B,quant >=4-bit,size in-range,pythia-1b@step112000,stage EXTRAPOLATION (fit on <=64k),,,,,0.0384,0.0002,,0.042,0.0382,0.0387,,,,,0.0632
+full,B,quant int3,size in-range,pythia-1b@step112000,stage EXTRAPOLATION (fit on <=64k),,,,,1.1202,-0.8607,,1.9809,3.1057,3.4723,,,,,5.777
+noD0,B,quant int5 (interp-rule),size in-range,pythia-1b@step112000,stage EXTRAPOLATION (fit on <=64k),,,,,0.0461,0.0275,,0.0186,0.0269,0.0254,,,,,0.025

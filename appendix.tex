@@ -293,6 +293,41 @@ recency, over-training exposure) is a first-order determinant of
 prunability, and the question of which family an agent should scale down from
 is a measured quantity.
 
+\subsection{New-source prospectives, second round}
+\label{sec:app_p1v2}
+
+The second frozen round (Table~\ref{tab:p1v2}) added seven pruning
+densities (0.9, 0.8, 0.75, 0.7, 0.65 and 0.6 as interpolation, 0.55 as
+extrapolation) and five bit-widths (8, 6, 5, 4, 3) on Pythia-1B at
+steps 32k and 112k. Two fitting protocols were frozen at the same time.
+Protocol A fits each candidate on the full nine-state development
+panel. Protocol B fits on development states at step 64k or below, so
+that its 112k rows test a training-stage extrapolation on top of the
+size change. The 5-bit prediction of the class-indicator candidate is a
+fixed rule, the average of its committed 4- and 6-bit predictions,
+chosen so that no 5-bit measurement enters any fit. Candidate names
+follow \S\ref{sec:twoaxes}: power is the shared power form, A2 the
+per-density source regression with a fixed interpolation rule, A1 its
+$\gamma=1$ variant, cont a continuous two-term polynomial in $1-d$, and
+the three source-free baselines are strength-only, the median
+development curve, and zero change. For quantization, full uses
+$\{N_0, L_0, D_0\}$, no-D0 drops the training-stage term, and mean and
+median are per-bit constants from the development panel.
+
+Per capability, at 112k under protocol A the source regression reaches
+MAE 0.111 (math), 0.091 (code) and 0.135 (QA); the strongest
+source-free alternative is strength-only for math (0.117) and the
+median curve for code (0.107) and QA (0.261). At 32k the QA error of
+the source regression rises to 0.339 while the median curve stays at
+0.193, which accounts for most of the aggregate gap. Under protocol B at
+112k the power and A2 forms are ahead of strength-only at $d=0.55$
+(0.96 and 1.00 against 1.33), but with errors near one nat the ordering
+carries little practical value. The pair cost 22 A100 minutes. The
+6.9B pair, a size extrapolation of about five times, is measured under
+the same freeze.
+
+\input{tables/p1v2}
+
 \subsection{Re-analysis of the prior ability-space grid}
 \label{sec:reanalysis}
 

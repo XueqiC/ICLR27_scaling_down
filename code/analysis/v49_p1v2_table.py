@@ -9,7 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]; OUT = ROOT / "results/v49-p1v2"
 GE = "$\\ge$"; BS = "\\\\"
 PC = ("power", "A2", "A1", "cont", "strength_only", "median_curve", "zero"); QC = ("full", "noD0", "per_bit_mean", "per_bit_median", "zero")
 rows = []
-for f in sorted(glob.glob(str(OUT / "compare_*.json"))):
+def _key(f):
+    t = Path(f).stem.replace("compare_", ""); return ("6.9b" in t, int(t.split("step")[1]))
+for f in sorted(glob.glob(str(OUT / "compare_*.json")), key=_key):
     c = json.loads(Path(f).read_text()); tag = c["tag"]; size = "6.9b" if "6.9b" in tag else "1b"; step = int(tag.split("step")[1])
     size_lab = "size extrapolation (~5x)" if size == "6.9b" else "size in-range"
     for P, res in c["protocols"].items():
@@ -40,6 +42,12 @@ if rows:
         if r["regime"].startswith("quant"):
             src = r['source'].replace('pythia-','').replace('@step','@'); reg = r['regime'].replace('>=', GE); best = r['best'].replace('_','-')
             L.append(f"{src} & {r['protocol']} & {reg} & {r['full']:.3f} & {r['noD0']:.3f} & {r['per_bit_mean']:.3f} & {r['per_bit_median']:.3f} & {r['zero']:.3f} & & {best} " + BS)
-    L += [r"\bottomrule\end{tabular}", r"\caption{P1-v2 new-source frozen prospectives (MAE over three capabilities, nats/token). Protocol A fits on the full 9-state panel; protocol B on step$\le$64k only, so its 112k rows are training-stage extrapolations. 1B sources are in-range sizes, 6.9B is a $\sim$5$\times$ size extrapolation. Predictions were committed before measurement; per-capability and per-point values are in the P1V2 docs.}", r"\label{tab:p1v2}\end{table}"]
+    size_note = ("1B sources are in-range sizes and 6.9B is a $\\sim$5$\\times$ size extrapolation. "
+                 if any("6.9b" in r["source"] for r in rows) else "The 1B source is an in-range size. ")
+    cap = ("\\caption{P1-v2 new-source frozen prospectives (MAE over three capabilities, nats/token). Protocol A fits on the "
+           "full nine-state development panel; protocol B on step$\\le$64k only, so its 112k rows are training-stage "
+           "extrapolations. " + size_note + "Predictions were committed before measurement; per-capability and per-point "
+           "values are in the results ledger.}")
+    L += [r"\bottomrule\end{tabular}", cap, r"\label{tab:p1v2}\end{table}"]
     (ROOT / "paper/tables/p1v2.tex").write_text("\n".join(L) + "\n")
 print(f"{len(rows)} rows from {len(glob.glob(str(OUT/'compare_*.json')))} sources -> p1v2_table.{{json,csv}} + paper/tables/p1v2.tex")

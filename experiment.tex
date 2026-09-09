@@ -223,6 +223,27 @@ without $D_0$ and 0.111 for the per-bit median; int3 0.397 against
 source-state: it confirms or refutes transfer for that state only and
 supports no population claim.
 
+\paragraph{Second round: two training stages of one new source.}
+A second frozen round measured the same 1B size at steps 32k and 112k
+on seven densities and five bit-widths, with predictions committed
+before measurement (Table~\ref{tab:p1v2}, Appendix~\ref{sec:app_p1v2}).
+At the late stage the per-density source regression is the best pruning
+predictor in the interpolation regime under both fitting protocols (MAE
+0.112 against 0.173 for the source-free median curve and 0.365 for
+strength-only when the full panel is used for fitting), and it leads on
+each capability separately. At the early stage its advantage is not
+robust. The median curve is better when the full panel is used (0.204
+against 0.261), mostly because of QA, and the source regression leads
+only narrowly when fitting is restricted to steps at or below 64k.
+Extrapolation to $d=0.55$ fails again for the source-conditioned
+family, with strength-only closest under the full-panel protocol. For
+quantization the full-input predictor pays off at 3 bits only (0.68 and
+1.05 against 1.2 to 3.5 for the per-bit median); from 4 bits upward the
+per-bit median is as good or better, and the 5-bit interpolation rule is
+worse than the median. We read this as stage-dependent transfer: the
+source signal appears informative once the source is well trained, and
+the early-stage QA response is the part the current form misses.
+
 \paragraph{Distillation: source and pool axes.}
 With the reference fixed to the initial student,
 $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$, a controlled LoRA panel (the
