@@ -322,9 +322,24 @@ the source regression rises to 0.339 while the median curve stays at
 0.193, which accounts for most of the aggregate gap. Under protocol B at
 112k the power and A2 forms are ahead of strength-only at $d=0.55$
 (0.96 and 1.00 against 1.33), but with errors near one nat the ordering
-carries little practical value. The pair cost 22 A100 minutes. The
-6.9B pair, a size extrapolation of about five times, is measured under
-the same freeze.
+carries little practical value. The pair cost 22 A100 minutes.
+
+The 6.9B pair, a size extrapolation of about five times, was measured
+under the same freeze (36 A100 minutes, reference model on CPU). Its
+dense anchors are math 1.27, code 1.30 and QA 5.11 at 32k, and 1.11,
+1.21 and 5.09 at 112k. Per capability under protocol A at 112k, the
+source regression reaches 0.23 (math), 0.19 (code) and 0.96 (QA)
+against 0.05, 0.07 and 0.15 for the median curve. Under protocol B the
+source forms lead on code only (A2 0.058 and 0.083 at the two stages
+against 0.208 and 0.074 for the median curve) and trail on QA (0.32 and
+0.20 against 0.08 and 0.15). At $d=0.55$ the source-free curves win
+under both protocols, with source-conditioned errors between 0.55 and
+2.2 nats. For quantization under protocol A the class-indicator
+candidate is worst or near worst above 3 bits (0.25 and 0.27 against
+0.03 and 0.04 for the per-bit median) and overshoots by about four nats
+at 3 bits. Protocol B compresses the differences above 3 bits to the
+0.02 to 0.05 range and leaves the candidate ahead at 3 bits only for the
+late stage (1.29 against 3.8 to 4.1).
 
 \input{tables/p1v2}
 

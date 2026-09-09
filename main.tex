@@ -111,9 +111,10 @@ and distillation, testing source-state transfer and unseen-configuration
 prediction separately, with the per-capability conditional loss vector
 as the common prediction endpoint. On a controlled panel, a
 source-conditioned pruning predictor predicts unseen compression
-densities with far lower error than strength-only baselines. A
-same-input comparison, however, shows no additional advantage for a
-shared power form. The predictive gain of the quantization candidate depends on the
+densities with far lower error than strength-only baselines, and the
+advantage carries to a new source of in-range size; at a source five
+times larger it loses to a source-free median curve. A same-input
+comparison shows no additional advantage for a shared power form. The predictive gain of the quantization candidate depends on the
 precision regime, and damage-magnitude transfer under aggressive
 quantization remains unstable. For distillation, the reuse-count coordinate improves QA-loss
 prediction on an unseen data pool; for math and code it does no better

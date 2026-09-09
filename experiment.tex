@@ -244,6 +244,27 @@ worse than the median. We read this as stage-dependent transfer: the
 source signal appears informative once the source is well trained, and
 the early-stage QA response is the part the current form misses.
 
+\paragraph{Size extrapolation to 6.9B.}
+The same freeze covered Pythia-6.9B at steps 32k and 112k, about five
+times the largest development size. Here the source-conditioned family
+fails. With the full panel used for fitting, the per-density regression
+has interpolation MAE 0.48 and 0.46 at the two stages, against 0.17 and
+0.09 for the source-free median curve and 0.16 and 0.29 for zero change
+(Table~\ref{tab:p1v2}). Most of the error is QA: the regression extends
+the panel's size trend into QA improvements of one to three nats,
+whereas the measured response stays below 0.65 nats and turns into a
+1.45 nat loss at $d=0.55$ for the late stage. Math and code damage is
+over-predicted by about a factor of two at mid densities, so the larger
+source is more robust per density than the trend below 1.4B suggests.
+Restricting the fit to early development stages brings the regression
+to 0.17 and 0.11, on par with strength-only and still behind the median
+curve. The quantization class-indicator candidate does not transfer
+either. From 4 bits upward the per-bit median is better by a factor of
+six or more, and at 3 bits the candidate overshoots by about four nats.
+Taken together with the 1B pair, the current source-conditioned
+predictors transfer within roughly the development size range and the
+interpolation density range, and not beyond either.
+
 \paragraph{Distillation: source and pool axes.}
 With the reference fixed to the initial student,
 $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$, a controlled LoRA panel (the
