@@ -68,5 +68,6 @@ references; no accuracy, no teacher calls); same-capability primary/secondary lo
 - [x] Verification: GPU identity/health, repo HEAD, P1 target provenance, pool inventory, protocol constants.
 - [x] P0 contrast table (P0_RELATED_CONTRAST.md).
 - [x] P1 dense L0 measured; predictions frozen + committed (b1bf631); compressed measurement queued.
-- [ ] P2-A six dev runs; [ ] P2 freeze + U375 predictions; [ ] P2-B three test runs; [ ] P3 decision.
-- GPU-hours used: (updated per package below).
+- [x] P1 measured + compared (P1_NEWSOURCE.md, commit bfa520d): interp d=0.65 success; extrap d=0.55 failure; quant full wins int4/int3.
+- [ ] P2-A six dev runs (running); [ ] P2 freeze + U375 predictions; [ ] P2-B three test runs (queued, sentinel-gated); [ ] P3 decision.
+- GPU-hours used: probe ≈0.1 h; P1 ≈0.02 h; running total ≈0.12 h of 24.
