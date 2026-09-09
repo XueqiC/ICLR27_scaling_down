@@ -86,6 +86,26 @@ def rows():
                 status="P-NEW (v46, frozen b1bf631)", ci="one source-state; 3 caps"))
     except FileNotFoundError:
         pass
+    # --- P1-v2 (A100 round v2): 1B (in-range size) and 6.9B (~5x size extrapolation) at steps 32k+112k, protocol A,
+    #     predictions frozen before measurement (v49; cd9ed8f for 1B, 950312f for 6.9B). Per-stage values: tables/p1v2.tex.
+    import glob as _glob
+    for size, lab in (("1b", "NEW size 1B (in-range), 32k+112k"), ("6.9b", "NEW size 6.9B (5$\\times$ extrap.), 32k+112k")):
+        files = sorted(_glob.glob(str(R / f"v49-p1v2/compare_pythia-{size}@step*.json")))
+        if len(files) != 2:
+            continue
+        S = [json.loads(Path(f).read_text())["protocols"]["A"]["summary"] for f in files]
+        mp = lambda reg, k: sum(x["prune"][reg][k] for x in S) / len(S)
+        for reg, ie, tl in (("interp_0.9-0.6", "interp", "$d$ 0.9--0.6"), ("extrap_0.55", "extrap", "$d$=0.55")):
+            others = ("power", "cont", "strength_only", "median_curve", "zero"); strongest = min(others, key=lambda k: mp(reg, k))
+            out.append(dict(method="pruning", capability="all", test=f"{lab}, {tl}", candidate="A2: per-$d$ source regr.\\ + fixed interp (frozen v49)",
+                inputs="K0", split="source+strength", ie=ie, cand_mae=mp(reg, "A2"), base_name=f"strongest: {strongest}",
+                base_mae=mp(reg, strongest), status="P-NEW (v49, frozen)", ci="mean of 2 stages; 3 caps; protocol A"))
+        mq = lambda key, k: sum((x["quant_ge4"] if key == "ge4" else x["quant"]["int3"])[k] for x in S) / len(S)
+        for key, tl in (("ge4", "$\\ge$4-bit"), ("int3", "int3")):
+            others = ("noD0", "per_bit_mean", "per_bit_median", "zero"); strongest = min(others, key=lambda k: mq(key, k))
+            out.append(dict(method="quantization", capability="all", test=f"{lab}, {tl}", candidate="config-indicator OLS {N0,L0,D0}",
+                inputs="K0", split="source", ie="interp", cand_mae=mq(key, "full"), base_name=f"strongest: {strongest}",
+                base_mae=mq(key, strongest), status="P-NEW (v49, frozen)", ci="mean of 2 stages; 3 caps; protocol A"))
     # LaTeX-ready candidate forms (math mode); plain 'candidate' stays for CSV/JSON
     tex_form = {
         "config-indicator OLS {N0,L0,D0} (16 coeffs/arm-cap)": r"config-indicator OLS $\{N_0,L_0,D_0\}$ (16 coeffs)",
@@ -120,8 +140,8 @@ def main():
     with (OUT_DIR / "main_table.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rs[0].keys())); w.writeheader(); w.writerows(rs)
     TEX.parent.mkdir(parents=True, exist_ok=True)
-    L = [r"\begin{table}[t]", r"\centering", r"\scriptsize", r"\setlength{\tabcolsep}{1.5pt}",
-         r"\begin{tabular}{@{}llp{3.2cm}lrp{2.0cm}rrl@{}}", r"\toprule",
+    L = [r"\begin{sidewaystable}[p]", r"\centering", r"\small", r"\setlength{\tabcolsep}{3pt}",
+         r"\begin{tabular}{@{}llp{4.6cm}lrp{3.2cm}rrl@{}}", r"\toprule",
          r"Method & Cap. & Test & Split & Cand. & Strongest same-budget baseline & Base. & Impr. & St. \\",
          r"\midrule"]
     prev = None
@@ -133,7 +153,7 @@ def main():
                "per_bit_median": "per-bit median", "full_N0_L0_D0": "full", "config_median": "median", "mean_base": "mean", "med_base": "median"}
         dn = lambda t: __import__("functools").reduce(lambda acc, kv: acc.replace(kv[0], kv[1]), _DN.items(), str(t)).replace("_", r"\_")
         esc = lambda s: str(s).replace("_", r"\_").replace("&", r"\&").replace(">=", r"$\ge$").replace("^", r"\^{}")
-        st = "P-new" if r["status"].startswith("P-NEW") else "P/R" if r["status"].startswith("P (4") else ("P" if r["status"].startswith("FROZEN") else ("L" if r["status"].startswith("LOO") else "R"))
+        st = ("P-new" if r["improvement"] > 0 else "R") if r["status"].startswith("P-NEW") else "P/R" if r["status"].startswith("P (4") else ("P" if r["status"].startswith("FROZEN") else ("L" if r["status"].startswith("LOO") else "R"))
         ab = {"pruning": "prune", "quantization": "quant", "distillation": "distill"}
         L.append(f"{ab[r['method']]} & {r['capability']} & {r['test']} & "
                  f"{esc(r['split'])}/{esc(r['ie']).replace('interp(0.65)+extrap(0.55)','int.+ext.').replace('interp (E in range)','interp')} & {r['cand_mae']:.3f} & {dn(r['base_name'])} & {r['base_mae']:.3f} & "
@@ -146,7 +166,7 @@ def main():
           r"Every number is generated from \texttt{results/v*/summary.json} by \texttt{analysis/v45\_main\_table.py}; "
           r"per-source, per-density, and per-pool breakdowns are in the corresponding docs. Point estimates; the "
           r"controlled panels have three size/step/pool clusters, so intervals are panel-conditional (see text).}",
-          r"\label{tab:main}", r"\end{table}"]
+          r"\label{tab:main}", r"\end{sidewaystable}"]
     TEX.write_text("\n".join(L) + "\n")
     print(f"{len(rs)} rows -> {OUT_DIR}/main_table.{{json,csv}} and {TEX}")
     for r in rs:
