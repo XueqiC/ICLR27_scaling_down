@@ -1,0 +1,127 @@
+{
+  "target": {
+    "size": "1b",
+    "step": 96000,
+    "N0": 805306368,
+    "D0": 201326592000,
+    "dense": {
+      "math": 1.35337736296765,
+      "code": 1.3192298550035655,
+      "qa": 5.005198431558935
+    }
+  },
+  "pruning": {
+    "math|0.65": {
+      "power": 0.74007438254678,
+      "A2": 0.7803915729188372,
+      "A1_gamma1": 0.7112560901675014,
+      "strength_only": 0.9427075365722141,
+      "median_curve": 0.5733527035894702,
+      "zero": 0.0
+    },
+    "math|0.55": {
+      "power": 1.7612612939779848,
+      "A2": 1.6404296202768438,
+      "A1_gamma1": 0.9144721159296445,
+      "strength_only": 2.419183097362524,
+      "median_curve": 1.5667501408790143,
+      "zero": 0.0
+    },
+    "code|0.65": {
+      "power": 0.5747000216818036,
+      "A2": 0.5599342781458698,
+      "A1_gamma1": 0.5131817989255066,
+      "strength_only": 1.1304235844412358,
+      "median_curve": 0.5584817087559009,
+      "zero": 0.0
+    },
+    "code|0.55": {
+      "power": 1.191132775197607,
+      "A2": 1.3831143183265908,
+      "A1_gamma1": 0.65980517004708,
+      "strength_only": 2.75869746777701,
+      "median_curve": 1.5261134906903226,
+      "zero": 0.0
+    },
+    "qa|0.65": {
+      "power": -0.3040840625723123,
+      "A2": -0.39025157849771785,
+      "A1_gamma1": -0.3626174859195997,
+      "strength_only": 0.4702941230495715,
+      "median_curve": -0.2012086805274651,
+      "zero": 0.0
+    },
+    "qa|0.55": {
+      "power": -0.6711177687628751,
+      "A2": -0.25333761031067303,
+      "A1_gamma1": -0.4662224818966281,
+      "strength_only": 1.2851310876002657,
+      "median_curve": -0.3163055105202051,
+      "zero": 0.0
+    }
+  },
+  "quantization": {
+    "math|4": {
+      "full_N0_L0_D0": 0.3142425615397393,
+      "noD0_N0_L0": 0.014521126678550211,
+      "per_bit_median": 0.1303883571937039,
+      "zero": 0.0
+    },
+    "math|3": {
+      "full_N0_L0_D0": 5.96644618161355,
+      "noD0_N0_L0": 2.9518603299190103,
+      "per_bit_median": 3.861820770386775,
+      "zero": 0.0
+    },
+    "code|4": {
+      "full_N0_L0_D0": 0.129912637006794,
+      "noD0_N0_L0": -0.21787513270361053,
+      "per_bit_median": 0.16407178512003817,
+      "zero": 0.0
+    },
+    "code|3": {
+      "full_N0_L0_D0": 5.545081010752125,
+      "noD0_N0_L0": 2.441054860483513,
+      "per_bit_median": 5.864154979795579,
+      "zero": 0.0
+    },
+    "qa|4": {
+      "full_N0_L0_D0": -0.2557510308231363,
+      "noD0_N0_L0": -0.26018835866167944,
+      "per_bit_median": -0.06196530418250923,
+      "zero": 0.0
+    },
+    "qa|3": {
+      "full_N0_L0_D0": 3.2830418759347437,
+      "noD0_N0_L0": 1.8308670105419993,
+      "per_bit_median": 3.911240494296578,
+      "zero": 0.0
+    }
+  },
+  "provenance": {
+    "frozen_at_utc": "2026-09-09T19:19:11.920528Z",
+    "v40_register_sha": "2080fb5ddf606f3a0ba8f4af6096ee4044c3bfb370d710c8abd6f04438265c93",
+    "dev_file_hashes": {
+      "results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json": "46c5f9c6cfb0b5581b13f517951b861cb1c52998c333945a37639b1031862525",
+      "results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json": "f5791d151a0507ac90aeaddaf97d4686ceead336d4fa7b128ec711f4793ad354",
+      "results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json": "87d9ebcad62e27b675e038b584671175f66aed91fc18da786ffc0f553af68e37",
+      "results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json": "228e436b0b58d734eb924f2ddc45b4c8135aa3b2765bb3b764db7a456123dcf9",
+      "results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json": "81bafd7adac31f27f2973545407005177fad63cf6d6e2ef942109e10fd8f3756",
+      "results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json": "f46f388cee3fbb1bb7a0175c1dfde457b13bee0fa262092d9ac1e41845df0e7b",
+      "results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json": "95cbe7e98739be4ea472781bf4f8a27c28827250e22d1bdbd8c5c576bd73938a",
+      "results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json": "a458cd11272a9face425eda62134b25ef0bf4af622f5902c63f13233028c0b15",
+      "results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json": "5ec4800f980d6317520f3d7eb85f4516631b629a146d5a964e33092eb1507315",
+      "results/v10-quantization/pythia-160m--step16000/quant_losses.json": "11d1845671057066a1e15286b7f84853c6db11511b44bb7bb72328d3fd0d3178",
+      "results/v10-quantization/pythia-160m--step64000/quant_losses.json": "dde3f0ad83db6997054a79318959dee2c33195ded3d11247fcb12a9992fba4ca",
+      "results/v10-quantization/pythia-160m--step143000/quant_losses.json": "96aa01041b947077090736afe19a1becd8b9135c9b7b4037a5ea457d6fd0b334",
+      "results/v10-quantization/pythia-410m--step16000/quant_losses.json": "ae2ae21276a632816c48bfad123d6963e3f0e4b96c56c47a046220f39b00aed7",
+      "results/v10-quantization/pythia-410m--step64000/quant_losses.json": "6d0bafbaabcf80fc426ee0587d1deceed793b9ad3ef4ddad189e0426212102e0",
+      "results/v10-quantization/pythia-410m--step143000/quant_losses.json": "6f0e6c037d8b993301839d55f1b8e1261680cc1ed93864b08a2237a1b5698790",
+      "results/v10-quantization/pythia-1.4b--step16000/quant_losses.json": "a903eaa306be8c4ba70fda979bcfafa4cc1334fab7b62997e4b6e7f96cf2c945",
+      "results/v10-quantization/pythia-1.4b--step64000/quant_losses.json": "1087bbf6102d85fded469961d958c713908e4ba936e24cd2d4985ee8b6e2a274",
+      "results/v10-quantization/pythia-1.4b--step143000/quant_losses.json": "5330aaa9da7183204c37d1ff1e2ea64c651ed588bb2f72f0ed7aaed72a595243"
+    },
+    "dense_json_sha": "996a1877e384551dc62857dfa202ab354d44143abc3e68ff078d1bee5f37ac11",
+    "note": "K0 only; no target compressed outcome used; A2/A1 refit on original dev at freeze time"
+  }
+}

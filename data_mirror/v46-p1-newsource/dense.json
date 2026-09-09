@@ -1,0 +1,19 @@
+{
+  "tag": "pythia-1b@step96000",
+  "resolved": "EleutherAI/pythia-1b",
+  "revision": "step96000",
+  "dense": {
+    "math": 1.35337736296765,
+    "code": 1.3192298550035655,
+    "qa": 5.005198431558935
+  },
+  "measurement_tokens": {
+    "math": 12643,
+    "code": 4207,
+    "qa": 263
+  },
+  "load_s": 34.8389196395874,
+  "eval_s": 12.822304725646973,
+  "peak_vram_gb": 2.278505984,
+  "tokens_per_s": 1334.627460987637
+}
