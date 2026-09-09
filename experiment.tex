@@ -2,8 +2,8 @@
 \label{sec:exp}
 
 The experiments build the argument in logical order: capabilities
-occupy distinct, causally implicated regions of the source model's
-gradient space (\S\ref{sec:regions}); pruning damage follows a law whose
+occupy distinct, causally implicated regions of the gradient space of
+the source model (\S\ref{sec:regions}); pruning damage follows a law whose
 coefficients are carried by that geometry (\S\ref{sec:curves}--%
 \S\ref{sec:law}); the signed first-order term predicts
 capability-selective effects in both directions across families
@@ -65,7 +65,7 @@ $2$--$4\times$.
 per-benchmark gradient signatures (rows: seven models from three
 families; columns: four metrics). In the shared-component-removed
 metric (third column), same-capability benchmarks align and different
-capabilities anti-align---the block structure that licenses
+capabilities anti-align, the block structure that licenses
 gradient-defined capability regions.}
 \label{fig:blocks}
 \end{figure}
@@ -149,11 +149,11 @@ follows a power law in the deleted capability mass $m_c(\dens)$:
 \label{eq:fitlaw}
 \end{equation}
 with in-sample $R^2 = 0.82$--$0.996$ over 24 capability$\times$model
-fits. The held-out battery (1000-resample cell bootstrap) gives the
-form its teeth: in \emph{leave-one-family-out} transfer the
+fits. The held-out battery (1000-resample cell bootstrap) is where the
+form proves itself: in \emph{leave-one-family-out} transfer the
 shared-$\gamma$ mechanism form attains MAE $2.17$ nats versus $10.3$
 for per-capability raw sparsity and $8.2$ for the direct-damage
-baseline (both CIs exclude zero)---the deleted-mass coordinate is what
+baseline (both CIs exclude zero), so the deleted-mass coordinate is what
 transfers across families; it also beats the direct-damage baseline in
 fit-shallow/predict-deep ($3.11$ vs.\ $4.24$) and raw sparsity in
 leave-largest-model-out ($1.41$ vs.\ $2.15$), while its edge over raw
@@ -162,29 +162,29 @@ sparsity within-model does not reach significance
 with it, QA joins the law). Two structural results:
 (i) in the deleted-mass coordinate the exponent concentrates at
 $\gamma\in[1.2,2.2]$ across all families, versus $3.2$--$8.7$ in the
-raw $(1-\dens)$ coordinate---the mechanism coordinate is what makes
+raw $(1-\dens)$ coordinate, which is what makes
 the form portable; and (ii) \emph{within a model, $\gamma$ is shared
 across capabilities} (e.g.\ Qwen3-0.6B: $1.41/1.56/1.43$;
 Gemma3-4B: $1.66/1.71$): capability differences are carried entirely
 by the two measured quantities, and the fitted structure is two
 parameters per model. Published (reduced) forms substitute the
-geometry's own smooth dependence on $(N_0,f)$, leaving only basic
+smooth dependence of the geometry itself on $(N_0,f)$, leaving only basic
 parameters in the interface.
 
 \subsection{The signed first-order term predicts, in both directions}
 \label{sec:mech}
 
-The alignment term $\gbar{c}^{\top}\dw$ is the family coefficient with
-teeth. Its sign predicts the presence or absence of the
+The alignment term $\gbar{c}^{\top}\dw$ is the decisive family
+coefficient. Its sign predicts the presence or absence of the
 capability-selective ``free lunch'' in every case measured:
-Qwen3's QA term is negative and QA improves under pruning (predicted
-$-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); Gemma's QA term is
-positive and no improvement exists at any size; OLMo-3-7B's is
+the QA term of Qwen3 is negative and QA improves under pruning (predicted
+$-0.83$ vs.\ measured $-0.79$ at 4B, $\dens=0.7$); the QA term of Gemma is
+positive and no improvement exists at any size; the term for OLMo-3-7B is
 positive (mild degradation, prediction $+0.015$ $=$ measurement at
-$\dens=0.8$, code) while OLMo-3-32B's is negative---and deep-pruning
-QA improvement duly appears. At the level of individual model$\times$capability$\times$density
+$\dens=0.8$, code) while the term for OLMo-3-32B is negative, and
+deep-pruning QA improvement duly appears. At the level of individual model$\times$capability$\times$density
 cells in the mild regime, sign prediction accuracy is $67.6\%$
-(Wilson 95\% CI $[58.3,75.7]$, $n{=}108$)---above chance, with the
+(Wilson 95\% CI $[58.3,75.7]$, $n{=}108$), above chance, with the
 family-level pattern (Qwen and OLMo-32B QA improvements, Gemma
 none, an OLMo size flip) called in advance. Beyond the mild regime, first- plus second-order
 predictions fail by orders of magnitude at the cliff in every family:
@@ -195,17 +195,18 @@ two-regime structure of \eqref{eq:prune}.
 \label{sec:orderparam}
 
 Measuring the capability geometry \emph{of the pruned models}
-resolves the cliff's apparent unpredictability. The capability-region
-mass retention (the fraction of the dense model's capability-exclusive
-top coordinates still prominent after pruning) declines smoothly from
-the first densities---no cliff in geometry---while loss is still flat;
+resolves the apparent unpredictability of the cliff. The
+capability-region mass retention (the fraction of the
+capability-exclusive top coordinates of the dense model still
+prominent after pruning) declines smoothly from the first densities
+(no cliff in geometry) while loss is still flat;
 the behavioral cliff occurs where retention crosses a critical value.
 The critical value is family-specific (Gemma: $0.035$--$0.10$ across
 1B/4B and all capabilities; Qwen: $0.13$--$0.23$) but consistent
 within a family across sizes and capabilities: the cliff boundary
 $\dens_c^{*}(N_0,f)$ reduces to one critical-retention constant per
-family, turning the two-regime law's least elegant fitted parameter
-into a measurable, smoothly-evolving order parameter.
+family, turning the least elegant fitted parameter of the two-regime
+law into a measurable, smoothly evolving order parameter.
 \preliminary{three models, two families; multi-model extension queued}
 
 \subsection{Quantization arm}
@@ -247,16 +248,16 @@ Recovery training on general text fits the recovery law cleanly
 $\beta'_{\text{math}}=1.23$, $\beta'_{\text{code}}=1.02$, with
 \emph{asymptotic residuals under the fixed LoRA recipe},
 $\Lc{c}^{\infty}-\Lc{c}^{\text{dense}}$, of $1.21$ (math) and $1.93$
-(code) nats---about $80\%$ of this pruning damage is redeemed within
-8M tokens and the remainder persists under this recipe; QA recovers
-completely. \preliminary{one model, one density, one recipe; with three-point
-ladders the saturating form's largest-budget extrapolation beats a
-carry-forward baseline in only 4 of 9 fits---the ladder is too sparse
+(code) nats; about $80\%$ of this pruning damage is redeemed within
+8M tokens and the remainder persists under this recipe, while QA
+recovers completely. \preliminary{one model, one density, one recipe; with three-point
+ladders the largest-budget extrapolation of the saturating form beats a
+carry-forward baseline in only 4 of 9 fits, so the ladder is too sparse
 to claim extrapolation, and the denser multi-model grid (B7) is
 queued} Two mechanism results:
 recovery on \emph{aligned} data (teacher traces) heals substantially
 faster at small budgets (math $2.76$ vs.\ $3.47$ at $0.5$M tokens),
-as the gradient-overlap prediction requires---but over-training on
+as the gradient-overlap prediction requires, but over-training on
 narrow aligned data \emph{re-damages} the model (QA $4.95\to9.75$
 from $0.5$M to $8$M tokens), while general-text recovery is monotone.
 Aligned recovery is fast but risky; general recovery is slow but safe;
@@ -267,7 +268,7 @@ pruning damage at matched severity.
 \subsection{Scale and family structure}
 \label{sec:family}
 
-\paragraph{Within-family robustness is non-monotonic---in two families
+\paragraph{Within-family robustness is non-monotonic in two families
 independently.} Gemma-3 robustness peaks at 12B (27B collapses far
 earlier, $+4.0$ vs.\ $+0.68$ at $\dens=0.7$), mirroring the prior
 ability-space observation of a Qwen3 14B peak. A mid-scale robustness
@@ -281,7 +282,7 @@ has the lowest concentration; within-Gemma top-end violation).
 family coefficient dominates: $\Delta\Lc{\text{math}}$ at $\dens=0.7$
 spans $+0.02$ (OLMo-3-32B), $+0.17$ (Muse-30B), $+0.68$ (Gemma4-31B),
 $+4.04$ (Gemma3-27B). OLMo-3-32B survives $70\%$ pruning with
-$\le+0.63$ nats on every capability---family provenance (data
+$\le+0.63$ nats on every capability. Family provenance (data
 recency, over-training exposure) is a first-order determinant of
 prunability, and ``which family should an agent scale down from?''
 is a measured quantity.

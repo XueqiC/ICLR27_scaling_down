@@ -1,8 +1,8 @@
 \section{Introduction}
 \label{sec:intro}
 
-Deployed LLM-based agents are specialists. A coding agent lives on code
-synthesis, debugging, and tool use; a retrieval assistant lives on
+Deployed LLM-based agents are specialists. A coding agent depends on code
+synthesis, debugging, and tool use; a retrieval assistant depends on
 multi-hop question answering; neither needs frontier-scale generality,
 and both are billed by inference cost. The practical question of the
 small-model era is therefore not ``how good can an $N$-parameter model
@@ -18,11 +18,11 @@ capabilities, improve some while collapsing others, hit cliffs at
 different strengths, and recover differently under continued training
 (\S\ref{sec:exp}). Aggregate perplexity, average benchmark scores, and
 effective parameter counts do not reveal whether the capabilities an
-agent needs survive. The full search space---source model $\times$
+agent needs survive. The full search space (source model $\times$
 method $\times$ strength $\times$ recipe $\times$ recovery
-budget---must today be explored by running every configuration through
-capability benchmarks and agent evaluations: expensive, and still prone
-to missing sign flips, non-monotonicities, and collapse cliffs.
+budget) must today be explored by running every configuration through
+capability benchmarks and agent evaluations, which is expensive and still
+prone to missing sign flips, non-monotonicities, and collapse cliffs.
 
 This paper develops \emph{predictive scaling-down laws} to replace that
 search. The target map is
@@ -43,8 +43,8 @@ requirement, and $C_m$ the deployment-plus-recovery cost. Three design
 rules keep the laws usable. First, \textbf{prediction-time inputs must be
 observable before compression}: public source descriptors and an
 \emph{observed dense capability anchor}
-$\mathbf L_0^{\mathrm{obs}}$---which absorbs unknown data quality,
-optimization, and post-training history---so predictions take the form
+$\mathbf L_0^{\mathrm{obs}}$ that absorbs unknown data quality,
+optimization, and post-training history, so predictions take the form
 $L_{c,0}^{\mathrm{obs}}+\widehat{\Delta L}_c^{(m)}$. Gradient and Fisher
 quantities serve as \emph{mechanism evidence}, not as prediction inputs.
 Second, the observable is a \emph{vector} of continuous
@@ -65,9 +65,10 @@ Gemma-3/4, Muse, OLMo-3; 270M--32B):
 \item \textbf{Capability responses to compression are anisotropic with
 an invariant ordering.} Multi-hop QA is the most pruning-robust
 capability and math/code the most fragile in every model measured,
-while magnitudes and signs are family-specific---Qwen3 and OLMo-3-32B
-QA \emph{improves} under substantial pruning, Gemma's never does.
-Sign, cliff location, and family identity all matter to method choice.
+while magnitudes and signs are family-specific: QA in Qwen3 and
+OLMo-3-32B \emph{improves} under substantial pruning, whereas QA in
+Gemma never does. Sign, cliff location, and family identity all matter
+to method choice.
 \item \textbf{Capability-conditioned prediction targets real
 structure.} Independent benchmarks of the same skill share gradient
 signatures that anti-align across skills (seven models, three
@@ -76,9 +77,9 @@ exclusive $0.05\%$ of coordinates selectively removed that capability
 (near-diagonal ablation matrix). Multi-model control ablations are in
 progress before stronger causal language is warranted.
 \item \textbf{The collapse cliff is real, proportional, and
-non-perturbative in loss}---but a geometric retention statistic decays
+non-perturbative in loss}, yet a geometric retention statistic decays
 smoothly and crosses a family-consistent critical value at the cliff,
-suggesting the cliff boundary can be carried by one constant per
+which suggests that the cliff boundary can be carried by one constant per
 family rather than fitted per model. \preliminary{three models, two
 families so far}
 \item \textbf{The other arms echo the structure.} Quantization is
@@ -92,8 +93,8 @@ re-damages under over-training.
 \end{enumerate}
 
 \paragraph{Central thesis.}
-Capability loss is a common \emph{outcome} coordinate---its map to
-behavioral accuracy shares a form across tested families---but
+Capability loss is a common \emph{outcome} coordinate, with a map to
+behavioral accuracy that shares a form across tested families, whereas
 compression ratio is \emph{not} a common \emph{intervention} coordinate:
 laws using only resource ratios fail to extrapolate across methods.
 The outcome space can therefore be unified through capabilities even

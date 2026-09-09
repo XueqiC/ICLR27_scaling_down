@@ -16,7 +16,7 @@ used directly per \eqref{eq:anchored}. D2/D3 are claimed only where
 $N$, $D$, and $f$ vary independently enough to identify them;
 $D$--family collinearity is reported rather than hidden.
 \resultpending{D1--D4 comparison; controlled $(N,D)$ grid}
-The paper's practical setting is D4: anchored prediction of
+The practical setting in this paper is D4: anchored prediction of
 compression-induced change.
 
 \subsection{Shared-plus-method-specific law hierarchy}
@@ -54,8 +54,8 @@ positive-damage branch and compared by the held-out battery
 leave-one-family-out, sign prediction, cliff-density prediction;
 baselines: raw sparsity, remaining parameters, removed weight norm,
 anchor-only, size-plus-density, family-conditioned reduced form):
-simple reduced forms in $(\dens; N_0, f)$, and---as mechanism
-comparators only---the measured-alignment-plus-deleted-mass form
+simple reduced forms in $(\dens; N_0, f)$, and, as mechanism
+comparators only, the measured-alignment-plus-deleted-mass form
 $\Delta\Lc{c}=a_c(\dens)+B\,m_c(\dens)^{\gamma}$ whose in-sample fits
 motivated this study (\S\ref{sec:law}). Cliff modeling compares a hard
 threshold against a smooth sigmoid in $\dens$ and, following the
@@ -87,8 +87,8 @@ $\Dr{=}0$:
 \label{eq:recovery}
 \end{equation}
 where $r_{m,c}$ is the \emph{asymptotic residual fraction under the
-fixed recovery recipe}---not claimed to be fundamentally
-unrecoverable capability. Recovery-source dependence (general vs.\
+fixed recovery recipe}, not a claim of fundamentally unrecoverable
+capability. Recovery-source dependence (general vs.\
 capability-aligned vs.\ mixed data) is an explicit axis.
 
 \paragraph{Uncertainty.} Configuration-level cluster bootstrap for
@@ -99,7 +99,7 @@ calibration coverage reported alongside MAE and relative error.
 \subsection{Mechanism analysis: capability geometry}
 \label{sec:geometry}
 
-As supporting evidence---not a prediction interface---we measure the
+As supporting evidence rather than a prediction interface, we measure the
 capability-conditional mean gradient $\gbar{c}$ and Fisher structure
 $\Fc{c}=\mathbb{E}_{i\sim c}[g_ig_i^{\top}]$ at the dense checkpoint,
 streamable at 30B scale (diagonal spectra in magnitude-quantile bins;
@@ -109,9 +109,9 @@ partially separable parameter regions (\S\ref{sec:regions});
 (ii) the \emph{signed} first-order term $\gbar{c}^{\top}\dw$, which no
 positive-semidefinite effective-parameter model can express and which
 anticipates capability-selective sign effects (\S\ref{sec:mech}); and
-(iii) upper-bound comparators for reduced-form laws---if a reduced
-form approaches the mechanism form's accuracy without gradient access,
-the practical interface loses nothing.
+(iii) upper-bound comparators for reduced-form laws: if a reduced
+form approaches the accuracy of the mechanism form without gradient
+access, the practical interface loses nothing.
 
 \subsection{Fitting and validation protocol}
 \label{sec:protocol}
