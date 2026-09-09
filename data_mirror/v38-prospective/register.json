@@ -1,0 +1,24 @@
+{
+  "frozen_fit_sha256": "58dd81d2db4c089f97656232908d4aab8bccdf3114c05a880a50a5aaff844874",
+  "new_step": 96000,
+  "new_sizes": [
+    "160m",
+    "1.4b"
+  ],
+  "predictor": "config-indicator OLS from v36 9-state fit; inputs {N0,D0,L0}; L0 measured, N0/D0 a priori",
+  "a_priori_inputs": [
+    {
+      "size": "160m",
+      "step": 96000,
+      "N0": 84934656,
+      "D0": 201326592000
+    },
+    {
+      "size": "1.4b",
+      "step": 96000,
+      "N0": 1207959552,
+      "D0": 201326592000
+    }
+  ],
+  "note": "Prediction registered before compressed measurement; only dense L0 is read from the new runs."
+}

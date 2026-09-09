@@ -105,8 +105,10 @@ def parse_losses(table, arm):
         if key == anchor or key.startswith("_"):
             continue
         q = audit.finite(key)
-        if q not in CONFIGS[arm] or q in compressed:
-            raise ValueError(f"Unexpected or duplicate {arm} coordinate: {key}")
+        if q not in CONFIGS[arm]:
+            continue  # extra measured coordinate (e.g. v40 densities 0.65/0.55); not part of this grid
+        if q in compressed:
+            raise ValueError(f"Duplicate {arm} coordinate: {key}")
         compressed[q] = losses(values)
     if set(compressed) != set(CONFIGS[arm]):
         raise ValueError(f"Incomplete {arm} configuration grid")

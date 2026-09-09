@@ -303,12 +303,134 @@ rankings survive ($\rho\ge0.98$); (4) item-level damage is smooth
 pre-cliff, ruling out discrete skill deletion at the item level.
 These findings fixed the protocol of \S\ref{sec:prelim}.
 
-\subsection{Pre-registered grid in progress}
+\subsection{Controlled prediction on two axes}
+\label{sec:twoaxes}
+
+The heterogeneous panel above tests how far a law transfers across
+finished models; it cannot separate the effect of training history from
+that of architecture and data, because those co-vary across public
+families. We therefore add a controlled panel, Pythia \{160M, 410M,
+1.4B\} at pretraining steps \{16k, 64k, 143k\} (33.6B, 134B, and 300B
+tokens), on which the source state $\mathbf x_0=(N_0,D_0,L_{c,0})$
+varies along known axes, and we ask two questions separately: whether
+source-state information predicts the compression response at a fixed
+intervention (the source axis), and whether a relation fit at seen
+intervention strengths predicts unseen ones (the strength axis).
+Table~\ref{tab:main} collects every registered test. Predictions marked
+P were frozen before the corresponding measurement, L are leave-one-out
+on an existing panel, and R are baselines added at closeout with the
+original prediction untouched. All three arms use the same K0 budget
+(pre-compression information only), the same endpoint, and the same
+rule: a candidate is credited only against the strongest baseline at
+the same information budget.
+
+\input{tables/main_prediction}
+
+\paragraph{Source axis.}
+On the $3\times3$ panel, adding $D_0$ to $\{N_0, L_{c,0}\}$ lowers
+held-out error in 4 of 12 arm$\times$capability$\times$split comparisons
+with a bootstrap interval excluding zero, for math and code but not QA.
+Against the strongest simple baseline, a per-configuration median, the
+full predictor wins with an interval excluding zero only for code; for
+math the point improvement is positive but the interval includes zero.
+The gain concentrates in aggressive settings (pruning $d=0.6$, int3) and
+vanishes when the most-trained checkpoint is held out. Because the
+predictor uses configuration indicators, it is a source-transfer model
+at a fixed density or bit-width, not a law over the intervention axis.
+On a never-fit training stage (step 96k, an interpolation between 64k
+and 143k), the frozen pruning predictor beat both the baseline and the
+no-$D_0$ model for all three capabilities (math 0.090 vs.\ 0.367; code
+0.128 vs.\ 0.438; QA 0.426 vs.\ 0.832), whereas the quantization
+predictor was mixed (math and QA above baseline, code below), a pattern
+the partition analysis below explains.
+
+\paragraph{Pruning: strength axis.}
+A shared-shape candidate
+$\widehat{\Delta L}_c(\mathbf x,d)=A_c(\mathbf x)\,((1-d)/0.3)^{\gamma_c}$
+with source-conditioned amplitude
+$A_c(\mathbf x)=\boldsymbol\beta_c\cdot(1,\log N_0,L_{c,0},\log D_0)$
+was frozen on the panel at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at
+unseen $d=0.65$ (interpolation) and $d=0.55$ (deeper extrapolation),
+including a new source (410M at step 96k). It beats every
+strength-only baseline by a wide margin (MAE 0.371, 0.524, and 0.759
+for math, code, and QA against 1.37, 1.63, and 1.61 for a strength-only
+curve), because a source-blind curve cannot see that one state (160M at
+step 143k) is several times more fragile than another. Two closeout
+baselines at the same information budget, however, change what this
+shows. A per-density source regression with linear interpolation and
+extrapolation in $d$, which uses the same inputs and no shared exponent,
+ties or beats the candidate for math (0.283) and code (0.279) and is
+within noise for QA; the candidate beats only the variant with
+$\gamma_c$ fixed to one. The evidence therefore supports
+source-conditioned inputs as the carrier of unseen-density prediction
+and does not single out the particular exponent. At $d=0.55$ the signed
+errors are mixed (six under-predictions, three over-predictions), with
+the most fragile source over-predicted, so we do not describe the deep
+regime as systematically under-predicted. QA amplitude does not follow
+the math/code relation.
+
+\paragraph{Quantization: partition.}
+The tested interventions are the integer bit-widths $\{8,6,4,3\}$;
+there is no integer point between 3 and 4, so the strength-axis test
+available here is per configuration. On three new sources at step 96k,
+responses at 4 bits and above are near zero and candidate and
+per-bit-median errors are both small (math 0.029 vs.\ 0.084; code
+0.104 vs.\ 0.094; QA 0.173 vs.\ 0.134), so no incremental value over a
+simple baseline is demonstrated at that error scale, which is not
+evidence that none exists. The int3 responses are real collapse, and the
+candidate advantage there is unstable across sources ($+0.45$ for math,
+$-1.12$ for code, and $-0.32$ for QA relative to the median), so
+magnitude transfer at int3 is not established. The fixed $4^{-b}$ shape
+misfits under this quantizer definition, and a learned exponential fits
+better within the tested range (\S\ref{sec:quant}). We claim no
+collapse-risk law.
+
+\paragraph{Distillation: source and pool axes.}
+With the reference fixed to the initial student,
+$\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$, a controlled LoRA panel (the
+same $3\times3$ sources with fixed teacher, pool, and reuse count)
+admits a source-transfer predictor only for math, where a linear model
+in $\{N_0,L_{c,0},D_0\}$ halves the held-out error of a constant (0.014
+vs.\ 0.031); for code the two are within noise (0.057 vs.\ 0.061) and
+for QA a per-capability constant is better (0.159 vs.\ 0.263). On the pool axis, predictors frozen on the endpoint pools (U75,
+U600) were tested on an unseen middle pool (U225). Its reuse count of
+2.3--4.7 lies inside the endpoint range, so this is a configuration
+interpolation, and because the endpoints are pool prefixes while U225 is
+randomly sampled, the sampling protocol also changes. A reuse-count law
+beats a constant only for QA (0.706 vs.\ 1.449); for math and code a
+constant is best (0.122 and 0.069) and the endpoint-fit forms
+over-extrapolate. The prediction residual is dominated by systematic
+bias rather than by pool variation: math and code show a small
+over-prediction bias with little spread, and the QA reuse-count
+predictor carries a bias that changes sign across the two budgets
+($-0.87$ then $+0.48$), a form misfit rather than pool sensitivity.
+Around that bias, variation across pools exceeds variation across
+training seeds, but with three pools and two seeds this describes the
+design rather than decomposing a population variance, and we make no
+causal claim about the residual.
+
+\paragraph{Reading across arms.}
+The three arms share the endpoint, the information budget, and the
+evaluation rule, and they deliver different things: pruning a
+source-conditioned prediction that extends to unseen densities,
+quantization a per-configuration validation whose only large signal is
+an unstable collapse magnitude, and distillation a capability-specific
+transfer in which the reuse coordinate helps QA and a constant suffices
+for math and code. Whether any single response form unifies remains
+open; the results negate only the resource-ratio models actually
+tested.
+
+\subsection{Remaining limitations}
 \label{sec:planned}
 
-Remaining: the distillation grid's capacity and $\Ds$ ladders; the
-recovery grid across sizes, densities, and sources; large-model
-geometric order parameters (14B--32B class); and the held-out
-extrapolation validation of every reduced-form law (largest size,
-deepest compression, largest recovery budget), with positive and
-negative controls, per \S\ref{sec:protocol}.
+The controlled panels have three size, step, and pool clusters, so all
+intervals are panel-conditional rather than population estimates. The
+shared pruning form is not independently necessary, since a per-density
+fit ties it. No held-out agent or method-selection validation was run,
+so the selection map is a framework deliverable rather than a validated
+selector. The full capacity$\times$teacher$\times$data distillation
+grid, large-model geometric order parameters, the cross-method M1/M2/M3
+held-out comparison of \S\ref{sec:claims}, agent-workload selection
+validation, and the held-out extrapolation battery for every reduced
+form (\S\ref{sec:protocol}) were not completed in this round and are
+stated as such rather than filled in.

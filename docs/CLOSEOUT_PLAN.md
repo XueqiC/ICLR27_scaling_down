@@ -62,3 +62,15 @@ disclosed and downgraded, never overwritten while still called a "frozen prospec
 Each package stops when its specified outputs exist; no new function classes, densities, bits, pools,
 training, or GPU. Success = a checkable honest judgment, not three SUPPORTED cells. Remaining external
 dependencies (PDF compile, Drive backup upload) are limitations, not blockers to the analysis closeout.
+
+## Minimal reproduction (CPU only; no model weights, no GPU)
+From the project root with `results/` present (the submission repo mirrors the needed JSONs under
+`data_mirror/` and the scripts under `code/analysis/`):
+
+    python3 analysis/v42_prune_sameinput.py    # Package A  -> results/v42-prune-sameinput/
+    python3 analysis/v43_distill_residuals.py  # Package B  -> results/v43-distill-residuals/
+    python3 analysis/v44_quant_partition.py    # Package C  -> results/v44-quant-partition/
+    python3 analysis/v45_main_table.py         # main table -> results/v45-main-table/ + paper/tables/main_prediction.tex
+
+Each reads only existing `results/v*/summary.json` / `compare.json` and loss JSONs; frozen registers
+(v38/v40/v41) are inputs, never rewritten. Runtime: seconds.

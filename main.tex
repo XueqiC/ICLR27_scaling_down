@@ -31,10 +31,12 @@
 
 \newtheorem{proposition}{Proposition}
 
-% evidence-status macros (searchable; remove before camera-ready)
-\newcommand{\resultpending}[1]{\textcolor{orange}{[RESULT PENDING: #1]}}
-\newcommand{\verifyclaim}[1]{\textcolor{red}{[VERIFY CLAIM: #1]}}
-\newcommand{\preliminary}[1]{\textcolor{blue}{[PRELIMINARY: #1]}}
+% evidence-status macros: rendered as plain inline status so no colored
+% "pending" placeholder carries a core conclusion (closeout rule); each is
+% an explicit, searchable statement of what was not completed this round.
+\newcommand{\resultpending}[1]{(not completed in this round: #1)}
+\newcommand{\verifyclaim}[1]{(unverified: #1)}
+\newcommand{\preliminary}[1]{(preliminary: #1)}
 
 % notation for the capability-geometry framework
 \newcommand{\wz}{w_0}

@@ -1,0 +1,212 @@
+{
+  "register": {
+    "frozen_fit_sha256": "58dd81d2db4c089f97656232908d4aab8bccdf3114c05a880a50a5aaff844874",
+    "new_step": 96000,
+    "new_sizes": [
+      "160m",
+      "1.4b"
+    ],
+    "predictor": "config-indicator OLS from v36 9-state fit; inputs {N0,D0,L0}; L0 measured, N0/D0 a priori",
+    "a_priori_inputs": [
+      {
+        "size": "160m",
+        "step": 96000,
+        "N0": 84934656,
+        "D0": 201326592000
+      },
+      {
+        "size": "1.4b",
+        "step": 96000,
+        "N0": 1207959552,
+        "D0": 201326592000
+      }
+    ],
+    "note": "Prediction registered before compressed measurement; only dense L0 is read from the new runs."
+  },
+  "arms": {
+    "pruning": {
+      "math": {
+        "n_test": 8,
+        "mae_full_N0_D0_L0": 0.09042306566889458,
+        "mae_noD0_N0_L0": 0.34342514306878413,
+        "mae_baseline_config_median": 0.3672511468796963,
+        "full_beats_baseline": true,
+        "full_beats_noD0": true,
+        "by_config": {
+          "0.9": {
+            "full": 0.010086655267627396,
+            "baseline_median": 0.025646602863244605,
+            "n": 2
+          },
+          "0.8": {
+            "full": 0.04425979698200655,
+            "baseline_median": 0.14731471960768805,
+            "n": 2
+          },
+          "0.7": {
+            "full": 0.10306195168889601,
+            "baseline_median": 0.41342046982519975,
+            "n": 2
+          },
+          "0.6": {
+            "full": 0.20428385873704835,
+            "baseline_median": 0.8826227952226526,
+            "n": 2
+          }
+        }
+      },
+      "code": {
+        "n_test": 8,
+        "mae_full_N0_D0_L0": 0.1282230497695723,
+        "mae_noD0_N0_L0": 0.17932697588148483,
+        "mae_baseline_config_median": 0.43764856192060847,
+        "full_beats_baseline": true,
+        "full_beats_noD0": true,
+        "by_config": {
+          "0.9": {
+            "full": 0.019482255555826916,
+            "baseline_median": 0.020026146898027064,
+            "n": 2
+          },
+          "0.8": {
+            "full": 0.0771648599491139,
+            "baseline_median": 0.13700380318516758,
+            "n": 2
+          },
+          "0.7": {
+            "full": 0.16730217410412218,
+            "baseline_median": 0.5129843118611838,
+            "n": 2
+          },
+          "0.6": {
+            "full": 0.24894290946922626,
+            "baseline_median": 1.0805799857380554,
+            "n": 2
+          }
+        }
+      },
+      "qa": {
+        "n_test": 8,
+        "mae_full_N0_D0_L0": 0.42577203583786355,
+        "mae_noD0_N0_L0": 0.4383395988611819,
+        "mae_baseline_config_median": 0.8323320163973383,
+        "full_beats_baseline": true,
+        "full_beats_noD0": true,
+        "by_config": {
+          "0.9": {
+            "full": 0.06954905368886485,
+            "baseline_median": 0.07066896387832733,
+            "n": 2
+          },
+          "0.8": {
+            "full": 0.2916897315497778,
+            "baseline_median": 0.3292092442965777,
+            "n": 2
+          },
+          "0.7": {
+            "full": 0.6810031308103023,
+            "baseline_median": 1.0952055608365017,
+            "n": 2
+          },
+          "0.6": {
+            "full": 0.6608462273025093,
+            "baseline_median": 1.8342442965779466,
+            "n": 2
+          }
+        }
+      }
+    },
+    "quantization": {
+      "math": {
+        "n_test": 8,
+        "mae_full_N0_D0_L0": 0.5688123895542565,
+        "mae_noD0_N0_L0": 0.6583699752467901,
+        "mae_baseline_config_median": 0.6914226251680772,
+        "full_beats_baseline": true,
+        "full_beats_noD0": true,
+        "by_config": {
+          "8": {
+            "full": 0.004789709820233402,
+            "baseline_median": 0.0014335996203432844,
+            "n": 2
+          },
+          "6": {
+            "full": 0.01068139980726849,
+            "baseline_median": 0.012516807719686773,
+            "n": 2
+          },
+          "4": {
+            "full": 0.08212542081568472,
+            "baseline_median": 0.2962311160325872,
+            "n": 2
+          },
+          "3": {
+            "full": 2.1776530277738395,
+            "baseline_median": 2.4555089772996914,
+            "n": 2
+          }
+        }
+      },
+      "code": {
+        "n_test": 8,
+        "mae_full_N0_D0_L0": 0.7806291387352633,
+        "mae_noD0_N0_L0": 0.7335899380003883,
+        "mae_baseline_config_median": 0.34839998811504624,
+        "full_beats_baseline": false,
+        "full_beats_noD0": false,
+        "by_config": {
+          "8": {
+            "full": 0.016291718102769435,
+            "baseline_median": 0.00713097218920844,
+            "n": 2
+          },
+          "6": {
+            "full": 0.028767084531880874,
+            "baseline_median": 0.01556928927977197,
+            "n": 2
+          },
+          "4": {
+            "full": 0.37872242474743634,
+            "baseline_median": 0.2985797480389827,
+            "n": 2
+          },
+          "3": {
+            "full": 2.6987353275589663,
+            "baseline_median": 1.0723199429522219,
+            "n": 2
+          }
+        }
+      },
+      "qa": {
+        "n_test": 8,
+        "mae_full_N0_D0_L0": 0.3031185803614214,
+        "mae_noD0_N0_L0": 0.1733001777630802,
+        "mae_baseline_config_median": 0.7165183875950569,
+        "full_beats_baseline": true,
+        "full_beats_noD0": false,
+        "by_config": {
+          "8": {
+            "full": 0.018558259718867865,
+            "baseline_median": 0.01924904942965755,
+            "n": 2
+          },
+          "6": {
+            "full": 0.07086124045562647,
+            "baseline_median": 0.03398288973384034,
+            "n": 2
+          },
+          "4": {
+            "full": 0.19107526323030982,
+            "baseline_median": 0.5135307747148286,
+            "n": 2
+          },
+          "3": {
+            "full": 0.9319795580408816,
+            "baseline_median": 2.2993108365019013,
+            "n": 2
+          }
+        }
+      }
+    }
+  }
+}

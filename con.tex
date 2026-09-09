@@ -1,23 +1,32 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We introduced scaling-down laws: capability-vector predictive laws for
-LLM compression in the standard scaling-law format, organized by a
-selective-deletion view of pruning, quantization, and distillation, and
-grounded in a measurable mechanism object, the capability geometry of
-the source model. Across four families and eleven models, the
-evidence supports a specific law structure: form is family-invariant
-(universal capability ordering; a universal, proportional,
-non-perturbative collapse band; a perturbative regime governed by the
-signed first-order geometry term), while magnitudes and signs are
-family coefficients. The sharpest of these is the sign of the QA
-alignment term, which predicts on which family pruning improves
-retrieval-style capability. Two findings frame the road ahead: the mid-scale
-robustness peak reproduced in two families, whose mechanism our
-retired concentration predictor does not explain, and the collapse
-boundary $\dens^{*}_c(N_0,f)$, which the completed
-distillation-and-recovery grid will attack with the same pre-registered
-discipline. The deliverables, reduced-form laws in basic parameters
-and the method-selection map, aim to make ``what should this agent
-scale down from, and how?'' a computed answer rather than a folklore
-one.
+We introduced capability-conditioned scaling-down laws: predict a
+vector of capability losses after compression from a dense source state
+observable before compression, common compression coordinates, and
+method-specific controls, with pruning, quantization, and distillation
+as parallel arms held to one evidence standard. Two axes carry the
+evidence. On the source axis, a controlled Pythia panel shows that
+source-state information, including training tokens, predicts the
+compression response beyond dense loss for math and code but not QA,
+and a frozen pruning predictor generalized to a never-fit training
+stage. On the strength axis, source-conditioned inputs predict pruning
+damage at unseen densities far better than any strength-only curve,
+although a per-density fit ties the shared power form, so the inputs
+rather than a particular exponent carry that result; quantization is
+validated per configuration, with an unstable collapse magnitude at
+three bits and no demonstrated gain in the near-lossless region; and
+distillation shows capability-specific transfer in which the reuse
+coordinate helps QA on an unseen pool while a constant suffices for
+math and code, with a bias-dominated residual. Across the heterogeneous
+panel, capability responses are anisotropic with an invariant ordering
+and family-specific magnitudes and signs, the capability geometry of
+the source model supports the measurement layer as mechanism evidence,
+and capability loss remains a common outcome coordinate while
+compression ratio does not serve as a common intervention coordinate.
+Whether one response form unifies the arms remains open; the evidence
+negates only the resource-ratio models we tested, so we unify at the
+decision layer through a capability- and cost-aware method-selection
+map, offered as a framework deliverable rather than a validated
+selector. The controlled panels are small and their intervals
+panel-conditional; these limits are stated rather than filled in.

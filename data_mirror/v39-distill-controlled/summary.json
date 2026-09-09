@@ -1,0 +1,217 @@
+{
+  "panel": {
+    "sizes": [
+      "160m",
+      "410m",
+      "1.4b"
+    ],
+    "steps": [
+      16000,
+      64000,
+      143000
+    ],
+    "run": "gpt-5.6-luna_full_600_lora",
+    "n_cells": 9
+  },
+  "note": "distillation delta_c = L_c(S_KD)-L_c(S0); single-setting linear predictor, no config indicators",
+  "by_cap": {
+    "math": {
+      "size": {
+        "scheme": "leave_one_size_out",
+        "n": 9,
+        "mae_noD0": 0.03320744854465299,
+        "mae_D0": 0.015790616542265466,
+        "mae_baseline_mean": 0.03795761671661376,
+        "mae_baseline_median": 0.039168578132827064,
+        "strongest_baseline": "mean_base",
+        "mae_baseline": 0.03795761671661376,
+        "D0_beats_noD0": true,
+        "D0_beats_baseline": true,
+        "per_fold": [
+          {
+            "held": "1.4b",
+            "mae_D0": 0.014816648469679753,
+            "mae_noD0": 0.023104139702996764,
+            "mae_baseline": 0.0504956629491945
+          },
+          {
+            "held": "160m",
+            "mae_D0": 0.024136596451431545,
+            "mae_noD0": 0.05928132330435398,
+            "mae_baseline": 0.04543686888660392
+          },
+          {
+            "held": "410m",
+            "mae_D0": 0.008418604705685104,
+            "mae_noD0": 0.017236882626608236,
+            "mae_baseline": 0.017940318314042844
+          }
+        ]
+      },
+      "step": {
+        "scheme": "leave_one_step_out",
+        "n": 9,
+        "mae_noD0": 0.025712172029637423,
+        "mae_D0": 0.013863453406322371,
+        "mae_baseline_mean": 0.03084491198467312,
+        "mae_baseline_median": 0.03069001731304984,
+        "strongest_baseline": "med_base",
+        "mae_baseline": 0.03069001731304984,
+        "D0_beats_noD0": true,
+        "D0_beats_baseline": true,
+        "per_fold": [
+          {
+            "held": 16000,
+            "mae_D0": 0.013152273261949218,
+            "mae_noD0": 0.030650594020470646,
+            "mae_baseline": 0.028006274882016496
+          },
+          {
+            "held": 64000,
+            "mae_D0": 0.011038683806227143,
+            "mae_noD0": 0.009625585739494291,
+            "mae_baseline": 0.024394262965013642
+          },
+          {
+            "held": 143000,
+            "mae_D0": 0.017399403150790756,
+            "mae_noD0": 0.036860336328947335,
+            "mae_baseline": 0.039669514092119385
+          }
+        ]
+      }
+    },
+    "code": {
+      "size": {
+        "scheme": "leave_one_size_out",
+        "n": 9,
+        "mae_noD0": 0.12423324376631267,
+        "mae_D0": 0.13088768310182,
+        "mae_baseline_mean": 0.08674035337928848,
+        "mae_baseline_median": 0.07950373715764737,
+        "strongest_baseline": "med_base",
+        "mae_baseline": 0.07950373715764737,
+        "D0_beats_noD0": false,
+        "D0_beats_baseline": false,
+        "per_fold": [
+          {
+            "held": "1.4b",
+            "mae_D0": 0.09335082636150445,
+            "mae_noD0": 0.08963524125297906,
+            "mae_baseline": 0.13271531574360193
+          },
+          {
+            "held": "160m",
+            "mae_D0": 0.24412055749362205,
+            "mae_noD0": 0.23240183575429527,
+            "mae_baseline": 0.08174867284684269
+          },
+          {
+            "held": "410m",
+            "mae_D0": 0.055191665450333445,
+            "mae_noD0": 0.05066265429166375,
+            "mae_baseline": 0.0240472228824975
+          }
+        ]
+      },
+      "step": {
+        "scheme": "leave_one_step_out",
+        "n": 9,
+        "mae_noD0": 0.04381683485676799,
+        "mae_D0": 0.056892895226047235,
+        "mae_baseline_mean": 0.06275035434769215,
+        "mae_baseline_median": 0.061121675514354434,
+        "strongest_baseline": "med_base",
+        "mae_baseline": 0.061121675514354434,
+        "D0_beats_noD0": false,
+        "D0_beats_baseline": true,
+        "per_fold": [
+          {
+            "held": 16000,
+            "mae_D0": 0.04444060045623028,
+            "mae_noD0": 0.0658620150561778,
+            "mae_baseline": 0.036179779732192406
+          },
+          {
+            "held": 64000,
+            "mae_D0": 0.027099215002977888,
+            "mae_noD0": 0.023304586182830506,
+            "mae_baseline": 0.0533040171143333
+          },
+          {
+            "held": 143000,
+            "mae_D0": 0.09913887021893353,
+            "mae_noD0": 0.04228390333129567,
+            "mae_baseline": 0.0938812296965376
+          }
+        ]
+      }
+    },
+    "qa": {
+      "size": {
+        "scheme": "leave_one_size_out",
+        "n": 9,
+        "mae_noD0": 0.29442509994161375,
+        "mae_D0": 0.3669050974494216,
+        "mae_baseline_mean": 0.20132837804534567,
+        "mae_baseline_median": 0.18757591360371778,
+        "strongest_baseline": "med_base",
+        "mae_baseline": 0.18757591360371778,
+        "D0_beats_noD0": false,
+        "D0_beats_baseline": false,
+        "per_fold": [
+          {
+            "held": "1.4b",
+            "mae_D0": 0.37345013555040846,
+            "mae_noD0": 0.3730919318080896,
+            "mae_baseline": 0.14587294043092505
+          },
+          {
+            "held": "160m",
+            "mae_D0": 0.3283955300235711,
+            "mae_noD0": 0.34593156904584865,
+            "mae_baseline": 0.28709204689480367
+          },
+          {
+            "held": "410m",
+            "mae_D0": 0.3988696267742852,
+            "mae_noD0": 0.16425179897090297,
+            "mae_baseline": 0.12976275348542465
+          }
+        ]
+      },
+      "step": {
+        "scheme": "leave_one_step_out",
+        "n": 9,
+        "mae_noD0": 0.2651126209412169,
+        "mae_D0": 0.2631021643796909,
+        "mae_baseline_mean": 0.15891687790452036,
+        "mae_baseline_median": 0.16011829319814097,
+        "strongest_baseline": "mean_base",
+        "mae_baseline": 0.15891687790452036,
+        "D0_beats_noD0": true,
+        "D0_beats_baseline": false,
+        "per_fold": [
+          {
+            "held": 16000,
+            "mae_D0": 0.3394097433241076,
+            "mae_noD0": 0.3375355915888198,
+            "mae_baseline": 0.07216248151668773
+          },
+          {
+            "held": 64000,
+            "mae_D0": 0.13024772188512543,
+            "mae_noD0": 0.1414039613870123,
+            "mae_baseline": 0.13832283745247098
+          },
+          {
+            "held": 143000,
+            "mae_D0": 0.31964902792983985,
+            "mae_noD0": 0.31639830984781847,
+            "mae_baseline": 0.26626531474440224
+          }
+        ]
+      }
+    }
+  }
+}
