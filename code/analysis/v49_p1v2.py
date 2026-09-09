@@ -87,7 +87,7 @@ def freeze():
     (OUT / "register.json").write_text(json.dumps(reg, indent=2, default=float)); print("frozen ->", OUT / "register.json")
 
 def predict(tag):
-    size, step = tag.split("@"); step = int(step.replace("step", ""))
+    size, step = tag.split("@"); size = size.replace("pythia-", ""); step = int(step.replace("step", ""))
     dense = json.loads((OUT / f"dense_{tag}.json").read_text())["dense"]; reg = json.loads((OUT / "register.json").read_text())
     N0, D0 = v36.matrix_n0(size), step * v36.TOKENS_PER_STEP; out = {"target": {"tag": tag, "N0": N0, "D0": D0, "dense": dense}, "protocols": {}}
     for P, pr in reg["protocols"].items():
@@ -104,7 +104,7 @@ def predict(tag):
             q = pr["quant"][cap]; row = {"arm": "quantization", "capability": cap, "N0": N0, "D0": D0, "L0": dense[cap]}
             def cls(fit, fields, b):
                 return float(v36.predict({**fit, "with_d0": "D0" in fields}, [v36.basic_input({**row, "config": b}, input_fields=fields)])[0])
-            for b in TEST_B:
+            for b in tuple(x for x in TEST_B if x in BITS_DEV) + tuple(x for x in TEST_B if x not in BITS_DEV):  # class bits first, then 5-bit rule
                 if b in BITS_DEV:
                     res["quant"][f"{cap}|{b}"] = {"full": cls(q["full"], ("N0", "L0", "D0"), b), "noD0": cls(q["noD0"], ("N0", "L0"), b),
                                                   "per_bit_mean": q["per_bit_mean"][str(b)], "per_bit_median": q["per_bit_median"][str(b)], "zero": 0.0}
