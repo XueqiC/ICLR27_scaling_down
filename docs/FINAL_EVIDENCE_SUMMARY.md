@@ -25,6 +25,10 @@ single functional form remains OPEN (only tested resource-ratio models are negat
 - SCOPE: Pythia controlled panel; d∈[0.55,0.9]; source-transfer at a training-STAGE interpolation (step96000
   between 64k/143k), not a longer-training extrapolation. Small panel, point estimates.
 
+- **P1 new-source frozen prospective (C32, P-new):** on pythia-1b@96k the source-conditioned family SUCCEEDS at
+  the interpolated density (A1/A2/power 0.15–0.19 vs strength-only 0.70) and FAILS at the extrapolated density
+  (all 1.14–1.69, strength-only 0.27; QA sign missed) → validity range = density interpolation. One source.
+
 ## Quantization
 - CLAIM: on the discrete integer bit-widths {8,6,4,3}, the frozen {N0,L0,D0} predictor is compared to simple
   per-bit baselines per source. Evidence: v38 (160M/1.4B@96k), v40 (410M@96k), v44 (partition table).
@@ -36,6 +40,9 @@ single functional form remains OPEN (only tested resource-ratio models are negat
 - NOT CLAIMED: "no unseen-bit axis / quantization has no law / int3 artifact / a validated collapse-RISK law".
   v38 and v40 are separate source measurements, not one merged prospective.
 - SCOPE: weights-only per-output-channel RTN; discrete bits; Pythia @96k sources.
+
+- **P1 (C32):** on the new source the frozen full {N0,L0,D0} predictor beats no-D0/per-bit-median/zero at both
+  int4 (0.074) and int3 (0.397); D0 carries information on this source; still per-bit, one source.
 
 ## Distillation
 - CLAIM: dense-student baseline + signed transfer response δ_c = L_c(S_KD) − L_c(S0); reuse-count E = T/D_U

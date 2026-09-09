@@ -396,6 +396,29 @@ misfits under this quantizer definition, and a learned exponential fits
 better within the tested range (\S\ref{sec:quant}). We claim no
 collapse-risk law.
 
+\paragraph{New-source frozen prospective (pruning and quantization).}
+To test the retrospective same-input comparison on an independent
+source, we froze and committed every candidate's prediction for
+Pythia-1B at step 96k, a new size inside the 160M--1.4B range at an
+interpolated training stage that had never entered any fit or
+selection, before measuring it, using only its measured dense loss and
+public descriptors. At the interpolated density $d=0.65$ the
+source-conditioned forms succeed and are indistinguishable (MAE 0.149
+for the $\gamma=1$ variant, 0.172 for the per-density baseline, and
+0.193 for the shared power form, against 0.704 for strength-only and
+0.657 for zero change), with math and code errors of 0.02 to 0.09 and
+QA the weakest capability. At the extrapolated density $d=0.55$ every
+source-conditioned candidate fails (1.14 to 1.69), under-predicting the
+collapse of this source by 1 to 1.5 nats and missing the sign of the QA
+response, while the source-blind strength-only curve is closest (0.273);
+the transfer range of the source-conditioned family is therefore the
+interpolation regime. For quantization the frozen full-input predictor
+is best at both bits on this source (int4 MAE 0.074 against 0.211
+without $D_0$ and 0.111 for the per-bit median; int3 0.397 against
+0.620 and 2.46), so $D_0$ carries information here. This is one
+source-state: it confirms or refutes transfer for that state only and
+supports no population claim.
+
 \paragraph{Distillation: source and pool axes.}
 With the reference fixed to the initial student,
 $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$, a controlled LoRA panel (the

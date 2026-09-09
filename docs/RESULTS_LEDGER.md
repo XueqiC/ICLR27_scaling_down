@@ -106,3 +106,13 @@ constant 1.449). **math/code: per-capability CONSTANT wins** (E/T/2D over-extrap
 **Variability dominated by POOL-SAMPLING not training noise**: QA pool-std 0.427 vs train-std 0.043 (~10×),
 code ~4× — the distillation residual is a data-SELECTION effect, not optimization stochasticity. Small (6 runs); endpoint pools first-U vs U=225 sampled. See DISTILL_NEWPOOL.md.
 **Package-B residual correction (DISTILL_RESIDUALS.md, retrospective):** analyzing prediction residuals r=delta-delta_hat (not raw-delta std) shows the U225 error is dominated by SYSTEMATIC BIAS of the frozen predictors, NOT pool variation: math/code (constant) have small over-prediction bias (~-0.16/-0.11) with tiny variation; QA (E-only) has a LARGE budget-dependent bias that SIGN-FLIPS (-0.87 at b0 -> +0.48 at b1) = a form misfit, so E-only merely beats a constant, it does not cleanly transfer. Around the bias, residual variation is pool>training but small. Protocol: endpoints first-U, U225 random-sampled -> 'unseen pool size AND changed sampling', U225 E interpolates (2.34-4.70 in 0.94-14.94). DROP the earlier 'pool-std/train-std~10x explains the residual / data-selection effect' causal phrasing.
+
+
+### C32 — P1 new-source frozen prospective (P-new, pythia-1b@step96000; v46; frozen b1bf631)
+New size (0.81B matrix params, inside 160M–1.4B) at an interpolated stage; never used before. Predictions
+committed before measurement. PRUNING d=0.65 (interp): source-conditioned forms succeed and are indistinguishable
+(A1 0.149 / A2 0.172 / power 0.193 vs strength-only 0.704, zero 0.657; math/code err 0.02–0.09; QA weakest).
+PRUNING d=0.55 (extrap): ALL source-conditioned forms fail (1.14–1.69), under-predicting collapse by 1–1.5 nat and
+missing QA's sign; strength-only closest (0.273) → transfer range = interpolation regime; no A3. QUANT: frozen
+full {N0,L0,D0} best at int4 (0.074 vs no-D0 0.211, median 0.111) and int3 (0.397 vs 0.620, 2.46). One source;
+no population claim. P1_NEWSOURCE.md; ≈1 GPU-min.
