@@ -4,94 +4,92 @@
 We first establish what compression does to the capability vector on
 the heterogeneous panel (\S\ref{sec:phenomena}), then test prediction
 arm by arm with one template (inputs and baselines; source axis;
-configuration axis; independent tests and boundaries) for pruning
-(\S\ref{sec:prune}), quantization (\S\ref{sec:quant}), and distillation
-(\S\ref{sec:distill}), and close with a cross-arm synthesis and the
-limitations (\S\ref{sec:synthesis}). Mechanism evidence, recovery
-training, and the re-analysis of an earlier ability-space grid are
-supporting material in Appendix~\ref{sec:app_support}.
+configuration axis; boundaries) for pruning (\S\ref{sec:prune}),
+quantization (\S\ref{sec:quant}), and distillation
+(\S\ref{sec:distill}), and close with a synthesis and the limitations
+(\S\ref{sec:synthesis}). Mechanism evidence, recovery training, and the
+re-analysis of an earlier ability-space grid are supporting material
+(Appendix~\ref{sec:app_support}).
 
 \subsection{Capability responses on the heterogeneous panel}
 \label{sec:phenomena}
 
 \input{tables/panel_prune}
 
-\paragraph{Pruning.} Table~\ref{tab:panel_prune} gives the
-per-capability damage at $d=0.7$ and $d=0.5$, the density at which
-math damage first exceeds one nat, and how QA ranks among the three
-capabilities before that cliff. Three things are visible. Magnitudes
-differ by two orders across series at the same density (OLMo-3-32B
-$+0.01$ against Gemma-3-27B $+4.0$ on math at $d=0.7$). The ordering of
-capabilities is series-specific: in the three Qwen3 sizes and in
-OLMo-3-32B, QA is the least-damaged capability at every pre-cliff
-density and improves, by up to $-0.79$ nats at Qwen3-4B; in every
-Gemma-3 size, in Gemma-4-31B, and in Muse-30B, QA is the most-damaged
-capability at the mildest densities (Gemma-4-31B: $+2.89$ QA against
-$+0.68$ math at $d=0.7$). OLMo-3-7B falls in between with differences
-of at most $0.15$ nats. A noise screen sets the scale of what counts:
-the median $|\Delta L|$ at $d=0.9$ is $0.013$ nats, and of the 62
-cells with a nominal improvement across all arms, 29 exceed twice that
-median; the rest are treated as zero. Cliffs occur between $d=0.5$ and
-$0.7$ for Qwen3 and Gemma, at $0.55$ for Muse-30B, at $0.35$ for
-OLMo-3-7B, and had not occurred by $d=0.3$ for OLMo-3-32B, whose QA
-loss is $-0.24$ nats below dense at that density. Robustness is not
-monotone in size within a series: Gemma-3-12B is the most robust
-Gemma-3 size and 27B collapses earlier. We read all of this as
-heterogeneity that a predictor has to reproduce, not as an invariant.
+\paragraph{Pruning.} Table~\ref{tab:panel_prune} gives per-capability
+damage at two densities, the density at which math damage first exceeds
+one nat, and how QA ranks before that cliff. Magnitudes differ by two
+orders across series at the same density (OLMo-3-32B $+0.01$ against
+Gemma-3-27B $+4.0$ on math at $d=0.7$). The ordering of capabilities is
+series-specific: in the Qwen3 sizes and in OLMo-3-32B, QA is the
+least-damaged capability at every pre-cliff density and improves, by up
+to $-0.79$ nats at Qwen3-4B; in every Gemma-3 size, in Gemma-4-31B,
+and in Muse-30B, QA is the most-damaged capability at the mildest
+densities (Gemma-4-31B: $+2.89$ QA against $+0.68$ math at $d=0.7$);
+OLMo-3-7B lies in between with differences of at most $0.15$ nats. A
+noise screen sets the scale: the median $|\Delta L|$ at $d=0.9$ is
+$0.013$ nats, and 29 of the 62 nominal improvement cells across all
+arms exceed twice that median; the rest are treated as zero. Cliffs
+occur between $d=0.5$ and $0.7$ for Qwen3 and Gemma, at $0.55$ for
+Muse-30B and $0.35$ for OLMo-3-7B, and had not occurred by $d=0.3$ for
+OLMo-3-32B. Robustness is not monotone in size within a series
+(Gemma-3-12B is the most robust Gemma-3 size; 27B collapses earlier).
+We read this as heterogeneity a predictor has to reproduce, not as an
+invariant.
 
-\paragraph{Quantization.} Appendix Table~\ref{tab:panel_quant} covers 14
-models. Int8 and int6 stay within $0.01$ nats of dense throughout.
-Int4 damages small models (Gemma-3-270M $+2.0$, $+2.4$, $+0.9$) and
-barely touches large ones (Gemma-3-27B $+0.33$, $+0.23$, $-0.67$), and
-the QA improvement under int4 recurs in five models (Qwen3-1.7B, 8B,
-14B, Gemma-3-12B, Gemma-3-27B), all clearing the noise screen. Int3
-collapses 12 of the 14 models by $4.6$ to $28$ nats; OLMo-3-7B loses
-$2.8$ to $4.7$ nats and OLMo-3-32B only $0.4$ to $1.2$, so the
-collapse is common but not universal, and OLMo-3 is the robust series
-under both interventions. Within the tested bit-widths, a learned
-exponential $q_c e^{-k b}$ fits held-out bits better than the fixed
-$q_c 4^{-b}$ shape (pooled MAE $6.7$ against $7.6$ nats), which shows
-that the fixed base is wrong for this quantizer and nothing more; the
-squared step-size ratio of the quantizer between 4 and 5 bits is
-$(7/15)^2\approx0.22$ (Appendix~\ref{sec:app_compress}), and a loss
-ratio would follow from it only under additional error-distribution
-assumptions that we do not test.
+\paragraph{Quantization.} Appendix Table~\ref{tab:panel_quant} covers
+14 models. Int8 and int6 stay within $0.01$ nats of dense. Int4
+damages small models (Gemma-3-270M $+2.0$, $+2.4$, $+0.9$) and barely
+touches large ones (Gemma-3-27B $+0.33$, $+0.23$, $-0.67$); a QA
+improvement under int4 recurs in five models and clears the noise
+screen. Int3 collapses 12 of the 14 models by $4.6$ to $28$ nats;
+OLMo-3-7B loses $2.8$ to $4.7$ and OLMo-3-32B only $0.4$ to $1.2$, so
+the collapse is common but not universal, and OLMo-3 is the robust
+series under both interventions. Within the tested bit-widths a learned
+exponential $q_c e^{-kb}$ fits held-out bits better than the fixed
+$q_c4^{-b}$ shape (pooled MAE $6.7$ against $7.6$ nats), which says the
+fixed base is wrong for this quantizer and nothing more; the squared
+step-size ratio between 4 and 5 bits is $(7/15)^2\approx0.22$
+(Appendix~\ref{sec:app_compress}), and a loss ratio would follow only
+under error-distribution assumptions we do not test.
 
 \paragraph{Distillation.} Black-box traces from two API teachers (600
-per domain each) train Gemma-3 students under a full-trace and an
+per domain) train Gemma-3 students under a full-trace and an
 answer-only recipe in a paired design. The answer-only recipe hurts
-math more than full-trace training ($+0.19$ to $+0.22$ against $+0.09$
-to $+0.12$ nats relative to the initial student), while QA improves
-under every recipe ($-0.58$ to $-1.44$). Because the recipes differ in
-supervised tokens and update counts, this pairing does not isolate
-reasoning coverage; the controlled comparisons that hold tokens fixed
-are those of \S\ref{sec:distill}.
+math more ($+0.19$ to $+0.22$ against $+0.09$ to $+0.12$ nats relative
+to the initial student) while QA improves under every recipe ($-0.58$
+to $-1.44$); because the recipes differ in supervised tokens and update
+counts, this pairing does not isolate reasoning coverage, and the
+controlled comparisons are those of \S\ref{sec:distill}.
 
 \paragraph{What the endpoint does and does not say.} The same
-capability heterogeneity appears on independent secondary benchmarks
-for math and QA, where the primary-benchmark response predicts the
-secondary one better than any other capability's response does, with
-bootstrap intervals excluding zero in most hold-out protocols; for code
-the cross-capability predictor is as good or better, so code
-specificity is not established at this resolution
-(Appendix~\ref{sec:app_probes}). A lower QA loss does not by itself
-mean better QA behavior: in the four pruned OLMo-3-32B cells whose QA
-loss lies below dense, exact-match accuracy does not rise
-(Appendix~\ref{sec:app_probes}). The phrase ``QA improves'' in this
-paper refers to the loss.
+heterogeneity appears on independent secondary benchmarks for math and
+QA, where the primary-benchmark response predicts the secondary one
+better than any other capability's response does, with intervals
+excluding zero in most hold-out protocols; for code the
+cross-capability predictor is as good or better
+(Appendix~\ref{sec:app_probes}, Fig.~\ref{fig:measurement}). A lower
+QA loss does not by itself mean better QA behavior: in the four pruned
+OLMo-3-32B cells whose QA loss lies below dense, exact-match accuracy
+does not rise. ``QA improves'' in this paper refers to the loss.
 
 \subsection{Pruning arm}
 \label{sec:prune}
-
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figs/predictive_responses.pdf}
+\caption{Measured capability responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (filled circles) with the frozen shared power form, the per-density regression A2, and the source-free median curve; the 6.9B source at the same stage is overlaid in grey (measured squares and its A2 and median predictions) and the extrapolated density $0.55$ is shaded. Middle: quantization of the same sources at the integer bit-widths (5-bit is the fixed interpolation rule); measured points are filled, the frozen configuration-indicator prediction is hollow, the per-bit median dotted; guide lines are visual only. Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools U75 and U600 (fit) and the unseen pool U225 (test), with the frozen constant and $E$-only forms and the QA bias of the $E$-only form at the two budgets. All values are native nats per token; columns use separate axes. Generated by \texttt{plot\_fig1\_responses.py} from the compare and run files listed in \texttt{docs/FIGURE\_BUILD\_NOTES.md}.}
+\label{fig:responses}
+\end{figure}
 \input{tables/pred_main}
 
 \paragraph{Inputs, candidates, baselines.} Inputs are $N_0$, $D_0$,
-and the dense capability loss $L_{0,c}$ of the source; the candidates
-and baselines are those of \S\ref{sec:predictors}. All fits use the
-nine Pythia development states.
+and the dense capability loss $L_{0,c}$ of the source
+(Fig.~\ref{fig:responses}, left); candidates and baselines are those of
+\S\ref{sec:predictors}, fit on the nine Pythia development states.
 
-\paragraph{Source axis (Table~\ref{tab:pred_main}; Appendix Table~\ref{tab:pred_source}).} With the
-density held fixed and one pretraining stage held out, the
+\paragraph{Source axis (Table~\ref{tab:pred_main}; Appendix Table~\ref{tab:pred_source}).}
+With the density fixed and one stage held out, the
 configuration-indicator regression reaches MAE $0.253$ (math), $0.292$
 (code), and $0.806$ (QA) against $0.413$, $0.516$, and $0.500$ for the
 strongest simple baseline; the improvement interval excludes zero for
@@ -102,8 +100,8 @@ for math ($+0.55$, $[0.29,1.00]$) and code ($+0.66$, $[0.38,1.13]$),
 whereas adding $D_0$ to $\{N_0,L_{0,c}\}$ does not ($+0.36$,
 $[-0.04,0.60]$; $+0.40$, $[-0.01,0.63]$); on an earlier split that also
 held out sizes, the $D_0$ interval cleared zero in one pruning cell
-(math) out of six. On a frozen prospective at a new stage (step 96k on
-the 160M and 1.4B sources, between 64k and 143k) the frozen regression
+(math) of six. On a frozen prospective at a new stage (step 96k on the
+160M and 1.4B sources, between 64k and 143k), the frozen regression
 beat both its no-$D_0$ variant and the per-configuration median on all
 three capabilities, with the largest margin on math.
 
@@ -111,13 +109,13 @@ three capabilities, with the largest margin on math.
 On the development sources plus a new source (410M at 96k), pooled over
 the unseen densities $0.65$ and $0.55$, the frozen shared power form
 has MAE $0.371$, $0.524$, $0.759$ against $1.37$, $1.64$, $1.61$ for
-the strength-only curve: a source-blind curve cannot see that one state
-(160M at 143k) is several times more fragile than another. The
+the strength-only curve: a source-blind curve cannot see that one
+state (160M at 143k) is several times more fragile than another. The
 same-input regression A2, added after the test, is better on math and
 code and within noise on QA, so the power structure adds nothing that
 the per-density regression lacks. Two frozen rounds on new sizes then
 set the range. For the 1B source, inside the development size range, at
-the interpolated densities over two stages the power form, A2, and the
+the interpolated densities over two stages, the power form, A2, and the
 source-free median curve are within $0.05$ nats of one another on every
 capability; per stage (Appendix~\ref{sec:app_p1v2}) A2 is best at 112k
 on each capability and the median curve is best at 32k, driven by QA.
@@ -133,57 +131,56 @@ Table~\ref{tab:p1v2}) the 6.9B interpolation errors shrink to the level
 of the source-free curves without beating them.
 
 \paragraph{Boundaries.} Source-state information improves pruning
-prediction at seen densities and at interpolated densities, for
-sources inside the development size and stage range, and mostly for
-math and code. The gain does not require the shared power structure.
-It does not extend to a source five times larger, to density $0.55$, or
-reliably to QA, whose response the current inputs do not carry.
+prediction at seen densities and at interpolated densities for sources
+inside the development size and stage range, mostly for math and code,
+and does not require the power structure. It does not extend to a
+source five times larger, to density $0.55$, or reliably to QA, whose
+response the current inputs do not carry.
 
 \subsection{Quantization arm}
 \label{sec:quant}
 
 \paragraph{Inputs, candidates, baselines.} The same inputs; the
 configuration-indicator regression per bit-width against its no-$D_0$
-variant, the per-bit mean and median, and zero change.
+variant, the per-bit mean and median, and zero change
+(Fig.~\ref{fig:responses}, middle).
 
 \paragraph{Source axis.} Pooled over the four bit-widths with a stage
-held out (Table~\ref{tab:pred_main}), the regression improves on the
-per-bit median by $+0.27$ (math), $+0.93$ (code, interval excluding
-zero), and $-0.52$ (QA); adding $D_0$ has an interval above zero for
-code ($+1.45$, $[0.15,2.10]$), a positive point estimate for math, and
-none for QA. The pooled number is dominated by int3, so the frozen
-step-96k test on three new sources is reported by regime: at 4 bits and
-above the responses are near zero and candidate and median errors are
-both small ($0.03$ against $0.08$ for math, $0.10$ against $0.09$ for
-code, $0.17$ against $0.13$ for QA), which demonstrates no gain at that
-error scale and does not show that none exists; at int3 the candidate
-is better for math ($+0.45$) and worse for code ($-1.12$) and QA
-($-0.32$), so the magnitude of the collapse does not transfer
-consistently across capabilities.
+held out, the regression improves on the per-bit median by $+0.27$
+(math), $+0.93$ (code, interval excluding zero), and $-0.52$ (QA);
+adding $D_0$ has an interval above zero for code ($+1.45$,
+$[0.15,2.10]$), a positive point estimate for math, and none for QA.
+The pooled number is dominated by int3, so the frozen step-96k test on
+three new sources is reported by regime: at 4 bits and above the
+responses are near zero and candidate and median errors are both small
+($0.03$ against $0.08$, $0.10$ against $0.09$, $0.17$ against $0.13$),
+which demonstrates no gain at that scale and does not show that none
+exists; at int3 the candidate is better for math ($+0.45$) and worse
+for code ($-1.12$) and QA ($-0.32$), so the collapse magnitude does not
+transfer consistently across capabilities.
 
-\paragraph{Configuration axis (Table~\ref{tab:pred_main}; Appendix Table~\ref{tab:pred_config_qd}).} The
-tested settings are the integer bit-widths; there is no integer between
-3 and 4, so the unseen-configuration tests are the 5-bit rule and the
-unseen sizes. For the in-range 1B source the regression is worse than
-the per-bit median at 4 bits and above, and at int3 it is better for
-math and code ($+1.2$ nats each) and worse for QA ($-1.0$). For the
-6.9B source it is worse everywhere, by $0.1$ to $0.4$ nats above 3 bits
-and by $1.2$ to $3.6$ nats at int3, where it overshoots the collapse.
-Under protocol B (Appendix Table~\ref{tab:p1v2}) the 6.9B differences
-above 3 bits shrink to at most $0.05$ nats and at int3 the regression
-is ahead at 112k ($1.29$ against $3.8$ to $4.1$) and behind at 32k. The
-single-stage 1B@96k test had the regression ahead on the int3 aggregate
-($0.40$ against $0.62$ for the median and $2.46$ without $D_0$) with
-the same math-positive, code-negative pattern per capability.
+\paragraph{Configuration axis (Appendix Table~\ref{tab:pred_config_qd}).}
+The tested settings are the integer bit-widths, so the
+unseen-configuration tests are the 5-bit rule and the unseen sizes. For
+the in-range 1B source the regression is worse than the per-bit median
+at 4 bits and above, and at int3 it is better for math and code
+($+1.2$ nats each) and worse for QA ($-1.0$). For the 6.9B source it is
+worse everywhere, by $0.1$ to $0.4$ nats above 3 bits and by $1.2$ to
+$3.6$ nats at int3, where it overshoots the collapse. Under protocol B
+(Appendix Table~\ref{tab:p1v2}) the 6.9B differences above 3 bits
+shrink to at most $0.05$ nats and at int3 the regression is ahead at
+112k ($1.29$ against $3.8$ to $4.1$) and behind at 32k. The
+single-stage 1B@96k test had the regression ahead on the int3
+aggregate ($0.40$ against $0.62$ for the median and $2.46$ without
+$D_0$) with the same math-positive, code-negative pattern.
 
-\paragraph{Boundaries.} In the near-zero regime (4 bits and above) no
-predictor is distinguishable from a per-bit constant on these panels.
-In the collapse regime (int3) the source-conditioned regression carries
-information for in-range sizes, with a sign that differs by capability,
-and it does not transfer to a five-times larger source. Which of these
-statements holds depends on the fitting protocol, as the protocol B
-exceptions show, so a quantization result in this paper is always
-stated with its precision regime and protocol.
+\paragraph{Boundaries.} In the near-zero regime no predictor is
+distinguishable from a per-bit constant on these panels. In the
+collapse regime the source-conditioned regression carries information
+for in-range sizes, with a sign that differs by capability, and does
+not transfer to a five-times larger source. Which statement holds
+depends on the fitting protocol, so a quantization result here is
+always stated with its precision regime and protocol.
 
 \subsection{Distillation arm}
 \label{sec:distill}
@@ -191,73 +188,70 @@ stated with its precision regime and protocol.
 \paragraph{Inputs, candidates, baselines.} The response is the signed
 transfer $\delta_c$ relative to the initial student. On the source
 axis the inputs are the student's $N_0$, $D_0$, and $L_{0,c}$ with a
-fixed teacher and pool; on the pool axis the inputs are the processed
-tokens $T$ and the reuse count $E=T/D_U$ of a fixed student.
+fixed teacher and pool; on the pool axis they are the processed tokens
+$T$ and the reuse count $E=T/D_U$ of a fixed student
+(Fig.~\ref{fig:responses}, right).
 
-\paragraph{Source axis (Table~\ref{tab:pred_main}).} With one stage
-held out on the nine-state LoRA panel, the linear model in
-$\{N_0,L_{0,c},D_0\}$ halves the error of a constant for math ($0.014$
-against $0.031$), ties for code ($0.057$ against $0.061$, with the
-no-$D_0$ variant at $0.044$), and is worse than a constant for QA
-($0.263$ against $0.159$). Nine cells give no usable interval; these
-are point estimates.
+\paragraph{Source axis.} With one stage held out on the nine-state
+LoRA panel, the linear model in $\{N_0,L_{0,c},D_0\}$ halves the error
+of a constant for math ($0.014$ against $0.031$), ties for code
+($0.057$ against $0.061$, with the no-$D_0$ variant at $0.044$), and is
+worse than a constant for QA ($0.263$ against $0.159$); nine cells give
+no usable interval.
 
-\paragraph{Configuration axis (Table~\ref{tab:pred_main}; Appendix Table~\ref{tab:pred_config_qd}).} Four
-forms frozen on the endpoint pools U75 and U600 were applied to an
-unseen middle pool U225, whose reuse count ($2.3$ to $4.7$) lies inside
-the endpoint range; because the endpoints are pool prefixes and U225 is
-randomly sampled, the sampling protocol changes as well. The reuse-count
-form beats the constant only for QA ($0.706$ against $1.449$) and ties
-the joint form; for math and code the constant is best ($0.122$,
-$0.069$) and the fitted forms over-extrapolate. All four forms were
-frozen and are reported; the per-capability recommendation (reuse
-count for QA, constant for math and code) is a reading made after the
-result. The residual is dominated by systematic bias: the QA reuse-count
-prediction is $-0.87$ nats off at one budget and $+0.48$ at the other,
-a form misfit, and around that bias the variation across pool samples
-exceeds the variation across training seeds (QA $0.43$ against $0.04$
-nats), which describes this design of three pools and two seeds and
-decomposes no population variance.
+\paragraph{Configuration axis.} Four forms frozen on the endpoint
+pools U75 and U600 were applied to an unseen middle pool U225, whose
+reuse count ($2.3$ to $4.7$) lies inside the endpoint range; because
+the endpoints are pool prefixes and U225 is randomly sampled, the
+sampling protocol changes as well. The reuse-count form beats the
+constant only for QA ($0.706$ against $1.449$) and ties the joint form;
+for math and code the constant is best ($0.122$, $0.069$) and the
+fitted forms over-extrapolate. All four forms are reported; the
+per-capability recommendation (reuse count for QA, constant for math
+and code) is a reading made after the result. The residual is
+dominated by systematic bias: the QA reuse-count prediction is $-0.87$
+nats off at one budget and $+0.48$ at the other, a form misfit, and
+around that bias the variation across pool samples exceeds the
+variation across training seeds (QA $0.43$ against $0.04$ nats), which
+describes this design of three pools and two seeds and decomposes no
+population variance.
 
 \paragraph{Boundaries.} A transfer predictor from the student state
 exists for math on the controlled panel; for QA a constant is better on
-both axes tested; the reuse-count coordinate carries information for QA
-on the unseen pool with a budget-dependent bias. Both panels are small,
-the pool test changes two things at once, and the absolute-exposure
-matrix that separates them is outside the data cut-off of this paper.
+both axes; the reuse-count coordinate carries information for QA on the
+unseen pool with a budget-dependent bias. Both panels are small, the
+pool test changes two things at once, and the absolute-exposure matrix
+that separates them lies outside the data cut-off of this paper.
 
 \FloatBarrier
 \subsection{Cross-arm synthesis and limitations}
 \label{sec:synthesis}
 \label{sec:planned}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figs/transfer_limits.pdf}
+\caption{Where transfer holds and where it fails. Top: improvement of the headline candidate (shared power form for pruning, configuration-indicator regression for quantization) over the strongest source-free baseline, MAE difference averaged over the three capabilities, for each new source (rows), regime (columns), and fitting protocol (panels); each cell also prints the candidate MAE and the baseline that was strongest. Positive (blue) means the candidate is better. The 1B@96k row is the earlier single-stage freeze, evaluated at $d=0.65/0.55$ and int4/int3 only; its protocol-B cells were not evaluated. Bottom: the distillation pool test, $E$-only form against the constant on the unseen pool U225, per capability. Generated by \texttt{plot\_fig3\_transfer.py}.}
+\label{fig:transfer}
+\end{figure}
+\paragraph{Inputs and forms (Appendix Fig.~\ref{fig:gains}).} The dense
+capability vector is the input with the clearest support: adding it has
+intervals above zero for math and code on the controlled pruning
+panel, and every successful frozen test uses it. Training tokens add
+information beyond $\{N_0,L_{0,c}\}$ with interval support in one cell
+(quantization, code) and positive point estimates in most others, and
+never for QA. On the same inputs the shared power form never beats the
+per-density regression with a fixed interpolation rule, so no exponent
+is established by these data.
 
-\paragraph{Which inputs help, and when.} The dense capability vector
-of the source is the input with the clearest support: on the
-controlled pruning panel adding it has intervals above zero for math
-and code, and every successful frozen test uses it. Training tokens
-$D_0$ add information beyond $\{N_0,L_{0,c}\}$ with interval support in
-one cell (quantization, code) and positive point estimates in most
-others; they never help QA. Source information beats source-free
-curves for pruning inside the development range and at seen or
-interpolated densities, and for quantization only in the collapse
-regime and for in-range sizes.
-
-\paragraph{Which forms add nothing.} On the same inputs, the shared
-power form never beats the per-density regression with a fixed
-interpolation rule, so no exponent is established by these data. At a
-new in-range size the per-density regression matches the source-free
-median curve on the pooled stages and beats it at the late stage only;
-at a five-times larger size it loses.
-
-\paragraph{Which transfers were tested.} Unseen stage inside the
-range: supported for pruning (leave-one-out and frozen). Unseen density
-inside the fitted range: supported for in-range sizes. Density $0.55$:
-fails for every source-conditioned form. Unseen size inside the range:
-on par with source-free curves. Size five times beyond the range: fails
-in both arms. Unseen bit-width: only the 5-bit rule, which is worse
-than a per-bit constant. Unseen pool: reuse count helps QA only. Each
-of these is one or two source states or one pool; none is a population
-statement.
+\paragraph{Which transfers were tested (Fig.~\ref{fig:transfer}).}
+Unseen stage inside the range: supported for pruning (leave-one-out and
+frozen). Unseen density inside the fitted range: supported on the
+development sources; on par with source-free curves at a new in-range
+size. Density $0.55$: fails for every source-conditioned form. Size
+five times beyond the range: fails in both arms. Unseen bit-width: only
+the 5-bit rule, worse than a per-bit constant. Unseen pool: reuse count
+helps QA only. Each is one or two source states or one pool; none is a
+population statement.
 
 \paragraph{Resource-ratio models.} A method-agnostic response in the
 storage or active-parameter ratio was tested on the heterogeneous
@@ -266,21 +260,19 @@ median $+5.9$, $+8.2$, and $+2.9$ nats while int8 quantization costs
 none; over 75 storage-matched pairs (14 with both sides pre-cliff) the
 mean absolute method gap is $9.3$ nats with sign agreement $0.61$, and
 the two shared-law hypotheses fit on pre-cliff cells reach held-out
-sign accuracies of $0.51$ and $0.37$. These particular models are
-rejected; whether another single form could unify the arms is untested.
+sign accuracies of $0.51$ and $0.37$. These models are rejected;
+whether another single form could unify the arms is untested. A
+capability- and cost-aware method selection would use predictors like
+these as loss constraints; an offline replay with frozen predictions
+quantifies the decision cost of prediction error, but no held-out
+selection validation was run, so nothing here is a validated selector.
 
-\paragraph{From predictors to selection.} A capability- and cost-aware
-method selection would use predictors like these as loss constraints.
-An offline replay with frozen predictions exists and quantifies the
-decision cost of prediction error, but no held-out agent or selection
-validation was run, so nothing here is a validated selector.
-
-\paragraph{Limitations.} The controlled panels have three sizes,
-three stages, and three pools, so intervals are conditional on the
-panel. QA is the capability the current inputs carry worst on every
-axis. The quantization conclusions depend on the precision regime and
-on the fitting protocol. The distillation pool test changes sampling
-protocol and pool size together. Code specificity of the endpoint was
-not detected at the available resolution. Recovery training, geometry,
-and the M1/M2 shared-law tests rest on single models or pre-cliff
-subsets and are reported as supporting evidence only.
+\paragraph{Limitations.} The controlled panels have three sizes, three
+stages, and three pools, so intervals are conditional on the panel. QA
+is the capability the current inputs carry worst on every axis. The
+quantization conclusions depend on the precision regime and the fitting
+protocol. The distillation pool test changes sampling protocol and pool
+size together. Code specificity of the endpoint was not detected at the
+available resolution. Recovery training, geometry, and the shared-law
+tests rest on single models or pre-cliff subsets and are supporting
+evidence only.

@@ -5,24 +5,23 @@ We asked whether the model state observable before compression,
 together with the intervention setting, predicts the
 capability-conditioned loss after pruning, quantization, and
 distillation, and over which ranges such predictions transfer. The
-answer has three parts. Capability responses are heterogeneous across
-capabilities and model series, in sign as well as magnitude, so a
+answer has three parts. Responses are heterogeneous across
+capabilities and model series in sign and magnitude, so a
 capability-conditioned endpoint is necessary and no single ordering
-holds. Source-state information helps: the dense capability vector is
-the input that carries prediction, and source-conditioned pruning
-predictors beat source-free curves at seen densities and at
-interpolated densities on the development sources, mostly for math and
-code, and match them at a new in-range size;
-the particular power structure adds nothing over a per-density
+holds. Source-state information helps: the dense capability vector
+carries the prediction, source-conditioned pruning predictors beat
+source-free curves at seen densities and at interpolated densities on
+the development sources, mostly for math and code, and match them at a
+new in-range size; the power structure adds nothing over a per-density
 regression, and training tokens add little beyond the dense anchor. The
 transfer range is bounded: the same predictors fail at density $0.55$
 and at a source five times larger, quantization predictors add value
-only in the collapse regime and only under some fitting protocols, and
-for distillation a reuse-count coordinate helps QA on an unseen pool
-while a constant is best for math and code. Method-agnostic
-resource-ratio laws fail a matched-storage test. These results identify
-conditional predictive relationships and their tested limits, and they
-provide the measurements, registers, and comparison protocol on which
-capability-conditioned scaling-down laws can be developed; extending
+only in the collapse regime and under some fitting protocols, and for
+distillation a reuse-count coordinate helps QA on an unseen pool while
+a constant is best for math and code. Method-agnostic resource-ratio
+laws fail a matched-storage test. These results identify conditional
+predictive relationships and their tested limits and provide the
+measurements, registers, and comparison protocol on which
+capability-conditioned scaling-down laws can be developed; widening
 the size range of the development panel and finding inputs that carry
-the QA response are the next steps, and both require new experiments.
+the QA response are the next steps, and both need new experiments.

@@ -1,82 +1,73 @@
 \section{Introduction}
 \label{sec:intro}
 
-Deployed language-model agents are specialists. A coding agent depends
+Deployed language-model agents are specialists: a coding agent depends
 on code synthesis and tool use, a retrieval assistant on multi-hop
-question answering, and neither needs frontier-scale generality while
-both pay for every token of inference. The practical question is which
-model covers a workload's capability profile at the lowest cost, and
-the usual answer starts from a strong dense source and scales it down
-by pruning, quantization, or distillation, often with recovery
-training. Compression does not shrink capabilities uniformly. At the
-same size or bit-width, different methods and different source
-families preserve different capabilities, improve some while collapsing
-others, and hit cliffs at different strengths (\S\ref{sec:phenomena}).
-Aggregate perplexity and average benchmark scores hide this, so
-choosing a route today means running each candidate configuration
-through capability benchmarks.
+question answering, and both pay for every token of inference. The
+practical question is which model covers a workload's capability
+profile at the lowest cost, and the usual answer starts from a strong
+dense source and scales it down by pruning, quantization, or
+distillation. Compression does not shrink capabilities uniformly: at
+the same size or bit-width, different methods and source families
+preserve different capabilities, improve some while collapsing others,
+and hit cliffs at different strengths (\S\ref{sec:phenomena}).
+Aggregate perplexity hides this, so choosing a route today means
+running each candidate configuration through capability benchmarks.
 
 This paper asks whether that search can be predicted from what is
 observable before compression. We fix a per-capability conditional
 loss as the endpoint and write every prediction relative to a reference
-measured beforehand: the dense source for pruning and quantization, the
-initial student for distillation (\S\ref{sec:prelim}). The admitted
+measured beforehand, the dense source for pruning and quantization and
+the initial student for distillation (\S\ref{sec:prelim}). The admitted
 inputs are the source size, its pretraining token count where
 disclosed, its dense capability losses, and the intervention setting.
-The question is then concrete. Can pre-compression model-state
+The question is then concrete: can pre-compression model-state
 information and intervention settings predict capability-conditioned
 loss, and over which source and intervention ranges do those
 predictions transfer?
 
-Answering it requires separating three things that a single accuracy
-number would blur. A predictor can fail because the source information
-is useless, because the functional form is wrong, or because the test
-lies outside the range in which anything was fit. We therefore test
-two axes separately, transfer across source-model states at a fixed
-intervention and prediction at unseen intervention settings, and we
-compare every candidate against baselines that use the same
-information: a source-free strength curve or a per-configuration
-constant asks whether the source state helps at all, a no-$D_0$ variant
-asks what training tokens add, and same-input alternatives ask whether
-a particular form adds anything (\S\ref{sec:method}). New-source tests
-are frozen prospectives: forms, coefficients, and predictions are
-committed before the compressed model is measured, and a failed
-prospective keeps its label.
+A predictor can fail because the source information is useless,
+because the functional form is wrong, or because the test lies outside
+the range in which anything was fit, and a single accuracy number blurs
+the three. We therefore test two axes separately, transfer across
+source states at a fixed intervention and prediction at unseen
+intervention settings, and compare every candidate with baselines that
+use the same information: a source-free curve or per-configuration
+constant asks whether the source state helps at all, a no-$D_0$
+variant asks what training tokens add, and same-input alternatives ask
+whether a particular form adds anything (\S\ref{sec:method}).
+New-source tests are frozen prospectives, committed before the
+compressed model is measured, and a failed prospective keeps its label.
 
 The evidence has three layers (\S\ref{sec:exp}). On a heterogeneous
-panel of 12 public models from five series, the capability response to
-compression is strongly capability- and series-specific: QA is the
+panel of 12 public models from five series, the response to
+compression is capability- and series-specific: QA is the
 least-damaged capability in Qwen3 and OLMo-3-32B, where it improves
 under moderate pruning, and the most-damaged one in the Gemma series at
 mild densities; 3-bit quantization collapses 12 of 14 models but not
 OLMo-3-32B. On a controlled Pythia panel, the dense capability vector
-is the input that carries prediction, training tokens add little beyond
-it, and source-conditioned pruning predictors beat source-free curves
-at seen densities and at interpolated densities on the development
-sources, mostly for math and code, and match them at a new in-range
-size; a shared power form adds nothing over a per-density regression
-with a fixed interpolation rule. The same predictors fail at density
-$0.55$ and at a source five times larger than the development range,
-in both arms. Quantization gains appear
-only in the collapse regime and depend on the fitting protocol. For
-distillation, a reuse-count coordinate helps QA on an unseen data pool
-with a budget-dependent bias, and a constant is best for math and code.
-Method-agnostic laws in storage or active-parameter ratios fail a
-matched-storage test.
+carries the prediction and training tokens add little beyond it;
+source-conditioned pruning predictors beat source-free curves at seen
+densities and at interpolated densities on the development sources,
+mostly for math and code, match them at a new in-range size, and fail
+at density $0.55$ and at a source five times larger, in both arms; a
+shared power form adds nothing over a per-density regression.
+Quantization gains appear only in the collapse regime and depend on the
+fitting protocol. For distillation, a reuse-count coordinate helps QA
+on an unseen pool with a budget-dependent bias, and a constant is best
+for math and code. Method-agnostic laws in storage or active-parameter
+ratios fail a matched-storage test.
 
 \paragraph{Contributions.}
 (1) A capability-conditioned prediction problem with an explicit
-admitted-information budget, a common loss interface across three
-compression methods, and a two-axis validation design that separates
-source transfer from configuration transfer (\S\ref{sec:prelim},
+information budget, one loss interface for three compression methods,
+and a two-axis validation design (\S\ref{sec:prelim},
 \S\ref{sec:method}).
-(2) Candidate relations for each arm, compared on the same inputs
-against same-budget baselines, with frozen prospective tests on new
-sources and their measured range of validity
-(\S\ref{sec:prune}--\ref{sec:distill}).
-(3) An empirical account of the conditions under which transferable
-prediction is possible and of its failure boundaries, with reproducible
-measurements, registers, and evaluation code (\S\ref{sec:synthesis}).
-Dense-reference scaling laws are prior work that we use, the Fisher
-implementation is infrastructure, and method selection is discussed
-but not validated.
+(2) Candidate relations per arm, compared on the same inputs with
+same-budget baselines and frozen prospective tests on new sources, with
+their measured range of validity (\S\ref{sec:prune}--\ref{sec:distill}).
+(3) An empirical account of when transferable prediction is possible
+and where it fails, with reproducible measurements, registers, and
+evaluation code (\S\ref{sec:synthesis}). Dense-reference scaling laws
+are prior work we use, the Fisher implementation is infrastructure, and
+method selection is discussed but not validated.
