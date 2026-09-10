@@ -123,3 +123,35 @@ capability responses at matched settings. No GPTQ law; no latency/storage claims
   protocols. Paper updated (abstract/conclusion qualified; new paragraphs; tab:p1v2; tab:main +8 rows). GPU-h ≈1.0.
 - P3 decision unchanged (only if >=6 h remain after P2 tests); it is also held back until the solo-throughput baseline of
   the first dev run is recorded, so it cannot contaminate the solo-vs-paired measurement.
+
+## Round v3 (2026-09-09 21:10 EDT; advisor packages) — turn phenomena into deliverable predictors
+Rules carried over: no Qwen, no new teacher API, freeze-before-measure, old frozen predictions immutable, no config
+dropped by outcome, budget 72 GPU-h total (card wall-clock), concurrency by measured throughput.
+
+### V3-P (pruning): choose one deliverable predictor, then confirm once
+- CPU development (v53): dev = 9 Pythia states + unblinded 1B@32k/96k/112k + 6.9B@32k/112k (all measured densities);
+  candidates = shared power, A2 (per-density regression + interpolation), continuous low-order form; same inputs
+  (N0, D0, L0c), same standardization, ridge on the same dev split; source-free baselines strength-only / median / zero.
+  Selection rule (pre-committed): lowest leave-one-source-out MAE averaged over capabilities; ties (<0.02 nats) go to
+  the form with fewer parameters that is continuous and zero at d=1. Old frozen v40/v46/v49 predictions untouched.
+- Test panel: Pythia-410M@48k, 1.4B@112k, 6.9B@80k (verify unused + weight identity vs neighbouring steps), densities
+  0.85 / 0.675 / 0.575 (interpolation between dev grid points; not labelled extrapolation). Order: dense L0 measured ->
+  v53 freeze + commit -> 9 prune configs measured (forward only, ~1.5 GPU-h).
+### V3-Q (quantization): add group size g -> F_{Q,c}(N0,D0,L0c,b,g)
+- Same symmetric RTN, contiguous groups of g weights along the input dimension, per-group absmax scale (v54).
+- Dev: 160M/410M/1.4B x {16k,143k} = 6 states x b{3,5} x g{64,256} (24). Tests: bit test b=4, g{64,256} (12);
+  granularity test g=128, b{3,4,5} (18); joint test Pythia-1B@96k g=128, b{3,4,5} (3, a known model, new configs).
+- Predictors: separable (state amplitude x shared (b,g) shape), low-order 2D with b x g interaction, same-input
+  interpolation baseline; compact candidate A_c(x)(2^{b-1}-1)^{-p_c}(g/g_ref)^{q_c} is a candidate, not a derived law.
+  Stop rule: if dev shows only near-zero and collapse cells with no identifiable middle response, stop the grid.
+### V3-D (distillation): one controlled matrix (reuse P2-v2)
+- Reuse: dev 270M/1B x U{75,450} x seeds{11,12,13} (running), tests U375 seeds{21,22,23} for 270M/1B/4B (queued).
+- Add: 4B x U{75,450} x seeds{11,12} (student held out at dev pools; 4 runs) and 2 training-seed repeats (270M U75 s11
+  seed 1; 1B U450 s11 seed 1). v50 freeze extended to emit 4B@U75/U450 predictions before those runs.
+- Budgets = processed-token triggers 119k/237k/475k/949k (already fixed); no 750k seal in existing runs.
+- Forms to add on CPU: (a_c + λ_c z_c) log(1+E) and (a_c + λ_c z_c)(1-e^{-T/T*}) + (b_c + μ_c z_c) log(1+E), z_c = L0c
+  primary (log N_S alternative); compared with zero / constant / T-only / E-only / same-input surface.
+### CPU common test: shared response shape across capabilities vs per-capability models at matched complexity.
+### Execution order: CPU (v53 dev, v54 implementation, v50 extension) now; forward packages interleaved with the running
+pipeline when a lane is idle; 4B dev runs + seed repeats after the test lanes; each package updates one paper table
+(formula + coefficients, inputs, dev/test ranges, per-capability MAE, gain vs same-input baseline, bias, intervals).
