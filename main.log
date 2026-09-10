@@ -912,17 +912,47 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [17]
 (tables/v56_forms) (tables/shared_structure
 Underfull \hbox (badness 10000) in paragraph at lines 5--5
+[]|\TU/ptm/b/n/9 What is
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--5
 []|\TU/ptm/b/n/9 Held-out MAE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--9
+Underfull \hbox (badness 10000) in paragraph at lines 5--5
+[]|\TU/ptm/b/n/9 K0 vs K1
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--7
+[]|\TU/ptm/b/n/9 Pruning
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--8
+[]|\TU/ptm/b/n/9 Grouped
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--8
+[]|\TU/ptm/b/n/9 Separable
+ []
+
+
+Underfull \hbox (badness 5331) in paragraph at lines 9--9
 []|\TU/ptm/b/n/9 Distill expo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--10
-[]|\TU/ptm/b/n/9 Pruning shar-
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+[]|$[]\OT1/cmr/m/n/9 (1 + \OML/cmm/m/it/9 E\OT1/cmr/m/n/9 )$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+[]|$\OML/cmm/m/it/9 ^^L[]$\TU/ptm/b/n/9 ; inactive
  []
 
 
@@ -931,42 +961,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--11
  []
 
 
-Underfull \hbox (badness 3291) in paragraph at lines 11--11
-[]|\TU/ptm/b/n/9 2D term vec-
- []
-
-
-Underfull \hbox (badness 2269) in paragraph at lines 11--11
-[]|\TU/ptm/b/n/9 Capability off-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--12
-[]|\TU/ptm/b/n/9 Source ampli-
- []
-
-
-Underfull \hbox (badness 4726) in paragraph at lines 12--12
+Underfull \hbox (badness 1960) in paragraph at lines 12--12
 []|$\OML/cmm/m/it/9 ^^M$ \TU/ptm/b/n/9 min/med/max
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--13
-[]|\TU/ptm/b/n/9 Source ampli-
- []
-
-
-Underfull \hbox (badness 4726) in paragraph at lines 13--13
+Underfull \hbox (badness 1960) in paragraph at lines 13--13
 []|$\OML/cmm/m/it/9 ^^M$ \TU/ptm/b/n/9 min/med/max
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 14--14
-[]|\TU/ptm/b/n/9 Source ampli-
- []
-
-
-Underfull \hbox (badness 4726) in paragraph at lines 14--14
+Underfull \hbox (badness 1960) in paragraph at lines 14--14
 []|$\OML/cmm/m/it/9 ^^M$ \TU/ptm/b/n/9 min/med/max
  []
 
@@ -976,8 +981,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--16
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 16--16
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 17--17
-[]|\TU/ptm/b/n/9 Prune confir-
+[]|\TU/ptm/b/n/9 One target
  []
 
 
@@ -986,12 +996,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
+Underfull \hbox (badness 5245) in paragraph at lines 18--18
 []|\TU/ptm/b/n/9 Prune pairs:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
+Underfull \hbox (badness 10000) in paragraph at lines 18--18
+\TU/ptm/b/n/9 17-source
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--18
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
+Underfull \hbox (badness 5245) in paragraph at lines 19--19
 []|\TU/ptm/b/n/9 Prune pairs:
  []
 
@@ -1001,8 +1021,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--19
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 19--20
 []|\TU/ptm/b/n/9 66.7%/1.523 to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]|\TU/ptm/b/n/9 Quant 2D
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]|\TU/ptm/b/n/9 One target
  []
 
 
@@ -1011,13 +1051,63 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--21
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 21--21
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--21
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]|\TU/ptm/b/n/9 Quant 2D
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\TU/ptm/b/n/9 granular-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 23--23
 []|\TU/ptm/b/n/9 Quant 2D
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
 []|\TU/ptm/b/n/9 Quant sep
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]|\TU/ptm/b/n/9 One target
  []
 
 
@@ -1031,13 +1121,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--25
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 25--25
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--25
+[]|\TU/ptm/b/n/9 One target
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 26--26
 []|\TU/ptm/b/n/9 Quant sep
  []
 
 
-Overfull \hbox (28.00769pt too wide) in paragraph at lines 3--29
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 26--26
+[]|\TU/ptm/b/n/9 Training
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--26
+[]|\TU/ptm/b/n/9 One target
  []
 
 [18]) (tables/pred_source
@@ -1158,4 +1263,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: C8984093320A68FADE8F51BF387E45B7;10203.
  )
-Output written on main.xdv (37 pages, 1110868 bytes).
+Output written on main.xdv (37 pages, 1110744 bytes).
