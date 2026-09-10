@@ -1,0 +1,8 @@
+{
+ "math": 1.2476271454559835,
+ "code": 1.3067506536724507,
+ "qa": 5.117365731939164,
+ "_tag": "pythia-1.4b@step112000",
+ "_resolved": "EleutherAI/pythia-1.4b",
+ "_revision": "step112000"
+}
