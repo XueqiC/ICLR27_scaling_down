@@ -109,7 +109,7 @@ and QA, so the size boundary is soft for math and hard for QA.
 student, at the development pools and at the unseen pools, are frozen
 and their measurement was in progress at the cut-off.
 
-\subsection{Applicability across Capabilities}
+\subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}
 
 \begin{figure}[!t]
@@ -137,5 +137,42 @@ structures, and only marginally for the reuse-only structure
 (Appendix~\ref{sec:app_forms}). Code results carry the caveat of
 \S\ref{sec:loss}: the within-capability specificity of the code loss
 was not detected on the secondary benchmark.
+
+\paragraph{What is shared and what varies.} We tested the stronger
+hypothesis that one function family serves all three methods with
+method- and capability-specific parameters. It holds for pruning by
+construction (the shared power family is the delivered form) and fails
+for the other two arms on the same held-out splits: a separable
+amplitude-times-shape family is worse than the two-dimensional
+quantization form (macro MAE 2.96 against 2.40 on six held-out states),
+and a single reuse-count family is worse than the budget-plus-reuse
+distillation form (0.54 against 0.28, driven by QA). Within pruning,
+one exponent shared across capabilities costs nothing (leave-one-source
+MAE 0.351, 0.338, 0.785 against 0.328, 0.355, 0.798 per capability),
+whereas within quantization the term coefficients must be
+capability-specific (3.46 against 0.91 for math). Three ranges are kept
+apart (Appendix~\ref{sec:app_forms}): the bootstrap confidence intervals
+of the delivered pruning coefficients exclude zero for the dense-anchor
+term on math and code and not on QA; the exponents fitted separately
+per source spread from 3.0 to 6.0 for math and from 0.5 to 6.0 for QA,
+so the shape is only roughly stable across models; and prediction
+intervals built from leave-one-source residuals (per capability, 80\%)
+cover 78\% of the confirmation-panel cells and 67\% of the 1B and 6.9B
+pair cells at a mean full width of about 1.5 nats, which is honest but
+wide relative to most responses.
+
+\paragraph{One calibration point.} Setting the amplitude of the pruning
+form from one measured compression point of the target, its mildest
+density, and predicting the rest with the shared exponent is not a
+usable law: the mildest responses are within noise and a steep exponent
+amplifies that noise (leave-one-source MAE above 17 nats; on the
+confirmation panel calibrated at $d=0.85$, 0.16, 0.51, 0.58 against
+0.36, 0.33, 0.99 for the uncalibrated form and 0.41, 0.32, 0.32 for the
+median curve). For grouped quantization the opposite holds: a separable
+law with its amplitude set at the single 5-bit cell $g=256$ predicts
+the unseen 4-bit configurations on states held out of the fit with MAE
+0.13, 0.12, 0.29, against 0.26, 0.64, 1.34 for the two-dimensional form
+without calibration, at the cost of one compressed measurement per
+source. Which calibration is worth its cost is therefore method-specific.
 
 \FloatBarrier

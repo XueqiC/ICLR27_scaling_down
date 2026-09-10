@@ -1,0 +1,31 @@
+\begin{table}[H]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{2.15cm}p{2.15cm}p{2.15cm}p{2.55cm}p{2.25cm}p{2.65cm}@{}}
+\toprule
+Law & What is shared & What varies & Held-out MAE shared vs specific & K0 vs K1 MAE & 80\% PI coverage \& width \\
+\midrule
+Pruning power & Power family & $\beta_c,\gamma_c$ & 0.494 vs 0.494 & --- & --- \\
+Grouped RTN & Separable family & $\beta_c,p_c,q_c$ & 2.962 vs 2.398 & --- & --- \\
+Distill exposure & $\log(1+E)$ family & $\beta_c$; inactive $D_0$ & 0.542 vs 0.275 & --- & --- \\
+Pruning sharing & One $\gamma$ & $\beta_c$ & 0.491 vs 0.494 & --- & --- \\
+Quantization sharing & 2D term vectors & Capability offsets & 3.999 vs 2.398 & --- & --- \\
+Prune math & Power family & Source amplitudes, $\gamma$ & $\gamma$ min/med/max 3.00/4.60/6.00 & --- & --- \\
+Prune code & Power family & Source amplitudes, $\gamma$ & $\gamma$ min/med/max 2.30/5.95/6.00 & --- & --- \\
+Prune qa & Power family & Source amplitudes, $\gamma$ & $\gamma$ min/med/max 0.50/3.40/6.00 & --- & --- \\
+\midrule
+Prune dev LOSO & Training $\gamma_c$ & One target amplitude & --- & 0.604 vs 31.406 & --- \\
+Prune confirmation & Training $\gamma_c$ & One target amplitude & --- & 0.560 vs 0.415 & 77.8\%/1.621 to 100.0\%/3.629 \\
+Prune pairs: 17-source OOF & Training $\gamma_c$ & One target amplitude & --- & 0.517 vs 0.763 & --- \\
+Prune pairs: independent 13 & Training $\gamma_c$ & One target amplitude & --- & 0.707 vs 0.772 & 66.7\%/1.523 to 87.5\%/4.277 \\
+Quant 2D dev LOSO & Training curve & One target amplitude & --- & 3.143 vs 26.177 & --- \\
+Quant 2D bit\_test & Training curve & One target amplitude & --- & 0.747 vs 6.442 & --- \\
+Quant 2D granularity\_test & Training curve & One target amplitude & --- & 1.751 vs 14.973 & --- \\
+Quant 2D joint\_test & Training curve & One target amplitude & --- & 0.344 vs 0.193 & --- \\
+Quant sep bit\_test & Training curve & One target amplitude & --- & 1.540 vs 0.183 & --- \\
+Quant sep granularity\_test & Training curve & One target amplitude & --- & 2.423 vs 0.623 & --- \\
+Quant sep joint\_test & Training curve & One target amplitude & --- & 0.724 vs 0.306 & --- \\
+\bottomrule
+\end{tabular}
+\caption{Shared structure and one-point calibration. MAE and PI widths are nats, pooled equally over capabilities. Family comparisons use registered dev splits: 17 pruning sources, six quantization states, 12 distillation runs. Specific forms: v53 power, v55 low-order 2D, v56 F2 with $L_0$. Distillation $D_0$ is unavailable (inactive column). Gamma ranges describe within-source fits. Bootstrap parameter CIs are in the accompanying summary. K1 costs one compressed measurement per source; scores exclude that cell. PI entries give coverage/full width for K0 then K1, from per-capability absolute LOSO residual quantiles. Confirmation excludes three new sources; independent pair evaluation excludes all four pair sources from fitting and its 13-source interval bank. Quantization tests omit the target source from fitting; 2D K1 scales its predicted curve and sep K1 calibrates the separable amplitude.}
+\label{tab:shared_structure}
+\end{table}
