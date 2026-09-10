@@ -1,0 +1,22 @@
+\begin{table}[t]\centering\footnotesize
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+subset & candidate & math & code & QA & mean \\
+\midrule
+all & power & 0.328 & 0.355 & 0.798 & 0.494 \\
+all & A1 & 0.610 & 0.608 & 0.905 & 0.708 \\
+all & A2 & 0.345 & 0.295 & 0.796 & 0.479 \\
+all & cont & 0.440 & 0.394 & 0.828 & 0.554 \\
+all & strength only & 0.492 & 0.601 & 0.692 & 0.595 \\
+all & median curve & 0.410 & 0.455 & 0.540 & 0.468 \\
+all & zero & 0.812 & 0.852 & 0.602 & 0.755 \\
+off coarse & power & 0.592 & 0.649 & 1.370 & 0.870 \\
+off coarse & A1 & 1.090 & 1.068 & 1.343 & 1.167 \\
+off coarse & A2 & 0.959 & 0.704 & 1.459 & 1.041 \\
+off coarse & cont & 0.758 & 0.638 & 1.306 & 0.900 \\
+off coarse & strength only & 0.909 & 1.077 & 1.163 & 1.050 \\
+off coarse & median curve & 0.758 & 0.790 & 0.901 & 0.816 \\
+off coarse & zero & 1.715 & 1.725 & 1.090 & 1.510 \\
+\bottomrule\end{tabular}
+\caption{Pruning development on 17 Pythia states: leave-one-source-out MAE (nats) over all held-out rows (`all') and over the densities off the coarse grid (0.75, 0.65, 0.55). Pre-committed rule: lowest mean over capabilities among the four source-conditioned candidates; a gap below 0.02 nats between the best two is resolved toward the continuous, zero-at-$d{=}1$ form with fewer parameters, which selected the power form over A2 (gap 0.015). Baselines do not select.}
+\label{tab:v53_loso}\end{table}

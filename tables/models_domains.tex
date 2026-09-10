@@ -1,0 +1,13 @@
+\begin{table}[t]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{1.8cm}p{3.6cm}p{0.8cm}p{2.5cm}p{0.7cm}p{2.2cm}p{1.2cm}@{}}
+\toprule
+Arm & Predictor & $P$/cap. & Varied setting; dev.\ states & Target cal. & Tested range & Coeff. \\
+\midrule
+Pruning & $A_c(\mathbf x)\,((1-d)/0.3)^{\gamma_c}$ (Eq.~\ref{eq:power}); same-input alternative A2 (per-$d$ regression + interpolation) & 5 (A2: 20) & $d$; 17 Pythia states (160M--6.9B, 16k--143k) & 0 & $d\in[0.55,0.9]$ interp.\ on new states; $d=0.55$ extrap.\ fails & Table~\ref{tab:round3_coef} \\
+Quantization, fixed $b$ & per-bit regression $\beta_{c,b}\cdot\phi(\mathbf x)$ & 4 per $b$ & new state at seen $b\in\{8,6,4,3\}$; 9 dev states & 0 & seen $b$; 5-bit rule fails; near-zero regime uninformative & register v38/v49 \\
+Quantization, $(b,g)$ & $\phi(\mathbf x)\cdot[1,u,v,uv,u^2]$ (Eq.~\ref{eq:quant2d}) & 20 & $b\in\{3,5\}\times g\in\{64,256\}$; 6 dev states & 0 & unseen $b=4$, $g=128$ on dev states; new state mixed & Table~\ref{tab:quant2d_coef} \\
+Distillation, source axis & $\delta_c=\beta_c\cdot\phi(\mathbf x)$ (initial student) & 4 & 9 Pythia students, fixed pool/budget & 0 & held-out stage; math only & register v39 \\
+Distillation, pool axis & $a_c+b_c\log E$ (and constant, $\log T$, joint) & 2 & Gemma-3-1B; pools U75/U600 & 0 & unseen pool U225: QA only; multi-student test frozen & register v41/v50 \\
+\bottomrule\end{tabular}
+\caption{Predictive models and their domains. Inputs are always $\mathbf x=(N_0,D_0,L_{0,c})$ through $\phi(\mathbf x)=[1,\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_0}]$; no prediction uses a measurement of the compressed target (target calibration count 0). Ranges summarize \S\ref{sec:general}; coefficients and standardization constants are in Appendix~\ref{sec:app_coef}.}
+\label{tab:models}\end{table}

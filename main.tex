@@ -101,43 +101,40 @@ Address \\
 \maketitle
 
 \begin{abstract}
-We systematically investigate whether information observable before
-compression can predict capability-conditioned loss after pruning,
-quantization, and distillation. The endpoint is a per-capability
-conditional loss (math, code, multi-hop QA) measured relative to the
-dense source or, for distillation, the initial student; the inputs are
-the source size, its pretraining tokens, its dense capability losses,
-and the intervention setting. We separate transfer across source-model
-states from prediction at unseen intervention settings, evaluate each
-candidate against baselines with the same information budget, and
-freeze predictions before new sources are measured. On a heterogeneous
-panel of 12 public models from five series, responses are strongly
-capability- and series-specific: QA is the least-damaged capability in
-Qwen3 and OLMo-3-32B and the most-damaged one in Gemma at mild pruning,
-and 3-bit quantization collapses 12 of 14 models but not OLMo-3-32B. On
-a controlled Pythia panel, the dense capability vector carries the
-prediction; source-conditioned pruning predictors beat source-free
-curves at seen densities and at interpolated densities on the
-development sources, match them at a new in-range size, and fail at
-density $0.55$ and at a source five times larger; a shared power form
-adds nothing over a per-density regression. Quantization
-gains appear only in the collapse regime and depend on the fitting
-protocol, whereas adding the quantization group size as a second axis
-lets a low-order relation predict unseen bit-widths and group sizes on
-seen states; for distillation a reuse-count coordinate helps QA on an
-unseen pool with a budget-dependent bias, and a constant is best for
-math and code. The results identify conditional predictive
-relationships and their tested limits, providing an empirical basis for
-developing capability-conditioned scaling-down laws.
+Specialized workloads need specific capabilities, and the models that
+serve them are usually dense sources scaled down by pruning,
+quantization, or distillation; choosing a configuration today means
+measuring each one. We develop and evaluate empirical,
+capability-conditioned models of the compression response: for three
+capabilities (math, code, multi-hop QA) we predict the conditional
+loss after compression from the initial model state (parameter count,
+pretraining tokens, and the dense capability losses of the source or
+initial student) and the configuration of the method. Relations are
+built on a controlled panel of Pythia checkpoints whose size and
+pretraining stage vary independently, compared against alternatives
+on the same inputs, and validated with predictions frozen before new
+configurations and new model states are measured. A five-parameter
+pruning form predicts math and code at unseen densities inside the
+fitted range on three new checkpoints (0.24 nats mean absolute error
+against 0.45 for a source-free strength curve) and fails beyond the
+range and for QA; with the quantization group size as a second axis a
+low-order form predicts unseen bit-widths and group sizes on the
+development states, whereas bit-width alone supports only a per-bit
+source regression; for distillation the student state carries the
+math response and a reuse-count term carries QA on an unseen data pool
+with a budget-dependent bias. Transfer to a source five times larger
+than the development range fails for QA and is on par with source-free
+references for math. We release the relations with their coefficients,
+tested ranges, registered predictions, and measurements.
 \end{abstract}
 
 
 \input{intro}
+\input{setup}
+\input{laws}
+\input{general}
 \input{related}
-\input{prelim}
-\input{method}
-\input{experiment}
-\input{con}
+\input{discussion}
 
 \bibliography{references}
 \bibliographystyle{iclr2027_conference}
