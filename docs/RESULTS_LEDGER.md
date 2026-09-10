@@ -362,11 +362,35 @@ no usable signal and a source-free curve should be delivered instead. No exponen
 baseline at 1.4B@112k and 6.9B@80k; ties median at 410M@48k), R on QA at all three checkpoints; aggregate R vs the
 median curve.
 
+
 ### C36. V3-Q grouped-RTN quantization: frozen predictors on unseen bit-width, unseen granularity, and a new state
 
 Protocol: v54 measures symmetric RTN with contiguous input groups of g weights (per-group absmax scale; g=None reproduces the per-channel quantizer bit-exactly). Dev = 160M/410M/1.4B x {16k,143k} x b{3,5} x g{64,256} (24 cells). Candidates fit per capability on standardized phi=[1,z(logN0),z(L0c),z(logD0)]: separable (beta.phi) qmax^-p (g/128)^q (6 params); low-order 2D phi x [1,u,v,uv,u^2] with u=log2 qmax centered, v=log2(g/128) (20 params); same-input bilinear interpolation between the four dev configs (16 params); baselines per-config mean/median interpolated the same way, zero. Dev LOSO (6 states, dominated by the collapsing 160M@143k): separable 1.95/2.19/4.75, 2D 0.91/1.91/4.37, interp 1.23/1.89/4.33, median 1.69/1.76/1.78, zero 1.82/1.93/1.80 (math/code/qa). All 33 test predictions committed in paper repo 5ad319c (21:53 EDT) before the tests were measured (21:53-22:41 EDT; whole 57-cell grid ~85 min of forward passes as a third process on the card). Rule: all candidates and baselines reported on every test; no selection by outcome.
 
 **Test MAE (nats)**
 
-| test | cells | candidate | math | code | qa |
-|---|---|---|---|---|---|
+| test | candidate | math | code | qa |
+|---|---|---|---|---|
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | (not found in compare.json: top keys ['schema_version', 'precommitted_rule', 'response', 'test_sets', 'rows', 'missing']) | | | |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | (not found in compare.json: top keys ['schema_version', 'precommitted_rule', 'response', 'test_sets', 'rows', 'missing']) | | | |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | (not found in compare.json: top keys ['schema_version', 'precommitted_rule', 'response', 'test_sets', 'rows', 'missing']) | | | |
+
+**Measured test responses (dL vs dense, math/code/qa, nats)**: results/v54-quant-group/*/quant_group_losses.json
+(mirrored). Highlights: 4-bit is a 0.03-0.35 nat regime for every state except 160M@143k (+1.9 to +3.2) and shrinks with
+g (g64 < g128 < g256); 3-bit at g=128 spans +0.3 (early 1.4B) to +14.5 (late 160M); 5-bit at g=128 is <= 0.1 except
+late 160M (+0.4 to +0.55). 1B@96k: b3_g128 +0.83/+0.95/-0.27; b4_g128 +0.06/+0.05/+0.02; b5_g128 ~0.
+
+Reading:
+- The low-order 2D form predicts the unseen bit-width on the dev states with MAE 0.19/0.21/0.44 against 0.45/0.53/0.48
+  for zero change and 0.55/0.73/0.54 for the per-config median (12 cells, all three capabilities incl. QA), and the
+  unseen granularity with 0.22/0.32/0.99 against 1.24/1.35/1.24 (zero) and 1.12/1.22/1.22 (median) (18 cells; the
+  collapse cell 160M@143k b3_g128 = +14.5 inflates every error). These are configuration-axis successes on SEEN source
+  states (new configs, not new sources).
+- The separable compact candidate A(x) qmax^-p (g/128)^q fails on every test (worse than zero on the bit test); the
+  same-input bilinear interpolation also fails (extension beyond the dev corners). The response is not separable into a
+  state amplitude times a shared (b,g) shape on this panel.
+- Joint test on a new in-range state (1B@96k, 3 cells): 2D 0.34/0.10/0.27 vs median 0.15/0.27/0.30 and zero
+  0.30/0.34/0.10: best on code, behind the median on math, behind zero on QA; too few cells to rank.
+- Stop rule: not triggered (intermediate responses 0.05-3 nats exist across the grid).
+Labels: low-order 2D = P-new on the bit test and the granularity test (seen states, unseen configs); mixed on the joint
+new-state test (P-new on code, R on math and QA); separable and interpolation = R everywhere.
