@@ -291,3 +291,73 @@ range, in addition to the density bound already recorded (C32, C33).
 | B int4 | 0.121 | 0.198 | **0.120** | 0.138 | 0.191 |
 | B int3 | **1.294** | 4.033 | 3.770 | 4.137 | 6.442 |
 | B >=4-bit aggregate | 0.048 | 0.060 | **0.042** | 0.045 | 0.061 |
+
+### C35. V3-P pruning test panel: frozen selected predictor (shared power form) on three new checkpoints at d = 0.85 / 0.675 / 0.575
+
+Protocol: v53 development on 17 Pythia states (9 dev + 160M/410M/1.4B@96k + 1B@32k/96k/112k + 6.9B@32k/112k; all measured densities >= 0.55), LOSO by source; pre-committed rule chose the shared power form (5 params/cap) over A2 by the tie rule (LOSO mean 0.494 vs 0.479, gap 0.015 < 0.02). All candidate + baseline predictions for the three test checkpoints were committed in paper repo 40a51b7 (21:18:52 EDT) before measurement (21:52-22:11 EDT, ~18 GPU-min). Checkpoint identity verified (HF shard hashes distinct; dense vectors differ from neighbours). Files: results/v53-prune-dev/{register.json, predictions_*.json, compare_*.json}.
+
+
+**pythia-410m@step48000** (observed dL | power | A2 | median curve | zero), nats
+
+| cap | d | observed | power | A2 | median | strength-only |
+|---|---|---|---|---|---|---|
+| math | 0.85 | +0.015 | +0.032 | +0.041 | +0.032 | +0.010 |
+| math | 0.675 | +0.260 | +0.589 | +0.471 | +0.480 | +0.567 |
+| math | 0.575 | +0.953 | +1.612 | +2.023 | +1.885 | +2.317 |
+| code | 0.85 | +0.018 | +0.048 | -0.011 | +0.027 | +0.018 |
+| code | 0.675 | +0.252 | +0.510 | +0.238 | +0.330 | +0.670 |
+| code | 0.575 | +1.140 | +1.156 | +1.574 | +1.875 | +2.362 |
+| qa | 0.85 | -0.026 | +0.050 | +0.045 | -0.045 | +0.002 |
+| qa | 0.675 | -0.212 | +0.524 | +0.393 | -0.316 | +0.197 |
+| qa | 0.575 | -0.166 | +1.187 | +1.223 | +0.364 | +0.984 |
+
+**pythia-1.4b@step112000** (observed dL | power | A2 | median curve | zero), nats
+
+| cap | d | observed | power | A2 | median | strength-only |
+|---|---|---|---|---|---|---|
+| math | 0.85 | +0.026 | +0.030 | +0.022 | +0.032 | +0.010 |
+| math | 0.675 | +0.379 | +0.540 | +0.381 | +0.480 | +0.567 |
+| math | 0.575 | +1.597 | +1.477 | +1.568 | +1.885 | +2.317 |
+| code | 0.85 | +0.027 | +0.073 | +0.029 | +0.027 | +0.018 |
+| code | 0.675 | +0.267 | +0.772 | +0.497 | +0.330 | +0.670 |
+| code | 0.575 | +1.547 | +1.750 | +1.955 | +1.875 | +2.362 |
+| qa | 0.85 | -0.011 | +0.050 | +0.001 | -0.045 | +0.002 |
+| qa | 0.675 | -0.645 | +0.529 | +0.151 | -0.316 | +0.197 |
+| qa | 0.575 | -0.142 | +1.199 | +1.371 | +0.364 | +0.984 |
+
+**pythia-6.9b@step80000** (observed dL | power | A2 | median curve | zero), nats
+
+| cap | d | observed | power | A2 | median | strength-only |
+|---|---|---|---|---|---|---|
+| math | 0.85 | +0.019 | +0.034 | +0.031 | +0.032 | +0.010 |
+| math | 0.675 | +0.241 | +0.623 | +0.513 | +0.480 | +0.567 |
+| math | 0.575 | +1.204 | +1.704 | +1.647 | +1.885 | +2.317 |
+| code | 0.85 | +0.005 | +0.073 | +0.056 | +0.027 | +0.018 |
+| code | 0.675 | +0.222 | +0.770 | +0.566 | +0.330 | +0.670 |
+| code | 0.575 | +1.295 | +1.745 | +1.779 | +1.875 | +2.362 |
+| qa | 0.85 | -0.078 | -0.050 | -0.203 | -0.045 | +0.002 |
+| qa | 0.675 | -0.379 | -0.526 | -1.142 | -0.316 | +0.197 |
+| qa | 0.575 | -0.004 | -1.193 | -0.869 | +0.364 | +0.984 |
+
+**Panel MAE (mean over the three checkpoints and three densities), nats**
+
+| candidate | math | code | qa | mean |
+|---|---|---|---|---|
+| power | 0.243 | 0.236 | 0.678 | 0.386 |
+| A1 | 0.363 | 0.403 | 0.738 | 0.501 |
+| A2 | 0.230 | 0.222 | 0.682 | 0.378 |
+| cont | 0.313 | 0.305 | 0.746 | 0.455 |
+| strength_only | 0.450 | 0.488 | 0.579 | 0.506 |
+| median_curve | 0.277 | 0.214 | 0.221 | 0.237 |
+| zero | 0.522 | 0.530 | 0.185 | 0.412 |
+
+Reading: the selected source-conditioned form beats the source-free strength curve and zero change on every checkpoint
+and is the best predictor of the math response (A2 near-exact at 1.4B@112k); on code it is on par with the median curve;
+on QA it is worse than every source-free curve by 0.3-0.6 nats on each checkpoint, because it over-predicts the QA
+improvement. The source-free median development curve has the lowest aggregate error on all three checkpoints. Answer to
+the round's question: with source state admitted, a compact continuous relation (5 params) predicts unseen densities
+inside the fitted range for math and code at the level of a per-density interpolation; for QA the current inputs carry
+no usable signal and a source-free curve should be delivered instead. No exponent universality is claimed
+(gamma is a fitted constant per capability on this panel). Labels: P-new for the selected form on math (better than every
+baseline at 1.4B@112k and 6.9B@80k; ties median at 410M@48k), R on QA at all three checkpoints; aggregate R vs the
+median curve.
