@@ -361,3 +361,12 @@ no usable signal and a source-free curve should be delivered instead. No exponen
 (gamma is a fitted constant per capability on this panel). Labels: P-new for the selected form on math (better than every
 baseline at 1.4B@112k and 6.9B@80k; ties median at 410M@48k), R on QA at all three checkpoints; aggregate R vs the
 median curve.
+
+### C36. V3-Q grouped-RTN quantization: frozen predictors on unseen bit-width, unseen granularity, and a new state
+
+Protocol: v54 measures symmetric RTN with contiguous input groups of g weights (per-group absmax scale; g=None reproduces the per-channel quantizer bit-exactly). Dev = 160M/410M/1.4B x {16k,143k} x b{3,5} x g{64,256} (24 cells). Candidates fit per capability on standardized phi=[1,z(logN0),z(L0c),z(logD0)]: separable (beta.phi) qmax^-p (g/128)^q (6 params); low-order 2D phi x [1,u,v,uv,u^2] with u=log2 qmax centered, v=log2(g/128) (20 params); same-input bilinear interpolation between the four dev configs (16 params); baselines per-config mean/median interpolated the same way, zero. Dev LOSO (6 states, dominated by the collapsing 160M@143k): separable 1.95/2.19/4.75, 2D 0.91/1.91/4.37, interp 1.23/1.89/4.33, median 1.69/1.76/1.78, zero 1.82/1.93/1.80 (math/code/qa). All 33 test predictions committed in paper repo 5ad319c (21:53 EDT) before the tests were measured (21:53-22:41 EDT; whole 57-cell grid ~85 min of forward passes as a third process on the card). Rule: all candidates and baselines reported on every test; no selection by outcome.
+
+**Test MAE (nats)**
+
+| test | cells | candidate | math | code | qa |
+|---|---|---|---|---|---|

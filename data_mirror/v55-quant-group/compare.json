@@ -1,0 +1,3029 @@
+{
+  "schema_version": 1,
+  "precommitted_rule": "all three candidates and baselines are reported on every test; no selection by test outcome",
+  "response": "signed dL_c = loss(config)_c - dense_c, in nats; no transform or clipping",
+  "test_sets": {
+    "bit_test": {
+      "n_expected_cells": 12,
+      "n_measured_cells": 12,
+      "n_scored_cells": 12,
+      "mae_table": [
+        {
+          "candidate": "separable",
+          "mae": {
+            "math": 0.7667773248667978,
+            "code": 0.7976633292338181,
+            "qa": 1.4270236735327033
+          },
+          "n": {
+            "math": 12,
+            "code": 12,
+            "qa": 12
+          }
+        },
+        {
+          "candidate": "low_order_2d",
+          "mae": {
+            "math": 0.19343270655503564,
+            "code": 0.2136063924706008,
+            "qa": 0.4363589226463181
+          },
+          "n": {
+            "math": 12,
+            "code": 12,
+            "qa": 12
+          }
+        },
+        {
+          "candidate": "same_input_interpolation",
+          "mae": {
+            "math": 1.2962294723721701,
+            "code": 1.3813991261552772,
+            "qa": 1.9419995112912618
+          },
+          "n": {
+            "math": 12,
+            "code": 12,
+            "qa": 12
+          }
+        },
+        {
+          "candidate": "mean",
+          "mae": {
+            "math": 1.4161517821839487,
+            "code": 1.5558297818511209,
+            "qa": 1.4949738375339117
+          },
+          "n": {
+            "math": 12,
+            "code": 12,
+            "qa": 12
+          }
+        },
+        {
+          "candidate": "median",
+          "mae": {
+            "math": 0.5532642401633153,
+            "code": 0.7257646426339833,
+            "qa": 0.5371385157520695
+          },
+          "n": {
+            "math": 12,
+            "code": 12,
+            "qa": 12
+          }
+        },
+        {
+          "candidate": "zero",
+          "mae": {
+            "math": 0.4499113475177305,
+            "code": 0.5318318675223834,
+            "qa": 0.48048607810519656
+          },
+          "n": {
+            "math": 12,
+            "code": 12,
+            "qa": 12
+          }
+        }
+      ],
+      "response_flags": {
+        "n_observed": 36,
+        "n_expected": 36,
+        "complete": true,
+        "near_zero_all_measured": false,
+        "near_zero_all_cells": false,
+        "collapse_any_measured": false,
+        "collapse_all_measured": false,
+        "n_collapse": 0,
+        "n_negative": 5,
+        "min_dL": -0.06356939163498154,
+        "max_dL": 3.184395055859282
+      },
+      "response_flags_by_capability": {
+        "math": {
+          "n_observed": 12,
+          "n_expected": 12,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": false,
+          "collapse_all_measured": false,
+          "n_collapse": 0,
+          "n_negative": 0,
+          "min_dL": 0.026793482559519077,
+          "max_dL": 2.3406628173692954
+        },
+        "code": {
+          "n_observed": 12,
+          "n_expected": 12,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": false,
+          "collapse_all_measured": false,
+          "n_collapse": 0,
+          "n_negative": 0,
+          "min_dL": 0.005883052056097071,
+          "max_dL": 3.184395055859282
+        },
+        "qa": {
+          "n_observed": 12,
+          "n_expected": 12,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": false,
+          "collapse_all_measured": false,
+          "n_collapse": 0,
+          "n_negative": 5,
+          "min_dL": -0.06356939163498154,
+          "max_dL": 2.808697718631179
+        }
+      }
+    },
+    "granularity_test": {
+      "n_expected_cells": 18,
+      "n_measured_cells": 18,
+      "n_scored_cells": 18,
+      "mae_table": [
+        {
+          "candidate": "separable",
+          "mae": {
+            "math": 0.5807414782178142,
+            "code": 0.642852129907769,
+            "qa": 1.6115475164729944
+          },
+          "n": {
+            "math": 18,
+            "code": 18,
+            "qa": 18
+          }
+        },
+        {
+          "candidate": "low_order_2d",
+          "mae": {
+            "math": 0.21893806488865353,
+            "code": 0.3192337038589318,
+            "qa": 0.9857409744534363
+          },
+          "n": {
+            "math": 18,
+            "code": 18,
+            "qa": 18
+          }
+        },
+        {
+          "candidate": "same_input_interpolation",
+          "mae": {
+            "math": 0.6055210811581364,
+            "code": 0.7113529385936516,
+            "qa": 1.4967968728933618
+          },
+          "n": {
+            "math": 18,
+            "code": 18,
+            "qa": 18
+          }
+        },
+        {
+          "candidate": "mean",
+          "mae": {
+            "math": 1.857363906068253,
+            "code": 1.9062547476448333,
+            "qa": 2.0191538201053048
+          },
+          "n": {
+            "math": 18,
+            "code": 18,
+            "qa": 18
+          }
+        },
+        {
+          "candidate": "median",
+          "mae": {
+            "math": 1.1225124299362352,
+            "code": 1.221895400646634,
+            "qa": 1.2201638221148408
+          },
+          "n": {
+            "math": 18,
+            "code": 18,
+            "qa": 18
+          }
+        },
+        {
+          "candidate": "zero",
+          "mae": {
+            "math": 1.2386641268334695,
+            "code": 1.3456540686157992,
+            "qa": 1.238961171841994
+          },
+          "n": {
+            "math": 18,
+            "code": 18,
+            "qa": 18
+          }
+        }
+      ],
+      "response_flags": {
+        "n_observed": 54,
+        "n_expected": 54,
+        "complete": true,
+        "near_zero_all_measured": false,
+        "near_zero_all_cells": false,
+        "collapse_any_measured": true,
+        "collapse_all_measured": false,
+        "n_collapse": 3,
+        "n_negative": 6,
+        "min_dL": -0.062262357414448743,
+        "max_dL": 15.537903992395435
+      },
+      "response_flags_by_capability": {
+        "math": {
+          "n_observed": 18,
+          "n_expected": 18,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": true,
+          "collapse_all_measured": false,
+          "n_collapse": 1,
+          "n_negative": 0,
+          "min_dL": 0.005991457723641513,
+          "max_dL": 14.51316934271929
+        },
+        "code": {
+          "n_observed": 18,
+          "n_expected": 18,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": true,
+          "collapse_all_measured": false,
+          "n_collapse": 1,
+          "n_negative": 0,
+          "min_dL": 0.0026146898027097354,
+          "max_dL": 14.616769669598288
+        },
+        "qa": {
+          "n_observed": 18,
+          "n_expected": 18,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": true,
+          "collapse_all_measured": false,
+          "n_collapse": 1,
+          "n_negative": 6,
+          "min_dL": -0.062262357414448743,
+          "max_dL": 15.537903992395435
+        }
+      }
+    },
+    "joint_test": {
+      "n_expected_cells": 3,
+      "n_measured_cells": 3,
+      "n_scored_cells": 3,
+      "mae_table": [
+        {
+          "candidate": "separable",
+          "mae": {
+            "math": 0.5864687173019436,
+            "code": 0.3797910432169252,
+            "qa": 0.6791571720527844
+          },
+          "n": {
+            "math": 3,
+            "code": 3,
+            "qa": 3
+          }
+        },
+        {
+          "candidate": "low_order_2d",
+          "mae": {
+            "math": 0.3449666002347098,
+            "code": 0.09686116820575912,
+            "qa": 0.2688506640957403
+          },
+          "n": {
+            "math": 3,
+            "code": 3,
+            "qa": 3
+          }
+        },
+        {
+          "candidate": "same_input_interpolation",
+          "mae": {
+            "math": 0.5375179930602606,
+            "code": 0.2411888026185929,
+            "qa": 0.3915555400599973
+          },
+          "n": {
+            "math": 3,
+            "code": 3,
+            "qa": 3
+          }
+        },
+        {
+          "candidate": "mean",
+          "mae": {
+            "math": 1.4912763555562805,
+            "code": 1.5582429816737846,
+            "qa": 1.8127259971097949
+          },
+          "n": {
+            "math": 3,
+            "code": 3,
+            "qa": 3
+          }
+        },
+        {
+          "candidate": "median",
+          "mae": {
+            "math": 0.15154396194408473,
+            "code": 0.2697934218636996,
+            "qa": 0.3017254254699975
+          },
+          "n": {
+            "math": 3,
+            "code": 3,
+            "qa": 3
+          }
+        },
+        {
+          "candidate": "zero",
+          "mae": {
+            "math": 0.29969812017190023,
+            "code": 0.33850328817050945,
+            "qa": 0.10393892585551316
+          },
+          "n": {
+            "math": 3,
+            "code": 3,
+            "qa": 3
+          }
+        }
+      ],
+      "response_flags": {
+        "n_observed": 9,
+        "n_expected": 9,
+        "complete": true,
+        "near_zero_all_measured": false,
+        "near_zero_all_cells": false,
+        "collapse_any_measured": false,
+        "collapse_all_measured": false,
+        "n_collapse": 0,
+        "n_negative": 2,
+        "min_dL": -0.27349691064638737,
+        "max_dL": 0.9492512479201329
+      },
+      "response_flags_by_capability": {
+        "math": {
+          "n_observed": 3,
+          "n_expected": 3,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": false,
+          "collapse_all_measured": false,
+          "n_collapse": 0,
+          "n_negative": 0,
+          "min_dL": 0.013782330143162325,
+          "max_dL": 0.8270386775290677
+        },
+        "code": {
+          "n_observed": 3,
+          "n_expected": 3,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": false,
+          "collapse_all_measured": false,
+          "n_collapse": 0,
+          "n_negative": 0,
+          "min_dL": 0.013073449013548899,
+          "max_dL": 0.9492512479201329
+        },
+        "qa": {
+          "n_observed": 3,
+          "n_expected": 3,
+          "complete": true,
+          "near_zero_all_measured": false,
+          "near_zero_all_cells": false,
+          "collapse_any_measured": false,
+          "collapse_all_measured": false,
+          "n_collapse": 0,
+          "n_negative": 2,
+          "min_dL": -0.27349691064638737,
+          "max_dL": 0.022665161596957972
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g64",
+      "capability": "math",
+      "loss": 1.8601202246302302,
+      "dense": 1.7996519813335443,
+      "dL": 0.060468243296685875,
+      "predictions": {
+        "separable": 0.48560879024118647,
+        "low_order_2d": 0.04302824456774146,
+        "same_input_interpolation": 0.3917269100936447,
+        "mean": 1.5249597477583383,
+        "median": 0.2582963210490992,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.4251405469445006,
+        "low_order_2d": 0.017439998728944417,
+        "same_input_interpolation": 0.3312586667969588,
+        "mean": 1.4644915044616524,
+        "median": 0.19782807775241334,
+        "zero": 0.060468243296685875
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g64",
+      "capability": "code",
+      "loss": 1.824280960304255,
+      "dense": 1.752495840266223,
+      "dL": 0.07178512003803195,
+      "predictions": {
+        "separable": 0.6944987938211392,
+        "low_order_2d": 0.1577441355480137,
+        "same_input_interpolation": 0.8153782580761236,
+        "mean": 1.5329650655398033,
+        "median": 0.35135329717369707,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.6227136737831073,
+        "low_order_2d": 0.08595901550998175,
+        "same_input_interpolation": 0.7435931380380917,
+        "mean": 1.4611799455017713,
+        "median": 0.2795681771356651,
+        "zero": 0.07178512003803195
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g64",
+      "capability": "qa",
+      "loss": 4.838610979087452,
+      "dense": 4.769843155893536,
+      "dL": 0.06876782319391594,
+      "predictions": {
+        "separable": 0.8707113836515405,
+        "low_order_2d": -0.018176751783039347,
+        "same_input_interpolation": 0.48978366647967087,
+        "mean": 1.5524983093337215,
+        "median": 0.0666517750504694,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8019435604576246,
+        "low_order_2d": 0.08694457497695529,
+        "same_input_interpolation": 0.4210158432857549,
+        "mean": 1.4837304861398055,
+        "median": 0.0021160481434465417,
+        "zero": 0.06876782319391594
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g256",
+      "capability": "math",
+      "loss": 1.8973740409712885,
+      "dense": 1.7996519813335443,
+      "dL": 0.09772205963774416,
+      "predictions": {
+        "separable": 0.5578180185221512,
+        "low_order_2d": 0.24922216893120286,
+        "same_input_interpolation": 0.5986207266408065,
+        "mean": 1.9349713165820073,
+        "median": 0.6129721172293463,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.460095958884407,
+        "low_order_2d": 0.1515001092934587,
+        "same_input_interpolation": 0.5008986670030623,
+        "mean": 1.837249256944263,
+        "median": 0.5152500575916021,
+        "zero": 0.09772205963774416
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g256",
+      "capability": "code",
+      "loss": 1.8476348942239125,
+      "dense": 1.752495840266223,
+      "dL": 0.09513905395768951,
+      "predictions": {
+        "separable": 0.8550283100876783,
+        "low_order_2d": 0.44247731194408835,
+        "same_input_interpolation": 1.1019645836693506,
+        "mean": 2.131671891137876,
+        "median": 0.82308824185257,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7598892561299888,
+        "low_order_2d": 0.34733825798639884,
+        "same_input_interpolation": 1.006825529711661,
+        "mean": 2.0365328371801863,
+        "median": 0.7279491878948805,
+        "zero": 0.09513905395768951
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g256",
+      "capability": "qa",
+      "loss": 4.805430133079848,
+      "dense": 4.769843155893536,
+      "dL": 0.03558697718631176,
+      "predictions": {
+        "separable": 0.9332053545259781,
+        "low_order_2d": 0.3417608100859972,
+        "same_input_interpolation": 0.8334855146173031,
+        "mean": 1.777056936633032,
+        "median": 0.34357007434746334,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8976183773396663,
+        "low_order_2d": 0.3061738328996854,
+        "same_input_interpolation": 0.7978985374309914,
+        "mean": 1.7414699594467202,
+        "median": 0.3079830971611516,
+        "zero": 0.03558697718631176
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g64",
+      "capability": "math",
+      "loss": 4.103219172664716,
+      "dense": 2.167365340504627,
+      "dL": 1.9358538321600887,
+      "predictions": {
+        "separable": 4.601516764452772,
+        "low_order_2d": 2.1441074752207157,
+        "same_input_interpolation": 7.44125427214513,
+        "mean": 1.5249597477583383,
+        "median": 0.2582963210490992,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.6656629322926837,
+        "low_order_2d": 0.208253643060627,
+        "same_input_interpolation": 5.505400439985042,
+        "mean": 0.41089408440175035,
+        "median": 1.6775575111109895,
+        "zero": 1.9358538321600887
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g64",
+      "capability": "code",
+      "loss": 4.141430948419301,
+      "dense": 2.1291300213929167,
+      "dL": 2.0123009270263843,
+      "predictions": {
+        "separable": 4.408784466772126,
+        "low_order_2d": 1.8167211039776614,
+        "same_input_interpolation": 7.063484146080226,
+        "mean": 1.5329650655398033,
+        "median": 0.35135329717369707,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.3964835397457414,
+        "low_order_2d": 0.1955798230487229,
+        "same_input_interpolation": 5.051183219053842,
+        "mean": 0.479335861486581,
+        "median": 1.6609476298526873,
+        "zero": 2.0123009270263843
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g64",
+      "capability": "qa",
+      "loss": 7.482889733840304,
+      "dense": 5.22231463878327,
+      "dL": 2.2605750950570345,
+      "predictions": {
+        "separable": 4.779723800628364,
+        "low_order_2d": 2.0975828870440174,
+        "same_input_interpolation": 6.560928452021801,
+        "mean": 1.5524983093337215,
+        "median": 0.0666517750504694,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.5191487055713297,
+        "low_order_2d": 0.16299220801301706,
+        "same_input_interpolation": 4.3003533569647665,
+        "mean": 0.708076785723313,
+        "median": 2.193923320006565,
+        "zero": 2.2605750950570345
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g256",
+      "capability": "math",
+      "loss": 4.508028157873922,
+      "dense": 2.167365340504627,
+      "dL": 2.3406628173692954,
+      "predictions": {
+        "separable": 5.285754737818179,
+        "low_order_2d": 2.981493600979,
+        "same_input_interpolation": 8.277223936676322,
+        "mean": 1.9349713165820073,
+        "median": 0.6129721172293463,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.9450919204488835,
+        "low_order_2d": 0.6408307836097045,
+        "same_input_interpolation": 5.936561119307026,
+        "mean": 0.4056915007872881,
+        "median": 1.727690700139949,
+        "zero": 2.3406628173692954
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g256",
+      "capability": "code",
+      "loss": 5.313525077252199,
+      "dense": 2.1291300213929167,
+      "dL": 3.184395055859282,
+      "predictions": {
+        "separable": 5.427850365908348,
+        "low_order_2d": 3.255179861981592,
+        "same_input_interpolation": 8.497326397955838,
+        "mean": 2.131671891137876,
+        "median": 0.82308824185257,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.2434553100490664,
+        "low_order_2d": 0.07078480612230997,
+        "same_input_interpolation": 5.312931342096556,
+        "mean": 1.0527231647214061,
+        "median": 2.3613068140067117,
+        "zero": 3.184395055859282
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g256",
+      "capability": "qa",
+      "loss": 8.031012357414449,
+      "dense": 5.22231463878327,
+      "dL": 2.808697718631179,
+      "predictions": {
+        "separable": 5.122781127766592,
+        "low_order_2d": 2.2854813898225124,
+        "same_input_interpolation": 6.761483528819955,
+        "mean": 1.777056936633032,
+        "median": 0.34357007434746334,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.3140834091354128,
+        "low_order_2d": 0.5232163288086666,
+        "same_input_interpolation": 3.952785810188776,
+        "mean": 1.031640781998147,
+        "median": 2.4651276442837156,
+        "zero": 2.808697718631179
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g64",
+      "capability": "math",
+      "loss": 1.6566083999050858,
+      "dense": 1.6118800917503757,
+      "dL": 0.04472830815471007,
+      "predictions": {
+        "separable": 0.023324432377479186,
+        "low_order_2d": -0.0646464055586507,
+        "same_input_interpolation": -0.06699317661566677,
+        "mean": 1.5249597477583383,
+        "median": 0.2582963210490992,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.021403875777230887,
+        "low_order_2d": 0.10937471371336077,
+        "same_input_interpolation": 0.11172148477037684,
+        "mean": 1.4802314396036282,
+        "median": 0.21356801289438915,
+        "zero": 0.04472830815471007
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g64",
+      "capability": "code",
+      "loss": 1.6051818397908248,
+      "dense": 1.5465890183028286,
+      "dL": 0.05859282148799627,
+      "predictions": {
+        "separable": -0.057562357749151666,
+        "low_order_2d": -0.12457419318578822,
+        "same_input_interpolation": -0.24596244740315532,
+        "mean": 1.5329650655398033,
+        "median": 0.35135329717369707,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.11615517923714794,
+        "low_order_2d": 0.1831670146737845,
+        "same_input_interpolation": 0.3045552688911516,
+        "mean": 1.474372244051807,
+        "median": 0.2927604756857008,
+        "zero": 0.05859282148799627
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g64",
+      "capability": "qa",
+      "loss": 5.053113117870723,
+      "dense": 5.072956273764259,
+      "dL": -0.019843155893536135,
+      "predictions": {
+        "separable": 1.062280545796317,
+        "low_order_2d": 0.7159514224135743,
+        "same_input_interpolation": 1.9411298235398007,
+        "mean": 1.5524983093337215,
+        "median": 0.0666517750504694,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.082123701689853,
+        "low_order_2d": 0.7357945783071105,
+        "same_input_interpolation": 1.9609729794333368,
+        "mean": 1.5723414652272576,
+        "median": 0.08649493094400554,
+        "zero": 0.019843155893536135
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g256",
+      "capability": "math",
+      "loss": 1.66635687732342,
+      "dense": 1.6118800917503757,
+      "dL": 0.05447678557304436,
+      "predictions": {
+        "separable": 0.026792737103249926,
+        "low_order_2d": 0.056605042656206916,
+        "same_input_interpolation": 0.05435665003619122,
+        "mean": 1.9349713165820073,
+        "median": 0.6129721172293463,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.027684048469794435,
+        "low_order_2d": 0.0021282570831625547,
+        "same_input_interpolation": 0.00012013553685313871,
+        "mean": 1.880494531008963,
+        "median": 0.5584953316563019,
+        "zero": 0.05447678557304436
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g256",
+      "capability": "code",
+      "loss": 1.6176610411219396,
+      "dense": 1.5465890183028286,
+      "dL": 0.07107202281911107,
+      "predictions": {
+        "separable": -0.07086757516182952,
+        "low_order_2d": -0.003107518839703838,
+        "same_input_interpolation": -0.1237233900232066,
+        "mean": 2.131671891137876,
+        "median": 0.82308824185257,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.14193959798094058,
+        "low_order_2d": 0.07417954165881491,
+        "same_input_interpolation": 0.19479541284231766,
+        "mean": 2.0605998683187647,
+        "median": 0.7520162190334589,
+        "zero": 0.07107202281911107
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g256",
+      "capability": "qa",
+      "loss": 5.0481226235741445,
+      "dense": 5.072956273764259,
+      "dL": -0.024833650190114298,
+      "predictions": {
+        "separable": 1.1385240987530616,
+        "low_order_2d": 0.6218367302281125,
+        "same_input_interpolation": 1.8640471417652869,
+        "mean": 1.777056936633032,
+        "median": 0.34357007434746334,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.163357748943176,
+        "low_order_2d": 0.6466703804182268,
+        "same_input_interpolation": 1.8888807919554012,
+        "mean": 1.8018905868231463,
+        "median": 0.36840372453757764,
+        "zero": 0.024833650190114298
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g64",
+      "capability": "math",
+      "loss": 1.7100371747211895,
+      "dense": 1.458277307601044,
+      "dL": 0.25175986712014553,
+      "predictions": {
+        "separable": 1.0341811754950085,
+        "low_order_2d": 0.06065720146520376,
+        "same_input_interpolation": 0.9498382732096732,
+        "mean": 1.5249597477583383,
+        "median": 0.2582963210490992,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.782421308374863,
+        "low_order_2d": 0.19110266565494177,
+        "same_input_interpolation": 0.6980784060895276,
+        "mean": 1.2731998806381928,
+        "median": 0.006536453928953689,
+        "zero": 0.25175986712014553
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g64",
+      "capability": "code",
+      "loss": 1.6650225814119326,
+      "dense": 1.4104468742571903,
+      "dL": 0.2545757071547423,
+      "predictions": {
+        "separable": 0.9909823912201527,
+        "low_order_2d": -0.06417566355677093,
+        "same_input_interpolation": 0.7993440331640983,
+        "mean": 1.5329650655398033,
+        "median": 0.35135329717369707,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7364066840654104,
+        "low_order_2d": 0.31875137071151327,
+        "same_input_interpolation": 0.544768326009356,
+        "mean": 1.278389358385061,
+        "median": 0.09677759001895475,
+        "zero": 0.2545757071547423
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g64",
+      "capability": "qa",
+      "loss": 5.160289923954372,
+      "dense": 5.0040993346007605,
+      "dL": 0.15619058935361174,
+      "predictions": {
+        "separable": 1.8868468303721124,
+        "low_order_2d": 0.3977057978911581,
+        "same_input_interpolation": 1.8636907205679025,
+        "mean": 1.5524983093337215,
+        "median": 0.0666517750504694,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.7306562410185007,
+        "low_order_2d": 0.24151520853754638,
+        "same_input_interpolation": 1.7075001312142908,
+        "mean": 1.3963077199801097,
+        "median": 0.08953881430314234,
+        "zero": 0.15619058935361174
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g256",
+      "capability": "math",
+      "loss": 1.8132563473859054,
+      "dense": 1.458277307601044,
+      "dL": 0.35497903978486134,
+      "predictions": {
+        "separable": 1.1879622150600162,
+        "low_order_2d": 0.7370069115049286,
+        "same_input_interpolation": 1.627021263208665,
+        "mean": 1.9349713165820073,
+        "median": 0.6129721172293463,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8329831752751549,
+        "low_order_2d": 0.38202787172006725,
+        "same_input_interpolation": 1.2720422234238036,
+        "mean": 1.579992276797146,
+        "median": 0.25799307744448496,
+        "zero": 0.35497903978486134
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g256",
+      "capability": "code",
+      "loss": 1.743700974566199,
+      "dense": 1.4104468742571903,
+      "dL": 0.3332541003090088,
+      "predictions": {
+        "separable": 1.2200424346738772,
+        "low_order_2d": 0.8364619840014087,
+        "same_input_interpolation": 1.703469311340915,
+        "mean": 2.131671891137876,
+        "median": 0.82308824185257,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8867883343648684,
+        "low_order_2d": 0.5032078836923999,
+        "same_input_interpolation": 1.3702152110319061,
+        "mean": 1.798417790828867,
+        "median": 0.4898341415435612,
+        "zero": 0.3332541003090088
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g256",
+      "capability": "qa",
+      "loss": 5.255941064638783,
+      "dense": 5.0040993346007605,
+      "dL": 0.2518417300380227,
+      "predictions": {
+        "separable": 2.022272360663548,
+        "low_order_2d": 0.8743668673181377,
+        "same_input_interpolation": 2.3279023016409113,
+        "mean": 1.777056936633032,
+        "median": 0.34357007434746334,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.7704306306255253,
+        "low_order_2d": 0.622525137280115,
+        "same_input_interpolation": 2.0760605716028886,
+        "mean": 1.5252152065950093,
+        "median": 0.09172834430944066,
+        "zero": 0.2518417300380227
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g64",
+      "capability": "math",
+      "loss": 1.4961638851538401,
+      "dense": 1.469370402594321,
+      "dL": 0.026793482559519077,
+      "predictions": {
+        "separable": -0.10844875773785306,
+        "low_order_2d": 0.0553016293331548,
+        "same_input_interpolation": 0.15722762612134422,
+        "mean": 1.5249597477583383,
+        "median": 0.2582963210490992,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.13524224029737214,
+        "low_order_2d": 0.028508146773635723,
+        "same_input_interpolation": 0.13043414356182514,
+        "mean": 1.4981662651988192,
+        "median": 0.23150283848958014,
+        "zero": 0.026793482559519077
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g64",
+      "capability": "code",
+      "loss": 1.4714166864749227,
+      "dense": 1.4655336344188257,
+      "dL": 0.005883052056097071,
+      "predictions": {
+        "separable": -0.13100393942707267,
+        "low_order_2d": 0.015720348358143565,
+        "same_input_interpolation": 0.0549192145738963,
+        "mean": 1.5329650655398033,
+        "median": 0.35135329717369707,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.13688699148316974,
+        "low_order_2d": 0.009837296302046494,
+        "same_input_interpolation": 0.04903616251779923,
+        "mean": 1.5270820134837062,
+        "median": 0.3454702451176,
+        "zero": 0.005883052056097071
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g64",
+      "capability": "qa",
+      "loss": 4.8470769961977185,
+      "dense": 4.9106463878327,
+      "dL": -0.06356939163498154,
+      "predictions": {
+        "separable": -1.6485609841133626,
+        "low_order_2d": -0.7861491035894987,
+        "same_input_interpolation": -2.293933877708085,
+        "mean": 1.5524983093337215,
+        "median": 0.0666517750504694,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.584991592478381,
+        "low_order_2d": 0.7225797119545172,
+        "same_input_interpolation": 2.2303644860731033,
+        "mean": 1.616067700968703,
+        "median": 0.13022116668545095,
+        "zero": 0.06356939163498154
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g256",
+      "capability": "math",
+      "loss": 1.5103614648422052,
+      "dense": 1.469370402594321,
+      "dL": 0.04099106224788418,
+      "predictions": {
+        "separable": -0.1245749096149438,
+        "low_order_2d": 0.09287515754310882,
+        "same_input_interpolation": 0.19389925602072453,
+        "mean": 1.9349713165820073,
+        "median": 0.6129721172293463,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.16556597186282798,
+        "low_order_2d": 0.05188409529522464,
+        "same_input_interpolation": 0.15290819377284035,
+        "mean": 1.893980254334123,
+        "median": 0.5719810549814621,
+        "zero": 0.04099106224788418
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g256",
+      "capability": "code",
+      "loss": 1.5046351319229856,
+      "dense": 1.4655336344188257,
+      "dL": 0.03910149750415992,
+      "predictions": {
+        "separable": -0.16128476815181633,
+        "low_order_2d": 0.06392320917494837,
+        "same_input_interpolation": 0.10013453291722342,
+        "mean": 2.131671891137876,
+        "median": 0.82308824185257,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.20038626565597625,
+        "low_order_2d": 0.02482171167078845,
+        "same_input_interpolation": 0.0610330354130635,
+        "mean": 2.092570393633716,
+        "median": 0.7839867443484101,
+        "zero": 0.03910149750415992
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g256",
+      "capability": "qa",
+      "loss": 4.8956749049429655,
+      "dense": 4.9106463878327,
+      "dL": -0.014971482889734489,
+      "predictions": {
+        "separable": -1.7668839141454171,
+        "low_order_2d": -0.6732157939207963,
+        "same_input_interpolation": -2.1828772384340818,
+        "mean": 1.777056936633032,
+        "median": 0.34357007434746334,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.7519124312556826,
+        "low_order_2d": 0.6582443110310618,
+        "same_input_interpolation": 2.1679057555443473,
+        "mean": 1.7920284195227665,
+        "median": 0.3585415572371978,
+        "zero": 0.014971482889734489
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g64",
+      "capability": "math",
+      "loss": 1.3107055287510876,
+      "dense": 1.2369690737957764,
+      "dL": 0.07373645495531123,
+      "predictions": {
+        "separable": 0.43306990481869106,
+        "low_order_2d": -0.11803934944795391,
+        "same_input_interpolation": 0.26219846260192636,
+        "mean": 1.5249597477583383,
+        "median": 0.2582963210490992,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.35933344986337984,
+        "low_order_2d": 0.19177580440326514,
+        "same_input_interpolation": 0.18846200764661514,
+        "mean": 1.451223292803027,
+        "median": 0.184559866093788,
+        "zero": 0.07373645495531123
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g64",
+      "capability": "code",
+      "loss": 1.3932731162348466,
+      "dense": 1.2896957451865938,
+      "dL": 0.10357737104825282,
+      "predictions": {
+        "separable": 0.7111768117186418,
+        "low_order_2d": -0.047632471777449226,
+        "same_input_interpolation": 0.6974594413263611,
+        "mean": 1.5329650655398033,
+        "median": 0.35135329717369707,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.607599440670389,
+        "low_order_2d": 0.15120984282570205,
+        "same_input_interpolation": 0.5938820702781082,
+        "mean": 1.4293876944915505,
+        "median": 0.24777592612544425,
+        "zero": 0.10357737104825282
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g64",
+      "capability": "qa",
+      "loss": 5.168666825095057,
+      "dense": 5.108870009505703,
+      "dL": 0.05979681558935379,
+      "predictions": {
+        "separable": 0.7561907806001895,
+        "low_order_2d": 0.14256489141942896,
+        "same_input_interpolation": 0.7785938422048895,
+        "mean": 1.5524983093337215,
+        "median": 0.0666517750504694,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.6963939650108357,
+        "low_order_2d": 0.08276807583007517,
+        "same_input_interpolation": 0.7187970266155357,
+        "mean": 1.4927014937443677,
+        "median": 0.006854959461115612,
+        "zero": 0.05979681558935379
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g256",
+      "capability": "math",
+      "loss": 1.3537332911492526,
+      "dense": 1.2369690737957764,
+      "dL": 0.1167642173534762,
+      "predictions": {
+        "separable": 0.497466687263953,
+        "low_order_2d": 0.4631306066775116,
+        "same_input_interpolation": 0.843632397925588,
+        "mean": 1.9349713165820073,
+        "median": 0.6129721172293463,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.3807024699104768,
+        "low_order_2d": 0.3463663893240354,
+        "same_input_interpolation": 0.7268681805721118,
+        "mean": 1.818207099228531,
+        "median": 0.4962078998758701,
+        "zero": 0.1167642173534762
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g256",
+      "capability": "code",
+      "loss": 1.4420014261944378,
+      "dense": 1.2896957451865938,
+      "dL": 0.15230568100784403,
+      "predictions": {
+        "separable": 0.8755613586478551,
+        "low_order_2d": 0.7507458264525908,
+        "same_input_interpolation": 1.496276478987319,
+        "mean": 2.131671891137876,
+        "median": 0.82308824185257,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7232556776400111,
+        "low_order_2d": 0.5984401454447468,
+        "same_input_interpolation": 1.343970797979475,
+        "mean": 1.9793662101300318,
+        "median": 0.670782560844726,
+        "zero": 0.15230568100784403
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "bit_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g256",
+      "capability": "qa",
+      "loss": 5.10771150190114,
+      "dense": 5.108870009505703,
+      "dL": -0.0011585076045630416,
+      "predictions": {
+        "separable": 0.8104652112618873,
+        "low_order_2d": 0.4457242160942758,
+        "same_input_interpolation": 1.0803003375813862,
+        "mean": 1.777056936633032,
+        "median": 0.34357007434746334,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8116237188664503,
+        "low_order_2d": 0.44688272369883886,
+        "same_input_interpolation": 1.0814588451859493,
+        "mean": 1.778215444237595,
+        "median": 0.3447285819520264,
+        "zero": 0.0011585076045630416
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 2.4565372142687654,
+      "dense": 1.7996519813335443,
+      "dL": 0.656885232935221,
+      "predictions": {
+        "separable": 1.565883182957005,
+        "low_order_2d": 0.9359652064668831,
+        "same_input_interpolation": 1.0170929057024698,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.908997950021784,
+        "low_order_2d": 0.27907997353166203,
+        "same_input_interpolation": 0.36020767276724874,
+        "mean": 2.8941492657333434,
+        "median": 0.24463141659416276,
+        "zero": 0.656885232935221
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 2.610767768005705,
+      "dense": 1.752495840266223,
+      "dL": 0.8582719277394819,
+      "predictions": {
+        "separable": 2.3184397596378865,
+        "low_order_2d": 1.9108805318148274,
+        "same_input_interpolation": 1.966377393829367,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.4601678318984046,
+        "low_order_2d": 1.0526086040753455,
+        "same_input_interpolation": 1.108105466089885,
+        "mean": 2.89716543855479,
+        "median": 0.3580490848585689,
+        "zero": 0.8582719277394819
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 5.274239543726236,
+      "dense": 4.769843155893536,
+      "dL": 0.5043963878327,
+      "predictions": {
+        "separable": 2.2892867046469307,
+        "low_order_2d": 1.0782210066295144,
+        "same_input_interpolation": 1.376191075570909,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.7848903168142307,
+        "low_order_2d": 0.5738246187968143,
+        "same_input_interpolation": 0.871794687738209,
+        "mean": 2.9250534695817487,
+        "median": 0.06688896150190171,
+        "zero": 0.5043963878327
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 1.8680297397769516,
+      "dense": 1.7996519813335443,
+      "dL": 0.06837775844340732,
+      "predictions": {
+        "separable": 0.5204626145548569,
+        "low_order_2d": 0.14612520674947227,
+        "same_input_interpolation": 0.49517381836722557,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.45208485611144955,
+        "low_order_2d": 0.07774744830606495,
+        "same_input_interpolation": 0.42679605992381825,
+        "mean": 1.6615877737267657,
+        "median": 0.36725646069581547,
+        "zero": 0.06837775844340732
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 1.830639410506299,
+      "dense": 1.752495840266223,
+      "dL": 0.07814357024007612,
+      "predictions": {
+        "separable": 0.7705946600118766,
+        "low_order_2d": 0.30011072374605074,
+        "same_input_interpolation": 0.9586714208727372,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.6924510897718005,
+        "low_order_2d": 0.22196715350597462,
+        "same_input_interpolation": 0.880527850632661,
+        "mean": 1.7541749080987634,
+        "median": 0.5090771992730574,
+        "zero": 0.07814357024007612
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 4.851235741444867,
+      "dense": 4.769843155893536,
+      "dL": 0.08139258555133111,
+      "predictions": {
+        "separable": 0.9014169542838324,
+        "low_order_2d": 0.16179202915147894,
+        "same_input_interpolation": 0.661634590548487,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8200243687325013,
+        "low_order_2d": 0.08039944360014784,
+        "same_input_interpolation": 0.5802420049971558,
+        "mean": 1.5833850374320457,
+        "median": 0.12371833914763528,
+        "zero": 0.08139258555133111
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 1.8091038519338765,
+      "dense": 1.7996519813335443,
+      "dL": 0.009451870600332146,
+      "predictions": {
+        "separable": 0.19324058978965275,
+        "low_order_2d": 0.019007549749084557,
+        "same_input_interpolation": 0.02571029322132956,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.1837887191893206,
+        "low_order_2d": 0.00955567914875241,
+        "same_input_interpolation": 0.016258422620997415,
+        "mean": 0.08247152574547185,
+        "median": 0.0071235070790161,
+        "zero": 0.009451870600332146
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 1.7751366769669599,
+      "dense": 1.752495840266223,
+      "dL": 0.02264083670073691,
+      "predictions": {
+        "separable": 0.28611116807460296,
+        "low_order_2d": 0.04749107534294672,
+        "same_input_interpolation": 0.052245099524347256,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.26347033137386605,
+        "low_order_2d": 0.02485023864220981,
+        "same_input_interpolation": 0.029604262823610346,
+        "mean": 0.0798421281990333,
+        "median": 0.001292488709294104,
+        "zero": 0.02264083670073691
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step16000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 4.780299429657795,
+      "dense": 4.769843155893536,
+      "dL": 0.010456273764258839,
+      "predictions": {
+        "separable": 0.3897922331523959,
+        "low_order_2d": -0.01003790121285636,
+        "same_input_interpolation": 0.018894720490789482,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.3793359593881371,
+        "low_order_2d": 0.020494174977115198,
+        "same_input_interpolation": 0.008438446726530643,
+        "mean": 0.06700778279467645,
+        "median": 0.014384802756654658,
+        "zero": 0.010456273764258839
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 16.680534683223918,
+      "dense": 2.167365340504627,
+      "dL": 14.51316934271929,
+      "predictions": {
+        "separable": 14.837947463785845,
+        "low_order_2d": 16.28627161675743,
+        "same_input_interpolation": 16.133623986272497,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.32477812106655435,
+        "low_order_2d": 1.7731022740381377,
+        "same_input_interpolation": 1.620454643553206,
+        "mean": 10.962134844050727,
+        "median": 13.611652693189907,
+        "zero": 14.51316934271929
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 16.745899690991205,
+      "dense": 2.1291300213929167,
+      "dL": 14.616769669598288,
+      "predictions": {
+        "separable": 14.717809865730096,
+        "low_order_2d": 16.058870142057742,
+        "same_input_interpolation": 15.9241384872792,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.10104019613180881,
+        "low_order_2d": 1.4421004724594546,
+        "same_input_interpolation": 1.3073688176809117,
+        "mean": 10.861332303304016,
+        "median": 13.400448657000236,
+        "zero": 14.616769669598288
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 20.760218631178706,
+      "dense": 5.22231463878327,
+      "dL": 15.537903992395435,
+      "predictions": {
+        "separable": 12.566917527567403,
+        "low_order_2d": 13.877824053394669,
+        "same_input_interpolation": 13.643573276668803,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.970986464828032,
+        "low_order_2d": 1.6600799390007666,
+        "same_input_interpolation": 1.8943307157266318,
+        "mean": 12.108454134980986,
+        "median": 15.100396566064637,
+        "zero": 15.537903992395435
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 4.358933797358222,
+      "dense": 2.167365340504627,
+      "dL": 2.1915684568535947,
+      "predictions": {
+        "separable": 4.931783555556348,
+        "low_order_2d": 2.5628005380998573,
+        "same_input_interpolation": 7.859239104410726,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.740215098702753,
+        "low_order_2d": 0.3712320812462626,
+        "same_input_interpolation": 5.667670647557131,
+        "mean": 0.4616029246834217,
+        "median": 1.7559342377143718,
+        "zero": 2.1915684568535947
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 4.927264083670074,
+      "dense": 2.1291300213929167,
+      "dL": 2.798134062277157,
+      "predictions": {
+        "separable": 4.8918526532572635,
+        "low_order_2d": 2.535950482979626,
+        "same_input_interpolation": 7.780405272018032,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.0937185909801066,
+        "low_order_2d": 0.26218357929753067,
+        "same_input_interpolation": 4.982271209740875,
+        "mean": 0.9658155839383173,
+        "median": 2.2109132927640234,
+        "zero": 2.798134062277157
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 7.937737642585551,
+      "dense": 5.22231463878327,
+      "dL": 2.7154230038022815,
+      "predictions": {
+        "separable": 4.948280396440342,
+        "low_order_2d": 2.1915321384332658,
+        "same_input_interpolation": 6.661205990420878,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.232857392638061,
+        "low_order_2d": 0.5238908653690157,
+        "same_input_interpolation": 3.945782986618596,
+        "mean": 1.0506453808189047,
+        "median": 2.5103120791033153,
+        "zero": 2.7154230038022815
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 2.581032982678162,
+      "dense": 2.167365340504627,
+      "dL": 0.413667642173535,
+      "predictions": {
+        "separable": 1.8311032076832692,
+        "low_order_2d": 0.4290820987363042,
+        "same_input_interpolation": 0.41647261183830486,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.4174355655097342,
+        "low_order_2d": 0.015414456562769185,
+        "same_input_interpolation": 0.0028049696647698408,
+        "mean": 0.32174424582773103,
+        "median": 0.3970922644941868,
+        "zero": 0.413667642173535
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 2.598882814357024,
+      "dense": 2.1291300213929167,
+      "dL": 0.46975279296410744,
+      "predictions": {
+        "separable": 1.8162774144460205,
+        "low_order_2d": 0.46669706971508346,
+        "same_input_interpolation": 0.45515927918756977,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.346524621481913,
+        "low_order_2d": 0.0030557232490239783,
+        "same_input_interpolation": 0.01459351377653767,
+        "mean": 0.3672698280643372,
+        "median": 0.44840444497266463,
+        "zero": 0.46975279296410744
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-160m@step143000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 5.771863117870723,
+      "dense": 5.22231463878327,
+      "dL": 0.549548479087453,
+      "predictions": {
+        "separable": 2.1397437188488637,
+        "low_order_2d": 0.4033291407547058,
+        "same_input_interpolation": 0.380602656287979,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.5901952397614108,
+        "low_order_2d": 0.1462193383327472,
+        "same_input_interpolation": 0.16894582279947395,
+        "mean": 0.4720844225285177,
+        "median": 0.5534770080798488,
+        "zero": 0.549548479087453
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 2.031123942102349,
+      "dense": 1.6118800917503757,
+      "dL": 0.4192438503519733,
+      "predictions": {
+        "separable": 0.07521144004368732,
+        "low_order_2d": -0.02188038772380141,
+        "same_input_interpolation": -0.010603373405398298,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.344032410308286,
+        "low_order_2d": 0.4411242380757747,
+        "same_input_interpolation": 0.4298472237573716,
+        "mean": 3.131790648316591,
+        "median": 0.4822727991774105,
+        "zero": 0.4192438503519733
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 2.078262419776563,
+      "dense": 1.5465890183028286,
+      "dL": 0.5316734014737343,
+      "predictions": {
+        "separable": -0.19215995772989505,
+        "low_order_2d": -0.3936614685670907,
+        "same_input_interpolation": -0.3707144097178907,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7238333592036293,
+        "low_order_2d": 0.925334870040825,
+        "same_input_interpolation": 0.902387811191625,
+        "mean": 3.2237639648205376,
+        "median": 0.6846476111243165,
+        "zero": 0.5316734014737343
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 5.280418250950571,
+      "dense": 5.072956273764259,
+      "dL": 0.20746197718631176,
+      "predictions": {
+        "separable": 2.792963059582356,
+        "low_order_2d": 4.187634783292828,
+        "same_input_interpolation": 3.8749771795362955,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.585501082396044,
+        "low_order_2d": 3.9801728061065162,
+        "same_input_interpolation": 3.6675152023499837,
+        "mean": 3.221987880228137,
+        "median": 0.23004544914448655,
+        "zero": 0.20746197718631176
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 1.6619473226291228,
+      "dense": 1.6118800917503757,
+      "dL": 0.05006723087874709,
+      "predictions": {
+        "separable": 0.024998507650904493,
+        "low_order_2d": -0.004020681451222252,
+        "same_input_interpolation": -0.006318263289737771,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.0250687232278426,
+        "low_order_2d": 0.054087912329969345,
+        "same_input_interpolation": 0.056385494168484866,
+        "mean": 1.679898301291426,
+        "median": 0.3855669882604757,
+        "zero": 0.05006723087874709
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 1.600665557404326,
+      "dense": 1.5465890183028286,
+      "dL": 0.054076539101497456,
+      "predictions": {
+        "separable": -0.06386943489870664,
+        "low_order_2d": -0.06384085601274653,
+        "same_input_interpolation": -0.18484291871318095,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.1179459740002041,
+        "low_order_2d": 0.11791739511424398,
+        "same_input_interpolation": 0.2389194578146784,
+        "mean": 1.778241939237342,
+        "median": 0.533144230411636,
+        "zero": 0.054076539101497456
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 5.048835551330798,
+      "dense": 5.072956273764259,
+      "dL": -0.02412072243346053,
+      "predictions": {
+        "separable": 1.0997417883420006,
+        "low_order_2d": 0.668894076320844,
+        "same_input_interpolation": 1.9025884826525437,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.1238625107754612,
+        "low_order_2d": 0.6930147987543045,
+        "same_input_interpolation": 1.9267092050860042,
+        "mean": 1.6888983454168374,
+        "median": 0.2292316471324269,
+        "zero": 0.02412072243346053
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 1.6236652693189908,
+      "dense": 1.6118800917503757,
+      "dL": 0.01178517756861508,
+      "predictions": {
+        "separable": 0.009281601074178155,
+        "low_order_2d": -0.003395734978789783,
+        "same_input_interpolation": -0.0024638288585169185,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.002503576494436924,
+        "low_order_2d": 0.015180912547404862,
+        "same_input_interpolation": 0.014249006427131998,
+        "mean": 0.08013821877718892,
+        "median": 0.004790200110733167,
+        "zero": 0.01178517756861508
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 1.5492037081055383,
+      "dense": 1.5465890183028286,
+      "dL": 0.0026146898027097354,
+      "predictions": {
+        "separable": -0.02371384019563817,
+        "low_order_2d": -0.019618481206466323,
+        "same_input_interpolation": -0.017652471939684986,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.026328529998347904,
+        "low_order_2d": 0.02223317100917606,
+        "same_input_interpolation": 0.02026716174239472,
+        "mean": 0.09986827509706048,
+        "median": 0.01873365818873307,
+        "zero": 0.0026146898027097354
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step16000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 5.085551330798479,
+      "dense": 5.072956273764259,
+      "dL": 0.012595057034220147,
+      "predictions": {
+        "separable": 0.47555219094965107,
+        "low_order_2d": 0.15879597762798275,
+        "same_input_interpolation": 0.12843503039109802,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.4629571339154309,
+        "low_order_2d": 0.1462009205937626,
+        "same_input_interpolation": 0.11583997335687787,
+        "mean": 0.06486899952471514,
+        "median": 0.016523586026615966,
+        "zero": 0.012595057034220147
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 3.6983706398797755,
+      "dense": 1.458277307601044,
+      "dL": 2.2400933322787315,
+      "predictions": {
+        "separable": 3.3347973582480512,
+        "low_order_2d": 2.536878585492689,
+        "same_input_interpolation": 2.6391336449931715,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.0947040259693197,
+        "low_order_2d": 0.29678525321395766,
+        "same_input_interpolation": 0.39904031271443996,
+        "mean": 1.3109411663898332,
+        "median": 1.3385766827493477,
+        "zero": 2.2400933322787315
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 4.0949607796529595,
+      "dense": 1.4104468742571903,
+      "dL": 2.684513905395769,
+      "predictions": {
+        "separable": 3.308188577642849,
+        "low_order_2d": 2.457035943511217,
+        "same_input_interpolation": 2.5632446372472195,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.6236746722470801,
+        "low_order_2d": 0.22747796188455194,
+        "same_input_interpolation": 0.12126926814854944,
+        "mean": 1.070923460898503,
+        "median": 1.4681928927977181,
+        "zero": 2.684513905395769
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 7.125712927756654,
+      "dense": 5.0040993346007605,
+      "dL": 2.1216135931558933,
+      "predictions": {
+        "separable": 4.960924416034464,
+        "low_order_2d": 4.1165557528203145,
+        "same_input_interpolation": 4.34431936212459,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 2.839310822878571,
+        "low_order_2d": 1.9949421596644212,
+        "same_input_interpolation": 2.222705768968697,
+        "mean": 1.3078362642585555,
+        "median": 1.684106166825095,
+        "zero": 2.1216135931558933
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 1.7528671992406866,
+      "dense": 1.458277307601044,
+      "dL": 0.29458989163964255,
+      "predictions": {
+        "separable": 1.108407939350139,
+        "low_order_2d": 0.39883205648506576,
+        "same_input_interpolation": 1.288429768209169,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.8138180477104964,
+        "low_order_2d": 0.1042421648454232,
+        "same_input_interpolation": 0.9938398765695264,
+        "mean": 1.4353756405305305,
+        "median": 0.14104432749958024,
+        "zero": 0.29458989163964255
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 1.717316377466128,
+      "dense": 1.4104468742571903,
+      "dL": 0.3068695032089377,
+      "predictions": {
+        "separable": 1.0995638086546755,
+        "low_order_2d": 0.38614316022231804,
+        "same_input_interpolation": 1.2514066722525066,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7926943054457378,
+        "low_order_2d": 0.07927365701338035,
+        "same_input_interpolation": 0.9445371690435689,
+        "mean": 1.5254489751299019,
+        "median": 0.2803512663041958,
+        "zero": 0.3068695032089377
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 5.302400190114068,
+      "dense": 5.0040993346007605,
+      "dL": 0.29830085551330754,
+      "predictions": {
+        "separable": 1.9533863401455291,
+        "low_order_2d": 0.6360363326046489,
+        "same_input_interpolation": 2.0957965111044072,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.6550854846322216,
+        "low_order_2d": 0.33773547709134133,
+        "same_input_interpolation": 1.7974956555910997,
+        "mean": 1.3664767674700693,
+        "median": 0.09318993081434115,
+        "zero": 0.29830085551330754
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 1.5286917661947323,
+      "dense": 1.458277307601044,
+      "dL": 0.07041445859368833,
+      "predictions": {
+        "separable": 0.4115365790696555,
+        "low_order_2d": 0.06503102651550594,
+        "same_input_interpolation": 0.07347860276934201,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.3411221204759672,
+        "low_order_2d": 0.0053834320781823986,
+        "same_input_interpolation": 0.003064144175653677,
+        "mean": 0.021508937752115667,
+        "median": 0.05383908091434009,
+        "zero": 0.07041445859368833
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 1.5149750415973378,
+      "dense": 1.4104468742571903,
+      "dL": 0.10452816734014747,
+      "predictions": {
+        "separable": 0.4082528753338361,
+        "low_order_2d": 0.0623178610474802,
+        "same_input_interpolation": 0.07141519385874726,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.3037247079936886,
+        "low_order_2d": 0.04221030629266727,
+        "same_input_interpolation": 0.033112973481400215,
+        "mean": 0.0020452024403772584,
+        "median": 0.08317981934870466,
+        "zero": 0.10452816734014747
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-410m@step143000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 4.99013783269962,
+      "dense": 5.0040993346007605,
+      "dL": -0.013961501901140316,
+      "predictions": {
+        "separable": 0.8446866015956497,
+        "low_order_2d": 0.05113712957842369,
+        "same_input_interpolation": 0.0732618124778501,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.85864810349679,
+        "low_order_2d": 0.065098631479564,
+        "same_input_interpolation": 0.08722331437899042,
+        "mean": 0.0914255584600756,
+        "median": 0.010032972908744497,
+        "zero": 0.013961501901140316
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 1.7468559677291782,
+      "dense": 1.469370402594321,
+      "dL": 0.2774855651348571,
+      "predictions": {
+        "separable": -0.3497014250296812,
+        "low_order_2d": 0.46973658804754326,
+        "same_input_interpolation": 0.36562010015503565,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.6271869901645384,
+        "low_order_2d": 0.19225102291268614,
+        "same_input_interpolation": 0.08813453502017854,
+        "mean": 3.2735489335337076,
+        "median": 0.6240310843945267,
+        "zero": 0.2774855651348571
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 1.7569526978844783,
+      "dense": 1.4655336344188257,
+      "dL": 0.2914190634656526,
+      "predictions": {
+        "separable": -0.4373294014894138,
+        "low_order_2d": 0.25971246740400566,
+        "same_input_interpolation": 0.17030068516018404,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7287484649550664,
+        "low_order_2d": 0.03170659606164694,
+        "same_input_interpolation": 0.12111837830546857,
+        "mean": 3.4640183028286193,
+        "median": 0.9249019491323982,
+        "zero": 0.2914190634656526
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 4.871732414448669,
+      "dense": 4.9106463878327,
+      "dL": -0.03891397338403113,
+      "predictions": {
+        "separable": -4.334419893424467,
+        "low_order_2d": -4.599551218807911,
+        "same_input_interpolation": -4.5640106771139255,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 4.295505920040436,
+        "low_order_2d": 4.56063724542388,
+        "same_input_interpolation": 4.525096703729894,
+        "mean": 3.46836383079848,
+        "median": 0.47642139971482944,
+        "zero": 0.03891397338403113
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 1.4955904453057027,
+      "dense": 1.469370402594321,
+      "dL": 0.026220042711381675,
+      "predictions": {
+        "separable": -0.1162325005884584,
+        "low_order_2d": 0.07408839343813184,
+        "same_input_interpolation": 0.1755634410710344,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.14245254329984008,
+        "low_order_2d": 0.047868350726750164,
+        "same_input_interpolation": 0.1493433983596527,
+        "mean": 1.7037454894587913,
+        "median": 0.4094141764278411,
+        "zero": 0.026220042711381675
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 1.481162348466841,
+      "dense": 1.4655336344188257,
+      "dL": 0.015628714048015357,
+      "predictions": {
+        "separable": -0.14535797190890498,
+        "low_order_2d": 0.03982177876654569,
+        "same_input_interpolation": 0.07752687374555986,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.16098668595692034,
+        "low_order_2d": 0.024193064718530333,
+        "same_input_interpolation": 0.0618981596975445,
+        "mean": 1.8166897642908242,
+        "median": 0.5715920554651182,
+        "zero": 0.015628714048015357
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 4.848384030418251,
+      "dense": 4.9106463878327,
+      "dL": -0.062262357414448743,
+      "predictions": {
+        "separable": -1.7066973616659864,
+        "low_order_2d": -0.7296824487551471,
+        "same_input_interpolation": -2.2384055580710838,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.6444350042515377,
+        "low_order_2d": 0.6674200913406984,
+        "same_input_interpolation": 2.176143200656635,
+        "mean": 1.7270399803978256,
+        "median": 0.26737328211341516,
+        "zero": 0.062262357414448743
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 1.4753618603179626,
+      "dense": 1.469370402594321,
+      "dL": 0.005991457723641513,
+      "predictions": {
+        "separable": -0.043155524216951194,
+        "low_order_2d": 0.013209727342356287,
+        "same_input_interpolation": 0.004608457212175517,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.04914698194059271,
+        "low_order_2d": 0.007218269618714773,
+        "same_input_interpolation": 0.0013830005114659968,
+        "mean": 0.08593193862216249,
+        "median": 0.010583919955706733,
+        "zero": 0.005991457723641513
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 1.4718326598526266,
+      "dense": 1.4655336344188257,
+      "dL": 0.006299025433800898,
+      "predictions": {
+        "separable": -0.053969409976408554,
+        "low_order_2d": 0.001734607422914508,
+        "same_input_interpolation": -0.005922690765105473,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.06026843541020945,
+        "low_order_2d": 0.00456441801088639,
+        "same_input_interpolation": 0.012221716198906371,
+        "mean": 0.09618393946596931,
+        "median": 0.015049322557641909,
+        "zero": 0.006299025433800898
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 4.892942015209125,
+      "dense": 4.9106463878327,
+      "dL": -0.017704372623574827,
+      "predictions": {
+        "separable": -0.7380129392481064,
+        "low_order_2d": -0.14997473880151269,
+        "same_input_interpolation": -0.14653575722222742,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7203085666245316,
+        "low_order_2d": 0.13227036617793786,
+        "same_input_interpolation": 0.1288313845986526,
+        "mean": 0.09516842918251012,
+        "median": 0.013775843631179008,
+        "zero": 0.017704372623574827
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 2.1685122202009017,
+      "dense": 1.2369690737957764,
+      "dL": 0.9315431464051254,
+      "predictions": {
+        "separable": 1.3964674747003036,
+        "low_order_2d": 1.095013671689614,
+        "same_input_interpolation": 1.1309627042859178,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.46492432829517827,
+        "low_order_2d": 0.16347052528448858,
+        "same_input_interpolation": 0.19941955788079246,
+        "mean": 2.6194913522634393,
+        "median": 0.03002649687574155,
+        "zero": 0.9315431464051254
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 2.5268599952460185,
+      "dense": 1.2896957451865938,
+      "dL": 1.2371642500594247,
+      "predictions": {
+        "separable": 2.3741158531740263,
+        "low_order_2d": 2.235848378917483,
+        "same_input_interpolation": 2.2508700268231965,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.1369516031146016,
+        "low_order_2d": 0.9986841288580584,
+        "same_input_interpolation": 1.0137057767637718,
+        "mean": 2.5182731162348473,
+        "median": 0.020843237461373842,
+        "zero": 1.2371642500594247
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 5.16884505703422,
+      "dense": 5.108870009505703,
+      "dL": 0.05997504752851679,
+      "predictions": {
+        "separable": 1.9881875127722008,
+        "low_order_2d": 1.9231191841351718,
+        "same_input_interpolation": 1.9495581611108155,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.928212465243684,
+        "low_order_2d": 1.863144136606655,
+        "same_input_interpolation": 1.8895831135822987,
+        "mean": 3.369474809885932,
+        "median": 0.3775323788022815,
+        "zero": 0.05997504752851679
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 1.3335047061615124,
+      "dense": 1.2369690737957764,
+      "dL": 0.09653563236573603,
+      "predictions": {
+        "separable": 0.4641528314077914,
+        "low_order_2d": 0.1725456286147793,
+        "same_input_interpolation": 0.5529154302637572,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.36761719904205536,
+        "low_order_2d": 0.07600999624904325,
+        "same_input_interpolation": 0.4563797978980212,
+        "mean": 1.633429899804437,
+        "median": 0.33909858677348675,
+        "zero": 0.09653563236573603
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 1.417458996909912,
+      "dense": 1.2896957451865938,
+      "dL": 0.12776325172331826,
+      "predictions": {
+        "separable": 0.7891000795255465,
+        "low_order_2d": 0.3515566773375699,
+        "same_input_interpolation": 1.09686796015684,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.6613368278022282,
+        "low_order_2d": 0.22379342561425164,
+        "same_input_interpolation": 0.9691047084335218,
+        "mean": 1.7045552266155213,
+        "median": 0.45945751778981525,
+        "zero": 0.12776325172331826
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 5.13432747148289,
+      "dense": 5.108870009505703,
+      "dL": 0.02545746197718657,
+      "predictions": {
+        "separable": 0.7828577908876069,
+        "low_order_2d": 0.29414455375685244,
+        "same_input_interpolation": 0.9294470898931378,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.7574003289104203,
+        "low_order_2d": 0.2686870917796659,
+        "same_input_interpolation": 0.9039896279159513,
+        "mean": 1.6393201610061903,
+        "median": 0.17965346272177982,
+        "zero": 0.02545746197718657
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 1.2558332674207071,
+      "dense": 1.2369690737957764,
+      "dL": 0.018864193624930747,
+      "predictions": {
+        "separable": 0.17233354401543705,
+        "low_order_2d": 0.029995370904650126,
+        "same_input_interpolation": 0.03296489090149603,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.1534693503905063,
+        "low_order_2d": 0.011131177279719379,
+        "same_input_interpolation": 0.01410069727656528,
+        "mean": 0.07305920272087325,
+        "median": 0.002288815945582501,
+        "zero": 0.018864193624930747
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 1.3052056096981222,
+      "dense": 1.2896957451865938,
+      "dL": 0.01550986451152836,
+      "predictions": {
+        "separable": 0.29298197508575596,
+        "low_order_2d": 0.05756176812454314,
+        "same_input_interpolation": 0.058849057631347484,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.2774721105742276,
+        "low_order_2d": 0.04205190361301478,
+        "same_input_interpolation": 0.043339193119819125,
+        "mean": 0.08697310038824185,
+        "median": 0.005838483479914447,
+        "zero": 0.01550986451152836
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "granularity_test",
+      "state": "pythia-1.4b@step143000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 5.089056558935361,
+      "dense": 5.108870009505703,
+      "dL": -0.019813450570342006,
+      "predictions": {
+        "separable": 0.3385246806160553,
+        "low_order_2d": 0.00929198449616056,
+        "same_input_interpolation": 0.011862446688486947,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.3583381311863973,
+        "low_order_2d": 0.029105435066502566,
+        "same_input_interpolation": 0.03167589725882895,
+        "mean": 0.0972775071292773,
+        "median": 0.015884921577946187,
+        "zero": 0.019813450570342006
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b3_g128",
+      "capability": "math",
+      "loss": 2.1804160404967177,
+      "dense": 1.35337736296765,
+      "dL": 0.8270386775290677,
+      "predictions": {
+        "separable": 1.8261651620105244,
+        "low_order_2d": 1.6335321534417941,
+        "same_input_interpolation": 1.657537283610595,
+        "mean": 3.5510344986685647,
+        "median": 0.9015166495293838,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.9991264844814567,
+        "low_order_2d": 0.8064934759127265,
+        "same_input_interpolation": 0.8304986060815274,
+        "mean": 2.7239958211394972,
+        "median": 0.07447797200031614,
+        "zero": 0.8270386775290677
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b3_g128",
+      "capability": "code",
+      "loss": 2.2684811029236984,
+      "dense": 1.3192298550035655,
+      "dL": 0.9492512479201329,
+      "predictions": {
+        "separable": 1.4802224914990603,
+        "low_order_2d": 1.1087495327808106,
+        "same_input_interpolation": 1.1515885675377495,
+        "mean": 3.755437366294272,
+        "median": 1.2163210125980508,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.5309712435789273,
+        "low_order_2d": 0.15949828486067763,
+        "same_input_interpolation": 0.20233731961761658,
+        "mean": 2.8061861183741392,
+        "median": 0.2670697646779179,
+        "zero": 0.9492512479201329
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b3_g128",
+      "capability": "qa",
+      "loss": 4.731701520912548,
+      "dense": 5.005198431558935,
+      "dL": -0.27349691064638737,
+      "predictions": {
+        "separable": 1.1323271072699308,
+        "low_order_2d": 0.46536341538282944,
+        "same_input_interpolation": 0.6283944235110157,
+        "mean": 3.4294498574144487,
+        "median": 0.4375074263307983,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 1.4058240179163182,
+        "low_order_2d": 0.7388603260292168,
+        "same_input_interpolation": 0.9018913341574031,
+        "mean": 3.702946768060836,
+        "median": 0.7110043369771857,
+        "zero": 0.27349691064638737
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b4_g128",
+      "capability": "math",
+      "loss": 1.4116507158111207,
+      "dense": 1.35337736296765,
+      "dL": 0.05827335284347068,
+      "predictions": {
+        "separable": 0.606974201634994,
+        "low_order_2d": 0.2571152687425924,
+        "same_input_interpolation": 0.8087813284346245,
+        "mean": 1.729965532170173,
+        "median": 0.4356342191392228,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.5487008487915234,
+        "low_order_2d": 0.1988419158991217,
+        "same_input_interpolation": 0.7505079755911538,
+        "mean": 1.6716921793267023,
+        "median": 0.3773608662957521,
+        "zero": 0.05827335284347068
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b4_g128",
+      "capability": "code",
+      "loss": 1.372415022581412,
+      "dense": 1.3192298550035655,
+      "dL": 0.053185167577846526,
+      "predictions": {
+        "separable": 0.49199102234030345,
+        "low_order_2d": 0.17339432115889386,
+        "same_input_interpolation": 0.5598684487449563,
+        "mean": 1.8323184783388395,
+        "median": 0.5872207695131335,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.4388058547624569,
+        "low_order_2d": 0.12020915358104733,
+        "same_input_interpolation": 0.5066832811671098,
+        "mean": 1.779133310760993,
+        "median": 0.534035601935287,
+        "zero": 0.053185167577846526
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b4_g128",
+      "capability": "qa",
+      "loss": 5.027863593155893,
+      "dense": 5.005198431558935,
+      "dL": 0.022665161596957972,
+      "predictions": {
+        "separable": 0.4458589001615254,
+        "low_order_2d": 0.06162360902674657,
+        "same_input_interpolation": 0.28253901707057993,
+        "mean": 1.6647776229833768,
+        "median": 0.20511092469896638,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.42319373856456743,
+        "low_order_2d": 0.0389584474297886,
+        "same_input_interpolation": 0.25987385547362196,
+        "mean": 1.6421124613864189,
+        "median": 0.1824457631020084,
+        "zero": 0.022665161596957972
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b5_g128",
+      "capability": "math",
+      "loss": 1.3671596931108123,
+      "dense": 1.35337736296765,
+      "dL": 0.013782330143162325,
+      "predictions": {
+        "separable": 0.22536114877601307,
+        "low_order_2d": 0.0433467390354437,
+        "same_input_interpolation": 0.04532972765126309,
+        "mean": 0.091923396345804,
+        "median": 0.016575377679348247,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.21157881863285075,
+        "low_order_2d": 0.029564408892281374,
+        "same_input_interpolation": 0.03154739750810077,
+        "mean": 0.07814106620264168,
+        "median": 0.002793047536185922,
+        "zero": 0.013782330143162325
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b5_g128",
+      "capability": "code",
+      "loss": 1.3323033040171144,
+      "dense": 1.3192298550035655,
+      "dL": 0.013073449013548899,
+      "predictions": {
+        "separable": 0.18266948032294025,
+        "low_order_2d": 0.02394951518910124,
+        "same_input_interpolation": 0.02761925608460123,
+        "mean": 0.10248296489977021,
+        "median": 0.021348347991442806,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.16959603130939135,
+        "low_order_2d": 0.01087606617555234,
+        "same_input_interpolation": 0.014545807071052332,
+        "mean": 0.08940951588622131,
+        "median": 0.008274898977893907,
+        "zero": 0.013073449013548899
+      },
+      "dense_difference_from_prediction_input": 0.0
+    },
+    {
+      "test_set": "joint_test",
+      "state": "pythia-1b@step96000",
+      "config": "b5_g128",
+      "capability": "qa",
+      "loss": 4.989543726235741,
+      "dense": 5.005198431558935,
+      "dL": -0.01565470532319413,
+      "predictions": {
+        "separable": 0.19279905435427333,
+        "low_order_2d": -0.044387924151409644,
+        "same_input_interpolation": -0.02855613587216113,
+        "mean": 0.07746405655893529,
+        "median": -0.003928528992395819,
+        "zero": 0.0
+      },
+      "absolute_errors": {
+        "separable": 0.20845375967746746,
+        "low_order_2d": 0.028733218828215515,
+        "same_input_interpolation": 0.012901430548967002,
+        "mean": 0.09311876188212942,
+        "median": 0.01172617633079831,
+        "zero": 0.01565470532319413
+      },
+      "dense_difference_from_prediction_input": 0.0
+    }
+  ],
+  "missing": [],
+  "thresholds": {
+    "near_zero": "abs(dL) < 0.03 for every planned capability/cell",
+    "collapse": "dL > 4; report any, all and count among measured responses"
+  },
+  "provenance": {
+    "predictions_sha256": "af08fcf285eeb4d71feeda93307febce51e5d32a094f45994228816ee457ff10",
+    "measurement_sha256": {
+      "results/v54-quant-group/pythia-160m--step16000/quant_group_losses.json": "67cb8d973d7116ee26ccbc295f36c8aeabc1f733e10e3e3e28e3a31c7a8c5939",
+      "results/v54-quant-group/pythia-160m--step143000/quant_group_losses.json": "803b5327fa5f747a23f23793f57803765fe3200f0b08a9edbd3216fb3d7c322f",
+      "results/v54-quant-group/pythia-410m--step16000/quant_group_losses.json": "1f92ad048199581e23c3626c5d2065c860c37c1a53351552d2bd2068d50eae81",
+      "results/v54-quant-group/pythia-410m--step143000/quant_group_losses.json": "bae7431f3c984976e1a22f02bf830254196f060c7d6f052a613a37e85f5e1389",
+      "results/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json": "41bc3efd814274b8a5da559dd313724b0de85460985b7d79aa371b16da140566",
+      "results/v54-quant-group/pythia-1.4b--step143000/quant_group_losses.json": "3b9d7d9b5584d542e8a9c88c8d02311b6a88ded22815ac215437b40b7183e406",
+      "results/v54-quant-group/pythia-1b--step96000/quant_group_losses.json": "3d5b139ddcd811afe4257dcc6f5dacf6e700b9bb153d96c841cc086184039426"
+    },
+    "frozen_inputs": {
+      "register_sha256": "d5e36301651d4627923bb95cf4e23f86600c9eeeea6bb60fd603da8e77b91e3d",
+      "input_sha256": {
+        "results/v54-quant-group/pythia-160m--step16000/quant_group_losses.json": "1a0629772c5fc1325b1228b04e7f2df3f6fbc342f792e04f25eb23587b05973b",
+        "results/v54-quant-group/pythia-160m--step143000/quant_group_losses.json": "00899ad6a1d3efc381e10b59da1654fee875aba59dfc7d30af889b7d484c7d82",
+        "results/v54-quant-group/pythia-410m--step16000/quant_group_losses.json": "6c48f3adc502eef9998060ae704e05167401748104110a48a79bde9fc9674502",
+        "results/v54-quant-group/pythia-410m--step143000/quant_group_losses.json": "391296649e8a1b6df08b59fe28542ce35fba5da0f86b55f7ca40a0ec789a4d8b",
+        "results/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json": "82abe92f15d248b1a502406b1ce6d4ff58f9b2d254e09d15d606ca160ca76eb0",
+        "results/v54-quant-group/pythia-1.4b--step143000/quant_group_losses.json": "f906945626282817158cdd4dc78d50f9b7173a5c194fc685aae32e80cd1f12c5",
+        "results/v46-p1-newsource/dense.json": "996a1877e384551dc62857dfa202ab354d44143abc3e68ff078d1bee5f37ac11"
+      }
+    }
+  }
+}
