@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "hf_id": "EleutherAI/pythia-1.4b",
+    "revision": "step16000",
+    "model_dtype": "bf16",
+    "probe_seed": 0,
+    "n_probe": 128,
+    "probe_half": "odd-indexed [1::2]",
+    "loss_protocol": "v10._measure_capability_losses (completion-token-weighted CE)",
+    "quantization": "symmetric round-to-nearest (torch.round, ties to even)",
+    "padding_rule": "Zero-pad the last input group in each row to group_size; zeros cannot change the absmax of the real entries. Trim padding after quantization. group_size=0 or None uses V10 per-output-channel quantization.",
+    "model_tag": "pythia-1.4b@step16000",
+    "created_at_utc": "2026-09-10T01:38:39.350363+00:00",
+    "configs": {
+      "b3_g64": {
+        "bits": 3,
+        "group_size": 64,
+        "qmax": 3,
+        "started_at_utc": "2026-09-10T01:40:00.447721+00:00",
+        "completed_at_utc": "2026-09-10T01:41:21.288335+00:00",
+        "wall_time_s": 80.84057042934,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b3_g256": {
+        "bits": 3,
+        "group_size": 256,
+        "qmax": 3,
+        "started_at_utc": "2026-09-10T01:41:21.289411+00:00",
+        "completed_at_utc": "2026-09-10T01:42:42.118204+00:00",
+        "wall_time_s": 80.82875667046756,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b5_g64": {
+        "bits": 5,
+        "group_size": 64,
+        "qmax": 15,
+        "started_at_utc": "2026-09-10T01:42:42.119282+00:00",
+        "completed_at_utc": "2026-09-10T01:44:04.085562+00:00",
+        "wall_time_s": 81.96623762976378,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b5_g256": {
+        "bits": 5,
+        "group_size": 256,
+        "qmax": 15,
+        "started_at_utc": "2026-09-10T01:44:04.086663+00:00",
+        "completed_at_utc": "2026-09-10T01:45:24.720673+00:00",
+        "wall_time_s": 80.63398427143693,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      }
+    },
+    "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+    "measurement_samples": {
+      "math": 64,
+      "code": 64,
+      "qa": 64
+    },
+    "dense": {
+      "started_at_utc": "2026-09-10T01:38:55.632673+00:00",
+      "completed_at_utc": "2026-09-10T01:40:00.446365+00:00",
+      "wall_time_s": 64.81363232806325,
+      "device": "cuda:0"
+    },
+    "updated_at_utc": "2026-09-10T01:45:24.720708+00:00"
+  },
+  "dense": {
+    "math": 1.469370402594321,
+    "code": 1.4655336344188257,
+    "qa": 4.9106463878327
+  },
+  "b3_g64": {
+    "math": 1.665269318990746,
+    "code": 1.6779177561207512,
+    "qa": 4.891278517110266
+  },
+  "b3_g256": {
+    "math": 1.8226093490469035,
+    "code": 1.860351794628001,
+    "qa": 4.818916349809886
+  },
+  "b5_g64": {
+    "math": 1.475915526378233,
+    "code": 1.4753387211789875,
+    "qa": 4.910765209125476
+  },
+  "b5_g256": {
+    "math": 1.4760539428933006,
+    "code": 1.474566199191823,
+    "qa": 4.9031012357414445
+  }
+}
