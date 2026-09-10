@@ -363,17 +363,33 @@ baseline at 1.4B@112k and 6.9B@80k; ties median at 410M@48k), R on QA at all thr
 median curve.
 
 
+
 ### C36. V3-Q grouped-RTN quantization: frozen predictors on unseen bit-width, unseen granularity, and a new state
 
 Protocol: v54 measures symmetric RTN with contiguous input groups of g weights (per-group absmax scale; g=None reproduces the per-channel quantizer bit-exactly). Dev = 160M/410M/1.4B x {16k,143k} x b{3,5} x g{64,256} (24 cells). Candidates fit per capability on standardized phi=[1,z(logN0),z(L0c),z(logD0)]: separable (beta.phi) qmax^-p (g/128)^q (6 params); low-order 2D phi x [1,u,v,uv,u^2] with u=log2 qmax centered, v=log2(g/128) (20 params); same-input bilinear interpolation between the four dev configs (16 params); baselines per-config mean/median interpolated the same way, zero. Dev LOSO (6 states, dominated by the collapsing 160M@143k): separable 1.95/2.19/4.75, 2D 0.91/1.91/4.37, interp 1.23/1.89/4.33, median 1.69/1.76/1.78, zero 1.82/1.93/1.80 (math/code/qa). All 33 test predictions committed in paper repo 5ad319c (21:53 EDT) before the tests were measured (21:53-22:41 EDT; whole 57-cell grid ~85 min of forward passes as a third process on the card). Rule: all candidates and baselines reported on every test; no selection by outcome.
 
-**Test MAE (nats)**
+**Test MAE (nats; from results/v55-quant-group/compare.json as printed by `v55 compare` at 22:43 EDT)**
 
 | test | candidate | math | code | qa |
 |---|---|---|---|---|
-| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | (not found in compare.json: top keys ['schema_version', 'precommitted_rule', 'response', 'test_sets', 'rows', 'missing']) | | | |
-| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | (not found in compare.json: top keys ['schema_version', 'precommitted_rule', 'response', 'test_sets', 'rows', 'missing']) | | | |
-| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | (not found in compare.json: top keys ['schema_version', 'precommitted_rule', 'response', 'test_sets', 'rows', 'missing']) | | | |
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | separable | 0.767 | 0.798 | 1.427 |
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | low_order_2d | 0.193 | 0.214 | 0.436 |
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | same_input_interpolation | 1.296 | 1.381 | 1.942 |
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | mean | 1.416 | 1.556 | 1.495 |
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | median | 0.553 | 0.726 | 0.537 |
+| bit test: b=4 unseen, g in {64,256}, six dev states (12 cells) | zero | 0.450 | 0.532 | 0.480 |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | separable | 0.581 | 0.643 | 1.612 |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | low_order_2d | 0.219 | 0.319 | 0.986 |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | same_input_interpolation | 0.606 | 0.711 | 1.497 |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | mean | 1.857 | 1.906 | 2.019 |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | median | 1.123 | 1.222 | 1.220 |
+| granularity test: g=128 unseen, b in {3,4,5}, six dev states (18 cells) | zero | 1.239 | 1.346 | 1.239 |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | separable | 0.586 | 0.380 | 0.679 |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | low_order_2d | 0.345 | 0.097 | 0.269 |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | same_input_interpolation | 0.538 | 0.241 | 0.392 |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | mean | 1.491 | 1.558 | 1.813 |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | median | 0.152 | 0.270 | 0.302 |
+| joint test: new state 1B@96k, g=128, b in {3,4,5} (3 cells) | zero | 0.300 | 0.339 | 0.104 |
 
 **Measured test responses (dL vs dense, math/code/qa, nats)**: results/v54-quant-group/*/quant_group_losses.json
 (mirrored). Highlights: 4-bit is a 0.03-0.35 nat regime for every state except 160M@143k (+1.9 to +3.2) and shrinks with
