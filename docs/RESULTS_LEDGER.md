@@ -450,3 +450,34 @@ Part B, capability conditioning at matched parameter count (shared response shap
 | F2 | 7/7 | macro | 0.702 | 0.359 | 0.343 | yes |
 
 Reading: on the development matrix, F1 has the lowest math and code error (0.057, 0.052 vs 0.073/0.055 for E-only and 0.095/0.103 for a constant) and F2 the lowest QA error (0.706 vs 0.798 E-only, 1.40 constant), so a training-amount term plus a reuse term with a student descriptor describes QA better than reuse alone; per-capability shapes beat a shared shape for the T+E and F2 structures on every capability (gains 0.1-0.4 nats) and only marginally for E-only, so capability conditioning is required for the response shape, not only for the amplitude. These are cross-validated development results with two students; the frozen test (v50 forms) and the retrospective evaluation of F1/F2 on the nine test runs and the 4B dev-pool runs follow.
+
+### C38. P2-v2 multi-student distillation test: frozen forms on 9 unseen-pool trajectories (data cut-off 2026-09-10 16:39 EDT)
+
+Freeze: results/v50-p2v2/freeze.json committed 33c706c (04:35 EDT, before any test run) from the 12 dev runs
+(Gemma-3-270M/1B x U75/U450 x data-seeds 11-13, 48 points). Eight forms per capability (constant/T/E/joint, each
+with and without a source term k*log(N_S/N_ref)); no candidate was selected at freeze. Tests: U375 pools, seeds 21-23,
+students 270M and 1B (same students, unseen pool) and 4B (held-out student, N_S 6.6x N_ref, outside the dev range of
+log N_S); planned T {35k,70k,140k,280k}; compare committed c06c856. Selection rule for the headline row (stated after
+the tests, so labeled R): the frozen form with the lowest in-sample dev MAE at freeze time = joint+src for all three
+capabilities. MAE in nats over 12 points per cell (3 seeds x 4 budgets):
+
+| student | cap | joint+src (dev-selected) | zero | best frozen form (retrospective) |
+|---|---|---|---|---|
+| 270M | math | 0.045 | 0.092 | constant+src 0.031 |
+| 1B | math | 0.050 | 0.095 | E 0.026 |
+| 4B | math | 0.089 | 0.153 | constant 0.020 |
+| 270M | code | 0.036 | 0.138 | E 0.031 |
+| 1B | code | 0.029 | 0.109 | E 0.018 |
+| 4B | code | 0.050 | 0.178 | T 0.033 |
+| 270M | QA | 0.606 | 1.005 | joint 0.544 |
+| 1B | QA | 0.444 | 1.148 | joint 0.301 |
+| 4B | QA | 1.141 | 1.167 | joint 0.272 |
+
+Reading: on the unseen pool with seen students, the dev-selected frozen form beats zero on all six cells by 2-4x. On
+the held-out 4B student it beats zero on code and math (math degrades with T: 0.038/0.024/0.11/0.18 at 35k-280k vs zero
+0.14-0.20) and fails on QA (1.14 vs 1.17; at T=280k the source-term extrapolation predicts 2.26 nats of damage against
+0.40 measured, while the same joint form without the source term gives 0.27). The source term k*log(N_S/N_ref) is fitted
+on two students spanning log ratio +-0.55 and evaluated at +1.9; it should be reported as not transferable in size.
+Origin code for the paper: P/F/F/A for the frozen forms, R for the "best form" column and the selection rule.
+Pending (not in this entry): 4B at the dev pools U75/U450 (extras stage B), two training-seed repeats (stage A),
+retrospective F1/F2 (v56) on the test trajectories.
