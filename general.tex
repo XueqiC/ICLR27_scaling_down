@@ -63,7 +63,10 @@ The reuse-count form beats the constant only for QA (0.706 against
 against 0.191 and 0.117) and the fitted forms over-extrapolate. The
 residual is dominated by systematic bias, $-0.87$ nats at one budget
 and $+0.48$ at the other for QA, and variation across pool samples
-exceeds variation across training seeds (0.43 against 0.04 nats).
+exceeds variation across training seeds (0.43 against 0.04 nats);
+under the uniform protocol two training-seed repeats differ from their
+originals by at most 0.02 nats for math, 0.03 for code, and 0.19 for
+QA at the largest reuse count (Appendix~\ref{sec:app_results}).
 Under the absolute-exposure protocol, eight forms for three students
 were frozen before nine runs on three unseen U375 pools. The form with
 the lowest development error at freeze time, the joint form with a
@@ -122,8 +125,13 @@ form), and the constant itself beats zero change for math and code
 larger student is the average development response, not its
 dependence on budget, reuse, or size: the source term fitted on two
 students extends the QA reuse penalty to 2.3 nats at the largest
-budget where 0.40 was measured (Table~\ref{tab:p2v2_test}). The
-student-size direction is therefore outside the range of these forms.
+budget where 0.40 was measured. At the development pools, by contrast,
+the same student is predicted better by the dev-selected form than by
+the constant (0.106, 0.048, and 0.96 against 0.156, 0.098, and 1.79
+for math, code, and QA over sixteen points each; zero change gives
+0.29, 0.23, and 1.86; Table~\ref{tab:p2v2_test}). The structured form
+therefore transfers to a larger student only at the pools it was
+developed on, and the student-size direction is not covered reliably.
 
 \subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}

@@ -1,6 +1,6 @@
 # V56 distillation forms
 
-Mode `dev`. Dev: 12/12 runs, 48 checkpoints (144 capability observations); 12 runs have all four checkpoints. Test: 0 runs, 0 checkpoints.
+Mode `all`. Dev: 12/12 runs, 48 checkpoints (144 capability observations); 12 runs have all four checkpoints. Test: 13 runs, 52 checkpoints.
 
 Tc = completion_tokens_seen; E = Tc / registered D_U_completion; delta = post_training - dense, in nats. A cluster is (student, U, data_seed), so all checkpoints/capabilities from a run stay together. Metrics pool held-out checkpoints; bias = prediction - actual. Missing runs are listed in JSON.
 
@@ -48,5 +48,23 @@ Part B: LOCO MAE; gain = shared minus per-capability. `>0.02` uses unrounded nat
 
 Per-capability gain >0.02 nats: E-only/math, T+E/math, T+E/code, T+E/qa, F2/math, F2/code, F2/qa.
 No gain >0.02 nats: E-only/code, E-only/qa.
+
+Test results (separate; dev fits frozen before reading test evals):
+- A zero: math 0.169/-0.169; code 0.169/-0.169; qa 1.339/+0.699
+- A constant: math 0.080/-0.017; code 0.066/+0.009; qa 1.218/+0.556
+- A T-only: math 0.098/-0.015; code 0.067/+0.011; qa 1.200/+0.581
+- A E-only: math 0.075/-0.061; code 0.050/-0.041; qa 0.552/-0.109
+- A surface:L0: math 0.157/+0.114; code 0.054/-0.034; qa 0.668/-0.011
+- A surface:logN: math 0.069/-0.004; code 0.053/-0.033; qa 0.784/+0.298
+- A F1:L0: math 0.173/+0.157; code 0.038/-0.017; qa 1.617/+1.187
+- A F1:logN: math 0.067/+0.012; code 0.039/-0.022; qa 1.821/+1.661
+- A F2:L0: math 0.200/+0.031; code 0.076/-0.059; qa 0.519/-0.127
+- A F2:logN: math 0.081/-0.033; code 0.065/-0.053; qa 0.782/-0.024
+- B E-only/shared: math 0.356/-0.270; code 0.366/-0.244; qa 0.831/+0.303
+- B E-only/per_capability: math 0.471/-0.470; code 0.489/-0.452; qa 1.127/+0.712
+- B T+E/shared: math 0.370/-0.246; code 0.380/-0.220; qa 0.856/+0.327
+- B T+E/per_capability: math 0.364/-0.142; code 0.334/-0.112; qa 0.587/+0.204
+- B F2/shared: math 0.535/-0.380; code 0.311/-0.296; qa 0.816/+0.303
+- B F2/per_capability: math 0.256/+0.195; code 0.108/-0.013; qa 0.589/-0.048
 
 JSON contains every candidate fit, fold, prediction, parameter count, input point, dense-loss source, config hash and SHA256 of all analysis inputs. Results are deterministic for a fixed set of input files.

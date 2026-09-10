@@ -160,6 +160,23 @@ constants in the register files listed in Appendix~\ref{sec:app_registration}.
 \FloatBarrier
 \subsection{Distillation: descriptor forms and capability conditioning}
 \input{tables/v56_forms}
+
+Retrospectively, fitted on all 48 development points and scored on
+the 52 test points (nine unseen-pool trajectories and four held-out
+student trajectories at the development pools; predictions specified
+after the frozen matrix, origin R), the second form of
+Eq.~\eqref{eq:kdforms} has the lowest error of every form on the 270M
+unseen-pool trajectories (0.022, 0.020, and 0.316 nats for math, code,
+and QA against 0.060, 0.047, and 0.862 for the frozen constant) and is
+second to the reuse-only form for QA on the 1B ones (0.478 against
+0.342). The first form, which has no budget term, fails for QA on every
+group (1.15 to 2.26 nats). On the held-out 4B student the frozen
+constant remains the best predictor for math and code at the unseen
+pool (0.020 and 0.038), and the second form with the loss descriptor
+is best for QA there (0.360, with the reuse-only form at 0.367); at
+the development pools the two descriptor variants disagree on math
+(0.404 with the loss descriptor, 0.122 with the size descriptor), so
+the descriptor choice is not settled by these data.
 \FloatBarrier
 \subsection{Shared structure, parameter ranges, and one-point calibration}
 \label{sec:app_shared}
@@ -235,7 +252,13 @@ late stage (1.29 against 3.8 to 4.1).
 The multi-student distillation test of the uniform protocol
 (\S\ref{sec:law_distill}) is given in Table~\ref{tab:p2v2_test}; the
 frozen predictions of all eight forms for every test point are in the
-mirrored compare file.
+mirrored compare file. Two pre-specified training-seed repeats
+(Gemma-3-270M at $U{=}75$ and Gemma-3-1B at $U{=}450$, data seed 11)
+reproduce the four checkpoints of their originals within 0.017 nats
+for math and 0.030 for code; for QA the difference grows with the
+reuse count, from 0.004 to 0.019 at the first two checkpoints to 0.089
+and 0.186 at the last, so training-seed noise is well below the law
+errors except for QA at high reuse.
 \input{tables/p2v2_test}
 \FloatBarrier
 \begin{figure}[p]
@@ -594,6 +617,11 @@ These findings fixed the protocol of \S\ref{sec:loss}.
 
 \section{Reproducibility and Prediction Registration}
 \label{sec:app_registration}
+
+\paragraph{Data cut-off.} All numbers in this version come from
+measurements completed by 19:47 EDT on 10 September 2026 (repository
+commit \texttt{3b5feae}); frozen predictions are cited with the commit
+that recorded them, and nothing measured after that time is used.
 \subsection{Registration and provenance codes}
 \label{sec:app_register}
 Each prediction test in Table~\ref{tab:pred_main} follows one order. The

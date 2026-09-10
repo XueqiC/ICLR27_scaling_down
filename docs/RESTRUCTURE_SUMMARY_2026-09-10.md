@@ -32,7 +32,7 @@ The frozen P2-v2 test (nine trajectories, c06c856) is integrated: §3.4 'Multi-s
 students', Table tab:p2v2_test (App. D, generator v62), Table 2 rows and Fig. 2 panel (generator updates), discussion
 sentence. The P3 primary-vs-secondary check (v48) is in App. E (Table tab:p3_check, generator v61) with the
 probe-specificity qualifier on the distillation QA response in §3.4. Extras (4B dev pools, seed repeats, F1/F2
-retrospective) enter under the final cut-off of this version.
+retrospective) are in: data cut-off 19:47 EDT (3b5feae), stated in App. I.
 
 ## Main text vs appendix
 Main (about 11.5 pages including Figs 1-3 and Tables 1-3; references begin on page 12; 36 pages total): problem and inputs (Eq. 2), loss definition with three boundaries, panel roles, fitting/evaluation

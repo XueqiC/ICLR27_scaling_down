@@ -169,7 +169,11 @@ $\log(1+E)$ alone), the second the lowest QA error (0.706 against 0.798
 for the reuse term alone and 1.40 for a constant). These are
 development results on two students; their predictions were specified
 after the frozen test matrix and are evaluated on it retrospectively
-(Appendix~\ref{sec:app_forms}). No joint student-pool-budget law is
+(Appendix~\ref{sec:app_forms}): the second form has the lowest error
+of all forms on the 270M unseen-pool trajectories (0.022, 0.020, and
+0.32 nats), the first fails for QA wherever it is tested because it
+has no budget term, and neither improves on the frozen constant for
+math and code on the 4B student. No joint student-pool-budget law is
 claimed.
 
 \paragraph{Multi-student test.} The joint form with a source term
@@ -177,8 +181,9 @@ $k\log(N_S/N_{\mathrm{ref}})$ had the lowest development error of the
 eight frozen forms for every capability; on the nine frozen test
 trajectories it predicts the unseen pool on both development students
 better than the frozen constant and than zero change, while on the
-held-out 4B student every structured form loses to the frozen constant
-(Table~\ref{tab:p2v2_test}, \S\ref{sec:unseen_states}). The delivered
-distillation law is thus the joint form in $T$ and $E$ with its source
-term, valid inside the development size range; beyond it only the
-per-capability constant transfers.
+held-out 4B student it beats the constant at the development pools and
+loses to it at the unseen pool (Table~\ref{tab:p2v2_test},
+\S\ref{sec:unseen_states}). The delivered distillation law is thus the
+joint form in $T$ and $E$ with its source term, valid inside the
+development size range; beyond it the per-capability constant is the
+safer predictor at a new pool.
