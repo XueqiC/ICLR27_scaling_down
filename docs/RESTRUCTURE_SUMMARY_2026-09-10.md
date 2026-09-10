@@ -27,6 +27,13 @@ Section 4.3 now carries the shared-structure / parameter-range / one-point-calib
 agreement, fixed-method and cheapest-feasible baselines, no-clear-winner cells) precedes Related Work (now 6) and
 Discussion (7); contribution (3), the abstract, and the discussion were adjusted. Main text is ~13 pages with four figures.
 
+## Update 2026-09-10 18:00 EDT: multi-student distillation test and P3 check
+The frozen P2-v2 test (nine trajectories, c06c856) is integrated: §3.4 'Multi-student test', §4.1 pool direction, §4.2 'New
+students', Table tab:p2v2_test (App. D, generator v62), Table 2 rows and Fig. 2 panel (generator updates), discussion
+sentence. The P3 primary-vs-secondary check (v48) is in App. E (Table tab:p3_check, generator v61) with the
+probe-specificity qualifier on the distillation QA response in §3.4. Extras (4B dev pools, seed repeats, F1/F2
+retrospective) enter under the final cut-off of this version.
+
 ## Main text vs appendix
 Main (about 11.5 pages including Figs 1-3 and Tables 1-3; references begin on page 12; 36 pages total): problem and inputs (Eq. 2), loss definition with three boundaries, panel roles, fitting/evaluation
 rules, the three arms' forms and development comparisons (Sec. 3), generalization by unseen settings / unseen states /

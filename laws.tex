@@ -134,7 +134,11 @@ processed tokens and optimizer steps are recorded separately and never
 substituted for $T$. QA improves under every recipe we ran while math
 and code respond by a few hundredths to a few tenths of a nat, and
 with a small pool the QA loss rises again once $E$ grows large
-(Fig.~\ref{fig:responses}, right).
+(Fig.~\ref{fig:responses}, right). The QA improvement is measured on a
+multi-hop probe whose format the teacher pool shares; an independent QA
+benchmark scored on the same checkpoints did not show it
+(Appendix~\ref{sec:app_measure}, Table~\ref{tab:p3_check}), so the
+distillation QA response is specific to that probe distribution.
 
 \paragraph{Source axis.} On the nine Pythia states as students, with
 the teacher pool and budget fixed, a linear form
@@ -167,3 +171,13 @@ development results on two students; their predictions were specified
 after the frozen test matrix and are evaluated on it retrospectively
 (Appendix~\ref{sec:app_forms}). No joint student-pool-budget law is
 claimed.
+
+\paragraph{Multi-student test.} The joint form with a source term
+$k\log(N_S/N_{\mathrm{ref}})$ had the lowest development error of the
+eight frozen forms for every capability; on the nine frozen test
+trajectories it predicts the unseen pool on both development students
+and the held-out 4B student for code and math, and fails for QA on that
+student, where the source term extrapolates beyond the two-student
+range (Table~\ref{tab:p2v2_test}, \S\ref{sec:unseen_states}). The
+delivered distillation law is thus the joint form in $T$ and $E$ with
+the source term restricted to the development size range.

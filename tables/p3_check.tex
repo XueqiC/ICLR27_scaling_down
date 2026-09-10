@@ -1,0 +1,17 @@
+\begin{table}[H]
+\centering\small
+\caption{Primary versus secondary benchmark on Gemma-3-1B (P3 check). Loss change from dense in nats per native token on the main-protocol probe / on an independent benchmark of the same capability (math: SVAMP; code: HumanEval; QA: TriviaQA; 128 samples, fixed probe seed, existing references). The six states were fixed before any secondary measurement. Scored completion tokens, primary / secondary: math 13198 / 260, code 4516 / 8393, QA 251 / 328.}
+\label{tab:p3_check}
+\begin{tabular}{lccc}
+\toprule
+State & Math & Code & QA \\
+\midrule
+magnitude pruning $d=0.7$ & $+1.31$ / $+0.51$ & $+1.23$ / $+1.41$ & $+0.83$ / $+3.30$ \\
+RTN int4 & $+0.95$ / $+2.51$ & $+0.60$ / $+0.75$ & $+0.88$ / $+1.99$ \\
+KD, $U=75$, first milestone & $+0.07$ / $-1.09$ & $+0.06$ / $+0.06$ & $-1.33$ / $+0.11$ \\
+KD, $U=75$, second milestone & $+0.08$ / $+0.31$ & $+0.12$ / $+0.07$ & $-0.69$ / $+0.31$ \\
+KD, $U=450$, first milestone & $+0.10$ / $-1.36$ & $+0.06$ / $+0.06$ & $-1.46$ / $+0.21$ \\
+KD, $U=450$, second milestone & $+0.09$ / $-0.30$ & $+0.11$ / $+0.07$ & $-1.40$ / $+0.37$ \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -231,6 +231,12 @@ late stage (1.29 against 3.8 to 4.1).
 \input{tables/p1v2}
 \input{tables/round3_prune}
 \input{tables/round3_quant}
+
+The multi-student distillation test of the uniform protocol
+(\S\ref{sec:law_distill}) is given in Table~\ref{tab:p2v2_test}; the
+frozen predictions of all eight forms for every test point are in the
+mirrored compare file.
+\input{tables/p2v2_test}
 \FloatBarrier
 \begin{figure}[p]
 \centering
@@ -258,6 +264,23 @@ established at this resolution (Fig.~\ref{fig:measurement}). Six model clusters 
 intervals only.
 
 
+
+\paragraph{Same-capability agreement across the three operations.} On
+Gemma-3-1B, six states fixed before the measurement (pruning at
+$d=0.7$, RTN int4, and four distillation checkpoints of the uniform
+protocol at $U=75$ and $U=450$) were scored on the main-protocol probe
+and on an independent benchmark of the same capability
+(Table~\ref{tab:p3_check}). Code agrees in sign and size on all six
+states. Pruning and quantization damage agrees in sign on all three
+capabilities, with sizes that differ on the short secondary probes
+(260 and 328 scored tokens for SVAMP and TriviaQA). The QA improvement
+under distillation on the primary probe ($-0.7$ to $-1.5$ nats) does
+not appear on TriviaQA ($+0.1$ to $+0.4$), so the distillation QA
+response reported in Section~\ref{sec:law_distill} is specific to the
+probe distribution, which shares its multi-hop format with the teacher
+pool, and should not be read as a general QA gain. The math response
+under distillation on SVAMP lies within that probe's noise.
+\input{tables/p3_check}
 
 \paragraph{Loss and behavior.} Loss-to-accuracy links were fit on
 GSM8K accuracy, MBPP pass@1, and TriviaQA exact match and token F1

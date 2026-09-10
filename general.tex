@@ -64,10 +64,15 @@ against 0.191 and 0.117) and the fitted forms over-extrapolate. The
 residual is dominated by systematic bias, $-0.87$ nats at one budget
 and $+0.48$ at the other for QA, and variation across pool samples
 exceeds variation across training seeds (0.43 against 0.04 nats).
-Under the absolute-exposure protocol, predictions of eight forms for
-three students on three unseen U375 pools were frozen before those runs
-began; their measurement was in progress at the data cut-off of this
-version and is not reported here.
+Under the absolute-exposure protocol, eight forms for three students
+were frozen before nine runs on three unseen U375 pools. The form with
+the lowest development error at freeze time, the joint form with a
+source term, beats zero change by two to four times on both
+development students at the new pool (math 0.045 and 0.050 against
+0.092 and 0.095; code 0.036 and 0.029 against 0.138 and 0.109; QA 0.61
+and 0.44 against 1.01 and 1.15; Table~\ref{tab:p2v2_test}). The pool
+direction is therefore covered by these forms; the student-size
+direction is treated in \S\ref{sec:unseen_states}.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
@@ -105,9 +110,16 @@ panel, 6.9B@80k at interpolated densities, the delivered power form
 ties the median curve on math (0.30 against 0.31) and loses on code
 and QA, so the size boundary is soft for math and hard for QA.
 
-\paragraph{New students.} Predictions for Gemma-3-4B as a held-out
-student, at the development pools and at the unseen pools, are frozen
-and their measurement was in progress at the cut-off.
+\paragraph{New students.} On Gemma-3-4B as a held-out student, whose
+$\log N_S$ lies $1.9$ above the reference against a development span of
+$\pm0.55$, the same frozen form transfers for code (0.050 against 0.178
+for zero change at the unseen pool) and for math (0.089 against 0.153,
+with the error growing with budget from 0.04 to 0.18 nats), and ties
+zero change for QA (1.14 against 1.17): the source term, fitted on two
+students, extends the reuse penalty to 2.3 nats at the largest budget
+where 0.40 was measured, while the same form without that term is
+within 0.27 (Table~\ref{tab:p2v2_test}). The student-size direction is
+therefore covered for code and math and not for QA.
 
 \subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}

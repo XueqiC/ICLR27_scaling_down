@@ -26,8 +26,11 @@ the development range, except that the pruning math error at the
 larger source is on par with the source-free curve. Bit-width alone
 supports no continuous quantization relation, and the separable
 amplitude-times-shape candidate fails once group size is added. The
-distillation relations are validated on one student per axis at the
-cut-off of this version; the frozen multi-student test is pending.
+distillation forms frozen on two students and two pools transfer to an
+unseen pool on both students and, for code and math, to a student
+6.6 times larger than the reference size, but their source term fails
+for QA at that size, and the QA response itself is specific to the
+probe distribution (Appendix~\ref{sec:app_measure}).
 
 For further development these results say three things. The dense
 capability anchor is the input to keep and training tokens add little
