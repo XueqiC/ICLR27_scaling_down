@@ -61,12 +61,12 @@ def freeze():
     refs = {"N": N, "N_ref": float(np.exp(np.mean([np.log(N[s]) for s in DEV_STUDENTS]))), "D_ref": float(np.median([p["DU"] for p in pts])), "T_ref": T_REF}
     fits = fit_all(pts, refs)
     preds = {}
-    for st in TEST_STUDENTS:
-        for s in (21, 22, 23):
-            DU = reg["pools"][f"U375_s{s}"]["D_U_completion"]; key = f"{st}|U375_s{s}"; preds[key] = {}
-            for T in T_PLANNED:
-                p = {"student": st, "Tc": T, "DU": DU, "E": T / DU}
-                preds[key][str(T)] = {cap: {k: float(basis(k.split("+")[0], "+src" in k, p, refs) @ np.array(fits[cap][k]["coef"])) for k in fits[cap]} for cap in CAPS}
+    TEST_POOLS = [(st, 375, s) for st in TEST_STUDENTS for s in (21, 22, 23)] + [("gemma3-4b", U, s) for U in (75, 450) for s in (11, 12)]  # v3: 4B held out at dev pools
+    for st, U, s in TEST_POOLS:
+        DU = reg["pools"][f"U{U}_s{s}"]["D_U_completion"]; key = f"{st}|U{U}_s{s}"; preds[key] = {}
+        for T in T_PLANNED:
+            p = {"student": st, "Tc": T, "DU": DU, "E": T / DU}
+            preds[key][str(T)] = {cap: {k: float(basis(k.split("+")[0], "+src" in k, p, refs) @ np.array(fits[cap][k]["coef"])) for k in fits[cap]} for cap in CAPS}
     out = {"frozen_at_utc": datetime.datetime.utcnow().isoformat() + "Z", "refs": refs, "n_dev_points": len(pts), "dev_points": pts, "fits": fits, "test_predictions_planned": preds,
            "dev_hash": hashlib.sha256(json.dumps(pts, sort_keys=True).encode()).hexdigest()}
     (OUT / "freeze.json").write_text(json.dumps(out, indent=2, default=float))
@@ -75,20 +75,21 @@ def freeze():
 
 def compare():
     fz = json.loads((OUT / "freeze.json").read_text()); refs = fz["refs"]; rows = []
-    for st in TEST_STUDENTS:
-        for s in (21, 22, 23):
-            for p in points(st, 375, s, "p2v2test"):
+    RUNS = [(st, 375, s, "test_pool") for st in TEST_STUDENTS for s in (21, 22, 23)] + [("gemma3-4b", U, s, "dev_pool_heldout_student") for U in (75, 450) for s in (11, 12)]
+    for st, U, s, role in RUNS:
+            for p in points(st, U, s, "p2v2test"):
+                p["role"] = role
                 for cap in CAPS:
                     act = p["delta"][cap]; pa = {k: float(basis(k.split("+")[0], "+src" in k, p, refs) @ np.array(fz["fits"][cap][k]["coef"])) for k in fz["fits"][cap]}
-                    rows.append({"student": st, "pool": f"U375_s{s}", "Tc": p["Tc"], "E": p["E"], "cap": cap, "actual": act, "pred_at_actual": pa, "abs": {k: abs(v - act) for k, v in pa.items()}, "signed": {k: v - act for k, v in pa.items()}, "abs_zero": abs(act)})
+                    rows.append({"student": st, "pool": f"U{U}_s{s}", "role": role, "Tc": p["Tc"], "E": p["E"], "cap": cap, "actual": act, "pred_at_actual": pa, "abs": {k: abs(v - act) for k, v in pa.items()}, "signed": {k: v - act for k, v in pa.items()}, "abs_zero": abs(act)})
     summ = {}
-    for st in TEST_STUDENTS:
+    for st, role in sorted({(r["student"], r["role"]) for r in rows}):
         for cap in CAPS:
             for i, T in enumerate(T_PLANNED):
-                rr = [r for r in rows if r["student"] == st and r["cap"] == cap and abs(r["Tc"] - T) / T < 0.5][:3]
-                rr = [r for r in rows if r["student"] == st and r["cap"] == cap]; rr = sorted(rr, key=lambda r: abs(r["Tc"] - T))[:3]
+                pool_rows = [r for r in rows if r["student"] == st and r["role"] == role and r["cap"] == cap]
+                rr = sorted(pool_rows, key=lambda r: abs(r["Tc"] - T))[:len({r["pool"] for r in pool_rows})]
                 if not rr: continue
-                keys = list(rr[0]["abs"]); summ[f"{st}|{cap}|T{T}"] = {"mae": {k: float(np.mean([r["abs"][k] for r in rr])) for k in keys}, "bias": {k: float(np.mean([r["signed"][k] for r in rr])) for k in keys}, "mae_zero": float(np.mean([r["abs_zero"] for r in rr])), "n_pools": len(rr)}
+                keys = list(rr[0]["abs"]); summ[f"{st}|{role}|{cap}|T{T}"] = {"mae": {k: float(np.mean([r["abs"][k] for r in rr])) for k in keys}, "bias": {k: float(np.mean([r["signed"][k] for r in rr])) for k in keys}, "mae_zero": float(np.mean([r["abs_zero"] for r in rr])), "n_pools": len(rr)}
     (OUT / "compare_test.json").write_text(json.dumps({"rows": rows, "summary": summ}, indent=2, default=float)); print(json.dumps({k: {"const": round(v["mae"]["constant"], 3), "E": round(v["mae"]["E"], 3), "joint+src": round(v["mae"]["joint+src"], 3), "zero": round(v["mae_zero"], 3)} for k, v in summ.items()}, indent=1))
 
 if __name__ == "__main__":
