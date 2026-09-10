@@ -133,11 +133,12 @@ def load_multistudent_distillation(audit):
             key = student, "test_pool", cap
             values = agg[key][selected[cap]]
             candidate = sum(values) / len(values)
-            baseline = sum(zero[key]) / len(zero[key])
+            baseline = sum(agg[key]["constant"]) / len(agg[key]["constant"])
+            zero_mae = sum(zero[key]) / len(zero[key])
             checked_close(npts[key], 12, f"v50 test point count/{student}/{cap}")
-            groups[label][cap] = {"candidate": candidate, "baseline_mae": baseline,
+            groups[label][cap] = {"candidate": candidate, "baseline_mae": baseline, "zero_mae": zero_mae,
                                   "gain": baseline - candidate}
-            audit.rule(f"U375 {student}/{cap}: joint+src MAE={candidate:.9f}, zero MAE={baseline:.9f}, "
+            audit.rule(f"U375 {student}/{cap}: joint+src MAE={candidate:.9f}, frozen constant MAE={baseline:.9f}, zero MAE={zero_mae:.9f}, "
                        f"gain={baseline - candidate:+.9f}; {npts[key]} points.")
     audit.rule("Multi-student distillation uses only role test_pool: mean over all summary rows for each "
                "(student, role, capability), summing n_pools for point counts, as in v62_p2v2_test_table.py. "
@@ -312,14 +313,14 @@ def main():
     ticks = list(range(3))
     for group_index, (label, cap_metrics) in enumerate(multistudent.items(), start=1):
         offset = 4 * group_index
-        distill.text(-.2, offset - .8, f"{label} · joint+src (dev-selected, R) vs zero",
+        distill.text(-.2, offset - .8, f"{label} · joint+src (dev-selected, R) vs frozen constant",
                      fontsize=8, va="center")
         for i, cap in enumerate(CAPS):
             cell = cap_metrics[cap]
             y = offset + i
             ticks.append(y)
             distill.plot(cell["gain"], y, marker="o", mfc="white", mec=COLORS["E"], ms=6, linestyle="none")
-            distill.annotate(f"{cell['gain']:+.3f}  (joint+src MAE {cell['candidate']:.3f}; zero {cell['baseline_mae']:.3f})",
+            distill.annotate(f"{cell['gain']:+.3f}  (joint+src MAE {cell['candidate']:.3f}; constant {cell['baseline_mae']:.3f}; zero {cell['zero_mae']:.3f})",
                             (cell["gain"], y), xytext=(7, 0), textcoords="offset points", va="center", fontsize=8)
     distill.set_ylim(14.6, -1.3)
     distill.set_yticks(ticks, [CAP_LABEL[c] for _ in range(1 + len(multistudent)) for c in CAPS])

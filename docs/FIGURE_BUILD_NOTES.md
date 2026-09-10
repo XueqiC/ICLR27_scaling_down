@@ -576,3 +576,92 @@ Exact data files read:
 - `results/v55-quant-group/compare.json`
 - `results/v50-p2v2/freeze.json`
 - `results/v50-p2v2/compare_test.json`
+
+
+## Figure 3 extension: confirmation pruning and grouped quantization
+
+Build: CPU, matplotlib Agg; shared Fig. 1 style and colours; no fitting.
+
+Outputs: `paper/figs/transfer_limits.pdf`, `paper/figs/transfer_limits.png`.
+
+Selection and calculations:
+
+- v55 bit_test: states=['pythia-1.4b@step143000', 'pythia-1.4b@step16000', 'pythia-160m@step143000', 'pythia-160m@step16000', 'pythia-410m@step143000', 'pythia-410m@step16000']; low_order_2d capability-averaged MAE=0.281132674; strongest simple=zero, MAE=0.487409764; gain=+0.206277090.
+- v55 granularity_test: states=['pythia-1.4b@step143000', 'pythia-1.4b@step16000', 'pythia-160m@step143000', 'pythia-160m@step16000', 'pythia-410m@step143000', 'pythia-410m@step16000']; low_order_2d capability-averaged MAE=0.507970914; strongest simple=median, MAE=1.188190551; gain=+0.680219636.
+- v55 joint_test: states=['pythia-1b@step96000']; low_order_2d capability-averaged MAE=0.236892811; strongest simple=median, MAE=0.241020936; gain=+0.004128126.
+- v55 bit_test and granularity_test evaluate seen development states; joint_test evaluates held-out 1B@96k. Use test_sets.mae_table, verified against rows; choose one of mean/median/zero after averaging math/code/QA. Candidate is always low_order_2d, without test-set selection.
+- U375 gemma3-270m/math: joint+src MAE=0.045272149, frozen constant MAE=0.060494882, zero MAE=0.091500606, gain=+0.015222733; 12 points.
+- U375 gemma3-270m/code: joint+src MAE=0.036434300, frozen constant MAE=0.047126805, zero MAE=0.138343759, gain=+0.010692506; 12 points.
+- U375 gemma3-270m/qa: joint+src MAE=0.605528849, frozen constant MAE=0.862064113, zero MAE=1.005208333, gain=+0.256535264; 12 points.
+- U375 gemma3-1b/math: joint+src MAE=0.050304442, frozen constant MAE=0.057060019, zero MAE=0.094935470, gain=+0.006755577; 12 points.
+- U375 gemma3-1b/code: joint+src MAE=0.028888793, frozen constant MAE=0.068816661, zero MAE=0.108996715, gain=+0.039927868; 12 points.
+- U375 gemma3-1b/qa: joint+src MAE=0.443918089, frozen constant MAE=1.004356921, zero MAE=1.147501141, gain=+0.560438832; 12 points.
+- U375 gemma3-4b/math: joint+src MAE=0.088809778, frozen constant MAE=0.020471983, zero MAE=0.153218449, gain=-0.068337795; 12 points.
+- U375 gemma3-4b/code: joint+src MAE=0.050403931, frozen constant MAE=0.038335917, zero MAE=0.177683053, gain=-0.012068015; 12 points.
+- U375 gemma3-4b/qa: joint+src MAE=1.140814148, frozen constant MAE=1.023870015, zero MAE=1.167014235, gain=-0.116944133; 12 points.
+- Multi-student distillation uses only role test_pool: mean over all summary rows for each (student, role, capability), summing n_pools for point counts, as in v62_p2v2_test_table.py. Candidate minimizes fits[cap][form].dev_mae in freeze.json 33c706c: joint+src for every capability. Predictions and baselines were frozen before tests (P/F/F/A); the headline selection rule was stated after tests (R). Test results: compare_test.json c06c856. Baseline is zero; * marks the held-out Gemma-3-4B student.
+- Protocol A, 1b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.254179151; baseline=median_curve, MAE=0.203799064; gain=-0.050380087.
+- Protocol A, 1b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=2.271696102; baseline=strength_only, MAE=0.636758790; gain=-1.634937312.
+- Protocol A, 1b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.103302198; baseline=per_bit_median, MAE=0.030937557; gain=-0.072364641.
+- Protocol A, 1b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=1.050004280; baseline=per_bit_median, MAE=1.437635732; gain=+0.387631452.
+- Protocol A, 1b@96000, Prune interp d=.9–.6: 3 rows, equal weight across math/code/QA; candidate=power, MAE=0.192657239; baseline=median_curve, MAE=0.263815104; gain=+0.071157865.
+- Protocol A, 1b@96000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.302291215; baseline=strength_only, MAE=0.273329452; gain=-1.028961763.
+- Protocol A, 1b@96000, Quantization bits ≥4: 3 rows, equal weight across math/code/QA; candidate=full_N0_L0_D0, MAE=0.073604549; baseline=per_bit_median, MAE=0.110823830; gain=+0.037219281.
+- Protocol A, 1b@96000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full_N0_L0_D0, MAE=0.397065263; baseline=per_bit_median, MAE=0.620234070; gain=+0.223168807.
+- Protocol A, 1b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.190800364; baseline=median_curve, MAE=0.172711717; gain=-0.018088647.
+- Protocol A, 1b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.397587115; baseline=strength_only, MAE=0.310579477; gain=-1.087007638.
+- Protocol A, 1b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.071351982; baseline=per_bit_median, MAE=0.036339643; gain=-0.035012339.
+- Protocol A, 1b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=0.676489584; baseline=per_bit_mean, MAE=0.801655342; gain=+0.125165758.
+- Protocol A, 6.9b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.476289966; baseline=zero, MAE=0.160377185; gain=-0.315912781.
+- Protocol A, 6.9b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.634883057; baseline=median_curve, MAE=0.274482630; gain=-1.360400427.
+- Protocol A, 6.9b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.252760495; baseline=zero, MAE=0.032538560; gain=-0.220221934.
+- Protocol A, 6.9b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=3.972453745; baseline=per_bit_median, MAE=1.834463104; gain=-2.137990641.
+- Protocol A, 6.9b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.436098600; baseline=median_curve, MAE=0.091829270; gain=-0.344269329.
+- Protocol A, 6.9b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=2.121200919; baseline=strength_only, MAE=0.190498768; gain=-1.930702151.
+- Protocol A, 6.9b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.271100740; baseline=per_bit_median, MAE=0.042210542; gain=-0.228890197.
+- Protocol A, 6.9b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=3.872925307; baseline=per_bit_mean, MAE=0.430418324; gain=-3.442506983.
+- Protocol B, 1b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.248786896; baseline=median_curve, MAE=0.223966151; gain=-0.024820745.
+- Protocol B, 1b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.772381880; baseline=strength_only, MAE=1.531093079; gain=-0.241288802.
+- Protocol B, 1b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.027764945; baseline=per_bit_median, MAE=0.026034275; gain=-0.001730669.
+- Protocol B, 1b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=0.605634952; baseline=per_bit_mean, MAE=0.627030567; gain=+0.021395615.
+- Protocol B, 1b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.223001647; baseline=median_curve, MAE=0.195080103; gain=-0.027921545.
+- Protocol B, 1b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=0.956543774; baseline=strength_only, MAE=1.333277455; gain=+0.376733681.
+- Protocol B, 1b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.038385525; baseline=per_bit_mean, MAE=0.038157755; gain=-0.000227770.
+- Protocol B, 1b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=1.120155415; baseline=per_bit_mean, MAE=3.105672734; gain=+1.985517319.
+- Protocol B, 6.9b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.160411557; baseline=median_curve, MAE=0.136013048; gain=-0.024398509.
+- Protocol B, 6.9b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=0.705043531; baseline=median_curve, MAE=0.148304450; gain=-0.556739081.
+- Protocol B, 6.9b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.032468485; baseline=per_bit_median, MAE=0.024557756; gain=-0.007910729.
+- Protocol B, 6.9b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=0.488935236; baseline=per_bit_mean, MAE=0.173583588; gain=-0.315351647.
+- Protocol B, 6.9b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.130573905; baseline=median_curve, MAE=0.095197388; gain=-0.035376517.
+- Protocol B, 6.9b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.440594044; baseline=strength_only, MAE=1.294240630; gain=-0.146353414.
+- Protocol B, 6.9b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.047715908; baseline=per_bit_mean, MAE=0.041901613; gain=-0.005814295.
+- Protocol B, 6.9b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=1.293731258; baseline=per_bit_mean, MAE=3.770416564; gain=+2.476685305.
+- Protocol A confirmation, 410M@48k, prune interp d=.85/.675/.575: power capability-averaged MAE=0.386244372; strongest simple=median_curve, MAE=0.293838171; gain=-0.092406201. Other pruning regimes and both quantization columns are not evaluated.
+- Protocol A confirmation, 1.4B@112k, prune interp d=.85/.675/.575: power capability-averaged MAE=0.401697437; strongest simple=median_curve, MAE=0.183657826; gain=-0.218039611. Other pruning regimes and both quantization columns are not evaluated.
+- Protocol A confirmation, 6.9B@80k, prune interp d=.85/.675/.575: power capability-averaged MAE=0.369662870; strongest simple=median_curve, MAE=0.233927327; gain=-0.135735543. Other pruning regimes and both quantization columns are not evaluated.
+- Read v49 summary.prune.interp_0.9-0.6, summary.prune.extrap_0.55, summary.quant_ge4 and summary.quant.int3; verify each against its exact underlying rows. Strongest source-free baseline minimizes aggregate MAE once per source/protocol/regime, not separately per capability or observation. Pruning candidates: strength_only, median_curve, zero; quantization: per_bit_mean, per_bit_median, zero where present.
+- For v46 1B@96k, compute MAE from pruning/quantization rows; its actual interpolation coverage is only d=.65 and its ≥4-bit coverage is only int4. Place these in protocol A as requested, labelled with an asterisk. The historical v46 freeze is preserved, not refit as v49.
+- Separate distillation panel: v41.by_cap[cap].mae.constant minus mae.E; U225 unseen pool, ordered math/code/QA. This candidate is E-only, with no post-test switch to constant in math/code. No confidence intervals are available.
+- U225 math: E MAE=0.191249416, constant MAE=0.122394913, gain=-0.068854504.
+- U225 code: E MAE=0.117348394, constant MAE=0.069374733, gain=-0.047973661.
+- U225 qa: E MAE=0.705643329, constant MAE=1.448513239, gain=+0.742869909.
+
+Limitations:
+
+- 1B@96k protocol B was not evaluated: four cells are hatched grey. The v46 A cells do not contain the full v49 density/bit ladders; unmeasured strengths are not filled in. Protocol summaries aggregate three capabilities as specified for this matrix.
+- No intervals are stored for these transfer comparisons; none are invented. Confirmation states appear only in protocol A; no protocol-B confirmation evaluation is implied.
+
+Exact data files read:
+
+- `results/v49-p1v2/compare_pythia-1b@step32000.json`
+- `results/v49-p1v2/compare_pythia-1b@step112000.json`
+- `results/v49-p1v2/compare_pythia-6.9b@step32000.json`
+- `results/v49-p1v2/compare_pythia-6.9b@step112000.json`
+- `results/v46-p1-newsource/compare.json`
+- `results/v41-distill-newpool/summary.json`
+- `results/v53-prune-dev/compare_pythia-410m@step48000.json`
+- `results/v53-prune-dev/compare_pythia-1.4b@step112000.json`
+- `results/v53-prune-dev/compare_pythia-6.9b@step80000.json`
+- `results/v55-quant-group/compare.json`
+- `results/v50-p2v2/freeze.json`
+- `results/v50-p2v2/compare_test.json`
