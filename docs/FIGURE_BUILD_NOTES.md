@@ -477,3 +477,13 @@ Exact data files read:
 - `results/v53-prune-dev/compare_pythia-1.4b@step112000.json`
 - `results/v53-prune-dev/compare_pythia-6.9b@step80000.json`
 - `results/v56-distill-forms/summary.json`
+
+
+## Validation of the transfer extension and compact input/form figure
+
+- Both scripts completed from `/tmp`, resolving data paths relative to their source files. Every JSON input was printed as `READ` and is listed in the two sections above.
+- All saved MAE/absolute-error identities checked by the scripts passed. The compact figure contains 12 input-gain points with the 12 stored v36b intervals, 24 same-input form-gain points, and 9 capability-shape points. No intervals were created for panels B or C.
+- Compact output: 6.5 × 3.2 inches (PDF page 468 × 230.4 pt), PNG 1950 × 960 at 300 dpi. Transfer output: 10.4 × 9.0 inches, PNG 3120 × 2700 at 300 dpi.
+- Inspected the rendered PNGs and compact PDF. Both PDFs embed Liberation Serif Bold as CID TrueType; PDF text extraction confirms a minimum size of 8 pt and all text inside the page bounds.
+- A guarded rerun allowed repository writes only to the four requested figure outputs and this notes file. The rerun wrote only the four figures, produced byte-identical outputs, and retained the existing identical notes sections without duplication.
+- All 13 actual figure-input JSON files and baseline registers retained their initial hashes. All 40,920 bytes of the original build notes remain an exact prefix. Concurrent edits to unrelated TeX files and live training logs were preserved; this task did not write results JSON, registers, or TeX.
