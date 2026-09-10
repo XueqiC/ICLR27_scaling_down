@@ -1,15 +1,15 @@
 \section{Developing Capability-Conditioned Scaling Laws}
 \label{sec:laws}
 
-\subsection{Conditioning on the Initial Model State}
-\label{sec:conditioning}
-
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\textwidth]{figs/input_form_compact.pdf}
-\caption{Which inputs and forms matter. A: improvement (nats, positive = better) from adding the dense anchor $L_{0,c}$ to $(N_0,D_0)$ and from adding $D_0$ to $(N_0,L_{0,c})$ on the controlled panel, leave-one-stage-out, with 95\% cluster-bootstrap intervals. B: improvement of the shared power form over the same-input alternatives A2 and A1 on every pruning test (positive = power form better). C: gain of per-capability response shapes over a shared shape at matched parameter count on the distillation development matrix (positive = per-capability better). Intervals only where computed.}
-\label{fig:inputs}
+\includegraphics[width=0.88\textwidth]{figs/predictive_responses.pdf}
+\caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen shared power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median development curve; the 6.9B source at the same stage is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources at the integer bit-widths with the frozen per-bit regression (hollow) and the per-bit median (dotted); the 5-bit point is the fixed interpolation rule and guide lines are visual only. Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools U75 and U600 (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms and the QA bias at the two budgets. Points are measurements; lines are development fits frozen before the test points were measured. Native nats per token; separate axes per column.}
+\label{fig:responses}
 \end{figure}
+
+\subsection{Conditioning on the Initial Model State}
+\label{sec:conditioning}
 
 The first question is whether the initial state is worth reading at
 all, and which part of it carries the signal. On the nine-state
@@ -39,13 +39,6 @@ would be needed.
 \subsection{Pruning}
 \label{sec:law_prune}
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\textwidth]{figs/predictive_responses.pdf}
-\caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen shared power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median development curve; the 6.9B source at the same stage is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources at the integer bit-widths with the frozen per-bit regression (hollow) and the per-bit median (dotted); the 5-bit point is the fixed interpolation rule and guide lines are visual only. Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools U75 and U600 (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms and the QA bias at the two budgets. Points are measurements; lines are development fits frozen before the test points were measured. Native nats per token; separate axes per column.}
-\label{fig:responses}
-\end{figure}
-
 \paragraph{Response.} Pruning damage grows with the removed fraction
 $1-d$ and is source-dependent in amplitude: at the same density a
 late-stage small model can be several times more fragile than an
@@ -73,11 +66,11 @@ change.
 
 \paragraph{Parametric fit and selection.} Fit on the nine development
 states at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at the pooled unseen
-densities $0.65$ and $0.55$, Eq.~\eqref{eq:power} has MAE 0.371, 0.524,
-and 0.759 against 1.37, 1.64, and 1.61 for the strength-only curve, so
-reading the source state is what matters; A2 is better on math (0.283)
-and code (0.279) and within noise on QA (0.818), so the power structure
-adds nothing over the per-density regression on this panel. After the
+densities $0.65$ and $0.55$, Eq.~\eqref{eq:power} cuts the error of the
+strength-only curve by a factor of two to three on every capability, so
+reading the source state is what matters, while A2 is better on math
+and code and within noise on QA (Table~\ref{tab:pred_main}), so the
+power structure adds nothing over the per-density regression. After the
 frozen tests of \S\ref{sec:general} we refit both on an expanded
 development set of 17 states including the unblinded 1B and 6.9B
 checkpoints and applied a pre-committed leave-one-source-out rule: A2

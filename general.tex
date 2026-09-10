@@ -15,7 +15,7 @@ they do not. Errors are MAE in nats per token; ``interpolation'' and
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\textwidth]{figs/transfer_limits.pdf}
+\includegraphics[width=0.92\textwidth]{figs/transfer_limits.pdf}
 \caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference, nats, averaged over the three capabilities; positive = candidate better) for each new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE printed in each cell; the confirmation panel (410M@48k, 1.4B@112k, 6.9B@80k) and the grouped-quantization tests are included. Cells not evaluated are hatched. Bottom: the distillation pool test, reuse-count form against the constant on the unseen pool U225, per capability. All predictions were frozen before the corresponding measurement.}
 \label{fig:transfer}
 \end{figure}
@@ -26,14 +26,12 @@ they do not. Errors are MAE in nats per token; ``interpolation'' and
 source-conditioned forms predict math and code and do not predict QA.
 On the three checkpoints that entered no fit, at densities between the
 grid points (0.85, 0.675, 0.575), the delivered power form has MAE
-0.243, 0.236, and 0.678 for math, code, and QA: it beats the
-strength-only curve (0.450, 0.488, 0.579) and zero change on every
-checkpoint, it has the lowest math error of all predictors (A2 is
-near-exact on math at 1.4B@112k), it ties the median development
-curve on code (0.214), and it loses QA to every source-free curve
-(median 0.221) because it over-predicts the QA improvement. The
-source-free median curve therefore has the lowest aggregate error
-(0.237 against 0.386). Beyond the fitted range the picture is uniform:
+0.24, 0.24, and 0.68 for math, code, and QA: it beats the strength-only
+curve (0.45, 0.49, 0.58) and zero change on every checkpoint, has the
+lowest math error of all predictors, ties the median development curve
+on code, and loses QA to every source-free curve (median 0.22) because
+it over-predicts the QA improvement, so the source-free median has the
+lowest aggregate error (0.24 against 0.39). Beyond the fitted range the picture is uniform:
 at $d=0.55$ every source-conditioned form fails on every source tested
 (errors 0.6 to 4.5 nats; the strength-only curve is closest), so the
 transfer range of these relations is the interpolation regime.
@@ -77,12 +75,11 @@ version and is not reported here.
 \paragraph{Unseen stage inside the range.} At step 96k, between the
 development stages, the frozen per-density pruning regression beat
 both its no-$D_0$ variant and the per-setting median on all three
-capabilities for the 160M and 1.4B sources (0.090, 0.128, 0.426
-against 0.367, 0.438, 0.832 for the median). The per-bit quantization
-regression on three sources at the same stage gains nothing over the
-per-bit median at four bits and above, where responses are near zero,
-and is inconsistent at int3 ($+0.45$ for math, $-1.12$ for code,
-$-0.32$ for QA).
+capabilities for the 160M and 1.4B sources (Table~\ref{tab:pred_main}).
+The per-bit quantization regression on three sources at the same stage
+gains nothing over the per-bit median at four bits and above, where
+responses are near zero, and is inconsistent at int3 (better for math,
+worse for code and QA).
 
 \paragraph{New size inside the range.} For a 1B source at steps 32k
 and 112k, at interpolated densities, the power form, A2, and the
@@ -114,6 +111,13 @@ and their measurement was in progress at the cut-off.
 
 \subsection{Applicability across Capabilities}
 \label{sec:capabilities}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.95\textwidth]{figs/input_form_compact.pdf}
+\caption{Which inputs and forms matter. A: improvement (nats, positive = better) from adding the dense anchor $L_{0,c}$ to $(N_0,D_0)$ and from adding $D_0$ to $(N_0,L_{0,c})$ on the controlled panel, leave-one-stage-out, with 95\% cluster-bootstrap intervals. B: improvement of the shared power form over the same-input alternatives A2 and A1 on every pruning test (positive = power form better). C: gain of per-capability response shapes over a shared shape at matched parameter count on the distillation development matrix (positive = per-capability better). Intervals only where computed.}
+\label{fig:inputs}
+\end{figure}
 
 The same asymmetry recurs on every axis. Math and code are carried by
 the initial-state inputs: the dense anchor has interval-supported

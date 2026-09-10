@@ -1,4 +1,4 @@
-\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{2pt}
+\begin{table}[H]\centering\scriptsize\setlength{\tabcolsep}{2pt}
 \begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
 Form & P & LOCO math & LOCO code & LOCO qa & LOSO math & LOSO code & LOSO qa \\
@@ -16,7 +16,7 @@ F2:logN & 12 & 0.062/-0.007 & 0.057/-0.005 & 0.706/-0.069 & 0.152/-0.152 & 0.178
 \bottomrule\end{tabular}
 \caption{Distillation development matrix (12 runs, 48 points): held-out MAE/signed bias (nats) per form and capability under leave-one-run-out (LOCO) and leave-one-student-out (LOSO). Forms: $t=\log(1+T_c/35000)$, $e=\log(1+E)$, $s=1-e^{-T_c/T_*}$; T-only $a+bt$; E-only $a+be$; surface $a+bt+ce+dz$; F1 $(a+\lambda z)e$; F2 $(a+\lambda z)s+(b+\mu z)e$, $z$ = standardized $L_{0,c}$ (or $\log N_S$, identical up to sign with two students). Under LOSO the descriptor forms degenerate (one student in training) and fall back to zero.}
 \label{tab:v56_forms}\end{table}
-\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{2pt}
+\begin{table}[H]\centering\scriptsize\setlength{\tabcolsep}{2pt}
 \begin{tabular}{@{}lllrrrr@{}}
 \toprule
 Structure & P shared/per & Capability & Shared MAE & Per-cap MAE & Gain & >0.02 \\

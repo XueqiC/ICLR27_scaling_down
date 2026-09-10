@@ -328,3 +328,152 @@ Exact data files read:
 - `results/v23-loss-validity/olmo3-7b/dense_prune-d0.9/loss_validity.json`
 
 <!-- FIGURE 4 END -->
+
+
+## Figure 3 extension: confirmation pruning and grouped quantization
+
+Build: CPU, matplotlib Agg; shared Fig. 1 style and colours; no fitting.
+
+Outputs: `paper/figs/transfer_limits.pdf`, `paper/figs/transfer_limits.png`.
+
+Selection and calculations:
+
+- v55 bit_test: states=['pythia-1.4b@step143000', 'pythia-1.4b@step16000', 'pythia-160m@step143000', 'pythia-160m@step16000', 'pythia-410m@step143000', 'pythia-410m@step16000']; low_order_2d capability-averaged MAE=0.281132674; strongest simple=zero, MAE=0.487409764; gain=+0.206277090.
+- v55 granularity_test: states=['pythia-1.4b@step143000', 'pythia-1.4b@step16000', 'pythia-160m@step143000', 'pythia-160m@step16000', 'pythia-410m@step143000', 'pythia-410m@step16000']; low_order_2d capability-averaged MAE=0.507970914; strongest simple=median, MAE=1.188190551; gain=+0.680219636.
+- v55 joint_test: states=['pythia-1b@step96000']; low_order_2d capability-averaged MAE=0.236892811; strongest simple=median, MAE=0.241020936; gain=+0.004128126.
+- v55 bit_test and granularity_test evaluate seen development states; joint_test evaluates held-out 1B@96k. Use test_sets.mae_table, verified against rows; choose one of mean/median/zero after averaging math/code/QA. Candidate is always low_order_2d, without test-set selection.
+- Protocol A, 1b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.254179151; baseline=median_curve, MAE=0.203799064; gain=-0.050380087.
+- Protocol A, 1b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=2.271696102; baseline=strength_only, MAE=0.636758790; gain=-1.634937312.
+- Protocol A, 1b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.103302198; baseline=per_bit_median, MAE=0.030937557; gain=-0.072364641.
+- Protocol A, 1b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=1.050004280; baseline=per_bit_median, MAE=1.437635732; gain=+0.387631452.
+- Protocol A, 1b@96000, Prune interp d=.9–.6: 3 rows, equal weight across math/code/QA; candidate=power, MAE=0.192657239; baseline=median_curve, MAE=0.263815104; gain=+0.071157865.
+- Protocol A, 1b@96000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.302291215; baseline=strength_only, MAE=0.273329452; gain=-1.028961763.
+- Protocol A, 1b@96000, Quantization bits ≥4: 3 rows, equal weight across math/code/QA; candidate=full_N0_L0_D0, MAE=0.073604549; baseline=per_bit_median, MAE=0.110823830; gain=+0.037219281.
+- Protocol A, 1b@96000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full_N0_L0_D0, MAE=0.397065263; baseline=per_bit_median, MAE=0.620234070; gain=+0.223168807.
+- Protocol A, 1b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.190800364; baseline=median_curve, MAE=0.172711717; gain=-0.018088647.
+- Protocol A, 1b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.397587115; baseline=strength_only, MAE=0.310579477; gain=-1.087007638.
+- Protocol A, 1b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.071351982; baseline=per_bit_median, MAE=0.036339643; gain=-0.035012339.
+- Protocol A, 1b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=0.676489584; baseline=per_bit_mean, MAE=0.801655342; gain=+0.125165758.
+- Protocol A, 6.9b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.476289966; baseline=zero, MAE=0.160377185; gain=-0.315912781.
+- Protocol A, 6.9b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.634883057; baseline=median_curve, MAE=0.274482630; gain=-1.360400427.
+- Protocol A, 6.9b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.252760495; baseline=zero, MAE=0.032538560; gain=-0.220221934.
+- Protocol A, 6.9b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=3.972453745; baseline=per_bit_median, MAE=1.834463104; gain=-2.137990641.
+- Protocol A, 6.9b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.436098600; baseline=median_curve, MAE=0.091829270; gain=-0.344269329.
+- Protocol A, 6.9b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=2.121200919; baseline=strength_only, MAE=0.190498768; gain=-1.930702151.
+- Protocol A, 6.9b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.271100740; baseline=per_bit_median, MAE=0.042210542; gain=-0.228890197.
+- Protocol A, 6.9b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=3.872925307; baseline=per_bit_mean, MAE=0.430418324; gain=-3.442506983.
+- Protocol B, 1b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.248786896; baseline=median_curve, MAE=0.223966151; gain=-0.024820745.
+- Protocol B, 1b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.772381880; baseline=strength_only, MAE=1.531093079; gain=-0.241288802.
+- Protocol B, 1b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.027764945; baseline=per_bit_median, MAE=0.026034275; gain=-0.001730669.
+- Protocol B, 1b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=0.605634952; baseline=per_bit_mean, MAE=0.627030567; gain=+0.021395615.
+- Protocol B, 1b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.223001647; baseline=median_curve, MAE=0.195080103; gain=-0.027921545.
+- Protocol B, 1b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=0.956543774; baseline=strength_only, MAE=1.333277455; gain=+0.376733681.
+- Protocol B, 1b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.038385525; baseline=per_bit_mean, MAE=0.038157755; gain=-0.000227770.
+- Protocol B, 1b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=1.120155415; baseline=per_bit_mean, MAE=3.105672734; gain=+1.985517319.
+- Protocol B, 6.9b@32000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.160411557; baseline=median_curve, MAE=0.136013048; gain=-0.024398509.
+- Protocol B, 6.9b@32000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=0.705043531; baseline=median_curve, MAE=0.148304450; gain=-0.556739081.
+- Protocol B, 6.9b@32000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.032468485; baseline=per_bit_median, MAE=0.024557756; gain=-0.007910729.
+- Protocol B, 6.9b@32000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=0.488935236; baseline=per_bit_mean, MAE=0.173583588; gain=-0.315351647.
+- Protocol B, 6.9b@112000, Prune interp d=.9–.6: 18 rows, equal weight across math/code/QA; candidate=power, MAE=0.130573905; baseline=median_curve, MAE=0.095197388; gain=-0.035376517.
+- Protocol B, 6.9b@112000, Prune extrap d=.55: 3 rows, equal weight across math/code/QA; candidate=power, MAE=1.440594044; baseline=strength_only, MAE=1.294240630; gain=-0.146353414.
+- Protocol B, 6.9b@112000, Quantization bits ≥4: 12 rows, equal weight across math/code/QA; candidate=full, MAE=0.047715908; baseline=per_bit_mean, MAE=0.041901613; gain=-0.005814295.
+- Protocol B, 6.9b@112000, Quantization int3: 3 rows, equal weight across math/code/QA; candidate=full, MAE=1.293731258; baseline=per_bit_mean, MAE=3.770416564; gain=+2.476685305.
+- Protocol A confirmation, 410M@48k, prune interp d=.85/.675/.575: power capability-averaged MAE=0.386244372; strongest simple=median_curve, MAE=0.293838171; gain=-0.092406201. Other pruning regimes and both quantization columns are not evaluated.
+- Protocol A confirmation, 1.4B@112k, prune interp d=.85/.675/.575: power capability-averaged MAE=0.401697437; strongest simple=median_curve, MAE=0.183657826; gain=-0.218039611. Other pruning regimes and both quantization columns are not evaluated.
+- Protocol A confirmation, 6.9B@80k, prune interp d=.85/.675/.575: power capability-averaged MAE=0.369662870; strongest simple=median_curve, MAE=0.233927327; gain=-0.135735543. Other pruning regimes and both quantization columns are not evaluated.
+- Read v49 summary.prune.interp_0.9-0.6, summary.prune.extrap_0.55, summary.quant_ge4 and summary.quant.int3; verify each against its exact underlying rows. Strongest source-free baseline minimizes aggregate MAE once per source/protocol/regime, not separately per capability or observation. Pruning candidates: strength_only, median_curve, zero; quantization: per_bit_mean, per_bit_median, zero where present.
+- For v46 1B@96k, compute MAE from pruning/quantization rows; its actual interpolation coverage is only d=.65 and its ≥4-bit coverage is only int4. Place these in protocol A as requested, labelled with an asterisk. The historical v46 freeze is preserved, not refit as v49.
+- Separate distillation panel: v41.by_cap[cap].mae.constant minus mae.E; U225 unseen pool, ordered math/code/QA. This candidate is E-only, with no post-test switch to constant in math/code. No confidence intervals are available.
+- U225 math: E MAE=0.191249416, constant MAE=0.122394913, gain=-0.068854504.
+- U225 code: E MAE=0.117348394, constant MAE=0.069374733, gain=-0.047973661.
+- U225 qa: E MAE=0.705643329, constant MAE=1.448513239, gain=+0.742869909.
+
+Limitations:
+
+- 1B@96k protocol B was not evaluated: four cells are hatched grey. The v46 A cells do not contain the full v49 density/bit ladders; unmeasured strengths are not filled in. Protocol summaries aggregate three capabilities as specified for this matrix.
+- No intervals are stored for these transfer comparisons; none are invented. Confirmation states appear only in protocol A; no protocol-B confirmation evaluation is implied.
+
+Exact data files read:
+
+- `results/v49-p1v2/compare_pythia-1b@step32000.json`
+- `results/v49-p1v2/compare_pythia-1b@step112000.json`
+- `results/v49-p1v2/compare_pythia-6.9b@step32000.json`
+- `results/v49-p1v2/compare_pythia-6.9b@step112000.json`
+- `results/v46-p1-newsource/compare.json`
+- `results/v41-distill-newpool/summary.json`
+- `results/v53-prune-dev/compare_pythia-410m@step48000.json`
+- `results/v53-prune-dev/compare_pythia-1.4b@step112000.json`
+- `results/v53-prune-dev/compare_pythia-6.9b@step80000.json`
+- `results/v55-quant-group/compare.json`
+
+
+## Compact input/form figure: adding inputs, form, and capability shape
+
+Build: CPU, matplotlib Agg; shared Fig. 1 style and colours; no fitting.
+
+Outputs: `paper/figs/input_form_compact.pdf`, `paper/figs/input_form_compact.png`.
+
+Selection and calculations:
+
+- Panel A pruning/combined_vs_D0/math: MAE(N0_D0) − MAE(N0_D0_L0) = +0.546736166; stored 95% interval=[0.2884933914054272, 0.9998958471693294]; n=36, held-out stage clusters=3.
+- Panel A pruning/combined_vs_D0/code: MAE(N0_D0) − MAE(N0_D0_L0) = +0.655587149; stored 95% interval=[0.3816181925802761, 1.1284297202658196]; n=36, held-out stage clusters=3.
+- Panel A pruning/combined_vs_D0/qa: MAE(N0_D0) − MAE(N0_D0_L0) = +0.138451717; stored 95% interval=[-0.04824370857940019, 0.37287929650437523]; n=36, held-out stage clusters=3.
+- Panel A quantization/combined_vs_D0/math: MAE(N0_D0) − MAE(N0_D0_L0) = +1.218892324; stored 95% interval=[0.04303810976138944, 2.730140662525886]; n=36, held-out stage clusters=3.
+- Panel A quantization/combined_vs_D0/code: MAE(N0_D0) − MAE(N0_D0_L0) = +1.569094752; stored 95% interval=[0.8087553473705607, 2.7481100812404806]; n=36, held-out stage clusters=3.
+- Panel A quantization/combined_vs_D0/qa: MAE(N0_D0) − MAE(N0_D0_L0) = +0.467450037; stored 95% interval=[-0.015734424200936736, 0.9468883535544776]; n=36, held-out stage clusters=3.
+- Panel A pruning/combined_vs_L0/math: MAE(N0_L0) − MAE(N0_D0_L0) = +0.359703570; stored 95% interval=[-0.03920938263707459, 0.5969889769034756]; n=36, held-out stage clusters=3.
+- Panel A pruning/combined_vs_L0/code: MAE(N0_L0) − MAE(N0_D0_L0) = +0.401281232; stored 95% interval=[-0.010718734082043865, 0.6290395405320417]; n=36, held-out stage clusters=3.
+- Panel A pruning/combined_vs_L0/qa: MAE(N0_L0) − MAE(N0_D0_L0) = -0.031486288; stored 95% interval=[-0.10538072020059586, 0.049829696068684926]; n=36, held-out stage clusters=3.
+- Panel A quantization/combined_vs_L0/math: MAE(N0_L0) − MAE(N0_D0_L0) = +0.844834291; stored 95% interval=[-0.13436486378013807, 1.6706866086352492]; n=36, held-out stage clusters=3.
+- Panel A quantization/combined_vs_L0/code: MAE(N0_L0) − MAE(N0_D0_L0) = +1.450936193; stored 95% interval=[0.15329014287614776, 2.1043487703168227]; n=36, held-out stage clusters=3.
+- Panel A quantization/combined_vs_L0/qa: MAE(N0_L0) − MAE(N0_D0_L0) = -0.025268244; stored 95% interval=[-0.356542454909357, 0.4853519187478823]; n=36, held-out stage clusters=3.
+- Panel A: v36b leave-one-stage-out; combined_vs_D0 adds L0 to {N0,D0}; combined_vs_L0 adds D0 to {N0,L0}. Use only stored improvement_ci95; no resampling or fitting.
+- Panel B v49 1b@32000/math: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 1b@32000/code: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 1b@32000/qa: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 1b@112000/math: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 1b@112000/code: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 1b@112000/qa: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 6.9b@32000/math: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 6.9b@32000/code: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 6.9b@32000/qa: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 6.9b@112000/math: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 6.9b@112000/code: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v49 6.9b@112000/qa: protocol A, 6 rows at densities [0.6, 0.65, 0.7, 0.75, 0.8, 0.9]; matched candidate and reference absolute errors checked against predictions.
+- Panel B v42 pooled: MAE(A2) − MAE(power), per capability: {'math': -0.08779893478046968, 'code': -0.24441431707540323, 'qa': 0.05866965739163588}.
+- Panel B v42 pooled: MAE(A1) − MAE(power), per capability: {'math': 0.4883124838030743, 'code': 0.41754793003116486, 'qa': 0.22658828906446515}.
+- Panel B 1B pair: MAE(A2) − MAE(power), per capability: {'math': -0.010683319172697138, 'code': -0.07174131974904338, 'qa': -0.02483124369029409}.
+- Panel B 1B pair: MAE(A1) − MAE(power), per capability: {'math': 0.19451181707133658, 'code': 0.14181798209779464, 'qa': 0.037022840214050404}.
+- Panel B 6.9B pair: MAE(A2) − MAE(power), per capability: {'math': -0.007794047950791347, 'code': -0.015826514897907144, 'qa': 0.0724212655131049}.
+- Panel B 6.9B pair: MAE(A1) − MAE(power), per capability: {'math': 0.11491754010554942, 'code': 0.10577332417347778, 'qa': 0.23688543981533722}.
+- Panel B Confirm.: MAE(A2) − MAE(power), per capability: {'math': -0.013211503093583524, 'code': -0.014418388241284857, 'qa': 0.0038445934016381376}.
+- Panel B Confirm.: MAE(A1) − MAE(power), per capability: {'math': 0.1195203451053085, 'code': 0.16673528320280737, 'qa': 0.05944162644849851}.
+- Panel B: v42 uses by_cap.mae[A2/A1] − mae[cand] for its pooled test. Each v49 size pair gives equal weight to the 32k and 112k source states, after averaging protocol-A rows_prune with 0.6 <= d <= 0.9 separately per state/capability. Confirmation gives equal weight to 410M@48k, 1.4B@112k and 6.9B@80k, using saved mae over d=.85/.675/.575. Capabilities and test cohorts remain separate; both A2 and A1 are shown.
+- Panel C E-only/math: LOCO shared MAE=0.430725750, per-capability MAE=0.408730069, gain=+0.021995681.
+- Panel C E-only/code: LOCO shared MAE=0.417268206, per-capability MAE=0.411597442, gain=+0.005670764.
+- Panel C E-only/qa: LOCO shared MAE=0.966664152, per-capability MAE=1.150070359, gain=-0.183406206.
+- Panel C T+E/math: LOCO shared MAE=0.438656260, per-capability MAE=0.327262958, gain=+0.111393302.
+- Panel C T+E/code: LOCO shared MAE=0.418537234, per-capability MAE=0.313755499, gain=+0.104781735.
+- Panel C T+E/qa: LOCO shared MAE=0.978950687, per-capability MAE=0.852848719, gain=+0.126101969.
+- Panel C F2/math: LOCO shared MAE=0.535513674, per-capability MAE=0.145040253, gain=+0.390473421.
+- Panel C F2/code: LOCO shared MAE=0.526956566, per-capability MAE=0.106925450, gain=+0.420031116.
+- Panel C F2/qa: LOCO shared MAE=1.044234292, per-capability MAE=0.825654088, gain=+0.218580203.
+- Panel C: every v56 Part B structure (E-only, T+E, F2), shared minus per-capability LOCO MAE. The comparison is checked against each mode's loco.metrics; no in-sample metrics are substituted. LOCO holds out a (student, U, data_seed) run cluster.
+- Layout: 6.5 × 3.2 inches, all text >=8 pt at native size, 300 dpi PNG, embedded TrueType PDF; method/reference colours from Fig. 1. Circle=Math, square=Code, triangle=QA. Zero lines on every panel; positive gains favour added inputs, power, or per-capability shape, respectively.
+
+Limitations:
+
+- Panels B and C have no stored intervals for these comparisons; markers only. Pair/confirmation aggregation does not imply independent training trajectories or a pooled cross-test score.
+
+Exact data files read:
+
+- `results/v36b-input-comparison/summary.json`
+- `results/v42-prune-sameinput/summary.json`
+- `results/v49-p1v2/compare_pythia-1b@step32000.json`
+- `results/v49-p1v2/compare_pythia-1b@step112000.json`
+- `results/v49-p1v2/compare_pythia-6.9b@step32000.json`
+- `results/v49-p1v2/compare_pythia-6.9b@step112000.json`
+- `results/v53-prune-dev/compare_pythia-410m@step48000.json`
+- `results/v53-prune-dev/compare_pythia-1.4b@step112000.json`
+- `results/v53-prune-dev/compare_pythia-6.9b@step80000.json`
+- `results/v56-distill-forms/summary.json`

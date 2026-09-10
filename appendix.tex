@@ -104,7 +104,7 @@ The three checkpoints of the confirmation panel (410M@48k, 1.4B@112k, 6.9B@80k) 
 before use: their model-shard hashes differ from every other cached revision of the same size, and their dense
 capability vectors differ from those of the neighbouring stages.
 
-\begin{table}[p]
+\begin{table}[H]
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}p{2.55cm}p{3.35cm}p{2.95cm}p{1.85cm}p{2.35cm}@{}}
 \toprule
@@ -148,15 +148,19 @@ the distillation source form and pool forms, and the frozen multi-student forms 
 constants in the register files listed in Appendix~\ref{sec:app_registration}.
 \input{tables/round3_coef}
 \input{tables/quant2d_coef}
+\FloatBarrier
 
 \section{Alternative Functional Forms and Model Selection}
 \label{sec:app_forms}
 \subsection{Pruning: expanded development set and the selection rule}
 \input{tables/v53_loso}
+\FloatBarrier
 \subsection{Grouped quantization: leave-one-state-out on six states}
 \input{tables/v55_loso}
+\FloatBarrier
 \subsection{Distillation: descriptor forms and capability conditioning}
 \input{tables/v56_forms}
+\FloatBarrier
 
 \section{Complete Prediction Results}
 \label{sec:app_results}
@@ -222,6 +226,7 @@ late stage (1.29 against 3.8 to 4.1).
 \input{tables/p1v2}
 \input{tables/round3_prune}
 \input{tables/round3_quant}
+\FloatBarrier
 \begin{figure}[p]
 \centering
 \includegraphics[width=0.92\textwidth]{figs/input_form_gain.pdf}
@@ -583,7 +588,7 @@ When a diagnostic overturns an earlier headline, the earlier claim is
 downgraded in the text and the prediction itself stays as committed.
 
 \subsection{Information budgets}
-\begin{table}[t]
+\begin{table}[H]
 \centering\small
 \begin{tabular}{@{}p{2.5cm}p{5.7cm}p{4.9cm}@{}}
 \toprule

@@ -17,6 +17,7 @@
 \usepackage{rotating}
 \usepackage{array}
 \usepackage{placeins}
+\usepackage{float}
 \renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.6}\renewcommand{\textfraction}{0.07}\renewcommand{\floatpagefraction}{0.75}
 \input{tables/counts}
 
@@ -105,27 +106,25 @@ Specialized workloads need specific capabilities, and the models that
 serve them are usually dense sources scaled down by pruning,
 quantization, or distillation; choosing a configuration today means
 measuring each one. We develop and evaluate empirical,
-capability-conditioned models of the compression response: for three
-capabilities (math, code, multi-hop QA) we predict the conditional
-loss after compression from the initial model state (parameter count,
+capability-conditioned models of the compression response: for math,
+code, and multi-hop QA we predict the conditional loss after
+compression from the initial model state (parameter count,
 pretraining tokens, and the dense capability losses of the source or
 initial student) and the configuration of the method. Relations are
 built on a controlled panel of Pythia checkpoints whose size and
-pretraining stage vary independently, compared against alternatives
-on the same inputs, and validated with predictions frozen before new
-configurations and new model states are measured. A five-parameter
+pretraining stage vary independently, compared with alternatives on
+the same inputs, and validated with predictions frozen before new
+configurations and model states are measured. A five-parameter
 pruning form predicts math and code at unseen densities inside the
 fitted range on three new checkpoints (0.24 nats mean absolute error
 against 0.45 for a source-free strength curve) and fails beyond the
 range and for QA; with the quantization group size as a second axis a
 low-order form predicts unseen bit-widths and group sizes on the
-development states, whereas bit-width alone supports only a per-bit
-source regression; for distillation the student state carries the
-math response and a reuse-count term carries QA on an unseen data pool
-with a budget-dependent bias. Transfer to a source five times larger
-than the development range fails for QA and is on par with source-free
-references for math. We release the relations with their coefficients,
-tested ranges, registered predictions, and measurements.
+development states; for distillation the student state carries the
+math response and a reuse-count term carries QA on an unseen pool.
+Transfer to a source five times larger fails for QA and is on par with
+source-free references for math. We release the relations with their
+coefficients, tested ranges, registered predictions, and measurements.
 \end{abstract}
 
 
