@@ -155,3 +155,25 @@ dropped by outcome, budget 72 GPU-h total (card wall-clock), concurrency by meas
 ### Execution order: CPU (v53 dev, v54 implementation, v50 extension) now; forward packages interleaved with the running
 pipeline when a lane is idle; 4B dev runs + seed repeats after the test lanes; each package updates one paper table
 (formula + coefficients, inputs, dev/test ranges, per-capability MAE, gain vs same-input baseline, bias, intervals).
+
+## Round v4 (2026-09-10 13:10 EDT; advisor framing) — shared structure, (m,c)-specific parameters, prediction intervals (CPU only)
+Goal: L_{m,c}(x) = f(x; theta_{m,c}) with a shared function family and method/capability-specific parameters, delivered
+with three kinds of range kept apart (parameter confidence interval; distribution of parameters across models; prediction
+interval for unseen models), applicability range, held-out error, and interval coverage/width. No new GPU work.
+1. Shared-shape test: one family in a per-method normalized strength s (pruning s=(1-d)/0.3; grouped quantization
+   s=(u,v) with u=log2 qmax, v=log2 g/128; distillation s=log(1+E)) with parameters fit per (m,c); compared on the same
+   held-out splits with the method-specific forms already delivered (v53 power/A2, v55 2D, v56 forms).
+2. Which parameters share: pruning gamma shared across capabilities vs per capability (amplitude per capability and
+   per state); quantization 2D term coefficients shared vs per capability; distillation shape (v56 Part B, done).
+3. Predict parameters, not just fit them: K0 amplitude from (N0, D0, L0c) vs K1 one-point calibration (amplitude set by
+   the mildest measured compression point of the target, shape shared), cost counted as one compressed measurement;
+   prediction intervals from leave-one-source-out residuals (per capability, per regime) with coverage and width on the
+   confirmation panel, the 1B/6.9B pairs, and the grouped-quantization tests.
+Deliverable: per law, form + parameter estimates and ranges + applicability + held-out error + PI coverage/width; a
+paragraph in Sec. 3.1/4.3 and one table (analysis/v59_shared_structure.py -> tables/shared_structure.tex).
+4. Layer 3 (v60, CPU): capability-specific selection maps from the delivered laws on the Pythia states over a nominal
+   storage budget (pruning r=d with the sparse-format caveat; per-channel RTN r=b/16; grouped RTN r=(b+16/g)/16;
+   distillation r=N_S/N_0 to a same-stage smaller student), validated leave-one-state-out: regret vs oracle, method
+   agreement, fixed-method and cheapest-feasible baselines, 'no clear winner' cells where the predicted method gap is
+   below the laws' held-out MAE; multi-capability (max-over-capabilities) version. Supporting evidence: v33 offline
+   replay on 12 heterogeneous models. Paper: new section 'From laws to capability-specific selection'; contribution (3).
