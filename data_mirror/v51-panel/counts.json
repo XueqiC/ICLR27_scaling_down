@@ -1,0 +1,38 @@
+{
+ "n_panel_prune": 12,
+ "n_prune_all": 14,
+ "n_quant": 14,
+ "n_quant_collapse": 12,
+ "quant_no_collapse": [
+  "OLMo-3-32B"
+ ],
+ "n_series": 5,
+ "series": [
+  "Gemma-3",
+  "Gemma-4",
+  "Muse",
+  "OLMo-3",
+  "Qwen3"
+ ],
+ "n_families": 4,
+ "families": [
+  "Gemma",
+  "Muse",
+  "OLMo",
+  "Qwen3"
+ ],
+ "qa_least_models": [
+  "Qwen3-0.6B",
+  "Qwen3-1.7B",
+  "Qwen3-4B"
+ ],
+ "qa_worst_models": [
+  "Gemma-3-270M",
+  "Gemma-3-1B",
+  "Gemma-3-4B",
+  "Gemma-3-12B",
+  "Gemma-3-27B",
+  "Gemma-4-31B",
+  "Muse-30B"
+ ]
+}

@@ -21,7 +21,7 @@ for f in sorted(glob.glob(str(OUT / "compare_*.json")), key=_key):
             m = s[key[0]][key[1]]; best = min(PC, key=lambda k: m[k]); same_best = min(("A2", "A1", "cont"), key=lambda k: m[k])
             rows.append({"source": tag, "protocol": P, "size": size_lab, "stage": stage_lab, "regime": reg, **{k: round(m[k], 4) for k in PC},
                          "best": best, "best_same_input_alt": same_best, "power_minus_bestalt": round(m["power"] - m[same_best], 4), "strength_only_vs_best": round(m["strength_only"] - m[best], 4)})
-        for reg, key in (("quant >=4-bit", "quant_ge4"), ("quant int3", None), ("quant int5 (interp-rule)", None)):
+        for reg, key in (("quant >=4-bit", "quant_ge4"), ("quant int3", None), ("quant int5 (rule)", None)):
             m = s[key] if key else s["quant"]["int3" if "int3" in reg else "int5"]
             best = min(QC, key=lambda k: m[k])
             rows.append({"source": tag, "protocol": P, "size": size_lab, "stage": stage_lab, "regime": reg, **{k: round(m[k], 4) for k in QC}, "best": best,
@@ -31,17 +31,17 @@ if rows:
     keys = sorted({k for r in rows for k in r}, key=lambda k: (k not in ("source", "protocol", "size", "stage", "regime", "best"), k))
     with (OUT / "p1v2_table.csv").open("w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=keys); w.writeheader(); [w.writerow({k: r.get(k, "") for k in keys}) for r in rows]
-    L = [r"\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{2pt}", r"\begin{tabular}{@{}lllrrrrrrl@{}}", r"\toprule",
-         r"Source & Prot. & Regime & power & A2 & A1 & cont & str.-only & zero & best \\", r"\midrule"]
+    L = [r"\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{1.6pt}", r"\begin{tabular}{@{}lllrrrrrrrl@{}}", r"\toprule",
+         r"Source & Prot. & Regime & power & A2 & A1 & cont & str.-only & median & zero & best \\", r"\midrule"]
     for r in rows:
         if r["regime"].startswith("prune"):
             src = r['source'].replace('pythia-','').replace('@step','@'); best = r['best'].replace('_','-')
-            L.append(f"{src} & {r['protocol']} & {r['regime']} & {r['power']:.3f} & {r['A2']:.3f} & {r['A1']:.3f} & {r['cont']:.3f} & {r['strength_only']:.3f} & {r['zero']:.3f} & {best} " + BS)
-    L += [r"\midrule", r"Source & Prot. & Regime & full & no-D0 & mean & median & zero & & best \\", r"\midrule"]
+            L.append(f"{src} & {r['protocol']} & {r['regime']} & {r['power']:.3f} & {r['A2']:.3f} & {r['A1']:.3f} & {r['cont']:.3f} & {r['strength_only']:.3f} & {r['median_curve']:.3f} & {r['zero']:.3f} & {best} " + BS)
+    L += [r"\midrule", r"Source & Prot. & Regime & full & no-D0 & mean & median & zero & & & best \\", r"\midrule"]
     for r in rows:
         if r["regime"].startswith("quant"):
             src = r['source'].replace('pythia-','').replace('@step','@'); reg = r['regime'].replace('>=', GE); best = r['best'].replace('_','-')
-            L.append(f"{src} & {r['protocol']} & {reg} & {r['full']:.3f} & {r['noD0']:.3f} & {r['per_bit_mean']:.3f} & {r['per_bit_median']:.3f} & {r['zero']:.3f} & & {best} " + BS)
+            L.append(f"{src} & {r['protocol']} & {reg} & {r['full']:.3f} & {r['noD0']:.3f} & {r['per_bit_mean']:.3f} & {r['per_bit_median']:.3f} & {r['zero']:.3f} & & & {best} " + BS)
     size_note = ("1B sources are in-range sizes and 6.9B is a $\\sim$5$\\times$ size extrapolation. "
                  if any("6.9b" in r["source"] for r in rows) else "The 1B source is an in-range size. ")
     cap = ("\\caption{P1-v2 new-source frozen prospectives (MAE over three capabilities, nats/token). Protocol A fits on the "

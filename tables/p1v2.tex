@@ -1,51 +1,51 @@
-\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{2pt}
-\begin{tabular}{@{}lllrrrrrrl@{}}
+\begin{table}[t]\centering\scriptsize\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{@{}lllrrrrrrrl@{}}
 \toprule
-Source & Prot. & Regime & power & A2 & A1 & cont & str.-only & zero & best \\
+Source & Prot. & Regime & power & A2 & A1 & cont & str.-only & median & zero & best \\
 \midrule
-1b@32000 & A & prune interp d0.9-0.6 & 0.254 & 0.261 & 0.393 & 0.275 & 0.363 & 0.412 & median-curve \\
-1b@32000 & A & prune extrap d0.55 & 2.272 & 2.130 & 2.394 & 2.221 & 0.637 & 2.434 & strength-only \\
-1b@32000 & B & prune interp d0.9-0.6 & 0.249 & 0.218 & 0.321 & 0.239 & 0.236 & 0.412 & A2 \\
-1b@32000 & B & prune extrap d0.55 & 1.772 & 1.777 & 2.151 & 1.863 & 1.531 & 2.434 & strength-only \\
-1b@112000 & A & prune interp d0.9-0.6 & 0.191 & 0.112 & 0.300 & 0.175 & 0.365 & 0.400 & A2 \\
-1b@112000 & A & prune extrap d0.55 & 1.398 & 1.235 & 1.838 & 1.356 & 0.311 & 2.237 & strength-only \\
-1b@112000 & B & prune interp d0.9-0.6 & 0.223 & 0.177 & 0.355 & 0.235 & 0.219 & 0.400 & A2 \\
-1b@112000 & B & prune extrap d0.55 & 0.957 & 0.995 & 1.685 & 1.127 & 1.333 & 2.237 & power \\
-6.9b@32000 & A & prune interp d0.9-0.6 & 0.476 & 0.482 & 0.608 & 0.501 & 0.483 & 0.160 & zero \\
-6.9b@32000 & A & prune extrap d0.55 & 1.635 & 1.423 & 0.939 & 1.457 & 1.493 & 0.889 & median-curve \\
-6.9b@32000 & B & prune interp d0.9-0.6 & 0.160 & 0.166 & 0.249 & 0.187 & 0.163 & 0.160 & median-curve \\
-6.9b@32000 & B & prune extrap d0.55 & 0.705 & 0.549 & 0.677 & 0.630 & 0.252 & 0.889 & median-curve \\
-6.9b@112000 & A & prune interp d0.9-0.6 & 0.436 & 0.463 & 0.610 & 0.479 & 0.376 & 0.294 & median-curve \\
-6.9b@112000 & A & prune extrap d0.55 & 2.121 & 1.939 & 2.224 & 2.061 & 0.191 & 2.198 & strength-only \\
-6.9b@112000 & B & prune interp d0.9-0.6 & 0.131 & 0.106 & 0.235 & 0.140 & 0.111 & 0.294 & median-curve \\
-6.9b@112000 & B & prune extrap d0.55 & 1.441 & 1.387 & 1.892 & 1.525 & 1.294 & 2.198 & strength-only \\
+1b@32000 & A & prune interp d0.9-0.6 & 0.254 & 0.261 & 0.393 & 0.275 & 0.363 & 0.204 & 0.412 & median-curve \\
+1b@32000 & A & prune extrap d0.55 & 2.272 & 2.130 & 2.394 & 2.221 & 0.637 & 1.509 & 2.434 & strength-only \\
+1b@32000 & B & prune interp d0.9-0.6 & 0.249 & 0.218 & 0.321 & 0.239 & 0.236 & 0.224 & 0.412 & A2 \\
+1b@32000 & B & prune extrap d0.55 & 1.772 & 1.777 & 2.151 & 1.863 & 1.531 & 1.645 & 2.434 & strength-only \\
+1b@112000 & A & prune interp d0.9-0.6 & 0.191 & 0.112 & 0.300 & 0.175 & 0.365 & 0.173 & 0.400 & A2 \\
+1b@112000 & A & prune extrap d0.55 & 1.398 & 1.235 & 1.838 & 1.356 & 0.311 & 1.311 & 2.237 & strength-only \\
+1b@112000 & B & prune interp d0.9-0.6 & 0.223 & 0.177 & 0.355 & 0.235 & 0.219 & 0.195 & 0.400 & A2 \\
+1b@112000 & B & prune extrap d0.55 & 0.957 & 0.995 & 1.685 & 1.127 & 1.333 & 1.447 & 2.237 & power \\
+6.9b@32000 & A & prune interp d0.9-0.6 & 0.476 & 0.482 & 0.608 & 0.501 & 0.483 & 0.165 & 0.160 & zero \\
+6.9b@32000 & A & prune extrap d0.55 & 1.635 & 1.423 & 0.939 & 1.457 & 1.493 & 0.275 & 0.889 & median-curve \\
+6.9b@32000 & B & prune interp d0.9-0.6 & 0.160 & 0.166 & 0.249 & 0.187 & 0.163 & 0.136 & 0.160 & median-curve \\
+6.9b@32000 & B & prune extrap d0.55 & 0.705 & 0.549 & 0.677 & 0.630 & 0.252 & 0.148 & 0.889 & median-curve \\
+6.9b@112000 & A & prune interp d0.9-0.6 & 0.436 & 0.463 & 0.610 & 0.479 & 0.376 & 0.092 & 0.294 & median-curve \\
+6.9b@112000 & A & prune extrap d0.55 & 2.121 & 1.939 & 2.224 & 2.061 & 0.191 & 1.272 & 2.198 & strength-only \\
+6.9b@112000 & B & prune interp d0.9-0.6 & 0.131 & 0.106 & 0.235 & 0.140 & 0.111 & 0.095 & 0.294 & median-curve \\
+6.9b@112000 & B & prune extrap d0.55 & 1.441 & 1.387 & 1.892 & 1.525 & 1.294 & 1.408 & 2.198 & strength-only \\
 \midrule
-Source & Prot. & Regime & full & no-D0 & mean & median & zero & & best \\
+Source & Prot. & Regime & full & no-D0 & mean & median & zero & & & best \\
 \midrule
-1b@32000 & A & quant $\ge$4-bit & 0.103 & 0.174 & 0.197 & 0.031 & 0.046 & & per-bit-median \\
-1b@32000 & A & quant int3 & 1.050 & 2.648 & 2.903 & 1.438 & 3.108 & & full \\
-1b@32000 & A & quant int5 (interp-rule) & 0.179 & 0.272 & 0.254 & 0.044 & 0.017 & & zero \\
-1b@32000 & B & quant $\ge$4-bit & 0.028 & 0.032 & 0.027 & 0.026 & 0.046 & & per-bit-median \\
-1b@32000 & B & quant int3 & 0.606 & 1.004 & 0.627 & 0.803 & 3.108 & & full \\
-1b@32000 & B & quant int5 (interp-rule) & 0.025 & 0.013 & 0.035 & 0.034 & 0.017 & & noD0 \\
-1b@112000 & A & quant $\ge$4-bit & 0.071 & 0.111 & 0.183 & 0.036 & 0.063 & & per-bit-median \\
-1b@112000 & A & quant int3 & 0.676 & 3.805 & 0.802 & 1.231 & 5.777 & & full \\
-1b@112000 & A & quant int5 (interp-rule) & 0.151 & 0.138 & 0.251 & 0.035 & 0.025 & & zero \\
-1b@112000 & B & quant $\ge$4-bit & 0.038 & 0.042 & 0.038 & 0.039 & 0.063 & & per-bit-mean \\
-1b@112000 & B & quant int3 & 1.120 & 1.981 & 3.106 & 3.472 & 5.777 & & full \\
-1b@112000 & B & quant int5 (interp-rule) & 0.046 & 0.019 & 0.027 & 0.025 & 0.025 & & noD0 \\
-6.9b@32000 & A & quant $\ge$4-bit & 0.253 & 0.317 & 0.190 & 0.034 & 0.033 & & zero \\
-6.9b@32000 & A & quant int3 & 3.973 & 5.103 & 3.300 & 1.835 & 2.711 & & per-bit-median \\
-6.9b@32000 & A & quant int5 (interp-rule) & 0.373 & 0.457 & 0.237 & 0.067 & 0.029 & & zero \\
-6.9b@32000 & B & quant $\ge$4-bit & 0.033 & 0.050 & 0.029 & 0.025 & 0.033 & & per-bit-median \\
-6.9b@32000 & B & quant int3 & 0.489 & 1.792 & 0.174 & 0.407 & 2.711 & & per-bit-mean \\
-6.9b@32000 & B & quant int5 (interp-rule) & 0.046 & 0.052 & 0.058 & 0.057 & 0.029 & & zero \\
-6.9b@112000 & A & quant $\ge$4-bit & 0.271 & 0.183 & 0.155 & 0.042 & 0.061 & & per-bit-median \\
-6.9b@112000 & A & quant int3 & 3.873 & 3.550 & 0.430 & 1.896 & 6.442 & & per-bit-mean \\
-6.9b@112000 & A & quant int5 (interp-rule) & 0.402 & 0.247 & 0.253 & 0.033 & 0.027 & & zero \\
-6.9b@112000 & B & quant $\ge$4-bit & 0.048 & 0.060 & 0.042 & 0.045 & 0.061 & & per-bit-mean \\
-6.9b@112000 & B & quant int3 & 1.294 & 4.033 & 3.770 & 4.137 & 6.442 & & full \\
-6.9b@112000 & B & quant int5 (interp-rule) & 0.043 & 0.025 & 0.025 & 0.023 & 0.027 & & per-bit-median \\
+1b@32000 & A & quant $\ge$4-bit & 0.103 & 0.174 & 0.197 & 0.031 & 0.046 & & & per-bit-median \\
+1b@32000 & A & quant int3 & 1.050 & 2.648 & 2.903 & 1.438 & 3.108 & & & full \\
+1b@32000 & A & quant int5 (rule) & 0.179 & 0.272 & 0.254 & 0.044 & 0.017 & & & zero \\
+1b@32000 & B & quant $\ge$4-bit & 0.028 & 0.032 & 0.027 & 0.026 & 0.046 & & & per-bit-median \\
+1b@32000 & B & quant int3 & 0.606 & 1.004 & 0.627 & 0.803 & 3.108 & & & full \\
+1b@32000 & B & quant int5 (rule) & 0.025 & 0.013 & 0.035 & 0.034 & 0.017 & & & noD0 \\
+1b@112000 & A & quant $\ge$4-bit & 0.071 & 0.111 & 0.183 & 0.036 & 0.063 & & & per-bit-median \\
+1b@112000 & A & quant int3 & 0.676 & 3.805 & 0.802 & 1.231 & 5.777 & & & full \\
+1b@112000 & A & quant int5 (rule) & 0.151 & 0.138 & 0.251 & 0.035 & 0.025 & & & zero \\
+1b@112000 & B & quant $\ge$4-bit & 0.038 & 0.042 & 0.038 & 0.039 & 0.063 & & & per-bit-mean \\
+1b@112000 & B & quant int3 & 1.120 & 1.981 & 3.106 & 3.472 & 5.777 & & & full \\
+1b@112000 & B & quant int5 (rule) & 0.046 & 0.019 & 0.027 & 0.025 & 0.025 & & & noD0 \\
+6.9b@32000 & A & quant $\ge$4-bit & 0.253 & 0.317 & 0.190 & 0.034 & 0.033 & & & zero \\
+6.9b@32000 & A & quant int3 & 3.973 & 5.103 & 3.300 & 1.835 & 2.711 & & & per-bit-median \\
+6.9b@32000 & A & quant int5 (rule) & 0.373 & 0.457 & 0.237 & 0.067 & 0.029 & & & zero \\
+6.9b@32000 & B & quant $\ge$4-bit & 0.033 & 0.050 & 0.029 & 0.025 & 0.033 & & & per-bit-median \\
+6.9b@32000 & B & quant int3 & 0.489 & 1.792 & 0.174 & 0.407 & 2.711 & & & per-bit-mean \\
+6.9b@32000 & B & quant int5 (rule) & 0.046 & 0.052 & 0.058 & 0.057 & 0.029 & & & zero \\
+6.9b@112000 & A & quant $\ge$4-bit & 0.271 & 0.183 & 0.155 & 0.042 & 0.061 & & & per-bit-median \\
+6.9b@112000 & A & quant int3 & 3.873 & 3.550 & 0.430 & 1.896 & 6.442 & & & per-bit-mean \\
+6.9b@112000 & A & quant int5 (rule) & 0.402 & 0.247 & 0.253 & 0.033 & 0.027 & & & zero \\
+6.9b@112000 & B & quant $\ge$4-bit & 0.048 & 0.060 & 0.042 & 0.045 & 0.061 & & & per-bit-mean \\
+6.9b@112000 & B & quant int3 & 1.294 & 4.033 & 3.770 & 4.137 & 6.442 & & & full \\
+6.9b@112000 & B & quant int5 (rule) & 0.043 & 0.025 & 0.025 & 0.023 & 0.027 & & & per-bit-median \\
 \bottomrule\end{tabular}
 \caption{P1-v2 new-source frozen prospectives (MAE over three capabilities, nats/token). Protocol A fits on the full nine-state development panel; protocol B on step$\le$64k only, so its 112k rows are training-stage extrapolations. 1B sources are in-range sizes and 6.9B is a $\sim$5$\times$ size extrapolation. Predictions were committed before measurement; per-capability and per-point values are in the results ledger.}
 \label{tab:p1v2}\end{table}

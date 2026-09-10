@@ -1,30 +1,27 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We systematically investigated whether the model state observable
-before compression, together with the intervention configuration, can
-predict the capability-conditioned loss after pruning, quantization,
-and distillation, testing source-state transfer and unseen-configuration
-prediction separately with the per-capability conditional loss vector as
-the common prediction endpoint. On a controlled panel, a
-source-conditioned pruning predictor predicts unseen compression
-densities with far lower error than strength-only baselines, and the
-advantage carries to a new source of in-range size; at a source five
-times larger it loses to a source-free median curve. A same-input
-comparison shows no additional advantage for a shared power form. The predictive gain of the quantization candidate depends on the
-precision regime, and damage-magnitude transfer under aggressive
-quantization remains unstable. For distillation, the reuse-count coordinate improves QA-loss
-prediction on an unseen data pool; for math and code it does no better
-than a constant baseline, and it carries a budget-dependent bias. Across the heterogeneous panel, capability responses are
-anisotropic with an invariant ordering and family-specific magnitudes
-and signs, the capability geometry of the source model supports the
-measurement layer as mechanism evidence, and laws that use only resource
-ratios did not extrapolate across the methods tested. That rules out
-those models and leaves open whether another single form could unify
-the arms. These results delimit the information the current predictors
-need, the range over which they transfer, and their limits, providing
-tested candidate relations and an evaluation basis for developing
-capability-conditioned scaling-down laws. How such predictors would
-enter a capability- and cost-aware method-selection map is left to
-future use (\S\ref{sec:map}); the controlled panels are small and their
-intervals panel-conditional, and we state these limits explicitly.
+We asked whether the model state observable before compression,
+together with the intervention setting, predicts the
+capability-conditioned loss after pruning, quantization, and
+distillation, and over which ranges such predictions transfer. The
+answer has three parts. Responses are heterogeneous across
+capabilities and model series in sign and magnitude, so a
+capability-conditioned endpoint is necessary and no single ordering
+holds. Source-state information helps: the dense capability vector
+carries the prediction, source-conditioned pruning predictors beat
+source-free curves at seen densities and at interpolated densities on
+the development sources, mostly for math and code, and match them at a
+new in-range size; the power structure adds nothing over a per-density
+regression, and training tokens add little beyond the dense anchor. The
+transfer range is bounded: the same predictors fail at density $0.55$
+and at a source five times larger, quantization predictors add value
+only in the collapse regime and under some fitting protocols, and for
+distillation a reuse-count coordinate helps QA on an unseen pool while
+a constant is best for math and code. Method-agnostic resource-ratio
+laws fail a matched-storage test. These results identify conditional
+predictive relationships and their tested limits and provide the
+measurements, registers, and comparison protocol on which
+capability-conditioned scaling-down laws can be developed; widening
+the size range of the development panel and finding inputs that carry
+the QA response are the next steps, and both need new experiments.

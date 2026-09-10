@@ -1,0 +1,36 @@
+\begin{table}[p]\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{3.1cm}rrr@{}}
+\toprule
+Test; \emph{unseen axis}; [origin] & Line & math & code & QA \\
+\midrule
+\textbf{pruning}: unseen $d$ 0.65 and 0.55, dev sources + 410M@96k\newline{\itshape densities 0.65 (interp.) and 0.55 (extrap.) pooled} [P·R·F·A] & cand.: shared power form & 0.371 (-0.09) & 0.524 (-0.24) & \textbf{0.759} (+0.06) \\
+ & same-input: A2 (per-$d$ regr.) & \textbf{0.283} & \textbf{0.279} & 0.818 \\
+ & simple: strength-only & 1.369 & 1.635 & 1.608 \\
+\addlinespace[2pt]
+\textbf{pruning}: new source 1B@96k, $d=0.65$ (interp.)\newline{\itshape in-range size; stage 96k} [P·F·F·A] & cand.: shared power form & 0.020 (-0.01) & 0.092 (-0.06) & 0.466 (-0.09) \\
+ & same-input: A1 ($\gamma{=}1$); A2 (per-$d$ regr.) & \textbf{0.009} & \textbf{0.031} & \textbf{0.380} \\
+ & simple: median curve & 0.147 & 0.076 & 0.569 \\
+\addlinespace[2pt]
+\textbf{pruning}: new source 1B@96k, $d=0.55$ (extrap.)\newline{\itshape in-range size; stage 96k} [P·F·F·A] & cand.: shared power form & 0.930 (-0.66) & 1.550 (-1.53) & 1.426 (-0.90) \\
+ & same-input: A2 (per-$d$ regr.) & 1.051 & 1.358 & 1.009 \\
+ & simple: strength-only & \textbf{0.273} & \textbf{0.018} & \textbf{0.530} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source 1B@32k+112k, $d$ 0.9--0.6 (interp.)\newline{\itshape in-range size; stages 32k, 112k} [P·F·F·A] & cand.: shared power form & 0.215 (-0.05) & 0.191 (-0.07) & 0.261 (-0.03) \\
+ & same-input: A2 (per-$d$ regr.) & 0.205 & \textbf{0.119} & 0.237 \\
+ & simple: median curve; strength-only & \textbf{0.169} & 0.128 & \textbf{0.227} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source 1B@32k+112k, $d=0.55$ (extrap.)\newline{\itshape in-range size; stages 32k, 112k} [P·F·F·A] & cand.: shared power form & 1.790 (-0.85) & 1.488 (-1.40) & 2.225 (-1.83) \\
+ & same-input: A1 ($\gamma{=}1$); A2 (per-$d$ regr.) & 1.896 & 1.386 & 1.744 \\
+ & simple: strength-only & \textbf{0.939} & \textbf{0.089} & \textbf{0.393} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source 6.9B@32k+112k, $d$ 0.9--0.6 (interp.)\newline{\itshape size $5\times$ beyond dev range; stages 32k, 112k} [P·F·F·A] & cand.: shared power form & 0.299 (-0.18) & 0.160 (-0.02) & 0.909 (-0.79) \\
+ & same-input: A2 (per-$d$ regr.) & 0.292 & \textbf{0.144} & 0.982 \\
+ & simple: median curve & \textbf{0.120} & \textbf{0.144} & \textbf{0.120} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source 6.9B@32k+112k, $d=0.55$ (extrap.)\newline{\itshape size $5\times$ beyond dev range; stages 32k, 112k} [P·F·F·A] & cand.: shared power form & \textbf{0.615} (+0.00) & 0.547 (-0.01) & 4.472 (-3.57) \\
+ & same-input: A1 ($\gamma{=}1$); A2 (per-$d$ regr.) & 0.618 & \textbf{0.535} & 2.850 \\
+ & simple: median curve; strength-only & 0.703 & 0.712 & \textbf{0.904} \\
+\addlinespace[2pt]
+\bottomrule\end{tabular}
+\caption{Configuration axis, pruning: does a relation fit at seen densities and sources predict unseen densities, sizes and stages? Protocol A (full development panel) for the two P1-v2 pairs and the single-stage 1B@96k prospective; protocol B in Table~\ref{tab:p1v2}. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}.}
+\label{tab:pred_config_prune}\end{table}

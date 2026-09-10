@@ -1,0 +1,37 @@
+\begin{table}[p]\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{3.1cm}rrr@{}}
+\toprule
+Test; \emph{unseen axis}; [origin] & Line & math & code & QA \\
+\midrule
+\textbf{quantization}: new source 1B@96k, int4\newline{\itshape in-range size; stage 96k; seen bit} [P·F·F·A] & cand.: config-indicator OLS & 0.116 (-0.05) & 0.046 (-0.03) & 0.059 (-0.00) \\
+ & same-input: no-$D_0$ & 0.184 & 0.394 & \textbf{0.054} \\
+ & simple: per-bit median & \textbf{0.068} & \textbf{0.012} & 0.253 \\
+\addlinespace[2pt]
+\textbf{quantization}: new source 1B@96k, int3\newline{\itshape in-range size; stage 96k; seen bit} [P·F·F·A] & cand.: config-indicator OLS & \textbf{0.690} (+0.72) & 0.318 (-0.32) & \textbf{0.182} (+0.26) \\
+ & same-input: no-$D_0$ & 2.324 & 3.423 & 1.635 \\
+ & simple: per-bit median & 1.414 & \textbf{0.001} & 0.446 \\
+\addlinespace[2pt]
+\textbf{quantization}: new source 1B@32k+112k, $b\ge4$ (incl.\ 5-bit rule)\newline{\itshape in-range size; stages 32k, 112k} [P·F·F·A] & cand.: config-indicator OLS & 0.064 (-0.04) & 0.041 (-0.01) & 0.157 (-0.10) \\
+ & same-input: no-$D_0$ & 0.118 & 0.156 & 0.153 \\
+ & simple: per-bit median & \textbf{0.020} & \textbf{0.028} & \textbf{0.052} \\
+\addlinespace[2pt]
+\textbf{quantization}: new source 1B@32k+112k, int3\newline{\itshape in-range size; stages 32k, 112k} [P·F·F·A] & cand.: config-indicator OLS & \textbf{0.256} (+1.21) & \textbf{0.362} (+1.18) & 1.972 (-0.97) \\
+ & same-input: no-$D_0$ & 3.218 & 3.565 & 2.897 \\
+ & simple: per-bit mean; per-bit median & 1.466 & 1.537 & \textbf{1.000} \\
+\addlinespace[2pt]
+\textbf{quantization}: new source 6.9B@32k+112k, $b\ge4$ (incl.\ 5-bit rule)\newline{\itshape size $5\times$ beyond dev range; stages 32k, 112k} [P·F·F·A] & cand.: config-indicator OLS & 0.181 (-0.14) & 0.177 (-0.13) & 0.428 (-0.39) \\
+ & same-input: no-$D_0$ & 0.169 & 0.154 & 0.426 \\
+ & simple: per-bit median; zero change & \textbf{0.036} & \textbf{0.043} & \textbf{0.034} \\
+\addlinespace[2pt]
+\textbf{quantization}: new source 6.9B@32k+112k, int3\newline{\itshape size $5\times$ beyond dev range; stages 32k, 112k} [P·F·F·A] & cand.: config-indicator OLS & 3.233 (-1.19) & 3.229 (-1.42) & 5.306 (-3.56) \\
+ & same-input: no-$D_0$ & 4.199 & 3.176 & 5.605 \\
+ & simple: per-bit mean & \textbf{2.046} & \textbf{1.805} & \textbf{1.744} \\
+\addlinespace[2pt]
+\midrule
+\textbf{distillation}: unseen pool U225 from endpoint pools U75/U600 (Gemma-3-1B)\newline{\itshape pool (reuse count in-range; sampling protocol differs)} [P·F·F·A] & cand.: $E$-only (reuse count) & 0.191 (-0.07) & 0.117 (-0.05) & \textbf{0.706} (+0.00) \\
+ & same-input: $T{+}E$ joint & 0.215 & 0.145 & 0.710 \\
+ & simple: constant & \textbf{0.122} & \textbf{0.069} & 1.449 \\
+\addlinespace[2pt]
+\bottomrule\end{tabular}
+\caption{Configuration axis, quantization and distillation: unseen sizes and stages at seen bit-widths (protocol A; the 5-bit prediction is a fixed interpolation rule), and an unseen distillation pool. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}.}
+\label{tab:pred_config_qd}\end{table}
