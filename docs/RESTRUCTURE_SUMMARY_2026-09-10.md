@@ -21,6 +21,12 @@ test them on unseen configurations and unseen model states, delivering each rela
   forms on the pool axis that carry QA on an unseen pool with a budget-dependent bias; descriptor forms F1/F2 shown as
   development-only candidates (retrospective on tests); the multi-student frozen test pending.
 
+## Update 2026-09-10 14:00 EDT: three-layer main line
+Section 4.3 now carries the shared-structure / parameter-range / one-point-calibration results (v59); a new Section 5
+'From Laws to Capability-Specific Selection' (v60: leave-one-state-out selection maps with regret vs oracle, method
+agreement, fixed-method and cheapest-feasible baselines, no-clear-winner cells) precedes Related Work (now 6) and
+Discussion (7); contribution (3), the abstract, and the discussion were adjusted. Main text is ~13 pages with four figures.
+
 ## Main text vs appendix
 Main (about 11.5 pages including Figs 1-3 and Tables 1-3; references begin on page 12; 36 pages total): problem and inputs (Eq. 2), loss definition with three boundaries, panel roles, fitting/evaluation
 rules, the three arms' forms and development comparisons (Sec. 3), generalization by unseen settings / unseen states /

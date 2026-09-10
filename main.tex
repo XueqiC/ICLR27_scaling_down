@@ -123,8 +123,11 @@ low-order form predicts unseen bit-widths and group sizes on the
 development states; for distillation the student state carries the
 math response and a reuse-count term carries QA on an unseen pool.
 Transfer to a source five times larger fails for QA and is on par with
-source-free references for math. We release the relations with their
-coefficients, tested ranges, registered predictions, and measurements.
+source-free references for math. Used as loss constraints, the laws
+select a compression method and setting for a held-out model and
+storage budget within 0.2 nats of the measured optimum for math and
+code. We release the relations with their coefficients, tested ranges,
+registered predictions, and measurements.
 \end{abstract}
 
 
@@ -132,6 +135,7 @@ coefficients, tested ranges, registered predictions, and measurements.
 \input{setup}
 \input{laws}
 \input{general}
+\input{selection}
 \input{related}
 \input{discussion}
 

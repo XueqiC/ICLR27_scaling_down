@@ -13,7 +13,10 @@ on, for the states it was fit on. Given a student's state, a linear
 form predicts its math transfer; given a fixed student, a reuse-count
 term predicts the QA transfer on a new pool with a bias that changes
 sign across budgets. Each of these comes with coefficients
-(Appendix~\ref{sec:app_coef}) and a tested range.
+(Appendix~\ref{sec:app_coef}) and a tested range, and together they
+select methods and settings for held-out states within 0.2 nats of the
+measured optimum for math and code under a storage budget
+(\S\ref{sec:selection}).
 
 What cannot be predicted is equally specific. No source-conditioned
 form predicts the QA response to pruning on a new checkpoint; a
@@ -37,7 +40,6 @@ development panel is the direct route to wider laws. The limitations
 are those of small controlled panels with correlated observations
 (three sizes, three stages, three pools), of one quantizer family and
 one teacher, of a loss endpoint whose code specificity was not
-detected on a secondary benchmark, and of the absence of any agent- or
-deployment-level validation: how these predictors would enter a
-method-selection procedure is a use we discuss in
-Appendix~\ref{sec:app_cross}, not a result.
+detected on a secondary benchmark, and of a selection validation that uses nominal storage as the only
+cost, without latency, recovery-training cost, or any agent-level
+measurement.
