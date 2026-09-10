@@ -410,3 +410,43 @@ Reading:
 - Stop rule: not triggered (intermediate responses 0.05-3 nats exist across the grid).
 Labels: low-order 2D = P-new on the bit test and the granularity test (seen states, unseen configs); mixed on the joint
 new-state test (P-new on code, R on math and QA); separable and interpolation = R everywhere.
+
+### C37. V3-D (CPU): student-descriptor forms and capability-conditioning test on the complete P2-v2 development matrix
+
+Data: 12 dev runs (Gemma-3-270M/1B x U75/U450 x data-seeds 11-13; absolute-exposure protocol, 4 checkpoints each, 48 points); response delta_c = L_c(S_KD) - L_c(S_0); E = completion tokens / registered D_U. Analysis analysis/v56_distill_forms.py (results/v56-distill-forms/summary.{json,md}), run 2026-09-10 04:36 EDT after the v50 freeze (33c706c, 04:35). Forms F1 = (a_c + lambda_c z_c) log(1+E) and F2 = (a_c + lambda_c z_c)(1-e^{-T/T*}) + (b_c + mu_c z_c) log(1+E) with z_c = L0c (log N_S alternative identical up to sign with two dev students) were specified by the round-3 advice AFTER the v50 freeze design; their predictions for the test runs were NOT committed before measurement, so any evaluation on the test runs is retrospective (label R) and is reported separately from the frozen v50 forms.
+
+Leave-one-run-out (12 clusters) MAE / signed bias (nats), math | code | qa:
+
+| Form | P | LOCO math | LOCO code | LOCO qa | LOSO math | LOSO code | LOSO qa |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| zero | 0 | 0.152/-0.152 | 0.178/-0.178 | 1.429/+0.143 | 0.152/-0.152 | 0.178/-0.178 | 1.429/+0.143 |
+| constant | 3 | 0.095/+0.000 | 0.103/+0.000 | 1.400/+0.000 | 0.093/+0.000 | 0.100/+0.000 | 1.358/-0.000 |
+| T-only | 6 | 0.082/+0.000 | 0.072/+0.000 | 1.092/-0.000 | 0.089/+0.000 | 0.070/+0.000 | 1.075/-0.000 |
+| E-only | 6 | 0.073/-0.003 | 0.055/-0.002 | 0.798/-0.029 | 0.091/+0.000 | 0.056/+0.000 | 0.949/+0.000 |
+| surface:L0 | 12 | 0.072/+0.000 | 0.054/-0.000 | 0.812/+0.001 | 0.091/+0.000 | 0.054/+0.000 | 0.944/-0.000 |
+| surface:logN | 12 | 0.072/+0.000 | 0.054/-0.000 | 0.812/+0.001 | 0.091/+0.000 | 0.054/+0.000 | 0.944/+0.000 |
+| F1:L0 | 6 | 0.057/+0.003 | 0.052/+0.003 | 1.518/+0.662 | 0.152/-0.152 | 0.178/-0.178 | 1.429/+0.143 |
+| F1:logN | 6 | 0.057/+0.003 | 0.052/+0.003 | 1.518/+0.662 | 0.152/-0.152 | 0.178/-0.178 | 1.429/+0.143 |
+| F2:L0 | 12 | 0.062/-0.007 | 0.057/-0.005 | 0.706/-0.069 | 0.152/-0.152 | 0.178/-0.178 | 1.429/+0.143 |
+| F2:logN | 12 | 0.062/-0.007 | 0.057/-0.005 | 0.706/-0.069 | 0.152/-0.152 | 0.178/-0.178 | 1.429/+0.143 |
+
+Leave-one-student-out (2 folds): descriptor forms degenerate (z constant within a fold) and fall back to zero; only student-free forms are informative there.
+
+Part B, capability conditioning at matched parameter count (shared response shape + per-capability offsets vs per-capability models), LOCO MAE:
+
+| Structure | P shared/per | Capability | Shared MAE | Per-cap MAE | Gain | >0.02 |
+|---|---:|---|---:|---:|---:|:---:|
+| E-only | 4/4 | math | 0.431 | 0.409 | 0.022 | yes |
+| E-only | 4/4 | code | 0.417 | 0.412 | 0.006 | no |
+| E-only | 4/4 | qa | 0.967 | 1.150 | -0.183 | no |
+| E-only | 4/4 | macro | 0.605 | 0.657 | -0.052 | no |
+| T+E | 5/5 | math | 0.439 | 0.327 | 0.111 | yes |
+| T+E | 5/5 | code | 0.419 | 0.314 | 0.105 | yes |
+| T+E | 5/5 | qa | 0.979 | 0.853 | 0.126 | yes |
+| T+E | 5/5 | macro | 0.612 | 0.498 | 0.114 | yes |
+| F2 | 7/7 | math | 0.536 | 0.145 | 0.390 | yes |
+| F2 | 7/7 | code | 0.527 | 0.107 | 0.420 | yes |
+| F2 | 7/7 | qa | 1.044 | 0.826 | 0.219 | yes |
+| F2 | 7/7 | macro | 0.702 | 0.359 | 0.343 | yes |
+
+Reading: on the development matrix, F1 has the lowest math and code error (0.057, 0.052 vs 0.073/0.055 for E-only and 0.095/0.103 for a constant) and F2 the lowest QA error (0.706 vs 0.798 E-only, 1.40 constant), so a training-amount term plus a reuse term with a student descriptor describes QA better than reuse alone; per-capability shapes beat a shared shape for the T+E and F2 structures on every capability (gains 0.1-0.4 nats) and only marginally for E-only, so capability conditioning is required for the response shape, not only for the amplitude. These are cross-validated development results with two students; the frozen test (v50 forms) and the retrospective evaluation of F1/F2 on the nine test runs and the 4B dev-pool runs follow.
