@@ -67,10 +67,12 @@ exceeds variation across training seeds (0.43 against 0.04 nats).
 Under the absolute-exposure protocol, eight forms for three students
 were frozen before nine runs on three unseen U375 pools. The form with
 the lowest development error at freeze time, the joint form with a
-source term, beats zero change by two to four times on both
-development students at the new pool (math 0.045 and 0.050 against
-0.092 and 0.095; code 0.036 and 0.029 against 0.138 and 0.109; QA 0.61
-and 0.44 against 1.01 and 1.15; Table~\ref{tab:p2v2_test}). The pool
+source term, beats the frozen per-capability constant and zero change
+on every capability of both development students at the new pool
+(math 0.045 and 0.050 against 0.060 and 0.057 for the constant and
+0.092 and 0.095 for zero change; code 0.036 and 0.029 against 0.047
+and 0.069 and 0.138 and 0.109; QA 0.61 and 0.44 against 0.86 and 1.00
+and 1.01 and 1.15; Table~\ref{tab:p2v2_test}). The pool
 direction is therefore covered by these forms; the student-size
 direction is treated in \S\ref{sec:unseen_states}.
 
@@ -112,14 +114,16 @@ and QA, so the size boundary is soft for math and hard for QA.
 
 \paragraph{New students.} On Gemma-3-4B as a held-out student, whose
 $\log N_S$ lies $1.9$ above the reference against a development span of
-$\pm0.55$, the same frozen form transfers for code (0.050 against 0.178
-for zero change at the unseen pool) and for math (0.089 against 0.153,
-with the error growing with budget from 0.04 to 0.18 nats), and ties
-zero change for QA (1.14 against 1.17): the source term, fitted on two
-students, extends the reuse penalty to 2.3 nats at the largest budget
-where 0.40 was measured, while the same form without that term is
-within 0.27 (Table~\ref{tab:p2v2_test}). The student-size direction is
-therefore covered for code and math and not for QA.
+$\pm0.55$, every frozen form with budget, reuse, or size structure
+loses to the frozen per-capability constant (math 0.089 against 0.020,
+code 0.050 against 0.038, QA 1.14 against 1.02 for the dev-selected
+form), and the constant itself beats zero change for math and code
+(0.153 and 0.178) while tying it for QA (1.17). What transfers to a
+larger student is the average development response, not its
+dependence on budget, reuse, or size: the source term fitted on two
+students extends the QA reuse penalty to 2.3 nats at the largest
+budget where 0.40 was measured (Table~\ref{tab:p2v2_test}). The
+student-size direction is therefore outside the range of these forms.
 
 \subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}

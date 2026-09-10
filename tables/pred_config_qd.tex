@@ -33,5 +33,24 @@ Test; \emph{unseen axis}; [origin] & Line & math & code & QA \\
  & simple: constant & \textbf{0.122} & \textbf{0.069} & 1.449 \\
 \addlinespace[2pt]
 \bottomrule\end{tabular}
-\caption{Configuration axis, quantization and distillation: unseen sizes and stages at seen bit-widths (protocol A; the 5-bit prediction is a fixed interpolation rule), and an unseen distillation pool. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}.}
+\end{table}
+\begin{table}[p]\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{3.1cm}rrr@{}}
+\toprule
+Test; \emph{unseen axis}; [origin] & Line & math & code & QA \\
+\midrule
+\textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool U375, Gemma-3-270M\newline{\itshape pool} [P/F/F/A] & cand.: joint form with source term (dev-selected, R) & \textbf{0.045} (+0.02) & \textbf{0.036} (+0.01) & \textbf{0.606} (+0.26) \\
+ & same-input: constant & 0.060 & 0.047 & 0.862 \\
+ & simple: zero change & 0.092 & 0.138 & 1.005 \\
+\addlinespace[2pt]
+\textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool U375, Gemma-3-1B\newline{\itshape pool} [P/F/F/A] & cand.: joint form with source term (dev-selected, R) & \textbf{0.050} (+0.01) & \textbf{0.029} (+0.04) & \textbf{0.444} (+0.56) \\
+ & same-input: constant & 0.057 & 0.069 & 1.004 \\
+ & simple: zero change & 0.095 & 0.109 & 1.148 \\
+\addlinespace[2pt]
+\textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool U375, held-out student Gemma-3-4B\newline{\itshape pool; held-out student} [P/F/F/A] & cand.: joint form with source term (dev-selected, R) & 0.089 (-0.07) & 0.050 (-0.01) & 1.141 (-0.12) \\
+ & same-input: constant & \textbf{0.020} & \textbf{0.038} & \textbf{1.024} \\
+ & simple: zero change & 0.153 & 0.178 & 1.167 \\
+\addlinespace[2pt]
+\bottomrule\end{tabular}
+\caption{Configuration axis, quantization and distillation (continued from the preceding table block): unseen sizes and stages at seen bit-widths (protocol A; the 5-bit prediction is a fixed interpolation rule), and unseen distillation pools. The U375 headline is the frozen form with the lowest per-capability development MAE (joint with a source term for every capability); this selection rule was stated after the tests (R). Each U375 group has 12 points per capability; Gemma-3-4B is a held-out student. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}.}
 \label{tab:pred_config_qd}\end{table}

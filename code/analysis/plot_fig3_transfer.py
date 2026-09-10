@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """CPU-only transfer matrices, including confirmation and grouped quantization."""
 import sys
+from collections import Counter, defaultdict
 
 sys.dont_write_bytecode = True
 if __package__:
@@ -108,6 +109,45 @@ def load_grouped_quantization(audit):
     return cells
 
 
+def load_multistudent_distillation(audit):
+    """Use the frozen dev choice and the summary-row means from v62_p2v2_test_table.py."""
+    freeze = audit.read("results/v50-p2v2/freeze.json")
+    payload = audit.read("results/v50-p2v2/compare_test.json")
+    selected = {c: min(freeze["fits"][c], key=lambda form: freeze["fits"][c][form]["dev_mae"])
+                for c in CAPS}
+    if any(form != "joint+src" for form in selected.values()):
+        raise ValueError("Frozen dev-selected headline form changed")
+    agg = defaultdict(lambda: defaultdict(list))
+    zero, npts = defaultdict(list), Counter()
+    for key, row in payload["summary"].items():
+        student, role, cap, budget = key.split("|")
+        for form, mae in row["mae"].items():
+            agg[student, role, cap][form].append(mae)
+        zero[student, role, cap].append(row["mae_zero"])
+        npts[student, role, cap] += row["n_pools"]
+    groups = {}
+    for student, label in (("gemma3-270m", "270M, pool 375"), ("gemma3-1b", "1B, pool 375"),
+                           ("gemma3-4b", "4B*, pool 375")):
+        groups[label] = {}
+        for cap in CAPS:
+            key = student, "test_pool", cap
+            values = agg[key][selected[cap]]
+            candidate = sum(values) / len(values)
+            baseline = sum(zero[key]) / len(zero[key])
+            checked_close(npts[key], 12, f"v50 test point count/{student}/{cap}")
+            groups[label][cap] = {"candidate": candidate, "baseline_mae": baseline,
+                                  "gain": baseline - candidate}
+            audit.rule(f"U375 {student}/{cap}: joint+src MAE={candidate:.9f}, zero MAE={baseline:.9f}, "
+                       f"gain={baseline - candidate:+.9f}; {npts[key]} points.")
+    audit.rule("Multi-student distillation uses only role test_pool: mean over all summary rows for each "
+               "(student, role, capability), summing n_pools for point counts, as in v62_p2v2_test_table.py. "
+               "Candidate minimizes fits[cap][form].dev_mae in freeze.json 33c706c: joint+src for every "
+               "capability. Predictions and baselines were frozen before tests (P/F/F/A); the headline "
+               "selection rule was stated after tests (R). Test results: compare_test.json c06c856. "
+               "Baseline is zero; * marks the held-out Gemma-3-4B student.")
+    return groups
+
+
 def regime_rows(prune, quant):
     return ([r for r in prune if .6 <= r["d"] <= .9],
             [r for r in prune if np.isclose(r["d"], .55)],
@@ -141,6 +181,7 @@ def main():
     v41 = audit.read("results/v41-distill-newpool/summary.json")
     confirmation = load_confirmation(audit)
     grouped_quant = load_grouped_quantization(audit)
+    multistudent = load_multistudent_distillation(audit)
     cells = {p: [[None] * 4 for _ in SOURCES] for p in ("A", "B")}
     for protocol in ("A", "B"):
         for i, (size, step) in enumerate(SOURCES):
@@ -267,15 +308,41 @@ def main():
         distill.annotate(f"{gain:+.3f}  (E MAE {mae['E']:.3f}; constant {mae['constant']:.3f})",
                         (gain, i), xytext=(7, 0), textcoords="offset points", va="center", fontsize=8)
         audit.rule(f"U225 {cap}: E MAE={mae['E']:.9f}, constant MAE={mae['constant']:.9f}, gain={gain:+.9f}.")
-    distill.set_ylim(2.6, -.6)
-    distill.set_yticks(range(3), [CAP_LABEL[c] for c in CAPS])
+    distill.text(-.2, -.8, "1B, pool 225 · E-only vs constant (6 runs)", fontsize=8, va="center")
+    ticks = list(range(3))
+    for group_index, (label, cap_metrics) in enumerate(multistudent.items(), start=1):
+        offset = 4 * group_index
+        distill.text(-.2, offset - .8, f"{label} · joint+src (dev-selected, R) vs zero",
+                     fontsize=8, va="center")
+        for i, cap in enumerate(CAPS):
+            cell = cap_metrics[cap]
+            y = offset + i
+            ticks.append(y)
+            distill.plot(cell["gain"], y, marker="o", mfc="white", mec=COLORS["E"], ms=6, linestyle="none")
+            distill.annotate(f"{cell['gain']:+.3f}  (joint+src MAE {cell['candidate']:.3f}; zero {cell['baseline_mae']:.3f})",
+                            (cell["gain"], y), xytext=(7, 0), textcoords="offset points", va="center", fontsize=8)
+    distill.set_ylim(14.6, -1.3)
+    distill.set_yticks(ticks, [CAP_LABEL[c] for _ in range(1 + len(multistudent)) for c in CAPS])
     distill.set_xlim(-.2, 1.35)
-    distill.set_title("Distillation · unseen U225 pool (6 runs, Gemma-3-1B)", fontsize=10, loc="left")
-    distill.set_xlabel("MAE(constant) − MAE(E-only), nats/token; positive = E-only better")
+    distill.set_title("Distillation · unseen pools (* = held-out student; R = selection rule stated after tests)",
+                      fontsize=10, loc="left")
+    distill.set_xlabel("MAE(baseline) − MAE(candidate), nats/token; positive = candidate better")
     distill.grid(axis="x", color="#eeeeee", lw=.5)
     fig.text(.5, .018, "*1B@96k: only d=.65/.55 and int4/int3; original v46 freeze. Cell lines: gain / candidate MAE / selected simple baseline.\n"
              "Pythia cells average math, code and QA. All values are nats per native token; the distillation panel is separate.",
              ha="center", fontsize=8, linespacing=1.5)
+    # Extend only the distillation panel downward; preserve the other panels in physical coordinates.
+    old_height, extra_height = fig.get_figheight(), 2.4
+    positions = {ax: ax.get_position().frozen() for ax in fig.axes}
+    new_height = old_height + extra_height
+    fig.set_size_inches(fig.get_figwidth(), new_height)
+    for ax, pos in positions.items():
+        bottom = pos.y0 * old_height + (0 if ax is distill else extra_height)
+        height = pos.height * old_height + (extra_height if ax is distill else 0)
+        ax.set_position([pos.x0, bottom / new_height, pos.width, height / new_height])
+    for label in fig.texts:
+        x, y = label.get_position()
+        label.set_position((x, (y * old_height + (extra_height if y > .5 else 0)) / new_height))
     audit.save(fig, "transfer_limits")
     audit.finish()
 

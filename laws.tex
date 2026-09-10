@@ -176,8 +176,9 @@ claimed.
 $k\log(N_S/N_{\mathrm{ref}})$ had the lowest development error of the
 eight frozen forms for every capability; on the nine frozen test
 trajectories it predicts the unseen pool on both development students
-and the held-out 4B student for code and math, and fails for QA on that
-student, where the source term extrapolates beyond the two-student
-range (Table~\ref{tab:p2v2_test}, \S\ref{sec:unseen_states}). The
-delivered distillation law is thus the joint form in $T$ and $E$ with
-the source term restricted to the development size range.
+better than the frozen constant and than zero change, while on the
+held-out 4B student every structured form loses to the frozen constant
+(Table~\ref{tab:p2v2_test}, \S\ref{sec:unseen_states}). The delivered
+distillation law is thus the joint form in $T$ and $E$ with its source
+term, valid inside the development size range; beyond it only the
+per-capability constant transfers.

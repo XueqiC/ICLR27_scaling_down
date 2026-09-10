@@ -1,26 +1,26 @@
 \begin{table}[H]
 \centering\small
-\caption{Multi-student distillation test on the uniform absolute-exposure protocol. Eight forms per capability were frozen from the twelve development runs (Gemma-3-270M and 1B, $U\in\{75,450\}$, three data seeds) before any test run; the headline column is the frozen form with the lowest development error at freeze time (joint with a source term $k\log(N_S/N_{\mathrm{ref}})$ for every capability; this selection rule was stated after the tests). MAE in nats over all test points of the row (three data seeds times four budgets per trajectory), the zero-change baseline, and the best of the eight frozen forms chosen after the fact (R). Gemma-3-4B is a held-out student whose $\log N_S$ lies $1.9$ above the reference against a development span of $\pm0.55$.}
+\caption{Multi-student distillation test on the uniform absolute-exposure protocol. Eight forms per capability were frozen from the twelve development runs (Gemma-3-270M and 1B, $U\in\{75,450\}$, three data seeds) before any test run; the headline column is the frozen form with the lowest development error at freeze time (joint with a source term $k\log(N_S/N_{\mathrm{ref}})$ for every capability; this selection rule was stated after the tests). MAE in nats over all test points of the row (three data seeds times four budgets per trajectory), the frozen per-capability constant (the same-input baseline of this arm), the zero-change baseline, and the best of the eight frozen forms chosen after the fact (R). Gemma-3-4B is a held-out student whose $\log N_S$ lies $1.9$ above the reference against a development span of $\pm0.55$.}
 \label{tab:p2v2_test}
-\begin{tabular}{llcccr}
+\begin{tabular}{llccccr}
 \toprule
-Student, pools & Cap. & Dev-selected & Zero & Best frozen (R) & $n$ \\
+Student, pools & Cap. & Dev-selected & Constant & Zero & Best frozen (R) & $n$ \\
 \midrule
-Gemma-3-270M, unseen pool ($U{=}375$) & Math & 0.045 & 0.092 & constant$+$src (0.031) & 12 \\
- & Code & 0.036 & 0.138 & E (0.031) & 12 \\
- & QA & 0.606 & 1.005 & joint (0.544) & 12 \\
+Gemma-3-270M, unseen pool ($U{=}375$) & Math & 0.045 & 0.060 & 0.092 & constant$+$src (0.031) & 12 \\
+ & Code & 0.036 & 0.047 & 0.138 & E (0.031) & 12 \\
+ & QA & 0.606 & 0.862 & 1.005 & joint (0.544) & 12 \\
 \addlinespace
-Gemma-3-1B, unseen pool ($U{=}375$) & Math & 0.050 & 0.095 & E (0.026) & 12 \\
- & Code & 0.029 & 0.109 & E (0.018) & 12 \\
- & QA & 0.444 & 1.148 & joint (0.301) & 12 \\
+Gemma-3-1B, unseen pool ($U{=}375$) & Math & 0.050 & 0.057 & 0.095 & E (0.026) & 12 \\
+ & Code & 0.029 & 0.069 & 0.109 & E (0.018) & 12 \\
+ & QA & 0.444 & 1.004 & 1.148 & joint (0.301) & 12 \\
 \addlinespace
-Gemma-3-4B, unseen pool ($U{=}375$) & Math & 0.089 & 0.153 & constant (0.020) & 12 \\
- & Code & 0.050 & 0.178 & T (0.033) & 12 \\
- & QA & 1.141 & 1.167 & joint (0.272) & 12 \\
+Gemma-3-4B, unseen pool ($U{=}375$) & Math & 0.089 & 0.020 & 0.153 & constant (0.020) & 12 \\
+ & Code & 0.050 & 0.038 & 0.178 & T (0.033) & 12 \\
+ & QA & 1.141 & 1.024 & 1.167 & joint (0.272) & 12 \\
 \addlinespace
-Gemma-3-4B, dev pools ($U{=}75,450$), held-out student & Math & 0.101 & 0.364 & joint$+$src (0.101) & 12 \\
- & Code & 0.051 & 0.271 & joint$+$src (0.051) & 12 \\
- & QA & 0.862 & 2.279 & joint$+$src (0.862) & 12 
+Gemma-3-4B, dev pools ($U{=}75,450$), held-out student & Math & 0.101 & 0.225 & 0.364 & joint$+$src (0.101) & 12 \\
+ & Code & 0.051 & 0.133 & 0.271 & joint$+$src (0.051) & 12 \\
+ & QA & 0.862 & 2.255 & 2.279 & joint$+$src (0.862) & 12 \\
 \bottomrule
 \end{tabular}
 \end{table}

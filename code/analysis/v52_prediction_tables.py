@@ -5,7 +5,7 @@ Origin code = prediction origin (P frozen prospective, L leave-one-out on an exi
 simple baseline origin (F frozen or pre-specified together with the candidate, R computed after the test, - none) ·
 selection (A all pre-specified forms reported, S per-capability choice made after the test, D chosen on the development set).
 Improvement = MAE(strongest baseline) - MAE(candidate), positive = candidate better. Outputs JSON/CSV + two LaTeX tables."""
-import json, csv, glob
+import json, csv, glob, collections
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]; R = ROOT / "results"; OUT = R / "v52-prediction-tables"; OUT.mkdir(exist_ok=True)
 TAB = ROOT / "paper/tables"; CAPS = ("math", "code", "qa"); J = lambda p: json.loads((R / p).read_text())
@@ -89,6 +89,30 @@ add("config", "distillation", "unseen pool U225 from endpoint pools U75/U600 (Ge
     "$E$-only (reuse count)", {c: m[c]["E"] for c in CAPS}, best(m, ("T", "2D")), {c: ("constant", m[c]["constant"]) for c in CAPS}, "P·F·F·A",
     "v41-distill-newpool/summary.json", "0bbbaa8 (analysis repo)", "6 runs (3 pools $\\times$ 2 seeds)",
     note="per-capability recommendation (E for QA, constant for math/code) is a post-test selection")
+# Match v62_p2v2_test_table.py: average summary rows within (student, role, cap).
+v50_freeze = J("v50-p2v2/freeze.json"); v50_test = J("v50-p2v2/compare_test.json")
+selected = {c: min(v50_freeze["fits"][c], key=lambda form: v50_freeze["fits"][c][form]["dev_mae"]) for c in CAPS}
+assert all(form == "joint+src" for form in selected.values()), "Frozen dev-selected headline form changed"
+agg = collections.defaultdict(lambda: collections.defaultdict(list)); zero = collections.defaultdict(list); npts = collections.Counter()
+for key, row in v50_test["summary"].items():
+    student, role, cap, budget = key.split("|")
+    for form, mae in row["mae"].items(): agg[(student, role, cap)][form].append(mae)
+    zero[(student, role, cap)].append(row["mae_zero"]); npts[(student, role, cap)] += row["n_pools"]
+for student, label in (("gemma3-270m", "Gemma-3-270M"), ("gemma3-1b", "Gemma-3-1B"),
+                       ("gemma3-4b", "held-out student Gemma-3-4B")):
+    cand, same, simple = {}, {}, {}
+    for c in CAPS:
+        key = (student, "test_pool", c)
+        mae = {form: sum(values) / len(values) for form, values in agg[key].items()}
+        cand[c] = mae[selected[c]]; same[c] = ("constant", mae["constant"])
+        simple[c] = ("zero", sum(zero[key]) / len(zero[key]))
+        assert npts[key] == 12, f"Unexpected test point count: {key}"
+    add("config", "distillation (uniform absolute-exposure protocol)",
+        f"multi-student distillation, unseen pool U375, {label}",
+        "pool; held-out student" if student == "gemma3-4b" else "pool",
+        "joint form with source term (dev-selected, R)", cand, same, simple, "P/F/F/A",
+        "results/v50-p2v2/compare_test.json (c06c856)", "freeze.json 33c706c", npts[(student, "test_pool", CAPS[0])],
+        note="Headline form minimizes frozen per-capability dev_mae; selection rule stated after the tests (R). 12 points per capability.")
 # ---------- derived fields ----------
 for g in groups:
     g["improvement"] = {}; g["outcome"] = {}
@@ -97,6 +121,7 @@ for g in groups:
         g["improvement"][c] = (strongest - g["cand"][c]) if strongest is not None else None
         g["outcome"][c] = None if strongest is None else ("better" if g["cand"][c] < strongest else "not better")
 json.dump(groups, open(OUT / "groups.json", "w"), indent=1)
+(TAB / "groups.json").write_bytes((OUT / "groups.json").read_bytes())
 with open(OUT / "rows.csv", "w", newline="") as fh:
     w = csv.writer(fh); w.writerow(["axis", "method", "test", "unseen", "line", "name", "math", "code", "qa", "origin", "src", "freeze", "n"])
     for g in groups:
@@ -107,12 +132,17 @@ with open(OUT / "rows.csv", "w", newline="") as fh:
 def fmt(v): return "--" if v is None else f"{v:.3f}"
 SHORT = {"config-indicator OLS $\\{N_0,L_0,D_0\\}$": "config-indicator OLS", "linear $\\{N_0,L_0,D_0\\}$": "linear $\\{N_0,L_0,D_0\\}$",
          "shared power $A_c(\\mathbf x)((1-d)/0.3)^{\\gamma_c}$": "shared power form", "shared power (frozen v40)": "shared power form", "shared power (frozen v49)": "shared power form"}
-def table(sel, label, caption, methods_rule=True):
+def table(sel, label, caption, methods_rule=True, page_break_method=None):
     L = [r"\begin{table}[p]\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}",
          r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{3.1cm}rrr@{}}", r"\toprule",
          r"Test; \emph{unseen axis}; [origin] & Line & math & code & QA \\", r"\midrule"]
+    header = L.copy()
     cur = None
     for g in [g for g in groups if sel(g)]:
+        if cur and cur != g["method"] and g["method"] == page_break_method:
+            # Continue the same table on a second float; retain one caption and table number.
+            L += [r"\bottomrule\end{tabular}", r"\end{table}"] + header
+            cur = None
         if cur and cur != g["method"] and methods_rule: L.append(r"\midrule")
         cur = g["method"]
         mins = {c: min([g["cand"][c]] + [v[1] for v in (g["same"][c], g["simple"][c]) if v]) for c in CAPS}
@@ -135,7 +165,7 @@ LEG = (r" MAE in nats/token per capability; bold = smallest in the group; the nu
        r"Config-indicator OLS uses $\{N_0,L_0,D_0\}$ with one coefficient set per configuration. Generated by \texttt{v52\_prediction\_tables.py}.")
 (TAB / "pred_source.tex").write_text(table(lambda g: g["axis"] == "source", "tab:pred_source", r"Source axis: does the pre-compression source state predict the response at a fixed intervention setting?" + LEG))
 (TAB / "pred_config_prune.tex").write_text(table(lambda g: g["axis"] == "config" and g["method"] == "pruning", "tab:pred_config_prune", r"Configuration axis, pruning: does a relation fit at seen densities and sources predict unseen densities, sizes and stages? Protocol A (full development panel) for the two P1-v2 pairs and the single-stage 1B@96k prospective; protocol B in Table~\ref{tab:p1v2}. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}."))
-(TAB / "pred_config_qd.tex").write_text(table(lambda g: g["axis"] == "config" and g["method"] != "pruning", "tab:pred_config_qd", r"Configuration axis, quantization and distillation: unseen sizes and stages at seen bit-widths (protocol A; the 5-bit prediction is a fixed interpolation rule), and an unseen distillation pool. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}."))
+(TAB / "pred_config_qd.tex").write_text(table(lambda g: g["axis"] == "config" and g["method"] != "pruning", "tab:pred_config_qd", r"Configuration axis, quantization and distillation (continued from the preceding table block): unseen sizes and stages at seen bit-widths (protocol A; the 5-bit prediction is a fixed interpolation rule), and unseen distillation pools. The U375 headline is the frozen form with the lowest per-capability development MAE (joint with a source term for every capability); this selection rule was stated after the tests (R). Each U375 group has 12 points per capability; Gemma-3-4B is a held-out student. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}.", page_break_method="distillation (uniform absolute-exposure protocol)"))
 
 # ---------- compact main-text table: one row per test ----------
 CODE = {"config_median": "med", "config_mean": "mean", "zero": "0", "so": "so", "med": "med", "strength_only": "so", "median_curve": "med", "A1": "A1", "A1_gamma1": "A1",
@@ -161,6 +191,9 @@ SHORT = [  # (substring of g["test"], short label, unseen tag)
     ("6.9B@32k+112k, $b\\ge4$", "quant: 6.9B@32k+112k, $b\\ge4$", "size$\\uparrow$, stage, $b$"),
     ("6.9B@32k+112k, int3", "quant: 6.9B@32k+112k, int3", "size$\\uparrow$, stage"),
     ("unseen pool U225", "distill: unseen pool U225 (Gemma-3-1B)", "pool"),
+    ("unseen pool U375, Gemma-3-270M", "KD 270M, pool 375", "pool"),
+    ("unseen pool U375, Gemma-3-1B", "KD 1B, pool 375", "pool"),
+    ("unseen pool U375, held-out student Gemma-3-4B", "KD 4B, pool 375", "student, pool"),
 ]
 def compact():
     L = [r"\begin{table}[!t]\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}",
@@ -184,8 +217,9 @@ def compact():
             cells.append(f"{cs}/{bs}{{\\scriptsize\\,{CODE.get(bname, bname)}}}")
         L.append(f"{short} & {tag} & {g['origin'].replace('·','')} & " + " & ".join(cells) + r" \\")
     L += [r"\bottomrule\end{tabular}",
-          r"\caption{Prediction tests, all three arms (MAE in nats/token per capability, candidate\,/\,strongest baseline, bold = better). The candidate is the source-conditioned predictor of each arm "
-          r"(configuration-indicator regression on the source axis and for quantization; shared power form for pruning on the configuration axis; $E$-only form for the distillation pool test). "
+          r"\caption{\scriptsize Prediction tests, all three arms (MAE in nats/token per capability, candidate\,/\,strongest baseline, bold = better). The candidate is the source-conditioned predictor of each arm "
+          r"(configuration-indicator regression on the source axis and for quantization; shared power form for pruning on the configuration axis; $E$-only form for the U225 distillation pool test; joint form with a source term for the multi-student U375 tests). "
+          r"For U375, the headline is the frozen form with the lowest per-capability development MAE; this selection rule was stated after the tests (R). Each U375 group has 12 points per capability; ``student'' marks the held-out Gemma-3-4B. "
           r"The baseline shown is the stronger of the same-input and the simple baseline per capability, named by code: nD = no-$D_0$ variant, med = per-configuration median or median development curve, "
           r"0 = zero change, so = strength-only curve, A1 = $\gamma{=}1$ power form, A2 = per-density regression with fixed interpolation, ct = continuous two-term form, pbm/pba = per-bit median/mean, "
           r"c = constant, TE = joint $T{+}E$ form. ``unseen'' lists what the test holds out (size$\uparrow$ = five times beyond the development range). Origin code, four letters: prediction (P frozen prospective, L leave-one-out), same-input baseline, simple baseline (F pre-specified with the candidate, R computed after the test, -- none), selection (A: all pre-specified forms reported). "

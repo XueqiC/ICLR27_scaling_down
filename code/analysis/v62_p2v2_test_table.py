@@ -22,19 +22,19 @@ for st, role in order:
     for i, c in enumerate(CAPS):
         key = (st, role, c); row = {cand: sum(v) / len(v) for cand, v in agg[key].items()}; best = min(row, key=row.get); z = sum(zero[key]) / len(zero[key])
         lab = f"{SN[st]}, {RN[role]}" if i == 0 else ""
-        lines.append(f"{lab} & {c.upper() if c=='qa' else c.capitalize()} & {row[sel[c]]:.3f} & {z:.3f} & {best.replace('+src', '$+$src')} ({row[best]:.3f}) & {npts[key]} \\\\")
+        lines.append(f"{lab} & {c.upper() if c=='qa' else c.capitalize()} & {row[sel[c]]:.3f} & {row['constant']:.3f} & {z:.3f} & {best.replace('+src', '$+$src')} ({row[best]:.3f}) & {npts[key]} \\\\")
     lines.append("\\addlinespace")
 tex = r"""\begin{table}[H]
 \centering\small
-\caption{Multi-student distillation test on the uniform absolute-exposure protocol. Eight forms per capability were frozen from the twelve development runs (Gemma-3-270M and 1B, $U\in\{75,450\}$, three data seeds) before any test run; the headline column is the frozen form with the lowest development error at freeze time (joint with a source term $k\log(N_S/N_{\mathrm{ref}})$ for every capability; this selection rule was stated after the tests). MAE in nats over all test points of the row (three data seeds times four budgets per trajectory), the zero-change baseline, and the best of the eight frozen forms chosen after the fact (R). Gemma-3-4B is a held-out student whose $\log N_S$ lies $1.9$ above the reference against a development span of $\pm0.55$.}
+\caption{Multi-student distillation test on the uniform absolute-exposure protocol. Eight forms per capability were frozen from the twelve development runs (Gemma-3-270M and 1B, $U\in\{75,450\}$, three data seeds) before any test run; the headline column is the frozen form with the lowest development error at freeze time (joint with a source term $k\log(N_S/N_{\mathrm{ref}})$ for every capability; this selection rule was stated after the tests). MAE in nats over all test points of the row (three data seeds times four budgets per trajectory), the frozen per-capability constant (the same-input baseline of this arm), the zero-change baseline, and the best of the eight frozen forms chosen after the fact (R). Gemma-3-4B is a held-out student whose $\log N_S$ lies $1.9$ above the reference against a development span of $\pm0.55$.}
 \label{tab:p2v2_test}
-\begin{tabular}{llcccr}
+\begin{tabular}{llccccr}
 \toprule
-Student, pools & Cap. & Dev-selected & Zero & Best frozen (R) & $n$ \\
+Student, pools & Cap. & Dev-selected & Constant & Zero & Best frozen (R) & $n$ \\
 \midrule
 %s
 \bottomrule
 \end{tabular}
 \end{table}
-""" % "\n".join(lines).rstrip("\\addlinespace\n")
+""" % "\n".join(lines).removesuffix("\n\\addlinespace")
 (ROOT / "paper/tables/p2v2_test.tex").write_text(tex); print("WROTE paper/tables/p2v2_test.tex"); print(tex)
