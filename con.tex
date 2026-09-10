@@ -16,7 +16,9 @@ new in-range size; the power structure adds nothing over a per-density
 regression, and training tokens add little beyond the dense anchor. The
 transfer range is bounded: the same predictors fail at density $0.55$
 and at a source five times larger, quantization predictors add value
-only in the collapse regime and under some fitting protocols, and for
+only in the collapse regime and under some fitting protocols, unless
+the group size is added as a second axis, where a low-order relation
+predicts unseen configurations on seen states, and for
 distillation a reuse-count coordinate helps QA on an unseen pool while
 a constant is best for math and code. Method-agnostic resource-ratio
 laws fail a matched-storage test. These results identify conditional

@@ -130,6 +130,28 @@ two facts. Under protocol B (early stages only; Appendix
 Table~\ref{tab:p1v2}) the 6.9B interpolation errors shrink to the level
 of the source-free curves without beating them.
 
+\paragraph{Deliverable predictor and confirmation panel (Table~\ref{tab:round3_prune}).}
+After the frozen rounds we refit the candidates on an expanded
+development set of 17 Pythia states that includes the unblinded 1B and
+6.9B checkpoints (the earlier frozen predictions stay as recorded) and
+chose one deliverable by a pre-committed leave-one-source-out rule:
+the per-density regression A2 and the shared power form tie within
+$0.02$ nats (0.479 against 0.494), and the rule resolves the tie
+toward the continuous five-parameter form that vanishes at $d=1$. Its
+predictions for three checkpoints that had never entered any fit
+(410M@48k, 1.4B@112k, 6.9B@80k) at three densities between the
+development grid points were committed before measurement. On the
+nine cells the selected form beats the strength-only curve and zero
+change on every checkpoint, has the lowest math error of all
+predictors (A2 is near-exact on math at 1.4B@112k), ties the median
+development curve on code, and loses QA to every source-free curve by
+$0.3$ to $0.6$ nats because it over-predicts the QA improvement. The
+source-free median curve therefore has the lowest aggregate error
+(0.237 against 0.386), and the deliverable is stated per capability: a
+compact source-conditioned relation for math and code inside the
+fitted range, a source-free curve for QA. No universality is claimed
+for the fitted exponents.
+
 \paragraph{Boundaries.} Source-state information improves pruning
 prediction at seen densities and at interpolated densities for sources
 inside the development size and stage range, mostly for math and code,
@@ -173,6 +195,31 @@ shrink to at most $0.05$ nats and at int3 the regression is ahead at
 single-stage 1B@96k test had the regression ahead on the int3
 aggregate ($0.40$ against $0.62$ for the median and $2.46$ without
 $D_0$) with the same math-positive, code-negative pattern.
+
+\paragraph{Group size as a second configuration axis (Table~\ref{tab:round3_quant}).}
+Bit-width alone leaves the near-zero and collapse regimes with little
+in between, so we added the group size $g$ of a grouped symmetric
+round-to-nearest quantizer (per-group absmax scale; $g$ equal to the
+row width reproduces the per-channel quantizer exactly). On six
+development states ($b\in\{3,5\}$, $g\in\{64,256\}$) the responses
+have structure: 5-bit cells stay within $0.1$ nats, 3-bit damage grows
+steeply with training stage (late 160M collapses by $15$ to $17$ nats,
+late 1.4B loses $0.6$ to $2.2$) and roughly halves when $g$ drops from
+256 to 64. Three predictors were frozen on those 24 cells and tested
+on unseen configurations: at the unseen bit-width $b=4$ a low-order
+two-dimensional form in $(\log_2 q_{\max},\log_2 g)$ with
+source-state coefficients has MAE $0.19$, $0.21$, $0.44$ against $0.45$,
+$0.53$, $0.48$ for zero change and $0.55$, $0.73$, $0.54$ for the
+per-configuration median, and at the unseen group size $g=128$ it has
+$0.22$, $0.32$, $0.99$ against $1.24$, $1.35$, $1.24$ for zero change,
+on all three capabilities. The compact separable candidate
+$A_c(\mathbf x)\,q_{\max}^{-p_c}(g/g_{\mathrm{ref}})^{q_c}$ is worse
+than zero change on the bit test, so the response does not factor into
+a state amplitude and a shared shape, and the same-input bilinear
+interpolation fails outside the development corners. These successes
+are configuration transfer on seen source states; on the one new state
+tested (1B@96k, three cells) the two-dimensional form is best on code
+and behind the source-free curves on math and QA.
 
 \paragraph{Boundaries.} In the near-zero regime no predictor is
 distinguishable from a per-bit constant on these panels. In the
@@ -248,8 +295,10 @@ Unseen stage inside the range: supported for pruning (leave-one-out and
 frozen). Unseen density inside the fitted range: supported on the
 development sources; on par with source-free curves at a new in-range
 size. Density $0.55$: fails for every source-conditioned form. Size
-five times beyond the range: fails in both arms. Unseen bit-width: only
-the 5-bit rule, worse than a per-bit constant. Unseen pool: reuse count
+five times beyond the range: fails in both arms. Unseen bit-width: the 5-bit
+rule of the per-channel predictor is worse than a per-bit constant, but with group size as a second
+axis a low-order form predicts the unseen 4-bit and the unseen group size on seen states. Unseen
+density between grid points on three new checkpoints: supported for math and code, not for QA. Unseen pool: reuse count
 helps QA only. Each is one or two source states or one pool; none is a
 population statement.
 
