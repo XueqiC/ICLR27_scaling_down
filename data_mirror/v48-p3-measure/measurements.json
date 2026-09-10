@@ -1,0 +1,205 @@
+[
+  {
+    "state": "dense",
+    "primary": {
+      "math": 1.2205068949840885,
+      "code": 1.060091895482728,
+      "qa": 5.567791334661354
+    },
+    "secondary": {
+      "math": 6.415865384615385,
+      "code": 0.6340942600977004,
+      "qa": 2.8920563488471798
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 400.38028049468994
+  },
+  {
+    "state": "prune_d0.7",
+    "primary": {
+      "math": 2.528792241248674,
+      "code": 2.2880868024800707,
+      "qa": 6.395418326693227
+    },
+    "secondary": {
+      "math": 6.921274038461538,
+      "code": 2.041180150125104,
+      "qa": 6.190620236280488
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 507.9240815639496
+  },
+  {
+    "state": "rtn_int4",
+    "primary": {
+      "math": 2.168339899984846,
+      "code": 1.6561669619131976,
+      "qa": 6.447833665338646
+    },
+    "secondary": {
+      "math": 8.928846153846154,
+      "code": 1.3847104730132254,
+      "qa": 4.877292540015244
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 534.8891999721527
+  },
+  {
+    "state": "kd_U75_s11_update-00000025",
+    "primary": {
+      "math": 1.2927716320654645,
+      "code": 1.1246124889282552,
+      "qa": 4.238732569721115
+    },
+    "secondary": {
+      "math": 5.321274038461539,
+      "code": 0.6916236000238294,
+      "qa": 3.0000297732469514
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 523.0566143989563
+  },
+  {
+    "state": "kd_U75_s11_update-00000049",
+    "primary": {
+      "math": 1.302735262918624,
+      "code": 1.1767604074402125,
+      "qa": 4.882283366533865
+    },
+    "secondary": {
+      "math": 6.727764423076923,
+      "code": 0.703424728940784,
+      "qa": 3.1998871593940548
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 551.2662389278412
+  },
+  {
+    "state": "kd_U450_s11_update-00000026",
+    "primary": {
+      "math": 1.3177375359903016,
+      "code": 1.1211525686448185,
+      "qa": 4.105577689243028
+    },
+    "secondary": {
+      "math": 5.051862980769231,
+      "code": 0.698865498034076,
+      "qa": 3.1044088224085367
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 505.42046642303467
+  },
+  {
+    "state": "kd_U450_s11_update-00000050",
+    "primary": {
+      "math": 1.3076223670253069,
+      "code": 1.1691762621789195,
+      "qa": 4.165214143426295
+    },
+    "secondary": {
+      "math": 6.1127403846153845,
+      "code": 0.7003399410222805,
+      "qa": 3.2667355421112805
+    },
+    "primary_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "secondary_tokens": {
+      "math": 260,
+      "code": 8393,
+      "qa": 328
+    },
+    "secondary_benchmarks": {
+      "math": "svamp",
+      "code": "humaneval",
+      "qa": "triviaqa"
+    },
+    "eval_s": 443.39919257164
+  }
+]

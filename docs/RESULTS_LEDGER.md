@@ -481,3 +481,21 @@ on two students spanning log ratio +-0.55 and evaluated at +1.9; it should be re
 Origin code for the paper: P/F/F/A for the frozen forms, R for the "best form" column and the selection rule.
 Pending (not in this entry): 4B at the dev pools U75/U450 (extras stage B), two training-seed repeats (stage A),
 retrospective F1/F2 (v56) on the test trajectories.
+
+### C39. P3 measurement check (v48): primary vs secondary benchmark, Gemma-3-1B, six pre-registered states (58 GPU-min)
+
+States fixed before any P3 result: magnitude pruning d=0.7 (v6 protocol), RTN int4 (v10 protocol), and the P2-v2 data-seed-11 adapters at U75/U450 at the two milestone snapshots. Primary = main-protocol probes (measurement half); secondary = one independent benchmark per capability with 128 samples and a fixed probe seed: SVAMP (math), HumanEval (code), TriviaQA (QA; the plan named HotpotQA, the run recorded TriviaQA). Values are loss changes from dense in nats per native token, primary / secondary:
+
+| state | math P/S | code P/S | QA P/S |
+|---|---|---|---|
+| prune_d0.7 | +1.31 / +0.51 | +1.23 / +1.41 | +0.83 / +3.30 |
+| rtn_int4 | +0.95 / +2.51 | +0.60 / +0.75 | +0.88 / +1.99 |
+| kd_U75_s11_update-00000025 | +0.07 / -1.09 | +0.06 / +0.06 | -1.33 / +0.11 |
+| kd_U75_s11_update-00000049 | +0.08 / +0.31 | +0.12 / +0.07 | -0.69 / +0.31 |
+| kd_U450_s11_update-00000026 | +0.10 / -1.36 | +0.06 / +0.06 | -1.46 / +0.21 |
+| kd_U450_s11_update-00000050 | +0.09 / -0.30 | +0.11 / +0.07 | -1.40 / +0.37 |
+
+dense primary: {'math': 1.22, 'code': 1.06, 'qa': 5.57} secondary: {'math': 6.42, 'code': 0.63, 'qa': 2.89}
+tokens primary: {'math': 13198, 'code': 4516, 'qa': 251} secondary: {'math': 260, 'code': 8393, 'qa': 328} benchmarks: {'math': 'svamp', 'code': 'humaneval', 'qa': 'triviaqa'}
+
+Reading: code agrees in sign and magnitude on all six states. Pruning and int4 damage agrees in sign on all three capabilities, with magnitudes that differ (SVAMP math has 260 scored tokens, TriviaQA 328, so their deltas are noisy). The distillation QA improvement on the primary probe (-0.7 to -1.5 nats on 2Wiki-style probes) does NOT appear on TriviaQA (+0.1 to +0.4): the QA gain under distillation is specific to the probe distribution, and the paper must say so (Appendix E and the distillation limitation in the discussion). Distillation math on SVAMP is within its noise (-1.4 to +0.3 over 260 tokens).
