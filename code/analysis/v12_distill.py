@@ -790,10 +790,13 @@ def _train(
     trajectory_tokens: Sequence[int] = (),
     trajectory_callback: Callable[[Mapping], None] | None = None,
     schedule_updates: int | None = None,
+    stop_after_trajectory: bool = False,
 ) -> dict:
     milestones = validate_trajectory_tokens(trajectory_tokens)
     if milestones and trajectory_callback is None:
         raise ValueError("Trajectory milestones require an evaluation callback")
+    if stop_after_trajectory and (not milestones or schedule_updates is None):
+        raise ValueError("stop_after_trajectory requires milestones and a fixed schedule")
     if data_sampling_seed is None:
         data_sampling_seed = seed
     if epochs <= 0:
@@ -835,6 +838,7 @@ def _train(
     accounting = TokenAccounting(examples)
     next_milestone = 0
     trajectory = []
+    trajectory_stop = False
 
     for epoch in range(epochs):
         order = list(range(len(examples)))
@@ -892,9 +896,10 @@ def _train(
                 with preserve_training_state(model), torch.no_grad():
                     trajectory_callback(snapshot)
                 trajectory.append(snapshot)
-            if budget_exhausted:
+                trajectory_stop = stop_after_trajectory and next_milestone == len(milestones)
+            if budget_exhausted or trajectory_stop:
                 break
-        if schedule_updates is not None and optimizer_step >= total_updates:
+        if trajectory_stop or (schedule_updates is not None and optimizer_step >= total_updates):
             break
 
     wall_time = time.monotonic() - start_time
@@ -911,6 +916,7 @@ def _train(
         "wall_time_seconds": wall_time,
         "optimizer_steps": optimizer_step,
         "total_updates_planned": total_updates,
+        "stopped_after_trajectory": trajectory_stop,
         "warmup_steps": warmup_steps,
         "effective_batch_size_sequences": EFFECTIVE_BATCH_SIZE,
         "max_len": MAX_LEN,
@@ -971,6 +977,7 @@ def run_distillation(
     training_mode: str = "lora",
     data_seed: int | None = None,
     schedule_tokens: int | None = None,
+    stop_after_trajectory: bool = False,
 ) -> dict:
     """Run dense evaluation, SFT, post-training evaluation, and persistence."""
     if not 0 <= seed < 2**32:
@@ -991,6 +998,8 @@ def run_distillation(
         (DEFAULT_TRAJECTORY_TOKENS if trajectory_tokens is None else trajectory_tokens)
         if save_trajectory else ()
     )
+    if stop_after_trajectory and (not milestones or schedule_tokens is None):
+        raise ValueError("--stop-after-trajectory requires --save-trajectory and --schedule-tokens")
     parsed_domains = parse_domains(domains)
     model_name = require_compliant(student)
     _, requested_revision = resolve_model_and_revision(student)
@@ -1012,6 +1021,8 @@ def run_distillation(
                 "output_candidates": {mode: str(path) for mode, path in output_paths.items()},
                 "save_trajectory": save_trajectory,
                 "trajectory_tokens": list(milestones),
+                "schedule_tokens": schedule_tokens,
+                "stop_after_trajectory": stop_after_trajectory,
                 "trajectory_policy": "baseline plus first completed optimizer update crossing each milestone; group crossings share one snapshot; no schedule restart or extension",
                 "token_accounting": TOKEN_ACCOUNTING,
                 "independent_replicates": "one continuous run/seed; snapshots are dependent repeated measurements",
@@ -1096,6 +1107,7 @@ def run_distillation(
         "output_suffix": output_suffix, "run_name": run_name,
         "seed": seed, "training_seed": seed, "data_sampling_seed": data_sampling_seed,
         "data_seed": data_seed, "schedule_tokens": schedule_tokens,
+        "stop_after_trajectory": stop_after_trajectory,
         "training_mode": training_mode, "probe_seed": SEED,
         "training_manifest": training_manifest,
         "data_selection": ("first n_per_domain rows; seeded initial and epoch shuffles"
@@ -1212,6 +1224,7 @@ def run_distillation(
             schedule_updates=schedule_updates,
             trajectory_tokens=milestones,
             trajectory_callback=save_trajectory_snapshot if save_trajectory else None,
+            stop_after_trajectory=stop_after_trajectory,
         )
         if training_mode == "lora":
             adapter_dir.mkdir(parents=True, exist_ok=True)
@@ -1303,6 +1316,8 @@ def main() -> None:
                         help="save evals and adapters during one continuous training run")
     parser.add_argument("--trajectory-tokens", type=int, nargs="+", default=None,
                         help="strictly increasing processed-input-token milestones (not unique tokens)")
+    parser.add_argument("--stop-after-trajectory", action="store_true",
+                        help="stop after the last requested checkpoint, retaining the full --schedule-tokens cosine/warmup horizon")
     parser.add_argument("--dry-run", action="store_true",
                         help="print the protocol without data/model loads or writes")
     args = parser.parse_args()
@@ -1323,6 +1338,7 @@ def main() -> None:
         schedule_tokens=args.schedule_tokens,
         save_trajectory=args.save_trajectory,
         trajectory_tokens=args.trajectory_tokens,
+        stop_after_trajectory=args.stop_after_trajectory,
         dry_run=args.dry_run,
     )
 

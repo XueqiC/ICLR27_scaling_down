@@ -16,9 +16,9 @@ token-weighted conditional cross-entropy of the reference completion,
 T_c=\sum_{(x,y)\in\probeset{c}}|y|,
 \label{eq:taskloss}
 \end{equation}
-with prompt tokens masked, sequences truncated to 1024 tokens, the
-model's own tokenizer, and the same 64 measurement probes per
-capability for every state compared within a model. Responses are
+with prompt tokens masked, 1024-token truncation, the model's own
+tokenizer, and the same 64 measurement probes per capability for
+every state compared within a model. Responses are
 within-model differences on identical token sequences in native nats
 per token: for pruning and quantization the damage
 $\Delta L_c=L_c(\text{compressed})-L_c(\text{dense})$, for distillation

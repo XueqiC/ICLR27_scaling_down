@@ -66,35 +66,28 @@ and int6 stay within 0.01 nats of dense, int4 costs 0.03 to 0.35 nats,
 and int3 collapses most models (Fig.~\ref{fig:responses}, middle). At fixed bit-width we use the
 source regression of \S\ref{sec:conditioning} per bit; it predicts a
 new state at a seen bit-width, is no law over $b$, and improves on the
-per-bit median for math and code and not for QA. A grouped quantizer
-whose scale is shared by $g$ contiguous weights changes the error at
-a fixed bit-width and is known before the operation, so it adds a
-genuine configuration axis: on six development states at
-$b\in\{3,5\}$ and $g\in\{64,256\}$, 5-bit cells stay within 0.1 nats
-and 3-bit damage roughly halves when $g$ drops from 256 to 64. Three
-relations were fit on those 24 cells with the same inputs: a separable form
-$A_c(\mathbf x)\,q_{\max}^{-p_c}(g/128)^{q_c}$, the low-order
-two-dimensional form
+per-bit median for math and code and not for QA. A grouped quantizer whose scale is shared by $g$ contiguous weights
+adds a genuine configuration axis. On six development states at
+$b\in\{3,5\}$ and $g\in\{64,256\}$ we fit, with the same inputs, a separable amplitude-times-shape
+form, the low-order surface
 \begin{equation}
 \widehat{\Delta L}_c(\mathbf x,b,g)=\phi(\mathbf x)\cdot\big[1,\,u,\,v,\,uv,\,u^2\big],
 \qquad u=\log_2 q_{\max}(b)\ \text{(centred)},\ v=\log_2\frac{g}{128},
 \label{eq:quant2d}
 \end{equation}
 with one four-vector of state coefficients per term, and a same-input
-bilinear interpolation. Because $b$ takes two development values, $u^2$ is constant on the
-development cells and the design of Eq.~\eqref{eq:quant2d} has rank
-16 for its 20 coefficients: the curvature in $u$ at an unseen
-bit-width is set by the ridge penalty and is not identified by the
-data (Appendix~\ref{sec:app_forms}). With six states the leave-one-state-out errors are large for all
-three forms, so the development set selects no form. A confirmation
-round with all 54 cells as development set (three bit levels, full
-rank) and 21 frozen cells at unseen group sizes and on a new state
-(\S\ref{sec:unseen_settings}) settles the choice: for math and code
-the delivered quantization predictor is the same-input piecewise
-interpolation over the measured $(b,g)$ grid with a pre-specified
-linear boundary rule in $\log_2 g$, and for QA and for a new state the
-source-free per-configuration median; the parametric surface loses on
-every test.
+bilinear interpolation. With two development bit-widths $u^2$ is
+constant on the development cells (rank 16 of 20; the curvature is set
+by the ridge penalty, Appendix~\ref{sec:app_forms}), and with six
+states the leave-one-state-out errors select no form. The frozen
+tests of \S\ref{sec:unseen_settings} and a confirmation round with all
+54 unblinded cells as development set (three bit levels, full rank)
+and 21 frozen cells at unseen group sizes and on a new state settle
+the choice: the delivered predictor for math and code is the
+same-input piecewise interpolation over the measured $(b,g)$ grid with
+a pre-specified linear boundary rule in $\log_2 g$, for QA and for a
+new state the source-free per-configuration median, and the
+parametric surface loses on every confirmation test.
 
 \subsection{Distillation}
 \label{sec:law_distill}

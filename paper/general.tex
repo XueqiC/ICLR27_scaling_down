@@ -33,16 +33,19 @@ to 4.5 nats): the transfer range is the interpolation regime.
 
 \paragraph{Quantization settings.} The per-channel predictor's one
 unseen setting, 5 bits by a fixed interpolation rule, is worse than a
-per-bit constant on the 1B source. With group size as a second axis,
-the frozen surface of Eq.~\eqref{eq:quant2d} has MAE 0.19, 0.21, and
-0.44 at the unseen $b=4$ on the six development states (zero change
-0.45, 0.53, 0.48; per-configuration median 0.55, 0.73, 0.54) and 0.22, 0.32, 0.99 at the unseen $g=128$ across three bit-widths
-(zero change 1.2 to 1.3). The separable power candidate we tested is
-worse than zero change on the bit test and the bilinear interpolation
-fails outside the development corners; other amplitude-times-shape
-forms remain untested. On the one new state tested (1B@96k at
-$g=128$, three cells) the surface is best on code and behind the
-source-free curves on math and QA.
+per-bit constant. The surface of Eq.~\eqref{eq:quant2d}, frozen on the two-bit-level
+set, beat zero change at $b=4$ and $g=128$ on the development states
+(0.19, 0.21, 0.44 against 0.45, 0.53, 0.48 at $b=4$), a result
+Appendix~\ref{sec:app_forms} traces to the regularized parametrization. In the confirmation round, with
+predictions frozen after development on all 54 cells, group sizes 32
+and 512 on two development states are predicted best by the
+same-input piecewise interpolation (0.07, 0.12, 0.48 for math, code,
+QA against 0.22, 0.31, 1.23 for the surface and 0.50, 0.56, 0.46 for
+the median), and on a state never used in a quantization fit
+(1.4B@112k) the source-free median is best or tied on every
+capability (0.13, 0.22, 0.13 at the new group sizes; 0.006, 0.03,
+0.16 at seen configurations), so source conditioning adds nothing
+there (Appendix~\ref{sec:app_results}).
 
 \paragraph{Distillation pools.} On the earlier protocol the
 reuse-count form beats the constant on the unseen pool U225 only for
@@ -62,11 +65,10 @@ pool direction is covered on the development students.
 
 Inside the range, the frozen per-density pruning regression beat its
 no-$D_0$ variant and the per-setting median on all three capabilities
-at the unseen stage 96k for the 160M and 1.4B sources, and for a 1B
-source at steps 32k and 112k the power form, A2, and the median curve
-are within 0.05 nats of one another, so a new in-range size is
-predicted about as well by the source relation as by the development
-median. For a 6.9B source, five times the development range, the
+at the unseen stage 96k, and for a 1B source at steps 32k and 112k
+the power form, A2, and the median curve are within 0.05 nats of one
+another: a new in-range size is predicted about as well by the source
+relation as by the development median. For a 6.9B source, five times the development range, the
 source-conditioned pruning forms lose to the median curve on math
 (0.30 against 0.12) and QA (0.91 against 0.12) and tie on code: the
 regression extends the panel's size trend into QA improvements that
@@ -106,13 +108,9 @@ pruning coefficients exclude zero for the dense-anchor term on math
 and code and not on QA; exponents fitted per source spread from 3.0
 to 6.0 for math and 0.5 to 6.0 for QA; and 80\% prediction intervals from leave-one-source residuals
 under-cover (78\% on the 27 confirmation-panel cells, 67\% on the 1B
-and 6.9B pair cells) at a mean full width near 1.5 nats. One measured
-calibration point helps or hurts by method: setting the pruning
-amplitude from the target's mildest density amplifies noise through
-the steep exponent (leave-one-source MAE above 17 nats), whereas a
-separable grouped-quantization law calibrated at the single 5-bit,
-$g=256$ cell predicts the unseen 4-bit configurations on held-out
-states with MAE 0.13, 0.12, 0.29 against 0.26, 0.64, 1.34
-uncalibrated.
+and 6.9B pair cells) at a mean full width near 1.5 nats. Setting the pruning amplitude from the target's mildest measured
+density amplifies noise through the steep exponent (leave-one-source
+MAE above 17 nats), so one-point calibration is no shortcut for
+pruning (Appendix~\ref{sec:app_shared}).
 
 \FloatBarrier
