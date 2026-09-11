@@ -1,0 +1,1221 @@
+{
+  "analysis": "v65-distill-paired",
+  "candidate": "joint+src",
+  "baselines": [
+    "constant",
+    "zero"
+  ],
+  "units": "nats",
+  "input": {
+    "path": "results/v50-p2v2/compare_test.json",
+    "sha256": "4c07abf0f940e95992a3f46d79b6d9a3ef9524ba55adaefa824b0cdec8a601aa",
+    "n_rows": 156,
+    "n_rows_used": 156
+  },
+  "script_sha256": "058ad9d5c9e1d7e5cf603b33c60ec759a1c2ea3387791619f1834e72bfaa8071",
+  "numpy_version": "1.26.4",
+  "method": {
+    "point_estimate": "mean over points within (student, role, cap)",
+    "paired_difference": "mean(abs(baseline_error) - abs(candidate_error))",
+    "relative_improvement": "(baseline_mae - candidate_mae) / baseline_mae",
+    "positive_favors": "candidate",
+    "cluster": [
+      "student",
+      "pool"
+    ],
+    "n_resamples": 5000,
+    "seed": 0,
+    "rng": "numpy.random.Generator(PCG64)",
+    "sampling": "sample n_trajectories with replacement; include every point of each draw",
+    "weighting": "point-weighted mean in original data and each bootstrap resample",
+    "draw_sharing": "same draws for both baselines and all caps within each student/role",
+    "group_order": [
+      [
+        "gemma3-270m",
+        "test_pool"
+      ],
+      [
+        "gemma3-1b",
+        "test_pool"
+      ],
+      [
+        "gemma3-4b",
+        "test_pool"
+      ],
+      [
+        "gemma3-4b",
+        "dev_pool_heldout_student"
+      ]
+    ],
+    "pool_order": "lexicographic",
+    "ci": "95% percentile; numpy.quantile([0.025, 0.975], method='linear')",
+    "relative_ci": "ratio recomputed from each resample's MAEs",
+    "predictions": "stored frozen predictions; no refitting or selection"
+  },
+  "limitations": [
+    "Only 3 trajectories per test group and 4 per held-out development group; bootstrap intervals have limited resolution."
+  ],
+  "groups": [
+    {
+      "student": "gemma3-270m",
+      "role": "test_pool",
+      "cap": "math",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.045272149213373664,
+      "frozen_constant_prediction": 0.15199548858412892,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.06049488243168164,
+          "paired_difference": {
+            "estimate": 0.015222733218307976,
+            "ci95": [
+              0.0020420429111755664,
+              0.027118180790982202
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.2516367105184374,
+            "ci95": [
+              0.03884257808274687,
+              0.39932071577307715
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 25.16367105184374,
+            "ci95": [
+              3.8842578082746866,
+              39.93207157730772
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.09150060615244728,
+          "paired_difference": {
+            "estimate": 0.04622845693907362,
+            "ci95": [
+              0.04329211181588492,
+              0.04889297045070159
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.5052256906588501,
+            "ci95": [
+              0.491766172142594,
+              0.5148630698319886
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 50.522569065885016,
+            "ci95": [
+              49.1766172142594,
+              51.48630698319886
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-270m",
+      "role": "test_pool",
+      "cap": "code",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.03643429967468317,
+      "frozen_constant_prediction": 0.17781337651313855,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.047126805309516795,
+          "paired_difference": {
+            "estimate": 0.010692505634833628,
+            "ci95": [
+              0.0062041649124902065,
+              0.017189260180728118
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.22688797945474953,
+            "ci95": [
+              0.1401995746417177,
+              0.35020386295317724
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 22.688797945474953,
+            "ci95": [
+              14.01995746417177,
+              35.02038629531772
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.1383437592264541,
+          "paired_difference": {
+            "estimate": 0.10190945955177093,
+            "ci95": [
+              0.09683547179867905,
+              0.10909097843661471
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.7366393693621981,
+            "ci95": [
+              0.7239885688386017,
+              0.7522382250481484
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 73.66393693621981,
+            "ci95": [
+              72.39885688386018,
+              75.22382250481485
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-270m",
+      "role": "test_pool",
+      "cap": "qa",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-270m",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.6055288492289588,
+      "frozen_constant_prediction": -0.1431442199950196,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.8620641133383132,
+          "paired_difference": {
+            "estimate": 0.2565352641093547,
+            "ci95": [
+              0.17273052381062115,
+              0.3760291296587819
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.2975825813186105,
+            "ci95": [
+              0.21496669960174747,
+              0.39340386498862817
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 29.758258131861048,
+            "ci95": [
+              21.496669960174746,
+              39.34038649886282
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 1.005208333333333,
+          "paired_difference": {
+            "estimate": 0.39967948410437426,
+            "ci95": [
+              0.31587474380564085,
+              0.5191733496538014
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.39760860594839315,
+            "ci95": [
+              0.3336705771585143,
+              0.47241422277323375
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 39.760860594839315,
+            "ci95": [
+              33.36705771585143,
+              47.24142227732337
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-1b",
+      "role": "test_pool",
+      "cap": "math",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.05030444157056718,
+      "frozen_constant_prediction": 0.15199548858412892,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.057060018563418725,
+          "paired_difference": {
+            "estimate": 0.006755576992851548,
+            "ci95": [
+              -0.0007998575619649548,
+              0.01452837080643557
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.11839423054766679,
+            "ci95": [
+              -0.01612361968498323,
+              0.233932480237907
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 11.839423054766678,
+            "ci95": [
+              -1.6123619684983228,
+              23.3932480237907
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.09493547002071019,
+          "paired_difference": {
+            "estimate": 0.044631028450143016,
+            "ci95": [
+              0.03959917709661365,
+              0.05197999860311057
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.4701196343200991,
+            "ci95": [
+              0.4279686283401255,
+              0.5076782917081379
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 47.011963432009914,
+            "ci95": [
+              42.79686283401255,
+              50.7678291708138
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-1b",
+      "role": "test_pool",
+      "cap": "code",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.0288887930550507,
+      "frozen_constant_prediction": 0.17781337651313855,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.06881666113079428,
+          "paired_difference": {
+            "estimate": 0.039927868075743576,
+            "ci95": [
+              0.031679727452127035,
+              0.04432698869433628
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.5802064125118757,
+            "ci95": [
+              0.5248209679468591,
+              0.6395442491501326
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 58.02064125118756,
+            "ci95": [
+              52.48209679468591,
+              63.95442491501326
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.10899671538234428,
+          "paired_difference": {
+            "estimate": 0.08010792232729358,
+            "ci95": [
+              0.06803669580146411,
+              0.08876725882207086
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.73495721450217,
+            "ci95": [
+              0.6733866847244149,
+              0.7697458624699779
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 73.495721450217,
+            "ci95": [
+              67.33866847244148,
+              76.97458624699779
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-1b",
+      "role": "test_pool",
+      "cap": "qa",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-1b",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.4439180890024957,
+      "frozen_constant_prediction": -0.1431442199950196,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 1.0043569212732404,
+          "paired_difference": {
+            "estimate": 0.5604388322707446,
+            "ci95": [
+              0.5550306492555268,
+              0.5657359914182787
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.5580076369267878,
+            "ci95": [
+              0.5386169400949288,
+              0.5803066500577347
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 55.80076369267878,
+            "ci95": [
+              53.86169400949288,
+              58.03066500577347
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 1.14750114126826,
+          "paired_difference": {
+            "estimate": 0.7035830522657642,
+            "ci95": [
+              0.6981748692505463,
+              0.7088802114132984
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.6131436623131711,
+            "ci95": [
+              0.5948910571071331,
+              0.6340407829089846
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 61.31436623131711,
+            "ci95": [
+              59.48910571071331,
+              63.40407829089846
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-4b",
+      "role": "test_pool",
+      "cap": "math",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.0888097783170625,
+      "frozen_constant_prediction": 0.15199548858412892,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.020471983339226507,
+          "paired_difference": {
+            "estimate": -0.06833779497783599,
+            "ci95": [
+              -0.06988684921728609,
+              -0.06550591281156465
+            ]
+          },
+          "relative_improvement": {
+            "estimate": -3.3381130614195778,
+            "ci95": [
+              -4.860048825629964,
+              -2.655586040955056
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": -333.8113061419578,
+            "ci95": [
+              -486.00488256299644,
+              -265.5586040955056
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.1532184485022983,
+          "paired_difference": {
+            "estimate": 0.06440867018523581,
+            "ci95": [
+              0.04342439270068123,
+              0.07990487338265895
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.4203715075751447,
+            "ci95": [
+              0.31100024276131777,
+              0.48766914168986497
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 42.03715075751447,
+            "ci95": [
+              31.100024276131776,
+              48.766914168986496
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-4b",
+      "role": "test_pool",
+      "cap": "code",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 0.05040393131234427,
+      "frozen_constant_prediction": 0.17781337651313855,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.03833591674047832,
+          "paired_difference": {
+            "estimate": -0.01206801457186594,
+            "ci95": [
+              -0.02916791034365411,
+              -0.0029297113998934463
+            ]
+          },
+          "relative_improvement": {
+            "estimate": -0.31479655628330155,
+            "ci95": [
+              -0.7179650638739796,
+              -0.07894310558069531
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": -31.479655628330157,
+            "ci95": [
+              -71.79650638739797,
+              -7.894310558069531
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.17768305284912903,
+          "paired_difference": {
+            "estimate": 0.12727912153678475,
+            "ci95": [
+              0.11678319273122698,
+              0.132989220361252
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.7163267373892864,
+            "ci95": [
+              0.6542446358969933,
+              0.7685878109516197
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 71.63267373892864,
+            "ci95": [
+              65.42446358969933,
+              76.85878109516196
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-4b",
+      "role": "test_pool",
+      "cap": "qa",
+      "n_points": 12,
+      "n_trajectories": 3,
+      "clusters": [
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s21",
+          "n_points": 4,
+          "Tc": [
+            35536,
+            70710,
+            143579,
+            283327
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s22",
+          "n_points": 4,
+          "Tc": [
+            40323,
+            72089,
+            142224,
+            285998
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U375_s23",
+          "n_points": 4,
+          "Tc": [
+            38200,
+            75272,
+            146852,
+            289585
+          ]
+        }
+      ],
+      "candidate_mae": 1.140814147828652,
+      "frozen_constant_prediction": -0.1431442199950196,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 1.0238700147327358,
+          "paired_difference": {
+            "estimate": -0.1169441330959161,
+            "ci95": [
+              -0.11931228393536486,
+              -0.11540352007048904
+            ]
+          },
+          "relative_improvement": {
+            "estimate": -0.11421775363393423,
+            "ci95": [
+              -0.11833416155680326,
+              -0.11136745515406221
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": -11.421775363393422,
+            "ci95": [
+              -11.833416155680327,
+              -11.136745515406222
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 1.1670142347277552,
+          "paired_difference": {
+            "estimate": 0.026200086899103508,
+            "ci95": [
+              0.023831936059654835,
+              0.027740699924530654
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.02245052898194964,
+            "ci95": [
+              0.020698045326068552,
+              0.023835398137979275
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 2.245052898194964,
+            "ci95": [
+              2.069804532606855,
+              2.3835398137979276
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-4b",
+      "role": "dev_pool_heldout_student",
+      "cap": "math",
+      "n_points": 16,
+      "n_trajectories": 4,
+      "clusters": [
+        {
+          "student": "gemma3-4b",
+          "pool": "U450_s11",
+          "n_points": 4,
+          "Tc": [
+            36203,
+            69539,
+            138524,
+            280329
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U450_s12",
+          "n_points": 4,
+          "Tc": [
+            36262,
+            69178,
+            137885,
+            280508
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U75_s11",
+          "n_points": 4,
+          "Tc": [
+            36542,
+            69387,
+            140070,
+            280140
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U75_s12",
+          "n_points": 4,
+          "Tc": [
+            35011,
+            69303,
+            138935,
+            277507
+          ]
+        }
+      ],
+      "candidate_mae": 0.10646529805997812,
+      "frozen_constant_prediction": 0.15199548858412892,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.155554710388569,
+          "paired_difference": {
+            "estimate": 0.04908941232859086,
+            "ci95": [
+              -0.06810252779333238,
+              0.16628135245051406
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.31557650813638255,
+            "ci95": [
+              -5.733747375426685,
+              0.5556938796086585
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 31.557650813638254,
+            "ci95": [
+              -573.3747375426684,
+              55.569387960865846
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.29384778943779355,
+          "paired_difference": {
+            "estimate": 0.18738249137781543,
+            "ci95": [
+              0.06920214984090507,
+              0.30556283291472586
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.6376855573299577,
+            "ci95": [
+              0.4638768217634869,
+              0.6968152516299874
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 63.76855573299577,
+            "ci95": [
+              46.38768217634869,
+              69.68152516299874
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-4b",
+      "role": "dev_pool_heldout_student",
+      "cap": "code",
+      "n_points": 16,
+      "n_trajectories": 4,
+      "clusters": [
+        {
+          "student": "gemma3-4b",
+          "pool": "U450_s11",
+          "n_points": 4,
+          "Tc": [
+            36203,
+            69539,
+            138524,
+            280329
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U450_s12",
+          "n_points": 4,
+          "Tc": [
+            36262,
+            69178,
+            137885,
+            280508
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U75_s11",
+          "n_points": 4,
+          "Tc": [
+            36542,
+            69387,
+            140070,
+            280140
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U75_s12",
+          "n_points": 4,
+          "Tc": [
+            35011,
+            69303,
+            138935,
+            277507
+          ]
+        }
+      ],
+      "candidate_mae": 0.04820698024089122,
+      "frozen_constant_prediction": 0.17781337651313855,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 0.09772890832595216,
+          "paired_difference": {
+            "estimate": 0.04952192808506095,
+            "ci95": [
+              -0.018589084368294373,
+              0.11763294053841629
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.5067275275386481,
+            "ci95": [
+              -0.5888418873462677,
+              0.7195972045663649
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 50.67275275386481,
+            "ci95": [
+              -58.884188734626775,
+              71.95972045663649
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 0.23030267382639502,
+          "paired_difference": {
+            "estimate": 0.18209569358550382,
+            "ci95": [
+              0.10277742268071648,
+              0.26141396449029114
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.7906798933770512,
+            "ci95": [
+              0.672031623294679,
+              0.8695437063244614
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 79.06798933770513,
+            "ci95": [
+              67.2031623294679,
+              86.95437063244614
+            ]
+          }
+        }
+      }
+    },
+    {
+      "student": "gemma3-4b",
+      "role": "dev_pool_heldout_student",
+      "cap": "qa",
+      "n_points": 16,
+      "n_trajectories": 4,
+      "clusters": [
+        {
+          "student": "gemma3-4b",
+          "pool": "U450_s11",
+          "n_points": 4,
+          "Tc": [
+            36203,
+            69539,
+            138524,
+            280329
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U450_s12",
+          "n_points": 4,
+          "Tc": [
+            36262,
+            69178,
+            137885,
+            280508
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U75_s11",
+          "n_points": 4,
+          "Tc": [
+            36542,
+            69387,
+            140070,
+            280140
+          ]
+        },
+        {
+          "student": "gemma3-4b",
+          "pool": "U75_s12",
+          "n_points": 4,
+          "Tc": [
+            35011,
+            69303,
+            138935,
+            277507
+          ]
+        }
+      ],
+      "candidate_mae": 0.9580229773585937,
+      "frozen_constant_prediction": -0.1431442199950196,
+      "comparisons": {
+        "constant": {
+          "baseline_mae": 1.7903979783989041,
+          "paired_difference": {
+            "estimate": 0.8323750010403106,
+            "ci95": [
+              0.12493909754100974,
+              1.539810904539611
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.464910601487987,
+            "ci95": [
+              0.116633693474404,
+              0.6236079262694282
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 46.4910601487987,
+            "ci95": [
+              11.6633693474404,
+              62.36079262694282
+            ]
+          }
+        },
+        "zero": {
+          "baseline_mae": 1.8619700883964143,
+          "paired_difference": {
+            "estimate": 0.9039471110378203,
+            "ci95": [
+              0.26808331753602965,
+              1.539810904539611
+            ]
+          },
+          "relative_improvement": {
+            "estimate": 0.48547885740545255,
+            "ci95": [
+              0.22076216881557761,
+              0.6308103429750984
+            ]
+          },
+          "relative_improvement_percent": {
+            "estimate": 48.547885740545254,
+            "ci95": [
+              22.076216881557762,
+              63.081034297509845
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -9,37 +9,31 @@ range to within a few tenths of a nat, and a per-density regression
 does the same without the power structure. Given the same inputs, the
 frozen surface of Eq.~\eqref{eq:quant2d} predicts the grouped
 quantizer at bit-widths and group sizes it was not fit on, for the
-states it was fit on. Given a student's state, a linear form predicts
-its math transfer; under a fixed distillation protocol, a response
-model in budget, reuse, and a student descriptor predicts unseen data
-pools on the two development students. Each comes with coefficients
+states it was fit on, with its curvature fixed by regularization.
+Given a student's state, a linear form predicts its math transfer,
+and under a fixed distillation protocol a response model in budget,
+reuse, and a student descriptor predicts unseen data pools on the two
+development students. Each comes with coefficients
 (Appendix~\ref{sec:app_coef}) and a tested range, and
 \S\ref{sec:selection} connects them to an explicit selection problem.
 
 What cannot be predicted is equally specific. No source-conditioned
-form predicts the QA response to pruning on a new checkpoint; a
-source-free curve is the better deliverable for that capability. No
+form predicts the QA response to pruning on a new checkpoint, and no
 form transfers to density 0.55 or to a source five times larger than
-the development range, except that the pruning math error at the
-larger source is on par with the source-free curve. Bit-width alone
-supports no continuous quantization relation, the curvature of the
-two-dimensional surface in bit-width is fixed by regularization, and
-the separable candidate we tested is worse. Joint transfer of the
-distillation forms to a larger student and a new pool is unreliable,
-and distillation lowers the conditional loss on the primary QA
-distribution without that change carrying over to TriviaQA, so the QA
-result is a prediction relation on the measured distribution and no
-general QA gain (Appendix~\ref{sec:app_measure}).
+the development range. Bit-width alone supports no continuous
+quantization relation, and the separable candidate we tested is worse
+than the surface. Joint transfer of the distillation forms to a larger
+student and a new pool is unreliable, and distillation lowers the
+conditional loss on the primary QA distribution without that change
+carrying over to TriviaQA, so the QA result is a prediction relation
+on the measured distribution and no general QA gain
+(Appendix~\ref{sec:app_measure}).
 
-For further development these results say three things. The dense
-capability anchor is the input to keep and training tokens add little
-beyond it, so metadata-only prediction is not yet available. The forms
-that work are low-dimensional and their exponents are not established
-as necessary, so the next question is which inputs carry the QA
-response. Transfer across sizes is bounded by the development range,
-so a wider development panel is the direct route to wider laws. The
-limitations are those of small controlled panels with correlated
-observations (three sizes, three stages, three pools), of one
-quantizer family and one teacher, of a loss endpoint whose code
-specificity was not detected on a secondary benchmark, and of a
-selection validation that uses nominal storage as the only cost.
+The dense capability anchor is the input to keep, the working forms
+are low-dimensional with exponents not established as necessary, and
+transfer across sizes is bounded by the development range, so a wider
+development panel is the direct route to wider laws. The limitations
+are small controlled panels with correlated observations, one
+quantizer family and one teacher, a loss endpoint whose code
+specificity was not detected on a secondary benchmark, and a selection
+validation with nominal storage as the only cost.

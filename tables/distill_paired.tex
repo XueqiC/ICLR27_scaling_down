@@ -1,0 +1,33 @@
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Paired distillation errors for the frozen joint$+$src candidate. MAEs and paired differences are in nats; positive differences and relative improvements favor the candidate. Differences are point means of $|e_{\mathrm{baseline}}|-|e_{\mathrm{candidate}}|$; relative improvement is $100(\mathrm{MAE}_{\mathrm{baseline}}-\mathrm{MAE}_{\mathrm{candidate}})/\mathrm{MAE}_{\mathrm{baseline}}$. Brackets show 95\% percentile intervals from 5,000 paired trajectory bootstrap resamples (seed 0); a cluster is student $\times$ pool, with all budgets resampled together. The same draws are used for both baselines and all capabilities within each student/pool-role group, recomputing each ratio per resample. Test rows use 12 points from 3 trajectories; held-out-student development rows use 16 points from 4 trajectories. Intervals have limited resolution with so few trajectories.}
+\label{tab:distill_paired}
+\begin{tabular}{@{}llrrrrrrr@{}}
+\toprule
+Student & Cap. & \shortstack{Candidate\\MAE} & \multicolumn{3}{c}{Frozen constant baseline} & \multicolumn{3}{c}{Zero baseline} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+& & & MAE & Diff. [CI] & Rel. \% [CI] & MAE & Diff. [CI] & Rel. \% [CI] \\
+\midrule
+\multicolumn{9}{l}{\textit{Test pools}} \\
+270M & Math & 0.045 & 0.060 & \shortstack{$0.015$\\$[0.002,0.027]$} & \shortstack{$25.2$\\$[3.9,39.9]$} & 0.092 & \shortstack{$0.046$\\$[0.043,0.049]$} & \shortstack{$50.5$\\$[49.2,51.5]$} \\
+270M & Code & 0.036 & 0.047 & \shortstack{$0.011$\\$[0.006,0.017]$} & \shortstack{$22.7$\\$[14.0,35.0]$} & 0.138 & \shortstack{$0.102$\\$[0.097,0.109]$} & \shortstack{$73.7$\\$[72.4,75.2]$} \\
+270M & QA & 0.606 & 0.862 & \shortstack{$0.257$\\$[0.173,0.376]$} & \shortstack{$29.8$\\$[21.5,39.3]$} & 1.005 & \shortstack{$0.400$\\$[0.316,0.519]$} & \shortstack{$39.8$\\$[33.4,47.2]$} \\
+\addlinespace
+1B & Math & 0.050 & 0.057 & \shortstack{$0.007$\\$[-0.001,0.015]$} & \shortstack{$11.8$\\$[-1.6,23.4]$} & 0.095 & \shortstack{$0.045$\\$[0.040,0.052]$} & \shortstack{$47.0$\\$[42.8,50.8]$} \\
+1B & Code & 0.029 & 0.069 & \shortstack{$0.040$\\$[0.032,0.044]$} & \shortstack{$58.0$\\$[52.5,64.0]$} & 0.109 & \shortstack{$0.080$\\$[0.068,0.089]$} & \shortstack{$73.5$\\$[67.3,77.0]$} \\
+1B & QA & 0.444 & 1.004 & \shortstack{$0.560$\\$[0.555,0.566]$} & \shortstack{$55.8$\\$[53.9,58.0]$} & 1.148 & \shortstack{$0.704$\\$[0.698,0.709]$} & \shortstack{$61.3$\\$[59.5,63.4]$} \\
+\addlinespace
+4B & Math & 0.089 & 0.020 & \shortstack{$-0.068$\\$[-0.070,-0.066]$} & \shortstack{$-333.8$\\$[-486.0,-265.6]$} & 0.153 & \shortstack{$0.064$\\$[0.043,0.080]$} & \shortstack{$42.0$\\$[31.1,48.8]$} \\
+4B & Code & 0.050 & 0.038 & \shortstack{$-0.012$\\$[-0.029,-0.003]$} & \shortstack{$-31.5$\\$[-71.8,-7.9]$} & 0.178 & \shortstack{$0.127$\\$[0.117,0.133]$} & \shortstack{$71.6$\\$[65.4,76.9]$} \\
+4B & QA & 1.141 & 1.024 & \shortstack{$-0.117$\\$[-0.119,-0.115]$} & \shortstack{$-11.4$\\$[-11.8,-11.1]$} & 1.167 & \shortstack{$0.026$\\$[0.024,0.028]$} & \shortstack{$2.2$\\$[2.1,2.4]$} \\
+\midrule
+\multicolumn{9}{l}{\textit{Development pools, held-out 4B student}} \\
+4B & Math & 0.106 & 0.156 & \shortstack{$0.049$\\$[-0.068,0.166]$} & \shortstack{$31.6$\\$[-573.4,55.6]$} & 0.294 & \shortstack{$0.187$\\$[0.069,0.306]$} & \shortstack{$63.8$\\$[46.4,69.7]$} \\
+4B & Code & 0.048 & 0.098 & \shortstack{$0.050$\\$[-0.019,0.118]$} & \shortstack{$50.7$\\$[-58.9,72.0]$} & 0.230 & \shortstack{$0.182$\\$[0.103,0.261]$} & \shortstack{$79.1$\\$[67.2,87.0]$} \\
+4B & QA & 0.958 & 1.790 & \shortstack{$0.832$\\$[0.125,1.540]$} & \shortstack{$46.5$\\$[11.7,62.4]$} & 1.862 & \shortstack{$0.904$\\$[0.268,1.540]$} & \shortstack{$48.5$\\$[22.1,63.1]$} \\
+\bottomrule
+\end{tabular}
+\end{table}

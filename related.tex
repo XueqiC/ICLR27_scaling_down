@@ -27,14 +27,12 @@ harms reasoning \citep{liu2025quantization}, and selective truncation
 can improve specific behaviors \citep{sharma2023laser}. Laws with
 task-level targets exist: \citet{sengupta2025compression} fit pruning
 laws to test loss and averaged zero-shot accuracy against the pruning
-ratio and recovery tokens, and their revised version adds rolling
-hold-out over ratios, zero- and one-shot transfer to unseen models,
-and per-task exponents, with the unpruned score and the ratio as the
-only inputs; \citet{zhou2025task} stratify post-training quantization
-laws into memorization, application, and reasoning strata for one
-quantizer, validated on a held-out larger model; task-specific
-distillation has been mapped as curves over dataset size, compression
-ratio, and supervision format \citep{ghita2026task}. Our relations use a
+ratio and recovery tokens, with per-task exponents and transfer to
+unseen models in their revised version; \citet{zhou2025task} stratify
+post-training quantization laws into memorization, application, and
+reasoning strata for one quantizer; task-specific distillation has
+been mapped over dataset size, compression ratio, and supervision
+format \citep{ghita2026task}. Our relations use a
 continuous conditional loss, admit the dense capability anchor and
 training tokens as inputs, and treat the three methods with one
 protocol.
