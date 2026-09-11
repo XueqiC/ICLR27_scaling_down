@@ -76,3 +76,17 @@
 - 结构:1 Intro / 2 Setup / 3 Laws(3.1–3.4)/ 4 Generalization(4.1 未见设置、4.2 尺寸与阶段、4.3 能力与共享结构)/ 5 Selection / 6 Related / 7 Discussion;附录 A–I;Fig 1 响应、Fig 2 泛化、Fig 3 输入与形式、Fig 4 map;Table 1 模型与域、Table 2 held-out、Table 3 …;附录 18 张表全部由脚本生成。
 - 纪律:冻结预测不可改(更正为新版本);所有数字来自生成表;claim–evidence matrix 到 S1/R2/D3/M2;数据截止 19:47 EDT(3b5feae)写在附录 I。
 - 待你决定:(1) 页数目标(若 10 页需删约 3 页);(2) 蒸馏结论表述强度是否接受;(3) 是否需要 Qwen/异构面板上的 selection-map 验证(现只有 Pythia 留一状态 + 12 模型离线 replay)。
+
+
+---
+
+## Round v4 / v5 补记(2026-09-11 05:30 EDT)
+
+**Round v4(CPU 修正)**:V63 量化可识别性(rank 16/20,曲率由 ridge 决定;去 u² 对照在 b=4 上 1.30/1.39/1.94);V64 selection 可行性(无回落,覆盖率,共同可行格 regret;只量化仅差 0.015–0.07);V65 蒸馏配对 CI(三档措辞);V66 标签只看流程。正文压到 9 页;参考文献 85 条全部核实。
+
+**Round v5(独立确认,约 5.5 GPU-h)**:
+- V69 量化:54 格新开发集满秩;21 格冻结确认:同输入分段插值最好(math/code),新状态上无源中位最好,曲面全输。交付 = 插值(math/code)+ 中位(QA/新状态)。
+- V70 蒸馏:U=200 × 6 池 × T{50k,100k,200k};全部赢 zero;相对最强冻结 baseline:code 两 student 检测到增益,QA 只在 270M,math 两边 baseline 更好。
+- V71 QA 范围:三个预算"只有新 2Wiki 样本复现";MuSiQue/TriviaQA 不复现;剪枝/量化损伤三集同向。
+- V72 剪枝:2.8B@16k/143k × 3 密度:中位曲线比幂形/A2 好 3–7 倍。
+- 总读法:source-conditioned 形式在已见状态的未见配置上有用;新模型状态上无源参考几乎总是更好;capability conditioning 的价值在"哪个能力用哪种预测器"。
