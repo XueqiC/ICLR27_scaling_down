@@ -307,15 +307,19 @@ The quantization confirmation round (development on all 54 unblinded
 cells with three bit levels, rank 20 of 20; predictions frozen before
 measurement for 21 cells: two development states and the never-fit
 state 1.4B@112k at $b\in\{3,4,5\}\times g\in\{32,512\}$, and the new
-state at $g=128$) is in Table~\ref{tab:quant_confirm}. The
-development leave-one-state-out rule had selected the surface for
-math, the per-configuration median for code, and zero for QA; on the
-frozen cells the same-input piecewise interpolation with the
-pre-specified boundary rule is best for math and code at unseen group
-sizes on the development states, the source-free median is best or
-tied on the new state, and the surface loses on every test, so the
-selection is reported as a prospective loss for the surface.
-\input{tables/quant_confirm}
+state at $g=128$) is in Table~\ref{tab:quant_threeway}. Table~\ref{tab:quant_threeway} keeps three statuses apart: the
+score of the frozen development-selected predictor (surface for math,
+per-configuration median for code, zero for QA), the score of every
+frozen candidate, and the post-test recommended rule (interpolation
+for math and code on seen states; median for QA and for new states),
+which is retrospective. The per-configuration median has nine anchors
+per capability, the median signed response over the six development
+states at each measured $(b,g)$, and predicts a never-measured group
+size by the same piecewise rule as the interpolation candidate:
+linear in $\log_2 g$ between the two nearest measured group sizes at
+the same bit-width, extrapolated beyond the grid and floored at zero
+change; no target measurement enters either predictor.
+\input{tables/quant_threeway}
 
 The pruning repeatability check froze the delivered power form, A2, the
 median development curve, and zero change for two Pythia-2.8B states

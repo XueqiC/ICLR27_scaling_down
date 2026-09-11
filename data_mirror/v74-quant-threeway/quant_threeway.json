@@ -1,0 +1,806 @@
+{
+  "schema_version": 1,
+  "source": "V69 frozen predictions and completed comparison",
+  "metric": "MAE of signed dL in nats; equal weight per measured state/configuration cell",
+  "selection_rule": "Per capability: minimize LOSO macro MAE (equal weight per held-out state). Candidates within 0.02 nats of the minimum, inclusive, tie; choose the fewest coefficients, then lower MAE, then declared candidate order. All six candidates, including median and zero, are eligible. No test-based selection.",
+  "selected": {
+    "math": "low_order_2d",
+    "code": "median",
+    "qa": "zero"
+  },
+  "recommendation_rule": "R: piecewise interpolation for math/code on development states; per-configuration median for QA and for all capabilities on new states. Specified post-test rule, not the minimum error in each test panel.",
+  "frozen_at_utc": "2026-09-11T03:20:25.020053+00:00",
+  "input_sha256": {
+    "results/v69-quant-confirm/develop.json": "9f035cb37a94d425064f37d822490b52dcad4c669e62864f27cba4ffa5e5643d",
+    "results/v69-quant-confirm/freeze.json": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+    "results/v69-quant-confirm/compare.json": "12944c61ed42c61f1beaf8f84ef5c87d900b3b1a38d65d175976e27d3d4e6bac"
+  },
+  "validation": {
+    "frozen_capability_rows": 63,
+    "candidate_scores": 54,
+    "median_anchors": 27,
+    "median_and_interpolation_predictions": 126
+  },
+  "rows": [
+    {
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "n": 12,
+      "n_states": 2,
+      "frozen_development_selected": {
+        "candidate": "low_order_2d",
+        "n": 12,
+        "n_states": 2,
+        "state_mae": {
+          "pythia-1.4b@step16000": 0.07152210642567605,
+          "pythia-410m@step143000": 0.358248151337864
+        },
+        "macro_mae": 0.21488512888177003,
+        "mae": 0.21488512888177
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.07152210642567605,
+            "pythia-410m@step143000": 0.358248151337864
+          },
+          "macro_mae": 0.21488512888177003,
+          "mae": 0.21488512888177
+        },
+        "bilinear": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.10381534686572153,
+            "pythia-410m@step143000": 0.5622579087377894
+          },
+          "macro_mae": 0.33303662780175547,
+          "mae": 0.3330366278017554
+        },
+        "same_input_interpolation": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.03887279642427058,
+            "pythia-410m@step143000": 0.09175579050071053
+          },
+          "macro_mae": 0.06531429346249056,
+          "mae": 0.06531429346249056
+        },
+        "bit_only": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.11385521021395544,
+            "pythia-410m@step143000": 0.8484756390900134
+          },
+          "macro_mae": 0.4811654246519844,
+          "mae": 0.4811654246519845
+        },
+        "median": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.26411518890558683,
+            "pythia-410m@step143000": 0.7355618392259222
+          },
+          "macro_mae": 0.4998385140657545,
+          "mae": 0.49983851406575447
+        },
+        "zero": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.10872946821693152,
+            "pythia-410m@step143000": 1.1084064963484406
+          },
+          "macro_mae": 0.608567982282686,
+          "mae": 0.6085679822826862
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "same_input_interpolation",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 12,
+        "n_states": 2,
+        "state_mae": {
+          "pythia-1.4b@step16000": 0.03887279642427058,
+          "pythia-410m@step143000": 0.09175579050071053
+        },
+        "macro_mae": 0.06531429346249056,
+        "mae": 0.06531429346249056
+      }
+    },
+    {
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "n": 12,
+      "n_states": 2,
+      "frozen_development_selected": {
+        "candidate": "median",
+        "n": 12,
+        "n_states": 2,
+        "state_mae": {
+          "pythia-1.4b@step16000": 0.38420093494968705,
+          "pythia-410m@step143000": 0.7292706600110926
+        },
+        "macro_mae": 0.5567357974803898,
+        "mae": 0.5567357974803898
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.04303596605063672,
+            "pythia-410m@step143000": 0.5741704283734839
+          },
+          "macro_mae": 0.3086031972120603,
+          "mae": 0.3086031972120603
+        },
+        "bilinear": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.0668677366786088,
+            "pythia-410m@step143000": 0.7013553654737746
+          },
+          "macro_mae": 0.3841115510761917,
+          "mae": 0.3841115510761917
+        },
+        "same_input_interpolation": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.0631466157096204,
+            "pythia-410m@step143000": 0.1693642245967282
+          },
+          "macro_mae": 0.1162554201531743,
+          "mae": 0.1162554201531743
+        },
+        "bit_only": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.1011519217678859,
+            "pythia-410m@step143000": 0.8641069241359417
+          },
+          "macro_mae": 0.4826294229519138,
+          "mae": 0.48262942295191386
+        },
+        "median": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.38420093494968705,
+            "pythia-410m@step143000": 0.7292706600110926
+          },
+          "macro_mae": 0.5567357974803898,
+          "mae": 0.5567357974803898
+        },
+        "zero": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.12146422628951759,
+            "pythia-410m@step143000": 1.234935821250297
+          },
+          "macro_mae": 0.6782000237699073,
+          "mae": 0.6782000237699073
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "same_input_interpolation",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 12,
+        "n_states": 2,
+        "state_mae": {
+          "pythia-1.4b@step16000": 0.0631466157096204,
+          "pythia-410m@step143000": 0.1693642245967282
+        },
+        "macro_mae": 0.1162554201531743,
+        "mae": 0.1162554201531743
+      }
+    },
+    {
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "n": 12,
+      "n_states": 2,
+      "frozen_development_selected": {
+        "candidate": "zero",
+        "n": 12,
+        "n_states": 2,
+        "state_mae": {
+          "pythia-1.4b@step16000": 0.030289527883396783,
+          "pythia-410m@step143000": 0.8836541508238277
+        },
+        "macro_mae": 0.45697183935361224,
+        "mae": 0.45697183935361224
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 1.749570436502358,
+            "pythia-410m@step143000": 0.7067989650011172
+          },
+          "macro_mae": 1.2281847007517377,
+          "mae": 1.2281847007517377
+        },
+        "bilinear": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 1.987084772091178,
+            "pythia-410m@step143000": 0.9346814395907727
+          },
+          "macro_mae": 1.4608831058409752,
+          "mae": 1.4608831058409752
+        },
+        "same_input_interpolation": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.030289527883396783,
+            "pythia-410m@step143000": 0.9228886519704735
+          },
+          "macro_mae": 0.47658908992693516,
+          "mae": 0.47658908992693516
+        },
+        "bit_only": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 1.9870847720912375,
+            "pythia-410m@step143000": 1.047211304416529
+          },
+          "macro_mae": 1.5171480382538833,
+          "mae": 1.5171480382538831
+        },
+        "median": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.22897110662230666,
+            "pythia-410m@step143000": 0.686908368979721
+          },
+          "macro_mae": 0.4579397378010138,
+          "mae": 0.45793973780101377
+        },
+        "zero": {
+          "n": 12,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step16000": 0.030289527883396783,
+            "pythia-410m@step143000": 0.8836541508238277
+          },
+          "macro_mae": 0.45697183935361224,
+          "mae": 0.45697183935361224
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 12,
+        "n_states": 2,
+        "state_mae": {
+          "pythia-1.4b@step16000": 0.22897110662230666,
+          "pythia-410m@step143000": 0.686908368979721
+        },
+        "macro_mae": 0.4579397378010138,
+        "mae": 0.45793973780101377
+      }
+    },
+    {
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "n": 6,
+      "n_states": 1,
+      "frozen_development_selected": {
+        "candidate": "low_order_2d",
+        "n": 6,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.41754695614318704
+        },
+        "macro_mae": 0.41754695614318704,
+        "mae": 0.41754695614318704
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.41754695614318704
+          },
+          "macro_mae": 0.41754695614318704,
+          "mae": 0.41754695614318704
+        },
+        "bilinear": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.4440927765870508
+          },
+          "macro_mae": 0.4440927765870508,
+          "mae": 0.4440927765870508
+        },
+        "same_input_interpolation": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.1694161521322806
+          },
+          "macro_mae": 0.1694161521322806,
+          "mae": 0.1694161521322806
+        },
+        "bit_only": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.43464948328199826
+          },
+          "macro_mae": 0.43464948328199826,
+          "mae": 0.43464948328199826
+        },
+        "median": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.12946558042658654
+          },
+          "macro_mae": 0.12946558042658654,
+          "mae": 0.12946558042658654
+        },
+        "zero": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5014204170950988
+          },
+          "macro_mae": 0.5014204170950988,
+          "mae": 0.5014204170950988
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 6,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.12946558042658654
+        },
+        "macro_mae": 0.12946558042658654,
+        "mae": 0.12946558042658654
+      }
+    },
+    {
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "n": 6,
+      "n_states": 1,
+      "frozen_development_selected": {
+        "candidate": "median",
+        "n": 6,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.21607836146105694
+        },
+        "macro_mae": 0.21607836146105694,
+        "mae": 0.21607836146105694
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.32718911129540623
+          },
+          "macro_mae": 0.32718911129540623,
+          "mae": 0.32718911129540623
+        },
+        "bilinear": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.37522587349659337
+          },
+          "macro_mae": 0.37522587349659337,
+          "mae": 0.37522587349659337
+        },
+        "same_input_interpolation": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.166174213861405
+          },
+          "macro_mae": 0.166174213861405,
+          "mae": 0.166174213861405
+        },
+        "bit_only": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.8034488034344348
+          },
+          "macro_mae": 0.8034488034344348,
+          "mae": 0.8034488034344348
+        },
+        "median": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.21607836146105694
+          },
+          "macro_mae": 0.21607836146105694,
+          "mae": 0.21607836146105694
+        },
+        "zero": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6564555106568418
+          },
+          "macro_mae": 0.6564555106568418,
+          "mae": 0.6564555106568418
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 6,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.21607836146105694
+        },
+        "macro_mae": 0.21607836146105694,
+        "mae": 0.21607836146105694
+      }
+    },
+    {
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "n": 6,
+      "n_states": 1,
+      "frozen_development_selected": {
+        "candidate": "zero",
+        "n": 6,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.3102225918884665
+        },
+        "macro_mae": 0.3102225918884665,
+        "mae": 0.3102225918884665
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5228956662038695
+          },
+          "macro_mae": 0.5228956662038695,
+          "mae": 0.5228956662038695
+        },
+        "bilinear": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6432078344762627
+          },
+          "macro_mae": 0.6432078344762627,
+          "mae": 0.6432078344762627
+        },
+        "same_input_interpolation": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5770928792344349
+          },
+          "macro_mae": 0.5770928792344349,
+          "mae": 0.5770928792344349
+        },
+        "bit_only": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6432078344763235
+          },
+          "macro_mae": 0.6432078344763235,
+          "mae": 0.6432078344763235
+        },
+        "median": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.1327654665716099
+          },
+          "macro_mae": 0.1327654665716099,
+          "mae": 0.1327654665716099
+        },
+        "zero": {
+          "n": 6,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3102225918884665
+          },
+          "macro_mae": 0.3102225918884665,
+          "mae": 0.3102225918884665
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 6,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.1327654665716099
+        },
+        "macro_mae": 0.1327654665716099,
+        "mae": 0.1327654665716099
+      }
+    },
+    {
+      "test_set": "new_state_interior",
+      "capability": "math",
+      "n": 3,
+      "n_states": 1,
+      "frozen_development_selected": {
+        "candidate": "low_order_2d",
+        "n": 3,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.07483221119250734
+        },
+        "macro_mae": 0.07483221119250734,
+        "mae": 0.07483221119250734
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.07483221119250734
+          },
+          "macro_mae": 0.07483221119250734,
+          "mae": 0.07483221119250734
+        },
+        "bilinear": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.16276388634789296
+          },
+          "macro_mae": 0.16276388634789296,
+          "mae": 0.16276388634789296
+        },
+        "same_input_interpolation": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.08469825944138192
+          },
+          "macro_mae": 0.08469825944138192,
+          "mae": 0.08469825944138192
+        },
+        "bit_only": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.1627638863478905
+          },
+          "macro_mae": 0.1627638863478905,
+          "mae": 0.1627638863478905
+        },
+        "median": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.0056025732289278025
+          },
+          "macro_mae": 0.0056025732289278025,
+          "mae": 0.0056025732289278025
+        },
+        "zero": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3029344301194337
+          },
+          "macro_mae": 0.3029344301194337,
+          "mae": 0.3029344301194337
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 3,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.0056025732289278025
+        },
+        "macro_mae": 0.0056025732289278025,
+        "mae": 0.0056025732289278025
+      }
+    },
+    {
+      "test_set": "new_state_interior",
+      "capability": "code",
+      "n": 3,
+      "n_states": 1,
+      "frozen_development_selected": {
+        "candidate": "median",
+        "n": 3,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.027384914032168584
+        },
+        "macro_mae": 0.027384914032168584,
+        "mae": 0.027384914032168584
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3319621921693545
+          },
+          "macro_mae": 0.3319621921693545,
+          "mae": 0.3319621921693545
+        },
+        "bilinear": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.475274566994856
+          },
+          "macro_mae": 0.475274566994856,
+          "mae": 0.475274566994856
+        },
+        "same_input_interpolation": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.27732095697825576
+          },
+          "macro_mae": 0.27732095697825576,
+          "mae": 0.27732095697825576
+        },
+        "bit_only": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.47527456699485415
+          },
+          "macro_mae": 0.47527456699485415,
+          "mae": 0.47527456699485415
+        },
+        "median": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.027384914032168584
+          },
+          "macro_mae": 0.027384914032168584,
+          "mae": 0.027384914032168584
+        },
+        "zero": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3752674114570953
+          },
+          "macro_mae": 0.3752674114570953,
+          "mae": 0.3752674114570953
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 3,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.027384914032168584
+        },
+        "macro_mae": 0.027384914032168584,
+        "mae": 0.027384914032168584
+      }
+    },
+    {
+      "test_set": "new_state_interior",
+      "capability": "qa",
+      "n": 3,
+      "n_states": 1,
+      "frozen_development_selected": {
+        "candidate": "zero",
+        "n": 3,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.04474611850443585
+        },
+        "macro_mae": 0.04474611850443585,
+        "mae": 0.04474611850443585
+      },
+      "frozen_candidates": {
+        "low_order_2d": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.7230855647046185
+          },
+          "macro_mae": 0.7230855647046185,
+          "mae": 0.7230855647046185
+        },
+        "bilinear": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.8730379200275932
+          },
+          "macro_mae": 0.8730379200275932,
+          "mae": 0.8730379200275932
+        },
+        "same_input_interpolation": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6615554502160231
+          },
+          "macro_mae": 0.6615554502160231,
+          "mae": 0.6615554502160231
+        },
+        "bit_only": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.8730379200276538
+          },
+          "macro_mae": 0.8730379200276538,
+          "mae": 0.8730379200276538
+        },
+        "median": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.15805707382762982
+          },
+          "macro_mae": 0.15805707382762982,
+          "mae": 0.15805707382762982
+        },
+        "zero": {
+          "n": 3,
+          "n_states": 1,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.04474611850443585
+          },
+          "macro_mae": 0.04474611850443585,
+          "mae": 0.04474611850443585
+        }
+      },
+      "post_test_recommended": {
+        "label": "R",
+        "candidate": "median",
+        "status": "post-test recommendation; not a frozen selection",
+        "n": 3,
+        "n_states": 1,
+        "state_mae": {
+          "pythia-1.4b@step112000": 0.15805707382762982
+        },
+        "macro_mae": 0.15805707382762982,
+        "mae": 0.15805707382762982
+      }
+    }
+  ]
+}
