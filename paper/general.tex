@@ -86,11 +86,8 @@ seven times worse (Appendix~\ref{sec:app_results}): on this new-size
 panel the aggregated development response is the more accurate
 predictor, and the extra value of $N_0$ and $D_0$ is not yet stable
 enough to support the source-conditioned forms. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
-reference size) the frozen constant is
-better than the headline form at the unseen pool on every capability
-(intervals below zero; math 0.020 against 0.089), because the source
-term extends the QA reuse penalty to 2.3 nats at the largest budget
-where 0.40 was measured; at the development pools the headline form
+reference size) the frozen constant is better than the headline form
+at the unseen pool on every capability (intervals below zero); at the development pools the headline form
 has the lower point error on every capability and only its QA gain
 clears zero (0.83 nats, interval $[0.12,1.54]$;
 Table~\ref{tab:distill_paired}). Joint transfer to a larger student and a
