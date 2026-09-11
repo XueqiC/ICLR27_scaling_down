@@ -45,20 +45,21 @@ forms remain untested. On the one new state tested (1B@96k at
 $g=128$, three cells) the surface is best on code and behind the
 source-free curves on math and QA.
 
-\paragraph{Distillation pools.} On the earlier protocol, the
-reuse-count form frozen on pools U75 and U600 beats the constant on
-the unseen pool U225 only for QA (0.706 against 1.449), with a bias
-that changes sign across budgets, and variation across pool samples
-exceeds variation across training seeds (0.43 against 0.04 nats;
-under the uniform protocol two seed repeats differ from their
-originals by at most 0.03 nats for math and code and 0.19 for QA at
-the largest reuse count, Appendix~\ref{sec:app_results}). Under the
-uniform protocol, the headline joint form beats the frozen
-per-capability constant on every capability of both development
-students at the unseen pool (math 0.045 and 0.050 against 0.060 and
-0.057; code 0.036 and 0.029 against 0.047 and 0.069; QA 0.61 and 0.44
-against 0.86 and 1.00; Table~\ref{tab:p2v2_test}), so the pool
-direction is covered on the development students.
+\paragraph{Distillation pools.} On the earlier protocol the
+reuse-count form beats the constant on the unseen pool U225 only for
+QA (0.706 against 1.449), with a bias that changes sign across
+budgets, and pool-sample variation exceeds training-seed variation
+(0.43 against 0.04 nats; Appendix~\ref{sec:app_results}). Under the
+uniform protocol the headline joint form is compared with the frozen
+constant cell by cell, with paired differences and 95\% intervals
+from a bootstrap over trajectories (Table~\ref{tab:distill_paired}). On the 270M
+student at the unseen pool the gain over the constant is detected on
+every capability (0.015, 0.011, and 0.26 nats; intervals above zero);
+on the 1B student it is detected for code and QA (0.040 and 0.56
+nats) and the math point estimate (0.007) is not resolved by three
+trajectories. Against zero change the gains are 42 to 79\% on every
+cell of both students. The pool direction is therefore covered on the
+development students.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
@@ -78,13 +79,14 @@ the per-bit median at every bit-width. On 6.9B@80k the power form
 ties the median on math (0.30 against 0.31) and loses on code and QA:
 the size boundary is soft for math and hard for QA. For distillation,
 on Gemma-3-4B as a held-out student ($\log N_S$ 1.9 above the
-reference against a development span of $\pm0.55$) the headline form
-loses to the frozen constant at the unseen pool (math 0.089 against
-0.020, code 0.050 against 0.038, QA 1.14 against 1.02), because its
-source term extends the QA reuse penalty to 2.3 nats at the largest
-budget where 0.40 was measured, and beats the constant at the
-development pools (0.106, 0.048, 0.96 against 0.156, 0.098, 1.79;
-Table~\ref{tab:p2v2_test}). Joint transfer to a larger student and a
+reference against a development span of $\pm0.55$) the frozen constant is
+better than the headline form at the unseen pool on every capability
+(intervals below zero; math 0.020 against 0.089), because the source
+term extends the QA reuse penalty to 2.3 nats at the largest budget
+where 0.40 was measured; at the development pools the headline form
+has the lower point error on every capability and only its QA gain
+clears zero (0.83 nats, interval $[0.12,1.54]$;
+Table~\ref{tab:distill_paired}). Joint transfer to a larger student and a
 new pool remains unreliable.
 
 \subsection{Applicability across Capabilities and Shared Structure}
