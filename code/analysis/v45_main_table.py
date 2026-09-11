@@ -153,7 +153,8 @@ def main():
                "per_bit_median": "per-bit median", "per_bit_mean": "per-bit mean", "full_N0_L0_D0": "full", "config_median": "median", "mean_base": "mean", "med_base": "median"}
         dn = lambda t: __import__("functools").reduce(lambda acc, kv: acc.replace(kv[0], kv[1]), _DN.items(), str(t)).replace("_", r"\_")
         esc = lambda s: str(s).replace("_", r"\_").replace("&", r"\&").replace(">=", r"$\ge$").replace("^", r"\^{}")
-        st = ("P-new" if r["improvement"] > 0 else "R") if r["status"].startswith("P-NEW") else "P/R" if r["status"].startswith("P (4") else ("P" if r["status"].startswith("FROZEN") else ("L" if r["status"].startswith("LOO") else "R"))
+        # Status records the process only; improvement and verdict record the outcome.
+        st = "P" if r["status"].startswith(("P-NEW", "FROZEN")) else "P/R" if r["status"].startswith("P (4") else "R"
         ab = {"pruning": "prune", "quantization": "quant", "distillation": "distill"}
         L.append(f"{ab[r['method']]} & {r['capability']} & {r['test']} & "
                  f"{esc(r['split'])}/{esc(r['ie']).replace('interp(0.65)+extrap(0.55)','int.+ext.').replace('interp (E in range)','interp')} & {r['cand_mae']:.3f} & {dn(r['base_name'])} & {r['base_mae']:.3f} & "
@@ -161,8 +162,8 @@ def main():
     L += [r"\bottomrule", r"\end{tabular}",
           r"\caption{Main prediction table (capability loss, nats/token); candidate forms and inputs (all K0) are given in \S\ref{sec:twoaxes}. Impr.\ $=$ baseline MAE $-$ candidate MAE "
           r"(positive $=$ candidate better) against the strongest baseline at the \emph{same} information budget (K0). "
-          r"Three statements are kept separate: whether adding $D_0$ improves on the model without it, whether the full-input model improves on the strongest same-budget baseline, and whether a frozen model succeeds on a new source state; Impr.\ reports point-estimate error reduction, and significance is stated in the text. Status: P $=$ frozen prospective (prediction registered before measurement); L $=$ leave-one-out on an existing "
-          r"panel (retrospective); R $=$ baseline/diagnostic added at closeout with the original prediction untouched; P/R $=$ the four candidates were frozen (P) but the per-capability choice among them was made after the test (R). "
+          r"Three statements are kept separate: whether adding $D_0$ improves on the model without it, whether the full-input model improves on the strongest same-budget baseline, and whether a frozen model succeeds on a new source state; Impr.\ reports point-estimate error reduction, and significance is stated in the text. Status: P $=$ frozen prospective (prediction registered before measurement, regardless of outcome); "
+          r"R $=$ retrospective (leave-one-out on an existing panel or baseline/diagnostic added at closeout with the original prediction untouched); P/R $=$ the four candidates were frozen (P) but the per-capability choice among them was made after the test (R). "
           r"Every number is generated from \texttt{results/v*/summary.json} by \texttt{analysis/v45\_main\_table.py}; "
           r"per-source, per-density, and per-pool breakdowns are in the corresponding docs. Point estimates; the "
           r"controlled panels have three size/step/pool clusters, so intervals are panel-conditional (see text).}",

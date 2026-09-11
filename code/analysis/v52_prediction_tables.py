@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Authoritative prediction-comparison tables (CPU only). Supersedes the presentation of v45_main_table.py (kept unchanged).
+"""Authoritative prediction-comparison tables (CPU only). Supersedes the presentation of v45_main_table.py.
 Each test = one group of three lines: candidate / strongest same-input baseline / strongest simple baseline, per capability.
-Origin code = prediction origin (P frozen prospective, L leave-one-out on an existing panel) · same-input baseline origin ·
+Origin code = prediction origin (P frozen before measurement, R retrospective, including leave-one-out) · same-input baseline origin ·
 simple baseline origin (F frozen or pre-specified together with the candidate, R computed after the test, - none) ·
-selection (A all pre-specified forms reported, S per-capability choice made after the test, D chosen on the development set).
+selection (A all pre-specified forms reported, S per-capability choice made after the test).
+Origin records the process only: a frozen prediction stays P whether it wins, ties, or loses; outcome is separate.
 Improvement = MAE(strongest baseline) - MAE(candidate), positive = candidate better. Outputs JSON/CSV + two LaTeX tables."""
 import json, csv, glob, collections
 from pathlib import Path
@@ -17,6 +18,7 @@ NAMES = {"config_median": "per-config median", "config_mean": "per-config mean",
 groups = []
 def add(axis, method, test, unseen, cand_name, cand, same, simple, origin, src, freeze, n, ci=None, note="", main=True):
     """cand/same/simple: dict cap->mae ; same/simple may carry per-cap names via tuples (name, mae)."""
+    # Supply origin from the recorded process, independently of errors and improvements.
     groups.append(dict(axis=axis, method=method, test=test, unseen=unseen, cand_name=cand_name, cand=cand, same=same, simple=simple,
                        origin=origin, src=src, freeze=freeze, n=n, ci=ci or {}, note=note, main=main))
 def best(d, keys):  # returns cap -> (name, mae) with the smallest mae among keys
@@ -31,7 +33,7 @@ for arm, label in (("pruning", "pruning"), ("quantization", "quantization")):
         s = cmp["strongest_simple_baseline"]; simple[c] = (s, cmp["baseline_candidates"][s]["mae"])
         lo, hi = core["N0_D0_L0"]["improvement_ci95"]; ci[c] = "ci_excl0" if lo > 0 else "ci_incl0"
     add("source", label, f"source transfer at fixed {'$d$' if arm=='pruning' else '$b$'}: $3\\times3$ Pythia panel, leave-one-step-out",
-        "held-out pretraining stage (in-range)", "config-indicator OLS $\\{N_0,L_0,D_0\\}$", cand, same, simple, "L·F·R·A",
+        "held-out pretraining stage (in-range)", "config-indicator OLS $\\{N_0,L_0,D_0\\}$", cand, same, simple, "R·F·R·A",
         "v36b-input-comparison/summary.json", "retrospective", "36 cells / 3 folds", ci)
 v38 = J("v38-prospective/compare.json")["arms"]["pruning"]
 add("source", "pruning", "new stage 96k on 160M and 1.4B, all measured $d$", "stage 96k (interpolation between 64k and 143k)",
@@ -45,7 +47,7 @@ for reg, lab in (("ge4", "$b\\ge4$ (near-zero regime)"), ("int3", "int3 (collaps
 v39 = J("v39-distill-controlled/summary.json")["by_cap"]
 add("source", "distillation", "$\\delta_c$ source transfer: $3\\times3$ LoRA panel, leave-one-step-out", "held-out pretraining stage (in-range)",
     "linear $\\{N_0,L_0,D_0\\}$", {c: v39[c]["step"]["mae_D0"] for c in CAPS}, {c: ("noD0_N0_L0", v39[c]["step"]["mae_noD0"]) for c in CAPS},
-    {c: (v39[c]["step"]["strongest_baseline"], v39[c]["step"]["mae_baseline"]) for c in CAPS}, "L·F·R·A", "v39-distill-controlled/summary.json", "retrospective", "9 cells / 3 folds")
+    {c: (v39[c]["step"]["strongest_baseline"], v39[c]["step"]["mae_baseline"]) for c in CAPS}, "R·F·R·A", "v39-distill-controlled/summary.json", "retrospective", "9 cells / 3 folds")
 # ---------- CONFIGURATION AXIS ----------
 v42 = J("v42-prune-sameinput/summary.json")["by_cap"]
 m = {c: v42[c]["mae"] for c in CAPS}
@@ -160,8 +162,8 @@ def table(sel, label, caption, methods_rule=True, page_break_method=None):
     return "\n".join(L) + "\n"
 LEG = (r" MAE in nats/token per capability; bold = smallest in the group; the number in parentheses is the improvement of the candidate over the strongest listed baseline "
        r"(positive = candidate better); $^{*}$ = bootstrap 95\% interval of that improvement excludes zero (computed only for the leave-one-out panels). Origin code: prediction origin "
-       r"(P frozen prospective, L leave-one-out) $\cdot$ same-input baseline origin $\cdot$ simple baseline origin (F pre-specified with the candidate, R computed after the test, -- none) $\cdot$ "
-       r"selection (A: all pre-specified forms reported). Where several same-input or simple baselines exist, the strongest per capability is shown and named; that choice is retrospective. "
+       r"(P frozen before measurement regardless of outcome, R retrospective, including leave-one-out) $\cdot$ same-input baseline origin $\cdot$ simple baseline origin (F pre-specified with the candidate, R computed after the test, -- none) $\cdot$ "
+       r"selection (A: all pre-specified forms reported; S: per-capability choice made after the test). Where several same-input or simple baselines exist, the strongest per capability is shown and named; that choice is retrospective. "
        r"Config-indicator OLS uses $\{N_0,L_0,D_0\}$ with one coefficient set per configuration. Generated by \texttt{v52\_prediction\_tables.py}.")
 (TAB / "pred_source.tex").write_text(table(lambda g: g["axis"] == "source", "tab:pred_source", r"Source axis: does the pre-compression source state predict the response at a fixed intervention setting?" + LEG))
 (TAB / "pred_config_prune.tex").write_text(table(lambda g: g["axis"] == "config" and g["method"] == "pruning", "tab:pred_config_prune", r"Configuration axis, pruning: does a relation fit at seen densities and sources predict unseen densities, sizes and stages? Protocol A (full development panel) for the two P1-v2 pairs and the single-stage 1B@96k prospective; protocol B in Table~\ref{tab:p1v2}. Format, bold, improvement in parentheses, and origin code as in Table~\ref{tab:pred_source}."))
@@ -222,7 +224,7 @@ def compact():
           r"For U375, the headline is the frozen form with the lowest per-capability development MAE; this selection rule was stated after the tests (R). Each U375 group has 12 points per capability; ``student'' marks the held-out Gemma-3-4B. "
           r"The baseline shown is the stronger of the same-input and the simple baseline per capability, named by code: nD = no-$D_0$ variant, med = per-configuration median or median development curve, "
           r"0 = zero change, so = strength-only curve, A1 = $\gamma{=}1$ power form, A2 = per-density regression with fixed interpolation, ct = continuous two-term form, pbm/pba = per-bit median/mean, "
-          r"c = constant, TE = joint $T{+}E$ form. ``unseen'' lists what the test holds out (size$\uparrow$ = five times beyond the development range). Origin code, four letters: prediction (P frozen prospective, L leave-one-out), same-input baseline, simple baseline (F pre-specified with the candidate, R computed after the test, -- none), selection (A: all pre-specified forms reported). "
+          r"c = constant, TE = joint $T{+}E$ form. ``unseen'' lists what the test holds out (size$\uparrow$ = five times beyond the development range). Origin code, four letters: prediction (P frozen before measurement regardless of outcome, R retrospective, including leave-one-out), same-input baseline, simple baseline (F pre-specified with the candidate, R computed after the test, -- none), selection (A: all pre-specified forms reported; S: per-capability choice made after the test). "
           r"Improvements, both baselines separately, and bootstrap intervals are in Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}. Generated by \texttt{v52\_prediction\_tables.py}.}",
           r"\label{tab:pred_main}\end{table}"]
     return "\n".join(L) + "\n"

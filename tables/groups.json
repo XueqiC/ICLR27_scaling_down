@@ -38,7 +38,7 @@
     0.49967654203633277
    ]
   },
-  "origin": "L\u00b7F\u00b7R\u00b7A",
+  "origin": "R\u00b7F\u00b7R\u00b7A",
   "src": "v36b-input-comparison/summary.json",
   "freeze": "retrospective",
   "n": "36 cells / 3 folds",
@@ -99,7 +99,7 @@
     1.4728778022021547
    ]
   },
-  "origin": "L\u00b7F\u00b7R\u00b7A",
+  "origin": "R\u00b7F\u00b7R\u00b7A",
   "src": "v36b-input-comparison/summary.json",
   "freeze": "retrospective",
   "n": "36 cells / 3 folds",
@@ -313,7 +313,7 @@
     0.15891687790452036
    ]
   },
-  "origin": "L\u00b7F\u00b7R\u00b7A",
+  "origin": "R\u00b7F\u00b7R\u00b7A",
   "src": "v39-distill-controlled/summary.json",
   "freeze": "retrospective",
   "n": "9 cells / 3 folds",
