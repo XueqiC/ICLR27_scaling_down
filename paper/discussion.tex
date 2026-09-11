@@ -1,9 +1,8 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
 
-What can be predicted now is specific. Given the parameter count, the
-pretraining token count, and the dense capability losses of a source
-in the development range, the pruning form of Eq.~\eqref{eq:power} predicts the math and code
+What can be predicted now is specific. Given the initial-state inputs
+of a source in the development range, the pruning form of Eq.~\eqref{eq:power} predicts the math and code
 response at any density inside the fitted range to within a few
 tenths of a nat. Given the same inputs, the frozen surface of
 Eq.~\eqref{eq:quant2d} predicts the grouped quantizer at bit-widths
@@ -19,9 +18,9 @@ What cannot be predicted is equally specific. No source-conditioned
 form predicts the QA response to pruning on a new checkpoint, and no
 form transfers to density 0.55 or to a source five times larger. Bit-width alone supports no continuous quantization relation. Joint
 transfer of the distillation forms to a larger student and a new pool
-is unreliable, and the distillation QA gain on the primary
-distribution does not carry over to TriviaQA, so it is a prediction
-relation on the measured distribution and no general QA gain
+is unreliable, and the distillation QA gain on the primary distribution reverses
+sign on an independent multi-hop set, so it is a prediction relation
+on the teacher-matched distribution and no general QA gain
 (Appendix~\ref{sec:app_measure}).
 
 The dense capability anchor is the input to keep, the working forms

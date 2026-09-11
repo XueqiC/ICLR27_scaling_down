@@ -1,0 +1,32 @@
+\begin{table}[H]
+\centering
+\small
+\caption{V69 quantization confirmation. MAE in nats from predictions frozen before measurement; 21 state/configuration cells per capability. Near-zero means measured $|\Delta L|<0.1$; clear-damage is its complement, including negative changes. Parentheses give measured counts; bold marks the candidate selected by development LOSO, including the 0.02-nat tie rule, independently of these test outcomes.}
+\label{tab:quant_confirm}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Regime & Candidate & Math & Code & QA \\
+\midrule
+All & 2-D surface & \textbf{0.2528 (21)} & 0.3173 (21) & 0.9545 (21) \\
+ & Bilinear & 0.3404 (21) & 0.3946 (21) & 1.1433 (21) \\
+ & Piecewise interpolation & 0.0978 (21) & 0.1535 (21) & 0.5317 (21) \\
+ & Bit only & 0.4224 (21) & 0.5732 (21) & 1.1754 (21) \\
+ & Per-config median & 0.3234 (21) & \textbf{0.3838 (21)} & 0.3222 (21) \\
+ & Zero & 0.5343 (21) & 0.6287 (21) & \textbf{0.3562 (21)} \\
+\addlinespace
+Near zero & 2-D surface & \textbf{0.1095 (11)} & 0.1259 (9) & 0.8820 (16) \\
+ & Bilinear & 0.1595 (11) & 0.1160 (9) & 1.1510 (16) \\
+ & Piecewise interpolation & 0.0119 (11) & 0.0258 (9) & 0.2040 (16) \\
+ & Bit only & 0.1439 (11) & 0.2020 (9) & 1.1732 (16) \\
+ & Per-config median & 0.0230 (11) & \textbf{0.0323 (9)} & 0.1348 (16) \\
+ & Zero & 0.0375 (11) & 0.0271 (9) & \textbf{0.0386 (16)} \\
+\addlinespace
+Clear damage & 2-D surface & \textbf{0.4104 (10)} & 0.4608 (12) & 1.1864 (5) \\
+ & Bilinear & 0.5395 (10) & 0.6035 (12) & 1.1187 (5) \\
+ & Piecewise interpolation & 0.1923 (10) & 0.2493 (12) & 1.5804 (5) \\
+ & Bit only & 0.7287 (10) & 0.8517 (12) & 1.1826 (5) \\
+ & Per-config median & 0.6538 (10) & \textbf{0.6474 (12)} & 0.9218 (5) \\
+ & Zero & 1.0807 (10) & 1.0799 (12) & \textbf{1.3722 (5)} \\
+\bottomrule
+\end{tabular}
+\end{table}

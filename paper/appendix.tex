@@ -2,6 +2,13 @@
 \label{sec:app_details}
 \subsection{Probes and loss computation}
 \label{sec:app_probes}
+
+The primary probes draw from MATH-500 \citep{hendrycks2021math,lightman2023verify}, MBPP
+\citep{austin2021program}, and 2WikiMultihopQA \citep{ho2020constructing}; the secondary benchmarks of the measurement
+checks are GSM8K \citep{cobbe2021gsm8k}, SVAMP \citep{patel2021svamp}, HumanEval \citep{chen2021codex}, HotpotQA
+\citep{yang2018hotpotqa}, TriviaQA \citep{joshi2017triviaqa}, and MuSiQue \citep{trivedi2022musique}. Models: Pythia
+\citep{biderman2023pythia}, Gemma 3 \citep{gemma2025gemma3}, Qwen3 \citep{qwen2025qwen3}; LoRA adapters \citep{hu2022lora}.
+The size-and-stage panel design follows the observational use of released checkpoints \citep{ruan2024observational,polo2024tinybenchmarks}.
 Each capability is measured on a fixed probe set of prompt--reference
 pairs drawn once, with a fixed seed, from held-out benchmark splits that
 are disjoint from each training and recovery source used in the paper.
@@ -334,6 +341,26 @@ probe distribution, which shares its multi-hop format with the teacher
 pool, and should not be read as a general QA gain. The math response
 under distillation on SVAMP lies within that probe's noise.
 \input{tables/p3_check}
+
+\paragraph{An independent multi-hop distribution.} The primary QA
+probe is drawn from 2WikiMultihopQA, whose format the teacher pool
+(HotpotQA-style traces) shares. We therefore scored every trajectory
+of the uniform distillation protocol at its final checkpoint, the
+early P3 checkpoints, and the three dense students on 128 MuSiQue
+answerable-dev questions \citep{trivedi2022musique} with the
+supporting paragraphs supplied, under the same template, context
+condition, and probe seed as the primary probe
+(Table~\ref{tab:musique_scope}). The sign flips on every trajectory:
+at moderate reuse ($E$ of 2.3 to 2.9) the primary loss falls by 0.4 to
+0.9 nats while the MuSiQue loss rises by 0.1 to 0.9 nats, more for
+larger students; at high reuse ($E\approx14$) both rise by several
+nats; and the 1B early checkpoints already diverge ($-1.0$ to $-1.4$
+against $+0.3$). The distillation QA response that the laws of
+\S\ref{sec:law_distill} predict is therefore the conditional loss on
+the teacher-matched QA distribution, and it does not carry over to an
+independent multi-hop distribution even with the same information
+condition.
+\input{tables/musique_scope}
 
 \paragraph{Loss and behavior.} Loss-to-accuracy links were fit on
 GSM8K accuracy, MBPP pass@1, and TriviaQA exact match and token F1

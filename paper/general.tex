@@ -13,7 +13,7 @@ source-free reference. Errors are MAE in nats per token.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.7\textwidth]{figs/transfer_limits.pdf}
+\includegraphics[width=0.66\textwidth]{figs/transfer_limits.pdf}
 \caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference in nats, averaged over capabilities; positive = candidate better) per new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE in each cell; hatched cells were not evaluated. Bottom: the distillation pool tests per capability against the frozen constant. All predictions were frozen before the corresponding measurement.}
 \label{fig:transfer}
 \end{figure}
@@ -46,9 +46,7 @@ source-free curves on math and QA.
 
 \paragraph{Distillation pools.} On the earlier protocol the
 reuse-count form beats the constant on the unseen pool U225 only for
-QA (0.706 against 1.449), with a bias that changes sign across
-budgets, and pool-sample variation exceeds training-seed variation
-(0.43 against 0.04 nats; Appendix~\ref{sec:app_results}). Under the
+QA (0.706 against 1.449; Appendix~\ref{sec:app_results}). Under the
 uniform protocol the headline joint form is compared with the frozen
 constant cell by cell, with paired differences and 95\% intervals
 from a bootstrap over trajectories (Table~\ref{tab:distill_paired}). On the 270M
@@ -56,9 +54,8 @@ student at the unseen pool the gain over the constant is detected on
 every capability (0.015, 0.011, and 0.26 nats; intervals above zero);
 on the 1B student it is detected for code and QA (0.040 and 0.56
 nats) and the math point estimate (0.007) is not resolved by three
-trajectories. Against zero change the gains are 42 to 79\% on every
-cell of both students. The pool direction is therefore covered on the
-development students.
+trajectories. Against zero change the gains are 42 to 79\% on every cell, so the
+pool direction is covered on the development students.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
@@ -100,11 +97,8 @@ error by 0.1 to 0.4 nats for the budget-plus-reuse structures
 
 \paragraph{Shared structure, ranges, and calibration.} One function
 family for all three methods, with method- and capability-specific
-parameters, holds for pruning by construction and fails for the other
-two arms on the same held-out splits (the separable family we tested
-is worse than the quantization surface, macro MAE 2.96 against 2.40;
-a reuse-only family is worse than the budget-plus-reuse form, 0.54
-against 0.28). Within pruning one exponent shared across capabilities costs nothing
+parameters, holds for pruning by construction and fails for the other two arms on
+the same held-out splits (Appendix~\ref{sec:app_shared}). Within pruning one exponent shared across capabilities costs nothing
 (leave-one-source MAE within 0.02 nats of per-capability exponents),
 whereas the quantization coefficients must be capability-specific. Three ranges are kept apart
 (Appendix~\ref{sec:app_shared}): the bootstrap intervals of the

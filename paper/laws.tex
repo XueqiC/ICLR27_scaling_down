@@ -3,7 +3,7 @@
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.72\textwidth]{figs/predictive_responses.pdf}
+\includegraphics[width=0.68\textwidth]{figs/predictive_responses.pdf}
 \caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median curve; the 6.9B source is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources with the frozen per-bit regression (hollow) and the per-bit median (dotted). Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms. Lines are fits frozen before the test points were measured; native nats per token.}
 \label{fig:responses}
 \end{figure}
@@ -11,12 +11,12 @@
 \subsection{Conditioning on the Initial Model State}
 \label{sec:conditioning}
 
-The first question is whether the initial state is worth reading, and
-which part of it carries the signal. On the nine-state panel with one
-pretraining stage held out, a per-setting regression of the pruning
-response on $(N_0,D_0,L_{0,c})$ lowers the error from 0.413, 0.516,
-and 0.500 nats (the strongest source-free reference) to 0.253, 0.292,
-and 0.806 for math, code, and QA; the improvement interval excludes
+Is the initial state worth reading, and which part carries the
+signal? On the nine-state panel with one stage held out, a
+per-setting regression of the pruning response on $(N_0,D_0,L_{0,c})$
+lowers the error from 0.413, 0.516, and 0.500 nats (the strongest
+source-free reference) to 0.253, 0.292, and 0.806 for math, code, and
+QA; the improvement interval excludes
 zero for code, includes zero for math, and is negative for QA, where
 predicting no change is better. Adding the dense anchor $L_{0,c}$ to
 $(N_0,D_0)$ has intervals above zero for math ($+0.55$, $[0.29,1.00]$)
@@ -62,9 +62,8 @@ per capability whose value these data do not establish as necessary.
 \label{sec:law_quant}
 
 Bit-width alone offers little room for a continuous relation: int8
-and int6 stay within 0.01 nats of dense, int4 costs 0.03 to 0.35 nats
-on most states, and int3 collapses most models by several nats
-(Fig.~\ref{fig:responses}, middle). At fixed bit-width we use the
+and int6 stay within 0.01 nats of dense, int4 costs 0.03 to 0.35 nats,
+and int3 collapses most models (Fig.~\ref{fig:responses}, middle). At fixed bit-width we use the
 source regression of \S\ref{sec:conditioning} per bit; it predicts a
 new state at a seen bit-width, is no law over $b$, and improves on the
 per-bit median for math and code and not for QA. A grouped quantizer
@@ -102,12 +101,12 @@ completion tokens $T$, the pool size $D_U$, and the reuse count
 $E=T/D_U$. QA improves under every recipe we ran while math and code
 respond by a few hundredths to a few tenths of a nat, and with a small
 pool the QA loss rises again once $E$ grows large
-(Fig.~\ref{fig:responses}, right). Distillation lowers the
-conditional loss on the primary QA distribution, and that change does
-not carry over to TriviaQA on the same checkpoints
-(Appendix~\ref{sec:app_measure}); we therefore read the QA result as
-a prediction relation on the measured QA distribution and not as a
-general QA gain.
+(Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the primary QA
+distribution, and on the same checkpoints the loss on an independent
+multi-hop set with the same context condition (MuSiQue) rises, as does
+TriviaQA (Appendix~\ref{sec:app_measure}); we therefore read the QA
+result as a prediction relation on the teacher-matched QA distribution
+and not as a general QA gain.
 
 \paragraph{Source axis.} On the nine Pythia states as students, with
 the teacher pool and budget fixed, a linear form

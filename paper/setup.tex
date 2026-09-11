@@ -7,7 +7,8 @@
 We measure three capabilities, mathematical reasoning, code generation,
 and multi-hop question answering, each through a fixed probe set
 $\probeset{c}$ of prompt and reference pairs drawn once from held-out
-splits of MATH-500, MBPP, and 2WikiMultihopQA. The observable is the
+splits of MATH-500 \citep{hendrycks2021math,lightman2023verify}, MBPP
+\citep{austin2021program}, and 2WikiMultihopQA \citep{ho2020constructing}. The observable is the
 token-weighted conditional cross-entropy of the reference completion,
 \begin{equation}
 \Lc{c}(w)\;=\;\frac{1}{T_c}\sum_{(x,y)\in\probeset{c}}\;\sum_{t=1}^{|y|}
@@ -35,8 +36,8 @@ is a tested property (Appendix~\ref{sec:app_measure}).
 A \emph{heterogeneous panel} of twelve finished public models from
 five series (Qwen3, Gemma-3, Gemma-4, Muse, OLMo-3; 0.6B to 32B)
 establishes the phenomena and the limits of cross-family transfer
-(Appendix~\ref{sec:app_hetero}). A \emph{controlled panel} of Pythia
-checkpoints (160M, 410M, 1.4B at steps 16k, 64k, 143k) varies the
+(Appendix~\ref{sec:app_hetero}). A \emph{controlled panel} of Pythia checkpoints
+\citep{biderman2023pythia} (160M, 410M, 1.4B at steps 16k, 64k, 143k) varies the
 initial state along parameter count and pretraining stage with
 architecture and data fixed and is the development set of every
 relation. \emph{New states and configurations} that entered no fit
@@ -50,8 +51,8 @@ density $d$. Quantization is symmetric round-to-nearest of the same
 matrices, weights only, per output channel at bit-width $b$ or with
 contiguous input groups of $g$ weights sharing one scale.
 Distillation is supervised fine-tuning of an existing student on
-black-box teacher traces with strict LoRA adapters from a pool of $U$
-traces per domain, processed for a fixed budget. The inputs admitted to every predictor
+black-box teacher traces with strict LoRA adapters \citep{hu2022lora}
+from a pool of $U$ traces per domain, processed for a fixed budget. The inputs admitted to every predictor
 are the parameter count $N_0$ of the transformer weight matrices, the
 pretraining token count $D_0$ where disclosed, and the dense capability
 losses $L_{0,c}$ measured once on the uncompressed model (the initial
@@ -71,9 +72,8 @@ and the evaluation protocol, and each keeps its own functional form.
 \label{sec:eval}
 
 Each relation is fit on development states and settings only and is
-judged on unseen settings (a density, bit-width, group size, pool, or
-budget outside the fitted set) and on unseen states (a new size,
-stage, or student). On the development panel we use
+judged on unseen settings (outside the fitted set) and unseen states
+(a new size, stage, or student). On the development panel we use
 leave-one-stage-out and leave-one-source-out cross-validation; for new
 states the forms, coefficients, and predictions of every candidate are
 committed to the repository before the outcome is measured, and a

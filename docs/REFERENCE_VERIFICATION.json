@@ -1,0 +1,289 @@
+{
+ "kaplan2020scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2001.08361v1 (2020); first author Jared Kaplan",
+  "bib_title": "Scaling Laws for Neural Language Models",
+  "bib_first_author": "kaplan",
+  "bib_year": "2020"
+ },
+ "hoffmann2022training": {
+  "verdict": "UNVERIFIED",
+  "evidence": " | s2 error: HTTP Error 429: ",
+  "bib_title": "An Empirical Analysis of Compute-Optimal Large Language Model Training",
+  "bib_first_author": "hoffmann",
+  "bib_year": "2022"
+ },
+ "frantar2023scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2309.08520v1 (2023); first author Elias Frantar",
+  "bib_title": "Scaling Laws for Sparsely-Connected Foundation Models",
+  "bib_first_author": "frantar",
+  "bib_year": "2024"
+ },
+ "kumar2024scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2411.04330v2 (2024); first author Tanishq Kumar",
+  "bib_title": "Scaling Laws for Precision",
+  "bib_first_author": "kumar",
+  "bib_year": "2025"
+ },
+ "busbridge2025distillation": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2502.08606v2 (2025); first author Dan Busbridge",
+  "bib_title": "Distillation Scaling Laws",
+  "bib_first_author": "busbridge",
+  "bib_year": "2025"
+ },
+ "panferov2025unified": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2506.01863v1 (2025); first author Andrei Panferov",
+  "bib_title": "Unified Scaling Laws for Compressed Representations",
+  "bib_first_author": "panferov",
+  "bib_year": "2025"
+ },
+ "jaiswal2023compressing": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2310.01382v2 (2023); first author Ajay Jaiswal",
+  "bib_title": "Compressing LLMs: The Truth is Rarely Pure and Never Simple",
+  "bib_first_author": "jaiswal",
+  "bib_year": "2024"
+ },
+ "liu2025quantization": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2504.04823v2 (2025); first author Ruikang Liu",
+  "bib_title": "Quantization Hurts Reasoning? An Empirical Study on Quantized Reasoning Models",
+  "bib_first_author": "liu",
+  "bib_year": "2025"
+ },
+ "schaeffer2023emergent": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2304.15004v2 (2023); first author Rylan Schaeffer",
+  "bib_title": "Are Emergent Abilities of Large Language Models a Mirage?",
+  "bib_first_author": "schaeffer",
+  "bib_year": "2023"
+ },
+ "schaeffer2024predicting": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2406.04391v2 (2024); first author Rylan Schaeffer",
+  "bib_title": "Why Has Predicting Downstream Capabilities of Frontier AI Models with Scale Remained Elusive?",
+  "bib_first_author": "schaeffer",
+  "bib_year": "2025"
+ },
+ "gadre2024language": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2403.08540v2 (2024); first author Samir Yitzhak Gadre",
+  "bib_title": "Language Models Scale Reliably with Over-Training and on Downstream Tasks",
+  "bib_first_author": "gadre",
+  "bib_year": "2025"
+ },
+ "bhagia2024establishing": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2412.04403v2 (2024); first author Akshita Bhagia",
+  "bib_title": "Establishing Task Scaling Laws via Compute-Efficient Model Ladders",
+  "bib_first_author": "bhagia",
+  "bib_year": "2025"
+ },
+ "owen2024how": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2401.04757v1 (2024); first author David Owen",
+  "bib_title": "How Predictable is Language Model Benchmark Performance?",
+  "bib_first_author": "owen",
+  "bib_year": "2024"
+ },
+ "ruan2024observational": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2405.10938v3 (2024); first author Yangjun Ruan",
+  "bib_title": "Observational Scaling Laws and the Predictability of Language Model Performance",
+  "bib_first_author": "ruan",
+  "bib_year": "2024"
+ },
+ "lourie2025scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2507.00885v2 (2025); first author Nicholas Lourie",
+  "bib_title": "Scaling Laws Are Unreliable for Downstream Tasks: A Reality Check",
+  "bib_first_author": "lourie",
+  "bib_year": "2025"
+ },
+ "sharma2023laser": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2312.13558v1 (2023); first author Pratyusha Sharma",
+  "bib_title": "The Truth is in There: Improving Reasoning in Language Models with Layer-Selective Rank Reduction",
+  "bib_first_author": "sharma",
+  "bib_year": "2024"
+ },
+ "yin2023junk": {
+  "verdict": "UNVERIFIED",
+  "evidence": " | s2 error: HTTP Error 429: ",
+  "bib_title": "Junk {DNA} Hypothesis: Pruning Small Pre-Trained Weights Irreversibly and Monotonically Impairs ``Difficult'' Downstream Tasks in {LLM}s",
+  "bib_first_author": "yin",
+  "bib_year": "2024"
+ },
+ "zhang2024scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2411.10272v3 (2024); first author Xiaodong Chen",
+  "bib_title": "P$^2$ Law: Scaling Law for Post-Training After Model Pruning",
+  "bib_first_author": "chen",
+  "bib_year": "2025"
+ },
+ "muralidharan2024compact": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2407.14679v2 (2024); first author Saurav Muralidharan",
+  "bib_title": "Compact Language Models via Pruning and Knowledge Distillation",
+  "bib_first_author": "muralidharan",
+  "bib_year": "2024"
+ },
+ "xia2023sheared": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2310.06694v2 (2023); first author Mengzhou Xia",
+  "bib_title": "Sheared LLaMA: Accelerating Language Model Pre-training via Structured Pruning",
+  "bib_first_author": "xia",
+  "bib_year": "2024"
+ },
+ "sengupta2025compression": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2504.04342v2 (2025); first author Ayan Sengupta",
+  "bib_title": "Pruning Laws for Large Language Models",
+  "bib_first_author": "sengupta",
+  "bib_year": "2025"
+ },
+ "zhou2025task": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2508.18609v4 (2025); first author Chenxi Zhou",
+  "bib_title": "Task-Stratified Knowledge Scaling Laws for Post-Training Quantized Large Language Models",
+  "bib_first_author": "zhou",
+  "bib_year": "2026"
+ },
+ "dettmers2023case": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2212.09720v2 (2022); first author Tim Dettmers",
+  "bib_title": "The case for 4-bit precision: {k}-bit Inference Scaling Laws",
+  "bib_first_author": "dettmers",
+  "bib_year": "2023"
+ },
+ "lecun1989optimal": {
+  "verdict": "TITLE-OK/AUTHOR-MISMATCH",
+  "evidence": "arXiv 2508.09697v4 (2025); first author Xinlei Zhang | s2 error: HTTP Error 429: ",
+  "bib_title": "Optimal Brain Damage",
+  "bib_first_author": "lecun",
+  "bib_year": "1989"
+ },
+ "hassibi1992second": {
+  "verdict": "UNVERIFIED",
+  "evidence": "arxiv error: HTTP Error 429: Unknown Error | s2 error: HTTP Error 429: ",
+  "bib_title": "Second Order Derivatives for Network Pruning: Optimal Brain Surgeon",
+  "bib_first_author": "hassibi",
+  "bib_year": "1992"
+ },
+ "frantar2023sparsegpt": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2301.00774v3 (2023); first author Elias Frantar",
+  "bib_title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+  "bib_first_author": "frantar",
+  "bib_year": "2023"
+ },
+ "sun2023simple": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2306.11695v3 (2023); first author Mingjie Sun",
+  "bib_title": "A Simple and Effective Pruning Approach for Large Language Models",
+  "bib_first_author": "sun",
+  "bib_year": "2024"
+ },
+ "fasc2026": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2601.07197v1 (2026); first author Ibne Farabi Shihab",
+  "bib_title": "Beyond Variance: Knowledge-Aware {LLM} Compression via Fisher-Aligned Subspace Diagnostics",
+  "bib_first_author": "shihab",
+  "bib_year": "2026"
+ },
+ "fisher3d2026": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2605.15828v2 (2026); first author Yipu Zhang",
+  "bib_title": "Not All Tasks Quantize Equally: Fisher-Guided Quantization for Visual Geometry Transformer",
+  "bib_first_author": "zhang",
+  "bib_year": "2026"
+ },
+ "gurari2018gradient": {
+  "verdict": "TITLE-OK/AUTHOR-MISMATCH",
+  "evidence": "arXiv 1812.04754v1 (2018); first author Guy Gur-Ari | S2 2018 arXiv.org first author Guy Gur-Ari 1812.04754",
+  "bib_title": "Gradient Descent Happens in a Tiny Subspace",
+  "bib_first_author": "gur-ari",
+  "bib_year": "2018"
+ },
+ "zhao2024galore": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2403.03507v2 (2024); first author Jiawei Zhao",
+  "bib_title": "GaLore: Memory-Efficient LLM Training by Gradient Low-Rank Projection",
+  "bib_first_author": "zhao",
+  "bib_year": "2024"
+ },
+ "michaud2023quantization": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2303.13506v3 (2023); first author Eric J. Michaud",
+  "bib_title": "The Quantization Model of Neural Scaling",
+  "bib_first_author": "michaud",
+  "bib_year": "2023"
+ },
+ "ilharco2023editing": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2212.04089v3 (2022); first author Gabriel Ilharco",
+  "bib_title": "Editing Models with Task Arithmetic",
+  "bib_first_author": "ilharco",
+  "bib_year": "2023"
+ },
+ "sharma2020neural": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2004.10802v1 (2020); first author Utkarsh Sharma",
+  "bib_title": "A Neural Scaling Law from the Dimension of the Data Manifold",
+  "bib_first_author": "sharma",
+  "bib_year": "2020"
+ },
+ "bahri2021explaining": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2102.06701v2 (2021); first author Yasaman Bahri",
+  "bib_title": "Explaining Neural Scaling Laws",
+  "bib_first_author": "bahri",
+  "bib_year": "2024"
+ },
+ "maloney2022solvable": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2210.16859v1 (2022); first author Alexander Maloney",
+  "bib_title": "A Solvable Model of Neural Scaling Laws",
+  "bib_first_author": "maloney",
+  "bib_year": "2022"
+ },
+ "li2025misfitting": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2502.18969v1 (2025); first author Margaret Li",
+  "bib_title": "(Mis)Fitting: A Survey of Scaling Laws",
+  "bib_first_author": "li",
+  "bib_year": "2025"
+ },
+ "besiroglu2024chinchilla": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2404.10102v2 (2024); first author Tamay Besiroglu",
+  "bib_title": "Chinchilla Scaling: A Replication Attempt",
+  "bib_first_author": "besiroglu",
+  "bib_year": "2024"
+ },
+ "gong2025identifying": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2503.01901v1 (2025); first author Yuezhou Hu",
+  "bib_title": "Identifying Sensitive Weights via Post-quantization Integral",
+  "bib_first_author": "hu",
+  "bib_year": "2025"
+ },
+ "ghita2026task": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2606.24747v2 (2026); first author Lavinia Ghita",
+  "bib_title": "Scaling Laws for Task-Specific {LLM} Distillation",
+  "bib_first_author": "ghita",
+  "bib_year": "2026"
+ },
+ "muennighoff2023scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2305.16264v5 (2023); first author Niklas Muennighoff",
+  "bib_title": "Scaling Data-Constrained Language Models",
+  "bib_first_author": "muennighoff",
+  "bib_year": "2023"
+ }
+}

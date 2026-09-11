@@ -2,25 +2,27 @@
 \label{sec:related}
 
 \paragraph{Scaling laws for compression.} Existing compression laws
-differ in what they take as input and what they predict. Sparsity enters as a factor on the size term of a pretraining loss
-law \citep{frantar2023scaling}; precision enters through an
-effective-parameter count with a post-training degradation term
-\citep{kumar2024scaling}; training formats collapse onto one capacity
-scalar \citep{panferov2025unified}; the P$^2$ law predicts the
-post-training loss of a pruned model from its size and loss before
-pruning, the pruning rate, and the post-training tokens
-\citep{zhang2024scaling}; and a distilled student follows a broken
-power law in teacher loss \citep{busbridge2025distillation}.
-Their targets are aggregate losses; we follow the P$^2$ law in
-admitting the pre-compression loss and add a per-capability endpoint
-measured the same way for three methods, a development panel in which
-size and stage vary separately, and held-out tests with same-input
-baselines.
+take sparsity \citep{frantar2023scaling}, precision
+\citep{kumar2024scaling}, training formats \citep{panferov2025unified},
+the pre-pruning loss and post-training tokens \citep{zhang2024scaling},
+or the teacher loss \citep{busbridge2025distillation} as inputs and
+predict an aggregate loss; we follow the P$^2$ law in admitting the
+pre-compression loss and add a per-capability endpoint measured the
+same way for three methods, a development panel in which size and
+stage vary separately, and held-out tests with same-input baselines.
 
-\paragraph{Task-conditioned evaluation of compression.} Pruning
-disproportionately harms knowledge-intensive tasks
+\paragraph{Compression methods and their task-conditioned evaluation.}
+The fixed operations stand in for method families: pruning
+\citep{lecun1989optimal,hassibi1992second,han2015deep,frankle2019lottery,frantar2023sparsegpt,sun2023simple,ma2023llmpruner,ashkboos2024slicegpt,men2024shortgpt},
+post-training quantization
+\citep{dettmers2022llmint8,frantar2022gptq,xiao2022smoothquant,lin2023awq,chee2023quip,dettmers2023spqr,shao2023omniquant,dettmers2023qlora},
+and distillation
+\citep{hinton2015distilling,sanh2019distilbert,hsieh2023distilling,mukherjee2023orca,gu2023minillm,agarwal2023gkd,xu2024survey}.
+Pruning disproportionately harms knowledge-intensive tasks
 \citep{jaiswal2023compressing}, low-bit quantization disproportionately
-harms reasoning \citep{liu2025quantization}, and selective truncation
+harms reasoning \citep{liu2025quantization} and favors undertrained
+models \citep{ouyang2024lowbit}, compression shifts trustworthiness
+dimensions unevenly \citep{hong2024decoding}, and selective truncation
 can improve specific behaviors \citep{sharma2023laser}. Laws with
 task-level targets exist: \citet{sengupta2025compression} fit pruning
 laws to test loss and averaged zero-shot accuracy against the pruning
@@ -34,9 +36,12 @@ continuous conditional loss, admit the dense capability anchor and
 training tokens as inputs, and treat the three methods with one
 protocol.
 
-\paragraph{Fitting and validating empirical laws.} Downstream accuracy
-is predictable mainly through continuous log-likelihood measurements
-\citep{schaeffer2023emergent,schaeffer2024predicting,gadre2024language,bhagia2024establishing,lourie2025scaling},
+\paragraph{Fitting and validating empirical laws.} Pretraining loss
+follows power laws in parameters and data
+\citep{hestness2017deep,kaplan2020scaling,hoffmann2022training}, whereas
+downstream accuracy is predictable mainly through continuous
+log-likelihood measurements
+\citep{wei2022emergent,schaeffer2023emergent,schaeffer2024predicting,gadre2024language,isik2024scaling,bhagia2024establishing,lourie2025scaling},
 which motivates our loss endpoint and its stated boundaries; fitted
 scaling-law forms are fragile to the fitting protocol
 \citep{li2025misfitting,besiroglu2024chinchilla}, and repeated tokens
