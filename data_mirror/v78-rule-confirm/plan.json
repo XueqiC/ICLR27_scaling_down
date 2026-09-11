@@ -1,0 +1,839 @@
+{
+  "panel": [
+    {
+      "tag": "pythia-160m@step32000",
+      "size": "160m",
+      "step": 32000,
+      "N0": 84934656,
+      "D0": 67108864000,
+      "state_status": "new_stage",
+      "configs": [
+        {
+          "id": "dense:source",
+          "method": "dense",
+          "law": "dense",
+          "config": "source",
+          "r": 1.0,
+          "target_state": "pythia-160m@step32000"
+        },
+        {
+          "id": "prune:d0.9",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.9",
+          "r": 0.9,
+          "target_state": "pythia-160m@step32000",
+          "d": 0.9
+        },
+        {
+          "id": "prune:d0.8",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.8",
+          "r": 0.8,
+          "target_state": "pythia-160m@step32000",
+          "d": 0.8
+        },
+        {
+          "id": "prune:d0.7",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.7",
+          "r": 0.7,
+          "target_state": "pythia-160m@step32000",
+          "d": 0.7
+        },
+        {
+          "id": "prune:d0.6",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.6",
+          "r": 0.6,
+          "target_state": "pythia-160m@step32000",
+          "d": 0.6
+        },
+        {
+          "id": "quant:channel_b8",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b8",
+          "r": 0.5,
+          "target_state": "pythia-160m@step32000",
+          "bit": 8
+        },
+        {
+          "id": "quant:channel_b6",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b6",
+          "r": 0.375,
+          "target_state": "pythia-160m@step32000",
+          "bit": 6
+        },
+        {
+          "id": "quant:channel_b5",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b5",
+          "r": 0.3125,
+          "target_state": "pythia-160m@step32000",
+          "bit": 5
+        },
+        {
+          "id": "quant:channel_b4",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b4",
+          "r": 0.25,
+          "target_state": "pythia-160m@step32000",
+          "bit": 4
+        },
+        {
+          "id": "quant:channel_b3",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b3",
+          "r": 0.1875,
+          "target_state": "pythia-160m@step32000",
+          "bit": 3
+        },
+        {
+          "id": "quant:b3_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g64",
+          "r": 0.203125,
+          "target_state": "pythia-160m@step32000",
+          "bit": 3,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b3_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g128",
+          "r": 0.1953125,
+          "target_state": "pythia-160m@step32000",
+          "bit": 3,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b3_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g256",
+          "r": 0.19140625,
+          "target_state": "pythia-160m@step32000",
+          "bit": 3,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b4_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g64",
+          "r": 0.265625,
+          "target_state": "pythia-160m@step32000",
+          "bit": 4,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b4_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g128",
+          "r": 0.2578125,
+          "target_state": "pythia-160m@step32000",
+          "bit": 4,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b4_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g256",
+          "r": 0.25390625,
+          "target_state": "pythia-160m@step32000",
+          "bit": 4,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b5_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g64",
+          "r": 0.328125,
+          "target_state": "pythia-160m@step32000",
+          "bit": 5,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b5_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g128",
+          "r": 0.3203125,
+          "target_state": "pythia-160m@step32000",
+          "bit": 5,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b5_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g256",
+          "r": 0.31640625,
+          "target_state": "pythia-160m@step32000",
+          "bit": 5,
+          "group_size": 256
+        }
+      ]
+    },
+    {
+      "tag": "pythia-410m@step32000",
+      "size": "410m",
+      "step": 32000,
+      "N0": 301989888,
+      "D0": 67108864000,
+      "state_status": "new_stage",
+      "configs": [
+        {
+          "id": "dense:source",
+          "method": "dense",
+          "law": "dense",
+          "config": "source",
+          "r": 1.0,
+          "target_state": "pythia-410m@step32000"
+        },
+        {
+          "id": "prune:d0.9",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.9",
+          "r": 0.9,
+          "target_state": "pythia-410m@step32000",
+          "d": 0.9
+        },
+        {
+          "id": "prune:d0.8",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.8",
+          "r": 0.8,
+          "target_state": "pythia-410m@step32000",
+          "d": 0.8
+        },
+        {
+          "id": "prune:d0.7",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.7",
+          "r": 0.7,
+          "target_state": "pythia-410m@step32000",
+          "d": 0.7
+        },
+        {
+          "id": "prune:d0.6",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.6",
+          "r": 0.6,
+          "target_state": "pythia-410m@step32000",
+          "d": 0.6
+        },
+        {
+          "id": "quant:channel_b8",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b8",
+          "r": 0.5,
+          "target_state": "pythia-410m@step32000",
+          "bit": 8
+        },
+        {
+          "id": "quant:channel_b6",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b6",
+          "r": 0.375,
+          "target_state": "pythia-410m@step32000",
+          "bit": 6
+        },
+        {
+          "id": "quant:channel_b5",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b5",
+          "r": 0.3125,
+          "target_state": "pythia-410m@step32000",
+          "bit": 5
+        },
+        {
+          "id": "quant:channel_b4",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b4",
+          "r": 0.25,
+          "target_state": "pythia-410m@step32000",
+          "bit": 4
+        },
+        {
+          "id": "quant:channel_b3",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b3",
+          "r": 0.1875,
+          "target_state": "pythia-410m@step32000",
+          "bit": 3
+        },
+        {
+          "id": "quant:b3_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g64",
+          "r": 0.203125,
+          "target_state": "pythia-410m@step32000",
+          "bit": 3,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b3_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g128",
+          "r": 0.1953125,
+          "target_state": "pythia-410m@step32000",
+          "bit": 3,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b3_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g256",
+          "r": 0.19140625,
+          "target_state": "pythia-410m@step32000",
+          "bit": 3,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b4_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g64",
+          "r": 0.265625,
+          "target_state": "pythia-410m@step32000",
+          "bit": 4,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b4_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g128",
+          "r": 0.2578125,
+          "target_state": "pythia-410m@step32000",
+          "bit": 4,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b4_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g256",
+          "r": 0.25390625,
+          "target_state": "pythia-410m@step32000",
+          "bit": 4,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b5_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g64",
+          "r": 0.328125,
+          "target_state": "pythia-410m@step32000",
+          "bit": 5,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b5_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g128",
+          "r": 0.3203125,
+          "target_state": "pythia-410m@step32000",
+          "bit": 5,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b5_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g256",
+          "r": 0.31640625,
+          "target_state": "pythia-410m@step32000",
+          "bit": 5,
+          "group_size": 256
+        }
+      ]
+    },
+    {
+      "tag": "pythia-1.4b@step32000",
+      "size": "1.4b",
+      "step": 32000,
+      "N0": 1207959552,
+      "D0": 67108864000,
+      "state_status": "new_stage",
+      "configs": [
+        {
+          "id": "dense:source",
+          "method": "dense",
+          "law": "dense",
+          "config": "source",
+          "r": 1.0,
+          "target_state": "pythia-1.4b@step32000"
+        },
+        {
+          "id": "prune:d0.9",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.9",
+          "r": 0.9,
+          "target_state": "pythia-1.4b@step32000",
+          "d": 0.9
+        },
+        {
+          "id": "prune:d0.8",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.8",
+          "r": 0.8,
+          "target_state": "pythia-1.4b@step32000",
+          "d": 0.8
+        },
+        {
+          "id": "prune:d0.7",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.7",
+          "r": 0.7,
+          "target_state": "pythia-1.4b@step32000",
+          "d": 0.7
+        },
+        {
+          "id": "prune:d0.6",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.6",
+          "r": 0.6,
+          "target_state": "pythia-1.4b@step32000",
+          "d": 0.6
+        },
+        {
+          "id": "quant:channel_b8",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b8",
+          "r": 0.5,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 8
+        },
+        {
+          "id": "quant:channel_b6",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b6",
+          "r": 0.375,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 6
+        },
+        {
+          "id": "quant:channel_b5",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b5",
+          "r": 0.3125,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 5
+        },
+        {
+          "id": "quant:channel_b4",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b4",
+          "r": 0.25,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 4
+        },
+        {
+          "id": "quant:channel_b3",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b3",
+          "r": 0.1875,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 3
+        },
+        {
+          "id": "quant:b3_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g64",
+          "r": 0.203125,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 3,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b3_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g128",
+          "r": 0.1953125,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 3,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b3_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g256",
+          "r": 0.19140625,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 3,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b4_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g64",
+          "r": 0.265625,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 4,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b4_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g128",
+          "r": 0.2578125,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 4,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b4_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g256",
+          "r": 0.25390625,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 4,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b5_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g64",
+          "r": 0.328125,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 5,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b5_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g128",
+          "r": 0.3203125,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 5,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b5_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g256",
+          "r": 0.31640625,
+          "target_state": "pythia-1.4b@step32000",
+          "bit": 5,
+          "group_size": 256
+        }
+      ]
+    },
+    {
+      "tag": "pythia-1b@step64000",
+      "size": "1b",
+      "step": 64000,
+      "N0": 805306368,
+      "D0": 134217728000,
+      "state_status": "new_stage",
+      "configs": [
+        {
+          "id": "dense:source",
+          "method": "dense",
+          "law": "dense",
+          "config": "source",
+          "r": 1.0,
+          "target_state": "pythia-1b@step64000"
+        },
+        {
+          "id": "prune:d0.9",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.9",
+          "r": 0.9,
+          "target_state": "pythia-1b@step64000",
+          "d": 0.9
+        },
+        {
+          "id": "prune:d0.8",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.8",
+          "r": 0.8,
+          "target_state": "pythia-1b@step64000",
+          "d": 0.8
+        },
+        {
+          "id": "prune:d0.7",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.7",
+          "r": 0.7,
+          "target_state": "pythia-1b@step64000",
+          "d": 0.7
+        },
+        {
+          "id": "prune:d0.6",
+          "method": "prune",
+          "law": "prune_power",
+          "config": "d0.6",
+          "r": 0.6,
+          "target_state": "pythia-1b@step64000",
+          "d": 0.6
+        },
+        {
+          "id": "quant:channel_b8",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b8",
+          "r": 0.5,
+          "target_state": "pythia-1b@step64000",
+          "bit": 8
+        },
+        {
+          "id": "quant:channel_b6",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b6",
+          "r": 0.375,
+          "target_state": "pythia-1b@step64000",
+          "bit": 6
+        },
+        {
+          "id": "quant:channel_b5",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b5",
+          "r": 0.3125,
+          "target_state": "pythia-1b@step64000",
+          "bit": 5
+        },
+        {
+          "id": "quant:channel_b4",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b4",
+          "r": 0.25,
+          "target_state": "pythia-1b@step64000",
+          "bit": 4
+        },
+        {
+          "id": "quant:channel_b3",
+          "method": "quant",
+          "law": "quant_channel",
+          "config": "channel_b3",
+          "r": 0.1875,
+          "target_state": "pythia-1b@step64000",
+          "bit": 3
+        },
+        {
+          "id": "quant:b3_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g64",
+          "r": 0.203125,
+          "target_state": "pythia-1b@step64000",
+          "bit": 3,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b3_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g128",
+          "r": 0.1953125,
+          "target_state": "pythia-1b@step64000",
+          "bit": 3,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b3_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b3_g256",
+          "r": 0.19140625,
+          "target_state": "pythia-1b@step64000",
+          "bit": 3,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b4_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g64",
+          "r": 0.265625,
+          "target_state": "pythia-1b@step64000",
+          "bit": 4,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b4_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g128",
+          "r": 0.2578125,
+          "target_state": "pythia-1b@step64000",
+          "bit": 4,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b4_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b4_g256",
+          "r": 0.25390625,
+          "target_state": "pythia-1b@step64000",
+          "bit": 4,
+          "group_size": 256
+        },
+        {
+          "id": "quant:b5_g64",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g64",
+          "r": 0.328125,
+          "target_state": "pythia-1b@step64000",
+          "bit": 5,
+          "group_size": 64
+        },
+        {
+          "id": "quant:b5_g128",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g128",
+          "r": 0.3203125,
+          "target_state": "pythia-1b@step64000",
+          "bit": 5,
+          "group_size": 128
+        },
+        {
+          "id": "quant:b5_g256",
+          "method": "quant",
+          "law": "quant_group",
+          "config": "b5_g256",
+          "r": 0.31640625,
+          "target_state": "pythia-1b@step64000",
+          "bit": 5,
+          "group_size": 256
+        },
+        {
+          "id": "distill:pythia-160m@step64000",
+          "method": "distill",
+          "law": "distill_linear",
+          "config": "pythia-160m@step64000",
+          "r": 0.10546875,
+          "target_state": "pythia-160m@step64000"
+        },
+        {
+          "id": "distill:pythia-410m@step64000",
+          "method": "distill",
+          "law": "distill_linear",
+          "config": "pythia-410m@step64000",
+          "r": 0.375,
+          "target_state": "pythia-410m@step64000"
+        }
+      ]
+    }
+  ],
+  "budgets": [
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0
+  ],
+  "objectives": [
+    "math",
+    "code",
+    "qa",
+    "multi"
+  ],
+  "policies": [
+    "locked-rule",
+    "v64-law",
+    "quant-only",
+    "prune-only",
+    "distill-only",
+    "cheapest"
+  ],
+  "new_evaluations": {
+    "dense": 4,
+    "compressed": 72
+  },
+  "reused_kd_outcomes": 2,
+  "snapshot_root": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots",
+  "output": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm",
+  "protocol": {
+    "model_dtype": "bf16",
+    "probe_seed": 0,
+    "n_probe": 128,
+    "probe_half": "odd-indexed [1::2]",
+    "loss_protocol": "v10._measure_capability_losses (completion-token-weighted CE)",
+    "quantization": "symmetric round-to-nearest (torch.round, ties to even)",
+    "qa_distribution": "2Wiki",
+    "reference_device": "cpu",
+    "pruning": "v6 sampled global magnitude threshold, seed 0, 2000000 weights"
+  },
+  "sequence": [
+    "freeze --stage independent",
+    "download fresh snapshots",
+    "verify",
+    "measure --stage dense",
+    "freeze --stage finalize",
+    "measure --stage configs",
+    "compare"
+  ],
+  "download_contract": "Use a new private Hugging Face hub cache with force_download=True for each exact EleutherAI model/revision. Include weights, config and tokenizer files. verify reads refs/stepN -> snapshots/<commit> and hashes actual bytes of every blob. No network or snapshot download is performed by this script.",
+  "reading_rule": "The locked rule is confirmed for a capability if its regret is within the v64 map's and below quant-only's on the new panel; otherwise it is reported as retrospective.",
+  "reading_detail": "Operational rule, fixed before measurement: mean regret over the same 4 states x 17 budgets (equal state and budget weights), locked <= v64 and locked < quant-only, with no fitted margin. All three policies are feasible on the full planned panel. Missing measurements prevent confirmation; never silently shrink the panel. The max map uses max_c(L_c-source_L0c), as in v64. Quant-only pools channel and grouped RTN and uses locked predictions; its v64-prediction variant is also reported. KD candidates reuse two historical v39 outcomes, not new independent KD experiments. Both students are purged from both KD fits, as in v64. Constants are v39's arithmetic mean-delta baseline on the remaining development students; math uses its +D0 linear form. QA claims apply only to 2Wiki. No-clear-winner sets reuse v64's frozen development LOSO MAE thresholds for both maps, unchanged; they are retrospective heuristics, not calibrated uncertainty for the locked predictors. Storage is nominal matrix storage: d, b/16, (b+16/g)/16, and N_student/N_source; sparse index overhead is excluded."
+}

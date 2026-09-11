@@ -200,3 +200,16 @@ Advisor package (user-forwarded, "keep the GPU busy after the MuSiQue run"). Non
 - Order: throughput test -> V5-Q forward grid (short) -> V5-M -> V5-D trajectories (longest) -> V5-P; CPU freezes precede each GPU test. Deliverable after the round: final formulas + reproducible coefficients + independent configuration predictions + strong-baseline comparisons + capability and applicability boundaries.
 
 - V5-P state change (2026-09-11 00:10 EDT): the cached pythia-2.8b step64000 snapshot shares its weight blob with step143000, so the pair is step16000 + step143000 (distinct blobs); densities 0.85/0.75/0.65 unchanged.
+
+## Round v7 (registered 2026-09-11 15:15 EDT): final combined selection rule, per-capability maps, one independent confirmation panel
+
+User directive: lock the combined rule first, deliver per-capability selection maps, confirm on a fresh panel. No other GPU work.
+- Locked rule (arm x capability x state status; development data only; written into analysis/final_rule.py before any new measurement):
+  pruning: seen size & unseen density in [0.6,0.9] -> power form (v53 delivered) for math/code, median curve for QA; new size or stage -> median development curve L0 + f~_c(d) for all capabilities.
+  per-channel quantization: seen bit-widths on new states -> per-bit development median for all capabilities (the per-bit source regression is kept for seen states only).
+  grouped quantization: seen states -> same-input piecewise interpolation (math, code), per-configuration median (QA); new states -> per-configuration median (all capabilities), with the frozen boundary rule.
+  distillation (same-stage smaller student as candidate): new source -> student reference + per-capability constant (v39 development) for code and QA, linear student-state form for math; QA only on the 2Wiki distribution.
+  Selection: argmin of predicted absolute loss over feasible measured configurations at nominal storage r_max in {0.20,...,1.00}; per-capability maps (math, code, QA) and the max-over-capabilities map; no-clear-winner heuristic reported as candidate sets.
+- Confirmation panel (never measured; weights downloaded fresh and blob-hashed against V77): pythia-160m@step32000, pythia-410m@step32000, pythia-1.4b@step32000 (new stage inside the range; no distillation candidate at 32k), pythia-1b@step64000 (new stage for that size; v39 students 160M@64k and 410M@64k as distillation candidates). Per state: dense; pruning d in {0.9,0.8,0.7,0.6}; per-channel RTN b in {8,6,5,4,3}; grouped RTN b in {3,4,5} x g in {64,128,256}. 18 configurations + dense per state; ~2-3 GPU-h on the Ada by UUID.
+- Freeze before measurement: predicted absolute losses of every candidate under the locked rule and under the earlier source-conditioned law set (v64 policy) as the comparison; the four maps per policy; sha256 committed.
+- Compare: oracle over measured configurations; regret per capability of the locked-rule map, the v64-law map, quant-only, cheapest; agreement of chosen method; candidate-set coverage under the heuristic; figure = per-capability maps with oracle marks; tables. Reading rules pre-stated: the locked rule is confirmed for a capability if its regret is within the v64 map's and below quant-only's on the new panel; otherwise reported as retrospective.
