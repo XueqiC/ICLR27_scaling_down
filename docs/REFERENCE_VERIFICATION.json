@@ -7,8 +7,8 @@
   "bib_year": "2020"
  },
  "hoffmann2022training": {
-  "verdict": "UNVERIFIED",
-  "evidence": " | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0)",
+  "verdict": "OK-manual",
+  "evidence": "Same paper as arXiv 2203.15556 'Training Compute-Optimal Large Language Models' (fetched by ID; first author Jordan Hoffmann); the entry uses the NeurIPS 2022 proceedings title 'An Empirical Analysis of Compute-Optimal Large Language Model Training'.",
   "bib_title": "An Empirical Analysis of Compute-Optimal Large Language Model Training",
   "bib_first_author": "hoffmann",
   "bib_year": "2022"
@@ -112,8 +112,8 @@
   "bib_year": "2024"
  },
  "yin2023junk": {
-  "verdict": "UNVERIFIED",
-  "evidence": " | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0)",
+  "verdict": "OK-manual",
+  "evidence": "arXiv 2310.02277 fetched by ID: title and authors (Lu Yin, Ajay Jaiswal, Shiwei Liu, Souvik Kundu, ...) match; ICML 2024.",
   "bib_title": "Junk {DNA} Hypothesis: Pruning Small Pre-Trained Weights Irreversibly and Monotonically Impairs ``Difficult'' Downstream Tasks in {LLM}s",
   "bib_first_author": "yin",
   "bib_year": "2024"
@@ -161,16 +161,16 @@
   "bib_year": "2023"
  },
  "lecun1989optimal": {
-  "verdict": "TITLE-OK/AUTHOR-MISMATCH",
-  "evidence": "arXiv 2508.09697v4 (2025); first author Xinlei Zhang | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0)",
+  "verdict": "OK-manual",
+  "evidence": "NeurIPS 1989 proceedings index lists 'Optimal Brain Damage' (LeCun, Denker, Solla); Semantic Scholar: Neural Information Processing Systems 1989, Yann LeCun first author. The arXiv hit is a different 2025 paper.",
   "bib_title": "Optimal Brain Damage",
   "bib_first_author": "lecun",
   "bib_year": "1989"
  },
  "hassibi1992second": {
-  "verdict": "UNVERIFIED",
-  "evidence": " | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0)",
-  "bib_title": "Second Order Derivatives for Network Pruning: Optimal Brain Surgeon",
+  "verdict": "OK-manual",
+  "evidence": "NeurIPS 1992 proceedings index lists 'Second order derivatives for network pruning: Optimal Brain Surgeon' (Hassibi, Stork).",
+  "bib_title": "Second order derivatives for network pruning: Optimal Brain Surgeon",
   "bib_first_author": "hassibi",
   "bib_year": "1992"
  },
@@ -285,5 +285,313 @@
   "bib_title": "Scaling Data-Constrained Language Models",
   "bib_first_author": "muennighoff",
   "bib_year": "2023"
+ },
+ "hestness2017deep": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1712.00409v1 (2017); first author Joel Hestness",
+  "bib_title": "Deep Learning Scaling is Predictable, Empirically",
+  "bib_first_author": "hestness",
+  "bib_year": "2017"
+ },
+ "wei2022emergent": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2206.07682v2 (2022); first author Jason Wei",
+  "bib_title": "Emergent Abilities of Large Language Models",
+  "bib_first_author": "wei",
+  "bib_year": "2022"
+ },
+ "isik2024scaling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2402.04177v3 (2024); first author Berivan Isik",
+  "bib_title": "Scaling Laws for Downstream Task Performance of Large Language Models",
+  "bib_first_author": "isik",
+  "bib_year": "2024"
+ },
+ "han2015deep": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1510.00149v5 (2015); first author Song Han",
+  "bib_title": "Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding",
+  "bib_first_author": "han",
+  "bib_year": "2015"
+ },
+ "frankle2019lottery": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1803.03635v5 (2018); first author Jonathan Frankle",
+  "bib_title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+  "bib_first_author": "frankle",
+  "bib_year": "2018"
+ },
+ "ma2023llmpruner": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2305.11627v3 (2023); first author Xinyin Ma",
+  "bib_title": "LLM-Pruner: On the Structural Pruning of Large Language Models",
+  "bib_first_author": "ma",
+  "bib_year": "2023"
+ },
+ "ashkboos2024slicegpt": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2401.15024v2 (2024); first author Saleh Ashkboos",
+  "bib_title": "SliceGPT: Compress Large Language Models by Deleting Rows and Columns",
+  "bib_first_author": "ashkboos",
+  "bib_year": "2024"
+ },
+ "men2024shortgpt": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2403.03853v3 (2024); first author Xin Men",
+  "bib_title": "ShortGPT: Layers in Large Language Models are More Redundant Than You Expect",
+  "bib_first_author": "men",
+  "bib_year": "2024"
+ },
+ "frantar2022gptq": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2210.17323v2 (2022); first author Elias Frantar",
+  "bib_title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+  "bib_first_author": "frantar",
+  "bib_year": "2022"
+ },
+ "lin2023awq": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2306.00978v6 (2023); first author Ji Lin",
+  "bib_title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+  "bib_first_author": "lin",
+  "bib_year": "2023"
+ },
+ "xiao2022smoothquant": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2211.10438v7 (2022); first author Guangxuan Xiao",
+  "bib_title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+  "bib_first_author": "xiao",
+  "bib_year": "2022"
+ },
+ "dettmers2022llmint8": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2208.07339v2 (2022); first author Tim Dettmers",
+  "bib_title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+  "bib_first_author": "dettmers",
+  "bib_year": "2022"
+ },
+ "chee2023quip": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2307.13304v2 (2023); first author Jerry Chee",
+  "bib_title": "QuIP: 2-Bit Quantization of Large Language Models With Guarantees",
+  "bib_first_author": "chee",
+  "bib_year": "2023"
+ },
+ "dettmers2023spqr": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2306.03078v1 (2023); first author Tim Dettmers",
+  "bib_title": "SpQR: A Sparse-Quantized Representation for Near-Lossless LLM Weight Compression",
+  "bib_first_author": "dettmers",
+  "bib_year": "2023"
+ },
+ "shao2023omniquant": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2308.13137v3 (2023); first author Wenqi Shao",
+  "bib_title": "OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models",
+  "bib_first_author": "shao",
+  "bib_year": "2023"
+ },
+ "dettmers2023qlora": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2305.14314v1 (2023); first author Tim Dettmers",
+  "bib_title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+  "bib_first_author": "dettmers",
+  "bib_year": "2023"
+ },
+ "ouyang2024lowbit": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2411.17691v2 (2024); first author Xu Ouyang",
+  "bib_title": "Low-Bit Quantization Favors Undertrained LLMs: Scaling Laws for Quantized LLMs with 100T Training Tokens",
+  "bib_first_author": "ouyang",
+  "bib_year": "2024"
+ },
+ "hinton2015distilling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1503.02531v1 (2015); first author Geoffrey Hinton",
+  "bib_title": "Distilling the Knowledge in a Neural Network",
+  "bib_first_author": "hinton",
+  "bib_year": "2015"
+ },
+ "sanh2019distilbert": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1910.01108v4 (2019); first author Victor Sanh",
+  "bib_title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",
+  "bib_first_author": "sanh",
+  "bib_year": "2019"
+ },
+ "gu2023minillm": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2306.08543v6 (2023); first author Yuxian Gu",
+  "bib_title": "MiniLLM: On-Policy Distillation of Large Language Models",
+  "bib_first_author": "gu",
+  "bib_year": "2023"
+ },
+ "agarwal2023gkd": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2306.13649v3 (2023); first author Rishabh Agarwal",
+  "bib_title": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes",
+  "bib_first_author": "agarwal",
+  "bib_year": "2023"
+ },
+ "xu2024survey": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2402.13116v4 (2024); first author Xiaohan Xu",
+  "bib_title": "A Survey on Knowledge Distillation of Large Language Models",
+  "bib_first_author": "xu",
+  "bib_year": "2024"
+ },
+ "hsieh2023distilling": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2305.02301v2 (2023); first author Cheng-Yu Hsieh",
+  "bib_title": "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes",
+  "bib_first_author": "hsieh",
+  "bib_year": "2023"
+ },
+ "mukherjee2023orca": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2306.02707v1 (2023); first author Subhabrata Mukherjee",
+  "bib_title": "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+  "bib_first_author": "mukherjee",
+  "bib_year": "2023"
+ },
+ "hong2024decoding": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2403.15447v3 (2024); first author Junyuan Hong",
+  "bib_title": "Decoding Compressed Trust: Scrutinizing the Trustworthiness of Efficient LLMs Under Compression",
+  "bib_first_author": "hong",
+  "bib_year": "2024"
+ },
+ "hendrycks2021math": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2103.03874v2 (2021); first author Dan Hendrycks",
+  "bib_title": "Measuring Mathematical Problem Solving With the MATH Dataset",
+  "bib_first_author": "hendrycks",
+  "bib_year": "2021"
+ },
+ "lightman2023verify": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2305.20050v1 (2023); first author Hunter Lightman",
+  "bib_title": "Let's Verify Step by Step",
+  "bib_first_author": "lightman",
+  "bib_year": "2023"
+ },
+ "austin2021program": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2108.07732v1 (2021); first author Jacob Austin",
+  "bib_title": "Program Synthesis with Large Language Models",
+  "bib_first_author": "austin",
+  "bib_year": "2021"
+ },
+ "chen2021codex": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2107.03374v2 (2021); first author Mark Chen",
+  "bib_title": "Evaluating Large Language Models Trained on Code",
+  "bib_first_author": "chen",
+  "bib_year": "2021"
+ },
+ "cobbe2021gsm8k": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2110.14168v2 (2021); first author Karl Cobbe",
+  "bib_title": "Training Verifiers to Solve Math Word Problems",
+  "bib_first_author": "cobbe",
+  "bib_year": "2021"
+ },
+ "yang2018hotpotqa": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1809.09600v1 (2018); first author Zhilin Yang",
+  "bib_title": "HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering",
+  "bib_first_author": "yang",
+  "bib_year": "2018"
+ },
+ "ho2020constructing": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2011.01060v2 (2020); first author Xanh Ho",
+  "bib_title": "Constructing A Multi-hop QA Dataset for Comprehensive Evaluation of Reasoning Steps",
+  "bib_first_author": "ho",
+  "bib_year": "2020"
+ },
+ "joshi2017triviaqa": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 1705.03551v2 (2017); first author Mandar Joshi",
+  "bib_title": "TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension",
+  "bib_first_author": "joshi",
+  "bib_year": "2017"
+ },
+ "trivedi2022musique": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2108.00573v3 (2021); first author Harsh Trivedi",
+  "bib_title": "MuSiQue: Multihop Questions via Single-hop Question Composition",
+  "bib_first_author": "trivedi",
+  "bib_year": "2021"
+ },
+ "patel2021svamp": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2103.07191v2 (2021); first author Arkil Patel",
+  "bib_title": "Are NLP Models really able to Solve Simple Math Word Problems?",
+  "bib_first_author": "patel",
+  "bib_year": "2021"
+ },
+ "biderman2023pythia": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2304.01373v2 (2023); first author Stella Biderman",
+  "bib_title": "Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling",
+  "bib_first_author": "biderman",
+  "bib_year": "2023"
+ },
+ "gemma2025gemma3": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2503.19786v1 (2025); first author  Gemma Team",
+  "bib_title": "Gemma 3 Technical Report",
+  "bib_first_author": "team",
+  "bib_year": "2025"
+ },
+ "qwen2025qwen3": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2505.09388v1 (2025); first author An Yang",
+  "bib_title": "Qwen3 Technical Report",
+  "bib_first_author": "yang",
+  "bib_year": "2025"
+ },
+ "hu2022lora": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2106.09685v2 (2021); first author Edward J. Hu",
+  "bib_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+  "bib_first_author": "hu",
+  "bib_year": "2021"
+ },
+ "yao2023react": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2210.03629v3 (2022); first author Shunyu Yao",
+  "bib_title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+  "bib_first_author": "yao",
+  "bib_year": "2022"
+ },
+ "schick2023toolformer": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2302.04761v1 (2023); first author Timo Schick",
+  "bib_title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+  "bib_first_author": "schick",
+  "bib_year": "2023"
+ },
+ "jimenez2024swebench": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2310.06770v3 (2023); first author Carlos E. Jimenez",
+  "bib_title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+  "bib_first_author": "jimenez",
+  "bib_year": "2023"
+ },
+ "liu2024agentbench": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2308.03688v3 (2023); first author Xiao Liu",
+  "bib_title": "AgentBench: Evaluating LLMs as Agents",
+  "bib_first_author": "liu",
+  "bib_year": "2023"
+ },
+ "polo2024tinybenchmarks": {
+  "verdict": "OK-arxiv",
+  "evidence": "arXiv 2402.14992v2 (2024); first author Felipe Maia Polo",
+  "bib_title": "tinyBenchmarks: evaluating LLMs with fewer examples",
+  "bib_first_author": "polo",
+  "bib_year": "2024"
  }
 }
