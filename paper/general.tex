@@ -78,7 +78,10 @@ source-conditioned pruning forms lose to the median curve on math
 regression extends the panel's size trend into QA improvements that
 do not occur, and the per-bit quantization regression is worse than
 the per-bit median at every bit-width. On 6.9B@80k the power form ties the median on math and loses on
-code and QA. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
+code and QA, and on a 2.8B source at two stages, inside the refit size
+range, the source-free median curve beats both source-conditioned
+forms three to seven times over (0.08, 0.05, 0.07 against 0.29, 0.39,
+0.68 nats; Appendix~\ref{sec:app_results}). For distillation, on Gemma-3-4B as a held-out student (6.6 times the
 reference size) the frozen constant is
 better than the headline form at the unseen pool on every capability
 (intervals below zero; math 0.020 against 0.089), because the source

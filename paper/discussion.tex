@@ -13,9 +13,10 @@ reuse, and a student descriptor predicts unseen data pools on the two
 development students. Each comes with coefficients and a tested range, and
 \S\ref{sec:selection} connects them to an explicit selection problem.
 
-What cannot be predicted is equally specific. No source-conditioned
-form predicts the QA response to pruning on a new checkpoint, and no
-form transfers to density 0.55 or to a source five times larger. Bit-width alone supports no continuous quantization relation. Joint
+What cannot be predicted is equally specific. No source-conditioned form predicts the QA response to pruning on a
+new checkpoint, no form transfers to density 0.55, and on new sizes
+(6.9B, and 2.8B inside the range) the source-free median curve is the
+better predictor. Bit-width alone supports no continuous quantization relation. Joint
 transfer of the distillation forms to a larger student and a new pool
 is unreliable, and the distillation QA gain replicates on a fresh sample of the
 primary distribution while reversing sign on an independent multi-hop

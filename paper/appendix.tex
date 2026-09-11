@@ -299,6 +299,17 @@ tied on the new state, and the surface loses on every test, so the
 selection is reported as a prospective loss for the surface.
 \input{tables/quant_confirm}
 
+The pruning repeatability check froze the delivered power form, A2, the
+median development curve, and zero change for two Pythia-2.8B states
+never used in a pruning fit (steps 16k and 143k; the cached step-64k
+snapshot shares its weight blob with step 143k and was excluded) at
+$d\in\{0.85,0.75,0.65\}$ before the pruned losses were measured
+(Table~\ref{tab:prune_repeat}). The median curve is best on every
+capability by a wide margin and zero change is second; both
+source-conditioned forms over-predict the damage, so the compact form
+is not repeatable on this in-range size.
+\input{tables/prune_repeat}
+
 The multi-student distillation test of the uniform protocol
 (\S\ref{sec:law_distill}) is given in Table~\ref{tab:p2v2_test}; the
 frozen predictions of all eight forms for every test point are in the

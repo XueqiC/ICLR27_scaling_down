@@ -1,0 +1,642 @@
+{
+  "schema_version": 1,
+  "n_rows": 18,
+  "n_configurations": 6,
+  "methods": [
+    "power",
+    "A2",
+    "median_curve",
+    "zero"
+  ],
+  "input_budget": {
+    "available_inputs_all_methods": [
+      "N0",
+      "D0",
+      "dense L0c",
+      "density",
+      "frozen V53 development register"
+    ],
+    "target_pruning_labels_before_prediction": 0,
+    "target_calibration_points": 0,
+    "refit_or_reselection": false,
+    "source_free_baselines": [
+      "median_curve",
+      "zero"
+    ],
+    "note": "Same available input budget; source-free baselines ignore source covariates. V53 A2 uses its delivered anchor subsets, median uses delivered development medians."
+  },
+  "rows": [
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.85,
+      "capability": "math",
+      "predictions": {
+        "power": -0.02343738849392332,
+        "A2": -0.15015456851095493,
+        "median_curve": 0.03157873922328566,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.02618049513564813,
+      "absolute_errors": {
+        "power": 0.04961788362957145,
+        "A2": 0.17633506364660306,
+        "median_curve": 0.005398244087637533,
+        "zero": 0.02618049513564813
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.85,
+      "capability": "code",
+      "predictions": {
+        "power": -0.05469011779568653,
+        "A2": -0.19292903760400104,
+        "median_curve": 0.02684513905395771,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.002198716425005909,
+      "absolute_errors": {
+        "power": 0.05249140137068062,
+        "A2": 0.19073032117899513,
+        "median_curve": 0.02904385547896362,
+        "zero": 0.002198716425005909
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.85,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.03671398264217074,
+        "A2": 0.09752243809440372,
+        "median_curve": -0.04523378089353639,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.16171577946768068,
+      "absolute_errors": {
+        "power": 0.19842976210985142,
+        "A2": 0.2592382175620844,
+        "median_curve": 0.11648199857414429,
+        "zero": 0.16171577946768068
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.75,
+      "capability": "math",
+      "predictions": {
+        "power": -0.15916296831240995,
+        "A2": -0.49672254139492067,
+        "median_curve": 0.11252273985604677,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.1459107806691451,
+      "absolute_errors": {
+        "power": 0.30507374898155504,
+        "A2": 0.6426333220640658,
+        "median_curve": 0.03338804081309832,
+        "zero": 0.1459107806691451
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.75,
+      "capability": "code",
+      "predictions": {
+        "power": -0.259745208628962,
+        "A2": -0.6212189815319127,
+        "median_curve": 0.059097932018065125,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.0731518897076302,
+      "absolute_errors": {
+        "power": 0.3328970983365922,
+        "A2": 0.6943708712395429,
+        "median_curve": 0.014053957689565078,
+        "zero": 0.0731518897076302
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.75,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.17436936443649179,
+        "A2": 0.11640949375183637,
+        "median_curve": -0.28952293250950545,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.3656725285171101,
+      "absolute_errors": {
+        "power": 0.5400418929536018,
+        "A2": 0.4820820222689465,
+        "median_curve": 0.07614959600760463,
+        "zero": 0.3656725285171101
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.65,
+      "capability": "math",
+      "predictions": {
+        "power": -0.5621111030296416,
+        "A2": -1.0700042282543598,
+        "median_curve": 0.6842126077671439,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.48325160167681736,
+      "absolute_errors": {
+        "power": 1.0453627047064589,
+        "A2": 1.5532558299311772,
+        "median_curve": 0.20096100609032652,
+        "zero": 0.48325160167681736
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.65,
+      "capability": "code",
+      "predictions": {
+        "power": -0.7248331608574888,
+        "A2": -1.138550601026464,
+        "median_curve": 0.47887449488947,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.3605894937009746,
+      "absolute_errors": {
+        "power": 1.0854226545584633,
+        "A2": 1.4991400947274387,
+        "median_curve": 0.11828500118849539,
+        "zero": 0.3605894937009746
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.65,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.48658721463369164,
+        "A2": -0.12674411038758854,
+        "median_curve": -0.45233780893536135,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.4492930133079849,
+      "absolute_errors": {
+        "power": 0.9358802279416765,
+        "A2": 0.32254890292039634,
+        "median_curve": 0.003044795627376473,
+        "zero": 0.4492930133079849
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.85,
+      "capability": "math",
+      "predictions": {
+        "power": 0.03166810752299654,
+        "A2": 0.023829651481733473,
+        "median_curve": 0.03157873922328566,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.02618049513564813,
+      "absolute_errors": {
+        "power": 0.005487612387348413,
+        "A2": 0.002350843653914657,
+        "median_curve": 0.005398244087637533,
+        "zero": 0.02618049513564813
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.85,
+      "capability": "code",
+      "predictions": {
+        "power": 0.06950858126496649,
+        "A2": 0.018674953694765233,
+        "median_curve": 0.02684513905395771,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.002198716425005909,
+      "absolute_errors": {
+        "power": 0.0717072976899724,
+        "A2": 0.02087367011977114,
+        "median_curve": 0.02904385547896362,
+        "zero": 0.002198716425005909
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.85,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.07483360445586919,
+        "A2": 0.04927396116728367,
+        "median_curve": -0.04523378089353639,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.16171577946768068,
+      "absolute_errors": {
+        "power": 0.23654938392354985,
+        "A2": 0.21098974063496434,
+        "median_curve": 0.11648199857414429,
+        "zero": 0.16171577946768068
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.75,
+      "capability": "math",
+      "predictions": {
+        "power": 0.21505766290913883,
+        "A2": 0.12657210838574623,
+        "median_curve": 0.11252273985604677,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.1459107806691451,
+      "absolute_errors": {
+        "power": 0.06914688223999374,
+        "A2": 0.01933867228339886,
+        "median_curve": 0.03338804081309832,
+        "zero": 0.1459107806691451
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.75,
+      "capability": "code",
+      "predictions": {
+        "power": 0.330124009050788,
+        "A2": 0.10769076926406318,
+        "median_curve": 0.059097932018065125,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.0731518897076302,
+      "absolute_errors": {
+        "power": 0.2569721193431578,
+        "A2": 0.03453887955643298,
+        "median_curve": 0.014053957689565078,
+        "zero": 0.0731518897076302
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.75,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.3554146706076401,
+        "A2": 0.12749733107811484,
+        "median_curve": -0.28952293250950545,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.3656725285171101,
+      "absolute_errors": {
+        "power": 0.7210871991247502,
+        "A2": 0.4931698595952249,
+        "median_curve": 0.07614959600760463,
+        "zero": 0.3656725285171101
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.65,
+      "capability": "math",
+      "predictions": {
+        "power": 0.7595127270782832,
+        "A2": 0.6393263318499229,
+        "median_curve": 0.6842126077671439,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.48325160167681736,
+      "absolute_errors": {
+        "power": 0.27626112540146586,
+        "A2": 0.15607473017310558,
+        "median_curve": 0.20096100609032652,
+        "zero": 0.48325160167681736
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.65,
+      "capability": "code",
+      "predictions": {
+        "power": 0.9212290390966938,
+        "A2": 0.6704067932706752,
+        "median_curve": 0.47887449488947,
+        "zero": 0.0
+      },
+      "observed_delta_loss": 0.3605894937009746,
+      "absolute_errors": {
+        "power": 0.5606395453957193,
+        "A2": 0.3098172995697006,
+        "median_curve": 0.11828500118849539,
+        "zero": 0.3605894937009746
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.65,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.9918040085184247,
+        "A2": 0.4070618928541795,
+        "median_curve": -0.45233780893536135,
+        "zero": 0.0
+      },
+      "observed_delta_loss": -0.4492930133079849,
+      "absolute_errors": {
+        "power": 1.4410970218264096,
+        "A2": 0.8563549061621644,
+        "median_curve": 0.003044795627376473,
+        "zero": 0.4492930133079849
+      }
+    }
+  ],
+  "scores": {
+    "power": {
+      "by_capability": {
+        "math": {
+          "n": 6,
+          "mae": 0.2918249928910655,
+          "bias": -0.17485978621479625
+        },
+        "code": {
+          "n": 6,
+          "mae": 0.39335501944909756,
+          "bias": -0.09691536530614776
+        },
+        "qa": {
+          "n": 6,
+          "mae": 0.6788475813133066,
+          "bias": 0.6788475813133066
+        }
+      },
+      "macro_mae": 0.45467586455115655,
+      "macro_bias": 0.13569080993078753
+    },
+    "A2": {
+      "by_capability": {
+        "math": {
+          "n": 6,
+          "mae": 0.4249980769587108,
+          "bias": -0.372973166901009
+        },
+        "code": {
+          "n": 6,
+          "mae": 0.45824518939864695,
+          "bias": -0.3365019063166786
+        },
+        "qa": {
+          "n": 6,
+          "mae": 0.4373972748572968,
+          "bias": 0.4373972748572968
+        }
+      },
+      "macro_mae": 0.44021351373821815,
+      "macro_bias": -0.09069259945346358
+    },
+    "median_curve": {
+      "by_capability": {
+        "math": {
+          "n": 6,
+          "mae": 0.07991576366368745,
+          "bias": 0.05765706978828858
+        },
+        "code": {
+          "n": 6,
+          "mae": 0.05379427145234136,
+          "bias": 0.04442496632596465
+        },
+        "qa": {
+          "n": 6,
+          "mae": 0.06522546340304179,
+          "bias": 0.06319559965145748
+        }
+      },
+      "macro_mae": 0.06631183283969021,
+      "macro_bias": 0.0550925452552369
+    },
+    "zero": {
+      "by_capability": {
+        "math": {
+          "n": 6,
+          "mae": 0.21844762582720353,
+          "bias": -0.21844762582720353
+        },
+        "code": {
+          "n": 6,
+          "mae": 0.14531336661120356,
+          "bias": -0.14384755566119964
+        },
+        "qa": {
+          "n": 6,
+          "mae": 0.3255604404309252,
+          "bias": 0.3255604404309252
+        }
+      },
+      "macro_mae": 0.22977381095644409,
+      "macro_bias": -0.012244913685825995
+    }
+  },
+  "by_state": {
+    "pythia-2.8b@step16000": {
+      "power": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.46668477910586176,
+            "bias": -0.46668477910586176
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.49027038475524537,
+            "bias": -0.49027038475524537
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.5581172943350432,
+            "bias": 0.5581172943350432
+          }
+        },
+        "macro_mae": 0.5050241527320501,
+        "macro_bias": -0.13294595650868798
+      },
+      "A2": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.7907414052139486,
+            "bias": -0.7907414052139486
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.7947470957153255,
+            "bias": -0.7947470957153255
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.3546230475838091,
+            "bias": 0.3546230475838091
+          }
+        },
+        "macro_mae": 0.6467038495043611,
+        "macro_bias": -0.4102884844484884
+      },
+      "median_curve": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.07991576366368745,
+            "bias": 0.05765706978828858
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.05379427145234136,
+            "bias": 0.04442496632596465
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.06522546340304179,
+            "bias": 0.06319559965145748
+          }
+        },
+        "macro_mae": 0.06631183283969021,
+        "macro_bias": 0.0550925452552369
+      },
+      "zero": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.21844762582720353,
+            "bias": -0.21844762582720353
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.14531336661120356,
+            "bias": -0.14384755566119964
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.3255604404309252,
+            "bias": 0.3255604404309252
+          }
+        },
+        "macro_mae": 0.22977381095644409,
+        "macro_bias": -0.012244913685825995
+      }
+    },
+    "pythia-2.8b@step143000": {
+      "power": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.11696520667626935,
+            "bias": 0.11696520667626935
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.2964396541429498,
+            "bias": 0.2964396541429498
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.7995778682915698,
+            "bias": 0.7995778682915698
+          }
+        },
+        "macro_mae": 0.404327576370263,
+        "macro_bias": 0.404327576370263
+      },
+      "A2": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.05925474870347303,
+            "bias": 0.04479507141193068
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.12174328308196825,
+            "bias": 0.12174328308196825
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.5201715021307846,
+            "bias": 0.5201715021307846
+          }
+        },
+        "macro_mae": 0.23372317797207529,
+        "macro_bias": 0.22890328554156114
+      },
+      "median_curve": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.07991576366368745,
+            "bias": 0.05765706978828858
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.05379427145234136,
+            "bias": 0.04442496632596465
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.06522546340304179,
+            "bias": 0.06319559965145748
+          }
+        },
+        "macro_mae": 0.06631183283969021,
+        "macro_bias": 0.0550925452552369
+      },
+      "zero": {
+        "by_capability": {
+          "math": {
+            "n": 3,
+            "mae": 0.21844762582720353,
+            "bias": -0.21844762582720353
+          },
+          "code": {
+            "n": 3,
+            "mae": 0.14531336661120356,
+            "bias": -0.14384755566119964
+          },
+          "qa": {
+            "n": 3,
+            "mae": 0.3255604404309252,
+            "bias": 0.3255604404309252
+          }
+        },
+        "macro_mae": 0.22977381095644409,
+        "macro_bias": -0.012244913685825995
+      }
+    }
+  },
+  "gain_of_power": {
+    "A2": {
+      "math": 0.13317308406764528,
+      "code": 0.06489016994954938,
+      "qa": -0.2414503064560098
+    },
+    "median_curve": {
+      "math": -0.21190922922737804,
+      "code": -0.3395607479967562,
+      "qa": -0.6136221179102648
+    },
+    "zero": {
+      "math": -0.07337736706386197,
+      "code": -0.248041652837894,
+      "qa": -0.3532871408823814
+    }
+  },
+  "provenance": {
+    "freeze_sha256": "3f4e45d0bd505b7d65815f2246a5c3b343f3a49be465aedf724aaa208b0de8b9",
+    "measurement_sha256": {
+      "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.85/prune_losses.json": "731172690abc23d2435d16a511303469e708c94ba69b09cb769cd650112ac790",
+      "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.75/prune_losses.json": "2ed66769dce7124b6af8e16ed72b2d63d69c56e67b4919d773636d609b79819c",
+      "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.65/prune_losses.json": "2776f6d300eeae7df64f94b069bfaa0cdb1eb23335047761a5371ad884ebb89c",
+      "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.85/prune_losses.json": "731172690abc23d2435d16a511303469e708c94ba69b09cb769cd650112ac790",
+      "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.75/prune_losses.json": "2ed66769dce7124b6af8e16ed72b2d63d69c56e67b4919d773636d609b79819c",
+      "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.65/prune_losses.json": "2776f6d300eeae7df64f94b069bfaa0cdb1eb23335047761a5371ad884ebb89c"
+    }
+  }
+}
