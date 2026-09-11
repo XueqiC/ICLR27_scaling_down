@@ -696,7 +696,7 @@ def latex(summary, panels):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out-dir", type=Path, default=ROOT / "results/v59-shared-structure")
-    parser.add_argument("--table", type=Path, default=ROOT / "paper/tables/shared_structure.tex")
+    parser.add_argument("--table", type=Path, default=ROOT / "paper/paper/tables/shared_structure.tex")
     args = parser.parse_args(argv)
     paths = (args.out_dir / "summary.json", args.out_dir / "summary.md", args.table)
     for path in paths:

@@ -20,7 +20,7 @@ from matplotlib.lines import Line2D
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-FIGS = ROOT / "paper/figs"
+FIGS = ROOT / "paper/paper/figs"
 NOTES = ROOT / "paper/docs/FIGURE_BUILD_NOTES.md"
 CAPS = ("math", "code", "qa")
 CAP_LABEL = {"math": "Math", "code": "Code", "qa": "QA"}

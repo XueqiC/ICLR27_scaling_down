@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""P2-v2 multi-student distillation test table -> paper/tables/p2v2_test.tex.
+"""P2-v2 multi-student distillation test table -> paper/paper/tables/p2v2_test.tex.
 Reads results/v50-p2v2/{freeze,compare_test}.json. Headline column = frozen form with the lowest in-sample dev MAE at
 freeze time (joint+src for every capability; rule stated after the tests -> origin code P/F/F/A for the prediction, R for
 the rule). Rows: student x role (unseen pool U375 seeds 21-23; held-out student at dev pools when present) x capability;
@@ -37,4 +37,4 @@ Student, pools & Cap. & Dev-selected & Constant & Zero & Best frozen (R) & $n$ \
 \end{tabular}
 \end{table}
 """ % "\n".join(lines).removesuffix("\n\\addlinespace")
-(ROOT / "paper/tables/p2v2_test.tex").write_text(tex); print("WROTE paper/tables/p2v2_test.tex"); print(tex)
+(ROOT / "paper/paper/tables/p2v2_test.tex").write_text(tex); print("WROTE paper/paper/tables/p2v2_test.tex"); print(tex)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""P3 primary-vs-secondary check table (v48 measurements) -> paper/tables/p3_check.tex. Values: loss change from dense,
+"""P3 primary-vs-secondary check table (v48 measurements) -> paper/paper/tables/p3_check.tex. Values: loss change from dense,
 nats per native token, primary / secondary, Gemma-3-1B, six pre-registered states."""
 import json; from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,4 +25,4 @@ State & Math & Code & QA \\
 \end{tabular}
 \end{table}
 """ % (tok[0]["math"], tok[1]["math"], tok[0]["code"], tok[1]["code"], tok[0]["qa"], tok[1]["qa"], "\n".join(rows))
-(ROOT / "paper/tables/p3_check.tex").write_text(tex); print("WROTE paper/tables/p3_check.tex")
+(ROOT / "paper/paper/tables/p3_check.tex").write_text(tex); print("WROTE paper/paper/tables/p3_check.tex")

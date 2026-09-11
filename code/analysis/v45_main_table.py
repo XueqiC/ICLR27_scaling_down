@@ -3,7 +3,7 @@
 
 One row per (method, capability, test) for the frozen/registered prediction tests that carry the paper's
 claims. Every number is read from a results/v*/summary.json (or compare.json) so the manuscript table is
-machine-traceable. Emits CSV + JSON + a booktabs LaTeX table (paper/tables/main_prediction.tex).
+machine-traceable. Emits CSV + JSON + a booktabs LaTeX table (paper/paper/tables/main_prediction.tex).
 
 Columns: method | capability | test | candidate (free params) | inputs/budget | split | interp/extrap |
 cand MAE | strongest compatible baseline (name, MAE) | paired improvement = base-cand | status | verdict.
@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 R = ROOT / "results"
 OUT_DIR = R / "v45-main-table"
-TEX = ROOT / "paper/tables/main_prediction.tex"
+TEX = ROOT / "paper/paper/tables/main_prediction.tex"
 CAPS = ("math", "code", "qa")
 
 def J(p): return json.loads((R / p).read_text())

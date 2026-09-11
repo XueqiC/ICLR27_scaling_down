@@ -43,8 +43,8 @@ METHODS = ("prune", "quant", "distill", "dense")
 POLICIES = ("MAP", "ORACLE", "prune-only", "quant-only", "distill-only", "CHEAPEST")
 LAWS = ("prune_power", "quant_channel", "quant_group", "distill_linear", "dense")
 OUTPUTS = ("results/v60-selection-maps/summary.json",
-           "results/v60-selection-maps/summary.md", "paper/tables/selection_maps.tex",
-           "paper/figs/selection_maps.pdf", "paper/figs/selection_maps.png")
+           "results/v60-selection-maps/summary.md", "paper/paper/tables/selection_maps.tex",
+           "paper/paper/figs/selection_maps.pdf", "paper/paper/figs/selection_maps.png")
 
 
 class Audit:

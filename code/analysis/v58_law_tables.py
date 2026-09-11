@@ -3,7 +3,7 @@
 form (v55); LOSO/selection tables for v53, v55; v56 forms + capability-conditioning tables."""
 import json, csv
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]; TAB = ROOT / "paper/tables"; C = ("math", "code", "qa")
+ROOT = Path(__file__).resolve().parents[1]; TAB = ROOT / "paper/paper/tables"; C = ("math", "code", "qa")
 # ---- Table 1: predictive models and their domains
 rows = [
  ("Pruning", r"$A_c(\mathbf x)\,((1-d)/0.3)^{\gamma_c}$ (Eq.~\ref{eq:power}); same-input alternative A2 (per-$d$ regression + interpolation)", "5 (A2: 20)", r"$d$; 17 Pythia states (160M--6.9B, 16k--143k)", "0", r"$d\in[0.55,0.9]$ interp.\ on new states; $d=0.55$ extrap.\ fails", r"Table~\ref{tab:round3_coef}"),

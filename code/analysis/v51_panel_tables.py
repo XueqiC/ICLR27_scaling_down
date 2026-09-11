@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Generate the heterogeneous-panel tables and count macros from raw result files (CPU only).
 Inputs: results/v6-capability-geometry/<model>/prune_losses.json, results/v10-quantization/<model>/quant_losses.json.
-Outputs: paper/tables/panel_prune.tex, paper/tables/panel_quant.tex, paper/tables/counts.tex, results/v51-panel/panel.json"""
+Outputs: paper/paper/tables/panel_prune.tex, paper/paper/tables/panel_quant.tex, paper/paper/tables/counts.tex, results/v51-panel/panel.json"""
 import json, os
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]; R6 = ROOT / "results/v6-capability-geometry"; R10 = ROOT / "results/v10-quantization"
-OUT = ROOT / "results/v51-panel"; OUT.mkdir(exist_ok=True); TAB = ROOT / "paper/tables"
+OUT = ROOT / "results/v51-panel"; OUT.mkdir(exist_ok=True); TAB = ROOT / "paper/paper/tables"
 C = ("math", "code", "qa")
 # display name, family, series, cohort (panel = original heterogeneous 12; prosp = later prospective additions)
 MODELS = [("Qwen3-0.6B", "Qwen3-0.6B", "Qwen3", "panel"), ("Qwen3-1.7B", "Qwen3-1.7B", "Qwen3", "panel"), ("Qwen3-4B", "Qwen3-4B", "Qwen3", "panel"),

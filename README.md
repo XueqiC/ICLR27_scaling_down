@@ -32,3 +32,7 @@ ICLR 2027 submission "Scaling-Down Laws for LLM Compression".
 
 Results snapshot date: see git log. Experiments still in flight are marked
 "in progress" in the paper's experiment section.
+
+## Layout (2026-09-10)
+- `paper/`: LaTeX sources, styles, `tables/` and `figs/` (generated), `references.bib`, `main.pdf`. Overleaf main document: `paper/main.tex`.
+- `code/analysis/`: mirrored analysis and generator scripts; `data_mirror/`: mirrored result files; `docs/`: ledgers, matrices, plans, summaries.

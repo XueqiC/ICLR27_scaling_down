@@ -9,7 +9,7 @@ Improvement = MAE(strongest baseline) - MAE(candidate), positive = candidate bet
 import json, csv, glob, collections
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]; R = ROOT / "results"; OUT = R / "v52-prediction-tables"; OUT.mkdir(exist_ok=True)
-TAB = ROOT / "paper/tables"; CAPS = ("math", "code", "qa"); J = lambda p: json.loads((R / p).read_text())
+TAB = ROOT / "paper/paper/tables"; CAPS = ("math", "code", "qa"); J = lambda p: json.loads((R / p).read_text())
 NAMES = {"config_median": "per-config median", "config_mean": "per-config mean", "zero": "zero change", "so": "strength-only",
          "med": "median curve", "strength_only": "strength-only", "median_curve": "median curve", "A1": "A1 ($\\gamma{=}1$)",
          "A1_gamma1": "A1 ($\\gamma{=}1$)", "A2": "A2 (per-$d$ regr.)", "cont": "continuous 2-term", "noD0": "no-$D_0$",

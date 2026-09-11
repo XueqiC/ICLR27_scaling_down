@@ -5,7 +5,7 @@
 
 Default writes are confined to results/v63-quant-identifiability/. With explicit
 authorization for the paper paths, --write-paper also writes the LaTeX table to
-paper/tables/quant_ident.tex and mirrors this script to paper/code/analysis/.
+paper/paper/tables/quant_ident.tex and mirrors this script to paper/code/analysis/.
 V54/V55 artifacts are read-only. No fitting or choice uses test responses.
 """
 from __future__ import annotations
@@ -527,7 +527,7 @@ def main(argv=None):
         outputs = {out / "summary.json": json.dumps(summary, indent=2, allow_nan=False) + "\n",
                    out / "summary.md": render_markdown(summary), out / "quant_ident.tex": tex}
         if args.write_paper:
-            outputs[root / "paper/tables/quant_ident.tex"] = tex
+            outputs[root / "paper/paper/tables/quant_ident.tex"] = tex
             outputs[root / "paper/code/analysis/v63_quant_identifiability.py"] = Path(__file__).read_text()
         # Resolve every output before writing to reject symlinks into protected trees.
         for path in outputs:

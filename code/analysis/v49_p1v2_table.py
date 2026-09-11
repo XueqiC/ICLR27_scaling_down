@@ -49,5 +49,5 @@ if rows:
            "extrapolations. " + size_note + "Predictions were committed before measurement; per-capability and per-point "
            "values are in the results ledger.}")
     L += [r"\bottomrule\end{tabular}", cap, r"\label{tab:p1v2}\end{table}"]
-    (ROOT / "paper/tables/p1v2.tex").write_text("\n".join(L) + "\n")
-print(f"{len(rows)} rows from {len(glob.glob(str(OUT/'compare_*.json')))} sources -> p1v2_table.{{json,csv}} + paper/tables/p1v2.tex")
+    (ROOT / "paper/paper/tables/p1v2.tex").write_text("\n".join(L) + "\n")
+print(f"{len(rows)} rows from {len(glob.glob(str(OUT/'compare_*.json')))} sources -> p1v2_table.{{json,csv}} + paper/paper/tables/p1v2.tex")

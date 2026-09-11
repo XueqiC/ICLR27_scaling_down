@@ -3,7 +3,7 @@
 per-capability test MAE, gain vs strongest same-input and source-free baselines, signed bias; coefficient tables."""
 import json, math
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]; TAB = ROOT / "paper/tables"; C = ("math", "code", "qa")
+ROOT = Path(__file__).resolve().parents[1]; TAB = ROOT / "paper/paper/tables"; C = ("math", "code", "qa")
 f3 = lambda v: f"{v:.3f}"; s3 = lambda v: f"{v:+.3f}"
 # ---------------- pruning (v53) ----------------
 reg = json.load(open(ROOT / "results/v53-prune-dev/register.json")); tags = ["pythia-410m@step48000", "pythia-1.4b@step112000", "pythia-6.9b@step80000"]
