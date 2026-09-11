@@ -18,10 +18,10 @@ What cannot be predicted is equally specific. No source-conditioned
 form predicts the QA response to pruning on a new checkpoint, and no
 form transfers to density 0.55 or to a source five times larger. Bit-width alone supports no continuous quantization relation. Joint
 transfer of the distillation forms to a larger student and a new pool
-is unreliable, and the distillation QA gain on the primary distribution reverses
-sign on an independent multi-hop set, so it is a prediction relation
-on the teacher-matched distribution and no general QA gain
-(Appendix~\ref{sec:app_measure}).
+is unreliable, and the distillation QA gain replicates on a fresh sample of the
+primary distribution while reversing sign on an independent multi-hop
+set, so it is a prediction relation on the teacher-matched
+distribution and no general QA gain (Appendix~\ref{sec:app_measure}).
 
 The dense capability anchor is the input to keep, the working forms
 are low-dimensional, and transfer across sizes is bounded by the

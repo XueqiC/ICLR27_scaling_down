@@ -1,0 +1,21 @@
+\begin{table}[H]
+\centering
+\small
+\caption{QA measurement scope on Gemma-3-1B: conditional loss and $\Delta L$ from dense (native-token nats; negative is improvement), 256 fixed references per set. KD labels denote nominal supervised-token budgets. 2Wiki supplies all context; MuSiQue supplies supporting paragraphs; TriviaQA uses V48's no-context control. 24/24 cells measured.}
+\label{tab:qa_scope}
+\begin{tabular}{lrrrrrr}
+\toprule
+& \multicolumn{2}{c}{New 2Wiki} & \multicolumn{2}{c}{MuSiQue} & \multicolumn{2}{c}{TriviaQA} \\
+State & Loss & $\Delta L$ & Loss & $\Delta L$ & Loss & $\Delta L$ \\
+\midrule
+Dense & 5.796 & +0.000 & 1.919 & +0.000 & 2.714 & +0.000 \\
+Prune d=0.85 & 6.203 & +0.408 & 2.135 & +0.216 & 2.870 & +0.156 \\
+Prune d=0.7 & 6.510 & +0.715 & 3.186 & +1.267 & 5.619 & +2.905 \\
+RTN int4/channel & 6.594 & +0.799 & 3.324 & +1.405 & 4.360 & +1.646 \\
+RTN b=4 g=128 & 5.759 & -0.036 & 2.136 & +0.217 & 3.089 & +0.375 \\
+KD T=35k & 4.247 & -1.548 & 1.995 & +0.076 & 2.960 & +0.246 \\
+KD T=140k & 4.537 & -1.258 & 2.114 & +0.195 & 3.058 & +0.344 \\
+KD T=280k & 4.917 & -0.878 & 2.124 & +0.204 & 2.967 & +0.253 \\
+\bottomrule
+\end{tabular}
+\end{table}

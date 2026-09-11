@@ -57,8 +57,17 @@ student at the unseen pool the gain over the constant is detected on
 every capability (0.015, 0.011, and 0.26 nats; intervals above zero);
 on the 1B student it is detected for code and QA (0.040 and 0.56
 nats) and the math point estimate (0.007) is not resolved by three
-trajectories. Against zero change the gains are 42 to 79\% on every cell, so the
-pool direction is covered on the development students.
+trajectories. Against zero change the gains are 42 to 79\% on every cell. In the
+confirmation round (six new pools of $U{=}200$, budgets 50k, 100k, and
+200k, predictions frozen before training) every selected form beats
+zero change; against the strongest baseline fixed from development,
+the gain is detected for code on both students (0.004 and 0.005 nats)
+and for QA on 270M (0.09), while for math a budget-only or same-input
+surface baseline is better on both students (0.065 against 0.074;
+0.033 against 0.057) and the constant is on par
+(Appendix~\ref{sec:app_results}). The pool direction is therefore
+covered for code and QA, and the development-selected math form adds
+nothing over simpler frozen forms.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}

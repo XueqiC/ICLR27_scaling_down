@@ -1,0 +1,18 @@
+\begin{table}[H]
+\centering
+\small
+\caption{V70 distillation confirmation at $U=200$ and supervised $T=50,100,200$k. Each student/capability has six sampled pools, with three dependent checkpoints per pool (18 points, not 18 replicates). MAE and paired improvement (baseline minus selected absolute error) are in nats. Both forms and strongest baselines were chosen by development LOCO before confirmation. Brackets: 95\% percentile intervals from 5,000 paired pool-cluster bootstrap resamples, seed 0; all budgets stay together.}
+\label{tab:distill_confirm}
+\begin{tabular}{@{}ll ll rrr@{}}
+\toprule
+Student & Cap. & Selected & Baseline & MAE & Base MAE & Improvement [95\% CI] \\
+\midrule
+270m & math & E & T-only & 0.0743 & 0.0654 & -0.0088 [-0.0098, -0.0081] \\
+270m & code & E & E-only & 0.0193 & 0.0230 & 0.0038 [0.0025, 0.0050] \\
+270m & qa & joint & E-only & 0.5150 & 0.6097 & 0.0947 [0.0774, 0.1093] \\
+1b & math & E & surface:L0 & 0.0569 & 0.0335 & -0.0234 [-0.0235, -0.0233] \\
+1b & code & E & E-only & 0.0485 & 0.0532 & 0.0047 [0.0042, 0.0050] \\
+1b & qa & joint & surface:logN & 0.4634 & 0.4502 & -0.0132 [-0.0198, -0.0098] \\
+\bottomrule
+\end{tabular}
+\end{table}

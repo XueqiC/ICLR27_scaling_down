@@ -311,6 +311,18 @@ and 0.186 at the last, so training-seed noise is well below the law
 errors except for QA at high reuse.
 \input{tables/p2v2_test}
 \input{tables/distill_paired}
+
+The distillation confirmation round re-selected forms on all 25
+trajectories of the uniform protocol (leave-one-trajectory-out, ties
+within 0.02 nats toward fewer parameters: a reuse-count form for math
+and code, the joint form for QA), froze predictions for six new pools
+of $U{=}200$ at budgets of 50k, 100k, and 200k supervised tokens, and
+fixed the strongest baseline per student and capability from the same
+development pass; Table~\ref{tab:distill_confirm} gives the paired differences with
+pool-cluster intervals (six independent pools). Dense losses
+re-measured on a different GPU drift by at most 0.001 nats from the
+frozen descriptor and were tolerated at 0.01.
+\input{tables/distill_confirm}
 \FloatBarrier
 \begin{figure}[p]
 \centering
@@ -375,6 +387,20 @@ the teacher-matched QA distribution, and it does not carry over to an
 independent multi-hop distribution even with the same information
 condition.
 \input{tables/musique_scope}
+
+\paragraph{Pre-specified scope check on eight states.} On Gemma-3-1B,
+eight states fixed before measurement (dense; pruning at $d=0.85$ and
+$0.7$; per-channel int4 and grouped $b=4$, $g=128$; the U450
+distillation trajectory at 35k, 140k, and 280k supervised tokens) were
+scored on three sets of 256 references each: a new sample of the
+primary 2Wiki distribution that overlaps neither existing probe half,
+MuSiQue answerable-dev with supporting paragraphs (zero overlap with
+the teacher traces), and the TriviaQA control (Table~\ref{tab:qa_scope}). At
+every distillation budget the pre-stated reading is ``only the new
+primary sample reproduces'': the 2Wiki gain replicates ($-1.55$,
+$-1.26$, $-0.88$ nats), MuSiQue and TriviaQA rise ($+0.08$ to $+0.34$).
+Pruning and quantization damage agrees in sign on all three sets.
+\input{tables/qa_scope}
 
 \paragraph{Loss and behavior.} Loss-to-accuracy links were fit on
 GSM8K accuracy, MBPP pass@1, and TriviaQA exact match and token F1
