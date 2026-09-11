@@ -50,10 +50,8 @@ density $d$. Quantization is symmetric round-to-nearest of the same
 matrices, weights only, per output channel at bit-width $b$ or with
 contiguous input groups of $g$ weights sharing one scale.
 Distillation is supervised fine-tuning of an existing student on
-black-box teacher traces with strict LoRA adapters: a pool of $U$
-traces per domain with $D_U$ supervised completion tokens is processed
-for a fixed budget, and we record the supervised completion tokens $T$
-and the reuse count $E=T/D_U$. The inputs admitted to every predictor
+black-box teacher traces with strict LoRA adapters from a pool of $U$
+traces per domain, processed for a fixed budget. The inputs admitted to every predictor
 are the parameter count $N_0$ of the transformer weight matrices, the
 pretraining token count $D_0$ where disclosed, and the dense capability
 losses $L_{0,c}$ measured once on the uncompressed model (the initial

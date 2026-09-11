@@ -3,13 +3,11 @@
 
 What can be predicted now is specific. Given the parameter count, the
 pretraining token count, and the dense capability losses of a source
-in the development range, the pruning form of Eq.~\eqref{eq:power}
-predicts the math and code response at any density inside the fitted
-range to within a few tenths of a nat, and a per-density regression
-does the same without the power structure. Given the same inputs, the
-frozen surface of Eq.~\eqref{eq:quant2d} predicts the grouped
-quantizer at bit-widths and group sizes it was not fit on, for the
-states it was fit on, with its curvature fixed by regularization.
+in the development range, the pruning form of Eq.~\eqref{eq:power} predicts the math and code
+response at any density inside the fitted range to within a few
+tenths of a nat. Given the same inputs, the frozen surface of
+Eq.~\eqref{eq:quant2d} predicts the grouped quantizer at bit-widths
+and group sizes it was not fit on, for the states it was fit on.
 Given a student's state, a linear form predicts its math transfer,
 and under a fixed distillation protocol a response model in budget,
 reuse, and a student descriptor predicts unseen data pools on the two
@@ -19,21 +17,15 @@ development students. Each comes with coefficients
 
 What cannot be predicted is equally specific. No source-conditioned
 form predicts the QA response to pruning on a new checkpoint, and no
-form transfers to density 0.55 or to a source five times larger than
-the development range. Bit-width alone supports no continuous
-quantization relation, and the separable candidate we tested is worse
-than the surface. Joint transfer of the distillation forms to a larger
-student and a new pool is unreliable, and distillation lowers the
-conditional loss on the primary QA distribution without that change
-carrying over to TriviaQA, so the QA result is a prediction relation
-on the measured distribution and no general QA gain
+form transfers to density 0.55 or to a source five times larger. Bit-width alone supports no continuous quantization relation. Joint
+transfer of the distillation forms to a larger student and a new pool
+is unreliable, and the distillation QA gain on the primary
+distribution does not carry over to TriviaQA, so it is a prediction
+relation on the measured distribution and no general QA gain
 (Appendix~\ref{sec:app_measure}).
 
 The dense capability anchor is the input to keep, the working forms
-are low-dimensional with exponents not established as necessary, and
-transfer across sizes is bounded by the development range, so a wider
-development panel is the direct route to wider laws. The limitations
-are small controlled panels with correlated observations, one
-quantizer family and one teacher, a loss endpoint whose code
-specificity was not detected on a secondary benchmark, and a selection
-validation with nominal storage as the only cost.
+are low-dimensional, and transfer across sizes is bounded by the
+development range. The limitations are small correlated panels, one
+quantizer family and one teacher, undetected code specificity on a
+secondary benchmark, and nominal storage as the only selection cost.

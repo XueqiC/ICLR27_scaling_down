@@ -34,6 +34,14 @@ sentence. The P3 primary-vs-secondary check (v48) is in App. E (Table tab:p3_che
 probe-specificity qualifier on the distillation QA response in §3.4. Extras (4B dev pools, seed repeats, F1/F2
 retrospective) are in: data cut-off 19:47 EDT (3b5feae), stated in App. I.
 
+## Update 2026-09-10 23:40 EDT: 9-page main text and round v4 corrections
+Main text compressed to nine pages (ICLR 2027 initial-submission limit): Table 2 is a 14-row headline table (complete table
+in App. D), Fig. 3 (inputs/forms) and the selection figure moved to the appendix, every section condensed to formula /
+inputs / selection rule / core numbers / strongest baseline / range. Round v4 corrections: quantization identifiability (rank
+16/20, curvature set by ridge; no-u^2 control), selection feasibility (no source fallback; coverage; common-feasible regret),
+distillation paired intervals with the three-way CI wording, P3 QA scope sentence in the main text, origin labels from process
+only, PI under-coverage stated. Repository layout: LaTeX under paper/.
+
 ## Main text vs appendix
 Main (about 11.5 pages including Figs 1-3 and Tables 1-3; references begin on page 12; 36 pages total): problem and inputs (Eq. 2), loss definition with three boundaries, panel roles, fitting/evaluation
 rules, the three arms' forms and development comparisons (Sec. 3), generalization by unseen settings / unseen states /

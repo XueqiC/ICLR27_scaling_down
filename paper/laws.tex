@@ -3,8 +3,8 @@
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.72\textwidth]{figs/predictive_responses.pdf}
-\caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen shared power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median development curve; the 6.9B source at the same stage is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources at the integer bit-widths with the frozen per-bit regression (hollow) and the per-bit median (dotted); the 5-bit point is the fixed interpolation rule and guide lines are visual only. Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools U75 and U600 (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms and the QA bias at the two budgets. Points are measurements; lines are development fits frozen before the test points were measured. Native nats per token; separate axes per column.}
+\includegraphics[width=0.64\textwidth]{figs/predictive_responses.pdf}
+\caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median curve; the 6.9B source is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources with the frozen per-bit regression (hollow) and the per-bit median (dotted). Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms. Lines are fits frozen before the test points were measured; native nats per token.}
 \label{fig:responses}
 \end{figure}
 
@@ -20,9 +20,8 @@ and 0.806 for math, code, and QA; the improvement interval excludes
 zero for code, includes zero for math, and is negative for QA, where
 predicting no change is better. Adding the dense anchor $L_{0,c}$ to
 $(N_0,D_0)$ has intervals above zero for math ($+0.55$, $[0.29,1.00]$)
-and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$
-does not ($+0.36$, $[-0.04,0.60]$; $+0.40$, $[-0.01,0.63]$;
-Fig.~\ref{fig:inputs}A), and a frozen test at a new stage confirmed
+and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not
+(Fig.~\ref{fig:inputs}A), and a frozen test at a new stage confirmed
 the ranking. Every relation is therefore conditioned on the three
 inputs, with the dense anchor as the carrier and $D_0$ as a weak
 second-order term, per capability.
@@ -40,8 +39,7 @@ A_c(\mathbf x)=\beta_c\cdot\big(1,\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_
 \label{eq:power}
 \end{equation}
 five parameters per capability, tildes standardized on the development
-set (Table~\ref{tab:models} in Appendix~\ref{sec:app_details}
-summarizes every delivered predictor). Its
+set (Appendix~\ref{sec:app_details}, Table~\ref{tab:models}). Its
 same-input alternatives are the per-density regression A2 (four
 coefficients at each development density, an unseen $d$ by linear
 interpolation), the power form with $\gamma_c=1$, and a two-term
@@ -84,16 +82,15 @@ two-dimensional form
 \label{eq:quant2d}
 \end{equation}
 with one four-vector of state coefficients per term, and a same-input
-bilinear interpolation. Because $b$ takes two development values,
-$u^2$ is collinear with $[1,u]$ on the development cells: the design
-of Eq.~\eqref{eq:quant2d} has rank 16 for its 20 coefficients, the ridge penalty fixes the remainder, and the curvature in $u$ at an
-unseen bit-width is set by the regularization and the centring, and
-is not identified by the development data
-(Appendix~\ref{sec:app_forms}). With six states the leave-one-state-out
-errors are large for all three forms, so the development set selects
-no form; the frozen tests of \S\ref{sec:unseen_settings} do, and what
-they can establish is that a frozen response surface improves
-prediction at unseen bit-width and group-size configurations.
+bilinear interpolation. Because $b$ takes two development values, $u^2$ is constant on the
+development cells and the design of Eq.~\eqref{eq:quant2d} has rank
+16 for its 20 coefficients: the curvature in $u$ at an unseen
+bit-width is set by the ridge penalty and is not identified by the
+data (Appendix~\ref{sec:app_forms}). With six states the
+leave-one-state-out errors are large for all three forms, so the
+development set selects no form; the frozen tests of
+\S\ref{sec:unseen_settings} do, and they can establish only that a
+frozen response surface improves prediction at unseen configurations.
 
 \subsection{Distillation}
 \label{sec:law_distill}
@@ -142,11 +139,10 @@ student descriptor $z_c=\tilde L_{0,c}$,
 \label{eq:kdforms}
 \end{equation}
 were compared on the development matrix by leave-one-run-out
-cross-validation (the first lowest for math and code, the second for
-QA) and scored on the test matrix retrospectively
-(Appendix~\ref{sec:app_forms}): the second is the best of all forms on
-the 270M unseen-pool trajectories, the first fails for QA because it
-has no budget term, and neither beats the frozen constant for math
+cross-validation and scored on the test matrix retrospectively
+(Appendix~\ref{sec:app_forms}): the second is the best of all forms
+on the 270M unseen-pool trajectories, the first fails for QA because
+it has no budget term, and neither beats the frozen constant for math
 and code on the 4B student. The delivered relation is the joint form
 inside the development size range; no joint student-pool-budget law
 is claimed.

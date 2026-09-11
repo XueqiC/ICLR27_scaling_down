@@ -2,18 +2,15 @@
 \label{sec:related}
 
 \paragraph{Scaling laws for compression.} Existing compression laws
-differ in what they take as input and what they predict. Sparsity
-enters as a multiplicative factor on the size term of a pretraining
-loss law \citep{frantar2023scaling}; precision enters through an
-effective-parameter count with a post-training degradation term that
-grows with pretraining tokens \citep{kumar2024scaling}; formats used
-during training collapse onto one capacity scalar
-\citep{panferov2025unified}; the P$^2$ law predicts the post-training
-loss of a pruned model from its size and loss before pruning, the
-pruning rate, and the post-training tokens, validated on held-out
-tokens, sizes, and rates \citep{zhang2024scaling}; and a distilled
-student follows a broken power law in teacher loss during
-pretraining-scale logit distillation \citep{busbridge2025distillation}.
+differ in what they take as input and what they predict. Sparsity enters as a factor on the size term of a pretraining loss
+law \citep{frantar2023scaling}; precision enters through an
+effective-parameter count with a post-training degradation term
+\citep{kumar2024scaling}; training formats collapse onto one capacity
+scalar \citep{panferov2025unified}; the P$^2$ law predicts the
+post-training loss of a pruned model from its size and loss before
+pruning, the pruning rate, and the post-training tokens
+\citep{zhang2024scaling}; and a distilled student follows a broken
+power law in teacher loss \citep{busbridge2025distillation}.
 Their targets are aggregate losses; we follow the P$^2$ law in
 admitting the pre-compression loss and add a per-capability endpoint
 measured the same way for three methods, a development panel in which
@@ -43,10 +40,9 @@ is predictable mainly through continuous log-likelihood measurements
 which motivates our loss endpoint and its stated boundaries; fitted
 scaling-law forms are fragile to the fitting protocol
 \citep{li2025misfitting,besiroglu2024chinchilla}, and repeated tokens
-are not worth new tokens in data-constrained pretraining
+are worth less than new tokens in data-constrained pretraining
 \citep{muennighoff2023scaling}, an effect our reuse-count coordinate
 measures in the distillation setting. Gradient-based importance
 underlies modern pruning
-\citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple}; we use
-gradient statistics only as mechanism evidence
-(Appendix~\ref{sec:app_mech}).
+\citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple} and
+enters here only as mechanism evidence (Appendix~\ref{sec:app_mech}).

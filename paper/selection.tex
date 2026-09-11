@@ -13,14 +13,13 @@ setting preserves that capability best? We write the decision as
 where $\mathcal F_m(B)$ is the set of settings of method $m$ that meet
 the budget $B$. Every candidate is compared through the absolute loss of the deployed
 model (the source with its predicted response, or the smaller student
-after distillation), and the map for one capability need not coincide
+after distillation); the map for one capability need not coincide
 with the map for another.
 
 We validated this use retrospectively on the controlled panel with a
-nominal storage budget $r_{\max}$ from 0.2 to 1, using only measured
-configurations (84 pruning, 70 per-channel and 57 grouped quantization
-cells, and 9 same-stage smaller students across 17 states) and
-refitting every law with the target state held out. A policy with no
+nominal storage budget $r_{\max}$ from 0.2 to 1, using only measured configurations (211 compression cells and 9
+same-stage smaller students across 17 states) and refitting every law
+with the target state held out. A policy with no
 feasible configuration at a budget returns no choice: quantization is
 feasible everywhere, whereas pruning-only covers 56\% and
 distillation-only 33\% of the 289 state-budget cells. Over all cells
@@ -33,14 +32,10 @@ close behind (0.21, 0.19, 0.49, and 0.04 nats), because on this
 storage axis quantization has the most feasible cells and dominates
 math and code; the maps' contribution is therefore the connection of
 the laws to an explicit decision, and they show no general advantage
-over a strong single method on this panel. Where a smaller student
-exists, distillation-only is near the oracle for QA (0.06 nats on its
-96 cells) and the map picks it in most of those cells (Appendix
-Fig.~\ref{fig:selection}). About half of the cells are ``no clear
-winner'' cells under a heuristic rule (predicted gap between the two
-best methods smaller than the larger of their held-out errors); the
-oracle's method lies in the reported candidate set in every such
-cell, and the rule carries no coverage guarantee
-(Appendix~\ref{sec:app_selection}). The maps inherit the laws'
-boundaries: in-range states, nominal storage as the only cost, and QA
-cells that are the least reliable.
+over a strong single method on this panel. Where a smaller student exists, distillation-only is near the oracle
+for QA (0.06 nats; Appendix Fig.~\ref{fig:selection}). Under a heuristic rule (predicted gap between the two best methods
+smaller than the larger of their held-out errors) about half of the
+cells have no clear winner; the oracle's method lies in the reported
+candidate set in every such cell, and the rule carries no coverage
+guarantee (Appendix~\ref{sec:app_selection}). The maps inherit the laws' boundaries: in-range states, nominal
+storage as the only cost, and unreliable QA cells.

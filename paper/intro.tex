@@ -7,12 +7,12 @@ answering, and both pay for every token of inference. The model that
 serves such a workload is usually a dense source scaled down by
 pruning, quantization, or distillation, and choosing the route and its
 strength today means running each candidate through capability
-benchmarks. A single compression ratio cannot replace that search,
-because compression does not shrink capabilities uniformly: on twelve
-public models from five series, the same pruning density leaves QA the
-least-damaged capability in Qwen3 and OLMo-3-32B and the most-damaged
-one in the Gemma series, and 3-bit quantization collapses twelve of
-fourteen models but not OLMo-3-32B (Appendix~\ref{sec:app_hetero}).
+benchmarks. A single compression ratio cannot replace that search, because
+compression does not shrink capabilities uniformly: across twelve
+public models from five series, the same pruning density leaves QA
+the least-damaged capability in some series and the most-damaged in
+others, and 3-bit quantization collapses twelve of fourteen models
+(Appendix~\ref{sec:app_hetero}).
 
 We therefore ask how the capability-conditioned loss after compression
 can be predicted from the initial model state and the configuration of
