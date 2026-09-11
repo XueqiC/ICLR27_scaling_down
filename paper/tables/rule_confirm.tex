@@ -1,0 +1,33 @@
+\begin{table}[H]
+\centering\small
+\caption{Independent V78 selection panel. Regret is in nats; agreement and heuristic method coverage are percentages. QA is restricted to 2Wiki; KD reuses v39 students.}
+\label{tab:rule-confirm}
+\begin{tabular}{llrrrr}
+\toprule
+Capability & Policy & Feasible & Regret & Agreement & Set coverage \\
+\midrule
+math & locked-rule & 68/68 & 0.0000 & 98.5 & 100.0 \\
+math & v64-law & 68/68 & 0.0149 & 98.5 & 100.0 \\
+math & quant-only & 68/68 & 0.0068 & 94.1 & --- \\
+math & cheapest & 68/68 & 1.7716 & 73.5 & --- \\
+\midrule
+code & locked-rule & 68/68 & 0.0043 & 95.6 & 100.0 \\
+code & v64-law & 68/68 & 0.1124 & 100.0 & 100.0 \\
+code & quant-only & 68/68 & 0.0102 & 97.1 & --- \\
+code & cheapest & 68/68 & 2.4346 & 75.0 & --- \\
+\midrule
+qa & locked-rule & 68/68 & 0.1410 & 76.5 & 100.0 \\
+qa & v64-law & 68/68 & 0.2136 & 61.8 & 97.1 \\
+qa & quant-only & 68/68 & 0.2526 & 48.5 & --- \\
+qa & cheapest & 68/68 & 1.3518 & 63.2 & --- \\
+\midrule
+Max & locked-rule & 68/68 & 0.0020 & 100.0 & 100.0 \\
+Max & v64-law & 68/68 & 0.0019 & 97.1 & 100.0 \\
+Max & quant-only & 68/68 & 0.0081 & 92.6 & --- \\
+Max & cheapest & 68/68 & 2.4263 & 72.1 & --- \\
+\bottomrule
+\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\small
+The max objective is $\max_c(L_c-L_{0c})$. Quant-only pools both RTN arms. All four headline policies share the same 68 feasible cells. Heuristic sets use frozen v64 development errors, not calibrated uncertainty. Verdicts: math: confirmed; code: confirmed; qa: confirmed.
+\end{minipage}
+\end{table}

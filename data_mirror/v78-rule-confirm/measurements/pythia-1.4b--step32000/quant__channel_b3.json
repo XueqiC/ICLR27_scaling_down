@@ -1,0 +1,33 @@
+{
+  "state": "pythia-1.4b@step32000",
+  "config": {
+    "id": "quant:channel_b3",
+    "method": "quant",
+    "law": "quant_channel",
+    "config": "channel_b3",
+    "r": 0.1875,
+    "target_state": "pythia-1.4b@step32000",
+    "bit": 3
+  },
+  "losses": {
+    "math": 3.6647947480819427,
+    "code": 4.950558592821488,
+    "qa": 6.520437262357414
+  },
+  "protocol": {
+    "model_dtype": "bf16",
+    "probe_seed": 0,
+    "n_probe": 128,
+    "probe_half": "odd-indexed [1::2]",
+    "loss_protocol": "v10._measure_capability_losses (completion-token-weighted CE)",
+    "quantization": "symmetric round-to-nearest (torch.round, ties to even)",
+    "qa_distribution": "2Wiki",
+    "reference_device": "cpu",
+    "pruning": "v6 sampled global magnitude threshold, seed 0, 2000000 weights"
+  },
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "gpu_uuid": "GPU-20b20454-ae9f-7860-6801-430d68842a27",
+  "verification_sha256": "eeacaa150c5458ffba9f225ccccd04455504b3322f1e4bfeeb6dbf41d4368d23",
+  "independent_sha256": "54b53f547800957f4be011ba4c3cbc50302144576de36f6da0e0bd63be6141a5",
+  "final_sha256": "78dd229d7131f485b3a0651eac6978d2671ad139c02fcc2ea753d3420d5f129f"
+}

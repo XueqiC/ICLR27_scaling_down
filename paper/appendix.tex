@@ -776,6 +776,30 @@ Table~\ref{tab:selection-feasible} gives the per-policy results behind Fig.~\ref
 \label{fig:selection}
 \end{figure}
 \input{tables/selection_feasible}
+
+\paragraph{Locked rule and independent confirmation.} The rule fixed
+before the confirmation panel was measured (analysis/final\_rule.py):
+pruning uses the power form for math and code and the median curve
+for QA at unseen densities of seen sizes, and the median development
+curve for every capability on new sizes or stages; per-channel
+quantization on new states uses the per-bit development median;
+grouped quantization uses the same-input piecewise interpolation for
+math and code and the per-configuration median for QA on seen states,
+and the per-configuration median for every capability on new states;
+distillation with a same-stage smaller student uses the student's
+reference loss plus a per-capability constant (code, QA) or the linear
+student-state form (math), QA on the 2Wiki distribution only.
+Selection minimizes the predicted absolute loss over feasible measured
+configurations. Predictions under this rule and under the earlier
+source-conditioned laws were frozen for four fresh states before
+measurement (Table~\ref{tab:rule-confirm}; Fig.~\ref{fig:rule_maps}).
+\input{tables/rule_confirm}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figs/rule_maps.pdf}
+\caption{Per-capability selection maps on the four fresh states under the locked rule and under the earlier source-conditioned laws (row pairs), against nominal storage budget; colour = predicted method, marker = the measured oracle's method, hatching = no-clear-winner candidate set. The QA map differs from the math and code maps; the max-over-capabilities map is bottom right.}
+\label{fig:rule_maps}
+\end{figure}
 \input{tables/candidate_coverage}
 \FloatBarrier
 \paragraph{Resource-ratio models.} A method-agnostic response in the
