@@ -108,9 +108,8 @@ and code a shared curve is as good or better; for grouped
 quantization the two are indistinguishable (0.003 nats); and for
 distillation the one-coefficient forms are algebraically equivalent,
 with a shared curve plus per-capability offset predicting QA better
-than the per-capability reuse form. Conditioning is needed where the
-sign of the response differs across capabilities, and adds little
-where the shape is shared.
+than the per-capability reuse form. Conditioning matters where the sign of the response differs across
+capabilities.
 
 \paragraph{Shared structure and ranges.} One function family across
 methods holds for pruning by construction and fails for quantization
