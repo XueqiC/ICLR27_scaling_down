@@ -1,202 +1,127 @@
 \section{Generalization to Unseen Models and Configurations}
 \label{sec:general}
 
-Once a form is chosen on the development set, its coefficients are
-frozen and it predicts three kinds of unseen object: compression
-settings outside the fitted set, model states of new sizes or
-pretraining stages, and, across both, the three capabilities.
-Table~\ref{tab:pred_main} lists every registered test with the
-candidate error and the strongest relevant baseline; Fig.~\ref{fig:transfer}
-shows where the candidates gain over a source-free reference and where
-they do not. Errors are MAE in nats per token; ``interpolation'' and
-``extrapolation'' refer to the fitted range of the setting.
+Once a form is chosen, its coefficients are frozen and it predicts
+three kinds of unseen object: compression settings outside the fitted
+set, model states of new sizes or stages, and, across both, the three
+capabilities. Table~\ref{tab:pred_main} lists every registered test
+with the candidate error and the strongest relevant baseline;
+Fig.~\ref{fig:transfer} shows where the candidates gain over a
+source-free reference. Errors are MAE in nats per token.
 
-\input{tables/pred_main}
+\input{tables/pred_headline}
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.92\textwidth]{figs/transfer_limits.pdf}
-\caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference, nats, averaged over the three capabilities; positive = candidate better) for each new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE printed in each cell; the confirmation panel (410M@48k, 1.4B@112k, 6.9B@80k) and the grouped-quantization tests are included. Cells not evaluated are hatched. Bottom: the distillation pool test, reuse-count form against the constant on the unseen pool U225, per capability. All predictions were frozen before the corresponding measurement.}
+\includegraphics[width=0.7\textwidth]{figs/transfer_limits.pdf}
+\caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference, nats, averaged over the three capabilities; positive = candidate better) for each new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE printed in each cell; the confirmation panel (410M@48k, 1.4B@112k, 6.9B@80k) and the grouped-quantization tests are included. Cells not evaluated are hatched. Bottom: the distillation pool tests, per capability, against the frozen constant. All predictions were frozen before the corresponding measurement.}
 \label{fig:transfer}
 \end{figure}
 \subsection{Prediction at Unseen Compression Settings}
 \label{sec:unseen_settings}
 
-\paragraph{Pruning densities.} Inside the fitted density range the
-source-conditioned forms predict math and code and do not predict QA.
-On the three checkpoints that entered no fit, at densities between the
-grid points (0.85, 0.675, 0.575), the delivered power form has MAE
-0.24, 0.24, and 0.68 for math, code, and QA: it beats the strength-only
-curve (0.45, 0.49, 0.58) and zero change on every checkpoint, has the
-lowest math error of all predictors, ties the median development curve
-on code, and loses QA to every source-free curve (median 0.22) because
-it over-predicts the QA improvement, so the source-free median has the
-lowest aggregate error (0.24 against 0.39). Beyond the fitted range the picture is uniform:
-at $d=0.55$ every source-conditioned form fails on every source tested
-(errors 0.6 to 4.5 nats; the strength-only curve is closest), so the
-transfer range of these relations is the interpolation regime.
+\paragraph{Pruning densities.} On the three checkpoints that entered
+no fit, at densities 0.85, 0.675, and 0.575, the delivered power form
+has MAE 0.24, 0.24, and 0.68 for math, code, and QA: it beats the
+strength-only curve (0.45, 0.49, 0.58) and zero change on every
+checkpoint, has the lowest math error of all predictors, ties the
+median curve on code, and loses QA to every source-free curve (median
+0.22) because it over-predicts the QA improvement, so the median has
+the lowest aggregate error (0.24 against 0.39). At $d=0.55$, beyond
+the range, every source-conditioned form fails on every source (0.6
+to 4.5 nats): the transfer range is the interpolation regime.
 
-\paragraph{Quantization settings.} The per-channel predictor has one
-unseen setting, 5 bits, and its fixed rule (the mean of the committed
-4- and 6-bit predictions) is worse than a per-bit constant on the 1B
-source. With group size as a second axis the outcome changes. At the
-unseen bit-width $b=4$ on the six development states, the
-two-dimensional form of Eq.~\eqref{eq:quant2d} has MAE 0.19, 0.21,
-and 0.44 against 0.45, 0.53, and 0.48 for zero change and 0.55, 0.73,
-and 0.54 for the per-configuration median; at the unseen group size
-$g=128$ across three bit-widths it has 0.22, 0.32, and 0.99 against
-1.24, 1.35, and 1.24 for zero change, on all three capabilities. The
-separable candidate is worse than zero change on the bit test and the
-bilinear interpolation fails outside the development corners, so the
-response does not factor into a state amplitude and a shared shape.
-These are configuration transfers on seen states; the one new state
-tested (1B@96k at $g=128$, three cells) is mixed, with the
-two-dimensional form best on code and behind the source-free curves on
-math and QA.
+\paragraph{Quantization settings.} The per-channel predictor's one
+unseen setting, 5 bits by a fixed interpolation rule, is worse than a
+per-bit constant on the 1B source. With group size as a second axis,
+the frozen surface of Eq.~\eqref{eq:quant2d} has MAE 0.19, 0.21, and
+0.44 at the unseen $b=4$ on the six development states (zero change
+0.45, 0.53, 0.48; per-configuration median 0.55, 0.73, 0.54) and
+0.22, 0.32, 0.99 at the unseen $g=128$ across three bit-widths (zero
+change 1.24, 1.35, 1.24). The separable power candidate we tested is
+worse than zero change on the bit test and the bilinear interpolation
+fails outside the development corners; other amplitude-times-shape
+forms remain untested. On the one new state tested (1B@96k at
+$g=128$, three cells) the surface is best on code and behind the
+source-free curves on math and QA.
 
-\paragraph{Distillation pools and budgets.} The four forms frozen on
-the endpoint pools U75 and U600 were applied to an unseen pool U225
-whose reuse count (2.3 to 4.7) lies inside the endpoint range and
-whose sampling protocol differs (random sample against pool prefix).
-The reuse-count form beats the constant only for QA (0.706 against
-1.449); for math and code the constant is best (0.122 and 0.069
-against 0.191 and 0.117) and the fitted forms over-extrapolate. The
-residual is dominated by systematic bias, $-0.87$ nats at one budget
-and $+0.48$ at the other for QA, and variation across pool samples
-exceeds variation across training seeds (0.43 against 0.04 nats);
-under the uniform protocol two training-seed repeats differ from their
-originals by at most 0.02 nats for math, 0.03 for code, and 0.19 for
-QA at the largest reuse count (Appendix~\ref{sec:app_results}).
-Under the absolute-exposure protocol, eight forms for three students
-were frozen before nine runs on three unseen U375 pools. The form with
-the lowest development error at freeze time, the joint form with a
-source term, beats the frozen per-capability constant and zero change
-on every capability of both development students at the new pool
-(math 0.045 and 0.050 against 0.060 and 0.057 for the constant and
-0.092 and 0.095 for zero change; code 0.036 and 0.029 against 0.047
-and 0.069 and 0.138 and 0.109; QA 0.61 and 0.44 against 0.86 and 1.00
-and 1.01 and 1.15; Table~\ref{tab:p2v2_test}). The pool
-direction is therefore covered by these forms; the student-size
-direction is treated in \S\ref{sec:unseen_states}.
+\paragraph{Distillation pools.} On the earlier protocol, the
+reuse-count form frozen on pools U75 and U600 beats the constant on
+the unseen pool U225 only for QA (0.706 against 1.449), with a bias
+that changes sign across budgets, and variation across pool samples
+exceeds variation across training seeds (0.43 against 0.04 nats;
+under the uniform protocol two seed repeats differ from their
+originals by at most 0.03 nats for math and code and 0.19 for QA at
+the largest reuse count, Appendix~\ref{sec:app_results}). Under the
+uniform protocol, the headline joint form beats the frozen
+per-capability constant on every capability of both development
+students at the unseen pool (math 0.045 and 0.050 against 0.060 and
+0.057; code 0.036 and 0.029 against 0.047 and 0.069; QA 0.61 and 0.44
+against 0.86 and 1.00; Table~\ref{tab:p2v2_test}), so the pool
+direction is covered on the development students.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
 
-\paragraph{Unseen stage inside the range.} At step 96k, between the
-development stages, the frozen per-density pruning regression beat
-both its no-$D_0$ variant and the per-setting median on all three
-capabilities for the 160M and 1.4B sources (Table~\ref{tab:pred_main}).
-The per-bit quantization regression on three sources at the same stage
-gains nothing over the per-bit median at four bits and above, where
-responses are near zero, and is inconsistent at int3 (better for math,
-worse for code and QA).
-
-\paragraph{New size inside the range.} For a 1B source at steps 32k
-and 112k, at interpolated densities, the power form, A2, and the
-source-free median curve are within 0.05 nats of one another on every
-capability; per stage, A2 is the best predictor at 112k on each
-capability and the median curve is best at 32k, driven by QA. A new
-in-range size is therefore predicted about as well by the source
-relation as by the development median.
-
-\paragraph{A source five times larger.} For a 6.9B source the
+Inside the range, the frozen per-density pruning regression beat its
+no-$D_0$ variant and the per-setting median on all three capabilities
+at the unseen stage 96k for the 160M and 1.4B sources, and for a 1B
+source at steps 32k and 112k the power form, A2, and the median curve
+are within 0.05 nats of one another, so a new in-range size is
+predicted about as well by the source relation as by the development
+median. For a 6.9B source, five times the development range, the
 source-conditioned pruning forms lose to the median curve on math
 (0.30 against 0.12) and QA (0.91 against 0.12) and tie on code: the
-regression extends the panel's size trend into QA improvements of one
-to three nats that do not occur, and over-predicts math and code
-damage by about a factor of two at mid densities. Fitting on early
-stages only (protocol B) brings the errors to the level of the
-source-free curves without beating them. The per-bit quantization
-regression is worse than the per-bit median or zero change at every
-bit-width for this source, by 0.1 to 0.4 nats above 3 bits and by 1.2
-to 3.6 nats at int3, with one protocol-B exception at int3 (1.29
-against 3.8 to 4.1). On the third new checkpoint of the confirmation
-panel, 6.9B@80k at interpolated densities, the delivered power form
-ties the median curve on math (0.30 against 0.31) and loses on code
-and QA, so the size boundary is soft for math and hard for QA.
-
-\paragraph{New students.} On Gemma-3-4B as a held-out student, whose
-$\log N_S$ lies $1.9$ above the reference against a development span of
-$\pm0.55$, every frozen form with budget, reuse, or size structure
-loses to the frozen per-capability constant (math 0.089 against 0.020,
-code 0.050 against 0.038, QA 1.14 against 1.02 for the dev-selected
-form), and the constant itself beats zero change for math and code
-(0.153 and 0.178) while tying it for QA (1.17). What transfers to a
-larger student is the average development response, not its
-dependence on budget, reuse, or size: the source term fitted on two
-students extends the QA reuse penalty to 2.3 nats at the largest
-budget where 0.40 was measured. At the development pools, by contrast,
-the same student is predicted better by the dev-selected form than by
-the constant (0.106, 0.048, and 0.96 against 0.156, 0.098, and 1.79
-for math, code, and QA over sixteen points each; zero change gives
-0.29, 0.23, and 1.86; Table~\ref{tab:p2v2_test}). The structured form
-therefore transfers to a larger student only at the pools it was
-developed on, and the student-size direction is not covered reliably.
+regression extends the panel's size trend into QA improvements that
+do not occur, and the per-bit quantization regression is worse than
+the per-bit median at every bit-width. On 6.9B@80k the power form
+ties the median on math (0.30 against 0.31) and loses on code and QA:
+the size boundary is soft for math and hard for QA. For distillation,
+on Gemma-3-4B as a held-out student ($\log N_S$ 1.9 above the
+reference against a development span of $\pm0.55$) the headline form
+loses to the frozen constant at the unseen pool (math 0.089 against
+0.020, code 0.050 against 0.038, QA 1.14 against 1.02), because its
+source term extends the QA reuse penalty to 2.3 nats at the largest
+budget where 0.40 was measured, and beats the constant at the
+development pools (0.106, 0.048, 0.96 against 0.156, 0.098, 1.79;
+Table~\ref{tab:p2v2_test}). Joint transfer to a larger student and a
+new pool remains unreliable.
 
 \subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=0.95\textwidth]{figs/input_form_compact.pdf}
-\caption{Which inputs and forms matter. A: improvement (nats, positive = better) from adding the dense anchor $L_{0,c}$ to $(N_0,D_0)$ and from adding $D_0$ to $(N_0,L_{0,c})$ on the controlled panel, leave-one-stage-out, with 95\% cluster-bootstrap intervals. B: improvement of the shared power form over the same-input alternatives A2 and A1 on every pruning test (positive = power form better). C: gain of per-capability response shapes over a shared shape at matched parameter count on the distillation development matrix (positive = per-capability better). Intervals only where computed.}
-\label{fig:inputs}
-\end{figure}
+Math and code are carried by the initial-state inputs on every axis,
+QA is not: its pruning response is over-predicted by every
+source-conditioned form on every new checkpoint, and its quantization
+error is the largest of the three on every test. Conditioning is also
+needed in the response shape: per-capability distillation models at
+the same parameter count as a shared-shape model lower the held-out
+error by 0.1 to 0.4 nats for the budget-plus-reuse structures
+(Appendix~\ref{sec:app_forms}, Fig.~\ref{fig:inputs}).
 
-The same asymmetry recurs on every axis. Math and code are carried by
-the initial-state inputs: the dense anchor has interval-supported
-value for them, the pruning forms predict them at unseen densities and
-stages, the two-dimensional quantization form predicts them at unseen
-settings, and the distillation source form predicts math. QA is not:
-its pruning response is over-predicted by every source-conditioned
-form on every new checkpoint, a constant or a source-free curve is
-better for it on both distillation axes except the reuse-count form on
-the unseen pool, and its quantization error is the largest of the
-three on every test. Capability conditioning is also needed in the
-response shape, not only in the amplitude: on the complete
-distillation development matrix, per-capability models with the same
-parameter count as a shared-shape model lower the held-out error by
-0.1 to 0.4 nats on every capability for the budget-plus-reuse
-structures, and only marginally for the reuse-only structure
-(Appendix~\ref{sec:app_forms}). Code results carry the caveat of
-\S\ref{sec:loss}: the within-capability specificity of the code loss
-was not detected on the secondary benchmark.
-
-\paragraph{What is shared and what varies.} We tested the stronger
-hypothesis that one function family serves all three methods with
-method- and capability-specific parameters. It holds for pruning by
-construction (the shared power family is the delivered form) and fails
-for the other two arms on the same held-out splits: a separable
-amplitude-times-shape family is worse than the two-dimensional
-quantization form (macro MAE 2.96 against 2.40 on six held-out states),
-and a single reuse-count family is worse than the budget-plus-reuse
-distillation form (0.54 against 0.28, driven by QA). Within pruning,
-one exponent shared across capabilities costs nothing (leave-one-source
-MAE 0.351, 0.338, 0.785 against 0.328, 0.355, 0.798 per capability),
-whereas within quantization the term coefficients must be
-capability-specific (3.46 against 0.91 for math). Three ranges are kept
-apart (Appendix~\ref{sec:app_forms}): the bootstrap confidence intervals
-of the delivered pruning coefficients exclude zero for the dense-anchor
-term on math and code and not on QA; the exponents fitted separately
-per source spread from 3.0 to 6.0 for math and from 0.5 to 6.0 for QA,
-so the shape is only roughly stable across models; and prediction
-intervals built from leave-one-source residuals (per capability, 80\%)
-cover 78\% of the confirmation-panel cells and 67\% of the 1B and 6.9B
-pair cells at a mean full width of about 1.5 nats, which is honest but
-wide relative to most responses.
-
-\paragraph{One calibration point.} Setting the amplitude of the pruning
-form from one measured compression point of the target, its mildest
-density, and predicting the rest with the shared exponent is not a
-usable law: the mildest responses are within noise and a steep exponent
-amplifies that noise (leave-one-source MAE above 17 nats; on the
-confirmation panel calibrated at $d=0.85$, 0.16, 0.51, 0.58 against
-0.36, 0.33, 0.99 for the uncalibrated form and 0.41, 0.32, 0.32 for the
-median curve). For grouped quantization the opposite holds: a separable
-law with its amplitude set at the single 5-bit cell $g=256$ predicts
-the unseen 4-bit configurations on states held out of the fit with MAE
-0.13, 0.12, 0.29, against 0.26, 0.64, 1.34 for the two-dimensional form
-without calibration, at the cost of one compressed measurement per
-source. Which calibration is worth its cost is therefore method-specific.
+\paragraph{Shared structure, ranges, and calibration.} One function
+family for all three methods, with method- and capability-specific
+parameters, holds for pruning by construction and fails for the other
+two arms on the same held-out splits (the separable family we tested
+is worse than the quantization surface, macro MAE 2.96 against 2.40;
+a reuse-only family is worse than the budget-plus-reuse form, 0.54
+against 0.28). Within pruning one exponent shared across capabilities
+costs nothing (leave-one-source MAE 0.351, 0.338, 0.785 against 0.328,
+0.355, 0.798), whereas the quantization coefficients must be
+capability-specific. Three ranges are kept apart
+(Appendix~\ref{sec:app_shared}): the bootstrap intervals of the
+pruning coefficients exclude zero for the dense-anchor term on math
+and code and not on QA; exponents fitted per source spread from 3.0
+to 6.0 for math and 0.5 to 6.0 for QA; and 80\% prediction intervals
+from leave-one-source residuals under-cover, at 78\% on the 27
+confirmation-panel cells and 67\% on the 1B and 6.9B pair cells, with
+a mean full width near 1.5 nats, which we report as such. One
+measured calibration point helps or hurts by method: setting the
+pruning amplitude from the target's mildest density amplifies noise
+through the steep exponent (leave-one-source MAE above 17 nats),
+whereas a separable grouped-quantization law calibrated at the single
+5-bit, $g=256$ cell predicts the unseen 4-bit configurations on
+held-out states with MAE 0.13, 0.12, 0.29 against 0.26, 0.64, 1.34
+uncalibrated, at the cost of one compressed measurement per source.
 
 \FloatBarrier

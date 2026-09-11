@@ -7,16 +7,14 @@ in the development range, the pruning form of Eq.~\eqref{eq:power}
 predicts the math and code response at any density inside the fitted
 range to within a few tenths of a nat, and a per-density regression
 does the same without the power structure. Given the same inputs, the
-two-dimensional form of Eq.~\eqref{eq:quant2d} predicts the response
-of the grouped quantizer at bit-widths and group sizes it was not fit
-on, for the states it was fit on. Given a student's state, a linear
-form predicts its math transfer; given a fixed student, a reuse-count
-term predicts the QA transfer on a new pool with a bias that changes
-sign across budgets. Each of these comes with coefficients
-(Appendix~\ref{sec:app_coef}) and a tested range, and together they
-select methods and settings for held-out states within 0.2 nats of the
-measured optimum for math and code under a storage budget
-(\S\ref{sec:selection}).
+frozen surface of Eq.~\eqref{eq:quant2d} predicts the grouped
+quantizer at bit-widths and group sizes it was not fit on, for the
+states it was fit on. Given a student's state, a linear form predicts
+its math transfer; under a fixed distillation protocol, a response
+model in budget, reuse, and a student descriptor predicts unseen data
+pools on the two development students. Each comes with coefficients
+(Appendix~\ref{sec:app_coef}) and a tested range, and
+\S\ref{sec:selection} connects them to an explicit selection problem.
 
 What cannot be predicted is equally specific. No source-conditioned
 form predicts the QA response to pruning on a new checkpoint; a
@@ -24,26 +22,24 @@ source-free curve is the better deliverable for that capability. No
 form transfers to density 0.55 or to a source five times larger than
 the development range, except that the pruning math error at the
 larger source is on par with the source-free curve. Bit-width alone
-supports no continuous quantization relation, and the separable
-amplitude-times-shape candidate fails once group size is added. The
-distillation forms frozen on two students and two pools transfer to an
-unseen pool on both students; on a student 6.6 times the reference
-size they beat the constant at the development pools and lose to it at
-the unseen pool, and the QA response itself is specific to the probe
-distribution
-(Appendix~\ref{sec:app_measure}).
+supports no continuous quantization relation, the curvature of the
+two-dimensional surface in bit-width is fixed by regularization, and
+the separable candidate we tested is worse. Joint transfer of the
+distillation forms to a larger student and a new pool is unreliable,
+and distillation lowers the conditional loss on the primary QA
+distribution without that change carrying over to TriviaQA, so the QA
+result is a prediction relation on the measured distribution and no
+general QA gain (Appendix~\ref{sec:app_measure}).
 
 For further development these results say three things. The dense
 capability anchor is the input to keep and training tokens add little
-beyond it, so cheaper metadata-only prediction is not yet available.
-The functional forms that work are low-dimensional and the particular
-exponents are not established as necessary, so the next question is
-which inputs carry the QA response rather than which exponent to fix.
-Transfer across sizes is bounded by the development range, so a wider
-development panel is the direct route to wider laws. The limitations
-are those of small controlled panels with correlated observations
-(three sizes, three stages, three pools), of one quantizer family and
-one teacher, of a loss endpoint whose code specificity was not
-detected on a secondary benchmark, and of a selection validation that uses nominal storage as the only
-cost, without latency, recovery-training cost, or any agent-level
-measurement.
+beyond it, so metadata-only prediction is not yet available. The forms
+that work are low-dimensional and their exponents are not established
+as necessary, so the next question is which inputs carry the QA
+response. Transfer across sizes is bounded by the development range,
+so a wider development panel is the direct route to wider laws. The
+limitations are those of small controlled panels with correlated
+observations (three sizes, three stages, three pools), of one
+quantizer family and one teacher, of a loss endpoint whose code
+specificity was not detected on a secondary benchmark, and of a
+selection validation that uses nominal storage as the only cost.

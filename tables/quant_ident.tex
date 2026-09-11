@@ -1,0 +1,49 @@
+\begin{table}[H]
+\centering\small
+\caption{Quantization identifiability audit, retrospective (R). The delivered V55 predictions are unchanged. The four fitted forms use the same 24 development cells per capability, pooled V55 standardization, and ridge $\lambda=10^{-3}$ (including intercepts). The delivered 20-coefficient design has rank 16: two development bit levels make $u^2=(u_3+u_5)u-u_3u_5$, leaving four unidentifiable directions. Ridge chooses a unique representation but does not identify curvature; deleting $u^2$ also changes the induced penalty. Top: rank and effective degrees of freedom (df). Bottom: MAE in nats on the frozen bit (12 cells/capability), granularity (18), and joint 1B at 96k (3) tests, plus development leave-one-state-out (LOSO, 24), with training-only standardization refit in each fold. Median uses V55's per-config anchors and bilinear interpolation. No control replaces a delivered prediction.}
+\label{tab:quant_ident}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Control & Rank & df (Math) & df (Code) & df (QA) \\
+\midrule
+Delivered (20) & 16 & 15.9790 & 15.9801 & 15.9220 \\
+Without $u^2$ (16) & 16 & 15.9742 & 15.9756 & 15.9045 \\
+Bit-only (8) & 8 & 7.9871 & 7.9878 & 7.9523 \\
+Bit+group additive (12) & 12 & 11.9797 & 11.9808 & 11.9249 \\
+\bottomrule
+\end{tabular}
+\par\medskip
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Evaluation & Control & Math & Code & QA \\
+\midrule
+Bit & Delivered (20) & 0.1934 & 0.2136 & 0.4364 \\
+ & Without $u^2$ (16) & 1.2996 & 1.3863 & 1.9441 \\
+ & Bit-only (8) & 1.2996 & 1.3863 & 1.9441 \\
+ & Bit+group additive (12) & 1.2996 & 1.3863 & 1.9441 \\
+ & V55 median & 0.5533 & 0.7258 & 0.5371 \\
+ & Zero & 0.4499 & 0.5318 & 0.4805 \\
+\addlinespace
+Granularity & Delivered (20) & 0.2189 & 0.3192 & 0.9857 \\
+ & Without $u^2$ (16) & 0.6092 & 0.7183 & 1.4759 \\
+ & Bit-only (8) & 0.6092 & 0.7183 & 1.4759 \\
+ & Bit+group additive (12) & 0.6092 & 0.7183 & 1.4759 \\
+ & V55 median & 1.1225 & 1.2219 & 1.2202 \\
+ & Zero & 1.2387 & 1.3457 & 1.2390 \\
+\addlinespace
+Joint & Delivered (20) & 0.3450 & 0.0969 & 0.2689 \\
+ & Without $u^2$ (16) & 0.5271 & 0.2225 & 0.3197 \\
+ & Bit-only (8) & 0.5271 & 0.2225 & 0.3197 \\
+ & Bit+group additive (12) & 0.5271 & 0.2225 & 0.3197 \\
+ & V55 median & 0.1515 & 0.2698 & 0.3017 \\
+ & Zero & 0.2997 & 0.3385 & 0.1039 \\
+\addlinespace
+Dev LOSO & Delivered (20) & 0.9135 & 1.9098 & 4.3712 \\
+ & Without $u^2$ (16) & 0.9804 & 1.9014 & 4.3649 \\
+ & Bit-only (8) & 1.0630 & 1.9014 & 4.3649 \\
+ & Bit+group additive (12) & 1.0998 & 1.9745 & 4.3768 \\
+ & V55 median & 1.6939 & 1.7582 & 1.7765 \\
+ & Zero & 1.8215 & 1.9291 & 1.7958 \\
+\bottomrule
+\end{tabular}
+\end{table}

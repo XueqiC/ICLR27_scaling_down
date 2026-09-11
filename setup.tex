@@ -17,77 +17,47 @@ T_c=\sum_{(x,y)\in\probeset{c}}|y|,
 \end{equation}
 with prompt tokens masked, sequences truncated to 1024 tokens, the
 model's own tokenizer, and the same 64 measurement probes per
-capability for every state that is compared within a model. All
-responses are within-model differences on identical token sequences,
-in native nats per token: for pruning and quantization the damage
-$\Delta L_c=L_c(\text{compressed})-L_c(\text{dense})$, and for
-distillation the signed transfer
-$\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$ of a student relative to its
-own initial state. Three boundaries apply throughout. The observable
-is the likelihood of a fixed reference, not a task-success measure; a
-QA loss can fall while exact-match accuracy does not rise. Native units
-differ across tokenizers, so absolute levels of different families are
-never placed on one scale. Capability specificity is a tested
-property rather than an assumption: on a pruning panel, the response
-on an independent secondary benchmark is predicted better from the
-same capability's primary response than from another capability's
-for math and QA, whereas for code no within-capability gain was
-detected at the available resolution (Appendix~\ref{sec:app_measure}).
+capability for every state compared within a model. Responses are
+within-model differences on identical token sequences in native nats
+per token: for pruning and quantization the damage
+$\Delta L_c=L_c(\text{compressed})-L_c(\text{dense})$, for distillation
+the signed transfer $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$ of a
+student relative to its own initial state. The observable is the
+likelihood of a fixed reference on a fixed distribution: a QA loss can
+fall while exact-match accuracy does not rise, and a gain on one QA
+distribution need not appear on another. Absolute levels of different
+tokenizers are never placed on one scale, and capability specificity
+is a tested property (Appendix~\ref{sec:app_measure}).
 
 \subsection{Models and Compression Settings}
 \label{sec:models}
 
-Three kinds of model panel serve three roles (Table~\ref{tab:panels}).
-A \emph{heterogeneous panel} of finished public models establishes
-the phenomena and the limits of cross-family transfer. A
-\emph{controlled panel} of Pythia checkpoints varies the initial model
-state along known axes, parameter count and pretraining stage, with
-architecture and data fixed; it is the development set of every
-relation in \S\ref{sec:laws}. \emph{New states and configurations}
-that entered no fit provide the validation of \S\ref{sec:general}.
-
-\begin{table}[t]
-\centering\footnotesize\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{2.9cm}p{5.6cm}p{4.9cm}@{}}
-\toprule
-Panel (role) & Model states & Compression settings \\
-\midrule
-Heterogeneous (phenomena, transfer limits) & 12 finished models from
-\nSeries{} series: Qwen3 0.6B/1.7B/4B, Gemma-3 270M--27B,
-Gemma-4-31B, Muse-30B, OLMo-3 7B/32B & pruning at 10 densities in
-$[0.3,0.9]$; RTN int8/6/5/4/3; Gemma-3 students distilled under two
-recipes \\
-Controlled Pythia (development) & 160M, 410M, 1.4B at steps 16k, 64k,
-143k (nine states) & pruning at $d\in\{0.9,0.8,0.7,0.6\}$; RTN at
-$b\in\{8,6,4,3\}$; grouped RTN at $b\in\{3,5\}\times g\in\{64,256\}$ on
-six of the states; LoRA distillation from one teacher pool \\
-New states / configurations (validation) & 160M, 410M, 1.4B at 96k;
-1B at 32k/96k/112k; 6.9B at 32k/80k/112k; 410M at 48k; 1.4B at 112k;
-Gemma-3 270M/1B/4B students & densities 0.85/0.75/0.675/0.65/0.575/0.55;
-5-bit; $b=4$ and $g=128$ grouped cells; distillation pools U225 and
-U375, 4B students \\
-\bottomrule
-\end{tabular}
-\caption{Panels and their roles. Full checkpoint revisions, probe
-seeds, and hyperparameters are listed in Appendix~\ref{sec:app_details}.}
-\label{tab:panels}
-\end{table}
+A \emph{heterogeneous panel} of twelve finished public models from
+five series (Qwen3, Gemma-3, Gemma-4, Muse, OLMo-3; 0.6B to 32B)
+establishes the phenomena and the limits of cross-family transfer
+(Appendix~\ref{sec:app_hetero}). A \emph{controlled panel} of Pythia
+checkpoints (160M, 410M, 1.4B at steps 16k, 64k, 143k) varies the
+initial state along parameter count and pretraining stage with
+architecture and data fixed and is the development set of every
+relation. \emph{New states and configurations} that entered no fit
+(Pythia 160M to 6.9B at further steps, new densities, bit-widths, and
+group sizes, and Gemma-3 270M, 1B, and 4B students at new pools)
+provide the validation; Appendix~\ref{sec:app_details} lists them.
 
 The three operations are held fixed by protocol. Pruning is global
 magnitude pruning of all transformer weight matrices to a retained
 density $d$. Quantization is symmetric round-to-nearest of the same
-matrices, weights only, either per output channel at bit-width $b$ or
-with contiguous input groups of $g$ weights sharing one scale.
+matrices, weights only, per output channel at bit-width $b$ or with
+contiguous input groups of $g$ weights sharing one scale.
 Distillation is supervised fine-tuning of an existing student on
-black-box teacher traces with strict LoRA adapters, where a pool of
-$U$ traces per domain with $D_U$ supervised completion tokens is
-processed for a fixed budget; we record the processed tokens, the
-supervised completion tokens $T$, and the reuse count $E=T/D_U$. The
-inputs admitted to every predictor are the parameter count $N_0$ of
-the transformer weight matrices, the pretraining token count $D_0$
-where disclosed, and the dense capability losses $L_{0,c}$ measured
-once on the uncompressed model (the initial student for
-distillation). Every prediction is written as
+black-box teacher traces with strict LoRA adapters: a pool of $U$
+traces per domain with $D_U$ supervised completion tokens is processed
+for a fixed budget, and we record the supervised completion tokens $T$
+and the reuse count $E=T/D_U$. The inputs admitted to every predictor
+are the parameter count $N_0$ of the transformer weight matrices, the
+pretraining token count $D_0$ where disclosed, and the dense capability
+losses $L_{0,c}$ measured once on the uncompressed model (the initial
+student for distillation). Every prediction is written as
 \begin{equation}
 \widehat L_{m,c}\;=\;L^{\mathrm{obs}}_{0,c}\;+\;
 \widehat\Delta_{m,c}(\mathbf x,\boldsymbol\theta_m),\qquad
@@ -97,32 +67,25 @@ distillation). Every prediction is written as
 with $\boldsymbol\theta_m$ the setting of method $m$ (density,
 bit-width and group size, or pool and budget). The function
 $\widehat\Delta_{m,c}$ is method-specific; the arms share the endpoint
-and the evaluation protocol, not a functional form.
+and the evaluation protocol, and each keeps its own functional form.
 
 \subsection{Fitting and Evaluation}
 \label{sec:eval}
 
 Each relation is fit on development states and settings only and is
-judged on two kinds of unseen target: an \emph{unseen setting} (a
-density, bit-width, group size, pool, or budget outside the fitted
-set) and an \emph{unseen state} (a checkpoint of a new size or
-pretraining stage, or a new student). On the development panel we use
+judged on unseen settings (a density, bit-width, group size, pool, or
+budget outside the fitted set) and on unseen states (a new size,
+stage, or student). On the development panel we use
 leave-one-stage-out and leave-one-source-out cross-validation; for new
 states the forms, coefficients, and predictions of every candidate are
-committed to the repository before the compressed outcome is
-measured, and a prediction keeps its status whatever the outcome. No
-prediction uses a measurement of the target compressed model; the
-dense anchor $L_{0,c}$ is the only measured input.
-
-Error is the mean absolute error of $\widehat\Delta$ in nats per
-token, per capability. Every candidate is compared with three
-baseline classes on exactly the same cells: source-free references
-(zero change, a per-capability constant, a strength-only curve, or the
-median development curve), same-input alternatives (the same
-$\mathbf x$ with a different functional structure), and the no-$D_0$
-ablation. Where several baselines exist the strongest per capability
-is reported and that choice is marked as retrospective; bootstrap
-intervals are given only for the leave-one-out panels, with source
-states as the resampling unit. Freeze commits, the provenance code of
-each comparison, and the fold rules are in
+committed to the repository before the outcome is measured, and a
+prediction keeps its provenance label whatever the outcome. The dense
+anchor $L_{0,c}$ is the only measured input. Error is the mean
+absolute error of $\widehat\Delta$ in nats per token per capability;
+every candidate is compared on the same cells with source-free
+references (zero change, a per-capability constant, a strength-only
+curve, or the median development curve), with same-input alternatives,
+and with the no-$D_0$ ablation, and the strongest baseline per
+capability is reported and marked as chosen after the fact. Freeze
+commits, provenance codes, fold rules, and bootstrap units are in
 Appendix~\ref{sec:app_registration}.

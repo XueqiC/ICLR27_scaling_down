@@ -105,29 +105,28 @@ Address \\
 Specialized workloads need specific capabilities, and the models that
 serve them are usually dense sources scaled down by pruning,
 quantization, or distillation; choosing a configuration today means
-measuring each one. We develop and evaluate empirical,
-capability-conditioned models of the compression response: for math,
-code, and multi-hop QA we predict the conditional loss after
-compression from the initial model state (parameter count,
-pretraining tokens, and the dense capability losses of the source or
-initial student) and the configuration of the method. Relations are
-built on a controlled panel of Pythia checkpoints whose size and
-pretraining stage vary independently, compared with alternatives on
-the same inputs, and validated with predictions frozen before new
-configurations and model states are measured. A five-parameter
-pruning form predicts math and code at unseen densities inside the
-fitted range on three new checkpoints (0.24 nats mean absolute error
-against 0.45 for a source-free strength curve) and fails beyond the
-range and for QA; with the quantization group size as a second axis a
-low-order form predicts unseen bit-widths and group sizes on the
-development states; for distillation the student state carries the
-math response and a reuse-count term carries QA on an unseen pool.
-Transfer to a source five times larger fails for QA and is on par with
-source-free references for math. Used as loss constraints, the laws
-select a compression method and setting for a held-out model and
-storage budget within 0.2 nats of the measured optimum for math and
-code. We release the relations with their coefficients, tested ranges,
-registered predictions, and measurements.
+measuring each one. We develop capability-conditioned empirical models
+of the compression response: for math, code, and multi-hop QA we
+predict the conditional loss after compression from the initial model
+state (parameter count, pretraining tokens, and the dense capability
+losses of the source or initial student) and the configuration of the
+method. Relations are built on a controlled panel of Pythia
+checkpoints whose size and pretraining stage vary independently,
+compared with alternatives on the same inputs, and validated with
+predictions frozen before new configurations and states are measured.
+A five-parameter pruning form predicts math and code at unseen
+densities inside the fitted range on three new checkpoints (0.24 nats
+mean absolute error against 0.45 for a source-free strength curve) and
+fails beyond the range and for QA; a frozen response surface in
+bit-width and group size predicts unseen quantization configurations
+on the development states; under a fixed distillation protocol a
+response model in training budget, reuse, and a student descriptor
+predicts unseen data pools on the development students, while joint
+transfer to a larger student and a new pool remains unreliable. We
+connect the relations to an explicit capability- and budget-specific
+selection problem with retrospective validation on held-out states,
+and release coefficients, tested ranges, registered predictions, and
+measurements.
 \end{abstract}
 
 

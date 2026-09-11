@@ -14,12 +14,11 @@ pruning rate, and the post-training tokens, validated on held-out
 tokens, sizes, and rates \citep{zhang2024scaling}; and a distilled
 student follows a broken power law in teacher loss during
 pretraining-scale logit distillation \citep{busbridge2025distillation}.
-Their targets are aggregate losses; the P$^2$ law shows that
-initial-state inputs are established practice, and we follow it in
-admitting the pre-compression loss. What we add is a per-capability
-endpoint measured the same way for three methods, a development panel
-in which size and pretraining stage vary separately, and tests that
-hold out settings and states with baselines on the same inputs.
+Their targets are aggregate losses; we follow the P$^2$ law in
+admitting the pre-compression loss and add a per-capability endpoint
+measured the same way for three methods, a development panel in which
+size and stage vary separately, and held-out tests with same-input
+baselines.
 
 \paragraph{Task-conditioned evaluation of compression.} Pruning
 disproportionately harms knowledge-intensive tasks
@@ -35,22 +34,21 @@ only inputs; \citet{zhou2025task} stratify post-training quantization
 laws into memorization, application, and reasoning strata for one
 quantizer, validated on a held-out larger model; task-specific
 distillation has been mapped as curves over dataset size, compression
-ratio, and supervision format \citep{ghita2026task}. Relative to these,
-our relations use a continuous conditional loss rather than accuracy,
-admit the dense capability anchor and training tokens as inputs, and
-treat the three methods with one protocol.
+ratio, and supervision format \citep{ghita2026task}. Our relations use a
+continuous conditional loss, admit the dense capability anchor and
+training tokens as inputs, and treat the three methods with one
+protocol.
 
 \paragraph{Fitting and validating empirical laws.} Downstream accuracy
 is predictable mainly through continuous log-likelihood measurements
-\citep{schaeffer2023emergent,schaeffer2024predicting,gadre2024language,bhagia2024establishing},
-and linear loss-to-downstream relations hold in a minority of settings
-\citep{lourie2025scaling}, which motivates our loss endpoint and its
-stated boundaries. Fitted scaling-law forms are fragile to the fitting
-protocol \citep{li2025misfitting,besiroglu2024chinchilla}, and
-data-constrained pretraining shows that repeated tokens are not worth
-new tokens \citep{muennighoff2023scaling}, an effect our reuse-count
-coordinate measures in the distillation setting without importing
-those coefficients. Curvature- and gradient-based importance underlies
-modern pruning \citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple};
-we use capability-conditional gradient statistics only as mechanism
-evidence (Appendix~\ref{sec:app_mech}), never as prediction inputs.
+\citep{schaeffer2023emergent,schaeffer2024predicting,gadre2024language,bhagia2024establishing,lourie2025scaling},
+which motivates our loss endpoint and its stated boundaries; fitted
+scaling-law forms are fragile to the fitting protocol
+\citep{li2025misfitting,besiroglu2024chinchilla}, and repeated tokens
+are not worth new tokens in data-constrained pretraining
+\citep{muennighoff2023scaling}, an effect our reuse-count coordinate
+measures in the distillation setting. Gradient-based importance
+underlies modern pruning
+\citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple}; we use
+gradient statistics only as mechanism evidence
+(Appendix~\ref{sec:app_mech}).
