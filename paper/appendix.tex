@@ -189,6 +189,15 @@ identified by the development data.
 \subsection{Distillation: descriptor forms and capability conditioning}
 \input{tables/v56_forms}
 
+Every distillation form, its free parameters, intercept, student
+descriptor, fit data, and frozen coefficients are listed in
+Table~\ref{tab:distill_forms_audit}; the confirmation's selected form for math and code,
+$a_c\log(1+E)$, has one parameter and vanishes at zero budget, and the
+baseline it is compared with, $c_c+b_c\log(1+E)$, adds an unpenalized
+intercept; both are fit on the same 100 development rows with unit
+weights.
+\input{tables/distill_forms_audit}
+
 Retrospectively, fitted on all 48 development points and scored on
 the 52 test points (nine unseen-pool trajectories and four held-out
 student trajectories at the development pools; predictions specified
@@ -354,7 +363,12 @@ fixed the strongest baseline per student and capability from the same
 development pass; Table~\ref{tab:distill_confirm} gives the paired differences with
 pool-cluster intervals (six independent pools). Dense losses
 re-measured on a different GPU drift by at most 0.001 nats from the
-frozen descriptor and were tolerated at 0.01.
+frozen descriptor and were tolerated at 0.01; shifting every response
+by $\pm$ that trajectory's drift changes no interval sign (0 of 12
+comparisons, 0 of 36 per-budget comparisons). Per-example losses are
+not stored, so an item-level interval cannot be computed; each
+evaluation scores 64 items per capability, and the pool-cluster
+intervals cover pool sampling only.
 \input{tables/distill_confirm}
 \FloatBarrier
 \begin{figure}[p]

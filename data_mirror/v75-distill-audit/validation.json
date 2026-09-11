@@ -1,0 +1,12 @@
+{
+  "analytic_drift_sign_reversal_check": "passed",
+  "trajectory_specific_shift_check": "passed",
+  "response_input_immutability": "passed",
+  "ci_zero_endpoint_classification": "passed",
+  "latex_static_braces_and_environments": "passed",
+  "latex_rendered": false,
+  "latex_render_note": "No pdflatex, latexmk, or tectonic executable is available; compilation/visual layout not verified.",
+  "source_mirror_identical": true,
+  "table_copies_identical": true,
+  "v70_hashes_unchanged": true
+}
