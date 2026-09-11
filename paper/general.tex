@@ -102,11 +102,18 @@ new pool remains unreliable.
 Math and code are carried by the initial-state inputs on every axis,
 QA is not: its pruning response is over-predicted by every
 source-conditioned form on every new checkpoint, and its quantization
-error is the largest of the three on every test. Conditioning is also
-needed in the response shape: per-capability distillation models at
-the same parameter count as a shared-shape model lower the held-out
-error by 0.1 to 0.4 nats for the budget-plus-reuse structures
-(Appendix~\ref{sec:app_forms}, Fig.~\ref{fig:inputs}).
+error is the largest of the three on every test. What capability conditioning adds is measurable on the frozen
+confirmation panels (Appendix~\ref{sec:app_shared}): per-capability
+pruning curves beat a shared damage curve with a per-capability scale
+by 0.07 nats macro, almost entirely through QA, whose response has
+the opposite sign (0.19 nats, interval $[0.13,0.25]$), while for math
+and code a shared curve is as good or better; for grouped
+quantization the two are indistinguishable (0.003 nats); and for
+distillation the one-coefficient forms are algebraically equivalent,
+with a shared curve plus per-capability offset predicting QA better
+than the per-capability reuse form. Conditioning is needed where the
+sign of the response differs across capabilities, and adds little
+where the shape is shared.
 
 \paragraph{Shared structure and ranges.} One function family across
 methods holds for pruning by construction and fails for quantization
