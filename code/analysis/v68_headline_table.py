@@ -19,6 +19,14 @@ for ln in lines:
 head = "\n".join(out)
 head = head.replace("\\caption{\\scriptsize Prediction tests, all three arms", "\\caption{\\scriptsize Prediction tests, headline rows of all three arms (the complete list is Table~\\ref{tab:pred_full} in Appendix~\\ref{sec:app_results})", 1)
 if "headline rows" not in head: head = head.replace("\\caption{", "\\caption{Headline prediction tests (complete list in Table~\\ref{tab:pred_full}). ", 1)
+import re as _re
+short = ("\\caption{\\scriptsize Headline prediction tests, all three arms: MAE in nats per token per capability, "
+         "candidate\\,/\\,strongest baseline (bold = better; c, med, so, 0 = constant, median, strength-only, and zero-change "
+         "baselines). Origin code: prediction $\\cdot$ same-input baseline $\\cdot$ simple baseline $\\cdot$ scoring, with P/F/A "
+         "prospective or pre-specified and R retrospective. Complete list and full legend: Table~\\ref{tab:pred_full} in "
+         "Appendix~\\ref{sec:app_results}.}")
+head = _re.sub(r"\\caption\{.*?\}\s*\n\\label\{tab:pred_main\}", lambda m: short + "\n\\label{tab:pred_main}", head, count=1, flags=_re.S)
+assert "Headline prediction tests" in head, "caption replacement failed"
 (T / "pred_headline.tex").write_text(head)
 full = src.replace("\\label{tab:pred_main}", "\\label{tab:pred_full}").replace("\\begin{table}[!t]", "\\begin{table}[H]", 1).replace("\\begin{table}[t]", "\\begin{table}[H]", 1)
 full = full.replace("\\caption{\\scriptsize Prediction tests, all three arms", "\\caption{\\scriptsize Prediction tests, all three arms, complete list", 1)
