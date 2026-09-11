@@ -148,6 +148,29 @@ weights (hash check); nothing is claimed about other revisions.}
 \end{table}
 \input{tables/models_domains}
 
+\paragraph{Architectures and parameter conventions.} Every model in
+the heterogeneous panel and the controlled panel is a dense
+transformer (Table~\ref{tab:model_arch}); no sparsely activated model
+entered any fit, so total and per-token active parameter counts
+coincide throughout, and the reference-model definition of
+\S\ref{sec:loss} is exercised only on dense architectures. The laws
+use the transformer-matrix count $N_0$ (decoder-block matrices,
+excluding embeddings, head, biases, and norms); the frozen
+distillation source term used v50's literal meta count of the student,
+which for Gemma-3-4B includes 0.42B vision and projector parameters
+and counts tied embeddings twice; these frozen covariates are reported
+as recorded and not recomputed.
+
+\paragraph{Weight identity of Pythia revisions.} Streamed SHA-256
+hashes of the safetensors blobs loaded for all 23 cached Pythia
+revisions (30 unique blobs) show that every revision with pruning or
+quantization measurements resolves to a distinct weight set, with one
+exception: the cached Pythia-2.8B revisions tagged step 16k, 64k, and
+143k carry identical learned parameters, so the 2.8B repeatability
+check (Appendix~\ref{sec:app_results}) is one state measured twice.
+\input{tables/model_arch}
+
+
 \section{Fitted Models and Coefficients}
 \label{sec:app_coef}
 The delivered pruning form (Eq.~\eqref{eq:power}) and its standardization are in Table~\ref{tab:round3_coef}; the
@@ -345,15 +368,19 @@ the same bit-width, extrapolated beyond the grid and floored at zero
 change; no target measurement enters either predictor.
 \input{tables/quant_threeway}
 
-The pruning repeatability check froze the delivered power form, A2, the
-median development curve, and zero change for two Pythia-2.8B states
-never used in a pruning fit (steps 16k and 143k; the cached step-64k
-snapshot shares its weight blob with step 143k and was excluded) at
-$d\in\{0.85,0.75,0.65\}$ before the pruned losses were measured
-(Table~\ref{tab:prune_repeat}). The median curve is best on every
-capability by a wide margin and zero change is second; both
-source-conditioned forms over-predict the damage, so the compact form
-is not repeatable on this in-range size.
+The pruning repeatability check froze the delivered power form, A2,
+the median development curve, and zero change for Pythia-2.8B, a size
+never used in a pruning fit, at $d\in\{0.85,0.75,0.65\}$ before the
+pruned losses were measured (Table~\ref{tab:prune_repeat}). The two
+cached revisions loaded as ``step 16k'' and ``step 143k'' carry
+identical learned parameters (387 of 388 tensors byte-identical, the
+remaining one differing in the sign of a zero; identical dense and
+pruned losses), so the panel is one state measured twice, and the
+weight-identity audit of Appendix~\ref{sec:app_pythia} now records
+the blob hashes of every Pythia revision used. On this state the
+median curve is best on every capability by a wide margin and zero
+change is second; both source-conditioned forms over-predict the
+damage.
 \input{tables/prune_repeat}
 
 The multi-student distillation test of the uniform protocol
