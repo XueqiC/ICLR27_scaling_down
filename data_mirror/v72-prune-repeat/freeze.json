@@ -1,0 +1,898 @@
+{
+  "schema_version": 1,
+  "experiment": "v72-prune-repeat",
+  "targets": [
+    {
+      "tag": "pythia-2.8b@step16000",
+      "size": "2.8b",
+      "step": 16000,
+      "L0": {
+        "math": 1.149727121727438,
+        "code": 1.21630615640599,
+        "qa": 5.247177994296578
+      },
+      "N0": 2516582400,
+      "D0": 33554432000
+    },
+    {
+      "tag": "pythia-2.8b@step143000",
+      "size": "2.8b",
+      "step": 143000,
+      "L0": {
+        "math": 1.149727121727438,
+        "code": 1.21630615640599,
+        "qa": 5.247177994296578
+      },
+      "N0": 2516582400,
+      "D0": 299892736000
+    }
+  ],
+  "densities": [
+    0.85,
+    0.75,
+    0.65
+  ],
+  "capabilities": [
+    "math",
+    "code",
+    "qa"
+  ],
+  "methods": [
+    "power",
+    "A2",
+    "median_curve",
+    "zero"
+  ],
+  "selected_candidate": "power",
+  "protocol": {
+    "model_dtype": "bf16",
+    "device": "cuda:0",
+    "n_probe": 128,
+    "probe_seed": 0,
+    "probe_half": "odd-indexed [1::2]",
+    "loss": "V6 completion-token-weighted CE, max_len=1024, nats",
+    "dense_evaluator": "analysis/v46_dense_eval.py (as in run_v53_dense.sh)",
+    "pruned_evaluator": "analysis/v6_capability_geometry.py:stage_prune (as in run_v53_measure.sh)",
+    "pruning": "global magnitude, language matrices; sampled threshold, seed=0, sample_size=2000000",
+    "reference_device": "cpu",
+    "response": "signed pruned CE minus the same V6 run's true dense CE; no clipping",
+    "dense_check_atol": 1e-06
+  },
+  "input_budget": {
+    "available_inputs_all_methods": [
+      "N0",
+      "D0",
+      "dense L0c",
+      "density",
+      "frozen V53 development register"
+    ],
+    "target_pruning_labels_before_prediction": 0,
+    "target_calibration_points": 0,
+    "refit_or_reselection": false,
+    "source_free_baselines": [
+      "median_curve",
+      "zero"
+    ],
+    "note": "Same available input budget; source-free baselines ignore source covariates. V53 A2 uses its delivered anchor subsets, median uses delivered development medians."
+  },
+  "scoring": "Full 2 states x 3 densities x 3 capabilities; MAE and signed bias; equal weight per state, density and capability; no missing/collapsed cells dropped",
+  "predictions": [
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.85,
+      "capability": "math",
+      "predictions": {
+        "power": -0.02343738849392332,
+        "A2": -0.15015456851095493,
+        "median_curve": 0.03157873922328566,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.85,
+      "capability": "code",
+      "predictions": {
+        "power": -0.05469011779568653,
+        "A2": -0.19292903760400104,
+        "median_curve": 0.02684513905395771,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.85,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.03671398264217074,
+        "A2": 0.09752243809440372,
+        "median_curve": -0.04523378089353639,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.75,
+      "capability": "math",
+      "predictions": {
+        "power": -0.15916296831240995,
+        "A2": -0.49672254139492067,
+        "median_curve": 0.11252273985604677,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.75,
+      "capability": "code",
+      "predictions": {
+        "power": -0.259745208628962,
+        "A2": -0.6212189815319127,
+        "median_curve": 0.059097932018065125,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.75,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.17436936443649179,
+        "A2": 0.11640949375183637,
+        "median_curve": -0.28952293250950545,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.65,
+      "capability": "math",
+      "predictions": {
+        "power": -0.5621111030296416,
+        "A2": -1.0700042282543598,
+        "median_curve": 0.6842126077671439,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.65,
+      "capability": "code",
+      "predictions": {
+        "power": -0.7248331608574888,
+        "A2": -1.138550601026464,
+        "median_curve": 0.47887449488947,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step16000",
+      "density": 0.65,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.48658721463369164,
+        "A2": -0.12674411038758854,
+        "median_curve": -0.45233780893536135,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.85,
+      "capability": "math",
+      "predictions": {
+        "power": 0.03166810752299654,
+        "A2": 0.023829651481733473,
+        "median_curve": 0.03157873922328566,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.85,
+      "capability": "code",
+      "predictions": {
+        "power": 0.06950858126496649,
+        "A2": 0.018674953694765233,
+        "median_curve": 0.02684513905395771,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.85,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.07483360445586919,
+        "A2": 0.04927396116728367,
+        "median_curve": -0.04523378089353639,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.75,
+      "capability": "math",
+      "predictions": {
+        "power": 0.21505766290913883,
+        "A2": 0.12657210838574623,
+        "median_curve": 0.11252273985604677,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.75,
+      "capability": "code",
+      "predictions": {
+        "power": 0.330124009050788,
+        "A2": 0.10769076926406318,
+        "median_curve": 0.059097932018065125,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.75,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.3554146706076401,
+        "A2": 0.12749733107811484,
+        "median_curve": -0.28952293250950545,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.65,
+      "capability": "math",
+      "predictions": {
+        "power": 0.7595127270782832,
+        "A2": 0.6393263318499229,
+        "median_curve": 0.6842126077671439,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.65,
+      "capability": "code",
+      "predictions": {
+        "power": 0.9212290390966938,
+        "A2": 0.6704067932706752,
+        "median_curve": 0.47887449488947,
+        "zero": 0.0
+      }
+    },
+    {
+      "source": "pythia-2.8b@step143000",
+      "density": 0.65,
+      "capability": "qa",
+      "predictions": {
+        "power": 0.9918040085184247,
+        "A2": 0.4070618928541795,
+        "median_curve": -0.45233780893536135,
+        "zero": 0.0
+      }
+    }
+  ],
+  "delivered_models": {
+    "math": {
+      "power": {
+        "beta": [
+          3.2753857871580543,
+          0.3188732868951945,
+          3.8504806428959615,
+          0.25007403556653884
+        ],
+        "gamma": 3.75,
+        "sse": 11.59641424194902
+      },
+      "A2": {
+        "anchors": {
+          "0.9": [
+            0.21023610648017535,
+            0.021637829542572307,
+            0.2736720434259348,
+            0.016701984868000078
+          ],
+          "0.8": [
+            1.2668942666762997,
+            0.12337336557335697,
+            1.6314727902483073,
+            0.10066638130974369
+          ],
+          "0.7": [
+            4.123645817531666,
+            0.4199744054227133,
+            5.238474545009726,
+            0.31980321469821743
+          ],
+          "0.6": [
+            10.86364470672076,
+            1.1608758603803973,
+            13.277265134316169,
+            0.8332975383790361
+          ],
+          "0.55": [
+            12.683082494176087,
+            0.7245569426113165,
+            13.550511207887736,
+            0.6271492662881137
+          ]
+        },
+        "n_obs_by_anchor": {
+          "0.9": 16,
+          "0.8": 16,
+          "0.7": 16,
+          "0.6": 16,
+          "0.55": 8
+        }
+      },
+      "median_curve": {
+        "anchors": {
+          "0.55": 2.643666455746263,
+          "0.6": 1.1263841651506765,
+          "0.65": 0.6842126077671439,
+          "0.7": 0.2759333227873132,
+          "0.75": 0.11252273985604677,
+          "0.8": 0.05564343905718583,
+          "0.9": 0.007514039389385441
+        }
+      },
+      "zero": {
+        "value": 0.0
+      }
+    },
+    "code": {
+      "power": {
+        "beta": [
+          4.499345815568069,
+          0.27297105700247765,
+          5.356772833475907,
+          0.3469522725417016
+        ],
+        "gamma": 3.05,
+        "sse": 10.848522538009643
+      },
+      "A2": {
+        "anchors": {
+          "0.9": [
+            0.43660373395066554,
+            0.04312218804344,
+            0.5861020695569547,
+            0.024306672929980202
+          ],
+          "0.8": [
+            1.8507694557600365,
+            0.13651902887304387,
+            2.4402030473677283,
+            0.11843969071420206
+          ],
+          "0.7": [
+            5.755328186046891,
+            0.41369410934182177,
+            7.483436747660419,
+            0.37327700948737563
+          ],
+          "0.6": [
+            11.461057465885197,
+            0.7064291661622297,
+            13.972477712050106,
+            0.8470312107795341
+          ],
+          "0.55": [
+            12.605886331394611,
+            0.40578815158529447,
+            13.558866266125886,
+            0.9304405386001573
+          ]
+        },
+        "n_obs_by_anchor": {
+          "0.9": 16,
+          "0.8": 16,
+          "0.7": 16,
+          "0.6": 16,
+          "0.55": 8
+        }
+      },
+      "median_curve": {
+        "anchors": {
+          "0.55": 2.6178690278107917,
+          "0.6": 1.1326063703351557,
+          "0.65": 0.47887449488947,
+          "0.7": 0.18032445923460905,
+          "0.75": 0.059097932018065125,
+          "0.8": 0.04581649631566442,
+          "0.9": 0.007873781792250956
+        }
+      },
+      "zero": {
+        "value": 0.0
+      }
+    },
+    "qa": {
+      "power": {
+        "beta": [
+          -7.408961663898445,
+          -0.4811976293313924,
+          5.4856962186039295,
+          0.10648814775615384
+        ],
+        "gamma": 3.05,
+        "sse": 48.92759106302308
+      },
+      "A2": {
+        "anchors": {
+          "0.9": [
+            -0.8246976076970506,
+            -0.0455709903815508,
+            0.5854231167658077,
+            -0.009249384240828653
+          ],
+          "0.8": [
+            -3.5786996627452066,
+            -0.210993185099731,
+            2.548337495507472,
+            -0.02329865320612273
+          ],
+          "0.7": [
+            -8.840057526552354,
+            -0.6590885983658076,
+            6.298468547181456,
+            0.03077841977049618
+          ],
+          "0.6": [
+            -12.111146209265568,
+            -1.3317444488159413,
+            8.967441537199544,
+            0.3293228495227231
+          ],
+          "0.55": [
+            -23.311933083393555,
+            -1.2305454639643671,
+            17.63293176323868,
+            0.6251040973347386
+          ]
+        },
+        "n_obs_by_anchor": {
+          "0.9": 16,
+          "0.8": 16,
+          "0.7": 16,
+          "0.6": 16,
+          "0.55": 8
+        }
+      },
+      "median_curve": {
+        "anchors": {
+          "0.55": 0.8739751663498101,
+          "0.6": -0.14617989543726218,
+          "0.65": -0.45233780893536135,
+          "0.7": -0.1804004277566542,
+          "0.75": -0.28952293250950545,
+          "0.8": -0.07502079372623616,
+          "0.9": -0.015446768060836558
+        }
+      },
+      "zero": {
+        "value": 0.0
+      }
+    }
+  },
+  "standardization": {
+    "center": [
+      20.248013065331047,
+      2.6610453843445394,
+      25.613656910721538
+    ],
+    "scale": [
+      1.4068782508941136,
+      1.690958165097974,
+      0.7387645771733673
+    ],
+    "constant_features": [],
+    "rule": "Natural logs in raw parameter/token units; mean and population std (ddof=0) pooled over training response rows and capabilities, as in v49. Scale=1 for a constant feature. Refit within each LOSO training fold; full-dev values used for prediction."
+  },
+  "candidate_definitions": {
+    "power": "(beta.phi) * ((1-d)/0.3)**gamma",
+    "A2": "Independent beta.phi at each fixed anchor, using only sources measured there. Linear interpolation between adjacent predicted anchors; outside the anchor range, linear extension from the nearest boundary pair. No clipping.",
+    "median_curve": "Median training response at every measured training density. Linear interpolation between adjacent predicted anchors; outside the anchor range, linear extension from the nearest boundary pair. No clipping.",
+    "zero": "0 at every density"
+  },
+  "cache": {
+    "hub": "/home/xueqi/.cache/huggingface/hub",
+    "hf_id": "EleutherAI/pythia-2.8b",
+    "revisions": {
+      "main": {
+        "commit": "2a259cdd96a4beb1cdf467512e3904197345f6a9",
+        "complete": false,
+        "weights": [],
+        "metadata_sha256": {}
+      },
+      "step143000": {
+        "commit": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+        "complete": true,
+        "weights": [
+          {
+            "file": "model.safetensors",
+            "blob_sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
+            "bytes": 5550463728
+          }
+        ],
+        "metadata_sha256": {
+          "config.json": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
+          "tokenizer_config.json": "70e38394e494931c6f773ba41e19460dd4436526b852207367f04341b4066d3f"
+        }
+      },
+      "step16000": {
+        "commit": "d86be5ee6523ec46075f22dd2230b8e346524d4f",
+        "complete": true,
+        "weights": [
+          {
+            "file": "model.safetensors",
+            "blob_sha256": "ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe",
+            "bytes": 5684693096
+          }
+        ],
+        "metadata_sha256": {
+          "config.json": "bca96a0c3534ff9e22d2e4aefe74652009de3fc71d74998e4fd25b089da61322",
+          "tokenizer_config.json": "84f28e3ab5abb48724a3e678ad5de5f6f920b4948dc01814503bd34b00823e3c"
+        }
+      },
+      "step64000": {
+        "commit": "e4e0ac4e8cba6f7880e63a12c51858ed49d968b8",
+        "complete": true,
+        "weights": [
+          {
+            "file": "model.safetensors",
+            "blob_sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
+            "bytes": 5550463728
+          }
+        ],
+        "metadata_sha256": {
+          "config.json": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
+          "tokenizer_config.json": "70e38394e494931c6f773ba41e19460dd4436526b852207367f04341b4066d3f"
+        }
+      }
+    },
+    "unreferenced_snapshots": [],
+    "duplicate_weight_revisions": []
+  },
+  "pruning_audit": {
+    "scope": "Local result JSON/CSV/TSV/gzip JSON and paper mirrors; architecture-only mentions excluded",
+    "files_sha256": {
+      "results/pythia-smoke/summary.json": "64b8d43158058698b13cd13b5be0c39ee042a9bba7a21bc3162e00c8ea64d2ca",
+      "results/sign-matrix/summary.json": "d62f87303b411ee94070dd4c8220d397e3779abb6c80e41b2adc9ba34672980c",
+      "results/v10-quantization/Qwen3-14B/prospective_summary.json": "9ccef6ccb064257d8f90f06ee9a3bd4dee7c6cf3ea29df3c657b0970ecc753ba",
+      "results/v11-geometry-damage/Qwen--Qwen3-1.7B/geometry_damage.json": "30defaf8722aee12af06fc599d5b86c093ef4b84b406a286296a8e15fda8e4b8",
+      "results/v11-geometry-damage/gemma3-1b/geometry_damage.json": "7f5a6c7857b807e771b5856816931f83f90d2c02edd0dbb98d4946900fe6b115",
+      "results/v11-geometry-damage/gemma3-4b/geometry_damage.json": "7cf1a918febdc7dc802ae14d0ab45daa7cd612a65259e19fcf14056f36ea85cc",
+      "results/v11-geometry-damage/olmo3-7b/geometry_damage.json": "ba22d0b711e9f61cfc30b32617f4416dd3f78a0f773ae6d0950ea25b3fad6d3f",
+      "results/v13-recovery/gemma3-1b/prune_0.6_c4/recovery.json": "fcb0aef3ad496d0af364c2e1e1676b8672803d661ec4a256e44b3a85a7871033",
+      "results/v13-recovery/gemma3-1b/prune_0.6_traces/recovery.json": "270cb7135c3e70f0711477c297e8e179161fb25861afa8873aeb1f77bbc44c6e",
+      "results/v13-recovery/gemma3-270m/prune_0.45_c4/recovery.json": "2b1d8a6a898d0092ae167bd5bee56fe526cb1418d6b48466570bec3158521afb",
+      "results/v13-recovery/gemma3-270m/prune_0.6_c4/recovery.json": "1758a91a64df94555d084be2aebc60c4964343d97c74e6f5e563565794ad3975",
+      "results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json": "fae21cb4eb0af935a3cedff97457916bd63dd6d8e340f5f6b367bc194485530d",
+      "results/v14-fitting/paper_numbers.json": "cfde72ca38ed7f21e4b0f59bd48e07c12b15146a55aa34ecc52424681b95db3c",
+      "results/v14-fitting/summary.json": "7b7fdc2e3b03f81beb31351e39a7d92ffb1bd3189571366895f0335186f281f3",
+      "results/v15-accuracy/_zeroshot_floor/gemma3-1b_dense_zeroshot.json": "d5829d72dd133f0befaa6856538cb64ab83d1c330e8cde3d5edb82ebc3f32425",
+      "results/v15-accuracy/gemma3-12b/dense__easy/accuracy.json": "3131eee825ad085510ec0e6efb0731dcb8278540551902af2af3e9d7bff977c9",
+      "results/v15-accuracy/gemma3-12b/gpt-5.6-luna_full_600__easy/accuracy.json": "a331aaa0866e90d23463dddd0908e2180af837adf328555290ee0fe18ec24528",
+      "results/v15-accuracy/gemma3-12b/prune-d0.5__easy/accuracy.json": "f6603031c7db229aec8c13486e3fd48b1b250e1fe724d5c89a154f644ef5cb5e",
+      "results/v15-accuracy/gemma3-12b/prune-d0.6__easy/accuracy.json": "520cd99bf13ddb01ddad1def52afec6388aad4973b7d18622f9f500a825e36f6",
+      "results/v15-accuracy/gemma3-12b/prune-d0.7__easy/accuracy.json": "9c3950ca55744abf0055ed47264e945899320cb09b94240a640488f6a894cb29",
+      "results/v15-accuracy/gemma3-12b/prune-d0.8__easy/accuracy.json": "d5dd1cd0fc843acdd3475d562d007d3807ac3760251fd58656c1c3d1ccfe889a",
+      "results/v15-accuracy/gemma3-1b/dense/accuracy.json": "d5829d72dd133f0befaa6856538cb64ab83d1c330e8cde3d5edb82ebc3f32425",
+      "results/v15-accuracy/gemma3-27b/dense__easy/accuracy.json": "12a6de83b649cb8bdc3b5dffa181b6f3fc029666d0e62d215542f49eda6ca69e",
+      "results/v15-accuracy/gemma3-27b/prune-d0.6__easy/accuracy.json": "5a87dde56e75e5364c4b6dc9ab07373189194a0737e75ac3d718d29060a716a4",
+      "results/v15-accuracy/gemma3-27b/prune-d0.7__easy/accuracy.json": "2a1ade766dbf11a4c2295125e249523415df4700e0400e3387d2009cad675c01",
+      "results/v15-accuracy/gemma3-27b/prune-d0.8__easy/accuracy.json": "cc9c24a47444e33adb5cc7906bbe842207327c4ed64ee05ecdb38ec377fb3b39",
+      "results/v15-accuracy/gemma3-4b/dense/accuracy.json": "1b87f20d2a139bbc37b6151fb3d00d17f35082755d710d465c9c4b5b8de5f3ab",
+      "results/v15-accuracy/gemma3-4b/dense__easy/accuracy.json": "cbcb9abe12a52490c0dc46927c51ce45559bb1a22b0818991996d7755ee5619f",
+      "results/v15-accuracy/gemma3-4b/dense_prune-d0.5/accuracy.json": "0c7eb8f91fcc8f7c08fb316c8106f1f118c8b5669dfcf9c3301c57581a41fcd0",
+      "results/v15-accuracy/gemma3-4b/gpt-5.6-luna_full_600__easy/accuracy.json": "b83d48493cf6604ff51382de840526e80e516fcdc7520e73f36ae8cf2b890618",
+      "results/v15-accuracy/gemma3-4b/prune-d0.6__easy/accuracy.json": "e6e51605092ae28b07068709244dcd290caa6502aafee3a8e2fad3612e3de311",
+      "results/v15-accuracy/gemma3-4b/prune-d0.7__easy/accuracy.json": "c95500b7aaad126bf7bd8ef376b3327122a1a801eadd5c6859ed9fb710f0cbb9",
+      "results/v15-accuracy/gemma3-4b/prune-d0.8__easy/accuracy.json": "3f11bb732fa719c1c6a9da18cb9af1abd4514b8488952000cea8b9ebb55eba6d",
+      "results/v15-accuracy/gemma4-31b/dense__easy/accuracy.json": "4f42e6d031af28d8ead491a65d2463358efa0f08adea64e4b6b73871ae627079",
+      "results/v15-accuracy/gemma4-31b/prune-d0.6__easy/accuracy.json": "246a79ab3a44cf1dfb176133add4e1ab56a0ad82f0e879db862c1caa809fad8e",
+      "results/v15-accuracy/gemma4-31b/prune-d0.7__easy/accuracy.json": "695ca041727605e85b5bc7f592be8e845280f247eb7f8b8c711c0f684c6a2b85",
+      "results/v15-accuracy/gemma4-31b/prune-d0.8__easy/accuracy.json": "103095b35f52e80ea992715b4c716b6b479901d6baf33415cb7415819a8c1567",
+      "results/v15-accuracy/muse-30b/dense__easy/accuracy.json": "6b135c0075e1285b5a47d08eecca1910c8277269f7e36e7c79ec1e14eba5716d",
+      "results/v15-accuracy/muse-30b/prune-d0.6__easy/accuracy.json": "ffdd8fb30c3400722b389d036dec412d6d8a3c8dd08e1e02b614865d78bf66bd",
+      "results/v15-accuracy/muse-30b/prune-d0.7__easy/accuracy.json": "1b757fcabda56bcfa12d11f9f4953547a910bce5bb10b936ed0820ab33d701de",
+      "results/v15-accuracy/muse-30b/prune-d0.8__easy/accuracy.json": "8ce09bbf2aafa3a6c03c694636c1f8a69f93f7987b78e8f2fee8140eccb9ea73",
+      "results/v15-accuracy/olmo3-32b/dense__easy/accuracy.json": "7592c7b962ee9f47eb79968569d19dce29b4294acf0e951caff5cb3f57ff24b9",
+      "results/v15-accuracy/olmo3-32b/prune-d0.6__easy/accuracy.json": "0280d68137678a57b62b39b4627e8f04d983577b5e1ef2c37020690b4f551be9",
+      "results/v15-accuracy/olmo3-32b/prune-d0.7__easy/accuracy.json": "fa09fa39ce78ff25005c691b0f333c86a72d0190f66cc1f96656b54430d3dfde",
+      "results/v15-accuracy/olmo3-32b/prune-d0.8__easy/accuracy.json": "ba3302d5975cd6d6fee8378699d3be6f774e5d0ef7abc067c84166e4548b1746",
+      "results/v15-accuracy/olmo3-7b/dense__easy/accuracy.json": "b624879b51b3858a720e610e6be7293efb3406c961bb1c244c4049a1d904a9ab",
+      "results/v15-accuracy/olmo3-7b/gpt-5.6-luna_full_600__easy/accuracy.json": "1002bdf32a77797a688736c84c411cbe8b588aa53900cb667cda272a5873ea23",
+      "results/v15-accuracy/olmo3-7b/prune-d0.6__easy/accuracy.json": "300d717117e764ff2466459ce86b07662e25e82e3df756f0f1f0f79338d7b6b3",
+      "results/v15-accuracy/olmo3-7b/prune-d0.7__easy/accuracy.json": "e854d69aa99250d2e70c65bf0b01650227b1595c8b442f62e1c9efe8ee3b2d31",
+      "results/v15-accuracy/olmo3-7b/prune-d0.8__easy/accuracy.json": "de939370e3808935c765539654970a72fdf89cafef530e8370e274670de31fed",
+      "results/v17-unification/m1_heldout.json": "85c748ac6b0f6b9e04e091b6389c7339cc8342c9d01da0f0a2423f2b8ba8d50c",
+      "results/v17-unification/m2_heldout.json": "03c7cbde6d97efe6b9cb7d2539299bd6998dd20563225abdb0b11cbf654436cf",
+      "results/v17-unification/m3_heldout.json": "9a46ee88de7f91de9b71f29e6c6712f292cd52a00b255e8601bcaf3b6f4ff74b",
+      "results/v17-unification/matched_active.csv": "e9995bde22d47eb1a7635c4fed76736419ef70c990d632caea8fa440e437d4db",
+      "results/v17-unification/matched_storage.csv": "1ffd53e4e00400a99f9e09d688fbcdb0040c57e64054bd68fcf5a7040c69ac65",
+      "results/v17-unification/matched_storage_pruning_vs_quant.csv": "d7bb341e389ed0883055ce8e11a863e247f0f5ea5b4e426965172614216f22ee",
+      "results/v17-unification/method_selection_map.csv": "12c600e97022800cddfe9604163190f0394aa1332b5e04d5911564cf46154be2",
+      "results/v17-unification/unification_table.csv": "7b114080860cb45cbdc8405a96c65dafd870013e664aabb880886a2b01bdcd77",
+      "results/v19-links/observations.csv": "23c6d7df9e4e51d093d5e848689e1a1f5145503abfaf813fc299c1cae0093d3e",
+      "results/v19-links/summary.json": "9d210bdd085f6c3071044de9cac211f201754d6e6c3ef9f80a43e44f4c0bda16",
+      "results/v20-robustness-corr/summary.json": "bfae5d41b6788ed027beb33e18d19503ce133a7f184ef3a395a09d901ff0af7b",
+      "results/v21-distill-law/summary.json": "127313df45694596a48dc62fb6ba25eae9e7263aaf04236163d6f12253cf7ec8",
+      "results/v22-distill-decomp/decomposition.csv": "75dc3fe9606dfe6fef37993c931f025d3d57dbf0fdd64c0f30d2bac8487ccb44",
+      "results/v22-distill-decomp/summary.json": "1ab8e953a2892a15e127ed7f0b001e281ba1e1e2c7e5d7573a23c4f44b7b3b81",
+      "results/v23-loss-validity/gemma3-12b/dense/loss_validity.json": "860f630b31040d344dd5d07cd3c5760b29ee25b2ad0c045cb81c0be00412dfc0",
+      "results/v23-loss-validity/gemma3-12b/dense_prune-d0.7/loss_validity.json": "1be4032d5ff3912c97c9ddce126c69555dbf93b6979a4d9b9f9b13fc4678e124",
+      "results/v23-loss-validity/gemma3-12b/dense_prune-d0.75/loss_validity.json": "2a9c04ff204644aab19ad77a4cf0ec1dad318e530f28e95775850424f17a71c0",
+      "results/v23-loss-validity/gemma3-12b/dense_prune-d0.8/loss_validity.json": "ed1b2993be216ce61065d1d676faa5aa0738f3056228493ffd2ead8e93e915c0",
+      "results/v23-loss-validity/gemma3-12b/dense_prune-d0.85/loss_validity.json": "e69eac4d46cb03b76d2ef222353f2d04da3cd1fe39c8ab3f2d0286575a830ec9",
+      "results/v23-loss-validity/gemma3-12b/dense_prune-d0.9/loss_validity.json": "03b84d8b7e9ce928b5c7fbc269b191ebec10c0cb9e675875ef0186669fbaa2d5",
+      "results/v23-loss-validity/gemma3-27b/dense/loss_validity.json": "c34f1ae3200dc8af9081297e4a6f4aa2c5b7e837e6dd9b90f4edcbd9b1183101",
+      "results/v23-loss-validity/gemma3-27b/dense_prune-d0.7/loss_validity.json": "df70b0ff653b3f6c9e8e29f3bd3b91848cdf7edfe6de4efe6d580c7acb551ad1",
+      "results/v23-loss-validity/gemma3-27b/dense_prune-d0.75/loss_validity.json": "51148f7aa5c3c3261aada373a1272ae8fecd275284ddf2ee712b1e2fb0c943bc",
+      "results/v23-loss-validity/gemma3-27b/dense_prune-d0.8/loss_validity.json": "ad5040c8808c516bb993bb2394eee5cf1f268d7e72c8ef751a083413e66cf53f",
+      "results/v23-loss-validity/gemma3-27b/dense_prune-d0.85/loss_validity.json": "968a756555263e9660bf188cccdd1248a68d19e46f5c6e68e1f34ea72ab5b4bf",
+      "results/v23-loss-validity/gemma3-27b/dense_prune-d0.9/loss_validity.json": "5f36671a479547cec0b65f90d2e4b92ded37f5aa15df05023927b8e8723f9acb",
+      "results/v23-loss-validity/gemma3-4b/dense/loss_validity.json": "aa27875e086f5ea2af9e4773282683bfb9442f3929c5feecb5ad35b1160b80f7",
+      "results/v23-loss-validity/gemma3-4b/dense_prune-d0.7/loss_validity.json": "16212d5f49666dabdae700eeda4d0c59122caa2324c91ef24b68eec6de4a7a96",
+      "results/v23-loss-validity/gemma3-4b/dense_prune-d0.75/loss_validity.json": "d7570a7d1c0cd6a8aae02104c604cab772cda859a9c822e3d1e020e68de8c5b5",
+      "results/v23-loss-validity/gemma3-4b/dense_prune-d0.8/loss_validity.json": "72a34d93b73a0e550ba2a9f26a9c13404ff211067c7eead59b4843199b91fa1e",
+      "results/v23-loss-validity/gemma3-4b/dense_prune-d0.85/loss_validity.json": "a340318285b207b294e7360047ab1e0463be8db9e4f87f600886620159a34a3f",
+      "results/v23-loss-validity/gemma3-4b/dense_prune-d0.9/loss_validity.json": "4c9625fcccbe4a90b1655ea20211d3ab723fb81f80feb650ce51f7c19cd2712f",
+      "results/v23-loss-validity/muse-30b/dense/loss_validity.json": "093e9fc941b8f0e52b99c2411b02178cd190ff8f059e889829b668bb1ed49762",
+      "results/v23-loss-validity/muse-30b/dense_prune-d0.7/loss_validity.json": "59db63311823b8c6e54fe9e06b77f4c0f51d3559a33dfc5c1b04916573790c1e",
+      "results/v23-loss-validity/muse-30b/dense_prune-d0.75/loss_validity.json": "c8055fbbbcf84c6aa8bf084238f6cdf97eec0281b35ef533930363fea1842578",
+      "results/v23-loss-validity/muse-30b/dense_prune-d0.8/loss_validity.json": "fbfd8ed25c7c142535930dc81a163a87c47d7e4d71c7de25b22dea54d64d3d1d",
+      "results/v23-loss-validity/muse-30b/dense_prune-d0.85/loss_validity.json": "50fb10eca43b0bd50255ded2b7cdf5c13a34bc39fb55d6a3bb66cd5c8b9d8a2b",
+      "results/v23-loss-validity/muse-30b/dense_prune-d0.9/loss_validity.json": "8b2da9a3205f8d9fa91a90714235949f58fd9b3631c680caafee53edd7501863",
+      "results/v23-loss-validity/olmo3-32b/dense/loss_validity.json": "3466212b217bc304ac7dae453a32b9db5f88e6309e28453e5083984c6ec4796f",
+      "results/v23-loss-validity/olmo3-32b/dense_prune-d0.7/loss_validity.json": "ff391366e663a1729a762cb14f939bd0fab4c3a0944848459e917a5c68f91e31",
+      "results/v23-loss-validity/olmo3-32b/dense_prune-d0.75/loss_validity.json": "e9c72abe60701bdbc47077975bbc06a4103217b915796f6ac2dbec8feb13467a",
+      "results/v23-loss-validity/olmo3-32b/dense_prune-d0.8/loss_validity.json": "2dd60e0b5891b1918caafdb0fa997df4de99f8933f345c0938ee66d9f9b9a979",
+      "results/v23-loss-validity/olmo3-32b/dense_prune-d0.85/loss_validity.json": "57f99ab65aa037a5f80aef4b5d14108a2894f2e8a99718e56afb45919579febd",
+      "results/v23-loss-validity/olmo3-32b/dense_prune-d0.9/loss_validity.json": "876c0ddfd05914baa3a8b908f7d630df7609a3aeeb0818b4be353f8134adc6e2",
+      "results/v23-loss-validity/olmo3-7b/dense/loss_validity.json": "b2622e91259c062fa0f32cc9663e27fe7ecdf1e25142eeb3db3c19092edfdd28",
+      "results/v23-loss-validity/olmo3-7b/dense_prune-d0.7/loss_validity.json": "ac0912b90a023e007b46caf56fa9dc9b653d2a9935b03f40d60ef41a5e0219cc",
+      "results/v23-loss-validity/olmo3-7b/dense_prune-d0.75/loss_validity.json": "55eca9e65e325040818c2a41b109be467fc8c710d45c2bea0f3315a33d72e837",
+      "results/v23-loss-validity/olmo3-7b/dense_prune-d0.8/loss_validity.json": "dee2cccde0696700eb2b6d63074052fc91b5cadc6531c5d6564d35c468cd646c",
+      "results/v23-loss-validity/olmo3-7b/dense_prune-d0.85/loss_validity.json": "c7d6a5c4b62aaa6f4ddf22634632372dcd34308f1b863a563dea35db18654031",
+      "results/v23-loss-validity/olmo3-7b/dense_prune-d0.9/loss_validity.json": "04e5a7b503d860a2bff13326be913cce2c174297f27b89d0a2dc2daaea47fd03",
+      "results/v26-loss-validity-pred/summary.json": "38e76d469c1090f1a5caec008201c674bba95efd31678a74ee0f93d85ac35f4e",
+      "results/v27-scoring-units/gemma3-1b/dense_prune-d0.7/all-L_full-scoring-units.json": "7f0e6a3ae501d71c19502a0547ab4258886f0c482c66adfc876ec07f75179f14",
+      "results/v27-scoring-units/gemma3-4b/dense_prune-d0.7/all-L_full-scoring-units.json": "bedd06e3d38eb2ca9c7b08e55a54c22d1ad130eb6bbce993365e169374398146",
+      "results/v27-scoring-units/olmo3-7b/dense_prune-d0.7/all-L_full-scoring-units.json": "1bbce39d150bdd1ca46812e5c38549939c6696ca851953b893ff83e655431d37",
+      "results/v27b-readout/summary.json": "51112ec9029b7040f522adb71a9fd951fb21d93420ebc6fed776d6717c2f301a",
+      "results/v27c/summary.json": "16e3d3cab4fba42394f653e01f31c71e29c133415eff4a636626c87341bb24d5",
+      "results/v28-new-source-pred/frozen_predictions.json": "069fc19c7546217f9b90d802abebcdee2092d7f4cb83a00ac1a12e4c2db598ee",
+      "results/v29-prune-diagnosis/predictions.csv": "98bd59fecf2a1fa3a683a153cc18fb3f477aaec4da49cdcf4c4663fe05f47ace",
+      "results/v29-prune-diagnosis/summary.json": "1875d214e2c72c5816964cc4f512a71259ad09874cd619c46c026c2783b60efa",
+      "results/v32-descriptors/Qwen3-0.6B/features.json": "2cf540627bceefe0748ac3f0238c3ed1753e2fe9f6e282d77a2c2979b474cfcd",
+      "results/v32-descriptors/Qwen3-1.7B/features.json": "e9740d6cb716ffb7ae40a2a0867f8b7aac76b21450c60c9c35a02afbad726fe4",
+      "results/v32-descriptors/Qwen3-4B/features.json": "be7e0223a087055b9b651aa51c00e81bc600a928446ba2927184eb430a90f4bb",
+      "results/v32-descriptors/Qwen3-8B/features.json": "1a5e7f2a017c6b4356ef509cf4181500cef1dc77ed2c6155df30ab7281c78256",
+      "results/v32-descriptors/gemma3-12b/features.json": "32a66e63e0330de4c59f9905bb8e119a05d3e16d43cd1f8cde3432eb45660b05",
+      "results/v32-descriptors/gemma3-1b/features.json": "78089cdf355fd120daba954530a610e12d4e6a661a00688f8740fc0e2c0960ac",
+      "results/v32-descriptors/gemma3-270m/features.json": "a65c9278d35f5d4efe4049334e8d6823be3820ba5f118c978d48bc1677832b40",
+      "results/v32-descriptors/gemma3-27b/features.json": "34d603a57596385c3c2a9592abc2b16035008b12a29494039cc7078cdfc6ad23",
+      "results/v32-descriptors/gemma3-4b/features.json": "9aca1a8a28dc664121ac3d2f3c793d8aa27e9ad1319027b7d4ca608d719df627",
+      "results/v32-descriptors/muse-30b/features.json": "0bcfaa46f543e61668977deeb308f4c77e29d68c56385dfd80f7cd066d6bc21a",
+      "results/v32-descriptors/olmo3-32b/features.json": "daaa35a847b2ad36a144181edc5737dc8e1c56660a00f9e25e43ba7f73c70486",
+      "results/v32-descriptors/olmo3-7b/features.json": "aca99f9baecefb2e7f9c6c9f534b298f716bdb0834c581d71d4a409aba1c759f",
+      "results/v32-descriptors/prediction/summary.json": "b69ea1c1a2486b994b02df563a13588f050cf634e5fa1dfcb8246d3f193f9086",
+      "results/v32-descriptors/prediction-11/summary.json": "cc760b137e417e0bd7ea579ef1664f51f49ff6447d917cb7ae4a8ff60cecfe99",
+      "results/v32-descriptors/prediction-v3/summary.json": "020b74260cff1676e9e97af71e971a6445033f06c4379d63981f865617811128",
+      "results/v33-selection/summary.json": "f90338f25883c4f5d16bb43a019f56c56903ea0430d2c1f4c4355c90eda7a1ea",
+      "results/v33b-selection-pareto/summary.json": "cd2a8390308245d2ca32d058918626f81b2af6eaf133d9cdc91e20668c51370e",
+      "results/v34-c17-scope/summary.json": "577458bbf5c302b5ec9e5e0d12680c2c86489f6b69f9b4e57af9fcd470de0ce4",
+      "results/v35-info-budget/summary.json": "c864591b2f83e137f747db2ad5f671032dabc175fe616a65cbbf48353b661bf7",
+      "results/v36-pythia-controlled/summary.json": "58dd81d2db4c089f97656232908d4aab8bccdf3114c05a880a50a5aaff844874",
+      "results/v36b-input-comparison/curves_pruning_code.csv": "b16469a1c4ed5765abba8fc05e0ecbb628bf8e63576589802a1034cf7ea0a3ef",
+      "results/v36b-input-comparison/curves_pruning_math.csv": "8a63353c25bee69aed2c788eac9f30fa43fd4a795bd2ef18deaf5400dfd6927e",
+      "results/v36b-input-comparison/curves_pruning_qa.csv": "f3ada0037100ef7fca72a60f4dfcd17ca848d9a28ba68aee45916562ac23b881",
+      "results/v36b-input-comparison/summary.json": "3c78f71bd246b3131e8713b90ed69a31a620b2fc1655442a7b282a7d7ec12ace",
+      "results/v38-prospective/compare.json": "88737c2b6ce4c6119f99ad77176e16d9db21221c1ff2d08c03a74390a9f546b8",
+      "results/v38-prospective/register.json": "e60fcd9ba0a2573cec8217bfaf454b0e438069c6aeb5aee45318302debc8fcec",
+      "results/v40-prune-strength/compare.json": "3b92b40bedfe1aa91b3fe8eac13de6e38a3380035f3a38f6ca153ca0ae95d7c6",
+      "results/v40-prune-strength/register.json": "2080fb5ddf606f3a0ba8f4af6096ee4044c3bfb370d710c8abd6f04438265c93",
+      "results/v42-prune-sameinput/summary.json": "5f4c2d49d2d8f09da45ab923f5510a16e9a4ac104eb066c3dd3037d550ed1cf5",
+      "results/v45-main-table/main_table.csv": "e6cd5e660524e47ed914d5c63f131fd29077b3bb7339f616ff7c44501cc0d850",
+      "results/v45-main-table/main_table.json": "55835b007857d0bba7af54fe505c5a9daaebaeda4826ac303033b42840e2f465",
+      "results/v46-p1-newsource/compare.json": "8e6a4b910b06038ef35f10a96e512d0cc29bfc1d2ed97471bba680cc9cb9d6f0",
+      "results/v46-p1-newsource/predictions_frozen.json": "c33b03950f0a649db07d0406e751e6890e2319e852c2d6fd2ffc4a1ff3d57445",
+      "results/v47-p2-register/register.json": "c12167d4b12b9c18e5983239573868ea4a7dfe3f62c8b638f3a10f99970e4757",
+      "results/v48-p3-measure/measurements.json": "95c38ada1ccdbeb846c33c92a42358dfbe75839737f588c3c9af2ee26bf8cbc4",
+      "results/v49-p1v2/compare_pythia-1b@step112000.json": "9697b57509b678350abcccc309ba8e0eff02196d8981d9f7c92e8118db37a45a",
+      "results/v49-p1v2/compare_pythia-1b@step32000.json": "6d68964aeb99d8fda157be3c0863e59915f437326b30088365282a1d4fc3500e",
+      "results/v49-p1v2/compare_pythia-6.9b@step112000.json": "320d9d172a624453dc883532fa97990bb49de68f70991b9456600ad17a855124",
+      "results/v49-p1v2/compare_pythia-6.9b@step32000.json": "402e4137f412b0e38ca7b59126830c31d09a566632043361b8f6d06571efd4e7",
+      "results/v49-p1v2/p1v2_table.csv": "c6c0c37ea24bccb97e0fc0ab544a8b6567d7e1b68357372a6bf0969d1b9dee26",
+      "results/v49-p1v2/p1v2_table.json": "9f436921a3fba7ae8614966f311294b0605f04f8f340f1d1ccb945f12ff842f9",
+      "results/v49-p1v2/predictions_pythia-1b@step112000.json": "e02ddeef0656436f63e585bbfc5755f32b79fbeeb11315ec60a267786419ed5e",
+      "results/v49-p1v2/predictions_pythia-1b@step32000.json": "42a890efab8968794f9cd7bebd9090b002a68705928a6b80f5f08416a512c287",
+      "results/v49-p1v2/predictions_pythia-6.9b@step112000.json": "86cc12db7a77d6db465d327140e2358b8bf166f63ce302961afd980f28feecad",
+      "results/v49-p1v2/predictions_pythia-6.9b@step32000.json": "cc24dacc8797eeb01d4572617f6053abcdfb711f168f28413dbdc18d937df192",
+      "results/v49-p1v2/register.json": "b31773ce2b3aee3b85683b08c4436349f9de83923d96e0e7d21fe901d343c272",
+      "results/v50-p2v2/freeze.json": "c7caf2f10865dee0e8aeb572957a55cd284ac9fc1693b51555318315492a67ee",
+      "results/v51-panel/counts.json": "87e7038996fdfe3f2fe08a64156138eac129056790a0d7c12555bb399621f15d",
+      "results/v52-prediction-tables/groups.json": "ced335a427a93b9b71904cf7cd34ce86ea455917491c21fb810f74d00d17c32f",
+      "results/v52-prediction-tables/rows.csv": "2e80fe39c8308ea2cc44e4209acb31a0ed35fed3be0cc40ed6ad3dee146c34dd",
+      "results/v53-prune-dev/compare_pythia-1.4b@step112000.json": "23dd3cd34588ea33666f0158fc05004b6bc8273ab8947bb43aad954085857406",
+      "results/v53-prune-dev/compare_pythia-410m@step48000.json": "6cbfcff19a7196a5377e83417538159b86797996d3045c976fcb3e29dd321399",
+      "results/v53-prune-dev/compare_pythia-6.9b@step80000.json": "288af4793219be8325a33fcaa0d2dbc0dd96defff4890de040aea0723e177eb9",
+      "results/v53-prune-dev/dense_dir_pythia-1.4b@step112000/dense.json": "31ef84da5d94045c1a9b403725b6c579f19bba4a10d100b6d5ca76cb91a7cfce",
+      "results/v53-prune-dev/dense_dir_pythia-410m@step48000/dense.json": "4385aa1e3bd56e41a7ebe2623dbebcc961af2b89e309ad9ca341c4705fe9b685",
+      "results/v53-prune-dev/dense_dir_pythia-6.9b@step80000/dense.json": "b4753e09dde4b495e44f7280dee0d2db0ef39885dea2ee1497aca5362340817d",
+      "results/v53-prune-dev/dense_pythia-1.4b@step112000.json": "357f0784978e815a88669dfea28237116f0559ca68c42021c90f95a01c893e00",
+      "results/v53-prune-dev/dense_pythia-410m@step48000.json": "96e841c74277ec09224f18e1e80c8a497da1dacef6bcf0ac60385bdaa1206779",
+      "results/v53-prune-dev/dense_pythia-6.9b@step80000.json": "272289767191c464ffe4e43b7786e01a8d140527169321ee76e5d21966663ebf",
+      "results/v53-prune-dev/loso_table.csv": "881e8f4886990b86fdbd9f1cff344c13d468d64c556b98b03025266184eba59c",
+      "results/v53-prune-dev/predictions_pythia-1.4b@step112000.json": "862e299cc30a55672c785de418b0c184c204e3d5c2b222fb6174351e507489f4",
+      "results/v53-prune-dev/predictions_pythia-410m@step48000.json": "6a3e987278dcb2d59d37eb72161bc0a062dd5cbe67116087b9fe7374bf426d6a",
+      "results/v53-prune-dev/predictions_pythia-6.9b@step80000.json": "c14ec20711138aa57d7ae4d394c97ba8b08c05ed65926c537473e6ec499558d3",
+      "results/v53-prune-dev/register.json": "7498103830f139f6bea16ee440b717a05dee41e45b9835fdac6a2251b833974d",
+      "results/v55-quant-group/register.json": "d5e36301651d4627923bb95cf4e23f86600c9eeeea6bb60fd603da8e77b91e3d",
+      "results/v59-shared-structure/summary.json": "cebf913fbb447fbfe7fa2ccab419c0100da3eb84d878e1b1630899610e284947",
+      "results/v6-capability-geometry/Qwen--Qwen3-14B/prospective_summary.json": "0b0bc822558b79f0d7741146d4020f0f3c1eead9a41d7396d6428f90fff48282",
+      "results/v6-capability-geometry/Qwen--Qwen3-14B/prune_losses.json": "85d52fc02cc3a545b2f8dc0080f461898c84a0a3982a2ff462706ca75296c20b",
+      "results/v6-capability-geometry/Qwen--Qwen3-8B/prune_losses.json": "94d7c6e9b96dd33aa73ad66b316913e54f49bbf5b81a428cdf2dbfc2d657591b",
+      "results/v6-capability-geometry/Qwen3-0.6B/archive-v1-sameprobe/prune_losses.json": "a909df5e43accbc9c6e8651d7a794c93475f7b897d88c571bdd46ad9e084a866",
+      "results/v6-capability-geometry/Qwen3-0.6B/prune_losses.json": "f2dbd1fb4dfc7654fcd36dd88db203678b1e5647121fe791ad2a6b9b2df1eab4",
+      "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json": "04b703c90611f6bf0a1244c186e5118892ff2e643624a39cf4f39e1cc51db7b7",
+      "results/v6-capability-geometry/Qwen3-14B/prune_losses.json": "85d52fc02cc3a545b2f8dc0080f461898c84a0a3982a2ff462706ca75296c20b",
+      "results/v6-capability-geometry/Qwen3-4B/prune_losses.json": "08befcee9e632da3ce7120e41ebe949ad78005819681189f08ef89405ea03957",
+      "results/v6-capability-geometry/gemma3-12b/prune_losses.json": "db4c05b2c0cf1282d6433042d93f82a7666be5a80485446a3eec56716bf9f680",
+      "results/v6-capability-geometry/gemma3-1b/prune_losses.json": "76642de5ce8c2b1b9c41288eda024a1a69ee5f2c5b5af570e9730f898e34e1d6",
+      "results/v6-capability-geometry/gemma3-270m/prune_losses.json": "9e2fcea66ea52aef718ea22bb06f35854d7cb06201225ef95637e3188ede50fc",
+      "results/v6-capability-geometry/gemma3-27b/prune_losses.json": "5821028e4b122801895fd5a7961f4979c408b880d3d4522060dd0eaf41c3c143",
+      "results/v6-capability-geometry/gemma3-4b/prune_losses.json": "25a9569440b7e29390bc63372ab9ad207365e4f784c7230cc75071bb2e9cbc5d",
+      "results/v6-capability-geometry/gemma4-31b/prune_losses.json": "487b96be35a80a4767ae43c7ebd25a7e5f4163f297d80de8423e144358c4bad3",
+      "results/v6-capability-geometry/muse-30b/prune_losses.json": "0d9915207b105d8118e4c7dd9120a804a2ce0ccf5b0ffba6cb1bea49003ff15a",
+      "results/v6-capability-geometry/olmo3-32b/prune_losses.json": "bd831adef03a061fa48da15c4d1e5028f63e34e4df54e8c80c882e00bdb4ce0e",
+      "results/v6-capability-geometry/olmo3-7b/prune_losses.json": "8d002990636ee2df5556246dc9940571258664b5bcac3463257346a7f2640b85",
+      "results/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json": "bfc02e7d54eb623c2e8e4f1237b546aa62ecd14f23330b50e2a833e226916c42",
+      "results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json": "5ec4800f980d6317520f3d7eb85f4516631b629a146d5a964e33092eb1507315",
+      "results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json": "95cbe7e98739be4ea472781bf4f8a27c28827250e22d1bdbd8c5c576bd73938a",
+      "results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json": "a458cd11272a9face425eda62134b25ef0bf4af622f5902c63f13233028c0b15",
+      "results/v6-capability-geometry/pythia-1.4b--step96000/prune_losses.json": "291926ecf463d6052e16336f0473aa364c4098db5a99185febe832e83d531f81",
+      "results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json": "87d9ebcad62e27b675e038b584671175f66aed91fc18da786ffc0f553af68e37",
+      "results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json": "46c5f9c6cfb0b5581b13f517951b861cb1c52998c333945a37639b1031862525",
+      "results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json": "f5791d151a0507ac90aeaddaf97d4686ceead336d4fa7b128ec711f4793ad354",
+      "results/v6-capability-geometry/pythia-160m--step96000/prune_losses.json": "477e2715ec4b9033fb27a7fb169a3b7e08c0a6682572712190aed7178d36a6bc",
+      "results/v6-capability-geometry/pythia-1b--step112000/prune_losses.json": "28542d8fe21c9be339b5b946416cf53b80fa3b1d8d8aedb04676b4eed80c16f3",
+      "results/v6-capability-geometry/pythia-1b--step32000/prune_losses.json": "ce73eda3b0059614505fe20e03f2bf135f1e82d80e49b881f267174580ac5e87",
+      "results/v6-capability-geometry/pythia-1b--step96000/prune_losses.json": "0f8d7866ab0d6a013b464aceebcbf274d0cc7ed9413be0281a38b5ac1b962d2f",
+      "results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json": "f46f388cee3fbb1bb7a0175c1dfde457b13bee0fa262092d9ac1e41845df0e7b",
+      "results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json": "228e436b0b58d734eb924f2ddc45b4c8135aa3b2765bb3b764db7a456123dcf9",
+      "results/v6-capability-geometry/pythia-410m--step48000/prune_losses.json": "e71893a8e75f8abf1dc023400ab910a8765d81171d3abc991ffb1d77e012738f",
+      "results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json": "81bafd7adac31f27f2973545407005177fad63cf6d6e2ef942109e10fd8f3756",
+      "results/v6-capability-geometry/pythia-410m--step96000/prune_losses.json": "a2a5307ace6cc58f1e987c3a7c8cbac8da1e6d17f4c9487cf55ca95d1b47a4c8",
+      "results/v6-capability-geometry/pythia-6.9b--step112000/prune_losses.json": "a7952f3fb14575f0090dac6eeec4f103b556f69781685fb16d914dbe1905d9cb",
+      "results/v6-capability-geometry/pythia-6.9b--step32000/prune_losses.json": "90b4e5a53afcfd24b9c355578d0bbb2753d006169661f521b2a82b2d17f885d2",
+      "results/v6-capability-geometry/pythia-6.9b--step80000/prune_losses.json": "9f37ba12f066a94d93c07a93a180f89b9de08b77b0a7b3697a6de6a02dc1f3dd",
+      "results/v60-selection-maps/summary.json": "a0c5893c8b5f1784e648a1643c4a4bd0dde43fb17abf6ec605604e881dd11c4d",
+      "results/v64-selection-feasible/summary.json": "bff53de6379b86cfef5466c5815e1fc01a82a5e355e2fd005978504c21f51218",
+      "results/v69-quant-confirm/freeze.json": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+      "results/v70-distill-confirm/freeze.json": "d7b28c7251dbc6113c3de7c957560827e603d4e77a48010f99835a8468db0c24",
+      "results/v71-qa-scope/measurements.json": "d127e75abaea9d7d401c8dd3d61dfd6f9ff4f00017548dc55e4ad9aec43df9e1",
+      "results/v71-qa-scope/register.json": "79cdd66f16a85be13b1080b295f4170c688d575b6ee4c9914fbf272ccd4dd561",
+      "paper/results/v11-geometry-damage/Qwen--Qwen3-1.7B/geometry_damage.json": "30defaf8722aee12af06fc599d5b86c093ef4b84b406a286296a8e15fda8e4b8",
+      "paper/results/v11-geometry-damage/gemma3-1b/geometry_damage.json": "7f5a6c7857b807e771b5856816931f83f90d2c02edd0dbb98d4946900fe6b115",
+      "paper/results/v11-geometry-damage/gemma3-4b/geometry_damage.json": "7cf1a918febdc7dc802ae14d0ab45daa7cd612a65259e19fcf14056f36ea85cc",
+      "paper/results/v13-recovery/gemma3-270m/prune_0.6_c4/recovery.json": "1758a91a64df94555d084be2aebc60c4964343d97c74e6f5e563565794ad3975",
+      "paper/results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json": "fae21cb4eb0af935a3cedff97457916bd63dd6d8e340f5f6b367bc194485530d",
+      "paper/results/v14-fitting/paper_numbers.json": "cfde72ca38ed7f21e4b0f59bd48e07c12b15146a55aa34ecc52424681b95db3c",
+      "paper/results/v14-fitting/summary.json.gz": "417a2d0fa9fcc401a6cd71073d5a96508931c62438e7ab081f1ba241aff121d3",
+      "paper/results/v6-capability-geometry/Qwen3-0.6B/archive-v1-sameprobe/prune_losses.json": "a909df5e43accbc9c6e8651d7a794c93475f7b897d88c571bdd46ad9e084a866",
+      "paper/results/v6-capability-geometry/Qwen3-0.6B/prune_losses.json": "f2dbd1fb4dfc7654fcd36dd88db203678b1e5647121fe791ad2a6b9b2df1eab4",
+      "paper/results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json": "16b7b8ea340a40ad501e599f50350b70de956c93d7c36f274c22a06c482c74d0",
+      "paper/results/v6-capability-geometry/Qwen3-4B/prune_losses.json": "08befcee9e632da3ce7120e41ebe949ad78005819681189f08ef89405ea03957",
+      "paper/results/v6-capability-geometry/gemma3-12b/prune_losses.json": "db4c05b2c0cf1282d6433042d93f82a7666be5a80485446a3eec56716bf9f680",
+      "paper/results/v6-capability-geometry/gemma3-1b/prune_losses.json": "1384b55012b5801621b5f05776144fa8110ada39c1c0ae67778203e90dda962e",
+      "paper/results/v6-capability-geometry/gemma3-270m/prune_losses.json": "9e2fcea66ea52aef718ea22bb06f35854d7cb06201225ef95637e3188ede50fc",
+      "paper/results/v6-capability-geometry/gemma3-27b/prune_losses.json": "5821028e4b122801895fd5a7961f4979c408b880d3d4522060dd0eaf41c3c143",
+      "paper/results/v6-capability-geometry/gemma3-4b/prune_losses.json": "25a9569440b7e29390bc63372ab9ad207365e4f784c7230cc75071bb2e9cbc5d",
+      "paper/results/v6-capability-geometry/gemma4-31b/prune_losses.json": "487b96be35a80a4767ae43c7ebd25a7e5f4163f297d80de8423e144358c4bad3",
+      "paper/results/v6-capability-geometry/muse-30b/prune_losses.json": "0d9915207b105d8118e4c7dd9120a804a2ce0ccf5b0ffba6cb1bea49003ff15a",
+      "paper/results/v6-capability-geometry/olmo3-32b/prune_losses.json": "bd831adef03a061fa48da15c4d1e5028f63e34e4df54e8c80c882e00bdb4ce0e",
+      "paper/results/v6-capability-geometry/olmo3-7b/prune_losses.json": "8d002990636ee2df5556246dc9940571258664b5bcac3463257346a7f2640b85",
+      "paper/data_mirror/v36b-input-comparison/summary.json.gz": "2a19669561462545ff35b7a264923bdba9c639444488478fe56e157f2b38ea02",
+      "paper/data_mirror/v38-prospective/compare.json": "88737c2b6ce4c6119f99ad77176e16d9db21221c1ff2d08c03a74390a9f546b8",
+      "paper/data_mirror/v38-prospective/register.json": "e60fcd9ba0a2573cec8217bfaf454b0e438069c6aeb5aee45318302debc8fcec",
+      "paper/data_mirror/v40-prune-strength/compare.json": "3b92b40bedfe1aa91b3fe8eac13de6e38a3380035f3a38f6ca153ca0ae95d7c6",
+      "paper/data_mirror/v40-prune-strength/register.json": "2080fb5ddf606f3a0ba8f4af6096ee4044c3bfb370d710c8abd6f04438265c93",
+      "paper/data_mirror/v42-prune-sameinput/summary.json": "5f4c2d49d2d8f09da45ab923f5510a16e9a4ac104eb066c3dd3037d550ed1cf5",
+      "paper/data_mirror/v45-main-table/main_table.json": "f0d3ac70a5eddadfdd90341d1e1df84123bec40074a32e6886e44ce67e7f7928",
+      "paper/data_mirror/v46-p1-newsource/compare.json": "8e6a4b910b06038ef35f10a96e512d0cc29bfc1d2ed97471bba680cc9cb9d6f0",
+      "paper/data_mirror/v46-p1-newsource/predictions_frozen.json": "c33b03950f0a649db07d0406e751e6890e2319e852c2d6fd2ffc4a1ff3d57445",
+      "paper/data_mirror/v47-p2-register/register.json": "2d1eadd9a7b720d08cb1ab6629176bbea4b3c1f2c3c5b23fb9bbdb13f84a48b6",
+      "paper/data_mirror/v47-p2-register-register.json": "c12167d4b12b9c18e5983239573868ea4a7dfe3f62c8b638f3a10f99970e4757",
+      "paper/data_mirror/v48-p3-measure/measurements.json": "95c38ada1ccdbeb846c33c92a42358dfbe75839737f588c3c9af2ee26bf8cbc4",
+      "paper/data_mirror/v49-p1v2/compare_pythia-1b--step112000.json": "9697b57509b678350abcccc309ba8e0eff02196d8981d9f7c92e8118db37a45a",
+      "paper/data_mirror/v49-p1v2/compare_pythia-1b--step32000.json": "6d68964aeb99d8fda157be3c0863e59915f437326b30088365282a1d4fc3500e",
+      "paper/data_mirror/v49-p1v2/compare_pythia-6.9b--step112000.json": "320d9d172a624453dc883532fa97990bb49de68f70991b9456600ad17a855124",
+      "paper/data_mirror/v49-p1v2/compare_pythia-6.9b--step32000.json": "402e4137f412b0e38ca7b59126830c31d09a566632043361b8f6d06571efd4e7",
+      "paper/data_mirror/v49-p1v2/p1v2_table.csv": "44f6076d182175f5adaa64c1d6cc9d8dff74efe6db1fb41581deb8dd7187d808",
+      "paper/data_mirror/v49-p1v2/p1v2_table.json": "7d7122f3d8b83c887c56110735e1d6efe2e42916e9817f85cc3040fb1de97826",
+      "paper/data_mirror/v49-p1v2/predictions_pythia-1b--step112000.json": "e02ddeef0656436f63e585bbfc5755f32b79fbeeb11315ec60a267786419ed5e",
+      "paper/data_mirror/v49-p1v2/predictions_pythia-1b--step32000.json": "42a890efab8968794f9cd7bebd9090b002a68705928a6b80f5f08416a512c287",
+      "paper/data_mirror/v49-p1v2/predictions_pythia-6.9b--step112000.json": "86cc12db7a77d6db465d327140e2358b8bf166f63ce302961afd980f28feecad",
+      "paper/data_mirror/v49-p1v2/predictions_pythia-6.9b--step32000.json": "cc24dacc8797eeb01d4572617f6053abcdfb711f168f28413dbdc18d937df192",
+      "paper/data_mirror/v49-p1v2/register.json": "b31773ce2b3aee3b85683b08c4436349f9de83923d96e0e7d21fe901d343c272",
+      "paper/data_mirror/v50-p2v2/freeze.json": "c7caf2f10865dee0e8aeb572957a55cd284ac9fc1693b51555318315492a67ee",
+      "paper/data_mirror/v51-panel/counts.json": "87e7038996fdfe3f2fe08a64156138eac129056790a0d7c12555bb399621f15d",
+      "paper/data_mirror/v52-prediction-tables/groups.json": "e295f8a49ca50eb27bbd326d6462cd592b2f2a97f27db2dcb244db63fe4a1d9d",
+      "paper/data_mirror/v52-prediction-tables/rows.csv": "c496ffbac013653bd4231e7a559f8f53b0e9b9b4a933a353ca9a15c74fe3c001",
+      "paper/data_mirror/v53-prune-dev/compare_pythia-1.4b--step112000.json": "23dd3cd34588ea33666f0158fc05004b6bc8273ab8947bb43aad954085857406",
+      "paper/data_mirror/v53-prune-dev/compare_pythia-410m--step48000.json": "6cbfcff19a7196a5377e83417538159b86797996d3045c976fcb3e29dd321399",
+      "paper/data_mirror/v53-prune-dev/compare_pythia-6.9b--step80000.json": "288af4793219be8325a33fcaa0d2dbc0dd96defff4890de040aea0723e177eb9",
+      "paper/data_mirror/v53-prune-dev/dense_pythia-1.4b--step112000.json": "357f0784978e815a88669dfea28237116f0559ca68c42021c90f95a01c893e00",
+      "paper/data_mirror/v53-prune-dev/dense_pythia-410m--step48000.json": "96e841c74277ec09224f18e1e80c8a497da1dacef6bcf0ac60385bdaa1206779",
+      "paper/data_mirror/v53-prune-dev/dense_pythia-6.9b--step80000.json": "272289767191c464ffe4e43b7786e01a8d140527169321ee76e5d21966663ebf",
+      "paper/data_mirror/v53-prune-dev/loso_table.csv": "881e8f4886990b86fdbd9f1cff344c13d468d64c556b98b03025266184eba59c",
+      "paper/data_mirror/v53-prune-dev/predictions_pythia-1.4b--step112000.json": "862e299cc30a55672c785de418b0c184c204e3d5c2b222fb6174351e507489f4",
+      "paper/data_mirror/v53-prune-dev/predictions_pythia-410m--step48000.json": "6a3e987278dcb2d59d37eb72161bc0a062dd5cbe67116087b9fe7374bf426d6a",
+      "paper/data_mirror/v53-prune-dev/predictions_pythia-6.9b--step80000.json": "c14ec20711138aa57d7ae4d394c97ba8b08c05ed65926c537473e6ec499558d3",
+      "paper/data_mirror/v53-prune-dev/register.json": "7498103830f139f6bea16ee440b717a05dee41e45b9835fdac6a2251b833974d",
+      "paper/data_mirror/v55-quant-group/register.json": "d5e36301651d4627923bb95cf4e23f86600c9eeeea6bb60fd603da8e77b91e3d",
+      "paper/data_mirror/v59-shared-structure/summary.json.gz": "bfd0876b3f6c74a731563a47fb80baae2f70ab0dd0ad903c8502b553708f64ca",
+      "paper/data_mirror/v6-capability-geometry/Qwen--Qwen3-14B/prune_losses.json": "85d52fc02cc3a545b2f8dc0080f461898c84a0a3982a2ff462706ca75296c20b",
+      "paper/data_mirror/v6-capability-geometry/Qwen--Qwen3-8B/prune_losses.json": "94d7c6e9b96dd33aa73ad66b316913e54f49bbf5b81a428cdf2dbfc2d657591b",
+      "paper/data_mirror/v6-capability-geometry/Qwen3-0.6B/archive-v1-sameprobe/prune_losses.json": "a909df5e43accbc9c6e8651d7a794c93475f7b897d88c571bdd46ad9e084a866",
+      "paper/data_mirror/v6-capability-geometry/Qwen3-0.6B/prune_losses.json": "f2dbd1fb4dfc7654fcd36dd88db203678b1e5647121fe791ad2a6b9b2df1eab4",
+      "paper/data_mirror/v6-capability-geometry/Qwen3-1.7B/prune_losses.json": "04b703c90611f6bf0a1244c186e5118892ff2e643624a39cf4f39e1cc51db7b7",
+      "paper/data_mirror/v6-capability-geometry/Qwen3-14B/prune_losses.json": "85d52fc02cc3a545b2f8dc0080f461898c84a0a3982a2ff462706ca75296c20b",
+      "paper/data_mirror/v6-capability-geometry/Qwen3-4B/prune_losses.json": "08befcee9e632da3ce7120e41ebe949ad78005819681189f08ef89405ea03957",
+      "paper/data_mirror/v6-capability-geometry/gemma3-12b/prune_losses.json": "db4c05b2c0cf1282d6433042d93f82a7666be5a80485446a3eec56716bf9f680",
+      "paper/data_mirror/v6-capability-geometry/gemma3-1b/prune_losses.json": "76642de5ce8c2b1b9c41288eda024a1a69ee5f2c5b5af570e9730f898e34e1d6",
+      "paper/data_mirror/v6-capability-geometry/gemma3-270m/prune_losses.json": "9e2fcea66ea52aef718ea22bb06f35854d7cb06201225ef95637e3188ede50fc",
+      "paper/data_mirror/v6-capability-geometry/gemma3-27b/prune_losses.json": "5821028e4b122801895fd5a7961f4979c408b880d3d4522060dd0eaf41c3c143",
+      "paper/data_mirror/v6-capability-geometry/gemma3-4b/prune_losses.json": "25a9569440b7e29390bc63372ab9ad207365e4f784c7230cc75071bb2e9cbc5d",
+      "paper/data_mirror/v6-capability-geometry/gemma4-31b/prune_losses.json": "487b96be35a80a4767ae43c7ebd25a7e5f4163f297d80de8423e144358c4bad3",
+      "paper/data_mirror/v6-capability-geometry/muse-30b/prune_losses.json": "0d9915207b105d8118e4c7dd9120a804a2ce0ccf5b0ffba6cb1bea49003ff15a",
+      "paper/data_mirror/v6-capability-geometry/olmo3-32b/prune_losses.json": "bd831adef03a061fa48da15c4d1e5028f63e34e4df54e8c80c882e00bdb4ce0e",
+      "paper/data_mirror/v6-capability-geometry/olmo3-7b/prune_losses.json": "8d002990636ee2df5556246dc9940571258664b5bcac3463257346a7f2640b85",
+      "paper/data_mirror/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json": "bfc02e7d54eb623c2e8e4f1237b546aa62ecd14f23330b50e2a833e226916c42",
+      "paper/data_mirror/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json": "5ec4800f980d6317520f3d7eb85f4516631b629a146d5a964e33092eb1507315",
+      "paper/data_mirror/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json": "95cbe7e98739be4ea472781bf4f8a27c28827250e22d1bdbd8c5c576bd73938a",
+      "paper/data_mirror/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json": "a458cd11272a9face425eda62134b25ef0bf4af622f5902c63f13233028c0b15",
+      "paper/data_mirror/v6-capability-geometry/pythia-1.4b--step96000/prune_losses.json": "291926ecf463d6052e16336f0473aa364c4098db5a99185febe832e83d531f81",
+      "paper/data_mirror/v6-capability-geometry/pythia-160m--step143000/prune_losses.json": "87d9ebcad62e27b675e038b584671175f66aed91fc18da786ffc0f553af68e37",
+      "paper/data_mirror/v6-capability-geometry/pythia-160m--step16000/prune_losses.json": "46c5f9c6cfb0b5581b13f517951b861cb1c52998c333945a37639b1031862525",
+      "paper/data_mirror/v6-capability-geometry/pythia-160m--step64000/prune_losses.json": "f5791d151a0507ac90aeaddaf97d4686ceead336d4fa7b128ec711f4793ad354",
+      "paper/data_mirror/v6-capability-geometry/pythia-160m--step96000/prune_losses.json": "477e2715ec4b9033fb27a7fb169a3b7e08c0a6682572712190aed7178d36a6bc",
+      "paper/data_mirror/v6-capability-geometry/pythia-1b--step96000/prune_losses.json": "0f8d7866ab0d6a013b464aceebcbf274d0cc7ed9413be0281a38b5ac1b962d2f",
+      "paper/data_mirror/v6-capability-geometry/pythia-410m--step143000/prune_losses.json": "f46f388cee3fbb1bb7a0175c1dfde457b13bee0fa262092d9ac1e41845df0e7b",
+      "paper/data_mirror/v6-capability-geometry/pythia-410m--step16000/prune_losses.json": "228e436b0b58d734eb924f2ddc45b4c8135aa3b2765bb3b764db7a456123dcf9",
+      "paper/data_mirror/v6-capability-geometry/pythia-410m--step48000/prune_losses.json": "e71893a8e75f8abf1dc023400ab910a8765d81171d3abc991ffb1d77e012738f",
+      "paper/data_mirror/v6-capability-geometry/pythia-410m--step64000/prune_losses.json": "81bafd7adac31f27f2973545407005177fad63cf6d6e2ef942109e10fd8f3756",
+      "paper/data_mirror/v6-capability-geometry/pythia-410m--step96000/prune_losses.json": "a2a5307ace6cc58f1e987c3a7c8cbac8da1e6d17f4c9487cf55ca95d1b47a4c8",
+      "paper/data_mirror/v6-capability-geometry/pythia-6.9b--step80000/prune_losses.json": "9f37ba12f066a94d93c07a93a180f89b9de08b77b0a7b3697a6de6a02dc1f3dd",
+      "paper/data_mirror/v60-selection-maps/summary.json.gz": "c8299e90be05cdaadc3b0bd45bf2b63dafe1510fc3320cc0f6b1f0a2457bdab6",
+      "paper/data_mirror/v64-selection-feasible/summary.json.gz": "08c7ed2113ccdd4d80f31cafebc8acbab34ca6910233fce19c8e064d2be80815",
+      "paper/data_mirror/v69-quant-confirm/freeze.json": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+      "paper/data_mirror/v70-distill-confirm/freeze.json": "d7b28c7251dbc6113c3de7c957560827e603d4e77a48010f99835a8468db0c24"
+    },
+    "target_mentions": [],
+    "prior_target_pruning_files": [],
+    "clean": true
+  },
+  "provenance": {
+    "register_sha256": "7498103830f139f6bea16ee440b717a05dee41e45b9835fdac6a2251b833974d",
+    "dense_sha256": {
+      "results/v72-prune-repeat/dense_dir_pythia-2.8b@step16000/dense.json": "6c3b82c7e536811ec8f4540784a69ba260957b52cb00323656dc16eaf5237f11",
+      "results/v72-prune-repeat/dense_dir_pythia-2.8b@step143000/dense.json": "67c94339ab13ac7522eaa02385c4fc9eb34223874bb31a103d6b8cb6193ade36"
+    },
+    "code_sha256": {
+      "analysis/v53_prune_dev.py": "5a3fa776ab1ddf491fdc70bad4bf7e7ee000754a735ec6ea10431c32a661bff2",
+      "analysis/v46_dense_eval.py": "7c9e6364e6894aa68ec0f9beaa8ac9fb8099f7faf81d5465cd10900f141a1323",
+      "analysis/v12_distill.py": "2d1d78b3562583a38fd15cda5f61ed9fbec7563ace7d44d9ddad7bd22225bc3a",
+      "analysis/v6_capability_geometry.py": "887510b9e8a6aebd6add8134102619a1af6939b5da5872e75c55e7c0a8f30509",
+      "analysis/model_registry.py": "64075b24d26325832f466d3797ec4d3def91c704e3195e51715dba6d6165a4b9",
+      "analysis/v72_prune_repeat.py": "a639ce3d57f98af62f0705a120e2c7e9cd16a3f936ad5868e1641f0f6264dfbc"
+    }
+  }
+}
