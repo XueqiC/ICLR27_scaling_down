@@ -19,11 +19,11 @@ post-training quantization
 and distillation
 \citep{hinton2015distilling,sanh2019distilbert,hsieh2023distilling,mukherjee2023orca,gu2023minillm,agarwal2023gkd,xu2024survey}.
 Pruning disproportionately harms knowledge-intensive tasks
-\citep{jaiswal2023compressing}, low-bit quantization disproportionately
-harms reasoning \citep{liu2025quantization} and favors undertrained
-models \citep{ouyang2024lowbit}, compression shifts trustworthiness
-dimensions unevenly \citep{hong2024decoding}, and selective truncation
-can improve specific behaviors \citep{sharma2023laser}. Laws with
+\citep{jaiswal2023compressing}, low-bit quantization harms reasoning
+\citep{liu2025quantization} and favors undertrained models
+\citep{ouyang2024lowbit}, compression shifts trust dimensions unevenly
+\citep{hong2024decoding}, and selective truncation can help
+\citep{sharma2023laser}. Laws with
 task-level targets exist: \citet{sengupta2025compression} fit pruning
 laws to test loss and averaged zero-shot accuracy against the pruning
 ratio and recovery tokens, with per-task exponents and transfer to
@@ -47,7 +47,5 @@ scaling-law forms are fragile to the fitting protocol
 \citep{li2025misfitting,besiroglu2024chinchilla}, and repeated tokens
 are worth less than new tokens in data-constrained pretraining
 \citep{muennighoff2023scaling}, an effect our reuse-count coordinate
-measures in the distillation setting. Gradient-based importance
-underlies modern pruning
-\citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple} and
+measures in the distillation setting. Gradient-based importance \citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple}
 enters here only as mechanism evidence (Appendix~\ref{sec:app_mech}).

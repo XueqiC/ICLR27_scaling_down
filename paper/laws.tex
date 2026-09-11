@@ -20,9 +20,7 @@ QA; the improvement interval excludes
 zero for code, includes zero for math, and is negative for QA, where
 predicting no change is better. Adding the dense anchor $L_{0,c}$ to
 $(N_0,D_0)$ has intervals above zero for math ($+0.55$, $[0.29,1.00]$)
-and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not
-(Fig.~\ref{fig:inputs}A), and a frozen test at a new stage confirmed
-the ranking. Every relation is therefore conditioned on the three
+and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not (Fig.~\ref{fig:inputs}A). Every relation is therefore conditioned on the three
 inputs, with the dense anchor as the carrier and $D_0$ as a weak
 second-order term, per capability.
 
@@ -50,11 +48,10 @@ and 0.55, Eq.~\eqref{eq:power} cuts the strength-only error by two to
 three times on every capability, and A2 is better on math and code
 and within noise on QA (Table~\ref{tab:pred_main}): reading the source
 state is what matters, and the power structure adds nothing over the
-per-density regression. After the frozen tests of \S\ref{sec:general}
-both were refit on 17 states, including the unblinded 1B and 6.9B
-checkpoints, under a pre-committed leave-one-source-out rule: A2
-(0.479) and the power form (0.494) tie within 0.02 nats, and the rule
-prefers the continuous form that vanishes at $d=1$. Its coefficients
+per-density regression. After the frozen tests of \S\ref{sec:general} both were refit on 17
+states under a pre-committed leave-one-source-out rule: A2 (0.479) and
+the power form (0.494) tie within 0.02 nats, and the rule prefers the
+continuous form that vanishes at $d=1$. Its coefficients
 are in Appendix~\ref{sec:app_coef}; $\gamma_c$ is a fitted constant
 per capability whose value these data do not establish as necessary.
 
@@ -127,11 +124,8 @@ the candidates' predictions are prospective and the headline choice is
 retrospective. On the nine test trajectories at an unseen pool its gain over the
 frozen constant is detected on five of the six student-capability
 cells of the two development students, and on the held-out 4B student
-the constant is better at the unseen pool (\S\ref{sec:general}). A
-second confirmation, with forms re-selected on all 25 trajectories by
-a pre-committed rule and frozen for a new pool size at three new
-budgets, finds the selected forms better than the strongest frozen
-baseline for code on both students and not for math
+the constant is better at the unseen pool (\S\ref{sec:general}). A second, frozen confirmation at a new pool size and three new budgets
+confirms the code relation and not the math one
 (\S\ref{sec:unseen_settings}). Two forms that vanish at $T=0$ and carry a
 student descriptor $z_c=\tilde L_{0,c}$,
 \begin{equation}

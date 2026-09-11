@@ -24,15 +24,14 @@ feasible everywhere, whereas pruning-only covers 56\% and
 distillation-only 33\% of the 289 state-budget cells. Over all cells
 the choice made from the laws is within 0.19 (math), 0.17 (code), and
 0.42 (QA) nats of the measured oracle, and within 0.03 nats for the
-worst of the three capabilities, picking the oracle's method in
-96\%, 95\%, 73\%, and 94\% of cells; the cheapest feasible
-configuration loses 4.3 to 5.2 nats. A quantization-only policy is
+worst of the three capabilities, picking the oracle's method in 96\%, 95\%, 73\%, and 94\% of cells
+(cheapest-feasible loses 4.3 to 5.2 nats). A quantization-only policy is
 close behind (0.21, 0.19, 0.49, and 0.04 nats), because on this
 storage axis quantization has the most feasible cells and dominates
 math and code; the maps' contribution is therefore the connection of
 the laws to an explicit decision, and they show no general advantage
 over a strong single method on this panel. Where a smaller student exists, distillation-only is near the oracle
-for QA (0.06 nats; Appendix Fig.~\ref{fig:selection}). Under a heuristic rule (predicted gap between the two best methods
+for QA (Appendix Fig.~\ref{fig:selection}). Under a heuristic rule (predicted gap between the two best methods
 smaller than the larger of their held-out errors) about half of the
 cells have no clear winner; the oracle's method lies in the reported
 candidate set in every such cell, and the rule carries no coverage

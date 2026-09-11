@@ -47,27 +47,22 @@ capability (0.13, 0.22, 0.13 at the new group sizes; 0.006, 0.03,
 0.16 at seen configurations), so source conditioning adds nothing
 there (Appendix~\ref{sec:app_results}).
 
-\paragraph{Distillation pools.} On the earlier protocol the
-reuse-count form beats the constant on the unseen pool U225 only for
-QA (0.706 against 1.449; Appendix~\ref{sec:app_results}). Under the
-uniform protocol the headline joint form is compared with the frozen
+\paragraph{Distillation pools.} Under the uniform protocol the headline joint form is compared with the frozen
 constant cell by cell, with paired differences and 95\% intervals
 from a bootstrap over trajectories (Table~\ref{tab:distill_paired}). On the 270M
 student at the unseen pool the gain over the constant is detected on
 every capability (0.015, 0.011, and 0.26 nats; intervals above zero);
 on the 1B student it is detected for code and QA (0.040 and 0.56
 nats) and the math point estimate (0.007) is not resolved by three
-trajectories. Against zero change the gains are 42 to 79\% on every cell. In the
-confirmation round (six new pools of $U{=}200$, budgets 50k, 100k, and
-200k, predictions frozen before training) every selected form beats
-zero change; against the strongest baseline fixed from development,
-the gain is detected for code on both students (0.004 and 0.005 nats)
-and for QA on 270M (0.09), while for math a budget-only or same-input
-surface baseline is better on both students (0.065 against 0.074;
-0.033 against 0.057) and the constant is on par
-(Appendix~\ref{sec:app_results}). The pool direction is therefore
-covered for code and QA, and the development-selected math form adds
-nothing over simpler frozen forms.
+trajectories. Against zero change the gains are 42 to 79\% on every cell. In a second confirmation (forms re-selected on all 25 trajectories
+by the pre-committed rule, six new pools of $U{=}200$ at budgets 50k,
+100k, and 200k, predictions frozen before training) every selected
+form beats zero change, the gain over the strongest development-fixed
+baseline is detected for code on both students and for QA on 270M,
+and for math a budget-only or surface baseline is better on both
+students (Appendix~\ref{sec:app_results}). The pool direction is
+covered for code and QA; the selected math form adds nothing over
+simpler frozen forms.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
@@ -82,8 +77,8 @@ source-conditioned pruning forms lose to the median curve on math
 (0.30 against 0.12) and QA (0.91 against 0.12) and tie on code: the
 regression extends the panel's size trend into QA improvements that
 do not occur, and the per-bit quantization regression is worse than
-the per-bit median at every bit-width. On 6.9B@80k the power form ties the median on math and loses on code
-and QA: the size boundary is soft for math and hard for QA. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
+the per-bit median at every bit-width. On 6.9B@80k the power form ties the median on math and loses on
+code and QA. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
 reference size) the frozen constant is
 better than the headline form at the unseen pool on every capability
 (intervals below zero; math 0.020 against 0.089), because the source
@@ -112,14 +107,12 @@ parameters, holds for pruning by construction and fails for the other two arms o
 the same held-out splits (Appendix~\ref{sec:app_shared}). Within pruning one exponent shared across capabilities costs nothing
 (leave-one-source MAE within 0.02 nats of per-capability exponents),
 whereas the quantization coefficients must be capability-specific. Three ranges are kept apart
-(Appendix~\ref{sec:app_shared}): the bootstrap intervals of the
-pruning coefficients exclude zero for the dense-anchor term on math
-and code and not on QA; exponents fitted per source spread from 3.0
-to 6.0 for math and 0.5 to 6.0 for QA; and 80\% prediction intervals from leave-one-source residuals
+(Appendix~\ref{sec:app_shared}): the bootstrap intervals of the pruning coefficients exclude zero for
+the dense-anchor term on math and code and not on QA; per-source
+exponents spread widely (3.0 to 6.0 for math); and 80\% prediction
+intervals from leave-one-source residuals
 under-cover (78\% on the 27 confirmation-panel cells, 67\% on the 1B
-and 6.9B pair cells) at a mean full width near 1.5 nats. Setting the pruning amplitude from the target's mildest measured
-density amplifies noise through the steep exponent (leave-one-source
-MAE above 17 nats), so one-point calibration is no shortcut for
-pruning (Appendix~\ref{sec:app_shared}).
+and 6.9B pair cells) at a mean full width near 1.5 nats. One-point calibration of the pruning amplitude at the mildest density
+amplifies noise and is no shortcut (Appendix~\ref{sec:app_shared}).
 
 \FloatBarrier
