@@ -3,7 +3,7 @@
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.68\textwidth]{figs/predictive_responses.pdf}
+\includegraphics[width=0.62\textwidth]{figs/predictive_responses.pdf}
 \caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median curve; the 6.9B source is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources with the frozen per-bit regression (hollow) and the per-bit median (dotted). Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms. Lines are fits frozen before the test points were measured; native nats per token.}
 \label{fig:responses}
 \end{figure}
@@ -12,13 +12,11 @@
 \label{sec:conditioning}
 
 Is the initial state worth reading, and which part carries the
-signal? On the nine-state panel with one stage held out, a
-per-setting regression of the pruning response on $(N_0,D_0,L_{0,c})$
-lowers the error from 0.413, 0.516, and 0.500 nats (the strongest
-source-free reference) to 0.253, 0.292, and 0.806 for math, code, and
-QA; the improvement interval excludes
-zero for code, includes zero for math, and is negative for QA, where
-predicting no change is better. Adding the dense anchor $L_{0,c}$ to
+signal? On the nine-state panel with one stage held out, a per-setting
+regression of the pruning response on $(N_0,D_0,L_{0,c})$ lowers the
+error from 0.413, 0.516, and 0.500 nats to 0.253, 0.292, and 0.806
+for math, code, and QA (interval above zero for code, crossing for
+math, negative for QA). Adding the dense anchor $L_{0,c}$ to
 $(N_0,D_0)$ has intervals above zero for math ($+0.55$, $[0.29,1.00]$)
 and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not (Fig.~\ref{fig:inputs}A). Every relation is therefore conditioned on the three
 inputs, with the dense anchor as the carrier and $D_0$ as a weak
@@ -37,12 +35,11 @@ A_c(\mathbf x)=\beta_c\cdot\big(1,\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_
 \label{eq:power}
 \end{equation}
 five parameters per capability, tildes standardized on the development
-set (Appendix~\ref{sec:app_details}, Table~\ref{tab:models}). Its
-same-input alternatives are the per-density regression A2 (four
-coefficients at each development density, an unseen $d$ by linear
-interpolation), the power form with $\gamma_c=1$, and a two-term
-polynomial in $1-d$; the source-free references are a strength-only
-curve, the median development curve, and zero change. Fit on the nine
+set (Appendix~\ref{sec:app_details}, Table~\ref{tab:models}). Its same-input alternatives are the per-density regression A2 (an
+unseen $d$ by linear interpolation between fitted densities), the
+power form with $\gamma_c=1$, and a two-term polynomial in $1-d$; the
+source-free references are a strength-only curve, the median
+development curve, and zero change. Fit on the nine
 states at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at the unseen 0.65
 and 0.55, Eq.~\eqref{eq:power} cuts the strength-only error by two to
 three times on every capability, and A2 is better on math and code
@@ -96,12 +93,13 @@ completion tokens $T$, the pool size $D_U$, and the reuse count
 $E=T/D_U$. QA improves under every recipe we ran while math and code
 respond by a few hundredths to a few tenths of a nat, and with a small
 pool the QA loss rises again once $E$ grows large
-(Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the primary QA
-distribution, and on the same checkpoints the loss on an independent
-multi-hop set with the same context condition (MuSiQue) rises, as does
-TriviaQA (Appendix~\ref{sec:app_measure}); we therefore read the QA
-result as a prediction relation on the teacher-matched QA distribution
-and not as a general QA gain.
+(Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the 2Wiki probe
+distribution and on a fresh sample of it, and on the same checkpoints
+the loss rises on MuSiQue and TriviaQA
+(Appendix~\ref{sec:app_measure}); we therefore read the QA result as
+a prediction relation on the measured 2Wiki distribution, repeatable
+within it and not transferable in direction to other QA
+distributions.
 
 \paragraph{Source axis.} On the nine Pythia states as students, with
 the teacher pool and budget fixed, a linear form

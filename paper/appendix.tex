@@ -209,6 +209,22 @@ the descriptor choice is not settled by these data.
 \subsection{Shared structure, parameter ranges, and one-point calibration}
 \label{sec:app_shared}
 
+\paragraph{Shared structure, ranges, and calibration (moved from the main text).} One function
+family for all three methods, with method- and capability-specific
+parameters, holds for pruning by construction and fails for the other two arms on
+the same held-out splits (Appendix~\ref{sec:app_shared}). Within pruning one exponent shared across capabilities costs nothing
+(leave-one-source MAE within 0.02 nats of per-capability exponents),
+whereas the quantization coefficients must be capability-specific. Three ranges are kept apart
+(Appendix~\ref{sec:app_shared}): the bootstrap intervals of the pruning coefficients exclude zero for
+the dense-anchor term on math and code and not on QA; per-source
+exponents spread widely (3.0 to 6.0 for math); and 80\% prediction
+intervals from leave-one-source residuals
+under-cover (78\% on the 27 confirmation-panel cells, 67\% on the 1B
+and 6.9B pair cells) at a mean full width near 1.5 nats. One-point calibration of the pruning amplitude at the mildest density
+amplifies noise and is no shortcut (Appendix~\ref{sec:app_shared}).
+
+
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figs/input_form_compact.pdf}
@@ -221,6 +237,8 @@ Table~\ref{tab:shared_structure} reports the shared-family test, the parameter-s
 
 \section{Complete Prediction Results}
 \label{sec:app_results}
+
+\input{tables/final_deliverables}
 Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd} give every registered test in three lines (candidate,
 strongest same-input baseline, strongest simple baseline) with improvements and provenance codes;
 Table~\ref{tab:p1v2} the per-stage, per-protocol results of the Pythia-1B and 6.9B pairs; Tables~\ref{tab:round3_prune}
@@ -380,8 +398,8 @@ under distillation on SVAMP lies within that probe's noise.
 \input{tables/p3_check}
 
 \paragraph{An independent multi-hop distribution.} The primary QA
-probe is drawn from 2WikiMultihopQA, whose format the teacher pool
-(HotpotQA-style traces) shares. We therefore scored every trajectory
+probe is drawn from 2WikiMultihopQA; the teacher pool's QA traces come
+from HotpotQA, a related but distinct multi-hop set. We therefore scored every trajectory
 of the uniform distillation protocol at its final checkpoint, the
 early P3 checkpoints, and the three dense students on 128 MuSiQue
 answerable-dev questions \citep{trivedi2022musique} with the
@@ -394,9 +412,12 @@ larger students; at high reuse ($E\approx14$) both rise by several
 nats; and the 1B early checkpoints already diverge ($-1.0$ to $-1.4$
 against $+0.3$). The distillation QA response that the laws of
 \S\ref{sec:law_distill} predict is therefore the conditional loss on
-the teacher-matched QA distribution, and it does not carry over to an
-independent multi-hop distribution even with the same information
-condition.
+the 2Wiki distribution (the teacher pool draws its QA traces from
+HotpotQA, a different Wikipedia multi-hop set), and it does not carry
+over to MuSiQue even with supporting paragraphs supplied. Context
+conditions differ across the sets and are part of the scope statement:
+2Wiki supplies all paragraphs, MuSiQue the supporting paragraphs, and
+TriviaQA none.
 \input{tables/musique_scope}
 
 \paragraph{Pre-specified scope check on eight states.} On Gemma-3-1B,

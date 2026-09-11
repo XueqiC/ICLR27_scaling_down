@@ -1,27 +1,21 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
 
-What can be predicted now is specific. Given the initial-state inputs
-of a source in the development range, the pruning form of Eq.~\eqref{eq:power} predicts the math and code
-response at any density inside the fitted range to within a few
-tenths of a nat. Given the same inputs, a frozen same-input interpolation over the
-measured grid predicts the grouped quantizer at unseen group sizes,
-for the states it was fit on.
-Given a student's state, a linear form predicts its math transfer,
-and under a fixed distillation protocol a response model in budget,
-reuse, and a student descriptor predicts unseen data pools on the two
-development students. Each comes with coefficients and a tested range, and
-\S\ref{sec:selection} connects them to an explicit selection problem.
-
-What cannot be predicted is equally specific. No source-conditioned form predicts the QA response to pruning on a
-new checkpoint, no form transfers to density 0.55, and on new sizes
-(6.9B, and 2.8B inside the range) the source-free median curve is the
-better predictor. Bit-width alone supports no continuous quantization relation. Joint
-transfer of the distillation forms to a larger student and a new pool
-is unreliable, and the distillation QA gain replicates on a fresh sample of the
-primary distribution while reversing sign on an independent multi-hop
-set, so it is a prediction relation on the teacher-matched
-distribution and no general QA gain (Appendix~\ref{sec:app_measure}).
+Table~\ref{tab:final} (Appendix~\ref{sec:app_results}) answers the same five questions for each arm:
+what predictor is delivered, which pre-compression inputs it needs,
+which parts were frozen and which choices are retrospective, where it
+gains over the strongest same-information baseline, and where it does
+not apply. The pattern across arms is consistent. Source-conditioned
+forms add value at unseen configurations of seen states (pruning
+densities, quantization group sizes, distillation code at a new pool
+size), and on new model states the source-free references are as good
+or better: the median density curve on 2.8B and 6.9B, the
+per-configuration median on the new quantization state, the constant
+on the held-out student. QA is carried by source-free predictors on
+every arm, and its distillation gain is repeatable within the 2Wiki
+distribution and reverses sign on MuSiQue and TriviaQA
+(Appendix~\ref{sec:app_measure}). \S\ref{sec:selection} connects the
+laws to an explicit selection problem.
 
 The dense capability anchor is the input to keep, the working forms
 are low-dimensional, and transfer across sizes is unreliable. The

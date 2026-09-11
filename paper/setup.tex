@@ -4,11 +4,18 @@
 \subsection{Capability-Conditioned Loss}
 \label{sec:loss}
 
-We measure three capabilities, mathematical reasoning, code generation,
-and multi-hop question answering, each through a fixed probe set
-$\probeset{c}$ of prompt and reference pairs drawn once from held-out
-splits of MATH-500 \citep{hendrycks2021math,lightman2023verify}, MBPP
-\citep{austin2021program}, and 2WikiMultihopQA \citep{ho2020constructing}. The observable is the
+We measure three capabilities, mathematical reasoning, code
+generation, and multi-hop question answering, each through a fixed
+probe set $\probeset{c}$ of prompt and reference pairs drawn once
+from held-out splits of MATH-500
+\citep{hendrycks2021math,lightman2023verify}, MBPP
+\citep{austin2021program}, and 2WikiMultihopQA
+\citep{ho2020constructing}. Each probe set fixes one evaluation
+distribution $j$ for its capability, so the measured quantity is
+$L_{c,j}$, the conditional loss of capability $c$ on distribution $j$;
+we write $L_c$ with the fixed distribution implied and test in
+Appendix~\ref{sec:app_measure} how far a response carries to other
+distributions of the same capability. The observable is the
 token-weighted conditional cross-entropy of the reference completion,
 \begin{equation}
 \Lc{c}(w)\;=\;\frac{1}{T_c}\sum_{(x,y)\in\probeset{c}}\;\sum_{t=1}^{|y|}
@@ -18,12 +25,16 @@ T_c=\sum_{(x,y)\in\probeset{c}}|y|,
 \end{equation}
 with prompt tokens masked, 1024-token truncation, the model's own
 tokenizer, and the same 64 measurement probes per capability for
-every state compared within a model. Responses are
-within-model differences on identical token sequences in native nats
-per token: for pruning and quantization the damage
-$\Delta L_c=L_c(\text{compressed})-L_c(\text{dense})$, for distillation
-the signed transfer $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$ of a
-student relative to its own initial state. The observable is the
+every state compared within a model. We define the reference model $M_0$ as the checkpoint before the
+compression intervention; the definition accommodates dense and
+sparsely activated architectures, while our controlled experiments
+focus on dense models. Responses are within-model differences on
+identical token sequences in native nats per token: for pruning and
+quantization the damage
+$\Delta L_c=L_c(\text{compressed})-L_c(M_0)$, for distillation the
+signed transfer $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$ of a student
+relative to its own initial state $S_0$, which is the reference
+model of that arm; the teacher never plays the role of the source. The observable is the
 likelihood of a fixed reference on a fixed distribution: a QA loss can
 fall while exact-match accuracy does not rise, and a gain on one QA
 distribution need not appear on another. Absolute levels of different tokenizers are never placed on one
@@ -44,17 +55,18 @@ relation. \emph{New states and configurations} that entered no fit
 group sizes, and Gemma-3 270M, 1B, and 4B students at new pools)
 provide the validation; Appendix~\ref{sec:app_details} lists them.
 
-The three operations are held fixed by protocol. Pruning is global
-magnitude pruning of all transformer weight matrices to a retained
-density $d$. Quantization is symmetric round-to-nearest of the same
-matrices, weights only, per output channel at bit-width $b$ or with
-contiguous input groups of $g$ weights sharing one scale.
-Distillation is supervised fine-tuning of an existing student on
-black-box teacher traces with strict LoRA adapters \citep{hu2022lora}
-from a pool of $U$ traces per domain, processed for a fixed budget. The inputs admitted to every predictor
-are the parameter count $N_0$ of the transformer weight matrices, the
-pretraining token count $D_0$ where disclosed, and the dense capability
-losses $L_{0,c}$ measured once on the uncompressed model (the initial
+The three operations are held fixed by protocol: global magnitude
+pruning of all transformer weight matrices to a retained density $d$;
+symmetric round-to-nearest weight quantization of the same matrices,
+per output channel at bit-width $b$ or with contiguous input groups of
+$g$ weights sharing one scale;
+and supervised fine-tuning of an existing student on black-box
+teacher traces with strict LoRA adapters \citep{hu2022lora} from a
+pool of $U$ traces per domain, processed for a fixed budget. The inputs admitted to every predictor are the parameter count $N_0$
+of the transformer weight matrices of $M_0$ (total and per-token
+active counts coincide for the dense models studied here), the
+pretraining token count $D_0$ where disclosed, and the reference
+capability losses $L_{0,c}=L_c(M_0)$ measured once (the initial
 student for distillation). Every prediction is written as
 \begin{equation}
 \widehat L_{m,c}\;=\;L^{\mathrm{obs}}_{0,c}\;+\;
@@ -75,8 +87,7 @@ judged on unseen settings (outside the fitted set) and unseen states
 (a new size, stage, or student). On the development panel we use
 leave-one-stage-out and leave-one-source-out cross-validation; for new states the forms, coefficients, and predictions of every
 candidate are committed before the outcome is measured, and a
-prediction keeps its provenance label whatever the outcome. The dense
-anchor $L_{0,c}$ is the only measured input. Error is the mean
+prediction keeps its provenance label whatever the outcome. The reference anchor $L_{0,c}$ is the only measured input. Error is the mean
 absolute error of $\widehat\Delta$ in nats per token per capability;
 every candidate is compared on the same cells with source-free
 references (zero change, a per-capability constant, a strength-only

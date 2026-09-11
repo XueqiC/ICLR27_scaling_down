@@ -1,19 +1,18 @@
 \section{Generalization to Unseen Models and Configurations}
 \label{sec:general}
 
-Once a form is chosen, its coefficients are frozen and it predicts
-three kinds of unseen object: compression settings outside the fitted
-set, model states of new sizes or stages, and, across both, the three
-capabilities. Table~\ref{tab:pred_main} lists every registered test
-with the candidate error and the strongest relevant baseline;
-Fig.~\ref{fig:transfer} shows where the candidates gain over a
-source-free reference. Errors are MAE in nats per token.
+Frozen forms predict three kinds of unseen object: settings outside
+the fitted set, states of new sizes or stages, and, across both, the
+three capabilities. Table~\ref{tab:pred_main} lists the headline
+tests with the strongest relevant baseline and Fig.~\ref{fig:transfer}
+the gains over source-free references; errors are MAE in nats per
+token.
 
 \input{tables/pred_headline}
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.66\textwidth]{figs/transfer_limits.pdf}
+\includegraphics[width=0.6\textwidth]{figs/transfer_limits.pdf}
 \caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference in nats, averaged over capabilities; positive = candidate better) per new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE in each cell; hatched cells were not evaluated. Bottom: the distillation pool tests per capability against the frozen constant. All predictions were frozen before the corresponding measurement.}
 \label{fig:transfer}
 \end{figure}
@@ -79,8 +78,12 @@ regression extends the panel's size trend into QA improvements that
 do not occur, and the per-bit quantization regression is worse than
 the per-bit median at every bit-width. On 6.9B@80k the power form ties the median on math and loses on
 code and QA, and on a 2.8B source at two stages, inside the refit size range, the
-source-free median curve beats both source-conditioned forms three to
-seven times over (Appendix~\ref{sec:app_results}). For distillation, on Gemma-3-4B as a held-out student (6.6 times the
+frozen median density curve $\widetilde f_c(d)$ predicts within 0.08,
+0.05, and 0.07 nats while both source-conditioned forms are three to
+seven times worse (Appendix~\ref{sec:app_results}): on this new-size
+panel the aggregated development response is the more accurate
+predictor, and the extra value of $N_0$ and $D_0$ is not yet stable
+enough to support the source-conditioned forms. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
 reference size) the frozen constant is
 better than the headline form at the unseen pool on every capability
 (intervals below zero; math 0.020 against 0.089), because the source
@@ -103,18 +106,13 @@ the same parameter count as a shared-shape model lower the held-out
 error by 0.1 to 0.4 nats for the budget-plus-reuse structures
 (Appendix~\ref{sec:app_forms}, Fig.~\ref{fig:inputs}).
 
-\paragraph{Shared structure, ranges, and calibration.} One function
-family for all three methods, with method- and capability-specific
-parameters, holds for pruning by construction and fails for the other two arms on
-the same held-out splits (Appendix~\ref{sec:app_shared}). Within pruning one exponent shared across capabilities costs nothing
-(leave-one-source MAE within 0.02 nats of per-capability exponents),
-whereas the quantization coefficients must be capability-specific. Three ranges are kept apart
-(Appendix~\ref{sec:app_shared}): the bootstrap intervals of the pruning coefficients exclude zero for
-the dense-anchor term on math and code and not on QA; per-source
-exponents spread widely (3.0 to 6.0 for math); and 80\% prediction
-intervals from leave-one-source residuals
-under-cover (78\% on the 27 confirmation-panel cells, 67\% on the 1B
-and 6.9B pair cells) at a mean full width near 1.5 nats. One-point calibration of the pruning amplitude at the mildest density
-amplifies noise and is no shortcut (Appendix~\ref{sec:app_shared}).
+\paragraph{Shared structure and ranges.} One function family across
+methods holds for pruning by construction and fails for quantization
+and distillation; within pruning one exponent shared across
+capabilities costs nothing, whereas the quantization coefficients must
+be capability-specific; parameter intervals, per-source exponent
+spreads, and 80\% prediction intervals that under-cover (78\% and
+67\%) are reported in Appendix~\ref{sec:app_shared}, together with
+the one-point calibration result.
 
 \FloatBarrier
