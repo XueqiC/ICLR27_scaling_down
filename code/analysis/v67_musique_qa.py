@@ -271,8 +271,9 @@ def evaluate(plan: list[dict], data_file: Path | None, out: Path) -> None:
     if not visible or visible.split(",")[0].strip() == "-1":
         raise ValueError("Set CUDA_VISIBLE_DEVICES explicitly before evaluation")
     # Set before importing HF libraries; V12's shared loader has no offline kwarg.
-    for key in ("HF_HUB_OFFLINE", "HF_DATASETS_OFFLINE", "TRANSFORMERS_OFFLINE"):
-        os.environ[key] = "1"
+    if os.environ.get("V67_ALLOW_ONLINE") != "1":  # cached Gemma snapshots lack refs for offline resolution on rai
+        for key in ("HF_HUB_OFFLINE", "HF_DATASETS_OFFLINE", "TRANSFORMERS_OFFLINE"):
+            os.environ[key] = "1"
     path = local_data_file(data_file)
     content = path.read_bytes()
     probes, indices = build_probes([json.loads(line) for line in content.splitlines() if line.strip()])

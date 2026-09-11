@@ -1,0 +1,48 @@
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Feasible leave-one-state-out selection. Coverage and oracle-method agreement are percentages; regret is in nats. Own/common refer to the subsets defined below.}
+\label{tab:selection-feasible}
+\begin{tabular}{llrrrrr}
+\toprule
+Policy & Objective & Coverage & \multicolumn{2}{c}{Regret (nats)} & \multicolumn{2}{c}{Agreement (\%)} \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+ & & (\%) & Own & Common & Own & Common \\
+\midrule
+MAP & Math & 100.0 & 0.1936 & 0.2018 & 95.8 & 94.5 \\
+MAP & Code & 100.0 & 0.1743 & 0.1112 & 94.8 & 96.4 \\
+MAP & QA & 100.0 & 0.4184 & 0.1578 & 73.4 & 67.3 \\
+MAP & All (max) & 100.0 & 0.0288 & 0.0174 & 93.8 & 94.5 \\
+\midrule
+ORACLE & Math & 100.0 & 0.0000 & 0.0000 & 100.0 & 100.0 \\
+ORACLE & Code & 100.0 & 0.0000 & 0.0000 & 100.0 & 100.0 \\
+ORACLE & QA & 100.0 & 0.0000 & 0.0000 & 100.0 & 100.0 \\
+ORACLE & All (max) & 100.0 & 0.0000 & 0.0000 & 100.0 & 100.0 \\
+\midrule
+prune-only & Math & 55.7 & 0.5875 & 0.2896 & 0.0 & 0.0 \\
+prune-only & Code & 55.7 & 0.6218 & 0.3098 & 5.0 & 0.0 \\
+prune-only & QA & 55.7 & 0.7245 & 0.4469 & 44.1 & 9.1 \\
+prune-only & All (max) & 55.7 & 0.6731 & 0.3295 & 1.2 & 0.0 \\
+\midrule
+quant-only & Math & 100.0 & 0.2089 & 0.2018 & 96.5 & 92.7 \\
+quant-only & Code & 100.0 & 0.1943 & 0.1112 & 94.1 & 96.4 \\
+quant-only & QA & 100.0 & 0.4905 & 0.5735 & 47.8 & 7.3 \\
+quant-only & All (max) & 100.0 & 0.0428 & 0.0178 & 93.1 & 90.9 \\
+\midrule
+distill-only & Math & 33.2 & 0.2968 & 0.3225 & 1.0 & 0.0 \\
+distill-only & Code & 33.2 & 0.3366 & 0.3626 & 3.1 & 0.0 \\
+distill-only & QA & 33.2 & 0.0564 & 0.0665 & 83.3 & 83.6 \\
+distill-only & All (max) & 33.2 & 0.3332 & 0.3606 & 3.1 & 0.0 \\
+\midrule
+CHEAPEST & Math & 100.0 & 4.5839 & 2.0931 & 79.9 & 43.6 \\
+CHEAPEST & Code & 100.0 & 5.1745 & 2.2502 & 78.9 & 47.3 \\
+CHEAPEST & QA & 100.0 & 4.3334 & 1.8392 & 64.7 & 58.2 \\
+CHEAPEST & All (max) & 100.0 & 5.1782 & 2.2700 & 78.2 & 43.6 \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{minipage}{\linewidth}\small
+Coverage is feasible cells / 289. Own averages only that policy's feasible cells; common averages the same 55/289 cells feasible for all six policies, including CHEAPEST. Agreement uses those same respective subsets. Empty subsets are N/A. An empty candidate set returns INFEASIBLE with no source fallback. Dense ($r=1$) is eligible for MAP/ORACLE/CHEAPEST only at $r_{\max}=1$. Fixed policies retain only their named method; quant-only pools channel and grouped RTN. Each deployed endpoint is an absolute loss: source dense plus response for pruning/RTN; student dense plus student post-training change for KD. The multi objective is $\max_c(L_c-L_{0c})$. The unchanged no-clear-winner heuristic uses pooled LOSO MAEs and is not calibrated uncertainty. Five-bit folds remain underidentified; measurement coverage and dense anchors vary by arm.
+\end{minipage}
+\end{table}

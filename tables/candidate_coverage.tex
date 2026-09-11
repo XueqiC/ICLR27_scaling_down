@@ -1,0 +1,36 @@
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Measured candidate coverage by source state. Each method column gives configuration count / minimum available storage ratio $r$.}
+\label{tab:candidate-coverage}
+\begin{tabular}{lrrrrr}
+\toprule
+Source state & Prune & Channel RTN & Grouped RTN & KD students & Min $r$: quant \\
+\midrule
+160m @ 16k & 4 / 0.6000000 & 4 / 0.1875000 & 9 / 0.1914062 & 0 / N/A & 0.1875000 \\
+160m @ 64k & 4 / 0.6000000 & 4 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+160m @ 96k & 4 / 0.6000000 & 4 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+160m @ 143k & 6 / 0.5500000 & 4 / 0.1875000 & 9 / 0.1914062 & 0 / N/A & 0.1875000 \\
+410m @ 16k & 4 / 0.6000000 & 4 / 0.1875000 & 9 / 0.1914062 & 1 / 0.2812500 & 0.1875000 \\
+410m @ 64k & 4 / 0.6000000 & 4 / 0.1875000 & 0 / N/A & 1 / 0.2812500 & 0.1875000 \\
+410m @ 96k & 6 / 0.5500000 & 4 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+410m @ 143k & 4 / 0.6000000 & 4 / 0.1875000 & 9 / 0.1914062 & 1 / 0.2812500 & 0.1875000 \\
+1b @ 32k & 7 / 0.5500000 & 5 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+1b @ 96k & 2 / 0.5500000 & 2 / 0.1875000 & 3 / 0.1953125 & 0 / N/A & 0.1875000 \\
+1b @ 112k & 7 / 0.5500000 & 5 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+1.4b @ 16k & 4 / 0.6000000 & 4 / 0.1875000 & 9 / 0.1914062 & 2 / 0.0703125 & 0.1875000 \\
+1.4b @ 64k & 6 / 0.5500000 & 4 / 0.1875000 & 0 / N/A & 2 / 0.0703125 & 0.1875000 \\
+1.4b @ 96k & 4 / 0.6000000 & 4 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+1.4b @ 143k & 4 / 0.6000000 & 4 / 0.1875000 & 9 / 0.1914062 & 2 / 0.0703125 & 0.1875000 \\
+6.9b @ 32k & 7 / 0.5500000 & 5 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+6.9b @ 112k & 7 / 0.5500000 & 5 / 0.1875000 & 0 / N/A & 0 / N/A & 0.1875000 \\
+\midrule
+Total & 84 & 70 & 57 & 9 & --- \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{minipage}{\linewidth}\small
+N/A means no measured candidate. Each state also has one dense source, minimum $r=1$; it is excluded from method counts. KD has 0, 1 or 2 smaller same-stage measured students. Student reuse across sources counts as separate alternatives, not independent measurements. Quant pools channel and grouped RTN. Ratios: pruning $r=d$, channel RTN $r=b/16$, grouped RTN $r=(b+16/g)/16$, KD $r=N_S/N_0$. Storage is nominal transformer-matrix storage; pruning requires a sparse format (index overhead excluded). No missing configurations are imputed. Coverage is measured availability, independent of the no-clear-winner heuristic.
+\end{minipage}
+\end{table}
