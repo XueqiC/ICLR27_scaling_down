@@ -116,9 +116,10 @@ predictions frozen before new configurations and states are measured.
 A five-parameter pruning form predicts math and code at unseen
 densities inside the fitted range on three new checkpoints (0.24 nats
 mean absolute error against 0.45 for a source-free strength curve) and
-fails beyond the range and for QA; a frozen response surface in
-bit-width and group size predicts unseen quantization configurations
-on the development states; under a fixed distillation protocol a
+fails beyond the range and for QA; with the group size as a second
+axis, a frozen same-input interpolation over the measured grid predicts
+unseen group sizes on the development states and a parametric surface
+does not; under a fixed distillation protocol a
 response model in training budget, reuse, and a student descriptor
 predicts unseen data pools on the development students, while joint
 transfer to a larger student and a new pool remains unreliable. We connect the relations to an explicit capability- and

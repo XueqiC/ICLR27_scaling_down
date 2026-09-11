@@ -5,7 +5,7 @@ Source: paper/paper/references.bib; checked against the arXiv export API and the
 | key | verdict | year | title | evidence |
 |---|---|---|---|---|
 | kaplan2020scaling | OK-arxiv | 2020 | Scaling Laws for Neural Language Models | arXiv 2001.08361v1 (2020); first author Jared Kaplan |
-| hoffmann2022training | UNVERIFIED | 2022 | An Empirical Analysis of Compute-Optimal Large Language Model Training |  | s2 error: HTTP Error 429:  |
+| hoffmann2022training | UNVERIFIED | 2022 | An Empirical Analysis of Compute-Optimal Large Language Model Training |  | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0) |
 | frantar2023scaling | OK-arxiv | 2024 | Scaling Laws for Sparsely-Connected Foundation Models | arXiv 2309.08520v1 (2023); first author Elias Frantar |
 | kumar2024scaling | OK-arxiv | 2025 | Scaling Laws for Precision | arXiv 2411.04330v2 (2024); first author Tanishq Kumar |
 | busbridge2025distillation | OK-arxiv | 2025 | Distillation Scaling Laws | arXiv 2502.08606v2 (2025); first author Dan Busbridge |
@@ -20,20 +20,20 @@ Source: paper/paper/references.bib; checked against the arXiv export API and the
 | ruan2024observational | OK-arxiv | 2024 | Observational Scaling Laws and the Predictability of Language Model Performance | arXiv 2405.10938v3 (2024); first author Yangjun Ruan |
 | lourie2025scaling | OK-arxiv | 2025 | Scaling Laws Are Unreliable for Downstream Tasks: A Reality Check | arXiv 2507.00885v2 (2025); first author Nicholas Lourie |
 | sharma2023laser | OK-arxiv | 2024 | The Truth is in There: Improving Reasoning in Language Models with Layer-Selecti | arXiv 2312.13558v1 (2023); first author Pratyusha Sharma |
-| yin2023junk | UNVERIFIED | 2024 | Junk {DNA} Hypothesis: Pruning Small Pre-Trained Weights Irreversibly and Monoto |  | s2 error: HTTP Error 429:  |
+| yin2023junk | UNVERIFIED | 2024 | Junk {DNA} Hypothesis: Pruning Small Pre-Trained Weights Irreversibly and Monoto |  | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0) |
 | zhang2024scaling | OK-arxiv | 2025 | P$^2$ Law: Scaling Law for Post-Training After Model Pruning | arXiv 2411.10272v3 (2024); first author Xiaodong Chen |
 | muralidharan2024compact | OK-arxiv | 2024 | Compact Language Models via Pruning and Knowledge Distillation | arXiv 2407.14679v2 (2024); first author Saurav Muralidharan |
 | xia2023sheared | OK-arxiv | 2024 | Sheared LLaMA: Accelerating Language Model Pre-training via Structured Pruning | arXiv 2310.06694v2 (2023); first author Mengzhou Xia |
 | sengupta2025compression | OK-arxiv | 2025 | Pruning Laws for Large Language Models | arXiv 2504.04342v2 (2025); first author Ayan Sengupta |
 | zhou2025task | OK-arxiv | 2026 | Task-Stratified Knowledge Scaling Laws for Post-Training Quantized Large Languag | arXiv 2508.18609v4 (2025); first author Chenxi Zhou |
 | dettmers2023case | OK-arxiv | 2023 | The case for 4-bit precision: {k}-bit Inference Scaling Laws | arXiv 2212.09720v2 (2022); first author Tim Dettmers |
-| lecun1989optimal | TITLE-OK/AUTHOR-MISMATCH | 1989 | Optimal Brain Damage | arXiv 2508.09697v4 (2025); first author Xinlei Zhang | s2 error: HTTP Error 429:  |
-| hassibi1992second | UNVERIFIED | 1992 | Second Order Derivatives for Network Pruning: Optimal Brain Surgeon | arxiv error: HTTP Error 429: Unknown Error | s2 error: HTTP Error 429:  |
+| lecun1989optimal | TITLE-OK/AUTHOR-MISMATCH | 1989 | Optimal Brain Damage | arXiv 2508.09697v4 (2025); first author Xinlei Zhang | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0) |
+| hassibi1992second | UNVERIFIED | 1992 | Second Order Derivatives for Network Pruning: Optimal Brain Surgeon |  | s2 error: HTTP Error 429:  | dblp error: Expecting value: line 1 column 1 (char 0) |
 | frantar2023sparsegpt | OK-arxiv | 2023 | SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot | arXiv 2301.00774v3 (2023); first author Elias Frantar |
 | sun2023simple | OK-arxiv | 2024 | A Simple and Effective Pruning Approach for Large Language Models | arXiv 2306.11695v3 (2023); first author Mingjie Sun |
 | fasc2026 | OK-arxiv | 2026 | Beyond Variance: Knowledge-Aware {LLM} Compression via Fisher-Aligned Subspace D | arXiv 2601.07197v1 (2026); first author Ibne Farabi Shihab |
 | fisher3d2026 | OK-arxiv | 2026 | Not All Tasks Quantize Equally: Fisher-Guided Quantization for Visual Geometry T | arXiv 2605.15828v2 (2026); first author Yipu Zhang |
-| gurari2018gradient | TITLE-OK/AUTHOR-MISMATCH | 2018 | Gradient Descent Happens in a Tiny Subspace | arXiv 1812.04754v1 (2018); first author Guy Gur-Ari | S2 2018 arXiv.org first author Guy Gur-Ari 1812.04754 |
+| gurari2018gradient | OK-arxiv | 2018 | Gradient Descent Happens in a Tiny Subspace | arXiv 1812.04754v1 (2018); first author Guy Gur-Ari |
 | zhao2024galore | OK-arxiv | 2024 | GaLore: Memory-Efficient LLM Training by Gradient Low-Rank Projection | arXiv 2403.03507v2 (2024); first author Jiawei Zhao |
 | michaud2023quantization | OK-arxiv | 2023 | The Quantization Model of Neural Scaling | arXiv 2303.13506v3 (2023); first author Eric J. Michaud |
 | ilharco2023editing | OK-arxiv | 2023 | Editing Models with Task Arithmetic | arXiv 2212.04089v3 (2022); first author Gabriel Ilharco |

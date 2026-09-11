@@ -85,11 +85,16 @@ bilinear interpolation. Because $b$ takes two development values, $u^2$ is const
 development cells and the design of Eq.~\eqref{eq:quant2d} has rank
 16 for its 20 coefficients: the curvature in $u$ at an unseen
 bit-width is set by the ridge penalty and is not identified by the
-data (Appendix~\ref{sec:app_forms}). With six states the
-leave-one-state-out errors are large for all three forms, so the
-development set selects no form; the frozen tests of
-\S\ref{sec:unseen_settings} do, and they can establish only that a
-frozen response surface improves prediction at unseen configurations.
+data (Appendix~\ref{sec:app_forms}). With six states the leave-one-state-out errors are large for all
+three forms, so the development set selects no form. A confirmation
+round with all 54 cells as development set (three bit levels, full
+rank) and 21 frozen cells at unseen group sizes and on a new state
+(\S\ref{sec:unseen_settings}) settles the choice: for math and code
+the delivered quantization predictor is the same-input piecewise
+interpolation over the measured $(b,g)$ grid with a pre-specified
+linear boundary rule in $\log_2 g$, and for QA and for a new state the
+source-free per-configuration median; the parametric surface loses on
+every test.
 
 \subsection{Distillation}
 \label{sec:law_distill}

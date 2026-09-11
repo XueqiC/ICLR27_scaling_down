@@ -285,6 +285,20 @@ late stage (1.29 against 3.8 to 4.1).
 \input{tables/round3_prune}
 \input{tables/round3_quant}
 
+The quantization confirmation round (development on all 54 unblinded
+cells with three bit levels, rank 20 of 20; predictions frozen before
+measurement for 21 cells: two development states and the never-fit
+state 1.4B@112k at $b\in\{3,4,5\}\times g\in\{32,512\}$, and the new
+state at $g=128$) is in Table~\ref{tab:quant_confirm}. The
+development leave-one-state-out rule had selected the surface for
+math, the per-configuration median for code, and zero for QA; on the
+frozen cells the same-input piecewise interpolation with the
+pre-specified boundary rule is best for math and code at unseen group
+sizes on the development states, the source-free median is best or
+tied on the new state, and the surface loses on every test, so the
+selection is reported as a prospective loss for the surface.
+\input{tables/quant_confirm}
+
 The multi-student distillation test of the uniform protocol
 (\S\ref{sec:law_distill}) is given in Table~\ref{tab:p2v2_test}; the
 frozen predictions of all eight forms for every test point are in the

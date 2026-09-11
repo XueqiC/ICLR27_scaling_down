@@ -1,0 +1,3601 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "n_expected_cells": 21,
+  "n_measured_cells": 21,
+  "rows": [
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b3_g32",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.458277307601044,
+      "phi_raw": [
+        19.52590409133485,
+        1.458277307601044,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 1.2243703359870879,
+        "bilinear": 0.9456986182281502,
+        "same_input_interpolation": 1.5316957517181335,
+        "bit_only": 2.1594520520865013,
+        "median": 0.26514672150597185,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 1.2243703359870879,
+      "dense": 1.458277307601044,
+      "loss": 2.759076168630863,
+      "dL": 1.300798861029819,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.07642852504273101,
+        "bilinear": 0.35510024280166874,
+        "same_input_interpolation": 0.23089689068831465,
+        "bit_only": 0.8586531910566824,
+        "median": 1.035652139523847,
+        "zero": 1.300798861029819
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b3_g32",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4104468742571903,
+      "phi_raw": [
+        19.52590409133485,
+        1.4104468742571903,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.7354391900194566,
+        "bilinear": 0.44822711665640624,
+        "same_input_interpolation": 1.0102700494417691,
+        "bit_only": 2.0569497080758894,
+        "median": 0.3986213453767533,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.3986213453767533,
+      "dense": 1.4104468742571903,
+      "loss": 2.979141906346565,
+      "dL": 1.5686950320893749,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.8332558420699183,
+        "bilinear": 1.1204679154329686,
+        "same_input_interpolation": 0.5584249826476058,
+        "bit_only": 0.4882546759865145,
+        "median": 1.1700736867126216,
+        "zero": 1.5686950320893749
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b3_g32",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 5.0040993346007605,
+      "phi_raw": [
+        19.52590409133485,
+        5.0040993346007605,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 2.961589569976837,
+        "bilinear": 2.546222009934862,
+        "same_input_interpolation": 3.7341615386736473,
+        "bit_only": 3.5394897781451227,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.0040993346007605,
+      "loss": 6.033507604562738,
+      "dL": 1.0294082699619773,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 1.9321813000148595,
+        "bilinear": 1.5168137399728847,
+        "same_input_interpolation": 2.70475326871167,
+        "bit_only": 2.5100815081831453,
+        "median": 1.0294082699619773,
+        "zero": 1.0294082699619773
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b3_g512",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.458277307601044,
+      "phi_raw": [
+        19.52590409133485,
+        1.458277307601044,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 3.6518772037038505,
+        "bilinear": 3.3732054859449137,
+        "same_input_interpolation": 4.328598275590526,
+        "bit_only": 2.1594520520865013,
+        "median": 1.7524914972712171,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 3.6518772037038505,
+      "dense": 1.458277307601044,
+      "loss": 6.0478525666376655,
+      "dL": 4.5895752590366214,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.937698055332771,
+        "bilinear": 1.2163697730917078,
+        "same_input_interpolation": 0.26097698344609555,
+        "bit_only": 2.43012320695012,
+        "median": 2.8370837617654043,
+        "zero": 4.5895752590366214
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b3_g512",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4104468742571903,
+      "phi_raw": [
+        19.52590409133485,
+        1.4104468742571903,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 3.9528843728584127,
+        "bilinear": 3.665672299495352,
+        "same_input_interpolation": 4.775903668681268,
+        "bit_only": 2.0569497080758894,
+        "median": 2.371226527216544,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 2.371226527216544,
+      "dense": 1.4104468742571903,
+      "loss": 6.445448062752555,
+      "dL": 5.0350011884953645,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 1.0821168156369518,
+        "bilinear": 1.3693288890000126,
+        "same_input_interpolation": 0.25909751981409634,
+        "bit_only": 2.978051480419475,
+        "median": 2.6637746612788207,
+        "zero": 5.0350011884953645
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b3_g512",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 5.0040993346007605,
+      "phi_raw": [
+        19.52590409133485,
+        5.0040993346007605,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 4.948125106398646,
+        "bilinear": 4.532757546356688,
+        "same_input_interpolation": 5.894430155082596,
+        "bit_only": 3.5394897781451227,
+        "median": 1.1260396863117865,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.0040993346007605,
+      "loss": 8.881178707224334,
+      "dL": 3.877079372623574,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 1.0710457337750716,
+        "bilinear": 0.6556781737331141,
+        "same_input_interpolation": 2.0173507824590224,
+        "bit_only": 0.33758959447845127,
+        "median": 2.7510396863117874,
+        "zero": 3.877079372623574
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b4_g32",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.458277307601044,
+      "phi_raw": [
+        19.52590409133485,
+        1.458277307601044,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": -0.187308550463808,
+        "bilinear": 0.41114250539849684,
+        "same_input_interpolation": 0.21767676541327824,
+        "bit_only": 0.8931017319759935,
+        "median": 0.05174800284742542,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": -0.187308550463808,
+      "dense": 1.458277307601044,
+      "loss": 1.6511706082417148,
+      "dL": 0.19289330064067078,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.3802018511044788,
+        "bilinear": 0.21824920475782605,
+        "same_input_interpolation": 0.024783464772607455,
+        "bit_only": 0.7002084313353227,
+        "median": 0.14114529779324536,
+        "zero": 0.19289330064067078
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b4_g32",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4104468742571903,
+      "phi_raw": [
+        19.52590409133485,
+        1.4104468742571903,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": -0.3939926933005732,
+        "bilinear": 0.2216519854486907,
+        "same_input_interpolation": 0.1706140428784676,
+        "bit_only": 0.8394402771289138,
+        "median": 0.07240908010458758,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.07240908010458758,
+      "dense": 1.4104468742571903,
+      "loss": 1.585036843356311,
+      "dL": 0.1745899690991206,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.5685826623996938,
+        "bilinear": 0.04706201634957008,
+        "same_input_interpolation": 0.003975926220653014,
+        "bit_only": 0.6648503080297932,
+        "median": 0.10218088899453304,
+        "zero": 0.1745899690991206
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b4_g32",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 5.0040993346007605,
+      "phi_raw": [
+        19.52590409133485,
+        5.0040993346007605,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.20715946046846134,
+        "bilinear": 1.1073117909123193,
+        "same_input_interpolation": 0.37516025671909925,
+        "bit_only": 1.4629134879288248,
+        "median": 0.0751396150190109,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.0040993346007605,
+      "loss": 5.063925855513308,
+      "dL": 0.05982652091254792,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.14733293955591342,
+        "bilinear": 1.0474852699997714,
+        "same_input_interpolation": 0.31533373580655133,
+        "bit_only": 1.4030869670162769,
+        "median": 0.015313094106462977,
+        "zero": 0.05982652091254792
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b4_g512",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.458277307601044,
+      "phi_raw": [
+        19.52590409133485,
+        1.458277307601044,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.7766099026911707,
+        "bilinear": 1.3750609585534752,
+        "same_input_interpolation": 0.41093423838062,
+        "bit_only": 0.8931017319759935,
+        "median": 0.13202958158664868,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.7766099026911707,
+      "dense": 1.458277307601044,
+      "loss": 1.8834532943130586,
+      "dL": 0.4251759867120146,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.3514339159791561,
+        "bilinear": 0.9498849718414606,
+        "same_input_interpolation": 0.014241748331394632,
+        "bit_only": 0.4679257452639789,
+        "median": 0.29314640512536594,
+        "zero": 0.4251759867120146
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b4_g512",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4104468742571903,
+      "phi_raw": [
+        19.52590409133485,
+        1.4104468742571903,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.8415838900598445,
+        "bilinear": 1.4572285688091102,
+        "same_input_interpolation": 0.2967575658441114,
+        "bit_only": 0.8394402771289138,
+        "median": 0.14449132398383635,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.14449132398383635,
+      "dense": 1.4104468742571903,
+      "loss": 1.874792013311148,
+      "dL": 0.4643451390539577,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.3772387510058868,
+        "bilinear": 0.9928834297551525,
+        "same_input_interpolation": 0.1675875732098463,
+        "bit_only": 0.3750951380749561,
+        "median": 0.31985381507012134,
+        "zero": 0.4643451390539577
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b4_g512",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 5.0040993346007605,
+      "phi_raw": [
+        19.52590409133485,
+        5.0040993346007605,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.9183628545015947,
+        "bilinear": 1.8185151849454546,
+        "same_input_interpolation": 0.6115997626980771,
+        "bit_only": 1.4629134879288248,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.0040993346007605,
+      "loss": 5.292062737642586,
+      "dL": 0.2879634030418252,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.6303994514597695,
+        "bilinear": 1.5305517819036294,
+        "same_input_interpolation": 0.3236363596562519,
+        "bit_only": 1.1749500848869996,
+        "median": 0.2879634030418252,
+        "zero": 0.2879634030418252
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b5_g32",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.458277307601044,
+      "phi_raw": [
+        19.52590409133485,
+        1.458277307601044,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.24102147126164458,
+        "bilinear": -0.06968795895296331,
+        "same_input_interpolation": 0.05240971096400683,
+        "bit_only": -0.24597384463122962,
+        "median": 0.013050699992090409,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.24102147126164458,
+      "dense": 1.458277307601044,
+      "loss": 1.5036976983310923,
+      "dL": 0.04542039073004833,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.19560108053159625,
+        "bilinear": 0.11510834968301165,
+        "same_input_interpolation": 0.006989320233958499,
+        "bit_only": 0.29139423536127795,
+        "median": 0.032369690737957924,
+        "zero": 0.04542039073004833
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b5_g32",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4104468742571903,
+      "phi_raw": [
+        19.52590409133485,
+        1.4104468742571903,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.3379769048220198,
+        "bilinear": 0.01784882440652416,
+        "same_input_interpolation": 0.046144829327425974,
+        "bit_only": -0.2557031717704734,
+        "median": 0.014737342524364094,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.014737342524364094,
+      "dense": 1.4104468742571903,
+      "loss": 1.475576420251961,
+      "dL": 0.06512954599477072,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.2728473588272491,
+        "bilinear": 0.04728072158824656,
+        "same_input_interpolation": 0.018984716667344748,
+        "bit_only": 0.32083271776524414,
+        "median": 0.05039220347040663,
+        "zero": 0.06512954599477072
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b5_g32",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 5.0040993346007605,
+      "phi_raw": [
+        19.52590409133485,
+        5.0040993346007605,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": 0.2768744020355209,
+        "bilinear": -0.18698052408950772,
+        "same_input_interpolation": 0.1523746853414357,
+        "bit_only": -0.404956166765629,
+        "median": 0.013842680608364244,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.0040993346007605,
+      "loss": 5.015981463878327,
+      "dL": 0.011882129277566378,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.2649922727579545,
+        "bilinear": 0.1988626533670741,
+        "same_input_interpolation": 0.14049255606386932,
+        "bit_only": 0.4168382960431954,
+        "median": 0.001960551330797866,
+        "zero": 0.011882129277566378
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b5_g512",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.458277307601044,
+      "phi_raw": [
+        19.52590409133485,
+        1.458277307601044,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": -0.1115503000949809,
+        "bilinear": -0.42225973030959185,
+        "same_input_interpolation": 0.10922151547336197,
+        "bit_only": -0.24597384463122962,
+        "median": 0.02260143953175675,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": -0.1115503000949809,
+      "dense": 1.458277307601044,
+      "loss": 1.5548524875425136,
+      "dL": 0.09657517994146958,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.20812548003645048,
+        "bilinear": 0.5188349102510614,
+        "same_input_interpolation": 0.012646335531892386,
+        "bit_only": 0.3425490245726992,
+        "median": 0.07397374040971283,
+        "zero": 0.09657517994146958
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b5_g512",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4104468742571903,
+      "phi_raw": [
+        19.52590409133485,
+        1.4104468742571903,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": -0.20912708753200926,
+        "bilinear": -0.5292551679475026,
+        "same_input_interpolation": 0.09373942374837113,
+        "bit_only": -0.2557031717704734,
+        "median": 0.03250534822914186,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.03250534822914186,
+      "dense": 1.4104468742571903,
+      "loss": 1.5123009270263845,
+      "dL": 0.10185405276919424,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.3109811403012035,
+        "bilinear": 0.6311092207166968,
+        "same_input_interpolation": 0.008114629020823105,
+        "bit_only": 0.35755722453966765,
+        "median": 0.06934870454005237,
+        "zero": 0.10185405276919424
+      }
+    },
+    {
+      "state": "pythia-410m@step143000",
+      "config": "b5_g512",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 5.0040993346007605,
+      "phi_raw": [
+        19.52590409133485,
+        5.0040993346007605,
+        26.426690701000897
+      ],
+      "predictions": {
+        "low_order_2d": -0.15907688331765912,
+        "bilinear": -0.6229318094426863,
+        "same_input_interpolation": 0.0,
+        "bit_only": -0.404956166765629,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.0040993346007605,
+      "loss": 5.039864543726236,
+      "dL": 0.03576520912547565,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.19484209244313477,
+        "bilinear": 0.658697018568162,
+        "same_input_interpolation": 0.03576520912547565,
+        "bit_only": 0.44072137589110466,
+        "median": 0.03576520912547565,
+        "zero": 0.03576520912547565
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g32",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.469370402594321,
+      "phi_raw": [
+        20.912198452454742,
+        1.469370402594321,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.39028210345371406,
+        "bilinear": 0.3337767187497609,
+        "same_input_interpolation": 0.30882348387233804,
+        "bit_only": 0.40701953832682447,
+        "median": 0.26514672150597185,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.39028210345371406,
+      "dense": 1.469370402594321,
+      "loss": 1.6028434706952464,
+      "dL": 0.1334730681009253,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.25680903535278876,
+        "bilinear": 0.2003036506488356,
+        "same_input_interpolation": 0.17535041577141275,
+        "bit_only": 0.2735464702258992,
+        "median": 0.13167365340504655,
+        "zero": 0.1334730681009253
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g32",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4655336344188257,
+      "phi_raw": [
+        20.912198452454742,
+        1.4655336344188257,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.16278629184495186,
+        "bilinear": 0.13357587788635317,
+        "same_input_interpolation": 0.06167549419227969,
+        "bit_only": 0.23642843315417217,
+        "median": 0.3986213453767533,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.3986213453767533,
+      "dense": 1.4655336344188257,
+      "loss": 1.5953767530306633,
+      "dL": 0.12984311861183762,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.03294317323311424,
+        "bilinear": 0.0037327592745155513,
+        "same_input_interpolation": 0.06816762441955793,
+        "bit_only": 0.10658531454233455,
+        "median": 0.2687782267649157,
+        "zero": 0.12984311861183762
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g32",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 4.9106463878327,
+      "phi_raw": [
+        20.912198452454742,
+        4.9106463878327,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -4.560180737615109,
+        "bilinear": -4.10004149743309,
+        "same_input_interpolation": 0.0,
+        "bit_only": -3.971908540259289,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 4.9106463878327,
+      "loss": 4.9029230038022815,
+      "dL": -0.007723384030418501,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 4.552457353584691,
+        "bilinear": 4.092318113402672,
+        "same_input_interpolation": 0.007723384030418501,
+        "bit_only": 3.9641851562288704,
+        "median": 0.007723384030418501,
+        "zero": 0.007723384030418501
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g512",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.469370402594321,
+      "phi_raw": [
+        20.912198452454742,
+        1.469370402594321,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.5367677426077408,
+        "bilinear": 0.4802623579037868,
+        "same_input_interpolation": 0.4703792336023458,
+        "bit_only": 0.40701953832682447,
+        "median": 1.7524914972712171,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.5367677426077408,
+      "dense": 1.469370402594321,
+      "loss": 1.9065095309657518,
+      "dL": 0.43713912837143076,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.09962861423631009,
+        "bilinear": 0.04312322953235603,
+        "same_input_interpolation": 0.03324010523091503,
+        "bit_only": 0.030119590044606293,
+        "median": 1.3153523688997864,
+        "zero": 0.43713912837143076
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g512",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4655336344188257,
+      "phi_raw": [
+        20.912198452454742,
+        1.4655336344188257,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.36849140238061784,
+        "bilinear": 0.33928098842201093,
+        "same_input_interpolation": 0.2581348182961736,
+        "bit_only": 0.23642843315417217,
+        "median": 2.371226527216544,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 2.371226527216544,
+      "dense": 1.4655336344188257,
+      "loss": 1.9883527454242929,
+      "dL": 0.5228191110054672,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.15432770862484935,
+        "bilinear": 0.18353812258345625,
+        "same_input_interpolation": 0.2646842927092936,
+        "bit_only": 0.286390677851295,
+        "median": 1.8484074162110766,
+        "zero": 0.5228191110054672
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b3_g512",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 4.9106463878327,
+      "phi_raw": [
+        20.912198452454742,
+        4.9106463878327,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -4.303914823267316,
+        "bilinear": -3.843775583085293,
+        "same_input_interpolation": 0.0,
+        "bit_only": -3.971908540259289,
+        "median": 1.1260396863117865,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 4.9106463878327,
+      "loss": 4.8413735741444865,
+      "dL": -0.06927281368821347,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 4.234642009579103,
+        "bilinear": 3.7745027693970794,
+        "same_input_interpolation": 0.06927281368821347,
+        "bit_only": 3.9026357265710754,
+        "median": 1.1953125,
+        "zero": 0.06927281368821347
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g32",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.469370402594321,
+      "phi_raw": [
+        20.912198452454742,
+        1.469370402594321,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.028774610912310983,
+        "bilinear": 0.13794626159151147,
+        "same_input_interpolation": 0.03488421308635625,
+        "bit_only": 0.16622294665629544,
+        "median": 0.05174800284742542,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.028774610912310983,
+      "dense": 1.469370402594321,
+      "loss": 1.48799731076485,
+      "dL": 0.018626908170529033,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.01014770274178195,
+        "bilinear": 0.11931935342098243,
+        "same_input_interpolation": 0.01625730491582722,
+        "bit_only": 0.1475960384857664,
+        "median": 0.03312109467689639,
+        "zero": 0.018626908170529033
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g32",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4655336344188257,
+      "phi_raw": [
+        20.912198452454742,
+        1.4655336344188257,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.00602037929172089,
+        "bilinear": 0.04797541327240096,
+        "same_input_interpolation": 0.0,
+        "bit_only": 0.09474935249764826,
+        "median": 0.07240908010458758,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.07240908010458758,
+      "dense": 1.4655336344188257,
+      "loss": 1.473793677204659,
+      "dL": 0.008260042785833255,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.014280422077554145,
+        "bilinear": 0.0397153704865677,
+        "same_input_interpolation": 0.008260042785833255,
+        "bit_only": 0.08648930971181501,
+        "median": 0.06414903731875432,
+        "zero": 0.008260042785833255
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g32",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 4.9106463878327,
+      "phi_raw": [
+        20.912198452454742,
+        4.9106463878327,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.7530741444654313,
+        "bilinear": -1.7211866966723255,
+        "same_input_interpolation": 0.0,
+        "bit_only": -1.6925498310740699,
+        "median": 0.0751396150190109,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 4.9106463878327,
+      "loss": 4.84731463878327,
+      "dL": -0.06333174904943029,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.689742395416001,
+        "bilinear": 1.6578549476228952,
+        "same_input_interpolation": 0.06333174904943029,
+        "bit_only": 1.6292180820246396,
+        "median": 0.13847136406844118,
+        "zero": 0.06333174904943029
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g512",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.469370402594321,
+      "phi_raw": [
+        20.912198452454742,
+        1.469370402594321,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.08532798104189965,
+        "bilinear": 0.19449963172109785,
+        "same_input_interpolation": 0.049506469532983544,
+        "bit_only": 0.16622294665629544,
+        "median": 0.13202958158664868,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.08532798104189965,
+      "dense": 1.469370402594321,
+      "loss": 1.5184884916554615,
+      "dL": 0.04911808906114046,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.03620989198075919,
+        "bilinear": 0.1453815426599574,
+        "same_input_interpolation": 0.0003883804718430861,
+        "bit_only": 0.11710485759515499,
+        "median": 0.08291149252550822,
+        "zero": 0.04911808906114046
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g512",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4655336344188257,
+      "phi_raw": [
+        20.912198452454742,
+        1.4655336344188257,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.08752749915879265,
+        "bilinear": 0.14152329172291578,
+        "same_input_interpolation": 0.07084676756641922,
+        "bit_only": 0.09474935249764826,
+        "median": 0.14449132398383635,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.14449132398383635,
+      "dense": 1.4655336344188257,
+      "loss": 1.5158069883527454,
+      "dL": 0.05027335393391974,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.037254145224872914,
+        "bilinear": 0.09124993778899604,
+        "same_input_interpolation": 0.020573413632499482,
+        "bit_only": 0.044475998563728525,
+        "median": 0.09421797004991661,
+        "zero": 0.05027335393391974
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b4_g512",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 4.9106463878327,
+      "phi_raw": [
+        20.912198452454742,
+        4.9106463878327,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.6958004132689033,
+        "bilinear": -1.6639129654757991,
+        "same_input_interpolation": 0.0,
+        "bit_only": -1.6925498310740699,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 4.9106463878327,
+      "loss": 4.928766634980988,
+      "dL": 0.018120247148288193,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.7139206604171915,
+        "bilinear": 1.6820332126240873,
+        "same_input_interpolation": 0.018120247148288193,
+        "bit_only": 1.710670078222358,
+        "median": 0.018120247148288193,
+        "zero": 0.018120247148288193
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g32",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.469370402594321,
+      "phi_raw": [
+        20.912198452454742,
+        1.469370402594321,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.02370001693633847,
+        "bilinear": -0.03820222383338079,
+        "same_input_interpolation": 0.006079388813847744,
+        "bit_only": -0.05037234466737106,
+        "median": 0.013050699992090409,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.02370001693633847,
+      "dense": 1.469370402594321,
+      "loss": 1.4753816341058292,
+      "dL": 0.006011231511508175,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.017688785424830294,
+        "bilinear": 0.04421345534488896,
+        "same_input_interpolation": 6.815730233956929e-05,
+        "bit_only": 0.056383576178879236,
+        "median": 0.007039468480582234,
+        "zero": 0.006011231511508175
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g32",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4655336344188257,
+      "phi_raw": [
+        20.912198452454742,
+        1.4655336344188257,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": 0.0027581785806921055,
+        "bilinear": -0.029021762816651947,
+        "same_input_interpolation": 0.00039541068950964264,
+        "bit_only": -0.03269024926904729,
+        "median": 0.014737342524364094,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.014737342524364094,
+      "dense": 1.4655336344188257,
+      "loss": 1.475279296410744,
+      "dL": 0.009745661991918286,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.006987483411226181,
+        "bilinear": 0.03876742480857023,
+        "same_input_interpolation": 0.009350251302408644,
+        "bit_only": 0.042435911260965575,
+        "median": 0.004991680532445808,
+        "zero": 0.009745661991918286
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g32",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 4.9106463878327,
+      "phi_raw": [
+        20.912198452454742,
+        4.9106463878327,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.09264897672791109,
+        "bilinear": 0.41858091803083697,
+        "same_input_interpolation": 0.0,
+        "bit_only": 0.3577215628110758,
+        "median": 0.013842680608364244,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 4.9106463878327,
+      "loss": 4.922112642585551,
+      "dL": 0.011466254752851235,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.10411523148076232,
+        "bilinear": 0.40711466327798573,
+        "same_input_interpolation": 0.011466254752851235,
+        "bit_only": 0.3462553080582246,
+        "median": 0.002376425855513009,
+        "zero": 0.011466254752851235
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g512",
+      "test_set": "development_state_boundary",
+      "capability": "math",
+      "L0": 1.469370402594321,
+      "phi_raw": [
+        20.912198452454742,
+        1.469370402594321,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.0006402247315306364,
+        "bilinear": -0.06254246550125331,
+        "same_input_interpolation": 7.596923276957657e-05,
+        "bit_only": -0.05037234466737106,
+        "median": 0.02260143953175675,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": -0.0006402247315306364,
+      "dense": 1.469370402594321,
+      "loss": 1.4773787866803765,
+      "dL": 0.00800838408605542,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.008648608817586056,
+        "bilinear": 0.07055084958730873,
+        "same_input_interpolation": 0.007932414853285844,
+        "bit_only": 0.05838072875342648,
+        "median": 0.01459305544570133,
+        "zero": 0.00800838408605542
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g512",
+      "test_set": "development_state_boundary",
+      "capability": "code",
+      "L0": 1.4655336344188257,
+      "phi_raw": [
+        20.912198452454742,
+        1.4655336344188257,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.0045787943240740425,
+        "bilinear": -0.03635873572141768,
+        "same_input_interpolation": 0.0,
+        "bit_only": -0.03269024926904729,
+        "median": 0.03250534822914186,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.03250534822914186,
+      "dense": 1.4655336344188257,
+      "loss": 1.473377703826955,
+      "dL": 0.007844069408129428,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.01242286373220347,
+        "bilinear": 0.04420280512954711,
+        "same_input_interpolation": 0.007844069408129428,
+        "bit_only": 0.04053431867717672,
+        "median": 0.024661278821012433,
+        "zero": 0.007844069408129428
+      }
+    },
+    {
+      "state": "pythia-1.4b@step16000",
+      "config": "b5_g512",
+      "test_set": "development_state_boundary",
+      "capability": "qa",
+      "L0": 4.9106463878327,
+      "phi_raw": [
+        20.912198452454742,
+        4.9106463878327,
+        24.23643479298077
+      ],
+      "predictions": {
+        "low_order_2d": -0.2143676871675793,
+        "bilinear": 0.2968622075911682,
+        "same_input_interpolation": 0.0,
+        "bit_only": 0.3577215628110758,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 4.9106463878327,
+      "loss": 4.898823669201521,
+      "dL": -0.011822718631179008,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.0,
+      "absolute_errors": {
+        "low_order_2d": 0.2025449685364003,
+        "bilinear": 0.3086849262223472,
+        "same_input_interpolation": 0.011822718631179008,
+        "bit_only": 0.3695442814422548,
+        "median": 0.011822718631179008,
+        "zero": 0.011822718631179008
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g32",
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": -0.3135910538324129,
+        "bilinear": -0.3932285151640027,
+        "same_input_interpolation": 0.0,
+        "bit_only": 0.5404353243782154,
+        "median": 0.26514672150597185,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": -0.3135910538324129,
+      "dense": 1.2469152890927786,
+      "loss": 1.550877956181286,
+      "dL": 0.3039626670885074,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.6175537209209203,
+        "bilinear": 0.6971911822525101,
+        "same_input_interpolation": 0.3039626670885074,
+        "bit_only": 0.236472657289708,
+        "median": 0.03881594558253554,
+        "zero": 0.3039626670885074
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g32",
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.5882295946453868,
+        "bilinear": 0.363711995044107,
+        "same_input_interpolation": 0.7357550402195461,
+        "bit_only": 1.6483807848576308,
+        "median": 0.3986213453767533,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.3986213453767533,
+      "dense": 1.3068695032089375,
+      "loss": 1.5603161397670549,
+      "dL": 0.2534466365581174,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.33478295808726943,
+        "bilinear": 0.11026535848598962,
+        "same_input_interpolation": 0.4823084036614287,
+        "bit_only": 1.3949341482995135,
+        "median": 0.14517470881863592,
+        "zero": 0.2534466365581174
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g32",
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 1.3725539798497666,
+        "bilinear": 1.168472323813674,
+        "same_input_interpolation": 1.590022090578251,
+        "bit_only": 1.6690420208789387,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 4.991028992395437,
+      "dL": -0.10943441064638826,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 1.4819883904961548,
+        "bilinear": 1.2779067344600623,
+        "same_input_interpolation": 1.6994565012246392,
+        "bit_only": 1.778476431525327,
+        "median": 0.10943441064638826,
+        "zero": 0.10943441064638826
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g512",
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 1.5537366252520384,
+        "bilinear": 1.4740991639204468,
+        "same_input_interpolation": 1.8557108003539433,
+        "bit_only": 0.5404353243782154,
+        "median": 1.7524914972712171,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 1.5537366252520384,
+      "dense": 1.2469152890927786,
+      "loss": 3.730562366526932,
+      "dL": 2.4836470774341532,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.9299104521821149,
+        "bilinear": 1.0095479135137064,
+        "same_input_interpolation": 0.6279362770802099,
+        "bit_only": 1.9432117530559379,
+        "median": 0.7311555801629361,
+        "zero": 2.4836470774341532
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g512",
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 3.157567174272449,
+        "bilinear": 2.933049574671161,
+        "same_input_interpolation": 3.707145373997669,
+        "bit_only": 1.6483807848576308,
+        "median": 2.371226527216544,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 2.371226527216544,
+      "dense": 1.3068695032089375,
+      "loss": 4.770739244116948,
+      "dL": 3.4638697409080104,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.3063025666355612,
+        "bilinear": 0.5308201662368495,
+        "same_input_interpolation": 0.2432756330896586,
+        "bit_only": 1.8154889560503795,
+        "median": 1.0926432136914666,
+        "zero": 3.4638697409080104
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g512",
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 2.3736933739800783,
+        "bilinear": 2.1696117179440018,
+        "same_input_interpolation": 2.714055215000873,
+        "bit_only": 1.6690420208789387,
+        "median": 1.1260396863117865,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 6.657557034220532,
+      "dL": 1.5570936311787067,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.8165997428013716,
+        "bilinear": 0.6125180867652951,
+        "same_input_interpolation": 1.1569615838221665,
+        "bit_only": 0.11194838970023202,
+        "median": 0.43105394486692017,
+        "zero": 1.5570936311787067
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g32",
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": -0.31102810089338695,
+        "bilinear": -0.13994684621428455,
+        "same_input_interpolation": 0.01949631314737643,
+        "bit_only": 0.21818819899079944,
+        "median": 0.05174800284742542,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": -0.31102810089338695,
+      "dense": 1.2469152890927786,
+      "loss": 1.2973384481531283,
+      "dL": 0.050423159060349665,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.3614512599537366,
+        "bilinear": 0.1903700052746342,
+        "same_input_interpolation": 0.030926845912973233,
+        "bit_only": 0.16776503993044978,
+        "median": 0.001324843787075758,
+        "zero": 0.050423159060349665
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g32",
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": -0.2999625783516971,
+        "bilinear": 0.17456323307054644,
+        "same_input_interpolation": 0.11649887778155832,
+        "bit_only": 0.6747332772407875,
+        "median": 0.07240908010458758,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.07240908010458758,
+      "dense": 1.3068695032089375,
+      "loss": 1.3555978131685287,
+      "dL": 0.04872830995959121,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.3486908883112883,
+        "bilinear": 0.12583492311095523,
+        "same_input_interpolation": 0.06777056782196711,
+        "bit_only": 0.6260049672811963,
+        "median": 0.023680770144996366,
+        "zero": 0.04872830995959121
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g32",
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.07778624956622937,
+        "bilinear": 0.5051640838184881,
+        "same_input_interpolation": 0.16309556184926888,
+        "bit_only": 0.6829248135883121,
+        "median": 0.0751396150190109,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.050409933460076,
+      "dL": -0.05005346958174961,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.12783971914797898,
+        "bilinear": 0.5552175534002377,
+        "same_input_interpolation": 0.2131490314310185,
+        "bit_only": 0.7329782831700618,
+        "median": 0.1251930846007605,
+        "zero": 0.05005346958174961
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g512",
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.4052419895167847,
+        "bilinear": 0.5763232441958857,
+        "same_input_interpolation": 0.09827168014691345,
+        "bit_only": 0.21818819899079944,
+        "median": 0.13202958158664868,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.4052419895167847,
+      "dense": 1.2469152890927786,
+      "loss": 1.3827018903741202,
+      "dL": 0.13578660128134157,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.2694553882354431,
+        "bilinear": 0.4405366429145441,
+        "same_input_interpolation": 0.037514921134428114,
+        "bit_only": 0.08240159770945787,
+        "median": 0.003757019694692887,
+        "zero": 0.13578660128134157
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g512",
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.7003775099887826,
+        "bilinear": 1.1749033214110285,
+        "same_input_interpolation": 0.2694522721127002,
+        "bit_only": 0.6747332772407875,
+        "median": 0.14449132398383635,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.14449132398383635,
+      "dense": 1.3068695032089375,
+      "loss": 1.4395055859282149,
+      "dL": 0.1326360827192774,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.5677414272695052,
+        "bilinear": 1.042267238691751,
+        "same_input_interpolation": 0.13681618939342277,
+        "bit_only": 0.5420971945215101,
+        "median": 0.011855241264558947,
+        "zero": 0.1326360827192774
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g512",
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.43330770910585603,
+        "bilinear": 0.8606855433581131,
+        "same_input_interpolation": 0.2757683452129447,
+        "bit_only": 0.6829248135883121,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.012981226235741,
+      "dL": -0.08748217680608406,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.5207898859119401,
+        "bilinear": 0.9481677201641971,
+        "same_input_interpolation": 0.36325052201902874,
+        "bit_only": 0.7704069903943962,
+        "median": 0.08748217680608406,
+        "zero": 0.08748217680608406
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g32",
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.17667706143902467,
+        "bilinear": 0.08787870767965145,
+        "same_input_interpolation": 0.016639869794311396,
+        "bit_only": -0.07167142700009776,
+        "median": 0.013050699992090409,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.17667706143902467,
+      "dense": 1.2469152890927786,
+      "loss": 1.2603614648422052,
+      "dL": 0.013446175749426637,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.16323088568959804,
+        "bilinear": 0.07443253193022481,
+        "same_input_interpolation": 0.0031936940448847595,
+        "bit_only": 0.0851176027495244,
+        "median": 0.00039547575733622775,
+        "zero": 0.013446175749426637
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g32",
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.25406548890724834,
+        "bilinear": 0.004424897976378572,
+        "same_input_interpolation": 0.03565122385698785,
+        "bit_only": -0.2010576303289775,
+        "median": 0.014737342524364094,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.014737342524364094,
+      "dense": 1.3068695032089375,
+      "loss": 1.3295697646779177,
+      "dL": 0.022700261468980187,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.23136522743826815,
+        "bilinear": 0.018275363492601615,
+        "same_input_interpolation": 0.012950962388007664,
+        "bit_only": 0.2237578917979577,
+        "median": 0.007962918944616093,
+        "zero": 0.022700261468980187
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g32",
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.13508263339508897,
+        "bilinear": -0.09147825435765994,
+        "same_input_interpolation": 0.06479191827857819,
+        "bit_only": -0.20408252447502667,
+        "median": 0.013842680608364244,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.1466254752851714,
+      "dL": 0.04616207224334623,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.08892056115174274,
+        "bilinear": 0.13764032660100617,
+        "same_input_interpolation": 0.01862984603523196,
+        "bit_only": 0.2502445967183729,
+        "median": 0.032319391634981987,
+        "zero": 0.04616207224334623
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g512",
+      "test_set": "new_state_boundary",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": -0.14242320792049518,
+        "bilinear": -0.2312215616798715,
+        "same_input_interpolation": 0.03421932948949444,
+        "bit_only": -0.07167142700009776,
+        "median": 0.02260143953175675,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": -0.14242320792049518,
+      "dense": 1.2469152890927786,
+      "loss": 1.2681721110495927,
+      "dL": 0.02125682195681411,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.16368002987730929,
+        "bilinear": 0.2524783836366856,
+        "same_input_interpolation": 0.012962507532680329,
+        "bit_only": 0.09292824895691187,
+        "median": 0.0013446175749426414,
+        "zero": 0.02125682195681411
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g512",
+      "test_set": "new_state_boundary",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": -0.15689956770347102,
+        "bilinear": -0.4065401586343392,
+        "same_input_interpolation": 0.07127555914101899,
+        "bit_only": -0.2010576303289775,
+        "median": 0.03250534822914186,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.03250534822914186,
+      "dense": 1.3068695032089375,
+      "loss": 1.3242215355360114,
+      "dL": 0.01735203232707394,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.17425160003054496,
+        "bilinear": 0.4238921909614131,
+        "same_input_interpolation": 0.05392352681394505,
+        "bit_only": 0.21840966265605144,
+        "median": 0.015153315902067921,
+        "zero": 0.01735203232707394
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g512",
+      "test_set": "new_state_boundary",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": -0.09012590683950439,
+        "bilinear": -0.3166867945922539,
+        "same_input_interpolation": 0.0,
+        "bit_only": -0.20408252447502667,
+        "median": 0.0,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.11157319391635,
+      "dL": 0.01110979087452435,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.10123569771402874,
+        "bilinear": 0.32779658546677826,
+        "same_input_interpolation": 0.01110979087452435,
+        "bit_only": 0.21519231534955102,
+        "median": 0.01110979087452435,
+        "zero": 0.01110979087452435
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g128",
+      "test_set": "new_state_interior",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.6200727857098158,
+        "bilinear": 0.5404353243782207,
+        "same_input_interpolation": 0.5903709676570692,
+        "bit_only": 0.5404353243782154,
+        "median": 0.7942141896701732,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.6200727857098158,
+      "dense": 1.2469152890927786,
+      "loss": 2.051827097998893,
+      "dL": 0.8049118089061142,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.1848390231962984,
+        "bilinear": 0.2644764845278935,
+        "same_input_interpolation": 0.21454084124904504,
+        "bit_only": 0.26447648452789885,
+        "median": 0.010697619235941036,
+        "zero": 0.8049118089061142
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g128",
+      "test_set": "new_state_interior",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 1.8728983844589182,
+        "bilinear": 1.6483807848576335,
+        "same_input_interpolation": 1.7059304055119622,
+        "bit_only": 1.6483807848576308,
+        "median": 1.0477180888994533,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 1.0477180888994533,
+      "dense": 1.3068695032089375,
+      "loss": 2.2968861421440456,
+      "dL": 0.9900166389351082,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.88288174552381,
+        "bilinear": 0.6583641459225253,
+        "same_input_interpolation": 0.715913766576854,
+        "bit_only": 0.6583641459225227,
+        "median": 0.05770144996434512,
+        "zero": 0.9900166389351082
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b3_g128",
+      "test_set": "new_state_interior",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 1.8731236769149229,
+        "bilinear": 1.6690420208788384,
+        "same_input_interpolation": 1.6792012766424955,
+        "bit_only": 1.6690420208789387,
+        "median": 0.3559291825095059,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.136050380228137,
+      "dL": 0.03558697718631176,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 1.8375366997286111,
+        "bilinear": 1.6334550436925266,
+        "same_input_interpolation": 1.6436142994561838,
+        "bit_only": 1.633455043692627,
+        "median": 0.32034220532319413,
+        "zero": 0.03558697718631176
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g128",
+      "test_set": "new_state_interior",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.047106944311698595,
+        "bilinear": 0.2181881989907999,
+        "same_input_interpolation": 0.04860564265008516,
+        "bit_only": 0.21818819899079944,
+        "median": 0.08245669540457168,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.047106944311698595,
+      "dense": 1.2469152890927786,
+      "loss": 1.3318832555564344,
+      "dL": 0.08496796646365579,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.03786102215195719,
+        "bilinear": 0.1332202325271441,
+        "same_input_interpolation": 0.03636232381357063,
+        "bit_only": 0.13322023252714366,
+        "median": 0.002511271059084108,
+        "zero": 0.08496796646365579
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g128",
+      "test_set": "new_state_interior",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.20020746581854265,
+        "bilinear": 0.6747332772407875,
+        "same_input_interpolation": 0.2051876071208154,
+        "bit_only": 0.6747332772407875,
+        "median": 0.10295341098169719,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.10295341098169719,
+      "dense": 1.3068695032089375,
+      "loss": 1.428927977180889,
+      "dL": 0.12205847397195146,
+      "regime": "clear_damage",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.07814899184659119,
+        "bilinear": 0.552674803268836,
+        "same_input_interpolation": 0.08312913314886394,
+        "bit_only": 0.552674803268836,
+        "median": 0.019105062990254273,
+        "zero": 0.12205847397195146
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b4_g128",
+      "test_set": "new_state_interior",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.25554697933604087,
+        "bilinear": 0.6829248135883006,
+        "same_input_interpolation": 0.26412163588689874,
+        "bit_only": 0.6829248135883121,
+        "median": 0.05342502376425884,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.029675617870723,
+      "dL": -0.07078778517110251,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.3263347645071434,
+        "bilinear": 0.7537125987594031,
+        "same_input_interpolation": 0.33490942105800126,
+        "bit_only": 0.7537125987594147,
+        "median": 0.12421280893536135,
+        "zero": 0.07078778517110251
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g128",
+      "test_set": "new_state_interior",
+      "capability": "math",
+      "L0": 1.2476271454559835,
+      "phi_raw": [
+        20.912198452454742,
+        1.2476271454559835,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.01712692675926475,
+        "bilinear": -0.07167142700011009,
+        "same_input_interpolation": 0.015731901727001146,
+        "bit_only": -0.07167142700009776,
+        "median": 0.015324685596772913,
+        "zero": 0.0
+      },
+      "selected_candidate": "low_order_2d",
+      "selected_prediction": 0.01712692675926475,
+      "dense": 1.2469152890927786,
+      "loss": 1.2658388040813098,
+      "dL": 0.018923514988531176,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.0007118563632049213,
+      "absolute_errors": {
+        "low_order_2d": 0.001796588229266427,
+        "bilinear": 0.09059494198864126,
+        "same_input_interpolation": 0.0031916132615300297,
+        "bit_only": 0.09059494198862894,
+        "median": 0.0035988293917582626,
+        "zero": 0.018923514988531176
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g128",
+      "test_set": "new_state_interior",
+      "capability": "code",
+      "L0": 1.3067506536724507,
+      "phi_raw": [
+        20.912198452454742,
+        1.3067506536724507,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.04858296060188866,
+        "bilinear": -0.20105763032898039,
+        "same_input_interpolation": 0.04664709267327563,
+        "bit_only": -0.2010576303289775,
+        "median": 0.019075350606132635,
+        "zero": 0.0
+      },
+      "selected_candidate": "median",
+      "selected_prediction": 0.019075350606132635,
+      "dense": 1.3068695032089375,
+      "loss": 1.3205966246731637,
+      "dL": 0.013727121464226277,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": 0.00011884953648677588,
+      "absolute_errors": {
+        "low_order_2d": 0.03485583913766238,
+        "bilinear": 0.21478475179320666,
+        "same_input_interpolation": 0.032919971209049353,
+        "bit_only": 0.21478475179320378,
+        "median": 0.005348229141906358,
+        "zero": 0.013727121464226277
+      }
+    },
+    {
+      "state": "pythia-1.4b@step112000",
+      "config": "b5_g128",
+      "test_set": "new_state_interior",
+      "capability": "qa",
+      "L0": 5.117365731939164,
+      "phi_raw": [
+        20.912198452454742,
+        5.117365731939164,
+        26.18234494203608
+      ],
+      "predictions": {
+        "low_order_2d": 0.0224783632777924,
+        "bilinear": -0.20408252447495645,
+        "same_input_interpolation": 0.021720963022008904,
+        "bit_only": -0.20408252447502667,
+        "median": -0.0017526140684407387,
+        "zero": 0.0
+      },
+      "selected_candidate": "zero",
+      "selected_prediction": 0.0,
+      "dense": 5.100463403041825,
+      "loss": 5.1283269961977185,
+      "dL": 0.027863593155893263,
+      "regime": "near_zero",
+      "dense_difference_from_prediction_input": -0.01690232889733867,
+      "absolute_errors": {
+        "low_order_2d": 0.005385229878100861,
+        "bilinear": 0.2319461176308497,
+        "same_input_interpolation": 0.006142630133884358,
+        "bit_only": 0.23194611763091993,
+        "median": 0.029616207224334,
+        "zero": 0.027863593155893263
+      }
+    }
+  ],
+  "missing": [],
+  "selected": {
+    "math": {
+      "candidate": "low_order_2d",
+      "n_coefficients": 20,
+      "loso_macro_mae": 0.6121321722318852,
+      "minimum_loso_macro_mae": 0.6121321722318852,
+      "tied_candidates": [
+        "low_order_2d"
+      ],
+      "form": "low_order_2d",
+      "model": {
+        "diagnostics": {
+          "n_rows": 54,
+          "n_coefficients": 20,
+          "design_rank": 20,
+          "condition_number": 51.773881907865544,
+          "condition_status": "finite",
+          "singular_values": [
+            12.794570537451595,
+            10.428397732704177,
+            10.428397732703926,
+            8.552152312098293,
+            7.361382370751305,
+            6.981280172603544,
+            6.970554073711834,
+            6.970554073711665,
+            6.00000000000014,
+            5.999999999999989,
+            5.69019226634021,
+            5.690192266340068,
+            4.022543380102538,
+            3.2786315212359427,
+            3.2786315212358588,
+            0.7860315183503406,
+            0.5253995237561858,
+            0.4522448444128534,
+            0.4288933526950313,
+            0.24712403370139857
+          ],
+          "rank_tolerance": 1.5341212944938979e-13
+        },
+        "coefficients": [
+          [
+            4.67050695798757,
+            0.4745953231870983,
+            6.024165727703016,
+            0.4588432645420653
+          ],
+          [
+            -12.23225237294704,
+            -1.2260085291331753,
+            -15.676084487768327,
+            -1.240079294443637
+          ],
+          [
+            0.315245675628694,
+            -0.007715589724567067,
+            0.2235366119878155,
+            0.11500399828490795
+          ],
+          [
+            -0.1606383233010814,
+            0.031150810012092488,
+            0.021539712246539586,
+            -0.12047872472028574
+          ],
+          [
+            7.759425272921264,
+            0.7741459182454062,
+            9.916469345473633,
+            0.7986943130583921
+          ]
+        ],
+        "terms": [
+          "1",
+          "u",
+          "v",
+          "u*v",
+          "u^2"
+        ]
+      },
+      "standardization": {
+        "center": [
+          19.565165103220423,
+          2.74589639621025,
+          25.331562746990866
+        ],
+        "scale": [
+          1.084175379007654,
+          1.6234865401697782,
+          1.0951279540100651
+        ],
+        "constant_features": [],
+        "u_center": 2.76640267279576
+      }
+    },
+    "code": {
+      "candidate": "median",
+      "n_coefficients": 9,
+      "loso_macro_mae": 1.2959914692443812,
+      "minimum_loso_macro_mae": 1.2959914692443812,
+      "tied_candidates": [
+        "median"
+      ],
+      "form": "median",
+      "model": {
+        "diagnostics": {
+          "n_rows": 54,
+          "n_coefficients": 9,
+          "design_rank": 9,
+          "condition_number": 1.0,
+          "condition_status": "finite",
+          "singular_values": [
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178,
+            2.449489742783178
+          ],
+          "rank_tolerance": 2.9370383039027195e-14
+        },
+        "anchors": {
+          "b3_g64": 0.7231697171381033,
+          "b3_g128": 1.0477180888994533,
+          "b3_g256": 1.7094723080579985,
+          "b4_g64": 0.08768124554314238,
+          "b4_g128": 0.10295341098169719,
+          "b4_g256": 0.12372236748276677,
+          "b5_g64": 0.016906346565248365,
+          "b5_g128": 0.019075350606132635,
+          "b5_g256": 0.02579034941763725
+        }
+      },
+      "standardization": {
+        "center": [
+          19.565165103220423,
+          2.74589639621025,
+          25.331562746990866
+        ],
+        "scale": [
+          1.084175379007654,
+          1.6234865401697782,
+          1.0951279540100651
+        ],
+        "constant_features": [],
+        "u_center": 2.76640267279576
+      }
+    },
+    "qa": {
+      "candidate": "zero",
+      "n_coefficients": 0,
+      "loso_macro_mae": 1.3179102195113364,
+      "minimum_loso_macro_mae": 1.3179102195113364,
+      "tied_candidates": [
+        "median",
+        "zero"
+      ],
+      "form": "zero",
+      "model": {
+        "diagnostics": {
+          "n_rows": 54,
+          "n_coefficients": 0,
+          "design_rank": 0,
+          "condition_number": null,
+          "condition_status": "not applicable (fixed zero)",
+          "singular_values": []
+        },
+        "value": 0.0
+      },
+      "standardization": {
+        "center": [
+          19.565165103220423,
+          2.74589639621025,
+          25.331562746990866
+        ],
+        "scale": [
+          1.084175379007654,
+          1.6234865401697782,
+          1.0951279540100651
+        ],
+        "constant_features": [],
+        "u_center": 2.76640267279576
+      }
+    }
+  },
+  "regime_rule": "near_zero: abs(measured dL)<0.1; clear_damage: abs(dL)>=0.1",
+  "regimes": {
+    "all": {
+      "low_order_2d": {
+        "math": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.30330870782629377,
+            "pythia-1.4b@step16000": 0.07152210642567605,
+            "pythia-410m@step143000": 0.358248151337864
+          },
+          "macro_mae": 0.24435965519661126,
+          "mae": 0.252780948429423
+        },
+        "code": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.32878013825338903,
+            "pythia-1.4b@step16000": 0.04303596605063672,
+            "pythia-410m@step143000": 0.5741704283734839
+          },
+          "macro_mae": 0.31532884422583657,
+          "mae": 0.31725045765834403
+        },
+        "qa": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5896256323707859,
+            "pythia-1.4b@step16000": 1.749570436502358,
+            "pythia-410m@step143000": 0.7067989650011172
+          },
+          "macro_mae": 1.015331677958087,
+          "mae": 0.9545165285884727
+        }
+      },
+      "bilinear": {
+        "math": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3503164798406649,
+            "pythia-1.4b@step16000": 0.10381534686572153,
+            "pythia-410m@step143000": 0.5622579087377894
+          },
+          "macro_mae": 0.33879657848139194,
+          "mae": 0.3404422786755738
+        },
+        "code": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.40857543799601426,
+            "pythia-1.4b@step16000": 0.0668677366786088,
+            "pythia-410m@step143000": 0.7013553654737746
+          },
+          "macro_mae": 0.39226618004946595,
+          "mae": 0.39459607404182995
+        },
+        "qa": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.7198178629933729,
+            "pythia-1.4b@step16000": 1.987084772091178,
+            "pythia-410m@step143000": 0.9346814395907727
+          },
+          "macro_mae": 1.2138613582251077,
+          "mae": 1.1432837160491456
+        }
+      },
+      "same_input_interpolation": {
+        "math": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.1411768545686477,
+            "pythia-1.4b@step16000": 0.03887279642427058,
+            "pythia-410m@step143000": 0.09175579050071053
+          },
+          "macro_mae": 0.09060181383120962,
+          "mae": 0.09782681965084364
+        },
+        "code": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.2032231282336886,
+            "pythia-1.4b@step16000": 0.0631466157096204,
+            "pythia-410m@step143000": 0.1693642245967282
+          },
+          "macro_mae": 0.1452446561800124,
+          "mae": 0.15352729504482326
+        },
+        "qa": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.605247069561631,
+            "pythia-1.4b@step16000": 0.030289527883396783,
+            "pythia-410m@step143000": 0.9228886519704735
+          },
+          "macro_mae": 0.5194750831385004,
+          "mae": 0.5317282240560905
+        }
+      },
+      "bit_only": {
+        "math": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.344020950970629,
+            "pythia-1.4b@step16000": 0.11385521021395544,
+            "pythia-410m@step143000": 0.8484756390900134
+          },
+          "macro_mae": 0.43545060009153264,
+          "mae": 0.42238922164568937
+        },
+        "code": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6940573912879079,
+            "pythia-1.4b@step16000": 0.1011519217678859,
+            "pythia-410m@step143000": 0.8641069241359417
+          },
+          "macro_mae": 0.5531054123972452,
+          "mae": 0.5732414093816255
+        },
+        "qa": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.7198178629934335,
+            "pythia-1.4b@step16000": 1.9870847720912375,
+            "pythia-410m@step143000": 1.047211304416529
+          },
+          "macro_mae": 1.2513713131670665,
+          "mae": 1.1754351059994046
+        }
+      },
+      "median": {
+        "math": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.08817791136070029,
+            "pythia-1.4b@step16000": 0.26411518890558683,
+            "pythia-410m@step143000": 0.7355618392259222
+          },
+          "macro_mae": 0.36261831316406984,
+          "mae": 0.3234125414778741
+        },
+        "code": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.15318054565142752,
+            "pythia-1.4b@step16000": 0.38420093494968705,
+            "pythia-410m@step143000": 0.7292706600110926
+          },
+          "macro_mae": 0.4222173802040691,
+          "mae": 0.38378354669654885
+        },
+        "qa": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.14119600232361654,
+            "pythia-1.4b@step16000": 0.22897110662230666,
+            "pythia-410m@step143000": 0.686908368979721
+          },
+          "macro_mae": 0.3523584926418814,
+          "mae": 0.32219242259641495
+        }
+      },
+      "zero": {
+        "math": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.4352584214365438,
+            "pythia-1.4b@step16000": 0.10872946821693152,
+            "pythia-410m@step143000": 1.1084064963484406
+          },
+          "macro_mae": 0.5507981286673053,
+          "mae": 0.534292456205768
+        },
+        "code": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5627261442569264,
+            "pythia-1.4b@step16000": 0.12146422628951759,
+            "pythia-410m@step143000": 1.234935821250297
+          },
+          "macro_mae": 0.6397087305989136,
+          "mae": 0.6287112182643438
+        },
+        "qa": {
+          "n": 21,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.22173043409378965,
+            "pythia-1.4b@step16000": 0.030289527883396783,
+            "pythia-410m@step143000": 0.8836541508238277
+          },
+          "macro_mae": 0.37855803760033807,
+          "mae": 0.3561540942422597
+        }
+      }
+    },
+    "near_zero": {
+      "low_order_2d": {
+        "math": {
+          "n": 11,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.1456039571803735,
+            "pythia-1.4b@step16000": 0.018173747241239373,
+            "pythia-410m@step143000": 0.20186328028402337
+          },
+          "macro_mae": 0.12188032823521207,
+          "mae": 0.1094946668577156
+        },
+        "code": {
+          "n": 9,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.19729088872944095,
+            "pythia-1.4b@step16000": 0.017736228611464178,
+            "pythia-410m@step143000": 0.2728473588272491
+          },
+          "macro_mae": 0.16262482538938475,
+          "mae": 0.12588398091009662
+        },
+        "qa": {
+          "n": 16,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.4297203654342209,
+            "pythia-1.4b@step16000": 1.749570436502358,
+            "pythia-410m@step143000": 0.20238910158566759
+          },
+          "macro_mae": 0.7938933011740822,
+          "mae": 0.8820395301131685
+        }
+      },
+      "bilinear": {
+        "math": {
+          "n": 11,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.148219219071466,
+            "pythia-1.4b@step16000": 0.09486630025328438,
+            "pythia-410m@step143000": 0.31697162996703654
+          },
+          "macro_mae": 0.18668571643059564,
+          "mae": 0.15950041420950367
+        },
+        "code": {
+          "n": 9,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.19569680733954414,
+            "pythia-1.4b@step16000": 0.05348388455342027,
+            "pythia-410m@step143000": 0.04728072158824656
+          },
+          "macro_mae": 0.09882047116040366,
+          "mae": 0.11600038768445603
+        },
+        "qa": {
+          "n": 16,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6554194208164283,
+            "pythia-1.4b@step16000": 1.987084772091178,
+            "pythia-410m@step143000": 0.6350149806450025
+          },
+          "macro_mae": 1.0925063911842028,
+          "mae": 1.150968095012317
+        }
+      },
+      "same_input_interpolation": {
+        "math": {
+          "n": 11,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.017327396913127797,
+            "pythia-1.4b@step16000": 0.00616156438582393,
+            "pythia-410m@step143000": 0.009817827882925442
+          },
+          "macro_mae": 0.011102263060625723,
+          "mae": 0.011901717988616872
+        },
+        "code": {
+          "n": 9,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.041891257058242294,
+            "pythia-1.4b@step16000": 0.011506944282217702,
+            "pythia-410m@step143000": 0.018984716667344748
+          },
+          "macro_mae": 0.024127639335934915,
+          "mae": 0.025841946892131637
+        },
+        "qa": {
+          "n": 16,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.37011507728683896,
+            "pythia-1.4b@step16000": 0.030289527883396783,
+            "pythia-410m@step143000": 0.16386383366529877
+          },
+          "macro_mae": 0.18808947961184486,
+          "mae": 0.2040083880815094
+        }
+      },
+      "bit_only": {
+        "math": {
+          "n": 11,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.11392521323053173,
+            "pythia-1.4b@step16000": 0.09486630025330678,
+            "pythia-410m@step143000": 0.3169716299669886
+          },
+          "macro_mae": 0.1752543811502757,
+          "mae": 0.14391222973635118
+        },
+        "code": {
+          "n": 9,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3207393183821023,
+            "pythia-1.4b@step16000": 0.05348388455342146,
+            "pythia-410m@step143000": 0.32083271776524414
+          },
+          "macro_mae": 0.23168530690025593,
+          "mae": 0.20196950327859323
+        },
+        "qa": {
+          "n": 16,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6554194208164776,
+            "pythia-1.4b@step16000": 1.9870847720912375,
+            "pythia-410m@step143000": 0.7535488796501922
+          },
+          "macro_mae": 1.1320176908526358,
+          "mae": 1.173193201075834
+        }
+      },
+      "median": {
+        "math": {
+          "n": 11,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.0018350075140393996,
+            "pythia-1.4b@step16000": 0.034416277782172044,
+            "pythia-410m@step143000": 0.053171715573835376
+          },
+          "macro_mae": 0.02980766695668227,
+          "mae": 0.02301668907695963
+        },
+        "code": {
+          "n": 9,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.013036308533396684,
+            "pythia-1.4b@step16000": 0.04700499168053229,
+            "pythia-410m@step143000": 0.05039220347040663
+          },
+          "macro_mae": 0.036811167894778535,
+          "mae": 0.032284156036235835
+        },
+        "qa": {
+          "n": 16,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.10432509505703434,
+            "pythia-1.4b@step16000": 0.22897110662230666,
+            "pythia-410m@step143000": 0.017679618187578832
+          },
+          "macro_mae": 0.11699193995563995,
+          "mae": 0.13482132248098855
+        }
+      },
+      "zero": {
+        "math": {
+          "n": 11,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.037803527643755476,
+            "pythia-1.4b@step16000": 0.02044115320730827,
+            "pythia-410m@step143000": 0.07099778533575896
+          },
+          "macro_mae": 0.04308082206227423,
+          "mae": 0.037525256519957126
+        },
+        "code": {
+          "n": 9,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.025626931304967904,
+            "pythia-1.4b@step16000": 0.019030782029950177,
+            "pythia-410m@step143000": 0.06512954599477072
+          },
+          "macro_mae": 0.03659575310989627,
+          "mae": 0.027084488814938117
+        },
+        "qa": {
+          "n": 16,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.04700655214557311,
+            "pythia-1.4b@step16000": 0.030289527883396783,
+            "pythia-410m@step143000": 0.03582461977186332
+          },
+          "macro_mae": 0.03770689993361107,
+          "mae": 0.0386410557271864
+        }
+      }
+    },
+    "clear_damage": {
+      "low_order_2d": {
+        "math": {
+          "n": 10,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5004396461336942,
+            "pythia-1.4b@step16000": 0.17821882479454942,
+            "pythia-410m@step143000": 0.43644058686478426
+          },
+          "macro_mae": 0.3716996859310093,
+          "mae": 0.41039585815830126
+        },
+        "code": {
+          "n": 12,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.4339715378725474,
+            "pythia-1.4b@step16000": 0.0936354409289818,
+            "pythia-410m@step143000": 0.6344350422827307
+          },
+          "macro_mae": 0.38734734036142,
+          "mae": 0.4607753152195296
+        },
+        "qa": {
+          "n": 5,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step112000": 1.1492940666487632,
+            "pythia-410m@step143000": 1.2112088284165667
+          },
+          "macro_mae": 1.1802514475326649,
+          "mae": 1.1864429237094454
+        }
+      },
+      "bilinear": {
+        "math": {
+          "n": 10,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6029380558021635,
+            "pythia-1.4b@step16000": 0.12171344009059581,
+            "pythia-410m@step143000": 0.6849010481231658
+          },
+          "macro_mae": 0.46985084800530835,
+          "mae": 0.5394783295882508
+        },
+        "code": {
+          "n": 12,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.5788783425211903,
+            "pythia-1.4b@step16000": 0.0936354409289859,
+            "pythia-410m@step143000": 0.8321702942508802
+          },
+          "macro_mae": 0.5015613592336855,
+          "mae": 0.6035428388098604
+        },
+        "qa": {
+          "n": 5,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.9452124106126787,
+            "pythia-410m@step143000": 1.2343478985365428
+          },
+          "macro_mae": 1.0897801545746106,
+          "mae": 1.118693703366997
+        }
+      },
+      "same_input_interpolation": {
+        "math": {
+          "n": 10,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.2959886766380476,
+            "pythia-1.4b@step16000": 0.10429526050116389,
+            "pythia-410m@step143000": 0.13272477180960307
+          },
+          "macro_mae": 0.17766956964960487,
+          "mae": 0.19234443147929306
+        },
+        "code": {
+          "n": 12,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.3322886251740456,
+            "pythia-1.4b@step16000": 0.16642595856442577,
+            "pythia-410m@step143000": 0.19944012618260493
+          },
+          "macro_mae": 0.23271823664035876,
+          "mae": 0.249291306159342
+        },
+        "qa": {
+          "n": 5,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step112000": 1.4282090425234029,
+            "pythia-410m@step143000": 1.6819134702756482
+          },
+          "macro_mae": 1.5550612563995254,
+          "mae": 1.58043169917475
+        }
+      },
+      "bit_only": {
+        "math": {
+          "n": 10,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.6316406231457506,
+            "pythia-1.4b@step16000": 0.15183303013525273,
+            "pythia-410m@step143000": 1.114227643651526
+          },
+          "macro_mae": 0.6325670989775097,
+          "mae": 0.7287139127459612
+        },
+        "code": {
+          "n": 12,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.9927118496125523,
+            "pythia-1.4b@step16000": 0.19648799619681478,
+            "pythia-410m@step143000": 0.9727617654100813
+          },
+          "macro_mae": 0.7206538704064828,
+          "mae": 0.8516953389588998
+        },
+        "qa": {
+          "n": 5,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.9452124106127795,
+            "pythia-410m@step143000": 1.3408737291828654
+          },
+          "macro_mae": 1.1430430698978225,
+          "mae": 1.182609201754831
+        }
+      },
+      "median": {
+        "math": {
+          "n": 10,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.1961065411690264,
+            "pythia-1.4b@step16000": 0.7235130111524164,
+            "pythia-410m@step143000": 1.0767569010519658
+          },
+          "macro_mae": 0.6654588177911361,
+          "mae": 0.6538479791188802
+        },
+        "code": {
+          "n": 12,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.26529593534585216,
+            "pythia-1.4b@step16000": 1.0585928214879963,
+            "pythia-410m@step143000": 0.8650463513192299
+          },
+          "macro_mae": 0.7296450360510262,
+          "mae": 0.6474080896917837
+        },
+        "qa": {
+          "n": 5,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.2702441777566542,
+            "pythia-410m@step143000": 1.3561371197718632
+          },
+          "macro_mae": 0.8131906487642587,
+          "mae": 0.9217799429657797
+        }
+      },
+      "zero": {
+        "math": {
+          "n": 10,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.9320770386775291,
+            "pythia-1.4b@step16000": 0.28530609823617803,
+            "pythia-410m@step143000": 1.6271108518547814
+          },
+          "macro_mae": 0.9481646629228294,
+          "mae": 1.0807363758601598
+        },
+        "code": {
+          "n": 12,
+          "n_states": 3,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.992405514618493,
+            "pythia-1.4b@step16000": 0.3263311148086524,
+            "pythia-410m@step143000": 1.4688970763014022
+          },
+          "macro_mae": 0.9292112352428492,
+          "mae": 1.0799312653513986
+        },
+        "qa": {
+          "n": 5,
+          "n_states": 2,
+          "state_mae": {
+            "pythia-1.4b@step112000": 0.8332640209125475,
+            "pythia-410m@step143000": 1.7314836818757922
+          },
+          "macro_mae": 1.2823738513941698,
+          "mae": 1.3721958174904942
+        }
+      }
+    }
+  },
+  "test_sets": {
+    "development_state_boundary": {
+      "n_expected_cells": 12,
+      "scores": {
+        "low_order_2d": {
+          "math": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.07152210642567605,
+              "pythia-410m@step143000": 0.358248151337864
+            },
+            "macro_mae": 0.21488512888177003,
+            "mae": 0.21488512888177
+          },
+          "code": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.04303596605063672,
+              "pythia-410m@step143000": 0.5741704283734839
+            },
+            "macro_mae": 0.3086031972120603,
+            "mae": 0.3086031972120603
+          },
+          "qa": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 1.749570436502358,
+              "pythia-410m@step143000": 0.7067989650011172
+            },
+            "macro_mae": 1.2281847007517377,
+            "mae": 1.2281847007517377
+          }
+        },
+        "bilinear": {
+          "math": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.10381534686572153,
+              "pythia-410m@step143000": 0.5622579087377894
+            },
+            "macro_mae": 0.33303662780175547,
+            "mae": 0.3330366278017554
+          },
+          "code": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.0668677366786088,
+              "pythia-410m@step143000": 0.7013553654737746
+            },
+            "macro_mae": 0.3841115510761917,
+            "mae": 0.3841115510761917
+          },
+          "qa": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 1.987084772091178,
+              "pythia-410m@step143000": 0.9346814395907727
+            },
+            "macro_mae": 1.4608831058409752,
+            "mae": 1.4608831058409752
+          }
+        },
+        "same_input_interpolation": {
+          "math": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.03887279642427058,
+              "pythia-410m@step143000": 0.09175579050071053
+            },
+            "macro_mae": 0.06531429346249056,
+            "mae": 0.06531429346249056
+          },
+          "code": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.0631466157096204,
+              "pythia-410m@step143000": 0.1693642245967282
+            },
+            "macro_mae": 0.1162554201531743,
+            "mae": 0.1162554201531743
+          },
+          "qa": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.030289527883396783,
+              "pythia-410m@step143000": 0.9228886519704735
+            },
+            "macro_mae": 0.47658908992693516,
+            "mae": 0.47658908992693516
+          }
+        },
+        "bit_only": {
+          "math": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.11385521021395544,
+              "pythia-410m@step143000": 0.8484756390900134
+            },
+            "macro_mae": 0.4811654246519844,
+            "mae": 0.4811654246519845
+          },
+          "code": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.1011519217678859,
+              "pythia-410m@step143000": 0.8641069241359417
+            },
+            "macro_mae": 0.4826294229519138,
+            "mae": 0.48262942295191386
+          },
+          "qa": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 1.9870847720912375,
+              "pythia-410m@step143000": 1.047211304416529
+            },
+            "macro_mae": 1.5171480382538833,
+            "mae": 1.5171480382538831
+          }
+        },
+        "median": {
+          "math": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.26411518890558683,
+              "pythia-410m@step143000": 0.7355618392259222
+            },
+            "macro_mae": 0.4998385140657545,
+            "mae": 0.49983851406575447
+          },
+          "code": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.38420093494968705,
+              "pythia-410m@step143000": 0.7292706600110926
+            },
+            "macro_mae": 0.5567357974803898,
+            "mae": 0.5567357974803898
+          },
+          "qa": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.22897110662230666,
+              "pythia-410m@step143000": 0.686908368979721
+            },
+            "macro_mae": 0.4579397378010138,
+            "mae": 0.45793973780101377
+          }
+        },
+        "zero": {
+          "math": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.10872946821693152,
+              "pythia-410m@step143000": 1.1084064963484406
+            },
+            "macro_mae": 0.608567982282686,
+            "mae": 0.6085679822826862
+          },
+          "code": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.12146422628951759,
+              "pythia-410m@step143000": 1.234935821250297
+            },
+            "macro_mae": 0.6782000237699073,
+            "mae": 0.6782000237699073
+          },
+          "qa": {
+            "n": 12,
+            "n_states": 2,
+            "state_mae": {
+              "pythia-1.4b@step16000": 0.030289527883396783,
+              "pythia-410m@step143000": 0.8836541508238277
+            },
+            "macro_mae": 0.45697183935361224,
+            "mae": 0.45697183935361224
+          }
+        }
+      }
+    },
+    "new_state_boundary": {
+      "n_expected_cells": 6,
+      "scores": {
+        "low_order_2d": {
+          "math": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.41754695614318704
+            },
+            "macro_mae": 0.41754695614318704,
+            "mae": 0.41754695614318704
+          },
+          "code": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.32718911129540623
+            },
+            "macro_mae": 0.32718911129540623,
+            "mae": 0.32718911129540623
+          },
+          "qa": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.5228956662038695
+            },
+            "macro_mae": 0.5228956662038695,
+            "mae": 0.5228956662038695
+          }
+        },
+        "bilinear": {
+          "math": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.4440927765870508
+            },
+            "macro_mae": 0.4440927765870508,
+            "mae": 0.4440927765870508
+          },
+          "code": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.37522587349659337
+            },
+            "macro_mae": 0.37522587349659337,
+            "mae": 0.37522587349659337
+          },
+          "qa": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.6432078344762627
+            },
+            "macro_mae": 0.6432078344762627,
+            "mae": 0.6432078344762627
+          }
+        },
+        "same_input_interpolation": {
+          "math": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.1694161521322806
+            },
+            "macro_mae": 0.1694161521322806,
+            "mae": 0.1694161521322806
+          },
+          "code": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.166174213861405
+            },
+            "macro_mae": 0.166174213861405,
+            "mae": 0.166174213861405
+          },
+          "qa": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.5770928792344349
+            },
+            "macro_mae": 0.5770928792344349,
+            "mae": 0.5770928792344349
+          }
+        },
+        "bit_only": {
+          "math": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.43464948328199826
+            },
+            "macro_mae": 0.43464948328199826,
+            "mae": 0.43464948328199826
+          },
+          "code": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.8034488034344348
+            },
+            "macro_mae": 0.8034488034344348,
+            "mae": 0.8034488034344348
+          },
+          "qa": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.6432078344763235
+            },
+            "macro_mae": 0.6432078344763235,
+            "mae": 0.6432078344763235
+          }
+        },
+        "median": {
+          "math": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.12946558042658654
+            },
+            "macro_mae": 0.12946558042658654,
+            "mae": 0.12946558042658654
+          },
+          "code": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.21607836146105694
+            },
+            "macro_mae": 0.21607836146105694,
+            "mae": 0.21607836146105694
+          },
+          "qa": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.1327654665716099
+            },
+            "macro_mae": 0.1327654665716099,
+            "mae": 0.1327654665716099
+          }
+        },
+        "zero": {
+          "math": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.5014204170950988
+            },
+            "macro_mae": 0.5014204170950988,
+            "mae": 0.5014204170950988
+          },
+          "code": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.6564555106568418
+            },
+            "macro_mae": 0.6564555106568418,
+            "mae": 0.6564555106568418
+          },
+          "qa": {
+            "n": 6,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.3102225918884665
+            },
+            "macro_mae": 0.3102225918884665,
+            "mae": 0.3102225918884665
+          }
+        }
+      }
+    },
+    "new_state_interior": {
+      "n_expected_cells": 3,
+      "scores": {
+        "low_order_2d": {
+          "math": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.07483221119250734
+            },
+            "macro_mae": 0.07483221119250734,
+            "mae": 0.07483221119250734
+          },
+          "code": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.3319621921693545
+            },
+            "macro_mae": 0.3319621921693545,
+            "mae": 0.3319621921693545
+          },
+          "qa": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.7230855647046185
+            },
+            "macro_mae": 0.7230855647046185,
+            "mae": 0.7230855647046185
+          }
+        },
+        "bilinear": {
+          "math": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.16276388634789296
+            },
+            "macro_mae": 0.16276388634789296,
+            "mae": 0.16276388634789296
+          },
+          "code": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.475274566994856
+            },
+            "macro_mae": 0.475274566994856,
+            "mae": 0.475274566994856
+          },
+          "qa": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.8730379200275932
+            },
+            "macro_mae": 0.8730379200275932,
+            "mae": 0.8730379200275932
+          }
+        },
+        "same_input_interpolation": {
+          "math": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.08469825944138192
+            },
+            "macro_mae": 0.08469825944138192,
+            "mae": 0.08469825944138192
+          },
+          "code": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.27732095697825576
+            },
+            "macro_mae": 0.27732095697825576,
+            "mae": 0.27732095697825576
+          },
+          "qa": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.6615554502160231
+            },
+            "macro_mae": 0.6615554502160231,
+            "mae": 0.6615554502160231
+          }
+        },
+        "bit_only": {
+          "math": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.1627638863478905
+            },
+            "macro_mae": 0.1627638863478905,
+            "mae": 0.1627638863478905
+          },
+          "code": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.47527456699485415
+            },
+            "macro_mae": 0.47527456699485415,
+            "mae": 0.47527456699485415
+          },
+          "qa": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.8730379200276538
+            },
+            "macro_mae": 0.8730379200276538,
+            "mae": 0.8730379200276538
+          }
+        },
+        "median": {
+          "math": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.0056025732289278025
+            },
+            "macro_mae": 0.0056025732289278025,
+            "mae": 0.0056025732289278025
+          },
+          "code": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.027384914032168584
+            },
+            "macro_mae": 0.027384914032168584,
+            "mae": 0.027384914032168584
+          },
+          "qa": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.15805707382762982
+            },
+            "macro_mae": 0.15805707382762982,
+            "mae": 0.15805707382762982
+          }
+        },
+        "zero": {
+          "math": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.3029344301194337
+            },
+            "macro_mae": 0.3029344301194337,
+            "mae": 0.3029344301194337
+          },
+          "code": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.3752674114570953
+            },
+            "macro_mae": 0.3752674114570953,
+            "mae": 0.3752674114570953
+          },
+          "qa": {
+            "n": 3,
+            "n_states": 1,
+            "state_mae": {
+              "pythia-1.4b@step112000": 0.04474611850443585
+            },
+            "macro_mae": 0.04474611850443585,
+            "mae": 0.04474611850443585
+          }
+        }
+      }
+    }
+  },
+  "provenance": {
+    "freeze_sha256": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+    "measurement_sha256": {
+      "results/v54-quant-group/pythia-410m--step143000/quant_group_losses.json": "b89d36c94683ae323f994600bafaee92582353cce33386b2dcccd42002e558b6",
+      "results/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json": "707e78756928830328bcdf521c405305883e7968373f9783b2390f2cbf554248",
+      "results/v54-quant-group/pythia-1.4b--step112000/quant_group_losses.json": "ab9990836c8e167eddd63613802d8d122e270608bb205a7447655cfe276ee7c6"
+    }
+  }
+}
