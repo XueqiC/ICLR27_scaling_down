@@ -44,4 +44,4 @@ reference verification, reviewer self-audit, round summaries).
 
 Text edits go to the paper repository. Generated `tables/*.tex` and `figs/*.pdf` are written
 there by the generators kept here, so a change to a number starts with the generator.
-Locally, `paper/` is a symlink to the paper repository's clone and is not tracked.
+Locally, `paper/` is the clone of the paper repository, ignored by this one.
