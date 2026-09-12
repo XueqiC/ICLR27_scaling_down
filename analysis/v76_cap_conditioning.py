@@ -270,8 +270,11 @@ def load_quantization(inputs):
     fits = anchor_sensitivities(cells, model)
     freeze = inputs.json(f"{base}/freeze.json")
     comp = inputs.json(f"{base}/compare.json")
-    require(freeze["provenance"]["develop_sha256"] == inputs.hashes[f"{base}/develop.json"] and
-            comp["provenance"]["freeze_sha256"] == inputs.hashes[f"{base}/freeze.json"], "V69 freeze chain changed")
+    require(provenance.matches(freeze["provenance"]["develop_sha256"],
+                               inputs.hashes[f"{base}/develop.json"])
+            and provenance.matches(comp["provenance"]["freeze_sha256"],
+                                   inputs.hashes[f"{base}/freeze.json"]),
+            "V69 freeze chain changed")
     require(comp["complete"] and comp["n_measured_cells"] == 21, "Incomplete V69 confirmation")
     require(freeze["models"] == dev["models"], "V69 frozen models differ from development")
     frozen_rows = indexed(freeze["predictions"], ("state", "config", "capability"))
