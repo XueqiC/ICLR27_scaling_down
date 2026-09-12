@@ -1,0 +1,639 @@
+{
+  "per_state": [
+    {
+      "state": "pythia-160m@step32000",
+      "objective": "math",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0,
+        "v64-law": 0.0005117921565525694,
+        "quant-only": 3.4894919764958005e-05,
+        "cheapest": 2.9025454680804543
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-410m@step32000",
+      "objective": "math",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0,
+        "v64-law": 0.02844168593641682,
+        "quant-only": 9.305311937317781e-06,
+        "cheapest": 1.6073076940971756
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step32000",
+      "objective": "math",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 2.4426443835457542e-05,
+        "v64-law": 0.030379517147363613,
+        "quant-only": 0.0,
+        "cheapest": 2.248675156212924
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-1b@step64000",
+      "objective": "math",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0,
+        "v64-law": 0.0004338601690775183,
+        "quant-only": 0.026970283486328156,
+        "cheapest": 0.3279017452112539
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "distill:pythia-160m@step64000",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-160m@step32000",
+      "objective": "code",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0,
+        "v64-law": 0.0,
+        "quant-only": 3.4955746025522316e-05,
+        "cheapest": 3.7673030942826378
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-410m@step32000",
+      "objective": "code",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0010137166347404085,
+        "v64-law": 0.4104748388540108,
+        "quant-only": 0.0009228316950740242,
+        "cheapest": 2.053674548022204
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step32000",
+      "objective": "code",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.011972343013744613,
+        "v64-law": 0.013314643661125048,
+        "quant-only": 0.012024776632782916,
+        "cheapest": 3.5268634908206202
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-1b@step64000",
+      "objective": "code",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0043205302087556815,
+        "v64-law": 0.02564353528433012,
+        "quant-only": 0.02781428711251553,
+        "cheapest": 0.3906059928130986
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "distill:pythia-160m@step64000",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-160m@step32000",
+      "objective": "qa",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.2204659192574372,
+        "v64-law": 0.14170837061060162,
+        "quant-only": 0.1264398344889291,
+        "cheapest": 1.882328477969134
+      },
+      "locked_distinct_configurations": 4,
+      "locked_config_ids": [
+        "prune:d0.6",
+        "prune:d0.7",
+        "quant:b3_g128",
+        "quant:channel_b4"
+      ]
+    },
+    {
+      "state": "pythia-410m@step32000",
+      "objective": "qa",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.04699731603668072,
+        "v64-law": 0.18324340192350697,
+        "quant-only": 0.21601012077834914,
+        "cheapest": 1.4591953701632747
+      },
+      "locked_distinct_configurations": 4,
+      "locked_config_ids": [
+        "prune:d0.6",
+        "prune:d0.7",
+        "quant:b3_g128",
+        "quant:channel_b4"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step32000",
+      "objective": "qa",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.2441358197271302,
+        "v64-law": 0.5239320062625807,
+        "quant-only": 0.38749720420487554,
+        "cheapest": 2.013168195034668
+      },
+      "locked_distinct_configurations": 4,
+      "locked_config_ids": [
+        "prune:d0.6",
+        "prune:d0.7",
+        "quant:b3_g128",
+        "quant:channel_b4"
+      ]
+    },
+    {
+      "state": "pythia-1b@step64000",
+      "objective": "qa",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.052428148065309634,
+        "v64-law": 0.005406368821292731,
+        "quant-only": 0.2803623350480877,
+        "cheapest": 0.052428148065309634
+      },
+      "locked_distinct_configurations": 1,
+      "locked_config_ids": [
+        "distill:pythia-160m@step64000"
+      ]
+    },
+    {
+      "state": "pythia-160m@step32000",
+      "objective": "multi",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0011689201059892221,
+        "v64-law": 0.003602994345902297,
+        "quant-only": 0.0012038758520147444,
+        "cheapest": 3.764621955937486
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-410m@step32000",
+      "objective": "multi",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.002180085176997343,
+        "v64-law": 0.0016771211689752263,
+        "quant-only": 0.002333853908824679,
+        "cheapest": 2.0505326358193674
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step32000",
+      "objective": "multi",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.004742795649706183,
+        "v64-law": 0.002121611121708846,
+        "quant-only": 0.005322923137963819,
+        "cheapest": 3.5073426746713743
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "quant:b3_g128",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    },
+    {
+      "state": "pythia-1b@step64000",
+      "objective": "multi",
+      "n_budgets": 17,
+      "mean_regret": {
+        "locked-rule": 0.0,
+        "v64-law": 0.0,
+        "quant-only": 0.02349375690375985,
+        "cheapest": 0.38262441958979454
+      },
+      "locked_distinct_configurations": 7,
+      "locked_config_ids": [
+        "dense:source",
+        "distill:pythia-160m@step64000",
+        "quant:b4_g64",
+        "quant:b5_g64",
+        "quant:channel_b4",
+        "quant:channel_b6",
+        "quant:channel_b8"
+      ]
+    }
+  ],
+  "pooled_mean_regret": {
+    "math": {
+      "locked-rule": 6.1066109588643855e-06,
+      "v64-law": 0.01494171385235263,
+      "quant-only": 0.006753620929507607,
+      "cheapest": 1.771607515900452
+    },
+    "code": {
+      "locked-rule": 0.004326647464310176,
+      "v64-law": 0.1123582544498665,
+      "quant-only": 0.010199212796599499,
+      "cheapest": 2.4346117814846395
+    },
+    "qa": {
+      "locked-rule": 0.14100680077163943,
+      "v64-law": 0.2135725369044955,
+      "quant-only": 0.2525773736300604,
+      "cheapest": 1.3517800478080966
+    },
+    "multi": {
+      "locked-rule": 0.0020229502331731873,
+      "v64-law": 0.0018504316591465924,
+      "quant-only": 0.008088602450640773,
+      "cheapest": 2.4262804215045044
+    }
+  },
+  "candidate_sets": [
+    {
+      "objective": "math",
+      "policy": "locked-rule",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 30,
+        "2": 28,
+        "3": 10,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 44.11764705882353,
+        "2": 41.1764705882353,
+        "3": 14.705882352941176,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 38,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 28,
+        "3": 10,
+        "4": 0
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 68,
+      "method_coverage": 1.0,
+      "config_coverage": 1.0,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "math",
+      "policy": "v64-law",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 31,
+        "2": 27,
+        "3": 10,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 45.588235294117645,
+        "2": 39.705882352941174,
+        "3": 14.705882352941176,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 37,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 27,
+        "3": 10,
+        "4": 0
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 39,
+      "method_coverage": 1.0,
+      "config_coverage": 0.5735294117647058,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "code",
+      "policy": "locked-rule",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 30,
+        "2": 28,
+        "3": 10,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 44.11764705882353,
+        "2": 41.1764705882353,
+        "3": 14.705882352941176,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 38,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 28,
+        "3": 10,
+        "4": 0
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 37,
+      "method_coverage": 1.0,
+      "config_coverage": 0.5441176470588235,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "code",
+      "policy": "v64-law",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 30,
+        "2": 26,
+        "3": 11,
+        "4": 1
+      },
+      "size_percent": {
+        "1": 44.11764705882353,
+        "2": 38.23529411764706,
+        "3": 16.176470588235293,
+        "4": 1.4705882352941178
+      },
+      "n_no_clear_winner": 38,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 26,
+        "3": 11,
+        "4": 1
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 23,
+      "method_coverage": 1.0,
+      "config_coverage": 0.3382352941176471,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "qa",
+      "policy": "locked-rule",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 24,
+        "2": 32,
+        "3": 12,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 35.294117647058826,
+        "2": 47.05882352941177,
+        "3": 17.647058823529413,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 44,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 32,
+        "3": 12,
+        "4": 0
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 18,
+      "method_coverage": 1.0,
+      "config_coverage": 0.2647058823529412,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "qa",
+      "policy": "v64-law",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 26,
+        "2": 30,
+        "3": 12,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 38.23529411764706,
+        "2": 44.11764705882353,
+        "3": 17.647058823529413,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 42,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 30,
+        "3": 12,
+        "4": 0
+      },
+      "oracle_method_covered": 66,
+      "oracle_config_covered": 23,
+      "method_coverage": 0.9705882352941176,
+      "config_coverage": 0.3382352941176471,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "multi",
+      "policy": "locked-rule",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 30,
+        "2": 28,
+        "3": 10,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 44.11764705882353,
+        "2": 41.1764705882353,
+        "3": 14.705882352941176,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 38,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 28,
+        "3": 10,
+        "4": 0
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 54,
+      "method_coverage": 1.0,
+      "config_coverage": 0.7941176470588235,
+      "method_coverage_no_clear_winner": 1.0
+    },
+    {
+      "objective": "multi",
+      "policy": "v64-law",
+      "n_cells": 68,
+      "size_counts": {
+        "1": 32,
+        "2": 26,
+        "3": 10,
+        "4": 0
+      },
+      "size_percent": {
+        "1": 47.05882352941177,
+        "2": 38.23529411764706,
+        "3": 14.705882352941176,
+        "4": 0.0
+      },
+      "n_no_clear_winner": 36,
+      "no_clear_winner_size_counts": {
+        "1": 0,
+        "2": 26,
+        "3": 10,
+        "4": 0
+      },
+      "oracle_method_covered": 68,
+      "oracle_config_covered": 62,
+      "method_coverage": 1.0,
+      "config_coverage": 0.9117647058823529,
+      "method_coverage_no_clear_winner": 1.0
+    }
+  ],
+  "verdict": {
+    "math": "confirmed",
+    "code": "confirmed",
+    "qa": "confirmed",
+    "multi": "retrospective"
+  },
+  "kd_provenance": {
+    "source": "pythia-1b@step64000",
+    "students": {
+      "pythia-160m@step64000": {
+        "tag": "pythia-160m@step64000",
+        "N0": 84934656,
+        "D0": 134217728000,
+        "dense": {
+          "math": 1.7309776160721349,
+          "code": 1.6732826241977656,
+          "qa": 4.920746197718631
+        },
+        "path": "results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/eval.json",
+        "teacher": "gpt-5.6-luna"
+      },
+      "pythia-410m@step64000": {
+        "tag": "pythia-410m@step64000",
+        "N0": 301989888,
+        "D0": 134217728000,
+        "dense": {
+          "math": 1.4996638456062643,
+          "code": 1.4356429759923937,
+          "qa": 5.031190589353612
+        },
+        "path": "results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/eval.json",
+        "teacher": "gpt-5.6-luna"
+      }
+    },
+    "original_v39_cohort_size": 9,
+    "v78_train_students": [
+      "pythia-1.4b@step143000",
+      "pythia-1.4b@step16000",
+      "pythia-1.4b@step64000",
+      "pythia-160m@step143000",
+      "pythia-160m@step16000",
+      "pythia-410m@step143000",
+      "pythia-410m@step16000"
+    ],
+    "excluded_states": [
+      "pythia-160m@step64000",
+      "pythia-1b@step64000",
+      "pythia-410m@step64000"
+    ],
+    "v78_train_count": 7,
+    "post_training_outcomes_in_v78_prediction_fit": false,
+    "historical_outcomes_reused_for_scoring": true,
+    "teacher": "gpt-5.6-luna"
+  }
+}

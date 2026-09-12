@@ -12,23 +12,21 @@ token.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.6\textwidth]{figs/transfer_limits.pdf}
+\includegraphics[width=0.55\textwidth]{figs/transfer_limits.pdf}
 \caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference in nats, averaged over capabilities; positive = candidate better) per new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE in each cell; hatched cells were not evaluated. Bottom: the distillation pool tests per capability against the frozen constant. All predictions were frozen before the corresponding measurement.}
 \label{fig:transfer}
 \end{figure}
 \subsection{Prediction at Unseen Compression Settings}
 \label{sec:unseen_settings}
 
-\paragraph{Pruning densities.} On the three checkpoints that entered
-no fit, at densities 0.85, 0.675, and 0.575, the delivered power form
-has MAE 0.24, 0.24, and 0.68 for math, code, and QA: it beats the
-strength-only curve (0.45, 0.49, 0.58) and zero change on every
-checkpoint, has the lowest math error of all predictors, ties the
-median curve on code, and loses QA to every source-free curve (median
-0.22) because it over-predicts the QA improvement, so the median has
-the lowest aggregate error (0.24 against 0.39). At $d=0.55$, beyond
-the range, every source-conditioned form fails on every source (0.6
-to 4.5 nats): the transfer range is the interpolation regime.
+\paragraph{Pruning densities.} On three checkpoints that entered no
+fit, at densities 0.85, 0.675, and 0.575, the delivered power form has
+MAE 0.24, 0.24, and 0.68 for math, code, and QA: it beats the
+strength-only curve and zero change on every checkpoint, has the
+lowest math error of all predictors, ties the median curve on code,
+and loses QA to every source-free curve (median 0.22). At $d=0.55$,
+beyond the range, every source-conditioned form fails on every source
+(0.6 to 4.5 nats): the transfer range is the interpolation regime.
 
 \paragraph{Quantization settings.} The per-channel predictor's one
 unseen setting, 5 bits by a fixed interpolation rule, is worse than a
@@ -74,10 +72,9 @@ the power form, A2, and the median curve are within 0.05 nats of one
 another: a new in-range size is predicted about as well by the source
 relation as by the development median. For a 6.9B source, five times the development range, the
 source-conditioned pruning forms lose to the median curve on math
-(0.30 against 0.12) and QA (0.91 against 0.12) and tie on code: the
-regression extends the panel's size trend into QA improvements that
-do not occur, and the per-bit quantization regression is worse than
-the per-bit median at every bit-width. On 6.9B@80k the power form ties the median on math and loses on
+(0.30 against 0.12) and QA (0.91 against 0.12) and tie on code, and
+the per-bit quantization regression is worse than the per-bit median
+at every bit-width. On 6.9B@80k the power form ties the median on math and loses on
 code and QA, and on a 2.8B source inside the refit size range the frozen median
 density curve $\widetilde f_c(d)$ predicts within 0.08, 0.05, and 0.07
 nats while both source-conditioned forms are three to
@@ -116,10 +113,9 @@ response differs across capabilities.
 \paragraph{Shared structure and ranges.} One function family across
 methods holds for pruning by construction and fails for quantization
 and distillation; within pruning one exponent shared across
-capabilities costs nothing, whereas the quantization coefficients must
-be capability-specific; parameter intervals, per-source exponent
-spreads, and 80\% prediction intervals that under-cover (78\% and
-67\%) are reported in Appendix~\ref{sec:app_shared}, together with
-the one-point calibration result.
+capabilities costs nothing, whereas the quantization coefficients
+must be capability-specific; parameter intervals, per-source
+exponent spreads, and 80\% prediction intervals that under-cover
+(78\% and 67\%) are in Appendix~\ref{sec:app_shared}.
 
 \FloatBarrier

@@ -6,7 +6,6 @@ Test & unseen & origin & math & code & QA \\
 \multicolumn{6}{@{}l}{\textit{Source axis: seen setting, unseen source state}} \\
 prune: fixed $d$, $3{\times}3$, leave-one-stage-out & stage & RFRA & \textbf{0.253}/0.413{\scriptsize\,med} & \textbf{0.292}/0.516{\scriptsize\,med} & 0.806/\textbf{0.500}{\scriptsize\,0} \\
 \addlinespace[1.5pt]
-quant: fixed $b$, $3{\times}3$, leave-one-stage-out & stage & RFRA & \textbf{1.144}/1.410{\scriptsize\,med} & \textbf{0.626}/1.553{\scriptsize\,med} & 1.989/\textbf{1.473}{\scriptsize\,med} \\
 \addlinespace[1.5pt]
 prune: stage 96k (160M, 1.4B), all $d$ & stage & PFRA & \textbf{0.090}/0.343{\scriptsize\,nD} & \textbf{0.128}/0.179{\scriptsize\,nD} & \textbf{0.426}/0.438{\scriptsize\,nD} \\
 \addlinespace[1.5pt]
@@ -18,7 +17,6 @@ prune: $d$ 0.65/0.55, dev sources + 410M@96k & $d$ & PRFA & 0.371/\textbf{0.283}
 \addlinespace[1.5pt]
 \addlinespace[1.5pt]
 prune: 1B@32k+112k, $d$ 0.9--0.6 & size, stage & PFFA & 0.215/\textbf{0.169}{\scriptsize\,so} & 0.191/\textbf{0.119}{\scriptsize\,A2} & 0.261/\textbf{0.227}{\scriptsize\,med} \\
-prune: 1B@32k+112k, $d=0.55$ & size, stage, $d$ & PFFA & 1.790/\textbf{0.939}{\scriptsize\,so} & 1.488/\textbf{0.089}{\scriptsize\,so} & 2.225/\textbf{0.393}{\scriptsize\,so} \\
 \addlinespace[1.5pt]
 \addlinespace[1.5pt]
 prune: 6.9B@32k+112k, $d$ 0.9--0.6 & size$\uparrow$, stage & PFFA & 0.299/\textbf{0.120}{\scriptsize\,med} & 0.160/\textbf{0.144}{\scriptsize\,A2} & 0.909/\textbf{0.120}{\scriptsize\,med} \\

@@ -1,23 +1,19 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
 
-Table~\ref{tab:final} (Appendix~\ref{sec:app_results}) answers the same five questions for each arm:
-what predictor is delivered, which pre-compression inputs it needs,
-which parts were frozen and which choices are retrospective, where it
-gains over the strongest same-information baseline, and where it does
-not apply. The pattern across arms is consistent. Source-conditioned
-forms add value at unseen configurations of seen states (pruning
-densities, quantization group sizes, distillation code at a new pool
-size), and on new model states the source-free references are as good
-or better: the median density curve on 2.8B and 6.9B, the
-per-configuration median on the new quantization state, the constant
-on the held-out student. QA is carried by source-free predictors on
-every arm, and its distillation gain is repeatable within the 2Wiki
-distribution and reverses sign on MuSiQue and TriviaQA
-(Appendix~\ref{sec:app_measure}). \S\ref{sec:selection} connects the
-laws to an explicit selection problem.
+Table~\ref{tab:final} (Appendix~\ref{sec:app_results}) answers, per
+arm, what predictor is delivered, which inputs it needs, which parts
+were frozen and which choices are retrospective, where it gains over
+the strongest same-information baseline, and where it does not apply.
+The pattern is consistent: source-conditioned forms add value at
+unseen configurations of seen states, and on new model states the
+source-free references are as good or better. QA is carried by
+source-free predictors on every arm, and its distillation gain is
+repeatable within the 2Wiki distribution and reverses sign on MuSiQue
+and TriviaQA (Appendix~\ref{sec:app_measure}); \S\ref{sec:selection}
+connects the relations to an explicit selection problem.
 
-The dense capability anchor is the input to keep, the working forms
-are low-dimensional, and transfer across sizes is unreliable. The
+The reference anchor is the input to keep, the working forms are
+low-dimensional, and transfer across sizes is unreliable; the
 limitations are small correlated panels, one quantizer family and one
 teacher, and nominal storage as the only selection cost.

@@ -3,7 +3,7 @@
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.62\textwidth]{figs/predictive_responses.pdf}
+\includegraphics[width=0.56\textwidth]{figs/predictive_responses.pdf}
 \caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median curve; the 6.9B source is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources with the frozen per-bit regression (hollow) and the per-bit median (dotted). Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms. Lines are fits frozen before the test points were measured; native nats per token.}
 \label{fig:responses}
 \end{figure}
@@ -18,9 +18,8 @@ error from 0.413, 0.516, and 0.500 nats to 0.253, 0.292, and 0.806
 for math, code, and QA (interval above zero for code, crossing for
 math, negative for QA). Adding the dense anchor $L_{0,c}$ to
 $(N_0,D_0)$ has intervals above zero for math ($+0.55$, $[0.29,1.00]$)
-and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not (Fig.~\ref{fig:inputs}A). Every relation is therefore conditioned on the three
-inputs, with the dense anchor as the carrier and $D_0$ as a weak
-second-order term, per capability.
+and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not (Fig.~\ref{fig:inputs}A). Every relation is therefore conditioned on the three inputs per
+capability, with the reference anchor as the carrier.
 
 \subsection{Pruning}
 \label{sec:law_prune}
@@ -39,13 +38,12 @@ set (Appendix~\ref{sec:app_details}, Table~\ref{tab:models}). Its same-input alt
 unseen $d$ by linear interpolation between fitted densities), the
 power form with $\gamma_c=1$, and a two-term polynomial in $1-d$; the
 source-free references are a strength-only curve, the median
-development curve, and zero change. Fit on the nine
-states at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at the unseen 0.65
-and 0.55, Eq.~\eqref{eq:power} cuts the strength-only error by two to
-three times on every capability, and A2 is better on math and code
-and within noise on QA (Table~\ref{tab:pred_main}): reading the source
-state is what matters, and the power structure adds nothing over the
-per-density regression. After the frozen tests of \S\ref{sec:general} both were refit on 17
+development curve, and zero change. Fit on the nine states at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at
+the unseen 0.65 and 0.55, Eq.~\eqref{eq:power} cuts the strength-only
+error by two to three times on every capability, and A2 matches it
+(Table~\ref{tab:pred_main}): reading the source state is what
+matters, and the power structure adds nothing over the per-density
+regression. After the frozen tests of \S\ref{sec:general} both were refit on 17
 states under a pre-committed leave-one-source-out rule: A2 (0.479) and
 the power form (0.494) tie within 0.02 nats, and the rule prefers the
 continuous form that vanishes at $d=1$. Its coefficients
@@ -70,9 +68,8 @@ form, the low-order surface
 \label{eq:quant2d}
 \end{equation}
 with one four-vector of state coefficients per term, and a same-input
-bilinear interpolation. With two development bit-widths $u^2$ is
-constant on the development cells (rank 16 of 20; the curvature is set
-by the ridge penalty, Appendix~\ref{sec:app_forms}), and with six
+bilinear interpolation. With two development bit-widths $u^2$ is constant on the development
+cells (rank 16 of 20, Appendix~\ref{sec:app_forms}), and with six
 states the leave-one-state-out errors select no form. The frozen
 tests of \S\ref{sec:unseen_settings} and a confirmation round with all
 54 unblinded cells as development set (three bit levels, full rank)
@@ -87,10 +84,9 @@ parametric surface loses on every confirmation test.
 \label{sec:law_distill}
 
 The response is the signed transfer $\delta_c$ of an existing student
-to teacher traces, relative to the student's own dense loss; the
-teacher never enters it. Its coordinates are the supervised
-completion tokens $T$, the pool size $D_U$, and the reuse count
-$E=T/D_U$. QA improves under every recipe we ran while math and code respond by
+to teacher traces relative to its own reference loss; the teacher
+never enters it. Its coordinates are the supervised completion tokens
+$T$, the pool size $D_U$, and the reuse count $E=T/D_U$. QA improves under every recipe we ran while math and code respond by
 a few hundredths to a few tenths of a nat; with a small pool the QA
 loss rises again at large $E$ (Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the 2Wiki probe
 distribution and on a fresh sample of it, and on the same checkpoints

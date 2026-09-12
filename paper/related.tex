@@ -11,7 +11,7 @@ pre-compression loss and add a per-capability endpoint measured the
 same way for three methods, a development panel in which size and
 stage vary separately, and held-out tests with same-input baselines.
 
-\paragraph{Compression methods and their task-conditioned evaluation.}
+\paragraph{Methods and task-conditioned evaluation.}
 The fixed operations stand in for method families: pruning
 \citep{lecun1989optimal,hassibi1992second,han2015deep,frankle2019lottery,frantar2023sparsegpt,sun2023simple,ma2023llmpruner,ashkboos2024slicegpt,men2024shortgpt},
 post-training quantization
@@ -36,15 +36,14 @@ continuous conditional loss, admit the dense capability anchor and
 training tokens as inputs, and treat the three methods with one
 protocol.
 
-\paragraph{Fitting and validating empirical laws.} Pretraining loss follows power laws in parameters and data
+\paragraph{Fitting and validating empirical laws.} Pretraining loss
+follows power laws in parameters and data
 \citep{hestness2017deep,kaplan2020scaling,hoffmann2022training};
 downstream accuracy is predictable mainly through continuous
 log-likelihood measurements
 \citep{wei2022emergent,schaeffer2023emergent,schaeffer2024predicting,gadre2024language,isik2024scaling,bhagia2024establishing,lourie2025scaling},
-which motivates our loss endpoint and its stated boundaries; fitted
-scaling-law forms are fragile to the fitting protocol
+fitted law forms are fragile to the fitting protocol
 \citep{li2025misfitting,besiroglu2024chinchilla}, and repeated tokens
-are worth less than new tokens in data-constrained pretraining
-\citep{muennighoff2023scaling}, an effect our reuse-count coordinate
-measures in the distillation setting. Gradient-based importance \citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple}
+are worth less than new ones \citep{muennighoff2023scaling}; gradient
+importance \citep{lecun1989optimal,frantar2023sparsegpt,sun2023simple}
 enters here only as mechanism evidence (Appendix~\ref{sec:app_mech}).

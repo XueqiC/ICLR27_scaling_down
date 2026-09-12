@@ -4,8 +4,8 @@ v52), keeps the rows whose label starts with one of KEEP, writes paper/paper/tab
 and paper/paper/tables/pred_full.tex (all rows, label tab:pred_full, [H]) for Appendix D. Numbers are copied verbatim."""
 import re; from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]; T = ROOT / "paper/paper/tables"
-KEEP = ["prune: fixed $d$", "quant: fixed $b$", "distill: $\\delta_c$", "prune: stage 96k", "quant: new stage 96k (160M/410M/1.4B), $b\\ge4$",
-        "prune: $d$ 0.65/0.55", "prune: 1B@32k+112k, $d$ 0.9--0.6", "prune: 1B@32k+112k, $d=0.55$", "prune: 6.9B@32k+112k, $d$ 0.9--0.6",
+KEEP = ["prune: fixed $d$", "distill: $\\delta_c$", "prune: stage 96k", "quant: new stage 96k (160M/410M/1.4B), $b\\ge4$",
+        "prune: $d$ 0.65/0.55", "prune: 1B@32k+112k, $d$ 0.9--0.6", "prune: 6.9B@32k+112k, $d$ 0.9--0.6",
         "quant: 6.9B@32k+112k, $b\\ge4$", "distill: unseen pool U225", "KD 270M", "KD 1B", "KD 4B"]
 src = (T / "pred_main.tex").read_text(); lines = src.split("\n")
 out, kept, dropped = [], 0, 0

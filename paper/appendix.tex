@@ -804,12 +804,24 @@ fallback. Predictions under this rule and under the earlier
 source-conditioned laws were frozen for four fresh states before
 measurement (Table~\ref{tab:rule-confirm}; Fig.~\ref{fig:rule_maps});
 the multi-capability evaluation is prospective and its prespecified
-criterion was not met.
+criterion was not met. The distillation candidates on 1B@64k are the
+existing v39 students 160M@64k and 410M@64k, whose post-training
+outcomes were purged from the fits that predict them; per-state
+regrets and candidate-set sizes are in
+Tables~\ref{tab:rule-confirm-by-state} and
+\ref{tab:rule-confirm-candidate-sizes}.
 \input{tables/rule_confirm}
+\input{tables/rule_confirm_by_state}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figs/rule_maps.pdf}
-\caption{Per-capability selection maps on the four fresh states under the locked rule and under the earlier source-conditioned laws (row pairs), against nominal storage budget; colour = predicted method, marker = the measured oracle's method, hatching = no-clear-winner candidate set. The QA map differs from the math and code maps; the bottom-right panel is the largest loss increase across capabilities, $\max_c[L_c(M)-L_c(M_0)]$.}
+\includegraphics[width=0.45\textwidth]{figs/rule_regret.pdf}
+\caption{Mean regret per objective on the four fresh states (log scale) for the locked rule, the earlier laws, quantization-only, and the cheapest feasible configuration.}
+\label{fig:rule_regret}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figs/rule_maps_full.pdf}
+\caption{Full selection maps on the four fresh states under the locked rule and under the earlier source-conditioned laws (row pairs), against nominal storage budget; colour = predicted method, marker = the measured oracle's method, hatching = no-clear-winner candidate set. The bottom-right panel is the largest loss increase across capabilities, $\max_c[L_c(M)-L_c(M_0)]$.}
 \label{fig:rule_maps}
 \end{figure}
 \input{tables/candidate_coverage}

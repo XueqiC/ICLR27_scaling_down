@@ -11,9 +11,8 @@ pruning, quantization, or distillation, and choosing the route and its
 strength today means running each candidate through capability
 benchmarks. A single compression ratio cannot replace that search, because
 compression does not shrink capabilities uniformly: across twelve
-public models from five series, the same pruning density leaves QA
-the least-damaged capability in some series and the most-damaged in
-others, and 3-bit quantization collapses twelve of fourteen models
+public models, the same pruning density leaves QA the least-damaged
+capability in some series and the most-damaged in others
 (Appendix~\ref{sec:app_hetero}).
 
 We therefore ask how the capability-conditioned loss after compression
@@ -47,7 +46,7 @@ a development-then-validation design that separates input value, form
 value, and transfer range; (2) the per-method relations, their
 coefficients, and their independent tests against same-input and
 source-free baselines, with the capabilities and settings they cover
-and where they stop; and (3) a connection of these relations to an
-explicit capability- and budget-specific selection problem, validated
-retrospectively on held-out states, with measurements, registered
-predictions, and code released.
+and where they stop; and (3) a connection of these relations to an explicit capability-
+and budget-specific selection problem, validated retrospectively on
+held-out states and prospectively, for one locked rule, on four fresh
+states, with measurements, registered predictions, and code released.

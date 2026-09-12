@@ -10,12 +10,10 @@ probe set $\probeset{c}$ of prompt and reference pairs drawn once
 from held-out splits of MATH-500
 \citep{hendrycks2021math,lightman2023verify}, MBPP
 \citep{austin2021program}, and 2WikiMultihopQA
-\citep{ho2020constructing}. Each probe set fixes one evaluation
-distribution $j$ for its capability, so the measured quantity is
-$L_{c,j}$, the conditional loss of capability $c$ on distribution $j$;
-we write $L_c$ with the fixed distribution implied and test in
-Appendix~\ref{sec:app_measure} how far a response carries to other
-distributions of the same capability. The observable is the
+\citep{ho2020constructing}. Each probe set fixes one evaluation distribution $j$, so the measured
+quantity is $L_{c,j}$; we write $L_c$ with the fixed distribution
+implied and test in Appendix~\ref{sec:app_measure} how far a response
+carries to other distributions of the same capability. The observable is the
 token-weighted conditional cross-entropy of the reference completion,
 \begin{equation}
 \Lc{c}(w)\;=\;\frac{1}{T_c}\sum_{(x,y)\in\probeset{c}}\;\sum_{t=1}^{|y|}
