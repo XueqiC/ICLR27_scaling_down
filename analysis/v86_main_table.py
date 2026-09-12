@@ -19,6 +19,11 @@ import re
 from statistics import mean
 import sys
 
+try:
+    from . import provenance
+except ImportError:
+    import provenance
+
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 TABLES = ROOT / "paper/paper/tables"
@@ -203,7 +208,8 @@ def build_rows():
         register.ref("selected_candidate"), "; ".join(p.ref("mae") for p in panel)))
 
     comp, freeze = read("v72-prune-repeat/compare.json"), read("v72-prune-repeat/freeze.json")
-    require(comp.data["provenance"]["freeze_sha256"] == freeze.sha256, "C52 freeze hash")
+    require(provenance.matches(comp.data["provenance"]["freeze_sha256"], freeze.sha256),
+            "C52 freeze hash")
     require(freeze.data["selected_candidate"] == "power", "C52 candidate changed")
     paired_rows(comp, freeze, ("source", "density", "capability"), "observed_delta_loss")
     rr = list(enumerate(comp.data["rows"]))

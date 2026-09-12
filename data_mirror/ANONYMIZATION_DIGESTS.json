@@ -1,0 +1,60 @@
+{
+  "files": {
+    "data_mirror/v47-p2-register/register.json": {
+      "anonymized_sha256": "2d1eadd9a7b720d08cb1ab6629176bbea4b3c1f2c3c5b23fb9bbdb13f84a48b6",
+      "original_sha256": "c12167d4b12b9c18e5983239573868ea4a7dfe3f62c8b638f3a10f99970e4757",
+      "substitutions": 6
+    },
+    "data_mirror/v67-musique-qa/measurements.json": {
+      "anonymized_sha256": "9d319a74eb94146b9b0f95002dd2074b6f55a768c945362ce7f8ff5c0b3cec77",
+      "original_sha256": "4dd03ac164f0c16129ac8f135af05f46516e26de48160aa51cea4e89e94b8c23",
+      "substitutions": 34
+    },
+    "data_mirror/v69-quant-confirm/freeze.json": {
+      "anonymized_sha256": "abaa8057de07026da28169430a12bd280c7ab9810f1d42e7534dbd9f26a9ea0d",
+      "original_sha256": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+      "substitutions": 13
+    },
+    "data_mirror/v70-distill-confirm/freeze.json": {
+      "anonymized_sha256": "73cfc29ad44fc9457583b04d5044b9e7bb47a2dcba29bebbe90948a8c8f0543d",
+      "original_sha256": "d7b28c7251dbc6113c3de7c957560827e603d4e77a48010f99835a8468db0c24",
+      "substitutions": 12
+    },
+    "data_mirror/v71-qa-scope/measurements.json": {
+      "anonymized_sha256": "2150e6c79d4047f53b9695f8585f9a0071f0d822fa2f9fad2c070d8b4e0fc2bc",
+      "original_sha256": "d127e75abaea9d7d401c8dd3d61dfd6f9ff4f00017548dc55e4ad9aec43df9e1",
+      "substitutions": 8
+    },
+    "data_mirror/v71-qa-scope/register.json": {
+      "anonymized_sha256": "b0d136decd0dc4d5177fa2c404648d482e79e317859f306dca056d70f4d975f7",
+      "original_sha256": "79cdd66f16a85be13b1080b295f4170c688d575b6ee4c9914fbf272ccd4dd561",
+      "substitutions": 8
+    },
+    "data_mirror/v72-prune-repeat/freeze.json": {
+      "anonymized_sha256": "8e93f7d56cbc236ade10ce00ae3cf3f48a83def850d8d5414a2ba4c31b97bbf5",
+      "original_sha256": "3f4e45d0bd505b7d65815f2246a5c3b343f3a49be465aedf724aaa208b0de8b9",
+      "substitutions": 1
+    },
+    "data_mirror/v77-model-arch/model_arch.json": {
+      "anonymized_sha256": "401e474ef21d239f82164fd096842688a13bbe59078b01595f86acd68246bb17",
+      "original_sha256": "3fc08ed204ddc39583f7f7fba82345f95f6bfe71380355b7529625b074abf242",
+      "substitutions": 198
+    },
+    "data_mirror/v77-model-arch/weight_identity.json": {
+      "anonymized_sha256": "a48a4b7921251752496c4e9c1ae224f40de1901028ab5a7bffdbe034d718e3c9",
+      "original_sha256": "a74c4e08c9a4d9d9a37cd8547f571d19ba853596eaabef151e5ac4c3369e9031",
+      "substitutions": 181
+    },
+    "data_mirror/v78-rule-confirm/plan.json": {
+      "anonymized_sha256": "26dac0804da34944d45808492ae7c5c11a8907989723f2d77468424ab6549554",
+      "original_sha256": "534f6037baedf888cbaac22d28faaa37cd425f00772a7bf03dd481f46462d566",
+      "substitutions": 2
+    },
+    "data_mirror/v78-rule-confirm/verification.json": {
+      "anonymized_sha256": "e89e9cbcb08c07cc7fdbf7cc36a095671c908bf6c7b41856e6182155d040ec87",
+      "original_sha256": "eeacaa150c5458ffba9f225ccccd04455504b3322f1e4bfeeb6dbf41d4368d23",
+      "substitutions": 9
+    }
+  },
+  "what": "Files whose text was anonymised before publication. A frozen record names original_sha256; the file shipped here hashes to anonymized_sha256. Only author, host, institution and path strings differ; no measurement value was changed."
+}
