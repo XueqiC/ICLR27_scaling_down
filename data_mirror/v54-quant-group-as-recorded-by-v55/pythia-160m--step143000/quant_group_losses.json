@@ -1,0 +1,179 @@
+{
+  "_meta": {
+    "hf_id": "EleutherAI/pythia-160m",
+    "revision": "step143000",
+    "model_dtype": "bf16",
+    "probe_seed": 0,
+    "n_probe": 128,
+    "probe_half": "odd-indexed [1::2]",
+    "loss_protocol": "v10._measure_capability_losses (completion-token-weighted CE)",
+    "quantization": "symmetric round-to-nearest (torch.round, ties to even)",
+    "padding_rule": "Zero-pad the last input group in each row to group_size; zeros cannot change the absmax of the real entries. Trim padding after quantization. group_size=0 or None uses V10 per-output-channel quantization.",
+    "model_tag": "pythia-160m@step143000",
+    "created_at_utc": "2026-09-10T01:20:55.757268+00:00",
+    "configs": {
+      "b3_g64": {
+        "bits": 3,
+        "group_size": 64,
+        "qmax": 3,
+        "started_at_utc": "2026-09-10T01:22:06.792425+00:00",
+        "completed_at_utc": "2026-09-10T01:23:12.335810+00:00",
+        "wall_time_s": 65.5433497345075,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b3_g256": {
+        "bits": 3,
+        "group_size": 256,
+        "qmax": 3,
+        "started_at_utc": "2026-09-10T01:23:12.336806+00:00",
+        "completed_at_utc": "2026-09-10T01:24:16.275038+00:00",
+        "wall_time_s": 63.938189269043505,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b5_g64": {
+        "bits": 5,
+        "group_size": 64,
+        "qmax": 15,
+        "started_at_utc": "2026-09-10T01:24:16.276142+00:00",
+        "completed_at_utc": "2026-09-10T01:25:22.097218+00:00",
+        "wall_time_s": 65.82102915551513,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b5_g256": {
+        "bits": 5,
+        "group_size": 256,
+        "qmax": 15,
+        "started_at_utc": "2026-09-10T01:25:22.098259+00:00",
+        "completed_at_utc": "2026-09-10T01:26:26.347694+00:00",
+        "wall_time_s": 64.24939850345254,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b4_g64": {
+        "bits": 4,
+        "group_size": 64,
+        "qmax": 7,
+        "started_at_utc": "2026-09-10T01:56:28.444339+00:00",
+        "completed_at_utc": "2026-09-10T01:57:48.265015+00:00",
+        "wall_time_s": 79.8205968812108,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b4_g256": {
+        "bits": 4,
+        "group_size": 256,
+        "qmax": 7,
+        "started_at_utc": "2026-09-10T01:57:48.266341+00:00",
+        "completed_at_utc": "2026-09-10T01:59:02.468523+00:00",
+        "wall_time_s": 74.20213837455958,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b3_g128": {
+        "bits": 3,
+        "group_size": 128,
+        "qmax": 3,
+        "started_at_utc": "2026-09-10T02:16:38.175934+00:00",
+        "completed_at_utc": "2026-09-10T02:17:43.795335+00:00",
+        "wall_time_s": 65.61933932825923,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b4_g128": {
+        "bits": 4,
+        "group_size": 128,
+        "qmax": 7,
+        "started_at_utc": "2026-09-10T02:17:43.796867+00:00",
+        "completed_at_utc": "2026-09-10T02:18:48.401472+00:00",
+        "wall_time_s": 64.6045508729294,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      },
+      "b5_g128": {
+        "bits": 5,
+        "group_size": 128,
+        "qmax": 15,
+        "started_at_utc": "2026-09-10T02:18:48.402969+00:00",
+        "completed_at_utc": "2026-09-10T02:19:53.035542+00:00",
+        "wall_time_s": 64.63252275064588,
+        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
+        "device": "cuda:0",
+        "reference_device": "cpu"
+      }
+    },
+    "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+    "measurement_samples": {
+      "math": 64,
+      "code": 64,
+      "qa": 64
+    },
+    "dense": {
+      "started_at_utc": "2026-09-10T01:21:06.729999+00:00",
+      "completed_at_utc": "2026-09-10T01:22:06.790438+00:00",
+      "wall_time_s": 60.06034956034273,
+      "device": "cuda:0"
+    },
+    "updated_at_utc": "2026-09-10T02:19:53.035603+00:00"
+  },
+  "dense": {
+    "math": 2.167365340504627,
+    "code": 2.1291300213929167,
+    "qa": 5.22231463878327
+  },
+  "b3_g64": {
+    "math": 17.69690737957763,
+    "code": 16.89612550511053,
+    "qa": 22.53374524714829
+  },
+  "b3_g256": {
+    "math": 19.312188562841097,
+    "code": 19.815545519372474,
+    "qa": 22.831749049429657
+  },
+  "b5_g64": {
+    "math": 2.5247567824092383,
+    "code": 2.531792251010221,
+    "qa": 5.8009743346007605
+  },
+  "b5_g256": {
+    "math": 2.6515067626354503,
+    "code": 2.6534347516044687,
+    "qa": 5.641753802281369
+  },
+  "b4_g64": {
+    "math": 4.103219172664716,
+    "code": 4.141430948419301,
+    "qa": 7.482889733840304
+  },
+  "b4_g256": {
+    "math": 4.508028157873922,
+    "code": 5.313525077252199,
+    "qa": 8.031012357414449
+  },
+  "b3_g128": {
+    "math": 16.680534683223918,
+    "code": 16.745899690991205,
+    "qa": 20.760218631178706
+  },
+  "b4_g128": {
+    "math": 4.358933797358222,
+    "code": 4.927264083670074,
+    "qa": 7.937737642585551
+  },
+  "b5_g128": {
+    "math": 2.581032982678162,
+    "code": 2.598882814357024,
+    "qa": 5.771863117870723
+  }
+}

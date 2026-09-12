@@ -128,22 +128,6 @@
       "published_sha256": "8ae1b00c9ef5c09b4388b079ef5744eb11d026e8a0fc14356aa0696788978e0a",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
-    "data_mirror/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json@live": {
-      "frozen_sha256": "707e78756928830328bcdf521c405305883e7968373f9783b2390f2cbf554248",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json",
-      "published_at": "data_mirror/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json",
-      "published_sha256": "41bc3efd814274b8a5da559dd313724b0de85460985b7d79aa371b16da140566",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v54-quant-group/pythia-410m--step143000/quant_group_losses.json@live": {
-      "frozen_sha256": "b89d36c94683ae323f994600bafaee92582353cce33386b2dcccd42002e558b6",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v54-quant-group/pythia-410m--step143000/quant_group_losses.json",
-      "published_at": "data_mirror/v54-quant-group/pythia-410m--step143000/quant_group_losses.json",
-      "published_sha256": "bae7431f3c984976e1a22f02bf830254196f060c7d6f052a613a37e85f5e1389",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
     "data_mirror/v64-selection-feasible/summary.md@live": {
       "frozen_sha256": "fd8627b6c78c90d5beb7657ccd053dfc333079c896be620125bbaf7f61a0e49d",
       "pairable": false,

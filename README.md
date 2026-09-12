@@ -31,6 +31,13 @@ python3 analysis/v86_main_table.py
 summaries and creating the directories the generators write into. It never overwrites an
 existing file and never modifies `data_mirror/`.
 
+One artifact exists in two states, because experiments recorded it at different times: the
+grouped-quantization measurements grew new configurations after an earlier audit had recorded
+their digest. `data_mirror/v54-quant-group/` carries the current file, which the
+capability-conditioning audits need, and `data_mirror/v54-quant-group-as-recorded-by-v55/`
+carries the state the earlier audit recorded. Copy the latter over the former to rebuild that
+earlier audit; the ledger says which entry used which.
+
 What runs from a plain checkout, measured on a fresh clone of this repository after
 `bootstrap_results.py`: the main prediction tables and the audits behind them regenerate
 (`v45_main_table`, `v52_prediction_tables`, `v63_quant_identifiability`,
