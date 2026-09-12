@@ -53,7 +53,11 @@ in the displacement is accurate to about ten percent for densities at or above 0
 four bits or more, and it stops being a useful description below that. The boundary is a
 property of the perturbation size, not of the capability.
 
-## T2: the displacement is not a shrinkage of the logits, and it fails
+## T2: the displacement is not a pure shrinkage of the logits, and it fails
+
+What T2 tests, after the amendment, is the shrinkage term alone. Its failure rules out the
+pure-shrinkage account. It does **not** rule out a shrinkage-plus-noise account, whose noise
+part was left to a later check, and this document must not be read as retiring that.
 
 The amended T2 predictor summarises the whole displacement by one scalar per cell,
 `eps*B + 0.5*eps^2*W` with `eps = -<r,z>/|z|^2`, `B = z_y - E_p[z]`, `W = Var_p(z)`.
@@ -68,15 +72,30 @@ The registered threshold was 1.5 times T1's error. T2 fails in every regime, and
 sign wrong on a third of the cells. The projected shrinkage is small throughout (median
 `eps` 0.030) and explains almost none of the response.
 
-## What carries the damage
+## Which term carries the damage, stated per capability rather than as one median
 
-Median first-order term across cells: **-0.042**. Median second-order term: **+0.258**. The
-loss change is dominated by the p-weighted *variance* of the displacement, while the
-first-order component is slightly negative on average. Compression damage in these panels is
-second-order noise in logit space, not a systematic shift toward or away from the reference
-token. The displacement also spreads across the vocabulary rather than concentrating: the
-sixteen largest coordinates carry 2.4% of the p-weighted squared displacement in the mild
-regime, rising to 20% in the severe one.
+Two medians across cells would not settle this, because the two terms cancel: they have
+opposite signs in 81 of 105 cells, and the variance term is non-negative by construction.
+Counted per cell:
+
+| Capability | Variance term larger in magnitude | Median \|first order\| | Median \|second order\| |
+|---|---|---:|---:|
+| math | 35 of 35 | 0.021 | 0.214 |
+| code | 35 of 35 | 0.031 | 0.255 |
+| QA (2Wiki) | 16 of 35 | 0.610 | 0.448 |
+
+So the variance term dominates for math and code in every cell measured here, and it does not
+dominate for QA, where the first-order term is the larger one in more than half the cells.
+
+Seventeen cells have a **negative** measured change, that is, compression that lowers the
+loss. A non-negative variance term cannot produce those. In all seventeen the first-order
+term is negative and outweighs the variance term, and the second-order account still gets the
+sign right in sixteen of them. Any statement that damage is carried by the variance must
+therefore be qualified by capability and by the sign of the response.
+
+The displacement spreads across the vocabulary rather than concentrating: the sixteen largest
+coordinates carry 2.4% of the p-weighted squared displacement in the mild regime, rising to
+20% in the severe one.
 
 The full decomposition
 `eps*B + (E_p[s] - s_y) + 0.5*eps^2*W - eps*Cov_p(z,s) + 0.5*Var_p(s)`
@@ -85,15 +104,27 @@ bookkeeping check that no term was dropped.
 
 ## Consequence for the research plan
 
-The advisor's package A rests on the hypothesis that pruning and quantization act as logit
-shrinkage plus isotropic noise. Measured directly, that hypothesis is false. `B` and `V`
-survive only as sensitivity summaries, exactly as the registration said they would if T2
-failed, and the shrinkage story is dropped on evidence rather than on taste.
+The pure-shrinkage account of the displacement is measurably wrong on these panels. The
+broader shrinkage-plus-noise account is **not** settled here: the registered T2 carries only
+the shrinkage term, and the isotropic-noise reading was deferred by the same amendment. `B`
+and `V` therefore keep the status the registration gave them if T2 failed, sensitivity
+summaries, and the noise part of the hypothesis remains open pending the checks below.
 
-What replaces it is sharper. The quantity that carries the damage, `0.5*Var_p(r)`, is
-measurable, capability-independent in form, and needs no labels. The next question, which
-needs its own registration and its own frozen predictions, is whether it can be predicted
-from the configuration and from pre-compression information, on states that entered no fit.
+Two limits of this experiment constrain how far any of it can be pushed. The displacement is
+computed from the compressed model, so T1 is a post-hoc decomposition of a measured loss, not
+a prediction from pre-compression information, and it cannot become one by relabelling. And
+the shrinkage coefficient is an uncentred projection: adding a constant to every logit leaves
+the probabilities and the loss unchanged but does change that coefficient, so the shrinkage
+component needs a shift-invariant definition before its explanatory share is interpreted.
+Both are addressed in the follow-up rather than argued away.
+
+What the experiment does hand forward is a candidate quantity. For math and code the
+variance term `0.5*Var_p(r)` is the larger of the two in every cell measured, it needs no
+reference labels, and its form does not depend on the capability, although computing it still
+needs a forward pass of the compressed model. The next question, which needs its own
+registration and its own frozen predictions, is whether it can be predicted from the
+configuration and from pre-compression information on states that entered no fit. For QA the
+first-order term is comparable or larger, so QA would need its own treatment.
 
 ## Reproduction check against the frozen measurements
 
