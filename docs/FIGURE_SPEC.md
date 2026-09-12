@@ -1,6 +1,6 @@
 # FIGURE_SPEC — core figures for the rewritten manuscript (generated from numeric result files only)
 
-All scripts live in `analysis/` (mirrored to `paper/code/analysis/`), run on CPU in seconds, write PDF+PNG to
+All scripts live in `analysis/` (mirrored to `paper/analysis/`), run on CPU in seconds, write PDF+PNG to
 `paper/figs/`, and print the exact data files and selection rules they used. Style: matplotlib, bold Nimbus Roman /
 Times-metric fonts (see `analysis/plot_v9_blocks_appendix.py` for the font setup), font size >= 8 pt at final size,
 one consistent colour per method/candidate across all figures, capability order math / code / QA, improvement

@@ -3822,13 +3822,13 @@
     "summary_json": "results/v79-cond-audit/summary.json",
     "summary_md": "results/v79-cond-audit/summary.md",
     "staged_table": "results/v79-cond-audit/paper/paper/tables/cond_audit.tex",
-    "staged_code_mirror": "results/v79-cond-audit/paper/code/analysis/v79_cond_audit.py",
+    "staged_code_mirror": "results/v79-cond-audit/paper/analysis/v79_cond_audit.py",
     "requested_table_destination": "paper/paper/tables/cond_audit.tex",
-    "requested_code_destination": "paper/code/analysis/v79_cond_audit.py",
+    "requested_code_destination": "paper/analysis/v79_cond_audit.py",
     "paper_destination_status": "Staged under results to obey explicit write-only scope, as in V76/V77."
   },
   "v76_tree_sha256": {
-    "results/v76-cap-conditioning/paper/code/analysis/v76_cap_conditioning.py": "5d7292c75beb5a325d4a2191af201eacbc2513387d48dfe4087ef8c9dc271410",
+    "results/v76-cap-conditioning/paper/analysis/v76_cap_conditioning.py": "5d7292c75beb5a325d4a2191af201eacbc2513387d48dfe4087ef8c9dc271410",
     "results/v76-cap-conditioning/paper/paper/tables/cap_conditioning.tex": "0df8ca73aefd5b868c33d3c8a07de3fc4d4e5e07dc1cdb0e74aa5051b98226e8",
     "results/v76-cap-conditioning/summary.json": "d0a2feaa9c5b09f5dd1a20dce09c20683d8761f756375c12c0e9dd49865d1103",
     "results/v76-cap-conditioning/summary.md": "79954020d52d9a93e5338d353b3c45743b1479250054e968e3bf72d825624605"

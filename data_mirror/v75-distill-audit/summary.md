@@ -157,4 +157,4 @@ Paper artifacts are staged under results/v75-distill-audit/paper/ to respect the
 - summary_json: `results/v75-distill-audit/summary.json`
 - summary_markdown: `results/v75-distill-audit/summary.md`
 - table: `results/v75-distill-audit/paper/paper/tables/distill_forms_audit.tex`
-- code_mirror: `results/v75-distill-audit/paper/code/analysis/v75_distill_audit.py`
+- code_mirror: `results/v75-distill-audit/paper/analysis/v75_distill_audit.py`

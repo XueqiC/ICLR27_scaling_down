@@ -109,7 +109,7 @@ class Audit:
             "NumPy and matplotlib. Agg backend; CPU only; no model execution or fitting. "
             "The scripts only write their PDF/PNG outputs, the Fig. 1 caption, and this document. "
             "No existing result JSON, register, or TeX is changed; no mirror is written under "
-            "`paper/code/analysis/`, following the user's narrower output allowlist.\n\n"
+            "`paper/analysis/`, following the user's narrower output allowlist.\n\n"
             "Fonts use the bold Nimbus Roman / Liberation Serif / Times New Roman setup from "
             "`analysis/plot_v9_blocks_appendix.py`, with embedded PDF fonts (fonttype 42), "
             "8 pt minimum at the saved physical size, and PNGs at 300 dpi. Preserve native "

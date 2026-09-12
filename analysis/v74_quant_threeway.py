@@ -6,7 +6,7 @@
 
 Writes results/v74-quant-threeway/{quant_threeway.json,quant_threeway.tex,
 median_algorithm.md}, paper/paper/tables/quant_threeway.tex, and an identical
-script at paper/code/analysis/v74_quant_threeway.py. No fitting or measurement.
+script at paper/analysis/v74_quant_threeway.py. No fitting or measurement.
 The R mapping is a supplied post-test recommendation, not another frozen selector.
 """
 from __future__ import annotations
@@ -346,7 +346,7 @@ def main():
         OUT / "quant_threeway.tex": table,
         OUT / "median_algorithm.md": render_algorithm(develop, frozen, hashes),
         Path("paper/paper/tables/quant_threeway.tex"): table,
-        Path("paper/code/analysis/v74_quant_threeway.py"): (root / "analysis/v74_quant_threeway.py").read_text(),
+        Path("paper/analysis/v74_quant_threeway.py"): (root / "analysis/v74_quant_threeway.py").read_text(),
     }
     for rel, value in outputs.items():
         path = root / rel

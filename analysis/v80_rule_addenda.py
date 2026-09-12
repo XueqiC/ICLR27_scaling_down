@@ -4,7 +4,7 @@
 Run: python -B analysis/v80_rule_addenda.py
 Updates the V80 addenda in place. Writes only results/v81-rule-labels/,
 the two named paper table files/three PDFs,
-and a byte-identical mirror of this script in paper/code/analysis/.
+and a byte-identical mirror of this script in paper/analysis/.
 V78 inputs, including their directory metadata inventory, are checked unchanged.
 """
 from __future__ import annotations
@@ -60,7 +60,7 @@ SYMBOLS = dict(zip(METHODS, ("^", "s", "D", "o")))
 FIG_NAMES = ("rule_maps_main", "rule_regret", "rule_maps_full")
 TABLE = "paper/paper/tables/rule_confirm_by_state.tex"
 CONFIRM_TABLE = "paper/paper/tables/rule_confirm.tex"
-MIRROR = "paper/code/analysis/v80_rule_addenda.py"
+MIRROR = "paper/analysis/v80_rule_addenda.py"
 PAPER_OUTPUTS = {TABLE, CONFIRM_TABLE, MIRROR, *(f"paper/paper/figs/{n}.pdf" for n in FIG_NAMES)}
 FIGURE_PAD = .04
 
@@ -457,7 +457,7 @@ def markdown(data, provenance):
         "directory inventory are verified. Figure text extents, legend separation, annotation "
         "counts, label overlaps, and saved regret width are checked in `validation.json`.",
         "- `analysis/v80_rule_addenda.py` is updated in place and mirrored byte-for-byte to "
-        "`paper/code/analysis/v80_rule_addenda.py`. Reproduce with `python -B analysis/v80_rule_addenda.py`. "
+        "`paper/analysis/v80_rule_addenda.py`. Reproduce with `python -B analysis/v80_rule_addenda.py`. "
         "PDF/PNG previews and both table files are also saved under `results/v81-rule-labels/`; "
         "SHA256 provenance is in `manifest.json`.", "",
         "V78 verdicts are unchanged: Math, Code, and QA confirmed; Multi retrospective. "

@@ -70,4 +70,4 @@ Audited 23 cached revisions covering 22 measured pruning/quantization states. Py
 - Every selected blob is hashed from bytes and checked against its LFS address; v72's three cached Pythia-2.8B selections match frozen provenance.
 - All 388 learned Pythia-2.8B parameter tensors are compared across the two distinct serialized blobs; the only payload difference is the sign bit of one zero.
 - `model_arch.json` retains full cached/resolved text configs, top-level architecture classes, parameter inventories, implementation source hashes, snapshot commits and result evidence.
-- `paper/paper/tables/model_arch.tex` and `paper/code/analysis/v77_model_arch.py` are staged under this results directory to respect the requested write boundary. No commit is made.
+- `paper/paper/tables/model_arch.tex` and `paper/analysis/v77_model_arch.py` are staged under this results directory to respect the requested write boundary. No commit is made.

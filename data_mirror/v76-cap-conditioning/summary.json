@@ -20776,9 +20776,9 @@
     "summary_json": "results/v76-cap-conditioning/summary.json",
     "summary_md": "results/v76-cap-conditioning/summary.md",
     "staged_table": "results/v76-cap-conditioning/paper/paper/tables/cap_conditioning.tex",
-    "staged_code_mirror": "results/v76-cap-conditioning/paper/code/analysis/v76_cap_conditioning.py",
+    "staged_code_mirror": "results/v76-cap-conditioning/paper/analysis/v76_cap_conditioning.py",
     "requested_table_destination": "paper/paper/tables/cap_conditioning.tex",
-    "requested_code_destination": "paper/code/analysis/v76_cap_conditioning.py",
+    "requested_code_destination": "paper/analysis/v76_cap_conditioning.py",
     "paper_destination_status": "staged under results to obey explicit write-only scope"
   }
 }

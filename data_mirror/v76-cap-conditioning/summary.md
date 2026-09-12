@@ -142,5 +142,5 @@ Maximum absolute A/B confirmation prediction difference: 1.39e-16 nats. B has no
 Paper outputs are staged to respect the requested write-only scope:
 
 - `paper/paper/tables/cap_conditioning.tex` under this results directory (uses `[H]`).
-- `paper/code/analysis/v76_cap_conditioning.py` under this results directory (byte-identical code mirror).
+- `paper/analysis/v76_cap_conditioning.py` under this results directory (byte-identical code mirror).
 - Reproduce: `python -B analysis/v76_cap_conditioning.py`; verify without writes: append `--check`.

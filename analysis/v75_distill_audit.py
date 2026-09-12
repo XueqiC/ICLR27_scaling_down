@@ -547,7 +547,7 @@ def main():
         "item_bootstrap_ci95": None, "item_bootstrap_status": items["status"],
         "pool_cluster_ci95": r["paired_difference"]["ci95"]}
         for r in sensitivity["scenarios"]["original"]["by_budget"]]
-    table_rel, mirror_rel = paper / "paper/tables/distill_forms_audit.tex", paper / "code/analysis/v75_distill_audit.py"
+    table_rel, mirror_rel = paper / "paper/tables/distill_forms_audit.tex", paper / "analysis/v75_distill_audit.py"
     report = {"schema_version": 1, "analysis": "V75 distillation forms and two CPU checks",
         "forms_audit": forms, "dense_drift_sensitivity": sensitivity, "item_sampling_uncertainty": items,
         "provenance": {"inputs_sha256": inputs.hashes, "v70_outputs_sha256": before,

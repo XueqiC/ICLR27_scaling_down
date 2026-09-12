@@ -315,4 +315,4 @@ e8565b890c82d7c0e830c91c0d5f41042e4c3462ee8b4e09c969cdbe03492a3d  results/v60-se
 - `paper/tables/candidate_coverage.tex`
 - `paper/figs/selection_feasible.pdf`
 - `paper/figs/selection_feasible.png`
-- `paper/code/analysis/v64_selection_feasible.py`
+- `paper/analysis/v64_selection_feasible.py`

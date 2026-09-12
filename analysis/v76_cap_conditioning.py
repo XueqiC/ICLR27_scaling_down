@@ -481,9 +481,9 @@ def build(inputs):
     result["outputs"] = {"summary_json": "results/v76-cap-conditioning/summary.json",
         "summary_md": "results/v76-cap-conditioning/summary.md",
         "staged_table": "results/v76-cap-conditioning/paper/paper/tables/cap_conditioning.tex",
-        "staged_code_mirror": "results/v76-cap-conditioning/paper/code/analysis/v76_cap_conditioning.py",
+        "staged_code_mirror": "results/v76-cap-conditioning/paper/analysis/v76_cap_conditioning.py",
         "requested_table_destination": "paper/paper/tables/cap_conditioning.tex",
-        "requested_code_destination": "paper/code/analysis/v76_cap_conditioning.py",
+        "requested_code_destination": "paper/analysis/v76_cap_conditioning.py",
         "paper_destination_status": "staged under results to obey explicit write-only scope"}
     return result
 
@@ -580,7 +580,7 @@ def markdown(result):
               "## Outputs", "",
               "Paper outputs are staged to respect the requested write-only scope:", "",
               "- `paper/paper/tables/cap_conditioning.tex` under this results directory (uses `[H]`).",
-              "- `paper/code/analysis/v76_cap_conditioning.py` under this results directory (byte-identical code mirror).",
+              "- `paper/analysis/v76_cap_conditioning.py` under this results directory (byte-identical code mirror).",
               "- Reproduce: `python -B analysis/v76_cap_conditioning.py`; verify without writes: append `--check`.", ""]
     return "\n".join(lines)
 
@@ -676,7 +676,7 @@ def main():
     outputs = {OUT / "summary.json": (json.dumps(result, indent=2, allow_nan=False) + "\n").encode(),
                OUT / "summary.md": markdown(result).encode(),
                OUT / "paper/paper/tables/cap_conditioning.tex": latex(result).encode(),
-               OUT / "paper/code/analysis/v76_cap_conditioning.py": script}
+               OUT / "paper/analysis/v76_cap_conditioning.py": script}
     inputs.verify()
     for path, raw in outputs.items():
         require(path.resolve().is_relative_to(OUT.resolve()) and not path.is_symlink(), f"Output scope violation: {path}")

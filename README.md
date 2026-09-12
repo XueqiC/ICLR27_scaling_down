@@ -20,47 +20,52 @@ Analysis needs no GPU and no network. Measurement was run with the stack pinned 
 
 ## Quickstart
 
-Regenerate a table or figure from the mirrored measurements:
+First reconstruct the input tree the analysis scripts read, then regenerate a table:
 
 ```
-PYTHONPATH=code python3 code/analysis/v86_main_table.py
+python3 bootstrap_results.py
+python3 analysis/v86_main_table.py
 ```
+
+`bootstrap_results.py` materialises `results/` from `data_mirror/`, expanding the gzipped
+summaries and creating the directories the generators write into. It never overwrites an
+existing file and never modifies `data_mirror/`.
 
 Run the offline test suite:
 
 ```
-PYTHONPATH=code python3 -m pytest code/tests
+python3 -m pytest tests
 ```
 
-The generators read the frozen JSON under `data_mirror/`. Each generated file names its
-inputs and their SHA-256 digests in a header comment, so a regenerated table can be compared
-line by line with the one that was published. Tests that reach for model weights, adapters,
-dataset caches or credentials cannot pass from a checkout alone, since those are not part of
-the repository.
+Each generated file names its inputs and their SHA-256 digests in a header comment, so a
+regenerated table can be compared line by line with the one that was published. Tests that
+reach for model weights, adapters, dataset caches or credentials cannot pass from a checkout
+alone, since those are not part of the repository, and inputs that were never mirrored cannot
+be reconstructed; `docs/RESULTS_LEDGER.md` names the artifact behind every reported number.
 
 ## Layout
 
 | Path | Contents |
 |---|---|
-| `code/analysis/` | the pipeline, one module per experiment, named `v<N>_<topic>.py` |
-| `code/tests/` | offline test suite |
-| `code/configs/` | sweep configurations |
-| `code/*.sh` | grid drivers for the larger measurement runs |
+| `analysis/` | the pipeline, one module per experiment, named `v<N>_<topic>.py` |
+| `tests/` | offline test suite |
+| `configs/` | sweep configurations |
+| `scripts/*.sh` | grid drivers for the larger measurement runs |
 | `data_mirror/` | frozen registers, predictions, measurements and comparison files, one directory per experiment |
 | `results/` | curated per-experiment reports and summaries |
 | `docs/` | results ledger, claim-evidence matrix, measurement definitions, pre-registrations, reference verification, reviewer self-audit |
 
 ## Measuring a model
 
-Checkpoints resolve through `code/analysis/model_registry.py`; all of them are public and
+Checkpoints resolve through `analysis/model_registry.py`; all of them are public and
 pinned by revision.
 
-- Pruning: `code/analysis/v6_capability_geometry.py` applies global magnitude pruning at a
+- Pruning: `analysis/v6_capability_geometry.py` applies global magnitude pruning at a
   deterministic sampled threshold and scores the probe sets.
-- Quantization: `code/analysis/v10_quantization.py` for per-channel round-to-nearest,
-  `code/analysis/v54_quant_group.py` for grouped round-to-nearest with a choice of symmetric
+- Quantization: `analysis/v10_quantization.py` for per-channel round-to-nearest,
+  `analysis/v54_quant_group.py` for grouped round-to-nearest with a choice of symmetric
   or asymmetric mode.
-- Distillation: `code/analysis/v12_distill.py` trains a LoRA student on stored teacher
+- Distillation: `analysis/v12_distill.py` trains a LoRA student on stored teacher
   traces. Generating traces needs an API endpoint and credentials, read from a
   `.secrets.env` file that is not part of the repository.
 
@@ -90,4 +95,4 @@ can differ from the digest recorded inside it. No measurement value was altered.
 
 Released for review and reuse in research. A permissive license will be attached on
 publication. Third-party datasets and checkpoints keep their own terms; see
-`code/analysis/model_registry.py` and `docs/MEASUREMENT_DEFINITIONS.md` for the sources.
+`analysis/model_registry.py` and `docs/MEASUREMENT_DEFINITIONS.md` for the sources.

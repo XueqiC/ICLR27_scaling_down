@@ -125,5 +125,5 @@ Run `python -B analysis/v79_cond_audit.py --selftest`, then `python -B analysis/
 Paper artifacts are staged under this results directory to obey the explicit write-only boundary:
 
 - [Table, with `[H]`](paper/paper/tables/cond_audit.tex), for `paper/paper/tables/cond_audit.tex`.
-- [Byte-identical code mirror](paper/code/analysis/v79_cond_audit.py), for `paper/code/analysis/v79_cond_audit.py`.
+- [Byte-identical code mirror](paper/analysis/v79_cond_audit.py), for `paper/analysis/v79_cond_audit.py`.
 - No files in the top-level paper tree are changed; no commit is made.

@@ -151,11 +151,11 @@ def predict(arm, capability, state_status, inputs):
 
 ## Reproduction and validation
 
-Run `python -B analysis/v85_selection_decomp.py`; verify determinism with `python -B analysis/v85_selection_decomp.py --check`. The mirrored entry point `python -B paper/code/analysis/v85_selection_decomp.py --check` resolves the same repository inputs.
+Run `python -B analysis/v85_selection_decomp.py`; verify determinism with `python -B analysis/v85_selection_decomp.py --check`. The mirrored entry point `python -B paper/analysis/v85_selection_decomp.py --check` resolves the same repository inputs.
 
 Generation validates the full 4 x 17 grid for each objective, frozen candidate rosters, policy feasibility, actual-minus-oracle regrets, paired differences, the 51:17 weighted identity, and reproduction of V78's published all-state means. It checks implementation hashes against V78, verbatim rule expressions, V53/V69 object identity, channel medians, and distillation mean constants/exclusions without refitting. No test cells are dropped.
 
-Outputs: `decomposition.json` (full precision, method counts and contributions), `decomposition.csv` (12 aggregate rows), `cell_regrets.csv` (272 original cells with JSON pointers), `rule_spec.json` (24 rule rows, provenance, literal code), this summary, and the two requested LaTeX tables. The new script is mirrored under `paper/code/analysis/`; the existing mirrored `final_rule.py` and `v78_rule_confirm.py` already match their originals.
+Outputs: `decomposition.json` (full precision, method counts and contributions), `decomposition.csv` (12 aggregate rows), `cell_regrets.csv` (272 original cells with JSON pointers), `rule_spec.json` (24 rule rows, provenance, literal code), this summary, and the two requested LaTeX tables. The new script is mirrored under `paper/analysis/`; the existing mirrored `final_rule.py` and `v78_rule_confirm.py` already match their originals.
 
 ## Input SHA256
 
