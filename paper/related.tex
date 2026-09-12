@@ -23,15 +23,11 @@ Pruning disproportionately harms knowledge-intensive tasks
 \citep{liu2025quantization} and favors undertrained models
 \citep{ouyang2024lowbit}, compression shifts trust dimensions unevenly
 \citep{hong2024decoding}, and selective truncation can help
-\citep{sharma2023laser}. Laws with
-task-level targets exist: \citet{sengupta2025compression} fit pruning
-laws to test loss and averaged zero-shot accuracy against the pruning
-ratio and recovery tokens, with per-task exponents and transfer to
-unseen models in their revised version; \citet{zhou2025task} stratify
-post-training quantization laws into memorization, application, and
-reasoning strata for one quantizer; task-specific distillation has
-been mapped over dataset size, compression ratio, and supervision
-format \citep{ghita2026task}. Our relations use a continuous conditional loss, admit the reference
+\citep{sharma2023laser}. Laws with task-level targets exist: pruning laws on test loss and
+averaged accuracy with per-task exponents \citep{sengupta2025compression},
+quantization laws stratified by task type for one quantizer
+\citep{zhou2025task}, and task-specific distillation curves over data,
+compression ratio, and supervision format \citep{ghita2026task}. Our relations use a continuous conditional loss, admit the reference
 anchor and training tokens as inputs, and treat the three methods
 with one protocol.
 

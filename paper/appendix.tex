@@ -189,6 +189,14 @@ constants in the register files listed in Appendix~\ref{sec:app_registration}.
 \subsection{Grouped quantization: leave-one-state-out on six states}
 \input{tables/v55_loso}
 
+The low-order surface tested for grouped quantization is
+\begin{equation}
+\widehat{\Delta L}_c(\mathbf x,b,g)=\phi(\mathbf x)\cdot\big[1,\,u,\,v,\,uv,\,u^2\big],
+\qquad u=\log_2 q_{\max}(b)\ \text{(centred)},\ v=\log_2\frac{g}{128},
+\label{eq:quant2d}
+\end{equation}
+with one four-vector of state coefficients per term (twenty coefficients).
+
 \paragraph{Identifiability of the two-dimensional form.} The
 development bit-widths are $b\in\{3,5\}$, so the centred $u$ takes the
 two values $\pm1.16$ and $u^2$ equals $1.35$ on every development

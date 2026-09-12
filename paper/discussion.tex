@@ -2,18 +2,18 @@
 \label{sec:discussion}
 
 Table~\ref{tab:final} (Appendix~\ref{sec:app_results}) answers, per
-arm, what predictor is delivered, which inputs it needs, which parts
-were frozen and which choices are retrospective, where it gains over
-the strongest same-information baseline, and where it does not apply.
+arm, what is delivered, which inputs it needs, which parts were
+frozen, where it gains over the strongest same-information baseline,
+and where it does not apply.
 The pattern is consistent: source-conditioned forms add value at
 unseen configurations of seen states, source-free references are as
 good or better on new model states, and QA is carried by source-free predictors on every arm.
 
-Our predictive relationships are conditional on the evaluated loss
-distributions and compression implementations; improvements on 2Wiki
-do not establish general QA improvements. Transfer to unseen source
+Our relations are conditional on the evaluated loss distributions and
+compression implementations; improvements on 2Wiki do not establish
+general QA improvements. Transfer to unseen source
 states remains uneven, and simple configuration-level response
-estimates can outperform source-conditioned parametric forms. The decision study covers four Pythia source states under nominal
-matrix-storage budgets, combining newly measured pruning and
-quantization outcomes with previously evaluated distillation
-candidates excluded from predictor fitting.
+estimates can outperform source-conditioned parametric forms. The decision study covers four Pythia states under nominal storage
+budgets, with new pruning and quantization measurements and
+previously evaluated distillation candidates excluded from predictor
+fitting.
