@@ -806,7 +806,9 @@ reference loss plus a per-capability constant (code, QA) or the linear
 student-state form (math), QA on the 2Wiki distribution only.
 Selection minimizes the predicted absolute loss over feasible measured
 configurations, or the largest predicted loss increase across
-capabilities for the multi-capability objective; quantization-only
+capabilities for the multi-capability objective
+(Table~\ref{tab:locked_rule} lists the rule as coded, including where
+it departs from the delivered predictors of Table~\ref{tab:final}); quantization-only
 uses the same candidates, predictor, and feasibility rule with no
 fallback. Predictions under this rule and under the earlier
 source-conditioned laws were frozen for four fresh states before
@@ -822,7 +824,9 @@ describe the no-clear-winner candidate set (whether it contains the
 oracle's method or configuration), and the single chosen
 configuration's method agreement is the figure quoted in the main
 text.
+\input{tables/locked_rule}
 \input{tables/rule_confirm}
+\input{tables/rule_decomp}
 \input{tables/rule_confirm_by_state}
 \begin{figure}[H]
 \centering
