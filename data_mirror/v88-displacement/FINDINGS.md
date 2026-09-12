@@ -126,6 +126,55 @@ registration and its own frozen predictions, is whether it can be predicted from
 configuration and from pre-compression information on states that entered no fit. For QA the
 first-order term is comparable or larger, so QA would need its own treatment.
 
+## Follow-up: the shift-invariant projection, and what the noise term actually carries
+
+The first pass projected the displacement onto the logits with the ordinary inner product.
+Adding a constant to every logit leaves the probabilities and the loss untouched but moves
+that coefficient, measured here at 85% for a shift of seven, so the shrinkage share it
+reported was not well defined. Projecting in the p-weighted covariance instead,
+`eps = -Cov_p(r,z)/Var_p(z)`, is invariant to the shift (1e-6 on the same fixture) and leaves
+a residual whose covariance with the logits is zero, so the cross term vanishes. A unit test
+asserts both properties, and asserts that the old coefficient is not invariant.
+
+Re-running all 105 cells with that definition improves the one-scalar summary and does not
+change the verdict: median relative error 83.8% mild, 82.0% moderate, 85.9% severe, still 36,
+5.4 and 2.2 times the exact account's error against a threshold of 1.5. Sign agreement rises
+from 66% to 85%. The pure-shrinkage account fails on a well-defined quantity, not on an
+artefact of the projection.
+
+The same run answers the more interesting question, which is what the noise term carries.
+Median share of the measured response, per term:
+
+| Regime | Shrinkage | Residual first order | Noise, the variance term | Sum |
+|---|---:|---:|---:|---:|
+| mild | 2.7% | -9.4% | **88.6%** | 99.1% |
+| moderate | 2.8% | 2.1% | 72.0% | 94.5% |
+| severe | 3.7% | -2.6% | 59.2% | 61.2% |
+
+Per capability, over the mild and moderate cells together:
+
+| Capability | Shrinkage | Residual first order | Noise |
+|---|---:|---:|---:|
+| math | 3.2% | -3.9% | 84.5% |
+| code | -0.3% | -19.8% | 88.6% |
+| QA (2Wiki) | 91.0% | 61.4% | -94.0% |
+
+For math and code the response in the predictable regime is between 84 and 89 percent noise,
+with shrinkage contributing about three percent. That is a positive result for the noise half
+of the shrinkage-plus-noise hypothesis, and it is why the hypothesis should not have been
+called dead: what fails is the shrinkage half, and it fails because shrinkage is genuinely a
+small share rather than because it was badly estimated.
+
+QA is structurally different. There the shrinkage and residual first-order terms are large and
+the variance term works against the response, which fits the seventeen cells where compression
+lowers the loss. QA needs its own treatment and cannot be folded into the same account.
+
+The centred decomposition reproduces the exact second-order value to within 1.87e-2 in the
+worst cell, 0.92% of that cell's response, from float32 cancellation at large logits.
+
+The first run, with the uncentred projection, is kept unchanged at
+`results/v88-displacement-uncentred-run/`.
+
 ## Reproduction check against the frozen measurements
 
 Recomputed losses are within 0.004 to 0.019 nats of the frozen values for math and code.
