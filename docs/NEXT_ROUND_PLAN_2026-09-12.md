@@ -52,7 +52,7 @@ isotropy assumption is needed. The plan's two descriptors are the special case
 variance `sigma^2` gives the `1/2 * sigma^2 * V` term.
 
 I verified these numerically before proposing them (vocabulary 5000, 200 random draws per
-case, `scratchpad` check on CPU):
+case; the check is `analysis/verify/ce_expansion_check.py`, which runs on CPU in a second):
 
 | displacement scale | mean exact dL | second-order prediction | first-order only | mean abs. rel. error of second order |
 |---|---|---|---|---|
@@ -68,6 +68,13 @@ damage is carried by the variance term; and the expansion degrades smoothly with
 size, which is a principled account of the "mild / non-trivial / aggressive" damage regimes
 the plan asks us to separate. Our compact forms work in a limited range because the expansion
 does.
+
+Two implementation facts settled while preparing this (codex V87, CPU only, 199 tests):
+the identity is `B = +dCE/deps` under `z -> (1-eps) z`, and the project's loss aggregation is
+**pooled tokens** (`total_loss / total_tokens`, `analysis/v10_quantization.py:179`,
+`analysis/v12_distill.py:523`), not an equal per-sample mean, so `B` and `V` are aggregated
+the same way, with a per-byte variant under the same rule. Finite-difference agreement on a
+tiny CPU model: `B` to 2.42e-7, `V` against the Hessian trace to 8.02e-8.
 
 ### 2.1b Why this is not the descriptor line we already closed
 
