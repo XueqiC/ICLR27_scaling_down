@@ -28,6 +28,11 @@ for _thread_var in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"
 
 import numpy as np
 
+try:
+    from . import provenance
+except ImportError:
+    import provenance
+
 ROOT = next(p for p in Path(__file__).resolve().parents
             if (p / "results/v53-prune-dev/register.json").is_file())
 OUT = ROOT / "results/v76-cap-conditioning"
@@ -66,7 +71,8 @@ class Inputs:
         actual = digest(raw)
         require(self.hashes.setdefault(rel, actual) == actual, f"Input changed during run: {rel}")
         if expected is not None:
-            require(actual == expected, f"Historical input hash mismatch: {rel}")
+            require(provenance.matches(expected, actual),
+                    f"Historical input hash mismatch: {rel}")
         return raw
 
     def json(self, rel, expected=None):

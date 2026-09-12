@@ -81,18 +81,21 @@ def main() -> int:
                 shutil.copy2(source, target)
 
 
-    # Some scripts mirror themselves into a `code/` tree, the layout an earlier
-    # revision of this repository used. Link it to the current one rather than
-    # editing scripts whose digests frozen records name.
+    # Some scripts read and mirror themselves under a `code/` tree, the layout an
+    # earlier revision of this repository used. Provide it as real directories with
+    # copies: a symlink would be refused by the generators' own output guard, and
+    # editing those scripts is not an option because frozen records name their digests.
     if not dry:
-        (ROOT / "code").mkdir(exist_ok=True)
-        for name in ("analysis", "tests", "configs"):
-            link = ROOT / "code" / name
-            if not link.exists():
-                try:
-                    link.symlink_to(Path("..") / name, target_is_directory=True)
-                except OSError:
-                    link.mkdir(parents=True, exist_ok=True)
+        for base in (ROOT / "code", ROOT / "paper" / "code"):
+            for name in ("analysis", "tests", "configs"):
+                source = ROOT / name
+                target = base / name
+                if not source.is_dir():
+                    continue
+                target.mkdir(parents=True, exist_ok=True)
+                for item in source.iterdir():
+                    if item.is_file() and not (target / item.name).exists():
+                        shutil.copy2(item, target / item.name)
 
     verb = "would write" if dry else "wrote"
     print(f"{verb} {written} file(s), {verb.split()[-1]} {expanded} gzipped summary/summaries, "

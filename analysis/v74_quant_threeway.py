@@ -18,6 +18,11 @@ import math
 from pathlib import Path
 import statistics
 
+try:
+    from . import provenance
+except ImportError:
+    import provenance
+
 
 SOURCE = Path("results/v69-quant-confirm")
 OUT = Path("results/v74-quant-threeway")
@@ -76,9 +81,11 @@ def anchor_prediction(anchors, config):
 
 
 def verify_sources(root, develop, frozen, compared, hashes):
-    require(frozen["provenance"]["develop_sha256"] == hashes[str(SOURCE / "develop.json")],
+    require(provenance.matches(frozen["provenance"]["develop_sha256"],
+                               hashes[str(SOURCE / "develop.json")]),
             "develop.json differs from the frozen source")
-    require(compared["provenance"]["freeze_sha256"] == hashes[str(SOURCE / "freeze.json")],
+    require(provenance.matches(compared["provenance"]["freeze_sha256"],
+                               hashes[str(SOURCE / "freeze.json")]),
             "freeze.json differs from the comparison source")
     require(compared["complete"] and not compared["missing"]
             and compared["n_measured_cells"] == compared["n_expected_cells"] == 21,
