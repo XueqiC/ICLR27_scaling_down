@@ -207,7 +207,9 @@ claims state their budget, and keep every old prediction as it stands.
 doubling `T` or enlarging `D_U` on existing trajectories, the 18-trajectory matrix does not
 get trained; we would be buying variance.
 
-**Phase 1, 1 to 2 GPU-h.** T1 and T2 on already-measured state-configuration pairs, plus
+**Phase 1, 1 to 2 GPU-h** (registered in `docs/prereg/v88_displacement_prereg.md` before any
+measurement: five weight-identity-distinct states, seven configurations each, three damage
+regimes, and the pass rules for T1 and T2). T1 and T2 on already-measured state-configuration pairs, plus
 `B`/`V` extraction on the Pythia panel. Pre-registered success criterion for continuing:
 the derived second-order prediction must beat the strongest same-information baseline by at
 least 15% relative on development states, and the shrinkage-plus-noise reduction must stay
