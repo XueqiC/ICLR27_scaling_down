@@ -245,13 +245,6 @@
       "published_sha256": "d1cfc5c046fdf1e127787934c6e2c8f1b40f6a381ca5c3f456312d74a1c0f0ec",
       "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
     },
-    "data_mirror/v88-displacement/summary.json@live": {
-      "frozen_sha256": "716e8f3c36a5994a8b00095561b5a0658eed48ace0f971ceec9b69497d0670fc",
-      "path_in_frozen_record": "data_mirror/v88-displacement/summary.json",
-      "published_at": "data_mirror/v88-displacement/summary.json",
-      "published_sha256": "2c4433eceb1e529319ffcbb1fcf6427cbc400c3b1cfb8b35f69b0118ce1a8668",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
-    },
     "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json@live": {
       "frozen_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
       "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",

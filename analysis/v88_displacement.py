@@ -59,6 +59,8 @@ METRICS = (
     "sigma2_hat", "shrinkage_prediction", "r_norm2", "z_norm2",
     "top16_r2_share", "p_r2", "top16_p_r2",
     "W", "cross", "residual_first_order",
+    "eps_centred", "sigma2_centred", "residual_first_order_centred",
+    "shrinkage_only_centred", "shrinkage_residual_centred",
     "shrinkage_only_prediction", "shrinkage_residual_prediction",
 )
 FORMULAS = {
@@ -74,6 +76,11 @@ FORMULAS = {
     "W": "Var_p(z); second-order sensitivity to logit shrinkage",
     "cross": "Cov_p(z, s), s=r+eps_hat*z; zero when the residual is p-orthogonal to z",
     "residual_first_order": "sum(p*s) - s[y]; the residual's first-order contribution",
+    "eps_centred": "-Cov_p(r,z)/Var_p(z); invariant to adding a constant to every logit",
+    "sigma2_centred": "Var_p(s_c), s_c = r + eps_centred*z; its covariance with z is zero by construction",
+    "residual_first_order_centred": "sum(p*s_c) - s_c[y]",
+    "shrinkage_only_centred": "eps_centred*B + 0.5*eps_centred**2*W; the shift-invariant one-scalar summary",
+    "shrinkage_residual_centred": "the full decomposition under the centred projection; its cross term is zero",
     "shrinkage_only_prediction": "eps_hat*B + 0.5*eps_hat**2*W; the whole displacement summarised by one scalar",
     "shrinkage_residual_prediction": "eps_hat*B + residual_first_order + 0.5*eps_hat**2*W "
                                      "- eps_hat*cross + 0.5*sigma2_hat; algebraically equals "
@@ -228,6 +235,17 @@ def reduce_token(dense_logits, compressed_logits, target):
     w = ((p * z.square()).sum(dtype=torch.float32) - pz.square()).clamp_min(0)
     ps = (p * residual).sum(dtype=torch.float32)
     cross = (p * z * residual).sum(dtype=torch.float32) - pz * ps
+    # Shift-invariant projection. Cross-entropy does not change when a constant is added
+    # to every logit, but the Euclidean projection above does, so the shrinkage share it
+    # reports is not well defined. Projecting in the p-weighted covariance instead is
+    # invariant to that shift and, by construction, leaves a residual with zero
+    # covariance against z, so the cross term of the decomposition vanishes.
+    pr_mean = pr
+    cov_rz = (p * z * r).sum(dtype=torch.float32) - pz * pr_mean
+    eps_c = -cov_rz / torch.where(w > 0, w, torch.ones_like(w))
+    residual_c = r + eps_c * z
+    ps_c = (p * residual_c).sum(dtype=torch.float32)
+    sigma2_c = ((p * residual_c.square()).sum(dtype=torch.float32) - ps_c.square()).clamp_min(0)
     top = r.abs().topk(min(16, r.numel()), sorted=False).indices
     top_mass = (p[top] * r[top].square()).sum()
     share = (top_mass / torch.where(pr2 > 0, pr2, torch.ones_like(pr2))).clamp(0, 1)
@@ -239,6 +257,11 @@ def reduce_token(dense_logits, compressed_logits, target):
         "B": b, "V": v, "eps_hat": eps, "sigma2_hat": sigma2,
         "shrinkage_prediction": eps * b + 0.5 * sigma2 * v,
         "W": w, "cross": cross, "residual_first_order": ps - residual[target],
+        "eps_centred": eps_c, "sigma2_centred": sigma2_c,
+        "residual_first_order_centred": ps_c - residual_c[target],
+        "shrinkage_only_centred": eps_c * b + 0.5 * eps_c.square() * w,
+        "shrinkage_residual_centred": (eps_c * b + (ps_c - residual_c[target])
+                                       + 0.5 * eps_c.square() * w + 0.5 * sigma2_c),
         "shrinkage_only_prediction": eps * b + 0.5 * eps.square() * w,
         "shrinkage_residual_prediction": (eps * b + (ps - residual[target])
                                           + 0.5 * eps.square() * w - eps * cross + 0.5 * sigma2),
@@ -295,6 +318,15 @@ def reduce_tokens(dense_logits, compressed_logits, targets):
     pz = (p * z).sum(1)
     w = ((p * z.square()).sum(1) - pz.square()).clamp_min(0)
     cross = (p * z * residual).sum(1) - pz * ps
+    # Shift-invariant projection, in the p-weighted covariance rather than the
+    # Euclidean inner product: cross-entropy is unchanged when a constant is added to
+    # every logit, and this projection is too, while the Euclidean one is not.
+    cov_rz = (p * z * r).sum(1) - pz * pr
+    eps_c = -cov_rz / torch.where(w > 0, w, torch.ones_like(w))
+    residual_c = r + eps_c.unsqueeze(1) * z
+    ps_c = (p * residual_c).sum(1)
+    sigma2_c = ((p * residual_c.square()).sum(1) - ps_c.square()).clamp_min(0)
+    residual_c_y = residual_c.gather(1, index).squeeze(1)
     # B and V come from the canonical descriptor reducer, not a second copy of the
     # formulas: it returns their sums over the tokens supplied, which is what this
     # function accumulates anyway.
@@ -316,6 +348,11 @@ def reduce_tokens(dense_logits, compressed_logits, targets):
         "B": b, "V": v, "eps_hat": eps, "sigma2_hat": sigma2,
         "shrinkage_prediction": eps * b + 0.5 * sigma2 * v,
         "W": w, "cross": cross, "residual_first_order": ps - residual_y,
+        "eps_centred": eps_c, "sigma2_centred": sigma2_c,
+        "residual_first_order_centred": ps_c - residual_c_y,
+        "shrinkage_only_centred": eps_c * b + 0.5 * eps_c.square() * w,
+        "shrinkage_residual_centred": (eps_c * b + (ps_c - residual_c_y)
+                                       + 0.5 * eps_c.square() * w + 0.5 * sigma2_c),
         "shrinkage_only_prediction": eps * b + 0.5 * eps.square() * w,
         "shrinkage_residual_prediction": (eps * b + (ps - residual_y)
                                           + 0.5 * eps.square() * w - eps * cross + 0.5 * sigma2),

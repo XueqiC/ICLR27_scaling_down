@@ -515,3 +515,27 @@ def test_shrinkage_residual_decomposition_is_exact():
         values = v88.reduce_token(z, z + r, target)
         assert abs(values["shrinkage_residual_prediction"]
                    - values["second_order_prediction"]) < 2e-5, (scale, noise, values)
+
+
+def test_centred_projection_is_shift_invariant_and_closes_the_decomposition():
+    """Adding a constant to every logit leaves the loss unchanged, so any quantity used to
+    interpret the response must be unchanged too. The Euclidean projection is not, which is
+    why the centred one exists; the centred residual also has zero covariance with z, so its
+    decomposition must reproduce the exact second-order value without a cross term."""
+    import torch
+    from analysis import v88_displacement as v88
+
+    generator = torch.Generator().manual_seed(5)
+    z = torch.randn(6, 400, generator=generator) * 3
+    r = -0.04 * z + torch.randn(6, 400, generator=generator) * 0.05
+    targets = torch.randint(0, 400, (6,), generator=generator)
+
+    base, _ = v88.reduce_tokens(z, z + r, targets)
+    shifted, _ = v88.reduce_tokens(z + 7.0, z + 7.0 + r, targets)
+
+    for key in ("measured_delta", "second_order_prediction", "eps_centred",
+                "shrinkage_only_centred", "shrinkage_residual_centred"):
+        assert abs(base[key] - shifted[key]) <= 1e-4 * max(abs(base[key]), 1.0), key
+    # the uncentred coefficient is not invariant; that is the defect being guarded against
+    assert abs(base["eps_hat"] - shifted["eps_hat"]) > 1e-3 * abs(base["eps_hat"])
+    assert abs(base["shrinkage_residual_centred"] - base["second_order_prediction"]) < 2e-5
