@@ -5,9 +5,8 @@ Deployed language-model agents are specialists
 \citep{yao2023react,schick2023toolformer,jimenez2024swebench,liu2024agentbench}:
 a coding agent lives on code synthesis, a retrieval assistant on
 multi-hop question answering, and both pay for every token of
-inference. The model that
-serves such a workload is usually a dense source scaled down by
-pruning, quantization, or distillation, and choosing the route and its
+inference. The model that serves such a workload is usually a reference model
+scaled down by pruning, quantization, or distillation, and choosing the route and its
 strength today means running each candidate through capability
 benchmarks. A single compression ratio cannot replace that search, because
 compression does not shrink capabilities uniformly: across twelve
@@ -18,11 +17,12 @@ capability in some series and the most-damaged in others
 We therefore ask how the capability-conditioned loss after compression
 can be predicted from the initial model state and the configuration of
 the method. The endpoint is the conditional loss of each capability on
-a fixed probe set, written relative to a reference measured
-beforehand, the dense source for pruning and quantization and the
-initial student for distillation (Eq.~\eqref{eq:interface}). The admitted inputs are the initial state (parameter count,
-pretraining tokens where disclosed, dense capability losses) and the
-intervention setting; no measurement of the compressed target enters. The relations are developed on a controlled panel of
+a fixed probe set, written relative to a reference model measured beforehand, the
+source for pruning and quantization and the initial student for
+distillation (Eq.~\ref{eq:interface}). The admitted inputs are the initial state (parameter count,
+pretraining tokens where disclosed, reference capability losses) and
+the intervention setting; no measurement of the compressed target
+enters. The relations are developed on a controlled panel of
 Pythia checkpoints whose size and pretraining stage vary
 independently, by comparing low-dimensional forms that use the same
 inputs, and tested by freezing coefficients and predictions before new

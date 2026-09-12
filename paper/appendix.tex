@@ -173,8 +173,8 @@ check (Appendix~\ref{sec:app_results}) is one state measured twice.
 
 \section{Fitted Models and Coefficients}
 \label{sec:app_coef}
-The delivered pruning form (Eq.~\eqref{eq:power}) and its standardization are in Table~\ref{tab:round3_coef}; the
-grouped-quantization form (Eq.~\eqref{eq:quant2d}) in Table~\ref{tab:quant2d_coef}; the per-bit source regressions,
+The delivered pruning form (Eq.~\ref{eq:power}) and its standardization are in Table~\ref{tab:round3_coef}; the
+grouped-quantization form (Eq.~\ref{eq:quant2d}) in Table~\ref{tab:quant2d_coef}; the per-bit source regressions,
 the distillation source form and pool forms, and the frozen multi-student forms are stored with their standardization
 constants in the register files listed in Appendix~\ref{sec:app_registration}.
 \input{tables/round3_coef}
@@ -193,7 +193,7 @@ constants in the register files listed in Appendix~\ref{sec:app_registration}.
 development bit-widths are $b\in\{3,5\}$, so the centred $u$ takes the
 two values $\pm1.16$ and $u^2$ equals $1.35$ on every development
 cell: the quadratic column is a multiple of the intercept column, the
-design of Eq.~\eqref{eq:quant2d} has rank 16 for its 20 coefficients,
+design of Eq.~\ref{eq:quant2d} has rank 16 for its 20 coefficients,
 and the ridge penalty resolves the four undetermined directions (the
 effective degrees of freedom are 15.9 per capability;
 Table~\ref{tab:quant_ident}). At the unseen $b=4$, where $u\approx0$
@@ -225,7 +225,7 @@ Retrospectively, fitted on all 48 development points and scored on
 the 52 test points (nine unseen-pool trajectories and four held-out
 student trajectories at the development pools; predictions specified
 after the frozen matrix, origin R), the second form of
-Eq.~\eqref{eq:kdforms} has the lowest error of every form on the 270M
+Eq.~\ref{eq:kdforms} has the lowest error of every form on the 270M
 unseen-pool trajectories (0.022, 0.020, and 0.316 nats for math, code,
 and QA against 0.060, 0.047, and 0.862 for the frozen constant) and is
 second to the reuse-only form for QA on the 1B ones (0.478 against
@@ -518,7 +518,7 @@ full-solution reference and are not evidence of format robustness.
 
 The loss is the conditional cross-entropy of the reference completion
 given the prompt, summed over completion tokens and divided by the
-number of completion tokens, as in Eq.~\eqref{eq:taskloss}. Prompts and
+number of completion tokens, as in Eq.~\ref{eq:taskloss}. Prompts and
 references are tokenized with the model's own tokenizer and truncated to
 1024 tokens; prompt tokens are masked out of the loss. All within-model
 responses $\Delta L_c$ are differences in native-token nats

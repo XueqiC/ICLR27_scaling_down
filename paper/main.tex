@@ -102,14 +102,12 @@ Address \\
 \maketitle
 
 \begin{abstract}
-Specialized workloads need specific capabilities, and the models that
-serve them are usually dense sources scaled down by pruning,
-quantization, or distillation; choosing a configuration today means
+Specialized workloads need specific capabilities, and the models that serve them are usually reference models scaled
+down by pruning, quantization, or distillation; choosing a configuration today means
 measuring each one. We develop capability-conditioned empirical models
 of the compression response: for math, code, and multi-hop QA we
-predict the conditional loss after compression from the initial model
-state (parameter count, pretraining tokens, and the dense capability
-losses of the source or initial student) and the configuration of the
+predict the conditional loss after compression from the initial model state (parameter count, pretraining tokens, and
+the reference capability losses of the source or initial student) and the configuration of the
 method. Relations are built on a controlled panel of Pythia checkpoints whose
 size and pretraining stage vary independently and validated with
 predictions frozen before new configurations and states are measured.

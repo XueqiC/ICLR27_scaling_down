@@ -32,11 +32,11 @@ quantization the damage
 $\Delta L_c=L_c(\text{compressed})-L_c(M_0)$, for distillation the
 signed transfer $\delta_c=L_c(S_{\mathrm{KD}})-L_c(S_0)$ of a student
 relative to its own initial state $S_0$, which is the reference
-model of that arm; the teacher never plays the role of the source. The observable is the
-likelihood of a fixed reference on a fixed distribution: a QA loss can
-fall while exact-match accuracy does not rise, and a gain on one QA
-distribution need not appear on another. Absolute levels of different tokenizers are never placed on one
-scale (Appendix~\ref{sec:app_measure}).
+model of that arm; the teacher never plays the role of the source. The observable is the likelihood of a fixed reference on a fixed
+distribution: a QA loss can fall while exact-match accuracy does not
+rise, and a gain on one QA distribution need not appear on another;
+absolute levels of different tokenizers are never placed on one scale
+(Appendix~\ref{sec:app_measure}).
 
 \subsection{Models and Compression Settings}
 \label{sec:models}
@@ -48,10 +48,10 @@ establishes the phenomena and the limits of cross-family transfer
 \citep{biderman2023pythia} (160M, 410M, 1.4B at steps 16k, 64k, 143k) varies the
 initial state along parameter count and pretraining stage with
 architecture and data fixed and is the development set of every
-relation. \emph{New states and configurations} that entered no fit
-(Pythia 160M to 6.9B at further steps, new densities, bit-widths, and
-group sizes, and Gemma-3 270M, 1B, and 4B students at new pools)
-provide the validation; Appendix~\ref{sec:app_details} lists them.
+relation. \emph{New states and configurations} that entered no fit (Pythia
+160M to 6.9B at further steps, new densities, bit-widths, and group
+sizes, Gemma-3 students at new pools; Appendix~\ref{sec:app_details})
+provide the validation.
 
 The three operations are held fixed by protocol: global magnitude
 pruning of all transformer weight matrices to a retained density $d$;
