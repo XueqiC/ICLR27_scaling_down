@@ -99,14 +99,19 @@ Math and code are carried by the initial-state inputs on every axis;
 QA is not: its pruning response is over-predicted by every
 source-conditioned form on every new checkpoint. What capability conditioning adds is measurable on the frozen
 confirmation panels (Appendix~\ref{sec:app_shared}): per-capability
-pruning curves beat a shared damage curve with a per-capability scale
-by 0.07 nats macro, almost entirely through QA, whose response has
-the opposite sign (0.19 nats, interval $[0.13,0.25]$), while for math
-and code a shared curve is as good or better; for grouped
-quantization the two are indistinguishable (0.003 nats); and for distillation the comparison is empty because the
-one-coefficient forms are algebraically equivalent, which supports no
-conclusion about conditioning there. Conditioning matters where the sign of the response differs across
-capabilities.
+pruning curves beat a shared damage curve with a signed
+per-capability scale by 0.06 nats macro (interval $[0.02,0.10]$ with
+the 2.8B duplicate merged), almost entirely through QA (0.17,
+$[0.11,0.24]$), whose aggregate curve is not proportional to the
+shared one: it changes sign across density (damage at $d=0.55$,
+improvement from 0.6 to 0.9), so no scale, including a negative one,
+can represent it ($R^2$ 0.49 against 0.94 and 0.97 for math and
+code), and its direction also varies across sources. For math and
+code a shared curve is as good or better, for grouped quantization
+the two are indistinguishable (0.003 nats), and for distillation the
+comparison is empty because the one-coefficient forms are
+algebraically equivalent. Conditioning matters where the shape of the
+response differs across capabilities.
 
 \paragraph{Shared structure and ranges.} One function family across
 methods holds for pruning by construction and fails for quantization

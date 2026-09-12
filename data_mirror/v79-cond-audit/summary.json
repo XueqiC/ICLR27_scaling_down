@@ -1,0 +1,4048 @@
+{
+  "schema_version": 1,
+  "experiment": "V79 audit of V76 capability conditioning",
+  "units": "Signed post-intervention minus dense cross entropy and MAE gains in nats",
+  "gain_convention": "Gain of A over B = MAE(B)-MAE(A); positive favors A. The literal MAE(A)-MAE(B) contrast has the opposite sign.",
+  "scale_audit": {
+    "formula": "s_c = sum_k(h_k*m_kc) / sum_k(h_k^2), unrestricted signed OLS, no intercept",
+    "v76_source_matches_hash_recorded_in_v76_summary": true,
+    "stored_spec": "Hold shared curve fixed; fit a separate unrestricted signed scale by unregularized least squares against each capability's development median anchors, equal weight per anchor.",
+    "arms": {
+      "pruning": {
+        "scales": {
+          "math": 1.2877733949854362,
+          "code": 1.2705589822523722,
+          "qa": 0.3278939776144556
+        },
+        "negative_scales_allowed": true,
+        "negative_scales_occurred": false,
+        "negative_capabilities": [],
+        "sensitivity_scales": {
+          "mean_of_capability_medians": {
+            "math": 1.345346701376178,
+            "code": 1.3234697601494825,
+            "qa": 0.33118353847433935
+          },
+          "development_rows_ols": {
+            "math": 1.6497951429761246,
+            "code": 1.6639865319345888,
+            "qa": 0.7400055144125719
+          },
+          "median_anchors_lad": {
+            "math": 1.2410450314202255,
+            "code": 1.2289346648900041,
+            "qa": 0.4102796460671209
+          },
+          "development_rows_lad": {
+            "math": 1.3621879134360722,
+            "code": 1.3259371215598468,
+            "qa": 0.3794405169514252
+          }
+        },
+        "negative_sensitivity_scales": []
+      },
+      "quantization": {
+        "scales": {
+          "math": 1.0697702915198664,
+          "code": 1.4313057764172066,
+          "qa": 0.556504983556108
+        },
+        "negative_scales_allowed": true,
+        "negative_scales_occurred": false,
+        "negative_capabilities": [],
+        "sensitivity_scales": {
+          "mean_of_capability_medians": {
+            "math": 1.0511163431233972,
+            "code": 1.4065809622867746,
+            "qa": 0.5423026945898292
+          },
+          "development_rows_ols": {
+            "math": 3.84295379248137,
+            "code": 4.142656276104001,
+            "qa": 3.6637748746469607
+          },
+          "median_anchors_lad": {
+            "math": 1.0258469028159147,
+            "code": 1.3771963377338856,
+            "qa": 0.5969567594501998
+          },
+          "development_rows_lad": {
+            "math": 1.2397937088376916,
+            "code": 1.7473100631557548,
+            "qa": 0.4371548487593176
+          }
+        },
+        "negative_sensitivity_scales": []
+      },
+      "distillation": {
+        "scales": {
+          "math": 0.7161844136458616,
+          "code": 0.7342255549033195,
+          "qa": 1.5495900314508189
+        },
+        "negative_scales_allowed": true,
+        "negative_scales_occurred": false,
+        "negative_capabilities": [],
+        "sensitivity_scales": {},
+        "negative_sensitivity_scales": []
+      }
+    },
+    "code_evidence": {
+      "corrections": {
+        "file": "analysis/v76_cap_conditioning.py",
+        "line": 116,
+        "end_line": 130,
+        "source": "def corrections(x, y, objective=\"ols\"):\n    \"\"\"One fixed signed scale and one offset per capability; no test inputs.\"\"\"\n    x, y = np.asarray(x, dtype=float), np.asarray(y, dtype=float)\n    require(y.shape == (len(x), len(CAPS)) and x @ x > 1e-24, \"Degenerate shared curve\")\n    if objective == \"ols\":\n        scale = x @ y / (x @ x)\n        offset = (y - x[:, None]).mean(axis=0)\n    elif objective == \"lad\":\n        mask = x != 0\n        scale = np.array([weighted_median(y[mask, ci] / x[mask], np.abs(x[mask]))\n                          for ci in range(len(CAPS))])\n        offset = np.median(y - x[:, None], axis=0)\n    else:\n        raise ValueError(objective)\n    return dict(zip(CAPS, map(float, scale))), dict(zip(CAPS, map(float, offset)))"
+      },
+      "fit_anchors": {
+        "file": "analysis/v76_cap_conditioning.py",
+        "line": 133,
+        "end_line": 155,
+        "source": "def fit_anchors(cells, shared_order=\"median_of_means\", correction_rows=\"anchors\", objective=\"ols\"):\n    \"\"\"cells have state, x and three aligned development responses in y.\"\"\"\n    indexed(cells, (\"state\", \"x\"))\n    keys = sorted({r[\"x\"] for r in cells}, key=str)\n    medians, shared, counts = {}, {}, {}\n    for key in keys:\n        y = np.asarray([r[\"y\"] for r in cells if r[\"x\"] == key])\n        medians[key] = np.median(y, axis=0)\n        shared[key] = float(np.median(y.mean(axis=1)) if shared_order == \"median_of_means\"\n                            else medians[key].mean())\n        counts[key] = len(y)\n    if correction_rows == \"anchors\":\n        x, y = [shared[k] for k in keys], [medians[k] for k in keys]\n    else:\n        x, y = [shared[r[\"x\"]] for r in cells], [r[\"y\"] for r in cells]\n    scales, offsets = corrections(x, y, objective)\n    models = {\"A\": {c: {k: float(medians[k][i]) for k in keys} for i, c in enumerate(CAPS)},\n              \"B\": {c: {k: scales[c] * shared[k] for k in keys} for c in CAPS},\n              \"C\": {c: {k: shared[k] + offsets[c] for k in keys} for c in CAPS},\n              \"D\": {c: dict(shared) for c in CAPS}}\n    return {\"shared_order\": shared_order, \"correction_rows\": correction_rows,\n            \"objective\": objective, \"shared_anchors\": shared, \"scales\": scales,\n            \"offsets\": offsets, \"n_states_by_anchor\": counts, \"models\": models}"
+      },
+      "fit_reuse": {
+        "file": "analysis/v76_cap_conditioning.py",
+        "line": 158,
+        "end_line": 172,
+        "source": "def fit_reuse(points):\n    x = np.log1p([p[\"E\"] for p in points])\n    y = np.array([[p[\"delta\"][c] for c in CAPS] for p in points])\n    coefficients = x @ y / (x @ x)\n    shared = float(x @ y.mean(axis=1) / (x @ x))\n    require(abs(shared) > 1e-12, \"Zero shared slope: scale parameterization is singular\")\n    scales, offsets = corrections(shared * x, y)\n    scaled = shared * np.array([scales[c] for c in CAPS])\n    close(scaled, coefficients, \"Reuse-count A and B must be algebraically equivalent\")\n    return {\"coefficients\": dict(zip(CAPS, map(float, coefficients))), \"shared_coefficient\": shared,\n            \"scales\": scales, \"offsets\": offsets,\n            \"max_coefficient_difference_A_B\": float(np.max(np.abs(scaled - coefficients))),\n            \"equivalence\": \"a_c=(w.T y_c)/(w.T w); a=(w.T mean_c(y_c))/(w.T w); \"\n                           \"s_c=((a*w).T y_c)/((a*w).T(a*w))=a_c/a, for a != 0. \"\n                           \"Thus a*s_c*w=a_c*w; arbitrary signed scales are allowed.\"}"
+      },
+      "predict_anchors": {
+        "file": "analysis/v76_cap_conditioning.py",
+        "line": 344,
+        "end_line": 351,
+        "source": "def predict_anchors(rows, fit, arm):\n    curve = (lambda anchors, x: linear(anchors, float(x))) if arm == \"pruning\" else quant_curve\n    result = []\n    for r in rows:\n        predictions = {m: curve(fit[\"models\"][m][r[\"capability\"]], r[\"x\"]) for m in METHODS}\n        close(predictions[\"A\"], r[\"frozen_A\"], f\"{arm} delivered A prediction\")\n        result.append({**r, \"predictions\": predictions})\n    return result"
+      },
+      "quant_curve": {
+        "file": "analysis/v76_cap_conditioning.py",
+        "line": 98,
+        "end_line": 106,
+        "source": "def quant_curve(anchors, config):\n    match = re.fullmatch(r\"b([345])_g([1-9][0-9]*)\", config)\n    require(match is not None, f\"Unsupported quantization configuration: {config}\")\n    bit, group = map(int, match.groups())\n    # Confirmation uses only exact b=3,4,5; V69's bilinear x interpolation\n    # therefore reduces exactly to this adjacent log2(g/128) interpolation.\n    v = math.log2(group / 128)\n    value = linear({math.log2(g / 128): anchors[f\"b{bit}_g{g}\"] for g in (64, 128, 256)}, v)\n    return max(0.0, value) if abs(v) > 1 else value"
+      }
+    },
+    "negative_scale_execution_test": {
+      "math": 2.0,
+      "code": -3.0,
+      "qa": -4.0
+    },
+    "conclusion": "Negative scales are allowed by the stored specification and actual code, but none occurred in any primary arm or stored sensitivity fit. Pruning has no output clipping. Quantization alone keeps V69's boundary zero floor after extrapolation; that is not a scale sign constraint."
+  },
+  "pruning_shape_audit": {
+    "density_order": [
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.9
+    ],
+    "shared_anchors": {
+      "0.55": 2.1301938195755135,
+      "0.6": 0.7373323148162219,
+      "0.65": 0.18320617181871984,
+      "0.7": 0.021570279425424183,
+      "0.75": -0.03750810636978852,
+      "0.8": 0.004003690910670099,
+      "0.9": -0.0020347496437705948
+    },
+    "shared_signs_in_density_order": [
+      1,
+      1,
+      1,
+      1,
+      -1,
+      1,
+      -1
+    ],
+    "n_development_states": 17,
+    "n_cells": 84,
+    "r2_definition": "1 - sum((m_c-s_c*h)^2)/sum((m_c-mean(m_c))^2). Fit s_c without intercept, equal weight per observed median anchor. Uncentered R^2 is supplemental, not the fraction of centered variance.",
+    "direction_definition": "At each density, arithmetic mean over available development source states; opposite means response*mean<0. Exact zero responses are not opposite; an exactly zero mean has no direction (share=null).",
+    "density_coverage_note": "The historical grid is unbalanced (4-16 sources per density); do not impute missing source-density pairs or add a dense anchor. Median-curve shape is an aggregate over the available sources.",
+    "capabilities": {
+      "math": {
+        "scale": 1.2877733949854362,
+        "r2": 0.938239262915359,
+        "uncentered_r2": 0.962320942858557,
+        "sse": 0.33224690732273565,
+        "centered_sst": 5.379581316644628,
+        "residuals": [
+          -0.09954047126548948,
+          0.17686722686732004,
+          0.4482845739018659,
+          0.2481556908208502,
+          0.1608246813353442,
+          0.050487592420679864,
+          0.010134335846089306
+        ],
+        "normal_equation_residual": -7.771561172376096e-16,
+        "median_anchors": {
+          "0.55": 2.643666455746263,
+          "0.6": 1.1263841651506765,
+          "0.65": 0.6842126077671439,
+          "0.7": 0.2759333227873132,
+          "0.75": 0.11252273985604677,
+          "0.8": 0.05564343905718583,
+          "0.9": 0.007514039389385441
+        },
+        "signs_in_density_order": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "changes_sign": false,
+        "linear_interpolated_zero_crossings": [],
+        "source_directions_by_density": {
+          "0.55": {
+            "n_sources": 8,
+            "mean": 3.2284193822668668,
+            "median": 2.643666455746263,
+            "n_positive": 8,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step64000": 2.0912758047931663,
+              "pythia-160m@step143000": 8.492683698489282,
+              "pythia-1b@step112000": 2.9017242743019853,
+              "pythia-1b@step32000": 3.8051886419362493,
+              "pythia-1b@step96000": 2.691746420944397,
+              "pythia-410m@step96000": 2.0594004587518784,
+              "pythia-6.9b@step112000": 2.595586490548129,
+              "pythia-6.9b@step32000": 1.189749268369849
+            }
+          },
+          "0.6": {
+            "n_sources": 16,
+            "mean": 1.5314341433995096,
+            "median": 1.1263841651506765,
+            "n_positive": 16,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step143000": 1.149648026575971,
+              "pythia-1.4b@step16000": 0.3653800522027999,
+              "pythia-1.4b@step64000": 0.992841888792217,
+              "pythia-1.4b@step96000": 1.1031203037253818,
+              "pythia-160m@step143000": 6.4641303488096185,
+              "pythia-160m@step16000": 0.872103140077513,
+              "pythia-160m@step64000": 1.4217748951989244,
+              "pythia-160m@step96000": 2.650300561575575,
+              "pythia-1b@step112000": 1.6657438898995494,
+              "pythia-1b@step32000": 2.307482401328799,
+              "pythia-410m@step143000": 1.6624614411136596,
+              "pythia-410m@step16000": 0.3736454955311239,
+              "pythia-410m@step64000": 0.7123704816894725,
+              "pythia-410m@step96000": 1.2114608874475996,
+              "pythia-6.9b@step112000": 1.0514118484536898,
+              "pythia-6.9b@step32000": 0.49907063197026025
+            }
+          },
+          "0.65": {
+            "n_sources": 8,
+            "mean": 1.0072545084236337,
+            "median": 0.6842126077671439,
+            "n_positive": 8,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step64000": 0.42936802973977706,
+              "pythia-160m@step143000": 3.9636162303250813,
+              "pythia-1b@step112000": 0.7594320968124653,
+              "pythia-1b@step32000": 0.8112987423870914,
+              "pythia-1b@step96000": 0.7201218065332597,
+              "pythia-410m@step96000": 0.648303409001028,
+              "pythia-6.9b@step112000": 0.48145218698093806,
+              "pythia-6.9b@step32000": 0.24444356560942815
+            }
+          },
+          "0.7": {
+            "n_sources": 16,
+            "mean": 0.4472274677687258,
+            "median": 0.2759333227873132,
+            "n_positive": 16,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step143000": 0.2948074033061774,
+              "pythia-1.4b@step16000": 0.07810646207387495,
+              "pythia-1.4b@step64000": 0.1954836668512221,
+              "pythia-1.4b@step96000": 0.23218381713200986,
+              "pythia-160m@step143000": 2.3880803606738907,
+              "pythia-160m@step16000": 0.257059242268449,
+              "pythia-160m@step64000": 0.4443565609428144,
+              "pythia-160m@step96000": 1.0590247567824094,
+              "pythia-1b@step112000": 0.3141659416277782,
+              "pythia-1b@step32000": 0.3058214031479869,
+              "pythia-410m@step143000": 0.6128094597801155,
+              "pythia-410m@step16000": 0.10060903266629762,
+              "pythia-410m@step64000": 0.1963734873052283,
+              "pythia-410m@step96000": 0.329905876769754,
+              "pythia-6.9b@step112000": 0.21723483350470607,
+              "pythia-6.9b@step32000": 0.12961717946689855
+            }
+          },
+          "0.75": {
+            "n_sources": 4,
+            "mean": 0.10358993118721815,
+            "median": 0.11252273985604677,
+            "n_positive": 4,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1b@step112000": 0.13084315431464044,
+              "pythia-1b@step32000": 0.11573598038440247,
+              "pythia-6.9b@step112000": 0.10930949932769107,
+              "pythia-6.9b@step32000": 0.05847109072213863
+            }
+          },
+          "0.8": {
+            "n_sources": 16,
+            "mean": 0.12283847781381006,
+            "median": 0.05564343905718583,
+            "n_positive": 16,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step143000": 0.07063197026022294,
+              "pythia-1.4b@step16000": 0.015047852566637765,
+              "pythia-1.4b@step64000": 0.03774816103772838,
+              "pythia-1.4b@step96000": 0.052183026180495196,
+              "pythia-160m@step143000": 0.7338448153128216,
+              "pythia-160m@step16000": 0.0732618840465078,
+              "pythia-160m@step64000": 0.10788578660128145,
+              "pythia-160m@step96000": 0.3468124653958713,
+              "pythia-1b@step112000": 0.05910385193387646,
+              "pythia-1b@step32000": 0.047832792849798356,
+              "pythia-410m@step143000": 0.19665032033536356,
+              "pythia-410m@step16000": 0.02064383453294316,
+              "pythia-410m@step64000": 0.04741754330459558,
+              "pythia-410m@step96000": 0.09795934509214588,
+              "pythia-6.9b@step112000": 0.042711381792296166,
+              "pythia-6.9b@step32000": 0.015680613778375374
+            }
+          },
+          "0.9": {
+            "n_sources": 16,
+            "mean": 0.01821042276358459,
+            "median": 0.007514039389385441,
+            "n_positive": 16,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step143000": 0.010104405599936639,
+              "pythia-1.4b@step16000": 0.0010480107569406094,
+              "pythia-1.4b@step64000": 0.006426481056711175,
+              "pythia-1.4b@step96000": 0.009432096812465485,
+              "pythia-160m@step143000": 0.11880091750375721,
+              "pythia-160m@step16000": 0.008878430752194744,
+              "pythia-160m@step64000": 0.00889820454006185,
+              "pythia-160m@step96000": 0.05961797041841321,
+              "pythia-1b@step112000": 0.00435023333069684,
+              "pythia-1b@step32000": 0.005358696511903682,
+              "pythia-410m@step143000": 0.03410978407023646,
+              "pythia-410m@step16000": 0.002254211816815621,
+              "pythia-410m@step64000": 0.008245669540457135,
+              "pythia-410m@step96000": 0.006782409238313747,
+              "pythia-6.9b@step112000": 0.005022542118168216,
+              "pythia-6.9b@step32000": 0.00203670015028079
+            }
+          }
+        },
+        "confirmation_gain_attribution": {
+          "original_five_labels": {
+            "gain_B_minus_A_nats": 0.018976758519038545,
+            "share_of_sum_of_capability_gains": 0.08702027865237978
+          },
+          "merged_four_states": {
+            "gain_B_minus_A_nats": 0.00482913823090933,
+            "share_of_sum_of_capability_gains": 0.027275570009569844
+          }
+        }
+      },
+      "code": {
+        "scale": 1.2705589822523722,
+        "r2": 0.9738573362375187,
+        "uncentered_r2": 0.9829468398447662,
+        "sse": 0.1433066891172311,
+        "centered_sst": 5.481717181509939,
+        "residuals": [
+          -0.08866786358936585,
+          0.1957821748404711,
+          0.24610024768112407,
+          0.1529181469609428,
+          0.10675419347347734,
+          0.04072957086695035,
+          0.0104590512287785
+        ],
+        "normal_equation_residual": -4.440892098500626e-16,
+        "median_anchors": {
+          "0.55": 2.6178690278107917,
+          "0.6": 1.1326063703351557,
+          "0.65": 0.47887449488947,
+          "0.7": 0.18032445923460905,
+          "0.75": 0.059097932018065125,
+          "0.8": 0.04581649631566442,
+          "0.9": 0.007873781792250956
+        },
+        "signs_in_density_order": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "changes_sign": false,
+        "linear_interpolated_zero_crossings": [],
+        "source_directions_by_density": {
+          "0.55": {
+            "n_sources": 8,
+            "mean": 3.1715741621107676,
+            "median": 2.6178690278107917,
+            "n_positive": 8,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step64000": 2.0856310910387448,
+              "pythia-160m@step143000": 8.873960066555739,
+              "pythia-1b@step112000": 2.868730686950321,
+              "pythia-1b@step32000": 2.690099833610649,
+              "pythia-1b@step96000": 2.7410268599952454,
+              "pythia-410m@step96000": 2.446517708580936,
+              "pythia-6.9b@step112000": 2.5456382220109344,
+              "pythia-6.9b@step32000": 1.1209888281435703
+            }
+          },
+          "0.6": {
+            "n_sources": 16,
+            "mean": 1.652621375089137,
+            "median": 1.1326063703351557,
+            "n_positive": 16,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step143000": 0.9827668172094131,
+              "pythia-1.4b@step16000": 0.35399334442595665,
+              "pythia-1.4b@step64000": 0.9776562871404799,
+              "pythia-1.4b@step96000": 1.0570477775136677,
+              "pythia-160m@step143000": 7.246434513905396,
+              "pythia-160m@step16000": 1.1336463037794153,
+              "pythia-160m@step64000": 2.0044568576182553,
+              "pythia-160m@step96000": 3.0898502495840265,
+              "pythia-1b@step112000": 1.306334680294747,
+              "pythia-1b@step32000": 1.4876990729736153,
+              "pythia-410m@step143000": 2.305502733539339,
+              "pythia-410m@step16000": 0.34549560256714984,
+              "pythia-410m@step64000": 0.9928690278107917,
+              "pythia-410m@step96000": 1.5407653910149752,
+              "pythia-6.9b@step112000": 1.131566436890896,
+              "pythia-6.9b@step32000": 0.4858569051580699
+            }
+          },
+          "0.65": {
+            "n_sources": 8,
+            "mean": 1.1127733539339195,
+            "median": 0.47887449488947,
+            "n_positive": 8,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step64000": 0.335512241502258,
+              "pythia-160m@step143000": 5.641014975041597,
+              "pythia-1b@step112000": 0.47533872117898746,
+              "pythia-1b@step32000": 0.513548847159496,
+              "pythia-1b@step96000": 0.4824102685999525,
+              "pythia-410m@step96000": 0.8081768481102924,
+              "pythia-6.9b@step112000": 0.47302115521749455,
+              "pythia-6.9b@step32000": 0.17316377466127886
+            }
+          },
+          "0.7": {
+            "n_sources": 16,
+            "mean": 0.5017883141193249,
+            "median": 0.18032445923460905,
+            "n_positive": 16,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1.4b@step143000": 0.17405514618493,
+              "pythia-1.4b@step16000": 0.04956025671499864,
+              "pythia-1.4b@step64000": 0.08806750653672446,
+              "pythia-1.4b@step96000": 0.148027097694319,
+              "pythia-160m@step143000": 3.380259091989541,
+              "pythia-160m@step16000": 0.2779890658426434,
+              "pythia-160m@step64000": 0.6137984311861184,
+              "pythia-160m@step96000": 1.1739957214166865,
+              "pythia-1b@step112000": 0.18659377228428808,
+              "pythia-1b@step32000": 0.16234846684097914,
+              "pythia-410m@step143000": 0.8060375564535298,
+              "pythia-410m@step16000": 0.11320418350368433,
+              "pythia-410m@step64000": 0.16817209412883294,
+              "pythia-410m@step96000": 0.395352983123366,
+              "pythia-6.9b@step112000": 0.21496909912051332,
+              "pythia-6.9b@step32000": 0.07618255288804376
+            }
+          },
+          "0.75": {
+            "n_sources": 4,
+            "mean": 0.054135963869740955,
+            "median": 0.059097932018065125,
+            "n_positive": 4,
+            "n_negative": 0,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1b@step112000": 0.08206560494414084,
+              "pythia-1b@step32000": 0.036130259091989414,
+              "pythia-6.9b@step112000": 0.09282148799619683,
+              "pythia-6.9b@step32000": 0.0055265034466367435
+            }
+          },
+          "0.8": {
+            "n_sources": 16,
+            "mean": 0.1376556186118374,
+            "median": 0.04581649631566442,
+            "n_positive": 15,
+            "n_negative": 1,
+            "n_zero": 0,
+            "n_opposite_mean": 1,
+            "opposite_mean_share": 0.0625,
+            "opposite_mean_sources": [
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step143000": 0.05152127406703122,
+              "pythia-1.4b@step16000": 0.012538626099358074,
+              "pythia-1.4b@step64000": 0.01859995246018542,
+              "pythia-1.4b@step96000": 0.04011171856429763,
+              "pythia-160m@step143000": 1.0844425956738766,
+              "pythia-160m@step16000": 0.07564772997385316,
+              "pythia-160m@step64000": 0.184811029236986,
+              "pythia-160m@step96000": 0.3141193249346328,
+              "pythia-1b@step112000": 0.031079153791300218,
+              "pythia-1b@step32000": 0.0026741145709530123,
+              "pythia-410m@step143000": 0.21612788210125977,
+              "pythia-410m@step16000": 0.004991680532445919,
+              "pythia-410m@step64000": 0.062158307582600436,
+              "pythia-410m@step96000": 0.08022343712859525,
+              "pythia-6.9b@step112000": 0.027365105776087528,
+              "pythia-6.9b@step32000": -0.003922034704064492
+            }
+          },
+          "0.9": {
+            "n_sources": 16,
+            "mean": 0.023989036130259045,
+            "median": 0.007873781792250956,
+            "n_positive": 13,
+            "n_negative": 3,
+            "n_zero": 0,
+            "n_opposite_mean": 3,
+            "opposite_mean_share": 0.1875,
+            "opposite_mean_sources": [
+              "pythia-1b@step32000",
+              "pythia-410m@step96000",
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step143000": 0.02109579272640838,
+              "pythia-1.4b@step16000": 5.9424768243276915e-05,
+              "pythia-1.4b@step64000": 0.005051105300689196,
+              "pythia-1.4b@step96000": 0.017173758022343666,
+              "pythia-160m@step143000": 0.2379367720465888,
+              "pythia-160m@step16000": 0.013608271927739501,
+              "pythia-160m@step64000": 0.016520085571666288,
+              "pythia-160m@step96000": 0.042013311148086485,
+              "pythia-1b@step112000": 0.004694556691228868,
+              "pythia-1b@step32000": -0.0027929641074400102,
+              "pythia-410m@step143000": 0.009567387687188011,
+              "pythia-410m@step16000": 0.0018421678155453591,
+              "pythia-410m@step64000": 0.0061801758973139,
+              "pythia-410m@step96000": -0.0011884953648679808,
+              "pythia-6.9b@step112000": 0.01429165676253863,
+              "pythia-6.9b@step32000": -0.0022284288091276583
+            }
+          }
+        },
+        "confirmation_gain_attribution": {
+          "original_five_labels": {
+            "gain_B_minus_A_nats": 0.009219210089404156,
+            "share_of_sum_of_capability_gains": 0.04227583072893669
+          },
+          "merged_four_states": {
+            "gain_B_minus_A_nats": 0.003966501967609698,
+            "share_of_sum_of_capability_gains": 0.022403293701175102
+          }
+        }
+      },
+      "qa": {
+        "scale": 0.3278939776144556,
+        "r2": 0.4893795584880357,
+        "uncentered_r2": 0.4947051103251465,
+        "sse": 0.5619107624771376,
+        "centered_sst": 1.1004470577270682,
+        "residuals": [
+          0.17549744175946502,
+          -0.3879467209660271,
+          -0.5124100093365188,
+          -0.18747319247571181,
+          -0.2772242503191294,
+          -0.07633357986407462,
+          -0.01477958590669102
+        ],
+        "normal_equation_residual": -3.885780586188048e-16,
+        "median_anchors": {
+          "0.55": 0.8739751663498101,
+          "0.6": -0.14617989543726218,
+          "0.65": -0.45233780893536135,
+          "0.7": -0.1804004277566542,
+          "0.75": -0.28952293250950545,
+          "0.8": -0.07502079372623616,
+          "0.9": -0.015446768060836558
+        },
+        "signs_in_density_order": [
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "changes_sign": true,
+        "linear_interpolated_zero_crossings": [
+          0.59283540802213
+        ],
+        "source_directions_by_density": {
+          "0.55": {
+            "n_sources": 8,
+            "mean": 1.5503171043250952,
+            "median": 0.8739751663498101,
+            "n_positive": 7,
+            "n_negative": 1,
+            "n_zero": 0,
+            "n_opposite_mean": 1,
+            "opposite_mean_share": 0.125,
+            "opposite_mean_sources": [
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step64000": 0.2575451520912546,
+              "pythia-160m@step143000": 7.2933697718631185,
+              "pythia-1b@step112000": 0.9396684885931563,
+              "pythia-1b@step32000": 0.8082818441064639,
+              "pythia-1b@step96000": 0.7553766634980992,
+              "pythia-410m@step96000": 1.2532081749049429,
+              "pythia-6.9b@step112000": 1.451788260456274,
+              "pythia-6.9b@step32000": -0.3567015209125479
+            }
+          },
+          "0.6": {
+            "n_sources": 16,
+            "mean": 0.5848346898764258,
+            "median": -0.14617989543726218,
+            "n_positive": 6,
+            "n_negative": 10,
+            "n_zero": 0,
+            "n_opposite_mean": 10,
+            "opposite_mean_share": 0.625,
+            "opposite_mean_sources": [
+              "pythia-1.4b@step143000",
+              "pythia-1.4b@step16000",
+              "pythia-1.4b@step64000",
+              "pythia-1.4b@step96000",
+              "pythia-1b@step112000",
+              "pythia-1b@step32000",
+              "pythia-410m@step16000",
+              "pythia-410m@step64000",
+              "pythia-6.9b@step112000",
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step143000": -0.44519367870722437,
+              "pythia-1.4b@step16000": -0.319926330798479,
+              "pythia-1.4b@step64000": -0.49958412547528486,
+              "pythia-1.4b@step96000": -0.5483602661596958,
+              "pythia-160m@step143000": 6.106582699619772,
+              "pythia-160m@step16000": 0.3484731463878328,
+              "pythia-160m@step64000": 1.5251901140684403,
+              "pythia-160m@step96000": 3.1201283269961975,
+              "pythia-1b@step112000": -0.17915280418250923,
+              "pythia-1b@step32000": -0.07824382129277563,
+              "pythia-410m@step143000": 1.2567728136882135,
+              "pythia-410m@step16000": -0.39133792775665377,
+              "pythia-410m@step64000": -0.24774239543726306,
+              "pythia-410m@step96000": 0.45401615969581766,
+              "pythia-6.9b@step112000": -0.11320698669201512,
+              "pythia-6.9b@step32000": -0.6310598859315588
+            }
+          },
+          "0.65": {
+            "n_sources": 8,
+            "mean": 0.08920137238593151,
+            "median": -0.45233780893536135,
+            "n_positive": 1,
+            "n_negative": 7,
+            "n_zero": 0,
+            "n_opposite_mean": 7,
+            "opposite_mean_share": 0.875,
+            "opposite_mean_sources": [
+              "pythia-1.4b@step64000",
+              "pythia-1b@step112000",
+              "pythia-1b@step32000",
+              "pythia-1b@step96000",
+              "pythia-410m@step96000",
+              "pythia-6.9b@step112000",
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step64000": -0.5982652091254756,
+              "pythia-160m@step143000": 4.15981463878327,
+              "pythia-1b@step112000": -0.7835967205323193,
+              "pythia-1b@step32000": -0.6140090304182504,
+              "pythia-1b@step96000": -0.769813450570342,
+              "pythia-410m@step96000": -0.0865019011406849,
+              "pythia-6.9b@step112000": -0.30641040874524705,
+              "pythia-6.9b@step32000": -0.28760693916349833
+            }
+          },
+          "0.7": {
+            "n_sources": 16,
+            "mean": 0.05144961977186313,
+            "median": -0.1804004277566542,
+            "n_positive": 4,
+            "n_negative": 12,
+            "n_zero": 0,
+            "n_opposite_mean": 12,
+            "opposite_mean_share": 0.75,
+            "opposite_mean_sources": [
+              "pythia-1.4b@step143000",
+              "pythia-1.4b@step16000",
+              "pythia-1.4b@step64000",
+              "pythia-1.4b@step96000",
+              "pythia-160m@step16000",
+              "pythia-1b@step112000",
+              "pythia-1b@step32000",
+              "pythia-410m@step16000",
+              "pythia-410m@step64000",
+              "pythia-410m@step96000",
+              "pythia-6.9b@step112000",
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step143000": -0.41394367870722437,
+              "pythia-1.4b@step16000": -0.14169439163498154,
+              "pythia-1.4b@step64000": -0.4164092205323193,
+              "pythia-1.4b@step96000": -0.5427162547528512,
+              "pythia-160m@step143000": 2.810004752851712,
+              "pythia-160m@step16000": -0.17362761406844118,
+              "pythia-160m@step64000": 0.266753802281368,
+              "pythia-160m@step96000": 1.647694866920152,
+              "pythia-1b@step112000": -0.6509327471482891,
+              "pythia-1b@step32000": -0.554479562737642,
+              "pythia-410m@step143000": 0.12773288973384034,
+              "pythia-410m@step16000": -0.18102423954372604,
+              "pythia-410m@step64000": -0.29004277566539916,
+              "pythia-410m@step96000": -0.1797766159695824,
+              "pythia-6.9b@step112000": -0.3841195342205319,
+              "pythia-6.9b@step32000": -0.10022576045627396
+            }
+          },
+          "0.75": {
+            "n_sources": 4,
+            "mean": -0.2699174192015208,
+            "median": -0.28952293250950545,
+            "n_positive": 0,
+            "n_negative": 4,
+            "n_zero": 0,
+            "n_opposite_mean": 0,
+            "opposite_mean_share": 0.0,
+            "opposite_mean_sources": [],
+            "responses": {
+              "pythia-1b@step112000": -0.39998217680608317,
+              "pythia-1b@step32000": -0.23829610266159662,
+              "pythia-6.9b@step112000": -0.3407497623574143,
+              "pythia-6.9b@step32000": -0.1006416349809891
+            }
+          },
+          "0.8": {
+            "n_sources": 16,
+            "mean": 0.013324694035171059,
+            "median": -0.07502079372623616,
+            "n_positive": 2,
+            "n_negative": 14,
+            "n_zero": 0,
+            "n_opposite_mean": 14,
+            "opposite_mean_share": 0.875,
+            "opposite_mean_sources": [
+              "pythia-1.4b@step143000",
+              "pythia-1.4b@step16000",
+              "pythia-1.4b@step64000",
+              "pythia-1.4b@step96000",
+              "pythia-160m@step16000",
+              "pythia-160m@step64000",
+              "pythia-1b@step112000",
+              "pythia-1b@step32000",
+              "pythia-410m@step143000",
+              "pythia-410m@step16000",
+              "pythia-410m@step64000",
+              "pythia-410m@step96000",
+              "pythia-6.9b@step112000",
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step143000": -0.0638070342205328,
+              "pythia-1.4b@step16000": -0.0024952471482890815,
+              "pythia-1.4b@step64000": -0.06674786121673026,
+              "pythia-1.4b@step96000": -0.09336383079847899,
+              "pythia-160m@step143000": 0.9524714828897345,
+              "pythia-160m@step16000": -0.027180370722433622,
+              "pythia-160m@step64000": -0.11121673003802357,
+              "pythia-160m@step96000": 0.5650546577946765,
+              "pythia-1b@step112000": -0.16525071292775628,
+              "pythia-1b@step32000": -0.11650427756653947,
+              "pythia-410m@step143000": -0.16682509505703358,
+              "pythia-410m@step16000": -0.0327352661596958,
+              "pythia-410m@step64000": -0.11810836501901179,
+              "pythia-410m@step96000": -0.08329372623574205,
+              "pythia-6.9b@step112000": -0.2085016634980983,
+              "pythia-6.9b@step32000": -0.04830085551330843
+            }
+          },
+          "0.9": {
+            "n_sources": 16,
+            "mean": 0.0003174756416350344,
+            "median": -0.015446768060836558,
+            "n_positive": 6,
+            "n_negative": 10,
+            "n_zero": 0,
+            "n_opposite_mean": 10,
+            "opposite_mean_share": 0.625,
+            "opposite_mean_sources": [
+              "pythia-1.4b@step64000",
+              "pythia-1.4b@step96000",
+              "pythia-160m@step64000",
+              "pythia-1b@step32000",
+              "pythia-410m@step143000",
+              "pythia-410m@step16000",
+              "pythia-410m@step64000",
+              "pythia-410m@step96000",
+              "pythia-6.9b@step112000",
+              "pythia-6.9b@step32000"
+            ],
+            "responses": {
+              "pythia-1.4b@step143000": 0.028220057034220147,
+              "pythia-1.4b@step16000": 0.00986216730037981,
+              "pythia-1.4b@step64000": -0.023675142585551257,
+              "pythia-1.4b@step96000": -0.0016040874524714255,
+              "pythia-160m@step143000": 0.22065114068441094,
+              "pythia-160m@step16000": 0.012090066539924393,
+              "pythia-160m@step64000": -0.043963878326996664,
+              "pythia-160m@step96000": 0.11406844106463865,
+              "pythia-1b@step112000": 0.00906012357414454,
+              "pythia-1b@step32000": -0.02233840304182433,
+              "pythia-410m@step143000": -0.11537547528517056,
+              "pythia-410m@step16000": -0.016456749049429398,
+              "pythia-410m@step64000": -0.014436787072243717,
+              "pythia-410m@step96000": -0.0532913498098857,
+              "pythia-6.9b@step112000": -0.07497623574144452,
+              "pythia-6.9b@step32000": -0.02275427756654036
+            }
+          }
+        },
+        "confirmation_gain_attribution": {
+          "original_five_labels": {
+            "gain_B_minus_A_nats": 0.18987686237897655,
+            "share_of_sum_of_capability_gains": 0.8707038906186835
+          },
+          "merged_four_states": {
+            "gain_B_minus_A_nats": 0.16825430703319746,
+            "share_of_sum_of_capability_gains": 0.9503211362892551
+          }
+        }
+      }
+    }
+  },
+  "duplicate_identity": {
+    "aliases": [
+      "pythia-2.8b@step143000",
+      "pythia-2.8b@step16000"
+    ],
+    "representative": "pythia-2.8b@step143000",
+    "tensor_evidence_file": "results/v77-model-arch/pythia_2_8b_tensor_identity.json",
+    "verification_scope": "Checked stored V77 full learned-tensor audit and its V72 frozen blob identities; no model loading or new multi-GB weight audit.",
+    "learned_parameter_tensors": 388,
+    "byte_identical_parameter_tensors": 387,
+    "equal_modulo_signed_zero": true,
+    "differences": [
+      {
+        "equal_modulo_signed_zero": true,
+        "examples": [
+          {
+            "flat_index": 201,
+            "step143000_fp16_bits": "0x8000",
+            "step16000_fp16_bits": "0x0000"
+          }
+        ],
+        "name": "gpt_neox.layers.8.input_layernorm.bias",
+        "other_differing_elements": 0,
+        "signed_zero_only_elements": 1
+      }
+    ],
+    "identical_measurement_pairs": [
+      {
+        "density": 0.65,
+        "files": [
+          "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.65/prune_losses.json",
+          "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.65/prune_losses.json"
+        ],
+        "sha256": "2776f6d300eeae7df64f94b069bfaa0cdb1eb23335047761a5371ad884ebb89c",
+        "byte_identical": true
+      },
+      {
+        "density": 0.75,
+        "files": [
+          "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.75/prune_losses.json",
+          "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.75/prune_losses.json"
+        ],
+        "sha256": "2ed66769dce7124b6af8e16ed72b2d63d69c56e67b4919d773636d609b79819c",
+        "byte_identical": true
+      },
+      {
+        "density": 0.85,
+        "files": [
+          "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.85/prune_losses.json",
+          "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.85/prune_losses.json"
+        ],
+        "sha256": "731172690abc23d2435d16a511303469e708c94ba69b09cb769cd650112ac790",
+        "byte_identical": true
+      }
+    ],
+    "conclusion": "Distinct serialized blob hashes do not imply distinct learned weights. The one differing learned entry is +0.0/-0.0; extra checkpoint buffers also differ. These two labels represent one measured state cluster."
+  },
+  "pruning_confirmation": {
+    "bootstrap": {
+      "resamples": 5000,
+      "seed": 0,
+      "rng": "NumPy PCG64",
+      "interval": "95% paired percentile",
+      "gain_sign": "baseline MAE minus A MAE; positive favors per-capability relations",
+      "unit": "Pruning/quantization: whole source state. Distillation: whole sampled pool, retaining both students and every budget.",
+      "pairing": "Same draws across variants and capabilities within each panel; macro uses the same draws.",
+      "weighting": "Resample clusters, sum their absolute errors and divide by resampled row counts (preserves cell-weighted estimand).",
+      "scope": "Conditional on fixed development fits, probes and training seed. Does not include development-fit or probe-item uncertainty. No interval for one-state panels; 2-5-state intervals are descriptive and cannot establish population generalization. No multiple-comparison adjustment."
+    },
+    "original_five_labels": {
+      "n_clusters": 5,
+      "cluster_ids": [
+        "pythia-1.4b@step112000",
+        "pythia-2.8b@step143000",
+        "pythia-2.8b@step16000",
+        "pythia-410m@step48000",
+        "pythia-6.9b@step80000"
+      ],
+      "n_rows": 45,
+      "bootstrap_status": "descriptive: fewer than six clusters",
+      "scores": {
+        "math": {
+          "n_rows": 15,
+          "mae": {
+            "A": 0.19832219409950202,
+            "B": 0.21729895261854057,
+            "C": 0.20378558521977436,
+            "D": 0.16811004168263127
+          },
+          "cluster_macro_mae": {
+            "A": 0.198322194099502,
+            "B": 0.21729895261854057,
+            "C": 0.20378558521977438,
+            "D": 0.1681100416826313
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.018976758519038545,
+              "ci95_nats": [
+                -0.02914972534350838,
+                0.06899776899710398
+              ],
+              "relative_gain_percent": 8.733018861969146,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "C": {
+              "gain_nats": 0.005463391120272332,
+              "ci95_nats": [
+                -0.0181622213239645,
+                0.029089003564509233
+              ],
+              "relative_gain_percent": 2.6809507229769416,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "D": {
+              "gain_nats": -0.030212152416870752,
+              "ci95_nats": [
+                -0.1350136076254094,
+                0.07648382940718647
+              ],
+              "relative_gain_percent": -17.97165244531148,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.13132266867041098,
+                "B": 0.17404255496970886,
+                "C": 0.11850179306393882,
+                "D": 0.1551910818287872
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.07991576366368745,
+                "B": 0.15548300333524298,
+                "C": 0.11948223702094206,
+                "D": 0.1695534471330765
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step16000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.07991576366368745,
+                "B": 0.15548300333524298,
+                "C": 0.11948223702094206,
+                "D": 0.1695534471330765
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.3897397110390471,
+                "B": 0.3451121850680505,
+                "C": 0.3702421532857095,
+                "D": 0.21749520050090465
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.31071706346067707,
+                "B": 0.25637401638445756,
+                "C": 0.2912195057073395,
+                "D": 0.1287570318173117
+              }
+            }
+          ]
+        },
+        "code": {
+          "n_rows": 15,
+          "mae": {
+            "A": 0.1496305760240872,
+            "B": 0.15884978611349135,
+            "C": 0.16346494086066488,
+            "D": 0.1072189879957947
+          },
+          "cluster_macro_mae": {
+            "A": 0.1496305760240872,
+            "B": 0.15884978611349135,
+            "C": 0.1634649408606649,
+            "D": 0.10721898799579468
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.009219210089404156,
+              "ci95_nats": [
+                -0.01163433339158454,
+                0.02726731598807422
+              ],
+              "relative_gain_percent": 5.803728361848361,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "C": {
+              "gain_nats": 0.013834364836577684,
+              "ci95_nats": [
+                -0.01927278269400093,
+                0.04694151236715628
+              ],
+              "relative_gain_percent": 8.463199976544141,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "D": {
+              "gain_nats": -0.04241158802829249,
+              "ci95_nats": [
+                -0.1108510448108846,
+                0.028850201562555536
+              ],
+              "relative_gain_percent": -39.556042097651535,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.13019471515727807,
+                "B": 0.14561112479132093,
+                "C": 0.11092193246327715,
+                "D": 0.1013208020885824
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.05379427145234136,
+                "B": 0.08402431402892342,
+                "C": 0.11728935758478694,
+                "D": 0.09707550167270972
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step16000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.05379427145234136,
+                "B": 0.08402431402892342,
+                "C": 0.11728935758478694,
+                "D": 0.09707550167270972
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.273784763489423,
+                "B": 0.2733149517463959,
+                "C": 0.2545119807954221,
+                "D": 0.15333193015973723
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.2365848585690522,
+                "B": 0.20727422597189302,
+                "C": 0.2173120758750513,
+                "D": 0.08729120438523434
+              }
+            }
+          ]
+        },
+        "qa": {
+          "n_rows": 15,
+          "mae": {
+            "A": 0.15847542379594454,
+            "B": 0.3483522861749211,
+            "C": 0.4111899092233345,
+            "D": 0.5681207557268645
+          },
+          "cluster_macro_mae": {
+            "A": 0.15847542379594454,
+            "B": 0.34835228617492103,
+            "C": 0.4111899092233345,
+            "D": 0.5681207557268644
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.18987686237897655,
+              "ci95_nats": [
+                0.1252118695219603,
+                0.2545418552359927
+              ],
+              "relative_gain_percent": 54.5071382949478,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "C": {
+              "gain_nats": 0.25271448542738995,
+              "ci95_nats": [
+                0.17229302786176462,
+                0.3331359429930152
+              ],
+              "relative_gain_percent": 61.45931107714273,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "D": {
+              "gain_nats": 0.40964533193091995,
+              "ci95_nats": [
+                0.3332255464186009,
+                0.486065117443239
+              ],
+              "relative_gain_percent": 72.10532757367963,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.28945609553232016,
+                "B": 0.4340269241797558,
+                "C": 0.6120815616587856,
+                "D": 0.7783996587930496
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.06522546340304179,
+                "B": 0.3415925471651345,
+                "C": 0.20538754622651453,
+                "D": 0.37445461912505223
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step16000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.06522546340304179,
+                "B": 0.3415925471651345,
+                "C": 0.20538754622651453,
+                "D": 0.37445461912505223
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.21799003881495616,
+                "B": 0.302828413406625,
+                "C": 0.5777960261635626,
+                "D": 0.6472011480199188
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.1544800578263628,
+                "B": 0.32172099895795553,
+                "C": 0.4552968658412951,
+                "D": 0.6660937335712492
+              }
+            }
+          ]
+        },
+        "macro": {
+          "n_rows": 45,
+          "mae": {
+            "A": 0.16880939797317793,
+            "B": 0.241500341635651,
+            "C": 0.25948014510125794,
+            "D": 0.2811499284684302
+          },
+          "cluster_macro_mae": {
+            "A": 0.1688093979731779,
+            "B": 0.241500341635651,
+            "C": 0.25948014510125794,
+            "D": 0.2811499284684301
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.07269094366247308,
+              "ci95_nats": [
+                0.029957581416833023,
+                0.11542430590811317
+              ],
+              "relative_gain_percent": 30.099727052204813,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "C": {
+              "gain_nats": 0.09067074712808001,
+              "ci95_nats": [
+                0.08232940245468567,
+                0.09979082605619796
+              ],
+              "relative_gain_percent": 34.9432312413334,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "D": {
+              "gain_nats": 0.11234053049525225,
+              "ci95_nats": [
+                0.06880329035605831,
+                0.15295468899574155
+              ],
+              "relative_gain_percent": 39.957517011378776,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.1836578264533364,
+                "B": 0.2512268679802619,
+                "C": 0.28050176239533386,
+                "D": 0.3449705142368064
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.06631183283969021,
+                "B": 0.19369995484310032,
+                "C": 0.14738638027741452,
+                "D": 0.2136945226436128
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step16000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.06631183283969021,
+                "B": 0.19369995484310032,
+                "C": 0.14738638027741452,
+                "D": 0.2136945226436128
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.2938381711144754,
+                "B": 0.30708518340702384,
+                "C": 0.4008500534148981,
+                "D": 0.33934275956018684
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.23392732661869736,
+                "B": 0.26178974710476877,
+                "C": 0.3212761491412286,
+                "D": 0.29404732325793176
+              }
+            }
+          ]
+        }
+      }
+    },
+    "merged_four_states": {
+      "n_clusters": 4,
+      "cluster_ids": [
+        "pythia-1.4b@step112000",
+        "pythia-2.8b@step143000",
+        "pythia-410m@step48000",
+        "pythia-6.9b@step80000"
+      ],
+      "n_rows": 36,
+      "bootstrap_status": "descriptive: fewer than six clusters",
+      "scores": {
+        "math": {
+          "n_rows": 12,
+          "mae": {
+            "A": 0.22792380170845564,
+            "B": 0.23275293993936497,
+            "C": 0.22486142226948247,
+            "D": 0.16774919032002
+          },
+          "cluster_macro_mae": {
+            "A": 0.22792380170845566,
+            "B": 0.232752939939365,
+            "C": 0.22486142226948247,
+            "D": 0.16774919032002
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.00482913823090933,
+              "ci95_nats": [
+                -0.04948528652360806,
+                0.05914356298542671
+              ],
+              "relative_gain_percent": 2.0747915073241954,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "C": {
+              "gain_nats": -0.0030623794389731673,
+              "ci95_nats": [
+                -0.019497557753337613,
+                0.02480046557960658
+              ],
+              "relative_gain_percent": -1.3618963217723916,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            },
+            "D": {
+              "gain_nats": -0.060174611388435634,
+              "ci95_nats": [
+                -0.1771022710907539,
+                0.05675304831388263
+              ],
+              "relative_gain_percent": -35.871774566326536,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.13132266867041098,
+                "B": 0.17404255496970886,
+                "C": 0.11850179306393882,
+                "D": 0.1551910818287872
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.07991576366368745,
+                "B": 0.15548300333524298,
+                "C": 0.11948223702094206,
+                "D": 0.1695534471330765
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.3897397110390471,
+                "B": 0.3451121850680505,
+                "C": 0.3702421532857095,
+                "D": 0.21749520050090465
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.31071706346067707,
+                "B": 0.25637401638445756,
+                "C": 0.2912195057073395,
+                "D": 0.1287570318173117
+              }
+            }
+          ]
+        },
+        "code": {
+          "n_rows": 12,
+          "mae": {
+            "A": 0.17358965216702363,
+            "B": 0.17755615413463333,
+            "C": 0.17500883667963438,
+            "D": 0.10975485957656594
+          },
+          "cluster_macro_mae": {
+            "A": 0.17358965216702366,
+            "B": 0.17755615413463333,
+            "C": 0.17500883667963438,
+            "D": 0.10975485957656593
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.003966501967609698,
+              "ci95_nats": [
+                -0.018128872039358646,
+                0.022823226105312483
+              ],
+              "relative_gain_percent": 2.2339422629091565,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "C": {
+              "gain_nats": 0.0014191845126107494,
+              "ci95_nats": [
+                -0.01927278269400093,
+                0.04280311892583395
+              ],
+              "relative_gain_percent": 0.8109216308937951,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "D": {
+              "gain_nats": -0.06383479259045768,
+              "ci95_nats": [
+                -0.13487324375675186,
+                0.007203658575836366
+              ],
+              "relative_gain_percent": -58.16124482936993,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.13019471515727807,
+                "B": 0.14561112479132093,
+                "C": 0.11092193246327715,
+                "D": 0.1013208020885824
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.05379427145234136,
+                "B": 0.08402431402892342,
+                "C": 0.11728935758478694,
+                "D": 0.09707550167270972
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.273784763489423,
+                "B": 0.2733149517463959,
+                "C": 0.2545119807954221,
+                "D": 0.15333193015973723
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.2365848585690522,
+                "B": 0.20727422597189302,
+                "C": 0.2173120758750513,
+                "D": 0.08729120438523434
+              }
+            }
+          ]
+        },
+        "qa": {
+          "n_rows": 12,
+          "mae": {
+            "A": 0.18178791389417023,
+            "B": 0.3500422209273677,
+            "C": 0.4626404999725395,
+            "D": 0.6165372898773175
+          },
+          "cluster_macro_mae": {
+            "A": 0.1817879138941702,
+            "B": 0.3500422209273677,
+            "C": 0.4626404999725395,
+            "D": 0.6165372898773175
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.16825430703319746,
+              "ci95_nats": [
+                0.1054390162266498,
+                0.2434180199834285
+              ],
+              "relative_gain_percent": 48.06686078823318,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "C": {
+              "gain_nats": 0.28085258607836927,
+              "ci95_nats": [
+                0.18577792864922088,
+                0.34505869251518795
+              ],
+              "relative_gain_percent": 60.7064418474041,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "D": {
+              "gain_nats": 0.4347493759831472,
+              "ci95_nats": [
+                0.3541577576066902,
+                0.5002786195028079
+              ],
+              "relative_gain_percent": 70.51469280465686,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.28945609553232016,
+                "B": 0.4340269241797558,
+                "C": 0.6120815616587856,
+                "D": 0.7783996587930496
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.06522546340304179,
+                "B": 0.3415925471651345,
+                "C": 0.20538754622651453,
+                "D": 0.37445461912505223
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.21799003881495616,
+                "B": 0.302828413406625,
+                "C": 0.5777960261635626,
+                "D": 0.6472011480199188
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.1544800578263628,
+                "B": 0.32172099895795553,
+                "C": 0.4552968658412951,
+                "D": 0.6660937335712492
+              }
+            }
+          ]
+        },
+        "macro": {
+          "n_rows": 36,
+          "mae": {
+            "A": 0.19443378925654986,
+            "B": 0.25345043833378866,
+            "C": 0.28750358630721873,
+            "D": 0.2980137799246345
+          },
+          "cluster_macro_mae": {
+            "A": 0.19443378925654986,
+            "B": 0.2534504383337887,
+            "C": 0.2875035863072188,
+            "D": 0.29801377992463446
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.0590166490772388,
+              "ci95_nats": [
+                0.02055471638930989,
+                0.10250669662407538
+              ],
+              "relative_gain_percent": 23.285281913584686,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "C": {
+              "gain_nats": 0.09306979705066887,
+              "ci95_nats": [
+                0.08421168498012774,
+                0.10209611735594987
+              ],
+              "relative_gain_percent": 32.371699513764305,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "D": {
+              "gain_nats": 0.10357999066808465,
+              "ci95_nats": [
+                0.05281229254247288,
+                0.1543476887936963
+              ],
+              "relative_gain_percent": 34.75677892957811,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.1836578264533364,
+                "B": 0.2512268679802619,
+                "C": 0.28050176239533386,
+                "D": 0.3449705142368064
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.06631183283969021,
+                "B": 0.19369995484310032,
+                "C": 0.14738638027741452,
+                "D": 0.2136945226436128
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.2938381711144754,
+                "B": 0.30708518340702384,
+                "C": 0.4008500534148981,
+                "D": 0.33934275956018684
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.23392732661869736,
+                "B": 0.26178974710476877,
+                "C": 0.3212761491412286,
+                "D": 0.29404732325793176
+              }
+            }
+          ]
+        }
+      }
+    },
+    "merged_cluster_original_row_weighting": {
+      "n_clusters": 4,
+      "cluster_ids": [
+        "pythia-1.4b@step112000",
+        "pythia-2.8b@step143000",
+        "pythia-410m@step48000",
+        "pythia-6.9b@step80000"
+      ],
+      "n_rows": 45,
+      "bootstrap_status": "descriptive: fewer than six clusters",
+      "scores": {
+        "math": {
+          "n_rows": 15,
+          "mae": {
+            "A": 0.19832219409950202,
+            "B": 0.21729895261854057,
+            "C": 0.20378558521977438,
+            "D": 0.16811004168263127
+          },
+          "cluster_macro_mae": {
+            "A": 0.22792380170845566,
+            "B": 0.232752939939365,
+            "C": 0.22486142226948247,
+            "D": 0.16774919032002
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.018976758519038545,
+              "ci95_nats": [
+                -0.04948528652360806,
+                0.06461812188080297
+              ],
+              "relative_gain_percent": 8.733018861969146,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "C": {
+              "gain_nats": 0.0054633911202723595,
+              "ci95_nats": [
+                -0.019497557753337613,
+                0.031128754627170033
+              ],
+              "relative_gain_percent": 2.680950722976955,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "D": {
+              "gain_nats": -0.030212152416870752,
+              "ci95_nats": [
+                -0.1771022710907539,
+                0.06771459336571807
+              ],
+              "relative_gain_percent": -17.97165244531148,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.13132266867041098,
+                "B": 0.17404255496970886,
+                "C": 0.11850179306393882,
+                "D": 0.1551910818287872
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 6,
+              "mae": {
+                "A": 0.07991576366368745,
+                "B": 0.15548300333524298,
+                "C": 0.11948223702094207,
+                "D": 0.1695534471330765
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.3897397110390471,
+                "B": 0.3451121850680505,
+                "C": 0.3702421532857095,
+                "D": 0.21749520050090465
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.31071706346067707,
+                "B": 0.25637401638445756,
+                "C": 0.2912195057073395,
+                "D": 0.1287570318173117
+              }
+            }
+          ]
+        },
+        "code": {
+          "n_rows": 15,
+          "mae": {
+            "A": 0.1496305760240872,
+            "B": 0.15884978611349135,
+            "C": 0.16346494086066485,
+            "D": 0.1072189879957947
+          },
+          "cluster_macro_mae": {
+            "A": 0.17358965216702366,
+            "B": 0.17755615413463333,
+            "C": 0.17500883667963435,
+            "D": 0.10975485957656593
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.009219210089404156,
+              "ci95_nats": [
+                -0.018128872039358646,
+                0.025844349102352185
+              ],
+              "relative_gain_percent": 5.803728361848361,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "C": {
+              "gain_nats": 0.013834364836577656,
+              "ci95_nats": [
+                -0.01927278269400093,
+                0.05167110487152464
+              ],
+              "relative_gain_percent": 8.463199976544125,
+              "direction": "A_better",
+              "interval_direction": "includes_zero"
+            },
+            "D": {
+              "gain_nats": -0.04241158802829249,
+              "ci95_nats": [
+                -0.13487324375675186,
+                0.019890649713217773
+              ],
+              "relative_gain_percent": -39.556042097651535,
+              "direction": "baseline_better",
+              "interval_direction": "includes_zero"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.13019471515727807,
+                "B": 0.14561112479132093,
+                "C": 0.11092193246327715,
+                "D": 0.1013208020885824
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 6,
+              "mae": {
+                "A": 0.05379427145234136,
+                "B": 0.08402431402892342,
+                "C": 0.11728935758478692,
+                "D": 0.09707550167270972
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.273784763489423,
+                "B": 0.2733149517463959,
+                "C": 0.2545119807954221,
+                "D": 0.15333193015973723
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.2365848585690522,
+                "B": 0.20727422597189302,
+                "C": 0.2173120758750513,
+                "D": 0.08729120438523434
+              }
+            }
+          ]
+        },
+        "qa": {
+          "n_rows": 15,
+          "mae": {
+            "A": 0.15847542379594454,
+            "B": 0.3483522861749211,
+            "C": 0.4111899092233345,
+            "D": 0.5681207557268645
+          },
+          "cluster_macro_mae": {
+            "A": 0.1817879138941702,
+            "B": 0.3500422209273677,
+            "C": 0.4626404999725395,
+            "D": 0.6165372898773175
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.18987686237897655,
+              "ci95_nats": [
+                0.1054390162266498,
+                0.2575390473171417
+              ],
+              "relative_gain_percent": 54.5071382949478,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "C": {
+              "gain_nats": 0.25271448542738995,
+              "ci95_nats": [
+                0.16622828043818602,
+                0.34505869251518795
+              ],
+              "relative_gain_percent": 61.45931107714273,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "D": {
+              "gain_nats": 0.40964533193091995,
+              "ci95_nats": [
+                0.3349026425132561,
+                0.5002786195028079
+              ],
+              "relative_gain_percent": 72.10532757367963,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.28945609553232016,
+                "B": 0.4340269241797558,
+                "C": 0.6120815616587856,
+                "D": 0.7783996587930496
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 6,
+              "mae": {
+                "A": 0.06522546340304179,
+                "B": 0.3415925471651345,
+                "C": 0.20538754622651453,
+                "D": 0.37445461912505223
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.21799003881495616,
+                "B": 0.302828413406625,
+                "C": 0.5777960261635626,
+                "D": 0.6472011480199188
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.1544800578263628,
+                "B": 0.32172099895795553,
+                "C": 0.4552968658412951,
+                "D": 0.6660937335712492
+              }
+            }
+          ]
+        },
+        "macro": {
+          "n_rows": 45,
+          "mae": {
+            "A": 0.16880939797317793,
+            "B": 0.241500341635651,
+            "C": 0.25948014510125794,
+            "D": 0.2811499284684302
+          },
+          "cluster_macro_mae": {
+            "A": 0.19443378925654986,
+            "B": 0.25345043833378866,
+            "C": 0.28750358630721873,
+            "D": 0.29801377992463446
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.07269094366247308,
+              "ci95_nats": [
+                0.02055471638930989,
+                0.11317016464379027
+              ],
+              "relative_gain_percent": 30.099727052204813,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "C": {
+              "gain_nats": 0.09067074712808001,
+              "ci95_nats": [
+                0.08316597246599326,
+                0.10209611735594987
+              ],
+              "relative_gain_percent": 34.9432312413334,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            },
+            "D": {
+              "gain_nats": 0.11234053049525225,
+              "ci95_nats": [
+                0.05281229254247288,
+                0.15202602246377173
+              ],
+              "relative_gain_percent": 39.957517011378776,
+              "direction": "A_better",
+              "interval_direction": "A_better"
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-1.4b@step112000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.1836578264533364,
+                "B": 0.2512268679802619,
+                "C": 0.28050176239533386,
+                "D": 0.3449705142368064
+              }
+            },
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 18,
+              "mae": {
+                "A": 0.06631183283969021,
+                "B": 0.1936999548431003,
+                "C": 0.1473863802774145,
+                "D": 0.21369452264361283
+              }
+            },
+            {
+              "cluster": "pythia-410m@step48000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.2938381711144754,
+                "B": 0.30708518340702384,
+                "C": 0.4008500534148981,
+                "D": 0.33934275956018684
+              }
+            },
+            {
+              "cluster": "pythia-6.9b@step80000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.23392732661869736,
+                "B": 0.26178974710476877,
+                "C": 0.3212761491412286,
+                "D": 0.29404732325793176
+              }
+            }
+          ]
+        }
+      }
+    },
+    "primary_weighting": "Count each physical state-density-capability once: merge identical cells within the 2.8B cluster, retaining step143000 as representative. 36 rows, 12 state-density cells, four equally weighted states. This is also the mean error within each cluster followed by equal-state averaging.",
+    "row_weighting_sensitivity": "Keep all 45 rows and only pair the two aliases in one cluster. Four bootstrap units, but the duplicate state retains double point-estimate weight. This preserves original gains and changes only their intervals.",
+    "changes_from_original": {
+      "math": {
+        "B": {
+          "gain_change_nats": -0.014147620288129215,
+          "ci_endpoint_changes_nats": [
+            -0.020335561180099684,
+            -0.009854206011677275
+          ],
+          "interval_direction_changed": false
+        },
+        "C": {
+          "gain_change_nats": -0.008525770559245499,
+          "ci_endpoint_changes_nats": [
+            -0.001335336429373113,
+            -0.0042885379849026545
+          ],
+          "interval_direction_changed": false
+        },
+        "D": {
+          "gain_change_nats": -0.02996245897156488,
+          "ci_endpoint_changes_nats": [
+            -0.04208866346534451,
+            -0.01973078109330384
+          ],
+          "interval_direction_changed": false
+        }
+      },
+      "code": {
+        "B": {
+          "gain_change_nats": -0.005252708121794458,
+          "ci_endpoint_changes_nats": [
+            -0.006494538647774106,
+            -0.004444089882761737
+          ],
+          "interval_direction_changed": false
+        },
+        "C": {
+          "gain_change_nats": -0.012415180323966934,
+          "ci_endpoint_changes_nats": [
+            0.0,
+            -0.00413839344132233
+          ],
+          "interval_direction_changed": false
+        },
+        "D": {
+          "gain_change_nats": -0.02142320456216519,
+          "ci_endpoint_changes_nats": [
+            -0.024022198945867254,
+            -0.02164654298671917
+          ],
+          "interval_direction_changed": false
+        }
+      },
+      "qa": {
+        "B": {
+          "gain_change_nats": -0.021622555345779088,
+          "ci_endpoint_changes_nats": [
+            -0.019772853295310505,
+            -0.011123835252564218
+          ],
+          "interval_direction_changed": false
+        },
+        "C": {
+          "gain_change_nats": 0.028138100650979325,
+          "ci_endpoint_changes_nats": [
+            0.013484900787456261,
+            0.01192274952217276
+          ],
+          "interval_direction_changed": false
+        },
+        "D": {
+          "gain_change_nats": 0.02510404405222727,
+          "ci_endpoint_changes_nats": [
+            0.0209322111880893,
+            0.01421350205956895
+          ],
+          "interval_direction_changed": false
+        }
+      },
+      "macro": {
+        "B": {
+          "gain_change_nats": -0.013674294585234281,
+          "ci_endpoint_changes_nats": [
+            -0.009402865027523133,
+            -0.01291760928403779
+          ],
+          "interval_direction_changed": false
+        },
+        "C": {
+          "gain_change_nats": 0.002399049922588853,
+          "ci_endpoint_changes_nats": [
+            0.0018822825254420639,
+            0.002305291299751905
+          ],
+          "interval_direction_changed": false
+        },
+        "D": {
+          "gain_change_nats": -0.008760539827167596,
+          "ci_endpoint_changes_nats": [
+            -0.015990997813585428,
+            0.0013929997979547637
+          ],
+          "interval_direction_changed": false
+        }
+      }
+    },
+    "matches_existing_v76_unique_outcome_sensitivity": true,
+    "unchanged_original_rows_sha256": "95033e5b4e3a7d063ce8a97bd9147f6cb6be1a59bfa3c409a4e0cd8907bbd370",
+    "frozen_rows": [
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.015146721505971739,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "code",
+        "actual": 0.01800570477775132,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.025784220532319324,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "math",
+        "actual": 0.25962983469113343,
+        "frozen_A": 0.4800729652772281,
+        "predictions": {
+          "A": 0.4800729652772281,
+          "B": 0.13185283291587024,
+          "C": 0.3694044183679325,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "code",
+        "actual": 0.25196101735203236,
+        "frozen_A": 0.3295994770620392,
+        "predictions": {
+          "A": 0.3295994770620392,
+          "B": 0.13009027974100584,
+          "C": 0.3146309601739314,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "qa",
+        "actual": -0.21221482889733867,
+        "frozen_A": -0.31636911834600745,
+        "predictions": {
+          "A": -0.31636911834600745,
+          "B": 0.03357248256010745,
+          "C": -0.37213990017921905,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "math",
+        "actual": 0.9526813256347388,
+        "frozen_A": 1.8850253104484715,
+        "predictions": {
+          "A": 1.8850253104484715,
+          "B": 1.8463619326475564,
+          "C": 1.7007792599417297,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "code",
+        "actual": 1.1403613025909196,
+        "frozen_A": 1.8752376990729753,
+        "predictions": {
+          "A": 1.8752376990729753,
+          "B": 1.8216805434474228,
+          "C": 1.6460058017477288,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "qa",
+        "actual": -0.16646863117870758,
+        "frozen_A": 0.36389763545627507,
+        "predictions": {
+          "A": 0.36389763545627507,
+          "B": 0.4701222750595555,
+          "C": 0.9592349413945782,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.0263782330143163,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "code",
+        "actual": 0.026800570477775176,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.011228612167300867,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "math",
+        "actual": 0.3794194415882306,
+        "frozen_A": 0.4800729652772281,
+        "predictions": {
+          "A": 0.4800729652772281,
+          "B": 0.13185283291587024,
+          "C": 0.3694044183679325,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "code",
+        "actual": 0.2669954837176134,
+        "frozen_A": 0.3295994770620392,
+        "predictions": {
+          "A": 0.3295994770620392,
+          "B": 0.13009027974100584,
+          "C": 0.3146309601739314,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "qa",
+        "actual": -0.6448728612167303,
+        "frozen_A": -0.31636911834600745,
+        "predictions": {
+          "A": -0.31636911834600745,
+          "B": 0.03357248256010745,
+          "C": -0.37213990017921905,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "math",
+        "actual": 1.5969113343352055,
+        "frozen_A": 1.8850253104484715,
+        "predictions": {
+          "A": 1.8850253104484715,
+          "B": 1.8463619326475564,
+          "C": 1.7007792599417297,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "code",
+        "actual": 1.5473021155217495,
+        "frozen_A": 1.8752376990729753,
+        "predictions": {
+          "A": 1.8752376990729753,
+          "B": 1.8216805434474228,
+          "C": 1.6460058017477288,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "qa",
+        "actual": -0.14196173954372693,
+        "frozen_A": 0.36389763545627507,
+        "predictions": {
+          "A": 0.36389763545627507,
+          "B": 0.4701222750595555,
+          "C": 0.9592349413945782,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.019279443170133748,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "code",
+        "actual": 0.004694556691228868,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.07794676806083611,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "math",
+        "actual": 0.2409238313691371,
+        "frozen_A": 0.4800729652772281,
+        "predictions": {
+          "A": 0.4800729652772281,
+          "B": 0.13185283291587024,
+          "C": 0.3694044183679325,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "code",
+        "actual": 0.22201093415735662,
+        "frozen_A": 0.3295994770620392,
+        "predictions": {
+          "A": 0.3295994770620392,
+          "B": 0.13009027974100584,
+          "C": 0.3146309601739314,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "qa",
+        "actual": -0.3792775665399244,
+        "frozen_A": -0.31636911834600745,
+        "predictions": {
+          "A": -0.31636911834600745,
+          "B": 0.03357248256010745,
+          "C": -0.37213990017921905,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "math",
+        "actual": 1.2043225500276833,
+        "frozen_A": 1.8850253104484715,
+        "predictions": {
+          "A": 1.8850253104484715,
+          "B": 1.8463619326475564,
+          "C": 1.7007792599417297,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "code",
+        "actual": 1.29522224863323,
+        "frozen_A": 1.8752376990729753,
+        "predictions": {
+          "A": 1.8752376990729753,
+          "B": 1.8216805434474228,
+          "C": 1.6460058017477288,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "qa",
+        "actual": -0.0039211026615966205,
+        "frozen_A": 0.36389763545627507,
+        "predictions": {
+          "A": 0.36389763545627507,
+          "B": 0.4701222750595555,
+          "C": 0.9592349413945782,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.02618049513564813,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "code",
+        "actual": -0.002198716425005909,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.16171577946768068,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "math",
+        "actual": 0.1459107806691451,
+        "frozen_A": 0.11252273985604677,
+        "predictions": {
+          "A": 0.11252273985604677,
+          "B": -0.04830194147929742,
+          "C": 0.22950808637607212,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "code",
+        "actual": 0.0731518897076302,
+        "frozen_A": 0.059097932018065125,
+        "predictions": {
+          "A": 0.059097932018065125,
+          "B": -0.04765626145541222,
+          "C": 0.17473462818207103,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "qa",
+        "actual": -0.3656725285171101,
+        "frozen_A": -0.28952293250950545,
+        "predictions": {
+          "A": -0.28952293250950545,
+          "B": -0.012298682190376055,
+          "C": -0.5120362321710794,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "math",
+        "actual": 0.48325160167681736,
+        "frozen_A": 0.6842126077671439,
+        "predictions": {
+          "A": 0.6842126077671439,
+          "B": 0.235928033865278,
+          "C": 0.4502223645645805,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "code",
+        "actual": 0.3605894937009746,
+        "frozen_A": 0.47887449488947,
+        "predictions": {
+          "A": 0.47887449488947,
+          "B": 0.2327742472083459,
+          "C": 0.3954489063705794,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step16000",
+        "cluster": "pythia-2.8b@step16000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "qa",
+        "actual": -0.4492930133079849,
+        "frozen_A": -0.45233780893536135,
+        "predictions": {
+          "A": -0.45233780893536135,
+          "B": 0.06007220040115743,
+          "C": -0.29132195398257105,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.02618049513564813,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "code",
+        "actual": -0.002198716425005909,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.16171577946768068,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "math",
+        "actual": 0.1459107806691451,
+        "frozen_A": 0.11252273985604677,
+        "predictions": {
+          "A": 0.11252273985604677,
+          "B": -0.04830194147929742,
+          "C": 0.22950808637607212,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "code",
+        "actual": 0.0731518897076302,
+        "frozen_A": 0.059097932018065125,
+        "predictions": {
+          "A": 0.059097932018065125,
+          "B": -0.04765626145541222,
+          "C": 0.17473462818207103,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "qa",
+        "actual": -0.3656725285171101,
+        "frozen_A": -0.28952293250950545,
+        "predictions": {
+          "A": -0.28952293250950545,
+          "B": -0.012298682190376055,
+          "C": -0.5120362321710794,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "math",
+        "actual": 0.48325160167681736,
+        "frozen_A": 0.6842126077671439,
+        "predictions": {
+          "A": 0.6842126077671439,
+          "B": 0.235928033865278,
+          "C": 0.4502223645645805,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "code",
+        "actual": 0.3605894937009746,
+        "frozen_A": 0.47887449488947,
+        "predictions": {
+          "A": 0.47887449488947,
+          "B": 0.2327742472083459,
+          "C": 0.3954489063705794,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "qa",
+        "actual": -0.4492930133079849,
+        "frozen_A": -0.45233780893536135,
+        "predictions": {
+          "A": -0.45233780893536135,
+          "B": 0.06007220040115743,
+          "C": -0.29132195398257105,
+          "D": 0.18320617181871984
+        }
+      }
+    ],
+    "representative_rows": [
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.015146721505971739,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "code",
+        "actual": 0.01800570477775132,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.025784220532319324,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "math",
+        "actual": 0.25962983469113343,
+        "frozen_A": 0.4800729652772281,
+        "predictions": {
+          "A": 0.4800729652772281,
+          "B": 0.13185283291587024,
+          "C": 0.3694044183679325,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "code",
+        "actual": 0.25196101735203236,
+        "frozen_A": 0.3295994770620392,
+        "predictions": {
+          "A": 0.3295994770620392,
+          "B": 0.13009027974100584,
+          "C": 0.3146309601739314,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "qa",
+        "actual": -0.21221482889733867,
+        "frozen_A": -0.31636911834600745,
+        "predictions": {
+          "A": -0.31636911834600745,
+          "B": 0.03357248256010745,
+          "C": -0.37213990017921905,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "math",
+        "actual": 0.9526813256347388,
+        "frozen_A": 1.8850253104484715,
+        "predictions": {
+          "A": 1.8850253104484715,
+          "B": 1.8463619326475564,
+          "C": 1.7007792599417297,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "code",
+        "actual": 1.1403613025909196,
+        "frozen_A": 1.8752376990729753,
+        "predictions": {
+          "A": 1.8752376990729753,
+          "B": 1.8216805434474228,
+          "C": 1.6460058017477288,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-410m@step48000",
+        "cluster": "pythia-410m@step48000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "qa",
+        "actual": -0.16646863117870758,
+        "frozen_A": 0.36389763545627507,
+        "predictions": {
+          "A": 0.36389763545627507,
+          "B": 0.4701222750595555,
+          "C": 0.9592349413945782,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.0263782330143163,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "code",
+        "actual": 0.026800570477775176,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.011228612167300867,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "math",
+        "actual": 0.3794194415882306,
+        "frozen_A": 0.4800729652772281,
+        "predictions": {
+          "A": 0.4800729652772281,
+          "B": 0.13185283291587024,
+          "C": 0.3694044183679325,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "code",
+        "actual": 0.2669954837176134,
+        "frozen_A": 0.3295994770620392,
+        "predictions": {
+          "A": 0.3295994770620392,
+          "B": 0.13009027974100584,
+          "C": 0.3146309601739314,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "qa",
+        "actual": -0.6448728612167303,
+        "frozen_A": -0.31636911834600745,
+        "predictions": {
+          "A": -0.31636911834600745,
+          "B": 0.03357248256010745,
+          "C": -0.37213990017921905,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "math",
+        "actual": 1.5969113343352055,
+        "frozen_A": 1.8850253104484715,
+        "predictions": {
+          "A": 1.8850253104484715,
+          "B": 1.8463619326475564,
+          "C": 1.7007792599417297,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "code",
+        "actual": 1.5473021155217495,
+        "frozen_A": 1.8752376990729753,
+        "predictions": {
+          "A": 1.8752376990729753,
+          "B": 1.8216805434474228,
+          "C": 1.6460058017477288,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-1.4b@step112000",
+        "cluster": "pythia-1.4b@step112000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "qa",
+        "actual": -0.14196173954372693,
+        "frozen_A": 0.36389763545627507,
+        "predictions": {
+          "A": 0.36389763545627507,
+          "B": 0.4701222750595555,
+          "C": 0.9592349413945782,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.019279443170133748,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "code",
+        "actual": 0.004694556691228868,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.07794676806083611,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "math",
+        "actual": 0.2409238313691371,
+        "frozen_A": 0.4800729652772281,
+        "predictions": {
+          "A": 0.4800729652772281,
+          "B": 0.13185283291587024,
+          "C": 0.3694044183679325,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "code",
+        "actual": 0.22201093415735662,
+        "frozen_A": 0.3295994770620392,
+        "predictions": {
+          "A": 0.3295994770620392,
+          "B": 0.13009027974100584,
+          "C": 0.3146309601739314,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.675",
+        "capability": "qa",
+        "actual": -0.3792775665399244,
+        "frozen_A": -0.31636911834600745,
+        "predictions": {
+          "A": -0.31636911834600745,
+          "B": 0.03357248256010745,
+          "C": -0.37213990017921905,
+          "D": 0.10238822562207184
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "math",
+        "actual": 1.2043225500276833,
+        "frozen_A": 1.8850253104484715,
+        "predictions": {
+          "A": 1.8850253104484715,
+          "B": 1.8463619326475564,
+          "C": 1.7007792599417297,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "code",
+        "actual": 1.29522224863323,
+        "frozen_A": 1.8752376990729753,
+        "predictions": {
+          "A": 1.8752376990729753,
+          "B": 1.8216805434474228,
+          "C": 1.6460058017477288,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-6.9b@step80000",
+        "cluster": "pythia-6.9b@step80000",
+        "panel": "v53_confirmation",
+        "x": "0.575",
+        "capability": "qa",
+        "actual": -0.0039211026615966205,
+        "frozen_A": 0.36389763545627507,
+        "predictions": {
+          "A": 0.36389763545627507,
+          "B": 0.4701222750595555,
+          "C": 0.9592349413945782,
+          "D": 1.4337630671958692
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "math",
+        "actual": 0.02618049513564813,
+        "frozen_A": 0.03157873922328566,
+        "predictions": {
+          "A": 0.03157873922328566,
+          "B": 0.0012677750899010554,
+          "C": 0.2680006633793104,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "code",
+        "actual": -0.002198716425005909,
+        "frozen_A": 0.02684513905395771,
+        "predictions": {
+          "A": 0.02684513905395771,
+          "B": 0.0012508280060932698,
+          "C": 0.2132272051853093,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.85",
+        "capability": "qa",
+        "actual": -0.16171577946768068,
+        "frozen_A": -0.04523378089353639,
+        "predictions": {
+          "A": -0.04523378089353639,
+          "B": 0.000322801991846463,
+          "C": -0.47354365516784114,
+          "D": 0.0009844706334497556
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "math",
+        "actual": 0.1459107806691451,
+        "frozen_A": 0.11252273985604677,
+        "predictions": {
+          "A": 0.11252273985604677,
+          "B": -0.04830194147929742,
+          "C": 0.22950808637607212,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "code",
+        "actual": 0.0731518897076302,
+        "frozen_A": 0.059097932018065125,
+        "predictions": {
+          "A": 0.059097932018065125,
+          "B": -0.04765626145541222,
+          "C": 0.17473462818207103,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.75",
+        "capability": "qa",
+        "actual": -0.3656725285171101,
+        "frozen_A": -0.28952293250950545,
+        "predictions": {
+          "A": -0.28952293250950545,
+          "B": -0.012298682190376055,
+          "C": -0.5120362321710794,
+          "D": -0.03750810636978852
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "math",
+        "actual": 0.48325160167681736,
+        "frozen_A": 0.6842126077671439,
+        "predictions": {
+          "A": 0.6842126077671439,
+          "B": 0.235928033865278,
+          "C": 0.4502223645645805,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "code",
+        "actual": 0.3605894937009746,
+        "frozen_A": 0.47887449488947,
+        "predictions": {
+          "A": 0.47887449488947,
+          "B": 0.2327742472083459,
+          "C": 0.3954489063705794,
+          "D": 0.18320617181871984
+        }
+      },
+      {
+        "state": "pythia-2.8b@step143000",
+        "cluster": "pythia-2.8b@step143000",
+        "panel": "v72_repeat",
+        "x": "0.65",
+        "capability": "qa",
+        "actual": -0.4492930133079849,
+        "frozen_A": -0.45233780893536135,
+        "predictions": {
+          "A": -0.45233780893536135,
+          "B": 0.06007220040115743,
+          "C": -0.29132195398257105,
+          "D": 0.18320617181871984
+        }
+      }
+    ],
+    "unique_v72_panel": {
+      "n_clusters": 1,
+      "cluster_ids": [
+        "pythia-2.8b@step143000"
+      ],
+      "n_rows": 9,
+      "bootstrap_status": "unavailable: one cluster",
+      "scores": {
+        "math": {
+          "n_rows": 3,
+          "mae": {
+            "A": 0.07991576366368745,
+            "B": 0.15548300333524298,
+            "C": 0.11948223702094206,
+            "D": 0.1695534471330765
+          },
+          "cluster_macro_mae": {
+            "A": 0.07991576366368745,
+            "B": 0.15548300333524298,
+            "C": 0.11948223702094206,
+            "D": 0.1695534471330765
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.07556723967155553,
+              "ci95_nats": null,
+              "relative_gain_percent": 48.6016079253512,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "C": {
+              "gain_nats": 0.039566473357254606,
+              "ci95_nats": null,
+              "relative_gain_percent": 33.11494188907733,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "D": {
+              "gain_nats": 0.08963768346938904,
+              "ci95_nats": null,
+              "relative_gain_percent": 52.866918948003224,
+              "direction": "A_better",
+              "interval_direction": null
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.07991576366368745,
+                "B": 0.15548300333524298,
+                "C": 0.11948223702094206,
+                "D": 0.1695534471330765
+              }
+            }
+          ]
+        },
+        "code": {
+          "n_rows": 3,
+          "mae": {
+            "A": 0.05379427145234136,
+            "B": 0.08402431402892342,
+            "C": 0.11728935758478694,
+            "D": 0.09707550167270972
+          },
+          "cluster_macro_mae": {
+            "A": 0.05379427145234136,
+            "B": 0.08402431402892342,
+            "C": 0.11728935758478694,
+            "D": 0.09707550167270972
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.03023004257658206,
+              "ci95_nats": null,
+              "relative_gain_percent": 35.97773207190488,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "C": {
+              "gain_nats": 0.06349508613244557,
+              "ci95_nats": null,
+              "relative_gain_percent": 54.135419819778456,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "D": {
+              "gain_nats": 0.04328123022036835,
+              "ci95_nats": null,
+              "relative_gain_percent": 44.585121348423336,
+              "direction": "A_better",
+              "interval_direction": null
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.05379427145234136,
+                "B": 0.08402431402892342,
+                "C": 0.11728935758478694,
+                "D": 0.09707550167270972
+              }
+            }
+          ]
+        },
+        "qa": {
+          "n_rows": 3,
+          "mae": {
+            "A": 0.06522546340304179,
+            "B": 0.3415925471651345,
+            "C": 0.20538754622651453,
+            "D": 0.37445461912505223
+          },
+          "cluster_macro_mae": {
+            "A": 0.06522546340304179,
+            "B": 0.3415925471651345,
+            "C": 0.20538754622651453,
+            "D": 0.37445461912505223
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.2763670837620927,
+              "ci95_nats": null,
+              "relative_gain_percent": 80.90547819490038,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "C": {
+              "gain_nats": 0.14016208282347276,
+              "ci95_nats": null,
+              "relative_gain_percent": 68.24273691302248,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "D": {
+              "gain_nats": 0.30922915572201043,
+              "ci95_nats": null,
+              "relative_gain_percent": 82.58121009284193,
+              "direction": "A_better",
+              "interval_direction": null
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 3,
+              "mae": {
+                "A": 0.06522546340304179,
+                "B": 0.3415925471651345,
+                "C": 0.20538754622651453,
+                "D": 0.37445461912505223
+              }
+            }
+          ]
+        },
+        "macro": {
+          "n_rows": 9,
+          "mae": {
+            "A": 0.06631183283969021,
+            "B": 0.19369995484310032,
+            "C": 0.14738638027741452,
+            "D": 0.2136945226436128
+          },
+          "cluster_macro_mae": {
+            "A": 0.06631183283969021,
+            "B": 0.19369995484310032,
+            "C": 0.14738638027741452,
+            "D": 0.2136945226436128
+          },
+          "gains_of_A": {
+            "B": {
+              "gain_nats": 0.1273881220034101,
+              "ci95_nats": null,
+              "relative_gain_percent": 65.7656952509856,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "C": {
+              "gain_nats": 0.08107454743772431,
+              "ci95_nats": null,
+              "relative_gain_percent": 55.00816784096581,
+              "direction": "A_better",
+              "interval_direction": null
+            },
+            "D": {
+              "gain_nats": 0.1473826898039226,
+              "ci95_nats": null,
+              "relative_gain_percent": 68.9688663895793,
+              "direction": "A_better",
+              "interval_direction": null
+            }
+          },
+          "clusters": [
+            {
+              "cluster": "pythia-2.8b@step143000",
+              "n_rows": 9,
+              "mae": {
+                "A": 0.06631183283969021,
+                "B": 0.19369995484310032,
+                "C": 0.14738638027741452,
+                "D": 0.2136945226436128
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "reuse_inventory": {
+    "discovery_command": [
+      "rg",
+      "--files",
+      "--hidden",
+      "--no-ignore",
+      "results",
+      "-g",
+      "*[Ff][Rr][Ee][Ee][Zz][Ee]*",
+      "-g",
+      "*[Cc][Oo][Mm][Pp][Aa][Rr][Ee]*"
+    ],
+    "matching_rule": "Case-insensitive full @/-- tags for both revisions; also check separate 2.8b, step16000 and step143000 fields.",
+    "n_files_scanned": 30,
+    "files_scanned": [
+      "results/v38-prospective/compare.json",
+      "results/v40-prune-strength/compare.json",
+      "results/v46-p1-newsource/compare.json",
+      "results/v47-p2-register/FREEZE2_COMMITTED",
+      "results/v49-p1v2/compare_pythia-1b@step112000.json",
+      "results/v49-p1v2/compare_pythia-1b@step32000.json",
+      "results/v49-p1v2/compare_pythia-6.9b@step112000.json",
+      "results/v49-p1v2/compare_pythia-6.9b@step32000.json",
+      "results/v50-p2v2/compare_test.json",
+      "results/v50-p2v2/freeze.json",
+      "results/v53-prune-dev/compare_pythia-1.4b@step112000.json",
+      "results/v53-prune-dev/compare_pythia-410m@step48000.json",
+      "results/v53-prune-dev/compare_pythia-6.9b@step80000.json",
+      "results/v54-quant-group/FREEZE_COMMITTED",
+      "results/v55-quant-group/compare.json",
+      "results/v69-quant-confirm/compare.json",
+      "results/v69-quant-confirm/compare.md",
+      "results/v69-quant-confirm/freeze.json",
+      "results/v70-distill-confirm/FREEZE_V70",
+      "results/v70-distill-confirm/compare.json",
+      "results/v70-distill-confirm/compare.md",
+      "results/v70-distill-confirm/freeze.json",
+      "results/v72-prune-repeat/compare.json",
+      "results/v72-prune-repeat/freeze.json",
+      "results/v78-rule-confirm/compare.json",
+      "results/v78-rule-confirm/compare.md",
+      "results/v78-rule-confirm/freeze-independent.json",
+      "results/v78-rule-confirm/freeze-independent.json.sha256",
+      "results/v78-rule-confirm/freeze.json",
+      "results/v78-rule-confirm/freeze.json.sha256"
+    ],
+    "files_with_both_tags": [
+      {
+        "file": "results/v72-prune-repeat/compare.json",
+        "matching_line_numbers": {
+          "pythia-2.8b@step143000": [
+            192,
+            210,
+            228,
+            246,
+            264,
+            282,
+            300,
+            318,
+            336,
+            527,
+            637,
+            638,
+            639
+          ],
+          "pythia-2.8b@step16000": [
+            30,
+            48,
+            66,
+            84,
+            102,
+            120,
+            138,
+            156,
+            174,
+            441,
+            634,
+            635,
+            636
+          ]
+        }
+      },
+      {
+        "file": "results/v72-prune-repeat/freeze.json",
+        "matching_line_numbers": {
+          "pythia-2.8b@step143000": [
+            18,
+            180,
+            191,
+            202,
+            213,
+            224,
+            235,
+            246,
+            257,
+            268,
+            887
+          ],
+          "pythia-2.8b@step16000": [
+            6,
+            81,
+            92,
+            103,
+            114,
+            125,
+            136,
+            147,
+            158,
+            169,
+            886
+          ]
+        }
+      }
+    ],
+    "broad_separated_field_matches": [
+      "results/v72-prune-repeat/compare.json",
+      "results/v72-prune-repeat/freeze.json"
+    ],
+    "code_evidence_lines": {
+      "411": "    report = {\"schema_version\": 1, \"n_rows\": len(rows), \"n_configurations\": len(cells),",
+      "413": "              \"by_state\": {tag: summarize([r for r in rows if r[\"source\"] == tag]) for tag in TAGS},"
+    },
+    "other_analyses_counting_aliases_as_separate_states": [
+      {
+        "analysis": "V72 pruning repeatability",
+        "files": [
+          "results/v72-prune-repeat/compare.json",
+          "results/v72-prune-repeat/freeze.json"
+        ],
+        "evidence": "Freeze has two target labels; compare reports six state-density configurations, 18 capability rows, and two by_state entries. V72 treats them as two states; its compare has no state-bootstrap interval. Covariate-dependent power/A2 predictions can differ across labels even though measurements agree; the V76 A/B/C/D predictions being audited agree exactly."
+      }
+    ],
+    "audited_analysis": "V76 pooled confirmation counts five state labels and bootstraps them separately; its unique_outcome_sensitivity already counts these aliases once.",
+    "scope": "No other freeze/compare file under results/ matched both labels. V77's identity files discuss the aliases as audit evidence, not independent performance states. This is a literal-tag/separated-field inventory, not proof against unnamed reuse."
+  },
+  "interpretation": {
+    "pruning": "The measured A-over-B gain is primarily a non-proportional aggregate QA curve shape (including a density sign reversal), not a prohibited negative scale. B already minimizes signed OLS over its entire one-scale function family. Math/code curves are much closer to proportional; their gain intervals include zero.",
+    "source_direction": "QA directions vary across development sources, and its arithmetic mean is positive at several densities with a negative median/majority. A and B are both source-free: neither adapts its sign to a source at fixed density. These diagnostics establish heterogeneity, but do not causally decompose its contribution to the aggregate curve or confirmation gain. The observed A-B contrast measures extra curve flexibility; it does not demonstrate learned source-specific direction.",
+    "constraints": "No nonnegativity, regularization, clipping, or optimizer-bound artifact in pruning. B is structurally restricted to proportional curves; OLS versus confirmation MAE is a criterion choice, not a sign constraint. V76's other fitting conventions are sensitivity analyses, not refits on confirmation labels.",
+    "distillation": "Distillation A==B equivalence is algebraic for the single-coefficient forms and supports no conclusion about conditioning. With w=log(1+E), a_c=(w^T y_c)/(w^T w), a=(w^T mean_c(y_c))/(w^T w), and a!=0, s_c=((a*w)^T y_c)/((a*w)^T(a*w))=a_c/a. Thus A=a_c*w=a*s_c*w=B. The equality is guaranteed by parameterization; it is not empirical evidence that conditioning helps, is unnecessary, or generalizes."
+  },
+  "distillation_equivalence": {
+    "shared_coefficient": 0.21122829253602982,
+    "coefficients": {
+      "math": 0.15127841083533305,
+      "code": 0.1550892102985471,
+      "qa": 0.32731725647420923
+    },
+    "max_prediction_difference_A_B": 1.3877787807814457e-16
+  },
+  "validation": {
+    "cpu_only": true,
+    "all_216_frozen_capability_rows_reproduced": true,
+    "negative_scales_executed_successfully": true,
+    "original_five_state_scores_reproduced_exactly": true,
+    "no_confirmation_refitting": true,
+    "historical_inputs_hash_verified": true,
+    "original_v76_files_unchanged": true
+  },
+  "outputs": {
+    "summary_json": "results/v79-cond-audit/summary.json",
+    "summary_md": "results/v79-cond-audit/summary.md",
+    "staged_table": "results/v79-cond-audit/paper/paper/tables/cond_audit.tex",
+    "staged_code_mirror": "results/v79-cond-audit/paper/code/analysis/v79_cond_audit.py",
+    "requested_table_destination": "paper/paper/tables/cond_audit.tex",
+    "requested_code_destination": "paper/code/analysis/v79_cond_audit.py",
+    "paper_destination_status": "Staged under results to obey explicit write-only scope, as in V76/V77."
+  },
+  "v76_tree_sha256": {
+    "results/v76-cap-conditioning/paper/code/analysis/v76_cap_conditioning.py": "5d7292c75beb5a325d4a2191af201eacbc2513387d48dfe4087ef8c9dc271410",
+    "results/v76-cap-conditioning/paper/paper/tables/cap_conditioning.tex": "0df8ca73aefd5b868c33d3c8a07de3fc4d4e5e07dc1cdb0e74aa5051b98226e8",
+    "results/v76-cap-conditioning/summary.json": "d0a2feaa9c5b09f5dd1a20dce09c20683d8761f756375c12c0e9dd49865d1103",
+    "results/v76-cap-conditioning/summary.md": "79954020d52d9a93e5338d353b3c45743b1479250054e968e3bf72d825624605"
+  },
+  "inputs_sha256": {
+    "analysis/v72_prune_repeat.py": "a639ce3d57f98af62f0705a120e2c7e9cd16a3f936ad5868e1641f0f6264dfbc",
+    "analysis/v76_cap_conditioning.py": "5d7292c75beb5a325d4a2191af201eacbc2513387d48dfe4087ef8c9dc271410",
+    "analysis/v79_cond_audit.py": "340bccc843a1adf1c23e995fe21979a6860af3932fc23954852ad2bfaa888b61",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/eval.json": "3d7eafaaffc276ae614c8ef26dced1d44d9d83627af42c131a743ac9f1f622d9",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/eval.json": "9a2da45a137db315b985d97a8f607e56192b360f65e5caf796adcd6da03ba04f",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/eval.json": "af74b78d38cf8fac2d5f11e27df61326caf1ec99ced341de2bb0ad0c1ec37430",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/eval.json": "8b51dfa6dbf1e430710ab798a8f3c9464dbe28b080d84f0be4af527c77589daa",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/eval.json": "fffabbe66b91b243e91edd4b8fd3345c99c9da57cf3c9542332f444fb0611bb6",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/eval.json": "9e85e1684d05f383bde8fa1122793dc882a6fefd2285ea2b496dd3bfdc16eb32",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/eval.json": "64d3020b9849a309d6a115df298cd59d7d1b2606b3d2cba2aab1185af22bf658",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/eval.json": "2da771dea55f8f867635e17de2f4204543aece75065d828a7e47819b1d3856c3",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/eval.json": "e623b33aeb9fe73400fa58df310f82311940daefc468d4cf2cedf56953bb9389",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/eval.json": "0d56fb5956e78ebdcb1c15a45bed840194299d8b751148ac23c459f2c016a949",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/eval.json": "5272407ecb21272115dc09865749f397ada66d1bcb817b7d5612c8147424cb65",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/eval.json": "d631dd0e6dc983cdbbbba8f710a31743a7980b8fab393fa03e94506c2e1a3fbc",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/eval.json": "fafcbe233d13660223c4a607a673022677d5ac56f91372f9f5b5f75c1783246d",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/eval.json": "a86f23f0fc18d9bef8e4aa0ce6dcf9dd63d409208340496cb8755d6ff2ecac62",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/eval.json": "9c88706f315f2a2c51d0258648422fa2b10d0b365a3ca35d978aa1d930e43dcd",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/eval.json": "4ae345e86e36d0ae81e0bd9978c37d4b7b99ff93f376fcb2454febd2a25d5647",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/eval.json": "0039d654fddf06aee0223b94ef915db8bc35be2c5f83bf7607a11b5fa105903b",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/eval.json": "af2ac6149ff98b0ee2102494a1f72743d8000fc75656e15fb1c48a2617a32b43",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/eval.json": "f22bea074f559a060f903a86cd8bcf29cd8641af8b107d4dc63f5c7ecf8ca3cd",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/eval.json": "13f2048cfdf07f0c593cad8ce3b7525d4475566dfcbf3c51c44e2c1e58e1fad2",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/eval.json": "bbd3edb53cf0b47a1b921e58e7b21033789c9a3500036d000b4cb2f2c37a4015",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/eval.json": "5a90ae2a887a5101b1bb21a1cbc2764c42eb5b2a6b6a98ec59b1372b6b578a75",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/eval.json": "427d1edd6b0fd5a39d70e5fbd94db071860f9962c24eb4abe50ef3c574fae615",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/eval.json": "3a936e7eae900fbe49cd491bca372d32da21efd85820471daf02575534f09d09",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/eval.json": "526cffeaf048b246e93de052e8d5ee757d350cf9435167491183442a46f0f916",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/eval.json": "ba4d636a3d8239e92565feead284763bede0110f62f70045a0cdd6f77e74286b",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/eval.json": "29de74e7317f829a354d2aa3cb5a1157319055a0d9b24fcb58d50babbbe04c83",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/eval.json": "f24d74046f65df82727e0874cf3c3f681131367442ed898bbdf4453f7574b021",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/eval.json": "0dada83b859b12683819c45181114897194456cc4ea07f1bf520cc8c67a113db",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/eval.json": "79ec1434b0f501fc229fc21a6a5b2d6b353816c1468ed7d3db960472b159682b",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/eval.json": "9607efd3ab4e02b8fcf6c07fd120a39e2127fbdfd417a78d909708185cc48495",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/eval.json": "7a6a145af491b32607c23de639256dc74a801e3bc1109f0185f0393938b35f48",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/eval.json": "db2f1d56d3b6df5c91285d601327fcd56305fd6d2676feb53dae7f2f027c742f",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/eval.json": "22c6c5be53b81eddb49e32cf841a1d89a5419e71ca5b61ebea338881098ee106",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/eval.json": "1034a5f7a20dcf89d615981ec179b9b1c315349fc9a53e707ffe45fcbd13900b",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/eval.json": "5789aa522d49c5f89f92fa8e78692c63c02d34a05a2f7e787565e97dcad686fa",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/eval.json": "9f434048a9391ebf7cd23d94b2d078b9778eaee8f7d1c08d6f729192e371b2de",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/eval.json": "d6da7e065a493a7d1970cb4c96b68a25996c40ed0840f697c451ce0c3c42d1a2",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/eval.json": "a693f59e7205b667c406d2b2a5913554d95910aab57c6b7366801045e2d19d0c",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/eval.json": "6698a4974e421c4f1ac75dd7d646f96f636feda075f547f559e18e6e48180e47",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/eval.json": "f6a5b5822c7544d5f70cf4bd928c0f6783c4349a99245a64e4f3d5dea1f33e0a",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/eval.json": "3a9fec20b02769b78916481b2e9b30c6b76b80a692295273f6d3cdb7bb557391",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/eval.json": "11cac86656459b1aad8b4bf4d24cb2a780fd5025e5ab54197fce376e3b469a7b",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/eval.json": "ca3d316a0333e77744b8ea4953d063a4de502c13dcaf518cfdc86e03e60ff809",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/eval.json": "da79bd62d834eafaf75aba59536f953899bc46817ead1fc7e870858972e4d911",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/eval.json": "364edb419e71fd5db5e059cb3b7776328eb0d9c46dabaed2a776aecc65f2001a",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/eval.json": "913b3cc2d5dd8b4d87d8413a082c2d96212a787e5190675392dcaa17d008f4c8",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/eval.json": "7e289668db86b4cd984fed30cb251a37619de3586e1c269d73770512e769cfb0",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/eval.json": "27db3efb26a27ccf4cdccc929da04369781ebda93db9bc5772e1032df00a4e59",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/eval.json": "292f998671702ae365602d184e1c68362d5b4143e678987df8f5277d1721b8bf",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/eval.json": "a3336b3ab30ade7ac3a954670792a17d64003f6312cf7383fbef3c709568deab",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/eval.json": "cdbca20d6cc17fe3c9cb0ef2b64fbe15a734a06702520fdda056469c661ee168",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/eval.json": "86b49fb1feb88fee09e7fb8500d4c6da538f1efd1c962f153ceb2537f5faf5af",
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/eval.json": "cde066077d40b8296069c63b4909c852525371ad945b1b3b0a667682d41a4e90",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/eval.json": "adc693d5cd1f4ac0be35a6e9b1874dde1b642aff1c01ea04f8cdf0bcea52ff9c",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/eval.json": "8e458ad75634b1821cd3690605dc2be43a356f5e1f4efece95f3fda7d8c906c0",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/eval.json": "adab7e2a9604125a7572acf949d89c4343e5c7372ab4649b030fec584fb7e35e",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/eval.json": "afe5fe59f0abc400d53a975d5888dd86d72f41e75bb1a333b92d9b72d2bccf45",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/eval.json": "b985cb04c12826fb4a7112568e97e8a698f1729a18a27213a889c3f4a57a8a38",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/eval.json": "f251c9e4a5f1d00f054e1b9f5a4c42cd678e6f624284a839d231ce719cdba516",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/eval.json": "088763a3c3d4d1b48b7b70abeda1b01692857148ac23a7131ccd7c5756c2ced7",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/eval.json": "6cb81644f47d0334ce858336c9844b1a1faa8f06759f5643f94487921739f056",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/eval.json": "2cca7e24735e1bbe8c037d6655e6b96e167d41e7fa523f9b9632094b7d761d29",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/eval.json": "201af7d8d8700bda54e79741c4c8a7fb8cdec8d28c993cbae0e8de265189e1de",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/eval.json": "72e8c0174482601f383735d050a51fd52a4a6030622ee719815fb4c879431188",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/eval.json": "77e52e02a2146a124de6828b7ef63728086c047388b65514e709cd6e294dd9f0",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/eval.json": "ccd507061eed17df28ff724917a1f51b3ef2ad376044c65a8cae2699808d4981",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/eval.json": "41f6dbd4d4ff2f87f589d1b2a09b3e74f37bc88a3ef514bbdab1fd8d8734389c",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/eval.json": "bf961dc6235a8d19f44d4718b8cb19b3e29aafa77b97f8006f7e22eefbf26773",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/eval.json": "3b4ee4a08e4971268725566fbf563f4aa1a589f5d119d37a8fca1287c9727af2",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/eval.json": "c6f1b8c5c0e9e442311ed3778328139b31d35aeb920bd4761d2aabc71bb31f43",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/eval.json": "2e0c1a0d3305ef23bd9b1e78ae9c0c6f934bc4688a2b1b8a1e014d89610e14bb",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/eval.json": "8fb0ca610fa041e9c75abb39e12089ad34b341bd0c0843bd8aabc5182479ba48",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/eval.json": "3cb0848c76cea29af2231d46e65462845e4a6364f220d94a5311a3420ebd1832",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/eval.json": "f5f86abe10ef4a7178372bcd8b2ef840cbe73886b1c3dda181edd020cd7ec3bb",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/eval.json": "84b11284795a681282b5e17c9f6d5dda37b5bc86a5384fb0bae03f20da377808",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/eval.json": "eb5a48c62f17e2b30d5715ae25141fdcf5d6a7598ab7dff6c848e13f2be7ed2b",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/eval.json": "7f9b29b4e1c5cf758ba0dec028fe49d9f360f47e1348a6fb979830603cd9873b",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/eval.json": "5798cffdf06612bed743abba025ffe56c7ea4863190b091b546abb5fa77eefde",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/eval.json": "9381d6d47c9e224f5d42e02f0b0867c9b15fe2efa987d960ed1ccb31f7358633",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/eval.json": "4091b14ab8794f3a6ee9d3a82c36c1072104b704b010c114390590d80cc517f5",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/eval.json": "8ecda137bc0e27af1932e65c3b17745d8e938ae32c027de6295ca6db10a546fb",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/eval.json": "c3813895b81554f6b0acad59f322a47b71141c0eadfe17118fad31ed023e00a6",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/eval.json": "8ced04ee8470a2f6e0c625ab6438d3024383a1fab1c7d7a49f9718a60723a1d3",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/eval.json": "7da67324d47ba3f0e45560953e69d7568a02605c4365d74ee1f60c01aeab5ffc",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/eval.json": "6de6aab42782e9e2331b51d13410195552d765d8066a7a112bbf8a721df8e10a",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/eval.json": "d7691cc61448a96733f9324d821eb6f96206891968362b4f3d23488dc58e9d45",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/eval.json": "d8635829ce2ed34dcec849c610c8572e4617d29ec9ee4d168f90442337fad1d9",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/eval.json": "21ec699670d0bcab33170e49dcaad7dbd978fc94229774e462201a762669ed48",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/eval.json": "307acc2e797c1f43717d4d179ac283e4a891734213c0815904b16e797d109b1b",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/eval.json": "729c0b4b581b004f4edfc17a245a576e2395048fc1f2a661ce3149518c35ebc3",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/eval.json": "3faaea45606668480de9e64734b8e68b7e488452f8d3e24551758f6fb6566868",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/eval.json": "01025c4f27620cb986c7b45803e91b79fe91d529ea2c020bde7ac7427583b0d2",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/eval.json": "98ffd4ad4f7384e16076998b647ebf764a8e0bc79e665e318f2c4fd3557d0119",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/eval.json": "04aaec8c740400aa87c6a9e004d177c27e127c4cd128d73754e07e4eaadd87af",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/eval.json": "74efd24a913878acd68d4566cc086c71e86348aedebaed3bd7b6d647b51c0710",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/eval.json": "5aacf87479ad80df30122537de711b700b7b01fa4cfdc770045cacab2b3c2ff4",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/eval.json": "7780f331339bb0ce7d509ff5b5986529132bd63ec3db4566327b23e364799fb4",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/eval.json": "fabdafd8a0c0bf4f5937936050c87f36159bfde55f113c853cf45cf4fd9f7a42",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/eval.json": "c7b4821231a7ca3496b9d24849b7583bbc63989fd1a6e8141b76a3ea34aa1eae",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/eval.json": "cee3f98863f36b7139ff2d785380e1b0b2c6a8f8122d12d2f4a5cce269038805",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/eval.json": "f212796f201952a6249e0929c2207bb3bb1e0750ca68087e8f21da115b8cf129",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/eval.json": "e026e9ad130eb8410c7d39527363ded97634c6b7ce1a399c874687bdd048de78",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/eval.json": "f0e58f793dcbb7677ec194c7f548f1805b10113ee1c4790df605ab3e02d57bc3",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/eval.json": "2f84e6f0955499eef0dcac4c34e0e25f13b8e86ec2cb014b79b87187efb7287f",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/eval.json": "65483bd746185b24c33b484fc51cbcc946d093c6702be98f9d9a960877df13fc",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/eval.json": "74a433db582144970db7c95f2a52746f409abb4d80b1ede66dc237c7336ce67e",
+    "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/eval.json": "6655d598e8f0ad989f9e3723d4b603a6b7cb505f9fbfe6a29efeb6b25647e05e",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/eval.json": "46eabf12829bc9acf834dff8d8dc37c6d0f75906e2e307fed201e29013a56c98",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/eval.json": "9df87c1694befb2b2b8e97b6bc51889b34564d0a98a0f3fc3756d9e6d22ca437",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/eval.json": "79420f7ac5a8855cc38173b304f01155d9fa29191b1a08286207e44137a56da5",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/eval.json": "07818f4e0bca055354d9dab25bfb9280990ef50017ecf18121f0482882957d40",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/eval.json": "4e8324397a24c7ec4900cca807bee69b45e4ff7601d0f627dde60e73181fb603",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/eval.json": "8aea522c9323b5756348f85cd98a8031407d0fd9e99aef17050a2b607fcc3eb0",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/eval.json": "6084b1970982861f19efbeed3af9ac30ee1192300b6abe9eb97d9c1de8fc0a1d",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/eval.json": "51ce03aebb279e0bfb7fcf47c183b6ef1258bcd9ada18526c6a8ead8440a2ae1",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/eval.json": "abe98f5eae3807e62e8d819759d06929dc50c16d9cf3147ffe3054a885aa2b94",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/eval.json": "2391e0c6f766e50c79fbe09efaf485e1c3a3aab475e12ed68c6bf27f9a618b4b",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/eval.json": "98b6410bd51f68cdbaccf907f0cabb5530bf116eebc404e610053433aa64063d",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/eval.json": "0a2b1d5ea9b7530c863dfce545d7823e539b333066df2dddc013f037fd79242e",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000026/eval.json": "f7477029053d77544af8f59cebcaf08a69094be9bef6546a78d1d53a37bdf614",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000050/eval.json": "d94ea81d0f135cc4454d6f620abeea8767c442a911838d046a5449a1d1314fd6",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000100/eval.json": "2f03878fcd1bc501afb28f92eb13886115f6a536f5c62830140b2f783edd2411",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000199/eval.json": "6eed204155fbe2d5cc84f6622155b10eb18ce760cf5899493a74b470460eb6d3",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000025/eval.json": "901fcc5ebc468f82b1b4ed577ad870ab4710acba9aaedb8a6f9122b331ad2a71",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000049/eval.json": "4d5440f91c5367b2fb0e924836d0b97249e2d4d3c3aa8f897ba19628009b23e6",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000099/eval.json": "a66a312f9e60d9792ea1a00d161868a05172660d9f0689f35f73c4acc309bc51",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000199/eval.json": "e7dcb5c8da8b6b25679783fb731669f18c11c1a8bce96e0e9a6e87b651c4ab44",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000025/eval.json": "e855591c49dd0b733a83f7ce5efdab9ac262154f15c56f273be1fafe30abb058",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000049/eval.json": "8cace574b2ccfa5dea4c08363d29368138ac73ea3d8844f1d6404b4a308defe4",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000098/eval.json": "a01879024c76d7b60a6b462abe15ac19df1b28af9c07e4004a2476b098614c12",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000196/eval.json": "80220f85db9a49f801b9a54b96c98064c4079757b70973d9c55a8c2b79a1608a",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000025/eval.json": "47a17327608b0236c6e034b2f4d097079e0dbd36f98b2311b5f7b89cf17ff1af",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000050/eval.json": "c8be461d5508cdd61e31f6436b2bda3c277f2140fe3f2342ccbda93a5d952fcf",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000100/eval.json": "b7bb879705bf660cde6d6198f58997afcbcb5000c40066568ab006ae763651a6",
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000200/eval.json": "5c75821fcd5cd7979cda93e4ecdef72dcc29fe6d833f9326cd81e629238eddc1",
+    "results/v38-prospective/compare.json": "88737c2b6ce4c6119f99ad77176e16d9db21221c1ff2d08c03a74390a9f546b8",
+    "results/v40-prune-strength/compare.json": "3b92b40bedfe1aa91b3fe8eac13de6e38a3380035f3a38f6ca153ca0ae95d7c6",
+    "results/v46-p1-newsource/compare.json": "8e6a4b910b06038ef35f10a96e512d0cc29bfc1d2ed97471bba680cc9cb9d6f0",
+    "results/v47-p2-register/FREEZE2_COMMITTED": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/v49-p1v2/compare_pythia-1b@step112000.json": "9697b57509b678350abcccc309ba8e0eff02196d8981d9f7c92e8118db37a45a",
+    "results/v49-p1v2/compare_pythia-1b@step32000.json": "6d68964aeb99d8fda157be3c0863e59915f437326b30088365282a1d4fc3500e",
+    "results/v49-p1v2/compare_pythia-6.9b@step112000.json": "320d9d172a624453dc883532fa97990bb49de68f70991b9456600ad17a855124",
+    "results/v49-p1v2/compare_pythia-6.9b@step32000.json": "402e4137f412b0e38ca7b59126830c31d09a566632043361b8f6d06571efd4e7",
+    "results/v50-p2v2/compare_test.json": "4c07abf0f940e95992a3f46d79b6d9a3ef9524ba55adaefa824b0cdec8a601aa",
+    "results/v50-p2v2/freeze.json": "c7caf2f10865dee0e8aeb572957a55cd284ac9fc1693b51555318315492a67ee",
+    "results/v53-prune-dev/compare_pythia-1.4b@step112000.json": "23dd3cd34588ea33666f0158fc05004b6bc8273ab8947bb43aad954085857406",
+    "results/v53-prune-dev/compare_pythia-410m@step48000.json": "6cbfcff19a7196a5377e83417538159b86797996d3045c976fcb3e29dd321399",
+    "results/v53-prune-dev/compare_pythia-6.9b@step80000.json": "288af4793219be8325a33fcaa0d2dbc0dd96defff4890de040aea0723e177eb9",
+    "results/v53-prune-dev/predictions_pythia-1.4b@step112000.json": "862e299cc30a55672c785de418b0c184c204e3d5c2b222fb6174351e507489f4",
+    "results/v53-prune-dev/predictions_pythia-410m@step48000.json": "6a3e987278dcb2d59d37eb72161bc0a062dd5cbe67116087b9fe7374bf426d6a",
+    "results/v53-prune-dev/predictions_pythia-6.9b@step80000.json": "c14ec20711138aa57d7ae4d394c97ba8b08c05ed65926c537473e6ec499558d3",
+    "results/v53-prune-dev/register.json": "7498103830f139f6bea16ee440b717a05dee41e45b9835fdac6a2251b833974d",
+    "results/v54-quant-group/FREEZE_COMMITTED": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/v54-quant-group/pythia-1.4b--step112000/quant_group_losses.json": "ab9990836c8e167eddd63613802d8d122e270608bb205a7447655cfe276ee7c6",
+    "results/v54-quant-group/pythia-1.4b--step143000/quant_group_losses.json": "3b9d7d9b5584d542e8a9c88c8d02311b6a88ded22815ac215437b40b7183e406",
+    "results/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json": "707e78756928830328bcdf521c405305883e7968373f9783b2390f2cbf554248",
+    "results/v54-quant-group/pythia-160m--step143000/quant_group_losses.json": "803b5327fa5f747a23f23793f57803765fe3200f0b08a9edbd3216fb3d7c322f",
+    "results/v54-quant-group/pythia-160m--step16000/quant_group_losses.json": "67cb8d973d7116ee26ccbc295f36c8aeabc1f733e10e3e3e28e3a31c7a8c5939",
+    "results/v54-quant-group/pythia-410m--step143000/quant_group_losses.json": "b89d36c94683ae323f994600bafaee92582353cce33386b2dcccd42002e558b6",
+    "results/v54-quant-group/pythia-410m--step16000/quant_group_losses.json": "1f92ad048199581e23c3626c5d2065c860c37c1a53351552d2bd2068d50eae81",
+    "results/v55-quant-group/compare.json": "aa7101b5a060d9cc89aa7ebd8322bfc0146e49ece9b96006d7b95a0afd607421",
+    "results/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json": "bfc02e7d54eb623c2e8e4f1237b546aa62ecd14f23330b50e2a833e226916c42",
+    "results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json": "5ec4800f980d6317520f3d7eb85f4516631b629a146d5a964e33092eb1507315",
+    "results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json": "95cbe7e98739be4ea472781bf4f8a27c28827250e22d1bdbd8c5c576bd73938a",
+    "results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json": "a458cd11272a9face425eda62134b25ef0bf4af622f5902c63f13233028c0b15",
+    "results/v6-capability-geometry/pythia-1.4b--step96000/prune_losses.json": "291926ecf463d6052e16336f0473aa364c4098db5a99185febe832e83d531f81",
+    "results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json": "87d9ebcad62e27b675e038b584671175f66aed91fc18da786ffc0f553af68e37",
+    "results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json": "46c5f9c6cfb0b5581b13f517951b861cb1c52998c333945a37639b1031862525",
+    "results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json": "f5791d151a0507ac90aeaddaf97d4686ceead336d4fa7b128ec711f4793ad354",
+    "results/v6-capability-geometry/pythia-160m--step96000/prune_losses.json": "477e2715ec4b9033fb27a7fb169a3b7e08c0a6682572712190aed7178d36a6bc",
+    "results/v6-capability-geometry/pythia-1b--step112000/prune_losses.json": "28542d8fe21c9be339b5b946416cf53b80fa3b1d8d8aedb04676b4eed80c16f3",
+    "results/v6-capability-geometry/pythia-1b--step32000/prune_losses.json": "ce73eda3b0059614505fe20e03f2bf135f1e82d80e49b881f267174580ac5e87",
+    "results/v6-capability-geometry/pythia-1b--step96000/prune_losses.json": "0f8d7866ab0d6a013b464aceebcbf274d0cc7ed9413be0281a38b5ac1b962d2f",
+    "results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json": "f46f388cee3fbb1bb7a0175c1dfde457b13bee0fa262092d9ac1e41845df0e7b",
+    "results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json": "228e436b0b58d734eb924f2ddc45b4c8135aa3b2765bb3b764db7a456123dcf9",
+    "results/v6-capability-geometry/pythia-410m--step48000/prune_losses.json": "e71893a8e75f8abf1dc023400ab910a8765d81171d3abc991ffb1d77e012738f",
+    "results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json": "81bafd7adac31f27f2973545407005177fad63cf6d6e2ef942109e10fd8f3756",
+    "results/v6-capability-geometry/pythia-410m--step96000/prune_losses.json": "a2a5307ace6cc58f1e987c3a7c8cbac8da1e6d17f4c9487cf55ca95d1b47a4c8",
+    "results/v6-capability-geometry/pythia-6.9b--step112000/prune_losses.json": "a7952f3fb14575f0090dac6eeec4f103b556f69781685fb16d914dbe1905d9cb",
+    "results/v6-capability-geometry/pythia-6.9b--step32000/prune_losses.json": "90b4e5a53afcfd24b9c355578d0bbb2753d006169661f521b2a82b2d17f885d2",
+    "results/v6-capability-geometry/pythia-6.9b--step80000/prune_losses.json": "9f37ba12f066a94d93c07a93a180f89b9de08b77b0a7b3697a6de6a02dc1f3dd",
+    "results/v69-quant-confirm/compare.json": "12944c61ed42c61f1beaf8f84ef5c87d900b3b1a38d65d175976e27d3d4e6bac",
+    "results/v69-quant-confirm/compare.md": "5a479b9a306355327fc1340e93c20d0fb45f61c4378fe508fa10b9555ca21ef2",
+    "results/v69-quant-confirm/develop.json": "9f035cb37a94d425064f37d822490b52dcad4c669e62864f27cba4ffa5e5643d",
+    "results/v69-quant-confirm/freeze.json": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+    "results/v70-distill-confirm/FREEZE_V70": "700ffd77373ffaea7713c84a5d77ee46f15a50edc17c1df9e49c2276aa5a4ddf",
+    "results/v70-distill-confirm/compare.json": "983f53033b07e035b1cb552429b8ce6ab23f8d6aee4365237970e2b46b0a829b",
+    "results/v70-distill-confirm/compare.md": "2a290e29dc6253899196c02d202f22fe35955acb3b457e693b2e4219f64f1c78",
+    "results/v70-distill-confirm/develop.json": "a3a3da1c66fdc9a4b21f314316c76c52f0d382afa8e9f65b9c6b0cb16a6bb86d",
+    "results/v70-distill-confirm/freeze.json": "d7b28c7251dbc6113c3de7c957560827e603d4e77a48010f99835a8468db0c24",
+    "results/v72-prune-repeat/compare.json": "639eef759655038f393e0451b4d7471883dae31d4da08ffe32a6277eaec76fb9",
+    "results/v72-prune-repeat/freeze.json": "3f4e45d0bd505b7d65815f2246a5c3b343f3a49be465aedf724aaa208b0de8b9",
+    "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.65/prune_losses.json": "2776f6d300eeae7df64f94b069bfaa0cdb1eb23335047761a5371ad884ebb89c",
+    "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.75/prune_losses.json": "2ed66769dce7124b6af8e16ed72b2d63d69c56e67b4919d773636d609b79819c",
+    "results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.85/prune_losses.json": "731172690abc23d2435d16a511303469e708c94ba69b09cb769cd650112ac790",
+    "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.65/prune_losses.json": "2776f6d300eeae7df64f94b069bfaa0cdb1eb23335047761a5371ad884ebb89c",
+    "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.75/prune_losses.json": "2ed66769dce7124b6af8e16ed72b2d63d69c56e67b4919d773636d609b79819c",
+    "results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.85/prune_losses.json": "731172690abc23d2435d16a511303469e708c94ba69b09cb769cd650112ac790",
+    "results/v76-cap-conditioning/summary.json": "d0a2feaa9c5b09f5dd1a20dce09c20683d8761f756375c12c0e9dd49865d1103",
+    "results/v77-model-arch/pythia_2_8b_tensor_identity.json": "9f6199f3055bbc901ab8962a2f20b1ae33638b0e180927c1430c4275e73c29ac",
+    "results/v78-rule-confirm/compare.json": "601669be112c5dd7c016e859423700a98f6a916dcd12c838bb5cd9c8c09686a8",
+    "results/v78-rule-confirm/compare.md": "227c4892a35917c14fb258cbfec66e1837adc6062f4b2218d7bd91ed822a8074",
+    "results/v78-rule-confirm/freeze-independent.json": "54b53f547800957f4be011ba4c3cbc50302144576de36f6da0e0bd63be6141a5",
+    "results/v78-rule-confirm/freeze-independent.json.sha256": "ed5b51ba0be39ea3090f1b4939e5e9077a15fe213fde38e7fe1becc068b40393",
+    "results/v78-rule-confirm/freeze.json": "78dd229d7131f485b3a0651eac6978d2671ad139c02fcc2ea753d3420d5f129f",
+    "results/v78-rule-confirm/freeze.json.sha256": "2ee2efaab09b1c7cfb098b681b35e28eeba7378dba7e3c3a06292e5b24537c87"
+  }
+}

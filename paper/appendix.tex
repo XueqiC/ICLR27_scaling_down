@@ -267,19 +267,26 @@ Table~\ref{tab:shared_structure} reports the shared-family test, the parameter-s
 \input{tables/shared_structure}
 
 \paragraph{Value of capability conditioning on the confirmation panels.}
-At equal development information, Table~\ref{tab:cap_conditioning} compares (A) the
-delivered per-capability source-free predictors with (B) one shared
-damage curve times a per-capability scale, (C) the shared curve plus
-a per-capability offset, and (D) the shared curve alone, all fit on
-development data only and scored on the frozen confirmation cells
-(15 pruning cells, 21 grouped-quantization cells, 12 distillation
-trajectories). The gain of A over B is 0.073 nats macro for pruning
-(state-bootstrap interval $[0.030,0.115]$; QA 0.19, math and code
-within noise), 0.003 for quantization, and zero for distillation,
-where A and B coincide; for distillation QA the offset variant C is
-best (0.63 against 1.24), which the delivered joint form, not part of
-this ablation, also addresses. The ablation is retrospective.
+At equal development information, Table~\ref{tab:cap_conditioning}
+compares (A) the delivered per-capability source-free predictors with
+(B) one shared damage curve times a signed per-capability scale, (C)
+the shared curve plus a per-capability offset, and (D) the shared
+curve alone, all fit on development data only and scored on the
+frozen confirmation cells. With the two identical 2.8B labels merged
+into one state (four clusters), the gain of A over B is 0.059 nats
+macro for pruning (state-bootstrap interval $[0.021,0.103]$), 0.168
+$[0.105,0.243]$ for QA, and within noise for math and code (0.005 and
+0.004); 0.003 for quantization; and zero for distillation, where A
+and B coincide algebraically (single-coefficient forms), which
+supports no conclusion about conditioning there. The audit of this
+comparison (Table~\ref{tab:cond_audit}) shows that negative scales were allowed
+and none occurred, and that the QA gain arises because the aggregate
+QA curve reverses sign across density, a shape no proportional
+baseline can represent; QA's direction also varies across
+development sources, which neither source-free variant captures. The
+ablation is retrospective.
 \input{tables/cap_conditioning}
+\input{tables/cond_audit}
 \FloatBarrier
 
 \section{Complete Prediction Results}
