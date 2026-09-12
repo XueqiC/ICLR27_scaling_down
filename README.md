@@ -1,6 +1,6 @@
 # Scaling-Down Laws for LLM Compression
 
-Paper source, analysis code, and curated experimental results for the
+Analysis code and curated experimental results for the
 ICLR 2027 submission "Scaling-Down Laws for LLM Compression".
 
 ## Layout
@@ -33,6 +33,15 @@ ICLR 2027 submission "Scaling-Down Laws for LLM Compression".
 Results snapshot date: see git log. Experiments still in flight are marked
 "in progress" in the paper's experiment section.
 
-## Layout (2026-09-10)
-- `paper/`: LaTeX sources, styles, `tables/` and `figs/` (generated), `references.bib`, `main.pdf`. Overleaf main document: `paper/main.tex`.
-- `code/analysis/`: mirrored analysis and generator scripts; `data_mirror/`: mirrored result files; `docs/`: ledgers, matrices, plans, summaries.
+## Two repositories (2026-09-12)
+
+The paper source moved to [XueqiC/Scaling_down_law_paper](https://github.com/XueqiC/Scaling_down_law_paper),
+which is the repository Overleaf syncs with; its main document is `main.tex` at the root.
+This repository keeps the experiments: `code/analysis/` (analysis and table/figure generators),
+`code/tests/`, `code/configs/`, `data_mirror/` (frozen predictions, measurements, comparison
+files), `results/` (curated reports), and `docs/` (results ledger, claim-evidence matrix,
+reference verification, reviewer self-audit, round summaries).
+
+Text edits go to the paper repository. Generated `tables/*.tex` and `figs/*.pdf` are written
+there by the generators kept here, so a change to a number starts with the generator.
+Locally, `paper/` is a symlink to the paper repository's clone and is not tracked.

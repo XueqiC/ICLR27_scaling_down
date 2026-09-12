@@ -1,12 +1,5 @@
 __pycache__/
 *.pyc
-# LaTeX build artifacts (Overleaf builds its own; the PDF lives in deliverables/)
-paper/main.aux
-paper/main.bbl
-paper/main.blg
-paper/main.log
-paper/main.out
-paper/main.pdf
-paper/main.fls
-paper/main.fdb_latexmk
-paper/main.synctex.gz
+# The paper source now lives in its own repository (XueqiC/Scaling_down_law_paper).
+# `paper/` here is a symlink to the local clone of that repository; never track it.
+/paper
