@@ -790,14 +790,19 @@ distillation with a same-stage smaller student uses the student's
 reference loss plus a per-capability constant (code, QA) or the linear
 student-state form (math), QA on the 2Wiki distribution only.
 Selection minimizes the predicted absolute loss over feasible measured
-configurations. Predictions under this rule and under the earlier
+configurations, or the largest predicted loss increase across
+capabilities for the multi-capability objective; quantization-only
+uses the same candidates, predictor, and feasibility rule with no
+fallback. Predictions under this rule and under the earlier
 source-conditioned laws were frozen for four fresh states before
-measurement (Table~\ref{tab:rule-confirm}; Fig.~\ref{fig:rule_maps}).
+measurement (Table~\ref{tab:rule-confirm}; Fig.~\ref{fig:rule_maps});
+the multi-capability evaluation is prospective and its prespecified
+criterion was not met.
 \input{tables/rule_confirm}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figs/rule_maps.pdf}
-\caption{Per-capability selection maps on the four fresh states under the locked rule and under the earlier source-conditioned laws (row pairs), against nominal storage budget; colour = predicted method, marker = the measured oracle's method, hatching = no-clear-winner candidate set. The QA map differs from the math and code maps; the max-over-capabilities map is bottom right.}
+\caption{Per-capability selection maps on the four fresh states under the locked rule and under the earlier source-conditioned laws (row pairs), against nominal storage budget; colour = predicted method, marker = the measured oracle's method, hatching = no-clear-winner candidate set. The QA map differs from the math and code maps; the bottom-right panel is the largest loss increase across capabilities, $\max_c[L_c(M)-L_c(M_0)]$.}
 \label{fig:rule_maps}
 \end{figure}
 \input{tables/candidate_coverage}
