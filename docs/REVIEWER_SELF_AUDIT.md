@@ -65,10 +65,11 @@ capability-specific (QA) and is stated so.
 
 ## Cross-cutting gaps and their status
 
-1. Capability conditioning value (V76): the shared-curve baseline used signed scales; the attribution of QA's gain to "opposite
-   sign" is under audit (V79) and the §4.3 wording will follow the audit, not the earlier text.
+1. Capability conditioning value (V76): the shared-curve baseline used signed scales and none came out negative (V79); the
+   QA gain is attributed to a sign-reversing, non-proportional aggregate curve (R^2 0.49) and §4.3 now says "shape", not "sign";
+   the 2.8B duplicate merged (four clusters) leaves the reading unchanged (macro 0.059 [0.021,0.103]).
 2. Small correlated panels: three sizes x three stages; intervals are descriptive where clusters < 6 (stated in App. C/D).
 3. One quantizer family, one teacher, one probe set per capability (§7); MoE not covered (App. A).
 4. Multi-capability objective naming unified to max_c[L_c(M) - L_c(M0)] (fixed today).
 5. 2.8B duplicate: affects V72's state count and V76's pruning cluster count (recomputed in V79); V78 unaffected (development data only).
-6. Figures: main-text map to be simplified (locked rows, disagreement marks only, separate legend) — V80.
+6. Figures: main-text map simplified to locked rows with disagreement marks and a separate legend (V80, fig:rule_main); full maps, regret chart, per-state and set-size tables in App. H.
