@@ -71,6 +71,16 @@ def main() -> int:
         if not dry:
             directory.mkdir(parents=True, exist_ok=True)
 
+    # Generated tables that later generators read back as cross-checks.
+    table_source = MIRROR / "tables"
+    if table_source.is_dir():
+        for source in sorted(table_source.glob("*.tex")):
+            target = OUTPUT_DIRS[0] / source.name
+            if not target.exists() and not dry:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+
+
     # Some scripts mirror themselves into a `code/` tree, the layout an earlier
     # revision of this repository used. Link it to the current one rather than
     # editing scripts whose digests frozen records name.
