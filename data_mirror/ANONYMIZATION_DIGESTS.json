@@ -2,13 +2,23 @@
   "files": {
     "analysis/model_registry.py@live": {
       "frozen_sha256": "64075b24d26325832f466d3797ec4d3def91c704e3195e51715dba6d6165a4b9",
+      "pairable": true,
       "path_in_frozen_record": "analysis/model_registry.py",
       "published_at": "analysis/model_registry.py",
       "published_sha256": "106f0befbe97ef68e3ff7943f54072235bcf5862aadb7a7c1d296d2de28fb9ae",
       "reason": "anonymisation of author, host, institution or path strings"
     },
+    "analysis/provenance.py@live": {
+      "frozen_sha256": "a625fba3d22f3b4b0d659de5fecce5640d783c4deee28f73a5bba40494ca4865",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/provenance.py",
+      "published_at": "analysis/provenance.py",
+      "published_sha256": "113531d7da34765f082881d825bbf20afcbc5c6fb2935dc5b82487db3e619f10",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "analysis/ref_fetch.py@live": {
       "frozen_sha256": "8c1a84e2ec5621da227e12ce513e51e6037a36ef6b07faa5dd36c72c227eea1f",
+      "pairable": true,
       "path_in_frozen_record": "analysis/ref_fetch.py",
       "published_at": "analysis/ref_fetch.py",
       "published_sha256": "934718f6fc28e1ab850a7914dca9d2707d2929afc1173a01b4ca9bbec91a09f1",
@@ -16,6 +26,7 @@
     },
     "analysis/v1_recipe_strat.py@live": {
       "frozen_sha256": "b0468bbea7323c1fb389529471ba4c2fcbfa30a616e72a1a938dd19f213e419c",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v1_recipe_strat.py",
       "published_at": "analysis/v1_recipe_strat.py",
       "published_sha256": "fb11c7f2476edfd9ac1d8246ef313e025385f4a9e788aed55fe18b49fd034aea",
@@ -23,6 +34,7 @@
     },
     "analysis/v2_damage_spectrum.py@live": {
       "frozen_sha256": "5d15429fef7873c6ffa6a94c03f6c4600c102b3df86cc5095393eac8ae5e9024",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v2_damage_spectrum.py",
       "published_at": "analysis/v2_damage_spectrum.py",
       "published_sha256": "132560ab040eee50ac207a75153d8d9d26fa98390fc686cdabfdddf84c3e2d9f",
@@ -30,6 +42,7 @@
     },
     "analysis/v30b_quant_regions.py@live": {
       "frozen_sha256": "7829988fced4169894fa60eee18cdbb4dbe8218d3915213017a2108da4eab049",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v30b_quant_regions.py",
       "published_at": "analysis/v30b_quant_regions.py",
       "published_sha256": "f0dad9738a136b2f0f1948223d7d8b7677b97e0a3a9df313511203fe5989f04a",
@@ -37,6 +50,7 @@
     },
     "analysis/v32_prune_descriptors.py@live": {
       "frozen_sha256": "5bd71a95bddf13f12d941b1ebeead26bfb65b193b2e43df499bccff67f23b852",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v32_prune_descriptors.py",
       "published_at": "analysis/v32_prune_descriptors.py",
       "published_sha256": "c8424ac8013d7c8a2db3e21c17e609786e9355df3461026013f2d55485382b62",
@@ -44,6 +58,7 @@
     },
     "analysis/v34_c17_scope_audit.py@live": {
       "frozen_sha256": "6531d0f6885d63b5a4cc3c8f3de4033c9b23b56af283fe332c8649be22653259",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v34_c17_scope_audit.py",
       "published_at": "analysis/v34_c17_scope_audit.py",
       "published_sha256": "aedfdb0d74cfa1a7fa499e9ad0da9f90c3535ee4a7722b5c4c9be9acb548fd69",
@@ -51,6 +66,7 @@
     },
     "analysis/v3_measurement_audit.py@live": {
       "frozen_sha256": "23368ce1a856e76321110680392c102c687bf95ad4e441c0753dd491c39b9a89",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v3_measurement_audit.py",
       "published_at": "analysis/v3_measurement_audit.py",
       "published_sha256": "efeda3221ad31de512fe59e15538e6d3a6ec8bd84944b475ce765124e08bae07",
@@ -58,6 +74,7 @@
     },
     "analysis/v67_musique_qa.py@live": {
       "frozen_sha256": "db8fc77e2afdf3f62d270971fb811077b632fddb025bbe642e34c9c67891b5ed",
+      "pairable": true,
       "path_in_frozen_record": "analysis/v67_musique_qa.py",
       "published_at": "analysis/v67_musique_qa.py",
       "published_sha256": "3b022e29f56e40c9269fc5f90df12efd42fd1aea29513d10fc046bd2feacd63b",
@@ -65,538 +82,599 @@
     },
     "data_mirror/v45-main-table/main_table.json@live": {
       "frozen_sha256": "55835b007857d0bba7af54fe505c5a9daaebaeda4826ac303033b42840e2f465",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v45-main-table/main_table.json",
       "published_at": "data_mirror/v45-main-table/main_table.json",
       "published_sha256": "f0d3ac70a5eddadfdd90341d1e1df84123bec40074a32e6886e44ce67e7f7928",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v47-p2-register/register.json@live": {
       "frozen_sha256": "c12167d4b12b9c18e5983239573868ea4a7dfe3f62c8b638f3a10f99970e4757",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v47-p2-register/register.json",
       "published_at": "data_mirror/v47-p2-register/register.json",
       "published_sha256": "2d1eadd9a7b720d08cb1ab6629176bbea4b3c1f2c3c5b23fb9bbdb13f84a48b6",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v49-p1v2/p1v2_table.csv@live": {
       "frozen_sha256": "c6c0c37ea24bccb97e0fc0ab544a8b6567d7e1b68357372a6bf0969d1b9dee26",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v49-p1v2/p1v2_table.csv",
       "published_at": "data_mirror/v49-p1v2/p1v2_table.csv",
       "published_sha256": "44f6076d182175f5adaa64c1d6cc9d8dff74efe6db1fb41581deb8dd7187d808",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v49-p1v2/p1v2_table.json@live": {
       "frozen_sha256": "9f436921a3fba7ae8614966f311294b0605f04f8f340f1d1ccb945f12ff842f9",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v49-p1v2/p1v2_table.json",
       "published_at": "data_mirror/v49-p1v2/p1v2_table.json",
       "published_sha256": "7d7122f3d8b83c887c56110735e1d6efe2e42916e9817f85cc3040fb1de97826",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v52-prediction-tables/groups.json@live": {
       "frozen_sha256": "ced335a427a93b9b71904cf7cd34ce86ea455917491c21fb810f74d00d17c32f",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v52-prediction-tables/groups.json",
       "published_at": "data_mirror/v52-prediction-tables/groups.json",
       "published_sha256": "78af1caaadfaf22a7836512a1771e9a1762b5e5656ea5c68202986190ab7c3f8",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v52-prediction-tables/rows.csv@live": {
       "frozen_sha256": "2e80fe39c8308ea2cc44e4209acb31a0ed35fed3be0cc40ed6ad3dee146c34dd",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v52-prediction-tables/rows.csv",
       "published_at": "data_mirror/v52-prediction-tables/rows.csv",
       "published_sha256": "8ae1b00c9ef5c09b4388b079ef5744eb11d026e8a0fc14356aa0696788978e0a",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
-    },
-    "data_mirror/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json@live": {
-      "frozen_sha256": "707e78756928830328bcdf521c405305883e7968373f9783b2390f2cbf554248",
-      "path_in_frozen_record": "data_mirror/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json",
-      "published_at": "data_mirror/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json",
-      "published_sha256": "41bc3efd814274b8a5da559dd313724b0de85460985b7d79aa371b16da140566",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
-    },
-    "data_mirror/v54-quant-group/pythia-410m--step143000/quant_group_losses.json@live": {
-      "frozen_sha256": "b89d36c94683ae323f994600bafaee92582353cce33386b2dcccd42002e558b6",
-      "path_in_frozen_record": "data_mirror/v54-quant-group/pythia-410m--step143000/quant_group_losses.json",
-      "published_at": "data_mirror/v54-quant-group/pythia-410m--step143000/quant_group_losses.json",
-      "published_sha256": "bae7431f3c984976e1a22f02bf830254196f060c7d6f052a613a37e85f5e1389",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v64-selection-feasible/summary.md@live": {
       "frozen_sha256": "fd8627b6c78c90d5beb7657ccd053dfc333079c896be620125bbaf7f61a0e49d",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v64-selection-feasible/summary.md",
       "published_at": "data_mirror/v64-selection-feasible/summary.md",
       "published_sha256": "a13029db91c7b2fe01a1d4fc8d6adf8c2b47a441e04f15198cee96beaff03d5e",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v67-musique-qa/measurements.json@live": {
       "frozen_sha256": "4dd03ac164f0c16129ac8f135af05f46516e26de48160aa51cea4e89e94b8c23",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v67-musique-qa/measurements.json",
       "published_at": "data_mirror/v67-musique-qa/measurements.json",
       "published_sha256": "9d319a74eb94146b9b0f95002dd2074b6f55a768c945362ce7f8ff5c0b3cec77",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v69-quant-confirm/freeze.json@live": {
       "frozen_sha256": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v69-quant-confirm/freeze.json",
       "published_at": "data_mirror/v69-quant-confirm/freeze.json",
       "published_sha256": "abaa8057de07026da28169430a12bd280c7ab9810f1d42e7534dbd9f26a9ea0d",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v70-distill-confirm/freeze.json@live": {
       "frozen_sha256": "d7b28c7251dbc6113c3de7c957560827e603d4e77a48010f99835a8468db0c24",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v70-distill-confirm/freeze.json",
       "published_at": "data_mirror/v70-distill-confirm/freeze.json",
       "published_sha256": "73cfc29ad44fc9457583b04d5044b9e7bb47a2dcba29bebbe90948a8c8f0543d",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v71-qa-scope/measurements.json@live": {
       "frozen_sha256": "d127e75abaea9d7d401c8dd3d61dfd6f9ff4f00017548dc55e4ad9aec43df9e1",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v71-qa-scope/measurements.json",
       "published_at": "data_mirror/v71-qa-scope/measurements.json",
       "published_sha256": "2150e6c79d4047f53b9695f8585f9a0071f0d822fa2f9fad2c070d8b4e0fc2bc",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v71-qa-scope/register.json@live": {
       "frozen_sha256": "79cdd66f16a85be13b1080b295f4170c688d575b6ee4c9914fbf272ccd4dd561",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v71-qa-scope/register.json",
       "published_at": "data_mirror/v71-qa-scope/register.json",
       "published_sha256": "b0d136decd0dc4d5177fa2c404648d482e79e317859f306dca056d70f4d975f7",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v72-prune-repeat/freeze.json@live": {
       "frozen_sha256": "3f4e45d0bd505b7d65815f2246a5c3b343f3a49be465aedf724aaa208b0de8b9",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v72-prune-repeat/freeze.json",
       "published_at": "data_mirror/v72-prune-repeat/freeze.json",
       "published_sha256": "8e93f7d56cbc236ade10ce00ae3cf3f48a83def850d8d5414a2ba4c31b97bbf5",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v75-distill-audit/summary.json@live": {
       "frozen_sha256": "f372b4d6a0bc4f55f7bae8d70a6d03cc6754bddd9e0d0d354d4f4cbfa5fa7230",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v75-distill-audit/summary.json",
       "published_at": "data_mirror/v75-distill-audit/summary.json",
       "published_sha256": "5209eedd401d62a6d46ebe7f5497a18074f089c0ca8cd769d29630945ee9a0dc",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v75-distill-audit/summary.md@live": {
       "frozen_sha256": "3adf5dfdb710569cf9cb2051ecb467b13a7b358c2ed83ef1562539993df2a59a",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v75-distill-audit/summary.md",
       "published_at": "data_mirror/v75-distill-audit/summary.md",
       "published_sha256": "413319c3fe4346fe6a417d7a843fca84fea1125fb25676bdaa3ecb14f21a7fd2",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v76-cap-conditioning/summary.json@live": {
       "frozen_sha256": "58467f045fd0d8296ad85b256d05175deac76a3a0f9c312b6af372127c2b3423",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v76-cap-conditioning/summary.json",
       "published_at": "data_mirror/v76-cap-conditioning/summary.json",
       "published_sha256": "b7a3df00b1424c804de32d6ba373408f292b5a680c18455c5558f46ed871e1a8",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v76-cap-conditioning/summary.md@live": {
       "frozen_sha256": "79954020d52d9a93e5338d353b3c45743b1479250054e968e3bf72d825624605",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v76-cap-conditioning/summary.md",
       "published_at": "data_mirror/v76-cap-conditioning/summary.md",
       "published_sha256": "18ea2094c0d3939c1eaa9d91e9310f6c0fa287709fb8bb3903cacf8ff388676a",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v77-model-arch/model_arch.json@live": {
       "frozen_sha256": "3fc08ed204ddc39583f7f7fba82345f95f6bfe71380355b7529625b074abf242",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v77-model-arch/model_arch.json",
       "published_at": "data_mirror/v77-model-arch/model_arch.json",
       "published_sha256": "401e474ef21d239f82164fd096842688a13bbe59078b01595f86acd68246bb17",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v77-model-arch/summary.md@live": {
       "frozen_sha256": "528012fcb45ae5f65604d5767f435eceab985bb389126e2548445bf492c3f5ad",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v77-model-arch/summary.md",
       "published_at": "data_mirror/v77-model-arch/summary.md",
       "published_sha256": "3ea3079d50149a5b617ad0b4c1841934d0a07320ded4750e8921aa67cd19a738",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v77-model-arch/weight_identity.json@live": {
       "frozen_sha256": "a74c4e08c9a4d9d9a37cd8547f571d19ba853596eaabef151e5ac4c3369e9031",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v77-model-arch/weight_identity.json",
       "published_at": "data_mirror/v77-model-arch/weight_identity.json",
       "published_sha256": "a48a4b7921251752496c4e9c1ae224f40de1901028ab5a7bffdbe034d718e3c9",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v78-rule-confirm/plan.json@live": {
       "frozen_sha256": "534f6037baedf888cbaac22d28faaa37cd425f00772a7bf03dd481f46462d566",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v78-rule-confirm/plan.json",
       "published_at": "data_mirror/v78-rule-confirm/plan.json",
       "published_sha256": "26dac0804da34944d45808492ae7c5c11a8907989723f2d77468424ab6549554",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v78-rule-confirm/verification.json@live": {
       "frozen_sha256": "eeacaa150c5458ffba9f225ccccd04455504b3322f1e4bfeeb6dbf41d4368d23",
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v78-rule-confirm/verification.json",
       "published_at": "data_mirror/v78-rule-confirm/verification.json",
       "published_sha256": "e89e9cbcb08c07cc7fdbf7cc36a095671c908bf6c7b41856e6182155d040ec87",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v79-cond-audit/summary.json@live": {
       "frozen_sha256": "b9413f016177bcc7e7d1d5e65406ee53cec64cb27d14e22ccac669d1402d140b",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v79-cond-audit/summary.json",
       "published_at": "data_mirror/v79-cond-audit/summary.json",
       "published_sha256": "733433a2ef2e7fee99a02ba4c8f4d4a5ca481a6962e85b6fa3ddf57b34a09cc4",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v79-cond-audit/summary.md@live": {
       "frozen_sha256": "9b7e04a6e12e77c2de74688c4467669a9843af1ae5225e8e9427a3213de482ee",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v79-cond-audit/summary.md",
       "published_at": "data_mirror/v79-cond-audit/summary.md",
       "published_sha256": "63f42207fcabeef7cb96a6146f92bb3553731c30f8b5354a5f64df0d0d938234",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v81-rule-labels/summary.md@live": {
       "frozen_sha256": "69295bee705735258e0315681e8cf2222c989469656971dc6d44d3f121a2bd3f",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v81-rule-labels/summary.md",
       "published_at": "data_mirror/v81-rule-labels/summary.md",
       "published_sha256": "54a467414bfbe779f3f98a832cb10df493067e962eee80015ed3c3eadfbcb444",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v85-selection-decomp/summary.md@live": {
       "frozen_sha256": "8efd910b925f1202edb6e3853de2d5ce93da6b70e9837640f19bb5a397466a3f",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v85-selection-decomp/summary.md",
       "published_at": "data_mirror/v85-selection-decomp/summary.md",
       "published_sha256": "d1cfc5c046fdf1e127787934c6e2c8f1b40f6a381ca5c3f456312d74a1c0f0ec",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g128.json@live": {
       "frozen_sha256": "9aa7880a1892db96d47523e8d130c8b38bfdbaf7f2c954763c2c2198e2881960",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g128.json",
       "published_sha256": "49fe7fe02847bea0ec080cb0badde82d592695bbaf4b226760650f2e25dfb30d",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g128.json@live": {
       "frozen_sha256": "17593e2bd122553430890a7567f80f5108950a5cfadc1436dce407783316c84b",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g128.json",
       "published_sha256": "2a444cafe2cfa8ab8563141f03ac3ab95f807bd9bdd572c221394ebd2e9a80c6",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g128.json@live": {
       "frozen_sha256": "d9d87541d6beb08424dbfc26eee7f7203fe9ec88731023180aab6201177b5d59",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g128.json",
       "published_sha256": "75e06d5aed8a5b7effc8720f78fc2f16b8977fdf787540bfe6f8a089da0bff87",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.6.json@live": {
       "frozen_sha256": "c3bb05e0c2db17e26d638d350f91a752aacc4384259d78c5a654145ae1860a78",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.6.json",
       "published_sha256": "2ecf2fe035d26e2a7859ddb69ccb8f6ecf5eb0841979e27041368b1df100f299",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json@live": {
       "frozen_sha256": "6287228afb99e648391c8b6356e16eb430ecff3bff85b668b9259b0414d4bcc4",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json",
       "published_sha256": "7d57c4e8c61566495a4eb077d4cd218017ef5ade3d840f43f652250ee08801f0",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.8.json@live": {
       "frozen_sha256": "0dcc038a10b57d95b469eb822950f298fe5cc867d8e0ae9bc5fdad468d230fe4",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.8.json",
       "published_sha256": "f35f3270f00fdcae1f12149e9032410cbabd2fe85accf38f2e8b19024ea24480",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json@live": {
       "frozen_sha256": "ed6753ac50565861b297b39df6e43838801c625dd0826e03199feaedd73f3a62",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json",
       "published_sha256": "0f861b05bd32a0c76641c3ff453beef994ae3d17e4b48c7186f632ef1043479b",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g128.json@live": {
       "frozen_sha256": "0f285e7cceb536cf6e972f037b277baf60a4f828cdfedf51989822a60354ad64",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g128.json",
       "published_sha256": "690632da2b56d0588cec1e2ee3bd8c5d30455b89c4bba6faf0b0387758abe1e0",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g128.json@live": {
       "frozen_sha256": "40cbd34666720eb607e59e8bc12191c03e698dd0ab8d77467fcac1459693ea6c",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g128.json",
       "published_sha256": "bc20727e505443ae5ed67630d3ce1e9486f368665f1cf33b894a1791925c506e",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g128.json@live": {
       "frozen_sha256": "6483d9a208b3753c002904e2aff00202c1184651d340cf26b239e08d82c14931",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g128.json",
       "published_sha256": "16dddb6307b3bcc6a95d776845c35651d28eef3eb6b102eda5082ce1b63a6b37",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json@live": {
       "frozen_sha256": "aa93cca18705ac37f31dc59d1c45b7038e18c57a92bb343e3122ca405aea68f8",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json",
       "published_sha256": "cc3c282713fd2e260e7026080b2ea59f588ed3f1e0eaaf210c41db0b5fe2151a",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.7.json@live": {
       "frozen_sha256": "f89790c1258e61c4e14e23f84e87ca73f0f3a4a608f9da874cb9f3514e6f0d71",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.7.json",
       "published_sha256": "f3c8dcfb97b19f8617043465238bcaecf6b1afe0e559543aafd8ac4f2848b1b3",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json@live": {
       "frozen_sha256": "f88ecc4caa2d1e59afa7190bd559089bb8f590718eb05dbab1a1f06218baf916",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json",
       "published_sha256": "a762da9ce96f231080f9ee7d169c89b69036b8957a93cb61e3faa29a193c6d86",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.9.json@live": {
       "frozen_sha256": "6e38b5798318dc6fb0d2ee05af059a7a212b61f94819ced0740ccdf8bbb11be2",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.9.json",
       "published_sha256": "d9aa5178feb45a8f42362d49464f89ffd3b441f066ba467abcfd7a647ffb1040",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/b3_g128.json@live": {
       "frozen_sha256": "42232a03b181d1b29a1bfbfde3b8c8f08377144186e1fceb8f171b78a96cc5a6",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b3_g128.json",
       "published_sha256": "bd589d19210ac057f0b32f775be6ed638eee313be45163445bce8a372d0594d6",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/b4_g128.json@live": {
       "frozen_sha256": "fe28284a9ef4476028bf22aa4e80cba1436bc43c2670d97726eedfac786f5f1b",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b4_g128.json",
       "published_sha256": "7f3172f4b930ab0d189814f596f06082c2b2e1db72bf6c0085c10e3a9e94cc4b",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/b5_g128.json@live": {
       "frozen_sha256": "578b21bb710490e5472d35c095af7d2e74988033a5a9ad4d0215ee0816c1dacf",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b5_g128.json",
       "published_sha256": "74f8410c4f9b58ec62a1aeb016be5e65a5b883cd9d99630cb21ab8358481ce34",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.6.json@live": {
       "frozen_sha256": "8a75b64e5418f11d324da61c161da83320a5e2fe4c9de9a0407413cbd9454ad7",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.6.json",
       "published_sha256": "d2420605a06331957d2e3af664a6fdca1ee409289b426569cf72c4641145a9a6",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.7.json@live": {
       "frozen_sha256": "589c795aeca292bef85c626bfc712037ff3f63baf04b311540dcbf01bf14daf3",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.7.json",
       "published_sha256": "99237f6a78cf7c9959fbf8b8003eb0def624ea67b4bbcd9e6dc24148bba5ac87",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.8.json@live": {
       "frozen_sha256": "12584b96aeb37a9fd097e12578d2b3f150807851f5218674c89741f4830d602d",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.8.json",
       "published_sha256": "0485503901a69dead0faf0a2f67840c887057396a160e222f77e8430260e2fd2",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.9.json@live": {
       "frozen_sha256": "5b12203a7c59c5fea1c820c200a11a020c37cbc2d06a5a27bfe57a57ca6fa985",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.9.json",
       "published_sha256": "c4387e89d2e4ad543a0bb0a62c1ba81ef80f79922c13d954cc628135a59d6112",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/b3_g128.json@live": {
       "frozen_sha256": "7270ca4f68021662670dc7b2d2a51794a1f57f27f43340a59e5d58d3a964fd4c",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b3_g128.json",
       "published_sha256": "7f1f9e03691d4714476f82c1f1e23c94180b646fad2d0b460887d739b213f071",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/b4_g128.json@live": {
       "frozen_sha256": "be961580b8dddb6e49b8447d56d03817c9dbd47f097bb1ec84e33a3b2ff1bee6",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g128.json",
       "published_sha256": "3720664442dab8de7aecd0ed9db9d1bbde5aef8e77b06ba671ff7943913b70a8",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/b5_g128.json@live": {
       "frozen_sha256": "ee489c7aa0b6d9d06a465d8e05f1ca277e5314e0f1ed19d590f5c8fed0bededd",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b5_g128.json",
       "published_sha256": "42645269c2a1df0c880db07a26bcc75d224ce8066eea46d6b4d75a92b29fbee7",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.6.json@live": {
       "frozen_sha256": "fe36abe78cfae4cc3458c851f85835211231e35ce2f0c6bc0d06d81e5c8d944a",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.6.json",
       "published_sha256": "1db8f1321db2ebf5ede3ceaa3f5b44b90540448df5e15daebdc20a734d04d590",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.7.json@live": {
       "frozen_sha256": "7b4fee4f80da12f4be6a2eb053a4785b6ae6dc0c766e00f45cda2058ce2b1a63",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.7.json",
       "published_sha256": "16f3d37d02a5ea6e3c49c986889c8f8e6ef9f585b09e700c7e4fac05a46abd2c",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.8.json@live": {
       "frozen_sha256": "706a7c59c3733b29fa992672ed46792ca2a7daba356c60e03a991ae5208f5ebf",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.8.json",
       "published_sha256": "755ca8a7a39027c861b14f2464facb06fd3c77eec0d13dcbaf360e4e5ea940ec",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.9.json@live": {
       "frozen_sha256": "c37529c056e13c2d85050cb967c2da81587f8a7a171e3629c979d2e306227fb8",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.9.json",
       "published_sha256": "e70cda8c314628cc2f6350b91c6f9da8a13580beee8bf0abe7125c8106cc2fd9",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/b3_g128.json@live": {
       "frozen_sha256": "f618d664e73389c7b47db3e33dae61d44f42be88ce9e6cf7cfb7ad7cd966fb49",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b3_g128.json",
       "published_sha256": "89707b83bbfd7f46c54bf403b843e2da87a4f3b7424c1a813cbf39a7e2a22f8e",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/b4_g128.json@live": {
       "frozen_sha256": "513954a1b5f111f30143e31d20d680e9a1e15d09369a1b6f79d4f39581260d49",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b4_g128.json",
       "published_sha256": "1ae39d9038955e98854ce992c7919ccaf09e62f66b541a6c3c4991e7ceafaeb5",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/b5_g128.json@live": {
       "frozen_sha256": "69db087b10a1b8b437676b04e8937220ee509916e9f5c8dee435a8734fc5d1f5",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b5_g128.json",
       "published_sha256": "2a44bfe518716b5aa9354eaa072e176b72359d48893baa63491af47f6f2c1474",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.6.json@live": {
       "frozen_sha256": "33bacc6d994fe8ef3f9a7da7d5041484a1dd5ecb9e4f6e38fe5ba0e7b9ac622d",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.6.json",
       "published_sha256": "54671b103589546aea2ce7beea20405a69fa4f0b003c5cb6f4de121f38bbd2d7",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.7.json@live": {
       "frozen_sha256": "50e234e08b96cedd11edf10b442a07002700a2f674d25909fe7504397e0a510e",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.7.json",
       "published_sha256": "e7cc0526cfc623475dd0f2c1a928fb98d9c738fb2ce7d5b7bcf131d7bf5c584a",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.8.json@live": {
       "frozen_sha256": "6d98c299957e40a2c8c74d1cb28194d5eb12f19cb30f42f3c047e2c88facc5aa",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.8.json",
       "published_sha256": "dbb34bbacf16079dc93f9cb4a7931cf919684fb91f9082d449cd3a2b24f66300",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.9.json@live": {
       "frozen_sha256": "bc83b47e4b4a4ba84e542c5cc13ef3b9e9b64d6cba14fb7b4118ecfe1a2f5334",
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.9.json",
       "published_sha256": "f315dcad2fb0e80e21ef8077027f5f5cd0d325ca0b2ed3f9c7cf3c06ce6db922",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json@live": {
       "frozen_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
       "published_at": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
       "published_sha256": "f8c4182ad1591e2249aa73487a8da11fba53d2e515beee1fb3dbd1bfd1c643ab",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json@live": {
       "frozen_sha256": "eafc51455ab51bc32a046ca3ea32cf54b2e889cad75229d80593c05c4086c9df",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
       "published_at": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
       "published_sha256": "4ee4f65ddefecb81d6d8dc5b436d6ad27e984039a7bc2ea52b5421124b4b1a30",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json@live": {
       "frozen_sha256": "989bc2130600d71e70bb363c9d8f4da1bfaabe601a5029584eae366e48baf788",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
       "published_at": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
       "published_sha256": "8d0138eb9f4c42b2855a9ebc92beb5d1cc71225ffa97b96da172865710e2cb0c",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/gemma3-1b/quant_losses.json@live": {
       "frozen_sha256": "096bf1004f8fa90ecd0d2af3f1af6ba36d96eeb82dbef13e7d7096e008c6f898",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/gemma3-1b/quant_losses.json",
       "published_at": "results/v10-quantization/gemma3-1b/quant_losses.json",
       "published_sha256": "382840025bd3e7f2e898224d55c4edbca80007e85dc2435befe85d992c5eb0e5",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/gemma3-270m/quant_losses.json@live": {
       "frozen_sha256": "26948f124e3aa77a7748495891879bf4e0a1f3998d2337d162c77c1b22ba2db7",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/gemma3-270m/quant_losses.json",
       "published_at": "results/v10-quantization/gemma3-270m/quant_losses.json",
       "published_sha256": "e2e40398a252e67a68c0c34079c5b3fd8e8230f9e79b2c2e326f800b94cfd043",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/gemma3-27b/quant_losses.json@live": {
       "frozen_sha256": "12f2f913190fe4b09276b9698c637671aa1c2455506133b1d8e8634d4b360203",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/gemma3-27b/quant_losses.json",
       "published_at": "results/v10-quantization/gemma3-27b/quant_losses.json",
       "published_sha256": "725928559a38f7ba390eb69cc51733fb6371fec004c00f508477dded720285f9",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/gemma3-4b/quant_losses.json@live": {
       "frozen_sha256": "8740ee0ab725930038b5023954c11eb0e0d396544f915ab7a2e73d80006cd4b4",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/gemma3-4b/quant_losses.json",
       "published_at": "results/v10-quantization/gemma3-4b/quant_losses.json",
       "published_sha256": "783db810bf314a8f93cb9d98b7eaa9832130c72d34f45156ab88a18ee31e95dc",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/muse-30b/quant_losses.json@live": {
       "frozen_sha256": "b25f4a4d4edc4951f453a22c7e10b5c25053e0c0cece3c4bb6e48f6319d8c3ee",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/muse-30b/quant_losses.json",
       "published_at": "results/v10-quantization/muse-30b/quant_losses.json",
       "published_sha256": "4a0da76a2388995a1e46138693f237cb8c94dc51c963102c894a6f9601ae4017",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v10-quantization/olmo3-7b/quant_losses.json@live": {
       "frozen_sha256": "8f65951d747f13cd06029cdaa505397017d9f85f93bcd3279ab01982a182cb9c",
+      "pairable": false,
       "path_in_frozen_record": "results/v10-quantization/olmo3-7b/quant_losses.json",
       "published_at": "results/v10-quantization/olmo3-7b/quant_losses.json",
       "published_sha256": "4ebc8ac4839a96739a1bc1598ad8c78c5f2f0cc0dbf05f2279fbec8a61e5059c",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/adapter/adapter_config.json@live": {
       "frozen_sha256": "c5eb99703443f320b190a6de1d38a6449e9e90f0830930dca58a2ab95f39bb78",
+      "pairable": false,
       "path_in_frozen_record": "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/adapter/adapter_config.json",
       "published_at": "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/adapter/adapter_config.json",
       "published_sha256": "6d5ce79e27858b07c23782145ca809a09d28af5bebe62134d41f503501692d7e",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/train_log.json@live": {
       "frozen_sha256": "426aa303fcad9806aa88e946d4afcb9dd556032ec822a1de0c5b46e20c146e49",
+      "pairable": false,
       "path_in_frozen_record": "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/train_log.json",
       "published_at": "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/train_log.json",
       "published_sha256": "53f014aaf988d339f38872f5b25bbbfe1d10ab1bb6e21fc559c5c398d7384c86",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/adapter/adapter_config.json@live": {
       "frozen_sha256": "e62d81e8cb8dc964765b1a8123b765f4474e78bd9ffdcab1a113d55b265e8f44",
+      "pairable": false,
       "path_in_frozen_record": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/adapter/adapter_config.json",
       "published_at": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/adapter/adapter_config.json",
       "published_sha256": "661a3f8df4b045ef95cd65b1d7b1b4a5996d7093c4244aa206a18dd6d80002e7",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/train_log.json@live": {
       "frozen_sha256": "90ee56f3d3cddf48e327bbca0c7966635c7665384aa34d6531a9ee623e99e3df",
+      "pairable": false,
       "path_in_frozen_record": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/train_log.json",
       "published_at": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/train_log.json",
       "published_sha256": "ae298146d7cb9aee8aa506cdab34695b177ad65764023ac949a5ca0ed07b6370",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json@live": {
       "frozen_sha256": "fae21cb4eb0af935a3cedff97457916bd63dd6d8e340f5f6b367bc194485530d",
+      "pairable": true,
       "path_in_frozen_record": "results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json",
       "published_at": "results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json",
       "published_sha256": "57b7304d6f753e7624b145aaf0e7a4edf5943814d1d87e42b78e707e71617e47",
@@ -604,6 +682,7 @@
     },
     "results/v13-recovery/gemma3-270m/quant_3_traces/recovery.json@live": {
       "frozen_sha256": "ad0519895e916a0ff2221071983b4933b3a850dc00a60557d07b007f05a96820",
+      "pairable": true,
       "path_in_frozen_record": "results/v13-recovery/gemma3-270m/quant_3_traces/recovery.json",
       "published_at": "results/v13-recovery/gemma3-270m/quant_3_traces/recovery.json",
       "published_sha256": "f3244b70a4430de7edc08133bf26cf1f0f65c9427e7cb7ebe229f7750e05fcc1",
@@ -611,34 +690,39 @@
     },
     "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json@live": {
       "frozen_sha256": "04b703c90611f6bf0a1244c186e5118892ff2e643624a39cf4f39e1cc51db7b7",
+      "pairable": false,
       "path_in_frozen_record": "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json",
       "published_at": "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json",
       "published_sha256": "16b7b8ea340a40ad501e599f50350b70de956c93d7c36f274c22a06c482c74d0",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v6-capability-geometry/gemma3-1b/prune_losses.json@live": {
       "frozen_sha256": "76642de5ce8c2b1b9c41288eda024a1a69ee5f2c5b5af570e9730f898e34e1d6",
+      "pairable": false,
       "path_in_frozen_record": "results/v6-capability-geometry/gemma3-1b/prune_losses.json",
       "published_at": "results/v6-capability-geometry/gemma3-1b/prune_losses.json",
       "published_sha256": "1384b55012b5801621b5f05776144fa8110ada39c1c0ae67778203e90dda962e",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v9c-ablation/gemma3-1b/ablation.json@live": {
       "frozen_sha256": "a4117b27ebef394947141b8ec5a57e8d36cd024d45b52320d454e49d63327d51",
+      "pairable": false,
       "path_in_frozen_record": "results/v9c-ablation/gemma3-1b/ablation.json",
       "published_at": "results/v9c-ablation/gemma3-1b/ablation.json",
       "published_sha256": "ebc36533c7d1457f36ee8aeaaa270906e57c33e79fd2804307f0a9452b46ca98",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "results/v9c-ablation/gemma3-1b/report.md@live": {
       "frozen_sha256": "a8900a0cbca5d2dfdcb16de768b5645eae36e460e7440a30ec4ca8fb92780084",
+      "pairable": false,
       "path_in_frozen_record": "results/v9c-ablation/gemma3-1b/report.md",
       "published_at": "results/v9c-ablation/gemma3-1b/report.md",
       "published_sha256": "e09a596c2c72179058888d494daa9dfa930f2c60ea101ca95ff17fb008dfdb99",
-      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "scripts/run_v71_after_v70.sh@live": {
       "frozen_sha256": "9489e8c4ace429ab45ffb22360b79679da85d1b65da7422101212590f559c512",
+      "pairable": true,
       "path_in_frozen_record": "scripts/run_v71_after_v70.sh",
       "published_at": "scripts/run_v71_after_v70.sh",
       "published_sha256": "4a31e1298975f7a587f91e608f7bf9d6a4a887595a16bbfb1f19fc7e9218d654",
@@ -646,6 +730,7 @@
     },
     "scripts/run_v72_after_v71.sh@live": {
       "frozen_sha256": "6f649f765e70ed00ee416e3b3b9a4a5bcfca7db29b4bfa36acf96e3ed68b8b4d",
+      "pairable": true,
       "path_in_frozen_record": "scripts/run_v72_after_v71.sh",
       "published_at": "scripts/run_v72_after_v71.sh",
       "published_sha256": "6d98e4c67e5961481894b85798683050af51c920d418f1f3984d8544c6554f48",
@@ -653,6 +738,7 @@
     },
     "tests/test_pythia_revision.py@live": {
       "frozen_sha256": "559e26517afc88f309cf0443bf002cad825ea449aee6e85a1ec15e4c2d1eff3b",
+      "pairable": true,
       "path_in_frozen_record": "tests/test_pythia_revision.py",
       "published_at": "tests/test_pythia_revision.py",
       "published_sha256": "465c5a5860c468d7736d77ca547ff325fe0e459e54c194598e56ec5c2fa301c4",
@@ -660,6 +746,7 @@
     },
     "tests/test_registry.py@live": {
       "frozen_sha256": "5fc990facb3cf1d3f8211aeace4e30647c6644b13c4baa58106d10fd54268a2f",
+      "pairable": true,
       "path_in_frozen_record": "tests/test_registry.py",
       "published_at": "tests/test_registry.py",
       "published_sha256": "b75ae25d736bd85fd24ebabd266ff123efb4e4984f01065c1cafa6e2037d5498",
@@ -667,6 +754,7 @@
     },
     "tests/test_v23_loss_validity.py@live": {
       "frozen_sha256": "edd01cd295ebc2cbeef15c15769f31c7661622086784eac7c82e95994845aca2",
+      "pairable": true,
       "path_in_frozen_record": "tests/test_v23_loss_validity.py",
       "published_at": "tests/test_v23_loss_validity.py",
       "published_sha256": "f83c496d3e95251ef494517ae1c45c50025898f63039d92bf81781feaac9164d",
@@ -674,6 +762,7 @@
     },
     "tests/test_v27_scoring_and_units.py@live": {
       "frozen_sha256": "19a8d1c8b1ac19b8c5b09c97d7f46117ba77574d3084e81e092392fcaa4e9ece",
+      "pairable": true,
       "path_in_frozen_record": "tests/test_v27_scoring_and_units.py",
       "published_at": "tests/test_v27_scoring_and_units.py",
       "published_sha256": "8cb806eb28388564b4734fce92b562c7b192ed716584567bf098743fd867d0b2",
@@ -681,11 +770,12 @@
     },
     "tests/test_v32.py@live": {
       "frozen_sha256": "1b793ac5fe951c4e74a076100b96f9dc2695b5aa6c557e21fe647f1a3c7cf9d7",
+      "pairable": true,
       "path_in_frozen_record": "tests/test_v32.py",
       "published_at": "tests/test_v32.py",
       "published_sha256": "260a4168b80273e90fdc05c730cd10553fcf8e4cb433dc07c3dc4d9d951d87dc",
       "reason": "anonymisation of author, host, institution or path strings"
     }
   },
-  "what": "How published files relate to the digests frozen records name. A frozen record names frozen_sha256; the file published here hashes to published_sha256. The reason field says why. No measurement value and no analysis logic was changed by either kind of edit."
+  "what": "How published files relate to the digests frozen records name. Only entries with pairable=true are accepted by analysis/provenance.py; those are the ones where anonymising the working-tree original reproduces the published bytes exactly. A frozen record names frozen_sha256; the file published here hashes to published_sha256. The reason field says why. No measurement value and no analysis logic was changed by either kind of edit."
 }
