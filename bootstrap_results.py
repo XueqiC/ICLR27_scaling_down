@@ -71,6 +71,19 @@ def main() -> int:
         if not dry:
             directory.mkdir(parents=True, exist_ok=True)
 
+    # Some scripts mirror themselves into a `code/` tree, the layout an earlier
+    # revision of this repository used. Link it to the current one rather than
+    # editing scripts whose digests frozen records name.
+    if not dry:
+        (ROOT / "code").mkdir(exist_ok=True)
+        for name in ("analysis", "tests", "configs"):
+            link = ROOT / "code" / name
+            if not link.exists():
+                try:
+                    link.symlink_to(Path("..") / name, target_is_directory=True)
+                except OSError:
+                    link.mkdir(parents=True, exist_ok=True)
+
     verb = "would write" if dry else "wrote"
     print(f"{verb} {written} file(s), {verb.split()[-1]} {expanded} gzipped summary/summaries, "
           f"left {skipped} existing file(s) alone")

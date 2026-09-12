@@ -325,9 +325,9 @@ def build(inputs):
         "outputs": {"summary_json": "results/v79-cond-audit/summary.json",
             "summary_md": "results/v79-cond-audit/summary.md",
             "staged_table": "results/v79-cond-audit/paper/paper/tables/cond_audit.tex",
-            "staged_code_mirror": "results/v79-cond-audit/paper/analysis/v79_cond_audit.py",
+            "staged_code_mirror": "results/v79-cond-audit/paper/code/analysis/v79_cond_audit.py",
             "requested_table_destination": "paper/paper/tables/cond_audit.tex",
-            "requested_code_destination": "paper/analysis/v79_cond_audit.py",
+            "requested_code_destination": "paper/code/analysis/v79_cond_audit.py",
             "paper_destination_status": "Staged under results to obey explicit write-only scope, as in V76/V77."}}
 
 
@@ -463,7 +463,7 @@ def markdown(result):
         "scale code evidence, and complete scores are recorded in `summary.json`.", "",
         "Paper artifacts are staged under this results directory to obey the explicit write-only boundary:", "",
         "- [Table, with `[H]`](paper/paper/tables/cond_audit.tex), for `paper/paper/tables/cond_audit.tex`.",
-        "- [Byte-identical code mirror](paper/analysis/v79_cond_audit.py), for `paper/analysis/v79_cond_audit.py`.",
+        "- [Byte-identical code mirror](paper/code/analysis/v79_cond_audit.py), for `paper/code/analysis/v79_cond_audit.py`.",
         "- No files in the top-level paper tree are changed; no commit is made.", ""]
     return "\n".join(lines)
 
@@ -557,7 +557,7 @@ def main():
     outputs = {OUT / "summary.json": (json.dumps(result, indent=2, allow_nan=False) + "\n").encode(),
                OUT / "summary.md": markdown(result).encode(),
                OUT / "paper/paper/tables/cond_audit.tex": latex(result).encode(),
-               OUT / "paper/analysis/v79_cond_audit.py": script}
+               OUT / "paper/code/analysis/v79_cond_audit.py": script}
     inputs.verify()
     require(before == tree_hashes(ROOT / "results/v76-cap-conditioning"), "V76 tree changed during audit")
     for path, raw in outputs.items():

@@ -38,12 +38,12 @@ for arm, label in (("pruning", "pruning"), ("quantization", "quantization")):
 v38 = J("v38-prospective/compare.json")["arms"]["pruning"]
 add("source", "pruning", "new stage 96k on 160M and 1.4B, all measured $d$", "stage 96k (interpolation between 64k and 143k)",
     "config-indicator OLS $\\{N_0,L_0,D_0\\}$", {c: v38[c]["mae_full_N0_D0_L0"] for c in CAPS}, {c: ("noD0_N0_L0", v38[c]["mae_noD0_N0_L0"]) for c in CAPS},
-    {c: ("config_median", v38[c]["mae_baseline_config_median"]) for c in CAPS}, "P·F·R·A", "v38-prospective/compare.json", "4e0bf2c", "8 cells per capability")
+    {c: ("config_median", v38[c]["mae_baseline_config_median"]) for c in CAPS}, "P·F·R·A", "v38-prospective/compare.json", "4e0bf2c (analysis repo)", "8 cells per capability")
 v44 = J("v44-quant-partition/summary.json")["partition"]
 for reg, lab in (("ge4", "$b\\ge4$ (near-zero regime)"), ("int3", "int3 (collapse regime)")):
     add("source", "quantization", f"new stage 96k on 160M, 410M, 1.4B; {lab}", "stage 96k (interpolation)", "config-indicator OLS $\\{N_0,L_0,D_0\\}$",
         {c: v44[f"{c}_{reg}"]["cand_mae"] for c in CAPS}, {c: None for c in CAPS}, {c: ("per_bit_median", v44[f"{c}_{reg}"]["median_mae"]) for c in CAPS},
-        "P·–·R·A", "v44-quant-partition/summary.json", "4e0bf2c + 20542e2", "3 sources")
+        "P·–·R·A", "v44-quant-partition/summary.json", "4e0bf2c + 20542e2 (analysis repo)", "3 sources")
 v39 = J("v39-distill-controlled/summary.json")["by_cap"]
 add("source", "distillation", "$\\delta_c$ source transfer: $3\\times3$ LoRA panel, leave-one-step-out", "held-out pretraining stage (in-range)",
     "linear $\\{N_0,L_0,D_0\\}$", {c: v39[c]["step"]["mae_D0"] for c in CAPS}, {c: ("noD0_N0_L0", v39[c]["step"]["mae_noD0"]) for c in CAPS},
@@ -53,7 +53,7 @@ v42 = J("v42-prune-sameinput/summary.json")["by_cap"]
 m = {c: v42[c]["mae"] for c in CAPS}
 add("config", "pruning", "unseen $d$ 0.65 and 0.55, dev sources + 410M@96k", "densities 0.65 (interp.) and 0.55 (extrap.) pooled",
     "shared power $A_c(\\mathbf x)((1-d)/0.3)^{\\gamma_c}$", {c: m[c]["cand"] for c in CAPS}, best(m, ("A1", "A2")), best(m, ("so", "med", "zero")),
-    "P·R·F·A", "v42-prune-sameinput/summary.json", "20542e2", "24 points")
+    "P·R·F·A", "v42-prune-sameinput/summary.json", "20542e2 (analysis repo)", "24 points")
 v46 = J("v46-p1-newsource/compare.json")
 def pool(rows, keys):
     out = {c: {} for c in CAPS}
@@ -65,14 +65,14 @@ for d, lab in ((0.65, "$d=0.65$ (interp.)"), (0.55, "$d=0.55$ (extrap.)")):
     p = pool([r for r in v46["pruning"] if abs(r["d"] - d) < 1e-9], ("power", "A2", "A1_gamma1", "strength_only", "median_curve", "zero"))
     add("config", "pruning", f"new source 1B@96k, {lab}", "in-range size; stage 96k",
         "shared power (frozen v40)", {c: p[c]["power"] for c in CAPS}, best(p, ("A2", "A1_gamma1")), best(p, ("strength_only", "median_curve", "zero")),
-        "P·F·F·A", "v46-p1-newsource/compare.json", "b1bf631", "1 source-state", main=False)
+        "P·F·F·A", "v46-p1-newsource/compare.json", "b1bf631 (paper repo)", "1 source-state", main=False)
 for b in (4, 3):
     p = pool([r for r in v46["quantization"] if r["bit"] == b], ("full_N0_L0_D0", "noD0_N0_L0", "per_bit_median", "zero"))
     add("config", "quantization", f"new source 1B@96k, int{b}", "in-range size; stage 96k; seen bit", "config-indicator OLS $\\{N_0,L_0,D_0\\}$",
         {c: p[c]["full_N0_L0_D0"] for c in CAPS}, {c: ("noD0_N0_L0", p[c]["noD0_N0_L0"]) for c in CAPS}, best(p, ("per_bit_median", "zero")),
-        "P·F·F·A", "v46-p1-newsource/compare.json", "b1bf631", "1 source-state", main=False)
-for size, lab, unseen, fz in (("1b", "1B@32k+112k", "in-range size; stages 32k, 112k", "cd9ed8f"),
-                              ("6.9b", "6.9B@32k+112k", "size $5\\times$ beyond dev range; stages 32k, 112k", "950312f")):
+        "P·F·F·A", "v46-p1-newsource/compare.json", "b1bf631 (paper repo)", "1 source-state", main=False)
+for size, lab, unseen, fz in (("1b", "1B@32k+112k", "in-range size; stages 32k, 112k", "cd9ed8f (paper repo)"),
+                              ("6.9b", "6.9B@32k+112k", "size $5\\times$ beyond dev range; stages 32k, 112k", "950312f (paper repo)")):
     files = sorted(glob.glob(str(R / f"v49-p1v2/compare_pythia-{size}@step*.json")))
     if len(files) != 2: continue
     A = [json.loads(Path(f).read_text())["protocols"]["A"] for f in files]
@@ -89,7 +89,7 @@ for size, lab, unseen, fz in (("1b", "1B@32k+112k", "in-range size; stages 32k, 
 v41 = J("v41-distill-newpool/summary.json")["by_cap"]; m = {c: v41[c]["mae"] for c in CAPS}
 add("config", "distillation", "unseen pool U225 from endpoint pools U75/U600 (Gemma-3-1B)", "pool (reuse count in-range; sampling protocol differs)",
     "$E$-only (reuse count)", {c: m[c]["E"] for c in CAPS}, best(m, ("T", "2D")), {c: ("constant", m[c]["constant"]) for c in CAPS}, "P·F·F·A",
-    "v41-distill-newpool/summary.json", "0bbbaa8", "6 runs (3 pools $\\times$ 2 seeds)",
+    "v41-distill-newpool/summary.json", "0bbbaa8 (analysis repo)", "6 runs (3 pools $\\times$ 2 seeds)",
     note="per-capability recommendation (E for QA, constant for math/code) is a post-test selection")
 # Match v62_p2v2_test_table.py: average summary rows within (student, role, cap).
 v50_freeze = J("v50-p2v2/freeze.json"); v50_test = J("v50-p2v2/compare_test.json")

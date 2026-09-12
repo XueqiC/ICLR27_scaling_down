@@ -1,5 +1,50 @@
 {
   "files": {
+    "analysis/model_registry.py": {
+      "anonymized_sha256": "106f0befbe97ef68e3ff7943f54072235bcf5862aadb7a7c1d296d2de28fb9ae",
+      "original_sha256": "64075b24d26325832f466d3797ec4d3def91c704e3195e51715dba6d6165a4b9",
+      "substitutions": 40
+    },
+    "analysis/ref_fetch.py": {
+      "anonymized_sha256": "934718f6fc28e1ab850a7914dca9d2707d2929afc1173a01b4ca9bbec91a09f1",
+      "original_sha256": "8c1a84e2ec5621da227e12ce513e51e6037a36ef6b07faa5dd36c72c227eea1f",
+      "substitutions": 1
+    },
+    "analysis/v1_recipe_strat.py": {
+      "anonymized_sha256": "fb11c7f2476edfd9ac1d8246ef313e025385f4a9e788aed55fe18b49fd034aea",
+      "original_sha256": "b0468bbea7323c1fb389529471ba4c2fcbfa30a616e72a1a938dd19f213e419c",
+      "substitutions": 1
+    },
+    "analysis/v2_damage_spectrum.py": {
+      "anonymized_sha256": "132560ab040eee50ac207a75153d8d9d26fa98390fc686cdabfdddf84c3e2d9f",
+      "original_sha256": "5d15429fef7873c6ffa6a94c03f6c4600c102b3df86cc5095393eac8ae5e9024",
+      "substitutions": 1
+    },
+    "analysis/v30b_quant_regions.py": {
+      "anonymized_sha256": "f0dad9738a136b2f0f1948223d7d8b7677b97e0a3a9df313511203fe5989f04a",
+      "original_sha256": "7829988fced4169894fa60eee18cdbb4dbe8218d3915213017a2108da4eab049",
+      "substitutions": 2
+    },
+    "analysis/v32_prune_descriptors.py": {
+      "anonymized_sha256": "c8424ac8013d7c8a2db3e21c17e609786e9355df3461026013f2d55485382b62",
+      "original_sha256": "5bd71a95bddf13f12d941b1ebeead26bfb65b193b2e43df499bccff67f23b852",
+      "substitutions": 9
+    },
+    "analysis/v34_c17_scope_audit.py": {
+      "anonymized_sha256": "aedfdb0d74cfa1a7fa499e9ad0da9f90c3535ee4a7722b5c4c9be9acb548fd69",
+      "original_sha256": "6531d0f6885d63b5a4cc3c8f3de4033c9b23b56af283fe332c8649be22653259",
+      "substitutions": 2
+    },
+    "analysis/v3_measurement_audit.py": {
+      "anonymized_sha256": "efeda3221ad31de512fe59e15538e6d3a6ec8bd84944b475ce765124e08bae07",
+      "original_sha256": "23368ce1a856e76321110680392c102c687bf95ad4e441c0753dd491c39b9a89",
+      "substitutions": 1
+    },
+    "analysis/v67_musique_qa.py": {
+      "anonymized_sha256": "3b022e29f56e40c9269fc5f90df12efd42fd1aea29513d10fc046bd2feacd63b",
+      "original_sha256": "db8fc77e2afdf3f62d270971fb811077b632fddb025bbe642e34c9c67891b5ed",
+      "substitutions": 1
+    },
     "data_mirror/v47-p2-register/register.json": {
       "anonymized_sha256": "2d1eadd9a7b720d08cb1ab6629176bbea4b3c1f2c3c5b23fb9bbdb13f84a48b6",
       "original_sha256": "c12167d4b12b9c18e5983239573868ea4a7dfe3f62c8b638f3a10f99970e4757",
@@ -54,7 +99,57 @@
       "anonymized_sha256": "e89e9cbcb08c07cc7fdbf7cc36a095671c908bf6c7b41856e6182155d040ec87",
       "original_sha256": "eeacaa150c5458ffba9f225ccccd04455504b3322f1e4bfeeb6dbf41d4368d23",
       "substitutions": 9
+    },
+    "results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json": {
+      "anonymized_sha256": "57b7304d6f753e7624b145aaf0e7a4edf5943814d1d87e42b78e707e71617e47",
+      "original_sha256": "fae21cb4eb0af935a3cedff97457916bd63dd6d8e340f5f6b367bc194485530d",
+      "substitutions": 1
+    },
+    "results/v13-recovery/gemma3-270m/quant_3_traces/recovery.json": {
+      "anonymized_sha256": "f3244b70a4430de7edc08133bf26cf1f0f65c9427e7cb7ebe229f7750e05fcc1",
+      "original_sha256": "ad0519895e916a0ff2221071983b4933b3a850dc00a60557d07b007f05a96820",
+      "substitutions": 1
+    },
+    "results/v9c-ablation/gemma3-1b/ablation.json": {
+      "anonymized_sha256": "ebc36533c7d1457f36ee8aeaaa270906e57c33e79fd2804307f0a9452b46ca98",
+      "original_sha256": "a4117b27ebef394947141b8ec5a57e8d36cd024d45b52320d454e49d63327d51",
+      "substitutions": 1
+    },
+    "scripts/run_v71_after_v70.sh": {
+      "anonymized_sha256": "4a31e1298975f7a587f91e608f7bf9d6a4a887595a16bbfb1f19fc7e9218d654",
+      "original_sha256": "9489e8c4ace429ab45ffb22360b79679da85d1b65da7422101212590f559c512",
+      "substitutions": 1
+    },
+    "scripts/run_v72_after_v71.sh": {
+      "anonymized_sha256": "6d98e4c67e5961481894b85798683050af51c920d418f1f3984d8544c6554f48",
+      "original_sha256": "6f649f765e70ed00ee416e3b3b9a4a5bcfca7db29b4bfa36acf96e3ed68b8b4d",
+      "substitutions": 2
+    },
+    "tests/test_pythia_revision.py": {
+      "anonymized_sha256": "465c5a5860c468d7736d77ca547ff325fe0e459e54c194598e56ec5c2fa301c4",
+      "original_sha256": "559e26517afc88f309cf0443bf002cad825ea449aee6e85a1ec15e4c2d1eff3b",
+      "substitutions": 5
+    },
+    "tests/test_registry.py": {
+      "anonymized_sha256": "b75ae25d736bd85fd24ebabd266ff123efb4e4984f01065c1cafa6e2037d5498",
+      "original_sha256": "5fc990facb3cf1d3f8211aeace4e30647c6644b13c4baa58106d10fd54268a2f",
+      "substitutions": 2
+    },
+    "tests/test_v23_loss_validity.py": {
+      "anonymized_sha256": "f83c496d3e95251ef494517ae1c45c50025898f63039d92bf81781feaac9164d",
+      "original_sha256": "edd01cd295ebc2cbeef15c15769f31c7661622086784eac7c82e95994845aca2",
+      "substitutions": 1
+    },
+    "tests/test_v27_scoring_and_units.py": {
+      "anonymized_sha256": "8cb806eb28388564b4734fce92b562c7b192ed716584567bf098743fd867d0b2",
+      "original_sha256": "19a8d1c8b1ac19b8c5b09c97d7f46117ba77574d3084e81e092392fcaa4e9ece",
+      "substitutions": 1
+    },
+    "tests/test_v32.py": {
+      "anonymized_sha256": "260a4168b80273e90fdc05c730cd10553fcf8e4cb433dc07c3dc4d9d951d87dc",
+      "original_sha256": "1b793ac5fe951c4e74a076100b96f9dc2695b5aa6c557e21fe647f1a3c7cf9d7",
+      "substitutions": 3
     }
   },
-  "what": "Files whose text was anonymised before publication. A frozen record names original_sha256; the file shipped here hashes to anonymized_sha256. Only author, host, institution and path strings differ; no measurement value was changed."
+  "what": "Files whose text was anonymised before publication, including source files whose digests frozen records name. A frozen record names original_sha256; the file shipped here hashes to anonymized_sha256. Only author, host, institution and path strings differ; no measurement value and no code path was changed."
 }

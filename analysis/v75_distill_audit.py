@@ -547,14 +547,14 @@ def main():
         "item_bootstrap_ci95": None, "item_bootstrap_status": items["status"],
         "pool_cluster_ci95": r["paired_difference"]["ci95"]}
         for r in sensitivity["scenarios"]["original"]["by_budget"]]
-    table_rel, mirror_rel = paper / "paper/tables/distill_forms_audit.tex", paper / "analysis/v75_distill_audit.py"
+    table_rel, mirror_rel = paper / "paper/tables/distill_forms_audit.tex", paper / "code/analysis/v75_distill_audit.py"
     report = {"schema_version": 1, "analysis": "V75 distillation forms and two CPU checks",
         "forms_audit": forms, "dense_drift_sensitivity": sensitivity, "item_sampling_uncertainty": items,
         "provenance": {"inputs_sha256": inputs.hashes, "v70_outputs_sha256": before,
             "v70_outputs_unchanged": True, "confirmation_refit": False, "gpu_used": False},
         "artifacts": {"summary_json": str(OUT / "summary.json"), "summary_markdown": str(OUT / "summary.md"),
             "table": str(table_rel), "code_mirror": str(mirror_rel),
-            "write_scope_note": ("Paper artifacts are staged under results/v75-distill-audit/paper/ to respect the write-only restriction, preserving paper/paper/tables and paper/code/analysis relative paths. Top-level paper files are untouched. No commit was made."
+            "write_scope_note": ("Paper artifacts are staged under results/v75-distill-audit/paper/ to respect the write-only restriction, preserving paper/paper/tables and paper/analysis relative paths. Top-level paper files are untouched. No commit was made."
                 if paper != Path("paper") else "The explicitly authorized paper table and code mirror are written to the top-level paper destinations. V70 outputs are untouched. No commit was made.")}}
     table = latex_table(forms)
     outputs = {OUT / "summary.json": json.dumps(report, indent=2, allow_nan=False) + "\n",

@@ -705,7 +705,7 @@ def summary_markdown(summary):
         "serialized blobs; the only payload difference is the sign bit of one zero.",
         "- `model_arch.json` retains full cached/resolved text configs, top-level architecture classes, "
         "parameter inventories, implementation source hashes, snapshot commits and result evidence.",
-        "- `paper/paper/tables/model_arch.tex` and `paper/analysis/v77_model_arch.py` are staged "
+        "- `paper/paper/tables/model_arch.tex` and `paper/code/analysis/v77_model_arch.py` are staged "
         "under this results directory to respect the requested write boundary. No commit is made.", ""]
     return "\n".join(lines)
 
@@ -755,7 +755,7 @@ def main():
     write("pythia_2_8b_tensor_identity.json", json_text(identity["pythia_2_8b_tensor_identity"]))
     write("summary.md", summary_markdown(summary))
     write("paper/paper/tables/model_arch.tex", table_tex(records))
-    write("paper/analysis/v77_model_arch.py", Path(__file__).read_bytes())
+    write("paper/code/analysis/v77_model_arch.py", Path(__file__).read_bytes())
     print(json_text(validation), flush=True)
     if bad_weights or provenance_bad or not all(identity["pythia_2_8b_checks"].values()):
         raise SystemExit("Identity audit has failures; see output records")

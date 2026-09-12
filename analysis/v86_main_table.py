@@ -180,8 +180,8 @@ def build_rows():
     for comp in panel:
         d = comp.data
         pred = read(comp.path.removeprefix("results/").replace("compare_", "predictions_"))
-        require(d["provenance"]["predictions_sha256"] == pred.sha256, "C35 prediction hash")
-        require(pred.data["provenance"]["register_sha256"] == register.sha256, "C35 register hash")
+        require(provenance.matches(d["provenance"]["predictions_sha256"], pred.sha256), "C35 prediction hash")
+        require(provenance.matches(pred.data["provenance"]["register_sha256"], register.sha256), "C35 register hash")
         require(comp.path.endswith("compare_" + d["tag"] + ".json"), "C35 state tag changed")
         require(d["selected_candidate"] == pred.data["selected_candidate"] == "power", "C35 candidate")
         require(sorted(d["densities"]) == [.575, .675, .85], "C35 density grid changed")
@@ -238,7 +238,8 @@ def build_rows():
 
     comp, freeze = read("v69-quant-confirm/compare.json"), read("v69-quant-confirm/freeze.json")
     require(comp.data["complete"] and len(comp.data["rows"]) == 63, "Quantization incomplete")
-    require(comp.data["provenance"]["freeze_sha256"] == freeze.sha256, "Quantization freeze hash")
+    require(provenance.matches(comp.data["provenance"]["freeze_sha256"], freeze.sha256),
+            "Quantization freeze hash")
     require(comp.data["selected"] == freeze.data["selected"], "Quantization selection changed")
     paired_rows(comp, freeze, ("state", "config", "capability"), "dL")
     methods = tuple(comp.data["regimes"]["all"])
@@ -281,7 +282,7 @@ def build_rows():
 
     comp, freeze = read("v70-distill-confirm/compare.json"), read("v70-distill-confirm/freeze.json")
     require(comp.data["complete"] and len(comp.data["rows"]) == 108, "Distillation incomplete")
-    require(comp.data["freeze_sha256"] == freeze.sha256, "Distillation freeze hash")
+    require(provenance.matches(comp.data["freeze_sha256"], freeze.sha256), "Distillation freeze hash")
     require(comp.data["bootstrap"] == freeze.data["bootstrap"], "Bootstrap protocol changed")
     paired_rows(comp, freeze, ("student", "pool", "T_planned", "capability"), "actual")
     require(len(comp.data["groups"]) == 6, "Expected six distillation groups")

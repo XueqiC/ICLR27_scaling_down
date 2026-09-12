@@ -6,3 +6,4 @@ __pycache__/
 # anonymous mirror serves this repository's contents verbatim.
 /tools
 /docs/inbox
+/code

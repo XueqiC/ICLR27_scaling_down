@@ -5,7 +5,7 @@
 
 Reads V78 without changing or recomputing its selections, oracle, or outcomes.
 Writes results/v85-selection-decomp/, the two paper tables, and this script's
-paper/analysis/ mirror. --check verifies those outputs without writing.
+paper/code/analysis/ mirror. --check verifies those outputs without writing.
 The rule implementation and its fitted objects are read, never imported/refit.
 """
 from __future__ import annotations
@@ -20,6 +20,11 @@ import json
 import math
 from pathlib import Path
 from statistics import mean, median
+
+try:
+    from . import provenance
+except ImportError:
+    import provenance
 
 
 ROOT = next(p for p in Path(__file__).resolve().parents
@@ -451,7 +456,7 @@ def summary(aggregates, spec, hashes):
                    e["verbatim"].startswith("def predict(")), "```", "", "## Reproduction and validation", "",
               "Run `python -B analysis/v85_selection_decomp.py`; verify determinism with "
               "`python -B analysis/v85_selection_decomp.py --check`. The mirrored entry point "
-              "`python -B paper/analysis/v85_selection_decomp.py --check` resolves the same repository inputs.", "",
+              "`python -B paper/code/analysis/v85_selection_decomp.py --check` resolves the same repository inputs.", "",
               "Generation validates the full 4 x 17 grid for each objective, frozen candidate rosters, "
               "policy feasibility, actual-minus-oracle regrets, paired differences, the 51:17 weighted "
               "identity, and reproduction of V78's published all-state means. It checks implementation "
@@ -460,7 +465,7 @@ def summary(aggregates, spec, hashes):
               "Outputs: `decomposition.json` (full precision, method counts and contributions), "
               "`decomposition.csv` (12 aggregate rows), `cell_regrets.csv` (272 original cells with JSON "
               "pointers), `rule_spec.json` (24 rule rows, provenance, literal code), this summary, "
-              "and the two requested LaTeX tables. The new script is mirrored under `paper/analysis/`; "
+              "and the two requested LaTeX tables. The new script is mirrored under `paper/code/analysis/`; "
               "the existing mirrored `final_rule.py` and `v78_rule_confirm.py` already match their originals.", "",
               "## Input SHA256", ""]
     lines += [f"- `{path}`: `{value}`" for path, value in hashes.items()]
@@ -473,7 +478,8 @@ def build_outputs():
     require(sha(inputs.raw[FREEZE]) == comp["input_sha256"][FREEZE], "V78 freeze hash mismatch")
     for path in CODE:
         inputs.text(path)
-        require(sha(inputs.raw[path]) == comp["input_sha256"][path], f"Implementation changed since V78: {path}")
+        require(provenance.matches(comp["input_sha256"][path], sha(inputs.raw[path])),
+                f"Implementation changed since V78: {path}")
     inputs.text(DELIVERED)
     aggregates, paired = decompose(comp, frozen)
     spec = rule_spec(inputs, frozen)
@@ -495,7 +501,7 @@ def build_outputs():
         f"{OUT}/summary.md": summary(aggregates, spec, hashes),
         f"{TABLES}/rule_decomp.tex": decomp_table(aggregates),
         f"{TABLES}/locked_rule.tex": locked_table(spec),
-        "paper/analysis/v85_selection_decomp.py": (ROOT / "analysis/v85_selection_decomp.py").read_text()}
+        "paper/code/analysis/v85_selection_decomp.py": (ROOT / "analysis/v85_selection_decomp.py").read_text()}
 
 
 def main():

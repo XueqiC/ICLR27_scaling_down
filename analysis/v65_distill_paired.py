@@ -273,7 +273,7 @@ def main():
         args.output_dir / "summary.json": json.dumps(summary, indent=2, allow_nan=False) + "\n",
         args.output_dir / "summary.md": markdown(summary),
         paper_dir / "tables/distill_paired.tex": latex(summary),
-        paper_dir / "analysis/v65_distill_paired.py": source.decode("utf-8"),
+        paper_dir / "code/analysis/v65_distill_paired.py": source.decode("utf-8"),
     }
     for path, content in artifacts.items():
         path.parent.mkdir(parents=True, exist_ok=True)

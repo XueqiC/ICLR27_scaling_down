@@ -48,7 +48,7 @@ LAWS = ("prune_power", "quant_channel", "quant_group", "distill_linear", "dense"
 OUT_ROOT = ROOT / "results/v64-selection-feasible"
 OUTPUTS = ("summary.json", "summary.md", "paper/paper/tables/selection_feasible.tex",
            "paper/paper/tables/candidate_coverage.tex", "paper/paper/figs/selection_feasible.pdf",
-           "paper/paper/figs/selection_feasible.png", "paper/analysis/v64_selection_feasible.py")
+           "paper/paper/figs/selection_feasible.png", "paper/code/analysis/v64_selection_feasible.py")
 ENDPOINT = (
     "Every candidate endpoint is the absolute measured/predicted loss of the deployed model. "
     "For pruning/quantization, predicted loss is source dense (the measurement arm's own anchor) "
