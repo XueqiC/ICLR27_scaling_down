@@ -58,6 +58,8 @@ METRICS = (
     "second_order", "second_order_prediction", "B", "V", "eps_hat",
     "sigma2_hat", "shrinkage_prediction", "r_norm2", "z_norm2",
     "top16_r2_share", "p_r2", "top16_p_r2",
+    "W", "cross", "residual_first_order",
+    "shrinkage_only_prediction", "shrinkage_residual_prediction",
 )
 FORMULAS = {
     "measured_delta": "CE(z+r,y) - CE(z,y)",
@@ -69,6 +71,13 @@ FORMULAS = {
     "eps_hat": "-sum(r*z)/sum(z*z); 0 when sum(z*z)==0 (unidentifiable)",
     "sigma2_hat": "Var_p(s), s=r+eps_hat*z; variance clamped at zero for roundoff",
     "shrinkage_prediction": "eps_hat*B + 0.5*sigma2_hat*V",
+    "W": "Var_p(z); second-order sensitivity to logit shrinkage",
+    "cross": "Cov_p(z, s), s=r+eps_hat*z; zero when the residual is p-orthogonal to z",
+    "residual_first_order": "sum(p*s) - s[y]; the residual's first-order contribution",
+    "shrinkage_only_prediction": "eps_hat*B + 0.5*eps_hat**2*W; the whole displacement summarised by one scalar",
+    "shrinkage_residual_prediction": "eps_hat*B + residual_first_order + 0.5*eps_hat**2*W "
+                                     "- eps_hat*cross + 0.5*sigma2_hat; algebraically equals "
+                                     "second_order_prediction, verified to roundoff in the tests",
     "r_norm2": "sum(r*r), unweighted squared Euclidean norm",
     "z_norm2": "sum(z*z), unweighted squared Euclidean norm",
     "top16_r2_share": "sum_{top min(16,vocab) abs(r)} p*r*r / sum(p*r*r); 0 if denominator==0; clamp to [0,1] for roundoff",
@@ -210,6 +219,15 @@ def reduce_token(dense_logits, compressed_logits, target):
     compressed_ce = torch.logsumexp(compressed, dim=0) - compressed[target]
     first = pr - r[target]
     second = 0.5 * variance
+    # Second-order sensitivity to logit shrinkage, and the shrinkage-residual
+    # cross term. Both are needed by the corrected shrinkage-plus-residual
+    # prediction registered for this experiment (see the prereg amendment):
+    #   dL ~ eps*B + 0.5*eps^2*W - eps*C + 0.5*Var_p(s)
+    # where W = Var_p(z), C = Cov_p(z, s) and s is the residual after projection.
+    pz = (p * z).sum(dtype=torch.float32)
+    w = ((p * z.square()).sum(dtype=torch.float32) - pz.square()).clamp_min(0)
+    ps = (p * residual).sum(dtype=torch.float32)
+    cross = (p * z * residual).sum(dtype=torch.float32) - pz * ps
     top = r.abs().topk(min(16, r.numel()), sorted=False).indices
     top_mass = (p[top] * r[top].square()).sum()
     share = (top_mass / torch.where(pr2 > 0, pr2, torch.ones_like(pr2))).clamp(0, 1)
@@ -220,6 +238,10 @@ def reduce_token(dense_logits, compressed_logits, target):
         "second_order_prediction": first + second,
         "B": b, "V": v, "eps_hat": eps, "sigma2_hat": sigma2,
         "shrinkage_prediction": eps * b + 0.5 * sigma2 * v,
+        "W": w, "cross": cross, "residual_first_order": ps - residual[target],
+        "shrinkage_only_prediction": eps * b + 0.5 * eps.square() * w,
+        "shrinkage_residual_prediction": (eps * b + (ps - residual[target])
+                                          + 0.5 * eps.square() * w - eps * cross + 0.5 * sigma2),
         "r_norm2": r_norm2, "z_norm2": z_norm2,
         "top16_r2_share": share, "p_r2": pr2, "top16_p_r2": top_mass,
     }
@@ -229,8 +251,92 @@ def reduce_token(dense_logits, compressed_logits, target):
     return result
 
 
+TOKEN_CHUNK = 64
+
+
 @torch.no_grad()
-def measure_pair(dense, compressed, tokenizer, probes, device="cpu", max_len=1024):
+def sequence_logits(model, ids):
+    """Every position's final logits from one causal forward, as the model emits them."""
+    output = model(input_ids=ids, use_cache=False)
+    logits = getattr(output, "logits", output)
+    if logits.ndim != 3 or logits.shape[1] != ids.shape[1]:
+        raise ValueError("sequence_logits expects [batch, tokens, vocab] aligned with the input")
+    return logits
+
+
+@torch.no_grad()
+def reduce_tokens(dense_logits, compressed_logits, targets):
+    """Batched form of reduce_token: identical formulas, summed over tokens.
+
+    Takes [tokens, vocab] float tensors and the [tokens] reference indices, and
+    returns the same metric names as reduce_token with each value summed over the
+    tokens supplied, plus the count of tokens whose displacement was non-zero.
+    All vocabulary arithmetic is float32 after the forwards; no matrix products.
+    """
+    if dense_logits.ndim != 2 or compressed_logits.shape != dense_logits.shape:
+        raise ValueError("reduce_tokens requires two equal [tokens, vocab] logit tensors")
+    z = dense_logits.float()
+    q = compressed_logits.float()
+    r = q - z
+    p = torch.softmax(z, dim=-1, dtype=torch.float32)
+    index = targets.reshape(-1, 1)
+    z_y = z.gather(1, index).squeeze(1)
+    r_y = r.gather(1, index).squeeze(1)
+    pr = (p * r).sum(1)
+    pr2 = (p * r.square()).sum(1)
+    variance = (pr2 - pr.square()).clamp_min(0)
+    r_norm2 = r.square().sum(1)
+    z_norm2 = z.square().sum(1)
+    eps = -(r * z).sum(1) / torch.where(z_norm2 > 0, z_norm2, torch.ones_like(z_norm2))
+    residual = r + eps.unsqueeze(1) * z
+    ps = (p * residual).sum(1)
+    sigma2 = ((p * residual.square()).sum(1) - ps.square()).clamp_min(0)
+    residual_y = residual.gather(1, index).squeeze(1)
+    pz = (p * z).sum(1)
+    w = ((p * z.square()).sum(1) - pz.square()).clamp_min(0)
+    cross = (p * z * residual).sum(1) - pz * ps
+    # B and V come from the canonical descriptor reducer, not a second copy of the
+    # formulas: it returns their sums over the tokens supplied, which is what this
+    # function accumulates anyway.
+    b_sum, v_sum = descriptor_bv.reduce_final_logits(z, targets.reshape(-1), chunk_tokens=z.shape[0])
+    b = z_y - pz
+    v = 1.0 - (p * p).sum(1)
+    dense_ce = torch.logsumexp(z, dim=1) - z_y
+    compressed_ce = torch.logsumexp(q, dim=1) - compressed_logits.float().gather(1, index).squeeze(1)
+    first = pr - r_y
+    second = 0.5 * variance
+    top_mass = (p.gather(1, r.abs().topk(min(16, r.shape[1]), dim=1, sorted=False).indices)
+                * r.gather(1, r.abs().topk(min(16, r.shape[1]), dim=1, sorted=False).indices).square()).sum(1)
+    share = (top_mass / torch.where(pr2 > 0, pr2, torch.ones_like(pr2))).clamp(0, 1)
+    per_token = {
+        "dense_ce": dense_ce, "compressed_ce": compressed_ce,
+        "measured_delta": compressed_ce - dense_ce,
+        "first_order": first, "second_order": second,
+        "second_order_prediction": first + second,
+        "B": b, "V": v, "eps_hat": eps, "sigma2_hat": sigma2,
+        "shrinkage_prediction": eps * b + 0.5 * sigma2 * v,
+        "W": w, "cross": cross, "residual_first_order": ps - residual_y,
+        "shrinkage_only_prediction": eps * b + 0.5 * eps.square() * w,
+        "shrinkage_residual_prediction": (eps * b + (ps - residual_y)
+                                          + 0.5 * eps.square() * w - eps * cross + 0.5 * sigma2),
+        "r_norm2": r_norm2, "z_norm2": z_norm2,
+        "top16_r2_share": share, "p_r2": pr2, "top16_p_r2": top_mass,
+    }
+    sums = {key: float(value.sum()) for key, value in per_token.items()}
+    # The inline per-token B and V exist only to build the predictions above; the
+    # recorded sums are the canonical reducer's, and the two must agree.
+    for name, canonical, inline in (("B", b_sum, sums["B"]), ("V", v_sum, sums["V"])):
+        if abs(canonical - inline) > 1e-4 * max(abs(canonical), 1.0):
+            raise ValueError(f"{name} disagrees with the canonical descriptor reducer")
+    sums["B"], sums["V"] = b_sum, v_sum
+    if not all(math.isfinite(value) for value in sums.values()):
+        raise ValueError("Non-finite logit displacement statistic")
+    return sums, int((pr2 > 0).sum())
+
+
+@torch.no_grad()
+def measure_pair(dense, compressed, tokenizer, probes, device="cpu", max_len=1024,
+                 per_token_forward=False):
     """Pair forwards on each scored token; retain Python scalar sample sums only."""
     if dense is compressed:
         raise ValueError("Dense and compressed must be separate models")
@@ -246,15 +352,39 @@ def measure_pair(dense, compressed, tokenizer, probes, device="cpu", max_len=102
                 ids, count = scored_inputs(tokenizer, sample, device, max_len)
                 sums = dict.fromkeys(METRICS, 0.0)
                 nonzero_displacements = 0
-                for target_position in range(ids.shape[1] - count, ids.shape[1]):
-                    prefix = ids[:, :target_position]
-                    z = forwards[0](prefix)
-                    q = forwards[1](prefix)
-                    values = reduce_token(z, q, ids[0, target_position])
-                    del z, q
-                    for key in METRICS:
-                        sums[key] += values[key]
-                    nonzero_displacements += values["p_r2"] > 0
+                if not per_token_forward:
+                    # Try one causal forward per model for this sample. A model with a
+                    # restricted output head, or the diagnostic transition model, does not
+                    # emit every position; the first failure switches the whole run to the
+                    # per-token path, which is also available as --per-token-forward.
+                    try:
+                        start = ids.shape[1] - count
+                        z_all = sequence_logits(dense, ids)[:, start - 1:ids.shape[1] - 1, :][0]
+                        q_all = sequence_logits(compressed, ids)[:, start - 1:ids.shape[1] - 1, :][0]
+                    except Exception:  # noqa: BLE001 - any failure means fall back
+                        per_token_forward = True
+                if per_token_forward:
+                    for target_position in range(ids.shape[1] - count, ids.shape[1]):
+                        prefix = ids[:, :target_position]
+                        z = forwards[0](prefix)
+                        q = forwards[1](prefix)
+                        values = reduce_token(z, q, ids[0, target_position])
+                        del z, q
+                        for key in METRICS:
+                            sums[key] += values[key]
+                        nonzero_displacements += values["p_r2"] > 0
+                else:
+                    # The logits at the scored positions are the same ones the prefix
+                    # loop recomputes; the reduction is batched over tokens.
+                    targets = ids[0, ids.shape[1] - count:ids.shape[1]]
+                    for begin in range(0, count, TOKEN_CHUNK):
+                        end = min(begin + TOKEN_CHUNK, count)
+                        chunk_sums, chunk_nonzero = reduce_tokens(
+                            z_all[begin:end], q_all[begin:end], targets[begin:end])
+                        for key in METRICS:
+                            sums[key] += chunk_sums[key]
+                        nonzero_displacements += chunk_nonzero
+                    del z_all, q_all
                 rows.append({
                     "capability": capability, "sample_index": index,
                     "sample_id": str(sample.get("sample_id", sample.get("id", digest(sample)))),
@@ -263,7 +393,8 @@ def measure_pair(dense, compressed, tokenizer, probes, device="cpu", max_len=102
                     "sums": sums,
                     **{key: value / count if count else None for key, value in sums.items()},
                 })
-        methods = [forward.method for forward in forwards]
+        methods = ([forward.method for forward in forwards] if per_token_forward
+                   else ["one causal forward per sample; batched token reduction"] * 2)
     finally:
         for forward in forwards:
             forward.close()

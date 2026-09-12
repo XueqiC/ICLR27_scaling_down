@@ -60,7 +60,10 @@ def test_injected_displacement_closed_form_terms_to_1e9():
     assert row["first_order"] == pytest.approx(first, abs=1e-9, rel=0)
     assert row["second_order"] == pytest.approx(second, abs=1e-9, rel=0)
     assert row["second_order_prediction"] == pytest.approx(first + second, abs=1e-9, rel=0)
-    assert dense.calls == compressed.calls == 1
+    # One forward per model per token, plus at most one probe: the run tries a single
+    # causal forward first and falls back to the per-token path when a model has a
+    # restricted output head, as this fixture does.
+    assert dense.calls <= 2 and compressed.calls <= 2
 
 
 def test_nonuniform_probability_closed_form_and_small_displacement_remainder():
@@ -227,7 +230,10 @@ def test_schema_sample_lengths_and_reused_bv(tmp_path, monkeypatch):
     assert len(payload["weight_sha256"]) == 64
     assert payload["scored_token_counts"] == {"math": 8, "code": 2, "qa": 3}
     assert len(payload["per_sample"]) == 4
-    assert len(calls) == 13 and all(shape == (1, 17) and chunk == 1 for shape, chunk in calls)
+    # B and V must come from the descriptor reducer rather than a second copy of the
+    # formulas. The batched path calls it once per token chunk instead of once per token.
+    assert calls and sum(shape[0] for shape, _ in calls) == 13
+    assert all(shape[1] == 17 for shape, _ in calls)
     assert payload["provenance"]["code_sha256"]["v6_capability_geometry.py"]
     for cap, samples in PROBES.items():
         rows = [row for row in payload["per_sample"] if row["capability"] == cap]
@@ -484,3 +490,21 @@ def test_output_and_float32_non_cpu_guards_before_loading(tmp_path):
     with pytest.raises(ValueError, match="symlink"):
         v88.write_json(link, {"new": True}, replace=True)
     assert target.read_text() == "frozen sentinel"
+
+def test_shrinkage_residual_decomposition_is_exact():
+    """The recorded decomposition must equal the exact second-order polynomial.
+
+    dL2 = eps*B + (E_p[s] - s_y) + 0.5*eps^2*W - eps*Cov_p(z,s) + 0.5*Var_p(s)
+    with s = r + eps*z. Any drift here means a term was dropped.
+    """
+    import torch
+    from analysis import v88_displacement as v88
+
+    generator = torch.Generator().manual_seed(88)
+    for scale, noise in ((0.0, 0.02), (0.02, 0.0), (0.02, 0.05), (0.1, 0.05)):
+        z = torch.randn(512, generator=generator) * 3
+        r = -scale * z + torch.randn(512, generator=generator) * noise
+        target = int(torch.randint(0, 512, (1,), generator=generator))
+        values = v88.reduce_token(z, z + r, target)
+        assert abs(values["shrinkage_residual_prediction"]
+                   - values["second_order_prediction"]) < 2e-5, (scale, noise, values)
