@@ -201,7 +201,7 @@
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v76-cap-conditioning/summary.json@live": {
-      "frozen_sha256": "58467f045fd0d8296ad85b256d05175deac76a3a0f9c312b6af372127c2b3423",
+      "frozen_sha256": "fa8b869f7d9acaf5b0a09d0b4dbaab3e3faff89d4d57c90e07e7dd0733b44b2c",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v76-cap-conditioning/summary.json",
       "published_at": "data_mirror/v76-cap-conditioning/summary.json",

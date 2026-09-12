@@ -311,8 +311,12 @@ def load_distillation(inputs):
         close(model["coefficients"][c], dev["models"][c]["E"]["coef"][0], "V70 E coefficient")
     freeze = inputs.json(f"{base}/freeze.json")
     comp = inputs.json(f"{base}/compare.json")
-    require(comp["complete"] and comp["freeze_sha256"] == inputs.hashes[f"{base}/freeze.json"], "V70 freeze chain changed")
-    require(inputs.read(f"{base}/FREEZE_V70").decode().strip() == inputs.hashes[f"{base}/freeze.json"], "V70 sentinel mismatch")
+    require(comp["complete"] and provenance.matches(comp["freeze_sha256"],
+                                                    inputs.hashes[f"{base}/freeze.json"]),
+            "V70 freeze chain changed")
+    require(provenance.matches(inputs.read(f"{base}/FREEZE_V70").decode().strip(),
+                               inputs.hashes[f"{base}/freeze.json"]),
+            "V70 sentinel mismatch")
     require(freeze["models"] == dev["models"] and
             freeze["inputs_sha256"][f"{base}/develop.json"] == inputs.hashes[f"{base}/develop.json"], "V70 frozen development changed")
     frozen_rows = indexed(freeze["predictions"], ("student", "pool", "T_planned", "capability"))
