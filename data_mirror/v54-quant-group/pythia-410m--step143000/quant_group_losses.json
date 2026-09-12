@@ -110,72 +110,6 @@
         "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
         "device": "cuda:0",
         "reference_device": "cpu"
-      },
-      "b3_g32": {
-        "bits": 3,
-        "group_size": 32,
-        "qmax": 3,
-        "started_at_utc": "2026-09-11T03:24:16.733306+00:00",
-        "completed_at_utc": "2026-09-11T03:24:27.475493+00:00",
-        "wall_time_s": 10.74212407041341,
-        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
-        "device": "cuda:0",
-        "reference_device": "cpu"
-      },
-      "b3_g512": {
-        "bits": 3,
-        "group_size": 512,
-        "qmax": 3,
-        "started_at_utc": "2026-09-11T03:24:27.477309+00:00",
-        "completed_at_utc": "2026-09-11T03:24:36.694216+00:00",
-        "wall_time_s": 9.216868596151471,
-        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
-        "device": "cuda:0",
-        "reference_device": "cpu"
-      },
-      "b4_g32": {
-        "bits": 4,
-        "group_size": 32,
-        "qmax": 7,
-        "started_at_utc": "2026-09-11T03:24:36.695693+00:00",
-        "completed_at_utc": "2026-09-11T03:24:46.881698+00:00",
-        "wall_time_s": 10.185973775573075,
-        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
-        "device": "cuda:0",
-        "reference_device": "cpu"
-      },
-      "b4_g512": {
-        "bits": 4,
-        "group_size": 512,
-        "qmax": 7,
-        "started_at_utc": "2026-09-11T03:24:46.883135+00:00",
-        "completed_at_utc": "2026-09-11T03:24:56.698030+00:00",
-        "wall_time_s": 9.814854783006012,
-        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
-        "device": "cuda:0",
-        "reference_device": "cpu"
-      },
-      "b5_g32": {
-        "bits": 5,
-        "group_size": 32,
-        "qmax": 15,
-        "started_at_utc": "2026-09-11T03:24:56.699749+00:00",
-        "completed_at_utc": "2026-09-11T03:25:07.105761+00:00",
-        "wall_time_s": 10.405996022745967,
-        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
-        "device": "cuda:0",
-        "reference_device": "cpu"
-      },
-      "b5_g512": {
-        "bits": 5,
-        "group_size": 512,
-        "qmax": 15,
-        "started_at_utc": "2026-09-11T03:25:07.106976+00:00",
-        "completed_at_utc": "2026-09-11T03:25:16.239316+00:00",
-        "wall_time_s": 9.132271780632436,
-        "timing_scope": "quantize + measure + restore (excludes model/probe loading and dense eval)",
-        "device": "cuda:0",
-        "reference_device": "cpu"
       }
     },
     "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
@@ -190,7 +124,7 @@
       "wall_time_s": 61.14384839683771,
       "device": "cuda:0"
     },
-    "updated_at_utc": "2026-09-11T03:25:16.239364+00:00"
+    "updated_at_utc": "2026-09-10T02:27:35.770999+00:00"
   },
   "dense": {
     "math": 1.458277307601044,
@@ -241,35 +175,5 @@
     "math": 1.5286917661947323,
     "code": 1.5149750415973378,
     "qa": 4.99013783269962
-  },
-  "b3_g32": {
-    "math": 2.759076168630863,
-    "code": 2.979141906346565,
-    "qa": 6.033507604562738
-  },
-  "b3_g512": {
-    "math": 6.0478525666376655,
-    "code": 6.445448062752555,
-    "qa": 8.881178707224334
-  },
-  "b4_g32": {
-    "math": 1.6511706082417148,
-    "code": 1.585036843356311,
-    "qa": 5.063925855513308
-  },
-  "b4_g512": {
-    "math": 1.8834532943130586,
-    "code": 1.874792013311148,
-    "qa": 5.292062737642586
-  },
-  "b5_g32": {
-    "math": 1.5036976983310923,
-    "code": 1.475576420251961,
-    "qa": 5.015981463878327
-  },
-  "b5_g512": {
-    "math": 1.5548524875425136,
-    "code": 1.5123009270263845,
-    "qa": 5.039864543726236
   }
 }
