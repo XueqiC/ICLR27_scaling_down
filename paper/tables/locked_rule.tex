@@ -32,17 +32,17 @@
 Arm & Cap. & State status & Response predictor & Fit & Anchor \\
 \midrule
 % delta = float(np.dot(p["beta"], z) * prune.shape(d, p["gamma"]))
-Pruning & Math & Seen size; new $d$ & v53 power & P & $L_{0,c}$ \\
+Pruning & Math & Seen source state; new $d$ & v53 power & P & $L_{0,c}$ \\
 % delta = float(np.dot(p["beta"], z) * prune.shape(d, p["gamma"]))
-Pruning & Code & Seen size; new $d$ & v53 power & P & $L_{0,c}$ \\
+Pruning & Code & Seen source state; new $d$ & v53 power & P & $L_{0,c}$ \\
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & QA & Seen size; new $d$ & v53 median curve & P & $L_{0,c}$ \\
+Pruning & QA & Seen source state; new $d$ & v53 median curve & P & $L_{0,c}$ \\
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & Math & New size/stage & v53 median curve & P & $L_{0,c}$ \\
+Pruning & Math & New size or new stage & v53 median curve & P & $L_{0,c}$ \\
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & Code & New size/stage & v53 median curve & P & $L_{0,c}$ \\
+Pruning & Code & New size or new stage & v53 median curve & P & $L_{0,c}$ \\
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & QA & New size/stage & v53 median curve & P & $L_{0,c}$ \\
+Pruning & QA & New size or new stage & v53 median curve & P & $L_{0,c}$ \\
 \addlinespace
 % delta = channel_delta(f["models"][c], inputs)
 Channel RTN & Math & Seen state & v36 regression & Q & $L_{0,c}$ \\

@@ -32,19 +32,11 @@ measured (Fig.~\ref{fig:rule_main}). Over 17 budgets on each state (68 cells per
 models), the frozen-rule maps are within 0.00001, 0.004, and 0.14
 nats of the oracle for math, code, and QA (2Wiki), below the
 source-conditioned maps (0.015, 0.11, 0.21) and quantization-only
-under the same candidates and rule (0.007, 0.010, 0.25), meeting the
-pre-stated criterion; for the largest loss
-increase the evaluation is prospective and its criterion was not met
-(0.0020 against 0.0019; quantization-only 0.008). Two boundaries apply. The QA confirmation is an aggregate: the frozen
+under the same candidates and rule (0.007, 0.010, 0.25), meeting the registered criterion (mean regret over the 68 cells within the source-conditioned maps' and below quantization-only's); for the largest loss increase the first condition fails (0.0020 against 0.0019; quantization-only 0.008), so that evaluation is prospective and not confirmed. The QA confirmation is an aggregate: the frozen
 rule beats quantization-only on three states and trails it on
 160M@32k (0.22 against 0.13). The math and code margins over
 quantization-only come almost entirely from 1B@64k, the state with
-historical distillation candidates; on the three newly measured 32k
-states the two policies coincide within $10^{-5}$ nats
-(Table~\ref{tab:rule_decomp}).  The pruning and quantization candidates are new measurements; the
-distillation candidates are two existing same-stage students, purged
-from the fit that predicts them, so the round is a selection test, not
-a new training experiment. 
+historical distillation candidates; on the three newly measured 32k states the mean regrets aggregated over their 51 cells differ by less than $10^{-5}$ nats (Table~\ref{tab:rule_decomp}).  The pruning and quantization candidates are new measurements; the distillation candidates are two existing same-stage students purged from the fit that predicts them. 
 
 \begin{figure}[t]
 \centering

@@ -1,28 +1,20 @@
 \section{Independent Tests: Configurations, Model States, and Capabilities}
 \label{sec:general}
 
-Every test below scores predictions frozen before the corresponding
-measurement, on three kinds of unseen object: settings outside the
-fitted set, model states of new sizes or stages, and, across both,
-the three capabilities. Table~\ref{tab:main_final} lists the latest
-confirmation of each arm against its strongest same-information
-baseline and Fig.~\ref{fig:confirm} the corresponding error
-differences, failures included; earlier registered tests are in
-Appendix~\ref{sec:app_results}. Errors are MAE in nats per token.
+Every test below scores predictions frozen before measurement on three kinds of unseen object: settings outside the fitted set, states of new sizes or stages, and the three capabilities across both. Table~\ref{tab:main_final} lists, per arm, the frozen candidate, the strongest of all predictors frozen in that round, and the delivered rule with when it was fixed; Fig.~\ref{fig:confirm} shows the candidate's error differences, failures included; earlier tests are in Appendix~\ref{sec:app_results}. Errors are MAE in nats per token.
 
 \input{tables/main_final}
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.9\textwidth]{figs/final_confirmations.pdf}
-\caption{Latest frozen confirmation of each arm: MAE of the strongest same-information baseline minus MAE of the delivered relation per capability (positive = relation better; failures kept). Pruning: three-checkpoint panel and 2.8B repeat; grouped quantization: unseen group sizes on development states and the new state; distillation: six new $U{=}200$ pools with pool-cluster intervals.}
+\includegraphics[width=0.9\textwidth]{figs/frozen_candidates.pdf}
+\caption{Frozen candidate evaluation, matching Table~\ref{tab:main_final}. Bars show MAE of the strongest frozen alternative minus MAE of the frozen candidate, separately for math, code, and QA; negative gains are retained. Strongest means the lowest pooled test MAE among all predictors recorded in that round's frozen comparison, excluding the candidate. Endpoint labels are candidate/alternative MAE in nats per token. Hollow diamonds show the delivered rule's gain against the same alternative when its method differs from the candidate. Pruning and quantization delivery was fixed after these tests and is retrospective here; distillation delivery equals the candidate and was fixed before test. Quantization candidates are frozen D: surface/median/zero.}
 \label{fig:confirm}
 \end{figure}
 \subsection{Prediction at Unseen Compression Settings}
 \label{sec:unseen_settings}
 
-\paragraph{Pruning densities.} On three checkpoints that entered no
-fit, at densities 0.85, 0.675, and 0.575, the power form has MAE
+\paragraph{Pruning densities.} On three checkpoints that entered no fit (new stages of seen sizes, which the delivered rule assigns to the median curve), at densities 0.85, 0.675, and 0.575, the frozen power candidate has MAE
 0.243, 0.236, and 0.68 for math, code, and QA against 0.230, 0.222,
 and 0.68 for A2 and 0.277, 0.214, and 0.22 for the median curve: it
 reaches A2's math error with a quarter of the parameters, trails the
@@ -33,26 +25,18 @@ form of that freeze fails (0.6 to 4.5 nats).
 \paragraph{Quantization settings.} The per-channel predictor's one
 unseen setting, 5 bits by a fixed interpolation rule, is worse than a
 per-bit constant. In the grouped confirmation, with predictions frozen
-after development on all 54 cells, group sizes 32 and 512 on two
-development states are predicted best by the piecewise interpolation
-(0.07, 0.12, 0.48 for math, code, QA against 0.22, 0.31, 1.23 for the
-surface and 0.50, 0.56, 0.46 for the median); on a state never used
+after development on all 54 cells, group sizes 32 and 512 on two development states are predicted best by the piecewise interpolation for math and code (0.07, 0.12 against 0.22, 0.31 for the frozen surface and 0.50, 0.56 for the median), while for QA the frozen zero and the median (0.46) edge the interpolation (0.48); on a state never used
 in a quantization fit (1.4B@112k) the median is best for math and QA
 at the new group sizes (0.13, 0.13), the interpolation is better for
 code (0.17 against 0.22), and at seen configurations the median leads
-on math and code while zero change is better for QA (0.05 against
-0.16): source conditioning adds nothing on that state.
+on math and code while zero change is better for QA (0.05 against 0.16), and over the nine new-state cells the median's QA error is 0.14 against 0.22 for zero change: source conditioning adds nothing on that state.
 
 \paragraph{Distillation pools.} On the first frozen test (nine
 trajectories at an unseen pool) the headline joint form beats the
 frozen constant on five of six development-student cells, with paired
 intervals above zero (Table~\ref{tab:distill_paired}). In the
 confirmation at six new pools of $U{=}200$ and three new budgets,
-every selected form beats zero change; the gain over the strongest
-development-fixed baseline is detected for code on both students
-(0.004 and 0.005 nats) and for QA on 270M (0.09), and for math a
-budget-only or surface baseline is better on both students
-(Appendix~\ref{sec:app_results}).
+every selected form beats zero change; the gain over the development-designated baseline is detected for code on both students (0.004 and 0.005 nats) and for QA on 270M (0.09), for math a budget-only or surface baseline is better on both students, and the hindsight best of the sixteen frozen forms is a source-conditioned variant for every capability (Table~\ref{tab:main_final}).
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
@@ -73,9 +57,8 @@ development response is the more accurate predictor there, and the
 extra value of $N_0$ and $D_0$ is not yet stable enough to support the
 source-conditioned forms. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
 reference size) the frozen constant is better than the headline form
-at the unseen pool on every capability (intervals below zero); at the development pools only its QA gain clears zero (0.83 nats,
-$[0.12,1.54]$; Table~\ref{tab:distill_paired}). Joint transfer to a larger student and a
-new pool remains unreliable.
+at the unseen pool on every capability (intervals below zero); at the development pools only its QA gain clears zero (0.83,
+$[0.12,1.54]$; Table~\ref{tab:distill_paired}).
 
 \subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}

@@ -7,9 +7,7 @@ take sparsity \citep{frantar2023scaling}, precision
 the pre-pruning loss and post-training tokens \citep{zhang2024scaling},
 or the teacher loss \citep{busbridge2025distillation} as inputs and
 predict an aggregate loss; we follow the P$^2$ law in admitting the
-pre-compression loss and add a per-capability endpoint measured the
-same way for three methods, a development panel in which size and
-stage vary separately, and held-out tests with same-input baselines.
+pre-compression loss and add a per-capability endpoint, a panel in which size and stage vary separately, and held-out tests with same-input baselines.
 
 \paragraph{Methods and task-conditioned evaluation.}
 The fixed operations stand in for method families: pruning
@@ -23,19 +21,12 @@ Pruning disproportionately harms knowledge-intensive tasks
 \citep{liu2025quantization} and favors undertrained models
 \citep{ouyang2024lowbit}, compression shifts trust dimensions unevenly
 \citep{hong2024decoding}, and selective truncation can help
-\citep{sharma2023laser}. Laws with task-level targets exist: pruning laws on test loss and
-averaged accuracy with per-task exponents \citep{sengupta2025compression},
-quantization laws stratified by task type for one quantizer
-\citep{zhou2025task}, and task-specific distillation curves over data,
-compression ratio, and supervision format \citep{ghita2026task}. Our relations use a continuous conditional loss, admit the reference
-anchor and training tokens as inputs, and treat the three methods
-with one protocol.
+\citep{sharma2023laser}. Laws with task-level targets exist: pruning laws with per-task exponents \citep{sengupta2025compression}, quantization laws stratified by task type for one quantizer \citep{zhou2025task}, and task-specific distillation curves over data, ratio, and supervision format \citep{ghita2026task}.
 
 \paragraph{Fitting and validating empirical laws.} Pretraining loss
 follows power laws in parameters and data
 \citep{hestness2017deep,kaplan2020scaling,hoffmann2022training};
-downstream accuracy is predictable mainly through continuous
-log-likelihood measurements
+downstream accuracy is predictable mainly through continuous log-likelihood
 \citep{wei2022emergent,schaeffer2023emergent,schaeffer2024predicting,gadre2024language,isik2024scaling,bhagia2024establishing,lourie2025scaling},
 fitted law forms are fragile to the fitting protocol
 \citep{li2025misfitting,besiroglu2024chinchilla}, and repeated tokens

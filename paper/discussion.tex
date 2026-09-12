@@ -1,17 +1,10 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
 
-Table~\ref{tab:final} (Appendix~\ref{sec:app_results}) answers, per
-arm, what is delivered, which inputs it needs, which parts were
-frozen, where it gains over the strongest same-information baseline,
-and where it does not apply.
-The pattern is consistent: source-conditioned forms add value at
-unseen configurations of seen states, source-free references are as
-good or better on new model states, and QA is carried by source-free predictors on every arm.
+Table~\ref{tab:final} (Appendix~\ref{sec:app_results}) summarizes each arm's delivery, inputs, frozen parts, gains, and limits. Across arms, source-conditioned forms add value at unseen configurations of seen states, source-free references are as good or better on new states, and QA is carried by source-free predictors.
 
 Our relations are conditional on the evaluated loss distributions and
-compression implementations; improvements on 2Wiki do not establish
-general QA improvements. Transfer to unseen source
+compression implementations; gains on 2Wiki do not establish general QA gains. Transfer to unseen source
 states remains uneven, and simple configuration-level response
 estimates can outperform source-conditioned parametric forms. The decision study covers four Pythia states under nominal storage
 budgets, with new pruning and quantization measurements and

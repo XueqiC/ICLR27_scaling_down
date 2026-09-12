@@ -47,8 +47,7 @@ establishes the phenomena and the limits of cross-family transfer
 (Appendix~\ref{sec:app_hetero}). A \emph{controlled panel} of Pythia checkpoints
 \citep{biderman2023pythia} (160M, 410M, 1.4B at steps 16k, 64k, 143k) varies the
 initial state along parameter count and pretraining stage with
-architecture and data fixed and is the development set of every
-relation. \emph{New states and configurations} that entered no fit (Pythia
+architecture and data fixed; it is the development set for pruning and quantization and the controlled transfer panel, while the distillation relations are developed on Gemma-3 student trajectories (\S\ref{sec:law_distill}). \emph{New states and configurations} that entered no fit (Pythia
 160M to 6.9B at further steps, new densities, bit-widths, and group
 sizes, Gemma-3 students at new pools; Appendix~\ref{sec:app_details})
 provide the validation.
