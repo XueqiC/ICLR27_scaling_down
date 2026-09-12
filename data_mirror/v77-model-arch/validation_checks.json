@@ -1,0 +1,32 @@
+{
+  "passed": [
+    "Monolithic safetensors take priority over existing shard index",
+    "Byte SHA-256 follows symlinks and matches known digest",
+    "Safetensors index selects referenced shards",
+    "PyTorch bin index selects all unique shards",
+    "Missing cached config is detected",
+    "Output path traversal is rejected"
+  ],
+  "latex": {
+    "compiled": true,
+    "pages": 1,
+    "text_width_inches": 5.5,
+    "table_placement": "H",
+    "font_size": "small",
+    "booktabs": true,
+    "overflow_warnings": false,
+    "font_substitution_warnings": false,
+    "font": "Times New Roman",
+    "engine": "Tectonic 0.15.0, offline cached bundle",
+    "table_tex_sha256": "f71f68ceeeb5de130e77acbfee1bc4e01b370262e9bd738596f7f8f59b13c25d"
+  },
+  "final_artifact_checks": {
+    "model_rows": 20,
+    "original_panel_rows": 12,
+    "all_blob_lfs_addresses_match": true,
+    "mirror_matches_source": true,
+    "source_hash_matches_provenance": true,
+    "rendered_table_matches_delivered_table": true,
+    "all_pythia_2_8b_learned_values_equal_modulo_signed_zero": true
+  }
+}
