@@ -1,32 +1,34 @@
-\section{Generalization to Unseen Models and Configurations}
+\section{Independent Tests: Configurations, Model States, and Capabilities}
 \label{sec:general}
 
-Frozen forms predict three kinds of unseen object: settings outside
-the fitted set, states of new sizes or stages, and, across both, the
-three capabilities. Table~\ref{tab:pred_main} lists the headline
-tests with the strongest relevant baseline and Fig.~\ref{fig:transfer}
-the gains over source-free references; errors are MAE in nats per
-token.
+Every test below scores predictions frozen before the corresponding
+measurement, on three kinds of unseen object: settings outside the
+fitted set, model states of new sizes or stages, and, across both,
+the three capabilities. Table~\ref{tab:main_final} lists the latest
+confirmation of each arm against its strongest same-information
+baseline and Fig.~\ref{fig:confirm} the corresponding error
+differences, failures included; earlier registered tests are in
+Appendix~\ref{sec:app_results}. Errors are MAE in nats per token.
 
-\input{tables/pred_headline}
+\input{tables/main_final}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.55\textwidth]{figs/transfer_limits.pdf}
-\caption{Generalization to unseen configurations and states. Top: improvement of the headline candidate over the strongest source-free reference (MAE difference in nats, averaged over capabilities; positive = candidate better) per new source (rows), regime (columns), and fitting protocol (panels), with the candidate MAE in each cell; hatched cells were not evaluated. Bottom: the distillation pool tests per capability against the frozen constant. All predictions were frozen before the corresponding measurement.}
-\label{fig:transfer}
+\caption{Latest independent confirmation of each arm: MAE of the strongest same-information baseline minus MAE of the delivered relation, per capability (positive = relation better; negative bars are failures, kept). Pruning: the three-checkpoint panel and the 2.8B repeat; grouped quantization: unseen group sizes on development states and the new state; distillation: six new pools of $U{=}200$ with pool-cluster intervals. All predictions were frozen before the plotted measurements.}
+\label{fig:confirm}
 \end{figure}
 \subsection{Prediction at Unseen Compression Settings}
 \label{sec:unseen_settings}
 
 \paragraph{Pruning densities.} On three checkpoints that entered no
-fit, at densities 0.85, 0.675, and 0.575, the delivered power form has
-MAE 0.24, 0.24, and 0.68 for math, code, and QA: it beats the
-strength-only curve and zero change on every checkpoint, has the
-lowest math error, ties the median curve on code, and loses QA to
-every source-free curve (median 0.22). At $d=0.55$,
-beyond the range, every source-conditioned form fails on every source
-(0.6 to 4.5 nats): the transfer range is the interpolation regime.
+fit, at densities 0.85, 0.675, and 0.575, the power form has MAE
+0.243, 0.236, and 0.68 for math, code, and QA against 0.230, 0.222,
+and 0.68 for A2 and 0.277, 0.214, and 0.22 for the median curve: it
+reaches A2's math error with a quarter of the parameters, trails the
+median on code, and loses QA to every source-free curve. At $d=0.55$,
+an extrapolation for the nine-state freeze, every source-conditioned
+form of that freeze fails on every source (0.6 to 4.5 nats).
 
 \paragraph{Quantization settings.} The per-channel predictor's one
 unseen setting, 5 bits by a fixed interpolation rule, is worse than a
@@ -37,28 +39,26 @@ predictions frozen after development on all 54 cells, group sizes 32
 and 512 on two development states are predicted best by the
 same-input piecewise interpolation (0.07, 0.12, 0.48 for math, code,
 QA against 0.22, 0.31, 1.23 for the surface and 0.50, 0.56, 0.46 for
-the median), and on a state never used in a quantization fit
-(1.4B@112k) the source-free median is best or tied on every
-capability (0.13, 0.22, 0.13 at the new group sizes; 0.006, 0.03,
-0.16 at seen configurations), so source conditioning adds nothing
-there (Appendix~\ref{sec:app_results}).
+the median), and on a state never used in a quantization fit (1.4B@112k) the
+source-free median is best for math and QA at the new group sizes
+(0.13, 0.13), the interpolation is better for code (0.17 against
+0.22), and at seen configurations the median leads on math and code
+(0.006, 0.03) while zero change is better for QA (0.05 against 0.16):
+source conditioning adds nothing on that state
+(Appendix~\ref{sec:app_results}).
 
-\paragraph{Distillation pools.} Under the uniform protocol the headline joint form is compared with the frozen
-constant cell by cell, with paired differences and 95\% intervals
-from a bootstrap over trajectories (Table~\ref{tab:distill_paired}). On the 270M student at the unseen pool the gain over the constant is
-detected on every capability (0.015, 0.011, and 0.26 nats); on the
-1B student it is detected for code and QA (0.040 and 0.56) and the
-math point estimate (0.007) is not resolved by three trajectories. Against zero change the gains are 42 to 79\% on every cell. In a second confirmation (forms re-selected on all 25 trajectories
-by the pre-committed rule, six new pools of $U{=}200$ at budgets 50k,
-100k, and 200k, predictions frozen before training) every selected
-form beats zero change, the gain over the strongest development-fixed baseline is detected
-for code on both students (the one-parameter form $a_c\log(1+E)$,
-which vanishes at zero budget, against the two-parameter
-$c_c+b_c\log(1+E)$) and for QA on 270M,
-and for math a budget-only or surface baseline is better on both
-students (Appendix~\ref{sec:app_results}). The pool direction is
-covered for code and QA; the selected math form adds nothing over
-simpler frozen forms.
+\paragraph{Distillation pools.} On the first frozen test (nine
+trajectories at an unseen pool) the headline joint form beats the
+frozen constant on five of six student-capability cells of the two
+development students, with paired intervals above zero
+(Table~\ref{tab:distill_paired}). In the confirmation at six new pools
+of $U{=}200$ and budgets 50k, 100k, and 200k, every selected form
+beats zero change; the gain over the strongest development-fixed
+baseline is detected for code on both students (0.004 and 0.005
+nats) and for QA on 270M (0.09), and for math a budget-only or surface
+baseline is better on both students (Appendix~\ref{sec:app_results}).
+The pool direction is covered for code and QA; the selected math form
+adds nothing over simpler frozen forms.
 
 \subsection{Transfer across Model Sizes and Training Stages}
 \label{sec:unseen_states}
@@ -88,9 +88,12 @@ new pool remains unreliable.
 \subsection{Applicability across Capabilities and Shared Structure}
 \label{sec:capabilities}
 
-Math and code are carried by the initial-state inputs on every axis;
-QA is not, since every source-conditioned form over-predicts its
-pruning response on every new checkpoint. What capability conditioning adds is measurable on the frozen
+Where the initial-state inputs help is method- and range-specific:
+they carry math and code at unseen pruning densities of seen sizes and
+at unseen group sizes of seen states, they add nothing on new
+quantization states or for distillation beyond the reference anchor,
+and every source-conditioned form over-predicts the QA pruning
+response on every new checkpoint. What capability conditioning adds is measurable on the frozen
 confirmation panels (Appendix~\ref{sec:app_shared}): per-capability
 pruning curves beat a shared damage curve with a signed
 per-capability scale by 0.06 nats macro (interval $[0.02,0.10]$ with

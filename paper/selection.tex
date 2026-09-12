@@ -21,8 +21,10 @@ nats of the oracle for math, code, and QA, picking the oracle's method
 in 96\%, 95\%, and 73\% of 289 cells; quantization-only is close behind (0.21, 0.19, 0.49) because it
 dominates math and code on this axis.
 
-\paragraph{Prospective confirmation of a frozen selection rule.} We
-then locked the complete rule of Table~\ref{tab:final}, froze every candidate's
+\paragraph{Prospective confirmation of a frozen selection rule.} We then locked a complete selection rule (Appendix
+Table~\ref{tab:locked_rule}; it uses source-free predictors on new
+states, including the per-bit median rather than the per-bit
+regression of Table~\ref{tab:final}), froze every candidate's
 predicted loss and the four maps for four fresh Pythia states (160M,
 410M, and 1.4B at step 32k; 1B at step 64k; 18 configurations each,
 weights hashed against every earlier revision), and only then
@@ -33,9 +35,13 @@ source-conditioned maps (0.015, 0.11, 0.21) and quantization-only
 under the same candidates, predictor, and feasibility rule (0.007,
 0.010, 0.25), meeting the pre-stated criterion; for the largest loss
 increase the evaluation is prospective and its criterion was not met
-(0.0020 against 0.0019; quantization-only 0.008). The QA confirmation is an aggregate: the frozen rule beats
-quantization-only on three states and trails it on 160M@32k (0.22
-against 0.13; Appendix~\ref{sec:app_selection}).  The pruning and quantization candidates are new measurements; the
+(0.0020 against 0.0019; quantization-only 0.008). Two boundaries apply. The QA confirmation is an aggregate: the frozen
+rule beats quantization-only on three states and trails it on
+160M@32k (0.22 against 0.13). The math and code margins over
+quantization-only come almost entirely from 1B@64k, the state with
+historical distillation candidates; on the three newly measured 32k
+states the two policies coincide to within $10^{-5}$ nats
+(Appendix Table~\ref{tab:rule_decomp}).  The pruning and quantization candidates are new measurements; the
 distillation candidates are two existing same-stage students, purged
 from the fit that predicts them, so the round is a selection test, not
 a new training experiment. 

@@ -1,132 +1,161 @@
-\section{Developing Capability-Conditioned Scaling Laws}
+\section{Final Predictive Relations per Method}
 \label{sec:laws}
 
-\begin{figure}[!t]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.56\textwidth]{figs/predictive_responses.pdf}
-\caption{Capability-conditioned compression responses and frozen predictions, one source per arm. Left: pruning of Pythia-1B at step 112k (measured, filled circles) with the frozen power form (Eq.~\ref{eq:power}), the per-density regression A2, and the source-free median curve; the 6.9B source is overlaid in grey and the extrapolated density $0.55$ is shaded. Middle: per-channel quantization of the same sources with the frozen per-bit regression (hollow) and the per-bit median (dotted). Right: distillation of Gemma-3-1B, signed transfer $\delta_c$ against the reuse count $E$; endpoint pools (fit) and the unseen pool U225 (test) with the frozen constant and reuse-count forms. Lines are fits frozen before the test points were measured; native nats per token.}
+\caption{Final predictive relations and measured responses on each arm's native configuration axis. Left: pruning of Pythia-1.4B at step 112k (measured points) with the frozen power form of Eq.~\ref{eq:power} and the frozen median development curve $\widetilde f_c(d)$; the shaded range is covered by the 17-state refit. Middle: grouped quantization on two development states, measured math response against group size at three bit-widths, with the frozen same-input piecewise interpolation (solid, extended to the never-measured $g=32$ and $512$) and the per-configuration median (dashed). Right: the twelve $U{=}200$ distillation trajectories against reuse count with the frozen selected forms and the frozen strongest baseline. All lines were frozen before the plotted points were measured.}
 \label{fig:responses}
 \end{figure}
+
+Each arm delivers one relation in the interface of Eq.~\ref{eq:interface};
+we state the relation, its inputs and range, how it was selected, and
+where it stops. Two roles are kept apart throughout: the reference
+anchor $L_{0,c}$ is a measured quantity needed to reconstruct an
+absolute loss, and the response relation $\widehat\Delta_{m,c}$ is the
+predictive claim; a good absolute prediction with a source-free
+$\widehat\Delta$ says nothing about whether $N_0$ or $D_0$ predict the
+damage.
 
 \subsection{Conditioning on the Initial Model State}
 \label{sec:conditioning}
 
-Is the initial state worth reading, and which part carries the
-signal? On the nine-state panel with one stage held out, a per-setting
-regression of the pruning response on $(N_0,D_0,L_{0,c})$ lowers the
-error from 0.413, 0.516, and 0.500 nats to 0.253, 0.292, and 0.806
-for math, code, and QA (interval above zero for code, crossing for
-math, negative for QA). Adding the reference anchor $L_{0,c}$ to $(N_0,D_0)$ has intervals
-above zero for math ($+0.55$, $[0.29,1.00]$)
-and code ($+0.66$, $[0.38,1.13]$); adding $D_0$ to $(N_0,L_{0,c})$ does not (Fig.~\ref{fig:inputs}A). Every relation is therefore conditioned on the three inputs per
-capability, with the reference anchor as the carrier.
+On the nine-state development panel with one stage held out, a
+per-setting regression of the pruning response on $(N_0,D_0,L_{0,c})$
+lowers the error from 0.413, 0.516, and 0.500 nats to 0.253, 0.292,
+and 0.806 for math, code, and QA (interval above zero for code,
+crossing for math, negative for QA); adding $L_{0,c}$ to $(N_0,D_0)$
+has intervals above zero for math ($+0.55$, $[0.29,1.00]$) and code
+($+0.66$, $[0.38,1.13]$), adding $D_0$ does not (Fig.~\ref{fig:inputs}A).
+The source-conditioned forms below therefore use the three inputs per
+capability, with the reference anchor as the carrier, and every arm
+also carries a source-free relation for the cases where the source
+inputs add nothing.
 
 \subsection{Pruning}
 \label{sec:law_prune}
 
-Pruning damage grows with the removed fraction $1-d$ with a
-source-dependent amplitude, and QA can improve while math and code
-degrade (Fig.~\ref{fig:responses}, left). The delivered form is
+\paragraph{Relation.} For a seen size at an unseen density in the
+development range, the compact form
 \begin{equation}
 \widehat{\Delta L}_c(\mathbf x,d)=A_c(\mathbf x)\,\Big(\frac{1-d}{0.3}\Big)^{\gamma_c},
 \qquad
 A_c(\mathbf x)=\beta_c\cdot\big(1,\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_0}\big),
 \label{eq:power}
 \end{equation}
-five parameters per capability, tildes standardized on the development
-set (Appendix~\ref{sec:app_details}, Table~\ref{tab:models}). Its same-input alternatives are the per-density regression A2 (an
-unseen $d$ by linear interpolation between fitted densities), the
-power form with $\gamma_c=1$, and a two-term polynomial in $1-d$; the
-source-free references are a strength-only curve, the median
-development curve, and zero change. Fit on the nine states at $d\in\{0.9,0.8,0.7,0.6\}$ and evaluated at
-the unseen 0.65 and 0.55, Eq.~\ref{eq:power} cuts the strength-only
-error by two to three times on every capability, and A2 matches it
-(Table~\ref{tab:pred_main}): reading the source state is what
-matters, and the power structure adds nothing over the per-density
-regression. After the frozen tests of \S\ref{sec:general} both were refit on 17
-states under a pre-committed leave-one-source-out rule: A2 (0.479) and
-the power form (0.494) tie within 0.02 nats, and the rule prefers the
-continuous form that vanishes at $d=1$. Its coefficients are in Appendix~\ref{sec:app_coef}; $\gamma_c$ is a
-fitted constant whose value these data do not establish as necessary.
+with five parameters per capability (tildes standardized on the
+development set) approximates the twenty-parameter per-density
+regression A2; for a new size or stage, and for QA everywhere, the
+delivered relation is the source-free median development curve,
+$\widehat L_c=L_{0,c}+\widetilde f_c(d)$.
+\paragraph{Inputs and range.} $N_0$, $D_0$, and $L_{0,c}$ for
+Eq.~\ref{eq:power}; $L_{0,c}$ alone for the median curve. The
+nine-state freeze covers $d\in[0.6,0.9]$ and $0.55$ was an
+extrapolation for it; the 17-state refit used for the confirmations
+includes 0.55.
+\paragraph{Selection.} Fit on nine states at $d\in\{0.9,0.8,0.7,0.6\}$
+and scored at the unseen 0.65 and 0.55, Eq.~\ref{eq:power} cuts the
+strength-only error two- to threefold and A2 matches it
+(Table~\ref{tab:main_final}); refit on 17 states under a pre-committed
+leave-one-source-out rule, A2 (0.479) and the power form (0.494) tie
+within 0.02 nats and the rule prefers the continuous form that
+vanishes at $d=1$. Its coefficients are in Appendix~\ref{sec:app_coef};
+$\gamma_c$ is a fitted constant whose value these data do not
+establish as necessary.
+\paragraph{Tests and boundary.} On three checkpoints that entered no
+fit the power form reaches, with fewer parameters, an error close to
+A2 on math (0.243 against 0.230) and does not beat the median curve on
+code (0.236 against 0.214) or QA (0.68 against 0.22); on a 2.8B source
+the median curve is three to seven times better than either source
+form (\S\ref{sec:unseen_settings}, \S\ref{sec:unseen_states}). The
+compact form is therefore delivered as an approximation with a
+tested range, and the median curve as the relation for new states.
 
 \subsection{Quantization}
 \label{sec:law_quant}
 
-Bit-width alone offers little room for a continuous relation: int8
-and int6 stay within 0.01 nats of dense, int4 costs 0.03 to 0.35 nats,
-and int3 collapses most models (Fig.~\ref{fig:responses}, middle). At fixed bit-width we use the
-source regression of \S\ref{sec:conditioning} per bit; it predicts a
-new state at a seen bit-width, is no law over $b$, and improves on the
-per-bit median for math and code and not for QA. Sharing one scale across $g$ contiguous weights adds a second
-configuration axis. On six development states at
-$b\in\{3,5\}$ and $g\in\{64,256\}$ we fit, with the same inputs, a separable amplitude-times-shape
-form, the low-order surface
-\begin{equation}
-\widehat{\Delta L}_c(\mathbf x,b,g)=\phi(\mathbf x)\cdot\big[1,\,u,\,v,\,uv,\,u^2\big],
-\qquad u=\log_2 q_{\max}(b)\ \text{(centred)},\ v=\log_2\frac{g}{128},
-\label{eq:quant2d}
-\end{equation}
-with one four-vector of state coefficients per term, and a same-input
-bilinear interpolation. With two development bit-widths $u^2$ is constant on the development
-cells (rank 16 of 20, Appendix~\ref{sec:app_forms}), and with six
-states the leave-one-state-out errors select no form. The frozen tests of \S\ref{sec:unseen_settings} and a confirmation
-round (all 54 unblinded cells as development set, full rank; 21
-frozen cells at unseen group sizes and on a new state) settle the
-choice: for math and code the same-input piecewise interpolation over
-the measured $(b,g)$ grid with a pre-specified linear boundary rule in
-$\log_2 g$, for QA and for a new state the source-free
-per-configuration median; the parametric surface loses on every
-confirmation test.
+\paragraph{Relation.} Per-channel RTN offers no continuous axis: int8
+and int6 stay within 0.01 nats of the reference, int4 costs 0.03 to
+0.35 nats, and int3 collapses most models; at a seen bit-width a new
+state is predicted by the per-bit source regression of
+\S\ref{sec:conditioning} (four coefficients per bit), which improves on
+the per-bit median for math and code and not for QA. Sharing one scale
+across $g$ contiguous weights adds a second axis. The delivered grouped
+relation for math and code on seen states is a same-input piecewise
+interpolation: a per-configuration regression on
+$(N_0,D_0,L_{0,c})$ at each measured $(b,g)$ cell, interpolated
+linearly in $\log_2 g$ between measured group sizes at the same
+bit-width and extrapolated linearly beyond the grid with a zero floor;
+for QA, and for every capability on a new state, the delivered
+relation is the per-configuration median of the development responses
+under the same boundary rule.
+\paragraph{Inputs and range.} The measured development grid
+($b\in\{3,4,5\}$, $g\in\{64,128,256\}$ on six states) plus
+$(N_0,D_0,L_{0,c})$ for the interpolation; $L_{0,c}$ alone for the
+median.
+\paragraph{Selection.} Two candidates with parametric structure were
+tested first: a separable amplitude-times-shape form and a low-order
+surface in $\log_2 q_{\max}$ and $\log_2 g$. The surface beat zero
+change at the unseen $b=4$ and $g=128$ on the two-bit-level development
+set, but its quadratic term is unidentified there (rank 16 of 20; the
+curvature is set by the ridge penalty, Appendix~\ref{sec:app_forms}),
+and in a confirmation round with all 54 unblinded cells as development
+set (full rank) and 21 cells frozen at unseen group sizes and on a new
+state, the development leave-one-state-out rule selected the surface
+for math, the median for code, and zero for QA; the interpolation won
+the frozen cells for math and code and the median won the new state,
+so the delivered rule was fixed after that round and is labeled
+retrospective (Appendix~\ref{sec:app_results}).
+\paragraph{Tests and boundary.} At $g\in\{32,512\}$ on the development
+states the interpolation has MAE 0.07, 0.12, and 0.48 against 0.22,
+0.31, and 1.23 for the surface; on the new state the per-configuration
+median is best for math and QA at the new group sizes (0.13 and 0.13)
+while the interpolation is better for code (0.17 against 0.22) and zero
+change is better for QA at seen configurations (0.05 against 0.16), so
+source conditioning adds nothing there and the parametric surface is
+not delivered (\S\ref{sec:unseen_settings}).
 
 \subsection{Distillation}
 \label{sec:law_distill}
 
-The response is the signed transfer $\delta_c$ of an existing student
-to teacher traces relative to its own reference loss; the teacher
-never enters it. Its coordinates are the supervised completion tokens
-$T$, the pool size $D_U$, and the reuse count $E=T/D_U$. QA improves under every recipe we ran while math and code respond by
-a few hundredths to a few tenths of a nat; with a small pool the QA
-loss rises again at large $E$ (Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the 2Wiki probe
-distribution and on a fresh sample of it, and on the same checkpoints
-the loss rises on MuSiQue and TriviaQA
-(Appendix~\ref{sec:app_measure}); we therefore read the QA result as
-a prediction relation on the measured 2Wiki distribution, repeatable
-within it and not transferable in direction to other QA
-distributions.
-
-\paragraph{Source axis.} On the nine Pythia states as students, with
-the teacher pool and budget fixed, a linear form
-$\delta_c=\beta_c\cdot(1,\tilde{\log N_0},\tilde L_{0,c},\tilde{\log D_0})$
-halves the error of a per-capability constant for math (0.014 against
-0.031 with one stage held out), ties it for code (0.057 against
-0.061), and is worse than a constant for QA (0.263 against 0.159):
-the student state carries the math response.
-
-\paragraph{Pool, budget, and student.} Under the uniform
-absolute-exposure protocol (two development students, two pools,
-three pool samples, four fixed checkpoints), eight forms per
-capability in $T$, $E$, and a source term $k\log(N_S/N_{\mathrm{ref}})$
-were frozen before any test run. The headline form, the joint form
-$\widehat\delta_c=u\,(a_c+k_c n+b_c u+q_c v)$ with
-$u=\log(1+T/T_{\mathrm{ref}})$, $v=\log(D_U/D_{\mathrm{ref}})$, and
-$n=\log(N_S/N_{\mathrm{ref}})$, is the frozen form with the lowest
-development error; that selection rule was stated after the tests, so
-the candidates' predictions are prospective and the headline choice is
-retrospective. On the nine test trajectories at an unseen pool its gain over the
-frozen constant is detected on five of the six student-capability
-cells of the two development students, and on the held-out 4B student
-the constant is better at the unseen pool (\S\ref{sec:general}). A second, frozen confirmation at a new pool size and three new budgets
-confirms the code relation and not the math one
-(\S\ref{sec:unseen_settings}). Two forms that vanish at $T=0$ and carry a
-student descriptor $z_c=\tilde L_{0,c}$,
+\paragraph{Relation.} The response is the signed transfer $\delta_c$ of
+an existing student relative to its own reference loss; the teacher
+never enters it, and the coordinates are the supervised completion
+tokens $T$, the pool size $D_U$, and the reuse count $E=T/D_U$. The
+delivered relations, frozen for the confirmation, are
 \begin{equation}
-\widehat\delta_c=(a_c+\lambda_c z_c)\log(1+E),\qquad
-\widehat\delta_c=(a_c+\lambda_c z_c)\big(1-e^{-T/T_*}\big)+(b_c+\mu_c z_c)\log(1+E),
+\widehat\delta_c=a_c\log(1+E)\ \ (\text{math, code}),\qquad
+\widehat\delta_{\mathrm{QA}}=u\,(a+b\,u+q\,v),\ \ u=\log(1+T/T_{\mathrm{ref}}),\ v=\log(D_U/D_{\mathrm{ref}}),
 \label{eq:kdforms}
 \end{equation}
-were compared on the development matrix by leave-one-run-out
-cross-validation and scored on the test matrix retrospectively
-(Appendix~\ref{sec:app_forms}): the second is best on the 270M
-unseen-pool trajectories, the first fails for QA because it has no
-budget term, and neither beats the frozen constant for math and code
-on the 4B student. No joint student-pool-budget law is claimed.
+one parameter for math and code, which vanish at zero budget, and
+three for QA. QA improves under every recipe we ran while math and
+code move by a few hundredths to a few tenths of a nat, and with a
+small pool the QA loss rises again at large $E$.
+\paragraph{Inputs and range.} $T$ and $D_U$, and the student's
+reference loss; no student descriptor. The relations hold on the two
+development students (270M, 1B); QA on the 2Wiki distribution only,
+where the gain replicates on a fresh sample and reverses sign on
+MuSiQue and TriviaQA (Appendix~\ref{sec:app_measure}).
+\paragraph{Selection.} Eight forms in $T$, $E$, and a source term were
+frozen on twelve development runs and scored on nine unseen-pool
+trajectories with the headline chosen after the test; two
+descriptor-carrying forms were compared retrospectively
+(Appendix~\ref{sec:app_forms}). The delivered forms were then
+re-selected on all 25 trajectories by a pre-committed
+leave-one-trajectory-out rule (ties within 0.02 nats toward fewer
+parameters) and frozen for six new pools of $U{=}200$ at three new
+budgets. On the nine Pythia states as students, a linear form in the
+student state halves the constant's error for math (0.014 against
+0.031) and is worse for QA; it serves only as the math predictor for
+distillation candidates in \S\ref{sec:selection}.
+\paragraph{Tests and boundary.} At the new pool size the selected form
+beats the frozen strongest baseline for code on both students
+(0.004 and 0.005 nats, intervals above zero), where the baseline is
+the same $\log(1+E)$ form with an intercept, so the gain supports the
+zero-budget boundary and parsimony of the form and no full
+student-data-training law; for QA the joint form gains on 270M and
+not on 1B, and for math a budget-only or surface baseline is better on
+both students. A student 6.6 times the reference size is outside the
+range: the frozen constant is better there at an unseen pool
+(\S\ref{sec:unseen_states}).

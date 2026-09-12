@@ -58,7 +58,7 @@
 \newcommand{\Ds}{D_S}
 \newcommand{\Dr}{D_R}
 
-\title{Capability Scaling-Down Laws of LLM Compression in Agent Systems}
+\title{Developing Capability-Conditioned Scaling-Down Laws for LLM Compression}
 
 % Authors must not appear in the submitted version. They should be hidden
 % as long as the \iclrfinalcopy macro remains commented out below.
@@ -104,17 +104,19 @@ Address \\
 \begin{abstract}
 Specialized workloads need specific capabilities, and the models that serve them are usually reference models scaled
 down by pruning, quantization, or distillation; choosing a configuration today means
-measuring each one. We develop capability-conditioned empirical models
-of the compression response: for math, code, and multi-hop QA we
-predict the conditional loss after compression from the initial model state (parameter count, pretraining tokens, and
-the reference capability losses of the source or initial student) and the configuration of the
-method. Relations are built on a controlled panel of Pythia checkpoints whose
+measuring each one. We systematically develop and test capability-conditioned relations
+that predict the loss on math, code, and multi-hop QA after pruning,
+quantization, or distillation from the initial model state (parameter
+count, pretraining tokens, and the reference capability losses of the
+source or initial student) and the configuration of the method,
+separating configuration response, transfer to new model states, and
+decision value. Relations are built on a controlled panel of Pythia checkpoints whose
 size and pretraining stage vary independently and validated with
 predictions frozen before new configurations and states are measured.
-A five-parameter pruning form predicts math and code at unseen
-densities inside the fitted range on three new checkpoints (0.24 nats
-mean absolute error against 0.45 for a source-free strength curve) and
-fails beyond the range and for QA; with the group size as a second
+A five-parameter pruning form reaches, with fewer parameters, the
+error of a per-density regression on three new checkpoints (0.24
+against 0.23 nats for math) and does not beat a source-free median
+curve on code or QA or on new sizes; with the group size as a second
 axis, a frozen same-input interpolation over the measured grid predicts
 unseen group sizes on the development states and a parametric surface
 does not; under a fixed distillation protocol a
