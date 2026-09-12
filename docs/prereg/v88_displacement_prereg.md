@@ -86,3 +86,39 @@ token, **moderate** 0.1 to 0.5, **severe** above 0.5. Reported separately, alway
 
 At most 2 GPU-hours, on one GPU the user has released for this work, selected by UUID. A
 pilot of one state and two configurations runs first as a functional check.
+
+## Amendment, written before any measurement was taken
+
+While implementing the measurement, the delegated implementer flagged that the
+shrinkage-plus-noise predictor registered above is algebraically incomplete: for a pure
+shrinkage `r = -eps*z` the exact second-order response is `eps*B + 0.5*eps^2*Var_p(z)`, so
+`eps*B + 0.5*sigma2*V` omits the shrinkage's own quadratic term. The objection is correct.
+Checking the algebra end to end, the complete decomposition of the exact second-order
+response under `r = -eps*z + s` is
+
+```
+dL2 = eps*B + (E_p[s] - s_y) + 0.5*eps^2*W - eps*Cov_p(z,s) + 0.5*Var_p(s)
+   W = Var_p(z)      s = r + eps_hat*z      eps_hat = -<r,z>/|z|^2
+```
+
+which reproduces `dL2` to roundoff on random fixtures (largest absolute difference 1.5e-14
+across four displacement regimes) and is asserted in the test suite.
+
+The registered T2 predictors are therefore replaced, before any measurement, by:
+
+- **shrinkage only**, `eps*B + 0.5*eps^2*W`: the entire displacement summarised by one
+  scalar per state and configuration. This is the interesting structural claim, and the
+  question T2 now asks is how much of the measured response one scalar recovers.
+- **shrinkage plus residual**, the full decomposition above: equal to the exact second-order
+  response by construction, so it is reported as a bookkeeping check rather than a
+  prediction.
+
+The isotropic reading, `0.5*sigma_coordinate^2*V`, becomes a further simplification to test
+rather than the definition of T2, since the p-weighted residual variance is measurable
+directly and needs no isotropy assumption.
+
+**T2 passes** if, in the mild regime, the median absolute relative error of the
+shrinkage-only predictor is at most 1.5 times that of the exact second-order predictor.
+Everything else in this registration, including the cell list, the regimes, the T1 rule and
+the stop rule, is unchanged. The original formulation above is left in place rather than
+edited, so the correction is visible.
