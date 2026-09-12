@@ -246,7 +246,7 @@ def test_input_validation_no_missing_anchor_config_or_nonfinite_values(arm):
         v36.parse_losses(bad, arm)
     bad = copy.deepcopy(table)
     bad[f"{v36.CONFIGS[arm][0]:.2f}"] = dict.fromkeys(v36.CAPS, 2.)
-    with pytest.raises(ValueError, match="duplicate"):
+    with pytest.raises(ValueError, match="(?i)duplicate"):
         v36.parse_losses(bad, arm)
 
 

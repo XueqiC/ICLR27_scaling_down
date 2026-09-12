@@ -3,6 +3,7 @@ import copy
 import json
 import math
 from pathlib import Path
+import os
 import subprocess
 import sys
 from types import SimpleNamespace
@@ -42,6 +43,12 @@ class DisplacedModel(torch.nn.Module):
         assert input_ids.device.type == "cpu" and not use_cache and logits_to_keep == 1
         self.calls += 1
         return SimpleNamespace(logits=(self.z + self.r).reshape(1, 1, -1))
+
+
+def _subprocess_env():
+    """torch sets MKL_THREADING_LAYER=INTEL in this process; a child that imports
+    numpy first then fails against libgomp. Give the child a compatible layer."""
+    return {**os.environ, "MKL_THREADING_LAYER": "GNU"}
 
 
 def test_injected_displacement_closed_form_terms_to_1e9():
@@ -468,7 +475,7 @@ def test_cli_pilot_full_and_separate_summary(tmp_path, monkeypatch):
 
 def test_cli_selftest_cpu_offline(tmp_path):
     completed = subprocess.run([sys.executable, "-m", "analysis.v88_displacement", "--selftest",
-                                "--output-dir", str(tmp_path)], capture_output=True, text=True, timeout=30)
+                                "--output-dir", str(tmp_path)], env=_subprocess_env(), capture_output=True, text=True, timeout=30)
     assert completed.returncode == 0, completed.stderr
     assert "CPU selftest: passed" in completed.stdout
     paths = sorted(tmp_path.glob("*/*.json"))

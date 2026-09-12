@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 
@@ -18,6 +19,12 @@ def cpu_threads():
     torch.set_num_threads(1)
     yield
     torch.set_num_threads(previous)
+
+
+def _subprocess_env():
+    """torch sets MKL_THREADING_LAYER=INTEL in this process; a child that imports
+    numpy first then fails against libgomp. Give the child a compatible layer."""
+    return {**os.environ, "MKL_THREADING_LAYER": "GNU"}
 
 
 def test_central_difference_shrinkage_and_hessian_trace():
@@ -113,7 +120,7 @@ def test_unprovable_scored_bytes_do_not_change_cohort_or_use_full_reference():
 
 def test_cli_selftest_offline_and_cpu_default(tmp_path):
     completed = subprocess.run([sys.executable, "-m", "analysis.descriptor_bv", "--selftest",
-                                "--output-dir", str(tmp_path)], check=True, capture_output=True, text=True)
+                                "--output-dir", str(tmp_path)], env=_subprocess_env(), check=True, capture_output=True, text=True)
     result = json.loads((tmp_path / "descriptor_selftest.json").read_text())
     assert result["device"] == "cpu" and result["selftest"]["status"] == "passed"
     assert json.loads(completed.stdout)["input_hashes"]["probes_sha256"]
@@ -121,5 +128,5 @@ def test_cli_selftest_offline_and_cpu_default(tmp_path):
 
 def test_cli_rejects_non_cpu_before_loading():
     result = subprocess.run([sys.executable, "-m", "analysis.descriptor_bv", "--device", "cuda:0"],
-                            capture_output=True, text=True)
+                            env=_subprocess_env(), capture_output=True, text=True)
     assert result.returncode != 0 and "CPU only" in result.stderr
