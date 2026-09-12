@@ -31,6 +31,16 @@ python3 analysis/v86_main_table.py
 summaries and creating the directories the generators write into. It never overwrites an
 existing file and never modifies `data_mirror/`.
 
+What runs from a plain checkout, measured on a fresh clone of this repository after
+`bootstrap_results.py`: the main prediction tables and the audits behind them regenerate
+(`v45_main_table`, `v52_prediction_tables`, `v63_quant_identifiability`,
+`v74_quant_threeway`, `v84_main_table`, `v85_selection_decomp`, `v86_main_table`). The two
+capability-conditioning audits (`v76_cap_conditioning`, `v79_cond_audit`) stop on their own
+integrity check, because an input they recorded at freeze time is not byte-identical to the
+copy published here; `data_mirror/ANONYMIZATION_DIGESTS.json` records every such difference
+and its reason, and `docs/RESULTS_LEDGER.md` reports their results. `v79_cond_audit` also
+shells out to `ripgrep`.
+
 Run the offline test suite:
 
 ```
