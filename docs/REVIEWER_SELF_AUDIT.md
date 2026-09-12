@@ -58,7 +58,7 @@ simpler frozen forms; no item-level intervals (per-example losses not stored).
 | Procedure | Eq. selection; locked rule (final_rule.py; App. H text); feasibility without fallback (C42) |
 | Strongest baseline | quantization-only under the same candidates/predictor/feasibility; earlier law maps; cheapest; fixed policies (C42, C54) |
 | Independent test | four fresh states, predictions and maps frozen before measurement (C53/C54): math/code/QA criterion met; largest-loss-increase objective prospective, criterion not met |
-| Scope | nominal storage only; 17 budgets x 4 states (68 cells from four models); distillation candidates reused from v39 (in-sample for that arm); QA restricted to 2Wiki |
+| Scope | nominal storage only; 17 budgets x 4 states (68 cells from four models); distillation candidates reused from v39 (their outcomes purged from the fits that predict them); QA restricted to 2Wiki; QA confirmation is an aggregate over heterogeneous states (160M@32k trails quant-only) |
 
 Reviewer risks: quant-only is close on math/code (the storage axis favours quantization); the value of cross-method selection is
 capability-specific (QA) and is stated so.
