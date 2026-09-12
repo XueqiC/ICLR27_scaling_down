@@ -17,17 +17,15 @@ another.
 We validated this use retrospectively on the controlled panel with a
 nominal storage budget $r_{\max}$ from 0.2 to 1, over measured
 configurations of 17 states with every law refit with the target
-state held out. A policy with no feasible configuration returns no choice (pruning-only
-covers 56\% and distillation-only 33\% of the 289 cells). The choice made from the laws is within 0.19, 0.17, and 0.42 nats of
+state held out; a policy with no feasible configuration returns no
+choice. The choice made from the laws is within 0.19, 0.17, and 0.42 nats of
 the measured oracle for math, code, and QA, and within 0.03 for the
 largest loss increase across the three capabilities, picking the
 oracle's method in 96\%, 95\%, 73\%, and 94\% of cells
 (cheapest-feasible loses 4.3 to 5.2 nats). A quantization-only policy is close behind (0.21, 0.19, 0.49, and
-0.04 nats), because on this storage axis quantization has the most
-feasible cells and dominates math and code. Where a smaller student exists, distillation-only is near the oracle
-for QA; under a heuristic no-clear-winner rule about half of the
-cells report a candidate set that always contains the oracle's method
-(Appendix~\ref{sec:app_selection}).
+0.04 nats), because on this storage axis quantization dominates math
+and code; where a smaller student exists, distillation-only is near
+the oracle for QA (Appendix~\ref{sec:app_selection}).
 
 \paragraph{Independent confirmation of the locked rule.} We then locked the complete rule of Table~\ref{tab:final}, froze
 every candidate's predicted loss and the four maps for four fresh

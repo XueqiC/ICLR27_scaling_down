@@ -90,10 +90,9 @@ The response is the signed transfer $\delta_c$ of an existing student
 to teacher traces, relative to the student's own dense loss; the
 teacher never enters it. Its coordinates are the supervised
 completion tokens $T$, the pool size $D_U$, and the reuse count
-$E=T/D_U$. QA improves under every recipe we ran while math and code
-respond by a few hundredths to a few tenths of a nat, and with a small
-pool the QA loss rises again once $E$ grows large
-(Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the 2Wiki probe
+$E=T/D_U$. QA improves under every recipe we ran while math and code respond by
+a few hundredths to a few tenths of a nat; with a small pool the QA
+loss rises again at large $E$ (Fig.~\ref{fig:responses}, right). Distillation lowers the conditional loss on the 2Wiki probe
 distribution and on a fresh sample of it, and on the same checkpoints
 the loss rises on MuSiQue and TriviaQA
 (Appendix~\ref{sec:app_measure}); we therefore read the QA result as
