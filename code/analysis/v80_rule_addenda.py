@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""CPU-only V80 addenda from the sealed V78 selections; no fitting or measurement.
+"""CPU-only V81 labels from the sealed V78 selections; no fitting or measurement.
 
 Run: python -B analysis/v80_rule_addenda.py
-Writes only results/v80-rule-addenda/, the named paper table/three PDFs,
+Updates the V80 addenda in place. Writes only results/v81-rule-labels/,
+the two named paper table files/three PDFs,
 and a byte-identical mirror of this script in paper/code/analysis/.
 V78 inputs, including their directory metadata inventory, are checked unchanged.
 """
@@ -18,7 +19,7 @@ import sys
 sys.dont_write_bytecode = True
 ROOT = next(p for p in Path(__file__).resolve().parents
             if (p / "results/v78-rule-confirm/compare.json").is_file())
-OUT = ROOT / "results/v80-rule-addenda"
+OUT = ROOT / "results/v81-rule-labels"
 V78 = ROOT / "results/v78-rule-confirm"
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 os.environ["MPLCONFIGDIR"] = str(OUT / ".mplconfig")
@@ -39,6 +40,15 @@ from matplotlib.text import Text
 CAPS = v64.CAPS
 OBJECTIVES = v64.OBJECTIVES
 POLICIES = ("locked-rule", "v64-law", "quant-only", "cheapest")
+POLICY_LABELS = {
+    "locked-rule": "Frozen selection rule",
+    "v64-law": "Source-conditioned predictor",
+    "quant-only": "Quantization-only",
+    "prune-only": "Pruning-only",
+    "distill-only": "Distillation-only",
+    "cheapest": "Cheapest feasible",
+}
+INTERNAL_NOTE = "Policy internal names: locked-rule, v64-law (respectively)."
 MAPS = POLICIES[:2]
 METHODS = v64.METHODS
 TITLES = {"math": "Math", "code": "Code", "qa": "QA (2Wiki)", "multi": "Multi (max ΔL)"}
@@ -49,8 +59,10 @@ METHOD_LABELS = ("Prune", "Quant", "Distill", "Dense")
 SYMBOLS = dict(zip(METHODS, ("^", "s", "D", "o")))
 FIG_NAMES = ("rule_maps_main", "rule_regret", "rule_maps_full")
 TABLE = "paper/paper/tables/rule_confirm_by_state.tex"
+CONFIRM_TABLE = "paper/paper/tables/rule_confirm.tex"
 MIRROR = "paper/code/analysis/v80_rule_addenda.py"
-PAPER_OUTPUTS = {TABLE, MIRROR, *(f"paper/paper/figs/{n}.pdf" for n in FIG_NAMES)}
+PAPER_OUTPUTS = {TABLE, CONFIRM_TABLE, MIRROR, *(f"paper/paper/figs/{n}.pdf" for n in FIG_NAMES)}
+FIGURE_PAD = .04
 
 
 def require(condition, message):
@@ -65,7 +77,7 @@ def sha(path):
 def write(path, data):
     path = path.absolute()
     require(path.is_relative_to(OUT) or str(path.relative_to(ROOT)) in PAPER_OUTPUTS,
-            f"Output outside V80 allowlist: {path}")
+            f"Output outside V81 allowlist: {path}")
     path.parent.mkdir(parents=True, exist_ok=True)
     if isinstance(data, str):
         data = data.encode()
@@ -257,11 +269,69 @@ def state_label(tag):
     return f"{size.upper()} @ {int(step)//1000}k"
 
 
+def single_choice_agreement(compare):
+    """Compare one selected configuration with the oracle on identical feasible cells."""
+    records = []
+    for cap in OBJECTIVES:
+        for reference in compare["tables"][cap]:
+            policy = reference["policy"]
+            rows = [r for r in compare["cells"][cap]
+                    if r["policies"][policy]["status"] == "FEASIBLE"]
+            exact, method = 0, 0
+            for row in rows:
+                choice = row["policies"][policy]
+                same_config = choice["config_id"] == row["oracle_id"]
+                same_method = choice["method"] == row["oracle_method"]
+                require(choice["oracle_method_agreement"] == same_method,
+                        f"Stored method agreement differs: {cap}/{policy}")
+                require(not same_config or same_method,
+                        f"Exact configuration match without method match: {cap}/{policy}")
+                exact += same_config
+                method += same_method
+            n = len(rows)
+            require(n == reference["n_feasible"] and n > 0, "Agreement denominator differs")
+            np.testing.assert_allclose(method / n, reference["method_agreement"], rtol=0, atol=1e-12)
+            require(exact <= method, f"Exact agreement exceeds method agreement: {cap}/{policy}")
+            records.append({"objective": cap, "policy": policy, "n_feasible": n,
+                            "exact_configuration_matches": exact, "method_matches": method,
+                            "exact_configuration_agreement": exact / n, "method_agreement": method / n})
+    return records
+
+
+def latex_confirm(compare):
+    lines = [r"\begin{table}[H]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
+        r"\caption{Independent V78 selection panel. Regret is in nats. Agreement is the percentage "
+        r"of single choices matching the oracle method; set coverage is the percentage of heuristic "
+        r"candidate sets containing that method. QA is restricted to 2Wiki; KD reuses V39 students.}",
+        r"\label{tab:rule-confirm}", r"\begin{tabularx}{\linewidth}{lXrrrr}", r"\toprule",
+        r"Capability & Policy & Feasible & Regret & \shortstack{Method\\agreement} & "
+        r"\shortstack{Set contains\\oracle method} \\", r"\midrule"]
+    for cap in OBJECTIVES:
+        for r in compare["tables"][cap]:
+            if r["policy"] not in POLICIES:
+                continue
+            cov = compare["candidate_set_coverage"][cap].get(r["policy"])
+            coverage = f"{100*cov['method_coverage']:.1f}" if cov else "---"
+            lines.append(f"{TABLE_LABELS[cap]} & {POLICY_LABELS[r['policy']]} & {r['n_feasible']}/68 & "
+                         f"{v64.number(r['mean_regret'], 4)} & {100*r['method_agreement']:.1f} & {coverage}" + r" \\")
+        lines.append(r"\midrule")
+    lines[-1] = r"\bottomrule"
+    lines += [r"\end{tabularx}", r"\par\smallskip\begin{minipage}{\linewidth}\footnotesize",
+        r"The multi objective is $\max_c(L_c-L_{0c})$. Quantization-only pools both RTN arms. "
+        r"All four headline policies share the same 68 feasible cells. Heuristic sets use frozen "
+        r"development errors; set coverage is retrospective, not calibrated uncertainty. Verdicts: " +
+        "; ".join(f"{TABLE_LABELS[c]}: {compare['verdict'][c]}" for c in CAPS) + ". " + INTERNAL_NOTE,
+        r"\end{minipage}", r"\end{table}"]
+    return "\n".join(lines) + "\n"
+
+
 def latex(data, freeze):
     lines = [r"\begin{table}[H]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
-        r"\caption{V78 regret by source state and objective. Each entry is the mean over all 17 nominal storage budgets (0.20--1.00, step 0.05), in nats. $K$ counts distinct configurations selected by the locked rule across these budgets.}",
+        r"\caption{V78 regret by source state and objective. Each entry is the mean over all 17 nominal storage budgets (0.20--1.00, step 0.05), in nats. $K$ counts distinct configurations selected by the Frozen selection rule across these budgets.}",
         r"\label{tab:rule-confirm-by-state}", r"\begin{tabular}{llrrrrr}", r"\toprule",
-        r"State & Objective & Locked-rule & V64-law & Quant-only & Cheapest & $K$ \\", r"\midrule"]
+        r"State & Objective & \shortstack{Frozen selection\\rule} & "
+        r"\shortstack{Source-conditioned\\predictor} & Quantization-only & "
+        r"\shortstack{Cheapest\\feasible} & $K$ \\", r"\midrule"]
     for s in freeze["states"]:
         for i, cap in enumerate(OBJECTIVES):
             r = next(r for r in data["per_state"] if r["state"] == s["tag"] and r["objective"] == cap)
@@ -273,29 +343,35 @@ def latex(data, freeze):
     lines += [r"\end{tabular}", r"\par\smallskip\begin{minipage}{\linewidth}\footnotesize",
         r"All four policies are feasible on all 68 state--budget cells per objective. "
         r"Multi minimizes $\max_c[L_c(M)-L_c(M_0)]$. QA uses 2Wiki. "
-        r"The 1B/64k state includes two historical V39 KD students, excluded from the V78 prediction fits.",
+        r"The 1B/64k state includes two historical V39 KD students, excluded from the V78 prediction fits. " + INTERNAL_NOTE,
         r"\end{minipage}", r"\end{table}", "", r"\begin{table}[H]", r"\centering\small",
         r"\setlength{\tabcolsep}{3pt}",
         r"\caption{Heuristic candidate-set sizes and oracle coverage on all 68 cells per objective. "
-        r"Size columns count methods in the set, including singleton sets. Coverage is count/68 (percent).}",
-        r"\label{tab:rule-confirm-candidate-sizes}", r"\begin{tabular}{llrrrrrr}", r"\toprule",
+        r"Size columns count methods in the no-clear-winner candidate set, including singleton sets. "
+        r"Both coverage columns describe the set, not the single choice, and report count/68 (percent).}",
+        r"\label{tab:rule-confirm-candidate-sizes}", r"\begin{tabularx}{\linewidth}{lXrrrrrr}", r"\toprule",
         r"& & \multicolumn{4}{c}{Set size (methods)} & \multicolumn{2}{c}{Oracle coverage} \\",
         r"\cmidrule(lr){3-6}\cmidrule(lr){7-8}",
-        r"Objective & Policy & 1 & 2 & 3 & 4 & Method & Exact config. \\", r"\midrule"]
+        r"Objective & Policy & 1 & 2 & 3 & 4 & \shortstack{Set contains\\oracle method} & "
+        r"\shortstack{Set contains\\oracle configuration} \\", r"\midrule"]
     for cap in OBJECTIVES:
         for i, p in enumerate(MAPS):
             r = next(r for r in data["candidate_sets"] if r["objective"] == cap and r["policy"] == p)
             counts = " & ".join(str(r["size_counts"][str(k)]) for k in range(1, 5))
             coverage = " & ".join(f"{r[key]}/68 ({100*r[key]/68:.1f})"
                                   for key in ("oracle_method_covered", "oracle_config_covered"))
-            lines.append(f"{TABLE_LABELS[cap] if i == 0 else ''} & {p} & {counts} & {coverage}" + r" \\")
+            lines.append(f"{TABLE_LABELS[cap] if i == 0 else ''} & {POLICY_LABELS[p]} & {counts} & {coverage}" + r" \\")
         lines.append(r"\midrule")
     lines[-1] = r"\bottomrule"
-    lines += [r"\end{tabular}", r"\par\smallskip\begin{minipage}{\linewidth}\footnotesize",
-        r"Sets reuse frozen V64 development LOSO MAE thresholds; coverage is retrospective, not calibrated uncertainty. "
+    lines += [r"\end{tabularx}", r"\par\smallskip\begin{minipage}{\linewidth}\footnotesize",
+        r"Sets reuse frozen development LOSO MAE thresholds; coverage is retrospective, not calibrated uncertainty. "
         r"On this panel the no-clear-winner flag holds exactly for sets of size $\geq2$. "
-        r"V64 Code at 1B/64k and budget 1.00 has four candidates (quant, dense, prune, distill); it is retained explicitly. "
-        r"Exact configuration coverage tests the oracle against one predicted best configuration per included method.",
+        r"The Source-conditioned predictor for Code at 1B/64k and budget 1.00 has four candidates "
+        r"(quantization, dense, pruning, distillation); it is retained explicitly. "
+        r"Set contains oracle method tests whether the measured oracle's method belongs to the candidate methods. "
+        r"Set contains oracle configuration tests whether its exact configuration ID belongs to the set of "
+        r"one predicted best configuration per included method. Neither column tests the single selected configuration. "
+        + INTERNAL_NOTE,
         r"\end{minipage}", r"\end{table}"]
     return "\n".join(lines) + "\n"
 
@@ -306,108 +382,88 @@ def quote(path, first, last):
         f"{i}: {source[i-1]}" for i in range(first, last + 1)) + "\n```\n"
 
 
+def quote_block(path, first_text, last_text):
+    """Locate exact source lines so the verbatim coverage evidence survives relabeling."""
+    source = (ROOT / path).read_text().splitlines()
+    first = next(i for i, line in enumerate(source) if first_text in line)
+    last = next(i for i in range(first, len(source)) if last_text in source[i])
+    return quote(path, first + 1, last + 1)
+
+
 def markdown(data, provenance):
-    # Quotations come directly from the hash-verified sources, not paraphrases.
-    parts = ["# V80 rule-confirmation addenda", "",
-        "Generated on CPU from `results/v78-rule-confirm/compare.json` and `freeze.json`. "
-        "The independent freeze, original source code and historical measurements are read only for verification. "
-        "All 4 states × 17 budgets are retained for each objective; no models are fitted or measured.", "",
-        "## 1. Multi-capability objective", "",
-        "The coded objective is **max_c [L_c(M) − L_c(M0)]**, where M0 is the source dense model, "
-        "not max_c L_c(M). Selection minimizes this maximum increase over feasible candidates. "
-        "The individual objectives use absolute deployed losses. KD predictions add the predicted change "
-        "to the student's dense loss, before the multi objective subtracts the source dense loss.", "",
-        quote("analysis/final_rule.py", 14, 19),
-        quote("analysis/v78_rule_confirm.py", 74, 78),
-        quote("analysis/v64_selection_feasible.py", 407, 410),
-        quote("analysis/v64_selection_feasible.py", 442, 447),
-        quote("analysis/v78_rule_confirm.py", 524, 536),
-        "## 2. Quant-only fairness and no fallback", "",
-        "**Quant-only uses the same quantization candidates, the same locked-rule predictor, and the same "
-        "feasibility rule as the locked-rule map, with no fallback.** Each state has five channel RTN "
-        "candidates (8, 6, 5, 4, 3 bits) and nine grouped RTN candidates (3, 4, 5 bits × groups 64, 128, 256). "
-        "Both maps first restrict candidates by `r <= budget + 1e-12`. Quant-only then filters that pool "
-        "to method `quant` and uses the identical objective and tie rule. An empty pool yields `None` "
-        "and `INFEASIBLE`; no other method or dense fallback is substituted. The headline `quant-only` "
-        "comes from the locked map; `v64-quant-only` is reported separately.", "",
-        quote("analysis/v78_rule_confirm.py", 127, 143),
-        quote("analysis/v78_rule_confirm.py", 309, 325),
-        quote("analysis/v78_rule_confirm.py", 338, 361),
-        quote("analysis/v78_rule_confirm.py", 529, 531),
-        "## 3. Distillation provenance and prediction-fit membership", "",
-        "**The pythia-1b@step64000 KD candidates are the historical V39 students "
-        "pythia-160m@step64000 and pythia-410m@step64000, but their post-training losses did not enter "
-        "the V78 KD prediction fits supplied to final_rule.predict. They are not in-sample outcomes "
-        "for those predictions.** Both students belong to the original nine-student V39 cohort. "
-        "V78 reconstructs that cohort, excludes both selectable students from the V39 +D0 linear fit "
-        "used for Math, and excludes them from the mean-delta baselines used for Code and QA. The V64 "
-        "KD fits also exclude both students and the source. Seven development students remain. "
-        "`final_rule.py` evaluates the supplied fit objects; it does not load a global V39 fit. "
-        "The two historical `post_training` outcomes are reused only when scoring these candidate endpoints. "
-        "Their teacher was `gpt-5.6-luna` (run `gpt-5.6-luna_full_600_lora`), not the 1B source; "
-        "these are reused alternatives, not fresh KD experiments trained from that source. "
-        "Original V39 cohort membership and reuse in development analyses do not make this a fully "
-        "independent prospective KD experiment.", "",
-        quote("analysis/v39_distill_controlled.py", 23, 40),
-        quote("analysis/v78_rule_confirm.py", 49, 51),
-        quote("analysis/v78_rule_confirm.py", 266, 293),
-        quote("analysis/v64_selection_feasible.py", 365, 371),
-        quote("analysis/final_rule.py", 60, 65),
-        quote("analysis/final_rule.py", 75, 87),
-        quote("analysis/v78_rule_confirm.py", 668, 673),
-        "Frozen evidence: `freeze-independent.json` → `models.locked.distill.excluded_students` "
-        "contains both alternatives; `models.v64.distill_linear.train_states` contains the seven students "
-        "below, and its models equal `models.locked.distill.linear`. The frozen constants were checked "
-        "against the arithmetic mean of the same seven development deltas.", "",
-        *[f"- `{t}`" for t in provenance["v78_train_students"]], "",
-        "## Per-state regret", "",
-        "Regret is in nats, averaged over exactly 17 budgets. K counts distinct configuration IDs, not methods.", "",
-        "| State | Objective | Locked-rule | V64-law | Quant-only | Cheapest | K |",
-        "|---|---|---:|---:|---:|---:|---:|"]
-    for r in data["per_state"]:
-        values = " | ".join(f"{r['mean_regret'][p]:.6f}" for p in POLICIES)
-        parts.append(f"| {r['state']} | {r['objective']} | {values} | {r['locked_distinct_configurations']} |")
-    parts += ["", "## Candidate-set sizes and coverage", "",
-        "Each size distribution uses all 68 cells, including singleton sets. On this panel, "
-        "the no-clear-winner flag is exactly equivalent to size ≥2. The JSON also includes "
-        "percentages and size counts conditional on that flag. **V64 Code has one size-4 set** "
-        "at pythia-1b@step64000, budget 1.00: quant, dense, prune, distill. Keeping this fourth "
-        "column avoids silently dropping a cell. Exact configuration coverage compares the oracle "
-        "with the predicted best configuration of each included method.", "",
-        "| Objective | Policy | Size 1 | Size 2 | Size 3 | Size 4 | Method coverage | Config coverage | No clear winner |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
+    parts = ["# V81 selection-confirmation labels", "",
+        "Generated on CPU from the sealed `results/v78-rule-confirm/compare.json` and freezes. "
+        "All four states × 17 budgets are retained per objective. No fitting, measurements, GPU "
+        "access, V78 edits, or commits are performed.", "",
+        "## Candidate-set coverage: definitions and verbatim code", "",
+        "In `tab:rule-confirm-candidate-sizes`, **Method coverage** (now **Set contains oracle method**) "
+        "is the fraction of the 68 state–budget cells whose heuristic `candidate_methods` contains "
+        "the measured oracle's method. **Exact config coverage** (now **Set contains oracle configuration**) "
+        "is the fraction whose `candidate_config_ids` contains the measured oracle's exact configuration ID. "
+        "The configuration set contains one predicted best configuration per included method. "
+        "Both columns describe the **no-clear-winner candidate set**, not the single chosen configuration.", "",
+        "The denominator is **all 68 cells, including singleton sets**, as in V78 and V80. It is not "
+        "restricted to cells flagged no-clear-winner. The separate `method_coverage_no_clear_winner` "
+        "statistic uses only flagged cells. On this panel that flag holds exactly when set size ≥2. "
+        "The best predicted method is always included; each additional method is included when its "
+        "predicted gap is strictly below the maximum of the two frozen development LOSO MAEs. "
+        "These are retrospective heuristic sets, not calibrated uncertainty.", "",
+        quote_block("analysis/v64_selection_feasible.py", "def ambiguity(",
+                    '\"threshold\": records[1]'),
+        quote_block("analysis/v78_rule_confirm.py", '\"candidate_config_ids\": [r[\"config_id\"]',
+                    'if r[\"method\"] in ambiguity[\"candidate_methods\"]]'),
+        quote_block("analysis/v78_rule_confirm.py", 'sets[name] = {',
+                    '\"oracle_config_covered\": oracle'),
+        quote_block("analysis/v78_rule_confirm.py", 'coverage[cap][policy] = {',
+                    '\"method_coverage_no_clear_winner\": v64.mean_or_none'),
+        "V80's aggregation, retained verbatim in the updated generator:", "",
+        quote_block("analysis/v80_rule_addenda.py", '\"oracle_method_covered\": sum(',
+                    '\"method_coverage_no_clear_winner\": float(np.mean'),
+        "| Objective | Policy | Set contains oracle method | Set contains oracle configuration |",
+        "|---|---|---:|---:|"]
     for r in data["candidate_sets"]:
-        counts = " | ".join(str(r["size_counts"][str(k)]) for k in range(1, 5))
-        cov = " | ".join(f"{r[k]}/68 ({100*r[k]/68:.1f}%)" for k in ("oracle_method_covered", "oracle_config_covered"))
-        parts.append(f"| {r['objective']} | {r['policy']} | {counts} | {cov} | {r['n_no_clear_winner']} |")
-    parts += ["", quote("analysis/v64_selection_feasible.py", 450, 474),
-        "## Figures and verification", "",
-        "- `paper/paper/figs/rule_maps_main.pdf`: 5.5 × 2.1 in (the paper style defines a 5.5-in "
-        "text width at `paper/paper/iclr2027_conference.sty:49`); four 4 × 17 panels, locked rule only, "
-        "method colours and white circles only where the oracle method differs. No hatching in this view.",
-        "- `paper/paper/figs/rule_regret.pdf`: 2.95 × 2.6 in, all 68 cells per objective, logarithmic "
-        "regret axis. Bar tops show the means; all bars start at the displayed 10⁻⁶-nat axis floor. "
-        "Budget cells share states and are not independent replicates; no error bars are inferred.",
-        "- `paper/paper/figs/rule_maps_full.pdf`: 5.5 × 4.8 in, two map rows per state, all oracle "
-        "symbols and the original no-clear-winner hatching. QA is titled `QA (2Wiki)`. Legends "
-        "are below the panels, separate from titles and axis labels.",
-        "- All figures use V64's shared Times-metric bold fonts (at least 8 pt), method palette, "
-        "white cell grids, PDF fonttype 42, deterministic metadata and 300-dpi PNG previews. "
-        "The full view preserves V78's oracle symbol shapes. Preview PNGs are under `results/v80-rule-addenda/figs/`.",
-        "- `paper/paper/tables/rule_confirm_by_state.tex` contains two `[H]` tables, with six decimals "
-        "for regret so that the small nonzero Math regret remains visible.",
-        "- All recorded V78 input hashes and freeze seals checked; locked predictions, feasible "
-        "selections, measured oracles, regrets and candidate sets reproduced without fitting. "
-        "Aggregate values match `compare.json`; figure extents, font sizes, marker counts, hatching "
-        "counts and legend separation are checked in `validation.json`.",
-        "- The full V78 directory inventory and input hashes were unchanged after generation. "
-        "Only the authorized outputs and script mirror are written. No commit is made.", "",
-        "The existing V78 verdict remains Math, Code and QA confirmed; Multi retrospective "
-        "(locked mean regret exceeds V64). Candidate-set coverage is a retrospective heuristic "
-        "using frozen V64 development LOSO MAE thresholds, not calibrated uncertainty.", "",
-        "Reproduce with `python -B analysis/v80_rule_addenda.py` or the identical paper code mirror. "
-        "Exact input/output SHA256 values are recorded in `manifest.json`."]
-    return "\n".join(parts) + "\n"
+        values = " | ".join(f"{r[k]}/68 ({100*r[k]/68:.1f}%)"
+                            for k in ("oracle_method_covered", "oracle_config_covered"))
+        parts.append(f"| {TABLE_LABELS[r['objective']]} | {POLICY_LABELS[r['policy']]} | {values} |")
+    parts += ["", "## Single chosen configuration: exact agreement ≤ method agreement", "",
+        "For each feasible cell, exact agreement is `choice['config_id'] == row['oracle_id']`; "
+        "method agreement is `choice['method'] == row['oracle_method']`. Exact agreement implies "
+        "method agreement in every cell. Counts and percentages below use the same feasible-cell "
+        "denominator for each pair, and method agreement reproduces `compare.json`'s table statistic. "
+        "**The inequality holds for every objective and every policy in compare.json**, including "
+        "the three additional source-conditioned method-only variants. The six named policies follow; "
+        "all nine are recorded in `summary.json`.", "",
+        "| Objective | Policy | Exact-configuration agreement | Method agreement |",
+        "|---|---|---:|---:|"]
+    for r in data["single_choice_agreement"]:
+        if r["policy"] not in POLICY_LABELS:
+            continue
+        n = r["n_feasible"]
+        values = " | ".join(f"{r[k]}/{n} ({100*r[k]/n:.1f}%)"
+                            for k in ("exact_configuration_matches", "method_matches"))
+        parts.append(f"| {TABLE_LABELS[r['objective']]} | {POLICY_LABELS[r['policy']]} | {values} |")
+    parts += ["", "## Regenerated artifacts and checks", "",
+        "- `paper/paper/figs/rule_maps_main.pdf`: original four-panel layout, exact title `QA (2Wiki)`, "
+        "saved with `bbox_inches='tight'` and `pad_inches=0.04` to retain edge ticks and row labels.",
+        "- `paper/paper/figs/rule_maps_full.pdf`: row suffixes `frozen` and `source-cond.`; "
+        "all oracle markers and no-clear-winner hatching retained.",
+        "- `paper/paper/figs/rule_regret.pdf`: logarithmic axis, 16 bars, each mean printed above its "
+        "bar with three significant digits; numeric labels rotated to fit within 3.2 inches. "
+        "Bar tops and annotations use the unchanged means over the 68 cells.",
+        "- `paper/paper/tables/rule_confirm.tex` and `rule_confirm_by_state.tex`: reader-facing policy "
+        "names and explicit candidate-set coverage definitions; internal policy names appear only "
+        "in table footnotes. Numeric entries and candidate-set size counts remain unchanged.",
+        "- V78 predictions, selections, oracles, regrets, candidate sets, seals, input hashes, and "
+        "directory inventory are verified. Figure text extents, legend separation, annotation "
+        "counts, label overlaps, and saved regret width are checked in `validation.json`.",
+        "- `analysis/v80_rule_addenda.py` is updated in place and mirrored byte-for-byte to "
+        "`paper/code/analysis/v80_rule_addenda.py`. Reproduce with `python -B analysis/v80_rule_addenda.py`. "
+        "PDF/PNG previews and both table files are also saved under `results/v81-rule-labels/`; "
+        "SHA256 provenance is in `manifest.json`.", "",
+        "V78 verdicts are unchanged: Math, Code, and QA confirmed; Multi retrospective. "
+        "QA is restricted to 2Wiki. The two historical distillation students remain excluded "
+        f"from the prediction fits ({provenance['v78_train_count']} development students).", ""]
+    return "\n".join(parts)
 
 
 def setup_style():
@@ -459,12 +515,16 @@ def map_axis(ax, entries, states, policies, cap, *, full):
 def check_layout(fig, legends):
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
+    saved_box = fig.get_tightbbox(renderer).padded(FIGURE_PAD).transformed(fig.dpi_scale_trans)
     visible = [t for t in fig.findobj(Text) if t.get_visible() and t.get_text()]
     for t in visible:
         require(t.get_fontsize() >= 8, f"Text smaller than 8 pt: {t.get_text()}")
         box = t.get_window_extent(renderer)
-        require(box.x0 >= -1 and box.y0 >= -1 and box.x1 <= fig.bbox.x1 + 1 and box.y1 <= fig.bbox.y1 + 1,
+        require(box.x0 >= saved_box.x0 and box.y0 >= saved_box.y0 and
+                box.x1 <= saved_box.x1 and box.y1 <= saved_box.y1,
                 f"Clipped text: {t.get_text()}")
+        require(t.get_text().lower() not in POLICY_LABELS,
+                f"Internal policy name in figure: {t.get_text()}")
     legend_boxes = [l.get_window_extent(renderer) for l in legends]
     axis_boxes = [a.get_tightbbox(renderer) for a in fig.axes]
     for i, box in enumerate(legend_boxes):
@@ -474,17 +534,24 @@ def check_layout(fig, legends):
                 "Legend overlaps shared axis label")
     for i, box in enumerate(axis_boxes):
         require(not any(box.overlaps(b) for b in axis_boxes[i+1:]), "Panels or axis labels overlap")
-    return {"size_inches": list(fig.get_size_inches()), "minimum_font_points": min(t.get_fontsize() for t in visible),
-            "text_within_canvas": True, "legends_outside_panels": True, "no_panel_or_legend_overlap": True}
+    return {"size_inches": list(fig.get_size_inches()),
+            "saved_size_inches": [saved_box.width / fig.dpi, saved_box.height / fig.dpi],
+            "minimum_font_points": min(t.get_fontsize() for t in visible),
+            "text_within_saved_bbox": True, "reader_facing_policy_labels": True,
+            "legends_outside_panels": True, "no_panel_or_legend_overlap": True,
+            "bbox_inches": "tight", "pad_inches": FIGURE_PAD}
 
 
 def save_figure(fig, name, legends, details):
     layout = check_layout(fig, legends)
+    if name == "rule_regret":
+        require(layout["saved_size_inches"][0] <= 3.2, "Regret figure exceeds 3.2 inches")
     import io
     for ext in ("pdf", "png"):
         buffer = io.BytesIO()
         metadata = {"CreationDate": None, "ModDate": None} if ext == "pdf" else {}
-        fig.savefig(buffer, format=ext, dpi=300, metadata=metadata)
+        fig.savefig(buffer, format=ext, dpi=300, metadata=metadata,
+                    bbox_inches="tight", pad_inches=FIGURE_PAD)
         write(OUT / f"figs/{name}.{ext}", buffer.getvalue())
         if ext == "pdf":
             write(ROOT / f"paper/paper/figs/{name}.pdf", buffer.getvalue())
@@ -511,18 +578,25 @@ def figures(compare, freeze, data):
                           frameon=False, columnspacing=1., handlelength=1.1, handletextpad=.4)]
     validation["rule_maps_main"] = save_figure(fig, "rule_maps_main", legends, {"panels": details})
 
-    fig, ax = plt.subplots(figsize=(2.95, 2.6))
-    fig.subplots_adjust(left=.22, right=.985, top=.97, bottom=.36)
+    fig, ax = plt.subplots(figsize=(3.1, 3.6))
+    fig.subplots_adjust(left=.22, right=.97, top=.91, bottom=.37)
     x, width = np.arange(len(OBJECTIVES)), .18
     bar_colors = (style.COLORS["measured"], style.COLORS["pruning"], style.COLORS["quantization"], "#a9a9a9")
     floor = 1e-6
+    annotations = []
     for i, (p, color) in enumerate(zip(POLICIES, bar_colors)):
         values = [data["pooled_mean_regret"][c][p] for c in OBJECTIVES]
         require(all(v > floor for v in values), "Log axis floor would hide a regret mean")
-        ax.bar(x + (i-1.5) * width, np.array(values)-floor, width=width*.94, bottom=floor,
-               color=color, label=p, zorder=3)
+        bars = ax.bar(x + (i-1.5) * width, np.array(values)-floor, width=width*.94, bottom=floor,
+                      color=color, label=POLICY_LABELS[p], zorder=3)
+        for cap, bar, value in zip(OBJECTIVES, bars, values):
+            label = format(value, ".3g")
+            ax.annotate(label, (bar.get_x() + bar.get_width()/2, value),
+                        xytext=(0, 3), textcoords="offset points", ha="center", va="bottom",
+                        rotation=90, fontsize=8, annotation_clip=False)
+            annotations.append({"objective": cap, "policy": p, "value": value, "label": label})
     ax.set_yscale("log")
-    ax.set_ylim(floor, 5)
+    ax.set_ylim(floor, 80)
     ax.set_yticks([1e-6, 1e-4, 1e-2, 1], ["1e-6", "1e-4", "1e-2", "1"])
     ax.minorticks_off()
     ax.set_ylabel("Mean regret (nats; log scale)", fontsize=8, labelpad=3)
@@ -530,11 +604,18 @@ def figures(compare, freeze, data):
     ax.tick_params(axis="x", length=0, pad=4)
     ax.tick_params(axis="y", length=2, pad=2)
     ax.grid(axis="y", color="#dddddd", lw=.5, zorder=0)
-    legends = [fig.legend(handles=ax.get_legend_handles_labels()[0], labels=POLICIES,
-                          loc="lower center", bbox_to_anchor=(.51, .015), ncol=2, frameon=False,
+    legends = [fig.legend(handles=ax.get_legend_handles_labels()[0], labels=[POLICY_LABELS[p] for p in POLICIES],
+                          loc="lower center", bbox_to_anchor=(.51, .015), ncol=1, frameon=False,
                           columnspacing=1., handlelength=1.1, handletextpad=.5)]
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    annotation_boxes = [t.get_window_extent(renderer) for t in ax.texts]
+    require(len(annotation_boxes) == len(ax.patches) == 16, "Missing regret value labels")
+    require(not any(a.overlaps(b) for i, a in enumerate(annotation_boxes) for b in annotation_boxes[i+1:]),
+            "Regret value labels overlap")
     validation["rule_regret"] = save_figure(fig, "rule_regret", legends,
-        {"scale": "log", "axis_floor": floor, "bar_count": len(ax.patches), "means": data["pooled_mean_regret"]})
+        {"scale": "log", "axis_floor": floor, "bar_count": len(ax.patches), "means": data["pooled_mean_regret"],
+         "annotations": annotations, "value_label_significant_digits": 3, "value_labels_do_not_overlap": True})
 
     fig, axes = plt.subplots(2, 2, figsize=(5.5, 4.8), sharey=True)
     fig.subplots_adjust(left=.25, right=.985, top=.93, bottom=.255, wspace=.12, hspace=.37)
@@ -547,7 +628,7 @@ def figures(compare, freeze, data):
         require(details[cap]["hatched_cells"] == expected_hatches, "Wrong full-map hatching")
         for y in (1.5, 3.5, 5.5):
             ax.axhline(y, color="white", lw=.8, zorder=4)
-    labels = [f"{state_label(s['tag'])} / {p}" for s in states for p in ("locked", "v64")]
+    labels = [f"{state_label(s['tag'])} / {p}" for s in states for p in ("frozen", "source-cond.")]
     for ax in axes[:, 0]:
         ax.set_yticklabels(labels)
     fig.text(.61, .185, "Nominal storage budget (% of dense matrix storage)", ha="center", fontsize=8)
@@ -567,6 +648,9 @@ def main():
     checks = validate(compare, freeze, initial)
     provenance = kd_provenance(initial)
     data = aggregate(compare, freeze)
+    data["single_choice_agreement"] = single_choice_agreement(compare)
+    checks["single_choice_exact_agreement_le_method_agreement"] = True
+    checks["single_choice_policy_objectives_checked"] = len(data["single_choice_agreement"])
     require(all((len(r["candidate_methods"]) >= 2) == r["no_clear_winner_heuristic"]
                 for rows in compare["cells"].values() for row in rows for r in row["candidate_sets"].values()),
             "No-clear-winner flag differs from size >= 2; update table note")
@@ -574,6 +658,9 @@ def main():
     table = latex(data, freeze)
     write(ROOT / TABLE, table)
     write(OUT / "rule_confirm_by_state.tex", table)
+    confirm_table = latex_confirm(compare)
+    write(ROOT / CONFIRM_TABLE, confirm_table)
+    write(OUT / "rule_confirm.tex", confirm_table)
     write(OUT / "summary.json", dump({**data, "kd_provenance": provenance}))
     write(OUT / "summary.md", markdown(data, provenance))
     write(ROOT / MIRROR, Path(__file__).read_bytes())
@@ -583,14 +670,17 @@ def main():
     checks["v78_inventory_unchanged"] = True
     checks["input_hashes_unchanged"] = True
     checks["script_mirror_identical"] = sha(ROOT / MIRROR) == sha(Path(__file__))
+    require("torch" not in sys.modules, "CPU label build imported GPU libraries")
+    checks["cpu_only_no_torch_import"] = True
     write(OUT / "validation.json", dump(checks))
     outputs = [ROOT / p for p in PAPER_OUTPUTS]
-    outputs += [OUT / n for n in ("summary.json", "summary.md", "validation.json", "rule_confirm_by_state.tex")]
+    outputs += [OUT / n for n in ("summary.json", "summary.md", "validation.json",
+                                  "rule_confirm.tex", "rule_confirm_by_state.tex")]
     outputs += [OUT / f"figs/{n}.{ext}" for n in FIG_NAMES for ext in ("pdf", "png")]
     write(OUT / "manifest.json", dump({"input_sha256": hashes, "v78_inventory": before,
         "script_sha256": sha(Path(__file__)), "output_sha256": {str(p.relative_to(ROOT)): sha(p) for p in sorted(outputs)},
         "versions": {"python": sys.version, "numpy": np.__version__, "matplotlib": plt.matplotlib.__version__}}))
-    print("V80 complete: 16 state/objective rows, 8 candidate distributions, 3 figures, mirrored script.")
+    print("V81 complete: 16 state/objective rows, 8 candidate distributions, 3 figures, 2 table files, mirrored script.")
     print("Verified all V78 inputs and directory inventory unchanged; no fits or measurements performed.")
 
 

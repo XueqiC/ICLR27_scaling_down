@@ -1,11 +1,11 @@
 \begin{table}[H]
 \centering\small
 \setlength{\tabcolsep}{3pt}
-\caption{V78 regret by source state and objective. Each entry is the mean over all 17 nominal storage budgets (0.20--1.00, step 0.05), in nats. $K$ counts distinct configurations selected by the locked rule across these budgets.}
+\caption{V78 regret by source state and objective. Each entry is the mean over all 17 nominal storage budgets (0.20--1.00, step 0.05), in nats. $K$ counts distinct configurations selected by the Frozen selection rule across these budgets.}
 \label{tab:rule-confirm-by-state}
 \begin{tabular}{llrrrrr}
 \toprule
-State & Objective & Locked-rule & V64-law & Quant-only & Cheapest & $K$ \\
+State & Objective & \shortstack{Frozen selection\\rule} & \shortstack{Source-conditioned\\predictor} & Quantization-only & \shortstack{Cheapest\\feasible} & $K$ \\
 \midrule
 160M @ 32k & Math & 0.000000 & 0.000512 & 0.000035 & 2.902545 & 7 \\
  & Code & 0.000000 & 0.000000 & 0.000035 & 3.767303 & 7 \\
@@ -29,35 +29,35 @@ State & Objective & Locked-rule & V64-law & Quant-only & Cheapest & $K$ \\
 \bottomrule
 \end{tabular}
 \par\smallskip\begin{minipage}{\linewidth}\footnotesize
-All four policies are feasible on all 68 state--budget cells per objective. Multi minimizes $\max_c[L_c(M)-L_c(M_0)]$. QA uses 2Wiki. The 1B/64k state includes two historical V39 KD students, excluded from the V78 prediction fits.
+All four policies are feasible on all 68 state--budget cells per objective. Multi minimizes $\max_c[L_c(M)-L_c(M_0)]$. QA uses 2Wiki. The 1B/64k state includes two historical V39 KD students, excluded from the V78 prediction fits. Policy internal names: locked-rule, v64-law (respectively).
 \end{minipage}
 \end{table}
 
 \begin{table}[H]
 \centering\small
 \setlength{\tabcolsep}{3pt}
-\caption{Heuristic candidate-set sizes and oracle coverage on all 68 cells per objective. Size columns count methods in the set, including singleton sets. Coverage is count/68 (percent).}
+\caption{Heuristic candidate-set sizes and oracle coverage on all 68 cells per objective. Size columns count methods in the no-clear-winner candidate set, including singleton sets. Both coverage columns describe the set, not the single choice, and report count/68 (percent).}
 \label{tab:rule-confirm-candidate-sizes}
-\begin{tabular}{llrrrrrr}
+\begin{tabularx}{\linewidth}{lXrrrrrr}
 \toprule
 & & \multicolumn{4}{c}{Set size (methods)} & \multicolumn{2}{c}{Oracle coverage} \\
 \cmidrule(lr){3-6}\cmidrule(lr){7-8}
-Objective & Policy & 1 & 2 & 3 & 4 & Method & Exact config. \\
+Objective & Policy & 1 & 2 & 3 & 4 & \shortstack{Set contains\\oracle method} & \shortstack{Set contains\\oracle configuration} \\
 \midrule
-Math & locked-rule & 30 & 28 & 10 & 0 & 68/68 (100.0) & 68/68 (100.0) \\
- & v64-law & 31 & 27 & 10 & 0 & 68/68 (100.0) & 39/68 (57.4) \\
+Math & Frozen selection rule & 30 & 28 & 10 & 0 & 68/68 (100.0) & 68/68 (100.0) \\
+ & Source-conditioned predictor & 31 & 27 & 10 & 0 & 68/68 (100.0) & 39/68 (57.4) \\
 \midrule
-Code & locked-rule & 30 & 28 & 10 & 0 & 68/68 (100.0) & 37/68 (54.4) \\
- & v64-law & 30 & 26 & 11 & 1 & 68/68 (100.0) & 23/68 (33.8) \\
+Code & Frozen selection rule & 30 & 28 & 10 & 0 & 68/68 (100.0) & 37/68 (54.4) \\
+ & Source-conditioned predictor & 30 & 26 & 11 & 1 & 68/68 (100.0) & 23/68 (33.8) \\
 \midrule
-QA (2Wiki) & locked-rule & 24 & 32 & 12 & 0 & 68/68 (100.0) & 18/68 (26.5) \\
- & v64-law & 26 & 30 & 12 & 0 & 66/68 (97.1) & 23/68 (33.8) \\
+QA (2Wiki) & Frozen selection rule & 24 & 32 & 12 & 0 & 68/68 (100.0) & 18/68 (26.5) \\
+ & Source-conditioned predictor & 26 & 30 & 12 & 0 & 66/68 (97.1) & 23/68 (33.8) \\
 \midrule
-Multi & locked-rule & 30 & 28 & 10 & 0 & 68/68 (100.0) & 54/68 (79.4) \\
- & v64-law & 32 & 26 & 10 & 0 & 68/68 (100.0) & 62/68 (91.2) \\
+Multi & Frozen selection rule & 30 & 28 & 10 & 0 & 68/68 (100.0) & 54/68 (79.4) \\
+ & Source-conditioned predictor & 32 & 26 & 10 & 0 & 68/68 (100.0) & 62/68 (91.2) \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \par\smallskip\begin{minipage}{\linewidth}\footnotesize
-Sets reuse frozen V64 development LOSO MAE thresholds; coverage is retrospective, not calibrated uncertainty. On this panel the no-clear-winner flag holds exactly for sets of size $\geq2$. V64 Code at 1B/64k and budget 1.00 has four candidates (quant, dense, prune, distill); it is retained explicitly. Exact configuration coverage tests the oracle against one predicted best configuration per included method.
+Sets reuse frozen development LOSO MAE thresholds; coverage is retrospective, not calibrated uncertainty. On this panel the no-clear-winner flag holds exactly for sets of size $\geq2$. The Source-conditioned predictor for Code at 1B/64k and budget 1.00 has four candidates (quantization, dense, pruning, distillation); it is retained explicitly. Set contains oracle method tests whether the measured oracle's method belongs to the candidate methods. Set contains oracle configuration tests whether its exact configuration ID belongs to the set of one predicted best configuration per included method. Neither column tests the single selected configuration. Policy internal names: locked-rule, v64-law (respectively).
 \end{minipage}
 \end{table}
