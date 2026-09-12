@@ -39,14 +39,18 @@ carries the state the earlier audit recorded. Copy the latter over the former to
 earlier audit; the ledger says which entry used which.
 
 What runs from a plain checkout, measured on a fresh clone of this repository after
-`bootstrap_results.py`: the main prediction tables and the audits behind them regenerate
-(`v45_main_table`, `v52_prediction_tables`, `v63_quant_identifiability`,
-`v74_quant_threeway`, `v84_main_table`, `v85_selection_decomp`, `v86_main_table`). The two
-capability-conditioning audits (`v76_cap_conditioning`, `v79_cond_audit`) stop on their own
-integrity check, because an input they recorded at freeze time is not byte-identical to the
-copy published here; `data_mirror/ANONYMIZATION_DIGESTS.json` records every such difference
-and its reason, and `docs/RESULTS_LEDGER.md` reports their results. `v79_cond_audit` also
-shells out to `ripgrep`.
+`bootstrap_results.py`: `v45_main_table`, `v52_prediction_tables`, `v74_quant_threeway`,
+`v76_cap_conditioning`, `v84_main_table`, `v85_selection_decomp` and `v86_main_table`
+regenerate their outputs. `v79_cond_audit` also regenerates, but it shells out to
+[ripgrep](https://github.com/BurntSushi/ripgrep), so install that first.
+`v63_quant_identifiability` is the one that does not: it verifies the grouped-quantization
+measurements against the digest recorded when it ran, and this repository publishes the
+current file, which gained configurations afterwards. Copy
+`data_mirror/v54-quant-group-as-recorded-by-v55/` over `data_mirror/v54-quant-group/`, rerun
+`bootstrap_results.py` in a clean tree, and it regenerates; the capability-conditioning audits
+then need the current file back. `data_mirror/ANONYMIZATION_DIGESTS.json` records every
+published file whose bytes differ from the working-tree original, with the reason, and marks
+which of those a digest check may accept.
 
 Run the offline test suite:
 
