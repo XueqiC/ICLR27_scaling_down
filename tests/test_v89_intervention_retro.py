@@ -174,6 +174,17 @@ def test_tau_zero_signal_profile_reaches_boundaries_and_is_not_identified():
         assert profile["clusters"] == 2 and profile["below_six_clusters"]
 
 
+def test_tau_profile_can_identify_an_interior_synthetic_timescale():
+    points = [point(f"run{i}", t, 100 * (i + 1),
+                    delta=0.4 * np.expm1(-t / 400) + 0.02 * np.log1p(t / (100 * (i + 1))) ** 2)
+              for i in range(8) for t in (0, 100, 200, 400, 800, 1600)]
+    fit = v89.fit_candidate(points, "saturation_p2", resamples=100)
+    assert fit.tau == pytest.approx(400)
+    assert fit.profile["identified_inside_observed_T_range"]
+    assert fit.profile["ci95"] == pytest.approx([400, 400])
+    assert fit.profile["clusters"] == 8
+
+
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value))
