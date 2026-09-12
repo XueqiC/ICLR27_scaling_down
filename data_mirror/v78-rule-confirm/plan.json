@@ -811,8 +811,8 @@
     "compressed": 72
   },
   "reused_kd_outcomes": 2,
-  "snapshot_root": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots",
-  "output": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm",
+  "snapshot_root": "results/v78-rule-confirm/snapshots",
+  "output": "results/v78-rule-confirm",
   "protocol": {
     "model_dtype": "bf16",
     "probe_seed": 0,

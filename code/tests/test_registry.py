@@ -29,7 +29,7 @@ def test_prc_detection_passes_compliant_families(model):
 
 
 def test_require_compliant_raises_without_escape_hatch(monkeypatch):
-    monkeypatch.delenv("SDL_ALLOW_PRC", raising=False)
-    with pytest.raises(RuntimeError, match="HiPerGator policy"):
+    monkeypatch.delenv("SDL_ALLOW_RESTRICTED", raising=False)
+    with pytest.raises(RuntimeError, match="the shared cluster policy"):
         require_compliant("Qwen/Qwen3-4B")
 

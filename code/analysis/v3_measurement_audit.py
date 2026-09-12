@@ -27,7 +27,7 @@ import numpy as np
 from scipy.optimize import minimize
 
 ROOT = Path(__file__).resolve().parents[1]
-RUNS = ROOT / "prior/xueqi-intern-backup/docs/scaling-down/results/runs"
+RUNS = ROOT / "prior/anon-intern-backup/docs/scaling-down/results/runs"
 OUT = ROOT / "results/v3-measurement-audit"
 
 DOMAINS = {

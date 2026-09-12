@@ -500,7 +500,7 @@
     "zero": "0 at every density"
   },
   "cache": {
-    "hub": "/home/xueqi/.cache/huggingface/hub",
+    "hub": "$HOME/.cache/huggingface/hub",
     "hf_id": "EleutherAI/pythia-2.8b",
     "revisions": {
       "main": {

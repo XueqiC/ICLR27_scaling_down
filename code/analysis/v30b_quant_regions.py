@@ -196,7 +196,7 @@ def missing_five(inventory):
             "commands": [f"python analysis/v10_quantization.py --model {model} --device cuda:0 "
                          "--model-dtype bf16 --n-probe 512 --bits 5 "
                          "--output-base results/v10-quant-shape512-fill5" for model in missing],
-            "protocol": "bf16 follows job_hpg_v10shape.slurm; saved aggregate JSON lacks dtype/item IDs. "
+            "protocol": "bf16 follows job_cluster_v10shape.slurm; saved aggregate JSON lacks dtype/item IDs. "
                         "Confirm the original runtime/probes before collecting matched fills.",
             "merge_policy": "V10 always measures dense and overwrites its dense key on merge. Stage fills "
                             "separately; check dense/probe/dtype agreement, then add only the 5-bit record "
@@ -335,7 +335,7 @@ def build_summary(n_boot=10000, target_reference_losses=None):
         raise ValueError("V10 inputs changed since V30; refusing to relabel its predictions")
     hashes = {**saved["input_sha256"], **snapshot_hash, **audit.provenance([
         Path(__file__), Path(v30.__file__), Path(audit.__file__), ROOT / "analysis/v10_quantization.py",
-        ROOT / "scripts/job_hpg_v10shape.slurm"])}
+        ROOT / "scripts/job_cluster_v10shape.slurm"])}
     panels, raw = {}, {}
     for name, directory in (("broad", "v10-quantization"), ("shape512", "v10-quant-shape512")):
         rows, _, inventory, excluded = v30.load_panel(ROOT / "results" / directory)

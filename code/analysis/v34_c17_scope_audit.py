@@ -20,7 +20,7 @@ import statistics
 import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
-PRIOR = Path("prior/xueqi-intern-backup")
+PRIOR = Path("prior/anon-intern-backup")
 RUNS = PRIOR / "docs/scaling-down/results/runs"
 PILOT = PRIOR / "scripts/empirical-study/scaling-down/pilot"
 SWEEP = PRIOR / "scripts/empirical-study/scaling-down/sweep"
@@ -665,7 +665,7 @@ def render_report(s: dict) -> str:
         "## Reproduce", "", "```bash",
         "python analysis/v34_c17_scope_audit.py",
         "# Optional read-only resolution against the existing local HotpotQA cache:",
-        "python analysis/v34_c17_scope_audit.py --hotpot-cache /home/xueqi/.cache/huggingface/datasets/hotpotqa___hotpot_qa",
+        "python analysis/v34_c17_scope_audit.py --hotpot-cache $HOME/.cache/huggingface/datasets/hotpotqa___hotpot_qa",
         "python -m pytest -q tests/test_v34.py", "```", "",
         "The first command reports cache provenance as unavailable; the second produces this snapshot's enriched "
         "split identification. Standard library only unless reading cached Arrow (pyarrow). "

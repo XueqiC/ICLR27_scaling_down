@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Model aliases and the HiPerGator PRC-model compliance guard."""
+"""Model aliases and the shared cluster restricted-model compliance guard."""
 from __future__ import annotations
 
 import os
@@ -57,52 +57,52 @@ MODEL_REGISTRY: dict[str, dict[str, str]] = {
     "pythia-160m": {
         "hf_id": "EleutherAI/pythia-160m",
         "family": "pythia",
-        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible; 3rd (smallest) panel size.",
+        "notes": "Controlled training-step checkpoints; unrestricted, the shared cluster-eligible; 3rd (smallest) panel size.",
     },
     "pythia-410m": {
         "hf_id": "EleutherAI/pythia-410m",
         "family": "pythia",
-        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible.",
+        "notes": "Controlled training-step checkpoints; unrestricted, the shared cluster-eligible.",
     },
     "pythia-1.4b": {
         "hf_id": "EleutherAI/pythia-1.4b",
         "family": "pythia",
-        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible.",
+        "notes": "Controlled training-step checkpoints; unrestricted, the shared cluster-eligible.",
     },
     "pythia-2.8b": {
         "hf_id": "EleutherAI/pythia-2.8b",
         "family": "pythia",
-        "notes": "Controlled training-step checkpoints; non-PRC, HiPerGator-eligible.",
+        "notes": "Controlled training-step checkpoints; unrestricted, the shared cluster-eligible.",
     },
     "Qwen3-0.6B": {
         "hf_id": "Qwen/Qwen3-0.6B",
         "family": "qwen3",
-        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1), never on HiPerGator.",
+        "notes": "restricted-origin; workstation-only (SDL_ALLOW_RESTRICTED=1), never on the shared cluster.",
     },
     "Qwen3-1.7B": {
         "hf_id": "Qwen/Qwen3-1.7B",
         "family": "qwen3",
-        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1), never on HiPerGator.",
+        "notes": "restricted-origin; workstation-only (SDL_ALLOW_RESTRICTED=1), never on the shared cluster.",
     },
     "Qwen3-4B": {
         "hf_id": "Qwen/Qwen3-4B",
         "family": "qwen3",
-        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1), never on HiPerGator.",
+        "notes": "restricted-origin; workstation-only (SDL_ALLOW_RESTRICTED=1), never on the shared cluster.",
     },
     "Qwen3-8B": {
         "hf_id": "Qwen/Qwen3-8B",
         "family": "qwen3",
-        "notes": "PRC-developed Base; RAI-only (SDL_ALLOW_PRC=1); NEW-SOURCE prospective test.",
+        "notes": "restricted-origin Base; workstation-only (SDL_ALLOW_RESTRICTED=1); NEW-SOURCE prospective test.",
     },
     "Qwen3-14B": {
         "hf_id": "Qwen/Qwen3-14B",
         "family": "qwen3",
-        "notes": "PRC-developed; RAI-only (SDL_ALLOW_PRC=1); NEW-SOURCE prospective (pruning+quant).",
+        "notes": "restricted-origin; workstation-only (SDL_ALLOW_RESTRICTED=1); NEW-SOURCE prospective (pruning+quant).",
     },
 }
 
 
-_PRC_PATTERN = re.compile(
+_RESTRICTED_PATTERN = re.compile(
     r"qwen|deepseek|chatglm|glm|yi-|baichuan|internlm|minimax|kimi|moonshot",
     re.IGNORECASE,
 )
@@ -124,24 +124,24 @@ def resolve_model(model: str) -> str:
 
 
 def is_prc_model(hf_id_or_tag: str) -> bool:
-    """Return whether a tag/id belongs to a known PRC-developed family."""
+    """Return whether a tag/id belongs to a known restricted-origin family."""
     base = hf_id_or_tag.partition("@")[0]
     candidate = f"{base} {resolve_model(base)}"
-    return _PRC_PATTERN.search(candidate) is not None
+    return _RESTRICTED_PATTERN.search(candidate) is not None
 
 
 def require_compliant(model: str) -> str:
     """Enforce cluster policy and return the resolved Hugging Face id.
 
-    ``SDL_ALLOW_PRC=1`` exists only for approved, non-cluster RAI work.  The
-    HiPerGator job wrapper has an additional unconditional guard.
+    ``SDL_ALLOW_RESTRICTED=1`` exists only for approved, non-cluster the workstation work.  The
+    the shared cluster job wrapper has an additional unconditional guard.
     """
     resolved = resolve_model(model)
-    if is_prc_model(model) and os.environ.get("SDL_ALLOW_PRC") != "1":
+    if is_prc_model(model) and os.environ.get("SDL_ALLOW_RESTRICTED") != "1":
         raise RuntimeError(
-            "UF HiPerGator policy prohibits running PRC-developed models "
-            f"({resolved!r} was refused). SDL_ALLOW_PRC=1 is an RAI-only "
-            "escape hatch and must never be set on HiPerGator."
+            "the shared cluster policy prohibits running restricted-origin models "
+            f"({resolved!r} was refused). SDL_ALLOW_RESTRICTED=1 is an workstation-only "
+            "escape hatch and must never be set on the shared cluster."
         )
     return resolved
 

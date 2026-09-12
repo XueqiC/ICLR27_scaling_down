@@ -1,5 +1,5 @@
 {
-  "cache_root": "/home/xueqi/.cache/huggingface/hub",
+  "cache_root": "$HOME/.cache/huggingface/hub",
   "coverage": {
     "audited_revision_count": 23,
     "measured_revision_count": 22,
@@ -42,99 +42,99 @@
     ".venv-gemma4/lib/python3.11/site-packages/transformers/models/olmo3/modeling_olmo3.py": "13be0868bbd4586d3347bfb55ca522879594749a33834b5e4c6db82718dd9979",
     ".venv-gemma4/lib/python3.11/site-packages/transformers/models/qwen3/configuration_qwen3.py": "49d9ccd0f29ccd977b93dba2004f84b867891b3d0509b71fd8ba3ed01054e64d",
     ".venv-gemma4/lib/python3.11/site-packages/transformers/models/qwen3/modeling_qwen3.py": "cbb7f2dc274c2f5592746c0dc6985ca50353efa07376f92cc922b77680a74f69",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/main": "9ce2d832ea09d8fd9fb368aeaff63c9a968cd04b637488097dda7ecbf36f9b98",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step112000": "cac43308487c0aac2a8525ac5e38225544746ad82b8229a28e83c269f5f4b18a",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step143000": "8d58759a7045444236de27951ca1d06b78a6a4523ec38d2288a3b5fdc7079291",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step16000": "e689f963eb7057f0c65c80bd6846301eac735cdd20b1f88519e91b6ed585fff5",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step64000": "57e938c438429a6db85ec20a42670c0ad3267e7386a3295283f1adfd075a4d8b",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step96000": "51884090703c7bc98576606164057ec884e7a821b2607ba5706814e84064fef4",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/fedc38a16eea3bd36a96b906d78d11d2ce18ed79/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/main": "6e4e9ec6f858611b4a70ae9c47394893f91de2270be4a1826838ae9aaa513148",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step143000": "9a870f206474e69f0bab98c1081cfc813c4bac7e7130ca84b00be26036eec686",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step16000": "8f533961356613f91b41c1671c56ed428e34e64b2cf3e7e55b14a2b80166300a",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step64000": "f542f100febadf42dffa45bd33f9b69353cd9c4bc9e2c8e9f19179c72735f74c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step96000": "e74fd1c45c41b11c6ec212d59da23e99c86db3c08fe24963057e6aa9eb761a56",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/13af86250de4e88e9c788ba8d7fb5b0e8a4afb7a/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/50f5173d932e8e61f858120bcb800b97af589f46/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aac0de458f9106a48f9e58f4ad7ba03f86753932/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aaf70579ac956a238ee7b6e95bfc31a7f699ffb6/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/b56d9bee36300031aeea723b73c4d62ac7fa71a2/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/main": "8b7534a6213aace0f88235c6e1ecf69e342374a36799755f981ae9d0fb17fefd",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/step112000": "ac01f599e6bfe7924c047e546c3b4b7b6d83f8b0d89dfa5aa2a29ed56b3f6c3e",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/step32000": "2b516efbd0d2a09f3266150cc9fd680b22295926de52afba58ff1bbaf4b2cff0",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/step96000": "967960a3084f4606d5b5da56fa389133dac0ca9c60a4e4ff885cd81c8355a139",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/134b25682ad454b623265d6fc6b948cb45e8c554/config.json": "302d6702a29de1039066e41404877fb8c53b7ddc82e88f9aba277f230086cfe0",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/8d1a7cf23cf6fac6615426d624a518106aedf4ba/config.json": "302d6702a29de1039066e41404877fb8c53b7ddc82e88f9aba277f230086cfe0",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/e2368797b94c696a2ccf2475692a2a498a8f821a/config.json": "302d6702a29de1039066e41404877fb8c53b7ddc82e88f9aba277f230086cfe0",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/main": "b1f6ef1c8ef95e1fe6917ae3ffc89bd2a175e300739363f66418f5ec889f0547",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/step143000": "697ad95899e18b30bade25a87cb322d931bea8718b72055630569f3286c15191",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/step16000": "5337529f7ded581cae2fb6e1cd8e7e2f9bced2fd5f6472f674e84cc63c87d222",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/step64000": "47e4d3afa953f785a242e33eda05828a8e31a7a8fcd9f969f6b34a1bc6a97859",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/d86be5ee6523ec46075f22dd2230b8e346524d4f/config.json": "bca96a0c3534ff9e22d2e4aefe74652009de3fc71d74998e4fd25b089da61322",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/dbe7ae300a54abcdc475a33907b3dff81d25709f/config.json": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/e4e0ac4e8cba6f7880e63a12c51858ed49d968b8/config.json": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/main": "c1efdfac4dc98ad9d7971c17acf453914ac1561b6ba86f4ea6530b131c5fdbf2",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step143000": "42f4405eb62bb9de9d7a2f01014f064b6b8510ca1fd9c430e4983bec30b3e136",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step16000": "44961552fe9c3be4c54b828930a542c41eb6667e5fc1654e84053f4f438000e9",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step48000": "19ea616748316b58e05dea91d24a0f76333acbcb1570bedde42f2a146177d66c",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step64000": "c38ea0472c7791dab01723b83c6bb33cd93933542711be4acb7e5e616fd705a7",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step96000": "bcf75a401c39fc7685ae5ecf8f29658ab1c14ee53ba5ef4e825dae8e94b430b7",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/14e4a927ed93cab99c654d1ba024da8271039354/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/37bf1f8c73edcdf706fa955c6fb4bf9927f88386/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/8446851c14ad5b18ec87ab6ecf9c1a068346293b/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/9879c9b5f8bea9051dcb0e68dff21493d67e9d4f/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bba6a464f54bbf08fc174cfb351d9794d58af21d/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bddc539ba381d577ef15c336e8c295e258d5fa49/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/main": "6cedd5ee182235950a23f4cd4d9bc6550a7f5488e1e6ae6a38f25601d99af9b8",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/step112000": "e2493048aa41f4142537a0b84ef742ddfddb98605fb04f4d05cbc7684fbf5737",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/step32000": "ea03ba7998617075cdb73c3829a076ac329a54a72ecbe7673b7a29296f1c9639",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/step80000": "d32dc5c8e29a9010e6b0c9a423ce5e412b1ec9b23c43e4a14f1f9c341cc816d4",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/config.json": "d7f2d0bbfa279e3324423a2882d8fd1e1276fce7806a152cf5f5648733fdccab",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/pytorch_model.bin.index.json": "2f0817c137077abd439e3602330433793bc08ba3660cf9ac2458ad0113bfc52e",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/config.json": "d7f2d0bbfa279e3324423a2882d8fd1e1276fce7806a152cf5f5648733fdccab",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/pytorch_model.bin.index.json": "2f0817c137077abd439e3602330433793bc08ba3660cf9ac2458ad0113bfc52e",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/config.json": "d7f2d0bbfa279e3324423a2882d8fd1e1276fce7806a152cf5f5648733fdccab",
-    "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/pytorch_model.bin.index.json": "2f0817c137077abd439e3602330433793bc08ba3660cf9ac2458ad0113bfc52e",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/refs/main": "4e949c8025d7f0c86b6cdba6e103f387df67ae45a5851c600aefb581a8f0f59c",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca/config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-1.7B/refs/main": "d89c51dbdb5da48da4f2608b1f8ae52379f5a658a54b03d7903209b3af3ea59f",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-14B/refs/main": "a7925cda022cf9245f8653965c4ea00625aafeb9d9aed4b6c177dc19c17b99f3",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18/config.json": "e73c3664ca09b10a673fef0c22e8a6b456201d49bd4713c9691f775720e8857a",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-4B/refs/main": "c0aa7f98bce7f5cfed644838701e5f65c2ba650aa61825d7107648fae9e1e8ba",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c/config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-8B/refs/main": "5893aad38d116dcc896b93a7f3b2d5127ec9445846c0d6c98efdcc7b8236333b",
-    "/home/xueqi/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/config.json": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
-    "/home/xueqi/.cache/huggingface/hub/models--allenai--Olmo-3-1025-7B/refs/main": "adace506ede36cbaebafd945a9c5dbab43f33b54762aeebefe6c57d0ac4eb05a",
-    "/home/xueqi/.cache/huggingface/hub/models--allenai--Olmo-3-1025-7B/snapshots/a81bae42db3975be1671e27b9c9a56da1a9f980f/config.json": "277d7ea5c6159d4c2d6986a8a23757d1ef06acaa7abc2c40e0513446f7db0f85",
-    "/home/xueqi/.cache/huggingface/hub/models--allenai--Olmo-3-1125-32B/refs/main": "a0e3cf162989d019b72df62fec5794e43c8398913e50b2ff6bf9cae2cf47649d",
-    "/home/xueqi/.cache/huggingface/hub/models--allenai--Olmo-3-1125-32B/snapshots/c2b61dae89a1ad10e4ad5653d0e46b590902607b/config.json": "72efc1f0ed1161e4205a54d94110f61d21c4c4315fde9ef17163bbc33c9a6149",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-12b-pt/refs/main": "703123d392fcf6e8c94bbe69aaefd976c8cb78f9c4dbb6cd82788ad176e04e8f",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-12b-pt/snapshots/295efb63d01a7017928f273a94ebb86105c9526f/config.json": "61501b2259b5efa7c5bb50a9eea9fd195c449b6e995b16bf8e3f52d3b80b2f77",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-1b-pt/refs/main": "229df700797a5742bbab71868df0950951a2ef402787d703a1cf4bb0671c3c6c",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-1b-pt/snapshots/fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/config.json": "4dd5218cebc4fdea9004b944d34672a2d47f9ef930e3bb16a3fc4bbbe0fcee81",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-270m/refs/main": "b6659386ab8df89ec420551550d2408c5165237e281a7afbed3746c071d85b78",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-270m/snapshots/9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/config.json": "8983343e5bfbf8e336d222a522a1d781443491e9de2d081b8856f8fd26ab6046",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-27b-pt/refs/main": "bcbec30b63f66f3e57ae0a029891485a0c6fea3448cc5e1e2eed9b6c3e399543",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-27b-pt/snapshots/9fe3c4ebc93fbadb14913801536d022054ef11cc/config.json": "019693e921a854e19b380463c77e71f655484523cafc59ba8a4c5fce7fbfcfe7",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-4b-pt/refs/main": "eba645161fb306d3578095b9ef73c37f5ee6facaf1ee94feb97a1866d82948b9",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-4b-pt/snapshots/cc012e0a6d0787b4adcc0fa2c4da74402494554d/config.json": "ae75620513f4a95fb36bcf6c09eeab02938e58051871cfe47ead2a7e79a43848",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-4-26B-A4B-it/refs/main": "33bdd68f2abe658ca87d5a98277bbe683c580c4a74a9efe7d84abc203984df59",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-4-26B-A4B-it/snapshots/4d7ae4984b7db7de8f8457170b3f1a419ee76d52/config.json": "ed0c1eb3633de771906e9ba004a44cc5635bcc06ee2062077c3d2e88a50707d3",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-4-31B/refs/main": "c6d3438b6706b96bddaee5642cfe66fc8adf9ed55f4a03bd5acd5ce4aef9679c",
-    "/home/xueqi/.cache/huggingface/hub/models--google--gemma-4-31B/snapshots/5bbc2fb1c1b2c611d06e3d9f23c170ba21659d89/config.json": "6a81841cad2b6ba06841e23c6afb5f0a27827bc12c64328ffa6338831a21267e",
-    "/home/xueqi/.cache/huggingface/hub/models--meta-models--Muse-Glimmer-30B/refs/main": "6fe44f448e3b1acdb63cc8a8dee277a4bc51190c0d9f1650517da14e25691c8c",
-    "/home/xueqi/.cache/huggingface/hub/models--meta-models--Muse-Glimmer-30B/snapshots/a4e59da52a7bc87ae7251dd5545c0dd437c44b68/config.json": "5a9df2d8a385b3d361ab6ae68d73586f4e775033933bd0cd863fb7f3820e6a14",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/main": "9ce2d832ea09d8fd9fb368aeaff63c9a968cd04b637488097dda7ecbf36f9b98",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step112000": "cac43308487c0aac2a8525ac5e38225544746ad82b8229a28e83c269f5f4b18a",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step143000": "8d58759a7045444236de27951ca1d06b78a6a4523ec38d2288a3b5fdc7079291",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step16000": "e689f963eb7057f0c65c80bd6846301eac735cdd20b1f88519e91b6ed585fff5",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step64000": "57e938c438429a6db85ec20a42670c0ad3267e7386a3295283f1adfd075a4d8b",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step96000": "51884090703c7bc98576606164057ec884e7a821b2607ba5706814e84064fef4",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/fedc38a16eea3bd36a96b906d78d11d2ce18ed79/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/main": "6e4e9ec6f858611b4a70ae9c47394893f91de2270be4a1826838ae9aaa513148",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step143000": "9a870f206474e69f0bab98c1081cfc813c4bac7e7130ca84b00be26036eec686",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step16000": "8f533961356613f91b41c1671c56ed428e34e64b2cf3e7e55b14a2b80166300a",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step64000": "f542f100febadf42dffa45bd33f9b69353cd9c4bc9e2c8e9f19179c72735f74c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/refs/step96000": "e74fd1c45c41b11c6ec212d59da23e99c86db3c08fe24963057e6aa9eb761a56",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/13af86250de4e88e9c788ba8d7fb5b0e8a4afb7a/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/50f5173d932e8e61f858120bcb800b97af589f46/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aac0de458f9106a48f9e58f4ad7ba03f86753932/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aaf70579ac956a238ee7b6e95bfc31a7f699ffb6/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/b56d9bee36300031aeea723b73c4d62ac7fa71a2/config.json": "76eb275107220e450d31258f792a2efcbee109d8b62ae0088260057dec06362f",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/main": "8b7534a6213aace0f88235c6e1ecf69e342374a36799755f981ae9d0fb17fefd",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/step112000": "ac01f599e6bfe7924c047e546c3b4b7b6d83f8b0d89dfa5aa2a29ed56b3f6c3e",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/step32000": "2b516efbd0d2a09f3266150cc9fd680b22295926de52afba58ff1bbaf4b2cff0",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/refs/step96000": "967960a3084f4606d5b5da56fa389133dac0ca9c60a4e4ff885cd81c8355a139",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/134b25682ad454b623265d6fc6b948cb45e8c554/config.json": "302d6702a29de1039066e41404877fb8c53b7ddc82e88f9aba277f230086cfe0",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/8d1a7cf23cf6fac6615426d624a518106aedf4ba/config.json": "302d6702a29de1039066e41404877fb8c53b7ddc82e88f9aba277f230086cfe0",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/e2368797b94c696a2ccf2475692a2a498a8f821a/config.json": "302d6702a29de1039066e41404877fb8c53b7ddc82e88f9aba277f230086cfe0",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/main": "b1f6ef1c8ef95e1fe6917ae3ffc89bd2a175e300739363f66418f5ec889f0547",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/step143000": "697ad95899e18b30bade25a87cb322d931bea8718b72055630569f3286c15191",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/step16000": "5337529f7ded581cae2fb6e1cd8e7e2f9bced2fd5f6472f674e84cc63c87d222",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/refs/step64000": "47e4d3afa953f785a242e33eda05828a8e31a7a8fcd9f969f6b34a1bc6a97859",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/d86be5ee6523ec46075f22dd2230b8e346524d4f/config.json": "bca96a0c3534ff9e22d2e4aefe74652009de3fc71d74998e4fd25b089da61322",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/dbe7ae300a54abcdc475a33907b3dff81d25709f/config.json": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/e4e0ac4e8cba6f7880e63a12c51858ed49d968b8/config.json": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/main": "c1efdfac4dc98ad9d7971c17acf453914ac1561b6ba86f4ea6530b131c5fdbf2",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step143000": "42f4405eb62bb9de9d7a2f01014f064b6b8510ca1fd9c430e4983bec30b3e136",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step16000": "44961552fe9c3be4c54b828930a542c41eb6667e5fc1654e84053f4f438000e9",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step48000": "19ea616748316b58e05dea91d24a0f76333acbcb1570bedde42f2a146177d66c",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step64000": "c38ea0472c7791dab01723b83c6bb33cd93933542711be4acb7e5e616fd705a7",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/refs/step96000": "bcf75a401c39fc7685ae5ecf8f29658ab1c14ee53ba5ef4e825dae8e94b430b7",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/14e4a927ed93cab99c654d1ba024da8271039354/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/37bf1f8c73edcdf706fa955c6fb4bf9927f88386/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/8446851c14ad5b18ec87ab6ecf9c1a068346293b/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/9879c9b5f8bea9051dcb0e68dff21493d67e9d4f/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bba6a464f54bbf08fc174cfb351d9794d58af21d/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bddc539ba381d577ef15c336e8c295e258d5fa49/config.json": "d4c11e84a59c8af4d88446bba53b718f7aef740daa070ded08fd6a9a3aca4fc6",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/main": "6cedd5ee182235950a23f4cd4d9bc6550a7f5488e1e6ae6a38f25601d99af9b8",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/step112000": "e2493048aa41f4142537a0b84ef742ddfddb98605fb04f4d05cbc7684fbf5737",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/step32000": "ea03ba7998617075cdb73c3829a076ac329a54a72ecbe7673b7a29296f1c9639",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/refs/step80000": "d32dc5c8e29a9010e6b0c9a423ce5e412b1ec9b23c43e4a14f1f9c341cc816d4",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/config.json": "d7f2d0bbfa279e3324423a2882d8fd1e1276fce7806a152cf5f5648733fdccab",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/pytorch_model.bin.index.json": "2f0817c137077abd439e3602330433793bc08ba3660cf9ac2458ad0113bfc52e",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/config.json": "d7f2d0bbfa279e3324423a2882d8fd1e1276fce7806a152cf5f5648733fdccab",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/pytorch_model.bin.index.json": "2f0817c137077abd439e3602330433793bc08ba3660cf9ac2458ad0113bfc52e",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/config.json": "d7f2d0bbfa279e3324423a2882d8fd1e1276fce7806a152cf5f5648733fdccab",
+    "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/pytorch_model.bin.index.json": "2f0817c137077abd439e3602330433793bc08ba3660cf9ac2458ad0113bfc52e",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/refs/main": "4e949c8025d7f0c86b6cdba6e103f387df67ae45a5851c600aefb581a8f0f59c",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca/config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-1.7B/refs/main": "d89c51dbdb5da48da4f2608b1f8ae52379f5a658a54b03d7903209b3af3ea59f",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-14B/refs/main": "a7925cda022cf9245f8653965c4ea00625aafeb9d9aed4b6c177dc19c17b99f3",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18/config.json": "e73c3664ca09b10a673fef0c22e8a6b456201d49bd4713c9691f775720e8857a",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-4B/refs/main": "c0aa7f98bce7f5cfed644838701e5f65c2ba650aa61825d7107648fae9e1e8ba",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c/config.json": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-8B/refs/main": "5893aad38d116dcc896b93a7f3b2d5127ec9445846c0d6c98efdcc7b8236333b",
+    "$HOME/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218/config.json": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "$HOME/.cache/huggingface/hub/models--allenai--Olmo-3-1025-7B/refs/main": "adace506ede36cbaebafd945a9c5dbab43f33b54762aeebefe6c57d0ac4eb05a",
+    "$HOME/.cache/huggingface/hub/models--allenai--Olmo-3-1025-7B/snapshots/a81bae42db3975be1671e27b9c9a56da1a9f980f/config.json": "277d7ea5c6159d4c2d6986a8a23757d1ef06acaa7abc2c40e0513446f7db0f85",
+    "$HOME/.cache/huggingface/hub/models--allenai--Olmo-3-1125-32B/refs/main": "a0e3cf162989d019b72df62fec5794e43c8398913e50b2ff6bf9cae2cf47649d",
+    "$HOME/.cache/huggingface/hub/models--allenai--Olmo-3-1125-32B/snapshots/c2b61dae89a1ad10e4ad5653d0e46b590902607b/config.json": "72efc1f0ed1161e4205a54d94110f61d21c4c4315fde9ef17163bbc33c9a6149",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-12b-pt/refs/main": "703123d392fcf6e8c94bbe69aaefd976c8cb78f9c4dbb6cd82788ad176e04e8f",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-12b-pt/snapshots/295efb63d01a7017928f273a94ebb86105c9526f/config.json": "61501b2259b5efa7c5bb50a9eea9fd195c449b6e995b16bf8e3f52d3b80b2f77",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-1b-pt/refs/main": "229df700797a5742bbab71868df0950951a2ef402787d703a1cf4bb0671c3c6c",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-1b-pt/snapshots/fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/config.json": "4dd5218cebc4fdea9004b944d34672a2d47f9ef930e3bb16a3fc4bbbe0fcee81",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-270m/refs/main": "b6659386ab8df89ec420551550d2408c5165237e281a7afbed3746c071d85b78",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-270m/snapshots/9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/config.json": "8983343e5bfbf8e336d222a522a1d781443491e9de2d081b8856f8fd26ab6046",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-27b-pt/refs/main": "bcbec30b63f66f3e57ae0a029891485a0c6fea3448cc5e1e2eed9b6c3e399543",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-27b-pt/snapshots/9fe3c4ebc93fbadb14913801536d022054ef11cc/config.json": "019693e921a854e19b380463c77e71f655484523cafc59ba8a4c5fce7fbfcfe7",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-4b-pt/refs/main": "eba645161fb306d3578095b9ef73c37f5ee6facaf1ee94feb97a1866d82948b9",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-3-4b-pt/snapshots/cc012e0a6d0787b4adcc0fa2c4da74402494554d/config.json": "ae75620513f4a95fb36bcf6c09eeab02938e58051871cfe47ead2a7e79a43848",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-4-26B-A4B-it/refs/main": "33bdd68f2abe658ca87d5a98277bbe683c580c4a74a9efe7d84abc203984df59",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-4-26B-A4B-it/snapshots/4d7ae4984b7db7de8f8457170b3f1a419ee76d52/config.json": "ed0c1eb3633de771906e9ba004a44cc5635bcc06ee2062077c3d2e88a50707d3",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-4-31B/refs/main": "c6d3438b6706b96bddaee5642cfe66fc8adf9ed55f4a03bd5acd5ce4aef9679c",
+    "$HOME/.cache/huggingface/hub/models--google--gemma-4-31B/snapshots/5bbc2fb1c1b2c611d06e3d9f23c170ba21659d89/config.json": "6a81841cad2b6ba06841e23c6afb5f0a27827bc12c64328ffa6338831a21267e",
+    "$HOME/.cache/huggingface/hub/models--meta-models--Muse-Glimmer-30B/refs/main": "6fe44f448e3b1acdb63cc8a8dee277a4bc51190c0d9f1650517da14e25691c8c",
+    "$HOME/.cache/huggingface/hub/models--meta-models--Muse-Glimmer-30B/snapshots/a4e59da52a7bc87ae7251dd5545c0dd437c44b68/config.json": "5a9df2d8a385b3d361ab6ae68d73586f4e775033933bd0cd863fb7f3820e6a14",
     "/usr/local/anaconda3/lib/python3.11/contextlib.py": "d732c045bc7450997f97b2f79cfdb1546b68d2655e89ab3170f3b19b3930d83c",
     "analysis/model_registry.py": "64075b24d26325832f466d3797ec4d3def91c704e3195e51715dba6d6165a4b9",
     "analysis/v50_p2v2.py": "7f94f63969dfe29c541b3508088d1f694906c9927bd5fe5fdbffcd7775c1eba7",
@@ -275,7 +275,7 @@
     "method": "Compare every meta-defined learned tensor's shape, dtype and SHA-256 payload; inspect differing F16 payloads at the bit level. Legacy embed_out maps to lm_head. Exclude checkpoint-only attention-mask and rotary buffers.",
     "revisions": [
       {
-        "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe",
+        "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe",
         "checkpoint_only_tensors": [
           "gpt_neox.layers.0.attention.bias",
           "gpt_neox.layers.0.attention.masked_bias",
@@ -4001,7 +4001,7 @@
         "revision": "step16000"
       },
       {
-        "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
+        "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
         "checkpoint_only_tensors": [],
         "parameters": {
           "embed_out.weight": {
@@ -7650,14 +7650,14 @@
       ],
       "revision": "step112000",
       "selected_by": "model.safetensors.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5",
       "status": "ok",
       "tag": "pythia-1.4b@step112000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
           "bytes": 4987196512,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00001-of-00002.safetensors",
@@ -7672,11 +7672,11 @@
             "tensor_count": 253
           },
           "sha256": "ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00001-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00001-of-00002.safetensors",
           "symlink_target": "../../blobs/ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
           "bytes": 671429088,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00002-of-00002.safetensors",
@@ -7691,7 +7691,7 @@
             "tensor_count": 39
           },
           "sha256": "2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00002-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00002-of-00002.safetensors",
           "symlink_target": "../../blobs/2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66"
         }
       ]
@@ -7709,14 +7709,14 @@
       ],
       "revision": "step143000",
       "selected_by": "model.safetensors.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
       "status": "ok",
       "tag": "pythia-1.4b@step143000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/2066abb3d75f8938ecac701b0982ed24fdbabaa3924967b583affa8fafdc62eb",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/2066abb3d75f8938ecac701b0982ed24fdbabaa3924967b583affa8fafdc62eb",
           "bytes": 4987196512,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00001-of-00002.safetensors",
@@ -7731,11 +7731,11 @@
             "tensor_count": 253
           },
           "sha256": "2066abb3d75f8938ecac701b0982ed24fdbabaa3924967b583affa8fafdc62eb",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/model-00001-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/model-00001-of-00002.safetensors",
           "symlink_target": "../../blobs/2066abb3d75f8938ecac701b0982ed24fdbabaa3924967b583affa8fafdc62eb"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/d18df8a16798bb6d069c665c79a7589d3434b33fe2f18bf2637cbe2b35690565",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/d18df8a16798bb6d069c665c79a7589d3434b33fe2f18bf2637cbe2b35690565",
           "bytes": 671429088,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00002-of-00002.safetensors",
@@ -7750,7 +7750,7 @@
             "tensor_count": 39
           },
           "sha256": "d18df8a16798bb6d069c665c79a7589d3434b33fe2f18bf2637cbe2b35690565",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/model-00002-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a/model-00002-of-00002.safetensors",
           "symlink_target": "../../blobs/d18df8a16798bb6d069c665c79a7589d3434b33fe2f18bf2637cbe2b35690565"
         }
       ]
@@ -7768,14 +7768,14 @@
       ],
       "revision": "step16000",
       "selected_by": "model.safetensors.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c",
       "status": "ok",
       "tag": "pythia-1.4b@step16000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/63df2fa511d358ee6b01a6426a3287f23232b2803a2f49a52cb8e84b2f08fbce",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/63df2fa511d358ee6b01a6426a3287f23232b2803a2f49a52cb8e84b2f08fbce",
           "bytes": 4987196512,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00001-of-00002.safetensors",
@@ -7790,11 +7790,11 @@
             "tensor_count": 253
           },
           "sha256": "63df2fa511d358ee6b01a6426a3287f23232b2803a2f49a52cb8e84b2f08fbce",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/model-00001-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/model-00001-of-00002.safetensors",
           "symlink_target": "../../blobs/63df2fa511d358ee6b01a6426a3287f23232b2803a2f49a52cb8e84b2f08fbce"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/03e7353100336a983c098882d6d4e0dba208f3c2dfc362ddc75e470e392a7a1d",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/03e7353100336a983c098882d6d4e0dba208f3c2dfc362ddc75e470e392a7a1d",
           "bytes": 671429088,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00002-of-00002.safetensors",
@@ -7809,7 +7809,7 @@
             "tensor_count": 39
           },
           "sha256": "03e7353100336a983c098882d6d4e0dba208f3c2dfc362ddc75e470e392a7a1d",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/model-00002-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7227add89b788c09c721b976969beb64fa71d10c/model-00002-of-00002.safetensors",
           "symlink_target": "../../blobs/03e7353100336a983c098882d6d4e0dba208f3c2dfc362ddc75e470e392a7a1d"
         }
       ]
@@ -7826,14 +7826,14 @@
       ],
       "revision": "step64000",
       "selected_by": "model.safetensors.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c",
       "status": "ok",
       "tag": "pythia-1.4b@step64000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/69d98ab6078779832830495e34f20db9a3b95f5bcfeead2d06dede30d923c2b9",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/69d98ab6078779832830495e34f20db9a3b95f5bcfeead2d06dede30d923c2b9",
           "bytes": 4987196512,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00001-of-00002.safetensors",
@@ -7848,11 +7848,11 @@
             "tensor_count": 253
           },
           "sha256": "69d98ab6078779832830495e34f20db9a3b95f5bcfeead2d06dede30d923c2b9",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/model-00001-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/model-00001-of-00002.safetensors",
           "symlink_target": "../../blobs/69d98ab6078779832830495e34f20db9a3b95f5bcfeead2d06dede30d923c2b9"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/ced120c7eeb8260f62061a6e4ed9e21ebab05b6bbf240ae1af2c686cac15ee16",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/ced120c7eeb8260f62061a6e4ed9e21ebab05b6bbf240ae1af2c686cac15ee16",
           "bytes": 671429088,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00002-of-00002.safetensors",
@@ -7867,7 +7867,7 @@
             "tensor_count": 39
           },
           "sha256": "ced120c7eeb8260f62061a6e4ed9e21ebab05b6bbf240ae1af2c686cac15ee16",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/model-00002-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/7277ad8a8582c08c985da32613a987189c6e7c3c/model-00002-of-00002.safetensors",
           "symlink_target": "../../blobs/ced120c7eeb8260f62061a6e4ed9e21ebab05b6bbf240ae1af2c686cac15ee16"
         }
       ]
@@ -7884,14 +7884,14 @@
       ],
       "revision": "step96000",
       "selected_by": "model.safetensors.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9",
       "status": "ok",
       "tag": "pythia-1.4b@step96000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/70dbf4f9ed7d0652ea3260f9a46fcb46de48faa11f60a36b6e6d6804f070beb8",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/70dbf4f9ed7d0652ea3260f9a46fcb46de48faa11f60a36b6e6d6804f070beb8",
           "bytes": 4987196512,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00001-of-00002.safetensors",
@@ -7906,11 +7906,11 @@
             "tensor_count": 253
           },
           "sha256": "70dbf4f9ed7d0652ea3260f9a46fcb46de48faa11f60a36b6e6d6804f070beb8",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/model-00001-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/model-00001-of-00002.safetensors",
           "symlink_target": "../../blobs/70dbf4f9ed7d0652ea3260f9a46fcb46de48faa11f60a36b6e6d6804f070beb8"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/0378430878c0c7c02b213821aaac94da2d81086cde6dc4999cbec86cc377ccae",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/blobs/0378430878c0c7c02b213821aaac94da2d81086cde6dc4999cbec86cc377ccae",
           "bytes": 671429088,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model-00002-of-00002.safetensors",
@@ -7925,7 +7925,7 @@
             "tensor_count": 39
           },
           "sha256": "0378430878c0c7c02b213821aaac94da2d81086cde6dc4999cbec86cc377ccae",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/model-00002-of-00002.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/e4af1b259bef9a8837551bde51c5c53f85c2a1e9/model-00002-of-00002.safetensors",
           "symlink_target": "../../blobs/0378430878c0c7c02b213821aaac94da2d81086cde6dc4999cbec86cc377ccae"
         }
       ]
@@ -7943,14 +7943,14 @@
       ],
       "revision": "step143000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/b56d9bee36300031aeea723b73c4d62ac7fa71a2",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/b56d9bee36300031aeea723b73c4d62ac7fa71a2",
       "status": "ok",
       "tag": "pythia-160m@step143000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/d829d1a5cf66032491679d64c5b18e85b82d37833a99c346905668b8553084d5",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/d829d1a5cf66032491679d64c5b18e85b82d37833a99c346905668b8553084d5",
           "bytes": 649308728,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -7965,7 +7965,7 @@
             "tensor_count": 148
           },
           "sha256": "d829d1a5cf66032491679d64c5b18e85b82d37833a99c346905668b8553084d5",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/b56d9bee36300031aeea723b73c4d62ac7fa71a2/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/b56d9bee36300031aeea723b73c4d62ac7fa71a2/model.safetensors",
           "symlink_target": "../../blobs/d829d1a5cf66032491679d64c5b18e85b82d37833a99c346905668b8553084d5"
         }
       ]
@@ -7983,14 +7983,14 @@
       ],
       "revision": "step16000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/13af86250de4e88e9c788ba8d7fb5b0e8a4afb7a",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/13af86250de4e88e9c788ba8d7fb5b0e8a4afb7a",
       "status": "ok",
       "tag": "pythia-160m@step16000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/b9cabaa6801bede34659808394d5b148bc5553eb47191b4c3385106afb34367c",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/b9cabaa6801bede34659808394d5b148bc5553eb47191b4c3385106afb34367c",
           "bytes": 649308728,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8005,7 +8005,7 @@
             "tensor_count": 148
           },
           "sha256": "b9cabaa6801bede34659808394d5b148bc5553eb47191b4c3385106afb34367c",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/13af86250de4e88e9c788ba8d7fb5b0e8a4afb7a/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/13af86250de4e88e9c788ba8d7fb5b0e8a4afb7a/model.safetensors",
           "symlink_target": "../../blobs/b9cabaa6801bede34659808394d5b148bc5553eb47191b4c3385106afb34367c"
         }
       ]
@@ -8022,14 +8022,14 @@
       ],
       "revision": "step64000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aac0de458f9106a48f9e58f4ad7ba03f86753932",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aac0de458f9106a48f9e58f4ad7ba03f86753932",
       "status": "ok",
       "tag": "pythia-160m@step64000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/0e054244779c34938b39db958396bf840c0ab22dac4fc172d6cd96d270ce5859",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/0e054244779c34938b39db958396bf840c0ab22dac4fc172d6cd96d270ce5859",
           "bytes": 649308728,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8044,7 +8044,7 @@
             "tensor_count": 148
           },
           "sha256": "0e054244779c34938b39db958396bf840c0ab22dac4fc172d6cd96d270ce5859",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aac0de458f9106a48f9e58f4ad7ba03f86753932/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aac0de458f9106a48f9e58f4ad7ba03f86753932/model.safetensors",
           "symlink_target": "../../blobs/0e054244779c34938b39db958396bf840c0ab22dac4fc172d6cd96d270ce5859"
         }
       ]
@@ -8061,14 +8061,14 @@
       ],
       "revision": "step96000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aaf70579ac956a238ee7b6e95bfc31a7f699ffb6",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aaf70579ac956a238ee7b6e95bfc31a7f699ffb6",
       "status": "ok",
       "tag": "pythia-160m@step96000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/c0a0cfe72389a4c9fe8d910b4c427bf7b30107b2574d88f9d31907dae3fab5eb",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/blobs/c0a0cfe72389a4c9fe8d910b4c427bf7b30107b2574d88f9d31907dae3fab5eb",
           "bytes": 649308728,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8083,7 +8083,7 @@
             "tensor_count": 148
           },
           "sha256": "c0a0cfe72389a4c9fe8d910b4c427bf7b30107b2574d88f9d31907dae3fab5eb",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aaf70579ac956a238ee7b6e95bfc31a7f699ffb6/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-160m/snapshots/aaf70579ac956a238ee7b6e95bfc31a7f699ffb6/model.safetensors",
           "symlink_target": "../../blobs/c0a0cfe72389a4c9fe8d910b4c427bf7b30107b2574d88f9d31907dae3fab5eb"
         }
       ]
@@ -8100,14 +8100,14 @@
       ],
       "revision": "step112000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/8d1a7cf23cf6fac6615426d624a518106aedf4ba",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/8d1a7cf23cf6fac6615426d624a518106aedf4ba",
       "status": "ok",
       "tag": "pythia-1b@step112000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/blobs/b7a8307519cae97ac4dd6111231addcac7f3a65860e7ee121df281942495d858",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/blobs/b7a8307519cae97ac4dd6111231addcac7f3a65860e7ee121df281942495d858",
           "bytes": 4047149576,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8122,7 +8122,7 @@
             "tensor_count": 196
           },
           "sha256": "b7a8307519cae97ac4dd6111231addcac7f3a65860e7ee121df281942495d858",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/8d1a7cf23cf6fac6615426d624a518106aedf4ba/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/8d1a7cf23cf6fac6615426d624a518106aedf4ba/model.safetensors",
           "symlink_target": "../../blobs/b7a8307519cae97ac4dd6111231addcac7f3a65860e7ee121df281942495d858"
         }
       ]
@@ -8139,14 +8139,14 @@
       ],
       "revision": "step32000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/e2368797b94c696a2ccf2475692a2a498a8f821a",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/e2368797b94c696a2ccf2475692a2a498a8f821a",
       "status": "ok",
       "tag": "pythia-1b@step32000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/blobs/57bfd83c56e38fca4d2bef4100e2ccd094bdf4ee97f6c42cc825f81645e2a80f",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/blobs/57bfd83c56e38fca4d2bef4100e2ccd094bdf4ee97f6c42cc825f81645e2a80f",
           "bytes": 4047149576,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8161,7 +8161,7 @@
             "tensor_count": 196
           },
           "sha256": "57bfd83c56e38fca4d2bef4100e2ccd094bdf4ee97f6c42cc825f81645e2a80f",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/e2368797b94c696a2ccf2475692a2a498a8f821a/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/e2368797b94c696a2ccf2475692a2a498a8f821a/model.safetensors",
           "symlink_target": "../../blobs/57bfd83c56e38fca4d2bef4100e2ccd094bdf4ee97f6c42cc825f81645e2a80f"
         }
       ]
@@ -8179,14 +8179,14 @@
       ],
       "revision": "step96000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/134b25682ad454b623265d6fc6b948cb45e8c554",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/134b25682ad454b623265d6fc6b948cb45e8c554",
       "status": "ok",
       "tag": "pythia-1b@step96000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/blobs/d0f23956b1eb0c9cfc82f3bc6bc2ca8f0470bf2445c83e61792b6dc072edbccc",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/blobs/d0f23956b1eb0c9cfc82f3bc6bc2ca8f0470bf2445c83e61792b6dc072edbccc",
           "bytes": 4047149576,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8201,7 +8201,7 @@
             "tensor_count": 196
           },
           "sha256": "d0f23956b1eb0c9cfc82f3bc6bc2ca8f0470bf2445c83e61792b6dc072edbccc",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/134b25682ad454b623265d6fc6b948cb45e8c554/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1b/snapshots/134b25682ad454b623265d6fc6b948cb45e8c554/model.safetensors",
           "symlink_target": "../../blobs/d0f23956b1eb0c9cfc82f3bc6bc2ca8f0470bf2445c83e61792b6dc072edbccc"
         }
       ]
@@ -8218,7 +8218,7 @@
       ],
       "revision": "step143000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/dbe7ae300a54abcdc475a33907b3dff81d25709f",
       "status": "ok",
       "tag": "pythia-2.8b@step143000",
       "unselected_cached_weight_files": [],
@@ -8231,7 +8231,7 @@
       },
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
           "bytes": 5550463728,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8246,7 +8246,7 @@
             "tensor_count": 388
           },
           "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/dbe7ae300a54abcdc475a33907b3dff81d25709f/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/dbe7ae300a54abcdc475a33907b3dff81d25709f/model.safetensors",
           "symlink_target": "../../blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"
         }
       ]
@@ -8263,7 +8263,7 @@
       ],
       "revision": "step16000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/d86be5ee6523ec46075f22dd2230b8e346524d4f",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/d86be5ee6523ec46075f22dd2230b8e346524d4f",
       "status": "ok",
       "tag": "pythia-2.8b@step16000",
       "unselected_cached_weight_files": [
@@ -8279,7 +8279,7 @@
       },
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe",
           "bytes": 5684693096,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8295,7 +8295,7 @@
             "tensor_count": 484
           },
           "sha256": "ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/d86be5ee6523ec46075f22dd2230b8e346524d4f/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/d86be5ee6523ec46075f22dd2230b8e346524d4f/model.safetensors",
           "symlink_target": "../../blobs/ab496f1c3fd79e3c749a9d5414136a2c8e4224f94eecb261970315cdb0f813fe"
         }
       ]
@@ -8308,7 +8308,7 @@
       "measurement_evidence": [],
       "revision": "step64000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/e4e0ac4e8cba6f7880e63a12c51858ed49d968b8",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/e4e0ac4e8cba6f7880e63a12c51858ed49d968b8",
       "status": "ok",
       "tag": "pythia-2.8b@step64000",
       "unselected_cached_weight_files": [],
@@ -8321,7 +8321,7 @@
       },
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
           "bytes": 5550463728,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8336,7 +8336,7 @@
             "tensor_count": 388
           },
           "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/e4e0ac4e8cba6f7880e63a12c51858ed49d968b8/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-2.8b/snapshots/e4e0ac4e8cba6f7880e63a12c51858ed49d968b8/model.safetensors",
           "symlink_target": "../../blobs/462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"
         }
       ]
@@ -8354,14 +8354,14 @@
       ],
       "revision": "step143000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bba6a464f54bbf08fc174cfb351d9794d58af21d",
       "status": "ok",
       "tag": "pythia-410m@step143000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4",
           "bytes": 1621370224,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8376,7 +8376,7 @@
             "tensor_count": 292
           },
           "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bba6a464f54bbf08fc174cfb351d9794d58af21d/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bba6a464f54bbf08fc174cfb351d9794d58af21d/model.safetensors",
           "symlink_target": "../../blobs/1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"
         }
       ]
@@ -8394,14 +8394,14 @@
       ],
       "revision": "step16000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/8446851c14ad5b18ec87ab6ecf9c1a068346293b",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/8446851c14ad5b18ec87ab6ecf9c1a068346293b",
       "status": "ok",
       "tag": "pythia-410m@step16000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/1d3b5176e12886e00546119571cba4c48ad3d66c920e632216431f33cd882bed",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/1d3b5176e12886e00546119571cba4c48ad3d66c920e632216431f33cd882bed",
           "bytes": 1621370224,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8416,7 +8416,7 @@
             "tensor_count": 292
           },
           "sha256": "1d3b5176e12886e00546119571cba4c48ad3d66c920e632216431f33cd882bed",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/8446851c14ad5b18ec87ab6ecf9c1a068346293b/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/8446851c14ad5b18ec87ab6ecf9c1a068346293b/model.safetensors",
           "symlink_target": "../../blobs/1d3b5176e12886e00546119571cba4c48ad3d66c920e632216431f33cd882bed"
         }
       ]
@@ -8432,14 +8432,14 @@
       ],
       "revision": "step48000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/14e4a927ed93cab99c654d1ba024da8271039354",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/14e4a927ed93cab99c654d1ba024da8271039354",
       "status": "ok",
       "tag": "pythia-410m@step48000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/09aa8bebb9260605cca30049a4d57aa462e0abdcb6498e13c41706a9d2c0c532",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/09aa8bebb9260605cca30049a4d57aa462e0abdcb6498e13c41706a9d2c0c532",
           "bytes": 1621370224,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8454,7 +8454,7 @@
             "tensor_count": 292
           },
           "sha256": "09aa8bebb9260605cca30049a4d57aa462e0abdcb6498e13c41706a9d2c0c532",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/14e4a927ed93cab99c654d1ba024da8271039354/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/14e4a927ed93cab99c654d1ba024da8271039354/model.safetensors",
           "symlink_target": "../../blobs/09aa8bebb9260605cca30049a4d57aa462e0abdcb6498e13c41706a9d2c0c532"
         }
       ]
@@ -8471,14 +8471,14 @@
       ],
       "revision": "step64000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/37bf1f8c73edcdf706fa955c6fb4bf9927f88386",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/37bf1f8c73edcdf706fa955c6fb4bf9927f88386",
       "status": "ok",
       "tag": "pythia-410m@step64000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/d5c2f8ba697b84dca4c35e77c8e26da3264e0f70b7a350134afd39804b90b8f4",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/d5c2f8ba697b84dca4c35e77c8e26da3264e0f70b7a350134afd39804b90b8f4",
           "bytes": 1621370224,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8493,7 +8493,7 @@
             "tensor_count": 292
           },
           "sha256": "d5c2f8ba697b84dca4c35e77c8e26da3264e0f70b7a350134afd39804b90b8f4",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/37bf1f8c73edcdf706fa955c6fb4bf9927f88386/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/37bf1f8c73edcdf706fa955c6fb4bf9927f88386/model.safetensors",
           "symlink_target": "../../blobs/d5c2f8ba697b84dca4c35e77c8e26da3264e0f70b7a350134afd39804b90b8f4"
         }
       ]
@@ -8510,14 +8510,14 @@
       ],
       "revision": "step96000",
       "selected_by": "model.safetensors",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bddc539ba381d577ef15c336e8c295e258d5fa49",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bddc539ba381d577ef15c336e8c295e258d5fa49",
       "status": "ok",
       "tag": "pythia-410m@step96000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/c940e8184c07037cbef288a9ade2d7f0d06b3a3384019557abca905ce8678696",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/blobs/c940e8184c07037cbef288a9ade2d7f0d06b3a3384019557abca905ce8678696",
           "bytes": 1621370224,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "model.safetensors",
@@ -8532,7 +8532,7 @@
             "tensor_count": 292
           },
           "sha256": "c940e8184c07037cbef288a9ade2d7f0d06b3a3384019557abca905ce8678696",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bddc539ba381d577ef15c336e8c295e258d5fa49/model.safetensors",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-410m/snapshots/bddc539ba381d577ef15c336e8c295e258d5fa49/model.safetensors",
           "symlink_target": "../../blobs/c940e8184c07037cbef288a9ade2d7f0d06b3a3384019557abca905ce8678696"
         }
       ]
@@ -8549,14 +8549,14 @@
       ],
       "revision": "step112000",
       "selected_by": "pytorch_model.bin.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997",
       "status": "ok",
       "tag": "pythia-6.9b@step112000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/8c0241797f86b84de9bf7b696098a24bfa9e5943604598114e40fbe210ce4d91",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/8c0241797f86b84de9bf7b696098a24bfa9e5943604598114e40fbe210ce4d91",
           "bytes": 9911682774,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "pytorch_model-00001-of-00002.bin",
@@ -8564,11 +8564,11 @@
           "lfs_address_matches": true,
           "lfs_address_sha256": "8c0241797f86b84de9bf7b696098a24bfa9e5943604598114e40fbe210ce4d91",
           "sha256": "8c0241797f86b84de9bf7b696098a24bfa9e5943604598114e40fbe210ce4d91",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/pytorch_model-00001-of-00002.bin",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/pytorch_model-00001-of-00002.bin",
           "symlink_target": "../../blobs/8c0241797f86b84de9bf7b696098a24bfa9e5943604598114e40fbe210ce4d91"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/2463dab7218d98d15d267b0c693d59446b3f6f57153a4559b90dcab05d65a32a",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/2463dab7218d98d15d267b0c693d59446b3f6f57153a4559b90dcab05d65a32a",
           "bytes": 3937306520,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "pytorch_model-00002-of-00002.bin",
@@ -8576,7 +8576,7 @@
           "lfs_address_matches": true,
           "lfs_address_sha256": "2463dab7218d98d15d267b0c693d59446b3f6f57153a4559b90dcab05d65a32a",
           "sha256": "2463dab7218d98d15d267b0c693d59446b3f6f57153a4559b90dcab05d65a32a",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/pytorch_model-00002-of-00002.bin",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/9c7bcdb57a6a163bc1bce8359d8ebc8b77eda997/pytorch_model-00002-of-00002.bin",
           "symlink_target": "../../blobs/2463dab7218d98d15d267b0c693d59446b3f6f57153a4559b90dcab05d65a32a"
         }
       ]
@@ -8593,14 +8593,14 @@
       ],
       "revision": "step32000",
       "selected_by": "pytorch_model.bin.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31",
       "status": "ok",
       "tag": "pythia-6.9b@step32000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/1ac5ce5069c216dbf1e5609f01ac84f7f37c1c6fe251249efd2ac7f2e258b360",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/1ac5ce5069c216dbf1e5609f01ac84f7f37c1c6fe251249efd2ac7f2e258b360",
           "bytes": 9911682774,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "pytorch_model-00001-of-00002.bin",
@@ -8608,11 +8608,11 @@
           "lfs_address_matches": true,
           "lfs_address_sha256": "1ac5ce5069c216dbf1e5609f01ac84f7f37c1c6fe251249efd2ac7f2e258b360",
           "sha256": "1ac5ce5069c216dbf1e5609f01ac84f7f37c1c6fe251249efd2ac7f2e258b360",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/pytorch_model-00001-of-00002.bin",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/pytorch_model-00001-of-00002.bin",
           "symlink_target": "../../blobs/1ac5ce5069c216dbf1e5609f01ac84f7f37c1c6fe251249efd2ac7f2e258b360"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/57ef239aa76f85941d0cd33f6b679354a2dfcc9e2ca1f131cb41f38fc99d7a80",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/57ef239aa76f85941d0cd33f6b679354a2dfcc9e2ca1f131cb41f38fc99d7a80",
           "bytes": 3937306520,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "pytorch_model-00002-of-00002.bin",
@@ -8620,7 +8620,7 @@
           "lfs_address_matches": true,
           "lfs_address_sha256": "57ef239aa76f85941d0cd33f6b679354a2dfcc9e2ca1f131cb41f38fc99d7a80",
           "sha256": "57ef239aa76f85941d0cd33f6b679354a2dfcc9e2ca1f131cb41f38fc99d7a80",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/pytorch_model-00002-of-00002.bin",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/554e5adfd737b258837ccf4d0c4dfa4e382c1a31/pytorch_model-00002-of-00002.bin",
           "symlink_target": "../../blobs/57ef239aa76f85941d0cd33f6b679354a2dfcc9e2ca1f131cb41f38fc99d7a80"
         }
       ]
@@ -8636,14 +8636,14 @@
       ],
       "revision": "step80000",
       "selected_by": "pytorch_model.bin.index.json",
-      "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8",
+      "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8",
       "status": "ok",
       "tag": "pythia-6.9b@step80000",
       "unselected_cached_weight_files": [],
       "used_in_pruning_quantization_panels": true,
       "weights": [
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/dc940c3bc923748a91327ee12711f918ff68714294b26b04e06975754af990d9",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/dc940c3bc923748a91327ee12711f918ff68714294b26b04e06975754af990d9",
           "bytes": 9911682774,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "pytorch_model-00001-of-00002.bin",
@@ -8651,11 +8651,11 @@
           "lfs_address_matches": true,
           "lfs_address_sha256": "dc940c3bc923748a91327ee12711f918ff68714294b26b04e06975754af990d9",
           "sha256": "dc940c3bc923748a91327ee12711f918ff68714294b26b04e06975754af990d9",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/pytorch_model-00001-of-00002.bin",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/pytorch_model-00001-of-00002.bin",
           "symlink_target": "../../blobs/dc940c3bc923748a91327ee12711f918ff68714294b26b04e06975754af990d9"
         },
         {
-          "blob_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/ccd93b0d64d8a36b641c1be231dbd45dcdbb179ef4fa12fd005ab92d5197f766",
+          "blob_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/blobs/ccd93b0d64d8a36b641c1be231dbd45dcdbb179ef4fa12fd005ab92d5197f766",
           "bytes": 3937306520,
           "digest_method": "SHA-256 streamed from actual blob bytes; each unique target read once",
           "file": "pytorch_model-00002-of-00002.bin",
@@ -8663,7 +8663,7 @@
           "lfs_address_matches": true,
           "lfs_address_sha256": "ccd93b0d64d8a36b641c1be231dbd45dcdbb179ef4fa12fd005ab92d5197f766",
           "sha256": "ccd93b0d64d8a36b641c1be231dbd45dcdbb179ef4fa12fd005ab92d5197f766",
-          "snapshot_path": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/pytorch_model-00002-of-00002.bin",
+          "snapshot_path": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-6.9b/snapshots/c51dca0acfafc416e132f889c7a2d0647b834be8/pytorch_model-00002-of-00002.bin",
           "symlink_target": "../../blobs/ccd93b0d64d8a36b641c1be231dbd45dcdbb179ef4fa12fd005ab92d5197f766"
         }
       ]

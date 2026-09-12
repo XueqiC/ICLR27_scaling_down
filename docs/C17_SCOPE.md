@@ -99,7 +99,7 @@ Revalidation is a gate for independent QA behavioral/generalization claims and u
 ```bash
 python analysis/v34_c17_scope_audit.py
 # Optional read-only resolution against the existing local HotpotQA cache:
-python analysis/v34_c17_scope_audit.py --hotpot-cache /home/xueqi/.cache/huggingface/datasets/hotpotqa___hotpot_qa
+python analysis/v34_c17_scope_audit.py --hotpot-cache $HOME/.cache/huggingface/datasets/hotpotqa___hotpot_qa
 python -m pytest -q tests/test_v34.py
 ```
 

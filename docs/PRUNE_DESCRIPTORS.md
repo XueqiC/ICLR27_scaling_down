@@ -70,7 +70,7 @@ One model: report individual signed labels/predictions and correctness; no popul
 
 ## GPU commands (emitted only; not executed)
 
-Run from the repository root in an allocated GPU environment with the checkpoint available. Gemma and OLMo are hpg-eligible. Muse is also non-PRC and allowed by the existing registry/hpg wrapper. The existing hpg wrapper uses its tf5 environment for Gemma4/Muse. Qwen commands are rai-only: SDL_ALLOW_PRC=1 must never be set on hpg. These are 12 dev models plus the separate Qwen3-8B target. Commands include the optional 12-forward group so all three versions can be compared. For weights only, omit --with-activations (the budget flags have no effect without it).
+Run from the repository root in an allocated GPU environment with the checkpoint available. Gemma and OLMo are the cluster-eligible. Muse is also unrestricted and allowed by the existing registry/the cluster wrapper. The existing the cluster wrapper uses its tf5 environment for Gemma4/Muse. Qwen commands are the workstation-only: SDL_ALLOW_RESTRICTED=1 must never be set on the cluster. These are 12 dev models plus the separate Qwen3-8B target. Commands include the optional 12-forward group so all three versions can be compared. For weights only, omit --with-activations (the budget flags have no effect without it).
 
 ```bash
 python analysis/v32_prune_descriptors.py extract --model gemma3-270m --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
@@ -82,10 +82,10 @@ python analysis/v32_prune_descriptors.py extract --model gemma4-31b --device cud
 python analysis/v32_prune_descriptors.py extract --model muse-30b --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
 python analysis/v32_prune_descriptors.py extract --model olmo3-7b --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
 python analysis/v32_prune_descriptors.py extract --model olmo3-32b --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
-SDL_ALLOW_PRC=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-0.6B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
-SDL_ALLOW_PRC=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-1.7B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
-SDL_ALLOW_PRC=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-4B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
-SDL_ALLOW_PRC=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-8B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
+SDL_ALLOW_RESTRICTED=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-0.6B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
+SDL_ALLOW_RESTRICTED=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-1.7B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
+SDL_ALLOW_RESTRICTED=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-4B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
+SDL_ALLOW_RESTRICTED=1 python analysis/v32_prune_descriptors.py extract --model Qwen3-8B --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512
 ```
 
 After extraction, run the CPU audit:

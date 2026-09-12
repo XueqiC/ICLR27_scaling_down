@@ -139,7 +139,7 @@ def test_dry_run_and_compliance_guard_do_not_load_models_or_data(tmp_path, monke
     scoring.main(["--model", "gemma3-270m", "--dry-run", "--prune-density", "0.9",
                   "--quant-bits", "4", "--output-base", str(tmp_path / "out")])
     assert not (tmp_path / "out").exists()
-    monkeypatch.delenv("SDL_ALLOW_PRC", raising=False)
+    monkeypatch.delenv("SDL_ALLOW_RESTRICTED", raising=False)
     with pytest.raises(RuntimeError, match="prohibits"):
         scoring.main(["--model", "Qwen3-4B", "--dry-run"])
 

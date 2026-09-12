@@ -1,64 +1,93 @@
-# Scaling-Down Laws for LLM Compression
+# Capability-conditioned scaling-down laws for LLM compression
 
-Analysis code and curated experimental results for the
-ICLR 2027 submission "Scaling-Down Laws for LLM Compression".
+Measurement and analysis code for studying how compressing a language model changes what
+it can do. Three compression families are treated under one protocol, pruning, post-training
+quantization and trace distillation, and the endpoint is the conditional loss on a fixed
+evaluation distribution per capability rather than an aggregate score. The repository holds
+the pipeline, the predictions that were frozen before each test, the measurements they were
+scored against, and the records that tie every reported number to the file it came from.
+
+## Installation
+
+```
+python3 -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt          # analysis, tables and figures: CPU only
+pip install -r requirements-gpu.txt      # additionally, to measure models
+```
+
+Analysis needs no GPU and no network. Measurement was run with the stack pinned in
+`requirements-gpu.txt` on single GPUs (CUDA 12.8).
+
+## Quickstart
+
+Regenerate a table or figure from the mirrored measurements:
+
+```
+PYTHONPATH=code python3 code/analysis/v86_main_table.py
+```
+
+Run the offline test suite:
+
+```
+PYTHONPATH=code python3 -m pytest code/tests
+```
+
+The generators read the frozen JSON under `data_mirror/`. Each generated file names its
+inputs and their SHA-256 digests in a header comment, so a regenerated table can be compared
+line by line with the one that was published. Tests that reach for model weights, adapters,
+dataset caches or credentials cannot pass from a checkout alone, since those are not part of
+the repository.
 
 ## Layout
 
 | Path | Contents |
 |---|---|
-| `*.tex`, `references.bib`, `iclr2027_conference.*` | Paper source (Overleaf-synced; ICLR 2027 style) |
-| `code/analysis/` | Full measurement & analysis pipeline (see table below) |
-| `code/tests/` | Offline pytest suite for the pipeline |
-| `code/configs/` | Sweep configurations |
-| `results/` | Curated outputs: per-experiment `report.md` + summary JSON (large binary artifacts — Fisher vectors, checkpoints, adapters — are excluded; regenerable via the pipeline) |
-| `figs/` | Paper figures |
+| `code/analysis/` | the pipeline, one module per experiment, named `v<N>_<topic>.py` |
+| `code/tests/` | offline test suite |
+| `code/configs/` | sweep configurations |
+| `code/*.sh` | grid drivers for the larger measurement runs |
+| `data_mirror/` | frozen registers, predictions, measurements and comparison files, one directory per experiment |
+| `results/` | curated per-experiment reports and summaries |
+| `docs/` | results ledger, claim-evidence matrix, measurement definitions, pre-registrations, reference verification, reviewer self-audit |
 
-## Pipeline map
+## Measuring a model
 
-| Script | Experiment |
-|---|---|
-| `v6_capability_geometry.py` | Capability-conditional Fisher spectra + magnitude-pruning damage curves (11 models, 4 families) |
-| `v6b_alignment.py` | Signed first-order term & full-Fisher quadratic damage prediction |
-| `v9_capability_regions.py` | 9-benchmark gradient-signature block structure (capability regions) |
-| `v9b_subspaces.py` | Projected-gradient SVD subspaces, principal-angle block structure |
-| `v9c_ablation.py` | Causal ablation of capability-exclusive coordinates (gold standard) |
-| `v10_quantization.py` | Per-channel RTN quantization damage vs bit-width |
-| `v11_geometry_damage.py` | Geometric order parameter vs behavioral cliff |
-| `v12_distill.py` / `v12_sweep.py` | Black-box distillation arm (LoRA SFT on teacher traces; coverage recipes) |
-| `v13_recovery.py` | Recovery-training arm (post-compression continued training, recovery-law fits) |
-| `teacher_api.py` | Frontier-API teacher client (trace generation) |
-| `model_registry.py` | Model registry + cluster-policy compliance guard |
+Checkpoints resolve through `code/analysis/model_registry.py`; all of them are public and
+pinned by revision.
 
-Results snapshot date: see git log. Experiments still in flight are marked
-"in progress" in the paper's experiment section.
+- Pruning: `code/analysis/v6_capability_geometry.py` applies global magnitude pruning at a
+  deterministic sampled threshold and scores the probe sets.
+- Quantization: `code/analysis/v10_quantization.py` for per-channel round-to-nearest,
+  `code/analysis/v54_quant_group.py` for grouped round-to-nearest with a choice of symmetric
+  or asymmetric mode.
+- Distillation: `code/analysis/v12_distill.py` trains a LoRA student on stored teacher
+  traces. Generating traces needs an API endpoint and credentials, read from a
+  `.secrets.env` file that is not part of the repository.
 
-## Building the anonymous submission artifact
+## Evidence and provenance
 
-`tools/build_anon_release.py` builds a submission-ready, anonymised snapshot into
-`../anon_release`: the working tree's own layout (`analysis/ tests/ configs/
-scripts/ results/ data_mirror/ paper/docs/`), with author, host, institution and
-path strings rewritten, internal planning notes and credentials left out, model
-weights and adapters left out, and a fresh git history with a single anonymous
-commit. It then runs `tools/check_anon.py`, whose deny list is written
-independently of the substitution table, and refuses to finish on a hit. Run it as
+`docs/RESULTS_LEDGER.md` is the spine: one entry per experiment, in order, recording what was
+frozen, when, what was measured and how it came out, including the entries that record
+failures and the ones that correct earlier entries. `docs/CLAIM_EVIDENCE_MATRIX.md` maps each
+reported claim to the artifact behind it. `docs/prereg/` holds registrations written before
+the corresponding measurement, and `docs/REFERENCE_VERIFICATION.md` records the check of every
+bibliography entry against arXiv, DBLP or the publisher.
 
-```
-python3 tools/build_anon_release.py --run-tests
-```
+Freeze discipline: wherever a test is described as independent, the predictions were written
+and hashed before the measurement, and the register and freeze files under `data_mirror/`
+carry those digests and timestamps. Nothing overwrites a frozen file; corrections arrive as
+new versions and are recorded in the ledger.
 
-`--include-traces` additionally copies the teacher trace files, which are
-third-party model outputs and are withheld by default.
+## Not included
 
-## Two repositories (2026-09-12)
+Model weights, LoRA adapters, downloaded checkpoints and dataset caches, all public or
+regenerable from the pipeline; teacher trace files, which are third-party model outputs;
+credentials; and run logs. Absolute paths in the stored artifacts are rewritten to
+`$HOME`-relative or repository-relative form, so a digest recomputed over one of those files
+can differ from the digest recorded inside it. No measurement value was altered.
 
-The paper source moved to [XueqiC/Scaling_down_law_paper](https://github.com/XueqiC/Scaling_down_law_paper),
-which is the repository Overleaf syncs with; its main document is `main.tex` at the root.
-This repository keeps the experiments: `code/analysis/` (analysis and table/figure generators),
-`code/tests/`, `code/configs/`, `data_mirror/` (frozen predictions, measurements, comparison
-files), `results/` (curated reports), and `docs/` (results ledger, claim-evidence matrix,
-reference verification, reviewer self-audit, round summaries).
+## License
 
-Text edits go to the paper repository. Generated `tables/*.tex` and `figs/*.pdf` are written
-there by the generators kept here, so a change to a number starts with the generator.
-Locally, `paper/` is the clone of the paper repository, ignored by this one.
+Released for review and reuse in research. A permissive license will be attached on
+publication. Third-party datasets and checkpoints keep their own terms; see
+`code/analysis/model_registry.py` and `docs/MEASUREMENT_DEFINITIONS.md` for the sources.

@@ -2890,7 +2890,7 @@
   "cached_weights": {
     "state": "pythia-1.4b@step112000",
     "revision": "958d8f6c1dba61335d72ead0be2438b4e759a2b5",
-    "snapshot": "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5",
+    "snapshot": "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5",
     "weights_cached": true,
     "weight_files": [
       "model-00001-of-00002.safetensors",
@@ -2902,12 +2902,12 @@
     ],
     "verification": "Complete local shards and config; safetensors index/header coverage checked when available. No model loaded.",
     "file_sha256": {
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step112000": "cac43308487c0aac2a8525ac5e38225544746ad82b8229a28e83c269f5f4b18a",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00001-of-00002.safetensors": "ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00002-of-00002.safetensors": "2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/tokenizer.json": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624"
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step112000": "cac43308487c0aac2a8525ac5e38225544746ad82b8229a28e83c269f5f4b18a",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00001-of-00002.safetensors": "ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00002-of-00002.safetensors": "2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/tokenizer.json": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624"
     }
   },
   "provenance": {
@@ -2982,12 +2982,12 @@
       "results/v63-quant-identifiability/summary.json": "ab703ab43d799096e4f854b316688ed4d578c345f4e3bf9f90ca9ac29d03b8ad",
       "results/v59-shared-structure/summary.json": "cebf913fbb447fbfe7fa2ccab419c0100da3eb84d878e1b1630899610e284947",
       "results/v53-prune-dev/dense_pythia-1.4b@step112000.json": "357f0784978e815a88669dfea28237116f0559ca68c42021c90f95a01c893e00",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step112000": "cac43308487c0aac2a8525ac5e38225544746ad82b8229a28e83c269f5f4b18a",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00001-of-00002.safetensors": "ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00002-of-00002.safetensors": "2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
-      "/home/xueqi/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/tokenizer.json": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/refs/step112000": "cac43308487c0aac2a8525ac5e38225544746ad82b8229a28e83c269f5f4b18a",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/config.json": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model.safetensors.index.json": "12fc280b890940fc91939fae98670cba3f21f17a4ac63cbb47bfafaab259bc07",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00001-of-00002.safetensors": "ececf53cd7e0bd3ae9c30606ce985f58f1530e4be60e6bdf05b8bf60b1320e75",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/model-00002-of-00002.safetensors": "2a8aebed981d6673820e3b6cbe4d923c0fb2b92445b0d4b25521285d27e86c66",
+      "$HOME/.cache/huggingface/hub/models--EleutherAI--pythia-1.4b/snapshots/958d8f6c1dba61335d72ead0be2438b4e759a2b5/tokenizer.json": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
       "results/v69-quant-confirm/develop.json": "9f035cb37a94d425064f37d822490b52dcad4c669e62864f27cba4ffa5e5643d"
     }
   }

@@ -7,7 +7,7 @@
   "top_fraction": 0.0005,
   "log_eps": 1e-12,
   "n_parameters": 999751680,
-  "fisher_artifact_dir": "/home/xueqi/hq/projects/scaling-down-law/results/v9-capability-regions/gemma3-1b",
+  "fisher_artifact_dir": "results/v9-capability-regions/gemma3-1b",
   "top_coordinate_counts": {
     "math": 499875,
     "code": 499875,

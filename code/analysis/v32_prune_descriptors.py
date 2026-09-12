@@ -327,7 +327,7 @@ def extract(args):
     dtype = {"bf16": torch.bfloat16, "fp16": torch.float16, "fp32": torch.float32}[args.dtype]
     if getattr(args, "offload", False):
         # Full CPU residency (materialized, no meta/disk) so weight-descriptor reads work for 27B+.
-        # rai has ~1TB RAM; retention needs only weights. Activations (if requested) run on CPU.
+        # the workstation has ~1TB RAM; retention needs only weights. Activations (if requested) run on CPU.
         model = load_dense_weights(hf_id, dtype, device_map={"": "cpu"})
     else:
         model = load_dense_weights(hf_id, dtype).to(args.device)
@@ -569,7 +569,7 @@ def extraction_commands():
     tags = list(audit.read_json(v28.METADATA)["models"]) + [TARGET]
     lines = []
     for tag in tags:
-        prefix = "SDL_ALLOW_PRC=1 " if registry.is_prc_model(tag) else ""
+        prefix = "SDL_ALLOW_RESTRICTED=1 " if registry.is_prc_model(tag) else ""
         lines.append(f"{prefix}python analysis/v32_prune_descriptors.py extract --model {tag} --device cuda:0 --dtype bf16 --with-activations --activation-forwards 12 --activation-max-length 512")
     return lines
 
@@ -647,9 +647,9 @@ def render_report(summary):
                 lines.append(f"| {cap} | {row['observed']:.5f} | {name} | {value:.5f} | {bool(np.sign(value)==np.sign(row['observed']))} |")
     lines += ["", "## GPU commands (emitted only; not executed)", "",
               "Run from the repository root in an allocated GPU environment with the checkpoint available. "
-              "Gemma and OLMo are hpg-eligible. Muse is also non-PRC and allowed by the existing registry/hpg wrapper. "
-              "The existing hpg wrapper uses its tf5 environment for Gemma4/Muse. Qwen commands are rai-only: "
-              "SDL_ALLOW_PRC=1 must never be set on hpg. These are 12 dev models plus the separate Qwen3-8B target. "
+              "Gemma and OLMo are the cluster-eligible. Muse is also unrestricted and allowed by the existing registry/the cluster wrapper. "
+              "The existing the cluster wrapper uses its tf5 environment for Gemma4/Muse. Qwen commands are the workstation-only: "
+              "SDL_ALLOW_RESTRICTED=1 must never be set on the cluster. These are 12 dev models plus the separate Qwen3-8B target. "
               "Commands include the optional 12-forward group so all three versions can be compared. "
               "For weights only, omit --with-activations (the budget flags have no effect without it).", "", "```bash",
               *extraction_commands(), "```", "",

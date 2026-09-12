@@ -26,7 +26,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-LOCKED = (ROOT / "prior/xueqi-intern-backup/docs/scaling-down/results/runs/"
+LOCKED = (ROOT / "prior/anon-intern-backup/docs/scaling-down/results/runs/"
           "irt-grid-fill-locked-2026-07-28")
 OUT = ROOT / "results/v1-recipe-strat"
 

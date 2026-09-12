@@ -323,10 +323,10 @@ def test_extract_guard_and_idempotent_cached_features(tmp_path, monkeypatch):
     v32.write_json(path, payload)
     original = path.read_bytes()
     args = v32.parser().parse_args(["extract", "--model", "Qwen3-8B", "--output-dir", str(tmp_path), "--with-activations"])
-    monkeypatch.delenv("SDL_ALLOW_PRC", raising=False)
+    monkeypatch.delenv("SDL_ALLOW_RESTRICTED", raising=False)
     with pytest.raises(RuntimeError, match="prohibits"):
         v32.extract(args)
-    monkeypatch.setenv("SDL_ALLOW_PRC", "1")
+    monkeypatch.setenv("SDL_ALLOW_RESTRICTED", "1")
     monkeypatch.setattr(v32, "load_dense_weights", lambda *_a: pytest.fail("Idempotent extract loaded a model"))
     assert v32.extract(args) == payload
     assert path.read_bytes() == original
@@ -439,7 +439,7 @@ def test_extraction_commands_cover_exact_dev_whitelist_and_rai_target():
     tags = set(v32.audit.read_json(v28.METADATA)["models"]) | {"Qwen3-8B"}
     assert len(commands) == len(tags) == 13
     assert {c.split("--model ")[1].split()[0] for c in commands} == tags
-    assert sum(c.startswith("SDL_ALLOW_PRC=1 ") for c in commands) == 4
+    assert sum(c.startswith("SDL_ALLOW_RESTRICTED=1 ") for c in commands) == 4
     assert all("--with-activations" in c and "--activation-forwards 12" in c for c in commands)
 
 

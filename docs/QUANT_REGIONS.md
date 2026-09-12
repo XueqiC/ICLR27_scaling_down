@@ -221,7 +221,7 @@ The range-dependent η and these cross-range errors are a validity-range problem
 
 Missing 5-bit records: **gemma3-270m, gemma3-4b, olmo3-7b** (3 of 7). Complete 4/5 models: gemma3-12b, gemma3-1b, gemma4-31b, muse-30b. Completes the same seven-model 4/5 comparison and reduces comparison-set variation.
 
-These exact V10 commands are listed, **not executed**. `--n-probe 512` builds 512 probes per capability and V10 evaluates the odd-indexed half (256); it does not evaluate 512 held-out items. bf16 follows job_hpg_v10shape.slurm; saved aggregate JSON lacks dtype/item IDs. Confirm the original runtime/probes before collecting matched fills.
+These exact V10 commands are listed, **not executed**. `--n-probe 512` builds 512 probes per capability and V10 evaluates the odd-indexed half (256); it does not evaluate 512 held-out items. bf16 follows job_cluster_v10shape.slurm; saved aggregate JSON lacks dtype/item IDs. Confirm the original runtime/probes before collecting matched fills.
 
 ```bash
 python analysis/v10_quantization.py --model gemma3-270m --device cuda:0 --model-dtype bf16 --n-probe 512 --bits 5 --output-base results/v10-quant-shape512-fill5

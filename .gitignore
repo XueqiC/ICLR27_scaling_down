@@ -1,5 +1,9 @@
 __pycache__/
 *.pyc
-# The paper source now lives in its own repository (XueqiC/Scaling_down_law_paper).
+# The paper source now lives in its own repository (the paper source repository).
 # `paper/` here is the local clone of that repository (its own git repo); never track it.
 /paper
+# Author-side tooling and correspondence live outside this repository: the
+# anonymous mirror serves this repository's contents verbatim.
+/tools
+/docs/inbox

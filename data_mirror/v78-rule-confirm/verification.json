@@ -7,13 +7,13 @@
       "hf_id": "EleutherAI/pythia-160m",
       "revision": "step32000",
       "commit": "dfead30ed6021412baa93aac4dbb31f1ee82033d",
-      "snapshot_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d",
+      "snapshot_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d",
       "weights": [
         {
           "file": "model.safetensors",
           "sha256": "837a7b56674b9563583343fb532f92704cc394da5970b19f8ac1a443aaeb6f0a",
           "bytes": 649308728,
-          "blob_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/837a7b56674b9563583343fb532f92704cc394da5970b19f8ac1a443aaeb6f0a"
+          "blob_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/837a7b56674b9563583343fb532f92704cc394da5970b19f8ac1a443aaeb6f0a"
         }
       ]
     },
@@ -22,13 +22,13 @@
       "hf_id": "EleutherAI/pythia-410m",
       "revision": "step32000",
       "commit": "e96fca70a425a39753c9f54a2cf74421606a33ac",
-      "snapshot_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac",
+      "snapshot_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac",
       "weights": [
         {
           "file": "model.safetensors",
           "sha256": "c30a2dd44723938b277e5e563b2277ed4b4118220c350be7dfa6094a8dc8e5b2",
           "bytes": 1621370224,
-          "blob_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/c30a2dd44723938b277e5e563b2277ed4b4118220c350be7dfa6094a8dc8e5b2"
+          "blob_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/c30a2dd44723938b277e5e563b2277ed4b4118220c350be7dfa6094a8dc8e5b2"
         }
       ]
     },
@@ -37,19 +37,19 @@
       "hf_id": "EleutherAI/pythia-1.4b",
       "revision": "step32000",
       "commit": "4d615cf6cea07d28784f3b6e47ef6e2b03d97be2",
-      "snapshot_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2",
+      "snapshot_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2",
       "weights": [
         {
           "file": "model-00001-of-00002.safetensors",
           "sha256": "e2cc40f3d4e821305999826e670dcb8414a986ee7f197a490b61aa946f3750de",
           "bytes": 4987196512,
-          "blob_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/e2cc40f3d4e821305999826e670dcb8414a986ee7f197a490b61aa946f3750de"
+          "blob_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/e2cc40f3d4e821305999826e670dcb8414a986ee7f197a490b61aa946f3750de"
         },
         {
           "file": "model-00002-of-00002.safetensors",
           "sha256": "a485538a70ea4f15feb0cd2b3804e9aef666f5ebdda5ada202cc2000420de786",
           "bytes": 671429088,
-          "blob_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/a485538a70ea4f15feb0cd2b3804e9aef666f5ebdda5ada202cc2000420de786"
+          "blob_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/a485538a70ea4f15feb0cd2b3804e9aef666f5ebdda5ada202cc2000420de786"
         }
       ]
     },
@@ -58,13 +58,13 @@
       "hf_id": "EleutherAI/pythia-1b",
       "revision": "step64000",
       "commit": "d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b",
-      "snapshot_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b",
+      "snapshot_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b",
       "weights": [
         {
           "file": "model.safetensors",
           "sha256": "2d4b40480e0989af60da04f7ec7cad5f609aef14d9aa43e3847847a9368d2ef0",
           "bytes": 4047149576,
-          "blob_path": "/home/xueqi/hq/projects/scaling-down-law/results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/2d4b40480e0989af60da04f7ec7cad5f609aef14d9aa43e3847847a9368d2ef0"
+          "blob_path": "results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/2d4b40480e0989af60da04f7ec7cad5f609aef14d9aa43e3847847a9368d2ef0"
         }
       ]
     }

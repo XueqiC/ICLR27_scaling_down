@@ -31,5 +31,5 @@ def main():
         if not m: print(f"% MISSING {key} {aid}", file=sys.stderr); continue
         out.append(bibtex(key, m, venue)); rec[key] = {"arxiv": m["id"], "title": m["title"], "first_author": m["authors"][0], "year": m["year"], "venue": venue}
         print(f"{key:26s} {m['id']:14s} {m['authors'][0][:22]:22s} {m['title'][:70]}", file=sys.stderr)
-    sys.stdout.write("\n".join(out)); Path("/tmp/claude-1010/-home-xueqi-hq-projects-scaling-down-law/460f58d4-6561-477e-8d6d-434658e40d6f/scratchpad/ref_fetch_record.json").write_text(json.dumps(rec, indent=1))
+    sys.stdout.write("\n".join(out)); Path("/tmp/claude-1010/-home-anon-hq-projects-scaling-down-law/460f58d4-6561-477e-8d6d-434658e40d6f/scratchpad/ref_fetch_record.json").write_text(json.dumps(rec, indent=1))
 if __name__ == "__main__": main()

@@ -1277,8 +1277,8 @@
       "split": "test",
       "n_rows": 500,
       "files": {
-        "/home/xueqi/.cache/huggingface/datasets/HuggingFaceH4___math-500/default/0.0.0/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/dataset_info.json": "314768b6c94fe43d0d720d362cd08c0f10ced24d026ffa2f7f3bf0ff135dfdb3",
-        "/home/xueqi/.cache/huggingface/datasets/HuggingFaceH4___math-500/default/0.0.0/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/math-500-test.arrow": "ff2663846092b986df3026f53904030cbaf8e061c9f978d319a7bd86b3a04ea4"
+        "$HOME/.cache/huggingface/datasets/HuggingFaceH4___math-500/default/0.0.0/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/dataset_info.json": "314768b6c94fe43d0d720d362cd08c0f10ced24d026ffa2f7f3bf0ff135dfdb3",
+        "$HOME/.cache/huggingface/datasets/HuggingFaceH4___math-500/default/0.0.0/6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be/math-500-test.arrow": "ff2663846092b986df3026f53904030cbaf8e061c9f978d319a7bd86b3a04ea4"
       }
     },
     {
@@ -1287,8 +1287,8 @@
       "split": "test",
       "n_rows": 500,
       "files": {
-        "/home/xueqi/.cache/huggingface/datasets/google-research-datasets___mbpp/full/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c/dataset_info.json": "eb06e0abed9140c33a95a1db2bdd233e1d80d7304586486d25dbff4d8e4a6503",
-        "/home/xueqi/.cache/huggingface/datasets/google-research-datasets___mbpp/full/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c/mbpp-test.arrow": "d7af94cfc4affeacd0bc887e741770b414764c868c8bf08485ea03c1a5f99b38"
+        "$HOME/.cache/huggingface/datasets/google-research-datasets___mbpp/full/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c/dataset_info.json": "eb06e0abed9140c33a95a1db2bdd233e1d80d7304586486d25dbff4d8e4a6503",
+        "$HOME/.cache/huggingface/datasets/google-research-datasets___mbpp/full/0.0.0/4bb6404fdc6cacfda99d4ac4205087b89d32030c/mbpp-test.arrow": "d7af94cfc4affeacd0bc887e741770b414764c868c8bf08485ea03c1a5f99b38"
       }
     },
     {
@@ -1297,8 +1297,8 @@
       "split": "validation",
       "n_rows": 12576,
       "files": {
-        "/home/xueqi/.cache/huggingface/datasets/framolfese___2_wiki_multihop_qa/default/0.0.0/fe713bfbd1afbca1a65246741a75890405d56a3a/dataset_info.json": "9c0d9c3fddba4553c6998a41a87f4b388b453246d0f8a904b44dbd81d3c214d8",
-        "/home/xueqi/.cache/huggingface/datasets/framolfese___2_wiki_multihop_qa/default/0.0.0/fe713bfbd1afbca1a65246741a75890405d56a3a/2_wiki_multihop_qa-validation.arrow": "1e71770c40423154e12c347d148f2bdf41448a74a09594f64482c1c3e216299a"
+        "$HOME/.cache/huggingface/datasets/framolfese___2_wiki_multihop_qa/default/0.0.0/fe713bfbd1afbca1a65246741a75890405d56a3a/dataset_info.json": "9c0d9c3fddba4553c6998a41a87f4b388b453246d0f8a904b44dbd81d3c214d8",
+        "$HOME/.cache/huggingface/datasets/framolfese___2_wiki_multihop_qa/default/0.0.0/fe713bfbd1afbca1a65246741a75890405d56a3a/2_wiki_multihop_qa-validation.arrow": "1e71770c40423154e12c347d148f2bdf41448a74a09594f64482c1c3e216299a"
       }
     },
     {
@@ -1307,8 +1307,8 @@
       "split": "validation",
       "n_rows": 17944,
       "files": {
-        "/home/xueqi/.cache/huggingface/datasets/mandarjoshi___trivia_qa/rc.nocontext/0.0.0/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f/dataset_info.json": "e61b22d51413772c50d1c8e18c0fd0c1c339586b27d638f16f7217d5d5426d85",
-        "/home/xueqi/.cache/huggingface/datasets/mandarjoshi___trivia_qa/rc.nocontext/0.0.0/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f/trivia_qa-validation.arrow": "8a1a58c307b1596879c4c0000ec1b7784c34ea60b52a679c8ec3c5f1dd5a8d74"
+        "$HOME/.cache/huggingface/datasets/mandarjoshi___trivia_qa/rc.nocontext/0.0.0/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f/dataset_info.json": "e61b22d51413772c50d1c8e18c0fd0c1c339586b27d638f16f7217d5d5426d85",
+        "$HOME/.cache/huggingface/datasets/mandarjoshi___trivia_qa/rc.nocontext/0.0.0/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f/trivia_qa-validation.arrow": "8a1a58c307b1596879c4c0000ec1b7784c34ea60b52a679c8ec3c5f1dd5a8d74"
       }
     }
   ],

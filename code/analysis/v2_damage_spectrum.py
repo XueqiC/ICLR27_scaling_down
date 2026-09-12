@@ -32,7 +32,7 @@ import numpy as np
 from scipy.optimize import minimize_scalar
 
 ROOT = Path(__file__).resolve().parents[1]
-RUNS = ROOT / "prior/xueqi-intern-backup/docs/scaling-down/results/runs"
+RUNS = ROOT / "prior/anon-intern-backup/docs/scaling-down/results/runs"
 EVAL = RUNS / "prune-mild-matched-2026-07-27/eval"
 LOCKED = RUNS / "irt-grid-fill-locked-2026-07-28"
 OUT = ROOT / "results/v2-damage-spectrum"

@@ -22,7 +22,7 @@ from analysis.model_registry import (
 @pytest.mark.parametrize("size", ["410m", "1.4b", "2.8b"])
 @pytest.mark.parametrize("revision", [None, "step16000", "step143000"])
 def test_pythia_registry_and_revision(size, revision, monkeypatch):
-    monkeypatch.delenv("SDL_ALLOW_PRC", raising=False)
+    monkeypatch.delenv("SDL_ALLOW_RESTRICTED", raising=False)
     base = f"pythia-{size}"
     requested = f"{base}@{revision}" if revision else base
     expected = f"EleutherAI/{base}"
@@ -58,11 +58,11 @@ def test_empty_checkpoint_parts_are_rejected(requested):
 
 
 def test_compliance_checks_base_model_only(monkeypatch):
-    monkeypatch.delenv("SDL_ALLOW_PRC", raising=False)
+    monkeypatch.delenv("SDL_ALLOW_RESTRICTED", raising=False)
     assert require_compliant("pythia-1.4b@qwen-comparison") == "EleutherAI/pythia-1.4b"
-    with pytest.raises(RuntimeError, match="HiPerGator policy"):
+    with pytest.raises(RuntimeError, match="the shared cluster policy"):
         require_compliant("Qwen3-4B@step16000")
-    monkeypatch.setenv("SDL_ALLOW_PRC", "1")
+    monkeypatch.setenv("SDL_ALLOW_RESTRICTED", "1")
     assert require_compliant("Qwen3-4B@step16000") == "Qwen/Qwen3-4B"
 
 
@@ -118,7 +118,7 @@ def test_cli_preserves_checkpoint_through_stage_to_loader(
         raise ReachedLoader
 
     expected_revision = revision
-    monkeypatch.setenv("SDL_ALLOW_PRC", "1")  # Qwen compatibility test, no cluster use.
+    monkeypatch.setenv("SDL_ALLOW_RESTRICTED", "1")  # Qwen compatibility test, no cluster use.
     module = {"prune": geometry, "fisher": geometry,
               "quant": quantization, "distill": distill}[pipeline]
     monkeypatch.setattr(module, "OUT_BASE", tmp_path)

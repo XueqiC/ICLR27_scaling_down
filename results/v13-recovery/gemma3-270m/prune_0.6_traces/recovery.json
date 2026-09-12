@@ -17,7 +17,7 @@
   },
   "recovery_source": {
     "name": "traces",
-    "trace_base": "/home/xueqi/hq/projects/scaling-down-law/results/traces-pilot",
+    "trace_base": "results/traces-pilot",
     "streaming": false,
     "shuffled": true,
     "seed": 0,

@@ -164,7 +164,7 @@ def test_dry_run_cli_prints_all_probes_and_loads_no_model(tmp_path, monkeypatch,
 def test_guard_checks_resolved_model_and_adapter_metadata(tmp_path, monkeypatch):
     from analysis import model_registry
 
-    monkeypatch.delenv("SDL_ALLOW_PRC", raising=False)
+    monkeypatch.delenv("SDL_ALLOW_RESTRICTED", raising=False)
     monkeypatch.setitem(model_registry.MODEL_REGISTRY, "safe-looking", {"hf_id": "Qwen/Qwen3-4B"})
     with pytest.raises(RuntimeError, match="prohibits"):
         validity.resolve_source("safe-looking", None, None)
