@@ -33,6 +33,23 @@ ICLR 2027 submission "Scaling-Down Laws for LLM Compression".
 Results snapshot date: see git log. Experiments still in flight are marked
 "in progress" in the paper's experiment section.
 
+## Building the anonymous submission artifact
+
+`tools/build_anon_release.py` builds a submission-ready, anonymised snapshot into
+`../anon_release`: the working tree's own layout (`analysis/ tests/ configs/
+scripts/ results/ data_mirror/ paper/docs/`), with author, host, institution and
+path strings rewritten, internal planning notes and credentials left out, model
+weights and adapters left out, and a fresh git history with a single anonymous
+commit. It then runs `tools/check_anon.py`, whose deny list is written
+independently of the substitution table, and refuses to finish on a hit. Run it as
+
+```
+python3 tools/build_anon_release.py --run-tests
+```
+
+`--include-traces` additionally copies the teacher trace files, which are
+third-party model outputs and are withheld by default.
+
 ## Two repositories (2026-09-12)
 
 The paper source moved to [XueqiC/Scaling_down_law_paper](https://github.com/XueqiC/Scaling_down_law_paper),

@@ -32,11 +32,11 @@ v10._restore_dense_weights(params, dense_w)
 # P2 adapters (data-seed 11; two milestone snapshots each) -- pre-registered choice
 from peft import PeftModel
 for U in (75, 450):
-    d = ROOT / f"results/v12-distill/gemma3-1b/gpt-5.6-luna_full_{U}_p2dev_lora_dseed11"
-    snaps = sorted([p for p in glob.glob(str(d / "trajectory/update-*")) if Path(p, "adapter_config.json").exists()])
+    d = ROOT / f"results/v12-distill/gemma3-1b/gpt-5.6-luna_full_{U}_p2v2_lora_dseed11"  # v2 protocol dev adapters (data-seed 11)
+    snaps = sorted([p for p in glob.glob(str(d / "trajectory/update-*")) if Path(p, "adapter", "adapter_config.json").exists()])  # v12 saves snapshot adapters under update-*/adapter/
     snaps = [s for s in snaps if json.loads(Path(s, "eval.json").read_text()).get("processed_tokens", 0) > 0][:2]
     for s in snaps:
-        pm = PeftModel.from_pretrained(base, s); pm.eval()
+        pm = PeftModel.from_pretrained(base, str(Path(s) / "adapter")); pm.eval()
         results.append(measure(pm, f"kd_U{U}_s11_{Path(s).name}")); del pm; torch.cuda.empty_cache()
         base, tok = v12.load_text_causal_lm(name, torch.bfloat16, rev); base.to(DEV).eval(); params = v6.language_weight_parameters(base)
 (OUT / "measurements.json").write_text(json.dumps(results, indent=2)); print("wrote", OUT / "measurements.json")

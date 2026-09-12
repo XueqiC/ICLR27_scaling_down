@@ -105,7 +105,12 @@ def test_eval_files_record_token_counts_seed_and_shared_trajectory(tmp_path, mon
     class Model(torch.nn.Module):
         def __init__(self):
             super().__init__()
-            self.weight = torch.nn.Parameter(torch.ones(1))
+            self.adapter = torch.nn.Module()
+            self.adapter.lora_A = torch.nn.Parameter(torch.ones(1))
+
+        @property
+        def weight(self):
+            return self.adapter.lora_A
 
         def save_pretrained(self, path):
             torch.save(self.state_dict(), path / "weights.pt")
@@ -117,7 +122,8 @@ def test_eval_files_record_token_counts_seed_and_shared_trajectory(tmp_path, mon
     monkeypatch.setattr(distill, "build_probes", lambda *a, **kw: {
         c: [{"prompt": "a", "completion": "B"}] * 4 for c in distill.CAPABILITIES})
     monkeypatch.setattr(distill, "load_text_causal_lm", lambda *a: (Model(), TinyTokenizer()))
-    monkeypatch.setattr(distill, "configure_training", lambda m: (m, "lora", ["weight"]))
+    monkeypatch.setattr(distill, "resolve_training_mode", lambda mode: "lora")
+    monkeypatch.setattr(distill, "configure_training", lambda m, **kw: (m, "lora", ["adapter.lora_A"]))
     monkeypatch.setattr(distill, "masked_causal_loss", lambda model, example, device: (model.weight.square().sum(), 2))
 
     def measure(model, *args):
@@ -164,7 +170,8 @@ def test_full_delta_snapshot_does_not_mutate_cpu_parameters(tmp_path):
 def test_trajectory_requires_fresh_directory_before_seeding_or_training(tmp_path, monkeypatch):
     monkeypatch.setattr(distill, "OUT_BASE", tmp_path)
     monkeypatch.setattr(distill, "seed_everything", lambda *a: pytest.fail("must refuse before seeding"))
-    run = tmp_path / "gemma3-270m" / "gpt-5.6-luna_full_1"
+    monkeypatch.setattr(distill, "resolve_training_mode", lambda mode: "lora")
+    run = tmp_path / "gemma3-270m" / "gpt-5.6-luna_full_1_lora"
     run.mkdir(parents=True)
     marker = run / "eval.json"
     marker.write_text('{"existing": true}')

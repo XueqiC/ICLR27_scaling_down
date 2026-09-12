@@ -133,7 +133,8 @@ def test_training_seeds_get_distinct_paths_and_are_written_to_eval(tmp_path, mon
     class Model(torch.nn.Module):
         def __init__(self):
             super().__init__()
-            self.weight = torch.nn.Parameter(torch.ones(1))
+            self.adapter = torch.nn.Module()
+            self.adapter.lora_A = torch.nn.Parameter(torch.ones(1))
 
         def save_pretrained(self, path):
             (path / "adapter_config.json").write_text("{}")
@@ -162,7 +163,8 @@ def test_training_seeds_get_distinct_paths_and_are_written_to_eval(tmp_path, mon
     monkeypatch.setattr(distill, "load_sft_records", load_records)
     monkeypatch.setattr(distill, "build_probes", probes)
     monkeypatch.setattr(distill, "load_text_causal_lm", lambda *a: (Model(), TinyTokenizer()))
-    monkeypatch.setattr(distill, "configure_training", lambda m: (m, "lora", ["weight"]))
+    monkeypatch.setattr(distill, "resolve_training_mode", lambda mode: "lora")
+    monkeypatch.setattr(distill, "configure_training", lambda m, **kw: (m, "lora", ["adapter.lora_A"]))
     monkeypatch.setattr(distill, "_train", train)
     monkeypatch.setattr(distill, "measure_capability_losses",
                         lambda *a: ({c: 2.0 for c in distill.CAPABILITIES},
@@ -179,10 +181,10 @@ def test_training_seeds_get_distinct_paths_and_are_written_to_eval(tmp_path, mon
         assert saved["probe_seed"] == 0
         paths.append(path)
     assert paths[0] != paths[1]
-    assert paths[0].parent.name == "gpt-5.6-luna_full_1"
-    assert paths[1].parent.name == "gpt-5.6-luna_full_1_seed7"
+    assert paths[0].parent.name == "gpt-5.6-luna_full_1_lora"
+    assert paths[1].parent.name == "gpt-5.6-luna_full_1_lora_seed7"
     assert distill.make_run_name("teacher", "full", 1, "control", seed=7) == (
-        "teacher_full_1_control_seed7"
+        "teacher_full_1_control_lora_seed7"
     )
     assert seeded == data_seeds == [0, 7]
     assert training_seeds == [(0, 0), (7, 7)]

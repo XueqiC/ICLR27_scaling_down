@@ -216,7 +216,7 @@ def rule_spec(inputs, frozen):
                      "state_label": status_label, "predictor_verbatim": predictor,
                      "code_verbatim": expression, "development": dev, "reference_anchor": anchor})
 
-    for status, label in ((('seen_size_unseen_density',), "Seen size; new $d$"), (NEW, "New size/stage")):
+    for status, label in ((('seen_size_unseen_density',), "Seen source state; new $d$"), (NEW, "New size or new stage")):
         for cap in CAPS:
             power = status != NEW and cap != "qa"
             add("pruning", cap, status, label, "v53 power" if power else "v53 median curve",

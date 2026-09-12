@@ -41,9 +41,12 @@ def test_existing_pairs_complete_separate_and_reproduce_v21():
     # New completed D-ladder cells may be added without changing the V22 audit.
     # Verify complete per-capability coverage of the input inventory instead of
     # freezing the older 23-run snapshot.
+    # Pythia controlled-panel cells (v36/v39 source-transfer study) are excluded from the v22
+    # heterogeneous-model decomposition, so they are excluded from the expected inventory too.
+    _no_pythia = lambda ps: {p for p in ps if not p.parent.parent.name.lower().startswith("pythia-")}
     expected = {
-        12: set((results / "v12-distill").glob("*/*/eval.json")),
-        16: set((results / "v16-style-residual").glob("*/*/residual.json")),
+        12: _no_pythia((results / "v12-distill").glob("*/*/eval.json")),
+        16: _no_pythia((results / "v16-style-residual").glob("*/*/residual.json")),
     }
     assert summary["counts"] == {f"v{v}_runs": len(paths) for v, paths in expected.items()}
     expected_cells = {(f"results/{p.relative_to(results).as_posix()}", cap)

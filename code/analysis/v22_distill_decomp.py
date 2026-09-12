@@ -65,6 +65,9 @@ def decompose(own_dense: float, distilled: float, reference: float) -> dict:
 def input_paths(results: Path) -> list[Path]:
     losses = sorted((results / "v12-distill").glob("*/*/eval.json"))
     losses += sorted((results / "v16-style-residual").glob("*/*/residual.json"))
+    # Pythia controlled-panel distill cells (v36/v39 source-transfer study) are not heterogeneous
+    # finished models and have no same-family reference here; exclude them from the v22 decomposition.
+    losses = [p for p in losses if not p.parent.parent.name.lower().startswith("pythia-")]
     if not losses:
         raise FileNotFoundError("no V12/V16 loss artifacts found")
     families = {family_of(path.parent.parent.name) for path in losses}
@@ -86,10 +89,12 @@ def load_decompositions(results: Path) -> list[dict]:
     for version, dirname, filename in [(12, "v12-distill", "eval.json"),
                                        (16, "v16-style-residual", "residual.json")]:
         for path in sorted((results / dirname).glob(f"*/*/{filename}")):
+            model, run = path.parent.parent.name, path.parent.name
+            if model.lower().startswith("pythia-"):
+                continue  # controlled-panel cells (v36/v39), not heterogeneous finished models
             payload = read_json(path)
             if payload.get("version") != version:
                 raise ValueError(f"unexpected measurement version: {path}")
-            model, run = path.parent.parent.name, path.parent.name
             if payload.get("student_tag") != model or payload.get("run_name") != run:
                 raise ValueError(f"path/metadata identity mismatch: {path}")
             family = family_of(model)
