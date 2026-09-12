@@ -23,8 +23,8 @@ token.
 fit, at densities 0.85, 0.675, and 0.575, the delivered power form has
 MAE 0.24, 0.24, and 0.68 for math, code, and QA: it beats the
 strength-only curve and zero change on every checkpoint, has the
-lowest math error of all predictors, ties the median curve on code,
-and loses QA to every source-free curve (median 0.22). At $d=0.55$,
+lowest math error, ties the median curve on code, and loses QA to
+every source-free curve (median 0.22). At $d=0.55$,
 beyond the range, every source-conditioned form fails on every source
 (0.6 to 4.5 nats): the transfer range is the interpolation regime.
 
@@ -45,12 +45,10 @@ there (Appendix~\ref{sec:app_results}).
 
 \paragraph{Distillation pools.} Under the uniform protocol the headline joint form is compared with the frozen
 constant cell by cell, with paired differences and 95\% intervals
-from a bootstrap over trajectories (Table~\ref{tab:distill_paired}). On the 270M
-student at the unseen pool the gain over the constant is detected on
-every capability (0.015, 0.011, and 0.26 nats; intervals above zero);
-on the 1B student it is detected for code and QA (0.040 and 0.56
-nats) and the math point estimate (0.007) is not resolved by three
-trajectories. Against zero change the gains are 42 to 79\% on every cell. In a second confirmation (forms re-selected on all 25 trajectories
+from a bootstrap over trajectories (Table~\ref{tab:distill_paired}). On the 270M student at the unseen pool the gain over the constant is
+detected on every capability (0.015, 0.011, and 0.26 nats); on the
+1B student it is detected for code and QA (0.040 and 0.56) and the
+math point estimate (0.007) is not resolved by three trajectories. Against zero change the gains are 42 to 79\% on every cell. In a second confirmation (forms re-selected on all 25 trajectories
 by the pre-committed rule, six new pools of $U{=}200$ at budgets 50k,
 100k, and 200k, predictions frozen before training) every selected
 form beats zero change, the gain over the strongest development-fixed baseline is detected
@@ -74,14 +72,14 @@ relation as by the development median. For a 6.9B source, five times the develop
 source-conditioned pruning forms lose to the median curve on math
 (0.30 against 0.12) and QA (0.91 against 0.12) and tie on code, and
 the per-bit quantization regression is worse than the per-bit median
-at every bit-width. On 6.9B@80k the power form ties the median on math and loses on
-code and QA, and on a 2.8B source inside the refit size range the frozen median
-density curve $\widetilde f_c(d)$ predicts within 0.08, 0.05, and 0.07
-nats while both source-conditioned forms are three to
-seven times worse (Appendix~\ref{sec:app_results}): on this new-size
-panel the aggregated development response is the more accurate
-predictor, and the extra value of $N_0$ and $D_0$ is not yet stable
-enough to support the source-conditioned forms. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
+at every bit-width. On 6.9B@80k the power form ties the median on math and loses on code
+and QA, and on a 2.8B source inside the refit size range the frozen
+median density curve $\widetilde f_c(d)$ predicts within 0.08, 0.05,
+and 0.07 nats while both source-conditioned forms are three to seven
+times worse (Appendix~\ref{sec:app_results}): the aggregated
+development response is the more accurate predictor there, and the
+extra value of $N_0$ and $D_0$ is not yet stable enough to support the
+source-conditioned forms. For distillation, on Gemma-3-4B as a held-out student (6.6 times the
 reference size) the frozen constant is better than the headline form
 at the unseen pool on every capability (intervals below zero); at the development pools only its QA gain clears zero (0.83 nats,
 $[0.12,1.54]$; Table~\ref{tab:distill_paired}). Joint transfer to a larger student and a
@@ -97,11 +95,11 @@ confirmation panels (Appendix~\ref{sec:app_shared}): per-capability
 pruning curves beat a shared damage curve with a signed
 per-capability scale by 0.06 nats macro (interval $[0.02,0.10]$ with
 the 2.8B duplicate merged), almost entirely through QA (0.17,
-$[0.11,0.24]$), whose aggregate curve is not proportional to the
-shared one: it changes sign across density (damage at $d=0.55$,
-improvement from 0.6 to 0.9), so no scale, including a negative one,
-can represent it ($R^2$ 0.49 against 0.94 and 0.97 for math and
-code), and its direction also varies across sources. For math and
+$[0.11,0.24]$), whose aggregate curve is not proportional to the tested shared curve:
+it changes sign across density (damage at $d=0.55$, improvement from
+0.6 to 0.9), so no scale of that curve, including a negative one,
+represents it ($R^2$ 0.49 against 0.94 and 0.97 for math and code),
+and its direction also varies across sources. For math and
 code a shared curve is as good or better, for grouped quantization
 the two are indistinguishable (0.003 nats), and for distillation the
 comparison is empty because the one-coefficient forms are

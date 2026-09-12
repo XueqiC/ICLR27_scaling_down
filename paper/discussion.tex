@@ -6,14 +6,14 @@ arm, what predictor is delivered, which inputs it needs, which parts
 were frozen and which choices are retrospective, where it gains over
 the strongest same-information baseline, and where it does not apply.
 The pattern is consistent: source-conditioned forms add value at
-unseen configurations of seen states, and on new model states the
-source-free references are as good or better. QA is carried by
-source-free predictors on every arm, and its distillation gain is
-repeatable within the 2Wiki distribution and reverses sign on MuSiQue
-and TriviaQA (Appendix~\ref{sec:app_measure}); \S\ref{sec:selection}
-connects the relations to an explicit selection problem.
+unseen configurations of seen states, source-free references are as
+good or better on new model states, and QA is carried by source-free predictors on every arm.
 
-The reference anchor is the input to keep, the working forms are
-low-dimensional, and transfer across sizes is unreliable; the
-limitations are small correlated panels, one quantizer family and one
-teacher, and nominal storage as the only selection cost.
+Our predictive relationships are conditional on the evaluated loss
+distributions and compression implementations; improvements on 2Wiki
+do not establish general QA improvements. Transfer to unseen source
+states remains uneven, and simple configuration-level response
+estimates can outperform source-conditioned parametric forms. The decision study covers four Pythia source states under nominal
+matrix-storage budgets, combining newly measured pruning and
+quantization outcomes with previously evaluated distillation
+candidates excluded from predictor fitting.

@@ -69,15 +69,14 @@ form, the low-order surface
 with one four-vector of state coefficients per term, and a same-input
 bilinear interpolation. With two development bit-widths $u^2$ is constant on the development
 cells (rank 16 of 20, Appendix~\ref{sec:app_forms}), and with six
-states the leave-one-state-out errors select no form. The frozen
-tests of \S\ref{sec:unseen_settings} and a confirmation round with all
-54 unblinded cells as development set (three bit levels, full rank)
-and 21 frozen cells at unseen group sizes and on a new state settle
-the choice: the delivered predictor for math and code is the
-same-input piecewise interpolation over the measured $(b,g)$ grid with
-a pre-specified linear boundary rule in $\log_2 g$, for QA and for a
-new state the source-free per-configuration median, and the
-parametric surface loses on every confirmation test.
+states the leave-one-state-out errors select no form. The frozen tests of \S\ref{sec:unseen_settings} and a confirmation
+round (all 54 unblinded cells as development set, full rank; 21
+frozen cells at unseen group sizes and on a new state) settle the
+choice: for math and code the same-input piecewise interpolation over
+the measured $(b,g)$ grid with a pre-specified linear boundary rule in
+$\log_2 g$, for QA and for a new state the source-free
+per-configuration median; the parametric surface loses on every
+confirmation test.
 
 \subsection{Distillation}
 \label{sec:law_distill}
@@ -127,9 +126,7 @@ student descriptor $z_c=\tilde L_{0,c}$,
 \end{equation}
 were compared on the development matrix by leave-one-run-out
 cross-validation and scored on the test matrix retrospectively
-(Appendix~\ref{sec:app_forms}): the second is the best of all forms
-on the 270M unseen-pool trajectories, the first fails for QA because
-it has no budget term, and neither beats the frozen constant for math
-and code on the 4B student. The delivered relation is the joint form
-inside the development size range; no joint student-pool-budget law
-is claimed.
+(Appendix~\ref{sec:app_forms}): the second is best on the 270M
+unseen-pool trajectories, the first fails for QA because it has no
+budget term, and neither beats the frozen constant for math and code
+on the 4B student. No joint student-pool-budget law is claimed.
