@@ -1,6 +1,6 @@
 # CLAIM_EVIDENCE_MATRIX (updated 2026-09-10 for the predictive-laws restructure; TeX locations refer to the new outline)
 
-Hashes: sha256 first 12 hex of the result file at S2 commit. Frozen-prediction commits: v38 4e0bf2c, v40 20542e2, v41 0bbbaa8 (analysis repo); v46 b1bf631, v49 cd9ed8f / 950312f (paper repo).
+Hashes: sha256 first 12 hex of the result file at S2 commit. Frozen-prediction commits: v38 4e0bf2c, v40 20542e2, v41 0bbbaa8; v46 b1bf631, v49 cd9ed8f / 950312f.
 
 | id | claim (final wording) | result files (hash) | prediction/analysis origin | figure/table + code | comparison / budget | range | counterexamples / uncertainty | TeX location |
 |---|---|---|---|---|---|---|---|---|

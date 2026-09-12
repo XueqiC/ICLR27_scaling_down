@@ -80,7 +80,7 @@ phenomenon, appendix; 16M tokens NOT called an asymptotic floor. Resource-ratio 
 mis-ranking — implications (nominal storage, no real latency; no held-out selection ⇒ no reliable-selector claim).
 Dense scaling/reference and prior compression/distillation laws — attributed to prior work, not our contribution.
 
-## Open limitations affecting submission (≤3 substantive)
+## Open limitations (≤3 substantive)
 1. Small controlled panel (3 sizes × 3 steps; 3 pools) — intervals are panel-conditional, not population.
 2. The shared pruning power form is not independently necessary (A2 ties it); the paper reports the
    source-conditioned family with the power shape as a non-necessary variant.
