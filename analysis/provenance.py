@@ -31,11 +31,13 @@ def _pairs() -> dict[str, tuple[str, str]]:
                 data = json.loads(candidate.read_text(encoding="utf-8"))
             except (json.JSONDecodeError, OSError):
                 return {}
-            return {
-                entry["original_sha256"]: (entry["anonymized_sha256"], rel)
-                for rel, entry in data.get("files", {}).items()
-                if entry.get("original_sha256") and entry.get("anonymized_sha256")
-            }
+            pairs: dict[str, tuple[str, str]] = {}
+            for key, entry in data.get("files", {}).items():
+                frozen = entry.get("frozen_sha256") or entry.get("original_sha256")
+                published = entry.get("published_sha256") or entry.get("anonymized_sha256")
+                if frozen and published:
+                    pairs[frozen] = (published, str(entry.get("published_at", key)))
+            return pairs
     return {}
 
 
