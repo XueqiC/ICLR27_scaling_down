@@ -159,11 +159,14 @@ Per capability, over the mild and moderate cells together:
 | code | -0.3% | -19.8% | 88.6% |
 | QA (2Wiki) | 91.0% | 61.4% | -94.0% |
 
-For math and code the response in the predictable regime is between 84 and 89 percent noise,
-with shrinkage contributing about three percent. That is a positive result for the noise half
-of the shrinkage-plus-noise hypothesis, and it is why the hypothesis should not have been
-called dead: what fails is the shrinkage half, and it fails because shrinkage is genuinely a
-small share rather than because it was badly estimated.
+For math and code, between 84 and 89 percent of the response in the predictable regime comes
+from the variance of the component of the displacement that is orthogonal to the logits, with
+shrinkage contributing about three percent. Stating that carefully matters. It says the
+orthogonal residual is where the loss change lives; it does **not** establish that the
+residual is random noise, isotropic or otherwise, and it is not a predictor, because
+computing it needs the compressed model. What the experiment settles is that the shrinkage
+component is a small share, so the pure-shrinkage account fails on magnitude rather than on
+estimation. Whether the residual has usable structure is open.
 
 QA is structurally different. There the shrinkage and residual first-order terms are large and
 the variance term works against the response, which fits the seventeen cells where compression

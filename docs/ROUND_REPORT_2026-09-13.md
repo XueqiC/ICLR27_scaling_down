@@ -52,7 +52,9 @@ width of its interval. Seven candidates, all low degrees of freedom, no searchin
 fitted to the response and then differenced is identically zero, so zero and the constant are
 one baseline, not two.
 
-**Verdict: not predictable for math, code or QA.** The detail matters more than the verdict.
+**Verdict: the pre-registered threshold was not met for math, code or QA.** That is the
+correct phrasing: not met is not the same as unpredictable, and the detail below matters
+more than the verdict.
 
 | Capability | Target | Best candidate | MAE against baseline | Gain [95% CI] | Interval width |
 |---|---|---|---|---|---|
@@ -151,9 +153,10 @@ under control for the first time; a protocol dependence that reframes earlier da
 a mechanism account of compression damage as second-order noise in logit space, with a
 boundary stated in configuration units.
 
-**Not established.** That any of it is predictable. The budget axis is close for code and the
-independent-data axis is not close for anything, and the pre-compression statistics do not
-beat a source-free curve.
+**Not established.** That any of it clears the registered bar. The budget axis is close for
+code, an error cut of 43% with an interval excluding zero, which is development evidence worth
+confirming rather than a null; the independent-data axis is not close for anything; and the
+pre-compression statistics do not beat a source-free curve.
 
 **What I would do next, in order.** Widen the matrix along the axis that failed, since the
 independent-data intervention is both the largest effect and the least predictable, before
