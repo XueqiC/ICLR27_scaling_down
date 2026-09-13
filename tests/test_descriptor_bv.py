@@ -126,7 +126,13 @@ def test_cli_selftest_offline_and_cpu_default(tmp_path):
     assert json.loads(completed.stdout)["input_hashes"]["probes_sha256"]
 
 
-def test_cli_rejects_non_cpu_before_loading():
+def test_cli_rejects_non_cpu_unless_opted_in():
+    """The device guard is an opt-in, not a prohibition: it stops a preparation step from
+    taking a shared accelerator by accident, and lifts when a measurement asks for one."""
     result = subprocess.run([sys.executable, "-m", "analysis.descriptor_bv", "--device", "cuda:0"],
                             env=_subprocess_env(), capture_output=True, text=True)
-    assert result.returncode != 0 and "CPU only" in result.stderr
+    assert result.returncode != 0 and "defaults to CPU" in result.stderr
+    with_flag = subprocess.run([sys.executable, "-m", "analysis.descriptor_bv",
+                                "--device", "cuda:0", "--allow-gpu"],
+                               env=_subprocess_env(), capture_output=True, text=True)
+    assert "defaults to CPU" not in with_flag.stderr

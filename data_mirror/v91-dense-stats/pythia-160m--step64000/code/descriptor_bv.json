@@ -1,0 +1,45 @@
+{
+ "aggregates": {
+  "code": {
+   "MBPP": {
+    "B": -0.08648356684092419,
+    "B_per_byte": -0.03394946026871028,
+    "L": 1.673460898502496,
+    "L_per_byte": 0.6569235793598955,
+    "V": 0.47286635805882155,
+    "V_per_byte": 0.18562552657958964,
+    "W": 3.618186308704591,
+    "W_per_byte": 1.420333097015976,
+    "n_samples": 64,
+    "n_scored_samples": 64,
+    "scored_reference_byte_count": 10717,
+    "scored_token_count": 4207
+   }
+  }
+ },
+ "aggregation_rule": "sum_i sum_scored_tokens(value_i) / sum_i scored_token_count_i; pooled tokens, not mean of sample means",
+ "byte_aggregation_rule": "sum_i sum_scored_tokens(value_i) / sum_i scored_reference_byte_count_i; pooled bytes",
+ "chunk_tokens": 32,
+ "code_sha256": {
+  "descriptor_bv.py": "1aef2b9e0f110d078c89798d18b8f3921e9ef15abc46b687f9f46764e265ad88",
+  "eval_records.py": "c80b883389299a4122bfbebc80eb28c227fff9d4e5b0f745af416b46baf440dd",
+  "v10_quantization.py": "5c5db431ac93283a6d29d7dcb38a1937f6be35542472a7f6d469ca394c6797ce",
+  "v27_scoring_and_units.py": "bfe2df56ddaa1d61d2bd85b266d2d494061f33e2a84b392a1ea03636c8f4aa9b",
+  "v6_capability_geometry.py": "887510b9e8a6aebd6add8134102619a1af6939b5da5872e75c55e7c0a8f30509"
+ },
+ "commit": "a4fb16019d8379f67cbb4d4e0921ed7875bbb1d6",
+ "device": "cuda:0",
+ "input_hashes": {
+  "probe_file_sha256": "9e285d1ea2e12f338e539483428251fb0615c4f8e6af0d9ce44e47e6c3bc57b6",
+  "probes_sha256": "3ca9c9e3547fdd2a5852ece6f22c28dca8a190f064f426737d52c4bf7849ba0e",
+  "tokenizer_vocab_sha256": "9c7009d001f35594463a5f799fe5942907040cf16eb006cfc5227636e53d7240"
+ },
+ "logit_source": "model(input_ids, use_cache=False).logits after final architecture transforms",
+ "max_len": 1024,
+ "model_id": "EleutherAI/pythia-160m",
+ "model_revision": "step64000",
+ "probability_reduction_dtype": "torch.float32",
+ "resolved_model_revision": "aac0de458f9106a48f9e58f4ad7ba03f86753932",
+ "schema_version": 1,
+ "shrinkage_identity": "B = +d CE((1-eps)*z)/d eps at eps=0; negative derivative is -B"
+}

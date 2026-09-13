@@ -224,6 +224,14 @@
       "published_sha256": "401e474ef21d239f82164fd096842688a13bbe59078b01595f86acd68246bb17",
       "reason": "anonymisation of author, host, institution or path strings"
     },
+    "data_mirror/v77-model-arch/pythia_2_8b_tensor_identity.json@live": {
+      "frozen_sha256": "9f6199f3055bbc901ab8962a2f20b1ae33638b0e180927c1430c4275e73c29ac",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v77-model-arch/pythia_2_8b_tensor_identity.json",
+      "published_at": "data_mirror/v77-model-arch/pythia_2_8b_tensor_identity.json",
+      "published_sha256": "00c5a7fb400da25c7597f460316d3a947f6957fa7e0eace67030af7cc1c63b05",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "data_mirror/v77-model-arch/summary.md@live": {
       "frozen_sha256": "528012fcb45ae5f65604d5767f435eceab985bb389126e2548445bf492c3f5ad",
       "pairable": false,

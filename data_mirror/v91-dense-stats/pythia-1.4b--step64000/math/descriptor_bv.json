@@ -1,0 +1,45 @@
+{
+ "aggregates": {
+  "math": {
+   "MATH-500": {
+    "B": 0.029687679993486815,
+    "B_per_byte": 0.011656201302992261,
+    "L": 1.3129992881436368,
+    "L_per_byte": 0.5155197043570076,
+    "V": 0.43765057173275373,
+    "V_per_byte": 0.1718336753025436,
+    "W": 2.6005111370887746,
+    "W_per_byte": 1.0210323376980026,
+    "n_samples": 64,
+    "n_scored_samples": 64,
+    "scored_reference_byte_count": 32201,
+    "scored_token_count": 12643
+   }
+  }
+ },
+ "aggregation_rule": "sum_i sum_scored_tokens(value_i) / sum_i scored_token_count_i; pooled tokens, not mean of sample means",
+ "byte_aggregation_rule": "sum_i sum_scored_tokens(value_i) / sum_i scored_reference_byte_count_i; pooled bytes",
+ "chunk_tokens": 32,
+ "code_sha256": {
+  "descriptor_bv.py": "1aef2b9e0f110d078c89798d18b8f3921e9ef15abc46b687f9f46764e265ad88",
+  "eval_records.py": "c80b883389299a4122bfbebc80eb28c227fff9d4e5b0f745af416b46baf440dd",
+  "v10_quantization.py": "5c5db431ac93283a6d29d7dcb38a1937f6be35542472a7f6d469ca394c6797ce",
+  "v27_scoring_and_units.py": "bfe2df56ddaa1d61d2bd85b266d2d494061f33e2a84b392a1ea03636c8f4aa9b",
+  "v6_capability_geometry.py": "887510b9e8a6aebd6add8134102619a1af6939b5da5872e75c55e7c0a8f30509"
+ },
+ "commit": "a4fb16019d8379f67cbb4d4e0921ed7875bbb1d6",
+ "device": "cuda:0",
+ "input_hashes": {
+  "probe_file_sha256": "9fc4af18e249419736b4199b56e35407c76b476d45ce71b31915931d0c3afa61",
+  "probes_sha256": "6f6d2c572e11ec59f111e5d9d758c41c177f817705b9ab0d981ad01ffed2716d",
+  "tokenizer_vocab_sha256": "9c7009d001f35594463a5f799fe5942907040cf16eb006cfc5227636e53d7240"
+ },
+ "logit_source": "model(input_ids, use_cache=False).logits after final architecture transforms",
+ "max_len": 1024,
+ "model_id": "EleutherAI/pythia-1.4b",
+ "model_revision": "step64000",
+ "probability_reduction_dtype": "torch.float32",
+ "resolved_model_revision": "7277ad8a8582c08c985da32613a987189c6e7c3c",
+ "schema_version": 1,
+ "shrinkage_identity": "B = +d CE((1-eps)*z)/d eps at eps=0; negative derivative is -B"
+}
