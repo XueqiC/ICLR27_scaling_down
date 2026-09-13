@@ -576,6 +576,222 @@
       "published_sha256": "f315dcad2fb0e80e21ef8077027f5f5cd0d325ca0b2ed3f9c7cf3c06ce6db922",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "87f81b4de206a6cfb72a2ea4013ab64c136e5c70408092930925bae1e18b8e21",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json",
+      "published_sha256": "cc99dc3e7a79b07c7d6afbfc80642ea14084b4035890f20ef6d9135172e485cf",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "c0dee0b0ba4529cf271d744de266667a1911262fa2bd30bd33c2e19b255e9699",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json",
+      "published_sha256": "1d07dfecb3b1815faa5b66f3067f5595a940747d71921ada97960104d138c3fc",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "f5cd61034aa2b2ce24c6a3b4c1b69bd80838bf4e0c94a700cbceee3c277f2b90",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json",
+      "published_sha256": "1534691e51683f2f6ba206747757667849686eb52ed529c6ea8597465a189611",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "a3ffb3a97b4d1fdf5caf9c6911adc4e133afce204518516b50f78b2973e15a4b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json",
+      "published_sha256": "b1940306b9d08e2853955c9453685b7526fdc7ec338312b68beefb20f1d13185",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "5b4803b295c6b7050db15dccbc7553840885f746c6ac097b0b8578ff81a1322f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json",
+      "published_sha256": "bb1e0545fbd030711f895191a3b17dfca0de1e89e35a42fb4c066c7c4252a485",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "201f74e4fb26c0e585e1c2d584b23db6eae12beec50f68ee9aa161bf265db2e0",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json",
+      "published_sha256": "1159c9129452fd923d379d26c7fb240da04b86c8a884ac1aa8f445f6098d39ac",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "5c5d6cf1984feee54705def00b1540f49380c7200450229a3223a378f097ee82",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json",
+      "published_sha256": "8983856833fe7925dc9a97e79d646775aef1543154f462ffb7095232597545ed",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "8f1a6db51a45d349627f36a26b10cb209a6b9d0c48162243a3330ce72f759236",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json",
+      "published_sha256": "00b3fa33cb77328f3e166d27053e2578c9dd95e8d5fb454d1d7728332e3f598f",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "82bd52a1dd199b79c89bca22e7c02ac128c9b797927b62c1497d07e3814b7f0b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json",
+      "published_sha256": "9f70866e1f2a43ea002e8f218fb8f3342ea07135b5faaf890c8f37fa66c069a0",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "4a3037f746499d6b92200187fe907a47c411a787362d42c536d765423887d9a5",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json",
+      "published_sha256": "5470318d71ca4fd10b1a55bdd00babc44d38f6382d7d5c88f617e6c14bff2734",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "9afb1736c913ec2b29ba53e17e3fe5e13d74292a7edcb2db994cc66b80e9b07a",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json",
+      "published_sha256": "6252753df990dd2f36f0b5d4cbe214d571eec6f25ccc02b12c300fe8f62af02b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "573d983f1c8ace9dfd5ed392d867cae01ea63a7f97ec5251eb27cfe1695345b1",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json",
+      "published_sha256": "a76157c643d319ca1b53783896c5028d2ae0f6515e69a9ea7d4971820a7b2ad4",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "ed8ddb2f36066b0b7da7f5e75ff95b62a77df0b5ecdd84d420f709df2c610a3e",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json",
+      "published_sha256": "679d58c5c884fe2474cd96275f90e71cfc8a9bce0d75e513d69e2b42d3f58a73",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "c412125d045560946c82b1dcae0ff4d33ca3e4f5fd1225056211005343faf69f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json",
+      "published_sha256": "e9e29545c474332e58ba4ad2fb2293153f3173b41e8a55f15cb67dbacc6a047d",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "7bc656dc9af8fe544a5488f24ce5ccc4aef7a5554c87f489e4f90adff53a9bdc",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json",
+      "published_sha256": "c22f2ae874a5491f77437e06c5370088dcf63643d27eae84db0b62aab6972bb9",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "41b42ed497a9afb8f32e91949660792c83e9ccff63c78d1635861159f28bf185",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json",
+      "published_sha256": "2199831afe27f53d1c4bd617c77dbece0c1d78a07be444f541a8108be965d92b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "6f81249c25321c1908ebb0c22f62cbf6de2bd2810e55a628265a821380bd0036",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json",
+      "published_sha256": "841756de3a05387d4dd5b38f079e014ec47e10e4c78763aeeb713726579e091a",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "31585a989b3bc538ca724cc19c474ac99877f354f9930ba0b3757943c70441fd",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json",
+      "published_sha256": "6fcd32e312133bb02065b7701894c99e05f0219c536879948a92587e311bb2f2",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "2867a3c3888a71a3ddfcb096abe20a94167623833c5bc4619451e60fc35fd9ce",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json",
+      "published_sha256": "168511414f5df899370f4cc40841686775c17ba3c4ca9e4e6d6203f6c3940659",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "9c1afb1d25d367a19fefef3c7edc0ba6a7c94a166e267e9f45557416494ca576",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json",
+      "published_sha256": "b878a6c81127581607ae191011505ea900f894c29c88bb5eb3e3baaa24cbae96",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "79933de5efc166945a6ec2502a31e8a09f09a1aee2d3bc72f610f6b86217189b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json",
+      "published_sha256": "4459dee0bd7e54e84ca8a696d089f2bd311b3e8a0828d96491a86ecb9c17ebb5",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "e23b68fa417532331c18274486451fca2653405363fe966dfe8d19c6da88560e",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json",
+      "published_sha256": "a1ccc024820e15079e653515eaf01b42655d5bda4f7a4bda928ffbdf09a68d2e",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "1b5986561d8e546cb4c3ca23030628b6f862ce21572653dfc77aa35c670a2a2d",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json",
+      "published_sha256": "c415c3b4b6c59ba56fd357daf211bb6fc7858a15dc976223433f9a045c3cf188",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "eb88f920b03adced1e7147a846fa36c3691ce079db4014553ae70de3b76f60bb",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json",
+      "published_sha256": "3092ceb11c43d569ba5b02285f2cf06f08497bd128fca7a7ba0d292dcf764b9a",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json@live": {
+      "frozen_sha256": "f3c18ade127792bb3e9b88217d0183f2237a27cb51a70c1f05cc27a5fa9ee5b0",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json",
+      "published_sha256": "3d252cbf2dba39f3c32cb9787d0bcc03bc12f090b6c4521569e6d66b12cfe9c7",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json@live": {
+      "frozen_sha256": "974a1b911fa94742c610c68caf87c727910cb9872785a36204694c8c44c2095f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json",
+      "published_sha256": "115d2e57d9ff86d85022fd2ba63326f33a5ba0a29cf103c3a347daacce103e26",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json@live": {
+      "frozen_sha256": "46726f873110930b091fb557c100aac1f8659d68e0262733ca4f8f358d55da5e",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json",
+      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json",
+      "published_sha256": "aacfae023d96ff1b9ea65762015d36bdb456483cb620eaf2e171f29228f9706c",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json@live": {
       "frozen_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
       "pairable": false,
