@@ -41,8 +41,7 @@ earlier audit; the ledger says which entry used which.
 What runs from a plain checkout, measured on a fresh clone of this repository after
 `bootstrap_results.py`: `v45_main_table`, `v52_prediction_tables`, `v74_quant_threeway`,
 `v76_cap_conditioning`, `v84_main_table`, `v85_selection_decomp` and `v86_main_table`
-regenerate their outputs. `v79_cond_audit` also regenerates, but it shells out to
-[ripgrep](https://github.com/BurntSushi/ripgrep), so install that first.
+regenerate their outputs. `v79_cond_audit` also regenerates, but it shells out to `ripgrep`, so install that first.
 `v63_quant_identifiability` is the one that does not: it verifies the grouped-quantization
 measurements against the digest recorded when it ran, and this repository publishes the
 current file, which gained configurations afterwards. Copy
