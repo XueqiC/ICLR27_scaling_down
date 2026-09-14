@@ -296,12 +296,196 @@
       "published_sha256": "d1cfc5c046fdf1e127787934c6e2c8f1b40f6a381ca5c3f456312d74a1c0f0ec",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b4_g32.json@live": {
+      "frozen_sha256": "04b30794158d02013bbf4256e221f7a797bb41fe6bcc1bcc9197bcecc3e8af87",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b4_g32.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b4_g32.json",
+      "published_sha256": "3e09c1fa024a03abde8157aab556918a34cd017e76b71f46f4f25deee931b154",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b4_g512.json@live": {
+      "frozen_sha256": "8d065984af9e8b70def38e3c299d37098751109fe31452acf308f95fc54b6049",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b4_g512.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b4_g512.json",
+      "published_sha256": "fab591c5d8979c934043fb2e4d08eea184320dca6225901ce397bb1b29ae3297",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b5_g32.json@live": {
+      "frozen_sha256": "e65044eab1f25cf6b1122f308599df996236ac7c2d0ce806f0759b89041bd12a",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b5_g32.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b5_g32.json",
+      "published_sha256": "b728b55cae0824a7ce159f7d5ba2273834397c574c693c185776e0feab40b98e",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b5_g512.json@live": {
+      "frozen_sha256": "2e0e52c0cecd62f6ba4434f0280c7d6b97018175b8ced1ec6634d7b15fe3611f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b5_g512.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/b5_g512.json",
+      "published_sha256": "93a790acd134e24008df75276ac4952922057e0368fa4685b279ad5a817ac81f",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.65.json@live": {
+      "frozen_sha256": "24f7c57854e9fa1ce7a22ae45da6b315b0af0b5e51bf5f5cfee3f0e91c536c56",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.65.json",
+      "published_sha256": "a5ed2399a609840c0d55dee54bc6aa0b10df4fd7c78a160041c18228330172dc",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.75.json@live": {
+      "frozen_sha256": "e2a30c7faaa81d73ebd88b3fa0eb7a5fad7cd5888ff50e9e0b379c361f5eeeda",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.75.json",
+      "published_sha256": "55b1007a64618184287235359f4e3c92c762753c99aa1ae8aefbfb333b7c2a68",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.85.json@live": {
+      "frozen_sha256": "d4027b35ce554dd340299c0164b01a566e792ed746c9b1c4d7bcd8349a47d9f7",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.85.json",
+      "published_sha256": "65586fb28a4d283e2d5269c94461da6729dacfbaeb4891ce47e68b38eedc0cc6",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b4_g32.json@live": {
+      "frozen_sha256": "75f8f25644db2698409449be46b3a7f90595ee94d99ecaeb4122ffbeab8a5b31",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b4_g32.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b4_g32.json",
+      "published_sha256": "477c5871e7226c48275df32a42ce0b91c2e32e74921a6a7524e9ad429f796367",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b4_g512.json@live": {
+      "frozen_sha256": "62bd2b18408cfb8215c53aac61106f4435c34dbc5840bb46b84d3f3ab8f5dfbe",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b4_g512.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b4_g512.json",
+      "published_sha256": "9c44b467057441a33bd0d5148d6ec98c5b490f37f212ce7bf0636311221b82cc",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b5_g32.json@live": {
+      "frozen_sha256": "f32bde57906b495be8cfd5edfff59a4b98ec96f0b0692051ee251da3deb7b2a6",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b5_g32.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b5_g32.json",
+      "published_sha256": "272986ec022e739bb209c076087a3848173a291b74435f537b5521bbf2959ac4",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b5_g512.json@live": {
+      "frozen_sha256": "649d63b9b659557f42c470b43db571ccb55c29db5a441642ec955730875b8325",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b5_g512.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/b5_g512.json",
+      "published_sha256": "bbf955f39c7e8299a7b83256ab882ca1ba58e252c63c7808d3594faadc036665",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.65.json@live": {
+      "frozen_sha256": "b4c35eea62b40ed25ad85162e541b7b3ad33635c20c8cc7489efaef1f44cc569",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.65.json",
+      "published_sha256": "d60da1667c5a63d1204aae885a7297bf21920b87275caa420863c7b80f17cea4",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.75.json@live": {
+      "frozen_sha256": "9675655074fa354bc620a8ec6a5ae9352ffa363551507b3af6d5ab7fff04adca",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.75.json",
+      "published_sha256": "7126333b0f790a7d9f060c73f1480ffdc7f470db7883c32de2d321c651634a08",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.85.json@live": {
+      "frozen_sha256": "f3b8020586920e86f591cc78a5ed6c032ab5ff590b05e5a7d3cb69a0eaf2dfbb",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-160m--step16000/prune_d0.85.json",
+      "published_sha256": "87382f9e4de6eaef9ddc765739e764a2e416df859e754cf100677d27aefcc81d",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b4_g32.json@live": {
+      "frozen_sha256": "184e9c4df3aa913d5733725c073a89b2908e5ffc71434f6858a1aaae4760eef2",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b4_g32.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b4_g32.json",
+      "published_sha256": "84b342238f6c0eec5e7e9ca1e59be1e9d188c4f49ada946d5a7eb7232c61f02b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b4_g512.json@live": {
+      "frozen_sha256": "c8ec6421dd666d46a7e5eba8da52146c3672ae5c289a731202bf1cc609c5dad0",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b4_g512.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b4_g512.json",
+      "published_sha256": "cb8d89ad00eb04a5d98046b045c44339c7fd61afd1593b3c7270728547fa4ba9",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b5_g32.json@live": {
+      "frozen_sha256": "d099dbadbd64d27e23f92365cb0d96d0da44fe22db1e50fb96a2d23046c33316",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b5_g32.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b5_g32.json",
+      "published_sha256": "7fc6e263a7129b372ab88ab7b80d4b510c535ee0a8a12f3506a1d8041b23f60b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b5_g512.json@live": {
+      "frozen_sha256": "a5432b4d9e7e92a0f75cf1f40f3306e80fc08c63feade08fb2ce80bb1f95dae4",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b5_g512.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/b5_g512.json",
+      "published_sha256": "c3da61964c32b6603c5f83237d85b6b6f405b98769a60de91d468708341a3d68",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.65.json@live": {
+      "frozen_sha256": "60b15c89cabc9383c9176f409be148fd6a0fa5f75978e2b46b0d25c08fa0cf5d",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.65.json",
+      "published_sha256": "5f3982bbc4e571add4aa7f3d14eec9659aa04df69ab5180774860864c90660ac",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.75.json@live": {
+      "frozen_sha256": "8b17c48d4d89a176b8bdfadfd14814aeb3b9227b356e0371ec96b3b29d56dafa",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.75.json",
+      "published_sha256": "d6a6f2b2be900a994fbdce11dfb02171de60c9a51deb67e4664d2330933162ae",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.85.json@live": {
+      "frozen_sha256": "182642a8ce8826b80aeb3ceeac18c1f5a6bdb1f43b88f6dca6f6d3605f19b424",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.85.json",
+      "published_sha256": "a9d8708b089fa221916a7fc9f14eaf668aa40ab1af57321fffc8024d4a6d60e0",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g0.json@live": {
+      "frozen_sha256": "bdd7e34e00e57ffe520a7058eb9e8b7372de314a43051d287c18cdb6703b3b35",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g0.json",
+      "published_sha256": "6290938731b1fae46ff292977386ec099d9e9dc96210d30be8012416ee91bac0",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g128.json@live": {
       "frozen_sha256": "9aa7880a1892db96d47523e8d130c8b38bfdbaf7f2c954763c2c2198e2881960",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g128.json",
       "published_sha256": "49fe7fe02847bea0ec080cb0badde82d592695bbaf4b226760650f2e25dfb30d",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g0.json@live": {
+      "frozen_sha256": "868b04203dd9193579928f0e364657f60f2319a44c57f1f4fddbb507e05c2004",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g0.json",
+      "published_sha256": "23a89e1594b3a96cc6c24fc3b7999d3fe4f0228962a449c6b70aed4c35f19303",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b4_g128.json@live": {
@@ -312,12 +496,36 @@
       "published_sha256": "2a444cafe2cfa8ab8563141f03ac3ab95f807bd9bdd572c221394ebd2e9a80c6",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g0.json@live": {
+      "frozen_sha256": "8179a7bf87117abb4b9eefea8b3adc7afe48b3bcf33743e01d1d126bec87c89a",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g0.json",
+      "published_sha256": "9f7ff34e43e54761c1aae62fa1f4b03682bd7f347ce759d6bc5aad3ea261f991",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g128.json@live": {
       "frozen_sha256": "d9d87541d6beb08424dbfc26eee7f7203fe9ec88731023180aab6201177b5d59",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b5_g128.json",
       "published_sha256": "75e06d5aed8a5b7effc8720f78fc2f16b8977fdf787540bfe6f8a089da0bff87",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/b6_g0.json@live": {
+      "frozen_sha256": "44a36bb1b21666471898f3ab94fa3623a7b0fcc6a6fa98cc82f1dc7b25a95eae",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b6_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b6_g0.json",
+      "published_sha256": "9df39966a2ff8d7c0fc77d030177097136b93b8d69a7eccde82cbe8ee7e76964",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/b8_g0.json@live": {
+      "frozen_sha256": "64671a6de34fe3ad0b3410dcdb17d005dcc1ea7ce44c480ffdfc769167e44a22",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/b8_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/b8_g0.json",
+      "published_sha256": "724e4e698b03ee2019388c3cba08e6e8dacec932e4e2af51d464603c54588935",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.6.json@live": {
@@ -328,12 +536,28 @@
       "published_sha256": "2ecf2fe035d26e2a7859ddb69ccb8f6ecf5eb0841979e27041368b1df100f299",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.65.json@live": {
+      "frozen_sha256": "f86a64613a8b50c752863a285375dce0de3950ba44cdbd1035e7445d936f0c45",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.65.json",
+      "published_sha256": "4bba17a7a50da2f68e749c35e5667c42ae6b06fd24ce127c8a774d8f3802b431",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json@live": {
       "frozen_sha256": "6287228afb99e648391c8b6356e16eb430ecff3bff85b668b9259b0414d4bcc4",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json",
       "published_sha256": "7d57c4e8c61566495a4eb077d4cd218017ef5ade3d840f43f652250ee08801f0",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.75.json@live": {
+      "frozen_sha256": "e7c1848f22c73f7f71b2b4e21c281cb5d40cddad4daf5b4bd222ff58376485da",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.75.json",
+      "published_sha256": "745a3df0af704df28cc011152bbba533b864730c2e0f1f3f4ebaeb81dadd9fde",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.8.json@live": {
@@ -344,12 +568,28 @@
       "published_sha256": "f35f3270f00fdcae1f12149e9032410cbabd2fe85accf38f2e8b19024ea24480",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.85.json@live": {
+      "frozen_sha256": "d125bcb5a0352797a7d0255229ab49c8ed48183e411923aca1edc97959287ffa",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.85.json",
+      "published_sha256": "3d70bf51caccdb2ee8712e7e9d99aa18458c11fb3776ea103903a7d0efe0e01b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json@live": {
       "frozen_sha256": "ed6753ac50565861b297b39df6e43838801c625dd0826e03199feaedd73f3a62",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json",
       "published_sha256": "0f861b05bd32a0c76641c3ff453beef994ae3d17e4b48c7186f632ef1043479b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g0.json@live": {
+      "frozen_sha256": "aaf317739787217d74ca8c42c6c480e4610cf2f36a754dd4a871e5a4f3deee61",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g0.json",
+      "published_sha256": "5171829aa8b74b7726738bbb99c92980ae9f5f5197907a0b70d166d579e221af",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/b3_g128.json@live": {
@@ -360,12 +600,44 @@
       "published_sha256": "690632da2b56d0588cec1e2ee3bd8c5d30455b89c4bba6faf0b0387758abe1e0",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g0.json@live": {
+      "frozen_sha256": "0901bee753a2593a159c6f2542b80ae5c1fb33a164fb0b5aa16c62751929c40d",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g0.json",
+      "published_sha256": "101e546d6584081cb91c252b1312685e69b8ad8a6bc84c1712e990502cd6b023",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g128.json@live": {
       "frozen_sha256": "40cbd34666720eb607e59e8bc12191c03e698dd0ab8d77467fcac1459693ea6c",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g128.json",
       "published_sha256": "bc20727e505443ae5ed67630d3ce1e9486f368665f1cf33b894a1791925c506e",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g32.json@live": {
+      "frozen_sha256": "34c75192fa4ac343302df7c16b6d256ca67704ea9e4f99475405d32679a73271",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g32.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g32.json",
+      "published_sha256": "28b45e0133f60e4961d9c5f2a204e1662e31ef6ec1ade7ff1d2821d4278627a5",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g512.json@live": {
+      "frozen_sha256": "1dded4bfae70b4f4a09db3ee12d25bae44c6e4fdd3850d906618a552da15520f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g512.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b4_g512.json",
+      "published_sha256": "1783fe18069e0c346f7c5a9ff350dc879ccdcff11326435ff0961c112a6ca597",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g0.json@live": {
+      "frozen_sha256": "b4252708a607475c389d33f57c13956b039ac58b945def16a19385a9a31f90bc",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g0.json",
+      "published_sha256": "8766c4c0d1cbbf00bac9129f8330c414be526d4d323a3884733789ad86d4c579",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/b5_g128.json@live": {
@@ -376,12 +648,36 @@
       "published_sha256": "16dddb6307b3bcc6a95d776845c35651d28eef3eb6b102eda5082ce1b63a6b37",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b6_g0.json@live": {
+      "frozen_sha256": "340c1a16edb4154046fb88f5450c765b2326afaa1684b7934151c00771afbb00",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b6_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b6_g0.json",
+      "published_sha256": "eb50efe2a747ec8916bcae8e297a02648f7ed1e60032300890b270ae5a8cf4db",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/b8_g0.json@live": {
+      "frozen_sha256": "56deab3a4b567a36b3b3685c7e56c3f0428f361b355a23aa492d0564910b4551",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/b8_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/b8_g0.json",
+      "published_sha256": "c79bd489c8244e082c9b5714bb1155ab0b9b2cf2c4ae75c251f0314af8357652",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json@live": {
       "frozen_sha256": "aa93cca18705ac37f31dc59d1c45b7038e18c57a92bb343e3122ca405aea68f8",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json",
       "published_sha256": "cc3c282713fd2e260e7026080b2ea59f588ed3f1e0eaaf210c41db0b5fe2151a",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.65.json@live": {
+      "frozen_sha256": "edf2dc2118bfe1384cdb905d0c9b0e6f96e801334b5b8bd8e1ef0e948b0876c3",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.65.json",
+      "published_sha256": "0ddaf431be42dd585a57b0796db1cd7739dacb3eb0c801ef2ed93e35ecae6ae8",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.7.json@live": {
@@ -392,12 +688,28 @@
       "published_sha256": "f3c8dcfb97b19f8617043465238bcaecf6b1afe0e559543aafd8ac4f2848b1b3",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.75.json@live": {
+      "frozen_sha256": "b20cf7a791c570fe115908afb2f285fa4ec18d39d332a45425367c7809fb6e0b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.75.json",
+      "published_sha256": "94cdc12ca537ab8ce117712254021221c02d10838b2a714a8fee1373b835cfb0",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json@live": {
       "frozen_sha256": "f88ecc4caa2d1e59afa7190bd559089bb8f590718eb05dbab1a1f06218baf916",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json",
       "published_sha256": "a762da9ce96f231080f9ee7d169c89b69036b8957a93cb61e3faa29a193c6d86",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.85.json@live": {
+      "frozen_sha256": "7cf1232876e1850cb672b2939adb75eabee047835fd5e4edabb20aeaac173ffb",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.85.json",
+      "published_sha256": "2b55315c8a465b0bdfa7935cca9f1accaef3bb63c099eb4653d9ac732d16d606",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step16000/prune_d0.9.json@live": {
@@ -408,12 +720,28 @@
       "published_sha256": "d9aa5178feb45a8f42362d49464f89ffd3b441f066ba467abcfd7a647ffb1040",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step143000/b3_g0.json@live": {
+      "frozen_sha256": "f080da51c523eb9885ad56ff4939032d919f3d716c04964d3c888234dd659c5d",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b3_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b3_g0.json",
+      "published_sha256": "2bebe047892f9415690b226184bbd18426b5f94fd673fd7fe9fbb92d98aff5f4",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step143000/b3_g128.json@live": {
       "frozen_sha256": "42232a03b181d1b29a1bfbfde3b8c8f08377144186e1fceb8f171b78a96cc5a6",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b3_g128.json",
       "published_sha256": "bd589d19210ac057f0b32f775be6ed638eee313be45163445bce8a372d0594d6",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step143000/b4_g0.json@live": {
+      "frozen_sha256": "b0c709f2af9a5f0cc34dbe75442ae024becb98fe85f142d2fa9a3be18a1e787a",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b4_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b4_g0.json",
+      "published_sha256": "298f4def3cfcddcc02b4325f5135f019f890276ff51e395db36504aae97c88b6",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/b4_g128.json@live": {
@@ -424,12 +752,36 @@
       "published_sha256": "7f3172f4b930ab0d189814f596f06082c2b2e1db72bf6c0085c10e3a9e94cc4b",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step143000/b5_g0.json@live": {
+      "frozen_sha256": "7af28152311ba7389fafc6b2cb73df926186612c5deb7d28d6a2332e141ad38b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b5_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b5_g0.json",
+      "published_sha256": "7c09bab9b584d139211e8781bd99efe464c4d7c1f10893d7aadd8d9658597206",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step143000/b5_g128.json@live": {
       "frozen_sha256": "578b21bb710490e5472d35c095af7d2e74988033a5a9ad4d0215ee0816c1dacf",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b5_g128.json",
       "published_sha256": "74f8410c4f9b58ec62a1aeb016be5e65a5b883cd9d99630cb21ab8358481ce34",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step143000/b6_g0.json@live": {
+      "frozen_sha256": "5f14722b475af673195e6adc06a21e00c270c957ee82ac49ab814fff14146849",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b6_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b6_g0.json",
+      "published_sha256": "8dd23efc25cc14e663aaf06f30c12bc9789c1151612f33e3775dd006d84249b9",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step143000/b8_g0.json@live": {
+      "frozen_sha256": "a27c6171aec9390b991105417c0ccf8acc09571bcc1f55e8431b98472e479e85",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/b8_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/b8_g0.json",
+      "published_sha256": "e8384841ca9bfcf64bcc4697fd96b3faa2d29a9d266496792c4e7fbd84a3f9d1",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.6.json@live": {
@@ -440,12 +792,28 @@
       "published_sha256": "d2420605a06331957d2e3af664a6fdca1ee409289b426569cf72c4641145a9a6",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.65.json@live": {
+      "frozen_sha256": "6347d78b73edd4f3ce7b2d7cee8cf23f5bc384507d92066c52ac285456798af7",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.65.json",
+      "published_sha256": "467473182693682e56347918652ebaad95359a78b41eaa65531fccf1d1d4d650",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.7.json@live": {
       "frozen_sha256": "589c795aeca292bef85c626bfc712037ff3f63baf04b311540dcbf01bf14daf3",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.7.json",
       "published_sha256": "99237f6a78cf7c9959fbf8b8003eb0def624ea67b4bbcd9e6dc24148bba5ac87",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.75.json@live": {
+      "frozen_sha256": "cc33d76efa53f9a1041b21eb2a5c61339dcf92d94c12b02f55003bdb656193eb",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.75.json",
+      "published_sha256": "51403361f31d6cd5064a51129fbe091da02e9a70397464af95263569fe061514",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.8.json@live": {
@@ -456,12 +824,28 @@
       "published_sha256": "0485503901a69dead0faf0a2f67840c887057396a160e222f77e8430260e2fd2",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.85.json@live": {
+      "frozen_sha256": "7faecfcb85721367f92256109a0e010bb29c053f2f87fcda69adfcfc0e9fb062",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.85.json",
+      "published_sha256": "09b4ea7697bbe4bb93d3c43f5e17fbda20eafcf34ef05cbfdd6b4075d1010be5",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.9.json@live": {
       "frozen_sha256": "5b12203a7c59c5fea1c820c200a11a020c37cbc2d06a5a27bfe57a57ca6fa985",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step143000/prune_d0.9.json",
       "published_sha256": "c4387e89d2e4ad543a0bb0a62c1ba81ef80f79922c13d954cc628135a59d6112",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b3_g0.json@live": {
+      "frozen_sha256": "31922a0c7a24e41867bfb285ed4760c1be632be01719c1d7264c75f82b5f4e53",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b3_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b3_g0.json",
+      "published_sha256": "05e160e1632f0e84833efa1b422c853b73bf5322aa4037bef4e9bd86bfb5368f",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/b3_g128.json@live": {
@@ -472,12 +856,44 @@
       "published_sha256": "7f1f9e03691d4714476f82c1f1e23c94180b646fad2d0b460887d739b213f071",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b4_g0.json@live": {
+      "frozen_sha256": "f5997aba38d05f4fa284090778245aba65c2dfd6b0bcdf29e788142b4181308c",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g0.json",
+      "published_sha256": "f4c40bf21756ef312a7c7a23809cf5c60910d409323deb1746edb226fcf77680",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step16000/b4_g128.json@live": {
       "frozen_sha256": "be961580b8dddb6e49b8447d56d03817c9dbd47f097bb1ec84e33a3b2ff1bee6",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g128.json",
       "published_sha256": "3720664442dab8de7aecd0ed9db9d1bbde5aef8e77b06ba671ff7943913b70a8",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b4_g32.json@live": {
+      "frozen_sha256": "55f92eda03e1c8c65fe25e9cd7f0360d580fc1ad3cd0952655edf8ef67ed72bc",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g32.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g32.json",
+      "published_sha256": "22d8edcc128fb7d6071bdf8d1e3d3bd451a1ecc6e71ebedb06c3b3e91dcd074f",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b4_g512.json@live": {
+      "frozen_sha256": "69a5c8408a6b6c015c2f070dac0cb38e2c1ee1202536d9b01a1f09a8eee73f7f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g512.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b4_g512.json",
+      "published_sha256": "6ac151db3d32770d0c32b24df87083752fbf6720eaf8aa49a1796064a163382f",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b5_g0.json@live": {
+      "frozen_sha256": "5330cdf6a5afd060e99b326667e2a17cb88951342f1c35c3fec6fd1f851dac85",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b5_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b5_g0.json",
+      "published_sha256": "927e990a610dc7fa967c0f043546f2d76ca93e029e25c38bcc9923bca1225d59",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/b5_g128.json@live": {
@@ -488,12 +904,36 @@
       "published_sha256": "42645269c2a1df0c880db07a26bcc75d224ce8066eea46d6b4d75a92b29fbee7",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b6_g0.json@live": {
+      "frozen_sha256": "02c9059f18a051be86c1a388b092f8eec26e52a9522edafe455f64ee7218ce77",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b6_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b6_g0.json",
+      "published_sha256": "874f997f6889401e40b83b0775a7c41dd86d12d84673c65b4f88366cae8dc91e",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/b8_g0.json@live": {
+      "frozen_sha256": "eb503fe0d90e261934a8dbc5068bf0119879e337a3e9f4af31023d894ec07199",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/b8_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/b8_g0.json",
+      "published_sha256": "edaa447be21e904f58823c9a188594bd49a516e168ec99dd9cccfef7de4c131d",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.6.json@live": {
       "frozen_sha256": "fe36abe78cfae4cc3458c851f85835211231e35ce2f0c6bc0d06d81e5c8d944a",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.6.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.6.json",
       "published_sha256": "1db8f1321db2ebf5ede3ceaa3f5b44b90540448df5e15daebdc20a734d04d590",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.65.json@live": {
+      "frozen_sha256": "d3c8ed3ad48990d56e6f6e4e81475659afda217a4e1893b6046d2fac1ef84f6b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.65.json",
+      "published_sha256": "1d04cf7cb789ac3a85dbed04da49443b0d13978ab0f8a533300e9db676832907",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.7.json@live": {
@@ -504,12 +944,28 @@
       "published_sha256": "16f3d37d02a5ea6e3c49c986889c8f8e6ef9f585b09e700c7e4fac05a46abd2c",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.75.json@live": {
+      "frozen_sha256": "f0bb6d7743c9adbde6b45056bfe7e49b9631a3a55947ed53e39ab2f181c3d879",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.75.json",
+      "published_sha256": "a4b401cf1b006700c7221b7e6e44f803e85f0838e16bc2c21dbf11cfff3965f1",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.8.json@live": {
       "frozen_sha256": "706a7c59c3733b29fa992672ed46792ca2a7daba356c60e03a991ae5208f5ebf",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.8.json",
       "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.8.json",
       "published_sha256": "755ca8a7a39027c861b14f2464facb06fd3c77eec0d13dcbaf360e4e5ea940ec",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.85.json@live": {
+      "frozen_sha256": "8c729a3261cac6443b8c0d879b8a19c39d249961ffe3df48a7686851becbeec7",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.85.json",
+      "published_sha256": "3c18ce70a2a0f5da9c6e537ee8080c8f8c6ad1b0ea091092f8a75719cc221c2c",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-160m--step16000/prune_d0.9.json@live": {
@@ -520,12 +976,108 @@
       "published_sha256": "e70cda8c314628cc2f6350b91c6f9da8a13580beee8bf0abe7125c8106cc2fd9",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-160m--step64000/b3_g128.json@live": {
+      "frozen_sha256": "6dc03061d9ea7d73594ddae500d7198a2b8fd0cc3aaacfe3806f5280dd7e1332",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/b3_g128.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/b3_g128.json",
+      "published_sha256": "ab3fdbfd9d1353dc06c16ab37897b4a3d75e46dd1ee41da581c028a9b300151e",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/b4_g0.json@live": {
+      "frozen_sha256": "dfb87ad2ba0ad403b0d5b3201e89071914f012aa228134fa3eea8549ee75d494",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/b4_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/b4_g0.json",
+      "published_sha256": "7a4cbaffd2b9fe05978292932d3fe4cd3f2992111ece136c9a306ed651853c49",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/b4_g128.json@live": {
+      "frozen_sha256": "cf9124e0e9721134a4a959d57f2bdac15a270f8fb2b3bd8093f6556a987653ba",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/b4_g128.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/b4_g128.json",
+      "published_sha256": "0a0f1a6728607b9c8b2dad25cca93a45c98b4e1e605a27ee789719af6951dc48",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/b5_g128.json@live": {
+      "frozen_sha256": "53f4e312cd6aa4b72ba8975e5d918cccf1689046bce9555e76790bf5d22235d7",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/b5_g128.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/b5_g128.json",
+      "published_sha256": "c9d2a6719ea81f06b0f5621577a49682d2f99191ccf7a1205bf18fbf865bc992",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/b6_g0.json@live": {
+      "frozen_sha256": "92366fa6af88342166c9cfc45121b604ad7593b6d47dc7092438459f3129b48f",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/b6_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/b6_g0.json",
+      "published_sha256": "02563b8537c83a70c43efbd9cafa019aef2e80adabb68bbc1ee114158ccac678",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/b8_g0.json@live": {
+      "frozen_sha256": "84398613e6f0618e11cd1453fd6a9f5668a22dba6be596a6d1bd03daa3b275b2",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/b8_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/b8_g0.json",
+      "published_sha256": "b433c3fd21131e510da39cc189713931b7a08ce50b12fb24bf4b2865e1d72967",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.6.json@live": {
+      "frozen_sha256": "d830548b2a356801ef810b04131ae41f61b758c4e5cb8d3704f3d37bf933c687",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.6.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.6.json",
+      "published_sha256": "02009166f183887b0c08945edddeede36cb0390924ccbcd41e628342e4b4ee79",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.7.json@live": {
+      "frozen_sha256": "71d7bc4356edc99fd592b357ed93f6cb6c7b80b97556967dd329d782ae94ef0e",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.7.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.7.json",
+      "published_sha256": "b3387920200d1bf8f00bfd9a9ebb7a49c56f1f2054a3130cd8956f3ef6cd4347",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.8.json@live": {
+      "frozen_sha256": "12d11153efab551d7ad97fa16632e4f24ed03fae78e8490f6f68560a760eac38",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.8.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.8.json",
+      "published_sha256": "faf537c71085cb3885a6e271038343d94e08de591e234c5af8482dc5822c8208",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.9.json@live": {
+      "frozen_sha256": "c12a98a16f4ef18ec6a7b422dee2e4d7d6495d7c1e7cb230e9564b63ac992d19",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.9.json",
+      "published_at": "data_mirror/v88-displacement/pythia-160m--step64000/prune_d0.9.json",
+      "published_sha256": "7689a4bd135ab94bf37eb285b8798af98add392efa9b4bddb572b55c6ea9ea65",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step143000/b3_g0.json@live": {
+      "frozen_sha256": "cc98b10099ba54b1144401db5192630c7c4a6d44c50e1077fe43b515ff9d35d0",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b3_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b3_g0.json",
+      "published_sha256": "bf9799f19ad49fee8de35bbf384bbb80ea5395382ce2b6a40a00e8eab5b6d460",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-410m--step143000/b3_g128.json@live": {
       "frozen_sha256": "f618d664e73389c7b47db3e33dae61d44f42be88ce9e6cf7cfb7ad7cd966fb49",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b3_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b3_g128.json",
       "published_sha256": "89707b83bbfd7f46c54bf403b843e2da87a4f3b7424c1a813cbf39a7e2a22f8e",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step143000/b4_g0.json@live": {
+      "frozen_sha256": "dc0117346109606764eaabc49e8a8d3e6bcab32d7bf65e903e475705dce116bd",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b4_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b4_g0.json",
+      "published_sha256": "423507eacbfcdeb0ec73bacdef418a20ef42fcc28081dd06e0308e3d02310547",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/b4_g128.json@live": {
@@ -536,12 +1088,36 @@
       "published_sha256": "1ae39d9038955e98854ce992c7919ccaf09e62f66b541a6c3c4991e7ceafaeb5",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-410m--step143000/b5_g0.json@live": {
+      "frozen_sha256": "1f1ce757ab72584e262438a3e19dd5d679b4d7a4a0306816ddb91e48e7d82d40",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b5_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b5_g0.json",
+      "published_sha256": "b47fce3087686c2a76ef12f56c3ea7c500b88deec68dc02bed48b29b67472d7a",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-410m--step143000/b5_g128.json@live": {
       "frozen_sha256": "69db087b10a1b8b437676b04e8937220ee509916e9f5c8dee435a8734fc5d1f5",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b5_g128.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b5_g128.json",
       "published_sha256": "2a44bfe518716b5aa9354eaa072e176b72359d48893baa63491af47f6f2c1474",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step143000/b6_g0.json@live": {
+      "frozen_sha256": "8ddd730fc33cc41fe517d480245770b03017c931a6750bfa85382b40a8b085e4",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b6_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b6_g0.json",
+      "published_sha256": "f97b494f4892400e9eb66ee701d96353e4cfb29f8338db4ce596b70f5d2386b2",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step143000/b8_g0.json@live": {
+      "frozen_sha256": "88bf23dc9033464c1a73d362fb42942f2f6b1fe174999f0675b0653546c170a9",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/b8_g0.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/b8_g0.json",
+      "published_sha256": "4eb125ff0c302580085340ff029caa4426e4f57318521125e6a72c00467f4f9d",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.6.json@live": {
@@ -552,12 +1128,28 @@
       "published_sha256": "54671b103589546aea2ce7beea20405a69fa4f0b003c5cb6f4de121f38bbd2d7",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.65.json@live": {
+      "frozen_sha256": "4bbdafbc8204c67f34c87be4d19f5ca258f2763f1b8a9fac2c50293cfc8cdb8a",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.65.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.65.json",
+      "published_sha256": "5b5309bb142a9a9ab018eab8d8c2a1a9b85394a3533f9983c7ad2b96fa0af394",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.7.json@live": {
       "frozen_sha256": "50e234e08b96cedd11edf10b442a07002700a2f674d25909fe7504397e0a510e",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.7.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.7.json",
       "published_sha256": "e7cc0526cfc623475dd0f2c1a928fb98d9c738fb2ce7d5b7bcf131d7bf5c584a",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.75.json@live": {
+      "frozen_sha256": "33eb6bbf8f1a8375fe3ff112c6113dcc99828a4d0c41b4e23b197290cbf668db",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.75.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.75.json",
+      "published_sha256": "cb2d21905c5ef43850e5426242c062e6c554232257c21dc19c137b19aebb59a6",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.8.json@live": {
@@ -568,12 +1160,44 @@
       "published_sha256": "dbb34bbacf16079dc93f9cb4a7931cf919684fb91f9082d449cd3a2b24f66300",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.85.json@live": {
+      "frozen_sha256": "2896492664bd06e7a93c15946c67640452417f3172b0e7308fc6d1395ce85a9b",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.85.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.85.json",
+      "published_sha256": "8f6c91b5b361fa07cac22810058ebaef1c04f2b5656465fb9f224b3f41b5083b",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.9.json@live": {
       "frozen_sha256": "bc83b47e4b4a4ba84e542c5cc13ef3b9e9b64d6cba14fb7b4118ecfe1a2f5334",
       "pairable": false,
       "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.9.json",
       "published_at": "data_mirror/v88-displacement/pythia-410m--step143000/prune_d0.9.json",
       "published_sha256": "f315dcad2fb0e80e21ef8077027f5f5cd0d325ca0b2ed3f9c7cf3c06ce6db922",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.7.json@live": {
+      "frozen_sha256": "4bec78f8b6b1923ee74ab2858e0664bc539e28dbcf388f88c7f4f19f8e9f6db4",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.7.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.7.json",
+      "published_sha256": "34d0a7be21a39d56d7460c13e7f931b77485ad1247a18b941a56c9e3671e36be",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.8.json@live": {
+      "frozen_sha256": "1c011f87b347df8f0fab0983de6a11a893bff0c42dd52ee13bb6c8b1e089a2d0",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.8.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.8.json",
+      "published_sha256": "f6275065db40ff999ce37c7d8b22da60c2ebd8e571515ae39246e0b749f214ba",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.9.json@live": {
+      "frozen_sha256": "245600c72263fab2c9653da73d0509c0898e45cf1473baf50907ae902b05157d",
+      "pairable": false,
+      "path_in_frozen_record": "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.9.json",
+      "published_at": "data_mirror/v88-displacement/pythia-410m--step16000/prune_d0.9.json",
+      "published_sha256": "c6a058841b9da79d126a0e8e0ba6c66855daa5f556c005c663f9fdc8a4a15f46",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json@live": {
