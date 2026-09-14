@@ -71,3 +71,34 @@ Residual budget and reuse mismatches at the corners are reported as measured, an
 they imply is computed from the local budget slope between adjacent checkpoints on the same
 trajectory, which is an empirical interpolation over about one optimizer step and is never the
 structure under test.
+
+---
+
+## Amendment, same day, still before any corner was trained
+
+The table above pooled the three QA distributions into one capability. Separating them changes which
+measurement is the primary readout, so the choice is restated here rather than left to be made after
+the fact.
+
+| Distribution | Matched seed pairs behind the noise figure | Noise on I | Predicted disagreement | Ratio |
+|---|---:|---:|---:|---:|
+| QA probe, 2Wiki, measured in the trajectory | 30 | 0.1608 | 1.5546 | **9.67** |
+| MATH-500 probe | 30 | 0.0088 | 0.0215 | 2.44 |
+| MBPP probe | 30 | 0.0254 | 0.0144 | 0.57 |
+| 2Wiki, fresh sample | 2 | 0.3823 | 0.8711 | 2.28 |
+| TriviaQA | 2 | 0.1440 | 0.2321 | 1.61 |
+| MuSiQue | 2 | 0.8360 | 0.3658 | 0.44 |
+
+**The primary readout is the 2Wiki QA probe the trainer already measures at every checkpoint**, on a
+ratio of about ten to one, with its noise estimated from thirty matched seed pairs. MATH-500 stays
+marginal and MBPP stays underpowered, exactly as registered above.
+
+The three fresh-sample distributions are demoted to a secondary check, for a reason that is about
+evidence rather than preference: they were only ever measured at trajectory endpoints, so their
+noise figures rest on two matched seed pairs each and are not trustworthy enough to carry a
+falsification. They will still be measured at the corner checkpoints and reported, labelled as
+secondary with the weakness of their noise estimate stated.
+
+One practical consequence: the primary statistic needs no evaluation beyond what training already
+writes, including at the existing corner, which has training-probe measurements but no fresh-sample
+measurements at that checkpoint.
