@@ -18,12 +18,12 @@
   "data_pool_sha256": "1f011fb08d30f9751a89d316b2a4446432fe046e73b4268c2d2ccae6dfe48fed",
   "unique_data_pool_tokens": 117996,
   "unique_data_pool_examples": 392,
-  "trajectory": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52",
-  "checkpoint": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144",
+  "trajectory": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52",
+  "checkpoint": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144",
   "checkpoint_name": "update-00000144",
   "snapshot_kind": "trajectory",
   "eval_source": {
-    "path": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/eval.json",
+    "path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/eval.json",
     "sha256": "10a9f0880ab1a0eb6c01ed9b7e14e8ef81698ca0eff519c0d0075c93395c8c2a"
   },
   "pool_size": 132,
@@ -36,12 +36,12 @@
   "D_U_completion": 34639,
   "reuse": 5.809347844914692,
   "D_U_source": {
-    "path": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/train_log.json",
+    "path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/train_log.json",
     "sha256": "70d03f969e7e5d7523260cfacaff91b03d5d7bfb3352af8a24c3f6397f0a8f34",
     "method": "sum completion_tokens over verified complete distinct first epoch",
     "first_complete_epoch_end_update": 25
   },
-  "adapter_path": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter",
+  "adapter_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter",
   "adapter_sha256": "129e19c714e5ff1fdc719f3c9788ef0471e421ed407e2987b56db4951a2cd658",
   "adapter_files_sha256": {
     "adapter_config.json": "2763276c82c438df81bb7bd2595cd010054d8afbf12b5b9a651bff8f93b6e5c6",
@@ -50,7 +50,7 @@
   "adapter_expected": true,
   "adapter_base_unrecorded": true,
   "adapter_loaded": true,
-  "model_local_path": "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-4b-pt/snapshots/cc012e0a6d0787b4adcc0fa2c4da74402494554d",
+  "model_local_path": "$HOME/.cache/huggingface/hub/models--google--gemma-3-4b-pt/snapshots/cc012e0a6d0787b4adcc0fa2c4da74402494554d",
   "model_revision": null,
   "model_config_sha256": "ae75620513f4a95fb36bcf6c09eeab02938e58051871cfe47ead2a7e79a43848",
   "losses": {
@@ -1216,7 +1216,7 @@
   "protocol": {
     "version": 99,
     "v71_register": {
-      "path": "/home/xueqi/hq/projects/scaling-down-law/results/v71-qa-scope/register.json",
+      "path": "results/v71-qa-scope/register.json",
       "sha256": "79cdd66f16a85be13b1080b295f4170c688d575b6ee4c9914fbf272ccd4dd561"
     },
     "distributions": [
@@ -2409,12 +2409,12 @@
     "data_pool_sha256": "1f011fb08d30f9751a89d316b2a4446432fe046e73b4268c2d2ccae6dfe48fed",
     "unique_data_pool_tokens": 117996,
     "unique_data_pool_examples": 392,
-    "trajectory": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52",
-    "checkpoint": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000000",
+    "trajectory": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52",
+    "checkpoint": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000000",
     "checkpoint_name": "update-00000000",
     "snapshot_kind": "trajectory_baseline",
     "eval_source": {
-      "path": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000000/eval.json",
+      "path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000000/eval.json",
       "sha256": "631ae487669e17f626ba3bdbb794d48e0c2e5f644ec26389486f2fde9aad8eda"
     },
     "pool_size": 132,
@@ -2427,7 +2427,7 @@
     "D_U_completion": 34639,
     "reuse": 0.0,
     "D_U_source": {
-      "path": "/home/xueqi/hq/projects/scaling-down-law/results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/train_log.json",
+      "path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/train_log.json",
       "sha256": "70d03f969e7e5d7523260cfacaff91b03d5d7bfb3352af8a24c3f6397f0a8f34",
       "method": "sum completion_tokens over verified complete distinct first epoch",
       "first_complete_epoch_end_update": 25
@@ -2437,7 +2437,7 @@
     "adapter_files_sha256": {},
     "adapter_expected": false,
     "adapter_loaded": false,
-    "model_local_path": "/home/xueqi/.cache/huggingface/hub/models--google--gemma-3-4b-pt/snapshots/cc012e0a6d0787b4adcc0fa2c4da74402494554d",
+    "model_local_path": "$HOME/.cache/huggingface/hub/models--google--gemma-3-4b-pt/snapshots/cc012e0a6d0787b4adcc0fa2c4da74402494554d",
     "model_revision": null,
     "model_config_sha256": "ae75620513f4a95fb36bcf6c09eeab02938e58051871cfe47ead2a7e79a43848",
     "losses": {

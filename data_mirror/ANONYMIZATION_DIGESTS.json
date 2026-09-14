@@ -80,6 +80,14 @@
       "published_sha256": "3b022e29f56e40c9269fc5f90df12efd42fd1aea29513d10fc046bd2feacd63b",
       "reason": "anonymisation of author, host, institution or path strings"
     },
+    "analysis/v99_scope_eval.py@live": {
+      "frozen_sha256": "8fdbb6e51a878c067a545e9a4b7f8eb3d81f7937bb9c8f0c69874cbd5516ec85",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/v99_scope_eval.py",
+      "published_at": "analysis/v99_scope_eval.py",
+      "published_sha256": "8cf21f3855ffb07f9ee46bb98d86dfc6ff717434b97b657d6ce72e5387ad8758",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "data_mirror/v45-main-table/main_table.json@live": {
       "frozen_sha256": "55835b007857d0bba7af54fe505c5a9daaebaeda4826ac303033b42840e2f465",
       "pairable": false,
@@ -1432,6 +1440,374 @@
       "published_sha256": "4f85739d9298e928b63668064b7c3c79cb8f7f562af5a9bf793107a55a3f9f6f",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000000.json@live": {
+      "frozen_sha256": "c43130938f16127cf1619fec54746891d3c06be42f38770337a5d87b60ed86e3",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000000.json",
+      "published_sha256": "b82412ac6e0e44abab4a4545abc22df336441c169e93e94ab7dd5efe683d34bb",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000144.json@live": {
+      "frozen_sha256": "01504e5112e8c5872e1464ea7362db3eacd1af8acda4bb1af7401df082501276",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000144.json",
+      "published_sha256": "05d85891593a74c0ddb6a5be5c165b6fa406378bab864ef2d1984ac544c406d0",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000000.json@live": {
+      "frozen_sha256": "1a63449af4f73bfc8b7cd426d4d46ef4386f084790ff1bbd4513f4704a81b701",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000000.json",
+      "published_sha256": "6bdaf83f81d113e381d1e66285fe8e2d0416d555984224ff6ac1d1d5ddaad61c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000144.json@live": {
+      "frozen_sha256": "db296e04a8480c9900d1301d7999055036056b3e12ad647d745c9a34441b07f8",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000144.json",
+      "published_sha256": "4744ffe170b92e8257cfa5ddf28dd5d38f0f852454900ec6a36d47537095f90b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000000.json@live": {
+      "frozen_sha256": "15c32515e6d8050265e5739b959a8bb621aba747853c7e102af17f566a894d39",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000000.json",
+      "published_sha256": "c31a1519b59880e838c3fe5f3b9d3f1075fcda482d2b5c796534898a352e38fc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000144.json@live": {
+      "frozen_sha256": "ee51a3da90a2639a5117350eb173b798f8afb2a9bef8faae7cdc701ac89c0dcc",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000144.json",
+      "published_sha256": "4cde059b636dcd600ae83a1fa901267740fd8bf69a2ac5c891fa80fc20e2fa7d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000000.json@live": {
+      "frozen_sha256": "4a6a31be213977153b98281b6d0c856a7ee93ed6abe6a35614567529c03307f7",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000000.json",
+      "published_sha256": "abc1e1fcd864637d49b9185a37b0aeec4ac3339dad5b01eb67226b303a2783d6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000144.json@live": {
+      "frozen_sha256": "a67f0ce1b66549008f2bb3de47b883b52ad289278ed9387faed58c419f027cf9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000144.json",
+      "published_sha256": "e2d4328b5ae53a05b7f0d0e83d149cf0eb0e487ce95a9a10a6e65d2473f536cb",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000000.json@live": {
+      "frozen_sha256": "4913db683ae479ab46a0ea59ef6b09a43bca854ec9cc99df417179345fe1500b",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000000.json",
+      "published_sha256": "aefd89cf594c23b4c7f07338d3aaee9696b583723e1db6bbd94b40bef17aa4e7",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000143.json@live": {
+      "frozen_sha256": "3280644c5c0102b2d4f004072366bcc0fc037227fd3652eb8e7461e438579f42",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000143.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000143.json",
+      "published_sha256": "1b761c6636ae340a3cb2daf9da0b65f7bda85d972a6a7b100591d6bacafb16b6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000000.json@live": {
+      "frozen_sha256": "13505499ad6a850e3f1151b32477825b19a549de69740ff1c5e04b6839096e75",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000000.json",
+      "published_sha256": "d21f4c2c5beb0cc49fb32f2aa09d066f5e8a1811089e862a93dcf937ccea2f8c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000143.json@live": {
+      "frozen_sha256": "92c29b777644d31c7c20bbf5842077b4a86c8e31b676cff1d464e91f60f15915",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000143.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000143.json",
+      "published_sha256": "b3ffef684c99076a22cd71a2c4865111aac7531179e60b298e0fad45761c60dc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000000.json@live": {
+      "frozen_sha256": "e49d4f88af98221eb87bd467bb7ad22f123805ab5b46be8eeda6a75e98709e32",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000000.json",
+      "published_sha256": "bc167993af50157b46dea11ebb98d5e5f870505283d82aeb8fc369e98ebc27d3",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000142.json@live": {
+      "frozen_sha256": "4f96c37164b68ba7559721b1c4dd80edde2fa9dba027539bd4501ac6dcdf19d4",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000142.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000142.json",
+      "published_sha256": "76762fe0f7ac22dd2815150662dcf2079e371ed4557f4f37729ab9498da37c7a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000000.json@live": {
+      "frozen_sha256": "d7eac8a507161f6762583a190be34f6d37e99792bddb038bfb89ca32f59186ea",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000000.json",
+      "published_sha256": "99c613049e2e1535170d2daf0e9184ad1c4f84fbe22beac4f63823d5ef3f298b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000142.json@live": {
+      "frozen_sha256": "f877238d17595d3ede458d735f56e30c463c08be15a6cc53076b84f98ed0894a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000142.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000142.json",
+      "published_sha256": "d71945aae5e229dcbfd908cea9f0bb48a6609cde00a692cd7520bc80e7a4d651",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000000.json@live": {
+      "frozen_sha256": "b7755f7b4f53384b0a59ac06db5831edcc6a5401a08a286214290cbc7bea34a6",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000000.json",
+      "published_sha256": "87cb2692e1b890ea4c9c1583c7fde3f7ee13dbed611875f6d0220a24d9eae78a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000143.json@live": {
+      "frozen_sha256": "6994771321dbc963fa19b098b6a29feca586ba279d38dfa2ee62b9be60871836",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000143.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000143.json",
+      "published_sha256": "02bdfaa188025d6fc7f4073272594b2723b1924278d9c9b0c2dfba3e846eef8f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000000.json@live": {
+      "frozen_sha256": "34c74350f5b453fd36401c4ad73252c450b624c592761cd692147ae01f6abe5c",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000000.json",
+      "published_sha256": "8a343e21e970e8441fc69818552866605a6e9c213202de17cf0cd6a872e7820d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000143.json@live": {
+      "frozen_sha256": "511826d1d395eecea8d108351eed4d9cacedb34e5403d871be94ed0dfe5b44ab",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000143.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000143.json",
+      "published_sha256": "79ee21c5acc5b9e162553412aebb36bd71a00a209e5ce84208fe0dd61c402e6c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000000.json@live": {
+      "frozen_sha256": "07a89a5ad44f101bc65d4ee6ad60592c8f9b9bba60e18be5b93d89e6a6bc5906",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000000.json",
+      "published_sha256": "bf01c12923570274cc01847d375904cc5decf7fdf90a2ee852b3070fa20ad6a9",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000152.json@live": {
+      "frozen_sha256": "70e56da48c349e92e4fec113fcfd1a5c07e300a32e657dbf6058509c4730e7bf",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000152.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000152.json",
+      "published_sha256": "674f0d0848b6377ebdbc66cad96fb9413f28314eb6e6f5c627f3a85108f09e84",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000000.json@live": {
+      "frozen_sha256": "dbd2a07103f2829c6954a61953c396c5ff08cf07a98d47f4d9629e00c28e3cb5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000000.json",
+      "published_sha256": "d4cb7b97d8389fadf8991bb9f39339732cbe2bf4e2877f75593d0787686fd1c5",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000152.json@live": {
+      "frozen_sha256": "71b982d44d61bbf508619ba5d346b0d63e34db3eb1be25fcb86612324e200c27",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000152.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000152.json",
+      "published_sha256": "a98b7189c52decc773cd7a37c9b1ec9dc44f5284d07465599c502644b103e672",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000000.json@live": {
+      "frozen_sha256": "8131034e48c976fc17b92c7e9aa82dbe206be216fa64ffcb992ec9bec1a92e70",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000000.json",
+      "published_sha256": "a1afe949bd31a568baac7789e66ef0a709bad1e83b33d213c6b2d1c3b261f192",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000151.json@live": {
+      "frozen_sha256": "af4fdb6dc7f53729cff4c50c9c5f0b4b6917dee2ba65869439dc2986ae360f73",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000151.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000151.json",
+      "published_sha256": "a9b05b376089002d0bd746f98cbf9871162ffb6c30d7ac706381c02b3de250a7",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000000.json@live": {
+      "frozen_sha256": "8e594a0a02039da5b340a53df395c497b84084187e2da74eef4bf8b8c2a7bae9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000000.json",
+      "published_sha256": "24a88fff8bb6bb15f541bd0882141dba6ac2521c0b33e3bd6f3ea1a1b9c95cf2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000151.json@live": {
+      "frozen_sha256": "6e8dea2d233747e5f7c289a8100f043ef6eb92994e015305f055d1655a4756ce",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000151.json",
+      "published_at": "data_mirror/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000151.json",
+      "published_sha256": "733168c7a35538fcf3cf237026f36be79f1a04c271e344e1d6dc6eed92cafa21",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/protocol.json@live": {
+      "frozen_sha256": "ff40b555d7be555e5231c3cf45d9895fd6b493d2ce7a9a2b7d45eca5f7322712",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/protocol.json",
+      "published_at": "data_mirror/v99-scope/protocol.json",
+      "published_sha256": "bbc18d4c0c9e700610eb9825a72e404ec3d8685bf3bb5db5805800c028d8571f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000000.json@live": {
+      "frozen_sha256": "098e0e52a96a41d93ac12c7ee03c1d4ac64ddde7e6c7a00b7f8fd19319194d6a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000000.json",
+      "published_sha256": "1d572212cb504bee9b4d996ff49884045f66a26679aa825f4968962599e7a25c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000144.json@live": {
+      "frozen_sha256": "c7a3b4f335dca1305d670718e3b13d9f95eb26d2ad90aeb87addd21eacb23717",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000144.json",
+      "published_sha256": "68573a4d8996ce2ca3ef9937b10b6f064ff13c43343c4ee80c5fe7793f987a4c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000000.json@live": {
+      "frozen_sha256": "2b17d0d3b3631978fe718afe141ae0fd23b3102b4e949cee13199287299fe55b",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000000.json",
+      "published_sha256": "da38f942c7c6592f7b1818379d493e08407b48742eb01ffda1c6c5a34a2fdd71",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000144.json@live": {
+      "frozen_sha256": "549e960bded320c4c0c717720f017a602d41236c743153bfef4f8ba984c71ebe",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000144.json",
+      "published_sha256": "13eadb94af52a346dd84c153f67df1ce79caaf20909a725ab94628c00c6dc15c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000000.json@live": {
+      "frozen_sha256": "9792ce5e699162dda6917442ada75c865b9265829922ea69a9b573083594962e",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000000.json",
+      "published_sha256": "89d96a90139624ae4ff8114a17baee151e0909eb55fc651a55879e401c1234ad",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000144.json@live": {
+      "frozen_sha256": "bb50a5e7d05e93243d4553deceac93ea247ee163967d71c0a0288cec506946a3",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000144.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000144.json",
+      "published_sha256": "1515154571cfca3449b53973b98de5ef2caa0dbaf186014ebc736b50c01071e2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000000.json@live": {
+      "frozen_sha256": "67e25f0d099b347cacc4f4dfaa70de308302c45fd369727908e616bd8517bc2d",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000000.json",
+      "published_sha256": "6b3b7487f68a57b3aedb84d1a4ca248c619071c919ee7575af0fee08f41fa750",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000143.json@live": {
+      "frozen_sha256": "f9925e76c9349bcd7d3543b9ca6776046d35264e18a732406d96e73927df8bd2",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000143.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000143.json",
+      "published_sha256": "28e6cb50664a632dabfb522df9b6835faa2605b461ab9015614abf2cdd203554",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000000.json@live": {
+      "frozen_sha256": "26ca9f805d69527ecbfcf2d91928860d0d109c85e17a3b37fa08d717abc80985",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000000.json",
+      "published_sha256": "2db15d2c19a2e4fd89700248135a21ba17196f196864508009c0677c0b2e7c81",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000142.json@live": {
+      "frozen_sha256": "673c5fe60c757c0a4a4e638311caf8888548e0727b5f631632b23660039bef36",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000142.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000142.json",
+      "published_sha256": "45ada914da0e8ddef2c6c9f45ac79e9de4f1cd373faec926316092d91d4d5c75",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000000.json@live": {
+      "frozen_sha256": "a22522c4e8806c8f54dc8995a1b52b2a8806b857c2409eec464cb3f52a05607c",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000000.json",
+      "published_sha256": "5ea05de4c027a4fc06be4a081bc56dd3ffa96673c6726be50bb7d7d5c6795018",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000143.json@live": {
+      "frozen_sha256": "e90c9c7fb652971d3beec151e4fb2de64f6ca7a4128176e5c658c941e229e594",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000143.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000143.json",
+      "published_sha256": "76e37495fe6e6e809ba3a90d79f7f9172df42dc52c22123176c88f2fd8518978",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000000.json@live": {
+      "frozen_sha256": "03039891042507a5c22c2349cc7a4691a6a2b9fa2e5ce36e9bb56aea66967f0b",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000000.json",
+      "published_sha256": "f197873994d5d33c130f87cc7fc99a612b787ac2656bf016082986975a4d0015",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000152.json@live": {
+      "frozen_sha256": "343fe891c223e2642f6528de486193d29cf1eeedc1a058553ebfa50c3544d345",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000152.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000152.json",
+      "published_sha256": "c6b52c778981a96490791f8a6a9c2bd1ea91f4f32a605edfa317692f851b5a55",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000000.json@live": {
+      "frozen_sha256": "06e3f58ca8500a63013d770544a869502533e609113ccf663e24ee6e299bfad5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000000.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000000.json",
+      "published_sha256": "23ecfb77d1a77687e7be1521c8932d6e6c3808bcc269e82eb1a78cdc0f86d436",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000151.json@live": {
+      "frozen_sha256": "b783314d818d8c2b5ec475cef88bdbf89f61de97de77857d2f1326a3f16f6f6f",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000151.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000151.json",
+      "published_sha256": "fb3ca09cdbd9af2a77997b603e7f84f2e423b86145a403e1d3fb0090f73496bb",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/rerun-4b/protocol.json@live": {
+      "frozen_sha256": "592ddb0dda35d2a8a9fffca382eb95e072129eaa3631d0dfcf4ebbe5edbbfb06",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/rerun-4b/protocol.json",
+      "published_at": "data_mirror/v99-scope/rerun-4b/protocol.json",
+      "published_sha256": "cb61b811b6b115852dad3965dfad8c9840e85d729f6791e5af91d6f22bed24d2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json@live": {
       "frozen_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
       "pairable": false,
@@ -1639,6 +2015,14 @@
       "published_at": "tests/test_v32.py",
       "published_sha256": "260a4168b80273e90fdc05c730cd10553fcf8e4cb433dc07c3dc4d9d951d87dc",
       "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "tests/test_v99_scope_eval.py@live": {
+      "frozen_sha256": "f202b53ccba945a8ea0dc71cb11f9791ce6f9ece3dbdd5fddc884d1d83dc3b95",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_v99_scope_eval.py",
+      "published_at": "tests/test_v99_scope_eval.py",
+      "published_sha256": "37866359e647f3098f7111aa306bf34e4084e67bac81b0998cf6be467232fd0a",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     }
   },
   "what": "How published files relate to the digests frozen records name. Only entries with pairable=true are accepted by analysis/provenance.py; those are the ones where anonymising the working-tree original reproduces the published bytes exactly. A frozen record names frozen_sha256; the file published here hashes to published_sha256. The reason field says why. No measurement value and no analysis logic was changed by either kind of edit."

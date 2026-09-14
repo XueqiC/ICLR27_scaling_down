@@ -1,7 +1,7 @@
 {
   "version": 99,
   "v71_register": {
-    "path": "/home/xueqi/hq/projects/scaling-down-law/results/v71-qa-scope/register.json",
+    "path": "results/v71-qa-scope/register.json",
     "sha256": "79cdd66f16a85be13b1080b295f4170c688d575b6ee4c9914fbf272ccd4dd561"
   },
   "distributions": [
