@@ -6,6 +6,8 @@ Positive paired gains with 95% intervals excluding zero: **0/9** leave-one-sourc
 
 Maximum shrinkage (α = ∞) was selected in **14/108** outer folds. **The data selects finite corrections in most folds; this alone does not establish held-out gain.**
 
+Within individual comparisons, the data prefers the median curve (∞ in most folds) for: pruning/code (size); pruning/qa (size); grouped_quantization/qa (size); per_channel_quantization/qa (size).
+
 ## Fixed predictor and selection
 
 `prediction = unchanged V92 median(configuration) + X beta`
@@ -18,7 +20,7 @@ The decision rule was fixed before A4 outcomes: fewer than five of nine primary 
 
 ## Identical panel, published comparator, and scoring
 
-**Publication discrepancy:** the current saved V92 numeric artifact has **459 primary rows, nine states in every arm, and 4/9 qualifying same-form statistics pairs**. Its coverage prose and legacy loader test still describe six grouped states and 378 rows; the task's 3/9 historical count differs from the current saved verdicts. Both whole-response candidates still lose to the median in **9/9** pairs. A4 compares directly with the current saved numeric panel and scores, pinned by SHA256 `29383f1b0a12dc2bd7c28479e8dd0257b72333f56b029812d9c3a0bec1d79b39`. It does not reconstruct a different historical six-state baseline. This discrepancy changes the coverage description, not A4's fixed predictor, grid, scoring, or decision rule.
+**Publication discrepancy:** the current saved V92 numeric artifact has **459 primary rows, nine states in every arm, and 4/9 qualifying same-form statistics pairs**. A4 found stale coverage prose and a loader assertion from the pre-gap-fill panel; the historical count in its task differed from the current saved verdicts. The working-tree V92 Markdown and loader test now match the completed panel, with a separate legacy fixture case. The pinned V92 JSON retains its historical protocol note unchanged. Both whole-response candidates still lose to the median in **9/9** pairs. A4 compares directly with the current saved numeric panel and scores, pinned by SHA256 `29383f1b0a12dc2bd7c28479e8dd0257b72333f56b029812d9c3a0bec1d79b39`. It does not reconstruct a different historical six-state baseline. This discrepancy changes the coverage description, not A4's fixed predictor, grid, scoring, or decision rule.
 
 Primary/size evaluation uses the common measured configuration grid: pruning densities .6/.7/.8/.9; grouped bits 3/4/5 × group sizes 64/128/256; per-channel bits 3/4/6/8. Budgets use exactly the same rows within each arm.
 
@@ -34,24 +36,24 @@ MAE is in nats/reference token on signed compressed-minus-dense CE response. Pos
 
 | Split | Arm | Capability | V92 median MAE | Shrunk MAE | Paired gain | 95% CI | Selected α × folds |
 |---|---|---|---:|---:|---:|---|---|
-| source | pruning | math | 0.37594 | 0.37862 | -0.00268 | [-0.08243, 0.09991] | 1×4, 100×5 |
-| source | pruning | code | 0.47609 | 0.47422 | 0.00187 | [-0.01527, 0.02075] | 10×6, 100×3 |
-| source | pruning | qa | 0.52545 | 0.53089 | -0.00544 | [-0.02519, 0.01256] | 10×8, 100×1 |
-| source | grouped_quantization | math | 0.83278 | 0.83056 | 0.00222 | [-0.00121, 0.00642] | 100×1, 1000×8 |
-| source | grouped_quantization | code | 0.91010 | 0.91119 | -0.00109 | [-0.01451, 0.01277] | 10×1, 100×2, 1000×6 |
-| source | grouped_quantization | qa | 0.97957 | 0.95670 | 0.02287 | [-0.00099, 0.06411] | 10×1, 100×8 |
-| source | per_channel_quantization | math | 1.19239 | 1.19251 | -0.00012 | [-0.00089, 0.00046] | 1000×2, 10000×7 |
-| source | per_channel_quantization | code | 1.36677 | 1.36729 | -0.00052 | [-0.00147, 0.00024] | 1000×3, 10000×4, ∞×2 |
-| source | per_channel_quantization | qa | 1.31277 | 1.31276 | 0.00001 | [-0.00055, 0.00060] | 1000×6, 10000×2, ∞×1 |
-| size | pruning | math | 0.37939 | 0.37974 | -0.00035 | [-0.00309, 0.00189] | 100×2, ∞×1 |
-| size | pruning | code | 0.54320 | 0.54239 | 0.00081 | [0.00000, 0.00167] | 100×1, ∞×2 |
-| size | pruning | qa | 0.59788 | 0.59753 | 0.00036 | [-0.00008, 0.00116] | 100×1, ∞×2 |
-| size | grouped_quantization | math | 0.82773 | 0.82707 | 0.00067 | [0.00017, 0.00117] | 1000×2, 10000×1 |
-| size | grouped_quantization | code | 0.91815 | 0.91768 | 0.00046 | [0.00016, 0.00079] | 1000×1, 10000×1, ∞×1 |
-| size | grouped_quantization | qa | 1.06468 | 1.06449 | 0.00018 | [-0.00022, 0.00082] | 1000×1, ∞×2 |
-| size | per_channel_quantization | math | 1.12514 | 1.12514 | -0.00000 | [-0.00000, 0.00000] | 1e+06×2, ∞×1 |
-| size | per_channel_quantization | code | 1.26931 | 1.26946 | -0.00015 | [-0.00039, 0.00004] | 10000×2, 1e+06×1 |
-| size | per_channel_quantization | qa | 1.20301 | 1.20287 | 0.00014 | [-0.00012, 0.00050] | 1000×1, ∞×2 |
+| source | pruning | math | 0.37594 | 0.37862 | -0.00267923 | [-0.0824295, 0.0999079] | 1×4, 100×5 |
+| source | pruning | code | 0.47609 | 0.47422 | 0.00187382 | [-0.0152679, 0.0207492] | 10×6, 100×3 |
+| source | pruning | qa | 0.52545 | 0.53089 | -0.00544291 | [-0.0251945, 0.0125634] | 10×8, 100×1 |
+| source | grouped_quantization | math | 0.83278 | 0.83056 | 0.00222011 | [-0.00120637, 0.00641554] | 100×1, 1000×8 |
+| source | grouped_quantization | code | 0.91010 | 0.91119 | -0.00108671 | [-0.0145134, 0.0127721] | 10×1, 100×2, 1000×6 |
+| source | grouped_quantization | qa | 0.97957 | 0.95670 | 0.0228672 | [-0.000994702, 0.064114] | 10×1, 100×8 |
+| source | per_channel_quantization | math | 1.19239 | 1.19251 | -0.000124739 | [-0.000886159, 0.000456844] | 1000×2, 10000×7 |
+| source | per_channel_quantization | code | 1.36677 | 1.36729 | -0.000522324 | [-0.00147433, 0.000240076] | 1000×3, 10000×4, ∞×2 |
+| source | per_channel_quantization | qa | 1.31277 | 1.31276 | 1.3978e-05 | [-0.000549667, 0.000595472] | 1000×6, 10000×2, ∞×1 |
+| size | pruning | math | 0.37939 | 0.37974 | -0.000350405 | [-0.00308688, 0.00189125] | 100×2, ∞×1 |
+| size | pruning | code | 0.54320 | 0.54239 | 0.000811283 | [0, 0.00166791] | 100×1, ∞×2 |
+| size | pruning | qa | 0.59788 | 0.59753 | 0.000356584 | [-8.25192e-05, 0.00116472] | 100×1, ∞×2 |
+| size | grouped_quantization | math | 0.82773 | 0.82707 | 0.000665645 | [0.000170599, 0.00117436] | 1000×2, 10000×1 |
+| size | grouped_quantization | code | 0.91815 | 0.91768 | 0.000464003 | [0.000163023, 0.00079282] | 1000×1, 10000×1, ∞×1 |
+| size | grouped_quantization | qa | 1.06468 | 1.06449 | 0.000183354 | [-0.000223037, 0.000815934] | 1000×1, ∞×2 |
+| size | per_channel_quantization | math | 1.12514 | 1.12514 | -2.63948e-08 | [-9.65863e-07, 9.72195e-07] | 1e+06×2, ∞×1 |
+| size | per_channel_quantization | code | 1.26931 | 1.26946 | -0.000146544 | [-0.000388807, 3.81776e-05] | 10000×2, 1e+06×1 |
+| size | per_channel_quantization | qa | 1.20301 | 1.20287 | 0.000139656 | [-0.000116931, 0.00050044] | 1000×1, ∞×2 |
 
 ## Degenerate limits
 
@@ -90,11 +92,20 @@ Imported V92 code paths: `load_data`, `fields`, `budget_inputs (via design/predi
 
 Tests cover exact infinite-shrinkage predictions, all-coefficient shrinkage, training-only nested selection, frozen medians fitted only to original responses, published baseline read-through, matching panel/folds/scoring, and a non-zero CLI exit on failed validation. A negative scientific result is a successful run; execution or integrity failures raise errors and exit non-zero.
 
-The additional legacy V92 test run exposed one pre-existing stale coverage assertion: `test_real_loader_uses_only_requested_sources_and_common_development_grid` expects six grouped states. The pinned published numeric artifact and unchanged loader both contain nine. That legacy test is left unchanged; A4 tests verify exact equality to the actual published observations, hashes, folds, scores, and cluster counts.
+A4 test command (20 passed):
+
+```bash
+CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -B -m pytest -q tests/test_a4_shrunk_source_correction.py
+```
+
+A4's additional V92 test run exposed a stale coverage assertion in `test_real_loader_uses_only_requested_sources_and_common_development_grid`. The follow-up documentation/test fix parameterizes that test against the current numeric artifact and the older paper-mirror fixture, preserving missing-state handling, common-grid selection, and the input-file allowlist. A4 tests verify exact equality to the actual published observations, hashes, folds, scores, and cluster counts.
 
 ## Interpretation
 
 The orthogonal-residual variance finding is not a demonstration that the residual is random noise. It is not a pre-compression predictor because computing it needs the compressed model. The scalar response residual fitted here is a different quantity; predictors consume only V92's pre-compression inputs.
+
+The shrunk correction has lower point MAE than both published whole-response OLS and ridge in 18/18 split/arm/capability comparisons. Keeping the median largely removes their excess error, but the incremental source correction fails the fixed majority criterion against that median.
 
 This check tests the specified residual correction on the existing information budget. Its result does not establish that source information is worthless or that the unexplained response is random noise.
 

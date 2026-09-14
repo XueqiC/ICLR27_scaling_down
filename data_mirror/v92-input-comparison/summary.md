@@ -1,3 +1,5 @@
+> Historical V92 snapshot: this report accompanies the adjacent pre-gap-fill JSON (378 primary rows, 6 grouped states, 3/9 qualifying pairs). The [current completed-panel report](../../../results/v92-input-comparison/summary.md) has 459 primary rows, 9 states in every arm, and 4/9 qualifying pairs. The snapshot below is retained for reproduction and legacy-loader compatibility.
+
 V92 VERDICT — development only; lower MAE is better.
 Statistics budget vs K0 + dense anchor, SAME form; gain must exceed the FULL 95% interval width.
 Positive gains are MAE reductions in nats. OLS and ridge are separate fixed comparisons.

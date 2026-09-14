@@ -101,12 +101,11 @@ experiment showed it is the quantity that appears in the shrinkage term.
 Then a development study with three strictly separated input budgets, leave-one-source-out,
 and a rule fixed in advance.
 
-**The statistics help in 3 of 9 arm-and-capability pairs**, all through ridge: pruning math,
-pruning QA and grouped-quantization math, each with an interval above zero.
+**The statistics help in 4 of 9 arm-and-capability pairs**, all through ridge: pruning math, pruning QA, grouped-quantization math, and grouped-quantization QA, each with an interval above zero. The completed panel has 459 primary response rows and 9 states in every arm.
 
 **In 9 of 9 they still lose to the source-free median curve.** Clearing an incremental rule
 inside a parametric family is not the same as beating what the paper already delivers, and
-accuracy at naming the most fragile capability gets worse when the statistics are added.
+accuracy at naming the most fragile capability falls for pruning (58.3% to 41.7%) but rises for grouped quantization (40.7% to 49.4%).
 
 The bar this round set is therefore not met, and I recommend holding the reserved confirmation
 panel rather than spending four Pythia states and two external models on a likely null. Their

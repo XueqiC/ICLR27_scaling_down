@@ -132,16 +132,12 @@ term.
 Then a development study with leave-one-source-state-out, three strictly separated input
 budgets, low-degree-of-freedom candidates, and the reading rule fixed before the numbers.
 
-**Under the registered rule the statistics help in 3 of 9 arm-and-capability pairs**, all
-through ridge: pruning math 0.084 [0.049, 0.122], pruning QA 0.109 [0.062, 0.157], grouped
-quantization math 0.352 [0.257, 0.437]. Ordinary least squares gains stay inside their
-intervals everywhere.
+**Under the registered rule the statistics help in 4 of 9 arm-and-capability pairs**, all
+through ridge: pruning math 0.084 [0.049, 0.122], pruning QA 0.109 [0.062, 0.157], grouped-quantization math 0.137 [0.087, 0.184], and grouped-quantization QA 0.318 [0.222, 0.429]. Ordinary least squares does not clear the full-interval-width rule in any pair. The completed panel has 459 primary response rows and 9 states in every arm.
 
 **In 9 of 9 pairs the statistics-augmented predictors still lose to the source-free median
 curve.** Clearing an incremental input rule inside the parametric family is not the same as
-beating what the paper already delivers. Accuracy at naming the most fragile capability also
-falls when the statistics are added, from 58.3% to 41.7% for pruning and from 38.9% to 18.5%
-for grouped quantization.
+beating what the paper already delivers. Accuracy at naming the most fragile capability falls from 58.3% to 41.7% for pruning, but rises from 40.7% to 49.4% for grouped quantization.
 
 **The bar this round set is therefore not met**, and the reserved confirmation states should
 not be spent on this branch as it stands. Their dense inputs were extracted anyway, twelve
