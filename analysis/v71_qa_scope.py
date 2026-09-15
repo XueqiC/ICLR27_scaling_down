@@ -18,6 +18,15 @@ an identical register; the base is reloaded for every state (PEFT mutates it).
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import table_text as publication_table_text
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import table_text as publication_table_text
+    except ImportError:
+        from paper_table_text import table_text as publication_table_text
+
+
 import argparse
 import gc
 import hashlib
@@ -494,7 +503,7 @@ def reports(result):
             values.extend(["--", "--"] if r["loss"] is None else [f"{r['loss']:.3f}", f"{r['delta_from_dense']:+.3f}"])
         tex.append(s["label"] + " & " + " & ".join(values) + r" \\")
     tex += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
-    return "\n".join(lines) + "\n", "\n".join(tex) + "\n"
+    return "\n".join(lines) + "\n", publication_table_text("\n".join(tex) + "\n")
 
 
 def save_outputs(out, table, result):

@@ -10,6 +10,15 @@ V54/V55 artifacts are read-only. No fitting or choice uses test responses.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 import hashlib
 import json
@@ -425,6 +434,7 @@ def render_markdown(summary):
     return "\n\n".join(parts) + "\n"
 
 
+@proofread_table
 def render_latex(summary):
     names = {**LABELS, "without_u2": r"Without $u^2$ (16)"}
     lines = [r"\begin{table}[H]", r"\centering\small",

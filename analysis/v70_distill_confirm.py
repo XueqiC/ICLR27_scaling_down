@@ -13,6 +13,15 @@ synthetic data. The 25 old uniform trajectories are now development data.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 from datetime import datetime, timezone
 import hashlib
@@ -606,6 +615,7 @@ def paired_summary(rows):
     return groups
 
 
+@proofread_table
 def compare_text(result, latex=False):
     if latex:
         lines = [r"\begin{table}[H]", r"\centering", r"\small",

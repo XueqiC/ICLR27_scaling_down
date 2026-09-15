@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Generate the eight-task table from frozen results; no fitting or oracle ranking.
 
-Run: python -B analysis/final_prediction_table.py
+Run: python -B analysis/final_prediction_table.py --stdout
 Every cell has an executable JSON-pointer recipe in main_prediction_v2_sources.md.
 """
 from __future__ import annotations
+
 
 import sys
 sys.dont_write_bytecode = True
@@ -16,8 +17,10 @@ from statistics import mean
 
 if __package__:
     from .paper_artifacts import ROOT, CAPS, Artifacts, frozen_run, output_path, legacy_rows
+    from .paper_table_text import fit_table_height
 else:
     from paper_artifacts import ROOT, CAPS, Artifacts, frozen_run, output_path, legacy_rows
+    from paper_table_text import fit_table_height
 
 STATUSES = {"development", "frozen prediction", "post-hoc recommendation"}
 P53 = "results/v53-prune-dev/register.json"
@@ -33,31 +36,47 @@ RELATIONS = {
     "low_order_2d": r"$\phi^\top Q_c$",
     "median": r"$m_c(b,g)$",
     "zero": r"$0$",
-    "F_log": r"$Au+Bv$",
-    "F_curv": r"$Au+Bh_p(E)$",
-    "F_int": r"$Au+Bv+kuv$",
-    "E": r"$a_c\ell_E$",
+    "F_log": "additive logarithmic form",
+    "F_curv": "curved form",
+    "F_int": "interaction form",
+    "E": r"$a_c\log(1+E)$",
     "joint": r"$u(a+bu+qv)$",
 }
 BASELINES = {
-    "A2": "A2", "median_curve": "med", "median": "med",
-    "bilinear": "bilin", "zero": "zero", "constant": "const",
-    "surface": "surf", "reuse_only": "E", "T-only": "T", "E-only": "E",
-    "surface:L0": "L", "surface:logN": "N",
+    "A2": "per-density regression", "median_curve": "development median", "median": "development median",
+    "bilinear": "bilinear", "zero": "zero change", "constant": "constant",
+    "surface": "response surface", "reuse_only": "reuse only", "T-only": "budget only", "E-only": "reuse only",
+    "surface:L0": "response surface with initial loss", "surface:logN": "response surface with student size",
 }
 RANGES = {
-    "density_request": "9 states; d=0.6-0.9",
-    "prune_new": "seen-size stages; 6.9B outside",
-    "quant_bit": "160M-1.4B; b4/g64,256",
-    "quant_group": "410M/1.4B; bits 3-5, g32/512",
-    "quant_new": "1.4B/112k; g32,128,512",
-    "budget": r"3 students; $T\ge150$k held out",
-    "reuse": "3 students; 1% budget proxy",
-    "pool": "270M/1B; 6 pools, 50k-200k",
+    "density_request": "nine states; densities held out inside 0.6 to 0.9",
+    "prune_new": "new stages of seen sizes; a 6.9B source outside the size range",
+    "quant_bit": "Pythia-160M to Pythia-1.4B; bit width 4 with group sizes 64 and 256",
+    "quant_group": "Pythia-410M and Pythia-1.4B; bit widths 3 to 5 with group sizes 32 and 512",
+    "quant_new": "Pythia-1.4B at step 112000; group sizes 32, 128 and 512",
+    "budget": "three students; budgets of at least 150000 tokens held out",
+    "reuse": "three students; a one percent budget tolerance approximates fixed-budget reuse",
+    "pool": "Gemma-3-270M and Gemma-3-1B students; six pools with budgets of 50000 to 200000 tokens",
 }
-HEADERS = ("Task", "Relation (params)", "Tested range", "MAE",
-           "Baseline MAE", "Status")
-COLUMN_WIDTHS = (".095", ".225", ".155", ".235", ".17", ".12")
+HEADERS = ("Task", "Relation", "Tested range", "Mean absolute error",
+           "Baseline error", "Status")
+# Task and status share a full-width heading. Each evidence field then has
+# a short label and a wide value cell, preserving the paper's 9-pt footnotesize.
+COLUMN_WIDTHS = (".24", ".76")
+CAPTION = (
+    "Development and frozen prediction evidence by method and prediction task. "
+    "Each block names a method and task; the left column identifies the field and the right column gives its value. "
+    "Parentheses after relations give parameter counts. "
+    "Errors are mean absolute errors in native-token nats on the training probes, "
+    "with stored intervals in brackets. Source-conditioned forms take the source size, "
+    "its initial loss and its pretraining tokens together with the configuration; "
+    "distillation forms take the supervised budget, the pool size and the reuse ratio. "
+    "The baseline row names the baseline selected inside the development folds and gives its error. "
+    "Status distinguishes development results, predictions frozen before measurement, "
+    "and recommendations made after testing. Cells marked not tested have no frozen artifact. "
+    "Error entries follow the capability order Math, Code, and QA; paired student errors follow the displayed student order. "
+    "Bit widths are in bits, group sizes count weights, and budgets count supervised tokens."
+)
 
 
 def pointer(path, *keys):
@@ -109,6 +128,10 @@ def evaluate(audit, part):
         result = ", ".join(str(v) for v in sorted(set(vals)))
     elif op == "join":
         result = ", ".join(str(v) for v in vals[0])
+    elif op == "shared":
+        if not vals or any(v != vals[0] for v in vals[1:]):
+            raise ValueError("Grouped presentation requires identical frozen values")
+        result = vals[0]
     elif op == "label":
         if vals != part["expected"]:
             raise ValueError("Presentation label no longer matches its frozen sources")
@@ -124,17 +147,22 @@ def tex_escape(text):
     escaped = "".join({"\\": r"\textbackslash{}", "_": r"\_", "&": r"\&", "%": r"\%",
                     "#": r"\#", "$": r"\$", "{": r"\{", "}": r"\}",
                     "~": r"\textasciitilde{}", "^": r"\textasciicircum{}"}.get(c, c) for c in text)
-    # Ragged cells need explicit break opportunities for these narrow columns.
-    return escaped.replace("Quantization", r"Quanti\-zation").replace("development", r"devel\-opment")
+    return escaped
 
 
 def render_text(text):
-    # Only the explicit relation vocabulary introduces TeX math.
-    # Attach capability separators to the preceding value so a stored interval
-    # and its MAE can share a line in the paper's narrow text block.
+    # Status is always one unhyphenated phrase, including future recommendation rows.
+    if text in STATUSES:
+        return r"\mbox{" + tex_escape(text) + "}"
     return r"\newline ".join("".join(
         token if token.startswith("$") else tex_escape(token)
-        for token in re.split(r"(\$[^$]+\$)", line)) for line in text.split("\n")).replace(" / ", "/ ")
+        for token in re.split(r"(\$[^$]+\$)", line)) for line in text.split("\n"))
+
+
+def baseline_names(names):
+    """Keep all frozen selections; only replace their abbreviated display names."""
+    names = list(dict.fromkeys(BASELINES[name] for name in names))
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
 
 
 @dataclass
@@ -170,12 +198,12 @@ def scored_number(n):
     return value(n.source, fmt=".2f")
 
 
-def cap_lines(fn, separator=" / ", label_separator=" "):
+def cap_lines(fn, separator="; ", label_separator=" "):
     parts = []
     for cap in CAPS:
         if parts:
             parts.append(separator)
-        parts += [("QA" if cap == "qa" else cap) + label_separator, *fn(cap)]
+        parts += [("QA" if cap == "qa" else cap.capitalize()) + label_separator, *fn(cap)]
     return parts
 
 
@@ -184,7 +212,7 @@ def baseline_parts(audit, fn):
     parts = []
     for cap in CAPS:
         if parts:
-            parts.append(" / ")
+            parts.append("; ")
         parts += fn(cap)
     return parts
 
@@ -248,7 +276,7 @@ def build(audit):
     audit.omit(density_note)
     audit.rule("V72 repeat: same weights, one state. Legacy identity checks still read it, but no table score uses it.")
     result.append([
-        cell("Prune: density", refs=[pointer(P53, "loso_folds")], note=density_note),
+        cell("Pruning, unseen density", refs=[pointer(P53, "loso_folds")], note=density_note),
         power,
         cell(tested_range(audit, "density_request", pointer(original_panel, "dev")),
              note="Requested scope, not an assertion that this holdout artifact exists."),
@@ -258,7 +286,7 @@ def build(audit):
     row = rows["C35"]
     ps = [p for p in audit.data if p.startswith("results/v53-prune-dev/compare_")]
     result.append([
-        cell("Prune: state", refs=[row.selection_source]), power,
+        cell("Pruning, new source state", refs=[row.selection_source]), power,
         cell(tested_range(audit, "prune_new", *[pointer(p, "tag") for p in ps], pointer(original_panel, "dev", "sizes")),
              refs=[pointer(ps[0], "densities")],
              note="Outside the size range of the original nine-state panel; V53's expanded register itself includes 6.9B."),
@@ -279,7 +307,7 @@ def build(audit):
         j = next(j for j,e in enumerate(entries) if e["candidate"] == r["candidate"])
         return [baseline(audit, r["candidate"], pointer(Q55,"loso_table",i,"candidate")), " ", number(bp,"test_sets","bit_test","mae_table",j,"mae",c)]
     result.append([
-        cell("Quant: bits", refs=[pointer(Q55,"test_sets","bit_test")]),
+        cell("Quantization, unseen bit-width", refs=[pointer(Q55,"test_sets","bit_test")]),
         cell(relation(audit, "low_order_2d", pointer(Q55,"candidate_definitions","low_order_2d")), " (", value(pointer(Q55,"n_params_per_capability","low_order_2d")), ")",
              refs=[pointer(Q55,"feature_names")]),
         cell(tested_range(audit, "quant_bit", pointer(Q55,"test_sets","bit_test","states"),
@@ -287,7 +315,7 @@ def build(audit):
         cell(*cap_lines(lambda c:[number(bp,"test_sets","bit_test","mae_table",candidate_index,"mae",c)])),
         cell(*baseline_parts(audit, bit_baseline), refs=[pointer(Q55,"loso_table")], note="Development minimum over registered baselines mean/median/zero."),
         cell("frozen prediction",refs=[pointer(Q55,"precommitted_rule")])])
-    for key,task in (("C44","Quant: group"),("C46","Quant: state")):
+    for key,task in (("C44","Quantization, unseen group size"),("C46","Quantization, new state")):
         row = rows[key]
         selected_baseline = {c: min((m for m in quant["methods"] if m != row.candidates[c]),
                            key=lambda m:quant["loso"]["scores"][m][c]["macro_mae"]) for c in CAPS}
@@ -308,8 +336,8 @@ def build(audit):
                  refs=[pointer(Q69,"loso","scores")],note="Minimum development LOSO macro MAE excluding the selected candidate, per capability."),
             cell("frozen prediction",refs=[pointer("results/v69-quant-confirm/freeze.json","frozen_at_utc")])])
 
-    for task,target,split in (("Distill: budget","response","largest_budget"),
-                              ("Distill: reuse","I_U","data_rung")):
+    for task,target,split in (("Distillation, budget response","response","largest_budget"),
+                              ("Distillation, data-reuse response","I_U","data_rung")):
         inds = {c:next(i for i,r in enumerate(a2["decision_table"]) if r["capability"]==c and r["target"]==target
                       and r["split"]==split and r["distribution"].startswith("training_probe:")) for c in CAPS}
         primary = "F_log" if target=="response" else "F_curv"
@@ -330,7 +358,7 @@ def build(audit):
                                       number(A2,"decision_table",inds[c],"primary_mae_interval",0), ",",
                                       number(A2,"decision_table",inds[c],"primary_mae_interval",1), "]"]),
                  note="Training-probe MAEs; reuse is the recorded tolerance proxy, not an exact intervention. Intervals conditional on frozen fold predictions."),
-            cell(*baseline_parts(audit, lambda c:[mapped(audit, "/".join(BASELINES[m] for m in a2["decision_table"][inds[c]]["inner_selected_baselines"]),
+            cell(*baseline_parts(audit, lambda c:[mapped(audit, baseline_names(a2["decision_table"][inds[c]]["inner_selected_baselines"]),
                                             pointer(A2,"decision_table",inds[c],"inner_selected_baselines")), " ",
                                       number(A2,"decision_table",inds[c],"baseline_mae")]),
                  note="Inner-development-selected baselines. Never strongest_observed_baseline or strongest_baseline_mae."),
@@ -344,13 +372,15 @@ def build(audit):
         return sum(([number(D70,"groups",i,key), ","] for i in pool_inds[c]), [])[:-1]
     def pool_baseline(c):
         names = [groups[i]["strongest_baseline"] for i in pool_inds[c]]
-        label = "/".join(BASELINES[m] for m in (names[:1] if len(set(names))==1 else names))
+        label = baseline_names(names)
         return [mapped(audit,label,*[pointer(D70,"groups",i,"strongest_baseline") for i in pool_inds[c]]),
                 " ",*pool_numbers(c,"baseline_mae")]
     result.append([
-        cell("Distill: pool",refs=[pointer(f70,"confirmation_register","unused_U_assertion")]),
-        cell(*cap_lines(lambda c:[relation(audit, audit.data[f70]["selected"][c]["method"], pointer(f70,"selected",c,"method")),
-                                 " (", value(pointer(f70,"selected",c,"n_params")), ")"], separator="; ", label_separator=": "),
+        cell("Distillation, new pool",refs=[pointer(f70,"confirmation_register","unused_U_assertion")]),
+        cell("Math and Code: ", relation(audit, "E", *[pointer(f70,"selected",c,"method") for c in ("math","code")]),
+             " (", value(*[pointer(f70,"selected",c,"n_params") for c in ("math","code")], op="shared"), "); QA: ",
+             relation(audit, "joint", pointer(f70,"selected","qa","method")),
+             " (", value(pointer(f70,"selected","qa","n_params")), ")",
              refs=[pointer(f70,"models"),pointer(f70,"reference_rule"),pointer(f70,"prediction_rule")],
              note="E and joint are the frozen V50/V70 design identifiers. E has one coefficient; joint has three coefficients on u, u*u, u*log(D_U/D_ref). T_star is null, not fitted, for these selected forms."),
         cell(tested_range(audit, "pool", pointer(f70,"confirmation_register","students"),
@@ -360,7 +390,7 @@ def build(audit):
              note="Comma-separated scores follow student order 270M, 1B; no student averaging."),
         cell(*baseline_parts(audit,pool_baseline),refs=[pointer(f70,"baseline_rule"),pointer(f70,"strongest_baseline"),
                         *[pointer(D70,"groups",i,"paired_difference") for i in range(len(groups))]],
-             note="Only MAEs are printed, paired in student order 270M, 1B. T=T-only, E=E-only, L=initial-loss surface, N=size surface. Stored paired_difference.ci95 estimates baseline-minus-candidate gain, not an MAE interval; it is not displayed in the MAE columns."),
+             note="Only MAEs are printed, paired in student order 270M, 1B. Names joined by 'and' follow the same student order; a shared name is printed once. Response-surface labels distinguish the stored initial-loss (surface:L0) and size (surface:logN) variants, without changing either selection. Stored paired_difference.ci95 estimates baseline-minus-candidate gain, not an MAE interval; it is not displayed in the MAE columns."),
         cell("frozen prediction",refs=[pointer(f70,"frozen_at_utc"),pointer("results/v47-p2-register/register.json","v5_confirm","registered_at_utc")])])
     for row in result:
         assert row[-1].plain(audit) in STATUSES
@@ -370,44 +400,49 @@ def build(audit):
     return result
 
 
-def generate(root=ROOT):
+def caption_cell():
+    return cell(CAPTION, refs=[
+        pointer(P53,"feature_names"), pointer(Q55,"feature_names"),
+        pointer(A2,"protocol","descriptors"), pointer(A2,"protocol","structures"),
+        pointer(A2,"protocol","I_U"), pointer("results/v70-distill-confirm/freeze.json","reference_rule"),
+        pointer(P53,"candidate_definitions","power"), pointer(Q55,"candidate_definitions","low_order_2d"),
+        pointer("results/v70-distill-confirm/freeze.json","models")])
+
+
+def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
+    lines = [f"% Generated from frozen JSON; see {sidecar}.",
+             r"\begin{table*}[t]", r"\centering\footnotesize",
+             r"\setlength{\tabcolsep}{3pt}", r"\renewcommand{\arraystretch}{1}",
+             r"\setlength{\abovecaptionskip}{4pt}",
+             r"\begin{tabular}{" + "".join(
+                 r">{\raggedright\arraybackslash}p{\dimexpr " + width + r"\textwidth-2\tabcolsep\relax}"
+                 for width in COLUMN_WIDTHS) + "}", r"\toprule"]
+    for i, row in enumerate(rows):
+        if i:
+            lines.append(r"\midrule")
+        lines += [r"\multicolumn{2}{p{\dimexpr\textwidth-2\tabcolsep\relax}}{\mbox{\textbf{" +
+                  row[0].render(audit) + r"}}\hfill " + row[5].render(audit) + r"} \\"]
+        lines += [HEADERS[j] + " & " + row[j].render(audit) + r" \\" for j in range(1, 5)]
+    lines += [r"\bottomrule", r"\end{tabular}", r"\caption{\footnotesize "+caption_cell().render(audit)+"}",
+              r"\label{tab:main-prediction-v2}", r"\end{table*}"]
+    return fit_table_height("\n".join(lines)+"\n")
+
+
+def generate(root=ROOT, *, write_tex=True):
     with frozen_run(root) as access:
         audit = Artifacts(root)
         rows = build(audit)
-        caption = cell(
-            "Frozen MAEs: native-token nats, training probes; stored intervals in brackets. "
-            "Inputs: source size, initial loss and pretraining tokens for source-conditioned forms; "
-            "the configuration for all; distillation forms take supervised budget, pool size and reuse. ",
-            mapped(audit, r"$r=(1-d)/0.3$; ", pointer(P53,"candidate_definitions","power")),
-            mapped(audit, r"$Q_c=a+bu+cv+duv+eu^2$; ", pointer(Q55,"candidate_definitions","low_order_2d")),
-            mapped(audit, r"$\ell_E=\log(1+E)$; ", pointer("results/v70-distill-confirm/freeze.json","models")),
-            r"$m_c$=med; $A,B$ affine in descriptor; $b/g$=bits/groups. "
-            "Budget/reuse forms: fold-selected; counts per capability. "
-            "Dev. baselines (math/code/QA): A2=per-density regression, med=dev. median, "
-            "surf=response surface, "
-            "E/T=E-only/T-only, L/N=loss/size surface. Pool pairs: student order. "
-            "Not tested: density holdout, exact fixed-budget reuse.",
-            refs=[pointer(P53,"feature_names"),pointer(Q55,"feature_names"),
-                  pointer(A2,"protocol","descriptors"),pointer(A2,"protocol","structures"),
-                  pointer(A2,"protocol","I_U"),pointer("results/v70-distill-confirm/freeze.json","reference_rule")])
-        lines = ["% Generated from frozen JSON; see main_prediction_v2_sources.md.",
-                 r"\begin{table*}[t]", r"\centering\footnotesize",
-                 r"\setlength{\tabcolsep}{3pt}", r"\renewcommand{\arraystretch}{1}",
-                 r"\setlength{\abovecaptionskip}{4pt}",
-                 r"\thinmuskip=0mu\medmuskip=0mu\thickmuskip=0mu",
-                 r"\begin{tabular}{" + "".join(
-                     r">{\raggedright\arraybackslash}p{\dimexpr " + width + r"\linewidth-2\tabcolsep\relax}"
-                     for width in COLUMN_WIDTHS) + "}",
-                 r"\toprule", " & ".join(HEADERS) + r" \\", r"\midrule"]
-        lines += [" & ".join(c.render(audit) for c in row)+r" \\" for row in rows]
-        lines += [r"\bottomrule", r"\end{tabular}", r"\caption{\footnotesize "+caption.render(audit)+"}",
-                  r"\label{tab:main-prediction-v2}", r"\end{table*}"]
-        tex = "\n".join(lines)+"\n"
+        caption = caption_cell()
+        sidecar = "main_prediction_v2_sources.md" if write_tex else "main_prediction_v2_preview_sources.md"
+        tex = render_table(rows, audit, sidecar=sidecar)
         records = [{"row":i,"column":j,**c.record(audit)} for i,row in enumerate(rows) for j,c in enumerate(row)]
-        side = ["# Main prediction table: cell sources", "", "Columns: task, relation, tested range, error, development baseline, status.",
+        side = ["# Main prediction table: cell sources", "", "Logical columns: task, relation, tested range, error, development baseline, status.",
+                "Rendered layout: one unbroken task/status heading followed by relation, tested range, MAE and baseline fields. Logical cell coordinates are unchanged.",
+                "Baseline entries follow math, code and QA order. Multiple selected baselines remain spelled out; pool scores and differing names follow student order 270M, 1B.",
                 "All indices are zero-based JSON pointers. `mean` is equal-weight arithmetic only; no refits or resampling.",
                 "Numeric values are formatted directly from the following executable source recipes. Context pointers justify textual labels and missing evidence.",
                 "The `label` operation uses the generator's explicit presentation mappings; `expected` preserves the source values and must match before rendering `label`. Counts always use their own JSON fields.",
+                "The `shared` operation prints a common value only after checking that all grouped source values are identical.",
                 "", "## Loader reuse and limits", "", *audit.notes, "", "## Fields per cell", ""]
         for r in records:
             refs = r["context"] + [s for p in r["parts"] if isinstance(p,dict) for s in p["sources"]]
@@ -416,14 +451,18 @@ def generate(root=ROOT):
                  "", "## Caption recipe", "", "```json",json.dumps(caption.record(audit),indent=2),"```",
                  "", "## Input hashes", ""]
         side += [f"- `{p}`: `{h}`" for p,h in sorted(audit.inputs.items())]
-        for name, content in (("main_prediction_v2.tex",tex),("main_prediction_v2_sources.md","\n".join(side)+"\n")):
+        outputs = [(sidecar, "\n".join(side)+"\n")]
+        if write_tex:
+            outputs.insert(0, ("main_prediction_v2.tex", tex))
+        for name, content in outputs:
             path=output_path(root,"tables",name);path.parent.mkdir(parents=True,exist_ok=True);path.write_text(content)
         return rows,audit,access
 
 
 if __name__ == "__main__":
-    rows, audit, _ = generate()
-    print("| " + " | ".join(HEADERS) + " |")
-    print("| " + " | ".join("---" for _ in HEADERS) + " |")
-    for row in rows:
-        print("| " + " | ".join(c.plain(audit).replace("\n", "<br>") for c in row) + " |")
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--stdout", action="store_true", help="Print LaTeX and write a preview sidecar, preserving the existing .tex/source pair")
+    args = parser.parse_args()
+    rows, audit, _ = generate(write_tex=not args.stdout)
+    print(render_table(rows, audit, sidecar="main_prediction_v2_preview_sources.md" if args.stdout else "main_prediction_v2_sources.md"), end="")

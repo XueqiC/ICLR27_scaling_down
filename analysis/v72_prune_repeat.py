@@ -19,6 +19,15 @@ No automatic substitution of a different checkpoint is permitted.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 import csv
 import gzip
@@ -373,6 +382,7 @@ def summarize(rows):
     return result
 
 
+@proofread_table
 def table_text(scores):
     lines = [r"\begin{table}[H]", r"\centering\footnotesize",
              r"\begin{tabular}{@{}lrrrr@{}}", r"\toprule",
@@ -382,7 +392,7 @@ def table_text(scores):
         values.append(scores[method]["macro_mae"])
         lines.append(label + " & " + " & ".join(f"{v:.3f}" for v in values) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}",
-              r"\caption{Pruning repeatability on Pythia-2.8B at steps 64k and 143k, "
+              r"\caption{Pruning repeatability on Pythia-2.8B (final checkpoint; the two cached revisions used carry identical weights, so the six cells per capability are three densities measured twice), "
               r"$d\in\{0.85,0.75,0.65\}$. Signed $\Delta L$ errors in nats; six cells per "
               r"capability, with equal state, density and capability weights. All four predictors "
               r"were frozen before target pruning measurements, using the delivered V53 register "

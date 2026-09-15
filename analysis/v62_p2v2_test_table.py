@@ -4,6 +4,15 @@ Reads results/v50-p2v2/{freeze,compare_test}.json. Headline column = frozen form
 freeze time (joint+src for every capability; rule stated after the tests -> origin code P/F/F/A for the prediction, R for
 the rule). Rows: student x role (unseen pool U375 seeds 21-23; held-out student at dev pools when present) x capability;
 MAE over all (seed, budget) points; zero-change baseline; best frozen form retrospectively (R)."""
+
+try:
+    from .paper_table_text import table_text as publication_table_text
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import table_text as publication_table_text
+    except ImportError:
+        from paper_table_text import table_text as publication_table_text
+
 import json, collections; from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 f = json.loads((ROOT / "results/v50-p2v2/freeze.json").read_text()); d = json.loads((ROOT / "results/v50-p2v2/compare_test.json").read_text())
@@ -37,4 +46,4 @@ Student, pools & Cap. & Dev-selected & Constant & Zero & Best frozen (R) & $n$ \
 \end{tabular}
 \end{table}
 """ % "\n".join(lines).removesuffix("\n\\addlinespace")
-(ROOT / "paper/paper/tables/p2v2_test.tex").write_text(tex); print("WROTE paper/paper/tables/p2v2_test.tex"); print(tex)
+(ROOT / "paper/paper/tables/p2v2_test.tex").write_text(publication_table_text(tex)); print("WROTE paper/paper/tables/p2v2_test.tex"); print(tex)

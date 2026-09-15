@@ -9,6 +9,15 @@ locked_rule.tex and rule_decomp.tex, without touching V85 result artifacts.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 from dataclasses import dataclass
 import hashlib
@@ -377,6 +386,7 @@ def stack(values):
     return r"\newline ".join(values)
 
 
+@proofread_table
 def render_tex(rows, inputs, context=False):
     # Presentation only: keep the shared row records and four-decimal summaries
     # unchanged, including the test metadata imported by Figure 2.
@@ -433,8 +443,10 @@ def render_tex(rows, inputs, context=False):
         lines.append(" & ".join(cells) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}",
         r"\caption{\scriptsize " + ("Earlier distillation context. " if context else "Frozen candidates and delivered rules. ") +
-        r"MAE in nats per token; stacks: math/code/QA. Strongest: lowest pooled test MAE among all "
-        r"predictors frozen in that round except the candidate (hindsight ranking). Gain = alternative "
+        r"MAE in nats per token; stacks: math/code/QA. " +
+        (r"Strongest: lowest pooled test MAE among all predictors frozen in that round except the candidate (hindsight ranking). "
+         if context else r"Strongest: lowest pooled test MAE among the round's other frozen predictors, a diagnostic minimum that selection favours; the registered comparison is primary. ") +
+        r"Gain = alternative "
         r"minus candidate; negative = alternative better. Delivered rules fixed after a test are "
         r"retrospective for it. " +
         (r"The joint+src rule was stated after test; not delivered.}" if context else
@@ -482,11 +494,14 @@ def check_block(rows, inputs):
     section = v74_raw.decode().split(r"\addlinespace")[0]
     dev_checks = []
     for label, methods, targets in (
-        ("FROZEN development-selected", indexed["C44"].candidates, ("0.2149", "0.5567", "0.4570")),
+        ("Frozen development selection", indexed["C44"].candidates, ("0.2149", "0.5567", "0.4570")),
         ("Piecewise interpolation", same("same_input_interpolation"), ("0.0653", "0.1163", "0.4766")),
         ("Per-configuration median", same("median"), ("0.4998", "0.5567", "0.4579")),
     ):
-        line = next(line for line in section.splitlines() if "& " + label + " &" in line)
+        def display_line(line):
+            return re.sub(r"\\shortstack(?:\[[^]]*\])?\{([^{}]*)\}",
+                          lambda match: match[1].replace(r"\\", " "), line)
+        line = next(line for line in section.splitlines() if "& " + label + " &" in display_line(line))
         table_numbers = tuple(re.findall(r"\d+\.\d{4}", line))
         values = tuple(indexed["C44"].scores[c][methods[c]].value for c in CAPS)
         require(tuple(f"{v:.4f}" for v in values) == table_numbers == targets, f"V74 mismatch: {label}")

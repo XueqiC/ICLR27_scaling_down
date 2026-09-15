@@ -7,6 +7,15 @@ analysis's write boundary. Use --paper-dir paper only when separately authorized
 Requires NumPy; does not fit models or load model weights.
 """
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 from collections import Counter, defaultdict
 import hashlib
@@ -184,6 +193,7 @@ def tex_interval(stat, digits):
             + f"$[{lo:.{digits}f},{hi:.{digits}f}]$" + "}")
 
 
+@proofread_table
 def latex(summary):
     lines = [r"\begin{table}[H]", r"\centering", r"\small",
              r"\setlength{\tabcolsep}{2pt}", r"\renewcommand{\arraystretch}{1.15}",

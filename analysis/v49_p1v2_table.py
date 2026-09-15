@@ -3,6 +3,15 @@
 Rows: source x protocol x regime (prune interp 0.9-0.6 / prune extrap 0.55 / quant >=4-bit / quant int3 / int5 rule),
 columns: MAE per candidate (mean over 3 capabilities), best candidate, strongest same-budget baseline, improvement.
 Labels: size = 'in-range' (1B) or 'extrapolation ~5x' (6.9B); stage = 'interp' (A) or 'extrap' (B, only for 112k)."""
+
+try:
+    from .paper_table_text import table_text as publication_table_text
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import table_text as publication_table_text
+    except ImportError:
+        from paper_table_text import table_text as publication_table_text
+
 import json, csv, glob
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]; OUT = ROOT / "results/v49-p1v2"
@@ -49,5 +58,5 @@ if rows:
            "extrapolations. " + size_note + "Predictions were committed before measurement; per-capability and per-point "
            "values are in the results ledger.}")
     L += [r"\bottomrule\end{tabular}", cap, r"\label{tab:p1v2}\end{table}"]
-    (ROOT / "paper/paper/tables/p1v2.tex").write_text("\n".join(L) + "\n")
+    (ROOT / "paper/paper/tables/p1v2.tex").write_text(publication_table_text("\n".join(L) + "\n"))
 print(f"{len(rows)} rows from {len(glob.glob(str(OUT/'compare_*.json')))} sources -> p1v2_table.{{json,csv}} + paper/paper/tables/p1v2.tex")

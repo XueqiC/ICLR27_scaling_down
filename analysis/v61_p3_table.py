@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """P3 primary-vs-secondary check table (v48 measurements) -> paper/paper/tables/p3_check.tex. Values: loss change from dense,
 nats per native token, primary / secondary, Gemma-3-1B, six pre-registered states."""
+
+try:
+    from .paper_table_text import table_text as publication_table_text
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import table_text as publication_table_text
+    except ImportError:
+        from paper_table_text import table_text as publication_table_text
+
 import json; from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 m = json.loads((ROOT / "results/v48-p3-measure/measurements.json").read_text()); d0 = m[0]
@@ -25,4 +34,4 @@ State & Math & Code & QA \\
 \end{tabular}
 \end{table}
 """ % (tok[0]["math"], tok[1]["math"], tok[0]["code"], tok[1]["code"], tok[0]["qa"], tok[1]["qa"], "\n".join(rows))
-(ROOT / "paper/paper/tables/p3_check.tex").write_text(tex); print("WROTE paper/paper/tables/p3_check.tex")
+(ROOT / "paper/paper/tables/p3_check.tex").write_text(publication_table_text(tex)); print("WROTE paper/paper/tables/p3_check.tex")

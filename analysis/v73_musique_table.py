@@ -2,6 +2,15 @@
 """MuSiQue scope table from results/v67-musique-qa/measurements.json -> paper/paper/tables/musique_scope.tex.
 Rows: student x pool group (final checkpoints of U375 test pools, U450 dev pools, U75 dev pools; seed repeats included);
 mean delta from dense on MuSiQue and on the primary 2Wiki probe, with the range over trajectories."""
+
+try:
+    from .paper_table_text import table_text as publication_table_text
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import table_text as publication_table_text
+    except ImportError:
+        from paper_table_text import table_text as publication_table_text
+
 import json, collections, re; from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 rows = json.loads((ROOT / "results/v67-musique-qa/measurements.json").read_text())
@@ -34,4 +43,4 @@ Student & Pool, checkpoint & $E$ & $n$ & $\Delta$ 2Wiki (primary) & $\Delta$ MuS
 \end{tabular}
 \end{table}
 """ % "\n".join(lines)
-(ROOT / "paper/paper/tables/musique_scope.tex").write_text(tex); print(tex)
+(ROOT / "paper/paper/tables/musique_scope.tex").write_text(publication_table_text(tex)); print(tex)

@@ -10,6 +10,15 @@ then PyTorch bin, matching the existing loader and v72 cache audit.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import ast
 from collections import defaultdict
 import gc
@@ -592,6 +601,7 @@ def weight_markdown(identity):
     return "\n".join(lines)
 
 
+@proofread_table
 def table_tex(records):
     codes = {"gemma3_text": "G3", "gemma4_text": "G4", "muse_glimmer_text": "MG",
              "olmo3": "O3", "gpt_neox": "PN", "qwen3": "Q3"}

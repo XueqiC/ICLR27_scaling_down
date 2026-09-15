@@ -8,6 +8,15 @@ The historical registers fix membership, never supply reported fitted scores.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 import hashlib
 import json
@@ -655,9 +664,10 @@ def markdown(summary, tables):
     return "\n".join(texts)
 
 
+@proofread_table
 def latex(summary, panels):
-    lines = [r"\begin{table*}[t]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
-             r"\begin{tabular}{@{}p{2.15cm}p{2.15cm}p{2.15cm}p{2.55cm}p{2.25cm}p{2.65cm}@{}}", r"\toprule",
+    lines = [r"\begin{table}[H]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
+             r"\begin{tabular}{@{}p{1.9cm}p{1.9cm}p{2.0cm}p{2.5cm}p{2.1cm}p{2.5cm}@{}}", r"\toprule",
              r"Law & What is shared & What varies & Held-out MAE shared vs specific & K0 vs K1 MAE & 80\% PI coverage \& width \\", r"\midrule"]
     for arm, law, shared, varies in (
         ("pruning", "Pruning power", "Power family", r"$\beta_c,\gamma_c$"),
@@ -689,7 +699,7 @@ def latex(summary, panels):
               r"PI entries give coverage/full width for K0 then K1, from per-capability absolute LOSO residual quantiles. "
               r"Confirmation excludes three new sources; independent pair evaluation excludes all four pair sources from fitting and its 13-source interval bank. "
               r"Quantization tests omit the target source from fitting; 2D K1 scales its predicted curve and sep K1 calibrates the separable amplitude.}",
-              r"\label{tab:shared_structure}", r"\end{table*}", ""]
+              r"\label{tab:shared_structure}", r"\end{table}", ""]
     return "\n".join(lines)
 
 

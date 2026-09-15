@@ -20,6 +20,15 @@ holding out the source would train on the very student outcomes being scored.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 from contextlib import contextmanager
 import hashlib
@@ -657,6 +666,7 @@ def report(summary):
     return "\n".join(lines) + "\n"
 
 
+@proofread_table
 def latex_table(summary):
     n_cells = summary["n_budget_cells_per_objective"]
     n_common = summary["tables"]["math"][0]["n_common_feasible"]
@@ -699,6 +709,7 @@ def latex_table(summary):
     return "\n".join(lines) + "\n"
 
 
+@proofread_table
 def latex_candidate_coverage(summary):
     lines = [r"\begin{table}[H]", r"\centering", r"\small", r"\setlength{\tabcolsep}{3pt}",
              r"\caption{Measured candidate coverage by source state. Each method column gives "

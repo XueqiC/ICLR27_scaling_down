@@ -7,6 +7,15 @@ to respect the explicit write-only boundary, as in V76 and V77.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import argparse
 import ast
 import hashlib
@@ -468,6 +477,7 @@ def markdown(result):
     return "\n".join(lines)
 
 
+@proofread_table
 def latex(result):
     p = result["pruning_confirmation"]
     old, new = p["original_five_labels"], p["merged_four_states"]

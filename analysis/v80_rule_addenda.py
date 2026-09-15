@@ -9,6 +9,15 @@ V78 inputs, including their directory metadata inventory, are checked unchanged.
 """
 from __future__ import annotations
 
+try:
+    from .paper_table_text import proofread_table
+except ImportError:  # Direct scripts and file-based imports.
+    try:
+        from analysis.paper_table_text import proofread_table
+    except ImportError:
+        from paper_table_text import proofread_table
+
+
 import hashlib
 import json
 import math
@@ -298,6 +307,7 @@ def single_choice_agreement(compare):
     return records
 
 
+@proofread_table
 def latex_confirm(compare):
     lines = [r"\begin{table}[H]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
         r"\caption{Independent V78 selection panel. Regret is in nats. Agreement is the percentage "
@@ -325,6 +335,7 @@ def latex_confirm(compare):
     return "\n".join(lines) + "\n"
 
 
+@proofread_table
 def latex(data, freeze):
     lines = [r"\begin{table}[H]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
         r"\caption{V78 regret by source state and objective. Each entry is the mean over all 17 nominal storage budgets (0.20--1.00, step 0.05), in nats. $K$ counts distinct configurations selected by the Frozen selection rule across these budgets.}",
