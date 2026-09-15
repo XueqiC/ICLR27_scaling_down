@@ -411,8 +411,8 @@ def caption_cell():
 
 def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
     lines = [f"% Generated from frozen JSON; see {sidecar}.",
-             r"\begin{table*}[t]", r"\centering\footnotesize",
-             r"\setlength{\tabcolsep}{3pt}", r"\renewcommand{\arraystretch}{1}",
+             r"\begin{table*}[tp]", r"\centering\footnotesize",
+             r"\setlength{\tabcolsep}{3pt}", r"\renewcommand{\arraystretch}{0.92}",
              r"\setlength{\abovecaptionskip}{4pt}",
              r"\begin{tabular}{" + "".join(
                  r">{\raggedright\arraybackslash}p{\dimexpr " + width + r"\textwidth-2\tabcolsep\relax}"
