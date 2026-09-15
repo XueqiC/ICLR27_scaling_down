@@ -8,3 +8,6 @@ __pycache__/
 /docs/inbox
 /code
 /generated
+
+# bootstrap output (materialised from data_mirror/ by bootstrap_results.py)
+/results/
