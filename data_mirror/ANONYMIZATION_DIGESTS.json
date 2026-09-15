@@ -1424,22 +1424,6 @@
       "published_sha256": "aacfae023d96ff1b9ea65762015d36bdb456483cb620eaf2e171f29228f9706c",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
-    "data_mirror/v92-input-comparison/summary.json@live": {
-      "frozen_sha256": "29383f1b0a12dc2bd7c28479e8dd0257b72333f56b029812d9c3a0bec1d79b39",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v92-input-comparison/summary.json",
-      "published_at": "data_mirror/v92-input-comparison/summary.json",
-      "published_sha256": "774cd0f5ffe7fd58dc4b83489f97b0526664b617dc07fb8befc45fd1cd233a18",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v92-input-comparison/summary.md@live": {
-      "frozen_sha256": "4b434fb562dddf7b8d118bdac8da253772f9e2d17cb4482a4cea26ef66d82893",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v92-input-comparison/summary.md",
-      "published_at": "data_mirror/v92-input-comparison/summary.md",
-      "published_sha256": "4f85739d9298e928b63668064b7c3c79cb8f7f562af5a9bf793107a55a3f9f6f",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
     "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000000.json@live": {
       "frozen_sha256": "c43130938f16127cf1619fec54746891d3c06be42f38770337a5d87b60ed86e3",
       "pairable": true,
@@ -2015,6 +1999,14 @@
       "published_at": "tests/test_v32.py",
       "published_sha256": "260a4168b80273e90fdc05c730cd10553fcf8e4cb433dc07c3dc4d9d951d87dc",
       "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "tests/test_v92_input_comparison.py@live": {
+      "frozen_sha256": "36953b6e336e28044a00a3f1c365793e62f2fc2ab88543c908de5832902f1f8a",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_v92_input_comparison.py",
+      "published_at": "tests/test_v92_input_comparison.py",
+      "published_sha256": "e478c39cd5d1ce40b5032ded18cf53f98342fbd0b1d546eb448f4d3f825ef3fb",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "tests/test_v99_scope_eval.py@live": {
       "frozen_sha256": "f202b53ccba945a8ea0dc71cb11f9791ce6f9ece3dbdd5fddc884d1d83dc3b95",

@@ -1,5 +1,3 @@
-> Historical V92 snapshot: this report accompanies the adjacent pre-gap-fill JSON (378 primary rows, 6 grouped states, 3/9 qualifying pairs). The [current completed-panel report](../../../results/v92-input-comparison/summary.md) has 459 primary rows, 9 states in every arm, and 4/9 qualifying pairs. The snapshot below is retained for reproduction and legacy-loader compatibility.
-
 V92 VERDICT — development only; lower MAE is better.
 Statistics budget vs K0 + dense anchor, SAME form; gain must exceed the FULL 95% interval width.
 Positive gains are MAE reductions in nats. OLS and ridge are separate fixed comparisons.
@@ -9,20 +7,23 @@ Positive gains are MAE reductions in nats. OLS and ridge are separate fixed comp
 | pruning | math | YES: ridge | 0.02606 [0.00167, 0.06089]; 0.05922 | 0.08356 [0.04882, 0.12227]; 0.07345 | 9 |
 | pruning | code | NO under fixed rule | -0.01182 [-0.07016, 0.04275]; 0.11290 | 0.05321 [0.01983, 0.08508]; 0.06525 | 9 |
 | pruning | qa | YES: ridge | 0.12777 [-0.13266, 0.38482]; 0.51748 | 0.10897 [0.06206, 0.15684]; 0.09478 | 9 |
-| grouped_quantization | math | YES: ridge | -0.00398 [-0.14263, 0.12737]; 0.27000 | 0.35172 [0.25743, 0.43691]; 0.17949 | 6 |
-| grouped_quantization | code | NO under fixed rule | -0.07811 [-0.37594, 0.10564]; 0.48159 | 0.31262 [0.07250, 0.51472]; 0.44223 | 6 |
-| grouped_quantization | qa | NO under fixed rule | 2.05567 [0.99378, 3.42335]; 2.42957 | 1.29369 [0.24962, 3.13225]; 2.88263 | 6 |
+| grouped_quantization | math | YES: ridge | 0.07527 [-0.08062, 0.20412]; 0.28474 | 0.13712 [0.08715, 0.18417]; 0.09702 | 9 |
+| grouped_quantization | code | NO under fixed rule | 0.00990 [-0.09775, 0.12628]; 0.22403 | 0.06829 [-0.00295, 0.13769]; 0.14064 | 9 |
+| grouped_quantization | qa | YES: ridge | 0.49851 [-0.00050, 1.03445]; 1.03495 | 0.31827 [0.22170, 0.42892]; 0.20722 | 9 |
 | per_channel_quantization | math | NO under fixed rule | -0.01889 [-0.11625, 0.05688]; 0.17313 | 0.08726 [0.03153, 0.14338]; 0.11185 | 9 |
 | per_channel_quantization | code | NO under fixed rule | -0.03841 [-0.14117, 0.05976]; 0.20093 | 0.08110 [-0.00865, 0.17812]; 0.18678 | 9 |
 | per_channel_quantization | qa | NO under fixed rule | -0.53423 [-1.42322, 0.20249]; 1.62571 | 0.17537 [0.01184, 0.34076]; 0.32892 | 9 |
 
 In 9/9 arm/capability pairs, both statistics-augmented linear candidates still have higher MAE than the K0 source-free median curve. Passing the incremental input rule is not a win over the delivered predictor.
 
-Most-fragile capability accuracy (ridge, dense anchor → dense statistics): pruning 58.3% → 41.7%; grouped_quantization 38.9% → 18.5%; per_channel_quantization 36.1% → 41.7%. These are descriptive ranking results, separate from the MAE reading rule.
+Most-fragile capability accuracy (ridge, dense anchor → dense statistics): pruning 58.3% → 41.7%; grouped_quantization 40.7% → 49.4%; per_channel_quantization 36.1% → 41.7%. These are descriptive ranking results, separate from the MAE reading rule.
+
+Statistics clear the fixed reading rule in 4 of 9 arm-and-capability pairs, all through ridge: pruning math, pruning QA, grouped-quantization math, and grouped-quantization QA.
 
 Development protocol and coverage
 
-Pruning and per-channel RTN: nine source states, three sizes × steps 16k/64k/143k. Grouped RTN: six available states; all three step64k files are absent. No missing responses or descriptors are imputed.
+Pruning, grouped RTN, and per-channel RTN each have 9 source states: 3 sizes × steps 16k/64k/143k. Primary/size evaluation contains 459 response rows (108 pruning, 243 grouped quantization, 108 per-channel quantization). All grouped step64k files are present; no source states are missing. No missing responses or descriptors are imputed.
+Coverage is read from the saved observations and provenance; the pinned summary.json retains its historical coverage note.
 Primary/size evaluation uses the common measured configuration grid: pruning densities .6/.7/.8/.9; grouped bits 3/4/5 × group sizes 64/128/256; per-channel bits 3/4/6/8. Budgets use exactly the same rows within each arm.
 Four additional pruning state-density cells (.55/.65 for 160M-step143k and 1.4B-step64k) are scored separately. Grouped g32/g512 confirmation additions in the V54 files are excluded. Only the listed development response files and V91 dense descriptors are read; no frozen prediction/test artifacts are accessed.
 The V91 dense measurements are reused, not rerun: 64 probe references per source/capability. L0 is the true dense anchor recorded with each response arm. Descriptor L differences, sample counts, revisions and file hashes are retained in the audit. Historical arm-local L0 and V91 L differ by at most 0.01319 nats; the cause is not remeasured, and descriptor L is never substituted.
@@ -41,9 +42,9 @@ Candidate and uncertainty definitions
 
 Zero predicts signed ΔL=0. Constant is the training capability mean. Median is the equal-source median at each training configuration. OLS is unregularized least squares. Ridge minimizes mean squared error + α‖β_nonintercept‖²; α ∈ [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0] is selected by inner grouped CV MAE. Size holdouts use inner size folds; all other evaluations use inner source folds. Every inner fold refits its scaler. The delivered new-source branch is the median for all three arms/capabilities (analysis/final_rule.py); it does not consume L0/B/V/W when predicting ΔL. Its absolute-loss presentation would add L0, which is unavailable to K0, so all candidates are evaluated directly on ΔL.
 
-MAE and paired improvements weight source states equally, then configurations equally within a state. 95% percentile intervals resample whole source states 20,000 times (seed 9201), pairing predictions on identical rows. Intervals condition on the fitted cross-validation predictions; they do not rerun fitting on bootstrap samples. Leave-one-size-out has three size folds but intervals still cluster on the 9 or 6 source states as requested; these small-cluster intervals are development evidence, not independent confirmation. No candidate is selected by outer-fold MAE. The rule is applied separately to the two fixed linear estimators; YES names the one that clears, without selecting a new predictor or adjusting for multiple comparisons.
+MAE and paired improvements weight source states equally, then configurations equally within a state. 95% percentile intervals resample whole source states 20,000 times (seed 9201), pairing predictions on identical rows. Intervals condition on the fitted cross-validation predictions; they do not rerun fitting on bootstrap samples. Leave-one-size-out has three size folds but intervals still cluster on the 9 source states in every arm; these small-cluster intervals are development evidence, not independent confirmation. No candidate is selected by outer-fold MAE. The rule is applied separately to the two fixed linear estimators; YES names the one that clears, without selecting a new predictor or adjusting for multiple comparisons.
 
-In grouped quantization, the statistics-budget OLS design is rank deficient in every primary fold: only five training source states support six source inputs plus an intercept, alongside configuration inputs. OLS uses the minimum-norm least-squares solution; ridge stabilizes the same design. Design ranks, coefficients, fold-local scalers and penalty scores are recorded in JSON. Audit row sets are interned as ordered indices into observations to avoid repeating the same training rows thousands of times.
+In grouped quantization, the saved statistics-budget OLS design is full rank in every primary fold (rank 9 of 9 columns), with 8 training source states. OLS uses least squares; ridge regularizes the same design. Design ranks, coefficients, fold-local scalers and penalty scores are recorded in JSON. Audit row sets are interned as ordered indices into observations to avoid repeating the same training rows thousands of times.
 
 MAE in nats: primary and size holdout
 
@@ -67,24 +68,24 @@ MAE in nats: primary and size holdout
 | leave_one_size_out | pruning | qa | K0 | 0.49968 | 0.78284 | 0.59788 | 1.95713 | 0.64547 | 0.59788 | 9 |
 | leave_one_size_out | pruning | qa | dense_anchor | 0.49968 | 0.78284 | 0.59788 | 2.41617 | 0.77809 | 0.59788 | 9 |
 | leave_one_size_out | pruning | qa | dense_statistics | 0.49968 | 0.78284 | 0.59788 | 0.74022 | 0.74223 | 0.59788 | 9 |
-| leave_one_source_state_out | grouped_quantization | math | K0 | 1.32241 | 2.02767 | 1.21618 | 2.89085 | 1.92979 | 1.21618 | 6 |
-| leave_one_source_state_out | grouped_quantization | math | dense_anchor | 1.32241 | 2.02767 | 1.21618 | 1.86804 | 1.85839 | 1.21618 | 6 |
-| leave_one_source_state_out | grouped_quantization | math | dense_statistics | 1.32241 | 2.02767 | 1.21618 | 1.87202 | 1.50667 | 1.21618 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | K0 | 1.42412 | 2.12489 | 1.29599 | 2.89539 | 2.01726 | 1.29599 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | dense_anchor | 1.42412 | 2.12489 | 1.29599 | 1.98179 | 1.90329 | 1.29599 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | dense_statistics | 1.42412 | 2.12489 | 1.29599 | 2.05989 | 1.59067 | 1.29599 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | K0 | 1.31791 | 2.23769 | 1.31976 | 3.25938 | 2.14307 | 1.31976 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | dense_anchor | 1.31791 | 2.23769 | 1.31976 | 4.06865 | 2.97719 | 1.31976 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | dense_statistics | 1.31791 | 2.23769 | 1.31976 | 2.01298 | 1.68350 | 1.31976 | 6 |
-| leave_one_size_out | grouped_quantization | math | K0 | 1.32241 | 2.01111 | 1.21842 | 5.28681 | 2.91696 | 1.21842 | 6 |
-| leave_one_size_out | grouped_quantization | math | dense_anchor | 1.32241 | 2.01111 | 1.21842 | 3.44299 | 2.20326 | 1.21842 | 6 |
-| leave_one_size_out | grouped_quantization | math | dense_statistics | 1.32241 | 2.01111 | 1.21842 | 2.43377 | 1.50892 | 1.21842 | 6 |
-| leave_one_size_out | grouped_quantization | code | K0 | 1.42412 | 2.11654 | 1.28642 | 5.30348 | 3.00528 | 1.28642 | 6 |
-| leave_one_size_out | grouped_quantization | code | dense_anchor | 1.42412 | 2.11654 | 1.28642 | 4.49046 | 2.09396 | 1.28642 | 6 |
-| leave_one_size_out | grouped_quantization | code | dense_statistics | 1.42412 | 2.11654 | 1.28642 | 1.81170 | 2.03833 | 1.28642 | 6 |
-| leave_one_size_out | grouped_quantization | qa | K0 | 1.31791 | 2.23798 | 1.42510 | 5.88932 | 3.25684 | 1.42510 | 6 |
-| leave_one_size_out | grouped_quantization | qa | dense_anchor | 1.31791 | 2.23798 | 1.42510 | 7.21084 | 2.23336 | 1.42510 | 6 |
-| leave_one_size_out | grouped_quantization | qa | dense_statistics | 1.31791 | 2.23798 | 1.42510 | 2.39065 | 2.14154 | 1.42510 | 6 |
+| leave_one_source_state_out | grouped_quantization | math | K0 | 0.99040 | 1.42215 | 0.83278 | 1.86041 | 1.27794 | 0.83278 | 9 |
+| leave_one_source_state_out | grouped_quantization | math | dense_anchor | 0.99040 | 1.42215 | 0.83278 | 1.33041 | 1.18150 | 0.83278 | 9 |
+| leave_one_source_state_out | grouped_quantization | math | dense_statistics | 0.99040 | 1.42215 | 0.83278 | 1.25514 | 1.04438 | 0.83278 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | K0 | 1.09952 | 1.53431 | 0.91010 | 1.86331 | 1.34500 | 0.91010 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | dense_anchor | 1.09952 | 1.53431 | 0.91010 | 1.37473 | 1.20859 | 0.91010 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | dense_statistics | 1.09952 | 1.53431 | 0.91010 | 1.36483 | 1.14031 | 0.91010 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | K0 | 0.96321 | 1.58730 | 0.97957 | 2.10696 | 1.52348 | 0.97957 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | dense_anchor | 0.96321 | 1.58730 | 0.97957 | 2.39513 | 1.50312 | 0.97957 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | dense_statistics | 0.96321 | 1.58730 | 0.97957 | 1.89662 | 1.18485 | 0.97957 | 9 |
+| leave_one_size_out | grouped_quantization | math | K0 | 0.99040 | 1.46904 | 0.82773 | 3.69100 | 2.07329 | 0.82773 | 9 |
+| leave_one_size_out | grouped_quantization | math | dense_anchor | 0.99040 | 1.46904 | 0.82773 | 2.97626 | 1.40224 | 0.82773 | 9 |
+| leave_one_size_out | grouped_quantization | math | dense_statistics | 0.99040 | 1.46904 | 0.82773 | 1.71333 | 0.97925 | 0.82773 | 9 |
+| leave_one_size_out | grouped_quantization | code | K0 | 1.09952 | 1.59451 | 0.91815 | 3.79694 | 2.15841 | 0.91815 | 9 |
+| leave_one_size_out | grouped_quantization | code | dense_anchor | 1.09952 | 1.59451 | 0.91815 | 3.26253 | 1.35099 | 0.91815 | 9 |
+| leave_one_size_out | grouped_quantization | code | dense_statistics | 1.09952 | 1.59451 | 0.91815 | 1.47167 | 1.29525 | 0.91815 | 9 |
+| leave_one_size_out | grouped_quantization | qa | K0 | 0.96321 | 1.66740 | 1.06468 | 4.28578 | 1.35119 | 1.06468 | 9 |
+| leave_one_size_out | grouped_quantization | qa | dense_anchor | 0.96321 | 1.66740 | 1.06468 | 5.60415 | 1.65551 | 1.06468 | 9 |
+| leave_one_size_out | grouped_quantization | qa | dense_statistics | 0.96321 | 1.66740 | 1.06468 | 2.60624 | 1.63267 | 1.06468 | 9 |
 | leave_one_source_state_out | per_channel_quantization | math | K0 | 1.58035 | 2.31155 | 1.19239 | 2.14090 | 1.87530 | 1.19239 | 9 |
 | leave_one_source_state_out | per_channel_quantization | math | dense_anchor | 1.58035 | 2.31155 | 1.19239 | 1.97760 | 1.83096 | 1.19239 | 9 |
 | leave_one_source_state_out | per_channel_quantization | math | dense_statistics | 1.58035 | 2.31155 | 1.19239 | 1.99650 | 1.74369 | 1.19239 | 9 |
@@ -134,30 +135,30 @@ Zero/constant/median/delivered ignore the added inputs, so both adjacent-budget 
 | leave_one_size_out | pruning | qa | K0 → dense_anchor | ridge | -0.13262 | [-0.27007, -0.00023] | 0.26984 | 9 |
 | leave_one_size_out | pruning | qa | dense_anchor → dense_statistics | ols | 1.67594 | [0.50907, 3.01895] | 2.50988 | 9 |
 | leave_one_size_out | pruning | qa | dense_anchor → dense_statistics | ridge | 0.03586 | [0.00093, 0.07641] | 0.07549 | 9 |
-| leave_one_source_state_out | grouped_quantization | math | K0 → dense_anchor | ols | 1.02281 | [0.24916, 1.84088] | 1.59172 | 6 |
-| leave_one_source_state_out | grouped_quantization | math | K0 → dense_anchor | ridge | 0.07139 | [-0.13590, 0.27947] | 0.41537 | 6 |
-| leave_one_source_state_out | grouped_quantization | math | dense_anchor → dense_statistics | ols | -0.00398 | [-0.14263, 0.12737] | 0.27000 | 6 |
-| leave_one_source_state_out | grouped_quantization | math | dense_anchor → dense_statistics | ridge | 0.35172 | [0.25743, 0.43691] | 0.17949 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | K0 → dense_anchor | ols | 0.91360 | [0.17577, 1.70119] | 1.52542 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | K0 → dense_anchor | ridge | 0.11397 | [-0.11961, 0.35097] | 0.47057 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | dense_anchor → dense_statistics | ols | -0.07811 | [-0.37594, 0.10564] | 0.48159 | 6 |
-| leave_one_source_state_out | grouped_quantization | code | dense_anchor → dense_statistics | ridge | 0.31262 | [0.07250, 0.51472] | 0.44223 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | K0 → dense_anchor | ols | -0.80927 | [-2.65123, 0.33489] | 2.98613 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | K0 → dense_anchor | ridge | -0.83412 | [-2.66602, 0.19607] | 2.86209 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | dense_anchor → dense_statistics | ols | 2.05567 | [0.99378, 3.42335] | 2.42957 | 6 |
-| leave_one_source_state_out | grouped_quantization | qa | dense_anchor → dense_statistics | ridge | 1.29369 | [0.24962, 3.13225] | 2.88263 | 6 |
-| leave_one_size_out | grouped_quantization | math | K0 → dense_anchor | ols | 1.84382 | [0.00661, 4.05054] | 4.04393 | 6 |
-| leave_one_size_out | grouped_quantization | math | K0 → dense_anchor | ridge | 0.71370 | [-0.01768, 1.56762] | 1.58530 | 6 |
-| leave_one_size_out | grouped_quantization | math | dense_anchor → dense_statistics | ols | 1.00922 | [0.31375, 1.72585] | 1.41210 | 6 |
-| leave_one_size_out | grouped_quantization | math | dense_anchor → dense_statistics | ridge | 0.69434 | [-0.10950, 1.56963] | 1.67914 | 6 |
-| leave_one_size_out | grouped_quantization | code | K0 → dense_anchor | ols | 0.81302 | [-1.04801, 2.90593] | 3.95393 | 6 |
-| leave_one_size_out | grouped_quantization | code | K0 → dense_anchor | ridge | 0.91132 | [0.08135, 1.80137] | 1.72002 | 6 |
-| leave_one_size_out | grouped_quantization | code | dense_anchor → dense_statistics | ols | 2.67876 | [1.03668, 4.41561] | 3.37892 | 6 |
-| leave_one_size_out | grouped_quantization | code | dense_anchor → dense_statistics | ridge | 0.05563 | [-0.24645, 0.37917] | 0.62562 | 6 |
-| leave_one_size_out | grouped_quantization | qa | K0 → dense_anchor | ols | -1.32152 | [-3.25466, 0.61162] | 3.86629 | 6 |
-| leave_one_size_out | grouped_quantization | qa | K0 → dense_anchor | ridge | 1.02348 | [-0.02653, 2.34463] | 2.37116 | 6 |
-| leave_one_size_out | grouped_quantization | qa | dense_anchor → dense_statistics | ols | 4.82019 | [1.06812, 9.12334] | 8.05522 | 6 |
-| leave_one_size_out | grouped_quantization | qa | dense_anchor → dense_statistics | ridge | 0.09182 | [-0.00860, 0.27901] | 0.28762 | 6 |
+| leave_one_source_state_out | grouped_quantization | math | K0 → dense_anchor | ols | 0.53000 | [0.12337, 1.01002] | 0.88665 | 9 |
+| leave_one_source_state_out | grouped_quantization | math | K0 → dense_anchor | ridge | 0.09644 | [-0.09711, 0.31135] | 0.40847 | 9 |
+| leave_one_source_state_out | grouped_quantization | math | dense_anchor → dense_statistics | ols | 0.07527 | [-0.08062, 0.20412] | 0.28474 | 9 |
+| leave_one_source_state_out | grouped_quantization | math | dense_anchor → dense_statistics | ridge | 0.13712 | [0.08715, 0.18417] | 0.09702 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | K0 → dense_anchor | ols | 0.48858 | [0.10109, 0.94617] | 0.84508 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | K0 → dense_anchor | ridge | 0.13641 | [-0.08317, 0.34426] | 0.42742 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | dense_anchor → dense_statistics | ols | 0.00990 | [-0.09775, 0.12628] | 0.22403 | 9 |
+| leave_one_source_state_out | grouped_quantization | code | dense_anchor → dense_statistics | ridge | 0.06829 | [-0.00295, 0.13769] | 0.14064 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | K0 → dense_anchor | ols | -0.28817 | [-0.89980, 0.26541] | 1.16521 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | K0 → dense_anchor | ridge | 0.02036 | [-0.11452, 0.15609] | 0.27061 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | dense_anchor → dense_statistics | ols | 0.49851 | [-0.00050, 1.03445] | 1.03495 | 9 |
+| leave_one_source_state_out | grouped_quantization | qa | dense_anchor → dense_statistics | ridge | 0.31827 | [0.22170, 0.42892] | 0.20722 | 9 |
+| leave_one_size_out | grouped_quantization | math | K0 → dense_anchor | ols | 0.71474 | [0.04646, 1.49356] | 1.44710 | 9 |
+| leave_one_size_out | grouped_quantization | math | K0 → dense_anchor | ridge | 0.67106 | [0.24164, 1.16929] | 0.92764 | 9 |
+| leave_one_size_out | grouped_quantization | math | dense_anchor → dense_statistics | ols | 1.26293 | [0.15387, 2.52301] | 2.36914 | 9 |
+| leave_one_size_out | grouped_quantization | math | dense_anchor → dense_statistics | ridge | 0.42299 | [0.01490, 0.89238] | 0.87748 | 9 |
+| leave_one_size_out | grouped_quantization | code | K0 → dense_anchor | ols | 0.53440 | [-0.13953, 1.30908] | 1.44861 | 9 |
+| leave_one_size_out | grouped_quantization | code | K0 → dense_anchor | ridge | 0.80742 | [0.27827, 1.38370] | 1.10543 | 9 |
+| leave_one_size_out | grouped_quantization | code | dense_anchor → dense_statistics | ols | 1.79086 | [0.24893, 3.43127] | 3.18235 | 9 |
+| leave_one_size_out | grouped_quantization | code | dense_anchor → dense_statistics | ridge | 0.05575 | [-0.33537, 0.45459] | 0.78997 | 9 |
+| leave_one_size_out | grouped_quantization | qa | K0 → dense_anchor | ols | -1.31837 | [-2.48480, -0.06096] | 2.42383 | 9 |
+| leave_one_size_out | grouped_quantization | qa | K0 → dense_anchor | ridge | -0.30431 | [-0.61008, -0.03807] | 0.57202 | 9 |
+| leave_one_size_out | grouped_quantization | qa | dense_anchor → dense_statistics | ols | 2.99791 | [0.92718, 5.27997] | 4.35279 | 9 |
+| leave_one_size_out | grouped_quantization | qa | dense_anchor → dense_statistics | ridge | 0.02284 | [-0.02228, 0.06322] | 0.08549 | 9 |
 | leave_one_source_state_out | per_channel_quantization | math | K0 → dense_anchor | ols | 0.16330 | [-0.02961, 0.39912] | 0.42873 | 9 |
 | leave_one_source_state_out | per_channel_quantization | math | K0 → dense_anchor | ridge | 0.04434 | [-0.06563, 0.15645] | 0.22208 | 9 |
 | leave_one_source_state_out | per_channel_quantization | math | dense_anchor → dense_statistics | ols | -0.01889 | [-0.11625, 0.05688] | 0.17313 | 9 |
@@ -198,15 +199,15 @@ The source-free median already uses a flexible configuration curve; a source-dep
 | pruning | qa | K0 | 0.17203 [0.03887, 0.29581] | -0.33844 [-0.60482, -0.06583] | -0.16938 [-0.30856, -0.03092] | 0.16906 [-0.01383, 0.38083] |
 | pruning | qa | dense_anchor | 0.17203 [0.03887, 0.29581] | -0.47769 [-0.82420, -0.15039] | -0.15270 [-0.28130, -0.01930] | 0.32499 [0.07709, 0.62453] |
 | pruning | qa | dense_statistics | 0.17203 [0.03887, 0.29581] | -0.34991 [-0.59173, -0.11015] | -0.04372 [-0.14852, 0.07014] | 0.30619 [0.10029, 0.52974] |
-| grouped_quantization | math | K0 | 0.81149 [0.39014, 1.14148] | -1.67467 [-2.57609, -0.65499] | -0.71360 [-1.06212, -0.26443] | 0.96106 [0.19097, 1.78965] |
-| grouped_quantization | math | dense_anchor | 0.81149 [0.39014, 1.14148] | -0.65186 [-1.17966, -0.01405] | -0.64221 [-1.05371, -0.21976] | 0.00965 [-0.28443, 0.31134] |
-| grouped_quantization | math | dense_statistics | 0.81149 [0.39014, 1.14148] | -0.65584 [-1.19971, 0.04309] | -0.29048 [-0.72006, 0.13400] | 0.36535 [-0.00348, 0.69067] |
-| grouped_quantization | code | K0 | 0.82890 [0.42415, 1.13782] | -1.59940 [-2.49333, -0.58764] | -0.72127 [-1.06881, -0.25394] | 0.87812 [0.14805, 1.65714] |
-| grouped_quantization | code | dense_anchor | 0.82890 [0.42415, 1.13782] | -0.68580 [-1.22478, -0.03638] | -0.60730 [-1.04614, -0.19476] | 0.07850 [-0.22095, 0.37213] |
-| grouped_quantization | code | dense_statistics | 0.82890 [0.42415, 1.13782] | -0.76390 [-1.15376, -0.35276] | -0.29468 [-0.57457, -0.03502] | 0.46923 [0.27595, 0.65869] |
-| grouped_quantization | qa | K0 | 0.91793 [0.43478, 1.31961] | -1.93962 [-3.03874, -0.76441] | -0.82331 [-1.24752, -0.29612] | 1.11632 [0.23066, 2.09925] |
-| grouped_quantization | qa | dense_anchor | 0.91793 [0.43478, 1.31961] | -2.74889 [-4.61998, -1.09668] | -1.65743 [-3.71116, -0.36037] | 1.09146 [0.24424, 2.06361] |
-| grouped_quantization | qa | dense_statistics | 0.91793 [0.43478, 1.31961] | -0.69322 [-1.36585, 0.17663] | -0.36374 [-0.72529, 0.09151] | 0.32948 [-0.08613, 0.66885] |
+| grouped_quantization | math | K0 | 0.58937 [0.38720, 0.73904] | -1.02763 [-1.49952, -0.51025] | -0.44516 [-0.68810, -0.19551] | 0.58247 [0.22033, 0.99355] |
+| grouped_quantization | math | dense_anchor | 0.58937 [0.38720, 0.73904] | -0.49763 [-0.79058, -0.11303] | -0.34872 [-0.56981, -0.12683] | 0.14891 [-0.10410, 0.37974] |
+| grouped_quantization | math | dense_statistics | 0.58937 [0.38720, 0.73904] | -0.42236 [-0.64711, -0.16085] | -0.21160 [-0.42461, 0.02540] | 0.21076 [0.01205, 0.39096] |
+| grouped_quantization | code | K0 | 0.62421 [0.42566, 0.76122] | -0.95321 [-1.42006, -0.43882] | -0.43490 [-0.68157, -0.16695] | 0.51831 [0.18045, 0.89987] |
+| grouped_quantization | code | dense_anchor | 0.62421 [0.42566, 0.76122] | -0.46463 [-0.79425, -0.05082] | -0.29849 [-0.53603, -0.06397] | 0.16614 [-0.10269, 0.40957] |
+| grouped_quantization | code | dense_statistics | 0.62421 [0.42566, 0.76122] | -0.45473 [-0.79471, -0.04860] | -0.23020 [-0.43094, -0.03398] | 0.22452 [-0.04064, 0.45520] |
+| grouped_quantization | qa | K0 | 0.60773 [0.36527, 0.81570] | -1.12739 [-1.68646, -0.53303] | -0.54391 [-0.84792, -0.24156] | 0.58348 [0.15201, 1.09344] |
+| grouped_quantization | qa | dense_anchor | 0.60773 [0.36527, 0.81570] | -1.41556 [-2.15654, -0.68677] | -0.52355 [-0.76880, -0.25556] | 0.89201 [0.30234, 1.55942] |
+| grouped_quantization | qa | dense_statistics | 0.60773 [0.36527, 0.81570] | -0.91705 [-1.54773, -0.28454] | -0.20528 [-0.40062, 0.05194] | 0.71178 [0.22377, 1.26237] |
 | per_channel_quantization | math | K0 | 1.11916 [0.85255, 1.38345] | -0.94851 [-1.27375, -0.57668] | -0.68291 [-1.05193, -0.32005] | 0.26560 [0.01642, 0.49458] |
 | per_channel_quantization | math | dense_anchor | 1.11916 [0.85255, 1.38345] | -0.78522 [-0.96291, -0.54403] | -0.63857 [-0.94586, -0.33258] | 0.14664 [-0.12832, 0.42205] |
 | per_channel_quantization | math | dense_statistics | 1.11916 [0.85255, 1.38345] | -0.80411 [-1.05628, -0.51229] | -0.55131 [-0.84361, -0.25681] | 0.25280 [-0.04153, 0.54194] |
@@ -243,26 +244,26 @@ Fragility is the largest signed ΔL among math/code/QA, not the largest absolute
 | leave_one_size_out | pruning | dense_anchor/ridge | 0.36111 | 0.10674 | 9 |
 | leave_one_size_out | pruning | dense_statistics/ols | 0.44444 | 0.08774 | 9 |
 | leave_one_size_out | pruning | dense_statistics/ridge | 0.52778 | 0.10121 | 9 |
-| leave_one_source_state_out | grouped_quantization | K0/zero | 0.33333 | 0.15494 | 6 |
-| leave_one_source_state_out | grouped_quantization | K0/constant | 0.70370 | 0.07569 | 6 |
-| leave_one_source_state_out | grouped_quantization | K0/median_curve | 0.61111 | 0.09375 | 6 |
-| leave_one_source_state_out | grouped_quantization | K0/ols | 0.50000 | 0.12646 | 6 |
-| leave_one_source_state_out | grouped_quantization | K0/ridge | 0.64815 | 0.07628 | 6 |
-| leave_one_source_state_out | grouped_quantization | K0/delivered | 0.61111 | 0.09375 | 6 |
-| leave_one_source_state_out | grouped_quantization | dense_anchor/ols | 0.25926 | 0.25606 | 6 |
-| leave_one_source_state_out | grouped_quantization | dense_anchor/ridge | 0.38889 | 0.21027 | 6 |
-| leave_one_source_state_out | grouped_quantization | dense_statistics/ols | 0.44444 | 0.12840 | 6 |
-| leave_one_source_state_out | grouped_quantization | dense_statistics/ridge | 0.18519 | 0.20167 | 6 |
-| leave_one_size_out | grouped_quantization | K0/zero | 0.33333 | 0.15494 | 6 |
-| leave_one_size_out | grouped_quantization | K0/constant | 0.70370 | 0.07569 | 6 |
-| leave_one_size_out | grouped_quantization | K0/median_curve | 0.66667 | 0.07861 | 6 |
-| leave_one_size_out | grouped_quantization | K0/ols | 0.51852 | 0.10155 | 6 |
-| leave_one_size_out | grouped_quantization | K0/ridge | 0.62963 | 0.07849 | 6 |
-| leave_one_size_out | grouped_quantization | K0/delivered | 0.66667 | 0.07861 | 6 |
-| leave_one_size_out | grouped_quantization | dense_anchor/ols | 0.50000 | 0.14469 | 6 |
-| leave_one_size_out | grouped_quantization | dense_anchor/ridge | 0.20370 | 0.22196 | 6 |
-| leave_one_size_out | grouped_quantization | dense_statistics/ols | 0.27778 | 0.19503 | 6 |
-| leave_one_size_out | grouped_quantization | dense_statistics/ridge | 0.57407 | 0.04887 | 6 |
+| leave_one_source_state_out | grouped_quantization | K0/zero | 0.33333 | 0.15427 | 9 |
+| leave_one_source_state_out | grouped_quantization | K0/constant | 0.70370 | 0.05135 | 9 |
+| leave_one_source_state_out | grouped_quantization | K0/median_curve | 0.64198 | 0.05236 | 9 |
+| leave_one_source_state_out | grouped_quantization | K0/ols | 0.60494 | 0.05899 | 9 |
+| leave_one_source_state_out | grouped_quantization | K0/ridge | 0.55556 | 0.05951 | 9 |
+| leave_one_source_state_out | grouped_quantization | K0/delivered | 0.64198 | 0.05236 | 9 |
+| leave_one_source_state_out | grouped_quantization | dense_anchor/ols | 0.33333 | 0.20985 | 9 |
+| leave_one_source_state_out | grouped_quantization | dense_anchor/ridge | 0.40741 | 0.12267 | 9 |
+| leave_one_source_state_out | grouped_quantization | dense_statistics/ols | 0.30864 | 0.20733 | 9 |
+| leave_one_source_state_out | grouped_quantization | dense_statistics/ridge | 0.49383 | 0.14288 | 9 |
+| leave_one_size_out | grouped_quantization | K0/zero | 0.33333 | 0.15427 | 9 |
+| leave_one_size_out | grouped_quantization | K0/constant | 0.70370 | 0.05135 | 9 |
+| leave_one_size_out | grouped_quantization | K0/median_curve | 0.64198 | 0.05301 | 9 |
+| leave_one_size_out | grouped_quantization | K0/ols | 0.58025 | 0.05977 | 9 |
+| leave_one_size_out | grouped_quantization | K0/ridge | 0.46914 | 0.15862 | 9 |
+| leave_one_size_out | grouped_quantization | K0/delivered | 0.64198 | 0.05301 | 9 |
+| leave_one_size_out | grouped_quantization | dense_anchor/ols | 0.44444 | 0.14109 | 9 |
+| leave_one_size_out | grouped_quantization | dense_anchor/ridge | 0.34568 | 0.18629 | 9 |
+| leave_one_size_out | grouped_quantization | dense_statistics/ols | 0.06173 | 0.29445 | 9 |
+| leave_one_size_out | grouped_quantization | dense_statistics/ridge | 0.29630 | 0.21673 | 9 |
 | leave_one_source_state_out | per_channel_quantization | K0/zero | 0.33333 | 0.21680 | 9 |
 | leave_one_source_state_out | per_channel_quantization | K0/constant | 0.44444 | 0.01364 | 9 |
 | leave_one_source_state_out | per_channel_quantization | K0/median_curve | 0.41667 | 0.01855 | 9 |
@@ -380,60 +381,60 @@ Each common density/bit-width is held out globally in turn. The same-sources dia
 | extra_pruning_strength_new_source | pruning | qa | 0.65 | ols | 2.17761 | 2.44666 | 2.32708 | 2 |
 | extra_pruning_strength_new_source | pruning | qa | 0.55 | ridge | 3.68686 | 3.70015 | 3.77519 | 2 |
 | extra_pruning_strength_new_source | pruning | qa | 0.65 | ridge | 2.53390 | 2.54918 | 2.16331 | 2 |
-| unseen_strength_same_sources | grouped_quantization | math | 3.0 | median_curve | 3.26224 | 3.26224 | 3.26224 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 4.0 | median_curve | 0.54620 | 0.54620 | 0.54620 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 5.0 | median_curve | 0.70688 | 0.70688 | 0.70688 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 3.0 | ols | 2.75958 | 2.75071 | 2.76561 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 4.0 | ols | 1.81639 | 1.48215 | 1.31988 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 5.0 | ols | 2.63722 | 3.91725 | 3.96747 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 3.0 | ridge | 3.11302 | 2.75086 | 2.77013 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 4.0 | ridge | 1.36341 | 1.30706 | 1.30643 | 6 |
-| unseen_strength_same_sources | grouped_quantization | math | 5.0 | ridge | 1.44203 | 3.91656 | 1.80268 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 3.0 | median_curve | 3.42856 | 3.42856 | 3.42856 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 4.0 | median_curve | 0.71942 | 0.71942 | 0.71942 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 5.0 | median_curve | 0.94732 | 0.94732 | 0.94732 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 3.0 | ols | 2.79500 | 2.78949 | 2.82585 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 4.0 | ols | 1.80953 | 1.52964 | 1.34771 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 5.0 | ols | 2.71246 | 3.92491 | 4.00674 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 3.0 | ridge | 3.26001 | 3.00128 | 3.01403 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 4.0 | ridge | 1.32253 | 1.32253 | 1.32253 | 6 |
-| unseen_strength_same_sources | grouped_quantization | code | 5.0 | ridge | 0.90752 | 1.25658 | 1.72730 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 3.0 | median_curve | 3.30607 | 3.30607 | 3.30607 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 4.0 | median_curve | 0.54301 | 0.54301 | 0.54301 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 5.0 | median_curve | 0.36845 | 0.36845 | 0.36845 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 3.0 | ols | 3.03955 | 3.07453 | 2.99529 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 4.0 | ols | 1.84339 | 1.98100 | 1.24584 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 5.0 | ols | 2.63635 | 3.05023 | 4.08583 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 3.0 | ridge | 3.23918 | 3.23553 | 3.03654 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 4.0 | ridge | 1.43085 | 1.35175 | 1.22527 | 6 |
-| unseen_strength_same_sources | grouped_quantization | qa | 5.0 | ridge | 1.42467 | 1.42467 | 1.95725 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 3.0 | median_curve | 3.26224 | 3.26224 | 3.26224 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 4.0 | median_curve | 0.57782 | 0.57782 | 0.57782 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 5.0 | median_curve | 0.70688 | 0.70688 | 0.70688 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 3.0 | ols | 2.98998 | 3.01388 | 2.99177 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 4.0 | ols | 2.92194 | 0.88562 | 1.21777 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 5.0 | ols | 3.31473 | 3.77992 | 3.81647 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 3.0 | ridge | 3.11528 | 3.06631 | 3.04725 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 4.0 | ridge | 1.79113 | 1.75265 | 0.84420 | 6 |
-| unseen_strength_new_source | grouped_quantization | math | 5.0 | ridge | 1.45289 | 2.04061 | 1.92515 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 3.0 | median_curve | 3.42856 | 3.42856 | 3.42856 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 4.0 | median_curve | 0.75703 | 0.75703 | 0.75703 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 5.0 | median_curve | 0.94732 | 0.94732 | 0.94732 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 3.0 | ols | 3.03876 | 3.11375 | 3.20347 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 4.0 | ols | 2.96865 | 1.23608 | 1.28706 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 5.0 | ols | 3.40460 | 3.89317 | 3.81550 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 3.0 | ridge | 3.26653 | 3.18422 | 3.20965 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 4.0 | ridge | 1.92096 | 1.58638 | 1.20624 | 6 |
-| unseen_strength_new_source | grouped_quantization | code | 5.0 | ridge | 1.28586 | 1.30218 | 1.72387 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 3.0 | median_curve | 3.32109 | 3.32109 | 3.32109 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 4.0 | median_curve | 0.57121 | 0.57121 | 0.57121 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 5.0 | median_curve | 0.36887 | 0.36887 | 0.36887 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 3.0 | ols | 3.31729 | 3.56175 | 3.37280 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 4.0 | ols | 3.28560 | 4.40644 | 1.13750 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 5.0 | ols | 3.38300 | 4.36728 | 3.93658 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 3.0 | ridge | 3.29626 | 3.62907 | 3.27342 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 4.0 | ridge | 1.91211 | 2.92370 | 1.24539 | 6 |
-| unseen_strength_new_source | grouped_quantization | qa | 5.0 | ridge | 1.48795 | 1.88060 | 1.48085 | 6 |
+| unseen_strength_same_sources | grouped_quantization | math | 3.0 | median_curve | 2.43692 | 2.43692 | 2.43692 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 4.0 | median_curve | 0.42462 | 0.42462 | 0.42462 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 5.0 | median_curve | 0.57102 | 0.57102 | 0.57102 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 3.0 | ols | 2.00988 | 2.02330 | 2.03020 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 4.0 | ols | 1.34966 | 1.21342 | 0.99726 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 5.0 | ols | 2.17124 | 3.04181 | 3.12884 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 3.0 | ridge | 2.18405 | 2.18405 | 2.03029 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 4.0 | ridge | 1.00936 | 0.99862 | 0.99612 | 9 |
+| unseen_strength_same_sources | grouped_quantization | math | 5.0 | ridge | 0.68571 | 2.98660 | 1.30680 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 3.0 | median_curve | 2.68322 | 2.68322 | 2.68322 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 4.0 | median_curve | 0.59838 | 0.59838 | 0.59838 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 5.0 | median_curve | 0.86590 | 0.86590 | 0.86590 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 3.0 | ols | 2.14962 | 2.17586 | 2.19748 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 4.0 | ols | 1.40897 | 1.24922 | 1.07603 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 5.0 | ols | 2.29702 | 3.14177 | 3.24048 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 3.0 | ridge | 2.55992 | 2.36652 | 2.19458 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 4.0 | ridge | 1.09542 | 1.06562 | 1.06562 | 9 |
+| unseen_strength_same_sources | grouped_quantization | code | 5.0 | ridge | 0.71859 | 0.99738 | 3.22983 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 3.0 | median_curve | 2.44587 | 2.44587 | 2.44587 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 4.0 | median_curve | 0.41475 | 0.41475 | 0.41475 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 5.0 | median_curve | 0.30849 | 0.30849 | 0.30849 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 3.0 | ols | 2.24230 | 2.31292 | 2.24761 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 4.0 | ols | 1.43488 | 1.62057 | 1.12802 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 5.0 | ols | 2.19086 | 2.34017 | 3.15653 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 3.0 | ridge | 2.39325 | 2.39344 | 2.24736 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 4.0 | ridge | 0.99506 | 1.12635 | 1.02831 | 9 |
+| unseen_strength_same_sources | grouped_quantization | qa | 5.0 | ridge | 0.74032 | 1.00116 | 1.40731 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 3.0 | median_curve | 2.43131 | 2.43131 | 2.43131 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 4.0 | median_curve | 0.46593 | 0.46593 | 0.46593 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 5.0 | median_curve | 0.63959 | 0.63959 | 0.63959 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 3.0 | ols | 2.06357 | 2.15586 | 2.07510 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 4.0 | ols | 1.79800 | 0.85920 | 0.76455 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 5.0 | ols | 2.48352 | 2.69787 | 3.35600 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 3.0 | ridge | 2.29195 | 2.17304 | 2.22459 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 4.0 | ridge | 1.15163 | 1.01597 | 0.70123 | 9 |
+| unseen_strength_new_source | grouped_quantization | math | 5.0 | ridge | 0.83661 | 1.71283 | 0.96927 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 3.0 | median_curve | 2.66551 | 2.66551 | 2.66551 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 4.0 | median_curve | 0.63208 | 0.63208 | 0.63208 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 5.0 | median_curve | 0.89741 | 0.89741 | 0.89741 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 3.0 | ols | 2.20880 | 2.32476 | 2.42160 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 4.0 | ols | 1.87687 | 0.94805 | 1.00548 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 5.0 | ols | 2.63036 | 2.81445 | 3.32597 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 3.0 | ridge | 2.51315 | 2.42565 | 2.47389 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 4.0 | ridge | 1.39050 | 1.07871 | 1.08384 | 9 |
+| unseen_strength_new_source | grouped_quantization | code | 5.0 | ridge | 0.89645 | 0.82369 | 2.71650 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 3.0 | median_curve | 2.45164 | 2.45164 | 2.45164 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 4.0 | median_curve | 0.44468 | 0.44468 | 0.44468 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 5.0 | median_curve | 0.31780 | 0.31780 | 0.31780 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 3.0 | ols | 2.35996 | 2.58492 | 2.58844 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 4.0 | ols | 2.04786 | 2.51186 | 1.67844 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 5.0 | ols | 2.48108 | 2.58846 | 2.52296 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 3.0 | ridge | 2.40895 | 2.42951 | 2.46346 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 4.0 | ridge | 1.41416 | 1.35609 | 0.84160 | 9 |
+| unseen_strength_new_source | grouped_quantization | qa | 5.0 | ridge | 1.03287 | 1.02192 | 1.56128 | 9 |
 | unseen_strength_same_sources | per_channel_quantization | math | 3.0 | median_curve | 5.60792 | 5.60792 | 5.60792 | 9 |
 | unseen_strength_same_sources | per_channel_quantization | math | 4.0 | median_curve | 2.14503 | 2.14503 | 2.14503 | 9 |
 | unseen_strength_same_sources | per_channel_quantization | math | 6.0 | median_curve | 0.06545 | 0.06545 | 0.06545 | 9 |
@@ -515,8 +516,7 @@ Reading-rule qualifications
 - pruning/qa: ols has a positive same-source strength-transfer input gain but does not clear the across-source reading rule; it does not count.
 - grouped_quantization/math: ols has a positive same-source strength-transfer input gain but does not clear the across-source reading rule; it does not count.
 - grouped_quantization/code: ols has a positive same-source strength-transfer input gain but does not clear the across-source reading rule; it does not count.
-- grouped_quantization/code: switching anchor OLS to statistics ridge improves MAE by 0.39112, but this mixes inputs and regularization and does not count.
-- grouped_quantization/qa: switching anchor OLS to statistics ridge improves MAE by 2.38515, but this mixes inputs and regularization and does not count.
+- grouped_quantization/code: switching anchor OLS to statistics ridge improves MAE by 0.23442, but this mixes inputs and regularization and does not count.
 - per_channel_quantization/math: ols has a positive same-source strength-transfer input gain but does not clear the across-source reading rule; it does not count.
 - per_channel_quantization/math: switching anchor OLS to statistics ridge improves MAE by 0.23391, but this mixes inputs and regularization and does not count.
 - per_channel_quantization/code: ridge has a positive same-source strength-transfer input gain but does not clear the across-source reading rule; it does not count.
