@@ -10,14 +10,15 @@ from analysis import plot_fig_generalization as generalization
 from analysis.paper_artifacts import ROOT, pyplot, output_path
 
 EXPECTED_PANEL_SIZES = {
-    **{f"fig1_{p}": (1.8, 1.8) for p in "abc"}, "fig1_legend": (5.5, .3),
-    **{f"fig2_{p}": (1.8, 1.9) for p in "abc"}, "fig2_legend": (5.5, .3),
-    "fig3_a": (2.3, 2.0), "fig3_b": (1.5, 2.0),
-    "fig3_c": (1.7, 2.0), "fig3_legend": (5.5, .3),
-    **{f"fig4_{p}": (1.8, 1.8) for p in "abc"}, "fig4_legend": (5.5, .3),
-    **{f"fig5_{p}": (2.7, 1.8) for p in "ab"},
-    "fig7": (5.5, 1.7), "fig7_legend": (5.5, .3),
-    "fig8_a": (2.7, 1.9), "fig8_b": (2.7, 1.9), "fig8_legend": (5.5, .3),
+    **{f"fig1_{p}": (1.8, 1.15) for p in "abc"}, "fig1_legend": (5.5, .42),
+    **{f"fig2_{p}": (1.8, 1.15) for p in "abc"}, "fig2_legend": (5.5, .42),
+    "fig3_a": (2.2, 1.6), "fig3_b": (1.45, 1.6),
+    "fig3_c": (1.85, 1.6), "fig3_legend": (5.5, .42),
+    **{f"fig4_{p}": (1.8, 1.15) for p in "abc"}, "fig4_legend": (5.5, .3),
+    **{f"fig5_{p}": (2.7, 1.45) for p in "ab"},
+    "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
+    "fig7_legend": (5.5, .3),
+    "fig8_a": (2.7, 1.45), "fig8_b": (2.7, 1.45), "fig8_legend": (5.5, .3),
 }
 
 
@@ -48,18 +49,32 @@ def check_artists(fig):
             # SubFigure transforms can differ at an edge by ~1e-13 pixels.
             assert box.x0 >= canvas.bbox.x0-.5 and box.y0 >= canvas.bbox.y0-.5
             assert box.x1 <= canvas.bbox.x1+.5 and box.y1 <= canvas.bbox.y1+.5
-            ys = [t.get_window_extent(renderer).y0 for t in legend.get_texts()]
-            assert max(ys) - min(ys) < 3, "Outside legends must be a single row"
+            ys = {round(t.get_window_extent(renderer).y0) for t in legend.get_texts()}
+            assert len(ys) <= 2, "Shared keys use at most two readable rows"
+            assert legend.handlelength == 1.6 and legend.columnspacing == 1.4
+            from matplotlib.transforms import Bbox
+            entries = [Bbox.union([handle.get_window_extent(renderer), text.get_window_extent(renderer)])
+                       for handle, text in zip(legend.legend_handles, legend.get_texts())]
+            for i, entry in enumerate(entries):
+                assert all(not entry.overlaps(other) for other in entries[i+1:]), "Legend entries touch"
             for ax in canvas.get_axes():
                 assert not box.overlaps(ax.xaxis.label.get_window_extent(renderer))
     for ax in fig.axes:
         assert not any(ax.get_title(loc) for loc in ("left", "center", "right"))
-        assert all(t.get_gid() == "objective-column-header" for t in ax.texts), \
-            "Only Figure 7's objective axis annotations are allowed"
-        if ax.texts:
-            assert [t.get_text() for t in ax.texts] == ["Math", "Code", "QA", "Largest loss\nincrease"]
-        assert ax.get_xlabel(), "Each panel needs its own x label"
-        assert ax.get_ylabel() or any(t.get_text() for t in ax.get_yticklabels())
+        assert not ax.texts, "Titles and explanatory text belong in captions"
+        assert ax.get_xlabel() or (len(ax.get_xticklabels()) == 12 and
+                                  all(t.get_rotation() == 45 for t in ax.get_xticklabels()))
+        assert "\n" not in ax.get_xlabel() + ax.get_ylabel(), "Axis labels must stay on one line"
+        canvas = ax.get_figure()
+        for label in (ax.xaxis.label, ax.yaxis.label):
+            if label.get_text():
+                bounds = label.get_window_extent(renderer)
+                assert bounds.x0 >= canvas.bbox.x0-.5 and bounds.y0 >= canvas.bbox.y0-.5
+                assert bounds.x1 <= canvas.bbox.x1+.5 and bounds.y1 <= canvas.bbox.y1+.5
+        assert ax.bbox.height / canvas.bbox.height >= .58, "Preserve usable plot height"
+        assert (ax.get_ylabel() or any(t.get_text() for t in ax.get_yticklabels())
+                or (len(ax.images) == 1 and ax.images[0].get_array().shape == (4, 17))), \
+            "Only aligned selection maps may omit repeated state labels"
         text = ax.get_xticklabels(which="both") + ax.get_yticklabels(which="both")
         text += [ax.xaxis.label, ax.yaxis.label]
         if ax.get_legend():
@@ -71,7 +86,8 @@ def check_artists(fig):
     assert box.x1 <= fig.bbox.x1+.5 and box.y1 <= fig.bbox.y1+.5, (box.bounds, fig.bbox.bounds)
 
 
-@pytest.mark.parametrize("kind,sizes", [("panel", (14, 15, 13)), ("full", (13, 14, 12))])
+@pytest.mark.parametrize("kind,sizes", [("panel", (7.5, 8.5, 7.5)), ("double", (8.5, 9.5, 8.5)),
+                                          ("full", (9, 10, 9)), ("legend", (8.5, 8.5, 8.5))])
 def test_shared_serif_bold_rcparams(kind, sizes):
     plt = pyplot()
     rc = style.apply_style(kind)
@@ -83,7 +99,8 @@ def test_shared_serif_bold_rcparams(kind, sizes):
         assert plt.rcParams[key] == "bold"
     assert [rc[k] for k in ("xtick.labelsize", "axes.labelsize", "legend.fontsize")] == list(sizes)
     assert rc["ytick.labelsize"] == sizes[0]
-    assert rc["lines.linewidth"] == 2 and rc["lines.markersize"] == 7
+    assert rc["lines.linewidth"] == 1.1 and rc["lines.markersize"] == 3.8
+    assert rc["errorbar.capsize"] == 2
     assert plt.rcParams["savefig.bbox"] is None
 
 
@@ -102,12 +119,22 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         for ax in fig.axes:
             assert ax.xaxis.label.get_fontsize() == label
             assert all(t.get_fontsize() == tick for t in ax.get_xticklabels()+ax.get_yticklabels())
+            if gen is generalization:
+                # Preserve the prior fraction of each canvas used for data,
+                # including the space needed by the expanded row labels.
+                old_width, old_left, old_right = {
+                    "fig3_a": (2.3, .91, .08), "fig3_b": (1.5, .08, .08),
+                    "fig3_c": (1.7, .52, .06),
+                }[stem]
+                assert ax.get_position().width >= (old_width-old_left-old_right)/old_width
         for canvas in all_figures(fig):
             legends = canvas.legends + [a.get_legend() for a in canvas.get_axes() if a.get_legend()]
             for leg in legends:
                 sizes = [t.get_fontsize() for t in leg.get_texts()]
-                expected = ([13]*6+[12]*3 if stem == "fig2_legend" else
-                            [12]*6+[13]*2 if stem == "fig3_legend" else [legend]*len(sizes))
+                expected = [legend]*len(sizes)
+                if stem in ("fig1_legend", "fig2_legend", "fig3_legend"):
+                    ys = {round(t.get_window_extent(fig.canvas.get_renderer()).y0) for t in leg.get_texts()}
+                    assert len(ys) == 2
                 assert sizes == expected
                 assert all(t.get_weight() == "bold" for t in leg.get_texts())
         saved[stem] = tuple(fig.get_size_inches())
@@ -148,10 +175,15 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         fig = plt.figure(figsize=gen.PANEL_SIZES["c"])
         ax = gen.draw_panel(fig, rows, "c")
         points = [line for line in ax.lines if line.get_marker() in ("o", "^")]
-        assert [t.get_text() for t in ax.get_yticklabels()] == ["1B", "4B dev.", "2Wiki", "MuSiQue", "TriviaQA"]
+        assert [t.get_text() for t in ax.get_yticklabels()] == ["1B", "4B development", "2Wiki", "MuSiQue", "TriviaQA"]
         assert sum(line.get_marker() == "^" for line in points) == 6
         assert sum(line.get_marker() == "o" for line in points) == 6
         assert ax.get_xlim() == (-2.5, 2.5)
+        fig.canvas.draw()
+        renderer = fig.canvas.get_renderer()
+        label = ax.get_yticklabels()[1].get_window_extent(renderer)
+        assert all(not label.overlaps(line.get_window_extent(renderer)) for line in ax.lines
+                   if line.get_marker() in ("o", "^", "|")), "Long row label must clear markers and whisker caps"
         assert not output_path(ROOT, "figs", "fig3_d.pdf").exists()
         plt.close(fig)
 
@@ -160,9 +192,28 @@ def test_explanations_moved_to_caption_files():
     directory = output_path(ROOT, "figs")
     expected = {
         "responses_v2": ("Positive = worse", "Development endpoints nearest 200k"),
-        "explanation": ("failed to reject", "Curvature intervals are conditional on development", "post-hoc"),
-        "generalization": ("No frozen response-law predictions", "Paired gain CIs are translated", "failed to reject"),
+        "explanation": ("failed to reject", "Curvature intervals are conditional on development", "post-hoc",
+                        "Fold estimate, Boundary", "Additive, F_int and Observed"),
+        "generalization": ("No frozen response-law predictions", "Paired gain CIs are translated", "failed to reject",
+                           "Prune in, frozen", "Prune out, frozen", "Baseline, Relation and Lower of pair"),
     }
     for stem, phrases in expected.items():
         text = (directory / f"{stem}_caption.txt").read_text()
         assert all(phrase in text for phrase in phrases)
+
+
+@pytest.mark.parametrize("gen,labels", [
+    (generalization, {"Math", "Code", "QA", "Baseline", "Relation", "Lower of pair", "1B", "4B development"}),
+    (explanation, {"Fold estimate", "Boundary", "Full", "Additive", "$F_{int}$", "Observed", "Group", "Channel", "Prune"}),
+])
+def test_expanded_legend_labels_fit_at_unchanged_font_size(gen, labels):
+    plt = pyplot()
+    style.apply_style("legend")
+    fig = plt.figure(figsize=gen.LEGEND_SIZE)
+    try:
+        legend = gen.draw_legend(fig)
+        check_artists(fig)
+        assert {t.get_text() for t in legend.get_texts()} == labels
+        assert all(t.get_fontsize() == 8.5 for t in legend.get_texts())
+    finally:
+        plt.close(fig)

@@ -27,14 +27,14 @@ D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
 GREEN, GREY = "#24835b", "#777777"
 MARKERS = {"math": "o", "code": "s", "qa": "D"}
-PANEL_SIZES = {"a": (2.3, 2.0), "b": (1.5, 2.0), "c": (1.7, 2.0)}
-KINDS = {"a": "full", "b": "full", "c": "panel"}
-LEGEND_SIZE = (5.5, .3)
-FIGSIZE = (5.5, 2.32)
+PANEL_SIZES = {"a": (2.2, 1.6), "b": (1.45, 1.6), "c": (1.85, 1.6)}
+KINDS = {"a": "double", "b": "panel", "c": "panel"}
+LEGEND_SIZE = (5.5, .42)
+FIGSIZE = (5.5, 2.04)
 if __package__:
-    from .paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
+    from .paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
 else:
-    from paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
+    from paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
 SCOPE_NOTE = ("No frozen response-law predictions on fresh evaluation distributions.\n"
               "Only registered corner contrasts are available below.")
 
@@ -202,8 +202,8 @@ def build(audit):
 
 def row_label(group, stratum):
     labels = {
-        "Pruning: density inside range": "Prune in-range",
-        "Pruning: density outside range": "Prune V46 out",
+        "Pruning: density inside range": "Prune in range",
+        "Pruning: density outside range": "Prune out, frozen",
         "Quantization: new group size": "Quant group",
         "Distillation: new-pool budgets": "Distill",
         "Pythia: new stages (power)": "New stages",
@@ -212,7 +212,7 @@ def row_label(group, stratum):
     }
     label = labels[group]
     if stratum == "V46" and "inside" in group:
-        label = "Prune V46 in"
+        label = "Prune in, frozen"
     elif stratum.startswith("gemma3-"):
         label += " " + {"gemma3-270m": "270M", "gemma3-1b": "1B"}[stratum]
     return label
@@ -235,8 +235,9 @@ def draw_maes(ax, rows, panel, limits):
                 ax.plot(baseline, yy, marker=marker, mfc="white", mec=GREY, ls="", zorder=3)
             if r["whisker"] is not None:
                 lo, hi = r["whisker"]
-                ax.hlines(yy, lo, hi, color=color, lw=2, zorder=2)
-                ax.vlines([lo, hi], yy-.08, yy+.08, color=color, lw=2, zorder=2)
+                midpoint = (lo + hi) / 2
+                ax.errorbar(midpoint, yy, xerr=[[midpoint-lo], [hi-midpoint]],
+                            fmt="none", color=color, lw=1.1, capsize=2, zorder=2)
             ax.plot(candidate, yy, marker=marker, color=color, ls="", zorder=4)
         counts = {r["n"] for r in part}
         if len(counts) != 1:
@@ -267,10 +268,10 @@ def draw_corners(ax, rows):
             dev = r["status"] == "development"
             lo, hi = r["residual_interval"]
             e = r["residual"]
-            ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=3, lw=2)
+            ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=2, lw=1.1)
             ax.plot(e, y+jitter, marker="^" if dev else "o", ls="", color=color,
                     mfc=color if r["within"] else "white", alpha=.85)
-    ax.axvline(0, color=".5", lw=1.2)
+    ax.axvline(0, color=".5", lw=1.1)
     ax.axhline(1.5, color=".7", lw=.6, zorder=0)
     ax.set_xscale("symlog", linthresh=.03)
     ax.set_xlim(-2.5, 2.5)
@@ -278,10 +279,10 @@ def draw_corners(ax, rows):
     ax.set_xticks([-.1, .1], minor=True)
     ax.xaxis.set_minor_formatter(NullFormatter())
     labels = {"Distillation: corner budgets (1B)": "1B",
-              "4B DEVELOPMENT: corner budgets": "4B dev.",
+              "4B DEVELOPMENT: corner budgets": "4B development",
               "2wiki_new": "2Wiki", "musique": "MuSiQue", "triviaqa": "TriviaQA"}
     ax.set(yticks=range(len(groups)), yticklabels=[labels[g] for g in groups],
-           ylim=(len(groups)-.5, -.5), xlabel="Pred. − obs.\n(nats)")
+           ylim=(len(groups)-.5, -.5), xlabel="Prediction error (nats)")
     ax.tick_params(axis="y", length=0, pad=3)
     ax.grid(axis="x", alpha=.15)
     ax.spines["left"].set_visible(False)
@@ -297,8 +298,9 @@ def mae_limits(rows):
 
 def draw_panel(fig, rows, panel):
     if panel in "ab":
-        ax = panel_axes(fig, PANEL_SIZES[panel], left=1.24 if panel == "a" else .08,
-                        bottom=.51, right=.08, top=.04)
+        ax = panel_axes(fig, PANEL_SIZES[panel], left=.94 if panel == "a" else .08,
+                        bottom=.40 if panel == "a" else .34,
+                        right=.005 if panel == "a" else .07, top=.06)
         draw_maes(ax, [r for r in rows if r["kind"] == "mae"], panel.upper(), mae_limits(rows))
         if panel == "b":
             from matplotlib.transforms import ScaledTranslation
@@ -308,10 +310,19 @@ def draw_panel(fig, rows, panel):
                 text.set_transform(ax.get_yaxis_transform() +
                                    ScaledTranslation(0, .14, fig.dpi_scale_trans))
     else:
-        ax = panel_axes(fig, PANEL_SIZES[panel], left=.84, bottom=.72, right=.06)
+        ax = panel_axes(fig, PANEL_SIZES[panel], left=.52, bottom=.30, right=.06)
         draw_corners(ax, [r for r in rows if r["kind"] == "corner"])
-        ax.xaxis.set_label_coords(.22, -.22)
-    return ax
+        # Offset the long row label into the space below the leftmost marker,
+        # preserving the data-axis width at the existing physical font size.
+        from matplotlib.transforms import ScaledTranslation
+        for text in ax.get_yticklabels():
+            if text.get_text() == "4B development":
+                text.set_verticalalignment("center")
+                text.set_transform(text.get_transform() +
+                                   ScaledTranslation(.25, -.025, fig.dpi_scale_trans))
+        ax.xaxis.label.set_verticalalignment("bottom")
+        ax.xaxis.set_label_coords(.5, .025, transform=fig.transSubfigure if hasattr(fig, "transSubfigure") else fig.transFigure)
+    return finish_panel(ax)
 
 
 def draw_legend(fig):
@@ -322,23 +333,20 @@ def draw_legend(fig):
         from paper_figure_style import legend_strip
     handles = [Line2D([], [], color=COLORS[c], marker=MARKERS[c], ls="",
                       label="QA" if c == "qa" else c.title()) for c in CAPS]
-    handles += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Base"),
-                Line2D([], [], color=GREY, marker="o", ls="", label="Rel."),
-                Line2D([], [], color=GREEN, marker="o", ls="", label="Lower"),
+    handles += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Baseline"),
+                Line2D([], [], color=GREY, marker="o", ls="", label="Relation"),
+                Line2D([], [], color=GREEN, marker="o", ls="", label="Lower of pair"),
                 Line2D([], [], color=".25", marker="o", ls="", label="1B"),
-                Line2D([], [], color=".25", marker="^", ls="", label="4B dev.")]
-    legend = legend_strip(fig, handles)
-    for text in legend.get_texts()[-2:]:
-        text.set_fontsize(13)  # Corner panel retains its original panel style.
-    return legend
+                Line2D([], [], color=".25", marker="^", ls="", label="4B development")]
+    return legend_strip(fig, handles)
 
 
 def plot(rows, plt):
     return combine_panels(plt, [
-        ("full", (0, .32, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
-        ("full", (2.3, .32, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
-        ("panel", (3.8, .32, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
-        ("full", (0, 0, *LEGEND_SIZE), draw_legend),
+        ("double", (0, .44, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
+        ("panel", (2.2, .44, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
+        ("panel", (3.65, .44, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
+        ("legend", (0, 0, *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
 
@@ -349,9 +357,12 @@ Paired markers compare the relation and development-selected baseline on identic
 cells with equal cell weights. Math, Code and QA use circles, squares and diamonds
 in the MAE panels. Hollow markers denote baselines; filled relation markers are
 green only when the relation MAE is lower. Cell counts per capability are in
-generalization_mae_pairs.md and the record sidecars. V46 and the Pythia locked-rule
-row have no stored development-selected baseline: their unpaired relation markers
-remain grey. V46/V72 and the 270M/1B new-pool budgets remain separate.
+generalization_mae_pairs.md and the record sidecars. The Prune in, frozen and
+Prune out, frozen rows are frozen new-state pruning predictions inside and outside
+the fitted density range, respectively. These rows and the Pythia locked-rule row
+have no stored development-selected baseline: their unpaired relation markers
+remain grey. Prune in range and the two frozen pruning rows remain separate,
+as do the 270M/1B new-pool budgets.
 Paired gain CIs are translated about the fixed baseline MAE: a stored
 baseline-minus-relation interval [lo, hi] is drawn at [baseline MAE - hi,
 baseline MAE - lo]. These are paired gain intervals, not marginal MAE confidence
@@ -365,11 +376,12 @@ Primary QA additivity: failed to reject. Math is size-dependent and code unresol
 No frozen response-law predictions on fresh evaluation distributions. Only
 registered corner contrasts are available on fresh distributions, with additive predictions zero.
 No A2 development-holdout interval is transplanted to these confirmation cells.
-The three panels are 2.3, 1.5 and 1.7 inches wide and 2 inches high in one
+The three panels are 2.2, 1.45 and 1.85 inches wide and 1.6 inches high in one
 5.5-inch row. Panel (c) stacks 1B, 4B development, 2Wiki, MuSiQue and TriviaQA.
-The shared key is fig3_legend.pdf: Base = baseline, Rel. = relation, Lower =
-lower relation MAE. Short pruning labels distinguish V72 in-range from V46
-in-range and out-of-range. Panel (b)'s row labels sit above their markers.
+The shared key is fig3_legend.pdf: Baseline, Relation and Lower of pair distinguish
+the paired MAEs; Lower of pair marks a relation MAE below its paired baseline.
+The 4B development entry identifies development-student triangles in (c).
+Panel (b)'s row labels sit above their markers.
 """
 
 
@@ -403,10 +415,10 @@ def generate(root=ROOT):
             save_panel(fig, f"fig3_{letter}", KINDS[letter], audit, panel_rows)
             write_caption(f"fig3_{letter}", audit, CAPTION_TEXT)
             plt.close(fig)
-        apply_style("full")
+        apply_style("legend")
         fig = plt.figure(figsize=LEGEND_SIZE)
         draw_legend(fig)
-        save_panel(fig, "fig3_legend", "full", audit, [])
+        save_panel(fig, "fig3_legend", "legend", audit, [])
         write_caption("fig3_legend", audit, CAPTION_TEXT)
         plt.close(fig)
         for suffix in (".pdf", "_data.json", "_caption.txt", "_sources.md"):

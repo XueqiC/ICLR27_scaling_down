@@ -1,6 +1,6 @@
 """Final-size serif styling and panel exports for artifact-only paper figures.
 
-Keep each panel's original style kind when changing its physical dimensions.
+Choose typography from each panel's physical width.
 Export the complete canvas so PDF placement preserves point sizes.
 """
 from __future__ import annotations
@@ -11,8 +11,14 @@ else:
     from paper_artifacts import FONT_ROOTS, output_path, write_notes
 
 SERIF = ["Times New Roman", "Nimbus Roman", "TeX Gyre Termes", "DejaVu Serif"]
-SIZES = {"panel": (14, 15, 13), "full": (13, 14, 12)}
+SIZES = {"panel": (7.5, 8.5, 7.5), "double": (8.5, 9.5, 8.5),
+         "full": (9, 10, 9), "legend": (8.5, 8.5, 8.5)}
 _fonts_registered = False
+
+
+def kind_for_width(width):
+    """Narrow panels use the small tier; Figure 3a uses the middle tier."""
+    return "panel" if width <= 2 else "double" if width <= 3 else "full"
 
 
 def apply_style(kind):
@@ -38,13 +44,16 @@ def apply_style(kind):
         "axes.labelweight": "bold", "axes.titleweight": "bold",
         "axes.labelsize": label, "axes.titlesize": label,
         "xtick.labelsize": tick, "ytick.labelsize": tick, "legend.fontsize": legend,
-        "axes.linewidth": 1.2, "lines.linewidth": 2.0, "lines.markersize": 7,
-        "lines.markeredgewidth": 1.2, "patch.linewidth": 1.2,
-        "xtick.major.width": 1.2, "ytick.major.width": 1.2,
-        "xtick.minor.width": 1.0, "ytick.minor.width": 1.0,
+        "axes.linewidth": .6, "lines.linewidth": 1.1, "lines.markersize": 3.8,
+        "lines.markeredgewidth": .6, "patch.linewidth": .6,
+        "errorbar.capsize": 2,
+        "xtick.major.width": .6, "ytick.major.width": .6,
+        "xtick.minor.width": .4, "ytick.minor.width": .4,
+        "xtick.major.size": 2, "ytick.major.size": 2,
+        "xtick.minor.size": 1.2, "ytick.minor.size": 1.2,
         "xtick.major.pad": 2, "ytick.major.pad": 2, "axes.labelpad": 2,
         "axes.spines.top": False, "axes.spines.right": False,
-        "grid.linewidth": .6, "legend.frameon": False,
+        "grid.linewidth": .4, "legend.frameon": False,
         "legend.borderpad": .2, "legend.labelspacing": .15,
         "legend.handlelength": 1.0, "legend.handletextpad": .35,
         "legend.columnspacing": .65, "legend.borderaxespad": .25,
@@ -55,11 +64,18 @@ def apply_style(kind):
     return rc
 
 
-def panel_axes(fig, size, *, left=.57, bottom=.48, right=.06, top=.04):
+def panel_axes(fig, size, *, left=.36, bottom=.30, right=.06, top=.06):
     """Margins in inches; all labels belong to this panel's own canvas."""
     w, h = size
     # add_axes also works identically on SubFigure, without shared subplotpars.
     return fig.add_axes((left/w, bottom/h, (w-left-right)/w, (h-bottom-top)/h))
+
+
+def finish_panel(ax):
+    """Leave headroom for long vertical labels on flat, uncropped canvases."""
+    # Set this after set_ylabel, which resets the label's vertical position.
+    ax.yaxis.label.set_y(.42)
+    return ax
 
 
 def legend_row(fig, handles, **kwargs):
@@ -71,10 +87,30 @@ def legend_row(fig, handles, **kwargs):
 
 
 def legend_strip(fig, handles):
-    """Fit a single row by tightening handle spacing, never scaling the fonts."""
-    return legend_row(fig, handles, loc="center", bbox_to_anchor=(.5, .5),
-                      handlelength=.65, handletextpad=.15, columnspacing=.35,
-                      borderpad=0)
+    """Measure generous 8.5-pt entries and wrap to two rows when needed.
+
+    Use the same renderer and physical-width check for Figures and SubFigures.
+    Reorder Matplotlib's column-major input so the visible key reads row-wise.
+    """
+    from math import ceil
+
+    owner = fig
+    while not hasattr(owner, "canvas"):
+        owner = owner.figure
+    for rows in (1, 2):
+        columns = ceil(len(handles) / rows)
+        ordered = [handles[r*columns+c] for c in range(columns) for r in range(rows)
+                   if r*columns+c < len(handles)]
+        legend = legend_row(fig, ordered, loc="center", bbox_to_anchor=(.5, .5),
+                            ncol=columns, fontsize=8.5, handlelength=1.6,
+                            handletextpad=.5, columnspacing=1.4,
+                            labelspacing=.5, borderpad=0)
+        owner.canvas.draw()
+        box = legend.get_window_extent(owner.canvas.get_renderer())
+        if box.width <= fig.bbox.width - .08*owner.dpi and box.height <= fig.bbox.height:
+            return legend
+        legend.remove()
+    raise ValueError("Legend needs more canvas space for two readable rows")
 
 
 def save_panel(fig, stem, kind, audit, records):
@@ -95,7 +131,7 @@ def save_panel(fig, stem, kind, audit, records):
     font = font_manager.FontProperties(family=SERIF, weight="bold")
     selected = font_manager.FontProperties(fname=font_manager.findfont(font)).get_name()
     audit.rule(f"{stem}.pdf: {w:g} x {h:g} in; bold {selected}; ticks {tick} pt, "
-               f"axis labels {label} pt, legend {legend} pt; lines 2 pt, markers 7 pt. "
+               f"axis labels {label} pt, legend {legend} pt; default lines 1.1 pt, markers 3.8 pt; caps 2 pt. "
                "Full canvas retained; no titles, panel letters, or explanatory annotations.")
     write_notes(stem, audit, records)
     output_path(audit.root, "figs", f"{stem}_data.json").write_text(
@@ -110,10 +146,17 @@ def save_panel(fig, stem, kind, audit, records):
                     "legend_font_sizes_pt": [t.get_fontsize() for leg in fig.findobj(Legend)
                                              for t in leg.get_texts()],
                     "font": {"family": selected, "weight": "bold", "ticks_pt": tick,
-                             "labels_pt": label, "legend_pt": legend}},
+                             "labels_pt": label, "legend_pt": legend},
+                    "style_defaults": {"line_width_pt": 1.1, "marker_size_pt": 3.8,
+                              "errorbar_capsize_pt": 2},
+                    "axis_font_sizes_pt": [
+                        {"x_ticks": [t.get_fontsize() for t in ax.get_xticklabels()],
+                         "y_ticks": [t.get_fontsize() for t in ax.get_yticklabels()],
+                         "x_label": ax.xaxis.label.get_fontsize(),
+                         "y_label": ax.yaxis.label.get_fontsize()} for ax in fig.axes]},
                    indent=2, allow_nan=False) + "\n")
     print(f"{stem}: {w:g} x {h:g} in; {selected} bold; "
-          f"ticks/labels/legend = {tick}/{label}/{legend} pt; lines/markers = 2/7 pt")
+          f"ticks/labels/legend = {tick}/{label}/{legend} pt; default lines/markers/caps = 1.1/3.8/2 pt")
 
 
 def write_caption(stem, audit, text):

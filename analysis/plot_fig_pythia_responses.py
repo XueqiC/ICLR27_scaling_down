@@ -4,25 +4,25 @@ from __future__ import annotations
 
 if __package__:
     from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
-    from .paper_figure_style import panel_axes
+    from .paper_figure_style import finish_panel, panel_axes
     from .paper_panel_exports import ref, capability_handles, axes_defaults, export
 else:
     from paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
-    from paper_figure_style import panel_axes
+    from paper_figure_style import finish_panel, panel_axes
     from paper_panel_exports import ref, capability_handles, axes_defaults, export
 
 P36 = "results/v36-pythia-controlled/summary.json"
 P53 = "results/v53-prune-dev/register.json"
 Q69 = "results/v69-quant-confirm/"
-PANEL_SIZE = (1.8, 1.8)
+PANEL_SIZE = (1.8, 1.15)
 LEGEND_SIZE = (5.5, .3)
 GROUP_STATE = "pythia-410m@step143000"
 CAPTIONS = {
     "a": """Pruning responses on the original nine development states: Pythia
 160M, 410M and 1.4B at steps 16k, 64k and 143k. Thin coloured lines are each
 state's measured loss minus its own dense loss, including every saved density.
-Heavy Math/Code lines are the pointwise median of the nine state-conditioned
-V53 power predictions; the heavy QA line is the delivered V53 median curve.
+Opaque Math/Code lines are the pointwise median of the nine state-conditioned
+V53 power predictions; the opaque QA line is the delivered V53 median curve.
 These summaries evaluate frozen coefficients without fitting. Delivered curves
 are shown only on their [0.6, 0.9] domain. V53's fit used 17 development states;
 the nine states displayed are selected by the original V36 input manifest.
@@ -116,7 +116,7 @@ def build(audit):
 
 def draw_panel(fig, rows, panel):
     from matplotlib.ticker import NullLocator, MaxNLocator
-    ax = panel_axes(fig, PANEL_SIZE, left=.50, bottom=.48, right=.09)
+    ax = panel_axes(fig, PANEL_SIZE, left=.35, bottom=.30, right=.07)
     part = [r for r in rows if r["panel"] == panel]
     if panel in ("a", "b"):
         for cap in CAPS:
@@ -124,12 +124,12 @@ def draw_panel(fig, rows, panel):
             for state in sorted({r["state"] for r in measured}):
                 line = sorted((r for r in measured if r["state"] == state), key=lambda r: r["x"])
                 ax.plot([r["x"] for r in line], [r["delta"] for r in line],
-                        color=COLORS[cap], lw=.9, alpha=.45)
+                        color=COLORS[cap], lw=1.1, alpha=.45)
             heavy = [r for r in part if r["kind"] == "delivered" and r["capability"] == cap]
             if heavy:
-                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=2.5)
+                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=1.1)
         if panel == "a":
-            ax.set(xlabel="Density $d$", xlim=(.535, 1.02), ylim=(-1, 10), xticks=[.6, .8, 1.])
+            ax.set(xlabel="Retained density", xlim=(.535, 1.02), ylim=(-1, 10), xticks=[.6, .8, 1.])
         else:
             ax.set(xlabel="Bit-width", xlim=(2.7, 8.3), ylim=(-1, 27), xticks=[3, 4, 6, 8])
     else:
@@ -141,8 +141,8 @@ def draw_panel(fig, rows, panel):
         ax.xaxis.set_minor_locator(NullLocator())
     axes_defaults(ax)
     ax.yaxis.set_major_locator(MaxNLocator(3, integer=True))
-    ax.set_ylabel("Δ loss (nats)")
-    return ax
+    ax.set_ylabel("Loss change (nats)")
+    return finish_panel(ax)
 
 
 def draw_legend(fig):
@@ -164,7 +164,7 @@ def generate(root=ROOT):
         panels = [(f"fig4_{p}", PANEL_SIZE, lambda f, p=p: draw_panel(f, rows, p),
                    [r for r in rows if r["panel"] == p], CAPTIONS[p]) for p in "abc"]
         caption = "\n".join(CAPTIONS.values()) + (
-            "Three 1.8 x 1.8-inch panels in one 5.5-inch row; fig4_legend.pdf "
+            "Three 1.8 x 1.15-inch panels in one 5.5-inch row; fig4_legend.pdf "
             "is the shared capability and bit-width key.\n")
         panels = [(name, size, draw, records, text + "Shared key: fig4_legend.pdf; panels form one row.\n")
                   for name, size, draw, records, text in panels]

@@ -28,12 +28,12 @@ def test_medians_use_saved_bands_and_individual_ratios_without_mutating_rows():
              dict(rows[0], capability="code", delta=-999)]
     original = copy.deepcopy(rows)
     plt = pyplot()
-    style.apply_style("panel")
+    style.apply_style("double")
     fig = plt.figure(figsize=drift.PANEL_SIZE)
     try:
         ax = drift.draw_panel(fig, rows, "a")
         lines = {line.get_marker(): line for line in ax.lines
-                 if line.get_color() == drift.COLORS["math"] and line.get_linewidth() == 2.5}
+                 if line.get_color() == drift.COLORS["math"] and line.get_linewidth() == 1.8}
         assert list(lines["o"].get_xdata()) == [25., 50.]
         assert list(lines["o"].get_ydata()) == [2., 3.]
         assert list(lines["^"].get_xdata()) == [24., 51.]
@@ -48,15 +48,15 @@ def test_print_size_layers_and_inside_legend(panel):
     rows, unavailable = drift.build(Artifacts())
     assert not unavailable
     plt = pyplot()
-    style.apply_style("panel")
+    style.apply_style("double")
     fig = plt.figure(figsize=drift.PANEL_SIZE)
     try:
         ax = drift.draw_panel(fig, rows, panel)
         check_artists(fig)
-        assert tuple(fig.get_size_inches()) == (2.7, 1.8)
+        assert tuple(fig.get_size_inches()) == (2.7, 1.45)
         assert ax.get_xlim() == (0, 220) and ax.get_ylim() == (-1, 8)
-        thin = [line for line in ax.lines if line.get_linewidth() == .8]
-        heavy = [line for line in ax.lines if line.get_linewidth() == 2.5]
+        thin = [line for line in ax.lines if line.get_linewidth() == .6]
+        heavy = [line for line in ax.lines if line.get_linewidth() == 1.8]
         expected = Counter()
         for cap in drift.CAPS:
             for tolerance in drift.TOLERANCES:
@@ -71,17 +71,17 @@ def test_print_size_layers_and_inside_legend(panel):
         assert all(line.get_alpha() == .35 and line.get_marker() in ("", "None") for line in thin)
         assert Counter((line.get_color(), line.get_marker()) for line in heavy) == Counter(
             (drift.COLORS[cap], marker) for cap in drift.CAPS for marker in ("o", "^"))
-        assert all(line.get_alpha() == 1 and line.get_markersize() == 9
+        assert all(line.get_alpha() == 1 and line.get_markersize() == 5
                    and line.get_markerfacecolor() == line.get_color()
                    and line.get_markeredgecolor() == "white"
                    and line.get_markeredgewidth() > 0 for line in heavy)
         assert min(line.get_zorder() for line in heavy) > max(line.get_zorder() for line in thin)
         assert all(len(line.get_xdata()) == (4 if line.get_marker() == "o" else 3) for line in heavy)
-        reference = [line for line in ax.lines if line.get_linewidth() == 1.2]
+        reference = [line for line in ax.lines if line.get_linewidth() == 1.1]
         assert len(reference) == 1 and list(reference[0].get_ydata()) == [0, 0]
         legend = ax.get_legend()
         assert [t.get_text() for t in legend.get_texts()] == ["Math", "Code", "QA"]
-        assert all(t.get_fontsize() == 13 for t in legend.get_texts())
+        assert all(t.get_fontsize() == 8.5 for t in legend.get_texts())
         box = legend.get_window_extent(fig.canvas.get_renderer())
         assert ax.bbox.contains(box.x0, box.y0) and ax.bbox.contains(box.x1, box.y1)
     finally:

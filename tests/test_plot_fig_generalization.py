@@ -1,4 +1,5 @@
 import json
+import re
 from collections import Counter
 from statistics import mean
 
@@ -140,7 +141,7 @@ def test_whiskers_are_exact_paired_gain_intervals_never_pooled_or_mae_intervals(
                for r in rows if r["kind"] == "mae" and r["whisker"] is None)
 
 
-def test_render_has_log_maes_shared_legend_and_short_labels(generated):
+def test_render_has_log_maes_shared_legend_and_descriptive_labels(generated):
     rows, _, _ = generated
     plt = pyplot()
     fig = gen.plot(rows, plt)
@@ -152,7 +153,10 @@ def test_render_has_log_maes_shared_legend_and_short_labels(generated):
         assert len(fig.subfigs) == 4
         assert [len(sub.legends) for sub in fig.subfigs] == [0, 0, 0, 1]
         assert [t.get_text() for t in maes[0].get_yticklabels()] == [
-            "Prune in-range", "Prune V46 in", "Prune V46 out", "Quant group", "Distill 270M", "Distill 1B"]
+            "Prune in range", "Prune in, frozen", "Prune out, frozen", "Quant group", "Distill 270M", "Distill 1B"]
+        from matplotlib.text import Text
+        drawn = [t.get_text() for t in fig.findobj(Text) if t.get_visible()]
+        assert not any(re.search(r"\bV\d+\b|\bBase\b|\bRel\.|\bdev\.", t) for t in drawn)
         assert [t.get_text() for t in maes[1].get_yticklabels()] == ["New stages", "New quant state", "Locked rule"]
         for panel, ax in zip("AB", maes):
             part = [r for r in rows if r["panel"] == panel and r["kind"] == "mae"]
