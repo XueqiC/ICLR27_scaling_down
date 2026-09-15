@@ -114,7 +114,7 @@ def test_table_every_cell_matches_sidecar_and_frozen_json():
     assert "budgets of at least 150000 tokens held out" in rows[5][2].plain(audit)
 
     assert r"\centering\footnotesize" in tex and r"\tiny" not in tex
-    assert tex.count(r"\begin{table*}[t]")==1 and r"\rotatebox" not in tex
+    assert tex.count(r"\begin{table*}[tp]")==1 and r"\rotatebox" not in tex
     assert r"\setlength{\tabcolsep}{3pt}" in tex
     assert all(header+" & " in tex for header in gen.HEADERS[1:5])
     assert sum(map(float,gen.COLUMN_WIDTHS))==pytest.approx(1)
