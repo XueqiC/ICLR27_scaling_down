@@ -23,14 +23,19 @@ baseline rather than the post-hoc strongest one is being checked (C78); the per-
 far say it does not.
 
 **On the corner test, the primary QA check failed to reject additivity in the budget-and-reuse
-region measured, on the two students measured; the frozen interaction candidate clearly overestimated
-the second difference there.** That is the whole of what the test shows. Failing to reject is not
-establishing: the measured statistic is about −0.21 to −0.24 nats on both students, inside the
-registered band but not shown to lie inside any pre-defined equivalence margin, so no claim of
-practical additivity is made. It does not exclude an interaction, and it does not license the
-inference that the fitted structures failed because of the form of their individual terms. What the
-test does separate, cleanly, is two things the earlier falsification had run together: the specific
-implication of the logarithmic reuse form fails, and additivity as such was not rejected.
+region measured, on the two students measured.** That is the whole of what the pre-fixed rule
+supports. Failing to reject is not establishing: the measured statistic is about −0.21 to −0.24
+nats on both students, inside the registered band but not shown to lie inside any pre-defined
+equivalence margin, so no claim of practical additivity is made, and an interaction is not excluded.
+The closeout audit (C79) also corrected a number in the registration: the "predicted disagreement"
+it quoted was A2's maximum over candidate corners, not the interaction structure's own prediction.
+Evaluated frozen at the achieved corners, that structure predicts −0.49 on both students. The
+measurement therefore sits between the additive prediction of zero and the interaction prediction,
+about one and a half noise units from each, with the interaction candidate's sign correct and its
+magnitude about twice the measurement. Neither structure predicts the measured value within the
+registered noise, and nothing here licenses an inference about why the fitted structures failed.
+What the test does separate is the logarithmic reuse form's specific implication, which fails, from
+additivity as such, which was not rejected.
 
 **The result does not generalise across capabilities.** On math and code the 4B student's statistic
 falls outside its band while the 1B's does not, and TriviaQA shows the same shape on the fresh-sample
