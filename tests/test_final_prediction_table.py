@@ -118,7 +118,9 @@ def test_table_every_cell_matches_sidecar_and_frozen_json():
     assert r"\setlength{\tabcolsep}{3pt}" in tex
     assert all(header+" & " in tex for header in gen.HEADERS[1:5])
     assert sum(map(float,gen.COLUMN_WIDTHS))==pytest.approx(1)
-    assert r"\textwidth-2\tabcolsep\relax" in tex
+    assert r"\begin{tabular*}{\textwidth}" in tex
+    assert r"\extracolsep{\fill}" in tex
+    assert not re.search(r"\\(?:resizebox|scalebox)", tex)
     assert "Inputs" not in gen.HEADERS
     assert caption["rendered"]==gen.CAPTION
     assert r"$A_c(\mathbf x)r^{\gamma_c}$ (5)" in tex

@@ -189,17 +189,12 @@ def table_text(text):
 
 
 def fit_table_height(text):
-    """Keep an expanded table and its caption together within the text height."""
-    def fit(match):
-        opening = re.match(r"\\begin\{table\*?\}(?:\[[^]]*\])?", match.group())
-        closing = re.search(r"\\end\{table\*?\}$", match.group())
-        body = match.group()[opening.end():closing.start()]
-        return (opening.group() + "\n" +
-                r"\setbox2=\vbox{\begin{minipage}{\linewidth}" + body +
-                r"\end{minipage}}" + "\n" +
-                r"\centering\ifdim\dimexpr\ht2+\dp2\relax>.95\textheight"
-                r"\resizebox*{!}{.95\textheight}{\box2}\else\box2\fi" + "\n" + closing.group())
-    return TABLE.sub(fit, text)
+    """Compatibility entry point: fit columns without scaling table fonts."""
+    if __package__:
+        from .paper_table_layout import table_layout
+    else:
+        from paper_table_layout import table_layout
+    return table_layout(text)
 
 
 def proofread_table(render):
@@ -277,18 +272,9 @@ def _caption_sentences(text):
 
 
 def _wrap_table_words(label, text):
-    """Give expanded labels line breaks and keep tabular boxes on the page."""
-    if label == "tab:models":
-        text = text.replace("p{1.8cm}p{3.6cm}p{0.8cm}p{2.5cm}p{0.7cm}p{2.2cm}p{1.2cm}",
-                            "p{1.9cm}p{3.1cm}p{1.7cm}p{2.4cm}p{1.5cm}p{2.2cm}p{1.9cm}")
+    """Give expanded labels readable breaks before applying column widths."""
     if label == "tab:final":
-        # Give this long summary its own float page after the preceding table.
         text = text.replace(r"\begin{table}[H]", r"\begin{table}[p]", 1)
-        text = text.replace("p{1.35cm}", "p{1.8cm}").replace("p{2.6cm}", "p{2.8cm}")
-    if label in {"tab:pred_source", "tab:pred_config_prune", "tab:pred_config_qd"}:
-        text = text.replace("p{4.1cm}", "p{5.2cm}").replace("p{3.1cm}", "p{4.0cm}")
-    if label == "tab:pred_source":
-        text = text.replace("p{5.2cm}", "p{6.0cm}").replace("p{4.0cm}", "p{4.5cm}")
     def wrap_tabular(match):
         block = match.group()
         paragraph_columns = "p{" in block.splitlines()[0] or r"\dimexpr" in block.splitlines()[0]
@@ -309,15 +295,7 @@ def _wrap_table_words(label, text):
                         cells[i] = r"\shortstack[l]{" + r"\\".join(words) + "}" + ending
             lines.append(" & ".join(cells))
         block = "\n".join(lines)
-        if block.startswith(r"\begin{tabularx}"):
-            return block
-        # TeX measures the actual font and math. Scale only tables that exceed
-        # the available width, leaving captions at their original text size.
-        height_limit = (r"\ifdim\dimexpr\ht0+\dp0\relax>.65\textheight"
-                        r"\setbox0=\hbox{\resizebox*{!}{.65\textheight}{\box0}}\fi"
-                        if label in {"tab:final", "tab:pred_config_prune", "tab:pred_full"} else "")
-        return (r"\setbox0=\hbox{" + "\n" + block + "\n}" + height_limit +
-                r"\ifdim\wd0>\linewidth\resizebox{\linewidth}{!}{\box0}\else\box0\fi")
+        return block
     return re.sub(r"\\begin\{(tabularx?)\}.*?\\end\{\1\}", wrap_tabular, text, flags=re.S)
 
 
