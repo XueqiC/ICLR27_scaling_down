@@ -16,7 +16,8 @@ else:
     import v51_panel_tables as tables
 
 SOURCE = "results/v51-panel/panel.json"
-PANEL_SIZE = (2.7, 1.45)
+PANEL_SIZE = (2.7, 1.6)
+BAR_WIDTH = .85 / 3
 SHORT_NAMES = {"Gemma-3": "G3", "Gemma-4": "G4", "OLMo-3": "OL3", "Qwen3": "Q3", "Muse": "Muse"}
 CAPTION = """Heterogeneity across the original twelve-model panel, ordered by
 family/series and increasing size within each series. Grouped bars show Math,
@@ -30,8 +31,10 @@ arithmetic. The two prospective Qwen3 additions are excluded by cohort=panel.
 Tick abbreviations: G3 = Gemma-3, G4 = Gemma-4, OL3 = OLMo-3, Q3 = Qwen3;
 Muse is written in full. The complete display names and JSON pointers are in
 the per-panel data sidecars. No seed averaging or uncertainty intervals.
-The two 2.7 x 1.45-inch panels form one row at 5.5-inch text width;
-model labels are rotated 45 degrees and the shared key is fig8_legend.pdf.
+The three touching capability bars fill 0.85 of each model slot; the remaining
+0.15 separates model groups. The two 2.7 x 1.6-inch panels form one row at
+5.5-inch text width; model labels are rotated 45 degrees at 7.5 pt.
+The shared key fig8_legend.pdf sits above the panels.
 """
 
 
@@ -73,10 +76,10 @@ def draw_panel(fig, rows, panel):
     from matplotlib.ticker import MaxNLocator
     ax = panel_axes(fig, PANEL_SIZE, left=.37, bottom=.53, right=.035, top=.06)
     part = [r for r in rows if r["panel"] == panel]
-    for offset, cap in zip((-.28, 0, .28), CAPS):
+    for offset, cap in zip((-BAR_WIDTH, 0, BAR_WIDTH), CAPS):
         series = sorted((r for r in part if r["capability"] == cap), key=lambda r: r["order"])
         ax.bar(np.array([r["order"] for r in series]) + offset, [r["delta"] for r in series],
-               width=.26, color=COLORS[cap], linewidth=.15, edgecolor="white")
+               width=BAR_WIDTH, color=COLORS[cap], linewidth=0, edgecolor="none")
     order = sorted((r for r in part if r["capability"] == "math"), key=lambda r: r["order"])
     for a, b in zip(order, order[1:]):
         if a["series"] != b["series"]:

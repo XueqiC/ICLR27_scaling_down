@@ -14,12 +14,12 @@ else:
 P36 = "results/v36-pythia-controlled/summary.json"
 P53 = "results/v53-prune-dev/register.json"
 Q69 = "results/v69-quant-confirm/"
-PANEL_SIZE = (1.8, 1.15)
+PANEL_SIZE = (1.8, 1.35)
 LEGEND_SIZE = (5.5, .3)
 GROUP_STATE = "pythia-410m@step143000"
 CAPTIONS = {
     "a": """Pruning responses on the original nine development states: Pythia
-160M, 410M and 1.4B at steps 16k, 64k and 143k. Thin coloured lines are each
+160M, 410M and 1.4B at steps 16k, 64k and 143k. Light coloured lines are each
 state's measured loss minus its own dense loss, including every saved density.
 Opaque Math/Code lines are the pointwise median of the nine state-conditioned
 V53 power predictions; the opaque QA line is the delivered V53 median curve.
@@ -30,7 +30,7 @@ The register and V6 loss artifacts are the pruning sources used by
 plot_fig1_final.py; no held-out source is presented as a development state.
 """,
     "b": """Per-output-channel symmetric round-to-nearest quantization on the
-same nine V36 development states. Thin lines show each state's per-capability
+same nine V36 development states. Light lines show each state's per-capability
 loss change from its own dense anchor across every saved bit-width. The full
 loss range is retained, including 3-bit collapse. The inputs are the frozen
 V10 quant_losses.json files listed in V36's summary; plot_fig1_final.py does
@@ -124,10 +124,10 @@ def draw_panel(fig, rows, panel):
             for state in sorted({r["state"] for r in measured}):
                 line = sorted((r for r in measured if r["state"] == state), key=lambda r: r["x"])
                 ax.plot([r["x"] for r in line], [r["delta"] for r in line],
-                        color=COLORS[cap], lw=1.1, alpha=.45)
+                        color=COLORS[cap], lw=1.4, alpha=.45)
             heavy = [r for r in part if r["kind"] == "delivered" and r["capability"] == cap]
             if heavy:
-                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=1.1)
+                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=1.4)
         if panel == "a":
             ax.set(xlabel="Retained density", xlim=(.535, 1.02), ylim=(-1, 10), xticks=[.6, .8, 1.])
         else:
@@ -135,7 +135,7 @@ def draw_panel(fig, rows, panel):
     else:
         for bit, marker, color in zip((3, 4, 5), ("o", "s", "^"), ("#71519a", "#c26a24", "#25836b")):
             line = sorted((r for r in part if r["bit"] == bit), key=lambda r: r["x"])
-            ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=color, marker=marker)
+            ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=color, marker=marker, lw=1.4, ms=5)
         ax.set(xscale="log", xlabel="Group size", xlim=(26, 640), ylim=(-.25, 5.4))
         ax.set_xticks([32, 128, 512], ["32", "128", "512"])
         ax.xaxis.set_minor_locator(NullLocator())
@@ -152,7 +152,9 @@ def draw_legend(fig):
     else:
         from paper_figure_style import legend_strip
     handles = capability_handles()
-    handles += [Line2D([], [], color=c, marker=m, label=f"{b} bit")
+    for handle in handles:
+        handle.set_linewidth(1.4)
+    handles += [Line2D([], [], color=c, marker=m, lw=1.4, ms=5, label=f"{b} bit")
                 for b, m, c in zip((3, 4, 5), ("o", "s", "^"), ("#71519a", "#c26a24", "#25836b"))]
     return legend_strip(fig, handles)
 
@@ -164,9 +166,11 @@ def generate(root=ROOT):
         panels = [(f"fig4_{p}", PANEL_SIZE, lambda f, p=p: draw_panel(f, rows, p),
                    [r for r in rows if r["panel"] == p], CAPTIONS[p]) for p in "abc"]
         caption = "\n".join(CAPTIONS.values()) + (
-            "Three 1.8 x 1.15-inch panels in one 5.5-inch row; fig4_legend.pdf "
-            "is the shared capability and bit-width key.\n")
-        panels = [(name, size, draw, records, text + "Shared key: fig4_legend.pdf; panels form one row.\n")
+            "Three 1.8 x 1.35-inch panels in one 5.5-inch row; fig4_legend.pdf "
+            "is the shared capability and bit-width key above the panels. "
+            "Lines are 1.4 pt; markers, where present, are 5 pt.\n")
+        panels = [(name, size, draw, records, text + "Shared key: fig4_legend.pdf above the panels; "
+                   "panels are 1.8 x 1.35 inches in one row. Lines 1.4 pt; markers 5 pt.\n")
                   for name, size, draw, records, text in panels]
         export(plt, audit, "pythia_responses", panels, caption, width=5.5,
                legend=("fig4_legend", LEGEND_SIZE, draw_legend, [], caption))

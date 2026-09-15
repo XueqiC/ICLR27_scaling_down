@@ -10,15 +10,16 @@ from analysis import plot_fig_generalization as generalization
 from analysis.paper_artifacts import ROOT, pyplot, output_path
 
 EXPECTED_PANEL_SIZES = {
-    **{f"fig1_{p}": (1.8, 1.15) for p in "abc"}, "fig1_legend": (5.5, .42),
-    **{f"fig2_{p}": (1.8, 1.15) for p in "abc"}, "fig2_legend": (5.5, .42),
+    **{f"fig1_{p}": (1.8, 1.35) for p in "abc"}, "fig1_legend": (5.5, .42),
+    **{f"fig2_{p}": (1.8, 1.35) for p in "abc"}, "fig2_legend": (5.5, .42),
     "fig3_a": (2.2, 1.6), "fig3_b": (1.45, 1.6),
     "fig3_c": (1.85, 1.6), "fig3_legend": (5.5, .42),
-    **{f"fig4_{p}": (1.8, 1.15) for p in "abc"}, "fig4_legend": (5.5, .3),
+    **{f"fig4_{p}": (1.8, 1.35) for p in "abc"}, "fig4_legend": (5.5, .3),
     **{f"fig5_{p}": (2.7, 1.45) for p in "ab"},
+    "fig5_legend": (5.5, .3),
     "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
     "fig7_legend": (5.5, .3),
-    "fig8_a": (2.7, 1.45), "fig8_b": (2.7, 1.45), "fig8_legend": (5.5, .3),
+    "fig8_a": (2.7, 1.6), "fig8_b": (2.7, 1.6), "fig8_legend": (5.5, .3),
 }
 
 
@@ -49,6 +50,8 @@ def check_artists(fig):
             # SubFigure transforms can differ at an edge by ~1e-13 pixels.
             assert box.x0 >= canvas.bbox.x0-.5 and box.y0 >= canvas.bbox.y0-.5
             assert box.x1 <= canvas.bbox.x1+.5 and box.y1 <= canvas.bbox.y1+.5
+            assert box.y0 == pytest.approx(canvas.bbox.y0, abs=.5), "Strip has no bottom padding"
+            assert canvas.bbox.y1-box.y1 >= .02*fig.dpi-.5, "Keep a small top margin"
             ys = {round(t.get_window_extent(renderer).y0) for t in legend.get_texts()}
             assert len(ys) <= 2, "Shared keys use at most two readable rows"
             assert legend.handlelength == 1.6 and legend.columnspacing == 1.4
@@ -60,6 +63,7 @@ def check_artists(fig):
             for ax in canvas.get_axes():
                 assert not box.overlaps(ax.xaxis.label.get_window_extent(renderer))
     for ax in fig.axes:
+        assert ax.get_legend() is None, "All legends belong in strips above the panels"
         assert not any(ax.get_title(loc) for loc in ("left", "center", "right"))
         assert not ax.texts, "Titles and explanatory text belong in captions"
         assert ax.get_xlabel() or (len(ax.get_xticklabels()) == 12 and
@@ -146,6 +150,9 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         panels = [sub for sub in fig.subfigs if sub.axes]
         assert len(panels) == 3
         assert max(s.bbox.y0 for s in panels)-min(s.bbox.y0 for s in panels) < .5
+        strips = [sub for sub in fig.subfigs if sub.legends]
+        assert len(strips) == 1
+        assert strips[0].bbox.y0 >= max(sub.bbox.y1 for sub in panels)-.5
         combined_save(fig, stem, audit)
 
     monkeypatch.setattr(gen, "save_panel", inspect_panel)

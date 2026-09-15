@@ -79,7 +79,7 @@ def finish_panel(ax):
 
 
 def legend_row(fig, handles, **kwargs):
-    """A single compact row on the panel's own canvas, below its x label."""
+    """Anchor a compact key at the bottom of its own canvas."""
     options = dict(loc="lower center", ncol=len(handles), bbox_to_anchor=(.5, 0),
                    borderaxespad=0)
     options.update(kwargs)
@@ -91,6 +91,8 @@ def legend_strip(fig, handles):
 
     Use the same renderer and physical-width check for Figures and SubFigures.
     Reorder Matplotlib's column-major input so the visible key reads row-wise.
+    The strip sits above the panels: remove bottom padding and leave spare
+    canvas height above the entries. Reserve at least .02 inches at the top.
     """
     from math import ceil
 
@@ -101,16 +103,38 @@ def legend_strip(fig, handles):
         columns = ceil(len(handles) / rows)
         ordered = [handles[r*columns+c] for c in range(columns) for r in range(rows)
                    if r*columns+c < len(handles)]
-        legend = legend_row(fig, ordered, loc="center", bbox_to_anchor=(.5, .5),
+        legend = legend_row(fig, ordered,
                             ncol=columns, fontsize=8.5, handlelength=1.6,
                             handletextpad=.5, columnspacing=1.4,
                             labelspacing=.5, borderpad=0)
         owner.canvas.draw()
         box = legend.get_window_extent(owner.canvas.get_renderer())
-        if box.width <= fig.bbox.width - .08*owner.dpi and box.height <= fig.bbox.height:
+        if box.width <= fig.bbox.width - .08*owner.dpi and box.height <= fig.bbox.height - .02*owner.dpi:
             return legend
         legend.remove()
     raise ValueError("Legend needs more canvas space for two readable rows")
+
+
+def artist_sizes(fig):
+    """Record rendered overrides, rather than reporting defaults as data sizes."""
+    from matplotlib.container import ErrorbarContainer
+    from matplotlib.legend import Legend
+    from matplotlib.lines import Line2D
+
+    lines = [line for ax in fig.axes for line in ax.lines]
+    lines += [line for legend in fig.findobj(Legend) for line in legend.legend_handles
+              if isinstance(line, Line2D)]
+    errorbars = [c for ax in fig.axes for c in ax.containers if isinstance(c, ErrorbarContainer)]
+    return {
+        "line_widths_pt": sorted({line.get_linewidth() for line in lines
+                                  if line.get_linestyle() not in ("", "None", "none")}),
+        "marker_sizes_pt": sorted({line.get_markersize() for line in lines
+                                   if line.get_marker() not in ("", "None", "none", None)}),
+        "errorbar_widths_pt": sorted({float(w) for c in errorbars for bars in c.lines[2]
+                                      for w in bars.get_linewidths()}),
+        "cap_sizes_pt": sorted({cap.get_markersize()/2 for c in errorbars for cap in c.lines[1]}),
+        "cap_widths_pt": sorted({cap.get_markeredgewidth() for c in errorbars for cap in c.lines[1]}),
+    }
 
 
 def save_panel(fig, stem, kind, audit, records):
@@ -130,8 +154,10 @@ def save_panel(fig, stem, kind, audit, records):
     w, h = map(float, fig.get_size_inches())
     font = font_manager.FontProperties(family=SERIF, weight="bold")
     selected = font_manager.FontProperties(fname=font_manager.findfont(font)).get_name()
+    rendered = artist_sizes(fig)
     audit.rule(f"{stem}.pdf: {w:g} x {h:g} in; bold {selected}; ticks {tick} pt, "
                f"axis labels {label} pt, legend {legend} pt; default lines 1.1 pt, markers 3.8 pt; caps 2 pt. "
+               f"Rendered artist sizes: {rendered}. "
                "Full canvas retained; no titles, panel letters, or explanatory annotations.")
     write_notes(stem, audit, records)
     output_path(audit.root, "figs", f"{stem}_data.json").write_text(
@@ -149,6 +175,9 @@ def save_panel(fig, stem, kind, audit, records):
                              "labels_pt": label, "legend_pt": legend},
                     "style_defaults": {"line_width_pt": 1.1, "marker_size_pt": 3.8,
                               "errorbar_capsize_pt": 2},
+                    "artist_sizes": rendered,
+                    "legend_layout": {"placement": "above panels", "bottom_padding_inches": 0,
+                                      "minimum_top_padding_inches": .02} if fig.legends else None,
                     "axis_font_sizes_pt": [
                         {"x_ticks": [t.get_fontsize() for t in ax.get_xticklabels()],
                          "y_ticks": [t.get_fontsize() for t in ax.get_yticklabels()],
@@ -156,7 +185,7 @@ def save_panel(fig, stem, kind, audit, records):
                          "y_label": ax.yaxis.label.get_fontsize()} for ax in fig.axes]},
                    indent=2, allow_nan=False) + "\n")
     print(f"{stem}: {w:g} x {h:g} in; {selected} bold; "
-          f"ticks/labels/legend = {tick}/{label}/{legend} pt; default lines/markers/caps = 1.1/3.8/2 pt")
+          f"ticks/labels/legend = {tick}/{label}/{legend} pt; rendered sizes = {rendered}")
 
 
 def write_caption(stem, audit, text):

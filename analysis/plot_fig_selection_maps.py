@@ -32,7 +32,7 @@ Selections, oracles and scores are read verbatim from V78 compare.json, with
 the chosen method/configuration checked against freeze.json. Nothing is refit,
 rescored or selected again. All 68 state-budget cells per objective are retained.
 QA remains limited to 2Wiki; the multi-objective result remains retrospective.
-The shared key is supplied as fig7_legend.pdf.
+The shared key is supplied as fig7_legend.pdf above the panels.
 The four panels form one 5.5-inch row: fig7_a.pdf is 1.75 x 1.5 inches;
 fig7_b.pdf, fig7_c.pdf and fig7_d.pdf are each 1.25 x 1.5 inches.
 Only (a) carries state tick labels. All panels use the same vertical margins,

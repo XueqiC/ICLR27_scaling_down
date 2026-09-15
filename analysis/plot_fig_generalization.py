@@ -30,7 +30,7 @@ MARKERS = {"math": "o", "code": "s", "qa": "D"}
 PANEL_SIZES = {"a": (2.2, 1.6), "b": (1.45, 1.6), "c": (1.85, 1.6)}
 KINDS = {"a": "double", "b": "panel", "c": "panel"}
 LEGEND_SIZE = (5.5, .42)
-FIGSIZE = (5.5, 2.04)
+FIGSIZE = (5.5, 2.02)
 if __package__:
     from .paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
 else:
@@ -343,10 +343,10 @@ def draw_legend(fig):
 
 def plot(rows, plt):
     return combine_panels(plt, [
-        ("double", (0, .44, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
-        ("panel", (2.2, .44, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
-        ("panel", (3.65, .44, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
-        ("legend", (0, 0, *LEGEND_SIZE), draw_legend),
+        ("double", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
+        ("panel", (2.2, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
+        ("panel", (3.65, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
+        ("legend", (0, PANEL_SIZES["a"][1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
 
@@ -378,7 +378,7 @@ registered corner contrasts are available on fresh distributions, with additive 
 No A2 development-holdout interval is transplanted to these confirmation cells.
 The three panels are 2.2, 1.45 and 1.85 inches wide and 1.6 inches high in one
 5.5-inch row. Panel (c) stacks 1B, 4B development, 2Wiki, MuSiQue and TriviaQA.
-The shared key is fig3_legend.pdf: Baseline, Relation and Lower of pair distinguish
+The shared key is fig3_legend.pdf above the panels: Baseline, Relation and Lower of pair distinguish
 the paired MAEs; Lower of pair marks a relation MAE below its paired baseline.
 The 4B development entry identifies development-student triangles in (c).
 Panel (b)'s row labels sit above their markers.

@@ -13,7 +13,7 @@ else:
 
 STUDENTS = ("gemma3-1b", "gemma3-4b")
 RATES = ("5e-5", "1e-4", "2e-4")
-PANEL_SIZE = (1.8, 1.15)
+PANEL_SIZE = (1.8, 1.35)
 CAPTION = """Learning-rate pilot for Gemma-3 1B (dashed) and 4B (solid).
 Colour identifies capability, using the Figure 1 palette. The x axis is the
 configured peak learning rate encoded in the run name, not the decayed lr field
@@ -22,8 +22,9 @@ update, with positive values indicating higher loss than the initial student.
 All six pilots use full teacher data with 75 examples per domain and data seed
 11; their final saved update is 8, at 37,903 processed input tokens. These are
 development pilots, with one run per student/rate and no uncertainty estimate.
-Panel (c) is 1.8 x 1.15 inches, the third panel in the 5.5-inch Figure 1 row.
-The complete capability/distribution/student/seed key is fig1_legend.pdf;
+Panel (c) is 1.8 x 1.35 inches, the third panel in the 5.5-inch Figure 1 row.
+Lines are 1.5 pt and markers are 5 pt. The complete
+capability/distribution/student/seed key is fig1_legend.pdf above the panels;
 the LR ticks give the configured rates and the markers denote checkpoints.
 """
 
@@ -65,7 +66,7 @@ def draw_panel(fig, rows):
             part = sorted((r for r in rows if r["student"] == student and r["capability"] == cap),
                           key=lambda r: r["learning_rate"])
             ax.plot([r["learning_rate"] for r in part], [r["delta"] for r in part],
-                    color=COLORS[cap], ls=ls, marker="o")
+                    color=COLORS[cap], ls=ls, marker="o", lw=1.5, ms=5)
     axes_defaults(ax)
     ax.set(xscale="log", xlabel="Peak learning rate", ylabel="Loss change (nats)",
            xlim=(4.3e-5, 2.35e-4), ylim=(-1.45, .18))

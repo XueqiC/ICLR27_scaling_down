@@ -17,10 +17,10 @@ A2="results/a2-curvature-interaction/summary.json"
 A5="results/a5-corner-second-difference/summary.json"
 A7="results/a7-closeout-audit/summary.json"
 CAPTION="failed to reject"
-PANEL_SIZES = {p: (1.8, 1.15) for p in "abc"}
+PANEL_SIZES = {p: (1.8, 1.35) for p in "abc"}
 KINDS = {"a": "panel", "b": "panel", "c": "panel"}
 LEGEND_SIZE = (5.5, .42)
-FIGSIZE = (5.5, 1.59)
+FIGSIZE = (5.5, 1.77)
 if __package__:
     from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels
 else:
@@ -44,8 +44,12 @@ error across its stored state/capability records. Zero-damage records are exclud
 The three families are pruning, grouped RTN, and per-channel RTN. There is no
 distillation displacement measurement; the superseded uncentred run and the
 separate cluster hardware run are not pooled.
-The three 1.8 x 1.15-inch panels form one row at 5.5-inch text width.
-The shared key is fig2_legend.pdf: Fold estimate, Boundary and Full apply to (a);
+The three 1.8 x 1.35-inch panels form one row at 5.5-inch text width.
+Lines are 1.5 pt and markers 5 pt; boundary crosses are 6 pt. Fold estimates
+are spread horizontally for visibility, without changing their curvature values.
+Error bars and whiskers are 1.3 pt with 2.5 pt caps; (b)'s shaded band edges
+and additive bars are 1.5 pt. The shared key fig2_legend.pdf sits above the panels:
+Fold estimate, Boundary and Full apply to (a);
 Additive, F_int and Observed to (b); Group, Channel and Prune to (c), denoting grouped
 RTN, per-channel RTN and pruning. Panel (b) labels use student size/readout,
 for example 1B QA. Damage and relative error in (c) are configuration medians.
@@ -122,6 +126,18 @@ def displacement(audit):
     return result
 
 
+def fold_positions(folds):
+    """Spread nearby curvature estimates across a wide, deterministic jitter grid."""
+    count = len(folds)
+    # Golden-ratio ordering distributes adjacent ranks across the available
+    # width, instead of stacking near-equal p estimates at adjacent x positions.
+    slots = sorted(range(count), key=lambda k: (k*((5**.5-1)/2)) % 1)
+    positions = [0.] * count
+    for index, slot in zip(sorted(range(count), key=lambda k: folds[k]["p"]), slots):
+        positions[index] = -.46 + .84*slot/max(1, count-1)
+    return positions
+
+
 def draw_panel(fig, data, panel):
     from matplotlib.ticker import NullFormatter, MaxNLocator
     size = PANEL_SIZES[panel]
@@ -129,16 +145,17 @@ def draw_panel(fig, data, panel):
         ax = panel_axes(fig, size, left=.35, bottom=.41, right=.06)
         for i, r in enumerate(data["profiles"]):
             color = COLORS[r["capability"]]
-            for k, fold in enumerate(r["folds"]):
-                x = i-.25+.38*k/max(1, len(r["folds"])-1)
-                ax.plot(x, fold["p"], marker="x" if fold["boundary"] else "o", color=color, alpha=.65)
+            for offset, fold in zip(fold_positions(r["folds"]), r["folds"]):
+                ax.plot(i+offset, fold["p"], ls="none", marker="x" if fold["boundary"] else "o",
+                        ms=6 if fold["boundary"] else 5, mew=1.3 if fold["boundary"] else .6,
+                        color=color, alpha=.8)
             lo, hi = r["interval"]
-            ax.errorbar(i+.28, r["p"], yerr=[[r["p"]-lo], [hi-r["p"]]],
-                        fmt="D", color=color, capsize=2)
-        ax.axhline(0, color=".65", lw=1.1, ls=":")
-        ax.axhline(1, color=".65", lw=1.1, ls="--")
+            ax.errorbar(i+.57, r["p"], yerr=[[r["p"]-lo], [hi-r["p"]]],
+                        fmt="D", color=color, ms=5, lw=1.5, elinewidth=1.3, capthick=1.3, capsize=2.5)
+        ax.axhline(0, color=".65", lw=1.5, ls=":")
+        ax.axhline(1, color=".65", lw=1.5, ls="--")
         ax.set(xticks=range(3), xticklabels=["Math", "Code", "QA"],
-               xlabel="Capability", ylabel="Curvature $p$")
+               xlabel="Capability", ylabel="Curvature $p$", xlim=(-.65, 2.75))
         ax.yaxis.set_major_locator(MaxNLocator(4))
         for text in ax.get_xticklabels():
             text.set_rotation(30)
@@ -148,12 +165,13 @@ def draw_panel(fig, data, panel):
         ax = panel_axes(fig, size, left=.49, bottom=.30, right=.06)
         for i, r in enumerate(data["corners"]):
             color = COLORS[r["capability"]]
-            ax.fill_betweenx([i-.36, i+.36], -r["noise"], r["noise"], color=".88", zorder=0)
-            ax.plot(r["additive"], i-.18, "|", color=".2")
-            ax.plot(r["F_int"], i+.18, "D", color="#7c4da1")
+            ax.fill_betweenx([i-.36, i+.36], -r["noise"], r["noise"],
+                             facecolor=".88", edgecolor=".75", linewidth=1.5, zorder=0)
+            ax.plot(r["additive"], i-.18, "|", color=".2", ms=5, mew=1.5)
+            ax.plot(r["F_int"], i+.18, "D", color="#7c4da1", ms=5)
             lo, hi = r["interval"]
             ax.errorbar(r["measured"], i, xerr=[[r["measured"]-lo], [hi-r["measured"]]],
-                        fmt="o", color=color, capsize=2)
+                        fmt="o", color=color, ms=5, lw=1.5, elinewidth=1.3, capthick=1.3, capsize=2.5)
         ax.set_xscale("symlog", linthresh=.02)
         ax.set_xticks([-.1, 0, .1], labels=["−0.1", "0", "0.1"])
         ax.xaxis.set_minor_formatter(NullFormatter())
@@ -173,7 +191,7 @@ def draw_panel(fig, data, panel):
                                           COLORS.values(), ("o", "s", "^")):
             part = sorted((r for r in data["displacement"] if r["family"] == family), key=lambda r: r["damage"])
             ax.plot([r["damage"] for r in part], [100*r["median_relative_error"] for r in part],
-                    marker=marker, color=color, label=labels[family])
+                    marker=marker, color=color, lw=1.5, ms=5, label=labels[family])
         ax.set(xscale="log", yscale="log", xlabel="Absolute damage (nats)",
                ylabel="Relative error (%)")
         ax.set_xticks([.01, 1])
@@ -185,21 +203,22 @@ def draw_panel(fig, data, panel):
 
 def draw_legend(fig):
     from matplotlib.lines import Line2D
-    handles = [Line2D([], [], marker=m, ls="", color=c, label=label)
+    handles = [Line2D([], [], marker=m, ls="", color=c, ms=6 if m == "x" else 5,
+                      mew=1.5 if m == "|" else 1.3 if m == "x" else .6, label=label)
                for m, c, label in (("o", ".3", "Fold estimate"), ("x", ".3", "Boundary"),
                                    ("D", ".3", "Full"), ("|", ".2", "Additive"),
                                    ("D", "#7c4da1", "$F_{int}$"), ("o", ".3", "Observed"))]
-    handles += [Line2D([], [], marker=m, color=c, label=label)
+    handles += [Line2D([], [], marker=m, color=c, lw=1.5, ms=5, label=label)
                 for m, c, label in zip(("o", "s", "^"), COLORS.values(), ("Group", "Channel", "Prune"))]
     return legend_strip(fig, handles)
 
 
 def plot(data, plt):
     return combine_panels(plt, [
-        ("panel", (0, .44, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a")),
-        ("panel", (1.85, .44, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b")),
-        ("panel", (3.7, .44, *PANEL_SIZES["c"]), lambda f: draw_panel(f, data, "c")),
-        ("legend", (0, 0, *LEGEND_SIZE), draw_legend),
+        ("panel", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a")),
+        ("panel", (1.85, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b")),
+        ("panel", (3.7, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, data, "c")),
+        ("legend", (0, PANEL_SIZES["a"][1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
 

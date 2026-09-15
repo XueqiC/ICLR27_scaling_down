@@ -1,9 +1,12 @@
 from collections import defaultdict
+from statistics import mean
+import json
 
 import pytest
 
 from analysis import plot_fig_responses_v2 as gen
-from analysis.paper_artifacts import Artifacts, development_rows
+from analysis.paper_artifacts import Artifacts, development_rows, pyplot, output_path, ROOT
+from analysis import paper_figure_style as style
 from paper_generator_checks import check_access, check_figures, refuses_symlink, refuses_external_io, refuses_output_file_symlink
 
 
@@ -30,6 +33,44 @@ def test_responses_produces_files_from_nearest_budget_and_separate_seeds():
                 for r in subset: by_rung[r["U"]].add(r["pool_seed"])
                 assert all(len(seeds)==2 for seeds in by_rung.values())
     assert all(r["status"]=="development" for r in rows)
+    for letter, panel in zip("ab", ("left", "right")):
+        sidecar = json.loads(output_path(ROOT, "figs", f"fig1_{letter}_data.json").read_text())
+        assert sidecar["records"] == [r for r in rows if r["panel"] == panel]
+
+
+@pytest.mark.parametrize("panel", ("left", "right"))
+def test_one_mean_line_per_student_readout_and_raw_seed_markers(panel):
+    rows = gen.build(Artifacts())
+    plt = pyplot()
+    style.apply_style("panel")
+    fig = plt.figure(figsize=gen.PANEL_SIZE)
+    try:
+        ax = gen.draw_panel(fig, rows, panel)
+        lines = [line for line in ax.lines if line.get_color() in gen.COLORS.values()
+                 and line.get_linestyle() != "None"]
+        points = [line for line in ax.lines if line.get_marker() in ("o", "s")]
+        assert len(lines) == 9 and len(points) == 18
+        assert all(line.get_linewidth() == 1.5 and line.get_marker() == "None" for line in lines)
+        assert all(line.get_linestyle() == "None" and line.get_markersize() == 5 for line in points)
+        assert ax.get_legend() is None
+        for series, color in zip(gen.CAPS if panel == "left" else gen.SCOPES, gen.COLORS.values()):
+            for student, ls in zip(gen.STUDENTS, gen.STYLES):
+                subset = [r for r in rows if (r["panel"], r["series"], r["student"]) == (panel, series, student)]
+                rungs = defaultdict(list)
+                for r in subset:
+                    rungs[r["U"]].append(r)
+                expected = sorted((mean(r["reuse"] for r in part), mean(r["delta"] for r in part))
+                                  for part in rungs.values())
+                line = next(line for line in lines if line.get_color() == color and line.get_linestyle() == ls)
+                assert list(zip(line.get_xdata(), line.get_ydata())) == expected
+        from collections import Counter
+        for parity, marker in ((1, "o"), (0, "s")):
+            assert Counter((x, y) for line in points if line.get_marker() == marker
+                           for x, y in zip(line.get_xdata(), line.get_ydata())) == Counter(
+                               (r["reuse"], r["delta"]) for r in rows
+                               if r["panel"] == panel and r["pool_seed"] % 2 == parity)
+    finally:
+        plt.close(fig)
 
 
 @pytest.mark.parametrize("component",["parent","directory"])

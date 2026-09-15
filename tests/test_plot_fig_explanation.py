@@ -4,7 +4,8 @@ from statistics import median
 import pytest
 
 from analysis import plot_fig_explanation as gen
-from analysis.paper_artifacts import ROOT
+from analysis.paper_artifacts import ROOT, Artifacts, pyplot
+from analysis import paper_figure_style as style
 from paper_generator_checks import check_access, check_figures, refuses_symlink, refuses_external_io, refuses_output_file_symlink
 
 
@@ -45,3 +46,45 @@ def test_explanation_refuses_symlinked_output(tmp_path,component):
 def test_explanation_confines_io(tmp_path):
     refuses_external_io(tmp_path)
     refuses_output_file_symlink(tmp_path,"figs","explanation.png")
+
+
+@pytest.mark.parametrize("panel", "abc")
+def test_explanation_line_marker_whisker_and_jitter_sizes(panel):
+    from matplotlib.container import ErrorbarContainer
+    from matplotlib.collections import PolyCollection
+    audit = Artifacts()
+    data = dict(profiles=gen.curvature(audit), corners=gen.corners(audit), displacement=gen.displacement(audit))
+    plt = pyplot()
+    style.apply_style("panel")
+    fig = plt.figure(figsize=gen.PANEL_SIZES[panel])
+    try:
+        ax = gen.draw_panel(fig, data, panel)
+        assert tuple(fig.get_size_inches()) == (1.8, 1.35)
+        assert ax.get_legend() is None
+        for line in ax.lines:
+            if line.get_marker() in ("o", "s", "^", "D", "x"):
+                assert line.get_markersize() == (6 if line.get_marker() == "x" else 5)
+        for container in ax.containers:
+            if isinstance(container, ErrorbarContainer):
+                assert all(list(bars.get_linewidths()) == [1.3] for bars in container.lines[2])
+                assert all(cap.get_markersize() == 5 and cap.get_markeredgewidth() == 1.3
+                           for cap in container.lines[1])
+        if panel == "a":
+            for i, profile in enumerate(data["profiles"]):
+                folds = [line for line in ax.lines if line.get_color() == gen.COLORS[profile["capability"]]
+                         and line.get_marker() in ("o", "x")]
+                assert len(folds) == len(profile["folds"])
+                xs = [line.get_xdata()[0] for line in folds]
+                assert max(xs)-min(xs) == pytest.approx(.84)
+                assert len(set(xs)) == len(xs)
+                assert [line.get_ydata()[0] for line in folds] == [r["p"] for r in profile["folds"]]
+        elif panel == "b":
+            assert all(list(band.get_linewidths()) == [1.5] for band in ax.collections if isinstance(band, PolyCollection))
+            # The additive bars have no ErrorbarContainer; whisker caps remain 1.3 pt.
+            additive = [line for line in ax.lines if line.get_marker() == "|" and line.get_color() == ".2"]
+            assert len(additive) == len(data["corners"])
+            assert all(line.get_markeredgewidth() == 1.5 for line in additive)
+        else:
+            assert len(ax.lines) == 3 and all(line.get_linewidth() == 1.5 for line in ax.lines)
+    finally:
+        plt.close(fig)

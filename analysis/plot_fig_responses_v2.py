@@ -6,6 +6,7 @@ import sys
 sys.dont_write_bytecode = True
 
 from collections import defaultdict
+from statistics import mean
 
 if __package__:
     from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot, development_rows, save_figure, write_notes
@@ -15,9 +16,9 @@ else:
 STUDENTS = ("gemma3-270m", "gemma3-1b", "gemma3-4b")
 STYLES = (":", "--", "-")
 SCOPES = ("2wiki_new", "musique", "triviaqa")
-PANEL_SIZE = (1.8, 1.15)
+PANEL_SIZE = (1.8, 1.35)
 LEGEND_SIZE = (5.5, .42)
-FIGSIZE = (5.5, 1.59)
+FIGSIZE = (5.5, 1.77)
 if __package__:
     from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels
 else:
@@ -26,16 +27,21 @@ else:
 CAPTION = """Capability responses (a) and fresh QA distributions (b). Positive = worse:
 positive loss change means higher loss than the student's own initial state.
 Development endpoints nearest 200k supervised tokens per trajectory; every seed
-shown separately. Reuse T/D_U is measured in supervised-token passes, and loss
+shown as a separate marker. Reuse T/D_U is measured in supervised-token passes, and loss
 change in native-token nats. All points, including 4B, are development.
 Colours identify Math, Code and QA in (a), and 2Wiki, MuSiQue and TriviaQA in (b).
 Dotted, dashed and solid lines denote 270M, 1B and 4B students. Circles and squares
 identify the first and second registered pool seeds within each rung; the core
-uses seeds 41/42 and the critical rung uses 51/52. No seed averaging is applied.
+uses seeds 41/42 and the critical rung uses 51/52. One line per student and
+capability/distribution connects the arithmetic means of the two seeds at each
+pool-size rung (both reuse and loss change are averaged). Marker-only circles
+and squares retain each seed's observed reuse and loss change; there are no
+separate per-seed lines. Every underlying seed value remains in the sidecars.
 The complete shared key is supplied separately as fig1_legend.pdf: colours for
 all capabilities and distributions, student line styles, and S1/S2 for the two
 registered pool seeds. The learning-rate pilot (c) uses the same student styles.
-All three 1.8 x 1.15-inch panels form one row at 5.5-inch text width.
+All three 1.8 x 1.35-inch panels form one row at 5.5-inch text width, with the
+shared legend above. Data lines are 1.5 pt and seed markers are 5 pt.
 """
 
 
@@ -77,7 +83,9 @@ def build(audit):
                "capability, distribution, delta. Select positive T_actual nearest 200000 separately per trajectory/readout. "
                "reuse=T_actual/D_U_pool; y=delta (own-initial loss subtracted by A1). Both pool seeds remain separate points.")
     audit.rule("The four-rung core includes pool seeds 41/42 and, for the critical rung, 51/52. "
-               "Seed markers identify the first/second registered seed within each rung; no seed averaging. "
+               "Seed markers identify the first/second registered seed within each rung; "
+               "one line connects arithmetic mean reuse/delta over the two seeds per rung. "
+               "All individual seed records are retained unchanged. "
                "Scope rows in the same CSV originate in v99-scope. All points, including 4B, are development.")
     return result
 
@@ -89,10 +97,21 @@ def draw_panel(fig, rows, panel):
     for c, color in zip(series, COLORS.values()):
         for student, style in zip(STUDENTS, STYLES):
             subset = [r for r in rows if r["panel"] == panel and r["series"] == c and r["student"] == student]
+            rungs = defaultdict(list)
+            for row in subset:
+                rungs[row["U"]].append(row)
+            if any(len(part) != 2 or len({r["pool_seed"] for r in part}) != 2
+                   for part in rungs.values()):
+                raise ValueError("Expected two distinct pool seeds per student/readout/rung")
+            points = sorted((mean(r["reuse"] for r in part), mean(r["delta"] for r in part))
+                            for part in rungs.values())
+            if points:
+                ax.plot([x for x, _ in points], [y for _, y in points],
+                        linestyle=style, color=color, lw=1.5, alpha=.9)
             for parity, marker in ((1, "o"), (0, "s")):
                 line = sorted((r for r in subset if r["pool_seed"] % 2 == parity), key=lambda r: r["reuse"])
                 ax.plot([r["reuse"] for r in line], [r["delta"] for r in line],
-                        linestyle=style, marker=marker, color=color, alpha=.85)
+                        linestyle="none", marker=marker, ms=5, color=color, alpha=.85)
     ax.axhline(0, color=".5", lw=1.1)
     ax.set(xlabel="Reuse ratio", ylabel="Loss change (nats)")
     ax.set_xticks([4, 8, 12])
@@ -103,12 +122,12 @@ def draw_panel(fig, rows, panel):
 
 def draw_legend(fig):
     from matplotlib.lines import Line2D
-    colours = [Line2D([], [], color=color, label=name)
+    colours = [Line2D([], [], color=color, lw=1.5, label=name)
                for names in (("Math", "Code", "QA"), ("2Wiki", "MuSiQue", "TriviaQA"))
                for color, name in zip(COLORS.values(), names)]
-    handles = [Line2D([], [], color=".25", ls=style, label=student)
+    handles = [Line2D([], [], color=".25", ls=style, lw=1.5, label=student)
                for student, style in zip(("270M", "1B", "4B"), STYLES)]
-    handles += [Line2D([], [], ls="", marker=m, color=".25", label=label)
+    handles += [Line2D([], [], ls="", marker=m, ms=5, color=".25", label=label)
                 for m, label in (("o", "S1"), ("s", "S2"))]
     return legend_strip(fig, colours + handles)
 
@@ -119,10 +138,10 @@ def plot(rows, plt, pilot_rows):
     else:
         from plot_fig_lr_pilot import draw_panel as draw_pilot
     return combine_panels(plt, [
-        ("panel", (0, .44, *PANEL_SIZE), lambda f: draw_panel(f, rows, "left")),
-        ("panel", (1.85, .44, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right")),
-        ("panel", (3.7, .44, *PANEL_SIZE), lambda f: draw_pilot(f, pilot_rows)),
-        ("legend", (0, 0, *LEGEND_SIZE), draw_legend),
+        ("panel", (0, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "left")),
+        ("panel", (1.85, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right")),
+        ("panel", (3.7, 0, *PANEL_SIZE), lambda f: draw_pilot(f, pilot_rows)),
+        ("legend", (0, PANEL_SIZE[1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
 
