@@ -22,7 +22,7 @@ SOURCES = {
     "corners": "results/a5-corner-second-difference/summary.json",
 }
 OUT = Path("results/a7-closeout-audit")
-DOC = Path("paper/docs/CLOSEOUT_AUDIT.md")
+DOC = Path("docs/CLOSEOUT_AUDIT.md")
 STRUCTURES = ("F_log", "F_curv", "F_int")
 FORMS = {
     "F_log": "(a+a_prime*z)*u+(b+b_prime*z)*v",

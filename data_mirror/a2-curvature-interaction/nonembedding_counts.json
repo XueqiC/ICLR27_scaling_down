@@ -1,0 +1,51 @@
+{
+  "method": "Sum of every tensor in the snapshot's safetensors headers, minus the tied token-embedding tensor, minus every vision-tower and multimodal-projector tensor. Shapes only; no weights were loaded and no model was instantiated.",
+  "scope": "Text decoder only, matching the registry note that the 4B and 12B checkpoints are analysed as text language models and that LoRA is applied to the text decoder.",
+  "counted_at_utc": "2026-09-14",
+  "students": {
+    "gemma3-270m": {
+      "hf_id": "google/gemma-3-270m",
+      "revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+      "total_parameters": 268098176,
+      "embedding_parameters": 167772160,
+      "vision_and_projector_parameters": 0,
+      "non_embedding_parameters": 100326016,
+      "embedding_tensors": [
+        "model.embed_tokens.weight"
+      ]
+    },
+    "gemma3-1b": {
+      "hf_id": "google/gemma-3-1b-pt",
+      "revision": "fcf18a2a879aab110ca39f8bffbccd5d49d8eb29",
+      "total_parameters": 999885952,
+      "embedding_parameters": 301989888,
+      "vision_and_projector_parameters": 0,
+      "non_embedding_parameters": 697896064,
+      "embedding_tensors": [
+        "model.embed_tokens.weight"
+      ]
+    },
+    "gemma3-4b": {
+      "hf_id": "google/gemma-3-4b-pt",
+      "revision": "cc012e0a6d0787b4adcc0fa2c4da74402494554d",
+      "total_parameters": 4300079472,
+      "embedding_parameters": 671252480,
+      "vision_and_projector_parameters": 419816304,
+      "non_embedding_parameters": 3209010688,
+      "embedding_tensors": [
+        "language_model.model.embed_tokens.weight"
+      ]
+    },
+    "gemma3-12b": {
+      "hf_id": "google/gemma-3-12b-pt",
+      "revision": "295efb63d01a7017928f273a94ebb86105c9526f",
+      "total_parameters": 12187325040,
+      "embedding_parameters": 1006878720,
+      "vision_and_projector_parameters": 421290864,
+      "non_embedding_parameters": 10759155456,
+      "embedding_tensors": [
+        "language_model.model.embed_tokens.weight"
+      ]
+    }
+  }
+}

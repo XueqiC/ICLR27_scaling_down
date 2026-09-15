@@ -1,5 +1,21 @@
 {
   "files": {
+    "analysis/a5_corner_second_difference.py@live": {
+      "frozen_sha256": "498ef3ebfa49f190fdc45401893b5cee515aa475dfc6377d12d022292614843f",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/a5_corner_second_difference.py",
+      "published_at": "analysis/a5_corner_second_difference.py",
+      "published_sha256": "bd87a6efe47fe9f009e76160aca436e3ae32be94853c97a49665b4900d4c5069",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "analysis/a7_closeout_audit.py@live": {
+      "frozen_sha256": "9337eefc290f5fa3d63152a8ced4f6ff06723bfc88fa429ef90152b609dec9e0",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/a7_closeout_audit.py",
+      "published_at": "analysis/a7_closeout_audit.py",
+      "published_sha256": "a213be9ad9c18dd8e756727638bfe83109797ef3316bbda6d6b742e205dadcdc",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
     "analysis/model_registry.py@live": {
       "frozen_sha256": "64075b24d26325832f466d3797ec4d3def91c704e3195e51715dba6d6165a4b9",
       "pairable": true,
@@ -7,6 +23,22 @@
       "published_at": "analysis/model_registry.py",
       "published_sha256": "106f0befbe97ef68e3ff7943f54072235bcf5862aadb7a7c1d296d2de28fb9ae",
       "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "analysis/paper_artifacts.py@live": {
+      "frozen_sha256": "81d5b4f3660875b9400de970b0cf309a2b222f060226f5b5b4525b52b8ef3197",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/paper_artifacts.py",
+      "published_at": "analysis/paper_artifacts.py",
+      "published_sha256": "670940d760d39cec871a2132cfea704021d15fe938b399942ddb4d09428eac14",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "analysis/plot_fig_generalization_cells.py@live": {
+      "frozen_sha256": "1560ae651777799cda6e94fca9f24f89c0111ae5880288581e43a1ce45cf489f",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/plot_fig_generalization_cells.py",
+      "published_at": "analysis/plot_fig_generalization_cells.py",
+      "published_sha256": "f7e9ae22cc02e2734dc7295c5828aea56a1dac01d0960205edbba8876e9fc1c7",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/provenance.py@live": {
       "frozen_sha256": "a625fba3d22f3b4b0d659de5fecce5640d783c4deee28f73a5bba40494ca4865",
@@ -88,6 +120,14 @@
       "published_sha256": "8cf21f3855ffb07f9ee46bb98d86dfc6ff717434b97b657d6ce72e5387ad8758",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/a3-corner-pools/plan.json@live": {
+      "frozen_sha256": "fc5fb5a7623d502e25bd8a5ef31a85226a3ff3944edf408bb6968ce8149dd505",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a3-corner-pools/plan.json",
+      "published_at": "data_mirror/a3-corner-pools/plan.json",
+      "published_sha256": "dd41baaf61baff7d838403dd556b2b4ddc6108a806ca777736ed9b708cfdaef3",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "data_mirror/v45-main-table/main_table.json@live": {
       "frozen_sha256": "55835b007857d0bba7af54fe505c5a9daaebaeda4826ac303033b42840e2f465",
       "pairable": false,
@@ -98,11 +138,11 @@
     },
     "data_mirror/v47-p2-register/register.json@live": {
       "frozen_sha256": "c12167d4b12b9c18e5983239573868ea4a7dfe3f62c8b638f3a10f99970e4757",
-      "pairable": false,
+      "pairable": true,
       "path_in_frozen_record": "data_mirror/v47-p2-register/register.json",
       "published_at": "data_mirror/v47-p2-register/register.json",
-      "published_sha256": "2d1eadd9a7b720d08cb1ab6629176bbea4b3c1f2c3c5b23fb9bbdb13f84a48b6",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+      "published_sha256": "790ae44d8921c609204046fe2d0790251fe14df18d3ea0d89e661326c07e015c",
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v49-p1v2/p1v2_table.csv@live": {
       "frozen_sha256": "c6c0c37ea24bccb97e0fc0ab544a8b6567d7e1b68357372a6bf0969d1b9dee26",
@@ -135,6 +175,14 @@
       "published_at": "data_mirror/v52-prediction-tables/rows.csv",
       "published_sha256": "8ae1b00c9ef5c09b4388b079ef5744eb11d026e8a0fc14356aa0696788978e0a",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v56-distill-forms/summary.json.gz@live": {
+      "frozen_sha256": "3243fc33d20618a05504bc1296c9041df7e621bab7ee78dacfb7364744a01236",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v56-distill-forms/summary.json.gz",
+      "published_at": "data_mirror/v56-distill-forms/summary.json.gz",
+      "published_sha256": "5c96747a71f54e17195e5a91983284e449a2a8cec46fecf17ac68e8aea07c8cd",
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v64-selection-feasible/summary.md@live": {
       "frozen_sha256": "fd8627b6c78c90d5beb7657ccd053dfc333079c896be620125bbaf7f61a0e49d",
@@ -471,6 +519,14 @@
       "published_at": "data_mirror/v88-displacement-cluster/pythia-410m--step143000/prune_d0.85.json",
       "published_sha256": "a9d8708b089fa221916a7fc9f14eaf668aa40ab1af57321fffc8024d4a6d60e0",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "data_mirror/v88-displacement-uncentred-run/summary.json@live": {
+      "frozen_sha256": "716e8f3c36a5994a8b00095561b5a0658eed48ace0f971ceec9b69497d0670fc",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v88-displacement-uncentred-run/summary.json",
+      "published_at": "data_mirror/v88-displacement-uncentred-run/summary.json",
+      "published_sha256": "2c4433eceb1e529319ffcbb1fcf6427cbc400c3b1cfb8b35f69b0118ce1a8668",
+      "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v88-displacement/pythia-1.4b--step143000/b3_g0.json@live": {
       "frozen_sha256": "bdd7e34e00e57ffe520a7058eb9e8b7372de314a43051d287c18cdb6703b3b35",
@@ -1424,6 +1480,70 @@
       "published_sha256": "aacfae023d96ff1b9ea65762015d36bdb456483cb620eaf2e171f29228f9706c",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000038.json@live": {
+      "frozen_sha256": "6ba2a9cb65bdc5d35272d41af785034a24fe4e40928bf433780f585a519f4a43",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000038.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000038.json",
+      "published_sha256": "8d2230b41971cc2a4377cf8b01f1bbdc6487b0bf36b89930984772930e544c72",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000036.json@live": {
+      "frozen_sha256": "857c8c4127e846cfb74d70fce5a28c75cea65e73013d77012b8868c9e60538be",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000036.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000036.json",
+      "published_sha256": "c487d49d3fe016fce828df3acac1399e3148f3e32f4f5a1a554a8add42eb423c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000074.json@live": {
+      "frozen_sha256": "80e0843eeac39e7453feb74cb669bdce701ad5e53889d6dfea534cc073c56af9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000074.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000074.json",
+      "published_sha256": "44589a441ba0bae8421a53688a5252acb7bd2cbc60ec26048ebff37e92c49d4a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-1b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-98e5d57052842e92/update-00000074.json@live": {
+      "frozen_sha256": "754e6ad6f631720d1796a61915772a1930611730e6d971d4e062703deeade31f",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-98e5d57052842e92/update-00000074.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-1b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-98e5d57052842e92/update-00000074.json",
+      "published_sha256": "14b9c75f02c41ef4439224418a51ed247a004bff43a57365b3ff5fb112c21933",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-4b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000038.json@live": {
+      "frozen_sha256": "1474f8d755d661e618899f0536dbe220ac89e298025afcb602810b52dc249ff5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000038.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000038.json",
+      "published_sha256": "3fdbbd188fc3aa421dc8940a3612f2d6cd15ddb8370c5ac928b7d2154a4c1577",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000036.json@live": {
+      "frozen_sha256": "9948e879b9242534f8a42760d6c425958f9ccee61195c0462738085abaa43213",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000036.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000036.json",
+      "published_sha256": "a2fa745cc7bcaa3b8fb475559393cab802eca124a6a7bc4d749f659f164fdb86",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000074.json@live": {
+      "frozen_sha256": "2b2cf80a25d9e44f054663709acb3dedbd58746ea193201119c9c19d62cb8c81",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000074.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000074.json",
+      "published_sha256": "a847ec25fd270174187c1e9ba32170fe87ceaa62dced84a59ce76af897817372",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v99-scope/a5-corners-gemma3-4b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-2da4fe4688510efb/update-00000074.json@live": {
+      "frozen_sha256": "9d7e46662aef5c3b27e3d8ecc88af000d85333a2074a16b6ca538fa0b15d9322",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-2da4fe4688510efb/update-00000074.json",
+      "published_at": "data_mirror/v99-scope/a5-corners-gemma3-4b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-2da4fe4688510efb/update-00000074.json",
+      "published_sha256": "8db9cefe5d47d50216b6bd4fbe98b7ba17b1db6289d01d4ee2f492b2b75201b8",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "data_mirror/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000000.json@live": {
       "frozen_sha256": "c43130938f16127cf1619fec54746891d3c06be42f38770337a5d87b60ed86e3",
       "pairable": true,
@@ -1959,6 +2079,30 @@
       "published_at": "scripts/run_v72_after_v71.sh",
       "published_sha256": "6d98e4c67e5961481894b85798683050af51c920d418f1f3984d8544c6554f48",
       "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "tests/paper_generator_checks.py@live": {
+      "frozen_sha256": "c32a8e55aaeda464140ee62463b9120de0461c2303679c344ac1e2074a12a22c",
+      "pairable": false,
+      "path_in_frozen_record": "tests/paper_generator_checks.py",
+      "published_at": "tests/paper_generator_checks.py",
+      "published_sha256": "35d7db8cca7d514b364eb80367ecf16dcf2cc6b91fe3457d7b64b384308b0e18",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "tests/test_final_prediction_table.py@live": {
+      "frozen_sha256": "84560a642083e6bff4eea1c190cffccc14a8fd0c0eaf2948ee56a2357134595c",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_final_prediction_table.py",
+      "published_at": "tests/test_final_prediction_table.py",
+      "published_sha256": "08b463ceaaad25204c5e2ccfbe1f42f6706daef51bf7099e01cda1910ab44fcc",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "tests/test_plot_fig_generalization.py@live": {
+      "frozen_sha256": "e59df0d0ba9b44d6e0d1785c3a2f714ad0e39ae00c8914dfa53f2167153bdde2",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_plot_fig_generalization.py",
+      "published_at": "tests/test_plot_fig_generalization.py",
+      "published_sha256": "c41321dc3f9bfd74e62377ed5504c951de6bd27936cf24237cd61940eb952821",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "tests/test_pythia_revision.py@live": {
       "frozen_sha256": "559e26517afc88f309cf0443bf002cad825ea449aee6e85a1ec15e4c2d1eff3b",

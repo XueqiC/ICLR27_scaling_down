@@ -24,12 +24,37 @@ First reconstruct the input tree the analysis scripts read, then regenerate a ta
 
 ```
 python3 bootstrap_results.py
-python3 analysis/v86_main_table.py
+python3 -m analysis.final_prediction_table
+python3 -m analysis.plot_fig_generalization
+python3 -m analysis.plot_fig_explanation
+python3 -m analysis.plot_fig_responses_v2
 ```
 
 `bootstrap_results.py` materialises `results/` from `data_mirror/`, expanding the gzipped
 summaries and creating the directories the generators write into. It never overwrites an
 existing file and never modifies `data_mirror/`.
+
+These CPU-only generators read frozen artifacts and write to `generated/tables/`
+and `generated/figs/`. `plot_fig_generalization` also generates the cell-level
+appendix; `python3 -m analysis.plot_fig_generalization_cells` runs that appendix
+alone. No training, model evaluation, fitting or resampling is needed. The exact
+input inventory, including the A5 corner-analysis checkpoints and A7 audit inputs,
+is in [PAPER_GENERATOR_INPUTS.md](docs/PAPER_GENERATOR_INPUTS.md). The original V47
+`freeze.json` is unavailable; the generators disclose this and use the recorded
+V70 freeze for the confirmation rows.
+
+Check these generators with:
+
+```
+python3 -m pytest -q tests/test_final_prediction_table.py tests/test_plot_fig_generalization.py tests/test_plot_fig_generalization_cells.py tests/test_plot_fig_explanation.py tests/test_plot_fig_responses_v2.py
+```
+
+Current validation: `plot_fig_explanation` and `plot_fig_responses_v2` and their
+tests pass. `final_prediction_table`, `plot_fig_generalization` and
+`plot_fig_generalization_cells` reach the V72 inputs but stop at `C52 freeze hash`:
+the shared helper forces raw digest equality even though the publication digest
+map records the exact anonymization correspondence. Their scoring code and digest
+acceptance rules are unchanged. The A5/A7 artifact analyses and their 75 tests pass.
 
 One artifact exists in two states, because experiments recorded it at different times: the
 grouped-quantization measurements grew new configurations after an earlier audit had recorded
@@ -38,8 +63,11 @@ capability-conditioning audits need, and `data_mirror/v54-quant-group-as-recorde
 carries the state the earlier audit recorded. Copy the latter over the former to rebuild that
 earlier audit; the ledger says which entry used which.
 
-What runs from a plain checkout, measured on a fresh clone of this repository after
-`bootstrap_results.py`: `v45_main_table`, `v52_prediction_tables`, `v74_quant_threeway`,
+The older versioned generators use the historical output layout. In a standalone
+checkout, `python3 bootstrap_results.py --legacy-layout` creates their
+`paper/paper/{tables,figs}` and `paper/code` compatibility paths. Do not use that
+option when `paper/` contains a separate manuscript repository. Previously checked
+with that layout: `v45_main_table`, `v52_prediction_tables`, `v74_quant_threeway`,
 `v76_cap_conditioning`, `v84_main_table`, `v85_selection_decomp` and `v86_main_table`
 regenerate their outputs. `v79_cond_audit` also regenerates, but it shells out to `ripgrep`, so install that first.
 `v63_quant_identifiability` is the one that does not: it verifies the grouped-quantization

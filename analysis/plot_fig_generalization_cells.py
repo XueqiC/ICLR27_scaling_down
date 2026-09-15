@@ -65,7 +65,7 @@ def build(audit):
         group="Pruning: density outside range" if r["d"]==.55 else "Pruning: density inside range"
         result.append(point("A",group,r["cap"],p,r["actual"],f"{path}#/pruning/{i}",density=r["d"],
                             state="V46 held-out 1B@96k",range_note="V46 original coarse fit: density .6--.9; .55 is outside. V53 later includes .55."))
-    audit.read("paper/docs/RESULTS_LEDGER.md")
+    audit.read("docs/RESULTS_LEDGER.md")
     audit.rule("V46 .55 is outside its original coarse .6--.9 fit; .65 is inside. "
                "Do not use the later V53 .55--.9 development range to reclassify the earlier V46 test. "
                "V72 repeats two revision labels with identical weights; these are shown as repeated records, not independent source states.")

@@ -1,0 +1,19 @@
+{
+  "tag": "pythia-410m@step48000",
+  "resolved": "EleutherAI/pythia-410m",
+  "revision": "step48000",
+  "dense": {
+    "math": 1.5276635292256584,
+    "code": 1.452460185405277,
+    "qa": 5.007604562737643
+  },
+  "measurement_tokens": {
+    "math": 12643,
+    "code": 4207,
+    "qa": 263
+  },
+  "load_s": 28.87228751182556,
+  "eval_s": 63.3080792427063,
+  "peak_vram_gb": 1.065610752,
+  "tokens_per_s": 270.31305016210206
+}

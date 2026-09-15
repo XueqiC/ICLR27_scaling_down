@@ -1,0 +1,2214 @@
+{
+  "schema_version": "a7-closeout-audit-v1",
+  "status": "COMPLETE",
+  "device": "cpu",
+  "training_run": false,
+  "new_measurements": 0,
+  "fits_performed": 0,
+  "new_candidates": 0,
+  "resampling_performed": false,
+  "source_sha256": {
+    "results/a2-curvature-interaction/summary.json": "aed1934bf0c81333e200678f08567d018575fb3fcef7e2ecfcd881c95d3f820f",
+    "results/a2-curvature-interaction/nonembedding_counts.json": "f79883a113b84af0fbee0f4b8437feff29ae359f16747e7c9dbad90c4fea6213",
+    "results/a3-corner-pools/plan.json": "fc5fb5a7623d502e25bd8a5ef31a85226a3ff3944edf408bb6968ce8149dd505",
+    "results/a5-training-seed-noise/summary.json": "dbf05ffd475fae3bcb7074b8e39ba8b931f7d7d8047ec3abda79d298791075f8",
+    "results/a5-corner-second-difference/summary.json": "05de90f078ea37d760f256eb9b9cfe37bea734827b2c8099e25f66a689a1bc75"
+  },
+  "checks": {
+    "gate": {
+      "status": "COMPLETE",
+      "inner_selected": [
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "66",
+          "primary": "F_curv",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.06501807840290771,
+          "baseline_mae": 0.062378423432125504,
+          "paired_gain": -0.002639654970782215,
+          "frozen_error_interval": [
+            -0.00423327454583612,
+            -0.0010537183794111218
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[66]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "132",
+          "primary": "F_log",
+          "baseline": "reuse_only",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.023338841716466413,
+          "baseline_mae": 0.020340306992730692,
+          "paired_gain": -0.0029985347237357195,
+          "frozen_error_interval": [
+            -0.004077369096467992,
+            -0.0010967785922727162
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[132]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "198",
+          "primary": "F_int",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.028743821441470523,
+          "baseline_mae": 0.034769038997687365,
+          "paired_gain": 0.006025217556216839,
+          "frozen_error_interval": [
+            0.003961942253149212,
+            0.007230674789295186
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": true,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[198]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "594",
+          "primary": "F_log",
+          "baseline": "reuse_only",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.03698507973114381,
+          "baseline_mae": 0.03261759616292047,
+          "paired_gain": -0.004367483568223338,
+          "frozen_error_interval": [
+            -0.00747990935414601,
+            -0.001546567115491946
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[594]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "student",
+          "held": "gemma3-1b",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.043360790089563055,
+          "baseline_mae": 0.03707798042819205,
+          "paired_gain": -0.006282809661371009,
+          "frozen_error_interval": [
+            -0.01198339493663879,
+            0.002570612861277263
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, student].folds[gemma3-1b]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "student",
+          "held": "gemma3-270m",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.03169044713458254,
+          "baseline_mae": 0.02528775644416561,
+          "paired_gain": -0.006402690690416934,
+          "frozen_error_interval": [
+            -0.012262805404556659,
+            0.00014239876921970547
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, student].folds[gemma3-270m]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "student",
+          "held": "gemma3-4b",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.03204896801935289,
+          "baseline_mae": 0.033366980861570784,
+          "paired_gain": 0.001318012842217891,
+          "frozen_error_interval": [
+            -0.0028989995509674134,
+            0.006455932737672221
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, student].folds[gemma3-4b]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "largest_budget",
+          "held": "T>=150000",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.04569780351880397,
+          "baseline_mae": 0.03984747175028483,
+          "paired_gain": -0.005850331768519129,
+          "frozen_error_interval": [
+            -0.013539954496465475,
+            0.0033099379032058627
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, largest_budget].folds[T>=150000]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "41",
+          "primary": "F_int",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.034412605699699825,
+          "baseline_mae": 0.030749375638637687,
+          "paired_gain": -0.0036632300610621384,
+          "frozen_error_interval": [
+            -0.010354018857849557,
+            0.0050237958223153245
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[41]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "42",
+          "primary": "F_int",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.040231851264432184,
+          "baseline_mae": 0.041235031881765305,
+          "paired_gain": 0.0010031806173331195,
+          "frozen_error_interval": [
+            -0.003644001405652933,
+            0.0066677788798359654
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[42]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "51",
+          "primary": "F_curv",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.029474658984976615,
+          "baseline_mae": 0.022646212428396557,
+          "paired_gain": -0.006828446556580058,
+          "frozen_error_interval": [
+            -0.008032116265444573,
+            -0.005634029273465438
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[51]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "52",
+          "primary": "F_curv",
+          "baseline": "reuse_only",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.031282199965099504,
+          "baseline_mae": 0.021591840070589834,
+          "paired_gain": -0.009690359894509672,
+          "frozen_error_interval": [
+            -0.012656697784402567,
+            -0.006746823792244397
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[52]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "66",
+          "primary": "F_curv",
+          "baseline": "zero",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 11.12346521354257,
+          "baseline_mae": 3.3746578553553457,
+          "paired_gain": -7.748807358187226,
+          "frozen_error_interval": [
+            -12.4925200875039,
+            -1.1107750419093085
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[66]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "132",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.1165839827576005,
+          "baseline_mae": 0.8688181467000541,
+          "paired_gain": -0.24776583605754643,
+          "frozen_error_interval": [
+            -0.4655270941855272,
+            -0.02621989245707275
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[132]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "198",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.4470931464296162,
+          "baseline_mae": 1.7609910067730927,
+          "paired_gain": 0.31389786034347666,
+          "frozen_error_interval": [
+            -0.4217505395684186,
+            1.0840515293875757
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[198]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "594",
+          "primary": "F_int",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.3653362433577323,
+          "baseline_mae": 1.1859011635757055,
+          "paired_gain": -0.17943507978202672,
+          "frozen_error_interval": [
+            -0.3249121190924277,
+            -0.0027908567211817926
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[594]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "student",
+          "held": "gemma3-1b",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 1.0835787199234619,
+          "baseline_mae": 1.3281241071137018,
+          "paired_gain": 0.24454538719023983,
+          "frozen_error_interval": [
+            -0.35996297326249366,
+            0.8962713960635229
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, student].folds[gemma3-1b]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "student",
+          "held": "gemma3-270m",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 1.6311956281583249,
+          "baseline_mae": 1.7982193726069196,
+          "paired_gain": 0.16702374444859464,
+          "frozen_error_interval": [
+            -0.5767966984221555,
+            1.4560982246271605
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, student].folds[gemma3-270m]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "student",
+          "held": "gemma3-4b",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 1.9838810152848185,
+          "baseline_mae": 2.4565827275938745,
+          "paired_gain": 0.4727017123090564,
+          "frozen_error_interval": [
+            -0.22191785384069954,
+            1.4197105592124675
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, student].folds[gemma3-4b]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "largest_budget",
+          "held": "T>=150000",
+          "primary": null,
+          "baseline": null,
+          "selection_method": null,
+          "status": "unscorable: no positive train or test responses",
+          "primary_mae": null,
+          "baseline_mae": null,
+          "paired_gain": null,
+          "frozen_error_interval": null,
+          "interval_excludes_zero": null,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, largest_budget].folds[T>=150000]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "41",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.5093194836000299,
+          "baseline_mae": 1.1919500466553776,
+          "paired_gain": -0.3173694369446519,
+          "frozen_error_interval": [
+            -0.737907388661266,
+            0.27259474066695843
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[41]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "42",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.6814645470616205,
+          "baseline_mae": 1.6203739356222324,
+          "paired_gain": -0.06109061143938813,
+          "frozen_error_interval": [
+            -0.6120458708607841,
+            0.5534782609349969
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[42]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "51",
+          "primary": "F_curv",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.8202720018483722,
+          "baseline_mae": 0.7337093730470631,
+          "paired_gain": -0.08656262880130929,
+          "frozen_error_interval": [
+            -0.41224647540097487,
+            0.12179842312200712
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[51]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "52",
+          "primary": "F_curv",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.6442521515821027,
+          "baseline_mae": 0.6321730955299754,
+          "paired_gain": -0.012079056052127259,
+          "frozen_error_interval": [
+            -0.3500444929378988,
+            0.2849370741608499
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[52]"
+        }
+      ],
+      "outer_oracle_diagnostic": [
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "66",
+          "primary": "F_curv",
+          "baseline": "reuse_only",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.06501807840290771,
+          "baseline_mae": 0.0426393863955212,
+          "paired_gain": -0.022378692007386514,
+          "frozen_error_interval": [
+            -0.02661402557183239,
+            -0.016586336795783387
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[66]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "132",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.023338841716466413,
+          "baseline_mae": 0.01705806196167629,
+          "paired_gain": -0.00628077975479012,
+          "frozen_error_interval": [
+            -0.009976351662643955,
+            -0.0017941765938123677
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[132]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "198",
+          "primary": "F_int",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.028743821441470523,
+          "baseline_mae": 0.02175937696299456,
+          "paired_gain": -0.0069844444784759666,
+          "frozen_error_interval": [
+            -0.01173226017295515,
+            0.002071445727326259
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[198]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "data_rung",
+          "held": "594",
+          "primary": "F_log",
+          "baseline": "constant",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.03698507973114381,
+          "baseline_mae": 0.02793616523964177,
+          "paired_gain": -0.009048914491502042,
+          "frozen_error_interval": [
+            -0.014844824909832965,
+            -0.0026499231745888453
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, data_rung].folds[594]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "student",
+          "held": "gemma3-1b",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.043360790089563055,
+          "baseline_mae": 0.036332448343794496,
+          "paired_gain": -0.007028341745768561,
+          "frozen_error_interval": [
+            -0.010202264006526773,
+            -0.003909884930544593
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, student].folds[gemma3-1b]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "student",
+          "held": "gemma3-270m",
+          "primary": "F_log",
+          "baseline": "mean_effect",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.03169044713458254,
+          "baseline_mae": 0.02528775644416561,
+          "paired_gain": -0.006402690690416934,
+          "frozen_error_interval": [
+            -0.012262805404556659,
+            0.00014239876921970547
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, student].folds[gemma3-270m]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "student",
+          "held": "gemma3-4b",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.03204896801935289,
+          "baseline_mae": 0.026807599226740954,
+          "paired_gain": -0.005241368792611943,
+          "frozen_error_interval": [
+            -0.011148580588539911,
+            -0.0005344928849405443
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, student].folds[gemma3-4b]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "largest_budget",
+          "held": "T>=150000",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 0.04569780351880397,
+          "baseline_mae": 0.03033430319596428,
+          "paired_gain": -0.015363500322839677,
+          "frozen_error_interval": [
+            -0.022170052271630745,
+            -0.007145702595529826
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, largest_budget].folds[T>=150000]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "41",
+          "primary": "F_int",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.034412605699699825,
+          "baseline_mae": 0.030749375638637687,
+          "paired_gain": -0.0036632300610621384,
+          "frozen_error_interval": [
+            -0.010354018857849557,
+            0.0050237958223153245
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[41]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "42",
+          "primary": "F_int",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.040231851264432184,
+          "baseline_mae": 0.027748247627764965,
+          "paired_gain": -0.012483603636667215,
+          "frozen_error_interval": [
+            -0.018208873758026687,
+            -0.0031847567410790115
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[42]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "51",
+          "primary": "F_curv",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.029474658984976615,
+          "baseline_mae": 0.018010103471672236,
+          "paired_gain": -0.011464555513304378,
+          "frozen_error_interval": [
+            -0.019239885755958964,
+            -0.0037489930501504853
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[51]"
+        },
+        {
+          "capability": "code",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "target": "I_T",
+          "split": "pool_seed",
+          "held": "52",
+          "primary": "F_curv",
+          "baseline": "mean_effect",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.031282199965099504,
+          "baseline_mae": 0.01596739786071239,
+          "paired_gain": -0.01531480210438711,
+          "frozen_error_interval": [
+            -0.019394102192097775,
+            -0.011266858975230037
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[training_probe:MBPP:d5f45bdd0f442e0e, pool_seed].folds[52]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "66",
+          "primary": "F_curv",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 11.12346521354257,
+          "baseline_mae": 1.7310524742473392,
+          "paired_gain": -9.392412739295231,
+          "frozen_error_interval": [
+            -13.668355317734571,
+            -2.900560788026598
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[66]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "132",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.1165839827576005,
+          "baseline_mae": 0.8688181467000541,
+          "paired_gain": -0.24776583605754643,
+          "frozen_error_interval": [
+            -0.4655270941855272,
+            -0.02621989245707275
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[132]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "198",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.4470931464296162,
+          "baseline_mae": 1.3410845701645309,
+          "paired_gain": -0.10600857626508536,
+          "frozen_error_interval": [
+            -0.2597707371616264,
+            0.11897642091464018
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[198]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "data_rung",
+          "held": "594",
+          "primary": "F_int",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.3653362433577323,
+          "baseline_mae": 1.1859011635757055,
+          "paired_gain": -0.17943507978202672,
+          "frozen_error_interval": [
+            -0.3249121190924277,
+            -0.0027908567211817926
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, data_rung].folds[594]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "student",
+          "held": "gemma3-1b",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 1.0835787199234619,
+          "baseline_mae": 0.8011678460054353,
+          "paired_gain": -0.2824108739180265,
+          "frozen_error_interval": [
+            -0.5290953021832517,
+            -0.056688315254886164
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, student].folds[gemma3-1b]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "student",
+          "held": "gemma3-270m",
+          "primary": "F_log",
+          "baseline": "reuse_only",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 1.6311956281583249,
+          "baseline_mae": 0.5305345420059355,
+          "paired_gain": -1.1006610861523893,
+          "frozen_error_interval": [
+            -1.691140155523894,
+            -0.46725438613457937
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, student].folds[gemma3-270m]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "student",
+          "held": "gemma3-4b",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Fixed parsimonious settings: fewer than three usable inner grouped folds",
+          "status": "scored",
+          "primary_mae": 1.9838810152848185,
+          "baseline_mae": 1.6365797083294207,
+          "paired_gain": -0.34730130695539785,
+          "frozen_error_interval": [
+            -0.5352735521524438,
+            -0.10697440947473295
+          ],
+          "interval_excludes_zero": true,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, student].folds[gemma3-4b]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "largest_budget",
+          "held": "T>=150000",
+          "primary": null,
+          "baseline": null,
+          "selection_method": null,
+          "status": "unscorable: no positive train or test responses",
+          "primary_mae": null,
+          "baseline_mae": null,
+          "paired_gain": null,
+          "frozen_error_interval": null,
+          "interval_excludes_zero": null,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, largest_budget].folds[T>=150000]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "41",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.5093194836000299,
+          "baseline_mae": 1.1919500466553776,
+          "paired_gain": -0.3173694369446519,
+          "frozen_error_interval": [
+            -0.737907388661266,
+            0.27259474066695843
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[41]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "42",
+          "primary": "F_log",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 1.6814645470616205,
+          "baseline_mae": 1.5411603734691433,
+          "paired_gain": -0.14030417359247713,
+          "frozen_error_interval": [
+            -0.38208636318493316,
+            0.2133766132024871
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[42]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "51",
+          "primary": "F_curv",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.8202720018483722,
+          "baseline_mae": 0.7337093730470631,
+          "paired_gain": -0.08656262880130929,
+          "frozen_error_interval": [
+            -0.41224647540097487,
+            0.12179842312200712
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[51]"
+        },
+        {
+          "capability": "qa",
+          "distribution": "2wiki_new:bbd036c56ac37bd3",
+          "target": "I_U",
+          "split": "pool_seed",
+          "held": "52",
+          "primary": "F_curv",
+          "baseline": "surface",
+          "selection_method": "Inner grouped response MAE; same F for all three targets",
+          "status": "scored",
+          "primary_mae": 0.6442521515821027,
+          "baseline_mae": 0.6321730955299754,
+          "paired_gain": -0.012079056052127259,
+          "frozen_error_interval": [
+            -0.3500444929378988,
+            0.2849370741608499
+          ],
+          "interval_excludes_zero": false,
+          "positive_gain_and_clear_interval": false,
+          "source_record": "results[2wiki_new:bbd036c56ac37bd3, pool_seed].folds[52]"
+        }
+      ],
+      "stored_split_metrics": [
+        {
+          "capability": "code",
+          "target": "I_T",
+          "split": "data_rung",
+          "status": "scored",
+          "paired_gain": -0.0006954650792769962,
+          "frozen_error_interval": [
+            -0.0027685519898134913,
+            0.0014252791551698217
+          ],
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "code",
+          "target": "I_T",
+          "split": "student",
+          "status": "scored",
+          "paired_gain": -0.0037891625031900174,
+          "frozen_error_interval": [
+            -0.007868208553274535,
+            0.00022226416848877812
+          ],
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "code",
+          "target": "I_T",
+          "split": "largest_budget",
+          "status": "scored",
+          "paired_gain": -0.005850331768519129,
+          "frozen_error_interval": [
+            -0.013539954496465475,
+            0.0033099379032058627
+          ],
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "code",
+          "target": "I_T",
+          "split": "pool_seed",
+          "status": "scored",
+          "paired_gain": -0.002914453632531531,
+          "frozen_error_interval": [
+            -0.00683359294172371,
+            0.001447717444031196
+          ],
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "qa",
+          "target": "I_U",
+          "split": "data_rung",
+          "status": "scored",
+          "paired_gain": -2.5830186212324944,
+          "frozen_error_interval": [
+            -4.694708758112539,
+            -0.4530269927368718
+          ],
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "qa",
+          "target": "I_U",
+          "split": "student",
+          "status": "scored",
+          "paired_gain": 0.2947569479826303,
+          "frozen_error_interval": [
+            -0.16134951340890344,
+            0.9415688796111975
+          ],
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "qa",
+          "target": "I_U",
+          "split": "largest_budget",
+          "status": "unscorable: no eligible held-out observations",
+          "paired_gain": null,
+          "frozen_error_interval": null,
+          "positive_gain_and_clear_interval": false
+        },
+        {
+          "capability": "qa",
+          "target": "I_U",
+          "split": "pool_seed",
+          "status": "scored",
+          "paired_gain": -0.16243977921306418,
+          "frozen_error_interval": [
+            -0.45509910502601963,
+            0.19519656469878338
+          ],
+          "positive_gain_and_clear_interval": false
+        }
+      ],
+      "conclusions": [
+        {
+          "capability": "code",
+          "scorable_folds": 12,
+          "unscorable_folds": 0,
+          "positive_gain_folds": 3,
+          "positive_gain_clear_interval_folds": 1,
+          "verdict_changed": false,
+          "conclusion": "code \u00d7 I_T (MBPP): the launch verdict remains not met with the development-stage baseline; 3/12 scorable folds have positive gain, 1/12 have positive gain and an interval clear of zero (0 unscorable), and 0/4 scorable splits have a clear positive gain."
+        },
+        {
+          "capability": "qa",
+          "scorable_folds": 11,
+          "unscorable_folds": 1,
+          "positive_gain_folds": 4,
+          "positive_gain_clear_interval_folds": 0,
+          "verdict_changed": false,
+          "conclusion": "QA \u00d7 I_U (fresh 2wiki_new, 1% proxy): the launch verdict remains not met with the development-stage baseline; 4/11 scorable folds have positive gain, 0/11 have positive gain and an interval clear of zero (1 unscorable), and 0/3 scorable splits have a clear positive gain."
+        }
+      ],
+      "interval_definition": "95% frozen-prediction trajectory multiplier intervals; same-run pair gets one weight, cross-run pair product. No refitting; shared pool seed dependence and baseline oracle selection not covered. Pointwise, not simultaneous.",
+      "note": "Frozen pointwise error intervals; folds overlap and are not independent replications. QA I_U is the stored 1% tolerance proxy, not an exact fixed-budget contrast. When inner folds were insufficient, A2 used its registered fallback settings. Outer-oracle intervals do not cover the post-hoc baseline selection."
+    },
+    "accounting": {
+      "status": "COMPLETE",
+      "rows": [
+        {
+          "student": "gemma3-270m",
+          "total_parameters": 268098176,
+          "embedding_parameters": 167772160,
+          "vision_and_projector_parameters": 0,
+          "non_embedding_parameters": 100326016,
+          "revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+          "embedding_tensors": [
+            "model.embed_tokens.weight"
+          ],
+          "total_minus_embedding": 100326016
+        },
+        {
+          "student": "gemma3-1b",
+          "total_parameters": 999885952,
+          "embedding_parameters": 301989888,
+          "vision_and_projector_parameters": 0,
+          "non_embedding_parameters": 697896064,
+          "revision": "fcf18a2a879aab110ca39f8bffbccd5d49d8eb29",
+          "embedding_tensors": [
+            "model.embed_tokens.weight"
+          ],
+          "total_minus_embedding": 697896064
+        },
+        {
+          "student": "gemma3-4b",
+          "total_parameters": 4300079472,
+          "embedding_parameters": 671252480,
+          "vision_and_projector_parameters": 419816304,
+          "non_embedding_parameters": 3209010688,
+          "revision": "cc012e0a6d0787b4adcc0fa2c4da74402494554d",
+          "embedding_tensors": [
+            "language_model.model.embed_tokens.weight"
+          ],
+          "total_minus_embedding": 3628826992
+        },
+        {
+          "student": "gemma3-12b",
+          "total_parameters": 12187325040,
+          "embedding_parameters": 1006878720,
+          "vision_and_projector_parameters": 421290864,
+          "non_embedding_parameters": 10759155456,
+          "revision": "295efb63d01a7017928f273a94ebb86105c9526f",
+          "embedding_tensors": [
+            "language_model.model.embed_tokens.weight"
+          ],
+          "total_minus_embedding": 11180446320
+        }
+      ],
+      "note": "For gemma3-4b, 4.300B minus 0.671B equals 3.629B only when the 0.420B vision/projector deduction is omitted; the round used 3.209B TEXT-DECODER NON-EMBEDDING parameters. These rounded values are calculated from the exact file counts below. The artifact combines vision tower and multimodal projector into one deduction."
+    },
+    "seed_pair": {
+      "status": "COMPLETE",
+      "student": "gemma3-1b",
+      "pool": "B",
+      "training_seeds": [
+        0,
+        1
+      ],
+      "run_paths": [
+        "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory",
+        "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory"
+      ],
+      "run_pair_count": 1,
+      "shared_checkpoint_count": 14,
+      "unit_of_replication": "one pair of training runs; one correlated difference trajectory",
+      "independent_checkpoint_replicates": false,
+      "trajectory": [
+        {
+          "checkpoint": "update-00000033",
+          "update": 33,
+          "T_supervised": 46348,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.002770169322708682,
+            "math": 0.00032201848764956686,
+            "code": -0.00116253321523474
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000034",
+          "update": 34,
+          "T_supervised": 47630,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.006816484063744355,
+            "math": 0.0006629792392787159,
+            "code": -0.0012732506643045038
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000035",
+          "update": 35,
+          "T_supervised": 49189,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.013041583665337697,
+            "math": -0.00018942263979382368,
+            "code": -0.001245571302037174
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000036",
+          "update": 36,
+          "T_supervised": 50558,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.010427041832668849,
+            "math": 0.001117593574784026,
+            "code": -0.0025741806908767817
+          },
+          "corner": 1
+        },
+        {
+          "checkpoint": "update-00000037",
+          "update": 37,
+          "T_supervised": 52086,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.016901145418326102,
+            "math": 0.0018184573420214623,
+            "code": -0.0015777236492471314
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000038",
+          "update": 38,
+          "T_supervised": 54152,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.016776643426293703,
+            "math": 0.002102591301712309,
+            "code": -0.0016330823737820133
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000039",
+          "update": 39,
+          "T_supervised": 55468,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.016216384462150124,
+            "math": 0.001799515078042102,
+            "code": 8.303808680243385e-05
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000071",
+          "update": 71,
+          "T_supervised": 101095,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.08668451195219085,
+            "math": 0.004356720715259721,
+            "code": 0.00011071744906998582
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000072",
+          "update": 72,
+          "T_supervised": 102704,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.09558640438246968,
+            "math": 0.005891044097590559,
+            "code": -0.0006643046944199149
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000073",
+          "update": 73,
+          "T_supervised": 103832,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.10654257968127467,
+            "math": 0.005606910137899712,
+            "code": 0.0007750221434899007
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000074",
+          "update": 74,
+          "T_supervised": 105450,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.11681399402390369,
+            "math": 0.006838157296560121,
+            "code": 0.0009964570416298724
+          },
+          "corner": 4
+        },
+        {
+          "checkpoint": "update-00000075",
+          "update": 75,
+          "T_supervised": 106128,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.10286977091633442,
+            "math": 0.006421427489013309,
+            "code": 0.00370903454384397
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000076",
+          "update": 76,
+          "T_supervised": 107466,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.10554656374501903,
+            "math": 0.007084406728292025,
+            "code": 0.004013507528786597
+          },
+          "corner": null
+        },
+        {
+          "checkpoint": "update-00000077",
+          "update": 77,
+          "T_supervised": 108709,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.10118899402390369,
+            "math": 0.010323533868767942,
+            "code": 0.0068644818423382326
+          },
+          "corner": null
+        }
+      ],
+      "corner_checkpoints": [
+        {
+          "checkpoint": "update-00000036",
+          "update": 36,
+          "T_supervised": 50558,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.010427041832668849,
+            "math": 0.001117593574784026,
+            "code": -0.0025741806908767817
+          },
+          "corner": 1
+        },
+        {
+          "checkpoint": "update-00000074",
+          "update": 74,
+          "T_supervised": 105450,
+          "differences_seed1_minus_seed0": {
+            "qa": 0.11681399402390369,
+            "math": 0.006838157296560121,
+            "code": 0.0009964570416298724
+          },
+          "corner": 4
+        }
+      ],
+      "interpretation": "Descriptive only: one pair documents the signed seed differences along this pool-B trajectory and at its two corner checkpoints. The 14 checkpoints are correlated observations of one pair, not 14 independent replicates. One pair cannot estimate a general training-seed noise distribution, establish interval coverage, or establish that the registered band is generally conservative. No sigma is calculated from these points; A5's derived sigma summaries are not reused."
+    },
+    "predictions": {
+      "status": "COMPLETE",
+      "failures": [],
+      "T_ref": 100000.0,
+      "forms": {
+        "F_log": "(a+a_prime*z)*u+(b+b_prime*z)*v",
+        "F_curv": "(a+a_prime*z)*u+(b+b_prime*z)*h_p(E)",
+        "F_int": "(a+a_prime*z)*u+(b+b_prime*z)*v+k*u*v"
+      },
+      "achieved_coordinates": {
+        "gemma3-1b": {
+          "1": {
+            "T": 50558,
+            "E": 1.429161013116237,
+            "pool": "B"
+          },
+          "2": {
+            "T": 50563,
+            "E": 2.9809574342648273,
+            "pool": "A"
+          },
+          "3": {
+            "T": 105433,
+            "E": 1.4292899167638207,
+            "pool": "C"
+          },
+          "4": {
+            "T": 105450,
+            "E": 2.9808344640434195,
+            "pool": "B"
+          }
+        },
+        "gemma3-4b": {
+          "1": {
+            "T": 50558,
+            "E": 1.429161013116237,
+            "pool": "B"
+          },
+          "2": {
+            "T": 50563,
+            "E": 2.9809574342648273,
+            "pool": "A"
+          },
+          "3": {
+            "T": 105433,
+            "E": 1.4292899167638207,
+            "pool": "C"
+          },
+          "4": {
+            "T": 105450,
+            "E": 2.9808344640434195,
+            "pool": "B"
+          }
+        }
+      },
+      "rows": [
+        {
+          "student": "gemma3-1b",
+          "capability": "qa",
+          "readout": "2Wiki QA probe",
+          "status": "COMPLETE",
+          "distribution": "training_probe:2WikiMultihopQA:35e3fde33c8b6e91",
+          "measured_I": -0.24340139442231123,
+          "registered_noise": 0.1608,
+          "registered_quoted_disagreement": 1.5546,
+          "additive_rectangle_prediction": 0.0,
+          "additive_zero_absolute_error": 0.24340139442231123,
+          "predictions": {
+            "F_log": {
+              "I": 0.0001735680549510098,
+              "budget_mismatch_term": 9.671641691022714e-05,
+              "reuse_mismatch_term": 7.685163804078267e-05,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.24357496247726224,
+              "signed_error": 0.24357496247726224,
+              "fit": {
+                "name": "F_log",
+                "coefficients": [
+                  -1.9122309107921351,
+                  -0.41188877184165573,
+                  0.8616417682644655,
+                  0.5524565239791365
+                ],
+                "p": null,
+                "lambda_": 0.0001,
+                "standardizer": {
+                  "descriptor": "log_parameters",
+                  "mean": 20.22558162501638,
+                  "scale": 1.418061255807182,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "14e55416aec32168cdfc"
+              },
+              "source_record": "parameter_intervals[4].fits.F_log.fit",
+              "descriptor_value": 20.363580744195005,
+              "z": 0.09731534418100686
+            },
+            "F_curv": {
+              "I": 0.00014798411701077266,
+              "budget_mismatch_term": 8.772193792407171e-05,
+              "reuse_mismatch_term": 6.026217908670096e-05,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 0.0005901100427978534,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.24354937853932201,
+              "signed_error": 0.24354937853932201,
+              "fit": {
+                "name": "F_curv",
+                "coefficients": [
+                  -1.7653994036355598,
+                  -0.055000423934242794,
+                  0.09774555097804123,
+                  0.04495374159117983
+                ],
+                "p": 1.7395573343589408,
+                "lambda_": 0.0001,
+                "standardizer": {
+                  "descriptor": "log_parameters",
+                  "mean": 20.22558162501638,
+                  "scale": 1.418061255807182,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "1efae06f85b0dde3de04"
+              },
+              "source_record": "parameter_intervals[4].fits.F_curv.fit",
+              "descriptor_value": 20.363580744195005,
+              "z": 0.09731534418100686
+            },
+            "F_int": {
+              "I": -0.4889276420754612,
+              "budget_mismatch_term": 0.00015791421978562134,
+              "reuse_mismatch_term": -9.632765454890801e-05,
+              "interaction_term": -0.4889892286406979,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.24552624765314995,
+              "signed_error": -0.24552624765314995,
+              "fit": {
+                "name": "F_int",
+                "coefficients": [
+                  -3.1410703331501093,
+                  -0.47865274569564903,
+                  -1.2045320494714542,
+                  0.5871917491468696,
+                  3.185144947346786
+                ],
+                "p": null,
+                "lambda_": 0.0001,
+                "standardizer": {
+                  "descriptor": "log_parameters",
+                  "mean": 20.22558162501638,
+                  "scale": 1.418061255807182,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "54d390e63b462d4644b3"
+              },
+              "source_record": "parameter_intervals[4].fits.F_int.fit",
+              "descriptor_value": 20.363580744195005,
+              "z": 0.09731534418100686
+            }
+          }
+        },
+        {
+          "student": "gemma3-1b",
+          "capability": "math",
+          "readout": "MATH-500",
+          "status": "COMPLETE",
+          "distribution": "training_probe:MATH-500:c76472bee07727fe",
+          "measured_I": 0.0075769055917565,
+          "registered_noise": 0.0088,
+          "registered_quoted_disagreement": 0.0215,
+          "additive_rectangle_prediction": 0.0,
+          "additive_zero_absolute_error": 0.0075769055917565,
+          "predictions": {
+            "F_log": {
+              "I": 2.627862950097213e-06,
+              "budget_mismatch_term": -2.5440723647888473e-06,
+              "reuse_mismatch_term": 5.17193531488606e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.007574277728806402,
+              "signed_error": -0.007574277728806402,
+              "fit": {
+                "name": "F_log",
+                "coefficients": [
+                  0.04657288714230582,
+                  0.009427084966322122,
+                  0.08250320638566419,
+                  -0.041201829543271826
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0926245138152246,
+                  "scale": 0.252121068231367,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "879e1b6d49582b5f4102"
+              },
+              "source_record": "parameter_intervals[1].fits.F_log.fit",
+              "descriptor_value": 1.2205068949840885,
+              "z": 0.5072260801763242
+            },
+            "F_curv": {
+              "I": -1.1880630783640673e-06,
+              "budget_mismatch_term": -4.488940480049705e-06,
+              "reuse_mismatch_term": 3.300877401685638e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 0.00028851622214465245,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.007578093654834864,
+              "signed_error": -0.007578093654834864,
+              "fit": {
+                "name": "F_curv",
+                "coefficients": [
+                  0.09542866102219366,
+                  -0.009492955895200205,
+                  0.01621510299318848,
+                  -0.009412430409279623
+                ],
+                "p": 1.1199447245584617,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0926245138152246,
+                  "scale": 0.252121068231367,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "42db3258d5ed1c3729a0"
+              },
+              "source_record": "parameter_intervals[1].fits.F_curv.fit",
+              "descriptor_value": 1.2205068949840885,
+              "z": 0.5072260801763242
+            },
+            "F_int": {
+              "I": -0.003186993033300934,
+              "budget_mismatch_term": -2.114702010996655e-06,
+              "reuse_mismatch_term": 4.079840424933373e-06,
+              "interaction_term": -0.0031889581717148706,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.010763898625057434,
+              "signed_error": -0.010763898625057434,
+              "fit": {
+                "name": "F_int",
+                "coefficients": [
+                  0.03776588947415002,
+                  0.009702590545040234,
+                  0.06956177856864044,
+                  -0.041333646924034746,
+                  0.02077201994034371
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0926245138152246,
+                  "scale": 0.252121068231367,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "f6dcf391766f12f4df18"
+              },
+              "source_record": "parameter_intervals[1].fits.F_int.fit",
+              "descriptor_value": 1.2205068949840885,
+              "z": 0.5072260801763242
+            }
+          }
+        },
+        {
+          "student": "gemma3-1b",
+          "capability": "code",
+          "readout": "MBPP",
+          "status": "COMPLETE",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "measured_I": -0.013978077945083989,
+          "registered_noise": 0.0254,
+          "registered_quoted_disagreement": 0.0144,
+          "additive_rectangle_prediction": 0.0,
+          "additive_zero_absolute_error": 0.013978077945083989,
+          "predictions": {
+            "F_log": {
+              "I": 3.1487248827440035e-06,
+              "budget_mismatch_term": -3.681446706393373e-06,
+              "reuse_mismatch_term": 6.8301715891373765e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.013981226669966733,
+              "signed_error": 0.013981226669966733,
+              "fit": {
+                "name": "F_log",
+                "coefficients": [
+                  0.07557325551646409,
+                  -0.004793005000751999,
+                  0.08326222558422997,
+                  -0.007251601949136412
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0175856214939474,
+                  "scale": 0.16173007606526607,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "ddffbcc4e6cb3a4cb149"
+              },
+              "source_record": "parameter_intervals[0].fits.F_log.fit",
+              "descriptor_value": 1.060091895482728,
+              "z": 0.26282232113479825
+            },
+            "F_curv": {
+              "I": 8.168238239744149e-07,
+              "budget_mismatch_term": -5.054922023404027e-06,
+              "reuse_mismatch_term": 5.871745847378442e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 0.00017813194089555395,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.013978894768907964,
+              "signed_error": 0.013978894768907964,
+              "fit": {
+                "name": "F_curv",
+                "coefficients": [
+                  0.1038613718478759,
+                  -0.006935876532077189,
+                  0.03386648692258302,
+                  -0.00343800386516288
+                ],
+                "p": 0.6905199830065477,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0175856214939474,
+                  "scale": 0.16173007606526607,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "e52a2c3890718131e794"
+              },
+              "source_record": "parameter_intervals[0].fits.F_curv.fit",
+              "descriptor_value": 1.060091895482728,
+              "z": 0.26282232113479825
+            },
+            "F_int": {
+              "I": -0.003424315256539653,
+              "budget_mismatch_term": -3.217335241928975e-06,
+              "reuse_mismatch_term": 5.658937929124246e-06,
+              "interaction_term": -0.0034267568592268485,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.010553762688544336,
+              "signed_error": 0.010553762688544336,
+              "fit": {
+                "name": "F_int",
+                "coefficients": [
+                  0.06611035139599394,
+                  -0.004433951424927834,
+                  0.06935622601785665,
+                  -0.007422578617359822,
+                  0.022320976939089823
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0175856214939474,
+                  "scale": 0.16173007606526607,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "245505687a5c1bdfd70b"
+              },
+              "source_record": "parameter_intervals[0].fits.F_int.fit",
+              "descriptor_value": 1.060091895482728,
+              "z": 0.26282232113479825
+            }
+          }
+        },
+        {
+          "student": "gemma3-4b",
+          "capability": "qa",
+          "readout": "2Wiki QA probe",
+          "status": "COMPLETE",
+          "distribution": "training_probe:2WikiMultihopQA:35e3fde33c8b6e91",
+          "measured_I": -0.2123381474103585,
+          "registered_noise": 0.1608,
+          "registered_quoted_disagreement": 1.5546,
+          "additive_rectangle_prediction": 0.0,
+          "additive_zero_absolute_error": 0.2123381474103585,
+          "predictions": {
+            "F_log": {
+              "I": 0.00024542050847632126,
+              "budget_mismatch_term": 0.00011866920943694547,
+              "reuse_mismatch_term": 0.0001267512990393758,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.21258356791883481,
+              "signed_error": 0.21258356791883481,
+              "fit": {
+                "name": "F_log",
+                "coefficients": [
+                  -1.9122309107921351,
+                  -0.41188877184165573,
+                  0.8616417682644655,
+                  0.5524565239791365
+                ],
+                "p": null,
+                "lambda_": 0.0001,
+                "standardizer": {
+                  "descriptor": "log_parameters",
+                  "mean": 20.22558162501638,
+                  "scale": 1.418061255807182,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "14e55416aec32168cdfc"
+              },
+              "source_record": "parameter_intervals[4].fits.F_log.fit",
+              "descriptor_value": 21.88922852970118,
+              "z": 1.173184090512247
+            },
+            "F_curv": {
+              "I": 0.00017945579648476206,
+              "budget_mismatch_term": 9.065334314328015e-05,
+              "reuse_mismatch_term": 8.88024533414819e-05,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 0.0005901100427978534,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.21251760320684326,
+              "signed_error": 0.21251760320684326,
+              "fit": {
+                "name": "F_curv",
+                "coefficients": [
+                  -1.7653994036355598,
+                  -0.055000423934242794,
+                  0.09774555097804123,
+                  0.04495374159117983
+                ],
+                "p": 1.7395573343589408,
+                "lambda_": 0.0001,
+                "standardizer": {
+                  "descriptor": "log_parameters",
+                  "mean": 20.22558162501638,
+                  "scale": 1.418061255807182,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "1efae06f85b0dde3de04"
+              },
+              "source_record": "parameter_intervals[4].fits.F_curv.fit",
+              "descriptor_value": 21.88922852970118,
+              "z": 1.173184090512247
+            },
+            "F_int": {
+              "I": -0.48884909384666997,
+              "budget_mismatch_term": 0.00018342538963766136,
+              "reuse_mismatch_term": -4.329059560975743e-05,
+              "interaction_term": -0.4889892286406979,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.27651094643631147,
+              "signed_error": -0.27651094643631147,
+              "fit": {
+                "name": "F_int",
+                "coefficients": [
+                  -3.1410703331501093,
+                  -0.47865274569564903,
+                  -1.2045320494714542,
+                  0.5871917491468696,
+                  3.185144947346786
+                ],
+                "p": null,
+                "lambda_": 0.0001,
+                "standardizer": {
+                  "descriptor": "log_parameters",
+                  "mean": 20.22558162501638,
+                  "scale": 1.418061255807182,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "54d390e63b462d4644b3"
+              },
+              "source_record": "parameter_intervals[4].fits.F_int.fit",
+              "descriptor_value": 21.88922852970118,
+              "z": 1.173184090512247
+            }
+          }
+        },
+        {
+          "student": "gemma3-4b",
+          "capability": "math",
+          "readout": "MATH-500",
+          "status": "COMPLETE",
+          "distribution": "training_probe:MATH-500:c76472bee07727fe",
+          "measured_I": -0.03685217457190493,
+          "registered_noise": 0.0088,
+          "registered_quoted_disagreement": 0.0215,
+          "additive_rectangle_prediction": 0.0,
+          "additive_zero_absolute_error": 0.03685217457190493,
+          "predictions": {
+            "F_log": {
+              "I": 1.0103468126488761e-05,
+              "budget_mismatch_term": -1.6548358506918547e-06,
+              "reuse_mismatch_term": 1.1758303977180615e-05,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.036862278040031414,
+              "signed_error": 0.036862278040031414,
+              "fit": {
+                "name": "F_log",
+                "coefficients": [
+                  0.04657288714230582,
+                  0.009427084966322122,
+                  0.08250320638566419,
+                  -0.041201829543271826
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0926245138152246,
+                  "scale": 0.252121068231367,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "879e1b6d49582b5f4102"
+              },
+              "source_record": "parameter_intervals[1].fits.F_log.fit",
+              "descriptor_value": 0.7404436278223974,
+              "z": -1.396872099834343
+            },
+            "F_curv": {
+              "I": 3.0873299618215676e-06,
+              "budget_mismatch_term": -5.38439045624926e-06,
+              "reuse_mismatch_term": 8.471720418070828e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 0.00028851622214465245,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.03685526190186675,
+              "signed_error": 0.03685526190186675,
+              "fit": {
+                "name": "F_curv",
+                "coefficients": [
+                  0.09542866102219366,
+                  -0.009492955895200205,
+                  0.01621510299318848,
+                  -0.009412430409279623
+                ],
+                "p": 1.1199447245584617,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0926245138152246,
+                  "scale": 0.252121068231367,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "42db3258d5ed1c3729a0"
+              },
+              "source_record": "parameter_intervals[1].fits.F_curv.fit",
+              "descriptor_value": 0.7404436278223974,
+              "z": -1.396872099834343
+            },
+            "F_int": {
+              "I": -0.0031794703684517953,
+              "budget_mismatch_term": -1.1994776521619956e-06,
+              "reuse_mismatch_term": 1.0687280915237191e-05,
+              "interaction_term": -0.0031889581717148706,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.033672704203453134,
+              "signed_error": 0.033672704203453134,
+              "fit": {
+                "name": "F_int",
+                "coefficients": [
+                  0.03776588947415002,
+                  0.009702590545040234,
+                  0.06956177856864044,
+                  -0.041333646924034746,
+                  0.02077201994034371
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0926245138152246,
+                  "scale": 0.252121068231367,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "f6dcf391766f12f4df18"
+              },
+              "source_record": "parameter_intervals[1].fits.F_int.fit",
+              "descriptor_value": 0.7404436278223974,
+              "z": -1.396872099834343
+            }
+          }
+        },
+        {
+          "student": "gemma3-4b",
+          "capability": "code",
+          "readout": "MBPP",
+          "status": "COMPLETE",
+          "distribution": "training_probe:MBPP:d5f45bdd0f442e0e",
+          "measured_I": -0.09460806023029222,
+          "registered_noise": 0.0254,
+          "registered_quoted_disagreement": 0.0144,
+          "additive_rectangle_prediction": 0.0,
+          "additive_zero_absolute_error": 0.09460806023029222,
+          "predictions": {
+            "F_log": {
+              "I": 3.7420203594529295e-06,
+              "budget_mismatch_term": -4.060794901032804e-06,
+              "reuse_mismatch_term": 7.802815260485734e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.09461180225065167,
+              "signed_error": 0.09461180225065167,
+              "fit": {
+                "name": "F_log",
+                "coefficients": [
+                  0.07557325551646409,
+                  -0.004793005000751999,
+                  0.08326222558422997,
+                  -0.007251601949136412
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0175856214939474,
+                  "scale": 0.16173007606526607,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "ddffbcc4e6cb3a4cb149"
+              },
+              "source_record": "parameter_intervals[0].fits.F_log.fit",
+              "descriptor_value": 0.8017050487156776,
+              "z": -1.3348202018476223
+            },
+            "F_curv": {
+              "I": 1.2463009827341063e-06,
+              "budget_mismatch_term": -5.603870384666465e-06,
+              "reuse_mismatch_term": 6.850171367400571e-06,
+              "interaction_term": 0.0,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 0.00017813194089555395,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.09460930653127496,
+              "signed_error": 0.09460930653127496,
+              "fit": {
+                "name": "F_curv",
+                "coefficients": [
+                  0.1038613718478759,
+                  -0.006935876532077189,
+                  0.03386648692258302,
+                  -0.00343800386516288
+                ],
+                "p": 0.6905199830065477,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0175856214939474,
+                  "scale": 0.16173007606526607,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "e52a2c3890718131e794"
+              },
+              "source_record": "parameter_intervals[0].fits.F_curv.fit",
+              "descriptor_value": 0.8017050487156776,
+              "z": -1.3348202018476223
+            },
+            "F_int": {
+              "I": -0.00342367061055462,
+              "budget_mismatch_term": -3.5682657057823215e-06,
+              "reuse_mismatch_term": 6.654514378010887e-06,
+              "interaction_term": -0.0034267568592268485,
+              "is_exact_rectangle": false,
+              "contrast_u": -4.9539375579277234e-05,
+              "contrast_reuse": 8.395376881642491e-05,
+              "contrast_uv": -0.15352181351998567,
+              "absolute_error": 0.0911843896197376,
+              "signed_error": 0.0911843896197376,
+              "fit": {
+                "name": "F_int",
+                "coefficients": [
+                  0.06611035139599394,
+                  -0.004433951424927834,
+                  0.06935622601785665,
+                  -0.007422578617359822,
+                  0.022320976939089823
+                ],
+                "p": null,
+                "lambda_": 0.01,
+                "standardizer": {
+                  "descriptor": "initial_loss",
+                  "mean": 1.0175856214939474,
+                  "scale": 0.16173007606526607,
+                  "students": [
+                    "gemma3-1b",
+                    "gemma3-270m",
+                    "gemma3-4b"
+                  ]
+                },
+                "fit_id": "245505687a5c1bdfd70b"
+              },
+              "source_record": "parameter_intervals[0].fits.F_int.fit",
+              "descriptor_value": 0.8017050487156776,
+              "z": -1.3348202018476223
+            }
+          }
+        }
+      ],
+      "error_definition": "Absolute prediction error abs(predicted I - measured I); signed errors also stored.",
+      "geometry_note": "The achieved coordinates are an approximate rectangle. The additive structures predict exactly zero on a matched rectangle, but their frozen predictions at the four unequal achieved coordinates include mismatch terms. The zero column is the registered rectangle reference, not their exact achieved-coordinate evaluation. No coordinates are projected, averaged, or interpolated.",
+      "interpretation": "For the 2Wiki QA probe, both measured values are inside twice the registered noise: failed to reject additivity. This does not identify why the fitted structures miss the measurements. MATH-500 is marginal and has opposite measured signs across students; MBPP remains underpowered. Students are reported separately. The registered bands are not calibrated confidence intervals."
+    }
+  }
+}

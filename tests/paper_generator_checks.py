@@ -12,11 +12,11 @@ def check_access(audit, access):
     assert reads and writes
     for name in reads:
         path = Path(name).resolve()
-        assert any(path.is_relative_to(ROOT / p) for p in ("results", "paper/docs"))
+        assert any(path.is_relative_to(ROOT / p) for p in ("results", "docs"))
         assert path.suffix not in (".safetensors", ".pt", ".bin")
     for name in writes:
         path = Path(name)
-        assert any(path.is_relative_to(ROOT / "paper/paper" / p) for p in ("figs", "tables"))
+        assert any(path.is_relative_to(ROOT / "generated" / p) for p in ("figs", "tables"))
         assert not path.is_symlink()
     for relative, digest in audit.inputs.items():
         # All evidence remains byte-identical after generation.
@@ -24,16 +24,16 @@ def check_access(audit, access):
 
 
 def check_figures(stem):
-    assert (ROOT / f"paper/paper/figs/{stem}.pdf").read_bytes().startswith(b"%PDF-")
-    assert (ROOT / f"paper/paper/figs/{stem}.png").read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
-    assert (ROOT / f"paper/paper/figs/{stem}_sources.md").is_file()
+    assert (ROOT / f"generated/figs/{stem}.pdf").read_bytes().startswith(b"%PDF-")
+    assert (ROOT / f"generated/figs/{stem}.png").read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+    assert (ROOT / f"generated/figs/{stem}_sources.md").is_file()
 
 
 def refuses_symlink(module, tmp_path, kind, component):
     target = tmp_path / "target"
     target.mkdir()
     sentinel=target/"sentinel";sentinel.write_text("untouched")
-    link=tmp_path / ("paper/paper" if component=="parent" else f"paper/paper/{kind}")
+    link=tmp_path / ("generated" if component=="parent" else f"generated/{kind}")
     link.parent.mkdir(parents=True,exist_ok=True)
     link.symlink_to(target,target_is_directory=True)
     with pytest.raises(ValueError,match="Symlink"):
@@ -55,7 +55,7 @@ def refuses_external_io(tmp_path):
 
 def refuses_output_file_symlink(tmp_path, kind, name):
     target=tmp_path/"sentinel";target.write_text("untouched")
-    directory=tmp_path/"paper/paper"/kind;directory.mkdir(parents=True)
+    directory=tmp_path/"generated"/kind;directory.mkdir(parents=True)
     (directory/name).symlink_to(target)
     with pytest.raises(ValueError,match="Symlink"):
         output_path(tmp_path,kind,name)

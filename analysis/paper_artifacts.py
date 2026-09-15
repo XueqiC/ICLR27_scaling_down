@@ -1,6 +1,6 @@
 """Read-only artifact access and output confinement for the restructured paper.
 
-Application inputs are restricted to results/ and paper/docs/. Python modules,
+Application inputs are restricted to results/ and docs/. Python modules,
 installed libraries and their bundled fonts are runtime resources, not evidence.
 No model libraries, subprocesses, network, fits, or resampling are used here.
 """
@@ -32,8 +32,8 @@ def no_symlinks(path):
 
 def output_path(root, kind, name=None):
     if kind not in ("figs", "tables"):
-        raise ValueError("Outputs must be paper/paper/figs or paper/paper/tables")
-    directory = no_symlinks(Path(root) / "paper/paper" / kind)
+        raise ValueError("Outputs must be generated/figs or generated/tables")
+    directory = no_symlinks(Path(root) / "generated" / kind)
     path = no_symlinks(directory / name) if name else directory
     if name and (Path(name).name != name or path.parent != directory):
         raise ValueError("Output name must be a basename")
@@ -50,9 +50,9 @@ class Artifacts:
     def path(self, relative):
         path = Path(relative)
         path = path if path.is_absolute() else self.root / path
-        allowed = (self.root / "results", self.root / "paper/docs")
+        allowed = (self.root / "results", self.root / "docs")
         if not any(path.resolve().is_relative_to(p.resolve()) for p in allowed):
-            raise ValueError(f"Input outside results/ and paper/docs/: {path}")
+            raise ValueError(f"Input outside results/ and docs/: {path}")
         return path
 
     def read(self, relative):
@@ -85,12 +85,12 @@ def _audit(event, args):
         writing = bool(flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
         if writing:
             no_symlinks(path)
-            if not any(path.is_relative_to(root / "paper/paper" / k) for k in ("figs", "tables")):
+            if not any(path.is_relative_to(root / "generated" / k) for k in ("figs", "tables")):
                 raise PermissionError(f"Write outside paper outputs: {path}")
             writes.add(str(path))
         else:
             resolved = path.resolve()
-            if any(resolved.is_relative_to(root / p) for p in ("results", "paper/docs")):
+            if any(resolved.is_relative_to(root / p) for p in ("results", "docs")):
                 reads.add(str(path))
                 return
             # Explicit runtime allowlist, never arbitrary repository files.
@@ -98,13 +98,13 @@ def _audit(event, args):
                 return
             if any(resolved.is_relative_to(p) for p in RUNTIME_ROOTS):
                 return
-            if resolved.is_relative_to(root / "paper/paper/figs/.mplconfig"):
+            if resolved.is_relative_to(root / "generated/figs/.mplconfig"):
                 return
             raise PermissionError(f"Read outside frozen artifact roots: {path}")
     elif event in ("os.mkdir", "os.remove", "os.rmdir", "os.rename"):
         for name in (args[:2] if event == "os.rename" else args[:1]):
             path = no_symlinks(Path(os.fsdecode(name)).absolute())
-            outputs = [root / "paper/paper" / k for k in ("figs", "tables")]
+            outputs = [root / "generated" / k for k in ("figs", "tables")]
             if not any(path.is_relative_to(p) or (event == "os.mkdir" and p.is_relative_to(path)) for p in outputs):
                 raise PermissionError(f"Mutation outside paper outputs: {path}")
 

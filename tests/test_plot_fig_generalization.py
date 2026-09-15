@@ -41,8 +41,8 @@ def test_both_figures_preserve_exact_cell_coverage_and_corner_bands(generated):
     check_access(audit, access)
     check_figures("generalization")
     check_figures("generalization_cells")
-    assert gen.format_pairs(rows) in (ROOT / "paper/paper/figs/generalization_mae_pairs.md").read_text()
-    side = (ROOT / "paper/paper/figs/generalization_cells_sources.md").read_text()
+    assert gen.format_pairs(rows) in (ROOT / "generated/figs/generalization_mae_pairs.md").read_text()
+    side = (ROOT / "generated/figs/generalization_cells_sources.md").read_text()
     original = json.loads(side.split("```json\n")[1].split("\n```")[0])
     cells = [c for r in rows if r["kind"] == "mae" for c in r["cells"]]
     corners = [{k: v for k, v in r.items() if k != "kind"} for r in rows if r["kind"] == "corner"]

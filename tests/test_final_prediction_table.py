@@ -11,7 +11,7 @@ from paper_generator_checks import check_access, refuses_symlink, refuses_extern
 
 def raw_source(ref):
     path,pointer=ref.split("#",1)
-    assert path.startswith(("results/","paper/docs/"))
+    assert path.startswith(("results/","docs/"))
     data=json.loads((ROOT/path).read_text())
     for key in pointer.lstrip("/").split("/") if pointer else []:
         key=key.replace("~1","/").replace("~0","~")
@@ -22,8 +22,8 @@ def raw_source(ref):
 def test_table_every_cell_matches_sidecar_and_frozen_json():
     rows,audit,access=gen.generate()
     check_access(audit,access)
-    tex=(ROOT/"paper/paper/tables/main_prediction_v2.tex").read_text()
-    side=(ROOT/"paper/paper/tables/main_prediction_v2_sources.md").read_text()
+    tex=(ROOT/"generated/tables/main_prediction_v2.tex").read_text()
+    side=(ROOT/"generated/tables/main_prediction_v2_sources.md").read_text()
     blocks=re.findall(r"```json\n(.*?)\n```",side,re.S)
     recipes=json.loads(blocks[0])
     caption=json.loads(blocks[1])

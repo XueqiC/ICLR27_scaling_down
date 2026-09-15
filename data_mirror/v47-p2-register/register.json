@@ -586,5 +586,635 @@
         }
       }
     }
+  },
+  "v2": {
+    "protocol_v2": {
+      "students": {
+        "dev": [
+          "gemma3-270m",
+          "gemma3-1b"
+        ],
+        "test_same": [
+          "gemma3-270m",
+          "gemma3-1b"
+        ],
+        "test_size": [
+          "gemma3-4b"
+        ]
+      },
+      "schedule": "absolute exposure: --schedule-tokens 1000000 processed (cosine horizon + stop), warmup 3% of that budget; same for every U",
+      "processed_triggers": [
+        119000,
+        237000,
+        475000,
+        949000
+      ],
+      "planned_supervised_T": [
+        35000,
+        70000,
+        140000,
+        280000
+      ],
+      "tokenizer": "gemma-3 shared across students -> D_U identical across students",
+      "lora": {
+        "r": 16,
+        "alpha": 32,
+        "dropout": 0.0,
+        "targets": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ]
+      },
+      "lr": 0.0001,
+      "training_seed": 0,
+      "pools": {
+        "U75_s11": {
+          "role": "dev",
+          "U": 75,
+          "data_seed": 11,
+          "D_U_completion": 20010,
+          "pool_processed": 67981,
+          "schedule_updates": 206,
+          "epochs_upper_bound": 16,
+          "planned_E_completion": [
+            1.75,
+            3.5,
+            7.0,
+            13.99
+          ],
+          "planned_E_processed": [
+            1.75,
+            3.49,
+            6.99,
+            13.96
+          ]
+        },
+        "U75_s12": {
+          "role": "dev",
+          "U": 75,
+          "data_seed": 12,
+          "D_U_completion": 19418,
+          "pool_processed": 66596,
+          "schedule_updates": 211,
+          "epochs_upper_bound": 17,
+          "planned_E_completion": [
+            1.8,
+            3.6,
+            7.21,
+            14.42
+          ],
+          "planned_E_processed": [
+            1.79,
+            3.56,
+            7.13,
+            14.25
+          ]
+        },
+        "U75_s13": {
+          "role": "dev",
+          "U": 75,
+          "data_seed": 13,
+          "D_U_completion": 20552,
+          "pool_processed": 67772,
+          "schedule_updates": 207,
+          "epochs_upper_bound": 16,
+          "planned_E_completion": [
+            1.7,
+            3.41,
+            6.81,
+            13.62
+          ],
+          "planned_E_processed": [
+            1.76,
+            3.5,
+            7.01,
+            14.0
+          ]
+        },
+        "U450_s11": {
+          "role": "dev",
+          "U": 450,
+          "data_seed": 11,
+          "D_U_completion": 118791,
+          "pool_processed": 400438,
+          "schedule_updates": 210,
+          "epochs_upper_bound": 4,
+          "planned_E_completion": [
+            0.29,
+            0.59,
+            1.18,
+            2.36
+          ],
+          "planned_E_processed": [
+            0.3,
+            0.59,
+            1.19,
+            2.37
+          ]
+        },
+        "U450_s12": {
+          "role": "dev",
+          "U": 450,
+          "data_seed": 12,
+          "D_U_completion": 117848,
+          "pool_processed": 400457,
+          "schedule_updates": 210,
+          "epochs_upper_bound": 4,
+          "planned_E_completion": [
+            0.3,
+            0.59,
+            1.19,
+            2.38
+          ],
+          "planned_E_processed": [
+            0.3,
+            0.59,
+            1.19,
+            2.37
+          ]
+        },
+        "U450_s13": {
+          "role": "dev",
+          "U": 450,
+          "data_seed": 13,
+          "D_U_completion": 120199,
+          "pool_processed": 402411,
+          "schedule_updates": 209,
+          "epochs_upper_bound": 4,
+          "planned_E_completion": [
+            0.29,
+            0.58,
+            1.16,
+            2.33
+          ],
+          "planned_E_processed": [
+            0.3,
+            0.59,
+            1.18,
+            2.36
+          ]
+        },
+        "U375_s21": {
+          "role": "test",
+          "U": 375,
+          "data_seed": 21,
+          "D_U_completion": 99504,
+          "pool_processed": 333166,
+          "schedule_updates": 211,
+          "epochs_upper_bound": 5,
+          "planned_E_completion": [
+            0.35,
+            0.7,
+            1.41,
+            2.81
+          ],
+          "planned_E_processed": [
+            0.36,
+            0.71,
+            1.43,
+            2.85
+          ]
+        },
+        "U375_s22": {
+          "role": "test",
+          "U": 375,
+          "data_seed": 22,
+          "D_U_completion": 99380,
+          "pool_processed": 332676,
+          "schedule_updates": 211,
+          "epochs_upper_bound": 5,
+          "planned_E_completion": [
+            0.35,
+            0.7,
+            1.41,
+            2.82
+          ],
+          "planned_E_processed": [
+            0.36,
+            0.71,
+            1.43,
+            2.85
+          ]
+        },
+        "U375_s23": {
+          "role": "test",
+          "U": 375,
+          "data_seed": 23,
+          "D_U_completion": 102522,
+          "pool_processed": 336143,
+          "schedule_updates": 209,
+          "epochs_upper_bound": 4,
+          "planned_E_completion": [
+            0.34,
+            0.68,
+            1.37,
+            2.73
+          ],
+          "planned_E_processed": [
+            0.35,
+            0.71,
+            1.41,
+            2.82
+          ]
+        }
+      }
+    },
+    "contamination_audit": "results/v47-p2-register/contamination_audit.json: 0 overlaps"
+  },
+  "v5_confirm": {
+    "registered_at_utc": "2026-09-11T03:34:23.609700+00:00",
+    "unused_U_assertion": "U=200 absent from every pre-existing registered pool section",
+    "sampling_rule": "V12 load_sft_records: random.Random(f'{data_seed}-{domain}').sample(eligible JSONL rows, U); full recipe; drop empty completions; V12 max_len=1024 tokenization",
+    "trigger_rule": "ceil(T_completion * pool_processed_tokens / D_U_completion); completed-update crossings may overshoot in processed and completion tokens",
+    "students": [
+      "gemma3-270m",
+      "gemma3-1b"
+    ],
+    "tokenizer_snapshots": {
+      "gemma3-270m": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+      "gemma3-1b": "fcf18a2a879aab110ca39f8bffbccd5d49d8eb29"
+    },
+    "shared_pool_verified": true,
+    "protocol": {
+      "schedule_tokens": 1000000,
+      "epochs_argument": 99,
+      "training_seed": 0,
+      "lora": {
+        "r": 16,
+        "alpha": 32,
+        "dropout": 0.0,
+        "targets": [
+          "q_proj",
+          "k_proj",
+          "v_proj",
+          "o_proj",
+          "gate_proj",
+          "up_proj",
+          "down_proj"
+        ]
+      },
+      "lr": 0.0001,
+      "optimizer": "AdamW",
+      "scheduler": "cosine",
+      "warmup_ratio": 0.03,
+      "effective_batch_size": 16,
+      "max_len": 1024,
+      "suffix": "p2v3conf"
+    },
+    "pools": {
+      "U200_s31": {
+        "U": 200,
+        "data_seed": 31,
+        "role": "confirmation",
+        "n_examples": 597,
+        "n_training_examples": 597,
+        "pool_processed_tokens": 179688,
+        "D_U_completion": 52958,
+        "completion_processed_ratio": 0.2947219625128,
+        "domain_counts": {
+          "code": 198,
+          "qa": 199,
+          "math": 200
+        },
+        "id_set_sha256": "248cea90980ec9e921a9d8b2869cfbd558ab6910ba5509996f56d1486d5100a7",
+        "data_pool_sha256": "111a5a9e84816cb050c3f7ce921eda2d06cc2581bb22075e1a486714e7801a8e",
+        "source_counts": {
+          "math": {
+            "source_rows": 200,
+            "training_rows": 200,
+            "coverage_deleted_rows": 0
+          },
+          "qa": {
+            "source_rows": 200,
+            "training_rows": 199,
+            "coverage_deleted_rows": 1
+          },
+          "code": {
+            "source_rows": 200,
+            "training_rows": 198,
+            "coverage_deleted_rows": 2
+          }
+        },
+        "planned_milestones": [
+          {
+            "planned_T_completion": 50000,
+            "trigger_processed": 169652,
+            "E_completion_convention": 0.9441444163299219
+          },
+          {
+            "planned_T_completion": 100000,
+            "trigger_processed": 339303,
+            "E_completion_convention": 1.8882888326598437
+          },
+          {
+            "planned_T_completion": 200000,
+            "trigger_processed": 678606,
+            "E_completion_convention": 3.7765776653196874
+          }
+        ],
+        "schedule_updates": 212,
+        "planned_epochs": 6
+      },
+      "U200_s32": {
+        "U": 200,
+        "data_seed": 32,
+        "role": "confirmation",
+        "n_examples": 594,
+        "n_training_examples": 594,
+        "pool_processed_tokens": 176885,
+        "D_U_completion": 52964,
+        "completion_processed_ratio": 0.299426180851966,
+        "domain_counts": {
+          "code": 199,
+          "math": 200,
+          "qa": 195
+        },
+        "id_set_sha256": "d7361b13114591e3e246acc73ac57650c5694929659ca7c898a88955c99327bc",
+        "data_pool_sha256": "babaee54e739cf5878333cad113ce15a3ddb331f6f133f1a360ae1d22d8e94e3",
+        "source_counts": {
+          "math": {
+            "source_rows": 200,
+            "training_rows": 200,
+            "coverage_deleted_rows": 0
+          },
+          "qa": {
+            "source_rows": 200,
+            "training_rows": 195,
+            "coverage_deleted_rows": 5
+          },
+          "code": {
+            "source_rows": 200,
+            "training_rows": 199,
+            "coverage_deleted_rows": 1
+          }
+        },
+        "planned_milestones": [
+          {
+            "planned_T_completion": 50000,
+            "trigger_processed": 166987,
+            "E_completion_convention": 0.9440374594063893
+          },
+          {
+            "planned_T_completion": 100000,
+            "trigger_processed": 333973,
+            "E_completion_convention": 1.8880749188127786
+          },
+          {
+            "planned_T_completion": 200000,
+            "trigger_processed": 667945,
+            "E_completion_convention": 3.776149837625557
+          }
+        ],
+        "schedule_updates": 215,
+        "planned_epochs": 6
+      },
+      "U200_s33": {
+        "U": 200,
+        "data_seed": 33,
+        "role": "confirmation",
+        "n_examples": 595,
+        "n_training_examples": 595,
+        "pool_processed_tokens": 176898,
+        "D_U_completion": 51800,
+        "completion_processed_ratio": 0.292824113330846,
+        "domain_counts": {
+          "code": 198,
+          "math": 200,
+          "qa": 197
+        },
+        "id_set_sha256": "0f2c000781217cd4e671ab4f776cdf4d24405c23ed5c4d080e7c2e158aa38add",
+        "data_pool_sha256": "9080a1f0baed5031f2095ff583da9fe720bd341ff79874c51576c266f99cceb0",
+        "source_counts": {
+          "math": {
+            "source_rows": 200,
+            "training_rows": 200,
+            "coverage_deleted_rows": 0
+          },
+          "qa": {
+            "source_rows": 200,
+            "training_rows": 197,
+            "coverage_deleted_rows": 3
+          },
+          "code": {
+            "source_rows": 200,
+            "training_rows": 198,
+            "coverage_deleted_rows": 2
+          }
+        },
+        "planned_milestones": [
+          {
+            "planned_T_completion": 50000,
+            "trigger_processed": 170751,
+            "E_completion_convention": 0.9652509652509652
+          },
+          {
+            "planned_T_completion": 100000,
+            "trigger_processed": 341502,
+            "E_completion_convention": 1.9305019305019304
+          },
+          {
+            "planned_T_completion": 200000,
+            "trigger_processed": 683004,
+            "E_completion_convention": 3.861003861003861
+          }
+        ],
+        "schedule_updates": 215,
+        "planned_epochs": 6
+      },
+      "U200_s34": {
+        "U": 200,
+        "data_seed": 34,
+        "role": "confirmation",
+        "n_examples": 592,
+        "n_training_examples": 592,
+        "pool_processed_tokens": 178516,
+        "D_U_completion": 53528,
+        "completion_processed_ratio": 0.29984987340070357,
+        "domain_counts": {
+          "code": 195,
+          "qa": 197,
+          "math": 200
+        },
+        "id_set_sha256": "576e944e2480472b1f1a0676f7c4a16e79c4eb13ee608a33460bde406ece69ba",
+        "data_pool_sha256": "d19eb5f62d1f8015b7811f2e52f24efcfb597f41ca00c3cdad1f914ec96050ac",
+        "source_counts": {
+          "math": {
+            "source_rows": 200,
+            "training_rows": 200,
+            "coverage_deleted_rows": 0
+          },
+          "qa": {
+            "source_rows": 200,
+            "training_rows": 197,
+            "coverage_deleted_rows": 3
+          },
+          "code": {
+            "source_rows": 200,
+            "training_rows": 195,
+            "coverage_deleted_rows": 5
+          }
+        },
+        "planned_milestones": [
+          {
+            "planned_T_completion": 50000,
+            "trigger_processed": 166751,
+            "E_completion_convention": 0.9340905694216112
+          },
+          {
+            "planned_T_completion": 100000,
+            "trigger_processed": 333501,
+            "E_completion_convention": 1.8681811388432223
+          },
+          {
+            "planned_T_completion": 200000,
+            "trigger_processed": 667001,
+            "E_completion_convention": 3.7363622776864447
+          }
+        ],
+        "schedule_updates": 208,
+        "planned_epochs": 6
+      },
+      "U200_s35": {
+        "U": 200,
+        "data_seed": 35,
+        "role": "confirmation",
+        "n_examples": 592,
+        "n_training_examples": 592,
+        "pool_processed_tokens": 178670,
+        "D_U_completion": 53332,
+        "completion_processed_ratio": 0.2984944310740471,
+        "domain_counts": {
+          "code": 195,
+          "qa": 197,
+          "math": 200
+        },
+        "id_set_sha256": "193e60a043f4a126fe14b75a2aae18b07e919a3e89cba039fb1ad03c6a18db7d",
+        "data_pool_sha256": "01742c467573d627517885096f6a984e76f97d76e66460d6874fd2c96154f801",
+        "source_counts": {
+          "math": {
+            "source_rows": 200,
+            "training_rows": 200,
+            "coverage_deleted_rows": 0
+          },
+          "qa": {
+            "source_rows": 200,
+            "training_rows": 197,
+            "coverage_deleted_rows": 3
+          },
+          "code": {
+            "source_rows": 200,
+            "training_rows": 195,
+            "coverage_deleted_rows": 5
+          }
+        },
+        "planned_milestones": [
+          {
+            "planned_T_completion": 50000,
+            "trigger_processed": 167508,
+            "E_completion_convention": 0.9375234380859522
+          },
+          {
+            "planned_T_completion": 100000,
+            "trigger_processed": 335015,
+            "E_completion_convention": 1.8750468761719044
+          },
+          {
+            "planned_T_completion": 200000,
+            "trigger_processed": 670030,
+            "E_completion_convention": 3.7500937523438087
+          }
+        ],
+        "schedule_updates": 208,
+        "planned_epochs": 6
+      },
+      "U200_s36": {
+        "U": 200,
+        "data_seed": 36,
+        "role": "confirmation",
+        "n_examples": 592,
+        "n_training_examples": 592,
+        "pool_processed_tokens": 178194,
+        "D_U_completion": 53411,
+        "completion_processed_ratio": 0.2997351201499489,
+        "domain_counts": {
+          "code": 198,
+          "qa": 194,
+          "math": 200
+        },
+        "id_set_sha256": "a7448d221b5d68cf287b65959825d9f2d8d7d0cf93ad787d8bffd2cdff16771e",
+        "data_pool_sha256": "c5eca315c67c25841f15d7ca701c7b12a81d28c2b2635b3864c8b748b2cda0b1",
+        "source_counts": {
+          "math": {
+            "source_rows": 200,
+            "training_rows": 200,
+            "coverage_deleted_rows": 0
+          },
+          "qa": {
+            "source_rows": 200,
+            "training_rows": 194,
+            "coverage_deleted_rows": 6
+          },
+          "code": {
+            "source_rows": 200,
+            "training_rows": 198,
+            "coverage_deleted_rows": 2
+          }
+        },
+        "planned_milestones": [
+          {
+            "planned_T_completion": 50000,
+            "trigger_processed": 166814,
+            "E_completion_convention": 0.9361367508565651
+          },
+          {
+            "planned_T_completion": 100000,
+            "trigger_processed": 333628,
+            "E_completion_convention": 1.8722735017131302
+          },
+          {
+            "planned_T_completion": 200000,
+            "trigger_processed": 667256,
+            "E_completion_convention": 3.7445470034262605
+          }
+        ],
+        "schedule_updates": 208,
+        "planned_epochs": 6
+      }
+    },
+    "overlap_jaccard": {
+      "U200_s31~U200_s32": 0.18037661050545095,
+      "U200_s31~U200_s33": 0.20161290322580644,
+      "U200_s31~U200_s34": 0.20222446916076844,
+      "U200_s31~U200_s35": 0.19377510040160642,
+      "U200_s31~U200_s36": 0.2182377049180328,
+      "U200_s32~U200_s33": 0.19257773319959878,
+      "U200_s32~U200_s34": 0.186,
+      "U200_s32~U200_s35": 0.19797979797979798,
+      "U200_s32~U200_s36": 0.20040485829959515,
+      "U200_s33~U200_s34": 0.17992047713717693,
+      "U200_s33~U200_s35": 0.20263424518743667,
+      "U200_s33~U200_s36": 0.20998980632008155,
+      "U200_s34~U200_s35": 0.19234642497482377,
+      "U200_s34~U200_s36": 0.2093973442288049,
+      "U200_s35~U200_s36": 0.20081135902636918
+    },
+    "inputs_sha256": {
+      "analysis/v12_distill.py": "2d1d78b3562583a38fd15cda5f61ed9fbec7563ace7d44d9ddad7bd22225bc3a",
+      "analysis/v47_p2_register.py": "716112bd38b43476fac84376aae8f614866bf851217700935fd38fa803ceb62b",
+      "results/traces-pilot/gpt-5.6-luna_math.jsonl": "b26fbe31b665d1137ebd80d9cdf9b304fb6af36d8d45d2790effda16a0ff559e",
+      "results/traces-pilot/gpt-5.6-luna_qa.jsonl": "2fd25f8478ba90e465651c7c136d76225dc24a926917f30ce2149732ca24ac44",
+      "results/traces-pilot/gpt-5.6-luna_code.jsonl": "743b6ba88d2fb7ef96872b8d247153a731feab207ec6ea5ab3acbc65b727c091",
+      "$HOME/.cache/huggingface/hub/models--google--gemma-3-270m/snapshots/9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/tokenizer.json": "7d4046bf0505a327dd5a0abbb427ecd4fc82f99c2ceaa170bc61ecde12809b0c",
+      "$HOME/.cache/huggingface/hub/models--google--gemma-3-270m/snapshots/9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/tokenizer_config.json": "94b03056ec5831e9021c3e3fe9db682778c4f2d081c4188f1fcb8b90541cf1cf",
+      "$HOME/.cache/huggingface/hub/models--google--gemma-3-270m/snapshots/9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/special_tokens_map.json": "2f7b0adf4fb469770bb1490e3e35df87b1dc578246c5e7e6fc76ecf33213a397",
+      "$HOME/.cache/huggingface/hub/models--google--gemma-3-1b-pt/snapshots/fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/tokenizer.json": "7d4046bf0505a327dd5a0abbb427ecd4fc82f99c2ceaa170bc61ecde12809b0c",
+      "$HOME/.cache/huggingface/hub/models--google--gemma-3-1b-pt/snapshots/fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/tokenizer_config.json": "4d97b6d876fd05ffaf72c3243231975c50263ad4fc620bc9f0b44be2ca11fa31",
+      "$HOME/.cache/huggingface/hub/models--google--gemma-3-1b-pt/snapshots/fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/special_tokens_map.json": "2f7b0adf4fb469770bb1490e3e35df87b1dc578246c5e7e6fc76ecf33213a397"
+    }
   }
 }

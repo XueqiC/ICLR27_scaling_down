@@ -25,9 +25,9 @@ else:
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = Path("results/a3-corner-pools/plan.json")
-PREREG = Path("paper/docs/prereg/corner_second_difference_prereg.md")
+PREREG = Path("docs/prereg/corner_second_difference_prereg.md")
 OUT = Path("results/a5-corner-second-difference")
-REPORT = Path("paper/docs/CORNER_SECOND_DIFFERENCE_REPORT.md")
+REPORT = Path("docs/CORNER_SECOND_DIFFERENCE_REPORT.md")
 STUDENTS = ("gemma3-1b", "gemma3-4b")
 READOUTS = {
     "qa": ("QA probe, 2Wiki, measured in the trajectory", "2WikiMultihopQA", "PRIMARY"),
@@ -605,7 +605,7 @@ def main(argv=None):
     parser.add_argument("--students", nargs="+", choices=STUDENTS, default=None)
     parser.add_argument("--root", type=Path, default=ROOT, help="Input repository root")
     parser.add_argument("--output-dir", type=Path, help="Defaults to ROOT/results/a5-corner-second-difference")
-    parser.add_argument("--report-path", type=Path, help="Defaults to ROOT/paper/docs/CORNER_SECOND_DIFFERENCE_REPORT.md")
+    parser.add_argument("--report-path", type=Path, help="Defaults to ROOT/docs/CORNER_SECOND_DIFFERENCE_REPORT.md")
     args = parser.parse_args(argv)
     try:
         report = build(args.root, args.students)

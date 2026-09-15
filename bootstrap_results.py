@@ -13,11 +13,16 @@ figure generators write into.
 Existing files are never overwritten, so it is safe to re-run, and it never
 touches `data_mirror/`.
 
-    python3 bootstrap_results.py [--dry-run]
+    python3 bootstrap_results.py [--dry-run] [--legacy-layout]
+
+New paper generators write to generated/{tables,figs}. Older versioned generators
+use paper/paper/{tables,figs} and paper/code; opt into those compatibility paths
+with --legacy-layout only when paper/ does not contain a separate manuscript repo.
 """
 from __future__ import annotations
 
 import gzip
+from itertools import product
 import shutil
 import sys
 from pathlib import Path
@@ -25,19 +30,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 MIRROR = ROOT / "data_mirror"
 RESULTS = ROOT / "results"
-OUTPUT_DIRS = (ROOT / "paper" / "paper" / "tables", ROOT / "paper" / "paper" / "figs")
+OUTPUT_DIRS = (ROOT / "generated" / "tables", ROOT / "generated" / "figs")
 
 
 def targets(relative: Path) -> list[Path]:
     """Both spellings of a mirrored name: the portable one and the original."""
-    names = {relative.name}
-    if "--step" in relative.name:
-        names.add(relative.name.replace("--step", "@step"))
-    return [RESULTS / relative.parent / name for name in sorted(names)]
+    # State tags occur in directory names as well as basenames (e.g. V53 dense
+    # snapshots). Preserve every spelling a frozen loader can request.
+    parts = [{part, part.replace("--step", "@step")} for part in relative.parts]
+    return [RESULTS.joinpath(*path) for path in sorted(product(*parts))]
 
 
 def main() -> int:
     dry = "--dry-run" in sys.argv
+    legacy = "--legacy-layout" in sys.argv
+    output_dirs = (tuple(ROOT / "paper" / "paper" / kind for kind in ("tables", "figs"))
+                   if legacy else OUTPUT_DIRS)
     if not MIRROR.is_dir():
         print(f"no data_mirror/ at {MIRROR}")
         return 1
@@ -67,7 +75,7 @@ def main() -> int:
                 shutil.copy2(source, target)
             written += 1
 
-    for directory in OUTPUT_DIRS:
+    for directory in output_dirs:
         if not dry:
             directory.mkdir(parents=True, exist_ok=True)
 
@@ -75,7 +83,7 @@ def main() -> int:
     table_source = MIRROR / "tables"
     if table_source.is_dir():
         for source in sorted(table_source.glob("*.tex")):
-            target = OUTPUT_DIRS[0] / source.name
+            target = output_dirs[0] / source.name
             if not target.exists() and not dry:
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(source, target)
@@ -86,7 +94,8 @@ def main() -> int:
     # copies: a symlink would be refused by the generators' own output guard, and
     # editing those scripts is not an option because frozen records name their digests.
     if not dry:
-        for base in (ROOT / "code", ROOT / "paper" / "code"):
+        bases = (ROOT / "code", ROOT / "paper" / "code") if legacy else (ROOT / "code",)
+        for base in bases:
             for name in ("analysis", "tests", "configs"):
                 source = ROOT / name
                 target = base / name
@@ -100,8 +109,8 @@ def main() -> int:
     verb = "would write" if dry else "wrote"
     print(f"{verb} {written} file(s), {verb.split()[-1]} {expanded} gzipped summary/summaries, "
           f"left {skipped} existing file(s) alone")
-    print(f"generators write LaTeX into {OUTPUT_DIRS[0].relative_to(ROOT)} and "
-          f"figures into {OUTPUT_DIRS[1].relative_to(ROOT)}")
+    print(f"generators write LaTeX into {output_dirs[0].relative_to(ROOT)} and "
+          f"figures into {output_dirs[1].relative_to(ROOT)}")
     print("Inputs that were never mirrored cannot be reconstructed; the ledger in "
           "docs/RESULTS_LEDGER.md names the artifact behind every reported number.")
     return 0
