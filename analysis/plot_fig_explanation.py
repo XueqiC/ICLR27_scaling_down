@@ -17,6 +17,33 @@ A2="results/a2-curvature-interaction/summary.json"
 A5="results/a5-corner-second-difference/summary.json"
 A7="results/a7-closeout-audit/summary.json"
 CAPTION="failed to reject"
+PANEL_SIZES = {"a": (2.7, 2.5), "b": (2.7, 2.5), "c": (5.5, 1.9)}
+KINDS = {"a": "panel", "b": "panel", "c": "full"}
+FIGSIZE = (5.5, 4.45)
+if __package__:
+    from .paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
+else:
+    from paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
+
+CAPTION_TEXT = """Reuse-term curvature (a), registered corner test (b), and post-hoc
+displacement account (c). Primary QA additivity: failed to reject. This applies
+to the primary QA test only; math is size-dependent and code unresolved.
+Curvature intervals are conditional on development. The exponent p is unitless.
+Fold circles and boundary-hit
+crosses show the stored development fits; diamonds show the full-development fit
+with its conditional interval. Reference lines mark p = 0 and p = 1.
+Corner rows show each student/readout separately. The additive prediction is zero;
+frozen F_int predictions are diamonds; measured second differences are circles.
+Shading is plus/minus one registered noise, and whiskers are the registered
+plus/minus twice-noise band, not a confidence interval. The second-difference
+axis uses a symmetric-log scale in native-token nats.
+Displacement is a post-hoc account, with both axes logarithmic. Each configuration
+shows median absolute measured damage and median relative second-order prediction
+error across its stored state/capability records. Zero-damage records are excluded.
+The three families are pruning, grouped RTN, and per-channel RTN. There is no
+distillation displacement measurement; the superseded uncentred run and the
+separate cluster hardware run are not pooled.
+"""
 
 
 def curvature(audit):
@@ -89,56 +116,95 @@ def displacement(audit):
     return result
 
 
+def draw_panel(fig, data, panel):
+    from matplotlib.lines import Line2D
+    from matplotlib.ticker import NullFormatter, MaxNLocator
+    size = PANEL_SIZES[panel]
+    if panel == "a":
+        ax = panel_axes(fig, size, left=.60, bottom=.75)
+        for i, r in enumerate(data["profiles"]):
+            color = COLORS[r["capability"]]
+            for k, fold in enumerate(r["folds"]):
+                x = i-.25+.38*k/max(1, len(r["folds"])-1)
+                ax.plot(x, fold["p"], marker="x" if fold["boundary"] else "o", color=color, alpha=.65)
+            lo, hi = r["interval"]
+            ax.errorbar(i+.28, r["p"], yerr=[[r["p"]-lo], [hi-r["p"]]],
+                        fmt="D", color=color, capsize=3)
+        ax.axhline(0, color=".65", lw=1.2, ls=":")
+        ax.axhline(1, color=".65", lw=1.2, ls="--")
+        ax.set(xticks=range(3), xticklabels=["Math", "Code", "QA"],
+               xlabel="Capability", ylabel="Curvature $p$")
+        ax.yaxis.set_major_locator(MaxNLocator(4))
+        legend_row(fig, [Line2D([], [], marker=m, ls="", color=".3", label=label)
+                        for m, label in (("o", "Fold"), ("x", "Bound."), ("D", "Full"))])
+    elif panel == "b":
+        ax = panel_axes(fig, size, left=.87, bottom=.78)
+        for i, r in enumerate(data["corners"]):
+            color = COLORS[r["capability"]]
+            ax.fill_betweenx([i-.36, i+.36], -r["noise"], r["noise"], color=".88", zorder=0)
+            ax.plot(r["additive"], i-.18, "|", color=".2")
+            ax.plot(r["F_int"], i+.18, "D", color="#7c4da1")
+            lo, hi = r["interval"]
+            ax.errorbar(r["measured"], i, xerr=[[r["measured"]-lo], [hi-r["measured"]]],
+                        fmt="o", color=color, capsize=3)
+        ax.set_xscale("symlog", linthresh=.02)
+        ax.set_xticks([-.1, 0, .1], labels=["−0.1", "0", "0.1"])
+        ax.xaxis.set_minor_formatter(NullFormatter())
+        ax.set(yticks=range(len(data["corners"])),
+               yticklabels=[r["student"].replace("gemma3-", "").upper()+" "+
+                            ("QA" if r["capability"] == "qa" else r["capability"].title())
+                            for r in data["corners"]],
+               ylim=(len(data["corners"])-.5, -.5),
+               xlabel="Second diff. (nats)")
+        legend_row(fig, [Line2D([], [], marker=m, ls="", color=c, label=label)
+                        for m, c, label in (("|", ".2", "Add."), ("D", "#7c4da1", "$F_{int}$"),
+                                            ("o", ".3", "Obs."))])
+    else:
+        ax = panel_axes(fig, size, left=.78, bottom=.79)
+        labels = {"prune": "Pruning", "pruning": "Pruning", "grouped_rtn": "Grouped RTN",
+                  "per_channel_rtn": "Per-channel RTN"}
+        for family, color, marker in zip(sorted({r["family"] for r in data["displacement"]}),
+                                          COLORS.values(), ("o", "s", "^")):
+            part = sorted((r for r in data["displacement"] if r["family"] == family), key=lambda r: r["damage"])
+            ax.plot([r["damage"] for r in part], [100*r["median_relative_error"] for r in part],
+                    marker=marker, color=color, label=labels[family])
+        ax.set(xscale="log", yscale="log", xlabel="Median |damage| (native-token nats)",
+               ylabel="Median rel.\nerror (%)")
+        ax.xaxis.set_minor_formatter(NullFormatter())
+        ax.yaxis.set_minor_formatter(NullFormatter())
+        legend_row(fig, ax.get_legend_handles_labels()[0])
+        ax.grid(alpha=.15, which="both")
+    return ax
+
+
+def plot(data, plt):
+    return combine_panels(plt, [
+        ("panel", (0, 1.95, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a")),
+        ("panel", (2.8, 1.95, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b")),
+        ("full", (0, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, data, "c")),
+    ], FIGSIZE)
+
+
 def generate(root=ROOT):
     with frozen_run(root) as access:
-        audit=Artifacts(root);plt=pyplot(root)
-        profiles=curvature(audit);corner=corners(audit);disp=displacement(audit)
-        from matplotlib.lines import Line2D
-        fig,axes=plt.subplots(1,3,figsize=(12,5.2),gridspec_kw={"width_ratios":[1,1.2,1.1]})
-        ax=axes[0]
-        for i,r in enumerate(profiles):
-            color=COLORS[r["capability"]]
-            for k,f in enumerate(r["folds"]):
-                # Deterministic offsets expose every fold without random draws.
-                x=i-.25+.38*k/max(1,len(r["folds"])-1)
-                ax.plot(x,f["p"],marker="x" if f["boundary"] else "o",color=color,ms=3,alpha=.65)
-            lo,hi=r["interval"]; p=r["p"]
-            ax.errorbar(i+.28,p,yerr=[[p-lo],[hi-p]],fmt="D",color=color,ms=5,capsize=3)
-        ax.axhline(0,color=".65",lw=.7,ls=":");ax.axhline(1,color=".65",lw=.7,ls="--")
-        ax.set(xticks=range(3),xticklabels=[c.title() for c in CAPS],ylabel="Reuse curvature exponent p (unitless)",title="a  Reuse-term curvature")
-        ax.legend(handles=[Line2D([],[],marker=m,ls="",color=".3",label=l) for m,l in
-                           (("o","fold"),("x","boundary hit"),("D","full development + conditional interval"))],fontsize=6,loc="upper center",bbox_to_anchor=(.5,-.15))
-        ax=axes[1]
-        for i,r in enumerate(corner):
-            color=COLORS[r["capability"]]
-            ax.fill_betweenx([i-.36,i+.36],-r["noise"],r["noise"],color=".88",zorder=0)
-            ax.plot(r["additive"],i-.18,"|",color=".2",ms=8)
-            ax.plot(r["F_int"],i+.18,"D",color="#7c4da1",ms=4)
-            lo,hi=r["interval"];m=r["measured"]
-            ax.errorbar(m,i,xerr=[[m-lo],[hi-m]],fmt="o",color=color,ms=4,capsize=2)
-        ax.set_xscale("symlog",linthresh=.02)
-        ax.set(yticks=range(len(corner)),yticklabels=[r["student"].replace("gemma3-", "")+" "+r["capability"].upper() for r in corner],
-               xlabel="Second difference (native-token nats; symlog)",title="b  Corner test")
-        ax.invert_yaxis()
-        ax.legend(handles=[Line2D([],[],marker=m,ls="",color=c,label=l) for m,c,l in
-                           (("|",".2","additive"),("D","#7c4da1","frozen F_int"),("o",".3","measured + registered band"))],
-                  fontsize=6,loc="upper center",bbox_to_anchor=(.5,-.20),bbox_transform=ax.transAxes,borderaxespad=0)
-        ax=axes[2]
-        labels={"prune":"Pruning","pruning":"Pruning","grouped_rtn":"Grouped RTN","per_channel_rtn":"Per-channel RTN"}
-        for family,color,marker in zip(sorted({r["family"] for r in disp}),COLORS.values(),("o","s","^")):
-            part=sorted((r for r in disp if r["family"]==family),key=lambda r:r["damage"])
-            ax.plot([r["damage"] for r in part],[100*r["median_relative_error"] for r in part],marker=marker,color=color,lw=1,label=labels.get(family,family))
-        ax.set(xscale="log",yscale="log",xlabel="Median |damage| (native-token nats)",ylabel="Median relative error (%)",title="c  Displacement account (post-hoc)")
-        ax.legend(fontsize=7);ax.grid(alpha=.15,which="both")
-        fig.text(.5,.065,CAPTION,ha="center",fontsize=9)
-        fig.text(.5,.025,"Primary QA additivity test; math size-dependent, code unresolved. Curvature intervals are conditional on development.",ha="center",fontsize=8)
-        fig.tight_layout(rect=(0,.14,1,1))
+        audit = Artifacts(root)
+        plt = pyplot(root)
+        data = {"profiles": curvature(audit), "corners": corners(audit), "displacement": displacement(audit)}
         audit.rule("A2 panel a uses training-probe parameter_stability[].folds[name=F_curv].p/boundary and "
                    "parameter_intervals[].fits.F_curv.fit.p / p_interval / fit.boundary_hit; no profile or bootstrap is rerun.")
-        data={"profiles":profiles,"corners":corner,"displacement":disp}
-        save_figure(fig,"explanation",audit);write_notes("explanation",audit,data);plt.close(fig)
-        return data,audit,access
+        for letter, key in zip("abc", ("profiles", "corners", "displacement")):
+            apply_style(KINDS[letter])
+            fig = plt.figure(figsize=PANEL_SIZES[letter])
+            draw_panel(fig, data, letter)
+            save_panel(fig, f"fig2_{letter}", KINDS[letter], audit, data[key])
+            plt.close(fig)
+        fig = plot(data, plt)
+        save_figure(fig, "explanation", audit)
+        write_notes("explanation", audit, data)
+        write_caption("explanation", audit, CAPTION_TEXT)
+        plt.close(fig)
+        return data, audit, access
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     generate()

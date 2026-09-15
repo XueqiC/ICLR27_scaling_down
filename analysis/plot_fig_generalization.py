@@ -27,8 +27,15 @@ D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
 GREEN, GREY = "#24835b", "#777777"
 MARKERS = {"math": "o", "code": "s", "qa": "D"}
-SCOPE_NOTE = ("No frozen response-law predictions\non fresh evaluation distributions.\n"
-              "Only registered corner contrasts\nare available below.")
+PANEL_SIZES = {"a": (5.5, 2.95), "b": (5.5, 1.9), "c": (2.7, 2.0), "d": (2.7, 2.0)}
+KINDS = {"a": "full", "b": "full", "c": "panel", "d": "panel"}
+FIGSIZE = (5.5, 6.95)
+if __package__:
+    from .paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
+else:
+    from paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
+SCOPE_NOTE = ("No frozen response-law predictions on fresh evaluation distributions.\n"
+              "Only registered corner contrasts are available below.")
 
 
 def resolve(audit, reference):
@@ -184,7 +191,7 @@ def build(audit):
     audit.rule("Corner rows are unchanged: signed prediction-minus-measurement on a separate symlog "
                "axis, original capability colours, circles filled iff within the stored band, triangles "
                "for the 4B development student. Whiskers are A5 registered +/-2-noise bands, not CIs. "
-               "Primary QA additivity failed to reject. Panel C shows only the registered additive "
+               "Primary QA additivity failed to reject. Source panel C (display panel d) shows only the registered additive "
                "corner predictions (zero); no frozen response-law predictions on fresh distributions exist.")
     audit.rule("V46 .55 is outside its original coarse .6--.9 range; .65 is inside. V72 repeats two "
                "revision labels with identical weights; both records retained, not independent states. "
@@ -194,129 +201,153 @@ def build(audit):
 
 def row_label(group, stratum):
     labels = {
-        "Pruning: density inside range": "Pruning: inside range",
-        "Pruning: density outside range": "Pruning: outside range",
-        "Quantization: new group size": "Quantization:\nnew group size",
-        "Distillation: new-pool budgets": "Distillation: new pools",
-        "Pythia: new stages (power)": "Pythia: new stages\n(power)",
-        "Pythia: new quantization state": "Pythia: new\nquantization state",
-        "Pythia: locked rule on new states": "Pythia: locked rule\nbaseline unavailable",
+        "Pruning: density inside range": "Pruning: inside",
+        "Pruning: density outside range": "Pruning: outside",
+        "Quantization: new group size": "Quant.: group size",
+        "Distillation: new-pool budgets": "Distill.: pools",
+        "Pythia: new stages (power)": "Pythia: stages",
+        "Pythia: new quantization state": "Pythia: quant. state",
+        "Pythia: locked rule on new states": "Pythia: locked rule",
     }
     label = labels[group]
-    if stratum == "V46":
-        label += "\nV46; baseline unavailable"
-    elif stratum == "V72":
-        label += "\nV72 repeat"
+    if stratum in ("V46", "V72"):
+        label += " " + stratum
     elif stratum.startswith("gemma3-"):
-        label += "\n" + {"gemma3-270m": "270M", "gemma3-1b": "1B"}[stratum]
+        label += " " + {"gemma3-270m": "270M", "gemma3-1b": "1B"}[stratum]
     return label
 
 
 def draw_maes(ax, rows, panel, limits):
+    from matplotlib.ticker import NullFormatter
     order = list(dict.fromkeys((r["group"], r["stratum"]) for r in rows if r["panel"] == panel))
+    labels = []
     for y, key in enumerate(order):
         part = [r for r in rows if r["panel"] == panel and (r["group"], r["stratum"]) == key]
         for r in part:
-            yy = y + (CAPS.index(r["capability"]) - 1) * .20
+            yy = y + (CAPS.index(r["capability"]) - 1) * .30
             marker = MARKERS[r["capability"]]
             color = GREEN if r["below_baseline"] else GREY
             candidate, baseline = r["relation_mae"], r["baseline_mae"]
             if baseline is not None:
-                ax.plot([baseline, candidate], [yy, yy], color=".68", lw=.8, zorder=1)
-                ax.plot(baseline, yy, marker=marker, mfc="white", mec=GREY, ms=5, ls="", zorder=3)
+                ax.plot([baseline, candidate], [yy, yy], color=".68", zorder=1)
+                ax.plot(baseline, yy, marker=marker, mfc="white", mec=GREY, ls="", zorder=3)
             if r["whisker"] is not None:
                 lo, hi = r["whisker"]
-                ax.hlines(yy, lo, hi, color=color, lw=1.0, zorder=2)
-                ax.vlines([lo, hi], yy-.06, yy+.06, color=color, lw=.8, zorder=2)
-            ax.plot(candidate, yy, marker=marker, color=color, ms=4, ls="", zorder=4)
+                ax.hlines(yy, lo, hi, color=color, lw=2, zorder=2)
+                ax.vlines([lo, hi], yy-.08, yy+.08, color=color, lw=2, zorder=2)
+            ax.plot(candidate, yy, marker=marker, color=color, ls="", zorder=4)
         counts = {r["n"] for r in part}
         if len(counts) != 1:
             raise ValueError("A shared row count requires equal counts per capability")
-        ax.text(1.025, y, str(counts.pop()), transform=ax.get_yaxis_transform(),
-                va="center", fontsize=7, color=".35")
+        labels.append(row_label(*key) + f" ({counts.pop()})")
         if y < len(order)-1:
             ax.axhline(y+.5, color=".93", lw=.6, zorder=0)
-    ax.text(1.025, 1.025, "n / cap.", transform=ax.transAxes, fontsize=7, color=".35")
     ax.set_xscale("log")
     ax.set_xlim(*limits)
-    ax.set(yticks=range(len(order)), yticklabels=[row_label(*key) for key in order],
-           ylim=(len(order)-.5, -.5), xlabel="MAE (native-token nats; log)")
-    ax.tick_params(axis="y", labelsize=7.5, length=0, pad=7)
+    ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.set(yticks=range(len(order)), yticklabels=labels,
+           ylim=(len(order)-.5, -.5), xlabel="MAE (native-token nats)")
+    ax.tick_params(axis="y", length=0, pad=4)
     ax.grid(axis="x", alpha=.15)
     ax.spines["left"].set_visible(False)
 
 
 def draw_corners(ax, rows, panel):
-    rows = [r for r in rows if r["panel"] == panel]
+    from matplotlib.ticker import NullFormatter
+    source_panels = ("A", "B") if panel == "c" else ("C",)
+    rows = [r for r in rows if r["panel"] in source_panels]
     groups = list(dict.fromkeys(r["group"] for r in rows))
     for y, group in enumerate(groups):
         part = [r for r in rows if r["group"] == group]
         for k, r in enumerate(part):
-            # Deliberately identical to the original cell plot's corner grammar.
             jitter = 0 if len(part) == 1 else -.26 + .52*k/(len(part)-1)
             color = COLORS[r["capability"]]
             dev = r["status"] == "development"
             lo, hi = r["residual_interval"]
             e = r["residual"]
-            ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=2, lw=.85)
+            ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=3, lw=2)
             ax.plot(e, y+jitter, marker="^" if dev else "o", ls="", color=color,
-                    mfc=color if r["within"] else "white", ms=5 if dev else 4, alpha=.85)
-    ax.axvline(0, color=".5", lw=.8)
+                    mfc=color if r["within"] else "white", alpha=.85)
+    ax.axvline(0, color=".5", lw=1.2)
     ax.set_xscale("symlog", linthresh=.03)
     ax.set_xlim(-2.5, 2.5)
-    ax.set_xticks([-1, -.1, 0, .1, 1], labels=["−1", "−0.1", "0", "0.1", "1"])
-    labels = {"Distillation: corner budgets (1B)": "Corner budgets\n1B",
-              "4B DEVELOPMENT: corner budgets": "Corner budgets\n4B DEVELOPMENT",
-              "2wiki_new": "2Wiki (fresh)", "musique": "MuSiQue", "triviaqa": "TriviaQA"}
+    ax.set_xticks([-1, 0, 1], labels=["−1", "0", "1"])
+    ax.set_xticks([-.1, .1], minor=True)
+    ax.xaxis.set_minor_formatter(NullFormatter())
+    labels = {"Distillation: corner budgets (1B)": "1B",
+              "4B DEVELOPMENT: corner budgets": "4B dev.",
+              "2wiki_new": "2Wiki", "musique": "MuSiQue", "triviaqa": "TriviaQA"}
     ax.set(yticks=range(len(groups)), yticklabels=[labels[g] for g in groups],
-           ylim=(len(groups)-.5, -.5), xlabel="Prediction − measurement\n(native-token nats; symlog)")
-    ax.tick_params(axis="y", labelsize=7.5, length=0, pad=7)
+           ylim=(len(groups)-.5, -.5), xlabel="Pred. − obs. (nats)")
+    ax.tick_params(axis="y", length=0, pad=3)
     ax.grid(axis="x", alpha=.15)
     ax.spines["left"].set_visible(False)
 
 
-def plot(rows, plt):
-    from matplotlib.lines import Line2D
+def mae_limits(rows):
     maes = [r for r in rows if r["kind"] == "mae"]
-    corners = [r for r in rows if r["kind"] == "corner"]
     values = [v for r in maes for v in (r["relation_mae"], r["baseline_mae"], *(r["whisker"] or [])) if v is not None]
     if not all(math.isfinite(v) and v > 0 for v in values):
         raise ValueError("Log MAE axis requires positive values; never add a pseudocount or clip an interval")
-    limits = min(values)/1.4, max(values)*1.4
-    fig = plt.figure(figsize=(13.6, 5.7))
-    grid = fig.add_gridspec(2, 3, left=.13, right=.975, top=.87, bottom=.19,
-                           wspace=1.0, hspace=.85, height_ratios=[4, 1.05])
-    titles = ("A  New configurations of seen states", "B  New sources or students",
-              "C  New evaluation distributions")
-    for i, panel in enumerate("AB"):
-        ax = fig.add_subplot(grid[0, i])
-        draw_maes(ax, maes, panel, limits)
-        ax.set_title(titles[i], fontsize=9, pad=23)
-        draw_corners(fig.add_subplot(grid[1, i]), corners, panel)
-    # C has only three supported corner contrasts. No development QA holdout is
-    # relabelled as a response-law prediction on a fresh distribution.
-    scope = fig.add_subplot(grid[:, 2])
-    scope.set_axis_off()
-    scope.set_title(titles[2], fontsize=9, pad=23)
-    scope.text(.5, .99, SCOPE_NOTE, transform=scope.transAxes, ha="center", va="top",
-               fontsize=8, linespacing=1.5, color=".3")
-    cx = scope.inset_axes([0, .20, 1, .48])
-    draw_corners(cx, corners, "C")
-    scope.text(.5, .03, "Primary QA additivity:\nfailed to reject", transform=scope.transAxes,
-               ha="center", va="top", fontsize=8, linespacing=1.4)
-    legend = [Line2D([], [], color=COLORS[c], marker=MARKERS[c], ls="",
-                     label="QA" if c == "qa" else c.title()) for c in CAPS]
-    legend += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Baseline"),
-               Line2D([], [], color=GREY, marker="o", ls="", label="Relation"),
-               Line2D([], [], color=GREEN, marker="o", ls="", label="Lower MAE"),
-               Line2D([], [], color=GREY, marker="|", lw=.8, label="Paired gain CI"),
-               Line2D([], [], color=GREY, marker="^", ls="", mfc="white",
-                      label="4B dev.; corners: filled in band / hollow outside")]
-    fig.legend(handles=legend, loc="lower center", bbox_to_anchor=(.5, .035), ncol=len(legend),
-               frameon=False, fontsize=7.5, handlelength=1.2, columnspacing=1.3)
-    fig.text(.5, .015, "Paired gain CIs are translated about the fixed baseline MAE; corner whiskers are registered ±2-noise bands.",
-             ha="center", fontsize=7, color=".35")
-    return fig
+    return min(values)/1.4, max(values)*1.4
+
+
+def draw_panel(fig, rows, panel):
+    from matplotlib.lines import Line2D
+    if panel in "ab":
+        ax = panel_axes(fig, PANEL_SIZES[panel], left=2.12, bottom=.79)
+        draw_maes(ax, [r for r in rows if r["kind"] == "mae"], panel.upper(), mae_limits(rows))
+        handles = [Line2D([], [], color=GREY, marker=MARKERS[c], ls="",
+                          label="QA" if c == "qa" else c.title()) for c in CAPS]
+        handles += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Baseline"),
+                    Line2D([], [], color=GREY, marker="o", ls="", label="Relation"),
+                    Line2D([], [], color=GREEN, marker="o", ls="", label="Lower MAE")]
+    else:
+        ax = panel_axes(fig, PANEL_SIZES[panel], left=.68 if panel == "c" else .90, bottom=.75)
+        draw_corners(ax, [r for r in rows if r["kind"] == "corner"], panel)
+        if panel == "c":
+            handles = [Line2D([], [], color=COLORS[c], marker="o", ls="",
+                              label="QA" if c == "qa" else c.title()) for c in CAPS]
+        else:
+            handles = [Line2D([], [], color=COLORS["qa"], marker=m, ls="", label=label)
+                       for m, label in (("o", "1B"), ("^", "4B dev."))]
+    legend_row(fig, handles)
+    return ax
+
+
+def plot(rows, plt):
+    return combine_panels(plt, [
+        ("full", (0, 4.0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
+        ("full", (0, 2.05, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
+        ("panel", (0, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
+        ("panel", (2.8, 0, *PANEL_SIZES["d"]), lambda f: draw_panel(f, rows, "d")),
+    ], FIGSIZE)
+
+
+CAPTION_TEXT = """Generalization to new configurations of seen states (a), new sources
+or students (b), registered corner contrasts for both students (c), and fresh
+evaluation distributions (d). MAE axes are logarithmic in native-token nats.
+Paired markers compare the relation and development-selected baseline on identical
+cells with equal cell weights. Math, Code and QA use circles, squares and diamonds
+in the MAE panels. Hollow markers denote baselines; filled relation markers are
+green only when the relation MAE is lower. Parentheses in row labels give the cell
+count per capability, not an independent sample size. V46 and the Pythia locked-rule
+row have no stored development-selected baseline: their unpaired relation markers
+remain grey. V46/V72 and the 270M/1B new-pool budgets remain separate.
+Paired gain CIs are translated about the fixed baseline MAE: a stored
+baseline-minus-relation interval [lo, hi] is drawn at [baseline MAE - hi,
+baseline MAE - lo]. These are paired gain intervals, not marginal MAE confidence
+intervals; no intervals are averaged across students.
+Corner whiskers are registered ±2-noise bands, not CIs. Corners: filled in band /
+hollow outside. Both corner panels use signed prediction-minus-measurement with a
+symmetric-log axis and unchanged limits of -2.5 to 2.5 native-token nats.
+Circles denote 1B; triangles denote the 4B development student. Capability colours
+apply in (c), and all fresh-distribution contrasts in (d) are QA.
+Primary QA additivity: failed to reject. Math is size-dependent and code unresolved.
+No frozen response-law predictions on fresh evaluation distributions. Only
+registered corner contrasts are available in (d), with additive predictions zero.
+No A2 development-holdout interval is transplanted to these confirmation cells.
+"""
 
 
 def format_pairs(rows):
@@ -336,9 +367,24 @@ def generate(root=ROOT):
         audit = Artifacts(root)
         plt = pyplot(root)
         rows = build(audit)
+        for letter in "abcd":
+            apply_style(KINDS[letter])
+            fig = plt.figure(figsize=PANEL_SIZES[letter])
+            draw_panel(fig, rows, letter)
+            if letter in "ab":
+                panel_rows = [r for r in rows if r["kind"] == "mae" and r["panel"] == letter.upper()]
+            else:
+                source_panels = ("A", "B") if letter == "c" else ("C",)
+                panel_rows = [r for r in rows if r["kind"] == "corner" and r["panel"] in source_panels]
+            save_panel(fig, f"fig3_{letter}", KINDS[letter], audit, panel_rows)
+            plt.close(fig)
+        audit.rule("Display mapping: fig3_a = MAE A, fig3_b = MAE B, fig3_c = corner A+B, "
+                   "fig3_d = corner C. Frozen record panel fields and all numerical values are unchanged. "
+                   "Row parentheses are cell counts per capability; unpaired V46/locked-rule markers have unavailable baselines.")
         fig = plot(rows, plt)
         save_figure(fig, "generalization", audit)
         write_notes("generalization", audit, rows)
+        write_caption("generalization", audit, CAPTION_TEXT)
         output_path(root, "figs", "generalization_mae_pairs.md").write_text(
             "# Generalization: per-row MAE pairs\n\n"
             "Native-token nats; cell counts are per capability. Baselines are selected on development "

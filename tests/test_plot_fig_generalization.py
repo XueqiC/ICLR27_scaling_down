@@ -41,8 +41,8 @@ def test_both_figures_preserve_exact_cell_coverage_and_corner_bands(generated):
     check_access(audit, access)
     check_figures("generalization")
     check_figures("generalization_cells")
-    assert gen.format_pairs(rows) in (ROOT / "generated/figs/generalization_mae_pairs.md").read_text()
-    side = (ROOT / "generated/figs/generalization_cells_sources.md").read_text()
+    assert gen.format_pairs(rows) in (ROOT / "paper/paper/figs/generalization_mae_pairs.md").read_text()
+    side = (ROOT / "paper/paper/figs/generalization_cells_sources.md").read_text()
     original = json.loads(side.split("```json\n")[1].split("\n```")[0])
     cells = [c for r in rows if r["kind"] == "mae" for c in r["cells"]]
     corners = [{k: v for k, v in r.items() if k != "kind"} for r in rows if r["kind"] == "corner"]
@@ -140,7 +140,7 @@ def test_whiskers_are_exact_paired_gain_intervals_never_pooled_or_mae_intervals(
                for r in rows if r["kind"] == "mae" and r["whisker"] is None)
 
 
-def test_render_has_log_maes_one_line_legend_and_explicit_counts(generated):
+def test_render_has_log_maes_panel_legends_and_explicit_counts(generated):
     rows, _, _ = generated
     plt = pyplot()
     fig = gen.plot(rows, plt)
@@ -149,14 +149,19 @@ def test_render_has_log_maes_one_line_legend_and_explicit_counts(generated):
         maes = [ax for ax in fig.axes if ax.get_xscale() == "log"]
         assert len(maes) == 2
         assert maes[0].get_xlim() == maes[1].get_xlim()
-        assert len(fig.legends) == 1
-        ys = [t.get_window_extent().y0 for t in fig.legends[0].get_texts()]
-        assert max(ys) - min(ys) < 1
+        assert len(fig.subfigs) == 4
+        for sub in fig.subfigs:
+            assert len(sub.legends) == 1
+            ys = [t.get_window_extent().y0 for t in sub.legends[0].get_texts()]
+            assert max(ys) - min(ys) < 1
         for panel, ax in zip("AB", maes):
             part = [r for r in rows if r["panel"] == panel and r["kind"] == "mae"]
             order = list(dict.fromkeys((r["group"], r["stratum"]) for r in part))
-            numbers = [t.get_text() for t in ax.texts if t.get_text().isdigit()]
-            assert len(numbers) == len(order)
+            labels = [t.get_text() for t in ax.get_yticklabels()]
+            assert len(labels) == len(order)
+            for label, key in zip(labels, order):
+                count = next(r["n"] for r in part if (r["group"], r["stratum"]) == key)
+                assert label.endswith(f"({count})")
             for r in part:
                 matching = [line for line in ax.lines if line.get_marker() == gen.MARKERS[r["capability"]]
                             and len(line.get_xdata()) == 1 and line.get_xdata()[0] == r["relation_mae"]]

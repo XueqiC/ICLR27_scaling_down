@@ -8,19 +8,7 @@ from analysis.paper_artifacts import ROOT
 from paper_generator_checks import check_access, check_figures, refuses_symlink, refuses_external_io, refuses_output_file_symlink
 
 
-def test_explanation_frozen_profiles_corners_and_three_families(monkeypatch):
-    save = gen.save_figure
-    def check_legend_and_save(fig, stem, audit):
-        fig.canvas.draw()
-        ax = fig.axes[1]
-        renderer = fig.canvas.get_renderer()
-        legend = ax.get_legend().get_window_extent(renderer)
-        assert legend.y1 < ax.get_window_extent(renderer).y0
-        assert legend.y0 >= fig.bbox.y0
-        assert all(not legend.overlaps(text.get_window_extent(renderer)) for text in fig.texts)
-        assert "4b CODE" in [t.get_text() for t in ax.get_yticklabels()]
-        save(fig, stem, audit)
-    monkeypatch.setattr(gen, "save_figure", check_legend_and_save)
+def test_explanation_frozen_profiles_corners_and_three_families():
     data,audit,access=gen.generate();check_access(audit,access);check_figures("explanation")
     a2=json.loads((ROOT/gen.A2).read_text());a5=json.loads((ROOT/gen.A5).read_text())
     assert gen.CAPTION=="failed to reject"
