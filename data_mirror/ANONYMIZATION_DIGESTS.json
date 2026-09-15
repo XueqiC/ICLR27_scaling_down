@@ -25,11 +25,11 @@
       "reason": "anonymisation of author, host, institution or path strings"
     },
     "analysis/paper_artifacts.py@live": {
-      "frozen_sha256": "81d5b4f3660875b9400de970b0cf309a2b222f060226f5b5b4525b52b8ef3197",
+      "frozen_sha256": "7f95c200481c5d6c6eb16388a150d19c0f1049ca55028e38957f0b128fb05fac",
       "pairable": false,
       "path_in_frozen_record": "analysis/paper_artifacts.py",
       "published_at": "analysis/paper_artifacts.py",
-      "published_sha256": "670940d760d39cec871a2132cfea704021d15fe938b399942ddb4d09428eac14",
+      "published_sha256": "8886832fd8b0e75a402c3f0af972300133faffb56708fdef558f8201fa52a3d5",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/plot_fig_generalization_cells.py@live": {

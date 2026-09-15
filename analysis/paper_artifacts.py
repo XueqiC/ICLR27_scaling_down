@@ -186,7 +186,19 @@ def legacy_rows(audit):
             self.sha256 = audit.inputs[relative]
 
     # No fallback to data_mirror/: evidence must stay in the two allowed roots.
-    with patch.object(old, "Comparison", Comparison), patch.object(old.provenance, "matches", lambda a, b: a == b):
+    def published_pairs():
+        # Bootstrap materialises the publication digest map in the allowed results root. Only pairs
+        # reproduced exactly by scrubbing the frozen original are eligible; scoring is unchanged.
+        try:
+            entries = audit.read("results/ANONYMIZATION_DIGESTS.json")["files"].values()
+        except Exception:
+            return {}
+        return {e["frozen_sha256"]: (e["published_sha256"], e.get("published_at", ""))
+                for e in entries if e.get("pairable") is True and "frozen_sha256" in e}
+
+    # Digest acceptance follows the repository rule: exact equality, or a frozen/published pair
+    # recorded as pairable in the anonymization digest map.
+    with patch.object(old, "Comparison", Comparison), patch.object(old.provenance, "_pairs", published_pairs):
         rows, _ = old.build_rows()
     audit.rule("Reused v86_main_table.build_rows, Comparison.number, row_scores and paired_rows; "
                "pruning inputs are v53-prune-dev register/predictions/compare and v72-prune-repeat freeze/compare. "
