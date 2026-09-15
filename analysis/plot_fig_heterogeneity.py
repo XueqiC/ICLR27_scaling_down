@@ -16,7 +16,7 @@ else:
     import v51_panel_tables as tables
 
 SOURCE = "results/v51-panel/panel.json"
-PANEL_SIZE = (5.5, 2.7)
+PANEL_SIZE = (2.7, 1.9)
 SHORT_NAMES = {"Gemma-3": "G3", "Gemma-4": "G4", "OLMo-3": "OL3", "Qwen3": "Q3", "Muse": "Muse"}
 CAPTION = """Heterogeneity across the original twelve-model panel, ordered by
 family/series and increasing size within each series. Grouped bars show Math,
@@ -30,6 +30,8 @@ arithmetic. The two prospective Qwen3 additions are excluded by cohort=panel.
 Tick abbreviations: G3 = Gemma-3, G4 = Gemma-4, OL3 = OLMo-3, Q3 = Qwen3;
 Muse is written in full. The complete display names and JSON pointers are in
 the per-panel data sidecars. No seed averaging or uncertainty intervals.
+The two 2.7 x 1.9-inch panels form one row at 5.5-inch text width;
+model labels are rotated 60 degrees and the shared key is fig8_legend.pdf.
 """
 
 
@@ -68,21 +70,22 @@ def build(audit):
 
 def draw_panel(fig, rows, panel):
     import numpy as np
-    ax = panel_axes(fig, PANEL_SIZE, left=.58, bottom=1.16, right=.05, top=.06)
+    from matplotlib.ticker import MaxNLocator
+    ax = panel_axes(fig, PANEL_SIZE, left=.49, bottom=1.11, right=.03, top=.04)
     part = [r for r in rows if r["panel"] == panel]
     for offset, cap in zip((-.26, 0, .26), CAPS):
         series = sorted((r for r in part if r["capability"] == cap), key=lambda r: r["order"])
         ax.bar(np.array([r["order"] for r in series]) + offset, [r["delta"] for r in series],
-               width=.24, color=COLORS[cap], linewidth=.6, edgecolor="white")
+               width=.24, color=COLORS[cap], linewidth=.15, edgecolor="white")
     order = sorted((r for r in part if r["capability"] == "math"), key=lambda r: r["order"])
     for a, b in zip(order, order[1:]):
         if a["series"] != b["series"]:
             ax.axvline(a["order"]+.5, color=".8", lw=1, zorder=0)
-    ax.set_xticks(range(12), [r["label"] for r in order], rotation=65, ha="right", rotation_mode="anchor")
-    ax.set(xlim=(-.65, 11.65), xlabel="Model", ylabel="Δ loss (nats)")
+    ax.set_xticks(range(12), [r["label"] for r in order], rotation=60, ha="right", rotation_mode="anchor")
+    ax.set(xlim=(-.65, 11.65), xlabel="Model", ylabel="Δ loss")
     axes_defaults(ax)
+    ax.yaxis.set_major_locator(MaxNLocator(3, integer=True))
     ax.margins(y=.18)
-    ax.legend(handles=capability_handles(), loc="upper right", ncol=3)
     return ax
 
 
@@ -93,7 +96,13 @@ def generate(root=ROOT):
         panels = [(f"fig8_{p}", PANEL_SIZE, lambda f, p=p: draw_panel(f, rows, p),
                    [r for r in rows if r["panel"] == p],
                    ("Pruning at density 0.7.\n" if p == "a" else "Per-channel int4.\n") + CAPTION) for p in "ab"]
-        export(plt, audit, "heterogeneity", panels, CAPTION, columns=1)
+        if __package__:
+            from .paper_figure_style import legend_strip
+        else:
+            from paper_figure_style import legend_strip
+        export(plt, audit, "heterogeneity", panels, CAPTION, width=5.5,
+               legend=("fig8_legend", (5.5, .3),
+                       lambda f: legend_strip(f, capability_handles()), [], CAPTION))
         return rows, audit, access
 
 

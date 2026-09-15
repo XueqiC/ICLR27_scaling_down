@@ -9,6 +9,17 @@ from analysis import plot_fig_explanation as explanation
 from analysis import plot_fig_generalization as generalization
 from analysis.paper_artifacts import ROOT, pyplot, output_path
 
+EXPECTED_PANEL_SIZES = {
+    **{f"fig1_{p}": (1.8, 1.8) for p in "abc"}, "fig1_legend": (5.5, .3),
+    **{f"fig2_{p}": (1.8, 1.9) for p in "abc"}, "fig2_legend": (5.5, .3),
+    "fig3_a": (2.3, 2.0), "fig3_b": (1.5, 2.0),
+    "fig3_c": (1.7, 2.0), "fig3_legend": (5.5, .3),
+    **{f"fig4_{p}": (1.8, 1.8) for p in "abc"}, "fig4_legend": (5.5, .3),
+    **{f"fig5_{p}": (2.7, 1.8) for p in "ab"},
+    "fig7": (5.5, 1.7), "fig7_legend": (5.5, .3),
+    "fig8_a": (2.7, 1.9), "fig8_b": (2.7, 1.9), "fig8_legend": (5.5, .3),
+}
+
 
 @pytest.fixture(scope="module", autouse=True)
 def scratch_root(tmp_path_factory):
@@ -29,17 +40,24 @@ def check_artists(fig):
     renderer = fig.canvas.get_renderer()
     for canvas in all_figures(fig):
         assert not canvas.texts, "Captions/notes belong in sidecars"
+        for i, legend in enumerate(canvas.legends):
+            assert all(not legend.get_window_extent(renderer).overlaps(other.get_window_extent(renderer))
+                       for other in canvas.legends[i+1:]), "Shared legend groups must not overlap"
         for legend in canvas.legends:
             box = legend.get_window_extent(renderer)
-            assert canvas.bbox.contains(box.x0, box.y0)
-            assert canvas.bbox.contains(box.x1, box.y1)
+            # SubFigure transforms can differ at an edge by ~1e-13 pixels.
+            assert box.x0 >= canvas.bbox.x0-.5 and box.y0 >= canvas.bbox.y0-.5
+            assert box.x1 <= canvas.bbox.x1+.5 and box.y1 <= canvas.bbox.y1+.5
             ys = [t.get_window_extent(renderer).y0 for t in legend.get_texts()]
             assert max(ys) - min(ys) < 3, "Outside legends must be a single row"
             for ax in canvas.get_axes():
                 assert not box.overlaps(ax.xaxis.label.get_window_extent(renderer))
     for ax in fig.axes:
         assert not any(ax.get_title(loc) for loc in ("left", "center", "right"))
-        assert not ax.texts, "Only axis/row labels and legends remain in the figure"
+        assert all(t.get_gid() == "objective-column-header" for t in ax.texts), \
+            "Only Figure 7's objective axis annotations are allowed"
+        if ax.texts:
+            assert [t.get_text() for t in ax.texts] == ["Math", "Code", "QA", "Largest loss\nincrease"]
         assert ax.get_xlabel(), "Each panel needs its own x label"
         assert ax.get_ylabel() or any(t.get_text() for t in ax.get_yticklabels())
         text = ax.get_xticklabels(which="both") + ax.get_yticklabels(which="both")
@@ -70,7 +88,7 @@ def test_shared_serif_bold_rcparams(kind, sizes):
 
 
 @pytest.mark.parametrize("gen,prefix,letters", [
-    (responses, "fig1", "ab"), (explanation, "fig2", "abc"), (generalization, "fig3", "abcd"),
+    (responses, "fig1", "abc"), (explanation, "fig2", "abc"), (generalization, "fig3", "abc"),
 ])
 def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     saved = {}
@@ -78,6 +96,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     combined_save = gen.save_figure
 
     def inspect_panel(fig, stem, kind, audit, records):
+        assert tuple(fig.get_size_inches()) == EXPECTED_PANEL_SIZES[stem]
         check_artists(fig)
         tick, label, legend = style.SIZES[kind]
         for ax in fig.axes:
@@ -85,13 +104,21 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
             assert all(t.get_fontsize() == tick for t in ax.get_xticklabels()+ax.get_yticklabels())
         for canvas in all_figures(fig):
             legends = canvas.legends + [a.get_legend() for a in canvas.get_axes() if a.get_legend()]
-            assert all(t.get_fontsize() == legend and t.get_weight() == "bold"
-                       for leg in legends for t in leg.get_texts())
+            for leg in legends:
+                sizes = [t.get_fontsize() for t in leg.get_texts()]
+                expected = ([13]*6+[12]*3 if stem == "fig2_legend" else
+                            [12]*6+[13]*2 if stem == "fig3_legend" else [legend]*len(sizes))
+                assert sizes == expected
+                assert all(t.get_weight() == "bold" for t in leg.get_texts())
         saved[stem] = tuple(fig.get_size_inches())
         save(fig, stem, kind, audit, records)
 
     def inspect_combined(fig, stem, audit):
         check_artists(fig)
+        assert fig.get_size_inches()[0] == 5.5
+        panels = [sub for sub in fig.subfigs if sub.axes]
+        assert len(panels) == 3
+        assert max(s.bbox.y0 for s in panels)-min(s.bbox.y0 for s in panels) < .5
         combined_save(fig, stem, audit)
 
     monkeypatch.setattr(gen, "save_panel", inspect_panel)
@@ -110,6 +137,10 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     if gen is responses:
         assert "fig1_legend" in saved
         assert output_path(ROOT, "figs", "fig1_legend.pdf").stat().st_size > 1000
+        import json
+        legend = json.loads(output_path(ROOT, "figs", "fig1_legend_data.json").read_text())
+        assert set(legend["legend_entries"]) == {
+            "Math", "Code", "QA", "2Wiki", "MuSiQue", "TriviaQA", "270M", "1B", "4B", "S1", "S2"}
     if gen is generalization:
         # Both students must be in c, and every 4B record keeps its triangle.
         plt = pyplot()
@@ -117,10 +148,11 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         fig = plt.figure(figsize=gen.PANEL_SIZES["c"])
         ax = gen.draw_panel(fig, rows, "c")
         points = [line for line in ax.lines if line.get_marker() in ("o", "^")]
-        assert [t.get_text() for t in ax.get_yticklabels()] == ["1B", "4B dev."]
-        assert sum(line.get_marker() == "^" for line in points) == 3
-        assert sum(line.get_marker() == "o" for line in points) == 3
+        assert [t.get_text() for t in ax.get_yticklabels()] == ["1B", "4B dev.", "2Wiki", "MuSiQue", "TriviaQA"]
+        assert sum(line.get_marker() == "^" for line in points) == 6
+        assert sum(line.get_marker() == "o" for line in points) == 6
         assert ax.get_xlim() == (-2.5, 2.5)
+        assert not output_path(ROOT, "figs", "fig3_d.pdf").exists()
         plt.close(fig)
 
 

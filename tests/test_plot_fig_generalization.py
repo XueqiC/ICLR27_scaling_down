@@ -140,7 +140,7 @@ def test_whiskers_are_exact_paired_gain_intervals_never_pooled_or_mae_intervals(
                for r in rows if r["kind"] == "mae" and r["whisker"] is None)
 
 
-def test_render_has_log_maes_panel_legends_and_explicit_counts(generated):
+def test_render_has_log_maes_shared_legend_and_short_labels(generated):
     rows, _, _ = generated
     plt = pyplot()
     fig = gen.plot(rows, plt)
@@ -150,18 +150,15 @@ def test_render_has_log_maes_panel_legends_and_explicit_counts(generated):
         assert len(maes) == 2
         assert maes[0].get_xlim() == maes[1].get_xlim()
         assert len(fig.subfigs) == 4
-        for sub in fig.subfigs:
-            assert len(sub.legends) == 1
-            ys = [t.get_window_extent().y0 for t in sub.legends[0].get_texts()]
-            assert max(ys) - min(ys) < 1
+        assert [len(sub.legends) for sub in fig.subfigs] == [0, 0, 0, 1]
+        assert [t.get_text() for t in maes[0].get_yticklabels()] == [
+            "Prune in-range", "Prune V46 in", "Prune V46 out", "Quant group", "Distill 270M", "Distill 1B"]
+        assert [t.get_text() for t in maes[1].get_yticklabels()] == ["New stages", "New quant state", "Locked rule"]
         for panel, ax in zip("AB", maes):
             part = [r for r in rows if r["panel"] == panel and r["kind"] == "mae"]
             order = list(dict.fromkeys((r["group"], r["stratum"]) for r in part))
             labels = [t.get_text() for t in ax.get_yticklabels()]
             assert len(labels) == len(order)
-            for label, key in zip(labels, order):
-                count = next(r["n"] for r in part if (r["group"], r["stratum"]) == key)
-                assert label.endswith(f"({count})")
             for r in part:
                 matching = [line for line in ax.lines if line.get_marker() == gen.MARKERS[r["capability"]]
                             and len(line.get_xdata()) == 1 and line.get_xdata()[0] == r["relation_mae"]]

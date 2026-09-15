@@ -18,11 +18,11 @@ from analysis import plot_fig_heterogeneity as heterogeneity
 from analysis import plot_fig_selection_maps as selection
 from analysis.paper_artifacts import ROOT, Artifacts, output_path
 from paper_generator_checks import check_access, refuses_symlink, refuses_output_file_symlink
-from test_paper_figure_style import check_artists
+from test_paper_figure_style import check_artists, EXPECTED_PANEL_SIZES
 
 GENERATORS = (lr, pythia, drift, heterogeneity, selection)
 PANELS = ("fig1_c", "fig4_a", "fig4_b", "fig4_c", "fig5_a", "fig5_b",
-          "fig8_a", "fig8_b", "fig7_a", "fig7_b", "fig7_c", "fig7_d", "fig7_legend")
+          "fig4_legend", "fig8_a", "fig8_b", "fig8_legend", "fig7", "fig7_legend")
 PREVIEWS = ("lr_pilot", "pythia_responses", "drift", "heterogeneity", "selection_maps")
 
 
@@ -37,6 +37,8 @@ def generated(tmp_path_factory):
 
     def inspect(fig, stem, kind, audit, records):
         from matplotlib.legend import Legend
+        if stem in EXPECTED_PANEL_SIZES:
+            assert tuple(fig.get_size_inches()) == EXPECTED_PANEL_SIZES[stem]
         check_artists(fig)
         assert kind == "panel"
         renderer = fig.canvas.get_renderer()
@@ -55,6 +57,9 @@ def generated(tmp_path_factory):
     def inspect_preview(plt, panels, size):
         fig = combine(plt, panels, size)
         check_artists(fig)
+        if size[0] == 5.5:
+            data_panels = [s for s in fig.subfigs if s.axes]
+            assert max(s.bbox.y0 for s in data_panels)-min(s.bbox.y0 for s in data_panels) < .5
         previews[len(previews)] = size
         return fig
 
@@ -149,6 +154,7 @@ def test_drift_uses_saved_ratios_both_tolerances_and_no_trajectory_reads(generat
         assert r["delta"] == frozen(r["delta_source"]) == r["raw_ratio"]
         assert r["x"] == frozen(r["x_source"])/1000
         assert r["tolerance"] == frozen(r["tolerance_source"])
+        assert r["band"] == frozen(r["band_source"])
         assert math.isclose(r["delta"], frozen(r["effect_source"])/frozen(r["bracket_source"]), abs_tol=1e-12)
     assert {r["student"] for r in rows} == set(drift.STUDENTS)
     assert {r["tolerance"] for r in rows} == set(drift.TOLERANCES)
@@ -205,6 +211,17 @@ def test_selection_maps_match_all_v80_cells_and_oracle_marks(generated, frozen):
         assert r["method"] == frozen(r["frozen_choice_source"])["method"]
         assert r["budget"] == frozen(r["budget_source"])
     assert Counter(r["panel"] for r in rows if not r["oracle_agreement"]) == Counter({"a": 1, "b": 3, "c": 16})
+    from analysis.paper_artifacts import pyplot
+    from analysis.paper_figure_style import apply_style
+    plt = pyplot()
+    apply_style("panel")
+    fig = plt.figure(figsize=selection.PANEL_SIZE)
+    ax = selection.draw_panel(fig, rows)
+    assert len(fig.axes) == 1 and len(ax.images) == 4
+    assert len(ax.get_yticklabels()) == 4
+    assert sum(line.get_marker() == "o" for line in ax.lines) == 20
+    assert all(image.get_array().shape == (4, 17) for image in ax.images)
+    plt.close(fig)
 
 
 @pytest.mark.parametrize("gen", GENERATORS)

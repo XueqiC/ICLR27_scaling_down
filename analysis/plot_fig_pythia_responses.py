@@ -14,7 +14,8 @@ else:
 P36 = "results/v36-pythia-controlled/summary.json"
 P53 = "results/v53-prune-dev/register.json"
 Q69 = "results/v69-quant-confirm/"
-PANEL_SIZE = (2.7, 2.0)
+PANEL_SIZE = (1.8, 1.8)
+LEGEND_SIZE = (5.5, .3)
 GROUP_STATE = "pythia-410m@step143000"
 CAPTIONS = {
     "a": """Pruning responses on the original nine development states: Pythia
@@ -114,9 +115,8 @@ def build(audit):
 
 
 def draw_panel(fig, rows, panel):
-    from matplotlib.lines import Line2D
-    from matplotlib.ticker import NullLocator
-    ax = panel_axes(fig, PANEL_SIZE, left=.55 if panel == "c" else .51, bottom=.48, right=.10)
+    from matplotlib.ticker import NullLocator, MaxNLocator
+    ax = panel_axes(fig, PANEL_SIZE, left=.50, bottom=.48, right=.09)
     part = [r for r in rows if r["panel"] == panel]
     if panel in ("a", "b"):
         for cap in CAPS:
@@ -128,24 +128,33 @@ def draw_panel(fig, rows, panel):
             heavy = [r for r in part if r["kind"] == "delivered" and r["capability"] == cap]
             if heavy:
                 ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=2.5)
-        ax.legend(handles=capability_handles(), loc="upper right")
         if panel == "a":
             ax.set(xlabel="Density $d$", xlim=(.535, 1.02), ylim=(-1, 10), xticks=[.6, .8, 1.])
         else:
             ax.set(xlabel="Bit-width", xlim=(2.7, 8.3), ylim=(-1, 27), xticks=[3, 4, 6, 8])
     else:
-        handles = []
         for bit, marker, color in zip((3, 4, 5), ("o", "s", "^"), ("#71519a", "#c26a24", "#25836b")):
             line = sorted((r for r in part if r["bit"] == bit), key=lambda r: r["x"])
             ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=color, marker=marker)
-            handles.append(Line2D([], [], color=color, marker=marker, label=f"{bit} bit"))
         ax.set(xscale="log", xlabel="Group size", xlim=(26, 640), ylim=(-.25, 5.4))
         ax.set_xticks([32, 128, 512], ["32", "128", "512"])
         ax.xaxis.set_minor_locator(NullLocator())
-        ax.legend(handles=handles, loc="upper left")
     axes_defaults(ax)
+    ax.yaxis.set_major_locator(MaxNLocator(3, integer=True))
     ax.set_ylabel("Δ loss (nats)")
     return ax
+
+
+def draw_legend(fig):
+    from matplotlib.lines import Line2D
+    if __package__:
+        from .paper_figure_style import legend_strip
+    else:
+        from paper_figure_style import legend_strip
+    handles = capability_handles()
+    handles += [Line2D([], [], color=c, marker=m, label=f"{b} bit")
+                for b, m, c in zip((3, 4, 5), ("o", "s", "^"), ("#71519a", "#c26a24", "#25836b"))]
+    return legend_strip(fig, handles)
 
 
 def generate(root=ROOT):
@@ -154,7 +163,13 @@ def generate(root=ROOT):
         rows = build(audit)
         panels = [(f"fig4_{p}", PANEL_SIZE, lambda f, p=p: draw_panel(f, rows, p),
                    [r for r in rows if r["panel"] == p], CAPTIONS[p]) for p in "abc"]
-        export(plt, audit, "pythia_responses", panels, "\n".join(CAPTIONS.values()))
+        caption = "\n".join(CAPTIONS.values()) + (
+            "Three 1.8 x 1.8-inch panels in one 5.5-inch row; fig4_legend.pdf "
+            "is the shared capability and bit-width key.\n")
+        panels = [(name, size, draw, records, text + "Shared key: fig4_legend.pdf; panels form one row.\n")
+                  for name, size, draw, records, text in panels]
+        export(plt, audit, "pythia_responses", panels, caption, width=5.5,
+               legend=("fig4_legend", LEGEND_SIZE, draw_legend, [], caption))
         return rows, audit, access
 
 

@@ -30,15 +30,21 @@ def axes_defaults(ax):
     ax.yaxis.set_major_locator(MaxNLocator(4))
 
 
-def export(plt, audit, stem, panels, caption, *, columns=None):
+def export(plt, audit, stem, panels, caption, *, columns=None, width=None, legend=None):
     """panels: (filename, size_inches, draw_callable, records, caption) tuples."""
     specs, manifest = [], []
     columns = columns or len(panels)
     gap = .10
-    width = max(sum(p[1][0] for p in panels[i:i+columns]) + gap*(len(panels[i:i+columns])-1)
-                for i in range(0, len(panels), columns))
+    if width is not None and columns > 1:
+        gap = (width - sum(p[1][0] for p in panels[:columns])) / (columns-1)
+        if gap < -1e-10:
+            raise ValueError("Panels exceed the requested row width")
+    width = width or max(sum(p[1][0] for p in panels[i:i+columns]) + gap*(len(panels[i:i+columns])-1)
+                        for i in range(0, len(panels), columns))
     heights = [max(p[1][1] for p in panels[i:i+columns]) for i in range(0, len(panels), columns)]
     height = sum(heights) + gap*(len(heights)-1)
+    if legend is not None:
+        height += legend[1][1] + .02
     top = height
     for row, i in enumerate(range(0, len(panels), columns)):
         top -= heights[row]
@@ -49,14 +55,21 @@ def export(plt, audit, stem, panels, caption, *, columns=None):
             draw(fig)
             save_panel(fig, name, "panel", audit, records)
             write_caption(name, audit, panel_caption)
-            output_path(audit.root, "figs", f"{name}_data.json").write_text(
-                json.dumps({"size_inches": size, "records": records,
-                            "input_sha256": audit.inputs}, indent=2, allow_nan=False) + "\n")
             plt.close(fig)
             specs.append(("panel", (x, top, *size), draw))
             manifest.append({"file": f"{name}.pdf", "size_inches": list(size)})
             x += size[0] + gap
         top -= gap
+    if legend is not None:
+        name, size, draw, records, panel_caption = legend
+        apply_style("panel")
+        fig = plt.figure(figsize=size)
+        draw(fig)
+        save_panel(fig, name, "panel", audit, records)
+        write_caption(name, audit, panel_caption)
+        plt.close(fig)
+        specs.append(("panel", (0, 0, *size), draw))
+        manifest.append({"file": f"{name}.pdf", "size_inches": list(size)})
     fig = combine_panels(plt, specs, (width, height))
     path = output_path(audit.root, "figs", f"{stem}.png")
     fig.savefig(path, dpi=220)

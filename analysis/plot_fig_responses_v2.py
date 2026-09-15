@@ -15,9 +15,9 @@ else:
 STUDENTS = ("gemma3-270m", "gemma3-1b", "gemma3-4b")
 STYLES = (":", "--", "-")
 SCOPES = ("2wiki_new", "musique", "triviaqa")
-PANEL_SIZE = (2.7, 2.0)
+PANEL_SIZE = (1.8, 1.8)
 LEGEND_SIZE = (5.5, .30)
-FIGSIZE = (5.5, 2.32)
+FIGSIZE = (5.5, 2.12)
 if __package__:
     from .paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
 else:
@@ -32,7 +32,10 @@ Colours identify Math, Code and QA in (a), and 2Wiki, MuSiQue and TriviaQA in (b
 Dotted, dashed and solid lines denote 270M, 1B and 4B students. Circles and squares
 identify the first and second registered pool seeds within each rung; the core
 uses seeds 41/42 and the critical rung uses 51/52. No seed averaging is applied.
-The shared line/marker key is supplied separately as fig1_legend.pdf.
+The complete shared key is supplied separately as fig1_legend.pdf: colours for
+all capabilities and distributions, student line styles, and S1/S2 for the two
+registered pool seeds. The learning-rate pilot (c) uses the same student styles.
+All three 1.8 x 1.8-inch panels form one row at 5.5-inch text width.
 """
 
 
@@ -80,12 +83,9 @@ def build(audit):
 
 
 def draw_panel(fig, rows, panel):
-    from matplotlib.lines import Line2D
     from matplotlib.ticker import MaxNLocator
-    ax = panel_axes(fig, PANEL_SIZE, left=.48, bottom=.51)
+    ax = panel_axes(fig, PANEL_SIZE, left=.48, bottom=.51, right=.10)
     series = CAPS if panel == "left" else SCOPES
-    names = {"math": "Math", "code": "Code", "qa": "QA", "2wiki_new": "2Wiki",
-             "musique": "MuSiQue", "triviaqa": "TriviaQA"}
     for c, color in zip(series, COLORS.values()):
         for student, style in zip(STUDENTS, STYLES):
             subset = [r for r in rows if r["panel"] == panel and r["series"] == c and r["student"] == student]
@@ -95,27 +95,40 @@ def draw_panel(fig, rows, panel):
                         linestyle=style, marker=marker, color=color, alpha=.85)
     ax.axhline(0, color=".5", lw=1.2)
     ax.set(xlabel="Reuse $T/D_U$", ylabel="Δ loss (nats)")
-    ax.xaxis.set_major_locator(MaxNLocator(3))
+    ax.set_xticks([4, 8, 12])
     ax.yaxis.set_major_locator(MaxNLocator(4, integer=True))
     ax.grid(alpha=.15)
-    ax.legend(handles=[Line2D([], [], color=color, label=names[c])
-                       for c, color in zip(series, COLORS.values())], loc="upper left")
     return ax
 
 
 def draw_legend(fig):
     from matplotlib.lines import Line2D
+    colours = [Line2D([], [], color=color, label=name)
+               for names in (("Math", "Code", "QA"), ("2Wiki", "MuSiQue", "TriviaQA"))
+               for color, name in zip(COLORS.values(), names)]
     handles = [Line2D([], [], color=".25", ls=style, label=student)
                for student, style in zip(("270M", "1B", "4B"), STYLES)]
     handles += [Line2D([], [], ls="", marker=m, color=".25", label=label)
-                for m, label in (("o", "Seed 1"), ("s", "Seed 2"))]
-    legend_row(fig, handles)
+                for m, label in (("o", "S1"), ("s", "S2"))]
+    # Coloured text is the colour key; reserve actual line length for the student
+    # dashes. This fits all eleven entries at the original 13 pt without scaling.
+    colour_key = legend_row(fig, colours, loc="center left", bbox_to_anchor=(0, .5),
+                            handlelength=0, handletextpad=0, columnspacing=.08,
+                            labelcolor="linecolor", borderpad=0)
+    style_key = legend_row(fig, handles, loc="center right", bbox_to_anchor=(1, .5),
+                           handlelength=1, handletextpad=.1, columnspacing=.08, borderpad=0)
+    return colour_key, style_key
 
 
-def plot(rows, plt):
+def plot(rows, plt, pilot_rows):
+    if __package__:
+        from .plot_fig_lr_pilot import draw_panel as draw_pilot
+    else:
+        from plot_fig_lr_pilot import draw_panel as draw_pilot
     return combine_panels(plt, [
         ("panel", (0, .32, *PANEL_SIZE), lambda f: draw_panel(f, rows, "left")),
-        ("panel", (2.8, .32, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right")),
+        ("panel", (1.85, .32, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right")),
+        ("panel", (3.7, .32, *PANEL_SIZE), lambda f: draw_pilot(f, pilot_rows)),
         ("panel", (0, 0, *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
@@ -125,20 +138,32 @@ def generate(root=ROOT):
         audit = Artifacts(root)
         plt = pyplot(root)
         rows = build(audit)
+        if __package__:
+            from . import plot_fig_lr_pilot as pilot
+        else:
+            import plot_fig_lr_pilot as pilot
+        pilot_rows = pilot.build(audit)
         for letter, panel in zip("ab", ("left", "right")):
             apply_style("panel")
             fig = plt.figure(figsize=PANEL_SIZE)
             draw_panel(fig, rows, panel)
             save_panel(fig, f"fig1_{letter}", "panel", audit, [r for r in rows if r["panel"] == panel])
+            write_caption(f"fig1_{letter}", audit, CAPTION)
             plt.close(fig)
+        fig = plt.figure(figsize=PANEL_SIZE)
+        pilot.draw_panel(fig, pilot_rows)
+        save_panel(fig, "fig1_c", "panel", audit, pilot_rows)
+        write_caption("fig1_c", audit, pilot.CAPTION)
+        plt.close(fig)
         fig = plt.figure(figsize=LEGEND_SIZE)
         draw_legend(fig)
         save_panel(fig, "fig1_legend", "panel", audit, [])
+        write_caption("fig1_legend", audit, CAPTION + pilot.CAPTION)
         plt.close(fig)
-        fig = plot(rows, plt)
+        fig = plot(rows, plt, pilot_rows)
         save_figure(fig, "responses_v2", audit)
-        write_notes("responses_v2", audit, rows)
-        write_caption("responses_v2", audit, CAPTION)
+        write_notes("responses_v2", audit, {"responses": rows, "lr_pilot": pilot_rows})
+        write_caption("responses_v2", audit, CAPTION + pilot.CAPTION)
         plt.close(fig)
         return rows, audit, access
 

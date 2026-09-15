@@ -27,9 +27,10 @@ D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
 GREEN, GREY = "#24835b", "#777777"
 MARKERS = {"math": "o", "code": "s", "qa": "D"}
-PANEL_SIZES = {"a": (5.5, 2.95), "b": (5.5, 1.9), "c": (2.7, 2.0), "d": (2.7, 2.0)}
-KINDS = {"a": "full", "b": "full", "c": "panel", "d": "panel"}
-FIGSIZE = (5.5, 6.95)
+PANEL_SIZES = {"a": (2.3, 2.0), "b": (1.5, 2.0), "c": (1.7, 2.0)}
+KINDS = {"a": "full", "b": "full", "c": "panel"}
+LEGEND_SIZE = (5.5, .3)
+FIGSIZE = (5.5, 2.32)
 if __package__:
     from .paper_figure_style import apply_style, panel_axes, legend_row, save_panel, write_caption, combine_panels
 else:
@@ -191,7 +192,7 @@ def build(audit):
     audit.rule("Corner rows are unchanged: signed prediction-minus-measurement on a separate symlog "
                "axis, original capability colours, circles filled iff within the stored band, triangles "
                "for the 4B development student. Whiskers are A5 registered +/-2-noise bands, not CIs. "
-               "Primary QA additivity failed to reject. Source panel C (display panel d) shows only the registered additive "
+               "Primary QA additivity failed to reject. Source panel C (lower group in display panel c) shows only the registered additive "
                "corner predictions (zero); no frozen response-law predictions on fresh distributions exist.")
     audit.rule("V46 .55 is outside its original coarse .6--.9 range; .65 is inside. V72 repeats two "
                "revision labels with identical weights; both records retained, not independent states. "
@@ -201,17 +202,17 @@ def build(audit):
 
 def row_label(group, stratum):
     labels = {
-        "Pruning: density inside range": "Pruning: inside",
-        "Pruning: density outside range": "Pruning: outside",
-        "Quantization: new group size": "Quant.: group size",
-        "Distillation: new-pool budgets": "Distill.: pools",
-        "Pythia: new stages (power)": "Pythia: stages",
-        "Pythia: new quantization state": "Pythia: quant. state",
-        "Pythia: locked rule on new states": "Pythia: locked rule",
+        "Pruning: density inside range": "Prune in-range",
+        "Pruning: density outside range": "Prune V46 out",
+        "Quantization: new group size": "Quant group",
+        "Distillation: new-pool budgets": "Distill",
+        "Pythia: new stages (power)": "New stages",
+        "Pythia: new quantization state": "New quant state",
+        "Pythia: locked rule on new states": "Locked rule",
     }
     label = labels[group]
-    if stratum in ("V46", "V72"):
-        label += " " + stratum
+    if stratum == "V46" and "inside" in group:
+        label = "Prune V46 in"
     elif stratum.startswith("gemma3-"):
         label += " " + {"gemma3-270m": "270M", "gemma3-1b": "1B"}[stratum]
     return label
@@ -224,7 +225,8 @@ def draw_maes(ax, rows, panel, limits):
     for y, key in enumerate(order):
         part = [r for r in rows if r["panel"] == panel and (r["group"], r["stratum"]) == key]
         for r in part:
-            yy = y + (CAPS.index(r["capability"]) - 1) * .30
+            # In the narrow middle panel, row labels sit above each marker group.
+            yy = y + (.16 if panel == "B" else 0) + (CAPS.index(r["capability"]) - 1) * (.16 if panel == "B" else .30)
             marker = MARKERS[r["capability"]]
             color = GREEN if r["below_baseline"] else GREY
             candidate, baseline = r["relation_mae"], r["baseline_mae"]
@@ -239,23 +241,23 @@ def draw_maes(ax, rows, panel, limits):
         counts = {r["n"] for r in part}
         if len(counts) != 1:
             raise ValueError("A shared row count requires equal counts per capability")
-        labels.append(row_label(*key) + f" ({counts.pop()})")
+        labels.append(row_label(*key))
         if y < len(order)-1:
             ax.axhline(y+.5, color=".93", lw=.6, zorder=0)
     ax.set_xscale("log")
     ax.set_xlim(*limits)
     ax.xaxis.set_minor_formatter(NullFormatter())
     ax.set(yticks=range(len(order)), yticklabels=labels,
-           ylim=(len(order)-.5, -.5), xlabel="MAE (native-token nats)")
+           ylim=(len(order)-.5, -.5), xlabel="MAE (nats)")
+    ax.set_xticks([.1, 1])
     ax.tick_params(axis="y", length=0, pad=4)
     ax.grid(axis="x", alpha=.15)
     ax.spines["left"].set_visible(False)
 
 
-def draw_corners(ax, rows, panel):
+def draw_corners(ax, rows):
     from matplotlib.ticker import NullFormatter
-    source_panels = ("A", "B") if panel == "c" else ("C",)
-    rows = [r for r in rows if r["panel"] in source_panels]
+    rows = sorted(rows, key=lambda r: (r["panel"] == "C", r["panel"]))
     groups = list(dict.fromkeys(r["group"] for r in rows))
     for y, group in enumerate(groups):
         part = [r for r in rows if r["group"] == group]
@@ -269,6 +271,7 @@ def draw_corners(ax, rows, panel):
             ax.plot(e, y+jitter, marker="^" if dev else "o", ls="", color=color,
                     mfc=color if r["within"] else "white", alpha=.85)
     ax.axvline(0, color=".5", lw=1.2)
+    ax.axhline(1.5, color=".7", lw=.6, zorder=0)
     ax.set_xscale("symlog", linthresh=.03)
     ax.set_xlim(-2.5, 2.5)
     ax.set_xticks([-1, 0, 1], labels=["−1", "0", "1"])
@@ -278,7 +281,7 @@ def draw_corners(ax, rows, panel):
               "4B DEVELOPMENT: corner budgets": "4B dev.",
               "2wiki_new": "2Wiki", "musique": "MuSiQue", "triviaqa": "TriviaQA"}
     ax.set(yticks=range(len(groups)), yticklabels=[labels[g] for g in groups],
-           ylim=(len(groups)-.5, -.5), xlabel="Pred. − obs. (nats)")
+           ylim=(len(groups)-.5, -.5), xlabel="Pred. − obs.\n(nats)")
     ax.tick_params(axis="y", length=0, pad=3)
     ax.grid(axis="x", alpha=.15)
     ax.spines["left"].set_visible(False)
@@ -293,45 +296,60 @@ def mae_limits(rows):
 
 
 def draw_panel(fig, rows, panel):
-    from matplotlib.lines import Line2D
     if panel in "ab":
-        ax = panel_axes(fig, PANEL_SIZES[panel], left=2.12, bottom=.79)
+        ax = panel_axes(fig, PANEL_SIZES[panel], left=1.24 if panel == "a" else .08,
+                        bottom=.51, right=.08, top=.04)
         draw_maes(ax, [r for r in rows if r["kind"] == "mae"], panel.upper(), mae_limits(rows))
-        handles = [Line2D([], [], color=GREY, marker=MARKERS[c], ls="",
-                          label="QA" if c == "qa" else c.title()) for c in CAPS]
-        handles += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Baseline"),
-                    Line2D([], [], color=GREY, marker="o", ls="", label="Relation"),
-                    Line2D([], [], color=GREEN, marker="o", ls="", label="Lower MAE")]
+        if panel == "b":
+            from matplotlib.transforms import ScaledTranslation
+            for text in ax.get_yticklabels():
+                text.set_horizontalalignment("left")
+                text.set_verticalalignment("center")
+                text.set_transform(ax.get_yaxis_transform() +
+                                   ScaledTranslation(0, .14, fig.dpi_scale_trans))
     else:
-        ax = panel_axes(fig, PANEL_SIZES[panel], left=.68 if panel == "c" else .90, bottom=.75)
-        draw_corners(ax, [r for r in rows if r["kind"] == "corner"], panel)
-        if panel == "c":
-            handles = [Line2D([], [], color=COLORS[c], marker="o", ls="",
-                              label="QA" if c == "qa" else c.title()) for c in CAPS]
-        else:
-            handles = [Line2D([], [], color=COLORS["qa"], marker=m, ls="", label=label)
-                       for m, label in (("o", "1B"), ("^", "4B dev."))]
-    legend_row(fig, handles)
+        ax = panel_axes(fig, PANEL_SIZES[panel], left=.84, bottom=.72, right=.06)
+        draw_corners(ax, [r for r in rows if r["kind"] == "corner"])
+        ax.xaxis.set_label_coords(.22, -.22)
     return ax
+
+
+def draw_legend(fig):
+    from matplotlib.lines import Line2D
+    if __package__:
+        from .paper_figure_style import legend_strip
+    else:
+        from paper_figure_style import legend_strip
+    handles = [Line2D([], [], color=COLORS[c], marker=MARKERS[c], ls="",
+                      label="QA" if c == "qa" else c.title()) for c in CAPS]
+    handles += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Base"),
+                Line2D([], [], color=GREY, marker="o", ls="", label="Rel."),
+                Line2D([], [], color=GREEN, marker="o", ls="", label="Lower"),
+                Line2D([], [], color=".25", marker="o", ls="", label="1B"),
+                Line2D([], [], color=".25", marker="^", ls="", label="4B dev.")]
+    legend = legend_strip(fig, handles)
+    for text in legend.get_texts()[-2:]:
+        text.set_fontsize(13)  # Corner panel retains its original panel style.
+    return legend
 
 
 def plot(rows, plt):
     return combine_panels(plt, [
-        ("full", (0, 4.0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
-        ("full", (0, 2.05, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
-        ("panel", (0, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
-        ("panel", (2.8, 0, *PANEL_SIZES["d"]), lambda f: draw_panel(f, rows, "d")),
+        ("full", (0, .32, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
+        ("full", (2.3, .32, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
+        ("panel", (3.8, .32, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
+        ("full", (0, 0, *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
 
 CAPTION_TEXT = """Generalization to new configurations of seen states (a), new sources
-or students (b), registered corner contrasts for both students (c), and fresh
-evaluation distributions (d). MAE axes are logarithmic in native-token nats.
+or students (b), and registered corner contrasts for both students and fresh
+evaluation distributions (c). MAE axes are logarithmic in native-token nats.
 Paired markers compare the relation and development-selected baseline on identical
 cells with equal cell weights. Math, Code and QA use circles, squares and diamonds
 in the MAE panels. Hollow markers denote baselines; filled relation markers are
-green only when the relation MAE is lower. Parentheses in row labels give the cell
-count per capability, not an independent sample size. V46 and the Pythia locked-rule
+green only when the relation MAE is lower. Cell counts per capability are in
+generalization_mae_pairs.md and the record sidecars. V46 and the Pythia locked-rule
 row have no stored development-selected baseline: their unpaired relation markers
 remain grey. V46/V72 and the 270M/1B new-pool budgets remain separate.
 Paired gain CIs are translated about the fixed baseline MAE: a stored
@@ -339,14 +357,19 @@ baseline-minus-relation interval [lo, hi] is drawn at [baseline MAE - hi,
 baseline MAE - lo]. These are paired gain intervals, not marginal MAE confidence
 intervals; no intervals are averaged across students.
 Corner whiskers are registered ±2-noise bands, not CIs. Corners: filled in band /
-hollow outside. Both corner panels use signed prediction-minus-measurement with a
+hollow outside. The combined corner panel uses signed prediction-minus-measurement with a
 symmetric-log axis and unchanged limits of -2.5 to 2.5 native-token nats.
 Circles denote 1B; triangles denote the 4B development student. Capability colours
-apply in (c), and all fresh-distribution contrasts in (d) are QA.
+apply in (c), and all fresh-distribution contrasts below its thin separator are QA.
 Primary QA additivity: failed to reject. Math is size-dependent and code unresolved.
 No frozen response-law predictions on fresh evaluation distributions. Only
-registered corner contrasts are available in (d), with additive predictions zero.
+registered corner contrasts are available on fresh distributions, with additive predictions zero.
 No A2 development-holdout interval is transplanted to these confirmation cells.
+The three panels are 2.3, 1.5 and 1.7 inches wide and 2 inches high in one
+5.5-inch row. Panel (c) stacks 1B, 4B development, 2Wiki, MuSiQue and TriviaQA.
+The shared key is fig3_legend.pdf: Base = baseline, Rel. = relation, Lower =
+lower relation MAE. Short pruning labels distinguish V72 in-range from V46
+in-range and out-of-range. Panel (b)'s row labels sit above their markers.
 """
 
 
@@ -367,20 +390,27 @@ def generate(root=ROOT):
         audit = Artifacts(root)
         plt = pyplot(root)
         rows = build(audit)
-        for letter in "abcd":
+        audit.rule("Display mapping: fig3_a = MAE A, fig3_b = MAE B, fig3_c = all corner A+B+C. "
+                   "Frozen panel fields, counts and numbers are unchanged; a thin separator precedes fresh distributions.")
+        for letter in "abc":
             apply_style(KINDS[letter])
             fig = plt.figure(figsize=PANEL_SIZES[letter])
             draw_panel(fig, rows, letter)
             if letter in "ab":
                 panel_rows = [r for r in rows if r["kind"] == "mae" and r["panel"] == letter.upper()]
             else:
-                source_panels = ("A", "B") if letter == "c" else ("C",)
-                panel_rows = [r for r in rows if r["kind"] == "corner" and r["panel"] in source_panels]
+                panel_rows = [r for r in rows if r["kind"] == "corner"]
             save_panel(fig, f"fig3_{letter}", KINDS[letter], audit, panel_rows)
+            write_caption(f"fig3_{letter}", audit, CAPTION_TEXT)
             plt.close(fig)
-        audit.rule("Display mapping: fig3_a = MAE A, fig3_b = MAE B, fig3_c = corner A+B, "
-                   "fig3_d = corner C. Frozen record panel fields and all numerical values are unchanged. "
-                   "Row parentheses are cell counts per capability; unpaired V46/locked-rule markers have unavailable baselines.")
+        apply_style("full")
+        fig = plt.figure(figsize=LEGEND_SIZE)
+        draw_legend(fig)
+        save_panel(fig, "fig3_legend", "full", audit, [])
+        write_caption("fig3_legend", audit, CAPTION_TEXT)
+        plt.close(fig)
+        for suffix in (".pdf", "_data.json", "_caption.txt", "_sources.md"):
+            output_path(root, "figs", "fig3_d" + suffix).unlink(missing_ok=True)
         fig = plot(rows, plt)
         save_figure(fig, "generalization", audit)
         write_notes("generalization", audit, rows)

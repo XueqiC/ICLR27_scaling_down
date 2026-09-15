@@ -1,7 +1,7 @@
 """Final-size serif styling and panel exports for artifact-only paper figures.
 
-Use ``apply_style('panel')`` for 2.7-inch panels or ``apply_style('full')``
-for 5.5-inch panels. Export the complete canvas so PDF placement preserves pt.
+Keep each panel's original style kind when changing its physical dimensions.
+Export the complete canvas so PDF placement preserves point sizes.
 """
 from __future__ import annotations
 
@@ -62,15 +62,26 @@ def panel_axes(fig, size, *, left=.57, bottom=.48, right=.06, top=.04):
     return fig.add_axes((left/w, bottom/h, (w-left-right)/w, (h-bottom-top)/h))
 
 
-def legend_row(fig, handles):
+def legend_row(fig, handles, **kwargs):
     """A single compact row on the panel's own canvas, below its x label."""
-    return fig.legend(handles=handles, loc="lower center", ncol=len(handles),
-                      bbox_to_anchor=(.5, 0), borderaxespad=0)
+    options = dict(loc="lower center", ncol=len(handles), bbox_to_anchor=(.5, 0),
+                   borderaxespad=0)
+    options.update(kwargs)
+    return fig.legend(handles=handles, **options)
+
+
+def legend_strip(fig, handles):
+    """Fit a single row by tightening handle spacing, never scaling the fonts."""
+    return legend_row(fig, handles, loc="center", bbox_to_anchor=(.5, .5),
+                      handlelength=.65, handletextpad=.15, columnspacing=.35,
+                      borderpad=0)
 
 
 def save_panel(fig, stem, kind, audit, records):
     """Save one vector PDF, provenance, and physical typography metadata."""
+    import json
     from matplotlib import font_manager
+    from matplotlib.legend import Legend
 
     fig.canvas.draw()
     for ax in fig.axes:
@@ -87,6 +98,20 @@ def save_panel(fig, stem, kind, audit, records):
                f"axis labels {label} pt, legend {legend} pt; lines 2 pt, markers 7 pt. "
                "Full canvas retained; no titles, panel letters, or explanatory annotations.")
     write_notes(stem, audit, records)
+    output_path(audit.root, "figs", f"{stem}_data.json").write_text(
+        json.dumps({"size_inches": [w, h], "records": records,
+                    "input_sha256": audit.inputs,
+                    "axes": [{"xlim": list(ax.get_xlim()), "ylim": list(ax.get_ylim()),
+                              "xscale": ax.get_xscale(), "yscale": ax.get_yscale(),
+                              "row_labels": [t.get_text() for t in ax.get_yticklabels()]}
+                             for ax in fig.axes],
+                    "legend_entries": [t.get_text() for leg in fig.findobj(Legend)
+                                       for t in leg.get_texts()],
+                    "legend_font_sizes_pt": [t.get_fontsize() for leg in fig.findobj(Legend)
+                                             for t in leg.get_texts()],
+                    "font": {"family": selected, "weight": "bold", "ticks_pt": tick,
+                             "labels_pt": label, "legend_pt": legend}},
+                   indent=2, allow_nan=False) + "\n")
     print(f"{stem}: {w:g} x {h:g} in; {selected} bold; "
           f"ticks/labels/legend = {tick}/{label}/{legend} pt; lines/markers = 2/7 pt")
 

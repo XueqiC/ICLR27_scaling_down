@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from statistics import median
 
 if __package__:
     from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot, output_path, write_notes
@@ -17,22 +18,32 @@ V96 = "results/v96-joint-response/summary.json"
 V100 = "results/v100-critical-region/summary.json"
 STUDENTS = ("gemma3-1b", "gemma3-4b")
 TOLERANCES = (.01, .003)
-PANEL_SIZE = (2.7, 2.05)
+PANEL_SIZE = (2.7, 1.8)
 CAPTION = """Observed-endpoint falsification diagnostic for logarithmic reuse,
 for Gemma-3 1B (a) and 4B (b). The ordinate is the saved measured pool-change
 effect divided by log(1+E2)-log(1+E1), where E=T/D_U; the abscissa is the saved
 common_T=(T_first+T_second)/2, in thousands of supervised tokens. Colour denotes
-Math, Code or QA; hollow circles denote 1% budget matching and filled triangles
-0.3%. The tighter set is nested in the 1% set, so some points coincide. Lines
-connect only the same capability, pool/seed trajectory dyad and tolerance across
-budgets; no pooling, interpolation, fitted slopes or new intervals are used.
+Math, Code or QA. Thin lines (0.8 pt, alpha 0.35, without markers) connect the
+saved ratios for each individual pool/seed trajectory dyad across budgets,
+separately within each capability and tolerance. Heavy lines (2.5 pt, alpha 1)
+connect the per-budget-band median of those individual plotted ratios across
+pool pairs, separately for each capability and tolerance. The bands are the
+saved V100 nominal 25k, 50k, 100k and 200k bands; each median is positioned at
+the median common_T of its contributing records. Heavy solid lines with filled
+circles denote 1% budget matching; heavy dashed lines with filled triangles
+denote 0.3%. All markers are 9 pt, filled in the capability colour, with a white
+edge. The tighter set is nested in the 1% set, so some points coincide. Only
+occupied bands are shown; connecting segments are visual guides, with no
+interpolated observations, fitted slopes or new intervals. The set of pool pairs
+can change across bands, so the median lines are descriptive summaries.
 At exactly matched T, a separable logarithmic reuse form predicts a horizontal
 ratio for each student/capability. The zero line is a reference, not a fitted
 coefficient. V100 reports zero exactly matched nonzero-budget pairs: the observed
 drift also admits residual budget, composition and schedule confounding and does
 not establish an exact fixed-budget causal falsification. At 0.3%, critical
 U=132 matches occur only near 200k and cannot identify critical-pool drift.
-V100 fixed_budget.endpoint_ratios supplies all plotted numbers; its saved
+V100 fixed_budget.endpoint_ratios supplies all individual plotted numbers and
+budget-band labels; the heavy lines summarize these records by medians. Its saved
 raw_response_curves verifies endpoint identity and E without reading trajectories.
 V96 part_d supplies the original definition and matching endpoint cross-checks;
 its broader ordinal matches are not added to the two requested tolerance sets.
@@ -50,7 +61,7 @@ def student_rows(old, summary, student):
     for i, raw in enumerate(summary["fixed_budget"]["endpoint_ratios"]):
         if raw["student"] != student or raw["tolerance"] not in TOLERANCES:
             continue
-        r = {k: raw[k] for k in ("student", "capability", "tolerance", "pair_id", "contrast",
+        r = {k: raw[k] for k in ("student", "capability", "tolerance", "pair_id", "contrast", "band",
                                  "trajectory_clusters", "raw_ratio", "measured_effect", "reuse_bracket",
                                  "common_T", "T_first", "T_second", "first_source", "second_source")}
         if not all(math.isfinite(r[k]) for k in ("raw_ratio", "measured_effect", "reuse_bracket", "common_T")):
@@ -76,6 +87,7 @@ def student_rows(old, summary, student):
                  effect_source=ref(V100, *base, "measured_effect"),
                  bracket_source=ref(V100, *base, "reuse_bracket"),
                  tolerance_source=ref(V100, *base, "tolerance"),
+                 band_source=ref(V100, *base, "band"),
                  endpoint_sources=[ref(V100, "raw_response_curves", ci, "points", pi) for ci, pi, _ in (first, second)],
                  v96_source=None)
         if r["pair_id"] in previous:
@@ -106,7 +118,6 @@ def build(audit):
 
 
 def draw_panel(fig, rows, panel):
-    from matplotlib.lines import Line2D
     ax = panel_axes(fig, PANEL_SIZE, left=.53, bottom=.50, right=.08)
     for cap in CAPS:
         for tolerance, marker in zip(TOLERANCES, ("o", "^")):
@@ -114,14 +125,25 @@ def draw_panel(fig, rows, panel):
             for dyad in sorted({tuple(r["trajectory_clusters"]) for r in part}):
                 line = sorted((r for r in part if tuple(r["trajectory_clusters"]) == dyad), key=lambda r: r["x"])
                 ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=COLORS[cap],
-                        marker=marker, mfc="white" if tolerance == .01 else COLORS[cap],
-                        ls="-" if tolerance == .01 else "--", alpha=.8)
+                        lw=.8, alpha=.35, marker="", ls="-", zorder=1)
+            # Use saved budget bands: actual endpoint midpoints differ by dyad.
+            # Take the median of ratios, never a ratio of aggregated effects.
+            points = sorted((median(r["x"] for r in part if r["band"] == band),
+                             median(r["delta"] for r in part if r["band"] == band))
+                            for band in {r["band"] for r in part})
+            if points:
+                ax.plot([x for x, _ in points], [y for _, y in points], color=COLORS[cap],
+                        lw=2.5, alpha=1, marker=marker, ms=9, mfc=COLORS[cap],
+                        mec="white", mew=1.2, ls="-" if tolerance == .01 else "--", zorder=3)
     axes_defaults(ax)
     ax.set(xlabel="Budget $T$ (k)", ylabel="Ratio (nats)", xlim=(0, 220), ylim=(-1, 8),
            xticks=[0, 100, 200], yticks=[0, 3, 6])
-    handles = capability_handles() + [Line2D([], [], ls="", color=".2", marker=m,
-                      mfc="white" if t == .01 else ".2", label=f"{100*t:g}%") for t, m in zip(TOLERANCES, ("o", "^"))]
-    ax.legend(handles=handles, loc="upper left", ncol=2, columnspacing=.4)
+    # Six capability/tolerance entries crowd a 2.7-inch panel at shared font size.
+    # Keep capability colours inside; the caption gives the tolerance marker key.
+    handles = capability_handles()
+    for handle in handles:
+        handle.set_linewidth(2.5)
+    ax.legend(handles=handles, loc="upper left", handlelength=.8, handletextpad=.3)
     return ax
 
 
@@ -129,6 +151,11 @@ def generate(root=ROOT):
     with frozen_run(root) as access:
         audit, plt = Artifacts(root), pyplot(root)
         rows, unavailable = build(audit)
+        audit.rule("Figure 5 artist overrides to shared defaults: individual dyads 0.8 pt, "
+                   "alpha 0.35, no markers; per-band medians 2.5 pt, alpha 1, with 9 pt "
+                   "capability-filled markers and 1.2 pt white edges. Saved budget bands "
+                   "group individual raw ratios; both x and y are medians within each "
+                   "student/capability/tolerance/band. Circle/solid = 1%; triangle/dashed = 0.3%.")
         for panel, reason in unavailable.items():
             audit.omit(reason)
             print(f"STOPPED fig5_{panel}: {reason}")
@@ -144,6 +171,8 @@ def generate(root=ROOT):
                   for p, s in zip("ab", STUDENTS) if p not in unavailable]
         if panels:
             export(plt, audit, "drift", panels, CAPTION + "\n" + "\n".join(unavailable.values()))
+            print("Figure 5 artist overrides: thin lines 0.8 pt / alpha 0.35; "
+                  "median lines 2.5 pt / alpha 1; filled markers 9 pt / white edges 1.2 pt.")
         else:
             for name in ("drift.png", "drift_files.json"):
                 path = output_path(root, "figs", name)
