@@ -21,6 +21,7 @@ COLORS = {"math": "#2563a6", "code": "#c26a24", "qa": "#25836b"}
 ACTIVE = None
 RUNTIME_ROOTS = tuple(Path(p).resolve() for p in
                       (sys.prefix, sys.base_prefix, *site.getsitepackages(), site.getusersitepackages()))
+FONT_ROOTS = (Path("/usr/share/fonts"), Path("/usr/local/share/fonts"))
 
 
 def no_symlinks(path):
@@ -70,6 +71,28 @@ class Artifacts:
     def omit(self, message):
         self.notes.append(message)
 
+    def published_pairs(self):
+        """Only scrub-reproducible pairs from this run's audited digest map."""
+        try:
+            entries = self.read("results/ANONYMIZATION_DIGESTS.json")["files"].values()
+        except (FileNotFoundError, KeyError, json.JSONDecodeError):
+            return {}
+        return {e["frozen_sha256"]: (e["published_sha256"], e.get("published_at", ""))
+                for e in entries if e.get("pairable") is True
+                and e.get("frozen_sha256") and e.get("published_sha256")}
+
+    def matches_digest(self, recorded, computed):
+        """Use the repository comparator with only this run's pairable map."""
+        from unittest.mock import patch
+        if __package__:
+            from . import provenance
+        else:
+            import provenance
+        if recorded == computed:
+            return True
+        with patch.object(provenance, "_pairs", self.published_pairs):
+            return provenance.matches(recorded, computed)
+
 
 def _audit(event, args):
     if ACTIVE is None:
@@ -97,6 +120,10 @@ def _audit(event, args):
             if path.suffix in (".py", ".pyc") and resolved.is_relative_to(ROOT / "analysis"):
                 return
             if any(resolved.is_relative_to(p) for p in RUNTIME_ROOTS):
+                return
+            # Installed fonts are read-only rendering resources, never evidence.
+            if resolved.suffix.lower() in (".ttf", ".otf", ".ttc") and any(
+                    resolved.is_relative_to(p) for p in FONT_ROOTS):
                 return
             if resolved.is_relative_to(root / "generated/figs/.mplconfig"):
                 return
@@ -185,20 +212,9 @@ def legacy_rows(audit):
             self.data = audit.read(relative)
             self.sha256 = audit.inputs[relative]
 
-    # No fallback to data_mirror/: evidence must stay in the two allowed roots.
-    def published_pairs():
-        # Bootstrap materialises the publication digest map in the allowed results root. Only pairs
-        # reproduced exactly by scrubbing the frozen original are eligible; scoring is unchanged.
-        try:
-            entries = audit.read("results/ANONYMIZATION_DIGESTS.json")["files"].values()
-        except Exception:
-            return {}
-        return {e["frozen_sha256"]: (e["published_sha256"], e.get("published_at", ""))
-                for e in entries if e.get("pairable") is True and "frozen_sha256" in e}
-
     # Digest acceptance follows the repository rule: exact equality, or a frozen/published pair
     # recorded as pairable in the anonymization digest map.
-    with patch.object(old, "Comparison", Comparison), patch.object(old.provenance, "_pairs", published_pairs):
+    with patch.object(old, "Comparison", Comparison), patch.object(old.provenance, "_pairs", audit.published_pairs):
         rows, _ = old.build_rows()
     audit.rule("Reused v86_main_table.build_rows, Comparison.number, row_scores and paired_rows; "
                "pruning inputs are v53-prune-dev register/predictions/compare and v72-prune-repeat freeze/compare. "

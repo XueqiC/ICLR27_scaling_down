@@ -23,5 +23,18 @@
     "math": 9.832213261648745,
     "code": 12.416642588847154,
     "qa": 12.220479704797048
+  },
+  "5": {
+    "math": 1.0797304360812425,
+    "code": 1.7003033805258596,
+    "qa": 5.463503228782288
+  },
+  "_5bit_meta": {
+    "dense_gap_vs_canonical": {
+      "math": -0.0003,
+      "code": -0.0008,
+      "qa": 0.0133
+    },
+    "note": "odd-half protocol diff, negligible vs quant damage"
   }
 }

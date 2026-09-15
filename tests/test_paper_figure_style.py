@@ -7,7 +7,7 @@ from analysis import paper_figure_style as style
 from analysis import plot_fig_responses_v2 as responses
 from analysis import plot_fig_explanation as explanation
 from analysis import plot_fig_generalization as generalization
-from analysis.paper_artifacts import ROOT, pyplot
+from analysis.paper_artifacts import ROOT, pyplot, output_path
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -99,7 +99,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     rows, _, _ = gen.generate()
     for letter in letters:
         stem = f"{prefix}_{letter}"
-        path = ROOT / f"paper/paper/figs/{stem}.pdf"
+        path = output_path(ROOT, "figs", f"{stem}.pdf")
         raw = path.read_bytes()
         assert raw.startswith(b"%PDF-") and len(raw) > 1000
         # Matplotlib's PDF page box is in physical points, independent of DPI.
@@ -109,7 +109,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         assert (path.parent / f"{stem}_sources.md").stat().st_size > 100
     if gen is responses:
         assert "fig1_legend" in saved
-        assert (ROOT / "paper/paper/figs/fig1_legend.pdf").stat().st_size > 1000
+        assert output_path(ROOT, "figs", "fig1_legend.pdf").stat().st_size > 1000
     if gen is generalization:
         # Both students must be in c, and every 4B record keeps its triangle.
         plt = pyplot()
@@ -125,7 +125,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
 
 
 def test_explanations_moved_to_caption_files():
-    directory = ROOT / "paper/paper/figs"
+    directory = output_path(ROOT, "figs")
     expected = {
         "responses_v2": ("Positive = worse", "Development endpoints nearest 200k"),
         "explanation": ("failed to reject", "Curvature intervals are conditional on development", "post-hoc"),

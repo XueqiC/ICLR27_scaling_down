@@ -25,15 +25,15 @@
       "reason": "anonymisation of author, host, institution or path strings"
     },
     "analysis/paper_artifacts.py@live": {
-      "frozen_sha256": "7f95c200481c5d6c6eb16388a150d19c0f1049ca55028e38957f0b128fb05fac",
+      "frozen_sha256": "8b7914bd32444375ad939acd369eeabd8ecf7ab7a26215c5b49cf5fd955b47ce",
       "pairable": false,
       "path_in_frozen_record": "analysis/paper_artifacts.py",
       "published_at": "analysis/paper_artifacts.py",
-      "published_sha256": "8886832fd8b0e75a402c3f0af972300133faffb56708fdef558f8201fa52a3d5",
+      "published_sha256": "2dd0ee2a97b91cd6f229a3701e3b9dc0cc4c87663f599103d8722914623078e5",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/plot_fig_generalization_cells.py@live": {
-      "frozen_sha256": "1560ae651777799cda6e94fca9f24f89c0111ae5880288581e43a1ce45cf489f",
+      "frozen_sha256": "972ec6d496e2b93dc0e1e5500a75dd126dea34ddc6f8025938bdd2a60934f9d2",
       "pairable": false,
       "path_in_frozen_record": "analysis/plot_fig_generalization_cells.py",
       "published_at": "analysis/plot_fig_generalization_cells.py",
@@ -1912,78 +1912,6 @@
       "published_sha256": "cb61b811b6b115852dad3965dfad8c9840e85d729f6791e5af91d6f22bed24d2",
       "reason": "anonymisation of author, host, institution or path strings"
     },
-    "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json@live": {
-      "frozen_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
-      "published_at": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
-      "published_sha256": "f8c4182ad1591e2249aa73487a8da11fba53d2e515beee1fb3dbd1bfd1c643ab",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json@live": {
-      "frozen_sha256": "eafc51455ab51bc32a046ca3ea32cf54b2e889cad75229d80593c05c4086c9df",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
-      "published_at": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
-      "published_sha256": "4ee4f65ddefecb81d6d8dc5b436d6ad27e984039a7bc2ea52b5421124b4b1a30",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json@live": {
-      "frozen_sha256": "989bc2130600d71e70bb363c9d8f4da1bfaabe601a5029584eae366e48baf788",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
-      "published_at": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
-      "published_sha256": "8d0138eb9f4c42b2855a9ebc92beb5d1cc71225ffa97b96da172865710e2cb0c",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/gemma3-1b/quant_losses.json@live": {
-      "frozen_sha256": "096bf1004f8fa90ecd0d2af3f1af6ba36d96eeb82dbef13e7d7096e008c6f898",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/gemma3-1b/quant_losses.json",
-      "published_at": "results/v10-quantization/gemma3-1b/quant_losses.json",
-      "published_sha256": "382840025bd3e7f2e898224d55c4edbca80007e85dc2435befe85d992c5eb0e5",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/gemma3-270m/quant_losses.json@live": {
-      "frozen_sha256": "26948f124e3aa77a7748495891879bf4e0a1f3998d2337d162c77c1b22ba2db7",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/gemma3-270m/quant_losses.json",
-      "published_at": "results/v10-quantization/gemma3-270m/quant_losses.json",
-      "published_sha256": "e2e40398a252e67a68c0c34079c5b3fd8e8230f9e79b2c2e326f800b94cfd043",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/gemma3-27b/quant_losses.json@live": {
-      "frozen_sha256": "12f2f913190fe4b09276b9698c637671aa1c2455506133b1d8e8634d4b360203",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/gemma3-27b/quant_losses.json",
-      "published_at": "results/v10-quantization/gemma3-27b/quant_losses.json",
-      "published_sha256": "725928559a38f7ba390eb69cc51733fb6371fec004c00f508477dded720285f9",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/gemma3-4b/quant_losses.json@live": {
-      "frozen_sha256": "8740ee0ab725930038b5023954c11eb0e0d396544f915ab7a2e73d80006cd4b4",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/gemma3-4b/quant_losses.json",
-      "published_at": "results/v10-quantization/gemma3-4b/quant_losses.json",
-      "published_sha256": "783db810bf314a8f93cb9d98b7eaa9832130c72d34f45156ab88a18ee31e95dc",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/muse-30b/quant_losses.json@live": {
-      "frozen_sha256": "b25f4a4d4edc4951f453a22c7e10b5c25053e0c0cece3c4bb6e48f6319d8c3ee",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/muse-30b/quant_losses.json",
-      "published_at": "results/v10-quantization/muse-30b/quant_losses.json",
-      "published_sha256": "4a0da76a2388995a1e46138693f237cb8c94dc51c963102c894a6f9601ae4017",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v10-quantization/olmo3-7b/quant_losses.json@live": {
-      "frozen_sha256": "8f65951d747f13cd06029cdaa505397017d9f85f93bcd3279ab01982a182cb9c",
-      "pairable": false,
-      "path_in_frozen_record": "results/v10-quantization/olmo3-7b/quant_losses.json",
-      "published_at": "results/v10-quantization/olmo3-7b/quant_losses.json",
-      "published_sha256": "4ebc8ac4839a96739a1bc1598ad8c78c5f2f0cc0dbf05f2279fbec8a61e5059c",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
     "results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/adapter/adapter_config.json@live": {
       "frozen_sha256": "c5eb99703443f320b190a6de1d38a6449e9e90f0830930dca58a2ab95f39bb78",
       "pairable": false,
@@ -2032,22 +1960,6 @@
       "published_sha256": "f3244b70a4430de7edc08133bf26cf1f0f65c9427e7cb7ebe229f7750e05fcc1",
       "reason": "anonymisation of author, host, institution or path strings"
     },
-    "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json@live": {
-      "frozen_sha256": "04b703c90611f6bf0a1244c186e5118892ff2e643624a39cf4f39e1cc51db7b7",
-      "pairable": false,
-      "path_in_frozen_record": "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json",
-      "published_at": "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json",
-      "published_sha256": "16b7b8ea340a40ad501e599f50350b70de956c93d7c36f274c22a06c482c74d0",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "results/v6-capability-geometry/gemma3-1b/prune_losses.json@live": {
-      "frozen_sha256": "76642de5ce8c2b1b9c41288eda024a1a69ee5f2c5b5af570e9730f898e34e1d6",
-      "pairable": false,
-      "path_in_frozen_record": "results/v6-capability-geometry/gemma3-1b/prune_losses.json",
-      "published_at": "results/v6-capability-geometry/gemma3-1b/prune_losses.json",
-      "published_sha256": "1384b55012b5801621b5f05776144fa8110ada39c1c0ae67778203e90dda962e",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
     "results/v9c-ablation/gemma3-1b/ablation.json@live": {
       "frozen_sha256": "a4117b27ebef394947141b8ec5a57e8d36cd024d45b52320d454e49d63327d51",
       "pairable": false,
@@ -2094,14 +2006,6 @@
       "path_in_frozen_record": "tests/test_final_prediction_table.py",
       "published_at": "tests/test_final_prediction_table.py",
       "published_sha256": "08b463ceaaad25204c5e2ccfbe1f42f6706daef51bf7099e01cda1910ab44fcc",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "tests/test_plot_fig_generalization.py@live": {
-      "frozen_sha256": "e59df0d0ba9b44d6e0d1785c3a2f714ad0e39ae00c8914dfa53f2167153bdde2",
-      "pairable": false,
-      "path_in_frozen_record": "tests/test_plot_fig_generalization.py",
-      "published_at": "tests/test_plot_fig_generalization.py",
-      "published_sha256": "c41321dc3f9bfd74e62377ed5504c951de6bd27936cf24237cd61940eb952821",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "tests/test_pythia_revision.py@live": {

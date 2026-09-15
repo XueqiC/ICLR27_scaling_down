@@ -38,7 +38,7 @@ The shared key is supplied as fig7_legend.pdf.
 
 def build(audit):
     compare, freeze = audit.read(COMPARE), audit.read(FREEZE)
-    if audit.read(FREEZE + ".sha256").strip() != audit.inputs[FREEZE]:
+    if not audit.matches_digest(audit.read(FREEZE + ".sha256").strip(), audit.inputs[FREEZE]):
         raise ValueError("V78 freeze seal mismatch")
     states = [s["tag"] for s in freeze["states"]]
     if len(states) != 4:

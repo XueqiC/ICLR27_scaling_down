@@ -1,0 +1,548 @@
+{
+  "description": "Complete frozen artifact reads of the five generators after bootstrap. SHA-256 values describe decompressed bytes. The digest map is provenance metadata, not a measurement.",
+  "runtime_resources": {
+    "paper_figure_style.py": "Reads installed fonts under /usr/share/fonts and /usr/local/share/fonts; Matplotlib fonts/cache are runtime resources. No frozen evidence inputs.",
+    "paper_panel_exports.py": "Writes figures and provenance sidecars; no additional frozen evidence reads."
+  },
+  "generators": {
+    "plot_fig_lr_pilot.py": [
+      "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json",
+      "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json",
+      "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json",
+      "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json"
+    ],
+    "plot_fig_pythia_responses.py": [
+      "results/ANONYMIZATION_DIGESTS.json",
+      "results/v10-quantization/pythia-1.4b--step143000/quant_losses.json",
+      "results/v10-quantization/pythia-1.4b--step16000/quant_losses.json",
+      "results/v10-quantization/pythia-1.4b--step64000/quant_losses.json",
+      "results/v10-quantization/pythia-160m--step143000/quant_losses.json",
+      "results/v10-quantization/pythia-160m--step16000/quant_losses.json",
+      "results/v10-quantization/pythia-160m--step64000/quant_losses.json",
+      "results/v10-quantization/pythia-410m--step143000/quant_losses.json",
+      "results/v10-quantization/pythia-410m--step16000/quant_losses.json",
+      "results/v10-quantization/pythia-410m--step64000/quant_losses.json",
+      "results/v36-pythia-controlled/summary.json",
+      "results/v53-prune-dev/register.json",
+      "results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json",
+      "results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json",
+      "results/v69-quant-confirm/compare.json",
+      "results/v69-quant-confirm/develop.json",
+      "results/v69-quant-confirm/freeze.json"
+    ],
+    "plot_fig_drift.py": [
+      "results/v100-critical-region/summary.json",
+      "results/v96-joint-response/summary.json"
+    ],
+    "plot_fig_heterogeneity.py": [
+      "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
+      "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
+      "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
+      "results/v10-quantization/gemma3-12b/quant_losses.json",
+      "results/v10-quantization/gemma3-1b/quant_losses.json",
+      "results/v10-quantization/gemma3-270m/quant_losses.json",
+      "results/v10-quantization/gemma3-27b/quant_losses.json",
+      "results/v10-quantization/gemma3-4b/quant_losses.json",
+      "results/v10-quantization/gemma4-31b/quant_losses.json",
+      "results/v10-quantization/muse-30b/quant_losses.json",
+      "results/v10-quantization/olmo3-32b/quant_losses.json",
+      "results/v10-quantization/olmo3-7b/quant_losses.json",
+      "results/v51-panel/panel.json",
+      "results/v6-capability-geometry/Qwen3-0.6B/prune_losses.json",
+      "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json",
+      "results/v6-capability-geometry/Qwen3-4B/prune_losses.json",
+      "results/v6-capability-geometry/gemma3-12b/prune_losses.json",
+      "results/v6-capability-geometry/gemma3-1b/prune_losses.json",
+      "results/v6-capability-geometry/gemma3-270m/prune_losses.json",
+      "results/v6-capability-geometry/gemma3-27b/prune_losses.json",
+      "results/v6-capability-geometry/gemma3-4b/prune_losses.json",
+      "results/v6-capability-geometry/gemma4-31b/prune_losses.json",
+      "results/v6-capability-geometry/muse-30b/prune_losses.json",
+      "results/v6-capability-geometry/olmo3-32b/prune_losses.json",
+      "results/v6-capability-geometry/olmo3-7b/prune_losses.json"
+    ],
+    "plot_fig_selection_maps.py": [
+      "results/v78-rule-confirm/compare.json",
+      "results/v78-rule-confirm/freeze.json",
+      "results/v78-rule-confirm/freeze.json.sha256"
+    ]
+  },
+  "artifacts": {
+    "results/ANONYMIZATION_DIGESTS.json": {
+      "mirror": "data_mirror/ANONYMIZATION_DIGESTS.json",
+      "published_sha256": "1d33953bb308962d18942192112f2c7169ece4881c0acf6df642fb88fd4013c3",
+      "uncompressed_bytes": 157825,
+      "newly_mirrored": false
+    },
+    "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
+      "published_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
+      "uncompressed_bytes": 831,
+      "newly_mirrored": false,
+      "frozen_sha256": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b"
+    },
+    "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
+      "published_sha256": "eafc51455ab51bc32a046ca3ea32cf54b2e889cad75229d80593c05c4086c9df",
+      "uncompressed_bytes": 638,
+      "newly_mirrored": false,
+      "frozen_sha256": "eafc51455ab51bc32a046ca3ea32cf54b2e889cad75229d80593c05c4086c9df"
+    },
+    "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
+      "published_sha256": "989bc2130600d71e70bb363c9d8f4da1bfaabe601a5029584eae366e48baf788",
+      "uncompressed_bytes": 642,
+      "newly_mirrored": false,
+      "frozen_sha256": "989bc2130600d71e70bb363c9d8f4da1bfaabe601a5029584eae366e48baf788"
+    },
+    "results/v10-quantization/gemma3-12b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/gemma3-12b/quant_losses.json",
+      "published_sha256": "af6a9a125573875ac7a7f192e1101dd5afe49162ff802331b371df723842389d",
+      "uncompressed_bytes": 638,
+      "newly_mirrored": false,
+      "frozen_sha256": "af6a9a125573875ac7a7f192e1101dd5afe49162ff802331b371df723842389d"
+    },
+    "results/v10-quantization/gemma3-1b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/gemma3-1b/quant_losses.json",
+      "published_sha256": "096bf1004f8fa90ecd0d2af3f1af6ba36d96eeb82dbef13e7d7096e008c6f898",
+      "uncompressed_bytes": 637,
+      "newly_mirrored": false,
+      "frozen_sha256": "096bf1004f8fa90ecd0d2af3f1af6ba36d96eeb82dbef13e7d7096e008c6f898"
+    },
+    "results/v10-quantization/gemma3-270m/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/gemma3-270m/quant_losses.json",
+      "published_sha256": "26948f124e3aa77a7748495891879bf4e0a1f3998d2337d162c77c1b22ba2db7",
+      "uncompressed_bytes": 635,
+      "newly_mirrored": false,
+      "frozen_sha256": "26948f124e3aa77a7748495891879bf4e0a1f3998d2337d162c77c1b22ba2db7"
+    },
+    "results/v10-quantization/gemma3-27b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/gemma3-27b/quant_losses.json",
+      "published_sha256": "12f2f913190fe4b09276b9698c637671aa1c2455506133b1d8e8634d4b360203",
+      "uncompressed_bytes": 640,
+      "newly_mirrored": false,
+      "frozen_sha256": "12f2f913190fe4b09276b9698c637671aa1c2455506133b1d8e8634d4b360203"
+    },
+    "results/v10-quantization/gemma3-4b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/gemma3-4b/quant_losses.json",
+      "published_sha256": "8740ee0ab725930038b5023954c11eb0e0d396544f915ab7a2e73d80006cd4b4",
+      "uncompressed_bytes": 641,
+      "newly_mirrored": false,
+      "frozen_sha256": "8740ee0ab725930038b5023954c11eb0e0d396544f915ab7a2e73d80006cd4b4"
+    },
+    "results/v10-quantization/gemma4-31b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/gemma4-31b/quant_losses.json",
+      "published_sha256": "874580399c72871655d15566fbd9717e0489a70e0799d48099891511ced3c6de",
+      "uncompressed_bytes": 639,
+      "newly_mirrored": false,
+      "frozen_sha256": "874580399c72871655d15566fbd9717e0489a70e0799d48099891511ced3c6de"
+    },
+    "results/v10-quantization/muse-30b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/muse-30b/quant_losses.json",
+      "published_sha256": "b25f4a4d4edc4951f453a22c7e10b5c25053e0c0cece3c4bb6e48f6319d8c3ee",
+      "uncompressed_bytes": 640,
+      "newly_mirrored": false,
+      "frozen_sha256": "b25f4a4d4edc4951f453a22c7e10b5c25053e0c0cece3c4bb6e48f6319d8c3ee"
+    },
+    "results/v10-quantization/olmo3-32b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/olmo3-32b/quant_losses.json",
+      "published_sha256": "49bc563779437dee4e181e3fc822e37767f299eedc2e679fa852b997aac470cd",
+      "uncompressed_bytes": 636,
+      "newly_mirrored": false,
+      "frozen_sha256": "49bc563779437dee4e181e3fc822e37767f299eedc2e679fa852b997aac470cd"
+    },
+    "results/v10-quantization/olmo3-7b/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/olmo3-7b/quant_losses.json",
+      "published_sha256": "8f65951d747f13cd06029cdaa505397017d9f85f93bcd3279ab01982a182cb9c",
+      "uncompressed_bytes": 640,
+      "newly_mirrored": false,
+      "frozen_sha256": "8f65951d747f13cd06029cdaa505397017d9f85f93bcd3279ab01982a182cb9c"
+    },
+    "results/v10-quantization/pythia-1.4b--step143000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-1.4b--step143000/quant_losses.json",
+      "published_sha256": "5330aaa9da7183204c37d1ff1e2ea64c651ed588bb2f72f0ed7aaed72a595243",
+      "uncompressed_bytes": 535,
+      "newly_mirrored": false,
+      "frozen_sha256": "5330aaa9da7183204c37d1ff1e2ea64c651ed588bb2f72f0ed7aaed72a595243"
+    },
+    "results/v10-quantization/pythia-1.4b--step16000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-1.4b--step16000/quant_losses.json",
+      "published_sha256": "a903eaa306be8c4ba70fda979bcfafa4cc1334fab7b62997e4b6e7f96cf2c945",
+      "uncompressed_bytes": 533,
+      "newly_mirrored": false,
+      "frozen_sha256": "a903eaa306be8c4ba70fda979bcfafa4cc1334fab7b62997e4b6e7f96cf2c945"
+    },
+    "results/v10-quantization/pythia-1.4b--step64000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-1.4b--step64000/quant_losses.json",
+      "published_sha256": "1087bbf6102d85fded469961d958c713908e4ba936e24cd2d4985ee8b6e2a274",
+      "uncompressed_bytes": 535,
+      "newly_mirrored": false,
+      "frozen_sha256": "1087bbf6102d85fded469961d958c713908e4ba936e24cd2d4985ee8b6e2a274"
+    },
+    "results/v10-quantization/pythia-160m--step143000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-160m--step143000/quant_losses.json",
+      "published_sha256": "96aa01041b947077090736afe19a1becd8b9135c9b7b4037a5ea457d6fd0b334",
+      "uncompressed_bytes": 532,
+      "newly_mirrored": false,
+      "frozen_sha256": "96aa01041b947077090736afe19a1becd8b9135c9b7b4037a5ea457d6fd0b334"
+    },
+    "results/v10-quantization/pythia-160m--step16000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-160m--step16000/quant_losses.json",
+      "published_sha256": "11d1845671057066a1e15286b7f84853c6db11511b44bb7bb72328d3fd0d3178",
+      "uncompressed_bytes": 535,
+      "newly_mirrored": false,
+      "frozen_sha256": "11d1845671057066a1e15286b7f84853c6db11511b44bb7bb72328d3fd0d3178"
+    },
+    "results/v10-quantization/pythia-160m--step64000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-160m--step64000/quant_losses.json",
+      "published_sha256": "dde3f0ad83db6997054a79318959dee2c33195ded3d11247fcb12a9992fba4ca",
+      "uncompressed_bytes": 532,
+      "newly_mirrored": false,
+      "frozen_sha256": "dde3f0ad83db6997054a79318959dee2c33195ded3d11247fcb12a9992fba4ca"
+    },
+    "results/v10-quantization/pythia-410m--step143000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-410m--step143000/quant_losses.json",
+      "published_sha256": "6f0e6c037d8b993301839d55f1b8e1261680cc1ed93864b08a2237a1b5698790",
+      "uncompressed_bytes": 534,
+      "newly_mirrored": false,
+      "frozen_sha256": "6f0e6c037d8b993301839d55f1b8e1261680cc1ed93864b08a2237a1b5698790"
+    },
+    "results/v10-quantization/pythia-410m--step16000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-410m--step16000/quant_losses.json",
+      "published_sha256": "ae2ae21276a632816c48bfad123d6963e3f0e4b96c56c47a046220f39b00aed7",
+      "uncompressed_bytes": 531,
+      "newly_mirrored": false,
+      "frozen_sha256": "ae2ae21276a632816c48bfad123d6963e3f0e4b96c56c47a046220f39b00aed7"
+    },
+    "results/v10-quantization/pythia-410m--step64000/quant_losses.json": {
+      "mirror": "data_mirror/v10-quantization/pythia-410m--step64000/quant_losses.json",
+      "published_sha256": "6d0bafbaabcf80fc426ee0587d1deceed793b9ad3ef4ddad189e0426212102e0",
+      "uncompressed_bytes": 535,
+      "newly_mirrored": false,
+      "frozen_sha256": "6d0bafbaabcf80fc426ee0587d1deceed793b9ad3ef4ddad189e0426212102e0"
+    },
+    "results/v100-critical-region/summary.json": {
+      "mirror": "data_mirror/v100-critical-region/summary.json.gz",
+      "published_sha256": "1203f8a85658ab02c7326080cb182685264e3a53d1ab5fe1ecc926b0c2d730a3",
+      "uncompressed_bytes": 22792658,
+      "newly_mirrored": false,
+      "frozen_sha256": "1203f8a85658ab02c7326080cb182685264e3a53d1ab5fe1ecc926b0c2d730a3"
+    },
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "published_sha256": "d4b93ea38f588e7799206364706c95f9125be749b53caa22d89663a8edcd6f84",
+      "uncompressed_bytes": 13969,
+      "newly_mirrored": true,
+      "frozen_sha256": "d4b93ea38f588e7799206364706c95f9125be749b53caa22d89663a8edcd6f84"
+    },
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "published_sha256": "468a6868879a302993b869d74dc1ca56c3bb565adfef8411fec9c1b7bd7e407f",
+      "uncompressed_bytes": 14077,
+      "newly_mirrored": true,
+      "frozen_sha256": "468a6868879a302993b869d74dc1ca56c3bb565adfef8411fec9c1b7bd7e407f"
+    },
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "published_sha256": "77207ebd0c4b100f6bc4f3e6a65a113be8b13482282f886a40993228b01b64e6",
+      "uncompressed_bytes": 13969,
+      "newly_mirrored": true,
+      "frozen_sha256": "77207ebd0c4b100f6bc4f3e6a65a113be8b13482282f886a40993228b01b64e6"
+    },
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "published_sha256": "c774d3767e5336ad6fb32f7cfc7e08c65a011d3713e8669ca215371f896b953b",
+      "uncompressed_bytes": 14077,
+      "newly_mirrored": true,
+      "frozen_sha256": "c774d3767e5336ad6fb32f7cfc7e08c65a011d3713e8669ca215371f896b953b"
+    },
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json",
+      "published_sha256": "10022114f0ab1effc8c48a5bc9a417db2ea9d19bd096d48dca58408c9cbe872a",
+      "uncompressed_bytes": 13968,
+      "newly_mirrored": true,
+      "frozen_sha256": "10022114f0ab1effc8c48a5bc9a417db2ea9d19bd096d48dca58408c9cbe872a"
+    },
+    "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json",
+      "published_sha256": "94649c984f59dd7b01853c76e7fd1f4e60d2707ebfce2df5b371453101757da7",
+      "uncompressed_bytes": 14078,
+      "newly_mirrored": true,
+      "frozen_sha256": "94649c984f59dd7b01853c76e7fd1f4e60d2707ebfce2df5b371453101757da7"
+    },
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "published_sha256": "4d8a442d7e1e3de687761ca5ec2853626f97621cea6036cb9bffe1f6d1db5f19",
+      "uncompressed_bytes": 19330,
+      "newly_mirrored": true,
+      "frozen_sha256": "4d8a442d7e1e3de687761ca5ec2853626f97621cea6036cb9bffe1f6d1db5f19"
+    },
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "published_sha256": "03897bc164c6a3f44c718aab4418f7230c9293a49d8d1b36e33d7eab1a6bfede",
+      "uncompressed_bytes": 19437,
+      "newly_mirrored": true,
+      "frozen_sha256": "03897bc164c6a3f44c718aab4418f7230c9293a49d8d1b36e33d7eab1a6bfede"
+    },
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json",
+      "published_sha256": "3fc87de4bb4cbaef88025647fa18a73da55f6d92ae4c823f77b8798f7dcc7091",
+      "uncompressed_bytes": 19330,
+      "newly_mirrored": true,
+      "frozen_sha256": "3fc87de4bb4cbaef88025647fa18a73da55f6d92ae4c823f77b8798f7dcc7091"
+    },
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json",
+      "published_sha256": "e1430b4c1349fc4311c8cfb1e8ce81a4dd7d18299ae2022618a32134cadfa570",
+      "uncompressed_bytes": 19435,
+      "newly_mirrored": true,
+      "frozen_sha256": "e1430b4c1349fc4311c8cfb1e8ce81a4dd7d18299ae2022618a32134cadfa570"
+    },
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json",
+      "published_sha256": "4737fdc8c8e8eeb8eb48a25275e3d9571a1a8fd19c7097946ee8e38b344dc08d",
+      "uncompressed_bytes": 19329,
+      "newly_mirrored": true,
+      "frozen_sha256": "4737fdc8c8e8eeb8eb48a25275e3d9571a1a8fd19c7097946ee8e38b344dc08d"
+    },
+    "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json": {
+      "mirror": "data_mirror/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json",
+      "published_sha256": "a0a1cc68da5bc2b2546bd532db728759ef159043289c69f241133679dbafc687",
+      "uncompressed_bytes": 19438,
+      "newly_mirrored": true,
+      "frozen_sha256": "a0a1cc68da5bc2b2546bd532db728759ef159043289c69f241133679dbafc687"
+    },
+    "results/v36-pythia-controlled/summary.json": {
+      "mirror": "data_mirror/v36-pythia-controlled/summary.json",
+      "published_sha256": "58dd81d2db4c089f97656232908d4aab8bccdf3114c05a880a50a5aaff844874",
+      "uncompressed_bytes": 949891,
+      "newly_mirrored": true,
+      "frozen_sha256": "58dd81d2db4c089f97656232908d4aab8bccdf3114c05a880a50a5aaff844874"
+    },
+    "results/v51-panel/panel.json": {
+      "mirror": "data_mirror/v51-panel/panel.json",
+      "published_sha256": "36d9f6748d2cabe7caf339b153aa8f819da1c84c540e8dd18fb1f225c7bc35b8",
+      "uncompressed_bytes": 11025,
+      "newly_mirrored": false,
+      "frozen_sha256": "36d9f6748d2cabe7caf339b153aa8f819da1c84c540e8dd18fb1f225c7bc35b8"
+    },
+    "results/v53-prune-dev/register.json": {
+      "mirror": "data_mirror/v53-prune-dev/register.json",
+      "published_sha256": "7498103830f139f6bea16ee440b717a05dee41e45b9835fdac6a2251b833974d",
+      "uncompressed_bytes": 150573,
+      "newly_mirrored": false,
+      "frozen_sha256": "7498103830f139f6bea16ee440b717a05dee41e45b9835fdac6a2251b833974d"
+    },
+    "results/v6-capability-geometry/Qwen3-0.6B/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/Qwen3-0.6B/prune_losses.json",
+      "published_sha256": "f2dbd1fb4dfc7654fcd36dd88db203678b1e5647121fe791ad2a6b9b2df1eab4",
+      "uncompressed_bytes": 1096,
+      "newly_mirrored": false,
+      "frozen_sha256": "f2dbd1fb4dfc7654fcd36dd88db203678b1e5647121fe791ad2a6b9b2df1eab4"
+    },
+    "results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/Qwen3-1.7B/prune_losses.json",
+      "published_sha256": "04b703c90611f6bf0a1244c186e5118892ff2e643624a39cf4f39e1cc51db7b7",
+      "uncompressed_bytes": 2078,
+      "newly_mirrored": false,
+      "frozen_sha256": "04b703c90611f6bf0a1244c186e5118892ff2e643624a39cf4f39e1cc51db7b7"
+    },
+    "results/v6-capability-geometry/Qwen3-4B/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/Qwen3-4B/prune_losses.json",
+      "published_sha256": "08befcee9e632da3ce7120e41ebe949ad78005819681189f08ef89405ea03957",
+      "uncompressed_bytes": 1100,
+      "newly_mirrored": false,
+      "frozen_sha256": "08befcee9e632da3ce7120e41ebe949ad78005819681189f08ef89405ea03957"
+    },
+    "results/v6-capability-geometry/gemma3-12b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/gemma3-12b/prune_losses.json",
+      "published_sha256": "db4c05b2c0cf1282d6433042d93f82a7666be5a80485446a3eec56716bf9f680",
+      "uncompressed_bytes": 1103,
+      "newly_mirrored": false,
+      "frozen_sha256": "db4c05b2c0cf1282d6433042d93f82a7666be5a80485446a3eec56716bf9f680"
+    },
+    "results/v6-capability-geometry/gemma3-1b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/gemma3-1b/prune_losses.json",
+      "published_sha256": "76642de5ce8c2b1b9c41288eda024a1a69ee5f2c5b5af570e9730f898e34e1d6",
+      "uncompressed_bytes": 1707,
+      "newly_mirrored": false,
+      "frozen_sha256": "76642de5ce8c2b1b9c41288eda024a1a69ee5f2c5b5af570e9730f898e34e1d6"
+    },
+    "results/v6-capability-geometry/gemma3-270m/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/gemma3-270m/prune_losses.json",
+      "published_sha256": "9e2fcea66ea52aef718ea22bb06f35854d7cb06201225ef95637e3188ede50fc",
+      "uncompressed_bytes": 1097,
+      "newly_mirrored": false,
+      "frozen_sha256": "9e2fcea66ea52aef718ea22bb06f35854d7cb06201225ef95637e3188ede50fc"
+    },
+    "results/v6-capability-geometry/gemma3-27b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/gemma3-27b/prune_losses.json",
+      "published_sha256": "5821028e4b122801895fd5a7961f4979c408b880d3d4522060dd0eaf41c3c143",
+      "uncompressed_bytes": 1095,
+      "newly_mirrored": false,
+      "frozen_sha256": "5821028e4b122801895fd5a7961f4979c408b880d3d4522060dd0eaf41c3c143"
+    },
+    "results/v6-capability-geometry/gemma3-4b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/gemma3-4b/prune_losses.json",
+      "published_sha256": "25a9569440b7e29390bc63372ab9ad207365e4f784c7230cc75071bb2e9cbc5d",
+      "uncompressed_bytes": 1101,
+      "newly_mirrored": false,
+      "frozen_sha256": "25a9569440b7e29390bc63372ab9ad207365e4f784c7230cc75071bb2e9cbc5d"
+    },
+    "results/v6-capability-geometry/gemma4-31b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/gemma4-31b/prune_losses.json",
+      "published_sha256": "487b96be35a80a4767ae43c7ebd25a7e5f4163f297d80de8423e144358c4bad3",
+      "uncompressed_bytes": 1098,
+      "newly_mirrored": false,
+      "frozen_sha256": "487b96be35a80a4767ae43c7ebd25a7e5f4163f297d80de8423e144358c4bad3"
+    },
+    "results/v6-capability-geometry/muse-30b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/muse-30b/prune_losses.json",
+      "published_sha256": "0d9915207b105d8118e4c7dd9120a804a2ce0ccf5b0ffba6cb1bea49003ff15a",
+      "uncompressed_bytes": 1093,
+      "newly_mirrored": false,
+      "frozen_sha256": "0d9915207b105d8118e4c7dd9120a804a2ce0ccf5b0ffba6cb1bea49003ff15a"
+    },
+    "results/v6-capability-geometry/olmo3-32b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/olmo3-32b/prune_losses.json",
+      "published_sha256": "bd831adef03a061fa48da15c4d1e5028f63e34e4df54e8c80c882e00bdb4ce0e",
+      "uncompressed_bytes": 1101,
+      "newly_mirrored": false,
+      "frozen_sha256": "bd831adef03a061fa48da15c4d1e5028f63e34e4df54e8c80c882e00bdb4ce0e"
+    },
+    "results/v6-capability-geometry/olmo3-7b/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/olmo3-7b/prune_losses.json",
+      "published_sha256": "8d002990636ee2df5556246dc9940571258664b5bcac3463257346a7f2640b85",
+      "uncompressed_bytes": 1102,
+      "newly_mirrored": false,
+      "frozen_sha256": "8d002990636ee2df5556246dc9940571258664b5bcac3463257346a7f2640b85"
+    },
+    "results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json",
+      "published_sha256": "5ec4800f980d6317520f3d7eb85f4516631b629a146d5a964e33092eb1507315",
+      "uncompressed_bytes": 499,
+      "newly_mirrored": false,
+      "frozen_sha256": "5ec4800f980d6317520f3d7eb85f4516631b629a146d5a964e33092eb1507315"
+    },
+    "results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json",
+      "published_sha256": "95cbe7e98739be4ea472781bf4f8a27c28827250e22d1bdbd8c5c576bd73938a",
+      "uncompressed_bytes": 501,
+      "newly_mirrored": false,
+      "frozen_sha256": "95cbe7e98739be4ea472781bf4f8a27c28827250e22d1bdbd8c5c576bd73938a"
+    },
+    "results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json",
+      "published_sha256": "a458cd11272a9face425eda62134b25ef0bf4af622f5902c63f13233028c0b15",
+      "uncompressed_bytes": 700,
+      "newly_mirrored": false,
+      "frozen_sha256": "a458cd11272a9face425eda62134b25ef0bf4af622f5902c63f13233028c0b15"
+    },
+    "results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-160m--step143000/prune_losses.json",
+      "published_sha256": "87d9ebcad62e27b675e038b584671175f66aed91fc18da786ffc0f553af68e37",
+      "uncompressed_bytes": 695,
+      "newly_mirrored": false,
+      "frozen_sha256": "87d9ebcad62e27b675e038b584671175f66aed91fc18da786ffc0f553af68e37"
+    },
+    "results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-160m--step16000/prune_losses.json",
+      "published_sha256": "46c5f9c6cfb0b5581b13f517951b861cb1c52998c333945a37639b1031862525",
+      "uncompressed_bytes": 499,
+      "newly_mirrored": false,
+      "frozen_sha256": "46c5f9c6cfb0b5581b13f517951b861cb1c52998c333945a37639b1031862525"
+    },
+    "results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-160m--step64000/prune_losses.json",
+      "published_sha256": "f5791d151a0507ac90aeaddaf97d4686ceead336d4fa7b128ec711f4793ad354",
+      "uncompressed_bytes": 499,
+      "newly_mirrored": false,
+      "frozen_sha256": "f5791d151a0507ac90aeaddaf97d4686ceead336d4fa7b128ec711f4793ad354"
+    },
+    "results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-410m--step143000/prune_losses.json",
+      "published_sha256": "f46f388cee3fbb1bb7a0175c1dfde457b13bee0fa262092d9ac1e41845df0e7b",
+      "uncompressed_bytes": 499,
+      "newly_mirrored": false,
+      "frozen_sha256": "f46f388cee3fbb1bb7a0175c1dfde457b13bee0fa262092d9ac1e41845df0e7b"
+    },
+    "results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-410m--step16000/prune_losses.json",
+      "published_sha256": "228e436b0b58d734eb924f2ddc45b4c8135aa3b2765bb3b764db7a456123dcf9",
+      "uncompressed_bytes": 499,
+      "newly_mirrored": false,
+      "frozen_sha256": "228e436b0b58d734eb924f2ddc45b4c8135aa3b2765bb3b764db7a456123dcf9"
+    },
+    "results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json": {
+      "mirror": "data_mirror/v6-capability-geometry/pythia-410m--step64000/prune_losses.json",
+      "published_sha256": "81bafd7adac31f27f2973545407005177fad63cf6d6e2ef942109e10fd8f3756",
+      "uncompressed_bytes": 500,
+      "newly_mirrored": false,
+      "frozen_sha256": "81bafd7adac31f27f2973545407005177fad63cf6d6e2ef942109e10fd8f3756"
+    },
+    "results/v69-quant-confirm/compare.json": {
+      "mirror": "data_mirror/v69-quant-confirm/compare.json",
+      "published_sha256": "12944c61ed42c61f1beaf8f84ef5c87d900b3b1a38d65d175976e27d3d4e6bac",
+      "uncompressed_bytes": 113156,
+      "newly_mirrored": false,
+      "frozen_sha256": "12944c61ed42c61f1beaf8f84ef5c87d900b3b1a38d65d175976e27d3d4e6bac"
+    },
+    "results/v69-quant-confirm/develop.json": {
+      "mirror": "data_mirror/v69-quant-confirm/develop.json",
+      "published_sha256": "9f035cb37a94d425064f37d822490b52dcad4c669e62864f27cba4ffa5e5643d",
+      "uncompressed_bytes": 408195,
+      "newly_mirrored": false,
+      "frozen_sha256": "9f035cb37a94d425064f37d822490b52dcad4c669e62864f27cba4ffa5e5643d"
+    },
+    "results/v69-quant-confirm/freeze.json": {
+      "mirror": "data_mirror/v69-quant-confirm/freeze.json",
+      "published_sha256": "abaa8057de07026da28169430a12bd280c7ab9810f1d42e7534dbd9f26a9ea0d",
+      "uncompressed_bytes": 101027,
+      "newly_mirrored": false,
+      "frozen_sha256": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2"
+    },
+    "results/v78-rule-confirm/compare.json": {
+      "mirror": "data_mirror/v78-rule-confirm/compare.json",
+      "published_sha256": "601669be112c5dd7c016e859423700a98f6a916dcd12c838bb5cd9c8c09686a8",
+      "uncompressed_bytes": 1133523,
+      "newly_mirrored": false,
+      "frozen_sha256": "601669be112c5dd7c016e859423700a98f6a916dcd12c838bb5cd9c8c09686a8"
+    },
+    "results/v78-rule-confirm/freeze.json": {
+      "mirror": "data_mirror/v78-rule-confirm/freeze.json",
+      "published_sha256": "78dd229d7131f485b3a0651eac6978d2671ad139c02fcc2ea753d3420d5f129f",
+      "uncompressed_bytes": 1321496,
+      "newly_mirrored": false,
+      "frozen_sha256": "78dd229d7131f485b3a0651eac6978d2671ad139c02fcc2ea753d3420d5f129f"
+    },
+    "results/v78-rule-confirm/freeze.json.sha256": {
+      "mirror": "data_mirror/v78-rule-confirm/freeze.json.sha256",
+      "published_sha256": "2ee2efaab09b1c7cfb098b681b35e28eeba7378dba7e3c3a06292e5b24537c87",
+      "uncompressed_bytes": 65,
+      "newly_mirrored": false,
+      "frozen_sha256": "2ee2efaab09b1c7cfb098b681b35e28eeba7378dba7e3c3a06292e5b24537c87"
+    },
+    "results/v96-joint-response/summary.json": {
+      "mirror": "data_mirror/v96-joint-response/summary.json.gz",
+      "published_sha256": "6a5fd653836a7879b2fd26e44360f25bb70159cf08f359b9970b7c30a1067d13",
+      "uncompressed_bytes": 8265106,
+      "newly_mirrored": false,
+      "frozen_sha256": "6a5fd653836a7879b2fd26e44360f25bb70159cf08f359b9970b7c30a1067d13"
+    }
+  }
+}

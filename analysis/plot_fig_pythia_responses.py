@@ -65,7 +65,7 @@ def build(audit):
         for path in selected:
             data = audit.read(path)
             expected_hash = register["dev_hashes"][path] if panel == "a" else manifest["input_sha256"][path]
-            if audit.inputs[path] != expected_hash:
+            if not audit.matches_digest(expected_hash, audit.inputs[path]):
                 raise ValueError(f"Frozen {arm} digest mismatch: {path}")
             state = path.split("/")[-2].replace("--step", "@step")
             if panel == "a":
@@ -91,9 +91,9 @@ def build(audit):
                          "state_sources": [ref(P53, "dev_states", i) for i, _ in prune_states],
                          "formula": "median_state(prune_curve(register,state,cap,d,method))"})
     develop, freeze, compare = [audit.read(Q69 + name + ".json") for name in ("develop", "freeze", "compare")]
-    if freeze["provenance"]["develop_sha256"] != audit.inputs[Q69 + "develop.json"]:
+    if not audit.matches_digest(freeze["provenance"]["develop_sha256"], audit.inputs[Q69 + "develop.json"]):
         raise ValueError("V69 development digest mismatch")
-    if compare["provenance"]["freeze_sha256"] != audit.inputs[Q69 + "freeze.json"]:
+    if not audit.matches_digest(compare["provenance"]["freeze_sha256"], audit.inputs[Q69 + "freeze.json"]):
         raise ValueError("V69 freeze digest mismatch")
     for data, section, name in ((develop, "dev_rows", "develop"), (compare, "rows", "compare")):
         for i, r in enumerate(data[section]):
