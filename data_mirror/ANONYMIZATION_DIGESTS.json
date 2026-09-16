@@ -32,6 +32,14 @@
       "published_sha256": "2dd0ee2a97b91cd6f229a3701e3b9dc0cc4c87663f599103d8722914623078e5",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "analysis/plot_fig_efficiency.py@live": {
+      "frozen_sha256": "a3e4af8d3b29c53dfaf7fe75b131cbb18f71dcf62c14746293b4af897ce85472",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/plot_fig_efficiency.py",
+      "published_at": "analysis/plot_fig_efficiency.py",
+      "published_sha256": "d67db04691ab643dcbb7eef1c2c30d769fb87da01678e3c33e4aa68d9fdaca9d",
+      "reason": "publication digest adapter; frozen scorer and numerical analysis unchanged; not a scrub-only correspondence"
+    },
     "analysis/plot_fig_generalization_cells.py@live": {
       "frozen_sha256": "972ec6d496e2b93dc0e1e5500a75dd126dea34ddc6f8025938bdd2a60934f9d2",
       "pairable": false,
@@ -120,12 +128,748 @@
       "published_sha256": "8cf21f3855ffb07f9ee46bb98d86dfc6ff717434b97b657d6ce72e5387ad8758",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/metadata.json@live": {
+      "frozen_sha256": "1ecbe079d73cd56fc168811abd0fdd69bf4605bde09a9426ba338e2cb9152f1b",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/metadata.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/metadata.json",
+      "published_sha256": "d126261687f251446b5c1135fde6ccc4dd2f758bec07e4e9d71880215fa39320",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/started.json@live": {
+      "frozen_sha256": "9e44a7819d5fffd3b646541670e6596e3386e9cb1591e654c5f831fe4b73a556",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/started.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/started.json",
+      "published_sha256": "4191498abcd6d5400f48683dc5bd1c9f941fb9e0673bb71fe7a92222c681b0cd",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-160m--step80000/metadata.json@live": {
+      "frozen_sha256": "450dd7ae4f5ea2995b47966225c6f9bf336cdbcb8ba3dc3815f08376566857a2",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-160m--step80000/metadata.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-160m--step80000/metadata.json",
+      "published_sha256": "c69f51f8f283bdce19dee3f1e1d69b8526ab2eb0384b87e84caebc01e62df815",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-160m--step80000/started.json@live": {
+      "frozen_sha256": "dbae6910d4a1c6e511101c185e12f820a0ec8ba8278a86cd2a78b999f9ab2607",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-160m--step80000/started.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-160m--step80000/started.json",
+      "published_sha256": "7dc63c6cdd0b3ed7f259737d0ddf5f6572a98ac4262e81fa697908644b184293",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-1b--step48000/metadata.json@live": {
+      "frozen_sha256": "599475bbc74a7257c31fa4ded21c561a9c366e8b590acf6717854b7e09cd21cc",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1b--step48000/metadata.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1b--step48000/metadata.json",
+      "published_sha256": "8fcfc69f703ba89bd8aaf6e3ee7ecdc736010728203103777707de0b7ee6cd21",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-1b--step48000/started.json@live": {
+      "frozen_sha256": "107a6e27da6427c5aca00ab86487bd59b403eb1f4ce053a9f413d52b794526d5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1b--step48000/started.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-1b--step48000/started.json",
+      "published_sha256": "a28a4bc25e63a1ada87331e9844468fb52cfcf167aac07e842f55b702377a527",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-410m--step112000/metadata.json@live": {
+      "frozen_sha256": "0b8d97821f7fa5d95da58c360f2b2a1b5c86940d3f495610901d9d6497b24a53",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-410m--step112000/metadata.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-410m--step112000/metadata.json",
+      "published_sha256": "f2a9ebfe6d0faf6b184bb370fa71bde56d46410c33d45017f8894a07732afef1",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/measurements/pythia-410m--step112000/started.json@live": {
+      "frozen_sha256": "f0328dc37d8a581d2c1c98db29760076f331b092df86682738f7815d219d5d5a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/measurements/pythia-410m--step112000/started.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/measurements/pythia-410m--step112000/started.json",
+      "published_sha256": "d6b206b454daebd1fb3ac405d0372b72585997bdc85994c1329fcdb8c2ec730d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/prereg_note_host.md@live": {
+      "frozen_sha256": "a7c13d1e2284b846179170a964e68af883300190739a5be3d7d76f079590d8e6",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/prereg_note_host.md",
+      "published_at": "data_mirror/a11-efficiency-confirmation/prereg_note_host.md",
+      "published_sha256": "18112c77e9794eb0f88a0647a6e7409bfda3fdf0e95bbf0a61ed24b08497931d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/runtime/data/a11/probes.json@live": {
+      "frozen_sha256": "2f6c23f673d36cdd8bb6cf368c2c13d35b9341f8b1ed9976c53bf377e9cb3423",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/runtime/data/a11/probes.json",
+      "published_at": "data_mirror/a11-efficiency-confirmation/runtime/data/a11/probes.json",
+      "published_sha256": "15eaf6f0c22c04e89a70a1821e431dc548ffc1142673024a8e26b7c30225b215",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/runtime/scripts/a11_sync_list.txt@live": {
+      "frozen_sha256": "b1d29dd50b2423b56e04aae96c8f1a3cd19578c0b0295c2bc21bd48e08ad805a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/runtime/scripts/a11_sync_list.txt",
+      "published_at": "data_mirror/a11-efficiency-confirmation/runtime/scripts/a11_sync_list.txt",
+      "published_sha256": "f6f2844142ec12c59c33fc48018aa41e1f73681f6369aadc78813d906535a8b5",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a11-efficiency-confirmation/runtime/scripts/loni_a11_prune.slurm@live": {
+      "frozen_sha256": "8a03449d3a11b58068398a9c5580e35efacf710d05405df51368f6d5d9b2e2ee",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a11-efficiency-confirmation/runtime/scripts/loni_a11_prune.slurm",
+      "published_at": "data_mirror/a11-efficiency-confirmation/runtime/scripts/loni_a11_prune.slurm",
+      "published_sha256": "f0afc88101046a92f868324584b6df8942dcf0d6502eb1ac5c92a2a29d479cf8",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/parser-validation.json@live": {
+      "frozen_sha256": "e508be54dbedce08e0d646752d5cebdf0c8b46d6d2f239c86ff49c3cc1caa90a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/parser-validation.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/parser-validation.json",
+      "published_sha256": "7c2874a7be6e6d3b98542de3418943be52cced4adb89b3aaa1a3ab4db1ba7248",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/plan.json.gz@live": {
+      "frozen_sha256": "3eadcc996fc1a61c573ebe7413be4e103ee2f38a8e04b6a06452861c79020f1f",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/plan.json.gz",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/plan.json.gz",
+      "published_sha256": "dc4edfc31892974eed5aebc1ffc274450f4fa8266144aa7a540ddd9ac540fd8c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/prereg.md@live": {
+      "frozen_sha256": "300a9e00fe4816c480bc31d557b447aa1551e39668f1a62b5e9e0cab3f1f25c7",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/prereg.md",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/prereg.md",
+      "published_sha256": "2f38168ac6c658bb7a8a2a3d8063edae2a7da1e470bd23a084df2b20dbcb7a05",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/registration_0/plan.json.gz@live": {
+      "frozen_sha256": "764390b11a3510848c862bd49b387b5e3db7bda586929141a014c6c8149ca9cf",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/registration_0/plan.json.gz",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/registration_0/plan.json.gz",
+      "published_sha256": "bf8b7acef499572375f677498e935f64ae8ffda33d593436e816113dbd69ef3a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "c834254d187aa7cbe3d54fac7ed0e2c43c0e4fc353c1c630986baf2345505d2d",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000000/eval.json",
+      "published_sha256": "ed08e94fa3c81ca3dab29ae7a01e3661e8b91ea0cfb13749500cbbedd9e9ab4a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000037/eval.json@live": {
+      "frozen_sha256": "a6eed685517e8178012a0638fba4a24ae604a4cd606fe75f43fce064e689b2a5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000037/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000037/eval.json",
+      "published_sha256": "dfe2a5ddc55a4c8fb4303b7a15c3f97b91aa0797050fcff93a49999e09f40ca6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000072/eval.json@live": {
+      "frozen_sha256": "cd83d7eae35ebca98e294f054968faee6f8a7b6813fe54a65cb56c250e8462ed",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000072/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000072/eval.json",
+      "published_sha256": "d013764eb977a618d368f4235e68ec1dbcf057d78d5c425824b1ad88ac975321",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000142/eval.json@live": {
+      "frozen_sha256": "b00083bffccd2ee28b7532c5b6a01cecaff2ce995269e49a895627047d7408db",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000142/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000142/eval.json",
+      "published_sha256": "ea6baf9f34195121d752c6a7cd104577091e36e21c88bbafe55cbf8f0a54b225",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "81f5d41c39615b2837774cc5cb967ccead302c9ba3ab1103f17ac7c0e0493444",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000000/eval.json",
+      "published_sha256": "aaa71cb858611194ab3cdab1fc40f2d33accd8dcae1d3efff374e830f79507c0",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000036/eval.json@live": {
+      "frozen_sha256": "04234c11aa54729d9fe763e0037262ab13a36fb836cb4e2442d7ad30394a836a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000036/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000036/eval.json",
+      "published_sha256": "681e765bc7bbaea7f85084b7beaa0f0fc4926fbb305cbc888371adccaf05aa21",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000071/eval.json@live": {
+      "frozen_sha256": "a4f44a3c09540abefaaab2d6a6edf1f6e820286769491d2c147c16421b28f974",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000071/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000071/eval.json",
+      "published_sha256": "326526c623b2def9ef027452e98965d431df08b198b321135c0af25043184739",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000141/eval.json@live": {
+      "frozen_sha256": "6d074c47201021b6faa11376924b22d0601eacb0b7b226ff943df96aab57bafd",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000141/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000141/eval.json",
+      "published_sha256": "ca48dce8e99e3128e1f4a7c7b977386a42e01b2696a3694960d3a1c7efe59184",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "3d201113104ab1ecb0873e7feb7050dec5d50779ce3e5d22381fa79167fab15c",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000000/eval.json",
+      "published_sha256": "1e14ab3814a282dc1e8317eb95d53e2bb1f36af3741d85a15903358353f0600d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000035/eval.json@live": {
+      "frozen_sha256": "a49d843c6d3fb85dfd1fba6ac68d814f71296332044ffbe37bf9efbd0ee54d4f",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000035/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000035/eval.json",
+      "published_sha256": "7c16aa34bcf69bc00ff854ede66e67c8150d81fa61b343d98a641e9fe0939cfc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000070/eval.json@live": {
+      "frozen_sha256": "5c2fc3f05db75be093926d980aeddeafbcfbbd363cb30bed29b81e369b2bd704",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000070/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000070/eval.json",
+      "published_sha256": "cf1f6927a42dc64f068ab98cd1bc1cedb982b2a75a8580c46c0fece41f73cef7",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000141/eval.json@live": {
+      "frozen_sha256": "3b20ca08b931ea3fd5b8acb791ae3e0224440aa5d902d8ae3c648c2bb66a39f2",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000141/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000141/eval.json",
+      "published_sha256": "de194f7c3e38cd1dd726b17832d4d67375ab6d18e964888acda425b4cf485199",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "7a3b9f861fe014ce8d9627fb6607282fe5cacc0f1bdcca2095c90599295f3520",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000000/eval.json",
+      "published_sha256": "29736fcc95724088f6a3758fc887d4710e61e3199eab6f8e699eed35c6462094",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000039/eval.json@live": {
+      "frozen_sha256": "51a0a7ae79e7ae50f3754fad2871a0fc5db6b61966ba6157bbe52753c0275d7d",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000039/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000039/eval.json",
+      "published_sha256": "91748b00c70a13af383aa7e179b4480fb4285cf8d1e28acc984225832d8eeb95",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000078/eval.json@live": {
+      "frozen_sha256": "f39cebee4727d11907b7c48616b2f4d5095d2607c2684c9269944e5992f5d0ef",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000078/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000078/eval.json",
+      "published_sha256": "403104cf9ed832e2aebe3c5c33519bb1a2b3c18469f733797cdf7e2b0206198c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000156/eval.json@live": {
+      "frozen_sha256": "b61066a1a28422335d6110f76b93ec351a0791c10ec7aee6f8eaed254e55f975",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000156/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000156/eval.json",
+      "published_sha256": "2c6b4959c39cca3f6288bd3bfbcc9e065ca96f4db401c86622be0c527e582b44",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "0d734c56bf5f8136cde90b52282b3776e008f6fb617c2a1b5623c609fa26f5e8",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000000/eval.json",
+      "published_sha256": "fd8f8a1dd6c7c73a798a6659c0d4524efd1e2992f142e64d3c40f7f44ad98767",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000038/eval.json@live": {
+      "frozen_sha256": "ba18915d1498a2a9a3aa2db1bd84a97e6b0bd5d5616396283c7598691ecff727",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000038/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000038/eval.json",
+      "published_sha256": "e95ddf8b1e209cd74e88ff99620d65f67eefd93116fc466491dd4860b2ed867e",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000077/eval.json@live": {
+      "frozen_sha256": "0c935c89f61d2c2e0e8c7ca49b7872b9b8add4d0790c3628125eecd16d776215",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000077/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000077/eval.json",
+      "published_sha256": "4b7cd686284076c5590a7473bc3844d1fdd48590851cd3773fd866b83674b7c9",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000154/eval.json@live": {
+      "frozen_sha256": "72d00b2db934ea97ccb8c7ad7e9217e8f94b3ff619ad332d1f5b0d6e5f7ff2e2",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000154/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000154/eval.json",
+      "published_sha256": "26b3856075652060aafaf4dd637fa7c7091f873db689ade2572767762973691c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "03f07803d2b7c9faa97884a0d4797401b00d00655dca00d399d357b1b79a1fc9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000000/eval.json",
+      "published_sha256": "6daac21abd1a859aaafb98961120dcac26c266377b0ee0bc8875fe247cabe7e0",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000038/eval.json@live": {
+      "frozen_sha256": "68a025607c0ebe97ab30c85fa4ddc52700a37526b84bb1da93148a662ffc1363",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000038/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000038/eval.json",
+      "published_sha256": "a5cedfccb8a2c17b8abe7e8945726c12b89256b5349bc5d4a8d5a99681ae68a2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000077/eval.json@live": {
+      "frozen_sha256": "59747ff95eb87e8945a7090fcc8af602d89a4f96ff0dfea05530035ad143f7bd",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000077/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000077/eval.json",
+      "published_sha256": "faebb6866e4903afe20706e0f6a15fb863e923f4997539ecd7bab8babf0451e3",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000154/eval.json@live": {
+      "frozen_sha256": "84c9cbc36b4b0121c2d10c1f8b8a5dafce41e4073725989071ce95c2e9a007d0",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000154/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000154/eval.json",
+      "published_sha256": "1623ffd0f3d3342d1f23aec25cf5552414ce9c48e7f737500c4807cb7802d256",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "5392cac603f7f5dbb1c31be68867096ef1a6e43a95c0ade5202b942459daa732",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000000/eval.json",
+      "published_sha256": "92c4a0599a95cb6eb6f366076f39f4115008e50c8907dae9d400cc3962b98384",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000035/eval.json@live": {
+      "frozen_sha256": "a5d2ec9244f4163726fdb1122f27792911e94c226b496bc047a2b4f95c5de6a7",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000035/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000035/eval.json",
+      "published_sha256": "d384aca858a51a405cfb05413fcd6f448bd42aaab66e1c871f365bcd4a048fae",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000069/eval.json@live": {
+      "frozen_sha256": "b2fa697cb69dd7a147636f4e80fd77dcf75938b54604613ae54469b07b43f096",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000069/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000069/eval.json",
+      "published_sha256": "792d797b35e93e7c6a760b4485959ee54402f485f192287c8f55f27c213af105",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000137/eval.json@live": {
+      "frozen_sha256": "53fa9898f612b7d4f1ec288db1e5771ae81e6a67ad2dd29c03caa029d77f35de",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000137/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000137/eval.json",
+      "published_sha256": "9e698f8aa4049006a411a1f618445efb258caa31dd33a1740a71cd18e692c494",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "1707863e1a5d0c6dfdbe079d9ab78405287260e3d68d8f3ceeefd50732f4be39",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000000/eval.json",
+      "published_sha256": "299a0f0a03b271b2cbbd2f8be7b9ae366ef685478ff5f080f266d8886f221300",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000035/eval.json@live": {
+      "frozen_sha256": "b9b17a707f12e06d4d99952c4ce346ceac0b45c691d610ade0a8df6b5c1db27d",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000035/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000035/eval.json",
+      "published_sha256": "2f1689152fa7238f2d6dcb4518008dda9e2e393d6e80ba1ae031e55e0a57b54a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000072/eval.json@live": {
+      "frozen_sha256": "69af2b78be55c2275e6294f3e297ad6a7a59453c66b5435e9e4dd9a4382d61a9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000072/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000072/eval.json",
+      "published_sha256": "568abed55467db0551d0538f4e591d2b27147275021df3184b5659085c7aa43b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000144/eval.json@live": {
+      "frozen_sha256": "7ce39fc9cf2f79e0d9e42dc92559370aa5eb0b6300872af54389bd5acbd4c073",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000144/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000144/eval.json",
+      "published_sha256": "a52f5ef23a49b04510a2f09db91d5b5a6490a942ca1b764297895b061a7ec406",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "3995b783f420e008e689438f6909127c6a4102bfcfd939a2cad532ceb8965de3",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000000/eval.json",
+      "published_sha256": "a8dcc1e7a62d69dad958fd411b5cc68b90c98a2a91473d5779f864438771e85c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000036/eval.json@live": {
+      "frozen_sha256": "647213463f1caf59864f5e5ea8bbd65eef3d6c50c5d8f8078eaaf415077e76be",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000036/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000036/eval.json",
+      "published_sha256": "6c88d4f7b3208f05ff59b7aad583fc74bd3662090c5e3c169ef13cbeceb75292",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000074/eval.json@live": {
+      "frozen_sha256": "665221d7958074f9c9014aad9ebf7be5b34dc2e17f7a2f52af7e40c61407bc10",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000074/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000074/eval.json",
+      "published_sha256": "060594699b9e89dfd93391461f6934f912f4656c5f5bc221cb1521e90ac700bc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000148/eval.json@live": {
+      "frozen_sha256": "3acf40e955d24e4df463920d08c50b137d5aeb729b213db384ea396d3bd5b7e1",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000148/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000148/eval.json",
+      "published_sha256": "1c3a40aeb3b23f44c5a04edc7e9573a64ea6e7ea3da4493d71676426da9efd0c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "ab1b611d6dbf55d50cce983bf8a4d51d44511397d84591ea906cd8c368c42d48",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000000/eval.json",
+      "published_sha256": "bc6b2746778879a49467697d71e67a871cf74523981b285df7a73900e9819e08",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000034/eval.json@live": {
+      "frozen_sha256": "1551287c69af8ed578211a114bab2fa79e0ee318c76c2f91f6c5d069053e71cc",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000034/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000034/eval.json",
+      "published_sha256": "af305c09f0131473594b9cfa344ef14c44f2dda73af8a18bf1402098bbac75e7",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000069/eval.json@live": {
+      "frozen_sha256": "7fc27e33013dc6c47f8edff2304cd85033085ad3d0cac186df2f58ff557c7215",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000069/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000069/eval.json",
+      "published_sha256": "ba34e835757b38be50f948ccd5f2b99acb20ccae9c286e622a0129d958d5f31b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000141/eval.json@live": {
+      "frozen_sha256": "ed5ebff34ce1adde51bd7061285353811e458ae0e7579b480fd1e26b4180283a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000141/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000141/eval.json",
+      "published_sha256": "a136935eeeb4202a614edcc36e77c60f28660deea5fc75dcce76fe594e87477b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "f2bfbc279361b286902588ed9a944adb6e96c5ab6eae5fbb432b03385a8564b2",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000000/eval.json",
+      "published_sha256": "29c4629af207dc13648843d8c3571f8a09615896122d2ee00bc17c7d67e1a339",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000034/eval.json@live": {
+      "frozen_sha256": "9d07e4f7ef7d76945fab1c30ad3051492a37040d735f3f8b55c175495f23bfd6",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000034/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000034/eval.json",
+      "published_sha256": "2a2a44a279c6f13a4d19254a84488efb4dc1af647ad01fe472decb274943dffc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000069/eval.json@live": {
+      "frozen_sha256": "47de5da2419abf6b06558a4d4802531a36b461740df6029f92e6fdda1a0b28a9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000069/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000069/eval.json",
+      "published_sha256": "91b9faa816e1b338096e8a03a51cf0cc1741b67ce4aedce24e949133a1a8fc3b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000141/eval.json@live": {
+      "frozen_sha256": "c21039ab56f2999f9157543de79a8912ccd3fa9b820dd7ef73c3a04ce9de9d9e",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000141/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000141/eval.json",
+      "published_sha256": "6e673d05dbdefce2c5926bad7a59d4f66caef109e18116cb6655911e9a900779",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "4e60f2133dee96fce1dde729e04f9b8d65ba9ba1f1f2ea55843d951e72392075",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000000/eval.json",
+      "published_sha256": "6beeee63a5326a29493afb64b3e94d942aca3af0f3a47d8f86bd2c8cebada32f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000036/eval.json@live": {
+      "frozen_sha256": "bd4c64e4d3fff52347f0f5ee8ad39f7fcfccbec633dc976278ee9e61459d70b8",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000036/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000036/eval.json",
+      "published_sha256": "5b6b8fd8642067be1fd302759a24957301fb8c1a290f0295f909551f2349c811",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000071/eval.json@live": {
+      "frozen_sha256": "81950f3985bd0a12294fc9229904ccee26ab042fd1476102ca0ce44dbb72df29",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000071/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000071/eval.json",
+      "published_sha256": "5c92fbafa76005bf61b4239450c903200adbf606801c65e99821e194891e6e76",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000141/eval.json@live": {
+      "frozen_sha256": "f973298fe2c204563b96bc6afe19ba43c46ec6f2bd4f5fb681cc380679757a27",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000141/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000141/eval.json",
+      "published_sha256": "e0905442a391874675f3212fee82de73cba6e8c644e94bb413556d3d0f4965a9",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "59df1f70fa9fc9b312c6a5202f88c9a5f8896c59552092c56b2ee920d2baabab",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000000/eval.json",
+      "published_sha256": "763e1a370cf2524067b16d0b1792d6e039db1d33aa56034a36043d2dcc9550ab",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000034/eval.json@live": {
+      "frozen_sha256": "3f5e5fe493b70c2d286258794b9cafcfea8028edb5487c76378c9b126040700b",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000034/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000034/eval.json",
+      "published_sha256": "21f0e0df782648263aa81ed1475e553e21c36cab905ff33b4563205732e57040",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000068/eval.json@live": {
+      "frozen_sha256": "5f43b21399178ddca0b1da4c609002b328760fc9f206b2ef12bf67db99ce93e7",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000068/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000068/eval.json",
+      "published_sha256": "b441745b66265a374cad9dc203c6e8ddc99ce35d701d9bb5145470c1be6d0c1e",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000135/eval.json@live": {
+      "frozen_sha256": "6efdcf3bcf46e5385b546a09c4e2f1cd0af611c7bfb69a5664d7f5529095b003",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000135/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000135/eval.json",
+      "published_sha256": "5c4b07f89e7e905cb27f9243f8aacd4bff271843fbad0bb67ce11e46c3985cd5",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "b3de6c4b75411402a6175c823fc5d567eaa64731547699c986d6e71ba1165ac3",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000000/eval.json",
+      "published_sha256": "53bda35d9aff354a9cde2ef1245536eb4f71df81e6008837c52d2732434322bc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000033/eval.json@live": {
+      "frozen_sha256": "b9f2593f791e64bdf49f20117f50a60c751e693399beb2efbd573b384ce351f7",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000033/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000033/eval.json",
+      "published_sha256": "3ddd66f5f13d4ed4fa5570de40dfbba76ff0cda9b7eff52caf1c20e5c75275e9",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000066/eval.json@live": {
+      "frozen_sha256": "2ef8271e7c4964d20a4363a2cd6e32dfa315abf09edd67d87cb82660dd4a9fd5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000066/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000066/eval.json",
+      "published_sha256": "1d337b874afdf8373193c47f2086a69b74d46e6e4d32a4869e06e67ae1d60e8f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000132/eval.json@live": {
+      "frozen_sha256": "10117ea6e9a3d919839f10b75b88ccc8cc5353543741cda2c549560f13ce9c0c",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000132/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000132/eval.json",
+      "published_sha256": "e3701355e80de997d7a038a3060e355a738be2a8f4e6a379d7ebbcf62d1bb67e",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "2b2d87d0c3408d0dafd50fd52a0c2916e8cd142ad92fb92ea8d7dca1b18180c2",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000000/eval.json",
+      "published_sha256": "ddde9f9e7b9f5888ada0208a6ebf73e599245175a1a434df1d7c63d5c08c818c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000038/eval.json@live": {
+      "frozen_sha256": "28ba55a1be0444f7de51271c45ec021baae51bdb9ac612aae09019aa40c4d004",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000038/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000038/eval.json",
+      "published_sha256": "7816d165ec31e55a86b84be762f0a243d4a394e1fc493387a911b53a1a314e15",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000076/eval.json@live": {
+      "frozen_sha256": "c737ab4a464bcb28fa39d9d4a8f5d3a78a54c11ac7cce25d0bec3ec3d71f9ebd",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000076/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000076/eval.json",
+      "published_sha256": "61d51279ed906d9d39e09cc5c170060455197dda5bf692e95ea03369ec993f3d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000153/eval.json@live": {
+      "frozen_sha256": "4f7c46b6b75763d22d52be6113a52dc92e7b7639eb3c32bd1a7d136863cf5185",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000153/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000153/eval.json",
+      "published_sha256": "e198a5ded92e5221420d9b8ba6a556cb98780a33014643d614ac333d9132a172",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "ddd34efb6df3413a0b3a2f7b8ca5db7c067abd501fc3e77e701758f22df9c375",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000000/eval.json",
+      "published_sha256": "50347edac8658c97fb79fc8f40a0d1308a326ce98683e534ca1ef62743479c10",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000033/eval.json@live": {
+      "frozen_sha256": "8444eaba27f5716e2d29bd0be6f0cbb4f804153c82cc7138114f72526d36773a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000033/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000033/eval.json",
+      "published_sha256": "8d3e7160fd01c58147c65a7775bac81775a22910b96bc84a6be70ca5b80ac036",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000067/eval.json@live": {
+      "frozen_sha256": "9e4ce499dd3f0fc116700ed97703fc685a793026a440c8cbcbbe540d7999bac6",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000067/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000067/eval.json",
+      "published_sha256": "5b6a6915b8bf897c1c002ca4cf16149ee818bdebc0d7a40d21cd17efc353700f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000133/eval.json@live": {
+      "frozen_sha256": "11aa7ef9a77dd56b6d936d7eb6a2c268de50a1cee4823004e789e5e28d51591b",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000133/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000133/eval.json",
+      "published_sha256": "aed88205fec06eb65d769bac6e5b3ae2877488dfb42e7d5ed5e70b42d4b64651",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "c5bc83e016b4fa2d9b7c926c375937f4ace3133f5328fd8c0f15078a411bbecf",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000000/eval.json",
+      "published_sha256": "c031c0b34cee53ec92227d6013b709ad80f3a52c683fc3e5d51c94760f64631f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000034/eval.json@live": {
+      "frozen_sha256": "9136306f47ef428c1dc92eee66c761c62e2174f4f09c901f2c1485a21044943e",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000034/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000034/eval.json",
+      "published_sha256": "3276d7970035629f2c51e685e135d8e129d1e5894bb8c6e3aac2817a47b8350c",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000069/eval.json@live": {
+      "frozen_sha256": "acf77c930baec45cf544da09b451a2e0a0c168dc4b2d19c02ffbd3576766fc01",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000069/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000069/eval.json",
+      "published_sha256": "462880730bd226235d38ecefddb7887113116f2ffe1a9fa0ad4c2fee8b2b7cb8",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000139/eval.json@live": {
+      "frozen_sha256": "9ae8582c93a7c86007d9be8e89e93fd4a5cb352042ac923de91bb239e2aacdb5",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000139/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000139/eval.json",
+      "published_sha256": "7d14bb2eb7a24667e60e1c8dd7b72b67ecdc5ff32518f3d097fd1426d280d559",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000000/eval.json@live": {
+      "frozen_sha256": "8dd488ea1c6a2abd3f59a051b42f20ce62403f7e8dac678ccacb871179fa900a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000000/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000000/eval.json",
+      "published_sha256": "8f7199974c091c6b01c8e8a3afc93f29c7793d59f22f4dbb7cb18d48e8c50900",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000034/eval.json@live": {
+      "frozen_sha256": "6cbbeb7d748cbaa8cf77aa006a338b6d78a6f558f9e6122d62bf534a84462626",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000034/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000034/eval.json",
+      "published_sha256": "153401dda27f396db0cfa3bac2c3599ca924a24dfc4b712f81d20c2ea93f24b2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000068/eval.json@live": {
+      "frozen_sha256": "94ac620fd4147a51c9172ad4e539ff934100fdda57999d1911357fc624b99517",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000068/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000068/eval.json",
+      "published_sha256": "b671e03fee068e735d341ae41c25d7f937ab5e38c07fa29ffc5c67789a4b476b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000136/eval.json@live": {
+      "frozen_sha256": "0e5126b50e489561aec644f541a3d5017f92ecccd59bb820a01b004c4f8cc81e",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000136/eval.json",
+      "published_at": "data_mirror/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000136/eval.json",
+      "published_sha256": "c6fd512a1488b7db8e6b84a954d39cbc0d7eec4522c1d025fef8cad73ad814f7",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a13-dreq-accounting/recommendations.csv@live": {
+      "frozen_sha256": "641182d6b103b6d1c05b1208941294f43c8d66ab4d33b4bb97fbe0676bb06d39",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a13-dreq-accounting/recommendations.csv",
+      "published_at": "data_mirror/a13-dreq-accounting/recommendations.csv",
+      "published_sha256": "c9801de918ca14f9455cd61f93cf3dcf74b53bfe7a6317b0cc7e915fcf129e18",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a13-dreq-accounting/same_denominator.csv@live": {
+      "frozen_sha256": "f9579c004a7597d036cde5646e2be7782f697b3284f69caebe39bcf36f8cadc3",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a13-dreq-accounting/same_denominator.csv",
+      "published_at": "data_mirror/a13-dreq-accounting/same_denominator.csv",
+      "published_sha256": "e5eaf77d478fc2615e25322ce3494ae8149e46df7e78a2a39ee14a0e1441585a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "data_mirror/a3-corner-pools/plan.json@live": {
       "frozen_sha256": "fc5fb5a7623d502e25bd8a5ef31a85226a3ff3944edf408bb6968ce8149dd505",
       "pairable": true,
       "path_in_frozen_record": "data_mirror/a3-corner-pools/plan.json",
       "published_at": "data_mirror/a3-corner-pools/plan.json",
       "published_sha256": "dd41baaf61baff7d838403dd556b2b4ddc6108a806ca777736ed9b708cfdaef3",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a9-measurement-efficiency/plan.json@live": {
+      "frozen_sha256": "0b12b06d3a9919c737cdc6b89480dc5461606a981d2ccff2a090a6ee06e07a95",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a9-measurement-efficiency/plan.json",
+      "published_at": "data_mirror/a9-measurement-efficiency/plan.json",
+      "published_sha256": "efb84508828fb6a69c97b9abc2261766003886e50570395d539256ebceb57bbe",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/a9-measurement-efficiency/summary.json.gz@live": {
+      "frozen_sha256": "846898c6ecfef2cbcb4b544243c37aadd388908e447bce6ef28095544295265a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/a9-measurement-efficiency/summary.json.gz",
+      "published_at": "data_mirror/a9-measurement-efficiency/summary.json.gz",
+      "published_sha256": "8dad352de7b50f8e369834b162185a472dd689474bb5968bc2297460876a2579",
       "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v45-main-table/main_table.json@live": {
@@ -2001,12 +2745,20 @@
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "tests/test_final_prediction_table.py@live": {
-      "frozen_sha256": "84560a642083e6bff4eea1c190cffccc14a8fd0c0eaf2948ee56a2357134595c",
+      "frozen_sha256": "9013d6b4ede3b7ab97d4fe8d9457bde012f8443731295f5684836f9247a0ba8e",
       "pairable": false,
       "path_in_frozen_record": "tests/test_final_prediction_table.py",
       "published_at": "tests/test_final_prediction_table.py",
-      "published_sha256": "08b463ceaaad25204c5e2ccfbe1f42f6706daef51bf7099e01cda1910ab44fcc",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+      "published_sha256": "2629af66e859238fdc53d3f83a22f7a5efb209d733b73913b8729e1012105fd9",
+      "reason": "public-checkout preview test preserves absent generated outputs; not a scrub-only correspondence"
+    },
+    "tests/test_plot_fig_efficiency.py@live": {
+      "frozen_sha256": "c963bf96c9d81b0cc8685dbfb3443d23d73e11720d65d8f628964189dc914a28",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_plot_fig_efficiency.py",
+      "published_at": "tests/test_plot_fig_efficiency.py",
+      "published_sha256": "30641e5b033936c03991120284cc73c4a631a1a109ae6da4f57779da606bf6f9",
+      "reason": "publication digest rejection tests added; not a scrub-only correspondence"
     },
     "tests/test_pythia_revision.py@live": {
       "frozen_sha256": "559e26517afc88f309cf0443bf002cad825ea449aee6e85a1ec15e4c2d1eff3b",

@@ -1,0 +1,932 @@
+[
+  {
+    "kind": "boundary",
+    "group": "QA distributions",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 15,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 33,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 18,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 18,
+      "median": 29851.0
+    },
+    "inside_interval": 24,
+    "unresolved_recommendations": 21
+  },
+  {
+    "kind": "boundary",
+    "group": "QA distributions",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 17,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 35,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 18,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 18,
+      "median": 29851.0
+    },
+    "inside_interval": 29,
+    "unresolved_recommendations": 22
+  },
+  {
+    "kind": "boundary",
+    "group": "QA distributions",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 7,
+      "median": 1.2616862536017621
+    },
+    "all_identified": {
+      "n": 25,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 18,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 18,
+      "median": 29851.0
+    },
+    "inside_interval": 14,
+    "unresolved_recommendations": 17
+  },
+  {
+    "kind": "boundary",
+    "group": "math/code",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 9,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 3,
+      "median": 1.4322563358010703
+    },
+    "all_identified": {
+      "n": 12,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.3644973679793897
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 26691.5
+    },
+    "inside_interval": 9,
+    "unresolved_recommendations": 5
+  },
+  {
+    "kind": "boundary",
+    "group": "math/code",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 9,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 2,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 11,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.3644973679793897
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 26691.5
+    },
+    "inside_interval": 11,
+    "unresolved_recommendations": 5
+  },
+  {
+    "kind": "boundary",
+    "group": "math/code",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 10,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 7,
+      "median": 2.856242946404722
+    },
+    "all_identified": {
+      "n": 17,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.3644973679793897
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 26691.5
+    },
+    "inside_interval": 10,
+    "unresolved_recommendations": 8
+  },
+  {
+    "kind": "boundary",
+    "group": "2Wiki original probe",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 12,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 4,
+      "median": 1.2616862536017621
+    },
+    "all_identified": {
+      "n": 16,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 29851.0
+    },
+    "inside_interval": 12,
+    "unresolved_recommendations": 8
+  },
+  {
+    "kind": "boundary",
+    "group": "2Wiki original probe",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 12,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 4,
+      "median": 0.6308431268008811
+    },
+    "all_identified": {
+      "n": 16,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 29851.0
+    },
+    "inside_interval": 13,
+    "unresolved_recommendations": 8
+  },
+  {
+    "kind": "boundary",
+    "group": "2Wiki original probe",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 4,
+      "median": 2.856133122671703
+    },
+    "all_identified": {
+      "n": 12,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 29851.0
+    },
+    "inside_interval": 8,
+    "unresolved_recommendations": 7
+  },
+  {
+    "kind": "boundary",
+    "group": "QA including original probe",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 30,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 26,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 19,
+      "median": 1.2616862536017621
+    },
+    "all_identified": {
+      "n": 49,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 30,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 30,
+      "median": 29851.0
+    },
+    "inside_interval": 36,
+    "unresolved_recommendations": 29
+  },
+  {
+    "kind": "boundary",
+    "group": "QA including original probe",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 30,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 26,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 21,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 51,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 30,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 30,
+      "median": 29851.0
+    },
+    "inside_interval": 42,
+    "unresolved_recommendations": 30
+  },
+  {
+    "kind": "boundary",
+    "group": "QA including original probe",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 26,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 26,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 11,
+      "median": 1.2616862536017621
+    },
+    "all_identified": {
+      "n": 37,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 30,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 30,
+      "median": 29851.0
+    },
+    "inside_interval": 22,
+    "unresolved_recommendations": 24
+  },
+  {
+    "kind": "boundary",
+    "group": "all requests",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 39,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 34,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 22,
+      "median": 1.2616862536017621
+    },
+    "all_identified": {
+      "n": 61,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 42,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 42,
+      "median": 29851.0
+    },
+    "inside_interval": 45,
+    "unresolved_recommendations": 34
+  },
+  {
+    "kind": "boundary",
+    "group": "all requests",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 39,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 34,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 23,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 62,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 42,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 42,
+      "median": 29851.0
+    },
+    "inside_interval": 53,
+    "unresolved_recommendations": 35
+  },
+  {
+    "kind": "boundary",
+    "group": "all requests",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 36,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 34,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 18,
+      "median": 1.4281214732023608
+    },
+    "all_identified": {
+      "n": 54,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 42,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 42,
+      "median": 29851.0
+    },
+    "inside_interval": 32,
+    "unresolved_recommendations": 32
+  },
+  {
+    "kind": "delta",
+    "group": "QA distributions",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 10,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 16,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 34,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 18,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 18,
+      "median": 29851.0
+    },
+    "inside_interval": 27,
+    "unresolved_recommendations": 25
+  },
+  {
+    "kind": "delta",
+    "group": "QA distributions",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 10,
+      "median": 1.409149543173184
+    },
+    "common_crossed": {
+      "n": 10,
+      "median": 1.409149543173184
+    },
+    "censored_lower_bound": {
+      "n": 7,
+      "median": 1.2616862536017621
+    },
+    "all_identified": {
+      "n": 17,
+      "median": 1.409149543173184
+    },
+    "interval_log_width": {
+      "n": 18,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 18,
+      "median": 29851.0
+    },
+    "inside_interval": 6,
+    "unresolved_recommendations": 9
+  },
+  {
+    "kind": "delta",
+    "group": "QA distributions",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 10,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 7,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 25,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 18,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 18,
+      "median": 29851.0
+    },
+    "inside_interval": 24,
+    "unresolved_recommendations": 17
+  },
+  {
+    "kind": "delta",
+    "group": "math/code",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 11,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 9,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 8,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 19,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.3644973679793897
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 26691.5
+    },
+    "inside_interval": 19,
+    "unresolved_recommendations": 10
+  },
+  {
+    "kind": "delta",
+    "group": "math/code",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 12,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 9,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 12,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 24,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.3644973679793897
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 26691.5
+    },
+    "inside_interval": 23,
+    "unresolved_recommendations": 10
+  },
+  {
+    "kind": "delta",
+    "group": "math/code",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 10,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 9,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 7,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 17,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.3644973679793897
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 26691.5
+    },
+    "inside_interval": 17,
+    "unresolved_recommendations": 8
+  },
+  {
+    "kind": "delta",
+    "group": "2Wiki original probe",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 12,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 4,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 16,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 29851.0
+    },
+    "inside_interval": 16,
+    "unresolved_recommendations": 8
+  },
+  {
+    "kind": "delta",
+    "group": "2Wiki original probe",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 12,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.7128876310202557
+    },
+    "censored_lower_bound": {
+      "n": 4,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 16,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 29851.0
+    },
+    "inside_interval": 12,
+    "unresolved_recommendations": 8
+  },
+  {
+    "kind": "delta",
+    "group": "2Wiki original probe",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 8,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 4,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 12,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 12,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 12,
+      "median": 29851.0
+    },
+    "inside_interval": 12,
+    "unresolved_recommendations": 7
+  },
+  {
+    "kind": "delta",
+    "group": "QA including original probe",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 30,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 20,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 50,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 30,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 30,
+      "median": 29851.0
+    },
+    "inside_interval": 43,
+    "unresolved_recommendations": 33
+  },
+  {
+    "kind": "delta",
+    "group": "QA including original probe",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 22,
+      "median": 0.704574771586592
+    },
+    "common_crossed": {
+      "n": 18,
+      "median": 1.409149543173184
+    },
+    "censored_lower_bound": {
+      "n": 11,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 33,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 30,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 30,
+      "median": 29851.0
+    },
+    "inside_interval": 18,
+    "unresolved_recommendations": 17
+  },
+  {
+    "kind": "delta",
+    "group": "QA including original probe",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 26,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 18,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 11,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 37,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 30,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 30,
+      "median": 29851.0
+    },
+    "inside_interval": 36,
+    "unresolved_recommendations": 24
+  },
+  {
+    "kind": "delta",
+    "group": "all requests",
+    "method": "boundary_loglinear",
+    "crossed": {
+      "n": 41,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 27,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 28,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 69,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 42,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 42,
+      "median": 29851.0
+    },
+    "inside_interval": 62,
+    "unresolved_recommendations": 43
+  },
+  {
+    "kind": "delta",
+    "group": "all requests",
+    "method": "fixed_reuse",
+    "crossed": {
+      "n": 34,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 27,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 23,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 57,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 42,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 42,
+      "median": 29851.0
+    },
+    "inside_interval": 41,
+    "unresolved_recommendations": 27
+  },
+  {
+    "kind": "delta",
+    "group": "all requests",
+    "method": "student_isotonic",
+    "crossed": {
+      "n": 36,
+      "median": 0.0
+    },
+    "common_crossed": {
+      "n": 27,
+      "median": 0.0
+    },
+    "censored_lower_bound": {
+      "n": 18,
+      "median": 0.0
+    },
+    "all_identified": {
+      "n": 54,
+      "median": 0.0
+    },
+    "interval_log_width": {
+      "n": 42,
+      "median": 1.4416594957680193
+    },
+    "interval_width_tokens": {
+      "n": 42,
+      "median": 29851.0
+    },
+    "inside_interval": 53,
+    "unresolved_recommendations": 32
+  }
+]

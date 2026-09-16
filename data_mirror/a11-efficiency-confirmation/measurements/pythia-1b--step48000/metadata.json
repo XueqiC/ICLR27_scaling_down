@@ -1,0 +1,93 @@
+{
+  "status": "complete",
+  "target": {
+    "state": "pythia-1b@step48000",
+    "size": "1b",
+    "step": 48000,
+    "hf_id": "EleutherAI/pythia-1b",
+    "revision": "step48000",
+    "N0": 805306368,
+    "D0": 100663296000,
+    "L0": {
+      "math": null,
+      "code": null,
+      "qa": null
+    },
+    "architecture": {
+      "hidden_size": 2048,
+      "intermediate_size": 8192,
+      "num_hidden_layers": 16
+    }
+  },
+  "started_utc": "2026-09-16T14:50:23.050898+00:00",
+  "completed_utc": "2026-09-16T14:51:38.737774+00:00",
+  "predictions_sha256": "beee08caab31ba9e032b57bbb6dac9f1464c500729980ee0f706aeeb38115dfb",
+  "protocol": {
+    "evaluator": "analysis/v6_capability_geometry.py:stage_prune",
+    "wrapper": "analysis/a11_measure.py",
+    "probe_file": "data/a11/probes.json",
+    "n_probe_requested": 128,
+    "probe_seed": 0,
+    "probe_half": "[1::2]",
+    "measurement_samples": {
+      "math": 64,
+      "code": 64,
+      "qa": 64
+    },
+    "datasets": {
+      "math": [
+        "HuggingFaceH4/MATH-500",
+        null,
+        "test"
+      ],
+      "code": [
+        "google-research-datasets/mbpp",
+        "full",
+        "test"
+      ],
+      "qa": [
+        "framolfese/2WikiMultihopQA",
+        null,
+        "validation"
+      ]
+    },
+    "dtype": "bf16",
+    "device": "cuda:0",
+    "reference_device": "cuda",
+    "pruning_seed": 0,
+    "threshold_sample_size": 2000000,
+    "pruning_scope": "all language matrices, embeddings and head included",
+    "mask": "abs(weight)>quantile(sample,1-density)",
+    "max_prompt_tokens": 512,
+    "max_completion_tokens": 512,
+    "max_length": 1024,
+    "loss": "summed completion NLL / summed scored completion tokens",
+    "dense_policy": "dense and all six densities from the same loaded checkpoint in one state job"
+  },
+  "probe_sha256": {
+    "math": "016b05ace9c9390dba1260954a478e9b8ac7f2fe1edc4c7aec5afafd1c5175a2",
+    "code": "0466491d8aafdeef5aa0001a89ebe3ff13afb53bd9b7800d6db5bea257a442b5",
+    "qa": "44ba9e25efc5c5c880fe65bfc3e93beefeb828f8bafec1ad847b1576dedee101"
+  },
+  "checkpoint": {
+    "hf_id": "EleutherAI/pythia-1b",
+    "revision": "step48000",
+    "commit_hash": "cb6be400acd5d46100f0688e76bf94bc156531c0",
+    "architecture": {
+      "hidden_size": 2048,
+      "intermediate_size": 8192,
+      "num_hidden_layers": 16
+    },
+    "tokenizer_class": "GPTNeoXTokenizerFast"
+  },
+  "prune_losses_sha256": "7e093003935bed150a6655f95f25addb9054bfe60669ddee8a193c2d1cf17b9b",
+  "slurm_job_id": "the workstation-local-a11",
+  "gpu_name": "NVIDIA RTX 6000 Ada Generation",
+  "versions": {
+    "torch": "2.10.0",
+    "transformers": "4.57.3",
+    "numpy": "1.26.4",
+    "tokenizers": "0.22.1",
+    "huggingface-hub": "0.36.0"
+  }
+}

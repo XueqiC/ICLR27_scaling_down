@@ -10,11 +10,11 @@ from paper_generator_checks import check_access, refuses_symlink, refuses_extern
 
 
 TASKS = [
-    "Three Pythia checkpoints unused in fitting (incl. 6.9B), pruned to densities 0.575, 0.675, 0.85",
+    "Three checkpoints outside every fit, pruned to densities 0.575, 0.675 and 0.85",
     "Pythia 160M to 1.4B at unseen bit width 4, group sizes 64 and 256",
-    "Pythia 410M (143000 steps) and 1.4B (16000 steps) at unseen group sizes 32 and 512, bit widths 3 to 5",
-    "Pythia 1.4B (112000 steps), unseen in fitting, at bit widths 3 to 5, group sizes 32, 128 and 512",
-    "Gemma 270M and 1B distilled on six new pools for 50000 to 200000 tokens",
+    "Pythia 410M and 1.4B at unseen group sizes 32 and 512, bit widths 3 to 5",
+    "A 1.4B stage unseen in fitting, bit widths 3 to 5, group sizes 32 to 512",
+    "Gemma 270M and 1B distilled on six new pools at 50 to 200 thousand tokens",
 ]
 
 
@@ -32,12 +32,15 @@ def raw_source(ref):
 def generated():
     tex_path = gen.output_path(ROOT, "tables", "main_prediction_v2.tex")
     side_path = gen.output_path(ROOT, "tables", "main_prediction_v2_sources.md")
-    original_tex, original_side = tex_path.read_bytes(), side_path.read_bytes()
+    # A clean public checkout has no generated canonical pair yet. Preview
+    # generation must preserve both existing contents and an absent file.
+    snapshot = lambda path: path.read_bytes() if path.exists() else None
+    original_tex, original_side = snapshot(tex_path), snapshot(side_path)
     rows, audit, access = gen.generate(write_tex=False)
     check_access(audit, access)
     tex = gen.render_table(rows, audit, sidecar="main_prediction_v2_preview_sources.md")
-    assert tex_path.read_bytes() == original_tex
-    assert side_path.read_bytes() == original_side
+    assert snapshot(tex_path) == original_tex
+    assert snapshot(side_path) == original_side
     assert all(not p.endswith(".tex") for p in access[1])
     side = (gen.output_path(ROOT, "tables", "main_prediction_v2_preview_sources.md")).read_text()
     blocks = re.findall(r"```json\n(.*?)\n```", side, re.S)
@@ -46,12 +49,12 @@ def generated():
 
 def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
     rows, audit, tex, recipes, caption = generated
-    assert len(rows) == 5 and len(recipes) == 30
+    assert len(rows) == 5 and len(recipes) == 35
     body = tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0]
     table_rows = [line.removesuffix(r" \\").split(" & ") for line in body.splitlines() if line.strip() != r"\midrule"]
-    assert len(table_rows) == 5 and all(len(row) == 6 for row in table_rows)
+    assert len(table_rows) == 5 and all(len(row) == 7 for row in table_rows)
     assert {(r["row"], r["column"]) for r in recipes} == {
-        (i, j) for i in range(5) for j in range(6)}
+        (i, j) for i in range(5) for j in range(7)}
     for record in [*recipes, caption]:
         # Independently resolve every JSON pointer and operation, then compare
         # with the actual TeX cell at the sidecar's physical row/column.
@@ -68,6 +71,9 @@ def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
             elif op == "mean": v = mean(vals)
             elif op == "weighted_mean": v = sum(vals[i] * vals[i+1] for i in range(0,len(vals),2)) / sum(vals[1::2])
             elif op == "length": v = len(vals[0])
+            elif op == "per_capability":
+                assert vals[0] % len(vals[1]) == 0
+                v = vals[0] // len(vals[1])
             elif op == "keys": v = ", ".join(vals[0])
             elif op == "unique": v = ", ".join(str(v) for v in sorted(set(vals)))
             elif op == "join": v = ", ".join(map(str, vals[0]))
@@ -113,7 +119,7 @@ def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
 def test_only_complete_frozen_tasks_and_compact_layout(generated):
     rows, audit, tex, recipes, caption = generated
     assert [row[0].plain(audit).split("\n")[0] for row in rows] == TASKS
-    assert all(len(row) == 6 for row in rows)
+    assert all(len(row) == 7 for row in rows)
     assert all(c.plain(audit).strip() for row in rows for c in row)
     assert all(c.strip() for line in tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0].splitlines() if line.strip() != r"\midrule"
                for c in line.removesuffix(r" \\").split(" & "))
@@ -121,15 +127,16 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert "unseen density" not in tex
     assert gen.HEADERS == (
         "Prediction task", "Predictor tested first", "Its error (nats)",
-        "Predictor we deliver", "Its error (nats)", "Simplest comparison\nMath / Code / QA")
+        "Predictor we deliver", "Its error (nats)", "Simplest comparison\nMath / Code / QA",
+        "Development measurements")
     assert " & ".join(gen.render_text(h) for h in gen.HEADERS) + r" \\" in tex
     assert r"\centering\footnotesize" in tex and r"\tiny" not in tex
     assert tex.count(r"\begin{table*}[!htbp]") == 1
     assert tex.count(r"\begin{tabular*}{\textwidth}") == 1
     assert r"\extracolsep{\fill}" in tex
-    assert tex.count(r">{\raggedright\arraybackslash\hspace{0pt}}p{") == 6
+    assert tex.count(r">{\raggedright\arraybackslash\hspace{0pt}}p{") == 7
     assert sum(map(float, gen.COLUMN_WIDTHS)) == pytest.approx(1)
-    assert all(float(gen.COLUMN_WIDTHS[i]) > .105 for i in (2, 4))
+    assert all(float(gen.COLUMN_WIDTHS[i]) >= .10 for i in (2, 4))
     assert float(gen.COLUMN_WIDTHS[5]) < .215
     assert r"\setlength{\tabcolsep}{1.5pt}" in tex
     assert r"\fontsize{8.5}{10}\selectfont" in tex
@@ -139,10 +146,11 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert not re.search(r"\\(?:resizebox|scalebox|rotatebox|multicolumn|dagger)", tex)
     assert r"\label{tab:main-prediction-v2}" in tex
     assert caption["rendered"] == gen.caption_cell(audit).render(audit)
-    assert len(caption["rendered"].split()) <= 60
+    assert len(caption["rendered"].split()) <= 70
     assert caption["rendered"] == (
         "Every row is a prediction frozen before measurement; errors are mean absolute errors in nats per token for Math, Code and QA. "
-        "``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the baseline selected during development. "
+        "The last column counts the development configuration measurements per capability behind the tested predictor. "
+        "``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the development-selected baseline. "
         "Distillation entries give the 270M and 1B students in that order.")
     assert "[" not in caption["rendered"]
     assert "Source-free median density curve" in tex
@@ -155,13 +163,13 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
                 assert lines.pop(0)  # Baseline identity precedes its scores.
             assert len(lines) == 3
             for cap, line in zip(("Math", "Code", "QA"), lines):
-                prefix = "" if j == 5 else cap + " "
+                prefix = ""
                 assert line.startswith(prefix)
                 if i == 4:
                     assert re.fullmatch(prefix + r"\d+\.\d{2}, \d+\.\d{2}", line)
                 else:
                     assert re.fullmatch(prefix + r"\d+\.\d{2}", line)
-            assert row[j].compact_scores == ("comparison" if j == 5 else "labelled")
+            assert row[j].compact_scores == ("comparison" if j == 5 else "ordered")
         assert "[" not in row[2].plain(audit)
         if i in (0, 2, 3):
             assert row[3].plain(audit).endswith("(chosen after this test)")
@@ -174,7 +182,7 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
     rows, audit, _, _, _ = generated
     def scores(row, column):
         lines = row[column].plain(audit).splitlines()[column == 5:]
-        return " / ".join(line if column == 5 else line.split(" ", 1)[1] for line in lines)
+        return " / ".join(lines)
     assert [scores(row, 2) for row in rows] == [
         "0.24 / 0.24 / 0.68", "0.19 / 0.21 / 0.44", "0.21 / 0.56 / 0.46",
         "0.30 / 0.15 / 0.22", "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
@@ -187,15 +195,36 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
         "0.28 / 0.21 / 0.22", "0.19 / 0.21 / 0.44", "0.07 / 0.12 / 0.46", "0.09 / 0.15 / 0.14",
         "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
     ]
-    assert "Gemma 270M and 1B" in rows[-1][0].plain(audit)
+    assert "270M and 1B" in gen.caption_cell(audit).plain(audit)
     assert "no student averaging" in rows[-1][2].note
     assert [row[5].plain(audit).splitlines()[0] for row in rows] == [
         "Per-density regression; QA: median",
         "Development median",
         "Bilinear regression; Code: no change; QA: median",
         "Bilinear regression; Code: no change; QA: median",
-        "Regressions: Math budget, loss; Code reuse; QA reuse, size",
+        "Regressions on budget and loss, on reuse, and on reuse and size",
     ]
+
+
+def test_development_measurements_count_configurations_per_capability(generated):
+    rows, audit, _, recipes, _ = generated
+    assert [int(row[6].plain(audit)) for row in rows] == [84, 24, 54, 54, 100]
+    prune = raw_source(gen.P53 + "#")
+    assert int(rows[0][6].plain(audit)) == sum(len(s["densities"]) for s in prune["dev_states"])
+    assert prune["n_dev_rows"] == 3 * int(rows[0][6].plain(audit))
+    for index, path in ((1, gen.Q55), (2, gen.Q69), (3, gen.Q69)):
+        frozen = raw_source(path + "#")
+        count = int(rows[index][6].plain(audit))
+        assert count == len(frozen["dev_states"]) * len(frozen["dev_configs"])
+        for cap in gen.CAPS:
+            actual = {(r["state"], r["config"]) for r in frozen["dev_rows"] if r["capability"] == cap}
+            assert len(actual) == count
+    distill = raw_source("results/v70-distill-confirm/develop.json#")
+    assert len(distill["points"]) == len({(p["cluster"], p["Tc"]) for p in distill["points"]}) == 100
+    assert all(set(p["delta"]) == set(gen.CAPS) for p in distill["points"])
+    assert "selection of QA's zero rule" in rows[2][6].note
+    assert "not 100 per test student" in rows[4][6].note
+    assert all(r["parts"][0]["sources"] for r in recipes if r["column"] == 6)
 
 
 def test_delivery_identities_and_bit_candidate_as_tested(generated):
@@ -229,8 +258,8 @@ def test_composite_relations_name_each_capability(generated):
     assert rows[2][3].plain(audit) == (
         "Math, Code: interpolation on the measured group-size grid; QA: development median (chosen after this test)")
     assert rows[-1][1].plain(audit) == (
-        "Math and code: one-coefficient reuse forms; QA: three-coefficient budget-and-pool form")
-    assert rows[0][1].plain(audit) == "Five-parameter power form (seventeen development states)"
+        "Reuse forms for math and code; budget-and-pool form for QA")
+    assert rows[0][1].plain(audit) == "Five-parameter power form"
     assert raw_source(gen.P53 + "#/n_params_per_capability/power") == 5
     assert raw_source(gen.P53 + "#/n_dev_states") == len(raw_source(gen.P53 + "#/dev_states")) == 17
     assert rows[1][1].plain(audit) == "Source regression across bit widths (twenty coefficients)"
@@ -261,11 +290,9 @@ def test_test_sets_match_frozen_membership(generated):
                {"pythia-410m@step143000", "pythia-1.4b@step16000"})
         assert {r["config"] for r in rr} == {f"b{b}_g{g}" for b in (3,4,5)
                                              for g in ((32,128,512) if new else (32,512))}
-    assert "410M (143000 steps) and 1.4B (16000 steps)" in rows[2][0].plain(audit)
-    assert "1.4B (112000 steps)" in rows[3][0].plain(audit)
     assert "group sizes 64 and 256" in rows[1][0].plain(audit)
     assert "group sizes 32 and 512" in rows[2][0].plain(audit)
-    assert "group sizes 32, 128 and 512" in rows[3][0].plain(audit)
+    assert "group sizes 32 to 512" in rows[3][0].plain(audit)
     for i in (2, 3):
         assert "bit widths 3 to 5" in rows[i][0].plain(audit)
     assert all("@" not in row[0].plain(audit) for row in rows)

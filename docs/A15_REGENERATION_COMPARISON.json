@@ -1,0 +1,199 @@
+[
+  {
+    "file": "figs/dreq_a.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/dreq_a.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/dreq_a_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/dreq_b.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/dreq_b.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/dreq_b_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/dreq_c.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/dreq_c.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/dreq_c_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/dreq_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/dreq_legend.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/dreq_legend.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/dreq_legend_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_a.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/eff_a.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/eff_a_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_b.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/eff_b.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/eff_b_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_legend.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/eff_legend.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/eff_legend_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_qa_a.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/eff_qa_a.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/eff_qa_a_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_qa_b.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/eff_qa_b.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/eff_qa_b_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_qa_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "figs/eff_qa_legend.pdf",
+    "byte_identical": false,
+    "pixel_identical": true,
+    "max_pixel_difference": 0,
+    "dpi": 216
+  },
+  {
+    "file": "figs/eff_qa_legend.png",
+    "byte_identical": true,
+    "pixel_identical": true,
+    "max_pixel_difference": 0
+  },
+  {
+    "file": "figs/eff_qa_legend_caption.txt",
+    "byte_identical": true
+  },
+  {
+    "file": "tables/dreq_main.tex",
+    "byte_identical": true,
+    "visible_tex_identical": true
+  },
+  {
+    "file": "tables/dreq_full.tex",
+    "byte_identical": true,
+    "visible_tex_identical": true
+  },
+  {
+    "file": "tables/main_prediction_v2.tex",
+    "byte_identical": true,
+    "visible_tex_identical": true
+  }
+]

@@ -11,3 +11,7 @@ __pycache__/
 
 # bootstrap output (materialised from data_mirror/ by bootstrap_results.py)
 /results/
+# A11 runtime aliases materialised from data_mirror/ by bootstrap_results.py.
+/data/a11/
+/scripts/loni_a11_prune.slurm
+/scripts/a11_sync_list.txt

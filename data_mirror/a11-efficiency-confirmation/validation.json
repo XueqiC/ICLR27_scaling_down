@@ -1,0 +1,42 @@
+{
+  "status": "CPU preparation complete; forward confirmation pending",
+  "checked_utc": "2026-09-16T14:06:18.055029+00:00",
+  "predictions_sha256": "beee08caab31ba9e032b57bbb6dac9f1464c500729980ee0f706aeeb38115dfb",
+  "coefficients_sha256": "243b45d5048f30c27505bb3882c33a9d9e1b7e8d90c993197a39b492b7a1eae9",
+  "prereg_sha256": "b5a228dd56b4035b62a71c249fe9dc3525f19e8044f5dc352795e6dd52794ab5",
+  "plan_sha256": "54ffc5000b1091d6f49e9f403d12aa68c6a0c4f0913e2ad74d1219836cc82576",
+  "tests": {
+    "command": "python -B -m pytest -q tests/test_a11_confirmation.py -p no:cacheprovider",
+    "passed": 10,
+    "failed": 0,
+    "coverage": [
+      "fixed subset and excluded states",
+      "1080 formula evaluations against original A9 predictor (360 frozen predictions x 3 synthetic anchors)",
+      "all 15 fits reproduced from development rows only",
+      "unweighted delta-loss MAE, incomplete cells and nonfinite losses",
+      "inclusive 0.05-nat boundary and joint math/code gate; QA descriptive",
+      "measurement provenance and incorrect freeze rejection",
+      "clean sync-list-only directory verifies and dry-runs",
+      "runtime/probe/prediction tamper rejection",
+      "mocked V6 wrapper preserves exact probe/measurement arguments without GPU calls"
+    ]
+  },
+  "all_four_state_dry_runs_passed": true,
+  "slurm_bash_syntax_passed": true,
+  "clean_sync_bundle_passed": true,
+  "target_forward_calls": 0,
+  "gpu_measurements_launched": 0,
+  "commits": 0,
+  "known_limitations": [
+    "LONI runtime and GPU measurements have not been executed here.",
+    "The remote quant64k.slurm file is not mounted locally; job follows the explicitly supplied gpu2/one-GPU/HF_HOME/PYTHONPATH/cd conventions.",
+    "Cluster needs a compatible existing Python environment and exact checkpoint revisions, loaded through HF_HOME."
+  ],
+  "runtime_revision": {
+    "reason": "CPU synthetic edge-case test: centered MAE summation preserves the inclusive 0.05-nat boundary without a tolerance or decision-rule change. Coefficients and every cell prediction unchanged. No target measurements.",
+    "created_utc": "2026-09-16T14:05:17.735585+00:00",
+    "initial_predictions_sha256": "08c16cf02d3eebf8bf13c45b02133483dc6021d9ddd4963c2bad1c47675be4df",
+    "initial_scorer_sha256": "aa5aae0ce148a27fcf4fc8ccdeacffe12f3695152ba31cfd2342c54380e2e99a",
+    "archive": "results/a11-efficiency-confirmation/premeasurement_archive/"
+  }
+}

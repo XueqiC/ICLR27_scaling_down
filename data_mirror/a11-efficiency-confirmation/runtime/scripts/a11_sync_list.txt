@@ -1,0 +1,19 @@
+# From the local repository root (rsync -aR --files-from=scripts/a11_sync_list.txt ./ cluster:$CLUSTER_PROJECT/sdl/).
+# Paths are relative to the repo root. Parent directories are created by rsync.
+# plan.json is the complete experiment/architecture config; no configs/ files are used.
+# Frozen probes replace all three dataset caches; no external probe directory is needed.
+# The cluster Python environment needs numpy, torch, transformers, accelerate,
+# tokenizers, huggingface-hub and safetensors. Reuse its installed environment.
+# Model weights, tokenizers and HF configs use HF_HOME=$CLUSTER_PROJECT/hf-cache;
+# the job resolves EleutherAI/pythia-{160m,410m,1.4b,1b} at the registered revisions.
+analysis/a11_measure.py
+analysis/a11_score.py
+analysis/v6_capability_geometry.py
+analysis/model_registry.py
+data/a11/probes.json
+results/a11-efficiency-confirmation/prereg.md
+results/a11-efficiency-confirmation/plan.json
+results/a11-efficiency-confirmation/predictions.json
+results/a11-efficiency-confirmation/predictions.json.sha256
+scripts/loni_a11_prune.slurm
+scripts/a11_sync_list.txt

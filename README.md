@@ -33,6 +33,9 @@ python3 -m analysis.plot_fig_responses_v2
 `bootstrap_results.py` materialises `results/` from `data_mirror/`, expanding the gzipped
 summaries and creating the directories the generators write into. It never overwrites an
 existing file and never modifies `data_mirror/`.
+It also restores A11's frozen probe and runtime-script aliases under `data/a11/`
+and `scripts/`. Those generated copies are ignored by Git; their published sources
+remain in `data_mirror/a11-efficiency-confirmation/runtime/`.
 
 These CPU-only generators read frozen artifacts and write to `generated/tables/`
 and `generated/figs/`. `plot_fig_generalization` also generates the cell-level
@@ -49,12 +52,13 @@ Check these generators with:
 python3 -m pytest -q tests/test_final_prediction_table.py tests/test_plot_fig_generalization.py tests/test_plot_fig_generalization_cells.py tests/test_plot_fig_explanation.py tests/test_plot_fig_responses_v2.py
 ```
 
-Current validation: `plot_fig_explanation` and `plot_fig_responses_v2` and their
-tests pass. `final_prediction_table`, `plot_fig_generalization` and
-`plot_fig_generalization_cells` reach the V72 inputs but stop at `C52 freeze hash`:
-the shared helper forces raw digest equality even though the publication digest
-map records the exact anonymization correspondence. Their scoring code and digest
-acceptance rules are unchanged. The A5/A7 artifact analyses and their 75 tests pass.
+The A5/A7 artifact analyses and their 75 tests were previously checked. A15 checks
+`final_prediction_table` and the three measurement/data-requirement generators
+below: all 51 selected tests pass. Their three tables are byte-identical to the
+manuscript copies; ten PDF panels and ten PNG previews have zero pixel differences.
+Publication digest acceptance is restricted to entries marked `pairable=true`.
+See [A15_MIRROR_VALIDATION.md](docs/A15_MIRROR_VALIDATION.md) for the exact scope,
+scratch regeneration procedure, sizes, and comparison results.
 
 One artifact exists in two states, because experiments recorded it at different times: the
 grouped-quantization measurements grew new configurations after an earlier audit had recorded
@@ -90,6 +94,28 @@ regenerated table can be compared line by line with the one that was published. 
 reach for model weights, adapters, dataset caches or credentials cannot pass from a checkout
 alone, since those are not part of the repository, and inputs that were never mirrored cannot
 be reconstructed; `docs/RESULTS_LEDGER.md` names the artifact behind every reported number.
+
+## Experiment index: measurement efficiency and data requirements
+
+| Experiment | Published evidence | CPU consumer |
+|---|---|---|
+| A9 / C81 | Complete plan, summary and replicate records; `summary.json.gz` | `analysis.plot_fig_efficiency` |
+| A11 / C83 | Preregistration, frozen predictions, four states' losses and metadata, premeasurement archive, frozen runtime inputs | `analysis.plot_fig_efficiency` |
+| A12 / C84 | Preregistration and amendment, current and `registration_0` plans, task table, scores, 90 eval files and 18 training-metrics files | `analysis.a13_dreq_accounting` |
+| A13 / C85 | Saved accounting, request/recommendation records, CSVs and validation | `analysis.a13_dreq_table` |
+| V53 / V55 / V69 / V70 | Existing registers, freezes, comparisons and development records | `analysis.final_prediction_table`, including Development measurements |
+
+A10 / C82 is described in the ledger; none of these four consumers opens its
+artifacts, so A15 does not add its 90 MB summary. The A12 serialized dataset
+inputs are also unnecessary for these consumers; all scored eval JSON is included.
+Adapters, model weights and execution logs are excluded. Large inputs retain their
+complete contents and use deterministic gzip above 5 MB. The complete file list,
+stored/expanded byte sizes and digests are in
+[A15_MIRROR_INVENTORY.csv](docs/A15_MIRROR_INVENTORY.csv).
+
+```
+python3 -m pytest -q tests/test_plot_fig_efficiency.py tests/test_a13_dreq_accounting.py tests/test_a13_dreq_tables.py tests/test_final_prediction_table.py tests/paper_generator_checks.py
+```
 
 ## Layout
 

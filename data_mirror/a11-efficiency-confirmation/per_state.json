@@ -1,0 +1,1015 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "cpu_only": true,
+  "unit": "nats",
+  "metric": "Unweighted mean absolute delta-loss error over six densities per state and capability",
+  "scorer": "analysis/a11_score.py: load_registration, read_measurements, score_tables",
+  "predictions_sha256": "beee08caab31ba9e032b57bbb6dac9f1464c500729980ee0f706aeeb38115dfb",
+  "measurement_sha256": {
+    "pythia-160m@step80000": {
+      "losses_sha256": "a529bacc691a109f107c28c151ee176994cbf4e59066a75b429eff1f2227d0f5",
+      "metadata_sha256": "450dd7ae4f5ea2995b47966225c6f9bf336cdbcb8ba3dc3815f08376566857a2"
+    },
+    "pythia-410m@step112000": {
+      "losses_sha256": "5c7ceb6e5e7b4da3ced3d4830f7e0d078eb636124f44983dd536f63001ca598f",
+      "metadata_sha256": "0b8d97821f7fa5d95da58c360f2b2a1b5c86940d3f495610901d9d6497b24a53"
+    },
+    "pythia-1.4b@step48000": {
+      "losses_sha256": "cfcdd75108ee3579bcd2dc7a402d0d779b7f6c90f0808909640943395a1b7ed2",
+      "metadata_sha256": "1ecbe079d73cd56fc168811abd0fdd69bf4605bde09a9426ba338e2cb9152f1b"
+    },
+    "pythia-1b@step48000": {
+      "losses_sha256": "7e093003935bed150a6655f95f25addb9054bfe60669ddee8a193c2d1cf17b9b",
+      "metadata_sha256": "599475bbc74a7257c31fa4ded21c561a9c366e8b590acf6717854b7e09cd21cc"
+    }
+  },
+  "development_measurements_per_capability": {
+    "power_18": 18,
+    "power_36": 36,
+    "A2_36": 36,
+    "median_curve_36": 36,
+    "median_curve_18": 18
+  },
+  "state_order": [
+    "pythia-160m@step80000",
+    "pythia-410m@step112000",
+    "pythia-1.4b@step48000",
+    "pythia-1b@step48000"
+  ],
+  "by_capability": {
+    "math": {
+      "n_cells": 24,
+      "mae": {
+        "power_18": 0.07260909705394436,
+        "power_36": 0.0621174279958979,
+        "A2_36": 0.05992498814398862,
+        "median_curve_36": 0.11242716654802398,
+        "median_curve_18": 0.14489943381054074
+      },
+      "power_18_minus_comparator_mae": {
+        "power_36": 0.010491669058046459,
+        "A2_36": 0.012684108909955742,
+        "median_curve_36": -0.03981806949407962,
+        "median_curve_18": -0.07229033675659638
+      },
+      "within_margin": true,
+      "descriptive_mae_le_0_25": {
+        "power_18": true,
+        "power_36": true,
+        "A2_36": true,
+        "median_curve_36": true,
+        "median_curve_18": true
+      },
+      "median_beats_power_18": {
+        "median_curve_36": false,
+        "median_curve_18": false
+      }
+    },
+    "code": {
+      "n_cells": 24,
+      "mae": {
+        "power_18": 0.10352741570952642,
+        "power_36": 0.1090856855387564,
+        "A2_36": 0.08374634933599624,
+        "median_curve_36": 0.16970971000713098,
+        "median_curve_18": 0.2121266143728706
+      },
+      "power_18_minus_comparator_mae": {
+        "power_36": -0.005558269829229981,
+        "A2_36": 0.01978106637353018,
+        "median_curve_36": -0.06618229429760455,
+        "median_curve_18": -0.10859919866334417
+      },
+      "within_margin": true,
+      "descriptive_mae_le_0_25": {
+        "power_18": true,
+        "power_36": true,
+        "A2_36": true,
+        "median_curve_36": true,
+        "median_curve_18": true
+      },
+      "median_beats_power_18": {
+        "median_curve_36": false,
+        "median_curve_18": false
+      }
+    },
+    "qa": {
+      "n_cells": 24,
+      "mae": {
+        "power_18": 0.1788168994701262,
+        "power_36": 0.2228597451933108,
+        "A2_36": 0.17725714640942014,
+        "median_curve_36": 0.18253673558301642,
+        "median_curve_18": 0.18602772991920144
+      },
+      "power_18_minus_comparator_mae": {
+        "power_36": -0.04404284572318462,
+        "A2_36": 0.0015597530607060484,
+        "median_curve_36": -0.003719836112890229,
+        "median_curve_18": -0.007210830449075251
+      },
+      "within_margin": true,
+      "descriptive_mae_le_0_25": {
+        "power_18": true,
+        "power_36": true,
+        "A2_36": true,
+        "median_curve_36": true,
+        "median_curve_18": true
+      },
+      "median_beats_power_18": {
+        "median_curve_36": false,
+        "median_curve_18": false
+      }
+    }
+  },
+  "records": [
+    {
+      "state": "pythia-160m@step80000",
+      "size": "160m",
+      "step": 80000,
+      "capability": "math",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.051795457189908946,
+        "power_36": 0.059349765832678286,
+        "A2_36": 0.08383047146070768,
+        "median_curve_36": 0.1369318331619606,
+        "median_curve_18": 0.1724974623638904
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.01590401204645206,
+          0.03541869790685226,
+          0.04694002526915164,
+          0.09331552048168223,
+          0.08094183423482249,
+          0.03825265320049298
+        ],
+        "power_36": [
+          0.0010340507973585489,
+          0.004801194433967759,
+          0.008737734711640854,
+          0.07297657672344426,
+          0.1254206072954609,
+          0.14312843103419737
+        ],
+        "A2_36": [
+          0.011560631113894687,
+          0.04557597279573988,
+          0.02343375693586247,
+          0.11703303281632449,
+          0.08115354574495481,
+          0.2242258893574698
+        ],
+        "median_curve_36": [
+          0.004805030451633378,
+          0.015057739460571179,
+          0.08146800601123161,
+          0.11049592659969931,
+          0.2690026101399985,
+          0.3407616863086296
+        ],
+        "median_curve_18": [
+          0.004805030451633385,
+          0.016110693664478287,
+          0.01913113976113273,
+          0.07932749347464987,
+          0.2690026101399985,
+          0.6466078066914498
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/0/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/3/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/6/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/9/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/12/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/15/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-160m@step80000",
+      "size": "160m",
+      "step": 80000,
+      "capability": "code",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.11760168434201804,
+        "power_36": 0.20138371895589566,
+        "A2_36": 0.17038267024483858,
+        "median_curve_36": 0.2886409555502733,
+        "median_curve_18": 0.34013746929720295
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.04164383495347307,
+          0.07999184095705836,
+          0.13820514703048525,
+          0.18124993206389495,
+          0.2024640596508338,
+          0.06205529139636279
+        ],
+        "power_36": [
+          0.023914177595719233,
+          0.056219153113115095,
+          0.13052002712032174,
+          0.22871384192509558,
+          0.3616298549912822,
+          0.40730525898984005
+        ],
+        "A2_36": [
+          0.01945513604441712,
+          0.070429886170147,
+          0.07499389229777842,
+          0.19216092381580752,
+          0.20396784123828238,
+          0.46128834190259904
+        ],
+        "median_curve_36": [
+          0.011112431661516542,
+          0.05244235797480376,
+          0.14018302828618956,
+          0.28895293558355095,
+          0.5430829569764677,
+          0.6960720228191113
+        ],
+        "median_curve_18": [
+          0.011112431661516542,
+          0.03761587829807447,
+          0.11053006893273104,
+          0.2741264559068217,
+          0.5430829569764677,
+          1.0643570240076063
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/1/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/4/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/7/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/10/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/13/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/16/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-160m@step80000",
+      "size": "160m",
+      "step": 80000,
+      "capability": "qa",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.13495524214258559,
+        "power_36": 0.26932375298826783,
+        "A2_36": 0.13499284287164853,
+        "median_curve_36": 0.25618365811153365,
+        "median_curve_18": 0.26671543290557664
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.014921723654217622,
+          0.07726872896900905,
+          0.1714267234684872,
+          0.23128427530031814,
+          0.17474292386393397,
+          0.14008707759954753
+        ],
+        "power_36": [
+          0.014428320168537984,
+          0.09279532649697098,
+          0.23302845667557026,
+          0.3852375135430126,
+          0.48435134113523937,
+          0.40610155991027597
+        ],
+        "A2_36": [
+          0.035697004084091155,
+          0.014831194744035603,
+          0.00918337885457543,
+          0.17031559761834725,
+          0.17799011676234766,
+          0.4019397651664942
+        ],
+        "median_curve_36": [
+          0.024536596958174783,
+          0.030804420152091644,
+          0.03392347908745297,
+          0.13469878802281388,
+          0.3889317965779462,
+          0.9242068678707227
+        ],
+        "median_curve_18": [
+          0.024536596958174783,
+          0.045917003326996456,
+          0.06414864543726258,
+          0.14981137119771867,
+          0.3889317965779462,
+          0.9269471839353611
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/2/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/5/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/8/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/11/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/14/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/17/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-410m@step112000",
+      "size": "410m",
+      "step": 112000,
+      "capability": "math",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.10245138552208208,
+        "power_36": 0.06378789982673264,
+        "A2_36": 0.0630650238435268,
+        "median_curve_36": 0.16099653299586078,
+        "median_curve_18": 0.19119193097629783
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.007917236793672872,
+          0.020415282712964222,
+          0.06223716411120228,
+          0.0610886050233681,
+          0.1192182512027471,
+          0.34383177328853787
+        ],
+        "power_36": [
+          0.017135066420894074,
+          0.03753334188931606,
+          0.07810475275413631,
+          0.05291585709873958,
+          0.04747218707211731,
+          0.14956619372519242
+        ],
+        "A2_36": [
+          0.011005143738521905,
+          0.016339287644886347,
+          0.08388176818021553,
+          0.04769004902554341,
+          0.11906773586628416,
+          0.10040615860570945
+        ],
+        "median_curve_36": [
+          0.019239895594400196,
+          0.04226647156529326,
+          0.1275013841651509,
+          0.14826386142529457,
+          0.2765957446808509,
+          0.35211184054417477
+        ],
+        "median_curve_18": [
+          0.019239895594400203,
+          0.01109803844024379,
+          0.06516451791505201,
+          0.11709542830024514,
+          0.2765957446808509,
+          0.657957960926995
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/18/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/21/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/24/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/27/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/30/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/33/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-410m@step112000",
+      "size": "410m",
+      "step": 112000,
+      "capability": "code",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.1365493626646051,
+        "power_36": 0.0555989392363312,
+        "A2_36": 0.07854717366794899,
+        "median_curve_36": 0.2574330480944458,
+        "median_curve_18": 0.3089295618413755
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.0070519510502447535,
+          0.0003153450593191831,
+          0.0021513810530247035,
+          0.023005196202500633,
+          0.2077831158740886,
+          0.5789891867484527
+        ],
+        "power_36": [
+          0.0038354425003768455,
+          0.006904163889497328,
+          0.04109681289110867,
+          0.08276568284691721,
+          0.011397592988621863,
+          0.18759394030146526
+        ],
+        "A2_36": [
+          0.011623927795010092,
+          0.011769882108382479,
+          0.03681481431574074,
+          0.02076285396371902,
+          0.20651740656629558,
+          0.18379415725854598
+        ],
+        "median_curve_36": [
+          0.014856192060850981,
+          0.04881744711195632,
+          0.10767768005704781,
+          0.20201449964345142,
+          0.4981578321844542,
+          0.6730746375089143
+        ],
+        "median_curve_18": [
+          0.014856192060850981,
+          0.03399096743522703,
+          0.07802472070358929,
+          0.18718801996672216,
+          0.4981578321844542,
+          1.041359638697409
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/19/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/22/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/25/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/28/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/31/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/34/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-410m@step112000",
+      "size": "410m",
+      "step": 112000,
+      "capability": "qa",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.14161711463083734,
+        "power_36": 0.2553937315066991,
+        "A2_36": 0.13661427126362208,
+        "median_curve_36": 0.1375802043726236,
+        "median_curve_18": 0.14192584561153357
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.10387137388478129,
+          0.1419674389667971,
+          0.1174503638646871,
+          0.18773897342098245,
+          0.19013416117551785,
+          0.10854037647225834
+        ],
+        "power_36": [
+          0.10867881832930865,
+          0.16463394212990334,
+          0.18056214008113924,
+          0.3238377219553987,
+          0.4420569286699072,
+          0.3125928378745373
+        ],
+        "A2_36": [
+          0.07252684235908435,
+          0.08687156494933523,
+          0.028438245714493604,
+          0.15080964059894963,
+          0.19214491381040233,
+          0.2888944201494672
+        ],
+        "median_curve_36": [
+          0.08056083650190082,
+          0.07839234790874447,
+          0.0034458174904941075,
+          0.018669795627376917,
+          0.12182153041825128,
+          0.522590898288974
+        ],
+        "median_curve_18": [
+          0.08056083650190082,
+          0.06327976473383966,
+          0.026779348859315502,
+          0.033782378802281715,
+          0.12182153041825128,
+          0.5253312143536124
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/20/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/23/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/26/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/29/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/32/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/35/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step48000",
+      "size": "1.4b",
+      "step": 48000,
+      "capability": "math",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.03370273351833181,
+        "power_36": 0.04974296371440245,
+        "A2_36": 0.02840791143890835,
+        "median_curve_36": 0.08037220860027947,
+        "median_curve_18": 0.07274694165414326
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.005233330979319328,
+          0.015277359879463215,
+          0.027234496968704835,
+          0.03830339405678318,
+          0.011787589243775765,
+          0.10438022998194452
+        ],
+        "power_36": [
+          0.0023880090821962463,
+          0.012770462573228891,
+          0.03399279390802734,
+          0.07182562486084265,
+          0.09982973306556642,
+          0.07765115879655315
+        ],
+        "A2_36": [
+          0.0035356212643454232,
+          0.013203607310505072,
+          0.010117500182576178,
+          0.04055573371548338,
+          0.011870341526647232,
+          0.09116466463389283
+        ],
+        "median_curve_36": [
+          0.005101637269635313,
+          0.027554773392391013,
+          0.03725381634105829,
+          0.09018824646049206,
+          0.08399905085818249,
+          0.2381357272799176
+        ],
+        "median_curve_18": [
+          0.005101637269635306,
+          0.05872320651744048,
+          0.09959068259115716,
+          0.1213566795855415,
+          0.08399905085818249,
+          0.06771039310290261
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/36/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/39/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/42/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/45/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/48/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/51/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step48000",
+      "size": "1.4b",
+      "step": 48000,
+      "capability": "code",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.04469483911492519,
+        "power_36": 0.07958387081670847,
+        "A2_36": 0.020196080584462185,
+        "median_curve_36": 0.07462265272165426,
+        "median_curve_18": 0.07003208937485139
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.007703106808667259,
+          0.012582830043013526,
+          0.027618955220940933,
+          0.026567229002823822,
+          0.004899528998737246,
+          0.18879738461536832
+        ],
+        "power_36": [
+          0.011454382857862211,
+          0.028936122649192764,
+          0.07114533169431025,
+          0.11744368449792475,
+          0.16889042297581014,
+          0.0796332802251507
+        ],
+        "A2_36": [
+          0.0075760252979363285,
+          0.009398300106775448,
+          0.013122167499403314,
+          0.024525019070687826,
+          0.00490814161891695,
+          0.06164682991305326
+        ],
+        "median_curve_36": [
+          0.009507962918944513,
+          0.02748395531257422,
+          0.04736154028999273,
+          0.07139885904444965,
+          0.06441644877584984,
+          0.22756714998811467
+        ],
+        "median_curve_18": [
+          0.009507962918944513,
+          0.04231043498930351,
+          0.07701449964345125,
+          0.0862253387211789,
+          0.06441644877584984,
+          0.14071785120038027
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/37/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/40/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/43/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/46/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/49/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/52/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-1.4b@step48000",
+      "size": "1.4b",
+      "step": 48000,
+      "capability": "qa",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.26490748665079944,
+        "power_36": 0.12893996287932963,
+        "A2_36": 0.24077685620317957,
+        "median_curve_36": 0.10797389892268693,
+        "median_curve_18": 0.11255470730354877
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.021223499100036847,
+          0.11005876961454031,
+          0.2259889407979836,
+          0.3106863992316189,
+          0.4335231982889498,
+          0.4879641128716674
+        ],
+        "power_36": [
+          0.008103113768931636,
+          0.04231640985048879,
+          0.10994147078895278,
+          0.14383290144904937,
+          0.22200017782378456,
+          0.2474457035947708
+        ],
+        "A2_36": [
+          0.023470183852166482,
+          0.1180574586813865,
+          0.18439497115319092,
+          0.325596266570626,
+          0.4333790733949039,
+          0.3597631835668036
+        ],
+        "median_curve_36": [
+          0.012654467680608406,
+          0.01604087452471517,
+          0.016486454372623527,
+          0.04804836026615922,
+          0.14600166349809918,
+          0.408611573193916
+        ],
+        "median_curve_18": [
+          0.012654467680608406,
+          0.031153457699619982,
+          0.046711620722433136,
+          0.03293577709125442,
+          0.14600166349809918,
+          0.4058712571292776
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/38/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/41/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/44/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/47/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/50/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/53/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-1b@step48000",
+      "size": "1b",
+      "step": 48000,
+      "capability": "math",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.10248681198545466,
+        "power_36": 0.07558908260977827,
+        "A2_36": 0.06439654583281165,
+        "median_curve_36": 0.07140809143399507,
+        "median_curve_18": 0.14316140024783142
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.008003883059877565,
+          0.02245226492954211,
+          0.0460897224558805,
+          0.05743051562942347,
+          0.02765047133504983,
+          0.4532940145029545
+        ],
+        "power_36": [
+          0.0020768586821832274,
+          0.012848294103023405,
+          0.0417752806790892,
+          0.0783454852323271,
+          0.0517703588134395,
+          0.2667182181486072
+        ],
+        "A2_36": [
+          0.006069278955232543,
+          0.023899202624730442,
+          0.027491999030129,
+          0.06537960378106678,
+          0.02755617199476945,
+          0.23598301861094173
+        ],
+        "median_curve_36": [
+          0.0024914972712171204,
+          0.018320414458593698,
+          0.019912204381871357,
+          0.04245432255002768,
+          0.06582693980858956,
+          0.27944317013367104
+        ],
+        "median_curve_18": [
+          0.0024914972712171135,
+          0.049488847583643164,
+          0.08224907063197023,
+          0.07362275567507712,
+          0.06582693980858956,
+          0.5852892905164913
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/54/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/57/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/60/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/63/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/66/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/69/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-1b@step48000",
+      "size": "1b",
+      "step": 48000,
+      "capability": "code",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.11526377671655742,
+        "power_36": 0.09977621314609031,
+        "A2_36": 0.06585947284673524,
+        "median_curve_36": 0.05814218366215046,
+        "median_curve_18": 0.12940733697805246
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.011350569539928912,
+          0.023061973335321673,
+          0.03212439585327642,
+          0.0325169641390155,
+          0.06655235171994489,
+          0.5259764057118572
+        ],
+        "power_36": [
+          0.0141822418827382,
+          0.038021014493019534,
+          0.07465564053544349,
+          0.1244185378761884,
+          0.10288005338224915,
+          0.2444997907069031
+        ],
+        "A2_36": [
+          0.007459498177305068,
+          0.017607517983547982,
+          0.01373129248434779,
+          0.03062053961603839,
+          0.06628864443838856,
+          0.2594493443807837
+        ],
+        "median_curve_36": [
+          0.010221060137865612,
+          0.03003922034704068,
+          0.035833135250772585,
+          0.04964939386736411,
+          0.050332778702162795,
+          0.172777513667697
+        ],
+        "median_curve_18": [
+          0.010221060137865612,
+          0.04486570002376997,
+          0.0654860946042311,
+          0.06447587354409337,
+          0.050332778702162795,
+          0.541062514856192
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/55/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/58/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/61/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/64/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/67/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/70/absolute_errors"
+      ]
+    },
+    {
+      "state": "pythia-1b@step48000",
+      "size": "1b",
+      "step": 48000,
+      "capability": "qa",
+      "n_cells": 6,
+      "densities": [
+        0.9,
+        0.85,
+        0.8,
+        0.75,
+        0.7,
+        0.65
+      ],
+      "mae": {
+        "power_18": 0.17378775445628236,
+        "power_36": 0.23778153339894673,
+        "A2_36": 0.19664461529923036,
+        "median_curve_36": 0.22840918092522147,
+        "median_curve_18": 0.22291493385614683
+      },
+      "absolute_errors": {
+        "power_18": [
+          0.02355556482045773,
+          0.046797035114978236,
+          0.028853823500789133,
+          0.24015623213240023,
+          0.4137385792506807,
+          0.28962529191838815
+        ],
+        "power_36": [
+          0.011675506192905971,
+          0.01739377418204635,
+          0.083342684600471,
+          0.32619425017116743,
+          0.5362768961611328,
+          0.45180608908595676
+        ],
+        "A2_36": [
+          0.015576322058332703,
+          0.03257407469166829,
+          0.06847712704762188,
+          0.24732767927449917,
+          0.41322671058882765,
+          0.4026857781344324
+        ],
+        "median_curve_36": [
+          0.021269011406844562,
+          0.039834838403042944,
+          0.059648288973383146,
+          0.2867009268060827,
+          0.5008020437262353,
+          0.46219997623574033
+        ],
+        "median_curve_18": [
+          0.021269011406844562,
+          0.054947421577947755,
+          0.029423122623573536,
+          0.2715883436311779,
+          0.5008020437262353,
+          0.4594596601711019
+        ]
+      },
+      "sources": [
+        "results/a11-efficiency-confirmation/summary.json#/cells/56/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/59/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/62/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/65/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/68/absolute_errors",
+        "results/a11-efficiency-confirmation/summary.json#/cells/71/absolute_errors"
+      ]
+    }
+  ],
+  "input_sha256": {
+    "results/a9-measurement-efficiency/summary.json": "846898c6ecfef2cbcb4b544243c37aadd388908e447bce6ef28095544295265a",
+    "results/a11-efficiency-confirmation/summary.json": "899eb866922f28a94fc5e3bbe5dad73b5495a90566df9de3bfb7f379159f9c54",
+    "results/a11-efficiency-confirmation/plan.json": "54ffc5000b1091d6f49e9f403d12aa68c6a0c4f0913e2ad74d1219836cc82576",
+    "results/a11-efficiency-confirmation/predictions.json": "beee08caab31ba9e032b57bbb6dac9f1464c500729980ee0f706aeeb38115dfb",
+    "results/a11-efficiency-confirmation/predictions.json.sha256": "2a9e84d385afde2a1548ec2e502b293a728464e450556144f3946b36afd0ad32",
+    "results/a11-efficiency-confirmation/prereg.md": "b5a228dd56b4035b62a71c249fe9dc3525f19e8044f5dc352795e6dd52794ab5",
+    "analysis/a11_score.py": "cb2f46dbb933df81565ca10044b01ea9f60a3d164e4a656410a114988f03786f",
+    "analysis/a11_measure.py": "22a761255e867708e0049bedee4fc5020f949b5704fe102b510c804d857f8a59",
+    "analysis/v6_capability_geometry.py": "887510b9e8a6aebd6add8134102619a1af6939b5da5872e75c55e7c0a8f30509",
+    "analysis/model_registry.py": "64075b24d26325832f466d3797ec4d3def91c704e3195e51715dba6d6165a4b9",
+    "scripts/loni_a11_prune.slurm": "8a03449d3a11b58068398a9c5580e35efacf710d05405df51368f6d5d9b2e2ee",
+    "scripts/a11_sync_list.txt": "b1d29dd50b2423b56e04aae96c8f1a3cd19578c0b0295c2bc21bd48e08ad805a",
+    "data/a11/probes.json": "2f6c23f673d36cdd8bb6cf368c2c13d35b9341f8b1ed9976c53bf377e9cb3423",
+    "results/a11-efficiency-confirmation/measurements/pythia-160m--step80000/prune_losses.json": "a529bacc691a109f107c28c151ee176994cbf4e59066a75b429eff1f2227d0f5",
+    "results/a11-efficiency-confirmation/measurements/pythia-160m--step80000/metadata.json": "450dd7ae4f5ea2995b47966225c6f9bf336cdbcb8ba3dc3815f08376566857a2",
+    "results/a11-efficiency-confirmation/measurements/pythia-410m--step112000/prune_losses.json": "5c7ceb6e5e7b4da3ced3d4830f7e0d078eb636124f44983dd536f63001ca598f",
+    "results/a11-efficiency-confirmation/measurements/pythia-410m--step112000/metadata.json": "0b8d97821f7fa5d95da58c360f2b2a1b5c86940d3f495610901d9d6497b24a53",
+    "results/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/prune_losses.json": "cfcdd75108ee3579bcd2dc7a402d0d779b7f6c90f0808909640943395a1b7ed2",
+    "results/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/metadata.json": "1ecbe079d73cd56fc168811abd0fdd69bf4605bde09a9426ba338e2cb9152f1b",
+    "results/a11-efficiency-confirmation/measurements/pythia-1b--step48000/prune_losses.json": "7e093003935bed150a6655f95f25addb9054bfe60669ddee8a193c2d1cf17b9b",
+    "results/a11-efficiency-confirmation/measurements/pythia-1b--step48000/metadata.json": "599475bbc74a7257c31fa4ded21c561a9c366e8b590acf6717854b7e09cd21cc"
+  }
+}

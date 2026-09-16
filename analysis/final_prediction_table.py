@@ -30,7 +30,7 @@ S86 = "results/v86-main-table/summary.json"
 # Presentation vocabulary only. Coefficient counts and scores still come from
 # JSON fields; each mapped phrase carries the source values in its recipe.
 RELATIONS = {
-    "power": "Five-parameter power form (seventeen development states)",
+    "power": "Five-parameter power form",
     "low_order_2d": "Source regression across bit widths (twenty coefficients)",
     "median": "Development median",
     "median_curve": "Source-free median density curve",
@@ -44,19 +44,21 @@ BASELINES = {
     "surface:L0": "loss regression", "surface:logN": "size regression",
 }
 RANGES = {
-    "prune_new": "Three Pythia checkpoints unused in fitting (incl. 6.9B), pruned to densities 0.575, 0.675, 0.85",
+    "prune_new": "Three checkpoints outside every fit, pruned to densities 0.575, 0.675 and 0.85",
     "quant_bit": "Pythia 160M to 1.4B at unseen bit width 4, group sizes 64 and 256",
-    "quant_group": "Pythia 410M (143000 steps) and 1.4B (16000 steps) at unseen group sizes 32 and 512, bit widths 3 to 5",
-    "quant_new": "Pythia 1.4B (112000 steps), unseen in fitting, at bit widths 3 to 5, group sizes 32, 128 and 512",
-    "pool": "Gemma 270M and 1B distilled on six new pools for 50000 to 200000 tokens",
+    "quant_group": "Pythia 410M and 1.4B at unseen group sizes 32 and 512, bit widths 3 to 5",
+    "quant_new": "A 1.4B stage unseen in fitting, bit widths 3 to 5, group sizes 32 to 512",
+    "pool": "Gemma 270M and 1B distilled on six new pools at 50 to 200 thousand tokens",
 }
 HEADERS = ("Prediction task", "Predictor tested first", "Its error (nats)",
-           "Predictor we deliver", "Its error (nats)", "Simplest comparison\nMath / Code / QA")
-COLUMN_WIDTHS = (".20", ".18", ".115", ".20", ".115", ".19")
+           "Predictor we deliver", "Its error (nats)", "Simplest comparison\nMath / Code / QA",
+           "Development measurements")
+COLUMN_WIDTHS = (".17", ".16", ".10", ".17", ".10", ".17", ".13")
 TABLE_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
     "Every row is a prediction frozen before measurement; errors are mean absolute errors in nats per token for Math, Code and QA. "
-    "``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the baseline selected during development. "
+    "The last column counts the development configuration measurements per capability behind the tested predictor. "
+    "``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the development-selected baseline. "
     "Distillation entries give the {students} students in that order."
 )
 NUMBER_PATTERN = r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|five|six|seventeen|twenty)\b"
@@ -113,6 +115,11 @@ def evaluate(audit, part):
         result = sum(v * n for v, n in zip(vals[::2], vals[1::2])) / sum(vals[1::2])
     elif op == "length":
         result = len(vals[0])
+    elif op == "per_capability":
+        count, capabilities = vals
+        if set(capabilities) != set(CAPS) or count % len(capabilities):
+            raise ValueError("Development rows must divide evenly across capabilities")
+        result = count // len(capabilities)
     elif op == "keys":
         result = ", ".join(vals[0])
     elif op == "unique":
@@ -165,7 +172,7 @@ class Cell:
         if not self.compact_scores:
             return render_text(plain)
         # Measure in the actual document font and column, without squeezing type.
-        # Score cells retain three labelled lines whenever the full line is too wide.
+        # Score cells retain three capability-ordered lines when the triplet is too wide.
         prefix, scores = plain.split("\n", 1) if self.compact_scores == "comparison" else ("", plain)
         return ((render_text(prefix) + r"\newline ") if prefix else "") + r"\TableOneErrors" + "".join(
             "{" + render_text(line) + "}" for line in scores.split("\n"))
@@ -205,7 +212,12 @@ def cap_lines(fn, separator="; ", label_separator=" "):
 
 
 def score_parts(fn):
-    return cap_lines(fn, separator="\n")
+    parts = []
+    for cap in CAPS:
+        if parts:
+            parts.append("\n")
+        parts.extend(fn(cap))
+    return parts
 
 
 def baseline_parts(audit, fn):
@@ -220,7 +232,7 @@ def baseline_parts(audit, fn):
     elif names == ["bilinear regression", "no change", "development median"]:
         label = "Bilinear regression; Code: no change; QA: median"
     elif names == ["budget regression, loss regression", "reuse regression", "reuse regression, size regression"]:
-        label = "Regressions: Math budget, loss; Code reuse; QA reuse, size"
+        label = "Regressions on budget and loss, on reuse, and on reuse and size"
     else:
         grouped = {}
         for cap, name in zip(CAPS, names):
@@ -238,7 +250,7 @@ def baseline_parts(audit, fn):
 def composite_label(names):
     """Translate the two frozen mixed predictors into ordinary words."""
     if list(names.values()) == ["E", "E", "joint"]:
-        return "Math and code: one-coefficient reuse forms; QA: three-coefficient budget-and-pool form"
+        return "Reuse forms for math and code; budget-and-pool form for QA"
     if list(names.values()) == ["low_order_2d", "median", "zero"]:
         return "Math source regression; Code development median; QA no change"
     if list(names.values()) == ["same_input_interpolation", "same_input_interpolation", "median"]:
@@ -459,6 +471,31 @@ def build(audit):
                  *pool_numbers(c,"baseline_mae")]), refs=[pointer(f70,"baseline_rule"),pointer(f70,"strongest_baseline")],
              note="Development-fixed baseline identities, student order 270M, 1B: " +
              " / ".join(baseline_names(groups[i]["strongest_baseline"] for i in pool_inds[c]) for c in CAPS) + ".")])
+    # Configuration measurements exclude dense anchors, repeats and test cells.
+    # V53 counts scalar capability rows, whereas V55/V69 count configurations.
+    # In V69 the QA zero rule still used the development panel for selection.
+    d70 = "results/v70-distill-confirm/develop.json"
+    development = audit.read(d70)
+    if not audit.matches_digest(audit.data[f70]["inputs_sha256"][d70], audit.inputs[d70]):
+        raise ValueError("Distillation development does not match its frozen registration")
+    if prune["n_dev_rows"] != len(CAPS) * sum(len(s["densities"]) for s in prune["dev_states"]):
+        raise ValueError("Pruning development row count disagrees with registered cells")
+    if development["development_structure"]["n_points"] != len(development["points"]):
+        raise ValueError("Distillation development count disagrees with registered points")
+    counts = [
+        cell(value(pointer(P53, "n_dev_rows"), pointer(P53, "models"), op="per_capability"),
+             refs=[pointer(P53, "dev_states")],
+             note="252 recorded scalar rows / three capability models = 84 state-density configurations per capability; cross-checked against dev_states[*].densities. This is the V53 17-state fit, not A9/A11's 36-cell panel. Dense anchors excluded."),
+        cell(value(pointer(Q55, "n_dev_cells")), refs=[pointer(Q55, "dev_states"), pointer(Q55, "dev_configs")],
+             note="Recorded configuration count; six states times four configurations per capability. Dense anchors excluded."),
+        *[cell(value(pointer(Q69, "n_dev_cells")), refs=[pointer(Q69, "dev_states"), pointer(Q69, "dev_configs"), pointer(Q69, "selection_rule")],
+               note="Recorded configuration count; six states times nine configurations per capability. Includes development selection of QA's zero rule, which fits no coefficients. The same development panel supports both tests; counts are not additive.") for _ in range(2)],
+        cell(value(pointer(d70, "development_structure", "n_points")),
+             refs=[pointer(d70, "development_structure"), pointer(d70, "points"), pointer(f70, "inputs_sha256", d70)],
+             note="100 registered checkpoints (25 trajectories times four) per capability, pooled across development students for the shared fit; not 100 per test student. The freeze authenticates develop.json; dense anchors excluded."),
+    ]
+    for row, count in zip(result, counts):
+        row.append(count)
     complete = []
     for row in result:
         try:
@@ -471,7 +508,7 @@ def build(audit):
             audit.omit("Task omitted because a frozen value is absent: " + row[0].plain(audit))
         else:
             for index in (2, 4):
-                row[index].compact_scores = "labelled"
+                row[index].compact_scores = "ordered"
             row[5].compact_scores = "comparison"
             complete.append(row)
     return complete
@@ -541,9 +578,10 @@ def generate(root=ROOT, *, write_tex=True):
         records = [{"row":i,"column":j,**c.record(audit)} for i,row in enumerate(rows) for j,c in enumerate(row)]
         numbers = numeric_inventory([*records, caption.record(audit)], audit)
         side = ["# Main prediction table: cell sources", "", "Columns: " + "; ".join(HEADERS) + ".",
-                "Rendered layout: one row per frozen prediction task. Cell coordinates match the six printed columns; every cell is populated.",
-                "Error cells use one Math / Code / QA line if it fits the actual column, otherwise three labelled lines. Distillation pairs follow student order 270M, 1B as stated in the caption. Baseline names precede their scores, in the capability order named in the header; where two names differ they follow student order 270M, 1B. Development selection pointers are recorded in each baseline cell's note/context.",
-                "The words 'chosen after this test' mark post-test delivery decisions; first predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test, 'The same predictor' retains the source regression as tested and its exact errors. The later delivered model has no matching stored score and its development includes those cells.",
+                "Rendered layout: one row per frozen prediction task. Cell coordinates match the seven printed columns; every cell is populated.",
+                "Development measurements are distinct development configuration measurements per capability for fitting or selecting the tested candidate, excluding dense anchors and held-out measurements. Counts do not describe the post-test delivered predictor. V53 divides recorded scalar rows by the recorded capability-model count; V55/V69 use n_dev_cells; V70 uses development_structure.n_points authenticated by freeze.json. Shared development sets are not additive across rows.",
+                "Error cells use one Math / Code / QA line if it fits the actual column, otherwise three lines in that order. Distillation pairs follow student order 270M, 1B as stated in the caption. Baseline names precede their scores, in the capability order named in the header; paired baseline names follow student order 270M, 1B. Development selection pointers are recorded in each baseline cell's note/context. Short task labels retain the full state and configuration definitions in their source recipes.",
+                "The words 'post-test' mark delivery chosen after this test; first predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test, 'The same predictor' retains the source regression as tested and its exact errors. The later delivered model has no matching stored score and its development includes those cells.",
                 "Stored V70 paired_difference.ci95 endpoints are omitted from Table 1 because they do not fit on the same line as the score. They remain in the appendix tables. The sign is baseline minus candidate; these are not MAE intervals. No refits, resampling or invented intervals.",
                 "All indices are zero-based JSON pointers. `mean` is equal-weight arithmetic; `weighted_mean` pairs each stored subset MAE with its stored cell count, preserving equal cell weights. No refits or resampling.",
                 "Numeric values are formatted directly from the following executable source recipes. Context pointers justify textual labels and freeze identities; incomplete tasks are omitted.",

@@ -1,0 +1,24 @@
+{
+  "target": {
+    "state": "pythia-160m@step80000",
+    "size": "160m",
+    "step": 80000,
+    "hf_id": "EleutherAI/pythia-160m",
+    "revision": "step80000",
+    "N0": 84934656,
+    "D0": 167772160000,
+    "L0": {
+      "math": null,
+      "code": null,
+      "qa": null
+    },
+    "architecture": {
+      "hidden_size": 768,
+      "intermediate_size": 3072,
+      "num_hidden_layers": 12
+    }
+  },
+  "started_utc": "2026-09-16T14:46:18.757976+00:00",
+  "predictions_sha256": "beee08caab31ba9e032b57bbb6dac9f1464c500729980ee0f706aeeb38115dfb",
+  "slurm_job_id": "the workstation-local-a11"
+}

@@ -1,0 +1,130 @@
+{
+  "tests": {
+    "a13": {
+      "passed": 15,
+      "log": "tests-a13.log"
+    },
+    "existing_a12_figure_style_table_layout": {
+      "passed": 40,
+      "warnings": 3,
+      "log": "tests-integration.log"
+    }
+  },
+  "input_hashes_unchanged": {
+    "results/a12-data-requirement-confirmation/score.json": "b25673e9aacb21f17b29d7eee595c3f50c38e7ac6db2bc5706885d5d2b95a8ce",
+    "results/a12-data-requirement-confirmation/plan.json": "3eadcc996fc1a61c573ebe7413be4e103ee2f38a8e04b6a06452861c79020f1f"
+  },
+  "figures": {
+    "dreq_a": {
+      "pdf_size_points": [
+        129.6,
+        97.2
+      ],
+      "marker_pixel_check": {
+        "dpi": 220,
+        "count": 2,
+        "point_ids": [
+          0,
+          1
+        ],
+        "minimum_visible_ink_pixels": 58,
+        "visible_ink_pixels": [
+          58,
+          87
+        ],
+        "fully_hidden": 0,
+        "accepted_coincident_point_ids": [],
+        "undocumented_hidden": 0
+      }
+    },
+    "dreq_b": {
+      "pdf_size_points": [
+        129.6,
+        97.2
+      ],
+      "marker_pixel_check": {
+        "dpi": 220,
+        "count": 5,
+        "point_ids": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "minimum_visible_ink_pixels": 85,
+        "visible_ink_pixels": [
+          90,
+          85,
+          85,
+          85,
+          85
+        ],
+        "fully_hidden": 0,
+        "accepted_coincident_point_ids": [],
+        "undocumented_hidden": 0
+      }
+    },
+    "dreq_c": {
+      "pdf_size_points": [
+        129.6,
+        97.2
+      ],
+      "marker_pixel_check": {
+        "dpi": 220,
+        "count": 10,
+        "point_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "minimum_visible_ink_pixels": 50,
+        "visible_ink_pixels": [
+          74,
+          74,
+          83,
+          50,
+          74,
+          74,
+          83,
+          50,
+          69,
+          50
+        ],
+        "fully_hidden": 0,
+        "accepted_coincident_point_ids": [],
+        "undocumented_hidden": 0
+      }
+    },
+    "dreq_legend": {
+      "pdf_size_points": [
+        396.0,
+        21.6
+      ],
+      "marker_pixel_check": {
+        "dpi": 220,
+        "count": 0,
+        "point_ids": [],
+        "minimum_visible_ink_pixels": 0,
+        "visible_ink_pixels": [],
+        "fully_hidden": 0,
+        "accepted_coincident_point_ids": [],
+        "undocumented_hidden": 0
+      }
+    }
+  },
+  "table": {
+    "pages": 6,
+    "overfull_boxes": 0,
+    "underfull_boxes": 0,
+    "unique_request_rows": 144,
+    "compile_log": "table-compile.log"
+  }
+}

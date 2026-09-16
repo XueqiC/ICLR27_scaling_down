@@ -31,6 +31,9 @@ ROOT = Path(__file__).resolve().parent
 MIRROR = ROOT / "data_mirror"
 RESULTS = ROOT / "results"
 OUTPUT_DIRS = (ROOT / "generated" / "tables", ROOT / "generated" / "figs")
+# A11 authenticates these files at their original repository-relative locations.
+# Keep their authoritative copies in the experiment mirror, just like results.
+A11_RUNTIME = MIRROR / "a11-efficiency-confirmation" / "runtime"
 
 
 def targets(relative: Path) -> list[Path]:
@@ -78,6 +81,19 @@ def main() -> int:
     for directory in output_dirs:
         if not dry:
             directory.mkdir(parents=True, exist_ok=True)
+
+    if A11_RUNTIME.is_dir():
+        for source in sorted(A11_RUNTIME.rglob("*")):
+            if not source.is_file():
+                continue
+            target = ROOT / source.relative_to(A11_RUNTIME)
+            if target.exists():
+                skipped += 1
+            else:
+                if not dry:
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(source, target)
+                written += 1
 
     # Generated tables that later generators read back as cross-checks.
     table_source = MIRROR / "tables"

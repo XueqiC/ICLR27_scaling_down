@@ -1,0 +1,62 @@
+{
+  "files": [
+    "paper/paper/figs/dreq_a.pdf",
+    "paper/paper/figs/dreq_a.png",
+    "paper/paper/figs/dreq_a_data.json",
+    "paper/paper/figs/dreq_a_sources.md",
+    "paper/paper/figs/dreq_a_caption.txt",
+    "paper/paper/figs/dreq_b.pdf",
+    "paper/paper/figs/dreq_b.png",
+    "paper/paper/figs/dreq_b_data.json",
+    "paper/paper/figs/dreq_b_sources.md",
+    "paper/paper/figs/dreq_b_caption.txt",
+    "paper/paper/figs/dreq_c.pdf",
+    "paper/paper/figs/dreq_c.png",
+    "paper/paper/figs/dreq_c_data.json",
+    "paper/paper/figs/dreq_c_sources.md",
+    "paper/paper/figs/dreq_c_caption.txt",
+    "paper/paper/figs/dreq_legend.pdf",
+    "paper/paper/figs/dreq_legend.png",
+    "paper/paper/figs/dreq_legend_data.json",
+    "paper/paper/figs/dreq_legend_sources.md",
+    "paper/paper/figs/dreq_legend_caption.txt",
+    "paper/paper/figs/dreq_caption.txt",
+    "results/a13-dreq-accounting/dreq_review.pdf",
+    "results/a13-dreq-accounting/dreq_review.png",
+    "results/a13-dreq-accounting/accounting.json",
+    "results/a13-dreq-accounting/requests.json",
+    "results/a13-dreq-accounting/recommendations.json",
+    "results/a13-dreq-accounting/same_denominator.json",
+    "results/a13-dreq-accounting/median_distances.json",
+    "results/a13-dreq-accounting/recommendations.csv",
+    "results/a13-dreq-accounting/same_denominator.csv",
+    "results/a13-dreq-accounting/summary.md",
+    "paper/paper/tables/dreq_full.tex",
+    "paper/paper/tables/dreq_full.json",
+    "paper/paper/tables/dreq_full_sources.md",
+    "results/a13-dreq-accounting/files_written.json",
+    "results/a13-dreq-accounting/tests-a13.log",
+    "results/a13-dreq-accounting/tests-integration.log",
+    "results/a13-dreq-accounting/run.log",
+    "results/a13-dreq-accounting/table-compile.log",
+    "results/a13-dreq-accounting/dreq_table_review.pdf",
+    "results/a13-dreq-accounting/validation.json"
+  ],
+  "input_sha256": {
+    "results/a12-data-requirement-confirmation/score.json": "b25673e9aacb21f17b29d7eee595c3f50c38e7ac6db2bc5706885d5d2b95a8ce",
+    "results/a12-data-requirement-confirmation/plan.json": "3eadcc996fc1a61c573ebe7413be4e103ee2f38a8e04b6a06452861c79020f1f"
+  },
+  "cpu_only": true,
+  "generators": [
+    "analysis/a13_dreq_accounting.py",
+    "analysis/a13_dreq_table.py"
+  ],
+  "source_and_documentation_files": [
+    "analysis/a13_dreq_accounting.py",
+    "analysis/a13_dreq_table.py",
+    "tests/test_a13_dreq_accounting.py",
+    "docs/RESULTS_LEDGER.md",
+    "PROJECT_STATE.md",
+    "notes/exp_log.md"
+  ]
+}
