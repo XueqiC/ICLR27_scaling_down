@@ -48,7 +48,7 @@ def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
     rows, audit, tex, recipes, caption = generated
     assert len(rows) == 5 and len(recipes) == 30
     body = tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0]
-    table_rows = [line.removesuffix(r" \\").split(" & ") for line in body.splitlines()]
+    table_rows = [line.removesuffix(r" \\").split(" & ") for line in body.splitlines() if line.strip() != r"\midrule"]
     assert len(table_rows) == 5 and all(len(row) == 6 for row in table_rows)
     assert {(r["row"], r["column"]) for r in recipes} == {
         (i, j) for i in range(5) for j in range(6)}
@@ -115,7 +115,7 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert [row[0].plain(audit).split("\n")[0] for row in rows] == TASKS
     assert all(len(row) == 6 for row in rows)
     assert all(c.plain(audit).strip() for row in rows for c in row)
-    assert all(c.strip() for line in tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0].splitlines()
+    assert all(c.strip() for line in tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0].splitlines() if line.strip() != r"\midrule"
                for c in line.removesuffix(r" \\").split(" & "))
     assert not re.search(r"not tested|n/a", tex, re.I)
     assert "unseen density" not in tex
@@ -295,7 +295,7 @@ def test_paired_intervals_remain_frozen_and_are_omitted_from_table(generated):
 def test_every_numeric_occurrence_is_in_inventory(generated):
     rows, audit, tex, recipes, caption = generated
     numbers = gen.numeric_inventory([*recipes, caption], audit)
-    body = tex.split("\\midrule\n")[1].split("\\bottomrule")[0]
+    body = "\n".join(l for l in tex.split("\\midrule\n", 1)[1].split("\\bottomrule")[0].splitlines() if l.strip() != r"\midrule")
     assert [n["number"] for n in numbers] == re.findall(r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|five|six|seventeen|twenty)\b", body + caption["rendered"], re.I)
     assert all(n["sources"] for n in numbers)
     caption_numbers = [n for n in numbers if n.get("location") == "caption"]

@@ -506,7 +506,8 @@ def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
              r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}",
              r"\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}" + columns + "@{}}",
              r"\toprule", " & ".join(render_text(h) for h in HEADERS) + r" \\", r"\midrule"]
-    lines += [" & ".join(c.render(audit) for c in row) + r" \\" for row in rows]
+    body = [" & ".join(c.render(audit) for c in row) + r" \\" for row in rows]
+    lines += [("\n" + r"\midrule" + "\n").join(body)]
     lines += [r"\bottomrule", r"\end{tabular*}", r"\caption{"+TABLE_FONT+" "+caption_cell(audit).render(audit)+"}",
               r"\label{tab:main-prediction-v2}", r"\end{table*}"]
     return "\n".join(lines)+"\n"
