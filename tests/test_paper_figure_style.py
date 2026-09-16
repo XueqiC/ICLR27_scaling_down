@@ -19,7 +19,7 @@ EXPECTED_PANEL_SIZES = {
     "fig5_legend": (5.5, .3),
     "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
     "fig7_legend": (5.5, .3),
-    "fig8_a": (2.7, 1.6), "fig8_b": (2.7, 1.6), "fig8_legend": (5.5, .3),
+    "fig8_a": (2.7, 2.0), "fig8_b": (2.7, 2.0), "fig8_legend": (5.5, .3),
 }
 
 
