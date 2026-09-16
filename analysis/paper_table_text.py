@@ -628,7 +628,8 @@ def table_text(text):
     """Apply editorial changes to tables without touching surrounding prose."""
     labels = re.findall(r"\\label\{([^}]+)\}", text)
     fallback = next((label for label in labels if label in CAPTION_NOTES), None)
-    return fit_table_height(TABLE.sub(lambda m: _concise(_table(m.group(), fallback)), text))
+    text = TABLE.sub(lambda m: _concise(_table(m.group(), fallback)), text)
+    return fit_table_height(text.replace("reuse count", "reuse ratio"))
 
 
 def fit_table_height(text):
