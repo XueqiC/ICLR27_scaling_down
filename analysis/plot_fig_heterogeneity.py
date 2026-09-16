@@ -21,8 +21,8 @@ else:
     import v51_panel_tables as tables
 
 SOURCE = "results/v51-panel/panel.json"
-PANEL_SIZE = (2.7, 1.6)
-BAR_WIDTH = .85 / 3
+PANEL_SIZE = (2.7, 2.0)
+BAR_WIDTH = 0.95 / 3
 SHORT_NAMES = {"Gemma-3": "G3", "Gemma-4": "G4", "OLMo-3": "OL3", "Qwen3": "Q3", "Muse": "Muse"}
 CAPTION = """Heterogeneity across the original twelve-model panel, ordered by
 family/series and increasing size within each series. Grouped bars show Math,
@@ -36,8 +36,8 @@ arithmetic. The two prospective Qwen3 additions are excluded by cohort=panel.
 Tick abbreviations: G3 = Gemma-3, G4 = Gemma-4, OL3 = OLMo-3, Q3 = Qwen3;
 Muse is written in full. The complete display names and JSON pointers are in
 the per-panel data sidecars. No seed averaging or uncertainty intervals.
-The three touching capability bars fill 0.85 of each model slot; the remaining
-0.15 separates model groups. The two 2.7 x 1.6-inch panels form one row at
+The three touching capability bars fill 0.95 of each model slot; the remaining
+0.05 separates model groups. The two 2.7 x 2.0-inch panels form one row at
 5.5-inch text width; model labels are rotated 45 degrees at 7.5 pt.
 The shared key fig8_legend.pdf sits above the panels.
 """
@@ -79,7 +79,7 @@ def build(audit):
 def draw_panel(fig, rows, panel):
     import numpy as np
     from matplotlib.ticker import MaxNLocator
-    ax = panel_axes(fig, PANEL_SIZE, left=.37, bottom=.53, right=.035, top=.06)
+    ax = panel_axes(fig, PANEL_SIZE, left=.37, bottom=.47, right=.02, top=.04)
     part = [r for r in rows if r["panel"] == panel]
     for offset, cap in zip((-BAR_WIDTH, 0, BAR_WIDTH), CAPS):
         series = sorted((r for r in part if r["capability"] == cap), key=lambda r: r["order"])
@@ -90,11 +90,11 @@ def draw_panel(fig, rows, panel):
         if a["series"] != b["series"]:
             ax.axvline(a["order"]+.5, color=PALETTE["grid"], lw=.6, zorder=0)
     ax.set_xticks(range(12), [r["label"] for r in order], rotation=45, ha="right", rotation_mode="anchor")
-    ax.set(xlim=(-.65, 11.65), xlabel="", ylabel="Loss change (nats)")
+    ax.set(xlim=(-.55, 11.55), xlabel="", ylabel="Loss change (nats)")
     ax.tick_params(axis="x", labelsize=7.5)
     axes_defaults(ax)
     ax.yaxis.set_major_locator(MaxNLocator(3, integer=True))
-    ax.margins(y=.18)
+    ax.margins(y=.06)
     return finish_panel(ax)
 
 
