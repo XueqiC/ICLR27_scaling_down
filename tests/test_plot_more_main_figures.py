@@ -60,7 +60,7 @@ def generated(tmp_path_factory):
                            for p in ax.patches)
                 for i in range(12):
                     bars = [ax.patches[i + 12*k] for k in range(3)]
-                    assert bars[-1].get_x()+bars[-1].get_width()-bars[0].get_x() == pytest.approx(.85)
+                    assert bars[-1].get_x()+bars[-1].get_width()-bars[0].get_x() == pytest.approx(.95)
                     assert all(a.get_x()+a.get_width() == pytest.approx(b.get_x())
                                for a, b in zip(bars, bars[1:]))
                     if i < 11:
