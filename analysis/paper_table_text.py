@@ -669,7 +669,7 @@ def table_text(text):
     text = text.replace("reuse count", "reuse ratio")
     for old, new in NOTE_ENDINGS:
         text = text.replace(old, new)
-    return fit_table_height(text)
+    return plain_language(fit_table_height(text))
 
 
 NOTE_ENDINGS = [
@@ -1000,3 +1000,422 @@ def _specific(label, text):
         # Outside math, paired values are separated by a semicolon.
         text = re.sub(r"(?<=[\d$])\s*/\s*(?=[+$\d-]|not available)", "; ", text)
     return text
+
+
+# Final reader-facing vocabulary. Data keys and numerical formatting remain in
+# the individual generators. This pass also covers their already-rendered notes.
+PLAIN_WORDS = {
+    'QA': 'Question answering', 'Math': 'Mathematics',
+    'MAEs': 'mean absolute errors', 'MAE': 'mean absolute error',
+    'CI': 'confidence interval', 'LOSO': 'leave one state out',
+    'LOCO': 'leave one run out', 'OLS': 'ordinary least squares',
+    'RTN': 'round-to-nearest quantization', 'LoRA': 'low-rank adaptation',
+    'A1': 'linear power form', 'A2': 'per-density regression',
+    'F1': 'descriptor-modulated reuse', 'F2': 'saturating budget and reuse',
+    'K0': 'no target measurement', 'K1': 'one target measurement',
+    'nD': 'no pretraining-token input', 'pbm': 'per-bit median',
+    'pba': 'per-bit mean', 'med': 'median', 'so': 'strength only',
+    'TE': 'joint budget and reuse', 'ct': 'continuous two-term form',
+    'L0': 'initial loss', 'logN': 'logarithmic student size',
+    'Arm': 'Compression method', 'df': 'effective degrees of freedom',
+}
+EXPERIMENT_WORDS = {
+    '36': 'per-bit source', '38': 'fixed-bit development',
+    '39': 'fixed-recipe student', '41': 'single-student pool',
+    '49': 'new-source prediction', '50': 'multi-student development',
+    '53': 'pruning development', '55': 'grouped-quantization development',
+    '64': 'development selection', '69': 'grouped-quantization interpolation',
+    '70': 'distillation confirmation', '78': 'independent selection',
+    '85': 'selection decomposition',
+}
+FOLD_WORDS = {
+    'RFRA': 'Retrospective / fixed / retrospective',
+    'PFRA': 'Frozen / fixed / retrospective',
+    'P–RA': 'Frozen / absent / retrospective',
+    'PRFA': 'Frozen / retrospective / fixed',
+    'PFFA': 'Frozen / fixed / fixed',
+}
+
+# No new numerical claims are introduced here. The previous caption's numerical
+# definitions remain, in order, in the adjacent note. Caption text is intentionally
+# independent of experiment identifiers, formulas and the stored artifact names.
+PLAIN_CAPTIONS = {
+ 'tab:models': 'The table shows which prediction forms apply to each compression method and test range. Loss is measured in nats per native token, bit width in bits, and budgets in tokens. Parameter and calibration columns give counts.',
+ 'tab:model_arch': 'The table compares model architectures and parameter counts. Counts are in billions of parameters. The columns distinguish counts before restoring tied weights, active parameters, unique parameters after restoring ties, and transformer matrices.',
+ 'tab:round3_coef': 'The table gives the frozen pruning exponent and coefficients for each capability. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the formula and standardization constants.',
+ 'tab:quant2d_coef': 'The table gives frozen grouped-quantization coefficients by capability and response term. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the formula and standardization constants.',
+ 'tab:v53_loso': 'The table compares pruning predictors when one source is held out. Entries are mean absolute errors in nats per native token. The rows separate all measured densities from densities outside the coarse development grid.',
+ 'tab:v55_loso': 'The table compares grouped-quantization predictors when one state is held out. Entries are mean absolute errors in nats per native token. A collapsing development state dominates the errors, so all candidate forms were retained for testing.',
+ 'tab:quant_ident': 'The table shows how many independent coefficients the quantization designs support and how accurately they predict held-out measurements. The upper panel gives dimensionless rank and effective degrees of freedom. The lower panel gives mean absolute errors in nats per native token.',
+ 'tab:v56_forms': 'The table compares distillation forms under run and student holdouts. Each pair gives mean absolute error followed by signed bias, in nats per native token. Parameter counts cover all capabilities.',
+ 'tab:v56_condition': 'The table compares shared and capability-specific distillation responses at matched parameter counts. Errors and gains are in nats per native token. Paired parameter counts list the shared response followed by the capability-specific response.',
+ 'tab:distill_forms_audit': 'The table records the frozen distillation formulas and their fitted coefficients. Responses are loss changes in nats per native token. The first panel specifies the fit; the second lists coefficients in the stated order. The notes define the inputs and fitting procedure.',
+ 'tab:shared_structure': 'The table compares shared response structure and calibration with one target measurement. Mean absolute errors and interval widths are in nats per native token; coverage is a percentage. Calibration pairs list no target measurement followed by one target measurement, which is excluded from scoring.',
+ 'tab:cap_conditioning': 'The table compares separate capability responses with shared responses on frozen confirmation panels. Mean absolute errors and gains are in nats per native token. Positive gains favor separate responses; brackets give paired confidence intervals.',
+ 'tab:cond_audit': 'The table compares separate capability responses with a shared response and fitted capability scales. Scales and squared correlations are dimensionless. Errors and improvements are in nats per native token; brackets give confidence intervals.',
+ 'tab:main_final': 'The table compares frozen relations, alternatives, and delivered rules on confirmation tests. Mean absolute errors and gains are in nats per native token. Lists follow mathematics, code, and question answering. Gain is alternative error minus relation error; retrospective rules were chosen after testing.',
+ 'tab:main_context': 'The table compares the earlier distillation relation with frozen alternatives on unseen pools and students. Mean absolute errors and gains are in nats per native token. Lists follow mathematics, code, and question answering. Gain is alternative error minus relation error; these rules were not delivered.',
+ 'tab:pred_full': 'The table compares relations with the named strongest baselines across all prediction tests. Pairs give relation error followed by baseline error, in nats per native token; bold marks the lower error. All specified forms are reported. Fold rules distinguish frozen predictions, fixed baselines, and retrospective fits.',
+ 'tab:pred_source': 'The table tests predictions for unseen source states at fixed compression settings. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give improvement over the strongest baseline. Asterisks mark confidence intervals excluding zero. All specified forms are reported.',
+ 'tab:pred_config_prune': 'The table tests pruning predictions at unseen densities and source states. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported.',
+ 'tab:pred_config_qd': 'The table tests quantization and distillation predictions on unseen settings, source states, and pools. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported.',
+ 'tab:p1v2': 'The table compares frozen predictors on new source states under two development-data rules. Entries are mean absolute errors over capabilities, in nats per native token. The final column names the predictor with the lowest observed error, a retrospective ranking.',
+ 'tab:round3_prune': 'The table compares frozen pruning predictors on new checkpoints and densities. Mean absolute errors and signed biases are in nats per native token. Bias is prediction minus observation; parameter counts are per capability.',
+ 'tab:round3_quant': 'The table compares frozen grouped-quantization predictors on unseen bit widths, group sizes, and source states. Entries are mean absolute errors in nats per native token. Parentheses in test headings give the number of measured cells per capability.',
+ 'tab:quant_threeway': 'The table compares development-selected predictors, all frozen candidates, and retrospective rules on the quantization confirmation panel. Entries are mean absolute errors in nats per native token, with equal weight per measured cell.',
+ 'tab:prune_repeat': 'The table compares pruning prediction errors when identical model weights are measured twice. Entries are mean absolute errors in nats per native token, with equal weight per measurement. All predictors were frozen before target measurement.',
+ 'tab:p2v2_test': 'The table compares frozen distillation predictions for unseen pools and students. Entries are mean absolute errors in nats per native token. The selected relation minimizes development error; the best frozen form is a retrospective ranking. Pool sizes count traces per domain.',
+ 'tab:distill_paired': 'The table compares distillation errors with the frozen constant and zero-change baselines. Errors and paired differences are in nats per native token; relative improvements are percentages. Positive differences favor the relation. Brackets give paired confidence intervals.',
+ 'tab:distill_confirm': 'The table compares distillation relations with baselines selected before confirmation. Mean absolute errors and paired improvements are in nats per native token. Improvement is baseline error minus relation error; brackets give paired confidence intervals. Pool sizes count traces per domain and budgets count supervised tokens.',
+ 'tab:p3_check': 'The table compares loss changes on primary and independent secondary benchmarks. Each pair lists the primary benchmark followed by the named secondary benchmark, in nats per native token. Compression states were specified before secondary measurement.',
+ 'tab:musique_scope': 'The table compares question-answering loss changes across two benchmarks and distillation checkpoints. Loss changes are in nats per native token. Entries give trajectory means with ranges in brackets; reuse is dimensionless and pool sizes count traces per domain.',
+ 'tab:qa_scope': 'The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count supervised tokens.',
+ 'tab:panel_prune': 'The table compares pruning damage across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-damaged and most-damaged outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.',
+ 'tab:panel_quant': 'The table compares quantization damage across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths. Daggers mark prospective additions.',
+ 'tab:selection-feasible': 'The table compares selection policies on their feasible compression choices. Coverage and agreement with the measured oracle are percentages; mean regret is in nats per native token. Results distinguish each policy\'s feasible cells from the cells shared by all policies.',
+ 'tab:rule-confirm': 'The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are percentages.',
+ 'tab:rule_decomp': 'The table separates selection regret by source-state subset and policy. Mean regret and policy differences are in nats per native token, with equal weight per state and storage budget. Negative differences favor the frozen rule.',
+ 'tab:rule-confirm-by-state': 'The table compares policy regret for each source state and objective. Mean regret is in nats per native token, averaged over storage budgets. The final column counts distinct configurations selected by the frozen rule.',
+ 'tab:rule-confirm-candidate-sizes': 'The table shows candidate-set sizes and coverage of the measured oracle. Set sizes count compression methods. Coverage entries give covered cells out of total cells, followed by the percentage in parentheses. This is a retrospective diagnostic of frozen predictions.',
+ 'tab:candidate-coverage': 'The table shows measured compression choices available for each source state. Method columns list configuration count followed by minimum storage ratio. Counts are numbers of configurations; storage ratios are dimensionless. Unavailable entries indicate that no candidate was measured.',
+ 'tab:locked_rule': 'The table specifies the selection predictor for each compression method, capability, and source-state status. Absolute losses are in nats per native token. Development-data columns name the fitting panel, and anchor columns identify the dense reference loss. The rule was frozen before confirmation.',
+ 'tab:final': 'The table summarizes delivered predictors, their inputs, evidence, and applicable settings. Prediction errors and gains are in nats per native token, relative to the strongest baseline using the same information. Rules chosen after testing are marked retrospective.',
+}
+
+
+def _reader_words(text):
+    """Expand prose tokens while protecting TeX references and mathematical names."""
+    protected = re.compile(r'(?m)^%[^\n]*|\\(?:label|ref|eqref|cite|texttt)\{[^}]*\}|\$(?:\\.|[^$])*\$')
+    code_phrases = {
+        r'\texttt{results/v75-distill-audit/summary.json}': 'the saved distillation audit',
+        r'\texttt{new\_state}': 'a new state', r'\texttt{new\_size}': 'a new size',
+        r'\texttt{new\_stage}': 'a new stage', r'\texttt{new\_source}': 'a new source',
+        r"\texttt{qa\_distribution='2Wiki'}": 'the primary question-answering distribution',
+        r'\texttt{tables/final\_deliverables.tex}': 'The delivered-predictor table',
+    }
+    def prose(s):
+        for old, new in PLAIN_WORDS.items():
+            s = re.sub(r'(?<![\w\\])' + re.escape(old) + r'(?!\w)', lambda m: new, s)
+        s = re.sub(r'\b[Vv](\d{2})\b', lambda m: EXPERIMENT_WORDS.get(m[1], 'development'), s)
+        # Unit prefixes change words, never the printed digits.
+        s = re.sub(r'(?<=\d)k\b', ' thousand', s)
+        s = re.sub(r'(?<=\d)M\b', ' million', s)
+        s = re.sub(r'(?<=\d)B\b', ' billion', s)
+        return re.sub(r'(?<=\w)@(?:step)?(?=\d)', ' at step ', s)
+    parts = []; start = 0
+    for m in protected.finditer(text):
+        parts.extend([prose(text[start:m.start()]), code_phrases.get(m.group(), m.group())]); start = m.end()
+    parts.append(prose(text[start:]))
+    return ''.join(parts)
+
+
+def _reader_caption(block, label):
+    try:
+        from .paper_table_layout import group
+    except ImportError:
+        from paper_table_layout import group
+    pattern = re.compile(r'\\caption(?:\*|\[\])?\{')
+    edits = []
+    for match in pattern.finditer(block):
+        old, end = group(block, match.end()-1)
+        if 'continued' in old.lower():
+            caption = ('The table continues the preceding comparison. '
+                       + PLAIN_CAPTIONS[label].split('. ', 1)[1])
+            note = ''
+        else:
+            caption = PLAIN_CAPTIONS[label]
+            # Preserve numerical statements in their original position. Readers
+            # see concise captions and fully traceable technical notes.
+            old = SIZE_PREFIX.sub('', old)
+            if label == 'tab:pred_full':
+                old = (r'The zero-change baseline predicts 0; the linear power form fixes $\gamma{=}1$. '
+                       r'Improvements and uncertainty intervals appear in Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}.')
+            else:
+                # Keep numerical definitions and the literal reference patches;
+                # discard obsolete code glossaries and repeated reading rules.
+                sentences = re.split(r'(?<=[.;]) (?=[A-Z$])', old)
+                kept = []
+                for sentence in sentences:
+                    probe = re.sub(r'\\(?:ref|eqref)\{[^}]*\}|\b(?:[AFKGVv]\d+|L0)\b|_(?:\{[^{}]*\}|\d)', '', sentence)
+                    if re.search(r'\d', probe) or r'\S\ref{sec:unseen_settings}' in sentence or r'Appendix Table~\ref{tab:round3_coef}' in sentence:
+                        kept.append(sentence)
+                old = ' '.join(kept)
+            note = ('\n'+r'\par\smallskip{\footnotesize '+old+r'\par}') if old else ''
+        edits.append((match.end(), end-1, caption, note))
+    for start, end, caption, note in reversed(edits):
+        block = block[:start]+caption+'}'+note+block[end+1:]
+    return block
+
+
+def _reader_body(block, label):
+    try:
+        from .paper_table_layout import group
+    except ImportError:
+        from paper_table_layout import group
+    # Remove artificial stacks before expanding words. Paragraph columns wrap.
+    pattern = re.compile(r'\\shortstack(?:\[[^]]*\])?')
+    while m := pattern.search(block):
+        content, end = group(block, m.end())
+        block = block[:m.start()]+'{'+content.replace(r'\\', ' ')+'}'+block[end:]
+    block = block.replace(r'\allowbreak ', '')
+    block = block.replace(r'\mbox{Held-out} axis', 'What is held out')
+    block = block.replace(r'\emph{\mbox{held-out} axis}; [provenance]', 'what is held out; fold rule')
+    block = block.replace('Provenance', 'Fold rule')
+    block = block.replace('P/F/F/A', 'PFFA')
+    for code, words in FOLD_WORDS.items():
+        block = block.replace(code, words).replace('·'.join(code), words)
+    # Math symbols that serve as code labels are translated; genuine formulas
+    # remain next to explicit word descriptions in formula/coefficient tables.
+    replacements = {
+        r'$F_1(L_0)$': 'Descriptor-modulated reuse with initial loss',
+        r'$F_2(L_0)$': 'Saturating budget and reuse with initial loss',
+        r'$\beta_{c,0}$': 'Intercept', r'$\beta_{0}$': 'Intercept',
+        r'$\beta_{c,\log N_0}$': 'Source size', r'$\beta_{\log N_0}$': 'Source size',
+        r'$\beta_{c,L_0}$': 'Initial loss', r'$\beta_{L_0}$': 'Initial loss',
+        r'$\beta_{c,\log D_0}$': 'Pretraining tokens', r'$\beta_{\log D_0}$': 'Pretraining tokens',
+        r'$\gamma_c$': 'Exponent', r'$K$': 'Selected configurations',
+        r'$N_{\rm meta}$': 'Parameters before tying', r'$N_{\rm active}$': 'Active parameters',
+        r'$N_{\rm unique}$': 'Unique parameters', r'$N_{0,\rm matrix}$': 'Matrix parameters',
+        r'$\Delta$ 2Wiki': 'Loss change on 2Wiki', r'$\Delta$ MuSiQue': 'Loss change on MuSiQue',
+        r'$\Delta L$': 'Loss change', r'$\widehat{\Delta L}$': 'Predicted loss change',
+        r'\mbox{Held-out} MAE': 'Held-out mean absolute error',
+        'Best frozen form (R)': 'Best frozen form (retrospective)',
+        'Intercept penalized?': 'Intercept penalty',
+        'M, U, T': 'Before tying; unique; matrices',
+        'G3; dense': 'Gemma three; dense', 'G4; dense': 'Gemma four; dense',
+        'MG; dense': 'Muse Glimmer; dense', 'O3; dense': 'Open Language Model three; dense',
+        'PN; dense': 'Pythia; dense', 'Q3; dense': 'Qwen three; dense',
+        'Origin code': 'Fold rule',
+    }
+    for old, new in replacements.items():
+        block = block.replace(old, new)
+    if label == 'tab:pred_full':
+        codes = dict(PLAIN_WORDS, c='constant', **{'0': 'zero change'})
+        # Name each row-specific baseline in a small heading above its pair.
+        block = re.sub(r'((?:\\textbf\{[\d.]+\}|[\d.]+)/(?:\\textbf\{[\d.]+\}|[\d.]+))\{\\scriptsize\\,([^}]+)\}',
+                       lambda m: r'\textit{Relation / '+codes.get(m[2],m[2])+r'}\newline '+m[1].replace('/', ' / ')+(' (0)' if m[2]=='0' else ''), block)
+        block = block.replace('Fold rule &', 'Fold rule: relation / input baseline / simple baseline &')
+    if label in {'tab:main_final', 'tab:main_context'}:
+        block = block.replace('Candidate MAE', 'Relation error (mathematics / code / question answering)')
+        block = block.replace('Strongest frozen alternative (name, MAE)', 'Named baseline and error (mathematics / code / question answering)')
+        block = block.replace(' & Gain &', ' & Gain (mathematics / code / question answering) &')
+        block = block.replace(' & Delivered rule &', ' & Delivered rule (mathematics / code / question answering) &')
+        # Make order visible horizontally, rather than a stack of anonymous values.
+        block = re.sub(r'(\$[+-]?[\d.]+\$)\\newline ', r'\1 / ', block)
+        block = block.replace('Median ', 'Development median ').replace('Zero ', 'Zero change ')
+    if label == 'tab:p1v2':
+        block = block.replace(' & A &', ' & Full development panel &').replace(' & B &', ' & Early stages only &')
+        block = block.replace('Source & Protocol &', 'Source & Development data &')
+    if label == 'tab:locked_rule':
+        for code, words in {'P':'Pruning development', 'Q':'Channel quantization development', 'G':'Grouped quantization development', 'K':'Fixed-recipe student development'}.items():
+            block = block.replace(' & '+code+' &', ' & '+words+' &')
+        block = block.replace(r'$L_{0,c}$', 'Source dense loss').replace(r'$L_{S0,c}$', 'Initial student dense loss')
+        block = block.replace(' & Fit & Anchor', ' & Development data & Dense reference loss')
+    if label == 'tab:cap_conditioning':
+        block = block.replace(' & A & B & C & D &', ' & Separate capability response & Shared response with scale & Shared response with offset & Shared response only &')
+        block = block.replace(r'$\Delta_B$', 'Gain over scaled shared response')
+    if label == 'tab:cond_audit':
+        block = block.replace('A, 4 states', 'Separate response, 4 states').replace('B, 4 states', 'Scaled shared response, 4 states')
+        block = block.replace(r'$\Delta$,', 'Gain,').replace(r'Pruning anchor $R^2$', r'Pruning anchor squared correlation ($R^2$)')
+    if label == 'tab:quant2d_coef':
+        for old,new in {'1':'Constant (1)', '$u$':'Bit response', '$v$':'Group-size response', '$uv$':'Bit and group interaction', '$u^2$':r'Squared bit response ($u^2$)'}.items():
+            block = block.replace(' & '+old+' &', ' & '+new+' &')
+    if label == 'tab:quant_ident':
+        block = block.replace('Bit &', 'Bit-width test &').replace('Granularity &', 'Group-size test &').replace('Joint &', 'Joint test &')
+        block = block.replace(r'Without $u^2$', r'Without squared bit response ($u^2$)')
+    if label == 'tab:shared_structure':
+        block = block.replace('80\\% prediction interval coverage and width', '80\\% interval: coverage / width; no target measurement then one target measurement')
+        block = block.replace(' versus ', ' / ')
+        block = block.replace(r'$\beta_c,\gamma_c$', 'Source coefficients and exponent').replace(r'$\beta_c,p_c,q_c$', 'Source coefficients and exponents')
+        block = block.replace(r'$\beta_c$', 'Source coefficients').replace(r'$\gamma$', 'Exponent')
+    if label == 'tab:p3_check':
+        block = block.replace('State & Math & Code & QA', 'State & Mathematics: primary / arithmetic word problems & Code: primary / HumanEval & Question answering: primary / TriviaQA')
+        block = block.replace('; $', ' / $')
+    if label == 'tab:panel_prune':
+        block = block.replace(r'$d^{*}_{\mathrm{math}}$', 'Density at damage threshold')
+        block = block.replace(r'$\Delta L_c$ at $d=0.7$', 'Loss change at density 0.7')
+        block = block.replace('QA least and most damaged', 'Question answering: least / measured; most / measured')
+        block = block.replace(r'$\,|\,$', '; ')
+        block = block.replace('Minimum QA response ($d$)', 'Minimum question-answering response (density)')
+    if label == 'tab:panel_quant':
+        block = block.replace(r'$\Delta L_c$ at', 'Loss change at')
+    if label == 'tab:rule-confirm':
+        block = block.replace(' & Feasible &', ' & Feasible / total cells &')
+        block = block.replace('Method agreement', 'Method agreement (percent)').replace('Set contains oracle method', 'Set contains oracle method (percent)')
+    if label == 'tab:rule-confirm-candidate-sizes':
+        block = block.replace('Set contains oracle method', 'Oracle method: covered / total (percent)').replace('Set contains oracle configuration', 'Oracle configuration: covered / total (percent)')
+    if label == 'tab:selection-feasible':
+        block = block.replace(' & Own & Common', ' & Policy-feasible cells & Shared feasible cells')
+        block = block.replace(r'(\%)', '(percent)')
+    if label == 'tab:v56_forms':
+        block = re.sub(r'leave-one-run-out (?=Math|Code|QA)', 'Run held out: ', block)
+        block = re.sub(r'leave-one-student-out (?=Math|Code|QA)', 'Student held out: ', block)
+        # All six headers explicitly specify each paired value's position.
+        block = re.sub(r'((?:Run|Student) held out: (?:Math|Code|QA))', r'\1 (error / signed bias)', block)
+        block = re.sub(r'(?<=\d); (?=[+-]\d)', ' / ', block)
+    if label == 'tab:v56_condition':
+        block = block.replace('Parameters, shared and specific', 'Parameters: shared / capability-specific')
+    if label == 'tab:candidate-coverage':
+        for heading in ['Pruning', 'Per-channel round-to-nearest quantization', 'Grouped round-to-nearest quantization', 'distillation students']:
+            block = block.replace(' & '+heading+' &', ' & '+heading+' (count; minimum ratio) &')
+            block = block.replace('{'+heading+'}', '{'+heading+' (count; minimum ratio)}')
+    # Words for scalar setting labels; the printed scalar itself is untouched.
+    for symbol, words in {'d':'density', 'b':'bit width', 'g':'group size', 'U':'pool size', 'T':'supervised tokens', 'n':'measured cells'}.items():
+        block = re.sub(r'\$'+symbol+r'(?:\{=\}|=)([^$]+)\$', lambda m: words+' '+m[1], block)
+        if symbol != 'n':
+            block = block.replace('$'+symbol+'$', words)
+        block = re.sub(r'\$'+symbol+r'(\\(?:in|ge|le)(?![A-Za-z])[^$]+)\$', lambda m: words+' $'+m[1]+'$', block)
+    block = block.replace('size$\\uparrow$', 'larger size')
+    block = _reader_words(block)
+    return block
+
+
+def plain_language(text):
+    """Make all table surfaces readable without touching the excluded main table."""
+    if r'\label{tab:main-prediction-v2}' in text:
+        return text
+    try:
+        from .paper_table_layout import TABULAR, _tabular
+    except ImportError:
+        from paper_table_layout import TABULAR, _tabular
+    current = next((s for s in re.findall(r'\\label\{([^}]+)\}', text) if s in PLAIN_CAPTIONS), None)
+    def rewrite(match):
+        nonlocal current
+        block = match.group()
+        labels = re.findall(r'\\label\{([^}]+)\}', block)
+        current = next((s for s in labels if s in PLAIN_CAPTIONS), current)
+        if current is None:
+            return block
+        # Rewrite captions first, then prose/cells/notes through one vocabulary.
+        block = _reader_caption(block, current)
+        block = _reader_body(block, current)
+        block = _reader_details(block, current)
+        try:
+            from .paper_table_layout import reader_layout
+        except ImportError:
+            from paper_table_layout import reader_layout
+        block = reader_layout(block, current)
+        return block
+    text = _reader_words(TABLE.sub(rewrite, text))
+    for old, new in {
+        r'\par D:': r'\par Development fit:',
+        r'\par O:': r'\par Ordinary least squares:',
+        r' R: $': r' Ridge regression: $',
+        r'\mathrm{SSE}': r'\text{sum of squared errors}',
+        r'\textbf{Development data.} P:': r'\textbf{Development data.} Pruning:',
+        ' Q: ': ' Channel quantization: ', ' G: ': ' Grouped quantization: ',
+        ' K: ': ' Fixed-recipe students: ',
+    }.items():
+        text = text.replace(old, new)
+    return text
+
+
+def _reader_details(block, label):
+    """Context-specific descriptors and explicit orders for multivalue cells."""
+    block = block.replace('per-density regression (per-density regression)', 'per-density regression')
+    block = block.replace('per-density regression per-density regression', 'per-density regression')
+    block = block.replace('the per-density regression per-density regression', 'per-density regression')
+    block = block.replace(r'Positive $\Delta_B=B-A$ favors A',
+                          'A positive gain favors the separate capability response')
+    if label == 'tab:quant_threeway':
+        block = block.replace(r'\textbf{D} is the frozen development leave-one-state-out selection',
+                              'The frozen development selection uses leave one state out')
+        block = block.replace('F lists all frozen candidates;', 'All frozen candidates are listed;')
+        block = block.replace(r'\textbf{R} is the \mbox{post-hoc} recommended rule',
+                              'the retrospective recommendation is the rule')
+    if label in {'tab:pred_source', 'tab:pred_config_prune', 'tab:pred_config_qd'}:
+        block = block.replace('what is held out; fold rule', 'what is held out; fold rule (relation / input baseline / simple baseline)')
+        block = block.replace('Protocol A', 'The full-development protocol').replace('protocol B', 'the early-stage protocol')
+    if label == 'tab:model_arch':
+        block = re.sub(r'Class abbreviations:.*?Qwen3ForCausalLM\.', '', block)
+        block = block.replace('Pythia T equals', 'The Pythia matrix count equals')
+        block = block.replace(' & Convention', '').replace(' & Before tying; unique; matrices', '')
+        block = block.replace(r'\multicolumn{7}', r'\multicolumn{6}')
+    if label == 'tab:p1v2':
+        block = block.replace('Protocol A', 'The full-development protocol').replace('protocol B', 'the early-stage protocol')
+    if label == 'tab:p2v2_test':
+        block = block.replace('$n$', 'Measured points').replace(' (R)', ' (retrospective)')
+    if label == 'tab:distill_forms_audit':
+        block = block.replace('Free parameters $k$', 'Parameter count')
+        block = block.replace(' & $n$ &', ' & Logarithmic student size &')
+        block = block.replace(' & $z_L$ &', ' & Standardized initial loss &')
+        block = block.replace(' & $z_N$ &', ' & Standardized student size &')
+        block = block.replace('$4+1=5$', '4 linear plus 1 saturation, total 5')
+        block = re.sub(r'\$T_\\star=(\d+)\$', lambda m: 'saturation budget '+m[1]+' tokens', block)
+        # Coefficient roles follow the exact formula in the first panel.
+        roles = {
+            'Constant': ['intercept'],
+            'Constant with student size': ['intercept', 'student size'],
+            'Budget response': ['budget'], 'Budget with student size': ['budget', 'student interaction'],
+            'Reuse response': ['reuse'], 'Reuse with student size': ['reuse', 'student interaction'],
+            'Joint budget and pool response': ['budget', 'budget curvature', 'pool interaction'],
+            'Joint with student size': ['budget', 'budget curvature', 'pool interaction', 'student interaction'],
+            'descriptor-modulated reuse with initial loss': ['reuse', 'initial-loss interaction'],
+            'descriptor-modulated reuse with student size': ['reuse', 'student-size interaction'],
+            'saturating budget and reuse with initial loss': ['saturation', 'initial-loss saturation', 'reuse', 'initial-loss reuse'],
+            'saturating budget and reuse with student size': ['saturation', 'student-size saturation', 'reuse', 'student-size reuse'],
+            'Budget only': ['intercept', 'budget'], 'Reuse only': ['intercept', 'reuse'],
+            'Response surface with initial loss': ['intercept', 'budget', 'reuse', 'initial loss'],
+            'Response surface with student size': ['intercept', 'budget', 'reuse', 'student size'],
+        }
+        lines = []
+        for line in block.splitlines():
+            cells = line.split(' & ')
+            if len(cells) == 5 and cells[0].strip('{}') in roles:
+                cells[1] = '; '.join(roles[cells[0].strip('{}')])
+                # Legacy stacked vectors used whitespace for some separators.
+                cells[2:] = [re.sub(r'(?<=\d) {2,}(?=[+\-\d])', ', ', c) for c in cells[2:]]
+                line = ' & '.join(cells)
+            lines.append(line)
+        block = '\n'.join(lines)
+        if 'Coefficient order &' in block:
+            block = _scalar_coefficient_rows(block, roles)
+    if label in {'tab:models', 'tab:final', 'tab:pred_source'}:
+        for symbol, name in {
+            r'$N_0$': 'source parameter count', r'$D_0$': 'pretraining tokens',
+            r'$L_{0,c}$': 'initial loss', r'$D_U$': 'unique-pool tokens',
+            r'$E=T/D_U$': 'reuse is supervised tokens divided by unique-pool tokens',
+            r'$(b,g)$': 'bit-width and group-size',
+            r'$\{N_0,L_0,D_0\}$': 'source size, initial loss, and pretraining tokens',
+            r'$\delta_c$': 'student loss change',
+        }.items():
+            block = block.replace(symbol, name)
+        block = block.replace('per-$d$', 'per-density')
+    if label == 'tab:models':
+        block = block.replace('Predictor &', 'Prediction form &').replace('Target calibration &', 'Target measurements &')
+        block = block.replace('5 (per-density regression: 20)', '5 (per-density regression: 20)')
+        block = block.replace('Eq.~', 'Equation~', 1)  # Keep the protected quantization reference verbatim.
+    if label == 'tab:pred_full':
+        block = block.replace(r'$\delta_c$', 'student loss change')
+        block = block.replace('all density', 'all densities').replace('sources +', 'sources and')
+    block = block.replace(r'$3{\times}3$', '3 sizes by 3 stages').replace(r'$3\times3$', '3 sizes by 3 stages')
+    block = block.replace('Mean mean absolute error', 'Capability mean absolute error')
+    if label == 'tab:shared_structure':
+        block = block.replace('Held-out mean absolute error, shared / specific', 'Held-out error: shared / capability-specific; exponent minimum / median / maximum')
+        block = block.replace('mean absolute error, no target measurement / one target measurement', 'Error: no target measurement / one target measurement')
+        block = block.replace(' to ', '; ')
+    if label == 'tab:v56_condition':
+        block = re.sub(r'(?<=\d); (?=\d)', ' / ', block)
+    if label == 'tab:panel_prune':
+        block = block.replace('least / measured; most / measured', 'least / measured; most / measured')
+    return block
+
+
+def _scalar_coefficient_rows(block, roles):
+    """One named coefficient per row, retaining the original capability order."""
+    block = block.replace('Form & Coefficient order & Mathematics & Code & Question answering',
+                          'Form & Capability & Coefficient or budget & Value')
+    lines = []
+    for line in block.splitlines():
+        cells = line.split(' & ')
+        name = cells[0].strip('{}')
+        if len(cells) != 5 or name not in roles:
+            lines.append(line)
+            continue
+        for capability, cell in zip(['Mathematics', 'Code', 'Question answering'], cells[2:]):
+            values = re.findall(r'[+-]?\d+(?:\.\d+)?', cell)
+            names = roles[name] + (['Saturation budget in tokens'] if 'saturation budget' in cell else [])
+            assert len(values) == len(names), (name, cell, names, values)
+            for role, value in zip(names, values):
+                lines.append(' & '.join([name, capability, role.capitalize(), value])+r' \\')
+    return '\n'.join(lines)

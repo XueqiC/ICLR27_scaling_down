@@ -13,6 +13,11 @@ from analysis import a1_development_table as a1
 
 @pytest.fixture(scope="module")
 def built():
+    # The public mirror intentionally omits the private development trajectories.
+    core, external, _ = a1.expected_membership()
+    if (a1.ROOT / "data_mirror").is_dir() and not all(
+            (a1.ROOT / a1.BASE_REL / run).is_dir() for run in core | external):
+        pytest.skip("Complete private development records are not in the public mirror")
     return a1.build()
 
 
@@ -246,9 +251,11 @@ def test_inventory_keeps_budget_student_direction_distribution_strata():
 
 def test_real_data_membership_values_and_scope(built):
     core, external, flags, report = built
-    assert len(core) == 582 and len(external) == 684
-    assert len(flags) == 1266
-    assert len({a1.row_key(r) for r in core + external}) == 1266
+    # Saved records: 450 training probes plus 46 rows from each of
+    # the three measurement-scope distributions; no numerical output changes.
+    assert len(core) == 588 and len(external) == 684
+    assert len(flags) == 1272
+    assert len({a1.row_key(r) for r in core + external}) == 1272
     assert all(tuple(r) == a1.COLUMNS for r in core + external)
     assert {r["run_id"] for r in core} == a1.expected_membership()[0]
     assert {r["run_id"] for r in external} == a1.expected_membership()[1]
@@ -289,7 +296,7 @@ def test_roundtrip_default_core_only_and_external_requires_opt_in(tmp_path, buil
         p for p in report["pairs"] if p["kind"] == "I_U" and p["tolerance"] == .005]
     with (out / "row_metadata.csv").open() as stream:
         saved_flags = list(csv.DictReader(stream))
-    assert sum(f["core"] == "true" for f in saved_flags) == 582
+    assert sum(f["core"] == "true" for f in saved_flags) == 588
     assert all(f["reconstructed"] == "true" for f in saved_flags)
     assert "T_domain_if_available" not in {k for f in saved_flags for k in f["reconstructed_fields"].split(";")}
     assert set(p.relative_to(tmp_path).parts[0] for p in tmp_path.rglob("*")) == {"results"}

@@ -10,6 +10,8 @@ sys.path.insert(0, str(ROOT / "analysis"))
 from paper_table_text import _academic_caption  # noqa: E402
 
 TABLES = ROOT / "paper" / "paper" / "tables"
+if not TABLES.exists():
+    TABLES = ROOT / "paper" / "tables"
 USED = """candidate_coverage cap_conditioning cond_audit distill_confirm distill_forms_audit distill_paired
 final_deliverables locked_rule main_context main_final main_prediction_v2 model_arch models_domains musique_scope
 p1v2 p2v2_test p3_check panel_prune panel_quant pred_config_prune pred_config_qd pred_full pred_source prune_repeat
@@ -35,7 +37,7 @@ FORBIDDEN = {
 
 def captions(text):
     out = []
-    for match in re.finditer(r"\\caption\*?\{", text):
+    for match in re.finditer(r"\\caption(?:\*|\[\])?\{", text):
         i, depth = match.end(), 1
         while depth:
             if text[i] == "{" and text[i - 1] != "\\":
@@ -74,7 +76,7 @@ def test_academic_caption_removes_provenance_sentences():
     assert out == r"\caption{The table lists x. CI denotes confidence interval.}"
 
 
-LONG_ALLOWED = {"pred_full": 160, "round3_quant": 120}
+LONG_ALLOWED = {"main_prediction_v2": 100}  # Separate author-owned task.
 
 
 @pytest.mark.parametrize("name", USED)
@@ -89,4 +91,4 @@ def test_caption_is_short(name):
         prose = re.sub(r"\$(?:\\.|[^$])*\$", "M", caption)
         prose = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?(?:\{[^{}]*\})?", " ", prose)
         words = len(prose.split())
-        assert words <= LONG_ALLOWED.get(name, 100), f"{name}: caption has {words} words"
+        assert words <= LONG_ALLOWED.get(name, 60), f"{name}: caption has {words} words"

@@ -30,7 +30,7 @@ CAPTION = """Frozen selection maps on four fresh source states: (a) math,
 budgets, from 20% through 100% of dense matrix storage in 5% increments.
 Row labels give Pythia parameter size / pretraining step (k=1,000).
 Cell colour is the frozen rule's predicted chosen method: pruning, quantization,
-distillation or dense. Cross-hatching and a hollow black circle mean the measured oracle method differs;
+distillation or dense. A hollow black circle means the measured oracle method differs;
 unmarked cells agree at method level and need not agree at configuration level.
 The chosen methods and mismatch identities reproduce V80 rule_maps_main.
 Selections, oracles and scores are read verbatim from V78 compare.json, with
@@ -84,7 +84,7 @@ def build(audit):
         if seen != {(s, b) for s in states for b in budgets}:
             raise ValueError("Incomplete V78 grid")
     audit.rule("Reuse V80 rule_maps_main semantics: colour indexes (prune,quant,distill,dense); "
-               "hollow black circle plus cross-hatching iff locked-rule.oracle_method_agreement is false. Direct V78 fields; "
+               "hollow black circle iff locked-rule.oracle_method_agreement is false. Direct V78 fields; "
                "freeze seal and frozen chosen method/configuration/score verified; no rule execution.")
     return rows
 
@@ -102,7 +102,7 @@ def draw_panel(fig, rows, panel):
         if not r["oracle_agreement"]:
             ax.add_patch(Rectangle((r["column"]-.5, r["row"]-.5), 1, 1,
                          facecolor=PALETTE["transparent"], edgecolor=darker(METHOD_COLORS[r["method_index"]]),
-                         hatch=HATCHES["oracle_differs"], linewidth=0, zorder=2))
+                         linewidth=0, zorder=2))
             ax.plot(r["column"], r["row"], "o", mfc=PALETTE["transparent"], mec=PALETTE["black"], color=PALETTE["black"], ls="", zorder=3,
                     clip_on=False)
     ax.imshow(matrix, cmap=ListedColormap(METHOD_COLORS), vmin=-.5, vmax=3.5,

@@ -178,6 +178,7 @@ PAGE_ROWS = {
     'tab:pred_config_prune': 10,
     'tab:pred_config_qd': 12,
     'tab:p1v2': 8,
+    'tab:locked_rule': 12,
 }
 
 
@@ -245,4 +246,68 @@ def _paginate(block, label):
         begin = _continued_open(opening, numbered and index > 0)
         result.append(begin + prefix + head + '\n' + '\n'.join(rows) + '\n'
                       + r'\bottomrule\end{tabular*}' + caption + closing)
+    return '\n'.join(result)
+
+
+# Expanded words need paragraph columns even in the formerly compact tables.
+# We retain type sizes and the existing data order.
+READER_PROFILES = {
+    'tab:round3_coef': [[18, 14, 14, 18, 18, 18]],
+    'tab:quant2d_coef': [[15, 25, 14, 15, 15, 16]],
+    'tab:v53_loso': [[20, 27, 13, 12, 15, 13]],
+    'tab:v55_loso': [[46, 18, 18, 18]],
+    'tab:round3_prune': [[23, 10]+[11.1666667]*6],
+    'tab:model_arch': [[23, 21, 14, 14, 14, 14]],
+    'tab:cap_conditioning': [[17, 16, 12, 12, 12, 12, 19]],
+    'tab:cond_audit': [[40, 20, 20, 20], [20, 17, 17, 23, 23]],
+    'tab:quant_ident': [[44, 11, 15, 15, 15], [24, 34, 14, 14, 14]],
+    'tab:quant_threeway': [[22, 33, 15, 15, 15]],
+    'tab:prune_repeat': [[34, 17, 15, 19, 15]],
+    'tab:p3_check': [[31, 23, 23, 23]],
+    'tab:p2v2_test': [[24, 12, 13, 10, 11, 22, 8]],
+    'tab:qa_scope': [[34]+[11]*6],
+    'tab:locked_rule': [[19, 13, 16, 22, 17, 13]],
+    'tab:rule_decomp': [[22, 30, 16, 16, 16]],
+    'tab:selection-feasible': [[22, 19, 10, 12, 12, 12, 13]],
+    'tab:pred_full': [[27, 11, 17, 15, 15, 15]],
+    'tab:main_final': [[13, 20, 12, 18, 11, 13, 13]],
+    'tab:main_context': [[13, 20, 12, 18, 11, 13, 13]],
+    'tab:p1v2': [[14, 12, 14, 7, 8, 7, 8, 7, 7, 7, 9]],
+    'tab:shared_structure': [[17, 13, 14, 18, 18, 20]],
+    'tab:rule-confirm-by-state': [[23, 15, 13, 13, 13, 13, 10]],
+}
+
+
+def reader_layout(block, label):
+    profiles = iter(READER_PROFILES.get(label, PROFILES.get(label, [])))
+    # The coefficient panel has already been split into a continued float.
+    if label == 'tab:distill_forms_audit' and r'\ContinuedFloat' in block:
+        profiles = iter([[35, 17, 28, 20]])
+    block = TABULAR.sub(lambda m: _tabular(m.group(), next(profiles, None)), block)
+    if label == 'tab:distill_forms_audit' and 'Coefficient or budget &' in block:
+        return _split_coefficient_rows(block)
+    if label == 'tab:locked_rule':
+        block = _paginate(block, label)
+        block = block.replace(r'\caption[]{Continued from the preceding table part.}',
+                              r'\caption[]{The table continues the frozen selection rules. Absolute losses are in nats per native token.}')
+    return block
+
+
+def _split_coefficient_rows(block):
+    """Split named scalar coefficients while printing numeric notes only once."""
+    tab = TABULAR.search(block)
+    body = tab.group()
+    start = body.index(r'\midrule') + len(r'\midrule')
+    end = body.rfind(r'\bottomrule')
+    rows = body[start:end].strip().splitlines()
+    chunks = [rows[i:i+24] for i in range(0, len(rows), 24)]
+    opening = re.match(r'\\begin\{table\*?\}(?:\[[^]]*\])?', block).group()
+    continued = (opening+r'\ContinuedFloat\normalfont\centering\scriptsize'
+                 +r'\setlength{\tabcolsep}{3pt}'+'\n'
+                 +r'\caption[]{The table continues the named coefficient list. Coefficients produce loss changes in nats per native token; saturation budgets are in supervised tokens.}'+'\n')
+    result = []
+    for i, chunk in enumerate(chunks):
+        prefix = block[:tab.start()] if i == 0 else continued
+        suffix = block[tab.end():] if i == len(chunks)-1 else '\n'+r'\end{table}'
+        result.append(prefix + body[:start]+'\n'+'\n'.join(chunk)+'\n'+body[end:]+suffix)
     return '\n'.join(result)

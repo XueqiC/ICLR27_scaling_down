@@ -12,7 +12,7 @@ from analysis.paper_artifacts import ROOT, pyplot, output_path
 EXPECTED_PANEL_SIZES = {
     **{f"fig1_{p}": (1.35, 1.25) for p in "abcd"}, "fig1_legend": (5.5, .42),
     **{f"fig2_{p}": (2.7, 1.45) for p in "ab"}, "fig2_legend": (5.5, .42),
-    **{f"fig3_{p}": (2.7, 1.6) for p in "ab"}, "fig3_legend": (5.5, .42),
+    "fig3_a": (5.5, 1.5), "fig3_b": (5.5, .85), "fig3_legend": (5.5, .3),
     "lr_pilot_a": (2.7, 1.45), "lr_pilot_legend": (5.5, .42),
     **{p: (2.7, 1.6) for p in ("corner_test_a", "corner_test_b", "corner_contrasts_a")},
     "corner_legend": (5.5, .42),
@@ -130,7 +130,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
             assert ax.xaxis.label.get_fontsize() == label
             assert all(t.get_fontsize() == tick for t in ax.get_xticklabels()+ax.get_yticklabels())
             if gen is generalization:
-                assert ax.get_position().width >= .58
+                assert ax.get_position().width >= .50
         for canvas in all_figures(fig):
             legends = canvas.legends + [a.get_legend() for a in canvas.get_axes() if a.get_legend()]
             for leg in legends:
@@ -152,7 +152,14 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         panels = [sub for sub in fig.subfigs if sub.axes]
         assert len(panels) == (4 if gen is responses else 2)
         row_positions = {round(s.bbox.y0) for s in panels}
-        assert len(row_positions) == 1
+        assert len(row_positions) == (2 if gen is generalization else 1)
+        if gen is generalization:
+            assert tuple(fig.get_size_inches()) == pytest.approx((5.5, 2.65))
+            for panel, size in zip(panels, [(5.5, 1.5), (5.5, .85)]):
+                assert panel.bbox.size/fig.dpi == pytest.approx(size)
+            assert panels[0].bbox.y0 == pytest.approx(panels[1].bbox.y1)
+            assert panels[0].axes[0].bbox.x0 == pytest.approx(panels[1].axes[0].bbox.x0)
+            assert panels[0].axes[0].bbox.x1 == pytest.approx(panels[1].axes[0].bbox.x1)
         if gen is responses:
             assert tuple(fig.get_size_inches()) == pytest.approx((5.5, 1.67))
             for panel in panels:
@@ -191,7 +198,8 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         assert set(legend["legend_entries"]) == {
             "Math", "Code", "QA", "2Wiki", "MuSiQue", "TriviaQA", "270M", "1B", "4B", "S1", "S2"}
     assert set(saved) == {f"{prefix}_{p}" for p in letters} | {f"{prefix}_legend"}
-    for stem in ("fig2_c", "fig3_c", "fig3_d"):
+    retired = {explanation: ("fig2_c",), generalization: ("fig3_c", "fig3_d")}
+    for stem in retired.get(gen, ()):
         assert not output_path(ROOT, "figs", stem+".pdf").exists()
 
 
@@ -202,7 +210,8 @@ def test_explanations_moved_to_caption_files():
         "explanation": ("Curvature intervals are conditional on development", "post-hoc",
                         "Fold estimate, Boundary", "Group, Channel and Prune"),
         "generalization": ("Paired gain CIs are translated",
-                           "Prune in, frozen", "Prune out, frozen", "Baseline, Relation and Lower of pair"),
+                           "new checkpoints inside the density range", "outside the range",
+                           "Baseline, Relation and Lower of pair"),
     }
     for stem, phrases in expected.items():
         text = (directory / f"{stem}_caption.txt").read_text()

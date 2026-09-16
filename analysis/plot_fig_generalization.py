@@ -32,14 +32,17 @@ D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
 GREY = PALETTE["reference"]
 MARKERS = {c: "o" for c in CAPS}
-PANEL_SIZES = {p: (2.7, 1.6) for p in "ab"}
+PANEL_SIZES = {"a": (5.5, 1.5), "b": (5.5, .85)}
 KINDS = {p: "double" for p in "ab"}
-LEGEND_SIZE = (5.5, .42)
-FIGSIZE = (5.5, 2.02)
+LEGEND_SIZE = (5.5, .3)
+FIGSIZE = (5.5, 2.65)
+SUBROW_OFFSETS = {"math": -.25, "code": 0., "qa": .25}
+AXIS_MARGINS = dict(left=2.62, bottom=.32, right=.08, top=.025)
+MAE_TICKS = (.03, .1, .3, 1.)
 if __package__:
-    from .paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
+    from .paper_figure_style import apply_style, finish_panel, panel_axes, save_panel as _save_panel, combine_panels
 else:
-    from paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
+    from paper_figure_style import apply_style, finish_panel, panel_axes, save_panel as _save_panel, combine_panels
 
 
 def resolve(audit, reference):
@@ -191,47 +194,81 @@ def build(audit):
     audit.rule("Corner rows retain their frozen values in the separate corner_contrasts appendix. "
                "V46 .55 is outside its original coarse .6--.9 range; .65 is inside. V72 repeats two "
                "revision labels with identical weights; both records retained, not independent states.")
+    audit.rule("Display: Math, Code and QA occupy categorical sub-rows at -0.25, 0 and +0.25 "
+               "row units. Intervals retain their exact x coordinates. Hollow markers have "
+               "thin white outer edges. A relation diamond is drawn above its baseline circle; "
+               "coincidence means abs(relation MAE - baseline MAE) / baseline MAE <= 0.02. "
+               "Each record's display fields document this coincidence and its sub-row. "
+               "Residual cross-capability glyph collisions use the shared 1.5% horizontal display "
+               "offset limit, with minimum total displacement on a 0.25-point grid. "
+               "Coincident pairs move together. Marker sidecars retain true MAEs and display offsets; "
+               "connecting segment endpoints follow the displayed markers.")
+    for panel in "AB":
+        part = [r for r in result if r["panel"] == panel]
+        order = list(dict.fromkeys((r["group"], r["stratum"]) for r in part))
+        for r in part:
+            key = r["group"], r["stratum"]
+            offset = SUBROW_OFFSETS[r["capability"]]
+            gap = relative_pair_gap(r)
+            r["display"] = dict(row_label=row_label(*key), row_index=order.index(key),
+                                subrow_offset=offset, y=order.index(key)+offset,
+                                relative_pair_gap=gap, coincident_within_2_percent=is_coincident(r),
+                                top_marker="diamond" if is_coincident(r) else None)
     return result
+
+
+def relative_pair_gap(row):
+    baseline = row["baseline_mae"]
+    return None if baseline is None else abs(row["relation_mae"] - baseline) / baseline
+
+
+def is_coincident(row):
+    gap = relative_pair_gap(row)
+    return gap is not None and (gap <= .02 or math.isclose(gap, .02, abs_tol=1e-12))
 
 
 def row_label(group, stratum):
     labels = {
-        "Pruning: density inside range": "Prune in range",
-        "Pruning: density outside range": "Prune out, frozen",
-        "Quantization: new group size": "Quant group",
-        "Distillation: new-pool budgets": "Distill",
-        "Pythia: new stages (power)": "New stages",
-        "Pythia: new quantization state": "New quant state",
+        "Pruning: density inside range": "Pruning, unseen densities of development states",
+        "Pruning: density outside range": "Pruning, new checkpoints outside the range",
+        "Quantization: new group size": "Quantization, unseen group sizes",
+        "Distillation: new-pool budgets": "Distillation, new pools,",
+        "Pythia: new stages (power)": "Pruning, new training stages of a seen size",
+        "Pythia: new quantization state": "Quantization, new model state",
     }
     label = labels[group]
     if stratum == "V46" and "inside" in group:
-        label = "Prune in, frozen"
+        label = "Pruning, new checkpoints inside the density range"
     elif stratum.startswith("gemma3-"):
-        label += " " + {"gemma3-270m": "270M", "gemma3-1b": "1B"}[stratum]
+        label += " " + {"gemma3-270m": "270M", "gemma3-1b": "1B"}[stratum] + " student"
     return label
 
 
 def draw_maes(ax, rows, panel, limits):
-    from matplotlib.ticker import NullFormatter
+    from matplotlib.ticker import NullLocator
     order = list(dict.fromkeys((r["group"], r["stratum"]) for r in rows if r["panel"] == panel))
     labels = []
     for y, key in enumerate(order):
         part = [r for r in rows if r["panel"] == panel and (r["group"], r["stratum"]) == key]
         for r in part:
-            # Keep the true row coordinate; bounded display dodging is shared.
-            yy = y
+            yy = y + SUBROW_OFFSETS[r["capability"]]
             marker = MARKERS[r["capability"]]
             color = COLORS[r["capability"]]
             candidate, baseline = r["relation_mae"], r["baseline_mae"]
             if baseline is not None:
-                ax.plot([baseline, candidate], [yy, yy], color=color if r["below_baseline"] else GREY, zorder=1)
-                ax.plot(baseline, yy, marker=marker, mfc=PALETTE["white"], color=color, mec=color, ls="", zorder=3)
+                segment, = ax.plot([baseline, candidate], [yy, yy], color=color if r["below_baseline"] else GREY, zorder=1)
+                segment._mae_segment = (yy, r["capability"])
+                point, = ax.plot(baseline, yy, marker=marker, mfc=PALETTE["white"], color=color, mec=color, ls="", zorder=3)
+                point._mae_pair = dict(capability=r["capability"], role="baseline",
+                                       coincident_within_2_percent=is_coincident(r))
             if r["whisker"] is not None:
                 lo, hi = r["whisker"]
                 midpoint = (lo + hi) / 2
                 ax.errorbar(midpoint, yy, xerr=[[midpoint-lo], [hi-midpoint]],
                             fmt="none", color=color, lw=1.1, capsize=2, zorder=2)
-            ax.plot(candidate, yy, marker="D", mfc=PALETTE["transparent"], color=color, ls="", zorder=4)
+            point, = ax.plot(candidate, yy, marker="D", mfc=PALETTE["transparent"], color=color, ls="", zorder=4)
+            point._mae_pair = dict(capability=r["capability"], role="relation",
+                                   coincident_within_2_percent=is_coincident(r))
         counts = {r["n"] for r in part}
         if len(counts) != 1:
             raise ValueError("A shared row count requires equal counts per capability")
@@ -240,10 +277,10 @@ def draw_maes(ax, rows, panel, limits):
             ax.axhline(y+.5, color=PALETTE["background"], lw=.6, zorder=0)
     ax.set_xscale("log")
     ax.set_xlim(*limits)
-    ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.xaxis.set_minor_locator(NullLocator())
     ax.set(yticks=range(len(order)), yticklabels=labels,
-           ylim=(len(order)-.5, -.5), xlabel="MAE (nats)")
-    ax.set_xticks([.1, 1])
+           ylim=(len(order)-.5, -.5), xlabel="Mean absolute error (nats)")
+    ax.set_xticks(MAE_TICKS, labels=["0.03", "0.1", "0.3", "1"])
     ax.tick_params(axis="y", length=0, pad=4)
     ax.grid(axis="x", alpha=.15)
     ax.spines["left"].set_visible(False)
@@ -258,9 +295,147 @@ def mae_limits(rows):
 
 
 def draw_panel(fig, rows, panel):
-    ax = panel_axes(fig, PANEL_SIZES[panel], left=1.03, bottom=.40, right=.08, top=.06)
+    ax = panel_axes(fig, PANEL_SIZES[panel], **AXIS_MARGINS)
     draw_maes(ax, rows, panel.upper(), mae_limits(rows))
     return finish_panel(ax)
+
+
+def prepare_mae_markers(fig):
+    """Retain shared glyph sizes/audit, explicit sub-rows and diamonds on top.
+
+    The shared pass only separates centres and orders by glyph area. This
+    figure separates complete glyphs across capabilities, keeping near-equal
+    pairs together and preserving the author's diamond-on-top encoding.
+    """
+    import matplotlib.patheffects as effects
+    if __package__:
+        from .paper_figure_style import prepare_figure, _update_marker_position, verify_marker_pixels
+    else:
+        from paper_figure_style import prepare_figure, _update_marker_position, verify_marker_pixels
+    if getattr(fig, "_mae_prepared", False):
+        return
+    metadata = {(i, line.get_marker(), *line.get_xydata()[0]): line._mae_pair
+                for i, ax in enumerate(fig.axes) for line in ax.lines
+                if hasattr(line, "_mae_pair")}
+    prepare_figure(fig)
+    for ax in fig.axes:
+        for point in ax.lines:
+            if not getattr(point, "_palette_point", False):
+                continue
+            record = point._marker_record
+            record.update(metadata[record["axis"], record["marker"], record["x"], record["y"]])
+            _update_marker_position(point, 0.)
+            connector = getattr(point, "_dodge_connector", None)
+            if connector is not None:
+                connector.remove()
+                del point._dodge_connector
+            point.set_zorder(4 if record["role"] == "relation" else 3)
+            point.set_path_effects([
+                effects.Stroke(linewidth=2*point.get_markeredgewidth(), foreground=PALETTE["white"]),
+                effects.Normal(),
+            ])
+            record.update(zorder=point.get_zorder(), white_outer_edge=True,
+                          subrow_offset=SUBROW_OFFSETS[record["capability"]],
+                          fallback_to_true=False)
+    separate_capability_markers(fig)
+    fig._marker_pixel_audit = verify_marker_pixels(fig)
+    fig._mae_prepared = True
+
+
+def separate_capability_markers(fig):
+    """Resolve the few residual glyph-edge collisions at the actual export DPI.
+
+    Search bounded horizontal offsets, minimizing their total absolute size.
+    Include white edges in collision checks; never separate a coincident pair.
+    """
+    import numpy as np
+    from matplotlib.backends.backend_agg import RendererAgg
+    if __package__:
+        from .paper_figure_style import MAX_MARKER_DISPLACEMENT, _update_marker_position
+    else:
+        from paper_figure_style import MAX_MARKER_DISPLACEMENT, _update_marker_position
+    width, height = map(int, fig.bbox.size)
+    renderer = RendererAgg(width, height, fig.dpi)
+
+    def footprint(points, dx):
+        pixels = set()
+        for point in points:
+            _update_marker_position(point, dx)
+            if max(point._marker_record["data_displacement_fraction"]) > MAX_MARKER_DISPLACEMENT + 1e-12:
+                return None
+            renderer.clear()
+            point.draw(renderer)
+            alpha = np.asarray(renderer.buffer_rgba())[:, :, 3]
+            pixels.update(np.flatnonzero(alpha > .2*255).tolist())
+        return pixels
+
+    for ax in fig.axes:
+        groups = defaultdict(lambda: defaultdict(list))
+        for point in ax.lines:
+            if getattr(point, "_palette_point", False):
+                r = point._marker_record
+                key = r["capability"], "pair" if r["coincident_within_2_percent"] else r["role"]
+                groups[round(r["y"])][key].append(point)
+        bound = MAX_MARKER_DISPLACEMENT * ax.bbox.width * 72 / fig.dpi
+        offsets = [0.] + [sign*k*.25 for k in range(1, int(bound/.25)+1) for sign in (-1, 1)]
+        for row, markers in groups.items():
+            keys = list(markers)
+            choices = {key: [(0., footprint(points, 0.))] for key, points in markers.items()}
+            zero_collision = any(a[0] != b[0] and choices[a][0][1] & choices[b][0][1]
+                                 for i, a in enumerate(keys) for b in keys[:i])
+            if not zero_collision:
+                continue
+            for key, points in markers.items():
+                for dx in offsets[1:]:
+                    pixels = footprint(points, dx)
+                    if pixels is not None:
+                        choices[key].append((dx, pixels))
+            best = None
+
+            def search(chosen, cost):
+                nonlocal best
+                if best is not None and cost >= best[0]:
+                    return
+                if len(chosen) == len(keys):
+                    best = cost, chosen
+                    return
+                key = keys[len(chosen)]
+                for candidate in choices[key]:
+                    if any(key[0] != previous[0] and candidate[1] & value[1]
+                           for previous, value in zip(keys, chosen)):
+                        continue
+                    search(chosen + [candidate], cost + abs(candidate[0]))
+
+            search([], 0.)
+            if best is None:
+                raise ValueError(f"Capability glyphs cannot be separated within the shared display bound: row {row}")
+            for key, (dx, _) in zip(keys, best[1]):
+                for point in markers[key]:
+                    _update_marker_position(point, dx)
+        endpoints = {(p._marker_record["y"], p._marker_record["capability"], p._marker_record["role"]):
+                     p._marker_record["drawn_coordinate"][0]
+                     for p in ax.lines if getattr(p, "_palette_point", False)}
+        for line in ax.lines:
+            if hasattr(line, "_mae_segment"):
+                y, cap = line._mae_segment
+                line.set_xdata([endpoints[y, cap, role] for role in ("baseline", "relation")])
+
+
+def save_panel(fig, stem, kind, audit, records):
+    """Use the shared exporter, replacing its generic dodge policy in sidecars."""
+    if __package__:
+        from .paper_figure_style import DODGE_CAPTION
+    else:
+        from paper_figure_style import DODGE_CAPTION
+    prepare_mae_markers(fig)
+    _save_panel(fig, stem, kind, audit, records)
+    audit.notes[:] = [note for note in audit.notes if DODGE_CAPTION not in note]
+    write_notes(stem, audit, records)
+
+
+def write_caption(stem, audit, text):
+    # The categorical sub-row policy is already explained in this caption.
+    output_path(audit.root, "figs", f"{stem}_caption.txt").write_text(text.strip() + "\n")
 
 
 def draw_legend(fig):
@@ -278,31 +453,45 @@ def draw_legend(fig):
 
 
 def plot(rows, plt):
-    return combine_panels(plt, [
-        ("double", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
-        ("double", (2.8, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
-        ("legend", (0, PANEL_SIZES["a"][1], *LEGEND_SIZE), draw_legend),
+    fig = combine_panels(plt, [
+        (KINDS["a"], (0, PANEL_SIZES["b"][1], *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
+        (KINDS["b"], (0, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
+        ("legend", (0, PANEL_SIZES["a"][1]+PANEL_SIZES["b"][1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
+    prepare_mae_markers(fig)
+    return fig
 
 
-CAPTION_TEXT = """Generalization to new configurations of seen states (a) and new
-sources or students (b). MAE axes are logarithmic in native-token nats and share
+CAPTION_TEXT = """Generalization across pruning densities and checkpoints, quantization
+group sizes, and distillation pools (a), and new training stages or a new
+quantization model state (b). MAE axes are logarithmic in native-token nats and share
 one range. Paired markers compare relation and development-selected baseline
 on identical cells with equal cell weights. Math, Code and QA retain their
-capability hues. Hollow circles denote baselines; hollow diamonds denote frozen
-relation predictions. The connecting segment uses the capability colour when
+capability hues. A hollow circle denotes the development-selected baseline;
+a hollow diamond denotes the frozen relation. The connecting segment uses the capability colour when
 the relation MAE is lower, and reference grey otherwise. Cell counts per capability
 are in generalization_mae_pairs.md and record sidecars.
-Prune in, frozen and Prune out, frozen are frozen new-state pruning predictions
-inside and outside the fitted density range. These rows have no stored
+Pruning, new checkpoints inside the density range and Pruning, new checkpoints
+outside the range are frozen new-state pruning predictions. These rows have no stored
 development-selected baseline and retain unpaired capability-coloured markers.
-Prune in range and the two frozen pruning rows remain separate, as do the
-270M/1B new-pool budgets. Paired gain CIs are translated about the fixed baseline
+Pruning, unseen densities of development states remains a separate row, as do
+Distillation, new pools, 270M student and Distillation, new pools, 1B student.
+Within each row, Math, Code and QA occupy sub-rows at -0.25, 0 and +0.25 row units;
+each connecting segment and interval follows its capability's sub-row. Markers
+retain thin white outer edges. Small horizontal display offsets, bounded by the
+shared 1.5% limit, separate any remaining glyph-edge collisions across capabilities;
+true MAEs and offsets are recorded in the sidecars. Connecting segments follow
+the displayed markers. When a baseline and relation
+coincide within 2 percent of the baseline MAE, the diamond is drawn on top and the
+coincidence is recorded in the sidecar.
+Paired gain CIs are translated about the fixed baseline
 MAE: [lo, hi] for baseline-minus-relation is drawn at
 [baseline MAE - hi, baseline MAE - lo]. These are paired gain intervals, not
 marginal MAE confidence intervals; no intervals are averaged across students.
 No A2 development-holdout interval is transplanted to confirmation cells.
-Two 2.7 x 1.6-inch panels form one 5.5-inch row with fig3_legend.pdf above:
+Two 5.5-inch-wide panels are stacked with matching left margins: fig3_a is
+1.5 inches high (six rows), and fig3_b is 0.85 inches high (two rows).
+The 5.5 x 0.3-inch fig3_legend.pdf strip sits above them:
 Baseline, Relation and Lower of pair distinguish the paired MAEs. The locked-rule
 selection row is excluded. Corner second differences and fresh-distribution
 contrasts are shown separately in corner_contrasts_a.pdf.
@@ -361,3 +550,9 @@ def generate(root=ROOT):
 if __name__ == "__main__":
     rows, _, _ = generate()
     print(format_pairs(rows))
+    for letter in "ab":
+        width, height = PANEL_SIZES[letter]
+        print(f"fig3_{letter}: {width:g} x {height:g} in")
+        for label in dict.fromkeys(r["display"]["row_label"] for r in rows if r["panel"] == letter.upper()):
+            print(f"  {label}")
+    print(f"fig3_legend: {LEGEND_SIZE[0]:g} x {LEGEND_SIZE[1]:g} in")

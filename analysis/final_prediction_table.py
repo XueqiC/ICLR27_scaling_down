@@ -30,39 +30,36 @@ S86 = "results/v86-main-table/summary.json"
 # Presentation vocabulary only. Coefficient counts and scores still come from
 # JSON fields; each mapped phrase carries the source values in its recipe.
 RELATIONS = {
-    "power": "Power form",
-    "low_order_2d": "Source surface",
-    "median": "Median",
+    "power": "Five-parameter power form (seventeen development states)",
+    "low_order_2d": "Source regression across bit widths (twenty coefficients)",
+    "median": "Development median",
     "median_curve": "Source-free median density curve",
     "same_input_interpolation": "Interpolation",
-    "zero": "zero change",
-    "E": r"$a_c\log(1+E)$",
-    "joint": "Joint budget/pool",
+    "zero": "no change",
 }
 BASELINES = {
-    "A2": "per-density", "median_curve": "development median", "median": "development median",
-    "bilinear": "bilinear", "zero": "zero change",
-    "T-only": "budget", "E-only": "reuse",
-    "surface:L0": "loss surface", "surface:logN": "size surface",
+    "A2": "per-density regression", "median_curve": "development median", "median": "development median",
+    "bilinear": "bilinear regression", "zero": "no change",
+    "T-only": "budget regression", "E-only": "reuse regression",
+    "surface:L0": "loss regression", "surface:logN": "size regression",
 }
 RANGES = {
-    "prune_new": "three checkpoints outside every fit; includes 6.9B",
-    "quant_bit": "160M–1.4B; bit 4; groups 64 and 256",
-    "quant_group": "410M at step 143k, 1.4B at step 16k; bits 3 to 5; groups 32 and 512",
-    "quant_new": "1.4B at step 112k; bits 3 to 5; groups 32, 128, and 512",
-    "pool": "270M, 1B pairs; six pools; 50k–200k tokens",
+    "prune_new": "Three Pythia checkpoints unused in fitting (incl. 6.9B), pruned to densities 0.575, 0.675, 0.85",
+    "quant_bit": "Pythia 160M to 1.4B at unseen bit width 4, group sizes 64 and 256",
+    "quant_group": "Pythia 410M (143000 steps) and 1.4B (16000 steps) at unseen group sizes 32 and 512, bit widths 3 to 5",
+    "quant_new": "Pythia 1.4B (112000 steps), unseen in fitting, at bit widths 3 to 5, group sizes 32, 128 and 512",
+    "pool": "Gemma 270M and 1B distilled on six new pools for 50000 to 200000 tokens",
 }
-HEADERS = ("Task (test set)", "Frozen candidate", "Candidate error (Math / Code / QA)",
-           "Delivered relation", "Delivered error (Math / Code / QA)",
-           "Baseline error (Math / Code / QA)")
-COLUMN_WIDTHS = (".20", ".17", ".245", ".145", ".12", ".12")
+HEADERS = ("Prediction task", "Predictor tested first", "Its error (nats)",
+           "Predictor we deliver", "Its error (nats)", "Simplest comparison\nMath / Code / QA")
+COLUMN_WIDTHS = (".20", ".18", ".115", ".20", ".115", ".19")
+TABLE_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
-    "Frozen prediction tasks by method. Frozen candidates, delivered relations, and baselines "
-    "selected within development folds report mean absolute errors in native-token nats "
-    "(Math / Code / QA) on the same cells. Brackets give stored paired intervals of baseline "
-    "minus candidate. Daggers mark delivered rules fixed after the test. "
-    "Distillation entries list the 270M and 1B students in that order."
+    "Every row is a prediction frozen before measurement; errors are mean absolute errors in nats per token for Math, Code and QA. "
+    "``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the baseline selected during development. "
+    "Distillation entries give the {students} students in that order."
 )
+NUMBER_PATTERN = r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|five|six|seventeen|twenty)\b"
 
 
 class MissingValue(ValueError):
@@ -161,15 +158,24 @@ class Cell:
     parts: list
     context: list = field(default_factory=list)
     note: str = ""
+    compact_scores: str = ""
 
     def render(self, audit):
-        return render_text(self.plain(audit))
+        plain = self.plain(audit)
+        if not self.compact_scores:
+            return render_text(plain)
+        # Measure in the actual document font and column, without squeezing type.
+        # Score cells retain three labelled lines whenever the full line is too wide.
+        prefix, scores = plain.split("\n", 1) if self.compact_scores == "comparison" else ("", plain)
+        return ((render_text(prefix) + r"\newline ") if prefix else "") + r"\TableOneErrors" + "".join(
+            "{" + render_text(line) + "}" for line in scores.split("\n"))
 
     def plain(self, audit):
         return "".join(p if isinstance(p, str) else evaluate(audit, p) for p in self.parts)
 
     def record(self, audit):
         return {"parts": self.parts, "context": self.context, "note": self.note,
+                "compact_scores": self.compact_scores,
                 "rendered": self.render(audit)}
 
 
@@ -199,33 +205,45 @@ def cap_lines(fn, separator="; ", label_separator=" "):
 
 
 def score_parts(fn):
-    parts = []
-    for cap in CAPS:
-        if parts:
-            parts.append(" / ")
-        parts.extend(fn(cap))
-    return parts
+    return cap_lines(fn, separator="\n")
 
 
 def baseline_parts(audit, fn):
-    """Name shared baselines once; otherwise retain capability/student order."""
+    """Name the comparison once; its header supplies the capability order."""
     entries = [fn(cap) for cap in CAPS]
     names = [evaluate(audit, entry[0]) for entry in entries]
     sources = [ref for entry in entries for ref in entry[0]["sources"]]
-    label = names[0] if len(set(names)) == 1 else " / ".join(names)
+    if len(set(names)) == 1:
+        label = names[0].capitalize()
+    elif names == ["per-density regression", "per-density regression", "development median"]:
+        label = "Per-density regression; QA: median"
+    elif names == ["bilinear regression", "no change", "development median"]:
+        label = "Bilinear regression; Code: no change; QA: median"
+    elif names == ["budget regression, loss regression", "reuse regression", "reuse regression, size regression"]:
+        label = "Regressions: Math budget, loss; Code reuse; QA reuse, size"
+    else:
+        grouped = {}
+        for cap, name in zip(CAPS, names):
+            grouped.setdefault(name, []).append("QA" if cap == "qa" else cap.capitalize())
+        label = "; ".join(", ".join(caps) + ": " + name for name, caps in grouped.items())
+    scores = dict(zip(CAPS, (entry[1:] for entry in entries)))
     parts = [mapped(audit, label, *sources), "\n"]
-    for i, entry in enumerate(entries):
-        if i:
-            parts.append(" / ")
-        parts.extend(entry[2:])
+    for cap in CAPS:
+        if cap != CAPS[0]:
+            parts.append("\n")
+        parts.extend(scores[cap])
     return parts
 
 
 def composite_label(names):
-    """Spell out every capability in a mixed relation, with compact line breaks."""
-    labels = {c: "Reuse" if names[c] == "E" else RELATIONS[names[c]] for c in CAPS}
-    return ";\n".join(("QA" if c == "qa" else c.capitalize()) + ": " +
-                       labels[c][:1].lower() + labels[c][1:] for c in CAPS)
+    """Translate the two frozen mixed predictors into ordinary words."""
+    if list(names.values()) == ["E", "E", "joint"]:
+        return "Math and code: one-coefficient reuse forms; QA: three-coefficient budget-and-pool form"
+    if list(names.values()) == ["low_order_2d", "median", "zero"]:
+        return "Math source regression; Code development median; QA no change"
+    if list(names.values()) == ["same_input_interpolation", "same_input_interpolation", "median"]:
+        return "Math, Code: interpolation on the measured group-size grid; QA: development median"
+    raise ValueError(f"Unmapped mixed predictor: {names}")
 
 
 def delivered_cells(audit, names, refs, scores, *, posthoc=False, note=""):
@@ -234,10 +252,10 @@ def delivered_cells(audit, names, refs, scores, *, posthoc=False, note=""):
         label = RELATIONS[names[CAPS[0]]]
     else:
         label = composite_label(names)
-    marker = r"$^{\dagger}$" if posthoc else ""
+    marker = " (chosen after this test)" if posthoc else ""
     return [
         cell(mapped(audit, label, *refs), marker, note=note),
-        cell(*score_parts(scores), marker, refs=refs, note=note),
+        cell(*score_parts(scores), refs=refs, note=note),
     ]
 
 
@@ -304,7 +322,8 @@ def build(audit):
         eligible = [(i, r) for i, r in enumerate(prune["loso_table"])
                     if r["subset"] == "all" and r["candidate"] != "power"]
         pbase[cap] = min(eligible, key=lambda ir: ir[1][f"{cap}_mae"])
-    power = cell(relation(audit, "power", pointer(P53, "candidate_definitions", "power")),
+    power = cell(relation(audit, "power", pointer(P53, "candidate_definitions", "power"),
+                          pointer(P53, "n_params_per_capability", "power"), pointer(P53, "n_dev_states")),
                  refs=[pointer(P53, "feature_names")])
     original_panel = "results/v40-prune-strength/register.json"
     audit.read(original_panel)
@@ -315,7 +334,7 @@ def build(audit):
     if len(ps) != 3 or any(audit.data[p]["tag"] in {s["tag"] for s in prune["dev_states"]} for p in ps):
         raise ValueError("Pruning test must contain three checkpoints outside every fit")
     result.append([
-        cell("Pruning, new state\n", tested_range(audit, "prune_new", *[pointer(p, "tag") for p in ps]),
+        cell(tested_range(audit, "prune_new", *[pointer(p, k) for p in ps for k in ("tag", "densities")]),
              refs=[row.selection_source, pointer(P53, "dev_states"), pointer(ps[0], "densities")],
              note="All three test checkpoints are absent from every development fit. The 6.9B size occurs at other stages in the expanded register."),
         power,
@@ -323,7 +342,9 @@ def build(audit):
         *delivered_cells(audit, dict.fromkeys(CAPS, "median_curve"), delivery_refs("C35"),
                          lambda c: [scored_number(row.scores[c]["median_curve"])], posthoc=True,
                          note="New-state source-free median curve, fixed after test; scores use the same three checkpoints and densities as the frozen candidate."),
-        cell(*score_parts(lambda c: [scored_number(row.scores[c][pbase[c][1]["candidate"]])]),
+        cell(*baseline_parts(audit, lambda c: [
+                 baseline(audit, pbase[c][1]["candidate"], pointer(P53, "loso_table", pbase[c][0], "candidate")),
+                 scored_number(row.scores[c][pbase[c][1]["candidate"]])]),
              refs=[pointer(P53, "loso_table")], note="Minimum development LOSO MAE excluding power, per capability: " +
              " / ".join(BASELINES[pbase[c][1]["candidate"]] for c in CAPS) + "; no test ranking.")])
 
@@ -334,29 +355,31 @@ def build(audit):
     base55 = {c: min(((i,r) for i,r in enumerate(q55["loso_table"]) if r["candidate"] in q55["baselines"]),
                     key=lambda ir: ir[1]["mae"][c]) for c in CAPS}
     def bit_baseline(c):
-        _, r = base55[c]
+        i, r = base55[c]
         j = next(j for j,e in enumerate(entries) if e["candidate"] == r["candidate"])
-        return [number(bp,"test_sets","bit_test","mae_table",j,"mae",c)]
+        return [baseline(audit, r["candidate"], pointer(Q55,"loso_table",i,"candidate")),
+                number(bp,"test_sets","bit_test","mae_table",j,"mae",c)]
     bit_scores = score_parts(lambda c: [number(bp,"test_sets","bit_test","mae_table",candidate_index,"mae",c)])
     bit_delivery_note = (
-        "The delivered relation for this task is the source surface as tested; its errors "
-        "reuse the candidate's exact frozen JSON fields. No post-test dagger applies. "
+        "The delivered relation for this task is the source regression as tested; its errors "
+        "reuse the candidate's exact frozen JSON fields. It was fixed before measurement. "
         "The later delivered rule has no matching stored score for this earlier bit test, "
         "whose configurations entered its development grid. V55 alternatives use different "
         "models and boundary rules and are not substituted for that later rule."
     )
     result.append([
-        cell("Quantization, unseen bit-width\n", tested_range(audit, "quant_bit", pointer(Q55,"test_sets","bit_test","states"),
+        cell(tested_range(audit, "quant_bit", pointer(Q55,"test_sets","bit_test","states"),
                          pointer(Q55,"test_sets","bit_test","configs")), refs=[pointer(Q55,"precommitted_rule")]),
-        cell(relation(audit, "low_order_2d", pointer(Q55,"candidate_definitions","low_order_2d")), refs=[pointer(Q55,"feature_names")]),
+        cell(relation(audit, "low_order_2d", pointer(Q55,"candidate_definitions","low_order_2d"),
+                      pointer(Q55,"n_params_per_capability","low_order_2d")), refs=[pointer(Q55,"feature_names")]),
         cell(*bit_scores),
-        cell(mapped(audit, "Source surface (as tested)", pointer(Q55,"candidate_definitions","low_order_2d")),
+        cell(mapped(audit, "The same predictor", pointer(Q55,"candidate_definitions","low_order_2d")),
              refs=[pointer(Q55,"precommitted_rule"), pointer(R74,"recommendation_rule"),
                    pointer(Q69,"dev_configs"), pointer(Q55,"dev_configs")], note=bit_delivery_note),
         cell(*bit_scores, note=bit_delivery_note),
-        cell(*score_parts(bit_baseline), refs=[pointer(Q55,"loso_table")], note="Development minimum over registered baselines mean/median/zero: " +
+        cell(*baseline_parts(audit, bit_baseline), refs=[pointer(Q55,"loso_table")], note="Development minimum over registered baselines mean/median/zero: " +
              " / ".join(BASELINES[base55[c][1]["candidate"]] for c in CAPS) + ".")])
-    for key,task in (("C44","Quantization, unseen group size"),("C46","Quantization, new state")):
+    for key in ("C44", "C46"):
         row = rows[key]
         selected_baseline = {c: min((m for m in quant["methods"] if m != row.candidates[c]),
                            key=lambda m:quant["loso"]["scores"][m][c]["macro_mae"]) for c in CAPS}
@@ -382,7 +405,7 @@ def build(audit):
                     range_refs.append(pointer(qp, "rows", i, k))
                     seen_values.add((k, r[k]))
         result.append([
-            cell(task, "\n", tested_range(audit, "quant_group" if key=="C44" else "quant_new",
+            cell(tested_range(audit, "quant_group" if key=="C44" else "quant_new",
                              *range_refs),
                  refs=[pointer("results/v69-quant-confirm/freeze.json","frozen_at_utc"),
                        *[pointer(qp,"rows",i,"test_set") for i,_ in rr]]),
@@ -395,7 +418,9 @@ def build(audit):
                              [*delivery_refs(key), pointer(R74,"recommendation_rule")],
                              lambda c: [quant_score(c, "median" if key == "C46" or c == "qa" else "same_input_interpolation")],
                              posthoc=True, note="Post-test rule on the identical frozen cells, never a test-error minimum. New-state errors pool boundary and interior cells equally per cell."),
-            cell(*score_parts(lambda c:[quant_score(c, selected_baseline[c])]),
+            cell(*baseline_parts(audit, lambda c: [
+                     baseline(audit, selected_baseline[c], pointer(Q69,"loso","scores",selected_baseline[c],c)),
+                     quant_score(c, selected_baseline[c])]),
                  refs=[pointer(Q69,"loso","scores")],note="Minimum development LOSO macro MAE excluding the selected candidate, per capability: " +
                  " / ".join(BASELINES[selected_baseline[c]] for c in CAPS) + ".")])
 
@@ -404,32 +429,34 @@ def build(audit):
     students = audit.data[f70]["confirmation_register"]["students"]
     pool_inds = {c: [next(i for i,g in enumerate(groups) if g["student"]==s and g["capability"]==c)
                      for s in students] for c in CAPS}
-    def pool_numbers(c, key, intervals=False):
+    def pool_numbers(c, key):
         parts = []
         for i in pool_inds[c]:
             if parts:
-                parts.append(",\n" if intervals else ", ")
+                parts.append(", ")
             parts.append(number(D70,"groups",i,key))
-            if intervals:
-                parts.extend(paired_interval(audit, D70, "groups", i))
         return parts
     pool_relation = cell(mapped(audit, composite_label({c: audit.data[f70]["selected"][c]["method"] for c in CAPS}),
-                                *[pointer(f70,"selected",c,"method") for c in CAPS]),
+                                *[pointer(f70,"selected",c,k) for c in CAPS for k in ("method", "n_params")]),
                          refs=[pointer(f70,"selected"), pointer(f70,"models")],
                          note="The frozen and delivered forms are identical: one-coefficient zero-anchored reuse for Math/Code, joint budget/pool for QA; fixed before test.")
     result.append([
-        cell("Distillation, new pool\n", tested_range(audit, "pool", pointer(f70,"confirmation_register","students"),
+        cell(tested_range(audit, "pool", pointer(f70,"confirmation_register","students"),
                          pointer(f70,"confirmation_register","pools"),pointer(D70,"groups",0,"clusters",0,"T_planned")),
              refs=[pointer(f70,"confirmation_register","unused_U_assertion"),
                     pointer(f70,"frozen_at_utc"),pointer("results/v47-p2-register/register.json","v5_confirm","registered_at_utc")]),
         pool_relation,
-        cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae", intervals=True)),
+        cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae")),
              refs=[pointer(f70,"confirmation_register","students"),pointer(f70,"bootstrap")],
-             note="Comma-separated scores follow student order 270M, 1B; no student averaging. Brackets are stored 95% paired baseline-minus-candidate intervals, not MAE intervals; each baseline identity is checked by the reused frozen loader."),
-        pool_relation,
+             note="Scores follow student order 270M, 1B; no student averaging. Stored paired baseline-minus-candidate intervals do not fit beside these scores and remain in the appendix tables; each baseline identity is checked by the reused frozen loader."),
+        cell(mapped(audit, "The same predictor", *pool_relation.parts[0]["sources"]),
+             refs=pool_relation.context, note=pool_relation.note),
         cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae")), refs=delivery_refs("C47") + delivery_refs("C48"),
              note="Same candidate, same cells; repeat the stored MAEs without the candidate-versus-baseline intervals."),
-        cell(*score_parts(lambda c: pool_numbers(c,"baseline_mae")), refs=[pointer(f70,"baseline_rule"),pointer(f70,"strongest_baseline")],
+        cell(*baseline_parts(audit, lambda c: [
+                 mapped(audit, baseline_names(groups[i]["strongest_baseline"] for i in pool_inds[c]),
+                        *[pointer(f70,"strongest_baseline",groups[i]["student"],c,"method") for i in pool_inds[c]]),
+                 *pool_numbers(c,"baseline_mae")]), refs=[pointer(f70,"baseline_rule"),pointer(f70,"strongest_baseline")],
              note="Development-fixed baseline identities, student order 270M, 1B: " +
              " / ".join(baseline_names(groups[i]["strongest_baseline"] for i in pool_inds[c]) for c in CAPS) + ".")])
     complete = []
@@ -443,15 +470,21 @@ def build(audit):
         except MissingValue:
             audit.omit("Task omitted because a frozen value is absent: " + row[0].plain(audit))
         else:
+            for index in (2, 4):
+                row[index].compact_scores = "labelled"
+            row[5].compact_scores = "comparison"
             complete.append(row)
     return complete
 
 
+def student_label(audit, ref):
+    return mapped(audit, {"gemma3-270m": "270M", "gemma3-1b": "1B"}[resolve(audit, ref)], ref)
+
+
 def caption_cell(audit):
-    before, students, after = re.split(r"(270M and 1B)", CAPTION)
-    return cell(before, mapped(audit, students,
-                              pointer("results/v70-distill-confirm/freeze.json","confirmation_register","students")),
-                after, refs=[
+    before, after = CAPTION.split("{students}")
+    return cell(before, mapped(audit, "270M and 1B",
+                              pointer("results/v70-distill-confirm/freeze.json","confirmation_register","students")), after, refs=[
         pointer(P53,"feature_names"), pointer(Q55,"feature_names"),
         pointer("results/v70-distill-confirm/freeze.json","reference_rule"),
         pointer(P53,"candidate_definitions","power"), pointer(Q55,"candidate_definitions","low_order_2d"),
@@ -466,13 +499,15 @@ def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
         r"\textwidth-" + f"{gaps * float(width):.2f}" + r"\tabcolsep\relax}"
         for width in COLUMN_WIDTHS)
     lines = [f"% Generated from frozen JSON; see {sidecar}.",
-             r"\begin{table*}[!htbp]\normalfont", r"\centering\footnotesize\linespread{0.85}\selectfont",
-             r"\setlength{\tabcolsep}{3pt}", r"\renewcommand{\arraystretch}{0.92}",
+             r"\begin{table*}[!htbp]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
+             r"\setlength{\tabcolsep}{1.5pt}", r"\renewcommand{\arraystretch}{0.92}",
              r"\setlength{\abovecaptionskip}{4pt}",
+             r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}%",
+             r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}",
              r"\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}" + columns + "@{}}",
-             r"\toprule", " & ".join(HEADERS) + r" \\", r"\midrule"]
+             r"\toprule", " & ".join(render_text(h) for h in HEADERS) + r" \\", r"\midrule"]
     lines += [" & ".join(c.render(audit) for c in row) + r" \\" for row in rows]
-    lines += [r"\bottomrule", r"\end{tabular*}", r"\caption{\footnotesize "+caption_cell(audit).render(audit)+"}",
+    lines += [r"\bottomrule", r"\end{tabular*}", r"\caption{"+TABLE_FONT+" "+caption_cell(audit).render(audit)+"}",
               r"\label{tab:main-prediction-v2}", r"\end{table*}"]
     return "\n".join(lines)+"\n"
 
@@ -487,7 +522,7 @@ def numeric_inventory(records, audit):
                     raise ValueError("Printed numeric literal lacks a JSON recipe")
                 continue
             displayed = evaluate(audit, part)
-            for match in re.finditer(r"[-+]?\d+(?:\.\d+)?|\b(?:three|six)\b", displayed):
+            for match in re.finditer(NUMBER_PATTERN, displayed, re.I):
                 location = {"row": record["row"], "column": record["column"]} if "row" in record else {"location": "caption"}
                 entries.append({**location, "part": index,
                                 "number": match.group(), "displayed": displayed,
@@ -506,9 +541,9 @@ def generate(root=ROOT, *, write_tex=True):
         numbers = numeric_inventory([*records, caption.record(audit)], audit)
         side = ["# Main prediction table: cell sources", "", "Columns: " + "; ".join(HEADERS) + ".",
                 "Rendered layout: one row per frozen prediction task. Cell coordinates match the six printed columns; every cell is populated.",
-                "Slash-separated scores follow Math / Code / QA order. Comma-separated distillation pairs follow student order 270M, 1B. Baseline identities and their development selection pointers are recorded in each baseline cell's note/context.",
-                "Daggers mark post-test delivery decisions; frozen candidate predictions remain distinct. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test, the delivered relation is the source surface as tested and repeats the candidate's stored errors without a dagger. The later delivered model has no matching stored score and its development includes those cells.",
-                "Only stored V70 paired_difference.ci95 endpoints are printed, after their own candidate MAE. The sign is baseline minus candidate; the baseline identities match the frozen development selection. These are not MAE intervals. Missing intervals stay absent; no resampling or invented intervals.",
+                "Error cells use one Math / Code / QA line if it fits the actual column, otherwise three labelled lines. Distillation pairs follow student order 270M, 1B as stated in the caption. Baseline names precede their scores, in the capability order named in the header; where two names differ they follow student order 270M, 1B. Development selection pointers are recorded in each baseline cell's note/context.",
+                "The words 'chosen after this test' mark post-test delivery decisions; first predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test, 'The same predictor' retains the source regression as tested and its exact errors. The later delivered model has no matching stored score and its development includes those cells.",
+                "Stored V70 paired_difference.ci95 endpoints are omitted from Table 1 because they do not fit on the same line as the score. They remain in the appendix tables. The sign is baseline minus candidate; these are not MAE intervals. No refits, resampling or invented intervals.",
                 "All indices are zero-based JSON pointers. `mean` is equal-weight arithmetic; `weighted_mean` pairs each stored subset MAE with its stored cell count, preserving equal cell weights. No refits or resampling.",
                 "Numeric values are formatted directly from the following executable source recipes. Context pointers justify textual labels and freeze identities; incomplete tasks are omitted.",
                 "The `label` operation uses the generator's explicit presentation mappings; `expected` preserves the source values and must match before rendering `label`. Counts always use their own JSON fields.",
