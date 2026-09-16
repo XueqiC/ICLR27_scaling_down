@@ -48,18 +48,18 @@ def test_explanation_confines_io(tmp_path):
     refuses_output_file_symlink(tmp_path,"figs","explanation.png")
 
 
-@pytest.mark.parametrize("panel", "abc")
+@pytest.mark.parametrize("panel", "ab")
 def test_explanation_line_marker_whisker_and_jitter_sizes(panel):
     from matplotlib.container import ErrorbarContainer
     from matplotlib.collections import PolyCollection
     audit = Artifacts()
     data = dict(profiles=gen.curvature(audit), corners=gen.corners(audit), displacement=gen.displacement(audit))
     plt = pyplot()
-    style.apply_style("panel")
+    style.apply_style("double")
     fig = plt.figure(figsize=gen.PANEL_SIZES[panel])
     try:
         ax = gen.draw_panel(fig, data, panel)
-        assert tuple(fig.get_size_inches()) == (1.8, 1.35)
+        assert tuple(fig.get_size_inches()) == (2.7, 1.45)
         assert ax.get_legend() is None
         for line in ax.lines:
             if line.get_marker() in ("o", "s", "^", "D", "x"):
@@ -81,12 +81,6 @@ def test_explanation_line_marker_whisker_and_jitter_sizes(panel):
                 xs = [line.get_xdata()[0] for line in folds]
                 assert xs == [i] * len(xs)
                 assert [line.get_ydata()[0] for line in folds] == [r["p"] for r in profile["folds"]]
-        elif panel == "b":
-            assert all(list(band.get_linewidths()) == [.6] for band in ax.collections if isinstance(band, PolyCollection))
-            # Additive ticks have no ErrorbarContainer; shared cap widths still apply.
-            additive = [line for line in ax.lines if line.get_marker() == "|" and line.get_color() == style.PALETTE["reference"]]
-            assert len(additive) == len(data["corners"])
-            assert all(line.get_markeredgewidth() == .6 for line in additive)
         else:
             assert len(ax.lines) == 3 and all(line.get_linewidth() == 1.1 for line in ax.lines)
     finally:

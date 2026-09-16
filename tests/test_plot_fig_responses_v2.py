@@ -33,29 +33,32 @@ def test_responses_produces_files_from_nearest_budget_and_separate_seeds():
                 for r in subset: by_rung[r["U"]].add(r["pool_seed"])
                 assert all(len(seeds)==2 for seeds in by_rung.values())
     assert all(r["status"]=="development" for r in rows)
-    for letter, panel in zip("ab", ("left", "right")):
+    for letter, panel in gen.PANELS.items():
         sidecar = json.loads(output_path(ROOT, "figs", f"fig1_{letter}_data.json").read_text())
-        assert sidecar["records"] == [r for r in rows if r["panel"] == panel]
+        assert sidecar["records"] == gen.panel_records(rows, panel)
 
 
-@pytest.mark.parametrize("panel", ("left", "right"))
+@pytest.mark.parametrize("panel", gen.PANELS.values())
 def test_one_mean_line_per_student_readout_and_raw_seed_markers(panel):
-    rows = gen.build(Artifacts())
+    all_rows = gen.build(Artifacts())
+    rows = gen.panel_records(all_rows, panel)
     plt = pyplot()
-    style.apply_style("panel")
+    style.apply_style(gen.PANEL_KIND)
     fig = plt.figure(figsize=gen.PANEL_SIZE)
     try:
         ax = gen.draw_panel(fig, rows, panel)
-        lines = [line for line in ax.lines if line.get_color() in (gen.COLORS if panel == "left" else gen.QA_COLORS).values()
+        lines = [line for line in ax.lines if line.get_color() in (gen.QA_COLORS if panel == "distributions" else gen.COLORS).values()
                  and line.get_linestyle() != "None"]
         points = [line for line in ax.lines if line.get_marker() in ("o", "s")]
-        assert len(lines) == 9 and len(points) == 18
+        assert len(lines) == (9 if panel == "distributions" else 3)
+        assert len(points) == 2*len(lines)
         assert all(line.get_linewidth() == 1.1 and line.get_marker() == "None" for line in lines)
         assert all(line.get_linestyle() == "None" and line.get_markersize() == 3.8 for line in points)
         assert ax.get_legend() is None
-        for series, color in zip(gen.CAPS if panel == "left" else gen.SCOPES, (gen.COLORS if panel == "left" else gen.QA_COLORS).values()):
+        for series in (gen.SCOPES if panel == "distributions" else (panel,)):
+            color = gen.QA_COLORS[series] if panel == "distributions" else gen.COLORS[series]
             for student, ls in zip(gen.STUDENTS, gen.STYLES):
-                subset = [r for r in rows if (r["panel"], r["series"], r["student"]) == (panel, series, student)]
+                subset = [r for r in rows if (r["series"], r["student"]) == (series, student)]
                 rungs = defaultdict(list)
                 for r in subset:
                     rungs[r["U"]].append(r)
@@ -68,7 +71,7 @@ def test_one_mean_line_per_student_readout_and_raw_seed_markers(panel):
             assert Counter((x, y) for line in points if line.get_marker() == marker
                            for x, y in zip(line.get_xdata(), line.get_ydata())) == Counter(
                                (r["reuse"], r["delta"]) for r in rows
-                               if r["panel"] == panel and r["pool_seed"] % 2 == parity)
+                               if r["pool_seed"] % 2 == parity)
     finally:
         plt.close(fig)
 

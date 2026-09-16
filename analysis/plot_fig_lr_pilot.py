@@ -9,16 +9,17 @@ else:
 
 if __package__:
     from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
-    from .paper_figure_style import finish_panel, panel_axes, position_row_axes, row_axis_style
+    from .paper_figure_style import finish_panel, panel_axes, position_row_axes, row_axis_style, measure_row_rectangle, legend_strip
     from .paper_panel_exports import ref, axes_defaults, export
 else:
     from paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
-    from paper_figure_style import finish_panel, panel_axes, position_row_axes, row_axis_style
+    from paper_figure_style import finish_panel, panel_axes, position_row_axes, row_axis_style, measure_row_rectangle, legend_strip
     from paper_panel_exports import ref, axes_defaults, export
 
 STUDENTS = ("gemma3-1b", "gemma3-4b")
 RATES = ("5e-5", "1e-4", "2e-4")
-PANEL_SIZE = (1.8, 1.35)
+PANEL_SIZE = (2.7, 1.45)
+LEGEND_SIZE = (5.5, .42)
 CAPTION = """Learning-rate pilot for Gemma-3 1B (dashed) and 4B (solid).
 Colour identifies capability, using the Figure 3 palette. The x axis is the
 configured peak learning rate encoded in the run name, not the decayed lr field
@@ -27,12 +28,10 @@ update, with positive values indicating higher loss than the initial student.
 All six pilots use full teacher data with 75 examples per domain and data seed
 11; their final saved update is 8, at 37,903 processed input tokens. These are
 development pilots, with one run per student/rate and no uncertainty estimate.
-Panel (c) is 1.8 x 1.35 inches, the third panel in the 5.5-inch Figure 3 row.
-Lines are 1.1 pt and markers are 3.8 pt. The complete
-capability/distribution/student/seed key is fig1_legend.pdf above the panels;
-the LR ticks give the configured rates and the markers denote checkpoints.
-The measured axes rectangle and compact numeric tick format match panels (a)/(b);
-the pilot retains its own loss-change range.
+The standalone appendix panel lr_pilot_a.pdf is 2.7 x 1.45 inches.
+Lines are 1.1 pt and markers are 3.8 pt. The shared capability and student key
+lr_pilot_legend.pdf sits above; the LR ticks give the configured peak rates,
+and markers denote the final checkpoints.
 """
 
 
@@ -83,16 +82,23 @@ def draw_panel(fig, rows, rectangle=None):
     return position_row_axes(ax, rectangle) if rectangle is not None else ax
 
 
+def draw_legend(fig):
+    from matplotlib.lines import Line2D
+    handles = [Line2D([], [], color=COLORS[c], label="QA" if c == "qa" else c.title()) for c in CAPS]
+    handles += [Line2D([], [], color=PALETTE["reference"], ls=ls, label=name)
+                for name, ls in (("1B", "--"), ("4B", "-"))]
+    return legend_strip(fig, handles)
+
+
 def generate(root=ROOT):
     with frozen_run(root) as access:
         audit, plt = Artifacts(root), pyplot(root)
         rows = build(audit)
-        if __package__:
-            from . import plot_fig_responses_v2 as responses
-        else:
-            import plot_fig_responses_v2 as responses
-        rectangle = responses.row_rectangle(responses.build(audit), plt, rows)
-        export(plt, audit, "lr_pilot", [("fig1_c", PANEL_SIZE, lambda f: draw_panel(f, rows, rectangle), rows, CAPTION)], CAPTION)
+        rectangle = measure_row_rectangle(plt, PANEL_SIZE, [lambda f: draw_panel(f, rows)], kind="double")
+        export(plt, audit, "lr_pilot",
+               [("lr_pilot_a", PANEL_SIZE, lambda f: draw_panel(f, rows, rectangle), rows, CAPTION)],
+               CAPTION, width=5.5, center=True,
+               legend=("lr_pilot_legend", LEGEND_SIZE, draw_legend, [], CAPTION))
         return rows, audit, access
 
 

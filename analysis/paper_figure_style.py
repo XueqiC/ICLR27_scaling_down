@@ -33,7 +33,7 @@ SEED_MARKERS = ("o", "s")
 HATCHES = {"math": "///", "code": "...", "qa": "xx",
            "prediction": "///", "oracle_differs": "xx", "ambiguous": "///",
            "infeasible": "xx"}
-PANEL_BANDS = {"three": (1.8, 1.35), "two": (2.7, 1.45), "full": (5.5, 1.5)}
+PANEL_BANDS = {"four": (1.35, 1.25), "three": (1.8, 1.35), "two": (2.7, 1.45), "full": (5.5, 1.5)}
 FONT_ROOTS = (Path("/usr/share/fonts"), Path("/usr/local/share/fonts"))
 
 
@@ -57,7 +57,8 @@ def method_ramp(method, count):
     return [ramp(i/max(1, count-1)) for i in range(count)]
 
 SERIF = ["Times New Roman", "Nimbus Roman", "TeX Gyre Termes", "DejaVu Serif"]
-SIZES = {"panel": (7.5, 8.5, 7.5), "double": (8.5, 9.5, 8.5),
+# Four-panel rows opt into the narrow tier; existing panels retain their sizes.
+SIZES = {"narrow": (7, 8, 7), "panel": (7.5, 8.5, 7.5), "double": (8.5, 9.5, 8.5),
          "full": (9, 10, 9), "legend": (8.5, 8.5, 8.5)}
 _fonts_registered = False
 

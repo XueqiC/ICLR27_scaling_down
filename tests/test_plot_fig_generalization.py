@@ -37,27 +37,21 @@ def frozen():
     return read
 
 
-def test_both_figures_preserve_exact_cell_coverage_and_corner_bands(generated):
+def test_maes_preserve_exact_eligible_cell_coverage(generated):
     rows, audit, access = generated
     check_access(audit, access)
     check_figures("generalization")
-    check_figures("generalization_cells")
     assert gen.format_pairs(rows) in (ROOT / "paper/paper/figs/generalization_mae_pairs.md").read_text()
-    side = (ROOT / "paper/paper/figs/generalization_cells_sources.md").read_text()
-    original = json.loads(side.split("```json\n")[1].split("\n```")[0])
-    cells = [c for r in rows if r["kind"] == "mae" for c in r["cells"]]
-    corners = [{k: v for k, v in r.items() if k != "kind"} for r in rows if r["kind"] == "corner"]
-    # Identity includes capability: V78 shares a measurement path across caps.
+    from analysis.paper_artifacts import Artifacts
+    original = gen.cells.build(Artifacts())
+    original = [r for r in original if r["measurement_interval"] is None
+                and r["group"] != "Pythia: locked rule on new states"]
+    cells = [c for r in rows for c in r["cells"]]
     identity = lambda r: (r["panel"], r["group"], r["capability"], r["source"])
-    assert Counter(map(identity, cells + corners)) == Counter(map(identity, original))
-    assert corners == [r for r in original if r["measurement_interval"] is not None]
-    assert len(cells) == 438 and len(corners) == 12
-    assert all(r["status"] == "development" for r in corners if r["student"] == "gemma3-4b")
-    scope = [r for r in rows if r["panel"] == "C"]
-    assert {r["group"] for r in scope} == {"2wiki_new", "musique", "triviaqa"}
-    assert all(r["kind"] == "corner" and r["predicted"] == 0
-               and r["candidate"] == "registered additive contrast" for r in scope)
-    assert "No frozen response-law predictions" in gen.SCOPE_NOTE
+    assert Counter(map(identity, cells)) == Counter(map(identity, original))
+    assert len(cells) == 222
+    assert all(r["kind"] == "mae" for r in rows)
+    assert not any("locked" in r["group"] for r in rows)
     assert any("A2 frozen_prediction_error_interval" in note for note in audit.notes)
 
 
@@ -150,14 +144,14 @@ def test_render_has_log_maes_shared_legend_and_descriptive_labels(generated):
         maes = [ax for ax in fig.axes if ax.get_xscale() == "log"]
         assert len(maes) == 2
         assert maes[0].get_xlim() == maes[1].get_xlim()
-        assert len(fig.subfigs) == 4
-        assert [len(sub.legends) for sub in fig.subfigs] == [0, 0, 0, 1]
+        assert len(fig.subfigs) == 3
+        assert [len(sub.legends) for sub in fig.subfigs] == [0, 0, 1]
         assert [t.get_text() for t in maes[0].get_yticklabels()] == [
             "Prune in range", "Prune in, frozen", "Prune out, frozen", "Quant group", "Distill 270M", "Distill 1B"]
         from matplotlib.text import Text
         drawn = [t.get_text() for t in fig.findobj(Text) if t.get_visible()]
         assert not any(re.search(r"\bV\d+\b|\bBase\b|\bRel\.|\bdev\.", t) for t in drawn)
-        assert [t.get_text() for t in maes[1].get_yticklabels()] == ["New stages", "New quant state", "Locked rule"]
+        assert [t.get_text() for t in maes[1].get_yticklabels()] == ["New stages", "New quant state"]
         for panel, ax in zip("AB", maes):
             part = [r for r in rows if r["panel"] == panel and r["kind"] == "mae"]
             order = list(dict.fromkeys((r["group"], r["stratum"]) for r in part))
@@ -168,7 +162,7 @@ def test_render_has_log_maes_shared_legend_and_descriptive_labels(generated):
                             and len(line.get_xdata()) == 1 and line.get_xdata()[0] == r["relation_mae"]]
                 assert any(line.get_color() == gen.COLORS[r["capability"]] for line in matching)
         assert "unavailable" in gen.format_pairs(rows)
-        assert len(gen.format_pairs(rows).splitlines()) == 29
+        assert len(gen.format_pairs(rows).splitlines()) == 26
     finally:
         plt.close(fig)
 
@@ -178,7 +172,7 @@ def test_generalization_refuses_symlinked_output(tmp_path, component):
     refuses_symlink(gen, tmp_path, "figs", component)
 
 
-@pytest.mark.parametrize("stem", ["generalization", "generalization_cells"])
+@pytest.mark.parametrize("stem", ["generalization"])
 def test_generalization_confines_io(tmp_path, stem):
     refuses_external_io(tmp_path)
     refuses_output_file_symlink(tmp_path, "figs", f"{stem}.pdf")

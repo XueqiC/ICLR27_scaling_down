@@ -21,34 +21,35 @@ else:
 STUDENTS = ("gemma3-270m", "gemma3-1b", "gemma3-4b")
 STYLES = (":", "--", "-")
 SCOPES = ("2wiki_new", "musique", "triviaqa")
-PANEL_SIZE = (1.8, 1.35)
+PANEL_SIZE = (1.35, 1.25)
+PANEL_KIND = "narrow"
+PANEL_GAP = .03
 LEGEND_SIZE = (5.5, .42)
-FIGSIZE = (5.5, 1.77)
+FIGSIZE = (5.5, PANEL_SIZE[1] + LEGEND_SIZE[1])
+PANELS = {"a": "math", "b": "code", "c": "qa", "d": "distributions"}
 if __package__:
     from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 else:
     from paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 
-CAPTION = """Capability responses (a) and fresh QA distributions (b). Positive = worse:
-positive loss change means higher loss than the student's own initial state.
-Development endpoints nearest 200k supervised tokens per trajectory; every seed
-shown as a separate marker. Reuse T/D_U is measured in supervised-token passes, and loss
-change in native-token nats. All points, including 4B, are development.
-Colours identify Math, Code and QA in (a), and 2Wiki, MuSiQue and TriviaQA in (b).
-Dotted, dashed and solid lines denote 270M, 1B and 4B students. Circles and squares
-identify the first and second registered pool seeds within each rung; the core
-uses seeds 41/42 and the critical rung uses 51/52. One line per student and
-capability/distribution connects the arithmetic means of the two seeds at each
-pool-size rung (both reuse and loss change are averaged). Marker-only circles
-and squares retain each seed's observed reuse and loss change; there are no
-separate per-seed lines. Every underlying seed value remains in the sidecars.
-The complete shared key is supplied separately as fig1_legend.pdf: colours for
-all capabilities and distributions, student line styles, and S1/S2 for the two
-registered pool seeds. The learning-rate pilot (c) uses the same student styles.
-All three 1.8 x 1.35-inch panels form one row at 5.5-inch text width, with the
-shared legend above. All three axes use the same measured rectangle and compact
-numeric tick format; (a) and (b) share their loss-change range and ticks.
-Data lines are 1.1 pt and seed markers are 3.8 pt.
+CAPTION = """Capability responses: (a) Math, (b) Code, (c) QA on the registered
+2Wiki training probe, and (d) QA on fresh 2Wiki, MuSiQue and TriviaQA distributions.
+Positive = worse: positive loss change means higher loss than the student's own
+initial state. Development endpoints nearest 200k supervised tokens per trajectory;
+reuse E = T/D_U in supervised-token passes, loss change in native-token nats.
+All points, including 4B, are development. Each panel has its own loss-change range.
+Colours identify capabilities in (a-c), and the green ramp identifies 2Wiki,
+MuSiQue and TriviaQA in (d). Dotted, dashed and solid lines denote 270M, 1B and 4B.
+Circles and squares identify the first and second registered pool seeds in each
+rung (41/42 in the core, 51/52 at the critical rung). One line per student/readout
+connects arithmetic mean reuse and loss change over both seeds at each pool-size
+rung. Marker-only circles and squares retain each seed's observed coordinates;
+all 132 underlying records remain unchanged in the sidecars.
+Four 1.35 x 1.25-inch panels form one 5.5-inch row with 0.03-inch gaps,
+with fig1_legend.pdf above. Only the first panel carries the shared y label.
+The narrowest style band uses 7-pt ticks and 8-pt axis labels; lines are
+1.1 pt and seed markers 3.8 pt. The learning-rate pilot is a separate appendix
+figure, lr_pilot_a.pdf with lr_pilot_legend.pdf.
 """
 
 
@@ -97,13 +98,21 @@ def build(audit):
     return result
 
 
+def panel_records(rows, panel):
+    if panel == "distributions":
+        return [r for r in rows if r["panel"] == "right"]
+    return [r for r in rows if r["panel"] == "left" and r["series"] == panel]
+
+
 def draw_panel(fig, rows, panel, rectangle=None):
+    from matplotlib.ticker import MaxNLocator
     ax = panel_axes(fig, PANEL_SIZE, left=.35, bottom=.30, right=.07)
-    series = CAPS if panel == "left" else SCOPES
+    selected = panel_records(rows, panel)
+    series = SCOPES if panel == "distributions" else (panel,)
     for c in series:
-        color = COLORS[c] if panel == "left" else QA_COLORS[c]
+        color = QA_COLORS[c] if panel == "distributions" else COLORS[c]
         for student, style in zip(STUDENTS, STYLES):
-            subset = [r for r in rows if r["panel"] == panel and r["series"] == c and r["student"] == student]
+            subset = [r for r in selected if r["series"] == c and r["student"] == student]
             rungs = defaultdict(list)
             for row in subset:
                 rungs[row["U"]].append(row)
@@ -120,14 +129,15 @@ def draw_panel(fig, rows, panel, rectangle=None):
                 ax.plot([r["reuse"] for r in line], [r["delta"] for r in line],
                         linestyle="none", marker=marker, ms=3.8, color=color, alpha=.85)
     ax.axhline(0, color=PALETTE["reference"], lw=1.1)
-    ax.set(xlabel="Reuse ratio", ylabel="Loss change (nats)")
+    ax.set(xlabel="Reuse ratio E", ylabel="Loss change (nats)" if panel == "math" else "")
     ax.set_xticks([4, 8, 12])
-    # One range over both readouts, retaining all observed seed extrema.
-    values = [r["delta"] for r in rows]
+    # Independent ranges retain all seed extrema and the zero reference.
+    values = [0.] + [r["delta"] for r in selected]
     lo, hi = min(values), max(values)
     padding = .05*(hi-lo)
     ax.set_ylim(lo-padding, hi+padding)
-    ax.set_yticks([0, 3, 6])
+    ticks = MaxNLocator(nbins=2, min_n_ticks=2).tick_values(*ax.get_ylim())
+    ax.set_yticks([v for v in ticks if ax.get_ylim()[0] <= v <= ax.get_ylim()[1]])
     row_axis_style(ax)
     finish_panel(ax)
     return position_row_axes(ax, rectangle) if rectangle is not None else ax
@@ -146,31 +156,21 @@ def draw_legend(fig):
     return legend_strip(fig, colours + handles)
 
 
-def row_rectangle(rows, plt, pilot_rows):
-    if __package__:
-        from .plot_fig_lr_pilot import draw_panel as draw_pilot
-    else:
-        from plot_fig_lr_pilot import draw_panel as draw_pilot
+def row_rectangle(rows, plt):
     return measure_row_rectangle(plt, PANEL_SIZE, [
-        lambda f: draw_panel(f, rows, "left"),
-        lambda f: draw_panel(f, rows, "right"),
-        lambda f: draw_pilot(f, pilot_rows),
-    ])
+        lambda f, p=p: draw_panel(f, rows, p) for p in PANELS.values()
+    ], kind=PANEL_KIND)
 
 
-def plot(rows, plt, pilot_rows, rectangle=None):
-    if __package__:
-        from .plot_fig_lr_pilot import draw_panel as draw_pilot
-    else:
-        from plot_fig_lr_pilot import draw_panel as draw_pilot
+def plot(rows, plt, rectangle=None):
     if rectangle is None:
-        rectangle = row_rectangle(rows, plt, pilot_rows)
-    return combine_panels(plt, [
-        ("panel", (0, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "left", rectangle)),
-        ("panel", (1.85, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right", rectangle)),
-        ("panel", (3.7, 0, *PANEL_SIZE), lambda f: draw_pilot(f, pilot_rows, rectangle)),
-        ("legend", (0, PANEL_SIZE[1], *LEGEND_SIZE), draw_legend),
-    ], FIGSIZE)
+        rectangle = row_rectangle(rows, plt)
+    row_width = len(PANELS)*PANEL_SIZE[0] + (len(PANELS)-1)*PANEL_GAP
+    left = (FIGSIZE[0]-row_width)/2
+    specs = [(PANEL_KIND, (left + i*(PANEL_SIZE[0]+PANEL_GAP), 0, *PANEL_SIZE),
+              lambda f, p=p: draw_panel(f, rows, p, rectangle)) for i, p in enumerate(PANELS.values())]
+    specs.append(("legend", (0, PANEL_SIZE[1], *LEGEND_SIZE), draw_legend))
+    return combine_panels(plt, specs, FIGSIZE)
 
 
 def generate(root=ROOT):
@@ -178,34 +178,24 @@ def generate(root=ROOT):
         audit = Artifacts(root)
         plt = pyplot(root)
         rows = build(audit)
-        if __package__:
-            from . import plot_fig_lr_pilot as pilot
-        else:
-            import plot_fig_lr_pilot as pilot
-        pilot_rows = pilot.build(audit)
-        rectangle = row_rectangle(rows, plt, pilot_rows)
-        for letter, panel in zip("ab", ("left", "right")):
-            apply_style("panel")
+        rectangle = row_rectangle(rows, plt)
+        for letter, panel in PANELS.items():
+            apply_style(PANEL_KIND)
             fig = plt.figure(figsize=PANEL_SIZE)
             draw_panel(fig, rows, panel, rectangle)
-            save_panel(fig, f"fig1_{letter}", "panel", audit, [r for r in rows if r["panel"] == panel])
+            save_panel(fig, f"fig1_{letter}", PANEL_KIND, audit, panel_records(rows, panel))
             write_caption(f"fig1_{letter}", audit, CAPTION)
             plt.close(fig)
-        fig = plt.figure(figsize=PANEL_SIZE)
-        pilot.draw_panel(fig, pilot_rows, rectangle)
-        save_panel(fig, "fig1_c", "panel", audit, pilot_rows)
-        write_caption("fig1_c", audit, pilot.CAPTION)
-        plt.close(fig)
         apply_style("legend")
         fig = plt.figure(figsize=LEGEND_SIZE)
         draw_legend(fig)
         save_panel(fig, "fig1_legend", "legend", audit, [])
-        write_caption("fig1_legend", audit, CAPTION + pilot.CAPTION)
+        write_caption("fig1_legend", audit, CAPTION)
         plt.close(fig)
-        fig = plot(rows, plt, pilot_rows, rectangle)
+        fig = plot(rows, plt, rectangle)
         save_figure(fig, "responses_v2", audit)
-        write_notes("responses_v2", audit, {"responses": rows, "lr_pilot": pilot_rows})
-        write_caption("responses_v2", audit, CAPTION + pilot.CAPTION)
+        write_notes("responses_v2", audit, rows)
+        write_caption("responses_v2", audit, CAPTION)
         plt.close(fig)
         return rows, audit, access
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Main-text paired MAEs from frozen predictions; CPU only, no fits/resampling.
 
-Also regenerates the unchanged per-cell appendix as generalization_cells.
+The legacy per-cell appendix remains independently reproducible.
 Paired gain intervals are reflected about the *fixed* baseline MAE for display;
 they are never labelled as marginal MAE or per-cell prediction intervals.
 """
@@ -32,16 +32,14 @@ D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
 GREY = PALETTE["reference"]
 MARKERS = {c: "o" for c in CAPS}
-PANEL_SIZES = {"a": (2.2, 1.6), "b": (1.45, 1.6), "c": (1.85, 1.6)}
-KINDS = {"a": "double", "b": "panel", "c": "panel"}
+PANEL_SIZES = {p: (2.7, 1.6) for p in "ab"}
+KINDS = {p: "double" for p in "ab"}
 LEGEND_SIZE = (5.5, .42)
 FIGSIZE = (5.5, 2.02)
 if __package__:
     from .paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
 else:
     from paper_figure_style import apply_style, finish_panel, panel_axes, save_panel, write_caption, combine_panels
-SCOPE_NOTE = ("No frozen response-law predictions on fresh evaluation distributions.\n"
-              "Only registered corner contrasts are available below.")
 
 
 def resolve(audit, reference):
@@ -116,7 +114,8 @@ def build(audit):
     result = []
     for original in source_cells:
         if original["measurement_interval"] is not None:
-            result.append({"kind": "corner", **original})
+            continue
+        if original["group"] == "Pythia: locked rule on new states":
             continue
         r = {**original, "baseline": None, "baseline_prediction": None,
              "baseline_source": None, "selection_source": None, "stratum": ""}
@@ -147,10 +146,6 @@ def build(audit):
             if stored["strongest_baseline"] != r["baseline"] or stored["selected"] != r["relation"]:
                 raise ValueError("V70 development/freeze selection mismatch")
             r["baseline_source"] = source + "/predictions/" + r["baseline"]
-        elif source.startswith("results/v78-rule-confirm/"):
-            r["relation"] = "locked-rule"
-            r["baseline_note"] = ("No development-selected prediction baseline stored for these cells; "
-                                  "v64-law and policy regret are different comparisons.")
         else:
             raise ValueError(f"Unclassified frozen prediction: {source}")
         if r["baseline_source"] is not None:
@@ -175,17 +170,16 @@ def build(audit):
             row["interval_source"] = f"{D70}#/groups/{i}/paired_difference/ci95"
         result.append(row)
 
-    audit.rule("Same prediction cells and row families as generalization_cells. MAE is mean absolute "
+    audit.rule("Same loss-prediction cells as generalization_cells, excluding locked-rule selection rows and corner contrasts. MAE is mean absolute "
                "prediction-minus-measurement error in native-token nats. Paired markers use identical cells "
                "and equal cell weights; n is the cell count per capability, not independent sample size.")
     audit.rule("Baselines use minimum development LOSO MAE excluding the selected relation: V53 "
                "loso_table[subset=all] for V53/V72; V69 loso.scores[*][cap].macro_mae for V69. "
                "V70 uses freeze.strongest_baseline[student][cap].method, never confirmation ranking.")
-    audit.rule("V46 has no recorded development-selected baseline; V78 has no such baseline predictions "
-               "on its plotted cells. Keep these relation MAEs capability-coloured and label baseline unavailable. "
-               "Do not choose on test errors, transport the later V53 selection to V46, or call V78's "
-               "v64-law a development-selected baseline. Split V46/V72 within the inside-range row to "
-               "avoid pairing a subset baseline with a full-row relation MAE.")
+    audit.rule("V46 has no recorded development-selected baseline. Keep its relation MAEs "
+               "capability-coloured and label baseline unavailable. Do not transport the later V53 "
+               "selection to V46. Split V46/V72 within the inside-range row to keep paired cells identical. "
+               "Locked-rule selection rows are excluded from this loss-prediction MAE figure.")
     audit.rule("V70 remains split by student within the new-pool budgets row: paired_difference.ci95 "
                "covers one student/capability's 18 checkpoints (6 equally sized pools). Never average "
                "interval endpoints across students. Draw the stored baseline-minus-relation gain interval "
@@ -194,14 +188,9 @@ def build(audit):
     audit.rule("A2 frozen_prediction_error_interval covers its development holdouts, not any of these "
                "V70 or A5/A7 corner cells. No A2 holdout row existed in the cell figure; none is added "
                "and no A2 interval is transplanted. No refitting, resampling, or invented interval.")
-    audit.rule("Corner rows are unchanged: signed prediction-minus-measurement on a separate symlog "
-               "axis, capability colours, hollow prediction diamonds, and solid whiskers "
-               "for the 4B development student. Whiskers are A5 registered +/-2-noise bands, not CIs. "
-               "Primary QA additivity failed to reject. Source panel C (lower group in display panel c) shows only the registered additive "
-               "corner predictions (zero); no frozen response-law predictions on fresh distributions exist.")
-    audit.rule("V46 .55 is outside its original coarse .6--.9 range; .65 is inside. V72 repeats two "
-               "revision labels with identical weights; both records retained, not independent states. "
-               "V78 uses each frozen configuration once. V93 descriptors only verify state identity.")
+    audit.rule("Corner rows retain their frozen values in the separate corner_contrasts appendix. "
+               "V46 .55 is outside its original coarse .6--.9 range; .65 is inside. V72 repeats two "
+               "revision labels with identical weights; both records retained, not independent states.")
     return result
 
 
@@ -213,7 +202,6 @@ def row_label(group, stratum):
         "Distillation: new-pool budgets": "Distill",
         "Pythia: new stages (power)": "New stages",
         "Pythia: new quantization state": "New quant state",
-        "Pythia: locked rule on new states": "Locked rule",
     }
     label = labels[group]
     if stratum == "V46" and "inside" in group:
@@ -261,40 +249,6 @@ def draw_maes(ax, rows, panel, limits):
     ax.spines["left"].set_visible(False)
 
 
-def draw_corners(ax, rows):
-    from matplotlib.ticker import NullFormatter
-    rows = sorted(rows, key=lambda r: (r["panel"] == "C", r["panel"]))
-    groups = list(dict.fromkeys(r["group"] for r in rows))
-    for y, group in enumerate(groups):
-        part = [r for r in rows if r["group"] == group]
-        for k, r in enumerate(part):
-            jitter = 0
-            color = QA_COLORS.get(r["group"], COLORS[r["capability"]])
-            dev = r["status"] == "development"
-            lo, hi = r["residual_interval"]
-            e = r["residual"]
-            whisker = ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=2, lw=1.1)
-            for segment in whisker.lines[2]:
-                segment.set_linestyle("-" if dev else "--")
-            ax.plot(e, y+jitter, marker="D", ls="", color=color,
-                    mfc=PALETTE["transparent"], alpha=.85)
-    ax.axvline(0, color=PALETTE["reference"], lw=1.1)
-    ax.axhline(1.5, color=PALETTE["grid"], lw=.6, zorder=0)
-    ax.set_xscale("symlog", linthresh=.03)
-    ax.set_xlim(-2.5, 2.5)
-    ax.set_xticks([-1, 0, 1], labels=["−1", "0", "1"])
-    ax.set_xticks([-.1, .1], minor=True)
-    ax.xaxis.set_minor_formatter(NullFormatter())
-    labels = {"Distillation: corner budgets (1B)": "1B",
-              "4B DEVELOPMENT: corner budgets": "4B development",
-              "2wiki_new": "2Wiki", "musique": "MuSiQue", "triviaqa": "TriviaQA"}
-    ax.set(yticks=range(len(groups)), yticklabels=[labels[g] for g in groups],
-           ylim=(len(groups)-.5, -.5), xlabel="Prediction error (nats)")
-    ax.tick_params(axis="y", length=0, pad=3)
-    ax.grid(axis="x", alpha=.15)
-    ax.spines["left"].set_visible(False)
-
-
 def mae_limits(rows):
     maes = [r for r in rows if r["kind"] == "mae"]
     values = [v for r in maes for v in (r["relation_mae"], r["baseline_mae"], *(r["whisker"] or [])) if v is not None]
@@ -304,31 +258,8 @@ def mae_limits(rows):
 
 
 def draw_panel(fig, rows, panel):
-    if panel in "ab":
-        ax = panel_axes(fig, PANEL_SIZES[panel], left=.94 if panel == "a" else .08,
-                        bottom=.40 if panel == "a" else .34,
-                        right=.005 if panel == "a" else .07, top=.06)
-        draw_maes(ax, [r for r in rows if r["kind"] == "mae"], panel.upper(), mae_limits(rows))
-        if panel == "b":
-            from matplotlib.transforms import ScaledTranslation
-            for text in ax.get_yticklabels():
-                text.set_horizontalalignment("left")
-                text.set_verticalalignment("center")
-                text.set_transform(ax.get_yaxis_transform() +
-                                   ScaledTranslation(0, .14, fig.dpi_scale_trans))
-    else:
-        ax = panel_axes(fig, PANEL_SIZES[panel], left=.52, bottom=.30, right=.06)
-        draw_corners(ax, [r for r in rows if r["kind"] == "corner"])
-        # Offset the long row label into the space below the leftmost marker,
-        # preserving the data-axis width at the existing physical font size.
-        from matplotlib.transforms import ScaledTranslation
-        for text in ax.get_yticklabels():
-            if text.get_text() == "4B development":
-                text.set_verticalalignment("center")
-                text.set_transform(text.get_transform() +
-                                   ScaledTranslation(.25, -.085, fig.dpi_scale_trans))
-        ax.xaxis.label.set_verticalalignment("bottom")
-        ax.xaxis.set_label_coords(.5, .025, transform=fig.transSubfigure if hasattr(fig, "transSubfigure") else fig.transFigure)
+    ax = panel_axes(fig, PANEL_SIZES[panel], left=1.03, bottom=.40, right=.08, top=.06)
+    draw_maes(ax, rows, panel.upper(), mae_limits(rows))
     return finish_panel(ax)
 
 
@@ -342,52 +273,39 @@ def draw_legend(fig):
                       label="QA" if c == "qa" else c.title()) for c in CAPS]
     handles += [Line2D([], [], color=GREY, mfc=PALETTE["white"], marker="o", ls="", label="Baseline"),
                 Line2D([], [], color=GREY, marker="D", mfc=PALETTE["transparent"], ls="", label="Relation"),
-                Line2D([], [], color=GREY, ls="-", label="Lower of pair"),
-                Line2D([], [], color=PALETTE["reference"], ls="--", label="1B"),
-                Line2D([], [], color=PALETTE["reference"], ls="-", label="4B development")]
+                Line2D([], [], color=GREY, ls="-", label="Lower of pair")]
     return legend_strip(fig, handles)
 
 
 def plot(rows, plt):
     return combine_panels(plt, [
         ("double", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, rows, "a")),
-        ("panel", (2.2, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
-        ("panel", (3.65, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, rows, "c")),
+        ("double", (2.8, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, rows, "b")),
         ("legend", (0, PANEL_SIZES["a"][1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
 
-CAPTION_TEXT = """Generalization to new configurations of seen states (a), new sources
-or students (b), and registered corner contrasts for both students and fresh
-evaluation distributions (c). MAE axes are logarithmic in native-token nats.
-Paired markers compare the relation and development-selected baseline on identical
-cells with equal cell weights. Math, Code and QA retain their capability hues in the MAE panels. Hollow capability markers denote baselines; hollow diamonds denote frozen
-relation predictions. Both retain their capability colour. The connecting segment uses that capability colour when
-the relation MAE is lower, and reference grey otherwise. Cell counts per capability are in
-generalization_mae_pairs.md and the record sidecars. The Prune in, frozen and
-Prune out, frozen rows are frozen new-state pruning predictions inside and outside
-the fitted density range, respectively. These rows and the Pythia locked-rule row
-have no stored development-selected baseline: their unpaired relation markers
-retain their capability colour. Prune in range and the two frozen pruning rows remain separate,
-as do the 270M/1B new-pool budgets.
-Paired gain CIs are translated about the fixed baseline MAE: a stored
-baseline-minus-relation interval [lo, hi] is drawn at [baseline MAE - hi,
-baseline MAE - lo]. These are paired gain intervals, not marginal MAE confidence
-intervals; no intervals are averaged across students.
-Corner whiskers are registered ±2-noise bands, not CIs. Corner predictions use hollow diamonds; band membership remains in the sidecar. The combined corner panel uses signed prediction-minus-measurement with a
-symmetric-log axis and unchanged limits of -2.5 to 2.5 native-token nats.
-Dashed whiskers denote 1B; solid whiskers denote the 4B development student. Capability colours
-apply in (c), and all fresh-distribution contrasts below its thin separator are QA.
-Primary QA additivity: failed to reject. Math is size-dependent and code unresolved.
-No frozen response-law predictions on fresh evaluation distributions. Only
-registered corner contrasts are available on fresh distributions, with additive predictions zero.
-No A2 development-holdout interval is transplanted to these confirmation cells.
-The three panels are 2.2, 1.45 and 1.85 inches wide and 1.6 inches high in one
-5.5-inch row. Panel (c) stacks 1B, 4B development, 2Wiki, MuSiQue and TriviaQA.
-The shared key is fig3_legend.pdf above the panels: Baseline, Relation and Lower of pair distinguish
-the paired MAEs; Lower of pair marks a relation MAE below its paired baseline.
-The 4B development entry identifies development-student solid whiskers in (c).
-Panel (b)'s row labels sit above their markers.
+CAPTION_TEXT = """Generalization to new configurations of seen states (a) and new
+sources or students (b). MAE axes are logarithmic in native-token nats and share
+one range. Paired markers compare relation and development-selected baseline
+on identical cells with equal cell weights. Math, Code and QA retain their
+capability hues. Hollow circles denote baselines; hollow diamonds denote frozen
+relation predictions. The connecting segment uses the capability colour when
+the relation MAE is lower, and reference grey otherwise. Cell counts per capability
+are in generalization_mae_pairs.md and record sidecars.
+Prune in, frozen and Prune out, frozen are frozen new-state pruning predictions
+inside and outside the fitted density range. These rows have no stored
+development-selected baseline and retain unpaired capability-coloured markers.
+Prune in range and the two frozen pruning rows remain separate, as do the
+270M/1B new-pool budgets. Paired gain CIs are translated about the fixed baseline
+MAE: [lo, hi] for baseline-minus-relation is drawn at
+[baseline MAE - hi, baseline MAE - lo]. These are paired gain intervals, not
+marginal MAE confidence intervals; no intervals are averaged across students.
+No A2 development-holdout interval is transplanted to confirmation cells.
+Two 2.7 x 1.6-inch panels form one 5.5-inch row with fig3_legend.pdf above:
+Baseline, Relation and Lower of pair distinguish the paired MAEs. The locked-rule
+selection row is excluded. Corner second differences and fresh-distribution
+contrasts are shown separately in corner_contrasts_a.pdf.
 """
 
 
@@ -403,21 +321,17 @@ def format_pairs(rows):
 
 
 def generate(root=ROOT):
-    _, _, appendix_access = cells.generate(root)
     with frozen_run(root) as access:
         audit = Artifacts(root)
         plt = pyplot(root)
         rows = build(audit)
-        audit.rule("Display mapping: fig3_a = MAE A, fig3_b = MAE B, fig3_c = all corner A+B+C. "
-                   "Frozen panel fields, counts and numbers are unchanged; a thin separator precedes fresh distributions.")
-        for letter in "abc":
+        audit.rule("Display mapping: fig3_a = MAE A, fig3_b = MAE B. "
+                   "Locked-rule selection rows and corner contrasts are excluded from MAEs.")
+        for letter in "ab":
             apply_style(KINDS[letter])
             fig = plt.figure(figsize=PANEL_SIZES[letter])
             draw_panel(fig, rows, letter)
-            if letter in "ab":
-                panel_rows = [r for r in rows if r["kind"] == "mae" and r["panel"] == letter.upper()]
-            else:
-                panel_rows = [r for r in rows if r["kind"] == "corner"]
+            panel_rows = [r for r in rows if r["panel"] == letter.upper()]
             save_panel(fig, f"fig3_{letter}", KINDS[letter], audit, panel_rows)
             write_caption(f"fig3_{letter}", audit, CAPTION_TEXT)
             plt.close(fig)
@@ -427,8 +341,11 @@ def generate(root=ROOT):
         save_panel(fig, "fig3_legend", "legend", audit, [])
         write_caption("fig3_legend", audit, CAPTION_TEXT)
         plt.close(fig)
-        for suffix in (".pdf", "_data.json", "_caption.txt", "_sources.md"):
-            output_path(root, "figs", "fig3_d" + suffix).unlink(missing_ok=True)
+        if __package__:
+            from .paper_figure_archive import archive_panels
+        else:
+            from paper_figure_archive import archive_panels
+        archive_panels(root, ("fig3_c", "fig3_d"))
         fig = plot(rows, plt)
         save_figure(fig, "generalization", audit)
         write_notes("generalization", audit, rows)
@@ -438,8 +355,6 @@ def generate(root=ROOT):
             "Native-token nats; cell counts are per capability. Baselines are selected on development "
             "evidence only. Unavailable baselines remain unscored.\n\n" + format_pairs(rows) + "\n")
         plt.close(fig)
-        access[0].update(appendix_access[0])
-        access[1].update(appendix_access[1])
         return rows, audit, access
 
 

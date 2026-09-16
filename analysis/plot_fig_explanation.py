@@ -22,47 +22,30 @@ A2="results/a2-curvature-interaction/summary.json"
 A5="results/a5-corner-second-difference/summary.json"
 A7="results/a7-closeout-audit/summary.json"
 CAPTION="failed to reject"
-PANEL_SIZES = {p: (1.8, 1.35) for p in "abc"}
-KINDS = {"a": "panel", "b": "panel", "c": "panel"}
+PANEL_SIZES = {p: (2.7, 1.45) for p in "ab"}
+KINDS = {p: "double" for p in "ab"}
 LEGEND_SIZE = (5.5, .42)
-FIGSIZE = (5.5, 1.77)
+FIGSIZE = (5.5, 1.87)
 if __package__:
     from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 else:
     from paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 
-CAPTION_TEXT = """Reuse-term curvature (a), registered corner test (b), and post-hoc
-displacement account (c). Primary QA additivity: failed to reject. This applies
-to the primary QA test only; math is size-dependent and code unresolved.
+CAPTION_TEXT = """Reuse-term curvature (a) and post-hoc displacement account (b).
 Curvature intervals are conditional on development. The exponent p is unitless.
-Fold estimate circles and Boundary
-crosses show the stored development fits; diamonds show the full-development fit
-with its conditional interval. Reference lines mark p = 0 and p = 1.
-Corner rows show each student/readout separately. The additive prediction is zero;
-frozen F_int predictions are diamonds; measured second differences are circles.
-Shading is plus/minus one registered noise, and whiskers are the registered
-plus/minus twice-noise band, not a confidence interval. The second-difference
-axis uses a symmetric-log scale in native-token nats.
-Displacement is a post-hoc account, with both axes logarithmic. Each configuration
-shows median absolute measured damage and median relative second-order prediction
-error across its stored state/capability records. Zero-damage records are excluded.
-The three families are pruning, grouped RTN, and per-channel RTN. There is no
-distillation displacement measurement; the superseded uncentred run and the
-separate cluster hardware run are not pooled.
-The three 1.8 x 1.35-inch panels form one row at 5.5-inch text width, using
-one axes rectangle measured from the widest y tick and tallest x tick in the row.
-Numeric ticks share one compact format and each axis has at most four major ticks.
-Panel (a) uses horizontal capability labels without a redundant x-axis title.
-Panel (b) retains all six student/readout identities as minor categorical labels;
-all panels retain their y-axis titles.
-Lines are 1.1 pt and markers 3.8 pt; boundary crosses are 3.8 pt. Fold estimates
-and full fits share their true capability coordinate; any display dodge is bounded.
-Error bars and whiskers are 1.1 pt with 2 pt caps; (b)'s shaded band edges
-and additive bars are 1.1 pt. The shared key fig2_legend.pdf sits above the panels:
-Fold estimate, Boundary and Full apply to (a);
-Additive, F_int and Observed to (b); Group, Channel and Prune to (c), denoting grouped
-RTN, per-channel RTN and pruning. Panel (b) labels use student size/readout,
-for example 1B QA. Damage and relative error in (c) are configuration medians.
+Fold estimate circles and Boundary crosses show stored development fits;
+diamonds show the full-development fit with its conditional interval.
+Reference lines mark p = 0 and p = 1. Capability colours identify Math, Code and QA.
+Displacement is a post-hoc account with logarithmic axes. Each configuration shows
+median absolute measured damage and median relative second-order prediction error
+across its stored state/capability records; zero-damage records are excluded.
+The three families are pruning, grouped RTN and per-channel RTN. No distillation
+displacement measurement is available; superseded uncentred and separate cluster
+hardware runs are not pooled. The two 2.7 x 1.45-inch panels form a 5.5-inch row.
+The shared key fig2_legend.pdf sits above: Fold estimate, Boundary and Full apply
+to (a); Group, Channel and Prune denote grouped RTN, per-channel RTN and pruning
+in (b). Lines are 1.1 pt and markers 3.8 pt; error bars use 2-pt caps.
+The registered corner tests and contrasts are separate appendix figures.
 """
 
 
@@ -142,7 +125,6 @@ def fold_positions(folds):
 
 
 def draw_panel(fig, data, panel, rectangle=None):
-    from matplotlib.ticker import NullLocator
     size = PANEL_SIZES[panel]
     ax = panel_axes(fig, size, left=.35, bottom=.30, right=.08)
     row_axis_style(ax)
@@ -161,27 +143,6 @@ def draw_panel(fig, data, panel, rectangle=None):
         ax.set(xticks=range(3), xticklabels=["Math", "Code", "QA"],
                ylabel="Curvature $p$", xlim=(-.65, 2.75))
         ax.set_yticks([-1, 0, 1, 3])
-    elif panel == "b":
-        for i, r in enumerate(data["corners"]):
-            color = COLORS[r["capability"]]
-            ax.fill_betweenx([i-.36, i+.36], -r["noise"], r["noise"],
-                             facecolor=PALETTE["background"], edgecolor=PALETTE["grid"], linewidth=.6, zorder=0)
-            ax.plot(r["additive"], i, "|", color=PALETTE["reference"], ms=3.8, mew=.6)
-            ax.plot(r["F_int"], i, "D", color=PALETTE["black"], mfc=PALETTE["transparent"], ms=3.8)
-            lo, hi = r["interval"]
-            ax.errorbar(r["measured"], i, xerr=[[r["measured"]-lo], [hi-r["measured"]]],
-                        fmt="o", color=color, ms=3.8, lw=1.1, elinewidth=1.1, capthick=.6, capsize=2)
-        ax.set_xscale("symlog", linthresh=.02)
-        # Scales reset formatters/locators: reapply the row styling afterwards.
-        row_axis_style(ax)
-        ax.set_xticks([-.1, 0, .1])
-        ax.yaxis.set_major_locator(NullLocator())
-        ax.set_yticks(range(len(data["corners"])),
-                     labels=[r["student"].replace("gemma3-", "").upper()+" "+
-                             ("QA" if r["capability"] == "qa" else r["capability"].title())
-                             for r in data["corners"]], minor=True)
-        ax.set(ylim=(len(data["corners"])-.5, -.5),
-               xlabel="Second difference (nats)", ylabel="Student/readout")
     else:
         labels = {"prune": "Pruning", "pruning": "Pruning", "grouped_rtn": "Grouped RTN",
                   "per_channel_rtn": "Per-channel RTN"}
@@ -204,8 +165,7 @@ def draw_legend(fig):
     handles = [Line2D([], [], marker=m, ls="", color=c, mfc=PALETTE["transparent"] if m == "D" else c, ms=3.8,
                       mew=.6, label=label)
                for m, c, label in (("o", PALETTE["reference"], "Fold estimate"), ("x", PALETTE["reference"], "Boundary"),
-                                   ("D", PALETTE["reference"], "Full"), ("|", PALETTE["reference"], "Additive"),
-                                   ("D", PALETTE["black"], "$F_{int}$"), ("o", PALETTE["reference"], "Observed"))]
+                                   ("D", PALETTE["reference"], "Full"))]
     handles += [Line2D([], [], marker=m, color=c, lw=1.1, ms=3.8, label=label)
                 for m, c, label in zip(("o", "s", "^"), [SEMANTIC_METHOD_COLORS[f] for f in ("grouped_rtn", "per_channel_rtn", "prune")], ("Group", "Channel", "Prune"))]
     return legend_strip(fig, handles)
@@ -213,16 +173,15 @@ def draw_legend(fig):
 
 def row_rectangle(data, plt):
     return measure_row_rectangle(plt, PANEL_SIZES["a"],
-                                 [lambda f, p=p: draw_panel(f, data, p) for p in "abc"])
+                                 [lambda f, p=p: draw_panel(f, data, p) for p in "ab"], kind="double")
 
 
 def plot(data, plt, rectangle=None):
     if rectangle is None:
         rectangle = row_rectangle(data, plt)
     return combine_panels(plt, [
-        ("panel", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a", rectangle)),
-        ("panel", (1.85, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b", rectangle)),
-        ("panel", (3.7, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, data, "c", rectangle)),
+        ("double", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a", rectangle)),
+        ("double", (2.8, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b", rectangle)),
         ("legend", (0, PANEL_SIZES["a"][1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
@@ -235,7 +194,7 @@ def generate(root=ROOT):
         audit.rule("A2 panel a uses training-probe parameter_stability[].folds[name=F_curv].p/boundary and "
                    "parameter_intervals[].fits.F_curv.fit.p / p_interval / fit.boundary_hit; no profile or bootstrap is rerun.")
         rectangle = row_rectangle(data, plt)
-        for letter, key in zip("abc", ("profiles", "corners", "displacement")):
+        for letter, key in zip("ab", ("profiles", "displacement")):
             apply_style(KINDS[letter])
             fig = plt.figure(figsize=PANEL_SIZES[letter])
             draw_panel(fig, data, letter, rectangle)
@@ -253,6 +212,14 @@ def generate(root=ROOT):
         write_notes("explanation", audit, data)
         write_caption("explanation", audit, CAPTION_TEXT)
         plt.close(fig)
+        if __package__:
+            from .plot_fig_corners import export_panels
+            from .paper_figure_archive import archive_panels
+        else:
+            from plot_fig_corners import export_panels
+            from paper_figure_archive import archive_panels
+        archive_panels(root, ("fig2_c",))
+        export_panels(data["corners"], audit, plt)
         return data, audit, access
 
 

@@ -10,10 +10,12 @@ from analysis import plot_fig_generalization as generalization
 from analysis.paper_artifacts import ROOT, pyplot, output_path
 
 EXPECTED_PANEL_SIZES = {
-    **{f"fig1_{p}": (1.8, 1.35) for p in "abc"}, "fig1_legend": (5.5, .42),
-    **{f"fig2_{p}": (1.8, 1.35) for p in "abc"}, "fig2_legend": (5.5, .42),
-    "fig3_a": (2.2, 1.6), "fig3_b": (1.45, 1.6),
-    "fig3_c": (1.85, 1.6), "fig3_legend": (5.5, .42),
+    **{f"fig1_{p}": (1.35, 1.25) for p in "abcd"}, "fig1_legend": (5.5, .42),
+    **{f"fig2_{p}": (2.7, 1.45) for p in "ab"}, "fig2_legend": (5.5, .42),
+    **{f"fig3_{p}": (2.7, 1.6) for p in "ab"}, "fig3_legend": (5.5, .42),
+    "lr_pilot_a": (2.7, 1.45), "lr_pilot_legend": (5.5, .42),
+    **{p: (2.7, 1.6) for p in ("corner_test_a", "corner_test_b", "corner_contrasts_a")},
+    "corner_legend": (5.5, .42),
     **{f"fig4_{p}": (1.8, 1.35) for p in "abc"}, "fig4_legend": (5.5, .3),
     **{f"fig5_{p}": (2.7, 1.15) for p in "ab"},
     "fig5_legend": (5.5, .3),
@@ -52,8 +54,10 @@ def check_artists(fig):
             assert box.x1 <= canvas.bbox.x1+.5 and box.y1 <= canvas.bbox.y1+.5
             assert box.y0 == pytest.approx(canvas.bbox.y0, abs=.5), "Strip has no bottom padding"
             assert canvas.bbox.y1-box.y1 >= .02*fig.dpi-.5, "Keep a small top margin"
-            ys = {round(t.get_window_extent(renderer).y0) for t in legend.get_texts()}
-            assert len(ys) <= 2, "Shared keys use at most two readable rows"
+            ys = sorted(t.get_window_extent(renderer).y0 for t in legend.get_texts())
+            # Math subscripts can move a glyph bounding box by 1-2 pixels on the same baseline.
+            row_count = 1 + sum(b-a > 2 for a, b in zip(ys, ys[1:]))
+            assert row_count <= 2, "Shared keys use at most two readable rows"
             assert legend.handlelength == 1.6 and legend.columnspacing == 1.4
             from matplotlib.transforms import Bbox
             entries = [Bbox.union([handle.get_window_extent(renderer), text.get_window_extent(renderer)])
@@ -91,7 +95,7 @@ def check_artists(fig):
     assert box.x1 <= fig.bbox.x1+.5 and box.y1 <= fig.bbox.y1+.5, (box.bounds, fig.bbox.bounds)
 
 
-@pytest.mark.parametrize("kind,sizes", [("panel", (7.5, 8.5, 7.5)), ("double", (8.5, 9.5, 8.5)),
+@pytest.mark.parametrize("kind,sizes", [("narrow", (7, 8, 7)), ("panel", (7.5, 8.5, 7.5)), ("double", (8.5, 9.5, 8.5)),
                                           ("full", (9, 10, 9)), ("legend", (8.5, 8.5, 8.5))])
 def test_shared_serif_bold_rcparams(kind, sizes):
     plt = pyplot()
@@ -110,7 +114,7 @@ def test_shared_serif_bold_rcparams(kind, sizes):
 
 
 @pytest.mark.parametrize("gen,prefix,letters", [
-    (responses, "fig1", "abc"), (explanation, "fig2", "abc"), (generalization, "fig3", "abc"),
+    (responses, "fig1", "abcd"), (explanation, "fig2", "ab"), (generalization, "fig3", "ab"),
 ])
 def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     saved = {}
@@ -126,13 +130,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
             assert ax.xaxis.label.get_fontsize() == label
             assert all(t.get_fontsize() == tick for t in ax.get_xticklabels()+ax.get_yticklabels())
             if gen is generalization:
-                # Preserve the prior fraction of each canvas used for data,
-                # including the space needed by the expanded row labels.
-                old_width, old_left, old_right = {
-                    "fig3_a": (2.3, .91, .08), "fig3_b": (1.5, .08, .08),
-                    "fig3_c": (1.7, .52, .06),
-                }[stem]
-                assert ax.get_position().width >= (old_width-old_left-old_right)/old_width
+                assert ax.get_position().width >= .58
         for canvas in all_figures(fig):
             legends = canvas.legends + [a.get_legend() for a in canvas.get_axes() if a.get_legend()]
             for leg in legends:
@@ -140,7 +138,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
                 expected = [legend]*len(sizes)
                 if stem in ("fig1_legend", "fig2_legend", "fig3_legend"):
                     ys = {round(t.get_window_extent(fig.canvas.get_renderer()).y0) for t in leg.get_texts()}
-                    assert len(ys) == 2
+                    assert len(ys) == (2 if stem == "fig1_legend" else 1)
                 assert sizes == expected
                 assert all(t.get_weight() == "bold" for t in leg.get_texts())
         if fig.axes:
@@ -152,8 +150,15 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         check_artists(fig)
         assert fig.get_size_inches()[0] == 5.5
         panels = [sub for sub in fig.subfigs if sub.axes]
-        assert len(panels) == 3
-        assert max(s.bbox.y0 for s in panels)-min(s.bbox.y0 for s in panels) < .5
+        assert len(panels) == (4 if gen is responses else 2)
+        row_positions = {round(s.bbox.y0) for s in panels}
+        assert len(row_positions) == 1
+        if gen is responses:
+            assert tuple(fig.get_size_inches()) == pytest.approx((5.5, 1.67))
+            for panel in panels:
+                assert panel.bbox.size/fig.dpi == pytest.approx((1.35, 1.25))
+            for left, right in zip(panels, panels[1:]):
+                assert (right.bbox.x0-left.bbox.x1)/fig.dpi == pytest.approx(.03)
         strips = [sub for sub in fig.subfigs if sub.legends]
         assert len(strips) == 1
         assert strips[0].bbox.y0 >= max(sub.bbox.y1 for sub in panels)-.5
@@ -185,33 +190,18 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         legend = json.loads(output_path(ROOT, "figs", "fig1_legend_data.json").read_text())
         assert set(legend["legend_entries"]) == {
             "Math", "Code", "QA", "2Wiki", "MuSiQue", "TriviaQA", "270M", "1B", "4B", "S1", "S2"}
-    if gen is generalization:
-        # Both students must be in c, and every 4B record keeps its triangle.
-        plt = pyplot()
-        style.apply_style("panel")
-        fig = plt.figure(figsize=gen.PANEL_SIZES["c"])
-        ax = gen.draw_panel(fig, rows, "c")
-        points = [line for line in ax.lines if line.get_marker() == "D"]
-        assert [t.get_text() for t in ax.get_yticklabels()] == ["1B", "4B development", "2Wiki", "MuSiQue", "TriviaQA"]
-        assert len(points) == 12
-        assert all(line.get_markerfacecolor() == style.PALETTE["transparent"] for line in points)
-        assert ax.get_xlim() == (-2.5, 2.5)
-        fig.canvas.draw()
-        renderer = fig.canvas.get_renderer()
-        label = ax.get_yticklabels()[1].get_window_extent(renderer)
-        assert all(not label.overlaps(line.get_window_extent(renderer)) for line in ax.lines
-                   if line.get_marker() in ("o", "^", "|")), "Long row label must clear markers and whisker caps"
-        assert not output_path(ROOT, "figs", "fig3_d.pdf").exists()
-        plt.close(fig)
+    assert set(saved) == {f"{prefix}_{p}" for p in letters} | {f"{prefix}_legend"}
+    for stem in ("fig2_c", "fig3_c", "fig3_d"):
+        assert not output_path(ROOT, "figs", stem+".pdf").exists()
 
 
 def test_explanations_moved_to_caption_files():
     directory = output_path(ROOT, "figs")
     expected = {
         "responses_v2": ("Positive = worse", "Development endpoints nearest 200k"),
-        "explanation": ("failed to reject", "Curvature intervals are conditional on development", "post-hoc",
-                        "Fold estimate, Boundary", "Additive, F_int and Observed"),
-        "generalization": ("No frozen response-law predictions", "Paired gain CIs are translated", "failed to reject",
+        "explanation": ("Curvature intervals are conditional on development", "post-hoc",
+                        "Fold estimate, Boundary", "Group, Channel and Prune"),
+        "generalization": ("Paired gain CIs are translated",
                            "Prune in, frozen", "Prune out, frozen", "Baseline, Relation and Lower of pair"),
     }
     for stem, phrases in expected.items():
@@ -220,8 +210,8 @@ def test_explanations_moved_to_caption_files():
 
 
 @pytest.mark.parametrize("gen,labels", [
-    (generalization, {"Math", "Code", "QA", "Baseline", "Relation", "Lower of pair", "1B", "4B development"}),
-    (explanation, {"Fold estimate", "Boundary", "Full", "Additive", "$F_{int}$", "Observed", "Group", "Channel", "Prune"}),
+    (generalization, {"Math", "Code", "QA", "Baseline", "Relation", "Lower of pair"}),
+    (explanation, {"Fold estimate", "Boundary", "Full", "Group", "Channel", "Prune"}),
 ])
 def test_expanded_legend_labels_fit_at_unchanged_font_size(gen, labels):
     plt = pyplot()
@@ -244,9 +234,8 @@ def test_harmonised_rows_have_explicit_matching_rectangles_and_sparse_ticks(gen)
     audit = Artifacts()
     if gen is responses:
         rows = gen.build(audit)
-        pilot_rows = pilot.build(audit)
-        rectangle = gen.row_rectangle(rows, plt, pilot_rows)
-        fig = gen.plot(rows, plt, pilot_rows)
+        rectangle = gen.row_rectangle(rows, plt)
+        fig = gen.plot(rows, plt)
     else:
         data = dict(profiles=gen.curvature(audit), corners=gen.corners(audit),
                     displacement=gen.displacement(audit))
@@ -260,8 +249,15 @@ def test_harmonised_rows_have_explicit_matching_rectangles_and_sparse_ticks(gen)
             assert ax.get_position().bounds == fig.axes[0].get_position().bounds
             assert ax.bbox.y0 == pytest.approx(fig.axes[0].bbox.y0)
             assert ax.bbox.height == pytest.approx(fig.axes[0].bbox.height)
-            assert len(ax.get_xticks()) <= 4 and len(ax.get_yticks()) <= 4
-            assert ax.get_ylabel()
+            max_ticks = 3 if gen is responses else 4
+            assert len(ax.get_xticks()) <= max_ticks and len(ax.get_yticks()) <= max_ticks
+            if gen is responses:
+                assert ax.get_xlabel() == "Reuse ratio E"
+                assert ax.get_ylabel() == ("Loss change (nats)" if ax is fig.axes[0] else "")
+                assert ax.xaxis.label.get_fontsize() == ax.yaxis.label.get_fontsize() == 8
+                assert all(t.get_fontsize() == 7 for t in ax.get_xticklabels()+ax.get_yticklabels())
+            else:
+                assert ax.get_ylabel()
             assert not ax.spines["top"].get_visible() and not ax.spines["right"].get_visible()
             assert ax.spines["left"].get_linewidth() == .6
             for axis in (ax.xaxis, ax.yaxis):
@@ -277,25 +273,16 @@ def test_harmonised_rows_have_explicit_matching_rectangles_and_sparse_ticks(gen)
             boxes = [t.get_window_extent(renderer) for t in ax.get_xticklabels()]
             assert all(not a.overlaps(b) for i, a in enumerate(boxes) for b in boxes[i+1:])
         if gen is responses:
-            a, b, c = fig.axes
-            assert a.get_ylim() == b.get_ylim()
-            assert list(a.get_yticks()) == list(b.get_yticks())
-            assert all(a.get_ylim()[0] < r["delta"] < a.get_ylim()[1] for r in rows)
-            assert c.get_ylim() == (-1.45, .18)
-            assert c.get_ylim() != a.get_ylim()
+            assert len({ax.get_ylim() for ax in fig.axes}) == 4
+            for ax, panel in zip(fig.axes, gen.PANELS.values()):
+                assert all(ax.get_ylim()[0] < r["delta"] < ax.get_ylim()[1]
+                           for r in gen.panel_records(rows, panel))
+            assert fig.axes[0].get_ylim()[1] < 1 and fig.axes[1].get_ylim()[1] < 1
+            assert fig.axes[2].get_ylim()[1] > 5
         else:
-            a, b, c = fig.axes
+            a, b = fig.axes
             assert a.get_xlabel() == ""
             assert [t.get_text() for t in a.get_xticklabels()] == ["Math", "Code", "QA"]
-            assert all(t.get_rotation() == 0 for t in a.get_xticklabels())
-            assert b.get_xlabel() and c.get_xlabel()
-            assert [t.get_text() for t in b.get_yticklabels(minor=True)] == [
-                "1B QA", "1B Math", "1B Code", "4B QA", "4B Math", "4B Code"]
-            assert all(t.get_fontsize() == 7.5 for t in b.get_yticklabels(minor=True))
-            for tick in b.yaxis.get_minor_ticks():
-                assert tick.tick1line.get_markersize() == 2
-                assert tick.tick1line.get_markeredgewidth() == .6
-                assert tick.gridline.get_visible() and tick.gridline.get_alpha() == .15
-                assert tick.gridline.get_linewidth() == .4
+            assert b.get_xlabel() == "Absolute damage (nats)"
     finally:
         plt.close(fig)
