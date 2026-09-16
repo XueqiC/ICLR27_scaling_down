@@ -675,7 +675,7 @@ def report(summary):
 def latex_table(summary):
     n_cells = summary["n_budget_cells_per_objective"]
     n_common = summary["tables"]["math"][0]["n_common_feasible"]
-    lines = [r"\begin{table}[H]", r"\centering", r"\small", r"\setlength{\tabcolsep}{3pt}",
+    lines = [r"\begin{table}[!htbp]", r"\centering", r"\small", r"\setlength{\tabcolsep}{3pt}",
              r"\caption{Feasible leave-one-state-out selection. Coverage and oracle-method agreement "
              r"are percentages; regret is in nats. Own/common refer to the subsets defined below.}",
              r"\label{tab:selection-feasible}", r"\begin{tabular}{llrrrrr}", r"\toprule",
@@ -716,7 +716,7 @@ def latex_table(summary):
 
 @proofread_table
 def latex_candidate_coverage(summary):
-    lines = [r"\begin{table}[H]", r"\centering", r"\small", r"\setlength{\tabcolsep}{3pt}",
+    lines = [r"\begin{table}[!htbp]", r"\centering", r"\small", r"\setlength{\tabcolsep}{3pt}",
              r"\caption{Measured candidate coverage by source state. Each method column gives "
              r"configuration count / minimum available storage ratio $r$.}",
              r"\label{tab:candidate-coverage}", r"\begin{tabular}{lrrrrr}", r"\toprule",

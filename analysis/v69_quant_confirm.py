@@ -659,7 +659,7 @@ def compare_markdown(d):
 
 
 def compare_latex(d):
-    lines = [r"\begin{table}[H]", r"\centering", r"\small",
+    lines = [r"\begin{table}[!htbp]", r"\centering", r"\small",
              r"\caption{V69 quantization confirmation. MAE in nats from predictions frozen before "
              r"measurement; 21 state/configuration cells per capability. Near-zero means measured "
              r"$|\Delta L|<0.1$; clear-damage is its complement, including negative changes. "
@@ -874,7 +874,7 @@ def selftest():
             assert all(np.isclose(r["dense_difference_from_prediction_input"], .05)
                        for r in result["rows"] if r["state"] == NEW_TAG)
             assert all(r["status"] == "skip" for r in measure(root, out, dry_run=True))
-            assert r"\begin{table}[H]" in (root / "paper/paper/tables/quant_confirm.tex").read_text()
+            assert r"\begin{table}[!htbp]" in (root / "paper/paper/tables/quant_confirm.tex").read_text()
             # Preserve append-only measurement compatibility, but reject dev mutations.
             table = json.loads(first_source.read_text())
             table["b3_g64"]["math"] += 1

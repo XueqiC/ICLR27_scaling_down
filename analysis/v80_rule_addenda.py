@@ -314,7 +314,7 @@ def single_choice_agreement(compare):
 
 @proofread_table
 def latex_confirm(compare):
-    lines = [r"\begin{table}[H]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
+    lines = [r"\begin{table}[!htbp]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
         r"\caption{Independent V78 selection panel. Regret is in nats. Agreement is the percentage "
         r"of single choices matching the oracle method; set coverage is the percentage of heuristic "
         r"candidate sets containing that method. QA is restricted to 2Wiki; KD reuses V39 students.}",
@@ -342,7 +342,7 @@ def latex_confirm(compare):
 
 @proofread_table
 def latex(data, freeze):
-    lines = [r"\begin{table}[H]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
+    lines = [r"\begin{table}[!htbp]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
         r"\caption{V78 regret by source state and objective. Each entry is the mean over all 17 nominal storage budgets (0.20--1.00, step 0.05), in nats. $K$ counts distinct configurations selected by the Frozen selection rule across these budgets.}",
         r"\label{tab:rule-confirm-by-state}", r"\begin{tabular}{llrrrrr}", r"\toprule",
         r"State & Objective & \shortstack{Frozen selection\\rule} & "
@@ -360,7 +360,7 @@ def latex(data, freeze):
         r"All four policies are feasible on all 68 state--budget cells per objective. "
         r"Multi minimizes $\max_c[L_c(M)-L_c(M_0)]$. QA uses 2Wiki. "
         r"The 1B/64k state includes two historical V39 KD students, excluded from the V78 prediction fits. " + INTERNAL_NOTE,
-        r"\end{minipage}", r"\end{table}", "", r"\begin{table}[H]", r"\centering\small",
+        r"\end{minipage}", r"\end{table}", "", r"\begin{table}[!htbp]", r"\centering\small",
         r"\setlength{\tabcolsep}{3pt}",
         r"\caption{Heuristic candidate-set sizes and oracle coverage on all 68 cells per objective. "
         r"Size columns count methods in the no-clear-winner candidate set, including singleton sets. "

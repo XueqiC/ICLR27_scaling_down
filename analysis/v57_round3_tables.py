@@ -37,7 +37,7 @@ L += [
       r"\label{tab:round3_prune}\end{table}"]
 (TAB / "round3_prune.tex").write_text(publication_table_text("\n".join(L) + "\n"))
 # coefficient table (selected pruning form + standardization)
-st = reg["standardization"]; L = [r"\begin{table}[H]\centering\footnotesize", r"\begin{tabular}{@{}lrrrrr@{}}", r"\toprule", r"capability & $\gamma_c$ & $\beta_{c,0}$ & $\beta_{c,\log N_0}$ & $\beta_{c,L_0}$ & $\beta_{c,\log D_0}$ \\", r"\midrule"]
+st = reg["standardization"]; L = [r"\begin{table}[!htbp]\centering\footnotesize", r"\begin{tabular}{@{}lrrrrr@{}}", r"\toprule", r"capability & $\gamma_c$ & $\beta_{c,0}$ & $\beta_{c,\log N_0}$ & $\beta_{c,L_0}$ & $\beta_{c,\log D_0}$ \\", r"\midrule"]
 for c in C:
     m = reg["models"][c]["power"]; L.append(f"{c} & {float(m['gamma']):.2f} & " + " & ".join(f"{b:+.3f}" for b in m["beta"]) + r" \\")
 L += [r"\bottomrule\end{tabular}", r"\caption{Selected pruning form $\widehat{\Delta L}_c=(\beta_c\cdot\phi)((1-d)/0.3)^{\gamma_c}$ with $\phi=[1,z(\log N_0),z(L_{0,c}),z(\log D_0)]$; standardization centers " + ", ".join(f"{v:.3f}" for v in st["center"]) + " and scales " + ", ".join(f"{v:.3f}" for v in st["scale"]) + r" for $(\log N_0, L_{0,c}, \log D_0)$ in natural units ($N_0$ = transformer weight-matrix parameters, $D_0$ = tokens). Register: \texttt{v53-prune-dev/register.json}.}", r"\label{tab:round3_coef}\end{table}"]

@@ -618,7 +618,7 @@ def paired_summary(rows):
 @proofread_table
 def compare_text(result, latex=False):
     if latex:
-        lines = [r"\begin{table}[H]", r"\centering", r"\small",
+        lines = [r"\begin{table}[!htbp]", r"\centering", r"\small",
             r"\caption{V70 distillation confirmation at $U=200$ and supervised $T=50,100,200$k. "
             r"Each student/capability has six sampled pools, with three dependent checkpoints per pool "
             r"(18 points, not 18 replicates). MAE and paired improvement (baseline minus selected "
@@ -656,7 +656,7 @@ def compare(root, out, dry_run=False):
                if not (run_dir(root, st, 200, seed, "p2v3conf") / "eval.json").is_file()]
     if dry_run and missing:
         print(f"DRY RUN compare: {len(missing)}/12 trajectories pending; will require all six pools and three budgets per student. "
-              "Outputs: compare.json/md and paper/paper/tables/distill_confirm.tex [H]. No writes.")
+              "Outputs: compare.json/md and paper/paper/tables/distill_confirm.tex [!htbp]. No writes.")
         return {"complete": False, "missing": missing}
     inputs = Inputs(root)
     points = {}
@@ -832,7 +832,7 @@ def selftest():
             assert not (out / "compare.json").exists()
             result = compare(root, out)
             assert (out / "freeze.json").read_bytes() == before
-            assert r"\begin{table}[H]" in (root / "paper/paper/tables/distill_confirm.tex").read_text()
+            assert r"\begin{table}[!htbp]" in (root / "paper/paper/tables/distill_confirm.tex").read_text()
             assert all(r["status"] == "skip" for r in plan(root, out))
             assert all(g["n_pools"] == 6 and g["n_checkpoints"] == 18 for g in result["groups"])
             for g in result["groups"]:
@@ -850,7 +850,7 @@ def selftest():
             input_path.write_bytes(input_path.read_bytes() + b"\n")
             fails(lambda: load_freeze(root, out), "Frozen input changed")
     assert "torch" not in sys.modules, "Selftest must not import models or training"
-    print("PASS (CPU, no training): formulas, independent OLS/ridge, 25-fold isolation, ties, pool triggers, write-once freeze, provenance, dry-run, paired six-pool bootstrap, [H] table")
+    print("PASS (CPU, no training): formulas, independent OLS/ridge, 25-fold isolation, ties, pool triggers, write-once freeze, provenance, dry-run, paired six-pool bootstrap, [!htbp] table")
 
 
 def main(argv=None):

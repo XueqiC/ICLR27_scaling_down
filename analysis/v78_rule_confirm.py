@@ -590,7 +590,7 @@ def report_markdown(result):
 
 
 def latex(result):
-    lines = [r"\begin{table}[H]", r"\centering\small",
+    lines = [r"\begin{table}[!htbp]", r"\centering\small",
              r"\caption{Independent V78 selection panel. Regret is in nats; agreement and heuristic "
              r"method coverage are percentages. QA is restricted to 2Wiki; KD reuses v39 students.}",
              r"\label{tab:rule-confirm}", r"\begin{tabular}{llrrrr}", r"\toprule",
@@ -769,7 +769,7 @@ def selftest():
     assert all(result["candidate_set_coverage"][c]["locked-rule"]["method_coverage"] == 1. for c in OBJECTIVES)
     assert all(next(r for r in result["tables"][c] if r["policy"] == "locked-rule")["method_agreement"] == 1.
                for c in OBJECTIVES)
-    assert "\\begin{table}[H]" in latex(result)
+    assert "\\begin{table}[!htbp]" in latex(result)
     assert figure(result).startswith(b"%PDF")
     with tempfile.TemporaryDirectory(prefix="v78-selftest-") as tmp:
         out = Path(tmp)
@@ -835,7 +835,7 @@ def selftest():
             compare(fixture, out / "paper")
             assert (fixture / "figs/rule_maps.pdf").read_bytes().startswith(b"%PDF")
             assert (fixture / "compare.md").read_text().startswith(READING_RULE)
-            assert "\\begin{table}[H]" in (out / "paper/paper/tables/rule_confirm.tex").read_text()
+            assert "\\begin{table}[!htbp]" in (out / "paper/paper/tables/rule_confirm.tex").read_text()
             # compare may be repeated without mutating its frozen reading rule.
             compare(fixture, out / "paper")
             first = measurement_path(fixture, TAGS[0], candidate_grid(TAGS[0])["configs"][1])

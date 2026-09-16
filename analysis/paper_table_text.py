@@ -273,8 +273,6 @@ def _caption_sentences(text):
 
 def _wrap_table_words(label, text):
     """Give expanded labels readable breaks before applying column widths."""
-    if label == "tab:final":
-        text = text.replace(r"\begin{table}[H]", r"\begin{table}[p]", 1)
     def wrap_tabular(match):
         block = match.group()
         paragraph_columns = "p{" in block.splitlines()[0] or r"\dimexpr" in block.splitlines()[0]

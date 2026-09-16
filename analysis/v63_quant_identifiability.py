@@ -437,7 +437,7 @@ def render_markdown(summary):
 @proofread_table
 def render_latex(summary):
     names = {**LABELS, "without_u2": r"Without $u^2$ (16)"}
-    lines = [r"\begin{table}[H]", r"\centering\small",
+    lines = [r"\begin{table}[!htbp]", r"\centering\small",
              r"\caption{Quantization identifiability audit, retrospective (R). The delivered V55 "
              r"predictions are unchanged. The four fitted forms use the same 24 development cells per capability, "
              r"pooled V55 standardization, and ridge $\lambda=10^{-3}$ (including intercepts). "

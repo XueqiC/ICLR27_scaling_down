@@ -21,7 +21,7 @@ for r in m[1:]:
     cells = [f"${r['primary'][c]-d0['primary'][c]:+.2f}$ / ${r['secondary'][c]-d0['secondary'][c]:+.2f}$" for c in ("math", "code", "qa")]
     rows.append(f"{name[r['state']]} & " + " & ".join(cells) + r" \\")
 tok = d0["primary_tokens"], d0["secondary_tokens"]
-tex = r"""\begin{table}[H]
+tex = r"""\begin{table}[!htbp]
 \centering\small
 \caption{Primary versus secondary benchmark on Gemma-3-1B (P3 check). Loss change from dense in nats per native token on the main-protocol probe / on an independent benchmark of the same capability (math: SVAMP; code: HumanEval; QA: TriviaQA; 128 samples, fixed probe seed, existing references). The six states were fixed before any secondary measurement. Scored completion tokens, primary / secondary: math %d / %d, code %d / %d, QA %d / %d.}
 \label{tab:p3_check}

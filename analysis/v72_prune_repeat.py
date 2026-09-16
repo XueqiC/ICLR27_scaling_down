@@ -384,7 +384,7 @@ def summarize(rows):
 
 @proofread_table
 def table_text(scores):
-    lines = [r"\begin{table}[H]", r"\centering\footnotesize",
+    lines = [r"\begin{table}[!htbp]", r"\centering\footnotesize",
              r"\begin{tabular}{@{}lrrrr@{}}", r"\toprule",
              r"Predictor & Math MAE & Code MAE & QA MAE & Mean MAE \\", r"\midrule"]
     for method, label in zip(METHODS, LABELS):
@@ -659,7 +659,7 @@ def selftest():
             fails(lambda: load_freeze(root), "predictions changed or incomplete")
             frozen_path.write_bytes(original_frozen)
             compare(root)
-            assert r"\begin{table}[H]" in (root / TABLE_REL).read_text()
+            assert r"\begin{table}[!htbp]" in (root / TABLE_REL).read_text()
             assert frozen_path.read_bytes() == original_frozen
             fails(lambda: compare(root), "overwrite")
             dense = dense_path(root, TAGS[0]); dense.write_text(dense.read_text() + " ")
@@ -706,7 +706,7 @@ def selftest():
     assert "torch" not in sys.modules and "transformers" not in sys.modules
     print("PASS: CPU selftest; cache aliases, contamination, dense-first/write-once freeze, "
           "V53 formulas, 18 paired rows, missing/drifting outcomes, provenance, "
-          "mocked runner order/partial resume/UUID, dry-run, [H] table")
+          "mocked runner order/partial resume/UUID, dry-run, [!htbp] table")
 
 
 def main(argv=None):

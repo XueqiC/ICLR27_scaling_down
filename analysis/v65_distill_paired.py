@@ -195,7 +195,7 @@ def tex_interval(stat, digits):
 
 @proofread_table
 def latex(summary):
-    lines = [r"\begin{table}[H]", r"\centering", r"\small",
+    lines = [r"\begin{table}[!htbp]", r"\centering", r"\small",
              r"\setlength{\tabcolsep}{2pt}", r"\renewcommand{\arraystretch}{1.15}",
              r"\caption{Paired distillation errors for the frozen joint$+$src candidate. "
              r"MAEs and paired differences are in nats; positive differences and relative "

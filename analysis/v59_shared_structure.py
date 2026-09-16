@@ -666,7 +666,7 @@ def markdown(summary, tables):
 
 @proofread_table
 def latex(summary, panels):
-    lines = [r"\begin{table}[H]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
+    lines = [r"\begin{table}[!htbp]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
              r"\begin{tabular}{@{}p{1.9cm}p{1.9cm}p{2.0cm}p{2.5cm}p{2.1cm}p{2.5cm}@{}}", r"\toprule",
              r"Law & What is shared & What varies & Held-out MAE shared vs specific & K0 vs K1 MAE & 80\% PI coverage \& width \\", r"\midrule"]
     for arm, law, shared, varies in (

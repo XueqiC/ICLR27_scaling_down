@@ -28,7 +28,7 @@ L += [r"\bottomrule\end{tabular}", r"\caption{Predictive models and their domain
 (TAB / "models_domains.tex").write_text(publication_table_text("\n".join(L) + "\n"))
 # ---- quant 2D coefficients (v55)
 r5 = json.load(open(ROOT / "results/v55-quant-group/register.json")); st = r5["standardization"]
-L = [r"\begin{table}[H]\centering\footnotesize", r"\begin{tabular}{@{}llrrrr@{}}", r"\toprule", r"capability & term & $\beta_{0}$ & $\beta_{\log N_0}$ & $\beta_{L_0}$ & $\beta_{\log D_0}$ \\", r"\midrule"]
+L = [r"\begin{table}[!htbp]\centering\footnotesize", r"\begin{tabular}{@{}llrrrr@{}}", r"\toprule", r"capability & term & $\beta_{0}$ & $\beta_{\log N_0}$ & $\beta_{L_0}$ & $\beta_{\log D_0}$ \\", r"\midrule"]
 for c in C:
     coef = r5["models"][c]["low_order_2d"]["coefficients"]
     for name, row in zip(("1", "$u$", "$v$", "$uv$", "$u^2$"), coef): L.append(f"{c} & {name} & " + " & ".join(f"{b:+.3f}" for b in row) + r" \\")
@@ -37,13 +37,13 @@ L += [r"\bottomrule\end{tabular}", r"\caption{Grouped-quantization form $\wideha
 (TAB / "quant2d_coef.tex").write_text(publication_table_text("\n".join(L) + "\n"))
 # ---- v53 LOSO table
 rows = list(csv.DictReader(open(ROOT / "results/v53-prune-dev/loso_table.csv")))
-L = [r"\begin{table}[H]\centering\footnotesize", r"\begin{tabular}{@{}llrrrr@{}}", r"\toprule", r"subset & candidate & math & code & QA & mean \\", r"\midrule"]
+L = [r"\begin{table}[!htbp]\centering\footnotesize", r"\begin{tabular}{@{}llrrrr@{}}", r"\toprule", r"subset & candidate & math & code & QA & mean \\", r"\midrule"]
 for r in rows: L.append(f"{r['subset'].replace('_',' ')} & {r['candidate'].replace('_',' ')} & {float(r['math_mae']):.3f} & {float(r['code_mae']):.3f} & {float(r['qa_mae']):.3f} & {float(r['mean_mae']):.3f} \\\\")
 L += [r"\bottomrule\end{tabular}", r"\caption{Pruning development on 17 Pythia states: leave-one-source-out MAE (nats) over all held-out rows (`all') and over the densities off the coarse grid (0.75, 0.65, 0.55). Pre-committed rule: lowest mean over capabilities among the four source-conditioned candidates; a gap below 0.02 nats between the best two is resolved toward the continuous, zero-at-$d{=}1$ form with fewer parameters, which selected the power form over A2 (gap 0.015). Baselines do not select.}", r"\label{tab:v53_loso}\end{table}"]
 (TAB / "v53_loso.tex").write_text(publication_table_text("\n".join(L) + "\n"))
 # ---- v55 LOSO table
 lo = r5["loso_table"]
-L = [r"\begin{table}[H]\centering\footnotesize", r"\begin{tabular}{@{}lrrr@{}}", r"\toprule", r"candidate & math & code & QA \\", r"\midrule"]
+L = [r"\begin{table}[!htbp]\centering\footnotesize", r"\begin{tabular}{@{}lrrr@{}}", r"\toprule", r"candidate & math & code & QA \\", r"\midrule"]
 def getm(entry, c):
     if isinstance(entry, dict): return entry.get(c, entry.get("mae", {}).get(c))
     return None
@@ -59,7 +59,7 @@ def md_table(txt, head):
     i = txt.index(head); j = txt.index("\n\n", i + 1); block = txt[i:j].strip().split("\n"); return [l for l in block if l.startswith("|")]
 tA = md_table(md, "| Form | P |"); tB = md_table(md, "| Structure | P shared/per |")
 def to_tex(lines, caption, label, colspec):
-    hdr = [c.strip() for c in lines[0].strip("|").split("|")]; out = [r"\begin{table}[H]\centering\scriptsize\setlength{\tabcolsep}{2pt}", r"\begin{tabular}{" + colspec + "}", r"\toprule", " & ".join(h.replace("_", r"\_") for h in hdr) + r" \\", r"\midrule"]
+    hdr = [c.strip() for c in lines[0].strip("|").split("|")]; out = [r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{2pt}", r"\begin{tabular}{" + colspec + "}", r"\toprule", " & ".join(h.replace("_", r"\_") for h in hdr) + r" \\", r"\midrule"]
     for l in lines[2:]:
         cells = [c.strip().replace("_", r"\_").replace("**", "") for c in l.strip("|").split("|")]; out.append(" & ".join(cells) + r" \\")
     out += [r"\bottomrule\end{tabular}", r"\caption{" + caption + "}", f"\\label{{{label}}}\\end{{table}}"]; return "\n".join(out) + "\n"

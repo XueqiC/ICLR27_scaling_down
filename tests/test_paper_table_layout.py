@@ -38,7 +38,7 @@ def test_dense_columns_allow_wraps_without_changing_values_or_formulas():
 def test_continuations_keep_one_label_and_all_rows_in_order():
     rows = [f'Row {i} & {i}.125 & -{i}.875 & 4 & 5 '+r'\\' for i in range(23)]
     result = table_layout(table('\n'.join(rows), 'tab:pred_source', spec='lllll'))
-    assert result.count(r'\begin{table}[H]') == 3
+    assert result.count(r'\begin{table}[!htbp]') == 3
     assert result.count(r'\ContinuedFloat') == 2
     assert result.count(r'\label{tab:pred_source}') == 1
     assert result.count(r'\caption{Frozen results.}') == 1

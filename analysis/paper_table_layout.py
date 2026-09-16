@@ -152,11 +152,13 @@ def _tabular(block, weights, *, wrap=True):
 
 
 def table_layout(text):
-    """Set every generated table to full width without changing its font."""
+    """Set full-width floating tables without changing fonts or cell contents."""
     all_labels = re.findall(r"\\label\{([^}]+)\}", text)
     fallback = next((s for s in all_labels if s in PROFILES), None)
     def layout(match):
         block = unscale(match.group())
+        block = re.sub(r'(\\begin\{table\*?\})(?:\[[^]]*\])?',
+                       r'\1[!htbp]', block, count=1)
         block = re.sub(r'(\\begin\{table\*?\}(?:\[[^]]*\])?)', r'\1\\normalfont', block, count=1)
         labels = re.findall(r'\\label\{([^}]+)\}', block)
         label = next((s for s in labels if s in PROFILES), fallback)
@@ -180,7 +182,6 @@ PAGE_ROWS = {
 
 
 def _continued_open(opening, numbered):
-    opening = re.sub(r'\[[^]]*\]', '[H]', opening, count=1)
     return opening + (r'\ContinuedFloat' if numbered else '') + '\n'
 
 

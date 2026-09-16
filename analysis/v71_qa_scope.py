@@ -7,7 +7,7 @@ CPU authoring (local dataset/metadata reads, no pretrained model or CUDA):
     python analysis/v71_qa_scope.py --dry-run --write-plan
 
 The last command freezes register.json and writes explicitly unmeasured result
-cells plus summary.md and the [H] paper table. Evaluation is a separate invocation:
+cells plus summary.md and the [!htbp] paper table. Evaluation is a separate invocation:
     CUDA_VISIBLE_DEVICES=GPU-<caller-selected-UUID> python analysis/v71_qa_scope.py
 
 Local Arrow caches are read directly, without cache writes/downloads. As in V67,
@@ -490,7 +490,7 @@ def reports(result):
     for s in register["states"]:
         if s["kind"] == "adapter":
             lines.append(f"| {s['planned_T']} | {reading(cells[s['state'], '2wiki_new']['delta_from_dense'], cells[s['state'], 'musique']['delta_from_dense'])} |")
-    tex = [r"\begin{table}[H]", r"\centering", r"\small",
+    tex = [r"\begin{table}[!htbp]", r"\centering", r"\small",
            r"\caption{QA measurement scope on Gemma-3-1B: conditional loss and $\Delta L$ from dense (native-token nats; negative is improvement), 256 fixed references per set. KD labels denote nominal supervised-token budgets. 2Wiki supplies all context; MuSiQue supplies supporting paragraphs; TriviaQA uses V48's no-context control. "
            + (r"CPU registration only; all cells are unmeasured." if done == 0 else f"{done}/24 cells measured.") + "}",
            r"\label{tab:qa_scope}", r"\begin{tabular}{lrrrrrr}", r"\toprule",
@@ -668,7 +668,7 @@ def selftest():
             result = initial_results(minimal)
             freeze_register(out, minimal)
             save_outputs(out, out / "qa_scope.tex", result)
-            assert result["status"] == "not_measured" and "\\begin{table}[H]" in (out / "qa_scope.tex").read_text()
+            assert result["status"] == "not_measured" and "\\begin{table}[!htbp]" in (out / "qa_scope.tex").read_text()
             for row in result["measurements"]:
                 row.update(loss=2.0 if row["state"] == "dense" else 1.0, tokens=500, n=N,
                            delta_from_dense=0.0 if row["state"] == "dense" else -1.0)
