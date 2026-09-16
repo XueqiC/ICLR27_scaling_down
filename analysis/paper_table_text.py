@@ -371,7 +371,7 @@ CONCISE_CAPTIONS = {
         r"Frozen coefficients of the grouped-quantization form $\widehat{\Delta L}_c=\sum_k \beta_{c,k}\cdot\phi(\mathbf x)\,t_k(b,g)$ "
         r"with $t_k\in\{1,u,v,uv,u^2\}$, $u=\log_2 q_{\max}(b)$ centred at the development mean, and "
         r"$v=\log_2(g/128)$; standardization uses centers 19.565, 2.746, 25.332 and scales 1.084, 1.623, 1.095 for "
-        r"$(\log N_0, L_{0,c}, \log D_0)$, with ridge penalty $10^{-3}$. Rows are capabilities and basis terms; "
+        r"$(\log N_0, L_{0,c}, \log D_0)$, with ridge penalty $10^{-3}$ in the fit on standardized inputs. Rows are capabilities and basis terms; "
         r"columns give the coefficients of the intercept, source size, initial loss, and pretraining tokens."),
     "tab:shared_structure": (
         r"Shared structure and one-point calibration, in nats pooled equally over capabilities. Rows are response "
@@ -431,7 +431,7 @@ CONCISE_CAPTIONS = {
         r"\mbox{held-out} densities and over the densities off the coarse grid (0.75, 0.65, 0.55). The "
         r"\mbox{pre-committed} rule selects the lowest capability mean among the four source-conditioned "
         r"candidates, resolving gaps below 0.02 nats toward the continuous zero-at-$d{=}1$ form with fewer "
-        r"parameters, which selected the power form over A2 (gap 0.015). A1 is the linear power form and A2 "
+        r"parameters, which selected the power form over A2 (gap 0.015 in mean absolute error). A1 is the linear power form and A2 "
         r"per-density regression with interpolation."),
     "tab:v55_loso": (
         r"Grouped quantization: leave-one-state-out mean absolute error in nats on the 24 development cells of "
@@ -457,7 +457,7 @@ CONCISE_CAPTIONS = {
         r"Capability conditioning at matched parameter count (leave-one-run-out mean absolute error, nats): a "
         r"shared response shape with per-capability offsets against per-capability models with the same total "
         r"count. Paired parameter counts give the shared and capability-specific totals; a gain above 0.02 nats is "
-        r"a descriptive threshold. F2 is the saturating budget response plus a logarithmic reuse response with a "
+        r"a descriptive threshold for comparing the fitted responses. F2 is the saturating budget response plus a logarithmic reuse response with a "
         r"student descriptor."),
     "tab:distill_forms_audit": (
         r"Audit of the sixteen frozen distillation forms for the response $\Delta L=L_{\rm post}-L_0$ in nats per "
@@ -540,7 +540,7 @@ CONCISE_CAPTIONS = {
         r"out $b{=}4$ and the group-size test $g{=}128$ on the development states; the joint test uses Pythia-1B at "
         r"step 96k at $g{=}128$. The signed bias of the two-dimensional form for Math, Code, and QA is +0.108, "
         r"+0.060, and +0.077 on the bit-width test, +0.162, +0.137, and +0.129 on the group-size test, and +0.345, "
-        r"+0.097, and +0.250 on the joint test."),
+        r"+0.097, and +0.250 on the joint test of source state and configuration."),
     "tab:quant_threeway": (
         r"Three-way quantization confirmation: mean absolute errors in nats with the measured cells at "
         r"$b\in\{3,4,5\}$ weighted equally; $n$ counts cells per capability. \textbf{D} is the frozen development "
@@ -551,7 +551,7 @@ CONCISE_CAPTIONS = {
         r"and Pythia-1.4B at step 16k; the new state is Pythia-1.4B at step 112k."),
     "tab:prune_repeat": (
         r"Pruning repeatability on Pythia-2.8B at the final checkpoint, whose two cached revisions carry identical "
-        r"weights, so the six cells per capability are three densities $d\in\{0.85,0.75,0.65\}$ measured twice. "
+        r"weights; the six cells per capability cover $d\in\{0.85,0.75,0.65\}$ measured on each revision. "
         r"Entries are mean absolute prediction errors for signed $\Delta L$ in nats with equal weights. All four "
         r"predictors were frozen before the target measurements from the development register with inputs "
         r"$(N_0,D_0,L_{0,c},d)$ and no target calibration; A2 uses the fixed ridge anchor fits with linear "
@@ -617,7 +617,7 @@ _CAPTION_ENDING_FIXES = {
                                 "F2 adds a saturating budget term to the reuse response."),
     "tab:cond_audit": (r"This is a \mbox{post-hoc} audit.",
                        r"This is a \mbox{post-hoc} audit of the conditioning comparison."),
-    "tab:p3_check": ("and 251 and 328 for QA.", "and 251 and 328 for QA, respectively."),
+    "tab:p3_check": ("and 251 and 328 for QA.", "and 251 and 328 for QA, in the same benchmark order."),
     "tab:musique_scope": ("with the range in brackets.", "with the range across trajectories in brackets."),
     "tab:pred_config_prune": ("A2 per-density regression with interpolation.",
                               "A2 the per-density regression with interpolation between densities."),
@@ -673,12 +673,18 @@ def table_text(text):
 
 
 NOTE_ENDINGS = [
+    ("and supports no conclusion about conditioning.",
+     "and provides no evidence about the benefit of capability conditioning."),
+    ("per-capability arithmetic mean development response (not a median).",
+     "arithmetic mean development response for each capability, rather than its median."),
+    ("invokes the new-stage branch for all four states.",
+     "invokes the new-stage branch for all four states included in the independent confirmation panel."),
     ("This retrospective ablation does not constitute a new preregistration.",
      "This retrospective ablation does not constitute a new preregistration of the comparison it reports."),
     ("selection uses the fixed-recipe student-state math form and code/QA constants.",
      "selection uses the fixed-recipe student-state math form together with the code and QA constants fixed at the same freeze."),
     ("The frozen selection rule uses the locked policy; the source-conditioned predictor uses the earlier selection laws.",
-     "The frozen selection rule uses the locked policy, and the source-conditioned predictor uses the earlier selection laws for every state."),
+     "The frozen selection rule uses the locked policy, and the source-conditioned predictor uses the earlier selection laws."),
     ("historical V39 distillation students, excluded from the V78 prediction fits.",
      "historical distillation students, which were excluded from the prediction fits."),
 ]
@@ -1040,40 +1046,40 @@ FOLD_WORDS = {
 # definitions remain, in order, in the adjacent note. Caption text is intentionally
 # independent of experiment identifiers, formulas and the stored artifact names.
 PLAIN_CAPTIONS = {
- 'tab:models': 'The table shows which prediction forms apply to each compression method and test range. Loss is measured in nats per native token, bit width in bits, and budgets in tokens. Parameter and calibration columns give counts.',
- 'tab:model_arch': 'The table compares model architectures and parameter counts. Counts are in billions of parameters. The columns distinguish counts before restoring tied weights, active parameters, unique parameters after restoring ties, and transformer matrices.',
- 'tab:round3_coef': 'The table gives the frozen pruning exponent and coefficients for each capability. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the formula and standardization constants.',
- 'tab:quant2d_coef': 'The table gives frozen grouped-quantization coefficients by capability and response term. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the formula and standardization constants.',
+ 'tab:models': 'The table shows which prediction forms apply to each compression method and test range. Loss is measured in nats per native token, bit width in bits, and budgets in tokens. Parameter and calibration columns give counts for each prediction family.',
+ 'tab:model_arch': 'The table compares model architectures and parameter counts. Counts are in billions of parameters. The columns distinguish counts before restoring tied weights, active parameters, unique parameters after restoring ties, and parameters in transformer matrices.',
+ 'tab:round3_coef': 'The table gives the frozen pruning exponent and coefficients for each capability. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the prediction formula and the constants used to standardize each input.',
+ 'tab:quant2d_coef': 'The table gives frozen grouped-quantization coefficients by capability and response term. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the prediction formula and the constants used to standardize each input.',
  'tab:v53_loso': 'The table compares pruning predictors when one source is held out. Entries are mean absolute errors in nats per native token. The rows separate all measured densities from densities outside the coarse development grid.',
  'tab:v55_loso': 'The table compares grouped-quantization predictors when one state is held out. Entries are mean absolute errors in nats per native token. A collapsing development state dominates the errors, so all candidate forms were retained for testing.',
  'tab:quant_ident': 'The table shows how many independent coefficients the quantization designs support and how accurately they predict held-out measurements. The upper panel gives dimensionless rank and effective degrees of freedom. The lower panel gives mean absolute errors in nats per native token.',
  'tab:v56_forms': 'The table compares distillation forms under run and student holdouts. Each pair gives mean absolute error followed by signed bias, in nats per native token. Parameter counts cover all capabilities.',
  'tab:v56_condition': 'The table compares shared and capability-specific distillation responses at matched parameter counts. Errors and gains are in nats per native token. Paired parameter counts list the shared response followed by the capability-specific response.',
- 'tab:distill_forms_audit': 'The table records the frozen distillation formulas and their fitted coefficients. Responses are loss changes in nats per native token. The first panel specifies the fit; the second lists coefficients in the stated order. The notes define the inputs and fitting procedure.',
+ 'tab:distill_forms_audit': 'The table records the frozen distillation formulas and their fitted coefficients. Responses are loss changes in nats per native token. The first panel specifies the fit; the second lists coefficients in the stated order. The notes define the model inputs and the procedure used to fit each form.',
  'tab:shared_structure': 'The table compares shared response structure and calibration with one target measurement. Mean absolute errors and interval widths are in nats per native token; coverage is a percentage. Calibration pairs list no target measurement followed by one target measurement, which is excluded from scoring.',
- 'tab:cap_conditioning': 'The table compares separate capability responses with shared responses on frozen confirmation panels. Mean absolute errors and gains are in nats per native token. Positive gains favor separate responses; brackets give paired confidence intervals.',
- 'tab:cond_audit': 'The table compares separate capability responses with a shared response and fitted capability scales. Scales and squared correlations are dimensionless. Errors and improvements are in nats per native token; brackets give confidence intervals.',
+ 'tab:cap_conditioning': 'The table compares separate capability responses with shared responses on frozen confirmation panels. Mean absolute errors and gains are in nats per native token. Positive gains favor separate responses; brackets give paired confidence intervals for the error differences.',
+ 'tab:cond_audit': 'The table compares separate capability responses with a shared response and fitted capability scales. Scales and squared correlations are dimensionless. Errors and improvements are in nats per native token; brackets give confidence intervals for the error differences.',
  'tab:main_final': 'The table compares frozen relations, alternatives, and delivered rules on confirmation tests. Mean absolute errors and gains are in nats per native token. Lists follow mathematics, code, and question answering. Gain is alternative error minus relation error; retrospective rules were chosen after testing.',
  'tab:main_context': 'The table compares the earlier distillation relation with frozen alternatives on unseen pools and students. Mean absolute errors and gains are in nats per native token. Lists follow mathematics, code, and question answering. Gain is alternative error minus relation error; these rules were not delivered.',
  'tab:pred_full': 'The table compares relations with the named strongest baselines across all prediction tests. Pairs give relation error followed by baseline error, in nats per native token; bold marks the lower error. All specified forms are reported. Fold rules distinguish frozen predictions, fixed baselines, and retrospective fits.',
  'tab:pred_source': 'The table tests predictions for unseen source states at fixed compression settings. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give improvement over the strongest baseline. Asterisks mark confidence intervals excluding zero. All specified forms are reported.',
- 'tab:pred_config_prune': 'The table tests pruning predictions at unseen densities and source states. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported.',
- 'tab:pred_config_qd': 'The table tests quantization and distillation predictions on unseen settings, source states, and pools. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported.',
- 'tab:p1v2': 'The table compares frozen predictors on new source states under two development-data rules. Entries are mean absolute errors over capabilities, in nats per native token. The final column names the predictor with the lowest observed error, a retrospective ranking.',
+ 'tab:pred_config_prune': 'The table tests pruning predictions at unseen densities and source states. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported, including the frozen baselines.',
+ 'tab:pred_config_qd': 'The table tests quantization and distillation predictions on unseen settings, source states, and pools. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported, including each baseline frozen before testing.',
+ 'tab:p1v2': 'The table compares frozen predictors on new source states under two development-data rules. Entries are mean absolute errors over capabilities, in nats per native token. The last column reports the retrospective winner, selected by the lowest observed error.',
  'tab:round3_prune': 'The table compares frozen pruning predictors on new checkpoints and densities. Mean absolute errors and signed biases are in nats per native token. Bias is prediction minus observation; parameter counts are per capability.',
  'tab:round3_quant': 'The table compares frozen grouped-quantization predictors on unseen bit widths, group sizes, and source states. Entries are mean absolute errors in nats per native token. Parentheses in test headings give the number of measured cells per capability.',
- 'tab:quant_threeway': 'The table compares development-selected predictors, all frozen candidates, and retrospective rules on the quantization confirmation panel. Entries are mean absolute errors in nats per native token, with equal weight per measured cell.',
+ 'tab:quant_threeway': 'The table compares development-selected predictors, all frozen candidates, and retrospective rules on the quantization confirmation panel. Entries are mean absolute errors in nats per native token, with equal weight assigned to each measured confirmation cell.',
  'tab:prune_repeat': 'The table compares pruning prediction errors when identical model weights are measured twice. Entries are mean absolute errors in nats per native token, with equal weight per measurement. All predictors were frozen before target measurement.',
  'tab:p2v2_test': 'The table compares frozen distillation predictions for unseen pools and students. Entries are mean absolute errors in nats per native token. The selected relation minimizes development error; the best frozen form is a retrospective ranking. Pool sizes count traces per domain.',
  'tab:distill_paired': 'The table compares distillation errors with the frozen constant and zero-change baselines. Errors and paired differences are in nats per native token; relative improvements are percentages. Positive differences favor the relation. Brackets give paired confidence intervals.',
- 'tab:distill_confirm': 'The table compares distillation relations with baselines selected before confirmation. Mean absolute errors and paired improvements are in nats per native token. Improvement is baseline error minus relation error; brackets give paired confidence intervals. Pool sizes count traces per domain and budgets count supervised tokens.',
+ 'tab:distill_confirm': 'The table compares distillation relations with baselines selected before confirmation. Mean absolute errors and paired improvements are in nats per native token. Improvement is baseline error minus relation error; brackets give paired confidence intervals. Pool sizes count traces per domain; budgets count supervised tokens.',
  'tab:p3_check': 'The table compares loss changes on primary and independent secondary benchmarks. Each pair lists the primary benchmark followed by the named secondary benchmark, in nats per native token. Compression states were specified before secondary measurement.',
  'tab:musique_scope': 'The table compares question-answering loss changes across two benchmarks and distillation checkpoints. Loss changes are in nats per native token. Entries give trajectory means with ranges in brackets; reuse is dimensionless and pool sizes count traces per domain.',
- 'tab:qa_scope': 'The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count supervised tokens.',
+ 'tab:qa_scope': 'The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count the supervised tokens used for training.',
  'tab:panel_prune': 'The table compares pruning damage across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-damaged and most-damaged outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.',
  'tab:panel_quant': 'The table compares quantization damage across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths. Daggers mark prospective additions.',
  'tab:selection-feasible': 'The table compares selection policies on their feasible compression choices. Coverage and agreement with the measured oracle are percentages; mean regret is in nats per native token. Results distinguish each policy\'s feasible cells from the cells shared by all policies.',
- 'tab:rule-confirm': 'The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are percentages.',
+ 'tab:rule-confirm': 'The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are reported as percentages of evaluated cells.',
  'tab:rule_decomp': 'The table separates selection regret by source-state subset and policy. Mean regret and policy differences are in nats per native token, with equal weight per state and storage budget. Negative differences favor the frozen rule.',
  'tab:rule-confirm-by-state': 'The table compares policy regret for each source state and objective. Mean regret is in nats per native token, averaged over storage budgets. The final column counts distinct configurations selected by the frozen rule.',
  'tab:rule-confirm-candidate-sizes': 'The table shows candidate-set sizes and coverage of the measured oracle. Set sizes count compression methods. Coverage entries give covered cells out of total cells, followed by the percentage in parentheses. This is a retrospective diagnostic of frozen predictions.',
