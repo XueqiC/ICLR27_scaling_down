@@ -56,7 +56,7 @@ def generated(tmp_path_factory):
                 assert ax.get_xticklabels()[0].get_text() == "G3 270M"
                 assert ax.get_xticklabels()[-1].get_text() == "Q3 4B"
                 assert len(ax.patches) == 36
-                assert all(p.get_width() == pytest.approx(.85/3) and p.get_linewidth() == 0
+                assert all(p.get_width() == pytest.approx(.95/3) and p.get_linewidth() == 0
                            for p in ax.patches)
                 for i in range(12):
                     bars = [ax.patches[i + 12*k] for k in range(3)]
