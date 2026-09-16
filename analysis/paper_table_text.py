@@ -332,11 +332,303 @@ def _table(text, fallback_label=None):
     return _academic_caption(text)
 
 
+# Final concise captions, keyed by table label: what the table shows, the unit, and the reading
+# rule a reader needs. Applied last, after the wording layer; nothing outside the caption changes.
+CONCISE_CAPTIONS = {
+    "tab:models": (
+        r"Predictive models and their domains. Rows are prediction families; columns give the predictor, "
+        r"parameters per capability, development settings, target calibration count (zero throughout), tested "
+        r"range, and coefficient source. All inputs are $\mathbf x=(N_0,D_0,L_{0,c})$; losses are in nats per "
+        r"native token, bit widths in bits, and budgets in tokens. This is a \mbox{post-hoc} summary of "
+        r"development fits and frozen prediction tests."),
+    "tab:panel_prune": (
+        r"Per-capability pruning damage on the heterogeneous panel, in nats per native token within each model. "
+        r"$d^{*}_{\mathrm{math}}$ is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the QA "
+        r"ranking columns count, over the pre-cliff densities, how often QA is the least and the most damaged "
+        r"capability; the last column gives the most negative QA response and its density. Daggers mark "
+        r"prospective additions measured at four densities only; a dash marks an unmeasured setting."),
+    "tab:panel_quant": (
+        r"Per-capability damage under per-output-channel symmetric round-to-nearest weight quantization, in nats "
+        r"per native token, at the displayed bit widths; 8 and 6 bits lie within 0.01 nats of dense for each "
+        r"model and are omitted. The last column lists all measured bit widths. Daggers mark prospective additions."),
+    "tab:round3_coef": (
+        r"Frozen coefficients of the selected pruning form $\widehat{\Delta L}_c=(\beta_c\cdot\phi)((1-d)/0.3)^{\gamma_c}$ "
+        r"with $\phi=[1,z(\log N_0),z(L_{0,c}),z(\log D_0)]$, standardized with centers 20.248, 2.661, 25.614 and "
+        r"scales 1.407, 1.691, 0.739 for $(\log N_0, L_{0,c}, \log D_0)$. Rows are capabilities; columns give the "
+        r"exponent and the coefficients of the intercept, source size, initial loss, and pretraining tokens. Loss "
+        r"is in nats per native token."),
+    "tab:quant2d_coef": (
+        r"Frozen coefficients of the grouped-quantization form $\widehat{\Delta L}_c=\sum_k \beta_{c,k}\cdot\phi(\mathbf x)\,t_k(b,g)$ "
+        r"with $t_k\in\{1,u,v,uv,u^2\}$, $u=\log_2 q_{\max}(b)$ centred at the development mean, and "
+        r"$v=\log_2(g/128)$; standardization uses centers 19.565, 2.746, 25.332 and scales 1.084, 1.623, 1.095 for "
+        r"$(\log N_0, L_{0,c}, \log D_0)$, with ridge penalty $10^{-3}$. Rows are capabilities and basis terms; "
+        r"columns give the coefficients of the intercept, source size, initial loss, and pretraining tokens."),
+    "tab:shared_structure": (
+        r"Shared structure and one-point calibration, in nats pooled equally over capabilities. Rows are response "
+        r"families, parameter-sharing comparisons, and calibration evaluations; columns describe the shared and "
+        r"varying terms and compare errors and prediction-interval summaries (coverage and full width for K0, then "
+        r"K1). K0 uses no compressed-target measurement and K1 uses one per source, excluded from scoring. This is "
+        r"a \mbox{post-hoc} analysis."),
+    "tab:cap_conditioning": (
+        r"Capability conditioning on the frozen confirmation panels (mean absolute error, nats). A is a "
+        r"per-capability response, B a shared response with a fixed capability scale, C a shared response with a "
+        r"fixed capability offset, and D a shared response only, all from the same development information. "
+        r"Positive $\Delta_B=B-A$ favors A; brackets give 95\% paired cluster-bootstrap intervals. This is a "
+        r"\mbox{post-hoc} ablation."),
+    "tab:final": (
+        r"Summary of each compression family: delivered predictor, inputs, prediction and rule-selection status, "
+        r"observed gains, and excluded settings. Errors are in nats per token against the strongest "
+        r"same-information baseline fixed from development before the test. A2 denotes per-density regression "
+        r"with interpolation. This is a \mbox{post-hoc} summary of frozen prediction evidence."),
+    "tab:pred_full": (
+        r"\scriptsize All prediction tests across the three arms. Each error pair gives the mean absolute error in "
+        r"nats per native token of the candidate followed by the strongest baseline, per capability; bold marks "
+        r"the lower error. The unseen column names what the test holds out. The origin code gives the prediction origin, the same-input baseline origin, the "
+        r"simple baseline origin (P frozen before measurement, R retrospective, F \mbox{pre-specified}, -- none), "
+        r"and the selection (A all \mbox{pre-specified} forms reported, S chosen after the test). Baseline codes: "
+        r"nD without pretraining tokens, med the per-configuration or development median, 0 zero change, so the "
+        r"strength-only curve, A1 the power form with $\gamma{=}1$, A2 per-density regression with interpolation, "
+        r"ct the continuous two-term form, pbm and pba the per-bit median and mean, c a constant, and TE the joint "
+        r"budget and reuse form. Improvements, both baselines, and bootstrap intervals are in "
+        r"Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}."),
+    "tab:distill_confirm": (
+        r"Frozen distillation confirmation at pool $U=200$ and supervised budgets $T=50,100,200$k. Each student and "
+        r"capability is scored on six sampled pools with three dependent checkpoints per pool. Columns give the "
+        r"selected and baseline forms, chosen by development leave-one-run-out before confirmation, their mean "
+        r"absolute errors in nats, and the paired improvement (baseline minus selected) with 95\% percentile "
+        r"intervals from 5,000 paired pool-cluster bootstrap resamples."),
+    "tab:locked_rule": (
+        r"The locked selection rule, frozen before the selection confirmation. Rows are compression families, "
+        r"capabilities, and source-state status; columns give the response predictor, the development fit, and "
+        r"the dense-loss anchor, where $L_{0,c}$ is the source dense loss and $L_{S0,c}$ the dense loss of the "
+        r"initial student. Fit keys P, Q, G, and K denote the pruning, channel-quantization, grouped-quantization, "
+        r"and distillation development data."),
+    "tab:rule-confirm": (
+        r"The independent selection panel. Rows are objectives and policies; columns give the number of feasible "
+        r"cells, mean regret in nats, agreement (the percentage of single choices matching the oracle method), and "
+        r"set coverage (the percentage of heuristic candidate sets containing that method, a \mbox{post-hoc} "
+        r"diagnostic). QA is restricted to 2Wiki; policy predictions were frozen before the new measurements."),
+    "tab:model_arch": (
+        r"Cached text-model architectures and parameter counts ($10^9$). M is the meta-device count before "
+        r"restoring tied weights, U the unique count after restoring ties, and T the transformer matrices "
+        r"excluding embeddings, language-model head, norms and biases; Pythia T equals the law covariate "
+        r"$L(4h^2+2hm)$. Multimodal checkpoints use their text decoder only. The frozen Gemma-3 student counts are "
+        r"0.435870336B, 1.301875840B, and 4.971331952B, the last including 0.419816304B non-text parameters. "
+        r"Class abbreviations: G3 Gemma3ForCausalLM, G4 Gemma4ForCausalLM, MG MuseGlimmerTextModel, O3 "
+        r"Olmo3ForCausalLM, PN GPTNeoXForCausalLM, and Q3 Qwen3ForCausalLM."),
+    "tab:v53_loso": (
+        r"Pruning development on 17 Pythia states: leave-one-source-out mean absolute error in nats over all "
+        r"\mbox{held-out} densities and over the densities off the coarse grid (0.75, 0.65, 0.55). The "
+        r"\mbox{pre-committed} rule selects the lowest capability mean among the four source-conditioned "
+        r"candidates, resolving gaps below 0.02 nats toward the continuous zero-at-$d{=}1$ form with fewer "
+        r"parameters, which selected the power form over A2 (gap 0.015). A1 is the linear power form and A2 "
+        r"per-density regression with interpolation."),
+    "tab:v55_loso": (
+        r"Grouped quantization: leave-one-state-out mean absolute error in nats on the 24 development cells of "
+        r"six states, by candidate predictor and capability. The late-stage 160M state, which collapses at 3 bits, "
+        r"dominates each \mbox{held-out} error, so the development set does not rank the forms; all three "
+        r"candidates and the baselines were frozen and tested (\S\ref{sec:unseen_settings})."),
+    "tab:quant_ident": (
+        r"Retrospective audit of quantization identifiability; the delivered predictions are unchanged. The four "
+        r"forms use the same 24 development cells per capability, pooled standardization, and ridge "
+        r"$\lambda=10^{-3}$. The upper panel reports rank and effective degrees of freedom; the delivered "
+        r"20-coefficient design has rank 16 because two development bit levels make $u^2=(u_3+u_5)u-u_3u_5$. The "
+        r"lower panel reports mean absolute errors in nats on the frozen bit-width test (12 cells per capability), "
+        r"the group-size test (18), the joint test on Pythia-1B at step 96k (3), and development "
+        r"leave-one-state-out evaluation (24)."),
+    "tab:v56_forms": (
+        r"Distillation development matrix (12 runs, 48 points): \mbox{held-out} mean absolute error followed by "
+        r"signed bias, in nats, per form and capability under leave-one-run-out and leave-one-student-out "
+        r"evaluation. Forms use $t=\log(1+T_c/35000)$, $e=\log(1+E)$, and $s=1-e^{-T_c/T_*}$: budget only $a+bt$, "
+        r"reuse only $a+be$, surface $a+bt+ce+dz$, F1 $(a+\lambda z)e$, and F2 $(a+\lambda z)s+(b+\mu z)e$, with "
+        r"$z$ the standardized $L_{0,c}$ or $\log N_S$. Under leave-one-student-out the descriptor forms reduce to "
+        r"zero change."),
+    "tab:v56_condition": (
+        r"Capability conditioning at matched parameter count (leave-one-run-out mean absolute error, nats): a "
+        r"shared response shape with per-capability offsets against per-capability models with the same total "
+        r"count. Paired parameter counts give the shared and capability-specific totals; a gain above 0.02 nats is "
+        r"a descriptive threshold. F2 is the saturating budget response plus a logarithmic reuse response with a "
+        r"student descriptor."),
+    "tab:distill_forms_audit": (
+        r"Audit of the sixteen frozen distillation forms for the response $\Delta L=L_{\rm post}-L_0$ in nats per "
+        r"native token. Panel A specifies each form and its fit; panel B gives the frozen raw-basis coefficients by "
+        r"capability. The selected reuse response for Math and Code is $a\log(1+E)$, with one parameter and no "
+        r"intercept; the reuse-only baseline $c+b\log(1+E)$ has an unpenalized intercept. F1 denotes "
+        r"descriptor-modulated reuse and F2 adds a saturating budget term."),
+    "tab:cond_audit": (
+        r"Audit of capability conditioning, where A fits a separate response per capability and B a shared "
+        r"response with a fitted, unrestricted signed capability scale. The upper panel gives the dimensionless "
+        r"scales and squared correlations; the lower panel gives the error comparison, with positive $\Delta=B-A$ "
+        r"the reduction in mean absolute error from A, in nats. The pruning confirmation counts the two identical "
+        r"Pythia-2.8B revisions as one state. This is a \mbox{post-hoc} audit."),
+    "tab:p3_check": (
+        r"Primary and secondary benchmarks on Gemma-3-1B: loss change from dense in nats per native token on the "
+        r"main-protocol probe followed by an independent benchmark of the same capability (Math: SVAMP; Code: "
+        r"HumanEval; QA: TriviaQA; 128 samples, fixed probe seed). The six states were fixed before any secondary "
+        r"measurement. Scored completion tokens, primary then secondary, are 13198 and 260 for Math, 4516 and 8393 "
+        r"for Code, and 251 and 328 for QA."),
+    "tab:musique_scope": (
+        r"Distillation QA responses on the primary 2Wiki probe and on 128 answerable MuSiQue development questions "
+        r"with supporting paragraphs supplied, as changes in conditional loss from the dense loss of the student in "
+        r"nats per native token, for each trajectory of the uniform protocol at its final checkpoint (three data "
+        r"seeds per pool size) and for the early checkpoints of the \mbox{pre-specified} states. Entries give the "
+        r"mean over trajectories with the range in brackets."),
+    "tab:qa_scope": (
+        r"QA measurement scope on Gemma-3-1B: conditional loss and $\Delta L$ from dense in native-token nats "
+        r"(negative is improvement) with 256 fixed references per set. 2Wiki supplies all context, MuSiQue supplies "
+        r"supporting paragraphs, and TriviaQA is the no-context control; distillation labels give nominal "
+        r"supervised-token budgets. All 24 cells of the \mbox{pre-specified} states were measured."),
+    "tab:main_final": (
+        r"\scriptsize Frozen candidates against delivered rules. Errors are mean absolute errors in nats per token, "
+        r"stacked as Math, Code, and QA. The strongest alternative is the frozen predictor of the round with the "
+        r"lowest pooled test error, a diagnostic that favours the alternative; the gain is the alternative error "
+        r"minus the candidate error, so negative values favor the alternative. Rules fixed after a test are "
+        r"retrospective for it. F1 denotes descriptor-modulated reuse, F2 the saturating budget and reuse form, and "
+        r"L0 the initial loss."),
+    "tab:pred_source": (
+        r"Source-axis tests: whether the pre-compression source state predicts the response at a fixed "
+        r"intervention setting. Entries are mean absolute errors in nats per native token per capability; bold "
+        r"marks the smallest error in the group; parentheses give the improvement of the candidate over the "
+        r"strongest listed baseline, with an asterisk where the bootstrap 95\% interval excludes zero. The origin "
+        r"code gives the prediction origin, the same-input baseline origin, the simple baseline origin, and the "
+        r"selection (P frozen before measurement, R retrospective, F \mbox{pre-specified}, -- none; A all forms "
+        r"reported, S chosen after the test)."),
+    "tab:pred_config_prune": (
+        r"Configuration-axis tests for pruning: whether a relation fitted at seen densities and sources predicts "
+        r"unseen densities, sizes and stages. Protocol A (full development panel) applies to the two new-source "
+        r"pairs and the prospective Pythia-1B at step 96k; protocol B is in Table~\ref{tab:p1v2}. Entries are mean "
+        r"absolute errors in nats per native token by capability; bold marks the lowest error, parentheses give "
+        r"the baseline-minus-candidate improvement, and the origin code follows Table~\ref{tab:pred_source}. A1 is "
+        r"the linear power form and A2 per-density regression with interpolation."),
+    "tab:pred_config_qd": (
+        r"Configuration-axis tests for quantization and distillation: unseen sizes and stages at seen bit-widths "
+        r"(protocol A; the 5-bit prediction is a fixed interpolation rule) and unseen distillation pools. For the "
+        r"pool of 375 traces per domain the headline is the frozen form with the lowest per-capability development "
+        r"error, a rule stated after the tests (R), with 12 points per capability and Gemma-3-4B \mbox{held-out}. "
+        r"Entries, bold marking, parentheses, and the origin code follow Table~\ref{tab:pred_source}."),
+    "tab:p1v2": (
+        r"New-source tests of frozen predictions: mean absolute error over three capabilities in nats per native "
+        r"token. Protocol A fits on the full nine-state development panel; protocol B fits on steps $\le$64k only, "
+        r"so its 112k rows are training-stage extrapolations. The 1B sources are in-range sizes and 6.9B is a "
+        r"$\sim$5$\times$ size extrapolation. Columns give candidate errors and the predictor with the lowest "
+        r"observed error, a \mbox{post-hoc} ranking. A1 is the linear power form and A2 per-density regression "
+        r"with interpolation."),
+    "tab:round3_prune": (
+        r"Third-round pruning confirmation on three new checkpoints (Pythia-410M at step 48k, Pythia-1.4B at step "
+        r"112k, Pythia-6.9B at step 80k) at $d\in\{0.85,0.675,0.575\}$, with predictions committed before "
+        r"measurement: mean absolute error and mean signed error (prediction minus observation) over nine cells "
+        r"per capability, in nats per native token. Candidates are the power form, A2 (per-density least squares "
+        r"at five anchors with linear interpolation), A1 (the power form with $\gamma_c{=}1$), the continuous "
+        r"two-term form, and the source-free strength-only curve, development median, and zero change. "
+        r"Coefficients are given in Appendix Table~\ref{tab:round3_coef}."),
+    "tab:round3_quant": (
+        r"Third-round grouped-quantization confirmation (mean absolute error, nats), with all predictions "
+        r"committed before the tests. The low-order two-dimensional form is $\phi\cdot[1,u,v,uv,u^2]$ with "
+        r"$u=\log_2 q_{\max}$ (centred) and $v=\log_2(g/128)$; the separable form is "
+        r"$(\beta_c\cdot\phi)\,q_{\max}^{-p_c}(g/128)^{q_c}$; same-input interpolation is bilinear between the four "
+        r"development configurations. The bit-width test holds "
+        r"out $b{=}4$ and the group-size test $g{=}128$ on the development states; the joint test uses Pythia-1B at "
+        r"step 96k at $g{=}128$. The signed bias of the two-dimensional form for Math, Code, and QA is +0.108, "
+        r"+0.060, and +0.077 on the bit-width test, +0.162, +0.137, and +0.129 on the group-size test, and +0.345, "
+        r"+0.097, and +0.250 on the joint test."),
+    "tab:quant_threeway": (
+        r"Three-way quantization confirmation: mean absolute errors in nats with the measured cells at "
+        r"$b\in\{3,4,5\}$ weighted equally; $n$ counts cells per capability. \textbf{D} is the frozen development "
+        r"leave-one-state-out selection (response surface for Math, development median for Code, zero change for "
+        r"QA, with the 0.02-nat tie rule); F lists all frozen candidates; \textbf{R} is the \mbox{post-hoc} "
+        r"recommended rule (piecewise interpolation for Math and Code on development states, the median "
+        r"otherwise), which reuses frozen candidate predictions. Development states are Pythia-410M at step 143k "
+        r"and Pythia-1.4B at step 16k; the new state is Pythia-1.4B at step 112k."),
+    "tab:prune_repeat": (
+        r"Pruning repeatability on Pythia-2.8B at the final checkpoint, whose two cached revisions carry identical "
+        r"weights, so the six cells per capability are three densities $d\in\{0.85,0.75,0.65\}$ measured twice. "
+        r"Entries are mean absolute prediction errors for signed $\Delta L$ in nats with equal weights. All four "
+        r"predictors were frozen before the target measurements from the development register with inputs "
+        r"$(N_0,D_0,L_{0,c},d)$ and no target calibration; A2 uses the fixed ridge anchor fits with linear "
+        r"interpolation."),
+    "tab:p2v2_test": (
+        r"Multi-student distillation on the uniform absolute-exposure protocol. Eight forms per capability were "
+        r"frozen from the twelve development runs (Gemma-3-270M and 1B, $U\in\{75,450\}$, three data seeds) ; the "
+        r"headline column is the frozen form with the lowest development error, a joint form with a source term "
+        r"$k\log(N_S/N_{\mathrm{ref}})$, under a rule stated after the tests. Errors are mean absolute errors in "
+        r"nats over all test points of the row against the frozen constant, zero change, and the best frozen form "
+        r"chosen after the fact (R). Gemma-3-4B is a \mbox{held-out} student ($\log N_S$ 1.9 above the reference; "
+        r"development span $\pm0.55$)."),
+    "tab:main_context": (
+        r"\scriptsize Earlier distillation tests. Errors are mean absolute errors in nats per token, stacked as "
+        r"Math, Code, and QA. The strongest alternative is the predictor frozen in that round, other than the "
+        r"candidate, with the lowest pooled test error, a retrospective ranking; the gain is the alternative error "
+        r"minus the candidate error, so negative values favor the alternative. Rules fixed after a test are "
+        r"retrospective for it; the joint-with-student-size rule was stated \mbox{post-hoc} and not delivered."),
+    "tab:distill_paired": (
+        r"Paired distillation errors for the frozen joint-with-student-size candidate: mean absolute errors and "
+        r"paired differences in nats, with positive differences and relative improvements favoring the candidate. "
+        r"Differences are point means of $|e_{\mathrm{baseline}}|-|e_{\mathrm{candidate}}|$ and relative "
+        r"improvement is $100(\mathrm{MAE}_{\mathrm{baseline}}-\mathrm{MAE}_{\mathrm{candidate}})/\mathrm{MAE}_{\mathrm{baseline}}$. "
+        r"Brackets give 95\% percentile intervals from 5,000 paired trajectory bootstrap resamples with student "
+        r"$\times$ pool clusters; test rows use 12 points from 3 trajectories and \mbox{held-out}-student "
+        r"development rows 16 points from 4, so the intervals have limited resolution."),
+    "tab:rule-confirm-by-state": (
+        r"Regret by source state and objective on the independent panel: the mean over the 17 nominal storage "
+        r"budgets (0.20--1.00 in steps of 0.05), in nats, and $K$, the number of distinct configurations selected "
+        r"by the frozen rule across these budgets. This is a \mbox{post-hoc} decomposition of frozen selection "
+        r"predictions."),
+    "tab:rule-confirm-candidate-sizes": (
+        r"Heuristic candidate-set sizes and oracle coverage on all 68 cells per objective. Size columns count "
+        r"methods in the no-clear-winner candidate set, including singletons; coverage columns give the count out "
+        r"of 68 and the percentage of sets containing the oracle method. This is a \mbox{post-hoc} diagnostic "
+        r"based on frozen development errors."),
+    "tab:candidate-coverage": (
+        r"Measured candidate coverage by source state on the development selection panel. Each method column gives "
+        r"the configuration count followed by the minimum available storage ratio $r$ (dimensionless). This is a "
+        r"\mbox{post-hoc} inventory."),
+    "tab:selection-feasible": (
+        r"Feasible leave-one-state-out selection by policy and objective: feasibility coverage and oracle-method "
+        r"agreement in percent and mean regret in nats. Own denotes the cells feasible for that policy and common "
+        r"the cells feasible for each policy. This is a \mbox{post-hoc} development evaluation."),
+    "tab:rule_decomp": (
+        r"Decomposition of selection regret in native-token nats (lower is better) over 17 storage budgets "
+        r"(0.20--1.00 in steps of 0.05), weighting each state--budget cell equally; all-state means weight the "
+        r"step-32k subset (160M, 410M, 1.4B, with newly measured pruning and quantization candidates) and Pythia-1B "
+        r"at step 64k (which adds two historical distillation candidates) 3:1. The maximum objective minimizes "
+        r"$\max_c(L_c-L_{0,c}^{\mathrm{source}})$; differences are computed before rounding, and negative values "
+        r"favor the frozen rule."),
+}
+
+SIZE_PREFIX = re.compile(r"^\\(?:scriptsize|footnotesize|small)\s+")
+
+
+def _concise(text):
+    """Replace the numbered caption of a table environment by its concise version, if one is registered."""
+    labels = re.findall(r"\\label\{([^}]+)\}", text)
+    label = next((label for label in labels if label in CONCISE_CAPTIONS), None)
+    if label is None:
+        return text
+    match = re.search(r"\\caption\{", text)
+    if not match:
+        return text
+    depth, end = 1, match.end()
+    while depth:
+        if text[end] in "{}" and text[end - 1] != "\\":
+            depth += 1 if text[end] == "{" else -1
+        end += 1
+    body = text[match.end():end - 1]
+    prefix = SIZE_PREFIX.match(body)
+    new = CONCISE_CAPTIONS[label]
+    if prefix and not SIZE_PREFIX.match(new):
+        new = prefix.group() + new
+    text = text[:match.end()] + new + text[end - 1:]
+    # Drop appended glossary notes; keep continuation notes.
+    def drop(m):
+        return "" if "Continued" not in m.group() else m.group()
+    return re.sub(r"\\caption\*\{(?:[^{}]|\{[^{}]*\})*\}\n?", drop, text)
+
+
 def table_text(text):
     """Apply editorial changes to tables without touching surrounding prose."""
     labels = re.findall(r"\\label\{([^}]+)\}", text)
     fallback = next((label for label in labels if label in CAPTION_NOTES), None)
-    return fit_table_height(TABLE.sub(lambda m: _table(m.group(), fallback), text))
+    return fit_table_height(TABLE.sub(lambda m: _concise(_table(m.group(), fallback)), text))
 
 
 def fit_table_height(text):
