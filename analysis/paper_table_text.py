@@ -59,6 +59,16 @@ CAPTION_NOTES = {
     "tab:final": "Rows identify compression families; columns give delivered predictors, inputs, prediction and rule-selection status, observed gains, and excluded settings. This is a post-hoc summary of frozen prediction evidence; A2 denotes per-density regression with interpolation.",
 }
 
+# Endings adjusted so that no caption note leaves a short last line on the pdfLaTeX build.
+_NOTE_ENDING_FIXES = {
+    "tab:pred_config_qd": ("Pool sizes count traces per domain.",
+                           "Pool sizes count traces per domain and budgets count supervised tokens."),
+}
+for _label, (_old, _new) in _NOTE_ENDING_FIXES.items():
+    assert CAPTION_NOTES[_label].count(_old) == 1, _label
+    CAPTION_NOTES[_label] = CAPTION_NOTES[_label].replace(_old, _new)
+
+
 
 # Final academic wording of captions. Applied after every other step, on the
 # rendered caption text, so the search strings are the literal published words.
@@ -595,6 +605,33 @@ CONCISE_CAPTIONS = {
         r"favor the frozen rule."),
 }
 
+# Endings adjusted so that no numbered caption leaves a short last line on the pdfLaTeX build.
+_CAPTION_ENDING_FIXES = {
+    "tab:panel_prune": ("a dash marks an unmeasured setting.",
+                        "a dash marks a setting that was not measured for that model."),
+    "tab:quant2d_coef": ("initial loss, and pretraining tokens.",
+                         "initial loss, and pretraining tokens, in standardized units."),
+    "tab:shared_structure": (r"This is a \mbox{post-hoc} analysis.",
+                             r"This is a \mbox{post-hoc} analysis of the development fits and their calibration."),
+    "tab:distill_forms_audit": ("F2 adds a saturating budget term.",
+                                "F2 adds a saturating budget term to the reuse response."),
+    "tab:cond_audit": (r"This is a \mbox{post-hoc} audit.",
+                       r"This is a \mbox{post-hoc} audit of the conditioning comparison."),
+    "tab:p3_check": ("and 251 and 328 for QA.", "and 251 and 328 for QA, respectively."),
+    "tab:musique_scope": ("with the range in brackets.", "with the range across trajectories in brackets."),
+    "tab:pred_config_prune": ("A2 per-density regression with interpolation.",
+                              "A2 the per-density regression with interpolation between densities."),
+    "tab:pred_config_qd": (r"follow Table~\ref{tab:pred_source}.", r"follow Table~\ref{tab:pred_source} throughout."),
+    "tab:rule-confirm-candidate-sizes": ("based on frozen development errors.",
+                                         "based on frozen development errors, without new measurements."),
+    "tab:candidate-coverage": (r"This is a \mbox{post-hoc} inventory.",
+                               r"This is a \mbox{post-hoc} inventory of the measured candidates."),
+}
+for _label, (_old, _new) in _CAPTION_ENDING_FIXES.items():
+    assert CONCISE_CAPTIONS[_label].count(_old) == 1, _label
+    CONCISE_CAPTIONS[_label] = CONCISE_CAPTIONS[_label].replace(_old, _new)
+
+
 SIZE_PREFIX = re.compile(r"^\\(?:scriptsize|footnotesize|small)\s+")
 
 
@@ -629,7 +666,22 @@ def table_text(text):
     labels = re.findall(r"\\label\{([^}]+)\}", text)
     fallback = next((label for label in labels if label in CAPTION_NOTES), None)
     text = TABLE.sub(lambda m: _concise(_table(m.group(), fallback)), text)
-    return fit_table_height(text.replace("reuse count", "reuse ratio"))
+    text = text.replace("reuse count", "reuse ratio")
+    for old, new in NOTE_ENDINGS:
+        text = text.replace(old, new)
+    return fit_table_height(text)
+
+
+NOTE_ENDINGS = [
+    ("This retrospective ablation does not constitute a new preregistration.",
+     "This retrospective ablation does not constitute a new preregistration of the comparison it reports."),
+    ("selection uses the fixed-recipe student-state math form and code/QA constants.",
+     "selection uses the fixed-recipe student-state math form together with the code and QA constants fixed at the same freeze."),
+    ("The frozen selection rule uses the locked policy; the source-conditioned predictor uses the earlier selection laws.",
+     "The frozen selection rule uses the locked policy, and the source-conditioned predictor uses the earlier selection laws for every state."),
+    ("historical V39 distillation students, excluded from the V78 prediction fits.",
+     "historical distillation students, which were excluded from the prediction fits."),
+]
 
 
 def fit_table_height(text):
