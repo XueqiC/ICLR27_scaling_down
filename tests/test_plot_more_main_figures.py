@@ -64,7 +64,7 @@ def generated(tmp_path_factory):
                     assert all(a.get_x()+a.get_width() == pytest.approx(b.get_x())
                                for a, b in zip(bars, bars[1:]))
                     if i < 11:
-                        assert ax.patches[i+1].get_x()-(bars[-1].get_x()+bars[-1].get_width()) == pytest.approx(.15)
+                        assert ax.patches[i+1].get_x()-(bars[-1].get_x()+bars[-1].get_width()) == pytest.approx(.05)
             for legend in ax.findobj(Legend):
                 box = legend.get_window_extent(renderer)
                 assert ax.bbox.contains(box.x0, box.y0) and ax.bbox.contains(box.x1, box.y1)
