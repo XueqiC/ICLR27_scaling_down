@@ -2,6 +2,11 @@
 """Curvature, registered corner test, and post-hoc displacement account."""
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import sys
 sys.dont_write_bytecode = True
 
@@ -22,9 +27,9 @@ KINDS = {"a": "panel", "b": "panel", "c": "panel"}
 LEGEND_SIZE = (5.5, .42)
 FIGSIZE = (5.5, 1.77)
 if __package__:
-    from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels
+    from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 else:
-    from paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels
+    from paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 
 CAPTION_TEXT = """Reuse-term curvature (a), registered corner test (b), and post-hoc
 displacement account (c). Primary QA additivity: failed to reject. This applies
@@ -44,11 +49,16 @@ error across its stored state/capability records. Zero-damage records are exclud
 The three families are pruning, grouped RTN, and per-channel RTN. There is no
 distillation displacement measurement; the superseded uncentred run and the
 separate cluster hardware run are not pooled.
-The three 1.8 x 1.35-inch panels form one row at 5.5-inch text width.
-Lines are 1.5 pt and markers 5 pt; boundary crosses are 6 pt. Fold estimates
-are spread horizontally for visibility, without changing their curvature values.
-Error bars and whiskers are 1.3 pt with 2.5 pt caps; (b)'s shaded band edges
-and additive bars are 1.5 pt. The shared key fig2_legend.pdf sits above the panels:
+The three 1.8 x 1.35-inch panels form one row at 5.5-inch text width, using
+one axes rectangle measured from the widest y tick and tallest x tick in the row.
+Numeric ticks share one compact format and each axis has at most four major ticks.
+Panel (a) uses horizontal capability labels without a redundant x-axis title.
+Panel (b) retains all six student/readout identities as minor categorical labels;
+all panels retain their y-axis titles.
+Lines are 1.1 pt and markers 3.8 pt; boundary crosses are 3.8 pt. Fold estimates
+and full fits share their true capability coordinate; any display dodge is bounded.
+Error bars and whiskers are 1.1 pt with 2 pt caps; (b)'s shaded band edges
+and additive bars are 1.1 pt. The shared key fig2_legend.pdf sits above the panels:
 Fold estimate, Boundary and Full apply to (a);
 Additive, F_int and Observed to (b); Group, Channel and Prune to (c), denoting grouped
 RTN, per-channel RTN and pruning. Panel (b) labels use student size/readout,
@@ -127,97 +137,92 @@ def displacement(audit):
 
 
 def fold_positions(folds):
-    """Spread nearby curvature estimates across a wide, deterministic jitter grid."""
-    count = len(folds)
-    # Golden-ratio ordering distributes adjacent ranks across the available
-    # width, instead of stacking near-equal p estimates at adjacent x positions.
-    slots = sorted(range(count), key=lambda k: (k*((5**.5-1)/2)) % 1)
-    positions = [0.] * count
-    for index, slot in zip(sorted(range(count), key=lambda k: folds[k]["p"]), slots):
-        positions[index] = -.46 + .84*slot/max(1, count-1)
-    return positions
+    """Start at the true category; the shared renderer bounds display dodging."""
+    return [0.] * len(folds)
 
 
-def draw_panel(fig, data, panel):
-    from matplotlib.ticker import NullFormatter, MaxNLocator
+def draw_panel(fig, data, panel, rectangle=None):
+    from matplotlib.ticker import NullLocator
     size = PANEL_SIZES[panel]
+    ax = panel_axes(fig, size, left=.35, bottom=.30, right=.08)
+    row_axis_style(ax)
     if panel == "a":
-        ax = panel_axes(fig, size, left=.35, bottom=.41, right=.06)
         for i, r in enumerate(data["profiles"]):
             color = COLORS[r["capability"]]
             for offset, fold in zip(fold_positions(r["folds"]), r["folds"]):
                 ax.plot(i+offset, fold["p"], ls="none", marker="x" if fold["boundary"] else "o",
-                        ms=6 if fold["boundary"] else 5, mew=1.3 if fold["boundary"] else .6,
+                        ms=3.8, mew=.6,
                         color=color, alpha=.8)
             lo, hi = r["interval"]
-            ax.errorbar(i+.57, r["p"], yerr=[[r["p"]-lo], [hi-r["p"]]],
-                        fmt="D", color=color, ms=5, lw=1.5, elinewidth=1.3, capthick=1.3, capsize=2.5)
-        ax.axhline(0, color=".65", lw=1.5, ls=":")
-        ax.axhline(1, color=".65", lw=1.5, ls="--")
+            ax.errorbar(i, r["p"], yerr=[[r["p"]-lo], [hi-r["p"]]],
+                        fmt="D", color=color, mfc=PALETTE["transparent"], ms=3.8, lw=1.1, elinewidth=1.1, capthick=.6, capsize=2)
+        ax.axhline(0, color=PALETTE["reference"], lw=1.1, ls=":")
+        ax.axhline(1, color=PALETTE["reference"], lw=1.1, ls="--")
         ax.set(xticks=range(3), xticklabels=["Math", "Code", "QA"],
-               xlabel="Capability", ylabel="Curvature $p$", xlim=(-.65, 2.75))
-        ax.yaxis.set_major_locator(MaxNLocator(4))
-        for text in ax.get_xticklabels():
-            text.set_rotation(30)
-            text.set_ha("right")
-            text.set_rotation_mode("anchor")
+               ylabel="Curvature $p$", xlim=(-.65, 2.75))
+        ax.set_yticks([-1, 0, 1, 3])
     elif panel == "b":
-        ax = panel_axes(fig, size, left=.49, bottom=.30, right=.06)
         for i, r in enumerate(data["corners"]):
             color = COLORS[r["capability"]]
             ax.fill_betweenx([i-.36, i+.36], -r["noise"], r["noise"],
-                             facecolor=".88", edgecolor=".75", linewidth=1.5, zorder=0)
-            ax.plot(r["additive"], i-.18, "|", color=".2", ms=5, mew=1.5)
-            ax.plot(r["F_int"], i+.18, "D", color="#7c4da1", ms=5)
+                             facecolor=PALETTE["background"], edgecolor=PALETTE["grid"], linewidth=.6, zorder=0)
+            ax.plot(r["additive"], i, "|", color=PALETTE["reference"], ms=3.8, mew=.6)
+            ax.plot(r["F_int"], i, "D", color=PALETTE["black"], mfc=PALETTE["transparent"], ms=3.8)
             lo, hi = r["interval"]
             ax.errorbar(r["measured"], i, xerr=[[r["measured"]-lo], [hi-r["measured"]]],
-                        fmt="o", color=color, ms=5, lw=1.5, elinewidth=1.3, capthick=1.3, capsize=2.5)
+                        fmt="o", color=color, ms=3.8, lw=1.1, elinewidth=1.1, capthick=.6, capsize=2)
         ax.set_xscale("symlog", linthresh=.02)
-        ax.set_xticks([-.1, 0, .1], labels=["−0.1", "0", "0.1"])
-        ax.xaxis.set_minor_formatter(NullFormatter())
-        ax.set(yticks=range(len(data["corners"])),
-               yticklabels=[r["student"].replace("gemma3-", "").upper()+" "+
-                            ("QA" if r["capability"] == "qa" else r["capability"].title())
-                            for r in data["corners"]],
-               ylim=(len(data["corners"])-.5, -.5),
-               xlabel="Second difference (nats)")
-        ax.xaxis.label.set_verticalalignment("bottom")
-        ax.xaxis.set_label_coords(.5, .03, transform=fig.transSubfigure if hasattr(fig, "transSubfigure") else fig.transFigure)
+        # Scales reset formatters/locators: reapply the row styling afterwards.
+        row_axis_style(ax)
+        ax.set_xticks([-.1, 0, .1])
+        ax.yaxis.set_major_locator(NullLocator())
+        ax.set_yticks(range(len(data["corners"])),
+                     labels=[r["student"].replace("gemma3-", "").upper()+" "+
+                             ("QA" if r["capability"] == "qa" else r["capability"].title())
+                             for r in data["corners"]], minor=True)
+        ax.set(ylim=(len(data["corners"])-.5, -.5),
+               xlabel="Second difference (nats)", ylabel="Student/readout")
     else:
-        ax = panel_axes(fig, size, left=.40, bottom=.34, right=.08)
         labels = {"prune": "Pruning", "pruning": "Pruning", "grouped_rtn": "Grouped RTN",
                   "per_channel_rtn": "Per-channel RTN"}
-        for family, color, marker in zip(sorted({r["family"] for r in data["displacement"]}),
-                                          COLORS.values(), ("o", "s", "^")):
+        for family, marker in zip(sorted({r["family"] for r in data["displacement"]}), ("o", "s", "^")):
+            color = SEMANTIC_METHOD_COLORS[family]
             part = sorted((r for r in data["displacement"] if r["family"] == family), key=lambda r: r["damage"])
             ax.plot([r["damage"] for r in part], [100*r["median_relative_error"] for r in part],
-                    marker=marker, color=color, lw=1.5, ms=5, label=labels[family])
+                    marker=marker, color=color, lw=1.1, ms=3.8, label=labels[family])
         ax.set(xscale="log", yscale="log", xlabel="Absolute damage (nats)",
                ylabel="Relative error (%)")
+        row_axis_style(ax)
         ax.set_xticks([.01, 1])
-        ax.xaxis.set_minor_formatter(NullFormatter())
-        ax.yaxis.set_minor_formatter(NullFormatter())
-        ax.grid(alpha=.15, which="both")
-    return finish_panel(ax)
+        ax.set_yticks([1, 10])
+    finish_panel(ax)
+    return position_row_axes(ax, rectangle) if rectangle is not None else ax
 
 
 def draw_legend(fig):
     from matplotlib.lines import Line2D
-    handles = [Line2D([], [], marker=m, ls="", color=c, ms=6 if m == "x" else 5,
-                      mew=1.5 if m == "|" else 1.3 if m == "x" else .6, label=label)
-               for m, c, label in (("o", ".3", "Fold estimate"), ("x", ".3", "Boundary"),
-                                   ("D", ".3", "Full"), ("|", ".2", "Additive"),
-                                   ("D", "#7c4da1", "$F_{int}$"), ("o", ".3", "Observed"))]
-    handles += [Line2D([], [], marker=m, color=c, lw=1.5, ms=5, label=label)
-                for m, c, label in zip(("o", "s", "^"), COLORS.values(), ("Group", "Channel", "Prune"))]
+    handles = [Line2D([], [], marker=m, ls="", color=c, mfc=PALETTE["transparent"] if m == "D" else c, ms=3.8,
+                      mew=.6, label=label)
+               for m, c, label in (("o", PALETTE["reference"], "Fold estimate"), ("x", PALETTE["reference"], "Boundary"),
+                                   ("D", PALETTE["reference"], "Full"), ("|", PALETTE["reference"], "Additive"),
+                                   ("D", PALETTE["black"], "$F_{int}$"), ("o", PALETTE["reference"], "Observed"))]
+    handles += [Line2D([], [], marker=m, color=c, lw=1.1, ms=3.8, label=label)
+                for m, c, label in zip(("o", "s", "^"), [SEMANTIC_METHOD_COLORS[f] for f in ("grouped_rtn", "per_channel_rtn", "prune")], ("Group", "Channel", "Prune"))]
     return legend_strip(fig, handles)
 
 
-def plot(data, plt):
+def row_rectangle(data, plt):
+    return measure_row_rectangle(plt, PANEL_SIZES["a"],
+                                 [lambda f, p=p: draw_panel(f, data, p) for p in "abc"])
+
+
+def plot(data, plt, rectangle=None):
+    if rectangle is None:
+        rectangle = row_rectangle(data, plt)
     return combine_panels(plt, [
-        ("panel", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a")),
-        ("panel", (1.85, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b")),
-        ("panel", (3.7, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, data, "c")),
+        ("panel", (0, 0, *PANEL_SIZES["a"]), lambda f: draw_panel(f, data, "a", rectangle)),
+        ("panel", (1.85, 0, *PANEL_SIZES["b"]), lambda f: draw_panel(f, data, "b", rectangle)),
+        ("panel", (3.7, 0, *PANEL_SIZES["c"]), lambda f: draw_panel(f, data, "c", rectangle)),
         ("legend", (0, PANEL_SIZES["a"][1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
@@ -229,10 +234,11 @@ def generate(root=ROOT):
         data = {"profiles": curvature(audit), "corners": corners(audit), "displacement": displacement(audit)}
         audit.rule("A2 panel a uses training-probe parameter_stability[].folds[name=F_curv].p/boundary and "
                    "parameter_intervals[].fits.F_curv.fit.p / p_interval / fit.boundary_hit; no profile or bootstrap is rerun.")
+        rectangle = row_rectangle(data, plt)
         for letter, key in zip("abc", ("profiles", "corners", "displacement")):
             apply_style(KINDS[letter])
             fig = plt.figure(figsize=PANEL_SIZES[letter])
-            draw_panel(fig, data, letter)
+            draw_panel(fig, data, letter, rectangle)
             save_panel(fig, f"fig2_{letter}", KINDS[letter], audit, data[key])
             write_caption(f"fig2_{letter}", audit, CAPTION_TEXT)
             plt.close(fig)
@@ -242,7 +248,7 @@ def generate(root=ROOT):
         save_panel(fig, "fig2_legend", "legend", audit, [])
         write_caption("fig2_legend", audit, CAPTION_TEXT)
         plt.close(fig)
-        fig = plot(data, plt)
+        fig = plot(data, plt, rectangle)
         save_figure(fig, "explanation", audit)
         write_notes("explanation", audit, data)
         write_caption("explanation", audit, CAPTION_TEXT)

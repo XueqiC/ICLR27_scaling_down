@@ -2,6 +2,11 @@
 """Readable main-text Figure 1: 4 representative models (one per family + 30B) x 2 decisive metrics
 (residual log-Fisher cosine; top-0.1% Jaccard), large bold Times-family fonts, shared colorbar per metric.
 The full 7x4 grid stays in the appendix (plot_v9_blocks.py). Data unchanged (results/v9-capability-regions)."""
+
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp, neutral_cmap
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp, neutral_cmap
 import json
 import numpy as np, matplotlib
 matplotlib.use("Agg")
@@ -11,7 +16,7 @@ import analysis.plot_v9_blocks as P
 plt.rcParams.update({"font.family": "serif", "font.serif": ["Nimbus Roman", "Liberation Serif", "Times New Roman"],
                      "font.weight": "bold", "axes.labelweight": "bold", "axes.titleweight": "bold", "pdf.fonttype": 42})
 MODELS = [("Qwen--Qwen3-4B", "Qwen3-4B"), ("gemma3-4b", "Gemma3-4B"), ("olmo3-7b", "OLMo3-7B"), ("muse-30b", "Muse-30B")]
-METRICS = [("shared_component_removed_cosine", "Residual log-Fisher cosine", "coolwarm"), ("top_0.1pct_jaccard", "Top-0.1% Jaccard", "viridis")]
+METRICS = [("shared_component_removed_cosine", "Residual log-Fisher cosine", neutral_cmap()), ("top_0.1pct_jaccard", "Top-0.1% Jaccard", neutral_cmap())]
 recs = []
 for tag, label in MODELS:
     payload = json.loads((P.OUT_BASE / tag / "similarity.json").read_text()); names = P._benchmark_order(payload)
@@ -24,7 +29,7 @@ for i, r in enumerate(recs):
         ax = axes[i, j]; mat = r["mats"][m]; n = len(r["names"])
         im = ax.imshow(mat, cmap=cmap, norm=norms[m], interpolation="nearest")
         for pos in P._separator_positions(r["names"], r["caps"]):
-            ax.axhline(pos, color="black", lw=1.6); ax.axvline(pos, color="black", lw=1.6)
+            ax.axhline(pos, color=PALETTE["black"], lw=1.6); ax.axvline(pos, color=PALETTE["black"], lw=1.6)
         ax.set_xticks(range(n)); ax.set_yticks(range(n))
         ax.set_xticklabels(r["names"], rotation=60, ha="right", fontsize=11, fontweight="bold")
         ax.set_yticklabels(r["names"], fontsize=11, fontweight="bold")

@@ -46,14 +46,14 @@ def test_one_mean_line_per_student_readout_and_raw_seed_markers(panel):
     fig = plt.figure(figsize=gen.PANEL_SIZE)
     try:
         ax = gen.draw_panel(fig, rows, panel)
-        lines = [line for line in ax.lines if line.get_color() in gen.COLORS.values()
+        lines = [line for line in ax.lines if line.get_color() in (gen.COLORS if panel == "left" else gen.QA_COLORS).values()
                  and line.get_linestyle() != "None"]
         points = [line for line in ax.lines if line.get_marker() in ("o", "s")]
         assert len(lines) == 9 and len(points) == 18
-        assert all(line.get_linewidth() == 1.5 and line.get_marker() == "None" for line in lines)
-        assert all(line.get_linestyle() == "None" and line.get_markersize() == 5 for line in points)
+        assert all(line.get_linewidth() == 1.1 and line.get_marker() == "None" for line in lines)
+        assert all(line.get_linestyle() == "None" and line.get_markersize() == 3.8 for line in points)
         assert ax.get_legend() is None
-        for series, color in zip(gen.CAPS if panel == "left" else gen.SCOPES, gen.COLORS.values()):
+        for series, color in zip(gen.CAPS if panel == "left" else gen.SCOPES, (gen.COLORS if panel == "left" else gen.QA_COLORS).values()):
             for student, ls in zip(gen.STUDENTS, gen.STYLES):
                 subset = [r for r in rows if (r["panel"], r["series"], r["student"]) == (panel, series, student)]
                 rungs = defaultdict(list)

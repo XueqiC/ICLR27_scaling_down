@@ -6,19 +6,25 @@ neither development MAE nor a baseline-gain interval is a prediction error bar.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import sys
 sys.dont_write_bytecode = True
 
 import math
 
 if __package__:
-    from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot, save_figure, write_notes, legacy_rows, confirmation_identity
+    from .paper_artifacts import ROOT, CAPS, COLORS, PRINT_RC, Artifacts, frozen_run, pyplot, save_figure, write_notes, legacy_rows, confirmation_identity
     from .plot_fig_explanation import corners, A5
 else:
-    from paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot, save_figure, write_notes, legacy_rows, confirmation_identity
+    from paper_artifacts import ROOT, CAPS, COLORS, PRINT_RC, Artifacts, frozen_run, pyplot, save_figure, write_notes, legacy_rows, confirmation_identity
     from plot_fig_explanation import corners, A5
 
-GRAMMAR = "Filled circle: within stated band; hollow circle: outside; triangle: development student; cross: interval not tested."
+GRAMMAR = "Hollow diamond: frozen prediction with a stored band; cross: interval not tested. Dashed / solid whiskers: 1B / 4B development; band membership remains in the sidecar."
+FIGSIZE = (5.5, 8.2)
 
 
 def point(panel,group,cap,predicted,measured,source,*,interval=None,development=False,**metadata):
@@ -134,7 +140,7 @@ def build(audit):
                                 interval=r["interval"],development=student=="gemma3-4b",student=student,candidate="registered additive contrast"))
     audit.rule("Panel C is the registered additive corner prediction (zero), with A5 fresh-scope measured I and registered +/-2-noise bands, "
                "checked against V99 delta_from_update_0. It is not a transported fitted response law: fresh-scope F_int predictions "
-               "are not stored in A7. The primary QA test failed to reject; fresh secondary readouts are shown individually, without a shared verdict. All 4B points use a development triangle, "
+               "are not stored in A7. The primary QA test failed to reject; fresh secondary readouts are shown individually, without a shared verdict. All 4B records retain their development status and solid whiskers, "
                "including the independently measured configurations, because 4B was a development student.")
     audit.rule("No measurement intervals are stored for V46/V53/V69/V70/V72/V78 prediction cells. "
                "They are crosses, with no invented whisker or coverage classification. V70 paired gain intervals "
@@ -143,40 +149,12 @@ def build(audit):
 
 
 def generate(root=ROOT):
-    with frozen_run(root) as access:
-        audit=Artifacts(root);plt=pyplot(root);rows=build(audit)
-        from matplotlib.lines import Line2D
-        fig,axes=plt.subplots(1,3,figsize=(13,5.4),sharex=True)
-        for ax,panel,title in zip(axes,"ABC",("A  New configurations","B  New sources or students","C  New evaluation distributions")):
-            groups=list(dict.fromkeys(r["group"] for r in rows if r["panel"]==panel))
-            for y,group in enumerate(groups):
-                part=[r for r in rows if r["panel"]==panel and r["group"]==group]
-                for k,r in enumerate(part):
-                    jitter=0 if len(part)==1 else -.26+.52*k/(len(part)-1)
-                    color=COLORS[r["capability"]]
-                    dev=r["status"]=="development"
-                    marker="^" if dev else "x" if r["within"] is None else "o"
-                    face=color if r["within"] else "white"
-                    if r["residual_interval"] is not None:
-                        lo,hi=r["residual_interval"];e=r["residual"]
-                        ax.errorbar(e,y+jitter,xerr=[[e-lo],[hi-e]],fmt="none",color=color,capsize=2,lw=.85)
-                    ax.plot(r["residual"],y+jitter,marker=marker,ls="",color=color,mfc=face,ms=5 if dev else 4,alpha=.85)
-            ax.axvline(0,color=".5",lw=.8)
-            ax.set_xscale("symlog",linthresh=.03)
-            ax.set_xticks([-1,-.1,0,.1,1],labels=["−1","−0.1","0","0.1","1"])
-            ax.set(yticks=range(len(groups)),yticklabels=[g.replace(": ",":\n") for g in groups],title=title,
-                   xlabel="Prediction − measurement\n(native-token nats; symlog)")
-            ax.tick_params(axis="y",labelsize=7);ax.invert_yaxis();ax.grid(axis="x",alpha=.15)
-            if panel=="C":
-                ax.text(.5,1.01,"Additive contrast: 1B circles; 4B development triangles",transform=ax.transAxes,ha="center",fontsize=6)
-        fig.legend(handles=[Line2D([],[],color=COLORS[c],marker="o",ls="",label=c.title()) for c in CAPS],
-                   loc="lower center",bbox_to_anchor=(.5,.095),ncol=3,frameon=False)
-        fig.text(.5,.065,GRAMMAR,ha="center",fontsize=8)
-        fig.text(.5,.02,"Whiskers: stored measurement bands (corner I ± twice registered noise). Missing intervals remain unclassified.\nPrimary QA corner additivity: failed to reject; full response transfer to fresh distributions: not tested.",ha="center",fontsize=8)
-        fig.tight_layout(rect=(0,.18,1,1))
-        save_figure(fig,"generalization_cells",audit);write_notes("generalization_cells",audit,rows);plt.close(fig)
-        return rows,audit,access
+    if __package__:
+        from .plot_paper_appendix import generate as render
+    else:
+        from plot_paper_appendix import generate as render
+    return render("generalization_cells", root=root)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     generate()

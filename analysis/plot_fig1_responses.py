@@ -4,6 +4,11 @@
 Run from any directory: python /path/to/analysis/plot_fig1_responses.py.
 Only reads result JSON; never imports analysis modules that rebuild results/TeX.
 """
+
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
 import json
 import os
 from pathlib import Path
@@ -21,19 +26,19 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGS = ROOT / "paper/paper/figs"
-NOTES = ROOT / "paper/docs/FIGURE_BUILD_NOTES.md"
+NOTES = ROOT / "docs/FIGURE_BUILD_NOTES.md"
 CAPS = ("math", "code", "qa")
 CAP_LABEL = {"math": "Math", "code": "Code", "qa": "QA"}
 # Method colours also identify their headline candidate throughout all four figures.
 COLORS = {
-    "pruning": "#2166ac", "power": "#2166ac",
-    "quantization": "#d97718", "full": "#d97718",
-    "distillation": "#22834a", "E": "#22834a",
-    "A2": "#8662a6", "A1": "#258d9e", "cont": "#b34e83",
-    "median_curve": "#737373", "per_bit_median": "#737373",
-    "constant": "#444444", "zero": "#999999",
-    "same_cap": "#ad416b", "cross_selected": "#795548",
-    "train_mean": "#444444", "measured": "#202020",
+    "pruning": PALETTE["pruning"], "power": PALETTE["pruning"],
+    "quantization": PALETTE["quantization"], "full": PALETTE["quantization"],
+    "distillation": PALETTE["distillation"], "E": PALETTE["distillation"],
+    "A2": PALETTE["reference"], "A1": PALETTE["reference"], "cont": PALETTE["reference"],
+    "median_curve": PALETTE["reference"], "per_bit_median": PALETTE["reference"],
+    "constant": PALETTE["reference"], "zero": PALETTE["reference"],
+    "same_cap": PALETTE["reference"], "cross_selected": PALETTE["reference"],
+    "train_mean": PALETTE["reference"], "measured": PALETTE["reference"],
 }
 
 
@@ -243,9 +248,9 @@ def main():
     for i, cap in enumerate(CAPS):
         ap, aq, ad = axes[i]
         for ax in (ap, aq, ad):
-            ax.axhline(0, color="#bbbbbb", lw=.6, zorder=0)
-            ax.grid(axis="y", color="#eeeeee", lw=.6)
-        ap.axvspan(.535, .6, color="#f1dfbf", alpha=.55, zorder=0)
+            ax.axhline(0, color=PALETTE["reference"], lw=.6, zorder=0)
+            ax.grid(axis="y", color=PALETTE["background"], lw=.6)
+        ap.axvspan(.535, .6, color=PALETTE["purple_light"], alpha=.55, zorder=0)
         for size in ("6.9b", "1b"):
             alpha = .45 if size == "6.9b" else 1
             marker = "s" if size == "6.9b" else "o"
@@ -265,9 +270,9 @@ def main():
                 color = COLORS["measured"] if candidate == "actual" else COLORS[candidate]
                 aq.plot(range(5), y, linestyle=":" if candidate == "per_bit_median" else "--",
                         lw=.65, color=color, alpha=alpha, marker=marker, ms=3.8,
-                        markerfacecolor=color if candidate == "actual" else "white", zorder=3)
+                        markerfacecolor=color if candidate == "actual" else PALETTE["white"], zorder=3)
         ap.set_xlim(.915, .535)
-        ap.set_xticks([.9, .8, .7, .6, .55], [".9", ".8", ".7", ".6", ".55"])
+        ap.set_xticks([.9, .8, .7, .6, .55], [PALETTE["background"], PALETTE["grid"], PALETTE["grid"], PALETTE["reference"], PALETTE["reference"]])
         ap.set_ylabel(f"{CAP_LABEL[cap]}\nΔL (nats/token)")
         aq.set_xticks(range(5), ["8", "6", "5*", "4", "3"])
         aq.set_xlim(-.3, 4.3)
@@ -276,7 +281,7 @@ def main():
             if pp:
                 ad.plot([p["E"] for p in pp], [p["delta"][cap] for p in pp], linestyle="none",
                         marker=marker, ms=4, markeredgewidth=.8, color=COLORS["measured"],
-                        markerfacecolor="white" if pool == 225 else COLORS["measured"], zorder=4)
+                        markerfacecolor=PALETTE["white"] if pool == 225 else COLORS["measured"], zorder=4)
         if points:
             e = np.geomspace(*summary["endpoint_E_range"], 200)
             for kind, ls in (("constant", ":"), ("E", "-")):
@@ -299,10 +304,10 @@ def main():
          Line2D([], [], color=COLORS["median_curve"], ls=":", label="Median curve"),
          Line2D([], [], color=COLORS["measured"], marker="s", ls="", alpha=.45, label="6.9B (light overlays)")],
         [Line2D([], [], marker="o", ls="", color=COLORS["measured"], label="1B measured"),
-         Line2D([], [], color=COLORS["full"], marker="o", mfc="white", ls="--", lw=.65, label="Full (frozen)"),
+         Line2D([], [], color=COLORS["full"], marker="o", mfc=PALETTE["white"], ls="--", lw=.65, label="Full (frozen)"),
          Line2D([], [], color=COLORS["per_bit_median"], ls=":", label="Per-bit median"),
          Line2D([], [], marker="s", ls="", color=COLORS["measured"], alpha=.45, label="6.9B (light overlays)")],
-        [Line2D([], [], marker=m, ls="", color=COLORS["measured"], mfc="white" if u == 225 else COLORS["measured"],
+        [Line2D([], [], marker=m, ls="", color=COLORS["measured"], mfc=PALETTE["white"] if u == 225 else COLORS["measured"],
                 label=f"U{u} {'test' if u == 225 else 'endpoint'}") for u, m in ((75, "o"), (600, "s"), (225, "D"))]
         + [Line2D([], [], color=COLORS[k], ls=l, label=n) for k, l, n in
            (("constant", ":", "Constant (frozen)"), ("E", "-", "E-only (frozen)"))],
@@ -327,7 +332,7 @@ def main():
     if qa_bias:
         axes[2, 2].text(.03, .97, "U225 QA bias (pred − obs)\n" + "; ".join(qa_bias),
                         transform=axes[2, 2].transAxes, va="top", fontsize=8,
-                        bbox={"facecolor": "white", "edgecolor": "none", "alpha": .85, "pad": 1})
+                        bbox={"facecolor": PALETTE["white"], "edgecolor": "none", "alpha": .85, "pad": 1})
     audit.omit("Trajectory checkpoints within a run share training and probes; no independent-seed "
                "error bars are inferred. T-only and 2D curves are not requested and are not reduced "
                "to an E curve by inventing a token budget.")

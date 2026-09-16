@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """CPU-only transfer matrices, including confirmation and grouped quantization."""
+
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
 import sys
 from collections import Counter, defaultdict
 
@@ -254,21 +259,21 @@ def main():
         for i, rr in enumerate(cells[protocol]):
             for j, cell in enumerate(rr):
                 if cell is None:
-                    ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, facecolor="#e1e1e1",
-                                           edgecolor="#bbbbbb", hatch="///", lw=.6))
+                    ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, facecolor=PALETTE["grid"],
+                                           edgecolor=PALETTE["grid"], hatch="///", lw=.6))
                     ax.text(j, i, "not\nevaluated", ha="center", va="center", fontsize=8,
-                            bbox={"facecolor": "#e1e1e1", "edgecolor": "none", "pad": 1})
+                            bbox={"facecolor": PALETTE["grid"], "edgecolor": "none", "pad": 1})
                     continue
                 face = cmap(norm(cell["gain"]))
-                ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, facecolor=face, edgecolor="white", lw=1))
-                text_color = "white" if abs(cell["gain"]) > .63 * limit else "#171717"
+                ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, facecolor=face, edgecolor=PALETTE["white"], lw=1))
+                text_color = PALETTE["white"] if abs(cell["gain"]) > .63 * limit else PALETTE["reference"]
                 ax.text(j, i - .23, f"{cell['gain']:+.3f}", ha="center", va="center", color=text_color, fontsize=10)
                 ax.text(j, i + .03, f"MAE {cell['candidate']:.3f}", ha="center", va="center", color=text_color, fontsize=8)
                 ax.text(j, i + .28, SHORT[cell["baseline"]], ha="center", va="center", color=text_color, fontsize=8)
         labels = [f"{'1B' if s == '1b' else '6.9B'}@{t // 1000}k" + ("*" if t == 96000 else "") for s, t in SOURCES]
         if protocol == "A":
             labels += list(confirmation)
-            ax.axhline(4.5, color="#444444", lw=1.2)
+            ax.axhline(4.5, color=PALETTE["reference"], lw=1.2)
         ax.set_yticks(range(len(labels)), labels if col == 0 else [])
         ax.set_xticks(range(len(regimes)), regimes)
         for tick, label in zip(ax.get_xticklabels(), regimes):
@@ -290,9 +295,9 @@ def main():
     group_ax.tick_params(length=0, pad=4)
     for i, test in enumerate(GROUP_TESTS):
         cell = grouped_quant[test]
-        group_ax.axhspan(i - .5, i + .5, color="#f5f5f5" if i % 2 == 0 else "white", zorder=-1)
+        group_ax.axhspan(i - .5, i + .5, color=PALETTE["background"] if i % 2 == 0 else PALETTE["white"], zorder=-1)
         group_ax.add_patch(Rectangle((-.5, i - .5), 1, 1, facecolor=cmap(norm(cell["gain"])),
-                                    edgecolor="white"))
+                                    edgecolor=PALETTE["white"]))
         labels = [f"{cell['gain']:+.3f}", f"{cell['candidate']:.3f}",
                   f"{cell['baseline']} ({cell['baseline_mae']:.3f})",
                   "held-out 1B@96k" if test == "joint_test" else "seen development states"]
@@ -301,11 +306,11 @@ def main():
     for spine in group_ax.spines.values():
         spine.set_visible(False)
     distill = fig.add_subplot(grid[2])
-    distill.axvline(0, color="#444444", lw=.8)
+    distill.axvline(0, color=PALETTE["reference"], lw=.8)
     for i, cap in enumerate(CAPS):
         mae = v41["by_cap"][cap]["mae"]
         gain = mae["constant"] - mae["E"]
-        distill.plot(gain, i, marker="o", mfc="white", mec=COLORS["E"], ms=6, linestyle="none")
+        distill.plot(gain, i, marker="o", mfc=PALETTE["white"], mec=COLORS["E"], ms=6, linestyle="none")
         distill.annotate(f"{gain:+.3f}  (E MAE {mae['E']:.3f}; constant {mae['constant']:.3f})",
                         (gain, i), xytext=(7, 0), textcoords="offset points", va="center", fontsize=8)
         audit.rule(f"U225 {cap}: E MAE={mae['E']:.9f}, constant MAE={mae['constant']:.9f}, gain={gain:+.9f}.")
@@ -319,7 +324,7 @@ def main():
             cell = cap_metrics[cap]
             y = offset + i
             ticks.append(y)
-            distill.plot(cell["gain"], y, marker="o", mfc="white", mec=COLORS["E"], ms=6, linestyle="none")
+            distill.plot(cell["gain"], y, marker="o", mfc=PALETTE["white"], mec=COLORS["E"], ms=6, linestyle="none")
             distill.annotate(f"{cell['gain']:+.3f}  (joint+src MAE {cell['candidate']:.3f}; constant {cell['baseline_mae']:.3f}; zero {cell['zero_mae']:.3f})",
                             (cell["gain"], y), xytext=(7, 0), textcoords="offset points", va="center", fontsize=8)
     distill.set_ylim(14.6, -1.3)
@@ -328,7 +333,7 @@ def main():
     distill.set_title("Distillation · unseen pools (* = held-out student; R = selection rule stated after tests)",
                       fontsize=10, loc="left")
     distill.set_xlabel("MAE(baseline) − MAE(candidate), nats/token; positive = candidate better")
-    distill.grid(axis="x", color="#eeeeee", lw=.5)
+    distill.grid(axis="x", color=PALETTE["background"], lw=.5)
     fig.text(.5, .018, "*1B@96k: only d=.65/.55 and int4/int3; original v46 freeze. Cell lines: gain / candidate MAE / selected simple baseline.\n"
              "Pythia cells average math, code and QA. All values are nats per native token; the distillation panel is separate.",
              ha="center", fontsize=8, linespacing=1.5)

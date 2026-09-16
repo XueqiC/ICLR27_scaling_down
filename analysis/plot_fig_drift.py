@@ -2,6 +2,11 @@
 """Observed logarithmic-reuse ratio drift; never rebuild missing quantities."""
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import math
 from statistics import median
 
@@ -18,7 +23,7 @@ V96 = "results/v96-joint-response/summary.json"
 V100 = "results/v100-critical-region/summary.json"
 STUDENTS = ("gemma3-1b", "gemma3-4b")
 TOLERANCES = (.01, .003)
-PANEL_SIZE = (2.7, 1.45)
+PANEL_SIZE = (2.7, 1.15)
 LEGEND_SIZE = (5.5, .3)
 CAPTION = """Observed-endpoint falsification diagnostic for logarithmic reuse,
 for Gemma-3 1B (a) and 4B (b). The ordinate is the saved measured pool-change
@@ -26,8 +31,8 @@ effect divided by log(1+E2)-log(1+E1), where E=T/D_U; the abscissa is the saved
 common_T=(T_first+T_second)/2, in thousands of supervised tokens. Colour denotes
 Math, Code or QA. Both matching tolerances (1% and 0.3%) are pooled. For each
 capability, one light filled band spans the minimum to maximum saved ratio
-across all pool pairs at each budget; one heavy solid line (1.8 pt) connects
-the per-budget median across those pairs, with 5 pt filled circles. Matching
+across all pool pairs at each budget; one heavy solid line (1.1 pt) connects
+the per-budget median across those pairs, with 3.8 pt filled circles. Matching
 pair IDs present at both tolerances count once in these summaries because the
 tighter set is nested in the 1% set. The sidecar keeps every pair's values and
 the tolerance flag, including both records of a pair present at both tolerances.
@@ -35,7 +40,7 @@ Budgets use the saved V100 nominal 25k, 50k, 100k and 200k bands; each summary
 is positioned at the median common_T of its contributing unique pairs. Filled
 bands have alpha 0.15 and no outline; they show the range across pool pairs,
 not uncertainty intervals. Circle markers have capability-coloured fill and
-a white edge. The two 2.7 x 1.45-inch panels have no inside legends; the shared
+a white edge. The two 2.7 x 1.15-inch panels have no inside legends; the shared
 5.5 x 0.3-inch fig5_legend.pdf sits above the panels. Only occupied budget bands
 are shown; connecting segments and filled bands are visual guides, with no
 interpolated observations, fitted slopes or new intervals. The set of pool pairs
@@ -148,8 +153,8 @@ def draw_panel(fig, rows, panel):
             x = [r["x"] for r in points]
             ax.fill_between(x, [r["min"] for r in points], [r["max"] for r in points],
                             color=COLORS[cap], alpha=.15, linewidth=0, zorder=1)
-            ax.plot(x, [r["median"] for r in points], color=COLORS[cap], lw=1.8, alpha=1,
-                    marker="o", ms=5, mfc=COLORS[cap], mec="white", mew=.6, ls="-", zorder=3)
+            ax.plot(x, [r["median"] for r in points], color=COLORS[cap], lw=1.1, alpha=1,
+                    marker="o", ms=3.8, mfc=COLORS[cap], mec=PALETTE["white"], mew=.6, ls="-", zorder=3)
     axes_defaults(ax)
     ax.set(xlabel="Budget (k tokens)", ylabel="Ratio (nats)", xlim=(0, 220), ylim=(-1, 8),
            xticks=[0, 100, 200], yticks=[0, 3, 6])
@@ -160,12 +165,12 @@ def draw_legend(fig):
     from matplotlib.patches import Patch
     handles = capability_handles()
     for handle in handles:
-        handle.set_linewidth(1.8)
+        handle.set_linewidth(1.1)
         handle.set_marker("o")
-        handle.set_markersize(5)
-        handle.set_markeredgecolor("white")
+        handle.set_markersize(3.8)
+        handle.set_markeredgecolor(PALETTE["white"])
         handle.set_markeredgewidth(.6)
-    handles.append(Patch(facecolor=".5", alpha=.15, linewidth=0, label="Range across pool pairs"))
+    handles.append(Patch(facecolor=PALETTE["reference"], alpha=.15, linewidth=0, label="Range across pool pairs"))
     return legend_strip(fig, handles)
 
 
@@ -174,7 +179,7 @@ def generate(root=ROOT):
         audit, plt = Artifacts(root), pyplot(root)
         rows, unavailable = build(audit)
         audit.rule("Figure 5 pools both matching tolerances (1% and 0.3%): one min/max band "
-                   "per capability, alpha 0.15, no outline; per-band medians 1.8 pt with 5 pt "
+                   "per capability, alpha 0.15, no outline; per-band medians 1.1 pt with 3.8 pt "
                    "filled circles and 0.6 pt white edges. Equal weight per unique pair_id/band; "
                    "nested tolerance duplicates count once. Both x and y are medians over "
                    "unique pairs per student/capability/band. Sidecars keep every pair and tolerance flag.")
@@ -193,9 +198,10 @@ def generate(root=ROOT):
                   for p, s in zip("ab", STUDENTS) if p not in unavailable]
         if panels:
             export(plt, audit, "drift", panels, CAPTION + "\n" + "\n".join(unavailable.values()),
-                   width=5.5, legend=("fig5_legend", LEGEND_SIZE, draw_legend, [], CAPTION))
-            print("Figure 5: min/max bands alpha 0.15; median lines 1.8 pt; "
-                  "filled circles 5 pt / white edges 0.6 pt; pooled tolerances.")
+                   width=5.5, legend=("fig5_legend", LEGEND_SIZE, draw_legend, [], CAPTION),
+                   preserve_legend=False)
+            print("Figure 5: min/max bands alpha 0.15; median lines 1.1 pt; "
+                  "filled circles 3.8 pt / white edges 0.6 pt; pooled tolerances.")
         else:
             for name in ("drift.png", "drift_files.json"):
                 path = output_path(root, "figs", name)

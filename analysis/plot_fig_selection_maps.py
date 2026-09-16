@@ -3,6 +3,11 @@
 from __future__ import annotations
 
 if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
+if __package__:
     from .paper_artifacts import ROOT, Artifacts, frozen_run, pyplot
     from .paper_figure_style import finish_panel, panel_axes, legend_strip, write_caption
     from .paper_panel_exports import ref, export
@@ -16,7 +21,7 @@ FREEZE = "results/v78-rule-confirm/freeze.json"
 OBJECTIVES = ("math", "code", "qa", "multi")
 METHODS = ("prune", "quant", "distill", "dense")
 # Preserve V80's categorical method palette and marker semantics.
-METHOD_COLORS = ("#2166ac", "#d97718", "#22834a", "#c4c4c4")
+METHOD_COLORS = tuple(SEMANTIC_METHOD_COLORS[m] for m in METHODS)
 PANEL_SIZES = {"a": (1.75, 1.5), **{p: (1.25, 1.5) for p in "bcd"}}
 LEGEND_SIZE = (5.5, .30)
 CAPTION = """Frozen selection maps on four fresh source states: (a) math,
@@ -25,9 +30,9 @@ CAPTION = """Frozen selection maps on four fresh source states: (a) math,
 budgets, from 20% through 100% of dense matrix storage in 5% increments.
 Row labels give Pythia parameter size / pretraining step (k=1,000).
 Cell colour is the frozen rule's predicted chosen method: pruning, quantization,
-distillation or dense. A white circle means the measured oracle method differs;
+distillation or dense. Cross-hatching and a hollow black circle mean the measured oracle method differs;
 unmarked cells agree at method level and need not agree at configuration level.
-The method colours and mismatch semantics reproduce V80 rule_maps_main.
+The chosen methods and mismatch identities reproduce V80 rule_maps_main.
 Selections, oracles and scores are read verbatim from V78 compare.json, with
 the chosen method/configuration checked against freeze.json. Nothing is refit,
 rescored or selected again. All 68 state-budget cells per objective are retained.
@@ -79,13 +84,14 @@ def build(audit):
         if seen != {(s, b) for s in states for b in budgets}:
             raise ValueError("Incomplete V78 grid")
     audit.rule("Reuse V80 rule_maps_main semantics: colour indexes (prune,quant,distill,dense); "
-               "white circle iff locked-rule.oracle_method_agreement is false. Direct V78 fields; "
+               "hollow black circle plus cross-hatching iff locked-rule.oracle_method_agreement is false. Direct V78 fields; "
                "freeze seal and frozen chosen method/configuration/score verified; no rule execution.")
     return rows
 
 
 def draw_panel(fig, rows, panel):
     import numpy as np
+    from matplotlib.patches import Rectangle
     from matplotlib.colors import ListedColormap
     ax = panel_axes(fig, PANEL_SIZES[panel], left=.72 if panel == "a" else .08,
                     bottom=.32, right=.04, top=.06)
@@ -94,7 +100,10 @@ def draw_panel(fig, rows, panel):
     for r in part:
         matrix[r["row"], r["column"]] = r["method_index"]
         if not r["oracle_agreement"]:
-            ax.plot(r["column"], r["row"], "o", mfc="white", mec="#111111", ls="", zorder=3,
+            ax.add_patch(Rectangle((r["column"]-.5, r["row"]-.5), 1, 1,
+                         facecolor=PALETTE["transparent"], edgecolor=darker(METHOD_COLORS[r["method_index"]]),
+                         hatch=HATCHES["oracle_differs"], linewidth=0, zorder=2))
+            ax.plot(r["column"], r["row"], "o", mfc=PALETTE["transparent"], mec=PALETTE["black"], color=PALETTE["black"], ls="", zorder=3,
                     clip_on=False)
     ax.imshow(matrix, cmap=ListedColormap(METHOD_COLORS), vmin=-.5, vmax=3.5,
               extent=(-.5, 16.5, 3.5, -.5),
@@ -112,7 +121,7 @@ def draw_panel(fig, rows, panel):
         label.set_ha("left" if tick == 0 else "right")
     ax.set_xticks(np.arange(-.5, 17), minor=True)
     ax.set_yticks(np.arange(-.5, 4), minor=True)
-    ax.grid(which="minor", color="white", lw=.6, alpha=.6)
+    ax.grid(which="minor", color=PALETTE["white"], lw=.6, alpha=.6)
     ax.tick_params(which="both", length=0)
     ax.set(xlim=(-.5, 16.5), ylim=(3.5, -.5), xlabel="Storage budget (%)")
     for spine in ax.spines.values():
@@ -124,7 +133,7 @@ def draw_legend(fig):
     from matplotlib.lines import Line2D
     from matplotlib.patches import Patch
     handles = [Patch(facecolor=c, label=m) for c, m in zip(METHOD_COLORS, ("Prune", "Quant", "Distill", "Dense"))]
-    handles += [Line2D([], [], marker="o", mfc="white", mec="#111111", ls="", label="Oracle differs")]
+    handles += [Line2D([], [], marker="o", mfc=PALETTE["transparent"], mec=PALETTE["black"], color=PALETTE["black"], ls="", label="Oracle differs")]
     return legend_strip(fig, handles)
 
 

@@ -47,16 +47,18 @@ def test_three_bands_three_median_lines_and_no_inside_legend(panel):
     try:
         ax = drift.draw_panel(fig, rows, panel)
         check_artists(fig)
-        assert tuple(fig.get_size_inches()) == (2.7, 1.45)
+        assert tuple(fig.get_size_inches()) == (2.7, 1.15)
         assert ax.get_xlim() == (0, 220) and ax.get_ylim() == (-1, 8)
+        assert list(ax.get_xticks()) == [0, 100, 200]
+        assert list(ax.get_yticks()) == [0, 3, 6]
         assert len(ax.lines) == 4  # Three medians and the zero reference only.
         assert len(ax.collections) == 3
-        heavy = [line for line in ax.lines if line.get_linewidth() == 1.8]
+        heavy = [line for line in ax.lines if line.get_marker() == "o"]
         assert len(heavy) == 3
-        assert all(line.get_marker() == "o" and line.get_markersize() == 5
+        assert all(line.get_marker() == "o" and line.get_markersize() == 3.8
                    and line.get_linestyle() == "-" and line.get_alpha() == 1
                    and line.get_markerfacecolor() == line.get_color()
-                   and line.get_markeredgecolor() == "white" for line in heavy)
+                   and line.get_markeredgecolor() == style.PALETTE["white"] for line in heavy)
         for cap, line, band in zip(drift.CAPS, heavy, ax.collections):
             assert line.get_color() == drift.COLORS[cap]
             pairs = {(r["band"], r["pair_id"]): r for r in rows
@@ -92,3 +94,41 @@ def test_drift_legend_strip_has_capabilities_and_range_entry():
             "Math", "Code", "QA", "Range across pool pairs"]
     finally:
         plt.close(fig)
+
+
+def test_drift_export_preserves_legend_and_aligns_short_panels(monkeypatch):
+    import hashlib
+    import json
+    from analysis import paper_panel_exports as exports
+    from analysis.paper_artifacts import ROOT, output_path
+    from paper_generator_checks import check_access
+
+    legend = output_path(ROOT, "figs", "fig5_legend.pdf")
+    before = hashlib.sha256(legend.read_bytes()).hexdigest()
+    save, combine = exports.save_panel, exports.combine_panels
+    rectangles = []
+
+    def inspect(fig, stem, kind, audit, records, **kwargs):
+        check_artists(fig)
+        if fig.axes:
+            assert tuple(fig.get_size_inches()) == (2.7, 1.15)
+            rectangles.append(tuple(fig.axes[0].get_position().bounds))
+        save(fig, stem, kind, audit, records, **kwargs)
+
+    def inspect_combined(plt, specs, size):
+        fig = combine(plt, specs, size)
+        check_artists(fig)
+        assert tuple(size) == (5.5, 1.45)
+        assert fig.axes[0].get_position().bounds == fig.axes[1].get_position().bounds
+        return fig
+
+    monkeypatch.setattr(exports, "save_panel", inspect)
+    monkeypatch.setattr(exports, "combine_panels", inspect_combined)
+    _, audit, access = drift.generate()
+    check_access(audit, access)
+    assert len(rectangles) == 2 and rectangles[0] == rectangles[1]
+    assert legend.read_bytes().startswith(b"%PDF-")
+    assert str(legend) in access[1]  # Palette changes must refresh the legend too.
+    for panel in "ab":
+        sidecar = json.loads(output_path(ROOT, "figs", f"fig5_{panel}_data.json").read_text())
+        assert sidecar["axes"][0]["rectangle"] == list(rectangles[0])

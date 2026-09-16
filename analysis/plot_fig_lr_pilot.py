@@ -3,29 +3,36 @@
 from __future__ import annotations
 
 if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
+if __package__:
     from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
-    from .paper_figure_style import finish_panel, panel_axes
+    from .paper_figure_style import finish_panel, panel_axes, position_row_axes, row_axis_style
     from .paper_panel_exports import ref, axes_defaults, export
 else:
     from paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
-    from paper_figure_style import finish_panel, panel_axes
+    from paper_figure_style import finish_panel, panel_axes, position_row_axes, row_axis_style
     from paper_panel_exports import ref, axes_defaults, export
 
 STUDENTS = ("gemma3-1b", "gemma3-4b")
 RATES = ("5e-5", "1e-4", "2e-4")
 PANEL_SIZE = (1.8, 1.35)
 CAPTION = """Learning-rate pilot for Gemma-3 1B (dashed) and 4B (solid).
-Colour identifies capability, using the Figure 1 palette. The x axis is the
+Colour identifies capability, using the Figure 3 palette. The x axis is the
 configured peak learning rate encoded in the run name, not the decayed lr field
 at the checkpoint. The y axis is the saved delta field at the final positive
 update, with positive values indicating higher loss than the initial student.
 All six pilots use full teacher data with 75 examples per domain and data seed
 11; their final saved update is 8, at 37,903 processed input tokens. These are
 development pilots, with one run per student/rate and no uncertainty estimate.
-Panel (c) is 1.8 x 1.35 inches, the third panel in the 5.5-inch Figure 1 row.
-Lines are 1.5 pt and markers are 5 pt. The complete
+Panel (c) is 1.8 x 1.35 inches, the third panel in the 5.5-inch Figure 3 row.
+Lines are 1.1 pt and markers are 3.8 pt. The complete
 capability/distribution/student/seed key is fig1_legend.pdf above the panels;
 the LR ticks give the configured rates and the markers denote checkpoints.
+The measured axes rectangle and compact numeric tick format match panels (a)/(b);
+the pilot retains its own loss-change range.
 """
 
 
@@ -58,29 +65,34 @@ def build(audit):
     return rows
 
 
-def draw_panel(fig, rows):
-    from matplotlib.ticker import NullLocator
+def draw_panel(fig, rows, rectangle=None):
     ax = panel_axes(fig, PANEL_SIZE, left=.35, bottom=.30, right=.07)
     for student, ls in zip(STUDENTS, ("--", "-")):
         for cap in CAPS:
             part = sorted((r for r in rows if r["student"] == student and r["capability"] == cap),
                           key=lambda r: r["learning_rate"])
             ax.plot([r["learning_rate"] for r in part], [r["delta"] for r in part],
-                    color=COLORS[cap], ls=ls, marker="o", lw=1.5, ms=5)
+                    color=COLORS[cap], ls=ls, marker="o", lw=1.1, ms=3.8)
     axes_defaults(ax)
     ax.set(xscale="log", xlabel="Peak learning rate", ylabel="Loss change (nats)",
            xlim=(4.3e-5, 2.35e-4), ylim=(-1.45, .18))
-    ax.set_xticks([float(r) for r in RATES], ["5e−5", "1e−4", "2e−4"])
+    ax.set_xticks([float(r) for r in RATES])
     ax.set_yticks([-1, 0])
-    ax.xaxis.set_minor_locator(NullLocator())
-    return finish_panel(ax)
+    row_axis_style(ax)
+    finish_panel(ax)
+    return position_row_axes(ax, rectangle) if rectangle is not None else ax
 
 
 def generate(root=ROOT):
     with frozen_run(root) as access:
         audit, plt = Artifacts(root), pyplot(root)
         rows = build(audit)
-        export(plt, audit, "lr_pilot", [("fig1_c", PANEL_SIZE, lambda f: draw_panel(f, rows), rows, CAPTION)], CAPTION)
+        if __package__:
+            from . import plot_fig_responses_v2 as responses
+        else:
+            import plot_fig_responses_v2 as responses
+        rectangle = responses.row_rectangle(responses.build(audit), plt, rows)
+        export(plt, audit, "lr_pilot", [("fig1_c", PANEL_SIZE, lambda f: draw_panel(f, rows, rectangle), rows, CAPTION)], CAPTION)
         return rows, audit, access
 
 

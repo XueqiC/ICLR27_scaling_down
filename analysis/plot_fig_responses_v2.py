@@ -2,6 +2,11 @@
 """Matched-budget observed responses from the canonical, frozen A1 table."""
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import sys
 sys.dont_write_bytecode = True
 
@@ -20,9 +25,9 @@ PANEL_SIZE = (1.8, 1.35)
 LEGEND_SIZE = (5.5, .42)
 FIGSIZE = (5.5, 1.77)
 if __package__:
-    from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels
+    from .paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 else:
-    from paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels
+    from paper_figure_style import apply_style, finish_panel, panel_axes, legend_strip, save_panel, write_caption, combine_panels, measure_row_rectangle, position_row_axes, row_axis_style
 
 CAPTION = """Capability responses (a) and fresh QA distributions (b). Positive = worse:
 positive loss change means higher loss than the student's own initial state.
@@ -41,7 +46,9 @@ The complete shared key is supplied separately as fig1_legend.pdf: colours for
 all capabilities and distributions, student line styles, and S1/S2 for the two
 registered pool seeds. The learning-rate pilot (c) uses the same student styles.
 All three 1.8 x 1.35-inch panels form one row at 5.5-inch text width, with the
-shared legend above. Data lines are 1.5 pt and seed markers are 5 pt.
+shared legend above. All three axes use the same measured rectangle and compact
+numeric tick format; (a) and (b) share their loss-change range and ticks.
+Data lines are 1.1 pt and seed markers are 3.8 pt.
 """
 
 
@@ -90,11 +97,11 @@ def build(audit):
     return result
 
 
-def draw_panel(fig, rows, panel):
-    from matplotlib.ticker import MaxNLocator
+def draw_panel(fig, rows, panel, rectangle=None):
     ax = panel_axes(fig, PANEL_SIZE, left=.35, bottom=.30, right=.07)
     series = CAPS if panel == "left" else SCOPES
-    for c, color in zip(series, COLORS.values()):
+    for c in series:
+        color = COLORS[c] if panel == "left" else QA_COLORS[c]
         for student, style in zip(STUDENTS, STYLES):
             subset = [r for r in rows if r["panel"] == panel and r["series"] == c and r["student"] == student]
             rungs = defaultdict(list)
@@ -107,40 +114,61 @@ def draw_panel(fig, rows, panel):
                             for part in rungs.values())
             if points:
                 ax.plot([x for x, _ in points], [y for _, y in points],
-                        linestyle=style, color=color, lw=1.5, alpha=.9)
+                        linestyle=style, color=color, lw=1.1, alpha=.9)
             for parity, marker in ((1, "o"), (0, "s")):
                 line = sorted((r for r in subset if r["pool_seed"] % 2 == parity), key=lambda r: r["reuse"])
                 ax.plot([r["reuse"] for r in line], [r["delta"] for r in line],
-                        linestyle="none", marker=marker, ms=5, color=color, alpha=.85)
-    ax.axhline(0, color=".5", lw=1.1)
+                        linestyle="none", marker=marker, ms=3.8, color=color, alpha=.85)
+    ax.axhline(0, color=PALETTE["reference"], lw=1.1)
     ax.set(xlabel="Reuse ratio", ylabel="Loss change (nats)")
     ax.set_xticks([4, 8, 12])
-    ax.yaxis.set_major_locator(MaxNLocator(4, integer=True))
-    ax.grid(alpha=.15)
-    return finish_panel(ax)
+    # One range over both readouts, retaining all observed seed extrema.
+    values = [r["delta"] for r in rows]
+    lo, hi = min(values), max(values)
+    padding = .05*(hi-lo)
+    ax.set_ylim(lo-padding, hi+padding)
+    ax.set_yticks([0, 3, 6])
+    row_axis_style(ax)
+    finish_panel(ax)
+    return position_row_axes(ax, rectangle) if rectangle is not None else ax
 
 
 def draw_legend(fig):
     from matplotlib.lines import Line2D
-    colours = [Line2D([], [], color=color, lw=1.5, label=name)
-               for names in (("Math", "Code", "QA"), ("2Wiki", "MuSiQue", "TriviaQA"))
-               for color, name in zip(COLORS.values(), names)]
-    handles = [Line2D([], [], color=".25", ls=style, lw=1.5, label=student)
+    colours = [Line2D([], [], color=color, lw=1.1, label=name)
+               for names, colors in ((("Math", "Code", "QA"), COLORS.values()),
+                                     (("2Wiki", "MuSiQue", "TriviaQA"), QA_COLORS.values()))
+               for color, name in zip(colors, names)]
+    handles = [Line2D([], [], color=PALETTE["reference"], ls=style, lw=1.1, label=student)
                for student, style in zip(("270M", "1B", "4B"), STYLES)]
-    handles += [Line2D([], [], ls="", marker=m, ms=5, color=".25", label=label)
+    handles += [Line2D([], [], ls="", marker=m, ms=3.8, color=PALETTE["reference"], label=label)
                 for m, label in (("o", "S1"), ("s", "S2"))]
     return legend_strip(fig, colours + handles)
 
 
-def plot(rows, plt, pilot_rows):
+def row_rectangle(rows, plt, pilot_rows):
     if __package__:
         from .plot_fig_lr_pilot import draw_panel as draw_pilot
     else:
         from plot_fig_lr_pilot import draw_panel as draw_pilot
+    return measure_row_rectangle(plt, PANEL_SIZE, [
+        lambda f: draw_panel(f, rows, "left"),
+        lambda f: draw_panel(f, rows, "right"),
+        lambda f: draw_pilot(f, pilot_rows),
+    ])
+
+
+def plot(rows, plt, pilot_rows, rectangle=None):
+    if __package__:
+        from .plot_fig_lr_pilot import draw_panel as draw_pilot
+    else:
+        from plot_fig_lr_pilot import draw_panel as draw_pilot
+    if rectangle is None:
+        rectangle = row_rectangle(rows, plt, pilot_rows)
     return combine_panels(plt, [
-        ("panel", (0, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "left")),
-        ("panel", (1.85, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right")),
-        ("panel", (3.7, 0, *PANEL_SIZE), lambda f: draw_pilot(f, pilot_rows)),
+        ("panel", (0, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "left", rectangle)),
+        ("panel", (1.85, 0, *PANEL_SIZE), lambda f: draw_panel(f, rows, "right", rectangle)),
+        ("panel", (3.7, 0, *PANEL_SIZE), lambda f: draw_pilot(f, pilot_rows, rectangle)),
         ("legend", (0, PANEL_SIZE[1], *LEGEND_SIZE), draw_legend),
     ], FIGSIZE)
 
@@ -155,15 +183,16 @@ def generate(root=ROOT):
         else:
             import plot_fig_lr_pilot as pilot
         pilot_rows = pilot.build(audit)
+        rectangle = row_rectangle(rows, plt, pilot_rows)
         for letter, panel in zip("ab", ("left", "right")):
             apply_style("panel")
             fig = plt.figure(figsize=PANEL_SIZE)
-            draw_panel(fig, rows, panel)
+            draw_panel(fig, rows, panel, rectangle)
             save_panel(fig, f"fig1_{letter}", "panel", audit, [r for r in rows if r["panel"] == panel])
             write_caption(f"fig1_{letter}", audit, CAPTION)
             plt.close(fig)
         fig = plt.figure(figsize=PANEL_SIZE)
-        pilot.draw_panel(fig, pilot_rows)
+        pilot.draw_panel(fig, pilot_rows, rectangle)
         save_panel(fig, "fig1_c", "panel", audit, pilot_rows)
         write_caption("fig1_c", audit, pilot.CAPTION)
         plt.close(fig)
@@ -173,7 +202,7 @@ def generate(root=ROOT):
         save_panel(fig, "fig1_legend", "legend", audit, [])
         write_caption("fig1_legend", audit, CAPTION + pilot.CAPTION)
         plt.close(fig)
-        fig = plot(rows, plt, pilot_rows)
+        fig = plot(rows, plt, pilot_rows, rectangle)
         save_figure(fig, "responses_v2", audit)
         write_notes("responses_v2", audit, {"responses": rows, "lr_pilot": pilot_rows})
         write_caption("responses_v2", audit, CAPTION + pilot.CAPTION)

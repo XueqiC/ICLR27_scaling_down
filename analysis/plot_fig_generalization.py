@@ -7,6 +7,11 @@ they are never labelled as marginal MAE or per-cell prediction intervals.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import math
 import sys
 from collections import defaultdict
@@ -25,8 +30,8 @@ P53 = "results/v53-prune-dev/register.json"
 Q69 = "results/v69-quant-confirm/develop.json"
 D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
-GREEN, GREY = "#24835b", "#777777"
-MARKERS = {"math": "o", "code": "s", "qa": "D"}
+GREY = PALETTE["reference"]
+MARKERS = {c: "o" for c in CAPS}
 PANEL_SIZES = {"a": (2.2, 1.6), "b": (1.45, 1.6), "c": (1.85, 1.6)}
 KINDS = {"a": "double", "b": "panel", "c": "panel"}
 LEGEND_SIZE = (5.5, .42)
@@ -177,7 +182,7 @@ def build(audit):
                "loso_table[subset=all] for V53/V72; V69 loso.scores[*][cap].macro_mae for V69. "
                "V70 uses freeze.strongest_baseline[student][cap].method, never confirmation ranking.")
     audit.rule("V46 has no recorded development-selected baseline; V78 has no such baseline predictions "
-               "on its plotted cells. Keep these relation MAEs grey and label baseline unavailable. "
+               "on its plotted cells. Keep these relation MAEs capability-coloured and label baseline unavailable. "
                "Do not choose on test errors, transport the later V53 selection to V46, or call V78's "
                "v64-law a development-selected baseline. Split V46/V72 within the inside-range row to "
                "avoid pairing a subset baseline with a full-row relation MAE.")
@@ -190,7 +195,7 @@ def build(audit):
                "V70 or A5/A7 corner cells. No A2 holdout row existed in the cell figure; none is added "
                "and no A2 interval is transplanted. No refitting, resampling, or invented interval.")
     audit.rule("Corner rows are unchanged: signed prediction-minus-measurement on a separate symlog "
-               "axis, original capability colours, circles filled iff within the stored band, triangles "
+               "axis, capability colours, hollow prediction diamonds, and solid whiskers "
                "for the 4B development student. Whiskers are A5 registered +/-2-noise bands, not CIs. "
                "Primary QA additivity failed to reject. Source panel C (lower group in display panel c) shows only the registered additive "
                "corner predictions (zero); no frozen response-law predictions on fresh distributions exist.")
@@ -225,26 +230,26 @@ def draw_maes(ax, rows, panel, limits):
     for y, key in enumerate(order):
         part = [r for r in rows if r["panel"] == panel and (r["group"], r["stratum"]) == key]
         for r in part:
-            # In the narrow middle panel, row labels sit above each marker group.
-            yy = y + (.16 if panel == "B" else 0) + (CAPS.index(r["capability"]) - 1) * (.16 if panel == "B" else .30)
+            # Keep the true row coordinate; bounded display dodging is shared.
+            yy = y
             marker = MARKERS[r["capability"]]
-            color = GREEN if r["below_baseline"] else GREY
+            color = COLORS[r["capability"]]
             candidate, baseline = r["relation_mae"], r["baseline_mae"]
             if baseline is not None:
-                ax.plot([baseline, candidate], [yy, yy], color=".68", zorder=1)
-                ax.plot(baseline, yy, marker=marker, mfc="white", mec=GREY, ls="", zorder=3)
+                ax.plot([baseline, candidate], [yy, yy], color=color if r["below_baseline"] else GREY, zorder=1)
+                ax.plot(baseline, yy, marker=marker, mfc=PALETTE["white"], color=color, mec=color, ls="", zorder=3)
             if r["whisker"] is not None:
                 lo, hi = r["whisker"]
                 midpoint = (lo + hi) / 2
                 ax.errorbar(midpoint, yy, xerr=[[midpoint-lo], [hi-midpoint]],
                             fmt="none", color=color, lw=1.1, capsize=2, zorder=2)
-            ax.plot(candidate, yy, marker=marker, color=color, ls="", zorder=4)
+            ax.plot(candidate, yy, marker="D", mfc=PALETTE["transparent"], color=color, ls="", zorder=4)
         counts = {r["n"] for r in part}
         if len(counts) != 1:
             raise ValueError("A shared row count requires equal counts per capability")
         labels.append(row_label(*key))
         if y < len(order)-1:
-            ax.axhline(y+.5, color=".93", lw=.6, zorder=0)
+            ax.axhline(y+.5, color=PALETTE["background"], lw=.6, zorder=0)
     ax.set_xscale("log")
     ax.set_xlim(*limits)
     ax.xaxis.set_minor_formatter(NullFormatter())
@@ -263,16 +268,18 @@ def draw_corners(ax, rows):
     for y, group in enumerate(groups):
         part = [r for r in rows if r["group"] == group]
         for k, r in enumerate(part):
-            jitter = 0 if len(part) == 1 else -.26 + .52*k/(len(part)-1)
-            color = COLORS[r["capability"]]
+            jitter = 0
+            color = QA_COLORS.get(r["group"], COLORS[r["capability"]])
             dev = r["status"] == "development"
             lo, hi = r["residual_interval"]
             e = r["residual"]
-            ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=2, lw=1.1)
-            ax.plot(e, y+jitter, marker="^" if dev else "o", ls="", color=color,
-                    mfc=color if r["within"] else "white", alpha=.85)
-    ax.axvline(0, color=".5", lw=1.1)
-    ax.axhline(1.5, color=".7", lw=.6, zorder=0)
+            whisker = ax.errorbar(e, y+jitter, xerr=[[e-lo], [hi-e]], fmt="none", color=color, capsize=2, lw=1.1)
+            for segment in whisker.lines[2]:
+                segment.set_linestyle("-" if dev else "--")
+            ax.plot(e, y+jitter, marker="D", ls="", color=color,
+                    mfc=PALETTE["transparent"], alpha=.85)
+    ax.axvline(0, color=PALETTE["reference"], lw=1.1)
+    ax.axhline(1.5, color=PALETTE["grid"], lw=.6, zorder=0)
     ax.set_xscale("symlog", linthresh=.03)
     ax.set_xlim(-2.5, 2.5)
     ax.set_xticks([-1, 0, 1], labels=["−1", "0", "1"])
@@ -319,7 +326,7 @@ def draw_panel(fig, rows, panel):
             if text.get_text() == "4B development":
                 text.set_verticalalignment("center")
                 text.set_transform(text.get_transform() +
-                                   ScaledTranslation(.25, -.025, fig.dpi_scale_trans))
+                                   ScaledTranslation(.25, -.085, fig.dpi_scale_trans))
         ax.xaxis.label.set_verticalalignment("bottom")
         ax.xaxis.set_label_coords(.5, .025, transform=fig.transSubfigure if hasattr(fig, "transSubfigure") else fig.transFigure)
     return finish_panel(ax)
@@ -333,11 +340,11 @@ def draw_legend(fig):
         from paper_figure_style import legend_strip
     handles = [Line2D([], [], color=COLORS[c], marker=MARKERS[c], ls="",
                       label="QA" if c == "qa" else c.title()) for c in CAPS]
-    handles += [Line2D([], [], color=GREY, mfc="white", marker="o", ls="", label="Baseline"),
-                Line2D([], [], color=GREY, marker="o", ls="", label="Relation"),
-                Line2D([], [], color=GREEN, marker="o", ls="", label="Lower of pair"),
-                Line2D([], [], color=".25", marker="o", ls="", label="1B"),
-                Line2D([], [], color=".25", marker="^", ls="", label="4B development")]
+    handles += [Line2D([], [], color=GREY, mfc=PALETTE["white"], marker="o", ls="", label="Baseline"),
+                Line2D([], [], color=GREY, marker="D", mfc=PALETTE["transparent"], ls="", label="Relation"),
+                Line2D([], [], color=GREY, ls="-", label="Lower of pair"),
+                Line2D([], [], color=PALETTE["reference"], ls="--", label="1B"),
+                Line2D([], [], color=PALETTE["reference"], ls="-", label="4B development")]
     return legend_strip(fig, handles)
 
 
@@ -354,23 +361,22 @@ CAPTION_TEXT = """Generalization to new configurations of seen states (a), new s
 or students (b), and registered corner contrasts for both students and fresh
 evaluation distributions (c). MAE axes are logarithmic in native-token nats.
 Paired markers compare the relation and development-selected baseline on identical
-cells with equal cell weights. Math, Code and QA use circles, squares and diamonds
-in the MAE panels. Hollow markers denote baselines; filled relation markers are
-green only when the relation MAE is lower. Cell counts per capability are in
+cells with equal cell weights. Math, Code and QA retain their capability hues in the MAE panels. Hollow capability markers denote baselines; hollow diamonds denote frozen
+relation predictions. Both retain their capability colour. The connecting segment uses that capability colour when
+the relation MAE is lower, and reference grey otherwise. Cell counts per capability are in
 generalization_mae_pairs.md and the record sidecars. The Prune in, frozen and
 Prune out, frozen rows are frozen new-state pruning predictions inside and outside
 the fitted density range, respectively. These rows and the Pythia locked-rule row
 have no stored development-selected baseline: their unpaired relation markers
-remain grey. Prune in range and the two frozen pruning rows remain separate,
+retain their capability colour. Prune in range and the two frozen pruning rows remain separate,
 as do the 270M/1B new-pool budgets.
 Paired gain CIs are translated about the fixed baseline MAE: a stored
 baseline-minus-relation interval [lo, hi] is drawn at [baseline MAE - hi,
 baseline MAE - lo]. These are paired gain intervals, not marginal MAE confidence
 intervals; no intervals are averaged across students.
-Corner whiskers are registered ±2-noise bands, not CIs. Corners: filled in band /
-hollow outside. The combined corner panel uses signed prediction-minus-measurement with a
+Corner whiskers are registered ±2-noise bands, not CIs. Corner predictions use hollow diamonds; band membership remains in the sidecar. The combined corner panel uses signed prediction-minus-measurement with a
 symmetric-log axis and unchanged limits of -2.5 to 2.5 native-token nats.
-Circles denote 1B; triangles denote the 4B development student. Capability colours
+Dashed whiskers denote 1B; solid whiskers denote the 4B development student. Capability colours
 apply in (c), and all fresh-distribution contrasts below its thin separator are QA.
 Primary QA additivity: failed to reject. Math is size-dependent and code unresolved.
 No frozen response-law predictions on fresh evaluation distributions. Only
@@ -380,7 +386,7 @@ The three panels are 2.2, 1.45 and 1.85 inches wide and 1.6 inches high in one
 5.5-inch row. Panel (c) stacks 1B, 4B development, 2Wiki, MuSiQue and TriviaQA.
 The shared key is fig3_legend.pdf above the panels: Baseline, Relation and Lower of pair distinguish
 the paired MAEs; Lower of pair marks a relation MAE below its paired baseline.
-The 4B development entry identifies development-student triangles in (c).
+The 4B development entry identifies development-student solid whiskers in (c).
 Panel (b)'s row labels sit above their markers.
 """
 

@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """CPU-only paired input/form gains; three panels, each split math / code / QA."""
+
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
 import sys
 
 sys.dont_write_bytecode = True  # Keep generated files within the requested allowlist.
@@ -36,7 +41,7 @@ def short_test(group):
         else:
             regime = "int3" if "int3" in test else ("int4" if version == "v46" else "bits ≥4")
         return f"{version} {size}@{stage} · {regime}"
-    raise ValueError(f"No readable label for test: {test}")
+    return test  # Newer registered groups retain their full saved identity.
 
 
 def row(label, group, values, intervals=None, counts=None, comparators=None):
@@ -50,10 +55,10 @@ def draw_panel(fig, grid, title, rows, xlabel, annotate=None):
     for j, cap in enumerate(CAPS):
         ax = fig.add_subplot(grid[0, j])
         axes.append(ax)
-        ax.axvline(0, color="#444444", lw=.8, zorder=0)
+        ax.axvline(0, color=PALETTE["reference"], lw=.8, zorder=0)
         for y, rr in enumerate(rows):
             if y % 2 == 0:
-                ax.axhspan(y - .5, y + .5, color="#f5f5f5", zorder=-2)
+                ax.axhspan(y - .5, y + .5, color=PALETTE["background"], zorder=-2)
             gain = rr["values"][cap]
             color = COLORS[rr["method"]]
             marker = "o" if rr["origin"] == "P" else "s"
@@ -63,7 +68,7 @@ def draw_panel(fig, grid, title, rows, xlabel, annotate=None):
                 ax.hlines(y, lo, hi, color=color, lw=1)
                 ax.vlines([lo, hi], y - .11, y + .11, color=color, lw=.8)
             ax.plot(gain, y, marker=marker, ms=4.2, linestyle="none", color=color,
-                    markerfacecolor="white" if rr["origin"] == "P" else color, zorder=4)
+                    markerfacecolor=PALETTE["white"] if rr["origin"] == "P" else color, zorder=4)
             if annotate == "n":
                 label_x = max(gain, ci[1]) if ci is not None else gain
                 ax.annotate(f"n={rr['counts'][cap]}", (label_x, y), xytext=(5, 0), textcoords="offset points",
@@ -76,7 +81,7 @@ def draw_panel(fig, grid, title, rows, xlabel, annotate=None):
         ax.tick_params(axis="y", length=0)
         ax.set_title(CAP_LABEL[cap], fontsize=9, pad=5)
         ax.locator_params(axis="x", nbins=4)
-        ax.grid(axis="x", color="#ececec", lw=.5)
+        ax.grid(axis="x", color=PALETTE["background"], lw=.5)
         vals = [v for rr in rows for v in (rr["values"][cap], *rr["intervals"].get(cap, []))]
         lo, hi = min(0, min(vals)), max(0, max(vals))
         span = max(hi - lo, .015)
@@ -88,10 +93,13 @@ def draw_panel(fig, grid, title, rows, xlabel, annotate=None):
     return axes
 
 
-def main():
-    setup_style()
-    audit = Audit(2, "Paired improvements in input information and predictive form")
+def load_panels(audit):
     groups = audit.read("results/v52-prediction-tables/groups.json")
+    # Preserve the twenty tests in this historical appendix figure. Later V50
+    # additions belong to the multi-student confirmation, not this cohort.
+    groups = [g for g in groups if "v50-p2v2" not in g["src"]]
+    if len(groups) != 20:
+        raise ValueError("Expected the twenty original input/form test groups")
     v36 = audit.read("results/v36b-input-comparison/summary.json")
     v39 = audit.read("results/v39-distill-controlled/summary.json")
     v42 = audit.read("results/v42-prune-sameinput/summary.json")
@@ -177,27 +185,14 @@ def main():
                "The files enumerate source states but cannot establish statistically independent sources; "
                "n is explicitly labelled source states. The v36b narrative contains stale six-cell wording; "
                "counts come from its 9 unique records.cell values, not that prose.")
-    fig = plt.figure(figsize=(8.4, 13.6))
-    outer = fig.add_gridspec(3, 1, left=.32, right=.98, bottom=.055, top=.93,
-                            height_ratios=[len(panel_a), len(panel_b), len(panel_c)], hspace=.30)
-    grid_a = outer[0].subgridspec(1, 3, wspace=.18)
-    grid_b = outer[1].subgridspec(1, 3, wspace=.18)
-    grid_c = outer[2].subgridspec(1, 3, wspace=.18)
-    draw_panel(fig, grid_a, "A  Full vs no-D0", panel_a,
-               "MAE(no-D0) − MAE(full), nats/token; positive = full better", "n")
-    draw_panel(fig, grid_b, "B  Source-conditioned vs source-free", panel_b,
-               "MAE(strongest simple) − MAE(candidate), nats/token; positive = candidate better")
-    draw_panel(fig, grid_c, "C  Shared power vs A2 / A1 (same input)", panel_c,
-               "MAE(reference) − MAE(power), nats/token; positive = power better", "comparator")
-    legend = [Line2D([], [], marker="o", ls="", color=COLORS[m], label=m.capitalize())
-              for m in ("pruning", "quantization", "distillation")]
-    legend += [Line2D([], [], marker="o", mfc="white", color="black", ls="", label="P: frozen prospective"),
-               Line2D([], [], marker="s", color="black", ls="", label="L: leave-one-out")]
-    fig.legend(handles=legend, loc="upper center", bbox_to_anchor=(.5, .995), ncol=3, frameon=False)
-    fig.text(.5, .012, "n = evaluated source states (shared trajectories); intervals only where recorded. Each capability has its own x scale.",
-             ha="center", fontsize=8)
-    audit.save(fig, "input_form_gain")
-    audit.finish()
+    return panel_a, panel_b, panel_c
+
+def main():
+    if __package__:
+        from .plot_paper_appendix import generate
+    else:
+        from plot_paper_appendix import generate
+    generate("input_form_gain")
 
 
 if __name__ == "__main__":

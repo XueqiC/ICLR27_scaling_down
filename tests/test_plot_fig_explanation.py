@@ -63,28 +63,31 @@ def test_explanation_line_marker_whisker_and_jitter_sizes(panel):
         assert ax.get_legend() is None
         for line in ax.lines:
             if line.get_marker() in ("o", "s", "^", "D", "x"):
-                assert line.get_markersize() == (6 if line.get_marker() == "x" else 5)
+                assert line.get_markersize() == 3.8
         for container in ax.containers:
             if isinstance(container, ErrorbarContainer):
-                assert all(list(bars.get_linewidths()) == [1.3] for bars in container.lines[2])
-                assert all(cap.get_markersize() == 5 and cap.get_markeredgewidth() == 1.3
+                assert all(list(bars.get_linewidths()) == [1.1] for bars in container.lines[2])
+                assert all(cap.get_markersize() == 4 and cap.get_markeredgewidth() == .6
                            for cap in container.lines[1])
         if panel == "a":
+            references = [line for line in ax.lines if line.get_linestyle() in (":", "--")
+                          and list(line.get_ydata()) in ([0, 0], [1, 1])]
+            assert len(references) == 2
+            assert all(line.get_color() == style.PALETTE["reference"] for line in references)
             for i, profile in enumerate(data["profiles"]):
                 folds = [line for line in ax.lines if line.get_color() == gen.COLORS[profile["capability"]]
                          and line.get_marker() in ("o", "x")]
                 assert len(folds) == len(profile["folds"])
                 xs = [line.get_xdata()[0] for line in folds]
-                assert max(xs)-min(xs) == pytest.approx(.84)
-                assert len(set(xs)) == len(xs)
+                assert xs == [i] * len(xs)
                 assert [line.get_ydata()[0] for line in folds] == [r["p"] for r in profile["folds"]]
         elif panel == "b":
-            assert all(list(band.get_linewidths()) == [1.5] for band in ax.collections if isinstance(band, PolyCollection))
-            # The additive bars have no ErrorbarContainer; whisker caps remain 1.3 pt.
-            additive = [line for line in ax.lines if line.get_marker() == "|" and line.get_color() == ".2"]
+            assert all(list(band.get_linewidths()) == [.6] for band in ax.collections if isinstance(band, PolyCollection))
+            # Additive ticks have no ErrorbarContainer; shared cap widths still apply.
+            additive = [line for line in ax.lines if line.get_marker() == "|" and line.get_color() == style.PALETTE["reference"]]
             assert len(additive) == len(data["corners"])
-            assert all(line.get_markeredgewidth() == 1.5 for line in additive)
+            assert all(line.get_markeredgewidth() == .6 for line in additive)
         else:
-            assert len(ax.lines) == 3 and all(line.get_linewidth() == 1.5 for line in ax.lines)
+            assert len(ax.lines) == 3 and all(line.get_linewidth() == 1.1 for line in ax.lines)
     finally:
         plt.close(fig)

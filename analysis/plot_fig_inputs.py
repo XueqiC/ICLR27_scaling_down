@@ -4,6 +4,11 @@
 Reuse Fig. 2's row representation and audited reader, and Fig. 3's source-file
 loaders and matched density scoring. Only Panel A has stored intervals.
 """
+
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
 import sys
 
 sys.dont_write_bytecode = True
@@ -106,17 +111,17 @@ def load_panels(audit):
 
 def forest_axis(fig, bounds, labels, xlim, ticks):
     ax = fig.add_axes(bounds)
-    ax.axvline(0, color="#444444", lw=.8, zorder=1)
+    ax.axvline(0, color=PALETTE["reference"], lw=.8, zorder=1)
     for i in range(len(labels)):
         if i % 2 == 0:
-            ax.axhspan(i - .5, i + .5, color="#f5f5f5", zorder=-2)
+            ax.axhspan(i - .5, i + .5, color=PALETTE["background"], zorder=-2)
     ax.set_ylim(len(labels) - .5, -.5)
     ax.set_yticks(range(len(labels)), labels)
     ax.tick_params(axis="y", length=0, pad=3)
     ax.set_xlim(*xlim)
     ax.set_xticks(ticks)
     ax.tick_params(axis="x", length=2, pad=2)
-    ax.grid(axis="x", color="#ececec", lw=.5)
+    ax.grid(axis="x", color=PALETTE["background"], lw=.5)
     ax.spines["left"].set_visible(False)
     return ax
 
@@ -129,59 +134,15 @@ def plot_points(ax, rr, y, color, hollow=False, dodge=0):
             ax.hlines(yy, lo, hi, color=color, lw=.8)
             ax.vlines([lo, hi], yy - .055, yy + .055, color=color, lw=.7)
         ax.plot(rr["values"][cap], yy, marker=MARKERS[cap], ms=3.8, ls="none", color=color,
-                mfc="white" if hollow else color, mew=.8, zorder=3)
+                mfc=PALETTE["white"] if hollow else color, mew=.8, zorder=3)
 
 
 def main():
-    setup_style()
-    audit = AppendAudit("inputs", "Compact input/form figure: adding inputs, form, and capability shape")
-    panel_a, panel_b, panel_c = load_panels(audit)
-    fig = plt.figure(figsize=(6.5, 3.2))
-    ax_a = forest_axis(fig, [.125, .32, .205, .47], [r["label"] for r in panel_a], (-.48, 2.95), [0, 1, 2])
-    ax_b = forest_axis(fig, [.485, .32, .215, .47], list(dict.fromkeys(r["label"] for r in panel_b)),
-                       (-.30, .55), [-.2, 0, .2, .4])
-    ax_c = forest_axis(fig, [.82, .32, .165, .47], [r["label"] for r in panel_c], (-.25, .49), [-.2, 0, .2, .4])
-    for i, rr in enumerate(panel_a):
-        plot_points(ax_a, rr, i, COLORS[rr["method"]])
-        ax_a.get_yticklabels()[i].set_color(COLORS[rr["method"]])
-    for i, rr in enumerate(panel_b):
-        plot_points(ax_b, rr, i // 2, COLORS[rr["baseline"]], hollow=rr["baseline"] == "A2",
-                    dodge=-.035 if rr["baseline"] == "A2" else .035)
-    for i, rr in enumerate(panel_c):
-        plot_points(ax_c, rr, i, COLORS["distillation"])
-
-    for x, title, subtitle in ((.025, "A  adding inputs", "v36b · leave-one-stage-out"),
-                               (.385, "B  form on the same inputs", "MAE(A2/A1) − MAE(power)"),
-                               (.765, "C  capability-specific\nshape", "")):
-        fig.text(x, .975, title, fontsize=9, va="top", linespacing=1.05)
-        if subtitle:
-            fig.text(x, .865, subtitle, fontsize=8, va="bottom")
-    fig.text(.025, .22, "L0 added to {N0,D0}\nD0 added to {N0,L0}", fontsize=8, va="top", linespacing=1.15)
-    baseline_legend = [Line2D([], [], color=COLORS[b], marker="o", mfc="white" if b == "A2" else COLORS[b],
-                             ls="", ms=4, label=b) for b in ("A2", "A1")]
-    fig.legend(handles=baseline_legend, loc="upper left", bbox_to_anchor=(.405, .25), ncol=2,
-               frameon=False, handletextpad=.3, columnspacing=1, borderpad=0)
-    fig.text(.405, .13, "Pairs: 32k + 112k\nConfirm.: 3 states", fontsize=8, va="top", linespacing=1.1)
-    fig.text(.765, .22, "v56 · LOCO\nShared − per-capability MAE", fontsize=8, va="top", linespacing=1.15)
-    cap_legend = [Line2D([], [], color="#444444", marker=MARKERS[c], ls="", ms=4,
-                        label={"math": "Math", "code": "Code", "qa": "QA"}[c]) for c in CAPS]
-    fig.legend(handles=cap_legend, loc="lower left", bbox_to_anchor=(.012, .006), ncol=3,
-               frameon=False, handletextpad=.3, columnspacing=.7, borderpad=0)
-    fig.text(.985, .027, "MAE gain (nats/token); positive = better · A: stored 95% intervals",
-             ha="right", fontsize=8)
-    # Guard against silently clipping points/intervals if upstream results change.
-    for ax, rows in ((ax_a, panel_a), (ax_b, panel_b), (ax_c, panel_c)):
-        lo, hi = ax.get_xlim()
-        for rr in rows:
-            for cap in CAPS:
-                values = [rr["values"][cap], *rr["intervals"].get(cap, [])]
-                if not all(lo < value < hi for value in values):
-                    raise ValueError(f"Expand compact axis limits: {rr['label']}/{cap}: {values}")
-    audit.rule("Layout: 6.5 × 3.2 inches, all text >=8 pt at native size, 300 dpi PNG, embedded TrueType PDF; "
-               "method/reference colours from Fig. 1. Circle=Math, square=Code, triangle=QA. "
-               "Zero lines on every panel; positive gains favour added inputs, power, or per-capability shape, respectively.")
-    audit.save(fig, "input_form_compact")
-    audit.finish()
+    if __package__:
+        from .plot_paper_appendix import generate
+    else:
+        from plot_paper_appendix import generate
+    return generate("input_form_compact")
 
 
 if __name__ == "__main__":

@@ -7,6 +7,11 @@ The caption and text-width inclusion live in paper/paper/laws.tex.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import hashlib
 import json
 import os
@@ -29,11 +34,11 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 WIDTH, HEIGHT, FONT = 5.5, 2.68, 7.5
 CAPS = ("math", "code", "qa")
-CAP_COLORS = dict(zip(CAPS, ("#2166ac", "#c76b16", "#22834a")))
+CAP_COLORS = dict(zip(CAPS, (PALETTE["math"], PALETTE["code"], PALETTE["qa"])))
 CAP_MARKERS = dict(zip(CAPS, ("o", "s", "^")))
 QUANT_STATES = ("pythia-410m@step143000", "pythia-1.4b@step16000")
 STUDENTS = ("gemma3-270m", "gemma3-1b")
-STATE_COLORS = ("#71519a", "#b75c16")
+STATE_COLORS = (PALETTE["quantization"], PALETTE["quantization"])
 STATE_MARKERS = ("o", "s")
 INPUTS = {}
 
@@ -137,15 +142,15 @@ def legend(fig, handles, x, y, columns=1):
                       handlelength=1.25, handletextpad=.3, columnspacing=.65, labelspacing=.1)
 
 
-def key(label, color="#333333", marker=None, ls="None", **kwargs):
+def key(label, color=PALETTE["reference"], marker=None, ls="None", **kwargs):
     return Line2D([], [], label=label, color=color, marker=marker, linestyle=ls,
                   markersize=3.1, linewidth=1., **kwargs)
 
 
 def axes_at(fig, x, y, width, height):
     ax = fig.add_axes([x / WIDTH, y / HEIGHT, width / WIDTH, height / HEIGHT])
-    ax.axhline(0, color="#bdbdbd", lw=.5, zorder=0)
-    ax.grid(axis="y", color="#e8e8e8", lw=.45, zorder=0)
+    ax.axhline(0, color=PALETTE["reference"], lw=.5, zorder=0)
+    ax.grid(axis="y", color=PALETTE["background"], lw=.45, zorder=0)
     return ax
 
 
@@ -164,7 +169,7 @@ def panel_a(fig, reg, pred, losses):
     assert reg["selected_candidate"] == "power"
     densities = sorted(float(k) for k in losses if not k.startswith("_"))
     support = [d for state in reg["dev_states"] for d in state["densities"]]
-    ax.axvspan(min(support), max(support), color="#e7e1ce", alpha=.65, zorder=-1)
+    ax.axvspan(min(support), max(support), color=PALETTE["background"], alpha=.65, zorder=-1)
     d = np.linspace(min(support), 1., 401)
     for cap in CAPS:
         close(losses["1.0"][cap], target["L0"][cap], f"A dense/{cap}")
@@ -179,7 +184,7 @@ def panel_a(fig, reg, pred, losses):
                 color=color, lw=1., ls="--")
         ax.plot(densities, [losses[str(x)][cap] - losses["1.0"][cap] for x in densities],
                 linestyle="None", marker=CAP_MARKERS[cap], color=color, ms=3.5,
-                markeredgecolor="white", markeredgewidth=.3, zorder=5)
+                markeredgecolor=PALETTE["white"], markeredgewidth=.3, zorder=5)
     ax.set(xlim=(.535, 1.02), ylim=(-.85, 3.05), xticks=[.6, .8, 1.], yticks=[0, 1, 2, 3],
            xlabel="Retained density d", ylabel="ΔL (nats)")
     ax.text(.98, .96, "17-state range", transform=ax.transAxes, ha="right", va="top", fontsize=FONT)
@@ -210,20 +215,20 @@ def panel_b(fig, freeze, develop, compare):
                           f"B {tag}/{bit}/{group}/{method}")
                 # Directly use the pre-measurement predictions for the hollow marks.
                 ax.plot(group, row["predictions"]["same_input_interpolation"], "D", ms=4.,
-                        mfc="white", mec=STATE_COLORS[j], mew=.85, zorder=4)
+                        mfc=PALETTE["white"], mec=STATE_COLORS[j], mew=.85, zorder=4)
             groups = [32, 64, 128, 256, 512]
             values = [(conf if k in (32, 512) else dev)[tag, f"b{bit}_g{k}"]["dL"] for k in groups]
             ax.plot(groups, values, linestyle="None", marker=STATE_MARKERS[j], ms=2.9,
-                    color=STATE_COLORS[j], markeredgecolor="white", markeredgewidth=.25, zorder=5)
+                    color=STATE_COLORS[j], markeredgecolor=PALETTE["white"], markeredgewidth=.25, zorder=5)
         ax.plot(g, quant_curve(freeze, states[QUANT_STATES[0]], bit, g, "median"),
-                color="#555555", ls="--", lw=.95)
+                color=PALETTE["reference"], ls="--", lw=.95)
         log_ticks(ax, [32, 64, 128, 256, 512])
         ax.set_xlim(26, 640)
         limits = [(0, 5.4), (0, .52), (-.009, .135)][i]
         ax.set_ylim(*limits)
         ax.set_yticks([[0, 2, 4], [0, .2, .4], [0, .05, .10]][i])
         ax.text(.03, .96, f"{bit} bit", transform=ax.transAxes, va="top", fontsize=FONT,
-                bbox=dict(facecolor="white", edgecolor="none", pad=.2, alpha=.8))
+                bbox=dict(facecolor=PALETTE["white"], edgecolor="none", pad=.2, alpha=.8))
         if i < 2:
             ax.tick_params(labelbottom=False)
         else:
@@ -261,7 +266,7 @@ def panel_c(fig, freeze, compare):
                 actual_e = np.array([r["T_actual"] / du for r in rr])
                 # Thin, translucent connectors identify each actual three-point run.
                 ax.plot(actual_e, [r["actual"] for r in rr], marker=STATE_MARKERS[j], ms=2.35,
-                        color=CAP_COLORS[cap], mec="white", mew=.2, lw=.45, alpha=.60, zorder=3)
+                        color=CAP_COLORS[cap], mec=PALETTE["white"], mew=.2, lw=.45, alpha=.60, zorder=3)
                 baseline = freeze["strongest_baseline"][student][cap]["method"]
                 # E-only curves coincide across students and pools. Draw these once
                 # over the union domain; retain every DU-dependent frozen curve.
@@ -283,7 +288,7 @@ def panel_c(fig, freeze, compare):
                         e_plot = np.geomspace(min(r["E_planned"] for r in cr),
                                               max(r["T_actual"] / r["DU"] for r in cr), 151)
                     ax.plot(e_plot, distill_curve(freeze, cap, method, student, du, e_plot),
-                            color=CAP_COLORS[cap] if ls == "-" else ("#555555" if j == 0 else "#999999"),
+                            color=CAP_COLORS[cap] if ls == "-" else (PALETTE["reference"] if j == 0 else PALETTE["dense"]),
                             ls=ls, lw=1.15 if ls == "-" else 1., alpha=.85, zorder=4 if ls == "-" else 2)
         log_ticks(ax, [1, 2, 4])
         ax.set_xlim(.79, 4.65)
@@ -291,7 +296,7 @@ def panel_c(fig, freeze, compare):
         ax.set_yticks([[0, .1, .2], [0, .1, .2], [-1, 0]][i])
         ax.text(.03, .96, cap.title() if cap != "qa" else "QA", transform=ax.transAxes,
                 va="top", color=CAP_COLORS[cap], fontsize=FONT,
-                bbox=dict(facecolor="white", edgecolor="none", pad=.2, alpha=.8))
+                bbox=dict(facecolor=PALETTE["white"], edgecolor="none", pad=.2, alpha=.8))
         if i < 2:
             ax.tick_params(labelbottom=False)
         else:
@@ -383,45 +388,11 @@ def notes(font, count_a, support, count_b, marks_b, count_c, min_font):
 
 
 def main():
-    font = style()
-    reg = read("results/v53-prune-dev/register.json")
-    pred = read("results/v53-prune-dev/predictions_pythia-1.4b@step112000.json")
-    losses = read("results/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json")
-    qf = read("results/v69-quant-confirm/freeze.json")
-    qd = read("results/v69-quant-confirm/develop.json")
-    qc = read("results/v69-quant-confirm/compare.json")
-    df = read("results/v70-distill-confirm/freeze.json")
-    dc = read("results/v70-distill-confirm/compare.json")
-    assert pred["provenance"]["register_sha256"] == INPUTS["results/v53-prune-dev/register.json"]
-    assert qc["provenance"]["freeze_sha256"] == INPUTS["results/v69-quant-confirm/freeze.json"]
-    assert qf["provenance"]["develop_sha256"] == INPUTS["results/v69-quant-confirm/develop.json"]
-    assert dc["freeze_sha256"] == INPUTS["results/v70-distill-confirm/freeze.json"]
-    fig = plt.figure(figsize=(WIDTH, HEIGHT))
-    for x, title, subtitle in ((1.045, "A  Pruning", "1.4B / 112k"),
-                               (2.81, "B  Group quantization", "Math · ΔL (nats)"),
-                               (4.675, "C  Distillation", "U = 200 · δ (nats)")):
-        fig.text(x / WIDTH, 2.60 / HEIGHT, title, ha="center", va="center", fontsize=8.5)
-        fig.text(x / WIDTH, 2.435 / HEIGHT, subtitle, ha="center", va="center", fontsize=FONT)
-    count_a, support = panel_a(fig, reg, pred, losses)
-    count_b, marks_b = panel_b(fig, qf, qd, qc)
-    count_c = panel_c(fig, df, dc)
-    legend(fig, [key("Frozen relation", ls="-"), key("Median (A, B)", ls="--"),
-                 key("Strongest baseline (C)", ls=":"),
-                 key("Unseen g at freeze", marker="D", markerfacecolor="white")],
-           WIDTH / 2, .105, 4)
-    min_font = validate_figure(fig)
-    for p, digest in INPUTS.items():
-        assert hashlib.sha256((ROOT / p).read_bytes()).hexdigest() == digest, f"Input changed: {p}"
-    for ext in ("pdf", "png"):
-        out = ROOT / f"paper/paper/figs/final_relations.{ext}"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        kw = {"metadata": {"CreationDate": None, "ModDate": None}} if ext == "pdf" else {}
-        fig.savefig(out, dpi=300, **kw)  # Never tight-crop: preserve exact physical size.
-        print(f"WROTE {out}")
-    plt.close(fig)
-    notes(font, count_a, support, count_b, marks_b, count_c, min_font)
-    print(f"VERIFIED A: {count_a} densities/capability; B: {count_b} measurements, {marks_b} frozen diamonds; "
-          f"C: {count_c} trajectories, 108 responses. {WIDTH} × {HEIGHT} in; minimum {min_font:g} pt.")
+    if __package__:
+        from .plot_paper_appendix import generate
+    else:
+        from plot_paper_appendix import generate
+    return generate("final_relations")
 
 
 if __name__ == "__main__":

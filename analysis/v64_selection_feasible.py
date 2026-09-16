@@ -20,6 +20,11 @@ holding out the source would train on the very student outcomes being scored.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 try:
     from .paper_table_text import proofread_table
 except ImportError:  # Direct scripts and file-based imports.
@@ -755,7 +760,7 @@ def figure_bytes(summary, style, audit):
         font = font_manager.findfont(font_manager.FontProperties(family=plt.rcParams["font.serif"], weight=weight))
         audit.read(font)
     colors = [style.COLORS["pruning"], style.COLORS["quantization"],
-              style.COLORS["distillation"], "#c4c4c4", "#dddddd"]
+              style.COLORS["distillation"], PALETTE["grid"], PALETTE["grid"]]
     states = summary["states"]
     fig, axes = plt.subplots(1, 3, figsize=(11.4, 6.4), sharey=True)
     fig.subplots_adjust(left=.15, right=.985, top=.84, bottom=.14, wspace=.10)
@@ -768,29 +773,29 @@ def figure_bytes(summary, style, audit):
         for i, entry in enumerate(entries):
             y, x = divmod(i, len(BUDGETS))
             if not entry["policies"]["MAP"]["feasible"]:
-                ax.add_patch(Rectangle((x - .5, y - .5), 1, 1, facecolor="#dddddd",
-                                       edgecolor="#777777", hatch="xxx", lw=0))
+                ax.add_patch(Rectangle((x - .5, y - .5), 1, 1, facecolor=PALETTE["grid"],
+                                       edgecolor=PALETTE["dense"], hatch="xxx", lw=0))
                 continue
             if entry["no_clear_winner_heuristic"]:
                 ax.add_patch(Rectangle((x - .5, y - .5), 1, 1, facecolor="none",
-                                       edgecolor="#222222", hatch="///", lw=0))
+                                       edgecolor=PALETTE["reference"], hatch="///", lw=0))
             if not entry["policies"]["MAP"]["oracle_method_agreement"]:
-                ax.plot(x, y, "o", ms=2.8, mfc="white", mec="#111111", mew=.7)
+                ax.plot(x, y, "o", ms=2.8, mfc=PALETTE["white"], mec=PALETTE["reference"], mew=.7)
         ticks = range(0, len(BUDGETS), 2)
         ax.set_xticks(list(ticks), [f"{BUDGETS[i]:.2f}" for i in ticks], rotation=45, ha="right")
         ax.set_yticks(range(len(states)), [f"{s['size']} @ {s['step']//1000}k" for s in states])
         ax.set_xticks(np.arange(-.5, len(BUDGETS), 1), minor=True)
         ax.set_yticks(np.arange(-.5, len(states), 1), minor=True)
-        ax.grid(which="minor", color="white", lw=.35, alpha=.6)
+        ax.grid(which="minor", color=PALETTE["white"], lw=.35, alpha=.6)
         ax.tick_params(which="minor", bottom=False, left=False)
         # Plain text avoids mathtext subscripts being smaller than 8 pt.
         ax.set_xlabel("Storage budget r_max")
         ax.set_title(style.CAP_LABEL[cap], pad=9)
     axes[0].set_ylabel("Held-out source (size, pretraining stage)")
     handles = [Patch(facecolor=color, label=label) for color, label in zip(colors, ("Prune", "Quant", "Distill", "Dense"))]
-    handles += [Patch(facecolor="#dddddd", edgecolor="#777777", hatch="xxx", label="INFEASIBLE"),
-                Patch(facecolor="white", edgecolor="#222222", hatch="///", label="No clear winner (heuristic)"),
-                Line2D([], [], marker="o", ms=3, mfc="white", mec="#111111", ls="", label="Oracle method differs")]
+    handles += [Patch(facecolor=PALETTE["grid"], edgecolor=PALETTE["dense"], hatch="xxx", label="INFEASIBLE"),
+                Patch(facecolor=PALETTE["white"], edgecolor=PALETTE["reference"], hatch="///", label="No clear winner (heuristic)"),
+                Line2D([], [], marker="o", ms=3, mfc=PALETTE["white"], mec=PALETTE["reference"], ls="", label="Oracle method differs")]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(.53, .995), ncol=4,
                frameon=False, columnspacing=1.3, handlelength=1.7)
     fig.text(.53, .885, "Measured configurations only; grouped RTN and student coverage varies by state", ha="center", fontsize=9)
@@ -969,6 +974,13 @@ def validate_v60_preservation(summary, audit):
 
 
 def main():
+    if "--figures-only" in sys.argv:
+        if __package__:
+            from .plot_paper_appendix import generate
+        else:
+            from plot_paper_appendix import generate
+        generate("selection_feasible")
+        return
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-root", type=Path, default=OUT_ROOT,
                         help="Output directory within results/v64-selection-feasible/ (exclusive creation)")

@@ -15,7 +15,7 @@ EXPECTED_PANEL_SIZES = {
     "fig3_a": (2.2, 1.6), "fig3_b": (1.45, 1.6),
     "fig3_c": (1.85, 1.6), "fig3_legend": (5.5, .42),
     **{f"fig4_{p}": (1.8, 1.35) for p in "abc"}, "fig4_legend": (5.5, .3),
-    **{f"fig5_{p}": (2.7, 1.45) for p in "ab"},
+    **{f"fig5_{p}": (2.7, 1.15) for p in "ab"},
     "fig5_legend": (5.5, .3),
     "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
     "fig7_legend": (5.5, .3),
@@ -66,7 +66,8 @@ def check_artists(fig):
         assert ax.get_legend() is None, "All legends belong in strips above the panels"
         assert not any(ax.get_title(loc) for loc in ("left", "center", "right"))
         assert not ax.texts, "Titles and explanatory text belong in captions"
-        assert ax.get_xlabel() or (len(ax.get_xticklabels()) == 12 and
+        assert ax.get_xlabel() or ([t.get_text() for t in ax.get_xticklabels()] == ["Math", "Code", "QA"]
+                                  and all(t.get_rotation() == 0 for t in ax.get_xticklabels())) or (len(ax.get_xticklabels()) == 12 and
                                   all(t.get_rotation() == 45 for t in ax.get_xticklabels()))
         assert "\n" not in ax.get_xlabel() + ax.get_ylabel(), "Axis labels must stay on one line"
         canvas = ax.get_figure()
@@ -113,6 +114,7 @@ def test_shared_serif_bold_rcparams(kind, sizes):
 ])
 def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     saved = {}
+    rectangles = {}
     save = gen.save_panel
     combined_save = gen.save_figure
 
@@ -141,6 +143,8 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
                     assert len(ys) == 2
                 assert sizes == expected
                 assert all(t.get_weight() == "bold" for t in leg.get_texts())
+        if fig.axes:
+            rectangles[stem] = tuple(fig.axes[0].get_position().bounds)
         saved[stem] = tuple(fig.get_size_inches())
         save(fig, stem, kind, audit, records)
 
@@ -158,9 +162,15 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
     monkeypatch.setattr(gen, "save_panel", inspect_panel)
     monkeypatch.setattr(gen, "save_figure", inspect_combined)
     rows, _, _ = gen.generate()
+    if gen in (responses, explanation):
+        assert len(set(rectangles.values())) == 1
     for letter in letters:
         stem = f"{prefix}_{letter}"
         path = output_path(ROOT, "figs", f"{stem}.pdf")
+        if gen in (responses, explanation):
+            import json
+            sidecar = json.loads(path.with_name(f"{stem}_data.json").read_text())
+            assert sidecar["axes"][0]["rectangle"] == list(rectangles[stem])
         raw = path.read_bytes()
         assert raw.startswith(b"%PDF-") and len(raw) > 1000
         # Matplotlib's PDF page box is in physical points, independent of DPI.
@@ -181,10 +191,10 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         style.apply_style("panel")
         fig = plt.figure(figsize=gen.PANEL_SIZES["c"])
         ax = gen.draw_panel(fig, rows, "c")
-        points = [line for line in ax.lines if line.get_marker() in ("o", "^")]
+        points = [line for line in ax.lines if line.get_marker() == "D"]
         assert [t.get_text() for t in ax.get_yticklabels()] == ["1B", "4B development", "2Wiki", "MuSiQue", "TriviaQA"]
-        assert sum(line.get_marker() == "^" for line in points) == 6
-        assert sum(line.get_marker() == "o" for line in points) == 6
+        assert len(points) == 12
+        assert all(line.get_markerfacecolor() == style.PALETTE["transparent"] for line in points)
         assert ax.get_xlim() == (-2.5, 2.5)
         fig.canvas.draw()
         renderer = fig.canvas.get_renderer()
@@ -222,5 +232,70 @@ def test_expanded_legend_labels_fit_at_unchanged_font_size(gen, labels):
         check_artists(fig)
         assert {t.get_text() for t in legend.get_texts()} == labels
         assert all(t.get_fontsize() == 8.5 for t in legend.get_texts())
+    finally:
+        plt.close(fig)
+
+
+@pytest.mark.parametrize("gen", [responses, explanation])
+def test_harmonised_rows_have_explicit_matching_rectangles_and_sparse_ticks(gen):
+    from analysis.paper_artifacts import Artifacts
+    from analysis import plot_fig_lr_pilot as pilot
+    plt = pyplot()
+    audit = Artifacts()
+    if gen is responses:
+        rows = gen.build(audit)
+        pilot_rows = pilot.build(audit)
+        rectangle = gen.row_rectangle(rows, plt, pilot_rows)
+        fig = gen.plot(rows, plt, pilot_rows)
+    else:
+        data = dict(profiles=gen.curvature(audit), corners=gen.corners(audit),
+                    displacement=gen.displacement(audit))
+        rectangle = gen.row_rectangle(data, plt)
+        fig = gen.plot(data, plt)
+    try:
+        check_artists(fig)
+        assert fig.get_layout_engine() is None
+        for ax in fig.axes:
+            assert ax.get_position().bounds == pytest.approx(rectangle, abs=1e-14)
+            assert ax.get_position().bounds == fig.axes[0].get_position().bounds
+            assert ax.bbox.y0 == pytest.approx(fig.axes[0].bbox.y0)
+            assert ax.bbox.height == pytest.approx(fig.axes[0].bbox.height)
+            assert len(ax.get_xticks()) <= 4 and len(ax.get_yticks()) <= 4
+            assert ax.get_ylabel()
+            assert not ax.spines["top"].get_visible() and not ax.spines["right"].get_visible()
+            assert ax.spines["left"].get_linewidth() == .6
+            for axis in (ax.xaxis, ax.yaxis):
+                if len(axis.get_majorticklocs()) and not (gen is explanation and ax is fig.axes[0] and axis is ax.xaxis):
+                    assert axis.get_major_formatter().func is style.compact_number
+                for tick in axis.get_major_ticks():
+                    assert tick.tick1line.get_markersize() == 2
+                    assert tick.tick1line.get_markeredgewidth() == .6
+                for grid in axis.get_gridlines():
+                    assert grid.get_visible() and grid.get_alpha() == .15 and grid.get_linewidth() == .4
+            # Horizontal tick labels must fit without overlapping each other.
+            renderer = fig.canvas.get_renderer()
+            boxes = [t.get_window_extent(renderer) for t in ax.get_xticklabels()]
+            assert all(not a.overlaps(b) for i, a in enumerate(boxes) for b in boxes[i+1:])
+        if gen is responses:
+            a, b, c = fig.axes
+            assert a.get_ylim() == b.get_ylim()
+            assert list(a.get_yticks()) == list(b.get_yticks())
+            assert all(a.get_ylim()[0] < r["delta"] < a.get_ylim()[1] for r in rows)
+            assert c.get_ylim() == (-1.45, .18)
+            assert c.get_ylim() != a.get_ylim()
+        else:
+            a, b, c = fig.axes
+            assert a.get_xlabel() == ""
+            assert [t.get_text() for t in a.get_xticklabels()] == ["Math", "Code", "QA"]
+            assert all(t.get_rotation() == 0 for t in a.get_xticklabels())
+            assert b.get_xlabel() and c.get_xlabel()
+            assert [t.get_text() for t in b.get_yticklabels(minor=True)] == [
+                "1B QA", "1B Math", "1B Code", "4B QA", "4B Math", "4B Code"]
+            assert all(t.get_fontsize() == 7.5 for t in b.get_yticklabels(minor=True))
+            for tick in b.yaxis.get_minor_ticks():
+                assert tick.tick1line.get_markersize() == 2
+                assert tick.tick1line.get_markeredgewidth() == .6
+                assert tick.gridline.get_visible() and tick.gridline.get_alpha() == .15
+                assert tick.gridline.get_linewidth() == .4
     finally:
         plt.close(fig)

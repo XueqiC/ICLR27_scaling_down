@@ -8,6 +8,11 @@ Uses V86's shared table rows, full alternative sets, and provenance validation.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import hashlib
 import json
 import os
@@ -29,13 +34,16 @@ from matplotlib.patches import Patch
 from matplotlib.text import Text
 import numpy as np
 
-from v86_main_table import ROOT, OUT, CAPS, build_rows, row_record, unchanged, require
+if __package__:
+    from .v86_main_table import ROOT, OUT, CAPS, build_rows, row_record, unchanged, require
+else:
+    from v86_main_table import ROOT, OUT, CAPS, build_rows, row_record, unchanged, require
 
 # The PDF is already 0.9 of the style's 5.5-inch textwidth, so inclusion does not
 # shrink any glyph. Preserve the original 2.4-inch height and 7 pt lower bound.
 WIDTH, HEIGHT, FONT = 4.95, 2.4, 7.2
 CAP_LABELS = {"math": "Math", "code": "Code", "qa": "QA"}
-POSITIVE, NEGATIVE = "#2166ac", "#bd542c"
+POSITIVE, NEGATIVE = PALETTE["math"], PALETTE["grid"]
 
 
 def close(actual, expected, context):
@@ -92,7 +100,7 @@ def draw_panel(fig, index, bars, title, headers, limits, ticks):
         ax.text(-.23, y, header, transform=ax.get_yaxis_transform(), va="center", fontsize=FONT)
     for low, high in ((.25, 2.85), (4.25, 6.85)):
         for tick in ticks:
-            ax.vlines(tick, low, high, color="#3e3e3e" if tick == 0 else "#e8e8e8",
+            ax.vlines(tick, low, high, color=PALETTE["reference"] if tick == 0 else PALETTE["background"],
                       lw=.7 if tick == 0 else .45, zorder=0)
     annotations, diamonds = [], []
     for y, bar in zip(positions, bars):
@@ -101,7 +109,7 @@ def draw_panel(fig, index, bars, title, headers, limits, ticks):
         ax.barh(y, gain, height=.26, color=color, edgecolor=color, linewidth=.4, zorder=2)
         if bar["delivered_differs"]:
             diamond, = ax.plot(bar["delivered_gain"], y, marker="D", linestyle="none", markersize=4.4,
-                               markerfacecolor="none", markeredgecolor="#161616", markeredgewidth=.9, zorder=4)
+                               markerfacecolor="none", markeredgecolor=PALETTE["reference"], markeredgewidth=.9, zorder=4)
             diamonds.append((diamond, bar, y))
         annotation = ax.annotate(f"{bar['candidate_mae']:.3f} / {bar['alternative_mae']:.3f}",
                                 (gain, y), xytext=(0, 3.0), textcoords="offset points",
@@ -202,50 +210,11 @@ def write_notes(panels, inputs, font, minimum, scale, summary_sha):
 
 
 def main():
-    font = style()
-    rows, inputs = build_rows()
-    validate_stored_intervals(inputs)
-    summary_raw = (OUT/"summary.json").read_bytes()
-    summary = json.loads(summary_raw)
-    records = [row_record(r) for r in rows[:6]]
-    require(records == summary["main_rows"], "Figure/table definitions or numbers diverged; regenerate V86 table")
-    require(summary["input_sha256"] == {c.path: c.sha256 for c in inputs}, "Table input hashes changed")
-    panels = [[dict(row["capabilities"][c], row=row["row"], cap=c, n=row["n_per_capability"])
-               for row in records[start:start+2] for c in CAPS] for start in (0, 2, 4)]
-    style_text = (ROOT/"paper/paper/iclr2027_conference.sty").read_text()
-    textwidth = float(re.search(r"\\textwidth\s+([\d.]+)\s+true\s+in", style_text)[1])
-    scale = .9*textwidth/WIDTH
-    close(scale, 1, "0.9 textwidth inclusion scale")
-    fig = plt.figure(figsize=(WIDTH, HEIGHT))
-    fig.text(.5, 2.275/HEIGHT, "Frozen candidate evaluation", ha="center", va="center", fontsize=10)
-    specifications = [
-        ("Pruning", ("C35 · three checkpoints", "C52 · 2.8B repeat"), (-.68, .06), [-.6, -.3, 0]),
-        ("Grouped quantization", ("C44 · development states", "C46 · new state"), (-.49, .11), [-.4, -.2, 0]),
-        ("Distillation", ("C47 · Gemma-3-270M", "C48 · Gemma-3-1B"), (-.21, .018), [-.2, -.1, 0]),
-    ]
-    axes, annotations, diamonds = [], [], []
-    for i, (bars, spec) in enumerate(zip(panels, specifications)):
-        ax, labels, markers = draw_panel(fig, i, bars, *spec)
-        axes.append(ax); annotations.append(labels); diamonds.append(markers)
-    fig.text(.5, .275/HEIGHT, "Gain in nats/token; endpoint MAEs: candidate / alternative", ha="center", va="center", fontsize=FONT)
-    fig.legend(handles=[Patch(facecolor=NEGATIVE, label="Bar: frozen candidate gain"),
-                        Line2D([], [], marker="D", linestyle="none", markerfacecolor="none", markeredgecolor="#161616",
-                               markersize=4.4, label="Diamond: delivered rule gain")],
-               loc="center", bbox_to_anchor=(.5, .11/HEIGHT), frameon=False, ncol=2,
-               handlelength=1.1, handletextpad=.5, columnspacing=1.4, borderpad=0)
-    minimum = validate_figure(fig, axes, annotations, panels, diamonds, scale)
-    require(sum(len(m) for m in diamonds) == 11, "Expected 11 delivered-rule diamonds")
-    unchanged(inputs)
-    require((OUT/"summary.json").read_bytes() == summary_raw, "Table summary changed during plotting")
-    for extension in ("pdf", "png"):
-        path = ROOT/f"paper/paper/figs/frozen_candidates.{extension}"
-        require(not path.is_symlink(), f"Refusing symlink output: {path}")
-        fig.savefig(path, dpi=300)
-        print(f"WROTE {path.relative_to(ROOT)}")
-    write_notes(panels, inputs, font, minimum, scale, hashlib.sha256(summary_raw).hexdigest())
-    plt.close(fig)
-    unchanged(inputs)
-    print(f"PASS 18 signed bars, 11 hollow diamonds; table values identical; all six stored CI checks; min glyph {minimum:g} pt at 0.9 textwidth.")
+    if __package__:
+        from .plot_paper_appendix import generate
+    else:
+        from plot_paper_appendix import generate
+    return generate("frozen_candidates")
 
 
 if __name__ == "__main__":

@@ -164,9 +164,9 @@ def test_render_has_log_maes_shared_legend_and_descriptive_labels(generated):
             labels = [t.get_text() for t in ax.get_yticklabels()]
             assert len(labels) == len(order)
             for r in part:
-                matching = [line for line in ax.lines if line.get_marker() == gen.MARKERS[r["capability"]]
+                matching = [line for line in ax.lines if line.get_marker() == "D"
                             and len(line.get_xdata()) == 1 and line.get_xdata()[0] == r["relation_mae"]]
-                assert any(line.get_color() == (gen.GREEN if r["below_baseline"] else gen.GREY) for line in matching)
+                assert any(line.get_color() == gen.COLORS[r["capability"]] for line in matching)
         assert "unavailable" in gen.format_pairs(rows)
         assert len(gen.format_pairs(rows).splitlines()) == 29
     finally:

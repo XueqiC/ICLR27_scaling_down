@@ -7,6 +7,11 @@ results/v83-fig2/notes.md. All experimental results are read only.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 from dataclasses import dataclass
 import hashlib
 import json
@@ -29,7 +34,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WIDTH, HEIGHT, FONT = 5.5, 2.4, 7.2
 CAPS = ("math", "code", "qa")
 CAP_LABELS = {"math": "Math", "code": "Code", "qa": "QA"}
-POSITIVE, NEGATIVE = "#2166ac", "#bd542c"
+POSITIVE, NEGATIVE = PALETTE["math"], PALETTE["grid"]
 INPUTS = {}
 METHOD_LABELS = {
     "power": "Power form", "A2": "Per-density source regression",
@@ -271,7 +276,7 @@ def draw_panel(fig, index, bars, title, headers, limits, ticks):
         ax.text(-.23, y, header, transform=ax.get_yaxis_transform(), va="center", fontsize=FONT)
     for low, high in ((.25, 2.85), (4.25, 6.85)):
         for tick in ticks:
-            ax.vlines(tick, low, high, color="#3e3e3e" if tick == 0 else "#e8e8e8",
+            ax.vlines(tick, low, high, color=PALETTE["reference"] if tick == 0 else PALETTE["background"],
                       lw=.7 if tick == 0 else .45, zorder=0)
     annotations = []
     for y, bar in zip(positions, bars):
@@ -280,7 +285,7 @@ def draw_panel(fig, index, bars, title, headers, limits, ticks):
         if bar.ci95 is not None:
             lo, hi = bar.ci95
             ax.errorbar(bar.gain, y, xerr=[[bar.gain - lo], [hi - bar.gain]],
-                        fmt="none", ecolor="#242424", elinewidth=.8,
+                        fmt="none", ecolor=PALETTE["reference"], elinewidth=.8,
                         capsize=2, capthick=.7, zorder=3)
         # The pair sits immediately above the endpoint, leaving the bar and CI unobscured.
         annotation = ax.annotate(f"{bar.candidate_mae:.3f} / {bar.baseline_mae:.3f}",

@@ -7,6 +7,11 @@ order rows explicitly.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp, neutral_cmap
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp, neutral_cmap
+
 import argparse
 import json
 from pathlib import Path
@@ -149,7 +154,7 @@ def plot_v9_blocks(
             axis = axes[row, column]
             image = axis.imshow(
                 record["matrices"][metric],
-                cmap="coolwarm" if "cosine" in metric else "viridis",
+                cmap=neutral_cmap() if "cosine" in metric else neutral_cmap(),
                 norm=norms[metric],
                 interpolation="nearest",
                 aspect="equal",
@@ -168,8 +173,8 @@ def plot_v9_blocks(
             if column == 0:
                 axis.set_ylabel(record["tag"], fontsize=9, labelpad=8)
             for position in separators:
-                axis.axhline(position, color="black", linewidth=1.1)
-                axis.axvline(position, color="black", linewidth=1.1)
+                axis.axhline(position, color=PALETTE["black"], linewidth=1.1)
+                axis.axvline(position, color=PALETTE["black"], linewidth=1.1)
             axis.set_xlim(-0.5, len(names) - 0.5)
             axis.set_ylim(len(names) - 0.5, -0.5)
 

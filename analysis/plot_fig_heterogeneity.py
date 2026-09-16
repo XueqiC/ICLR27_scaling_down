@@ -2,6 +2,11 @@
 """Original heterogeneous twelve-model panel, frozen V51 values and loaders."""
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import math
 
 if __package__:
@@ -83,7 +88,7 @@ def draw_panel(fig, rows, panel):
     order = sorted((r for r in part if r["capability"] == "math"), key=lambda r: r["order"])
     for a, b in zip(order, order[1:]):
         if a["series"] != b["series"]:
-            ax.axvline(a["order"]+.5, color=".8", lw=.6, zorder=0)
+            ax.axvline(a["order"]+.5, color=PALETTE["grid"], lw=.6, zorder=0)
     ax.set_xticks(range(12), [r["label"] for r in order], rotation=45, ha="right", rotation_mode="anchor")
     ax.set(xlim=(-.65, 11.65), xlabel="", ylabel="Loss change (nats)")
     ax.tick_params(axis="x", labelsize=7.5)

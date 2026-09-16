@@ -2,6 +2,11 @@
 """Plot behavioral and geometric V11 damage curves for one model."""
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 import argparse
 import json
 import math
@@ -105,7 +110,7 @@ def plot_geometry_damage(
             loss_axis.plot(
                 positive_density,
                 positive_damage,
-                color="#b33b2e",
+                color=PALETTE["grid"],
                 marker="o",
                 linewidth=1.8,
                 markersize=4,
@@ -135,7 +140,7 @@ def plot_geometry_damage(
                 linewidth=1.5,
                 markersize=3.8,
             )
-        geometry_axis.axhline(0.0, color="black", alpha=0.2, linewidth=0.7)
+        geometry_axis.axhline(0.0, color=PALETTE["black"], alpha=0.2, linewidth=0.7)
         geometry_axis.set_title(f"{capability}: geometry", fontsize=11)
         geometry_axis.set_ylabel("retention / cosine")
         geometry_axis.set_xlabel("density")
@@ -148,7 +153,7 @@ def plot_geometry_damage(
             for axis in (loss_axis, geometry_axis):
                 axis.axvline(
                     float(cliff_density),
-                    color="#555555",
+                    color=PALETTE["reference"],
                     linestyle="--",
                     linewidth=1.0,
                     alpha=0.8,

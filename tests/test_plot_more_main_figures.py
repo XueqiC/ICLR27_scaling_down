@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from analysis import paper_panel_exports as exports
+from analysis import paper_figure_style as style
 from analysis import plot_fig_lr_pilot as lr
 from analysis import plot_fig_pythia_responses as pythia
 from analysis import plot_fig_drift as drift
@@ -22,7 +23,8 @@ from test_paper_figure_style import check_artists, EXPECTED_PANEL_SIZES
 
 GENERATORS = (lr, pythia, drift, heterogeneity, selection)
 PANELS = ("fig1_c", "fig4_a", "fig4_b", "fig4_c", "fig5_a", "fig5_b",
-          "fig4_legend", "fig8_a", "fig8_b", "fig8_legend", "fig7", "fig7_legend")
+          "fig4_legend", "fig5_legend", "fig8_a", "fig8_b", "fig8_legend",
+          "fig7_a", "fig7_b", "fig7_c", "fig7_d", "fig7_legend")
 PREVIEWS = ("lr_pilot", "pythia_responses", "drift", "heterogeneity", "selection_maps")
 
 
@@ -35,24 +37,47 @@ def generated(tmp_path_factory):
     saved, previews = {}, {}
     save, combine = exports.save_panel, exports.combine_panels
 
-    def inspect(fig, stem, kind, audit, records):
+    def inspect(fig, stem, kind, audit, records, **kwargs):
         from matplotlib.legend import Legend
         if stem in EXPECTED_PANEL_SIZES:
             assert tuple(fig.get_size_inches()) == EXPECTED_PANEL_SIZES[stem]
         check_artists(fig)
-        assert kind == "panel"
+        assert kind == ("legend" if stem.endswith("_legend") else style.kind_for_width(fig.get_size_inches()[0]))
+        tick, label, legend_size = style.SIZES[kind]
         renderer = fig.canvas.get_renderer()
         for ax in fig.axes:
-            assert ax.xaxis.label.get_fontsize() == ax.yaxis.label.get_fontsize() == 15
-            assert all(t.get_fontsize() == 14 for t in ax.get_xticklabels() + ax.get_yticklabels())
+            assert ax.xaxis.label.get_fontsize() == ax.yaxis.label.get_fontsize() == label
+            assert all(t.get_fontsize() == tick for t in ax.get_yticklabels())
+            assert all(t.get_fontsize() == (7.5 if stem.startswith("fig8_") else tick)
+                       for t in ax.get_xticklabels())
+            if stem.startswith("fig8_"):
+                assert ax.get_xlabel() == "" and ax.get_ylabel() == "Loss change (nats)"
+                assert all(t.get_rotation() == 45 and "-" not in t.get_text() for t in ax.get_xticklabels())
+                assert ax.get_xticklabels()[0].get_text() == "G3 270M"
+                assert ax.get_xticklabels()[-1].get_text() == "Q3 4B"
+                assert len(ax.patches) == 36
+                assert all(p.get_width() == pytest.approx(.85/3) and p.get_linewidth() == 0
+                           for p in ax.patches)
+                for i in range(12):
+                    bars = [ax.patches[i + 12*k] for k in range(3)]
+                    assert bars[-1].get_x()+bars[-1].get_width()-bars[0].get_x() == pytest.approx(.85)
+                    assert all(a.get_x()+a.get_width() == pytest.approx(b.get_x())
+                               for a, b in zip(bars, bars[1:]))
+                    if i < 11:
+                        assert ax.patches[i+1].get_x()-(bars[-1].get_x()+bars[-1].get_width()) == pytest.approx(.15)
             for legend in ax.findobj(Legend):
                 box = legend.get_window_extent(renderer)
                 assert ax.bbox.contains(box.x0, box.y0) and ax.bbox.contains(box.x1, box.y1)
-            assert all(line.get_markersize() >= 7 for line in ax.lines if line.get_marker() in ("o", "s", "^"))
+            assert all(line.get_markersize() == 3.8
+                       for line in ax.lines if line.get_marker() in ("o", "s", "^"))
+            if stem.startswith("fig4_") or stem == "fig1_c":
+                data_lines = [line for line in ax.lines if line.get_color() != ".55"]
+                assert all(line.get_linewidth() == 1.1
+                           for line in data_lines)
         for legend in fig.findobj(Legend):
-            assert all(t.get_fontsize() == 13 and t.get_weight() == "bold" for t in legend.get_texts())
+            assert all(t.get_fontsize() == legend_size and t.get_weight() == "bold" for t in legend.get_texts())
         saved[stem] = list(fig.get_size_inches())
-        save(fig, stem, kind, audit, records)
+        save(fig, stem, kind, audit, records, **kwargs)
 
     def inspect_preview(plt, panels, size):
         fig = combine(plt, panels, size)
@@ -60,6 +85,9 @@ def generated(tmp_path_factory):
         if size[0] == 5.5:
             data_panels = [s for s in fig.subfigs if s.axes]
             assert max(s.bbox.y0 for s in data_panels)-min(s.bbox.y0 for s in data_panels) < .5
+            strips = [s for s in fig.subfigs if s.legends]
+            assert len(strips) == 1
+            assert strips[0].bbox.y0 >= max(s.bbox.y1 for s in data_panels)-.5
         previews[len(previews)] = size
         return fig
 
@@ -164,6 +192,12 @@ def test_drift_uses_saved_ratios_both_tolerances_and_no_trajectory_reads(generat
         broad = {r["pair_id"] for r in part if r["tolerance"] == .01}
         assert tight and tight < broad
     assert "zero exactly matched" in drift.CAPTION
+    directory = output_path(ROOT, "figs")
+    for panel in "ab":
+        sidecar = json.loads((directory / f"fig5_{panel}_data.json").read_text())
+        assert sidecar["records"] == [r for r in rows if r["panel"] == panel]
+    assert "Both matching tolerances (1% and 0.3%) are pooled" in drift.CAPTION
+    assert "sidecar keeps every pair" in drift.CAPTION
 
 
 @pytest.mark.parametrize("section,field", [("fixed_budget", "raw_ratio"), ("fixed_budget", "common_T"),
@@ -215,13 +249,38 @@ def test_selection_maps_match_all_v80_cells_and_oracle_marks(generated, frozen):
     from analysis.paper_figure_style import apply_style
     plt = pyplot()
     apply_style("panel")
-    fig = plt.figure(figsize=selection.PANEL_SIZE)
-    ax = selection.draw_panel(fig, rows)
-    assert len(fig.axes) == 1 and len(ax.images) == 4
-    assert len(ax.get_yticklabels()) == 4
-    assert sum(line.get_marker() == "o" for line in ax.lines) == 20
-    assert all(image.get_array().shape == (4, 17) for image in ax.images)
-    plt.close(fig)
+    vertical = []
+    for panel, mismatches in zip("abcd", (1, 3, 16, 0)):
+        fig = plt.figure(figsize=selection.PANEL_SIZES[panel])
+        try:
+            ax = selection.draw_panel(fig, rows, panel)
+            check_artists(fig)
+            assert len(fig.axes) == 1 and len(ax.images) == 1
+            assert len(ax.get_yticklabels()) == (4 if panel == "a" else 0)
+            assert list(ax.get_yticks()) == [0, 1, 2, 3]
+            assert ax.get_ylim() == (3.5, -.5)
+            assert ax.get_xlabel() == "Storage budget (%)"
+            assert [t.get_text() for t in ax.get_xticklabels()] == ["20", "100"]
+            assert sum(line.get_marker() == "o" for line in ax.lines) == mismatches
+            matrix = ax.images[0].get_array()
+            assert matrix.shape == (4, 17)
+            for r in rows:
+                if r["panel"] == panel:
+                    assert matrix[r["row"], r["column"]] == r["method_index"]
+            vertical.append((ax.bbox.y0/fig.dpi, ax.bbox.y1/fig.dpi))
+        finally:
+            plt.close(fig)
+    assert all(bounds == pytest.approx(vertical[0]) for bounds in vertical)
+    directory = output_path(ROOT, "figs")
+    for panel in "abcd":
+        sidecar = json.loads((directory / f"fig7_{panel}_data.json").read_text())
+        assert sidecar["records"] == [r for r in rows if r["panel"] == panel]
+    manifest = json.loads((directory / "selection_maps_files.json").read_text())
+    assert {f["file"] for f in manifest} == {
+        "fig7_a.pdf", "fig7_b.pdf", "fig7_c.pdf", "fig7_d.pdf", "fig7_legend.pdf", "selection_maps.png"}
+    assert not (directory / "fig7.pdf").exists()
+    caption = " ".join((directory / "fig7_caption.txt").read_text().split())
+    assert "(a) math, (b) code, (c) question answering, (d) largest loss increase across the three" in caption
 
 
 @pytest.mark.parametrize("gen", GENERATORS)

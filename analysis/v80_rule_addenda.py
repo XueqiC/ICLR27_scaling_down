@@ -9,6 +9,11 @@ V78 inputs, including their directory metadata inventory, are checked unchanged.
 """
 from __future__ import annotations
 
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
 try:
     from .paper_table_text import proofread_table
 except ImportError:  # Direct scripts and file-based imports.
@@ -63,7 +68,7 @@ METHODS = v64.METHODS
 TITLES = {"math": "Math", "code": "Code", "qa": "QA (2Wiki)", "multi": "Multi (max ΔL)"}
 TABLE_LABELS = {**TITLES, "multi": "Multi"}
 COLORS = (style.COLORS["pruning"], style.COLORS["quantization"],
-          style.COLORS["distillation"], "#c4c4c4")
+          style.COLORS["distillation"], PALETTE["grid"])
 METHOD_LABELS = ("Prune", "Quant", "Distill", "Dense")
 SYMBOLS = dict(zip(METHODS, ("^", "s", "D", "o")))
 FIG_NAMES = ("rule_maps_main", "rule_regret", "rule_maps_full")
@@ -499,12 +504,12 @@ def map_axis(ax, entries, states, policies, cap, *, full):
                 method = r["policies"][p]["method"]
                 matrix[y, x] = METHODS.index(method)
                 if full and r["candidate_sets"][p]["no_clear_winner_heuristic"]:
-                    ax.add_patch(Rectangle((x-.5, y-.5), 1, 1, facecolor="none", edgecolor="#222222",
+                    ax.add_patch(Rectangle((x-.5, y-.5), 1, 1, facecolor="none", edgecolor=PALETTE["reference"],
                                            hatch="///", lw=0, zorder=2))
                     n_hatches += 1
                 if full or method != r["oracle_method"]:
                     ax.plot(x, y, marker=SYMBOLS[r["oracle_method"]] if full else "o", ls="",
-                            ms=3 if full else 2.8, mfc="white", mec="#111111", mew=.65, zorder=3)
+                            ms=3 if full else 2.8, mfc=PALETTE["white"], mec=PALETTE["reference"], mew=.65, zorder=3)
                     n_markers += 1
     ax.imshow(matrix, cmap=ListedColormap(COLORS), vmin=-.5, vmax=3.5,
               aspect="auto", interpolation="nearest", zorder=0)
@@ -513,7 +518,7 @@ def map_axis(ax, entries, states, policies, cap, *, full):
     ax.set_yticks(range(len(matrix)))
     ax.set_xticks(np.arange(-.5, len(v64.BUDGETS), 1), minor=True)
     ax.set_yticks(np.arange(-.5, len(matrix), 1), minor=True)
-    ax.grid(which="minor", color="white", lw=.35, alpha=.6)
+    ax.grid(which="minor", color=PALETTE["white"], lw=.35, alpha=.6)
     ax.tick_params(which="minor", bottom=False, left=False)
     ax.tick_params(axis="both", which="major", length=0, pad=3)
     ax.set_title(TITLES[cap], pad=6, fontsize=9)
@@ -583,7 +588,7 @@ def figures(compare, freeze, data):
                                                       for r in compare["cells"][cap]), "Wrong main markers")
     axes[0].set_yticklabels([state_label(s["tag"]) for s in states])
     fig.text(.57, .24, "Nominal storage budget (% of dense matrix storage)", ha="center", fontsize=8)
-    handles = method_handles() + [Line2D([], [], marker="o", ms=3, mfc="white", mec="#111111", ls="",
+    handles = method_handles() + [Line2D([], [], marker="o", ms=3, mfc=PALETTE["white"], mec=PALETTE["reference"], ls="",
                                          label="Oracle method differs")]
     legends = [fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.5, .025), ncol=5,
                           frameon=False, columnspacing=1., handlelength=1.1, handletextpad=.4)]
@@ -592,7 +597,7 @@ def figures(compare, freeze, data):
     fig, ax = plt.subplots(figsize=(3.1, 3.6))
     fig.subplots_adjust(left=.22, right=.97, top=.91, bottom=.37)
     x, width = np.arange(len(OBJECTIVES)), .18
-    bar_colors = (style.COLORS["measured"], style.COLORS["pruning"], style.COLORS["quantization"], "#a9a9a9")
+    bar_colors = (style.COLORS["measured"], style.COLORS["pruning"], style.COLORS["quantization"], PALETTE["grid"])
     floor = 1e-6
     annotations = []
     for i, (p, color) in enumerate(zip(POLICIES, bar_colors)):
@@ -614,7 +619,7 @@ def figures(compare, freeze, data):
     ax.set_xticks(x, ["Math", "Code", "QA\n(2Wiki)", "Multi"])
     ax.tick_params(axis="x", length=0, pad=4)
     ax.tick_params(axis="y", length=2, pad=2)
-    ax.grid(axis="y", color="#dddddd", lw=.5, zorder=0)
+    ax.grid(axis="y", color=PALETTE["grid"], lw=.5, zorder=0)
     legends = [fig.legend(handles=ax.get_legend_handles_labels()[0], labels=[POLICY_LABELS[p] for p in POLICIES],
                           loc="lower center", bbox_to_anchor=(.51, .015), ncol=1, frameon=False,
                           columnspacing=1., handlelength=1.1, handletextpad=.5)]
@@ -638,14 +643,14 @@ def figures(compare, freeze, data):
                                for r in compare["cells"][cap] for p in MAPS)
         require(details[cap]["hatched_cells"] == expected_hatches, "Wrong full-map hatching")
         for y in (1.5, 3.5, 5.5):
-            ax.axhline(y, color="white", lw=.8, zorder=4)
+            ax.axhline(y, color=PALETTE["white"], lw=.8, zorder=4)
     labels = [f"{state_label(s['tag'])} / {p}" for s in states for p in ("frozen", "source-cond.")]
     for ax in axes[:, 0]:
         ax.set_yticklabels(labels)
     fig.text(.61, .185, "Nominal storage budget (% of dense matrix storage)", ha="center", fontsize=8)
-    oracle_handles = [Line2D([], [], marker=SYMBOLS[m], ms=3.5, ls="", mfc="white", mec="#111111",
+    oracle_handles = [Line2D([], [], marker=SYMBOLS[m], ms=3.5, ls="", mfc=PALETTE["white"], mec=PALETTE["reference"],
                              label="Oracle " + label.lower()) for m, label in zip(METHODS, METHOD_LABELS)]
-    hatch = [Patch(facecolor="white", edgecolor="#222222", hatch="///", label="No clear winner (heuristic)")]
+    hatch = [Patch(facecolor=PALETTE["white"], edgecolor=PALETTE["reference"], hatch="///", label="No clear winner (heuristic)")]
     legends = [fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.53, bottom), ncol=ncol,
                           frameon=False, columnspacing=1.3, handlelength=1.5, handletextpad=.5)
                for handles, bottom, ncol in ((method_handles(), .115, 4), (oracle_handles, .065, 4), (hatch, .015, 1))]
@@ -654,6 +659,14 @@ def figures(compare, freeze, data):
 
 
 def main():
+    if "--figures-only" in sys.argv:
+        if __package__:
+            from .plot_paper_appendix import generate
+        else:
+            from plot_paper_appendix import generate
+        for name in ("rule_maps_main", "rule_maps_full", "rule_regret"):
+            generate(name)
+        return
     before = inventory()
     compare, freeze, initial, hashes = load_inputs()
     checks = validate(compare, freeze, initial)

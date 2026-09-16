@@ -13,11 +13,26 @@ import os
 from pathlib import Path
 import site
 import sys
+import tempfile
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 CAPS = ("math", "code", "qa")
-COLORS = {"math": "#2563a6", "code": "#c26a24", "qa": "#25836b"}
+if __package__:
+    from .paper_figure_style import CAPABILITY_COLORS as COLORS
+else:
+    from paper_figure_style import CAPABILITY_COLORS as COLORS
+MPL_CACHE = Path(tempfile.gettempdir()) / "scaling-down-law-mpl"
+# Physical point sizes for figures drawn at their final 5.5-inch print width.
+PRINT_RC = {
+    "font.size": 8.5, "axes.labelsize": 9, "axes.titlesize": 10,
+    "xtick.labelsize": 9, "ytick.labelsize": 9, "legend.fontsize": 8.5,
+    "axes.linewidth": .7, "lines.linewidth": 1.1,
+    "lines.markersize": 4, "lines.markeredgewidth": .8,
+    "xtick.major.width": .7, "ytick.major.width": .7,
+    "xtick.minor.width": .5, "ytick.minor.width": .5,
+    "grid.linewidth": .5, "savefig.bbox": None,
+}
 ACTIVE = None
 RUNTIME_ROOTS = tuple(Path(p).resolve() for p in
                       (sys.prefix, sys.base_prefix, *site.getsitepackages(), site.getusersitepackages()))
@@ -108,6 +123,8 @@ def _audit(event, args):
         writing = bool(flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
         if writing:
             no_symlinks(path)
+            if path.is_relative_to(MPL_CACHE):
+                return  # Runtime cache, never an evidence/artifact write.
             if not any(path.is_relative_to(root / "generated" / k) for k in ("figs", "tables")):
                 raise PermissionError(f"Write outside paper outputs: {path}")
             writes.add(str(path))
@@ -125,15 +142,19 @@ def _audit(event, args):
             if resolved.suffix.lower() in (".ttf", ".otf", ".ttc") and any(
                     resolved.is_relative_to(p) for p in FONT_ROOTS):
                 return
-            if resolved.is_relative_to(root / "generated/figs/.mplconfig"):
+            if resolved.is_relative_to(MPL_CACHE):
                 return
             raise PermissionError(f"Read outside frozen artifact roots: {path}")
     elif event in ("os.mkdir", "os.remove", "os.rmdir", "os.rename"):
         for name in (args[:2] if event == "os.rename" else args[:1]):
             path = no_symlinks(Path(os.fsdecode(name)).absolute())
+            if path.is_relative_to(MPL_CACHE):
+                continue
             outputs = [root / "generated" / k for k in ("figs", "tables")]
             if not any(path.is_relative_to(p) or (event == "os.mkdir" and p.is_relative_to(path)) for p in outputs):
                 raise PermissionError(f"Mutation outside paper outputs: {path}")
+            if event == "os.rename":
+                writes.add(str(path))
 
 
 sys.addaudithook(_audit)
@@ -156,33 +177,49 @@ def frozen_run(root=ROOT):
 
 
 def pyplot(root=ROOT):
-    cache = output_path(root, "figs") / ".mplconfig"
+    cache = MPL_CACHE
     no_symlinks(cache)
     os.environ["MPLCONFIGDIR"] = str(cache)
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     os.environ["OMP_NUM_THREADS"] = "1"
-    # Legacy plot modules evaluate gettempdir() even when MPLCONFIGDIR is set.
-    # Point that probe/cache at an allowed output directory before importing.
-    import tempfile
-    tempfile.tempdir = str(cache)
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8,
                          "axes.titlesize": 10, "axes.spines.top": False,
                          "axes.spines.right": False, "pdf.fonttype": 42,
-                         "savefig.dpi": 220})
+                         "savefig.dpi": 220, "savefig.bbox": "tight"})
     return plt
 
 
 def save_figure(fig, stem, audit):
+    if __package__:
+        from .paper_figure_style import prepare_figure
+    else:
+        from paper_figure_style import prepare_figure
+    prepare_figure(fig)
     for suffix in ("pdf", "png"):
         path = output_path(audit.root, "figs", f"{stem}.{suffix}")
         path.parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(path, bbox_inches="tight", metadata={"Creator": "frozen paper generator"}
+        # Honour the caller's rcParams: print-sized figures must retain their
+        # full canvas, since tight cropping changes the exported physical size.
+        save_canvas(fig, path, metadata={"Creator": "frozen paper generator"}
                     if suffix == "pdf" else None)
     write_notes(stem, audit)
+
+
+def save_canvas(fig, path, **kwargs):
+    """Publish a complete canvas atomically, including during concurrent tests."""
+    import io
+    buffer = io.BytesIO()
+    path = no_symlinks(path)
+    fig.savefig(buffer, format=path.suffix.lstrip("."), **kwargs)
+    MPL_CACHE.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(dir=path.parent, prefix=".figure-", suffix=path.suffix, delete=False) as temporary:
+        temporary.write(buffer.getvalue())
+        temporary_name = temporary.name
+    os.replace(temporary_name, path)
 
 
 def write_notes(stem, audit, extra=None):

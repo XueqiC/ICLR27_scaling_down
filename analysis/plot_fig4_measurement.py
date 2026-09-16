@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """CPU-only benchmark-transfer evidence, verified against the original V23 measurements."""
+
+if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
 import hashlib
 import sys
 
@@ -15,7 +20,7 @@ import numpy as np
 PROTOCOLS = ("leave_model_out", "leave_density_out", "leave_model_and_density_out")
 PROTOCOL_LABEL = ("Model out", "Density out", "Model + density out")
 COHORTS = ("all_densities", "without_strongest")
-PRIMARY_COLORS = {"math": "#ad416b", "code": "#258d9e", "qa": "#8662a6"}
+PRIMARY_COLORS = CAPABILITY_COLORS
 
 
 def load_and_verify(audit, summary):
@@ -55,81 +60,11 @@ def load_and_verify(audit, summary):
 
 
 def main():
-    setup_style()
-    audit = Audit(4, "Measurement support: primary-to-secondary benchmark transfer")
-    summary = audit.read("results/v26-loss-validity-pred/summary.json")
-    pairs = load_and_verify(audit, summary)
-    models = sorted({r["model"] for r in summary["rows"]})
-    densities = sorted({r["density"] for r in summary["rows"]}, reverse=True)
-    audit.rule(f"All v26 input_sha256 files read and hash-verified against V23; {len(models)} models "
-               f"({', '.join(models)}), densities {densities}. Verify primary/secondary row deltas "
-               "against capabilities[cap][role].delta_L_c and L_c - baseline_L_c in original V23 JSON.")
-    audit.rule("Three capability panels, math/code/QA. Each shows all_densities and without_strongest "
-               "(exclude d=.70), each with leave_model_out, leave_density_out, leave_model_and_density_out. "
-               "Top: recorded MAE for every primary-capability predictor, cross_selected, zero, train_mean. "
-               "The same-capability primary uses a diamond. Bottom: same_over_cross_gain and its stored gain_ci95. "
-               "All saved MAEs are independently checked from the OOF records without fitting models.")
-    audit.rule("Gain = MAE(cross-selected) - MAE(same-capability), positive = same-capability better. "
-               f"Intervals: {summary['n_boot']} paired bootstrap draws; {summary['bootstrap_unit']}. "
-               "Cross-selected source is chosen inside development CV, not by the displayed target MAEs. "
-               "Zero/mean are source-free controls, not accuracy measures.")
-    audit.omit("The numeric JSON supports all capability panels, so no fallback TeX table is needed. "
-               "This is measured-primary to measured-secondary loss transfer, not downstream accuracy "
-               "validity or density-only prediction. Native-token loss units differ across models. "
-               "Stored descriptive CIs condition on fixed OOF fits and omit refitting/probe uncertainty.")
-    audit.omit("OLMo sampling-resolution and Pearson diagnostics are available but are outside the requested "
-               "prediction-gain plot; they are not substituted for prediction evidence. No repeated-run "
-               "numerical-noise estimate is available in these measurements.")
-    fig = plt.figure(figsize=(8.4, 8.4))
-    grid = fig.add_gridspec(2, 3, left=.18, right=.98, bottom=.125, top=.86,
-                          height_ratios=[1.4, 1], hspace=.30, wspace=.20)
-    row_specs = [(cohort, protocol) for cohort in COHORTS for protocol in PROTOCOLS]
-    labels = [f"{'All d' if i < 3 else 'd ≥.75'} · {PROTOCOL_LABEL[i % 3]}" for i in range(6)]
-    for j, cap in enumerate(CAPS):
-        top = fig.add_subplot(grid[0, j])
-        bottom = fig.add_subplot(grid[1, j])
-        primary, secondary = pairs[cap]
-        top.set_title(f"{CAP_LABEL[cap]}\n{primary} →\n{secondary}", fontsize=10, pad=8)
-        predictors = (*CAPS, "cross_selected", "zero", "train_mean")
-        for y, (cohort, protocol) in enumerate(row_specs):
-            result = summary["analyses"][cohort][protocol][cap]
-            metrics = result["metrics"]
-            for k, predictor in enumerate(predictors):
-                color = PRIMARY_COLORS[predictor] if predictor in CAPS else COLORS[predictor]
-                marker = "D" if predictor == cap else ("s" if predictor == "cross_selected" else "o")
-                top.plot(metrics[predictor]["mae"], y + (k - 2.5) * .12, marker=marker,
-                         color=color, ms=3.6, linestyle="none", mfc="white" if predictor == "zero" else color)
-            gain = result["same_over_cross_gain"]
-            lo, hi = result["gain_ci95"]
-            bottom.hlines(y, lo, hi, color=COLORS["same_cap"], lw=1.3)
-            bottom.vlines([lo, hi], y - .1, y + .1, color=COLORS["same_cap"], lw=.8)
-            bottom.plot(gain, y, "D", color=COLORS["same_cap"], ms=4)
-            audit.rule(f"{cohort}/{protocol}/{cap}: n={metrics[cap]['n']}, "
-                       + ", ".join(f"{p} MAE={metrics[p]['mae']:.9f}" for p in predictors)
-                       + f"; same-over-cross gain={gain:+.9f}, CI95=[{lo:+.9f}, {hi:+.9f}].")
-        for ax in (top, bottom):
-            ax.axhline(2.5, color="#999999", lw=.6)
-            ax.set_ylim(5.6, -.6)
-            ax.set_yticks(range(6), labels if j == 0 else [])
-            ax.tick_params(axis="y", length=0)
-            ax.grid(axis="x", color="#ededed", lw=.5)
-            ax.locator_params(axis="x", nbins=4)
-        top.set_xlim(left=0)
-        top.set_xlabel("Prediction MAE (nats/token)")
-        bottom.axvline(0, color="#444444", lw=.8)
-        bottom.set_xlabel("Same-over-cross gain (nats/token)")
-        bottom.set_title("Paired gain and 95% interval", fontsize=9)
-    legend = [Line2D([], [], marker="o", color=PRIMARY_COLORS[c], ls="", label=f"{CAP_LABEL[c]} primary") for c in CAPS]
-    legend += [Line2D([], [], marker="s", color=COLORS["cross_selected"], ls="", label="Cross-selected"),
-               Line2D([], [], marker="o", color=COLORS["zero"], mfc="white", ls="", label="Zero"),
-               Line2D([], [], marker="o", color=COLORS["train_mean"], ls="", label="Train mean"),
-               Line2D([], [], marker="D", color="black", ls="", label="Same-capability marker")]
-    fig.legend(handles=legend, loc="upper center", bbox_to_anchor=(.5, .985), frameon=False, ncol=4)
-    fig.text(.5, .035, "Positive gain = same-capability predictor better. All measured densities retained in the first three rows.\n"
-             "Six model clusters; fixed-fit descriptive intervals. Primary losses are held-out inputs; no accuracy claim.",
-             ha="center", fontsize=8, linespacing=1.5)
-    audit.save(fig, "measurement_support")
-    audit.finish()
+    if __package__:
+        from .plot_paper_appendix import generate
+    else:
+        from plot_paper_appendix import generate
+    return generate("measurement_support")
 
 
 if __name__ == "__main__":

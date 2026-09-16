@@ -3,6 +3,11 @@
 from __future__ import annotations
 
 if __package__:
+    from .paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+else:
+    from paper_figure_style import PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS as SEMANTIC_METHOD_COLORS, BIT_COLORS, HATCHES, darker, method_ramp
+
+if __package__:
     from .paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot
     from .paper_figure_style import finish_panel, panel_axes
     from .paper_panel_exports import ref, capability_handles, axes_defaults, export
@@ -124,18 +129,18 @@ def draw_panel(fig, rows, panel):
             for state in sorted({r["state"] for r in measured}):
                 line = sorted((r for r in measured if r["state"] == state), key=lambda r: r["x"])
                 ax.plot([r["x"] for r in line], [r["delta"] for r in line],
-                        color=COLORS[cap], lw=1.4, alpha=.45)
+                        color=COLORS[cap], lw=1.1, alpha=.45)
             heavy = [r for r in part if r["kind"] == "delivered" and r["capability"] == cap]
             if heavy:
-                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=1.4)
+                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=1.1)
         if panel == "a":
             ax.set(xlabel="Retained density", xlim=(.535, 1.02), ylim=(-1, 10), xticks=[.6, .8, 1.])
         else:
             ax.set(xlabel="Bit-width", xlim=(2.7, 8.3), ylim=(-1, 27), xticks=[3, 4, 6, 8])
     else:
-        for bit, marker, color in zip((3, 4, 5), ("o", "s", "^"), ("#71519a", "#c26a24", "#25836b")):
+        for bit, marker, color in zip((3, 4, 5), ("o", "s", "^"), tuple(BIT_COLORS.values())):
             line = sorted((r for r in part if r["bit"] == bit), key=lambda r: r["x"])
-            ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=color, marker=marker, lw=1.4, ms=5)
+            ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=color, marker=marker, lw=1.1, ms=3.8)
         ax.set(xscale="log", xlabel="Group size", xlim=(26, 640), ylim=(-.25, 5.4))
         ax.set_xticks([32, 128, 512], ["32", "128", "512"])
         ax.xaxis.set_minor_locator(NullLocator())
@@ -153,9 +158,9 @@ def draw_legend(fig):
         from paper_figure_style import legend_strip
     handles = capability_handles()
     for handle in handles:
-        handle.set_linewidth(1.4)
-    handles += [Line2D([], [], color=c, marker=m, lw=1.4, ms=5, label=f"{b} bit")
-                for b, m, c in zip((3, 4, 5), ("o", "s", "^"), ("#71519a", "#c26a24", "#25836b"))]
+        handle.set_linewidth(1.1)
+    handles += [Line2D([], [], color=c, marker=m, lw=1.1, ms=3.8, label=f"{b} bit")
+                for b, m, c in zip((3, 4, 5), ("o", "s", "^"), tuple(BIT_COLORS.values()))]
     return legend_strip(fig, handles)
 
 
@@ -168,9 +173,9 @@ def generate(root=ROOT):
         caption = "\n".join(CAPTIONS.values()) + (
             "Three 1.8 x 1.35-inch panels in one 5.5-inch row; fig4_legend.pdf "
             "is the shared capability and bit-width key above the panels. "
-            "Lines are 1.4 pt; markers, where present, are 5 pt.\n")
+            "Lines are 1.1 pt; markers, where present, are 3.8 pt.\n")
         panels = [(name, size, draw, records, text + "Shared key: fig4_legend.pdf above the panels; "
-                   "panels are 1.8 x 1.35 inches in one row. Lines 1.4 pt; markers 5 pt.\n")
+                   "panels are 1.8 x 1.35 inches in one row. Lines 1.1 pt; markers 3.8 pt.\n")
                   for name, size, draw, records, text in panels]
         export(plt, audit, "pythia_responses", panels, caption, width=5.5,
                legend=("fig4_legend", LEGEND_SIZE, draw_legend, [], caption))
