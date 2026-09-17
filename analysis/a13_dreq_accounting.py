@@ -282,7 +282,7 @@ FIGURE_CAPTION = (
 
 def draw_panel(fig, records, color):
     from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
-    ax = style.panel_axes(fig, (1.8, 1.35), left=.44, bottom=.31, right=.04, top=.05)
+    ax = style.panel_axes(fig, (1.8, 1.2), left=.44, bottom=.31, right=.04, top=.05)
     ax.set(yscale="log", xlim=(-.6, 7.6), ylim=(6500, 220000),
            xlabel="Training tokens, T (k)", ylabel=r"$D_U$ (k tokens)")
     ax.set_xticks([.5, 3.5, 6.5], ["50", "100", "200"])
@@ -327,7 +327,7 @@ def generate_figures(score, plan, requests, audit):
         draw = lambda fig, rr=subset, cc=color: draw_panel(fig, rr, cc)
         draws.append(draw)
         style.apply_style("panel")
-        fig = plt.figure(figsize=(1.8, 1.35))
+        fig = plt.figure(figsize=(1.8, 1.2))
         draw(fig)
         stem = f"dreq_{letter}"
         style.save_panel(fig, stem, "panel", audit, dict(readout=readout, primary_tau=.25,

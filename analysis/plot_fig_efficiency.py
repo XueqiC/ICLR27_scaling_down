@@ -23,7 +23,7 @@ else:
 
 A9 = "results/a9-measurement-efficiency/summary.json"
 A11 = "results/a11-efficiency-confirmation"
-PANEL_SIZE = (2.7, 1.45)
+PANEL_SIZE = (2.7, 1.3)
 LEGEND_SIZE = (5.5, .3)
 METHODS = ("power", "A2", "median_curve")
 CONFIRM_METHODS = ("power_18", "A2_36", "median_curve_36")

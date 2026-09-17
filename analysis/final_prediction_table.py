@@ -54,10 +54,10 @@ RANGES = {
     "pool": "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
     "efficiency": "Four unseen Pythia states pruned at six densities",
 }
-HEADERS = ("Prediction task", "Predictor tested first", "Its error (nats)",
-           "Predictor we deliver", "Its error (nats)", "Simplest comparison",
+HEADERS = ("Prediction task", "Frozen candidate", "Candidate error (nats)",
+           "Delivered relation", "Delivered error (nats)", "Development baseline",
            "Development measurements")
-COLUMN_WIDTHS = (".20", ".15", ".09", ".17", ".09", ".17", ".13")
+COLUMN_WIDTHS = (".20", ".15", ".10", ".16", ".10", ".16", ".13")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (

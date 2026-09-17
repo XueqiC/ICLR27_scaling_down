@@ -125,8 +125,8 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert not re.search(r"not tested|n/a", tex, re.I)
     assert "unseen density" not in tex
     assert gen.HEADERS == (
-        "Prediction task", "Predictor tested first", "Its error (nats)",
-        "Predictor we deliver", "Its error (nats)", "Simplest comparison",
+        "Prediction task", "Frozen candidate", "Candidate error (nats)",
+        "Delivered relation", "Delivered error (nats)", "Development baseline",
         "Development measurements")
     assert " & ".join(gen.render_text(h) for h in gen.HEADERS) + r" \\" in tex
     assert r"\centering\footnotesize" in tex and r"\tiny" not in tex
@@ -138,7 +138,7 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert all(float(gen.COLUMN_WIDTHS[i]) >= .09 for i in (2, 4))
     assert float(gen.COLUMN_WIDTHS[5]) < .215
     assert r"\setlength{\tabcolsep}{1.5pt}" in tex
-    assert gen.COLUMN_WIDTHS == (".20", ".15", ".09", ".17", ".09", ".17", ".13")
+    assert gen.COLUMN_WIDTHS == (".20", ".15", ".10", ".16", ".10", ".16", ".13")
     assert gen.TABLE_FONT == r"\footnotesize\fontsize{8}{9.5}\selectfont"
     assert gen.CAPTION_FONT == r"\footnotesize\fontsize{8.5}{10}\selectfont"
     assert r"\centering" + gen.TABLE_FONT in tex

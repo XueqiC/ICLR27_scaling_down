@@ -10,7 +10,7 @@ from analysis import plot_fig_generalization as generalization
 from analysis.paper_artifacts import ROOT, pyplot, output_path
 
 EXPECTED_PANEL_SIZES = {
-    **{f"fig1_{p}": (1.35, 1.25) for p in "abcd"}, "fig1_legend": (5.5, .42),
+    **{f"fig1_{p}": (1.35, 1.12) for p in "abcd"}, "fig1_legend": (5.5, .42),
     **{f"fig2_{p}": (2.7, 1.45) for p in "ab"}, "fig2_legend": (5.5, .42),
     "fig3_a": (5.5, 1.0), "fig3_b": (5.5, 1.35), "fig3_legend": (5.5, .3),
     "lr_pilot_a": (2.7, 1.45), "lr_pilot_legend": (5.5, .42),
@@ -161,9 +161,9 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
             assert panels[0].axes[0].bbox.x0 == pytest.approx(panels[1].axes[0].bbox.x0)
             assert panels[0].axes[0].bbox.x1 == pytest.approx(panels[1].axes[0].bbox.x1)
         if gen is responses:
-            assert tuple(fig.get_size_inches()) == pytest.approx((5.5, 1.67))
+            assert tuple(fig.get_size_inches()) == pytest.approx((5.5, 1.54))
             for panel in panels:
-                assert panel.bbox.size/fig.dpi == pytest.approx((1.35, 1.25))
+                assert panel.bbox.size/fig.dpi == pytest.approx((1.35, 1.12))
             for left, right in zip(panels, panels[1:]):
                 assert (right.bbox.x0-left.bbox.x1)/fig.dpi == pytest.approx(.03)
         strips = [sub for sub in fig.subfigs if sub.legends]

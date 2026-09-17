@@ -21,7 +21,7 @@ else:
 STUDENTS = ("gemma3-270m", "gemma3-1b", "gemma3-4b")
 STYLES = (":", "--", "-")
 SCOPES = ("2wiki_new", "musique", "triviaqa")
-PANEL_SIZE = (1.35, 1.25)
+PANEL_SIZE = (1.35, 1.12)
 PANEL_KIND = "narrow"
 PANEL_GAP = .03
 LEGEND_SIZE = (5.5, .42)
