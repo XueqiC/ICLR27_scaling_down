@@ -37,8 +37,8 @@ def test_parse_env_file(tmp_path):
 def test_luna_payload_and_response_with_mocked_http(monkeypatch):
     captured = {}
     monkeypatch.setattr(
-        teacher_api, "_load_credentials",
-        lambda path=None: ("https://gateway.example", "test-key"),
+        teacher_api, "_load_key_ring",
+        lambda path=None: ("https://gateway.example", ["test-key"]),
     )
 
     def fake_post(url, **kwargs):
@@ -77,8 +77,8 @@ def test_luna_payload_and_response_with_mocked_http(monkeypatch):
 def test_sonnet_payload_and_response_with_mocked_http(monkeypatch):
     captured = {}
     monkeypatch.setattr(
-        teacher_api, "_load_credentials",
-        lambda path=None: ("https://gateway.example", "test-key"),
+        teacher_api, "_load_key_ring",
+        lambda path=None: ("https://gateway.example", ["test-key"]),
     )
 
     def fake_post(url, **kwargs):

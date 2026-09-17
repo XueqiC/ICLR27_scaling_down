@@ -1,0 +1,2798 @@
+{
+  "capabilities": [
+    "math",
+    "code",
+    "qa"
+  ],
+  "cpu_only": true,
+  "data_ladder": {
+    "data_only_full_diagnostic": {
+      "data_ladder_metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.031689420319045376,
+            "n": 4,
+            "relative_error": 0.3053204553067461,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "math": {
+            "mae": 0.024264474957916924,
+            "n": 4,
+            "relative_error": 0.2104263099759097,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "qa": {
+            "mae": 0.13780621036723723,
+            "n": 4,
+            "relative_error": 0.11089526297583183,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          }
+        },
+        "mae": 0.06458670188139984,
+        "n": 12,
+        "relative_error": 0.13255155382335934,
+        "sign_accuracy": 1.0,
+        "sign_correct": 12
+      },
+      "fit": {
+        "candidate": "data_only",
+        "include_size": false,
+        "law": "Delta L_c = a_c + b_c (D/600)^(-beta_c)",
+        "n_train": 12,
+        "parameters": {
+          "code": {
+            "beta_at_bound": false,
+            "optimizer_success": true,
+            "parameters": {
+              "a": 0.13663611495198422,
+              "b": -0.00018806382679334937,
+              "beta": 3.089430361782657
+            },
+            "rank": 2,
+            "sse": 0.006664318737472751
+          },
+          "math": {
+            "beta_at_bound": true,
+            "optimizer_success": true,
+            "parameters": {
+              "a": 0.12911021196542458,
+              "b": -1.2633721615172379e-05,
+              "beta": 3.9999999129185557
+            },
+            "rank": 2,
+            "sse": 0.0037744030709713564
+          },
+          "qa": {
+            "beta_at_bound": false,
+            "optimizer_success": true,
+            "parameters": {
+              "a": -0.9307006010548112,
+              "b": -0.19860459537355038,
+              "beta": 0.3907003866323021
+            },
+            "rank": 2,
+            "sse": 0.09564694411389961
+          }
+        },
+        "parameters_per_capability": 3,
+        "status": "ok",
+        "train_row_ids": [
+          "data|gemma3|gemma3-4b|150|code",
+          "data|gemma3|gemma3-4b|150|math",
+          "data|gemma3|gemma3-4b|150|qa",
+          "data|gemma3|gemma3-4b|300|code",
+          "data|gemma3|gemma3-4b|300|math",
+          "data|gemma3|gemma3-4b|300|qa",
+          "data|gemma3|gemma3-4b|600|code",
+          "data|gemma3|gemma3-4b|600|math",
+          "data|gemma3|gemma3-4b|600|qa",
+          "data|gemma3|gemma3-4b|75|code",
+          "data|gemma3|gemma3-4b|75|math",
+          "data|gemma3|gemma3-4b|75|qa"
+        ]
+      },
+      "records": [
+        {
+          "D": 75,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.07650780421275949,
+          "predicted": 0.07736249760019547,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|75|math"
+        },
+        {
+          "D": 75,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.02136846767050482,
+          "predicted": 0.02066792083454047,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|75|code"
+        },
+        {
+          "D": 75,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -1.3266309760956174,
+          "predicted": -1.378235492549782,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|75|qa"
+        },
+        {
+          "D": 150,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.13742612517048036,
+          "predicted": 0.12587597962237868,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|150|math"
+        },
+        {
+          "D": 150,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.11038529672276354,
+          "predicted": 0.12301139181582277,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|150|code"
+        },
+        {
+          "D": 150,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -1.458976593625498,
+          "predicted": -1.2720619645104707,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|150|qa"
+        },
+        {
+          "D": 300,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.16588687679951508,
+          "predicted": 0.128908072431783,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|300|math"
+        },
+        {
+          "D": 300,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.19771368467670503,
+          "predicted": 0.1350353908745785,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|300|code"
+        },
+        {
+          "D": 300,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -0.9670692231075693,
+          "predicted": -1.1910771273878789,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|300|qa"
+        },
+        {
+          "D": 600,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.08142332171541145,
+          "predicted": 0.1290975782438094,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|600|math"
+        },
+        {
+          "D": 600,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.08569530558015948,
+          "predicted": 0.13644805112519087,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|600|code"
+        },
+        {
+          "D": 600,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -1.2180029880478092,
+          "predicted": -1.1293051964283616,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|600|qa"
+        }
+      ],
+      "status": "NON-DECISIONAL_FULL_DATA"
+    },
+    "data_only_heldout": {
+      "candidate": "data_only",
+      "folds": [
+        {
+          "fit": {
+            "candidate": "data_only",
+            "include_size": false,
+            "law": "Delta L_c = a_c + b_c (D/600)^(-beta_c)",
+            "n_train": 9,
+            "parameters": {
+              "code": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -1.6331363830745942,
+                  "b": 1.7521854739144225,
+                  "beta": 0.010000000807446502
+                },
+                "rank": 2,
+                "sse": 0.006628849547147054
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -3.902108356855955,
+                  "b": 4.002450008466274,
+                  "beta": 0.010000000886888535
+                },
+                "rank": 2,
+                "sse": 0.00213262008031355
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -1.0845036515412687,
+                  "b": -0.0014305417426693822,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 2,
+                "sse": 0.037200870993787175
+              }
+            },
+            "parameters_per_capability": 3,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|150|code",
+              "data|gemma3|gemma3-4b|150|math",
+              "data|gemma3|gemma3-4b|150|qa",
+              "data|gemma3|gemma3-4b|300|code",
+              "data|gemma3|gemma3-4b|300|math",
+              "data|gemma3|gemma3-4b|300|qa",
+              "data|gemma3|gemma3-4b|600|code",
+              "data|gemma3|gemma3-4b|600|math",
+              "data|gemma3|gemma3-4b|600|qa"
+            ]
+          },
+          "held_out_D": 75,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa",
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa",
+            "data|gemma3|gemma3-4b|600|code",
+            "data|gemma3|gemma3-4b|600|math",
+            "data|gemma3|gemma3-4b|600|qa"
+          ]
+        },
+        {
+          "fit": {
+            "candidate": "data_only",
+            "include_size": false,
+            "law": "Delta L_c = a_c + b_c (D/600)^(-beta_c)",
+            "n_train": 9,
+            "parameters": {
+              "code": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.141850918304011,
+                  "b": -2.9364288546733408e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 2,
+                "sse": 0.006323559597359662
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.12367501071147559,
+                  "b": -1.1477519555258801e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 2,
+                "sse": 0.003581638544141184
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -1.0922817441202166,
+                  "b": -5.710138519279796e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 2,
+                "sse": 0.031699494143925214
+              }
+            },
+            "parameters_per_capability": 3,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|300|code",
+              "data|gemma3|gemma3-4b|300|math",
+              "data|gemma3|gemma3-4b|300|qa",
+              "data|gemma3|gemma3-4b|600|code",
+              "data|gemma3|gemma3-4b|600|math",
+              "data|gemma3|gemma3-4b|600|qa",
+              "data|gemma3|gemma3-4b|75|code",
+              "data|gemma3|gemma3-4b|75|math",
+              "data|gemma3|gemma3-4b|75|qa"
+            ]
+          },
+          "held_out_D": 150,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa",
+            "data|gemma3|gemma3-4b|600|code",
+            "data|gemma3|gemma3-4b|600|math",
+            "data|gemma3|gemma3-4b|600|qa",
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa"
+          ]
+        },
+        {
+          "fit": {
+            "candidate": "data_only",
+            "include_size": false,
+            "law": "Delta L_c = a_c + b_c (D/600)^(-beta_c)",
+            "n_train": 9,
+            "parameters": {
+              "code": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.10000303106575215,
+                  "b": -1.896623888751614e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 2,
+                "sse": 0.00043725411286847426
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -0.2684679283640891,
+                  "b": 0.3626923667298373,
+                  "beta": 0.010000001277697759
+                },
+                "rank": 2,
+                "sse": 0.002260420808217219
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 5.614611452704901,
+                  "b": -6.869074113409821,
+                  "beta": 0.010000001057317884
+                },
+                "rank": 2,
+                "sse": 0.018336612897651445
+              }
+            },
+            "parameters_per_capability": 3,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|150|code",
+              "data|gemma3|gemma3-4b|150|math",
+              "data|gemma3|gemma3-4b|150|qa",
+              "data|gemma3|gemma3-4b|600|code",
+              "data|gemma3|gemma3-4b|600|math",
+              "data|gemma3|gemma3-4b|600|qa",
+              "data|gemma3|gemma3-4b|75|code",
+              "data|gemma3|gemma3-4b|75|math",
+              "data|gemma3|gemma3-4b|75|qa"
+            ]
+          },
+          "held_out_D": 300,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa",
+            "data|gemma3|gemma3-4b|600|code",
+            "data|gemma3|gemma3-4b|600|math",
+            "data|gemma3|gemma3-4b|600|qa",
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa"
+          ]
+        },
+        {
+          "fit": {
+            "candidate": "data_only",
+            "include_size": false,
+            "law": "Delta L_c = a_c + b_c (D/600)^(-beta_c)",
+            "n_train": 9,
+            "parameters": {
+              "code": {
+                "beta_at_bound": false,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 4.7144524658200915,
+                  "b": -4.431066808491985,
+                  "beta": 0.02762740114621156
+                },
+                "rank": 2,
+                "sse": 1.6500667674108356e-23
+              },
+              "math": {
+                "beta_at_bound": false,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.19084297795351202,
+                  "b": -0.011659372507716212,
+                  "beta": 1.0979024155260146
+                },
+                "rank": 2,
+                "sse": 3.41231988130194e-25
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 24.634085949101184,
+                  "b": -25.528203197300588,
+                  "beta": 0.010000000943126967
+                },
+                "rank": 2,
+                "sse": 0.06520793237345451
+              }
+            },
+            "parameters_per_capability": 3,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|150|code",
+              "data|gemma3|gemma3-4b|150|math",
+              "data|gemma3|gemma3-4b|150|qa",
+              "data|gemma3|gemma3-4b|300|code",
+              "data|gemma3|gemma3-4b|300|math",
+              "data|gemma3|gemma3-4b|300|qa",
+              "data|gemma3|gemma3-4b|75|code",
+              "data|gemma3|gemma3-4b|75|math",
+              "data|gemma3|gemma3-4b|75|qa"
+            ]
+          },
+          "held_out_D": 600,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|600|code",
+            "data|gemma3|gemma3-4b|600|math",
+            "data|gemma3|gemma3-4b|600|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa",
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa",
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa"
+          ]
+        }
+      ],
+      "metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.11353764934922214,
+            "n": 4,
+            "relative_error": 1.093909779502286,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "math": {
+            "mae": 0.07288079842198236,
+            "n": 4,
+            "relative_error": 0.6320366505615266,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "qa": {
+            "mae": 1.6571262150979091,
+            "n": 4,
+            "relative_error": 1.3335207964699778,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          }
+        },
+        "mae": 0.6145148876230379,
+        "n": 12,
+        "relative_error": 1.2611714304841863,
+        "sign_accuracy": 1.0,
+        "sign_correct": 12
+      },
+      "parameters_per_capability": 3,
+      "protocol": "leave one of four Gemma-3 4B data budgets out (all rotations)",
+      "records": [
+        {
+          "D": 75,
+          "absolute_error": 0.10793383764875919,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 75,
+          "model": "gemma3-4b",
+          "observed": 0.07650780421275949,
+          "predicted": 0.18444164186151868,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|75|math"
+        },
+        {
+          "D": 75,
+          "absolute_error": 0.13449776761333432,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 75,
+          "model": "gemma3-4b",
+          "observed": 0.02136846767050482,
+          "predicted": 0.15586623528383914,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|75|code"
+        },
+        {
+          "D": 75,
+          "absolute_error": 5.6173705923769335,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 75,
+          "model": "gemma3-4b",
+          "observed": -1.3266309760956174,
+          "predicted": -6.944001568472551,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|75|qa"
+        },
+        {
+          "D": 150,
+          "absolute_error": 0.0166893591104446,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 150,
+          "model": "gemma3-4b",
+          "observed": 0.13742612517048036,
+          "predicted": 0.12073676606003576,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|150|math"
+        },
+        {
+          "D": 150,
+          "absolute_error": 0.023948364620770907,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 150,
+          "model": "gemma3-4b",
+          "observed": 0.11038529672276354,
+          "predicted": 0.13433366134353444,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|150|code"
+        },
+        {
+          "D": 150,
+          "absolute_error": 0.35207689666061204,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 150,
+          "model": "gemma3-4b",
+          "observed": -1.458976593625498,
+          "predicted": -1.1068996969648859,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|150|qa"
+        },
+        {
+          "D": 300,
+          "absolute_error": 0.06913971319834128,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 300,
+          "model": "gemma3-4b",
+          "observed": 0.16588687679951508,
+          "predicted": 0.0967471636011738,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|300|math"
+        },
+        {
+          "D": 300,
+          "absolute_error": 0.09801411341483622,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 300,
+          "model": "gemma3-4b",
+          "observed": 0.19771368467670503,
+          "predicted": 0.0996995712618688,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|300|code"
+        },
+        {
+          "D": 300,
+          "absolute_error": 0.33517163150568585,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 300,
+          "model": "gemma3-4b",
+          "observed": -0.9670692231075693,
+          "predicted": -1.3022408546132551,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|300|qa"
+        },
+        {
+          "D": 600,
+          "absolute_error": 0.09776028373038437,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 600,
+          "model": "gemma3-4b",
+          "observed": 0.08142332171541145,
+          "predicted": 0.1791836054457958,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|600|math"
+        },
+        {
+          "D": 600,
+          "absolute_error": 0.19769035174794714,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 600,
+          "model": "gemma3-4b",
+          "observed": 0.08569530558015948,
+          "predicted": 0.2833856573281066,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|600|code"
+        },
+        {
+          "D": 600,
+          "absolute_error": 0.3238857398484054,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 600,
+          "model": "gemma3-4b",
+          "observed": -1.2180029880478092,
+          "predicted": -0.8941172481994037,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|600|qa"
+        }
+      ],
+      "status": "PARTIAL_ONE_SIZE_DATA_LADDER"
+    },
+    "delta_reference": "student_own_dense",
+    "monotonicity": {
+      "code": {
+        "D": [
+          75,
+          150,
+          300,
+          600
+        ],
+        "direction": "non-monotone",
+        "is_monotone": false,
+        "observed": [
+          0.02136846767050482,
+          0.11038529672276354,
+          0.19771368467670503,
+          0.08569530558015948
+        ],
+        "successive_differences": [
+          0.08901682905225872,
+          0.08732838795394149,
+          -0.11201837909654555
+        ]
+      },
+      "math": {
+        "D": [
+          75,
+          150,
+          300,
+          600
+        ],
+        "direction": "non-monotone",
+        "is_monotone": false,
+        "observed": [
+          0.07650780421275949,
+          0.13742612517048036,
+          0.16588687679951508,
+          0.08142332171541145
+        ],
+        "successive_differences": [
+          0.06091832095772087,
+          0.02846075162903472,
+          -0.08446355508410364
+        ]
+      },
+      "qa": {
+        "D": [
+          75,
+          150,
+          300,
+          600
+        ],
+        "direction": "non-monotone",
+        "is_monotone": false,
+        "observed": [
+          -1.3266309760956174,
+          -1.458976593625498,
+          -0.9670692231075693,
+          -1.2180029880478092
+        ],
+        "successive_differences": [
+          -0.1323456175298805,
+          0.49190737051792865,
+          -0.2509337649402399
+        ]
+      }
+    },
+    "rows": [
+      {
+        "D": 75,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.07650780421275949,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|75|math",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 75,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.02136846767050482,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|75|code",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 75,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": -1.3266309760956174,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|75|qa",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 150,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.13742612517048036,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|150|math",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 150,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.11038529672276354,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|150|code",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 150,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": -1.458976593625498,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|150|qa",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 300,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.16588687679951508,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|300|math",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 300,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.19771368467670503,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|300|code",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 300,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": -0.9670692231075693,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|300|qa",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.08142332171541145,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|600|math",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.08569530558015948,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|600|code",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": -1.2180029880478092,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "data|gemma3|gemma3-4b|600|qa",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      }
+    ],
+    "separable_full_diagnostic": {
+      "data_ladder_metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.031990076484241486,
+            "n": 4,
+            "relative_error": 0.30821721000671415,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "math": {
+            "mae": 0.026835892954791447,
+            "n": 4,
+            "relative_error": 0.2327261537362382,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "qa": {
+            "mae": 0.15029889955708575,
+            "n": 4,
+            "relative_error": 0.12094836616538845,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          }
+        },
+        "mae": 0.06970828966537289,
+        "n": 12,
+        "relative_error": 0.14306260949012764,
+        "sign_accuracy": 1.0,
+        "sign_correct": 12
+      },
+      "fit": {
+        "candidate": "separable_size_plus_data",
+        "include_size": true,
+        "law": "Delta L_c = a_c - alpha_c log(r_storage) + b_c (D/600)^(-beta_c)",
+        "n_train": 21,
+        "parameters": {
+          "code": {
+            "beta_at_bound": false,
+            "optimizer_success": true,
+            "parameters": {
+              "a": 0.12327970584539276,
+              "alpha": 0.008634989797344473,
+              "b": -0.0002654783127599581,
+              "beta": 2.934912788922051
+            },
+            "rank": 3,
+            "sse": 0.007035877847080632
+          },
+          "math": {
+            "beta_at_bound": true,
+            "optimizer_success": true,
+            "parameters": {
+              "a": 0.12656878816519834,
+              "alpha": -0.004230086252329,
+              "b": -9.94465654424563e-06,
+              "beta": 3.9999999129185557
+            },
+            "rank": 3,
+            "sse": 0.004865056897884768
+          },
+          "qa": {
+            "beta_at_bound": false,
+            "optimizer_success": true,
+            "parameters": {
+              "a": 0.3025051168901058,
+              "alpha": 0.15798759078544883,
+              "b": -1.6550733577005114,
+              "beta": 0.08662698194576196
+            },
+            "rank": 3,
+            "sse": 0.11067429284775082
+          }
+        },
+        "parameters_per_capability": 4,
+        "status": "ok",
+        "train_row_ids": [
+          "data|gemma3|gemma3-4b|150|code",
+          "data|gemma3|gemma3-4b|150|math",
+          "data|gemma3|gemma3-4b|150|qa",
+          "data|gemma3|gemma3-4b|300|code",
+          "data|gemma3|gemma3-4b|300|math",
+          "data|gemma3|gemma3-4b|300|qa",
+          "data|gemma3|gemma3-4b|75|code",
+          "data|gemma3|gemma3-4b|75|math",
+          "data|gemma3|gemma3-4b|75|qa",
+          "self-size|gemma3|gemma3-12b|code",
+          "self-size|gemma3|gemma3-12b|math",
+          "self-size|gemma3|gemma3-12b|qa",
+          "self-size|gemma3|gemma3-1b|code",
+          "self-size|gemma3|gemma3-1b|math",
+          "self-size|gemma3|gemma3-1b|qa",
+          "self-size|gemma3|gemma3-270m|code",
+          "self-size|gemma3|gemma3-270m|math",
+          "self-size|gemma3|gemma3-270m|qa",
+          "self-size|gemma3|gemma3-4b|code",
+          "self-size|gemma3|gemma3-4b|math",
+          "self-size|gemma3|gemma3-4b|qa"
+        ]
+      },
+      "records": [
+        {
+          "D": 75,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.07650780421275949,
+          "predicted": 0.07800343756551203,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|75|math"
+        },
+        {
+          "D": 75,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.02136846767050482,
+          "predicted": 0.020548697759813522,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|75|code"
+        },
+        {
+          "D": 75,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -1.3266309760956174,
+          "predicted": -1.3867309175193652,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|75|qa"
+        },
+        {
+          "D": 150,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.13742612517048036,
+          "predicted": 0.11619091162673024,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|150|math"
+        },
+        {
+          "D": 150,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.11038529672276354,
+          "predicted": 0.12374279269106554,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|150|code"
+        },
+        {
+          "D": 150,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -1.458976593625498,
+          "predicted": -1.2712382444216266,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|150|qa"
+        },
+        {
+          "D": 300,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.16588687679951508,
+          "predicted": 0.11857762889961924,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|300|math"
+        },
+        {
+          "D": 300,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.19771368467670503,
+          "predicted": 0.13723733198572044,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|300|code"
+        },
+        {
+          "D": 300,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -0.9670692231075693,
+          "predicted": -1.1624762624150466,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|300|qa"
+        },
+        {
+          "D": 600,
+          "capability": "math",
+          "model": "gemma3-4b",
+          "observed": 0.08142332171541145,
+          "predicted": 0.11872679873817873,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|600|math"
+        },
+        {
+          "D": 600,
+          "capability": "code",
+          "model": "gemma3-4b",
+          "observed": 0.08569530558015948,
+          "predicted": 0.13900199294714755,
+          "qa_annotation": "",
+          "row_id": "data|gemma3|gemma3-4b|600|code"
+        },
+        {
+          "D": 600,
+          "capability": "qa",
+          "model": "gemma3-4b",
+          "observed": -1.2180029880478092,
+          "predicted": -1.0600527197545626,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "row_id": "data|gemma3|gemma3-4b|600|qa"
+        }
+      ],
+      "status": "NON-DECISIONAL_FULL_DATA"
+    },
+    "separable_heldout": {
+      "candidate": "separable_size_plus_data",
+      "folds": [
+        {
+          "fit": {
+            "candidate": "separable_size_plus_data",
+            "include_size": true,
+            "law": "Delta L_c = a_c - alpha_c log(r_storage) + b_c (D/600)^(-beta_c)",
+            "n_train": 18,
+            "parameters": {
+              "code": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -0.4122901946262713,
+                  "alpha": 0.010309395259963439,
+                  "b": 0.5265062829143522,
+                  "beta": 0.010000000993040416
+                },
+                "rank": 3,
+                "sse": 0.0073590148031902145
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -3.684380871711933,
+                  "alpha": 0.00043429944459960623,
+                  "b": 3.786430768153669,
+                  "beta": 0.010000001068146193
+                },
+                "rank": 3,
+                "sse": 0.0024981546772083222
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -1.3347702689445866,
+                  "alpha": 0.15490129901134825,
+                  "b": -0.0015810964529900662,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 3,
+                "sse": 0.04671107792594882
+              }
+            },
+            "parameters_per_capability": 4,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|150|code",
+              "data|gemma3|gemma3-4b|150|math",
+              "data|gemma3|gemma3-4b|150|qa",
+              "data|gemma3|gemma3-4b|300|code",
+              "data|gemma3|gemma3-4b|300|math",
+              "data|gemma3|gemma3-4b|300|qa",
+              "self-size|gemma3|gemma3-12b|code",
+              "self-size|gemma3|gemma3-12b|math",
+              "self-size|gemma3|gemma3-12b|qa",
+              "self-size|gemma3|gemma3-1b|code",
+              "self-size|gemma3|gemma3-1b|math",
+              "self-size|gemma3|gemma3-1b|qa",
+              "self-size|gemma3|gemma3-270m|code",
+              "self-size|gemma3|gemma3-270m|math",
+              "self-size|gemma3|gemma3-270m|qa",
+              "self-size|gemma3|gemma3-4b|code",
+              "self-size|gemma3|gemma3-4b|math",
+              "self-size|gemma3|gemma3-4b|qa"
+            ]
+          },
+          "held_out_D": 75,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa",
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa",
+            "self-size|gemma3|gemma3-12b|code",
+            "self-size|gemma3|gemma3-12b|math",
+            "self-size|gemma3|gemma3-12b|qa",
+            "self-size|gemma3|gemma3-1b|code",
+            "self-size|gemma3|gemma3-1b|math",
+            "self-size|gemma3|gemma3-1b|qa",
+            "self-size|gemma3|gemma3-270m|code",
+            "self-size|gemma3|gemma3-270m|math",
+            "self-size|gemma3|gemma3-270m|qa",
+            "self-size|gemma3|gemma3-4b|code",
+            "self-size|gemma3|gemma3-4b|math",
+            "self-size|gemma3|gemma3-4b|qa"
+          ]
+        },
+        {
+          "fit": {
+            "candidate": "separable_size_plus_data",
+            "include_size": true,
+            "law": "Delta L_c = a_c - alpha_c log(r_storage) + b_c (D/600)^(-beta_c)",
+            "n_train": 18,
+            "parameters": {
+              "code": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.12722515895177217,
+                  "alpha": 0.007839175548703834,
+                  "b": -2.9336979409630252e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 3,
+                "sse": 0.006667439160812085
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.11899068365922583,
+                  "alpha": -0.002788037421320641,
+                  "b": -9.06484070793993e-06,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 3,
+                "sse": 0.004314680124301134
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": -1.3426644237630008,
+                  "alpha": 0.15611543010926845,
+                  "b": -6.657589826497556e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 3,
+                "sse": 0.042296387179560434
+              }
+            },
+            "parameters_per_capability": 4,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|300|code",
+              "data|gemma3|gemma3-4b|300|math",
+              "data|gemma3|gemma3-4b|300|qa",
+              "data|gemma3|gemma3-4b|75|code",
+              "data|gemma3|gemma3-4b|75|math",
+              "data|gemma3|gemma3-4b|75|qa",
+              "self-size|gemma3|gemma3-12b|code",
+              "self-size|gemma3|gemma3-12b|math",
+              "self-size|gemma3|gemma3-12b|qa",
+              "self-size|gemma3|gemma3-1b|code",
+              "self-size|gemma3|gemma3-1b|math",
+              "self-size|gemma3|gemma3-1b|qa",
+              "self-size|gemma3|gemma3-270m|code",
+              "self-size|gemma3|gemma3-270m|math",
+              "self-size|gemma3|gemma3-270m|qa",
+              "self-size|gemma3|gemma3-4b|code",
+              "self-size|gemma3|gemma3-4b|math",
+              "self-size|gemma3|gemma3-4b|qa"
+            ]
+          },
+          "held_out_D": 150,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa",
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa",
+            "self-size|gemma3|gemma3-12b|code",
+            "self-size|gemma3|gemma3-12b|math",
+            "self-size|gemma3|gemma3-12b|qa",
+            "self-size|gemma3|gemma3-1b|code",
+            "self-size|gemma3|gemma3-1b|math",
+            "self-size|gemma3|gemma3-1b|qa",
+            "self-size|gemma3|gemma3-270m|code",
+            "self-size|gemma3|gemma3-270m|math",
+            "self-size|gemma3|gemma3-270m|qa",
+            "self-size|gemma3|gemma3-4b|code",
+            "self-size|gemma3|gemma3-4b|math",
+            "self-size|gemma3|gemma3-4b|qa"
+          ]
+        },
+        {
+          "fit": {
+            "candidate": "separable_size_plus_data",
+            "include_size": true,
+            "law": "Delta L_c = a_c - alpha_c log(r_storage) + b_c (D/600)^(-beta_c)",
+            "n_train": 18,
+            "parameters": {
+              "code": {
+                "beta_at_bound": false,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.09907702660383892,
+                  "alpha": 0.013232385035356885,
+                  "b": -0.0002197457422982614,
+                  "beta": 2.9538211595481267
+                },
+                "rank": 3,
+                "sse": 0.00244940242427703
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.10809769396414201,
+                  "alpha": -0.0007153661793433914,
+                  "b": -6.8961577409843875e-06,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 3,
+                "sse": 0.0020632126467086892
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 14.05296319218648,
+                  "alpha": 0.16915563969653302,
+                  "b": -15.464213784197499,
+                  "beta": 0.010000001332812692
+                },
+                "rank": 3,
+                "sse": 0.06323170834211664
+              }
+            },
+            "parameters_per_capability": 4,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|150|code",
+              "data|gemma3|gemma3-4b|150|math",
+              "data|gemma3|gemma3-4b|150|qa",
+              "data|gemma3|gemma3-4b|75|code",
+              "data|gemma3|gemma3-4b|75|math",
+              "data|gemma3|gemma3-4b|75|qa",
+              "self-size|gemma3|gemma3-12b|code",
+              "self-size|gemma3|gemma3-12b|math",
+              "self-size|gemma3|gemma3-12b|qa",
+              "self-size|gemma3|gemma3-1b|code",
+              "self-size|gemma3|gemma3-1b|math",
+              "self-size|gemma3|gemma3-1b|qa",
+              "self-size|gemma3|gemma3-270m|code",
+              "self-size|gemma3|gemma3-270m|math",
+              "self-size|gemma3|gemma3-270m|qa",
+              "self-size|gemma3|gemma3-4b|code",
+              "self-size|gemma3|gemma3-4b|math",
+              "self-size|gemma3|gemma3-4b|qa"
+            ]
+          },
+          "held_out_D": 300,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa",
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa",
+            "self-size|gemma3|gemma3-12b|code",
+            "self-size|gemma3|gemma3-12b|math",
+            "self-size|gemma3|gemma3-12b|qa",
+            "self-size|gemma3|gemma3-1b|code",
+            "self-size|gemma3|gemma3-1b|math",
+            "self-size|gemma3|gemma3-1b|qa",
+            "self-size|gemma3|gemma3-270m|code",
+            "self-size|gemma3|gemma3-270m|math",
+            "self-size|gemma3|gemma3-270m|qa",
+            "self-size|gemma3|gemma3-4b|code",
+            "self-size|gemma3|gemma3-4b|math",
+            "self-size|gemma3|gemma3-4b|qa"
+          ]
+        },
+        {
+          "fit": {
+            "candidate": "separable_size_plus_data",
+            "include_size": true,
+            "law": "Delta L_c = a_c - alpha_c log(r_storage) + b_c (D/600)^(-beta_c)",
+            "n_train": 18,
+            "parameters": {
+              "code": {
+                "beta_at_bound": false,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.1524876763150955,
+                  "alpha": 0.0033483979740706543,
+                  "b": -0.0016951286391903224,
+                  "beta": 2.119188494500598
+                },
+                "rank": 3,
+                "sse": 0.003253577291210471
+              },
+              "math": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 0.14121883045573863,
+                  "alpha": -0.007017720273469446,
+                  "b": -1.2404370232648072e-05,
+                  "beta": 3.9999999129185557
+                },
+                "rank": 3,
+                "sse": 0.003119637324675538
+              },
+              "qa": {
+                "beta_at_bound": true,
+                "optimizer_success": true,
+                "parameters": {
+                  "a": 18.088184962770015,
+                  "alpha": 0.1389222689647749,
+                  "b": -19.340574746291995,
+                  "beta": 0.010000000815696002
+                },
+                "rank": 3,
+                "sse": 0.07529951072713544
+              }
+            },
+            "parameters_per_capability": 4,
+            "status": "ok",
+            "train_row_ids": [
+              "data|gemma3|gemma3-4b|150|code",
+              "data|gemma3|gemma3-4b|150|math",
+              "data|gemma3|gemma3-4b|150|qa",
+              "data|gemma3|gemma3-4b|300|code",
+              "data|gemma3|gemma3-4b|300|math",
+              "data|gemma3|gemma3-4b|300|qa",
+              "data|gemma3|gemma3-4b|75|code",
+              "data|gemma3|gemma3-4b|75|math",
+              "data|gemma3|gemma3-4b|75|qa",
+              "self-size|gemma3|gemma3-12b|code",
+              "self-size|gemma3|gemma3-12b|math",
+              "self-size|gemma3|gemma3-12b|qa",
+              "self-size|gemma3|gemma3-1b|code",
+              "self-size|gemma3|gemma3-1b|math",
+              "self-size|gemma3|gemma3-1b|qa",
+              "self-size|gemma3|gemma3-270m|code",
+              "self-size|gemma3|gemma3-270m|math",
+              "self-size|gemma3|gemma3-270m|qa"
+            ]
+          },
+          "held_out_D": 600,
+          "test_row_ids": [
+            "data|gemma3|gemma3-4b|600|code",
+            "data|gemma3|gemma3-4b|600|math",
+            "data|gemma3|gemma3-4b|600|qa"
+          ],
+          "train_row_ids": [
+            "data|gemma3|gemma3-4b|150|code",
+            "data|gemma3|gemma3-4b|150|math",
+            "data|gemma3|gemma3-4b|150|qa",
+            "data|gemma3|gemma3-4b|300|code",
+            "data|gemma3|gemma3-4b|300|math",
+            "data|gemma3|gemma3-4b|300|qa",
+            "data|gemma3|gemma3-4b|75|code",
+            "data|gemma3|gemma3-4b|75|math",
+            "data|gemma3|gemma3-4b|75|qa",
+            "self-size|gemma3|gemma3-12b|code",
+            "self-size|gemma3|gemma3-12b|math",
+            "self-size|gemma3|gemma3-12b|qa",
+            "self-size|gemma3|gemma3-1b|code",
+            "self-size|gemma3|gemma3-1b|math",
+            "self-size|gemma3|gemma3-1b|qa",
+            "self-size|gemma3|gemma3-270m|code",
+            "self-size|gemma3|gemma3-270m|math",
+            "self-size|gemma3|gemma3-270m|qa"
+          ]
+        }
+      ],
+      "metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.0734946690806795,
+            "n": 4,
+            "relative_error": 0.7081046481890231,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "math": {
+            "mae": 0.05945976129899301,
+            "n": 4,
+            "relative_error": 0.5156467710055752,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "qa": {
+            "mae": 1.7618013093323992,
+            "n": 4,
+            "relative_error": 1.4177548238858677,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          }
+        },
+        "mae": 0.6315852465706905,
+        "n": 12,
+        "relative_error": 1.2962049983382753,
+        "sign_accuracy": 1.0,
+        "sign_correct": 12
+      },
+      "parameters_per_capability": 4,
+      "protocol": "leave one of four Gemma-3 4B data budgets out (all rotations)",
+      "records": [
+        {
+          "D": 75,
+          "absolute_error": 0.10590716963401403,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 75,
+          "model": "gemma3-4b",
+          "observed": 0.07650780421275949,
+          "predicted": 0.18241497384677352,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|75|math"
+        },
+        {
+          "D": 75,
+          "absolute_error": 0.1229985809211217,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 75,
+          "model": "gemma3-4b",
+          "observed": 0.02136846767050482,
+          "predicted": 0.14436704859162652,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|75|code"
+        },
+        {
+          "D": 75,
+          "absolute_error": 6.197507968988627,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 75,
+          "model": "gemma3-4b",
+          "observed": -1.3266309760956174,
+          "predicted": -7.524138945084244,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|75|qa"
+        },
+        {
+          "D": 150,
+          "absolute_error": 0.02591811815076403,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 150,
+          "model": "gemma3-4b",
+          "observed": 0.13742612517048036,
+          "predicted": 0.11150800701971633,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|150|math"
+        },
+        {
+          "D": 150,
+          "absolute_error": 0.023843904200690297,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 150,
+          "model": "gemma3-4b",
+          "observed": 0.11038529672276354,
+          "predicted": 0.13422920092345383,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|150|code"
+        },
+        {
+          "D": 150,
+          "absolute_error": 0.38831793979188545,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 150,
+          "model": "gemma3-4b",
+          "observed": -1.458976593625498,
+          "predicted": -1.0706586538336125,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|150|qa"
+        },
+        {
+          "D": 300,
+          "absolute_error": 0.05922402861074029,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 300,
+          "model": "gemma3-4b",
+          "observed": 0.16588687679951508,
+          "predicted": 0.10666284818877479,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|300|math"
+        },
+        {
+          "D": 300,
+          "absolute_error": 0.07583935853467216,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 300,
+          "model": "gemma3-4b",
+          "observed": 0.19771368467670503,
+          "predicted": 0.12187432614203286,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|300|code"
+        },
+        {
+          "D": 300,
+          "absolute_error": 0.23855022693626982,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 300,
+          "model": "gemma3-4b",
+          "observed": -0.9670692231075693,
+          "predicted": -1.205619450043839,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|300|qa"
+        },
+        {
+          "D": 600,
+          "absolute_error": 0.04678972880045368,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_D": 600,
+          "model": "gemma3-4b",
+          "observed": 0.08142332171541145,
+          "predicted": 0.12821305051586512,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|600|math"
+        },
+        {
+          "D": 600,
+          "absolute_error": 0.07129683266623382,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_D": 600,
+          "model": "gemma3-4b",
+          "observed": 0.08569530558015948,
+          "predicted": 0.1569921382463933,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|600|code"
+        },
+        {
+          "D": 600,
+          "absolute_error": 0.222829101612815,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_D": 600,
+          "model": "gemma3-4b",
+          "observed": -1.2180029880478092,
+          "predicted": -0.9951738864349942,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "data|gemma3|gemma3-4b|600|qa"
+        }
+      ],
+      "status": "PARTIAL_ONE_SIZE_DATA_LADDER"
+    },
+    "verdict": "no_clean_monotone_data_exponent"
+  },
+  "generated": "2026-09-04",
+  "inputs_mutated": false,
+  "qa_caveat": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+  "source_referenced_size_law": {
+    "family_specific_exponent": {
+      "added_qwen_parameters_per_capability": 2,
+      "full_data_fit": {
+        "law": "Delta L_c = floor_c - alpha_c log(r_storage)",
+        "n_train": 6,
+        "n_train_per_capability": 2,
+        "parameters": {
+          "code": {
+            "alpha": 0.21629382337062647,
+            "floor": -0.2890553580384991
+          },
+          "math": {
+            "alpha": 0.12203657839788659,
+            "floor": -0.1384027390536564
+          },
+          "qa": {
+            "alpha": 0.2859440215479825,
+            "floor": -2.9275852873483847
+          }
+        },
+        "status": "ok",
+        "train_families": [
+          "qwen3"
+        ],
+        "train_models": [
+          "Qwen3-0.6B",
+          "Qwen3-1.7B"
+        ],
+        "train_row_ids": [
+          "size|qwen3|Qwen3-0.6B|code",
+          "size|qwen3|Qwen3-0.6B|math",
+          "size|qwen3|Qwen3-0.6B|qa",
+          "size|qwen3|Qwen3-1.7B|code",
+          "size|qwen3|Qwen3-1.7B|math",
+          "size|qwen3|Qwen3-1.7B|qa"
+        ]
+      },
+      "heldout_metrics": {
+        "mae": null,
+        "n": 0,
+        "relative_error": null,
+        "sign_accuracy": null,
+        "sign_correct": 0
+      },
+      "in_sample_metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 4.163336342344337e-17,
+            "n": 2,
+            "relative_error": 3.6964712729462886e-16,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          },
+          "math": {
+            "mae": 1.3877787807814457e-17,
+            "n": 2,
+            "relative_error": 2.1838367782881218e-16,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          },
+          "qa": {
+            "mae": 1.3322676295501878e-15,
+            "n": 2,
+            "relative_error": 5.257538709109304e-16,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          }
+        },
+        "mae": 4.625929269271486e-16,
+        "n": 6,
+        "relative_error": 5.120592731542176e-16,
+        "sign_accuracy": 1.0,
+        "sign_correct": 6
+      },
+      "reason": "two Qwen sizes exactly identify a Qwen intercept and exponent, leaving no Qwen size for held-out evaluation",
+      "records": [
+        {
+          "absolute_error": 0.0,
+          "capability": "math",
+          "model": "Qwen3-0.6B",
+          "observed": 0.09311529271206687,
+          "predicted": 0.09311529271206687,
+          "qa_annotation": "",
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|math"
+        },
+        {
+          "absolute_error": 5.551115123125783e-17,
+          "capability": "code",
+          "model": "Qwen3-0.6B",
+          "observed": 0.12127997688529324,
+          "predicted": 0.1212799768852933,
+          "qa_annotation": "",
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|code"
+        },
+        {
+          "absolute_error": 1.7763568394002505e-15,
+          "capability": "qa",
+          "model": "Qwen3-0.6B",
+          "observed": -2.38511516951107,
+          "predicted": -2.385115169511068,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|qa"
+        },
+        {
+          "absolute_error": 2.7755575615628914e-17,
+          "capability": "math",
+          "model": "Qwen3-1.7B",
+          "observed": -0.033980174731182755,
+          "predicted": -0.03398017473118278,
+          "qa_annotation": "",
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|math"
+        },
+        {
+          "absolute_error": 2.7755575615628914e-17,
+          "capability": "code",
+          "model": "Qwen3-1.7B",
+          "observed": -0.10398006356544354,
+          "predicted": -0.10398006356544351,
+          "qa_annotation": "",
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|code"
+        },
+        {
+          "absolute_error": 8.881784197001252e-16,
+          "capability": "qa",
+          "model": "Qwen3-1.7B",
+          "observed": -2.6829126787361623,
+          "predicted": -2.6829126787361615,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|qa"
+        }
+      ],
+      "status": "NON-DECISIONAL_UNDERIDENTIFIED_HELDOUT",
+      "trend_sign_matches_gemma": {
+        "code": true,
+        "math": true,
+        "qa": true
+      }
+    },
+    "hierarchical_intercept": {
+      "added_qwen_parameters_per_capability": 1,
+      "folds": [
+        {
+          "calibration_models": [
+            "Qwen3-1.7B"
+          ],
+          "held_out_model": "Qwen3-0.6B",
+          "qwen_intercepts": {
+            "code": -0.20866316069092272,
+            "math": -0.1557559696671601,
+            "qa": -1.1408947757971324
+          },
+          "test_row_ids": [
+            "size|qwen3|Qwen3-0.6B|code",
+            "size|qwen3|Qwen3-0.6B|math",
+            "size|qwen3|Qwen3-0.6B|qa"
+          ],
+          "train_row_ids": [
+            "size|qwen3|Qwen3-1.7B|code",
+            "size|qwen3|Qwen3-1.7B|math",
+            "size|qwen3|Qwen3-1.7B|qa"
+          ]
+        },
+        {
+          "calibration_models": [
+            "Qwen3-0.6B"
+          ],
+          "held_out_model": "Qwen3-1.7B",
+          "qwen_intercepts": {
+            "code": -0.12633605004818707,
+            "math": -0.2351690977152317,
+            "qa": -0.9834989628265518
+          },
+          "test_row_ids": [
+            "size|qwen3|Qwen3-1.7B|code",
+            "size|qwen3|Qwen3-1.7B|math",
+            "size|qwen3|Qwen3-1.7B|qa"
+          ],
+          "train_row_ids": [
+            "size|qwen3|Qwen3-0.6B|code",
+            "size|qwen3|Qwen3-0.6B|math",
+            "size|qwen3|Qwen3-0.6B|qa"
+          ]
+        }
+      ],
+      "metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.08232711064273565,
+            "n": 2,
+            "relative_error": 0.7309517522770771,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          },
+          "math": {
+            "mae": 0.0794131280480716,
+            "n": 2,
+            "relative_error": 1.2496610563005477,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          },
+          "qa": {
+            "mae": 0.1573958129705808,
+            "n": 2,
+            "relative_error": 0.06211323918632998,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          }
+        },
+        "mae": 0.10637868388712934,
+        "n": 6,
+        "relative_error": 0.11775405195273185,
+        "sign_accuracy": 1.0,
+        "sign_correct": 6
+      },
+      "protocol": "keep Gemma floor/exponent fixed; fit a Qwen intercept on one Qwen size and predict the other (both rotations)",
+      "records": [
+        {
+          "absolute_error": 0.0794131280480716,
+          "calibration_model": "Qwen3-1.7B",
+          "capability": "math",
+          "family": "qwen3",
+          "held_out_model": "Qwen3-0.6B",
+          "model": "Qwen3-0.6B",
+          "observed": 0.09311529271206687,
+          "predicted": 0.17252842076013847,
+          "qa_annotation": "",
+          "qwen_intercept": -0.1557559696671601,
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|math"
+        },
+        {
+          "absolute_error": 0.08232711064273565,
+          "calibration_model": "Qwen3-1.7B",
+          "capability": "code",
+          "family": "qwen3",
+          "held_out_model": "Qwen3-0.6B",
+          "model": "Qwen3-0.6B",
+          "observed": 0.12127997688529324,
+          "predicted": 0.03895286624255759,
+          "qa_annotation": "",
+          "qwen_intercept": -0.20866316069092272,
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|code"
+        },
+        {
+          "absolute_error": 0.1573958129705808,
+          "calibration_model": "Qwen3-1.7B",
+          "capability": "qa",
+          "family": "qwen3",
+          "held_out_model": "Qwen3-0.6B",
+          "model": "Qwen3-0.6B",
+          "observed": -2.38511516951107,
+          "predicted": -2.5425109824816507,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "qwen_intercept": -1.1408947757971324,
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|qa"
+        },
+        {
+          "absolute_error": 0.0794131280480716,
+          "calibration_model": "Qwen3-0.6B",
+          "capability": "math",
+          "family": "qwen3",
+          "held_out_model": "Qwen3-1.7B",
+          "model": "Qwen3-1.7B",
+          "observed": -0.033980174731182755,
+          "predicted": -0.11339330277925436,
+          "qa_annotation": "",
+          "qwen_intercept": -0.2351690977152317,
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|math"
+        },
+        {
+          "absolute_error": 0.08232711064273564,
+          "calibration_model": "Qwen3-0.6B",
+          "capability": "code",
+          "family": "qwen3",
+          "held_out_model": "Qwen3-1.7B",
+          "model": "Qwen3-1.7B",
+          "observed": -0.10398006356544354,
+          "predicted": -0.0216529529227079,
+          "qa_annotation": "",
+          "qwen_intercept": -0.12633605004818707,
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|code"
+        },
+        {
+          "absolute_error": 0.1573958129705808,
+          "calibration_model": "Qwen3-0.6B",
+          "capability": "qa",
+          "family": "qwen3",
+          "held_out_model": "Qwen3-1.7B",
+          "model": "Qwen3-1.7B",
+          "observed": -2.6829126787361623,
+          "predicted": -2.5255168657655815,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "qwen_intercept": -0.9834989628265518,
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|qa"
+        }
+      ],
+      "status": "ok"
+    },
+    "registered_ratios": {
+      "gemma3": {
+        "gemma3-12b": 0.445,
+        "gemma3-1b": 0.036,
+        "gemma3-270m": 0.01,
+        "gemma3-4b": 0.157
+      },
+      "qwen3": {
+        "Qwen3-0.6B": 0.15,
+        "Qwen3-1.7B": 0.425
+      }
+    },
+    "rows": [
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-270m",
+        "observed": 0.8084463555084103,
+        "post_training_loss": 1.4103273223215638,
+        "qa_annotation": "",
+        "r_storage": 0.01,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-270m|math",
+        "self_observed": 0.09433247461736616,
+        "source_loss": 0.6018809668131535,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-270m",
+        "observed": 0.6294840566873339,
+        "post_training_loss": 1.3634300265721877,
+        "qa_annotation": "",
+        "r_storage": 0.01,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-270m|code",
+        "self_observed": 0.17313441098317095,
+        "source_loss": 0.7339459698848538,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-270m",
+        "observed": -1.16398468625498,
+        "post_training_loss": 4.622447709163347,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.01,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-270m|qa",
+        "self_observed": -0.6532930776892432,
+        "source_loss": 5.786432395418327,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-1b",
+        "observed": 0.7380379602970146,
+        "post_training_loss": 1.3399189271101681,
+        "qa_annotation": "",
+        "r_storage": 0.036,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-1b|math",
+        "self_observed": 0.11941203212607965,
+        "source_loss": 0.6018809668131535,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-1b",
+        "observed": 0.46445969884853855,
+        "post_training_loss": 1.1984056687333924,
+        "qa_annotation": "",
+        "r_storage": 0.036,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-1b|code",
+        "self_observed": 0.1383137732506643,
+        "source_loss": 0.7339459698848538,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-1b",
+        "observed": -0.9659642679282872,
+        "post_training_loss": 4.82046812749004,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.036,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-1b|qa",
+        "self_observed": -0.7473232071713145,
+        "source_loss": 5.786432395418327,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.220241703288377,
+        "post_training_loss": 0.8221226701015305,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-4b|math",
+        "self_observed": 0.08142332171541145,
+        "source_loss": 0.6018809668131535,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": 0.15353742249778568,
+        "post_training_loss": 0.8874833923826395,
+        "qa_annotation": "",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-4b|code",
+        "self_observed": 0.08569530558015948,
+        "source_loss": 0.7339459698848538,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-4b",
+        "observed": -1.530580801792829,
+        "post_training_loss": 4.255851593625498,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.157,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-4b|qa",
+        "self_observed": -1.2180029880478092,
+        "source_loss": 5.786432395418327,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "gemma3",
+        "model": "gemma3-12b",
+        "observed": 0.14169760569783296,
+        "post_training_loss": 0.7435785725109865,
+        "qa_annotation": "",
+        "r_storage": 0.445,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-12b|math",
+        "self_observed": 0.09921957872404907,
+        "source_loss": 0.6018809668131535,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "gemma3",
+        "model": "gemma3-12b",
+        "observed": 0.15500442869796283,
+        "post_training_loss": 0.8889503985828167,
+        "qa_annotation": "",
+        "r_storage": 0.445,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-12b|code",
+        "self_observed": 0.13842449069973428,
+        "source_loss": 0.7339459698848538,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "gemma3",
+        "model": "gemma3-12b",
+        "observed": -1.5412101593625502,
+        "post_training_loss": 4.245222236055777,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.445,
+        "recipe": "full",
+        "row_id": "size|gemma3|gemma3-12b|qa",
+        "self_observed": -1.1862394173306772,
+        "source_loss": 5.786432395418327,
+        "source_model": "gemma3-27b",
+        "source_path": "results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "full"
+      },
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "qwen3",
+        "model": "Qwen3-0.6B",
+        "observed": 0.09311529271206687,
+        "post_training_loss": 1.0049376493428912,
+        "qa_annotation": "",
+        "r_storage": 0.15,
+        "recipe": "full",
+        "row_id": "size|qwen3|Qwen3-0.6B|math",
+        "self_observed": 0.0005693697729987068,
+        "source_loss": 0.9118223566308243,
+        "source_model": "Qwen3-4B",
+        "source_path": "results/v12-distill/Qwen3-0.6B/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "qwen3",
+        "model": "Qwen3-0.6B",
+        "observed": 0.12127997688529324,
+        "post_training_loss": 1.667075989598382,
+        "qa_annotation": "",
+        "r_storage": 0.15,
+        "recipe": "full",
+        "row_id": "size|qwen3|Qwen3-0.6B|code",
+        "self_observed": 0.07649523259173652,
+        "source_loss": 1.5457960127130888,
+        "source_model": "Qwen3-4B",
+        "source_path": "results/v12-distill/Qwen3-0.6B/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "qwen3",
+        "model": "Qwen3-0.6B",
+        "observed": -2.38511516951107,
+        "post_training_loss": 4.3444418819188195,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.15,
+        "recipe": "full",
+        "row_id": "size|qwen3|Qwen3-0.6B|qa",
+        "self_observed": -1.2818842250922504,
+        "source_loss": 6.7295570514298895,
+        "source_model": "Qwen3-4B",
+        "source_path": "results/v12-distill/Qwen3-0.6B/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "math",
+        "family": "qwen3",
+        "model": "Qwen3-1.7B",
+        "observed": -0.033980174731182755,
+        "post_training_loss": 0.8778421818996416,
+        "qa_annotation": "",
+        "r_storage": 0.425,
+        "recipe": "full",
+        "row_id": "size|qwen3|Qwen3-1.7B|math",
+        "self_observed": -0.13014766278375145,
+        "source_loss": 0.9118223566308243,
+        "source_model": "Qwen3-4B",
+        "source_path": "results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "code",
+        "family": "qwen3",
+        "model": "Qwen3-1.7B",
+        "observed": -0.10398006356544354,
+        "post_training_loss": 1.4418159491476452,
+        "qa_annotation": "",
+        "r_storage": 0.425,
+        "recipe": "full",
+        "row_id": "size|qwen3|Qwen3-1.7B|code",
+        "self_observed": -0.16032216122507936,
+        "source_loss": 1.5457960127130888,
+        "source_model": "Qwen3-4B",
+        "source_path": "results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      },
+      {
+        "D": 600,
+        "capability": "qa",
+        "family": "qwen3",
+        "model": "Qwen3-1.7B",
+        "observed": -2.6829126787361623,
+        "post_training_loss": 4.046644372693727,
+        "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+        "r_storage": 0.425,
+        "recipe": "full",
+        "row_id": "size|qwen3|Qwen3-1.7B|qa",
+        "self_observed": -2.34507610701107,
+        "source_loss": 6.7295570514298895,
+        "source_model": "Qwen3-4B",
+        "source_path": "results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/eval.json",
+        "teacher": "gpt-5.6-luna",
+        "training_mode": "lora"
+      }
+    ],
+    "shared_no_refit": {
+      "added_qwen_parameters_per_capability": 0,
+      "fit": {
+        "law": "Delta L_c = floor_c - alpha_c log(r_storage)",
+        "n_train": 12,
+        "n_train_per_capability": 4,
+        "parameters": {
+          "code": {
+            "alpha": 0.13724364877089246,
+            "floor": -0.012751641948438388
+          },
+          "math": {
+            "alpha": 0.19828875813189037,
+            "floor": -0.047893175402913435
+          },
+          "qa": {
+            "alpha": 0.13481316806054225,
+            "floor": -1.6573729620379518
+          }
+        },
+        "status": "ok",
+        "train_families": [
+          "gemma3"
+        ],
+        "train_models": [
+          "gemma3-12b",
+          "gemma3-1b",
+          "gemma3-270m",
+          "gemma3-4b"
+        ],
+        "train_row_ids": [
+          "size|gemma3|gemma3-12b|code",
+          "size|gemma3|gemma3-12b|math",
+          "size|gemma3|gemma3-12b|qa",
+          "size|gemma3|gemma3-1b|code",
+          "size|gemma3|gemma3-1b|math",
+          "size|gemma3|gemma3-1b|qa",
+          "size|gemma3|gemma3-270m|code",
+          "size|gemma3|gemma3-270m|math",
+          "size|gemma3|gemma3-270m|qa",
+          "size|gemma3|gemma3-4b|code",
+          "size|gemma3|gemma3-4b|math",
+          "size|gemma3|gemma3-4b|qa"
+        ]
+      },
+      "metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.16749960536955488,
+            "n": 2,
+            "relative_error": 1.4871666100600403,
+            "sign_accuracy": 0.5,
+            "sign_correct": 1
+          },
+          "math": {
+            "mae": 0.1954625336911959,
+            "n": 2,
+            "relative_error": 3.075837992074318,
+            "sign_accuracy": 0.5,
+            "sign_correct": 1
+          },
+          "qa": {
+            "mae": 1.0621968693118422,
+            "n": 2,
+            "relative_error": 0.4191756245693089,
+            "sign_accuracy": 1.0,
+            "sign_correct": 2
+          }
+        },
+        "mae": 0.4750530027908644,
+        "n": 6,
+        "relative_error": 0.5258517395297909,
+        "sign_accuracy": 0.6666666666666666,
+        "sign_correct": 4
+      },
+      "protocol": "fit all four Gemma sizes; predict both Qwen sizes with no refit",
+      "records": [
+        {
+          "absolute_error": 0.2351690977152317,
+          "capability": "math",
+          "family": "qwen3",
+          "model": "Qwen3-0.6B",
+          "observed": 0.09311529271206687,
+          "predicted": 0.32828439042729857,
+          "qa_annotation": "",
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|math"
+        },
+        {
+          "absolute_error": 0.12633605004818707,
+          "capability": "code",
+          "family": "qwen3",
+          "model": "Qwen3-0.6B",
+          "observed": 0.12127997688529324,
+          "predicted": 0.2476160269334803,
+          "qa_annotation": "",
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|code"
+        },
+        {
+          "absolute_error": 0.9834989628265518,
+          "capability": "qa",
+          "family": "qwen3",
+          "model": "Qwen3-0.6B",
+          "observed": -2.38511516951107,
+          "predicted": -1.4016162066845181,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.15,
+          "row_id": "size|qwen3|Qwen3-0.6B|qa"
+        },
+        {
+          "absolute_error": 0.1557559696671601,
+          "capability": "math",
+          "family": "qwen3",
+          "model": "Qwen3-1.7B",
+          "observed": -0.033980174731182755,
+          "predicted": 0.12177579493597734,
+          "qa_annotation": "",
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|math"
+        },
+        {
+          "absolute_error": 0.20866316069092272,
+          "capability": "code",
+          "family": "qwen3",
+          "model": "Qwen3-1.7B",
+          "observed": -0.10398006356544354,
+          "predicted": 0.10468309712547917,
+          "qa_annotation": "",
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|code"
+        },
+        {
+          "absolute_error": 1.1408947757971324,
+          "capability": "qa",
+          "family": "qwen3",
+          "model": "Qwen3-1.7B",
+          "observed": -2.6829126787361623,
+          "predicted": -1.54201790293903,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.425,
+          "row_id": "size|qwen3|Qwen3-1.7B|qa"
+        }
+      ],
+      "status": "ok"
+    },
+    "source_matching_caveat": "Gemma uses a 27B source and Qwen a 4B source; absolute source capability and source size differ, so r_storage is imperfectly matched.",
+    "verdict": "hierarchical",
+    "within_gemma_leave_one_size_out": {
+      "folds": [
+        {
+          "held_out_model": "gemma3-12b",
+          "test_row_ids": [
+            "size|gemma3|gemma3-12b|code",
+            "size|gemma3|gemma3-12b|math",
+            "size|gemma3|gemma3-12b|qa"
+          ],
+          "train_row_ids": [
+            "size|gemma3|gemma3-1b|code",
+            "size|gemma3|gemma3-1b|math",
+            "size|gemma3|gemma3-1b|qa",
+            "size|gemma3|gemma3-270m|code",
+            "size|gemma3|gemma3-270m|math",
+            "size|gemma3|gemma3-270m|qa",
+            "size|gemma3|gemma3-4b|code",
+            "size|gemma3|gemma3-4b|math",
+            "size|gemma3|gemma3-4b|qa"
+          ]
+        },
+        {
+          "held_out_model": "gemma3-1b",
+          "test_row_ids": [
+            "size|gemma3|gemma3-1b|code",
+            "size|gemma3|gemma3-1b|math",
+            "size|gemma3|gemma3-1b|qa"
+          ],
+          "train_row_ids": [
+            "size|gemma3|gemma3-12b|code",
+            "size|gemma3|gemma3-12b|math",
+            "size|gemma3|gemma3-12b|qa",
+            "size|gemma3|gemma3-270m|code",
+            "size|gemma3|gemma3-270m|math",
+            "size|gemma3|gemma3-270m|qa",
+            "size|gemma3|gemma3-4b|code",
+            "size|gemma3|gemma3-4b|math",
+            "size|gemma3|gemma3-4b|qa"
+          ]
+        },
+        {
+          "held_out_model": "gemma3-270m",
+          "test_row_ids": [
+            "size|gemma3|gemma3-270m|code",
+            "size|gemma3|gemma3-270m|math",
+            "size|gemma3|gemma3-270m|qa"
+          ],
+          "train_row_ids": [
+            "size|gemma3|gemma3-12b|code",
+            "size|gemma3|gemma3-12b|math",
+            "size|gemma3|gemma3-12b|qa",
+            "size|gemma3|gemma3-1b|code",
+            "size|gemma3|gemma3-1b|math",
+            "size|gemma3|gemma3-1b|qa",
+            "size|gemma3|gemma3-4b|code",
+            "size|gemma3|gemma3-4b|math",
+            "size|gemma3|gemma3-4b|qa"
+          ]
+        },
+        {
+          "held_out_model": "gemma3-4b",
+          "test_row_ids": [
+            "size|gemma3|gemma3-4b|code",
+            "size|gemma3|gemma3-4b|math",
+            "size|gemma3|gemma3-4b|qa"
+          ],
+          "train_row_ids": [
+            "size|gemma3|gemma3-12b|code",
+            "size|gemma3|gemma3-12b|math",
+            "size|gemma3|gemma3-12b|qa",
+            "size|gemma3|gemma3-1b|code",
+            "size|gemma3|gemma3-1b|math",
+            "size|gemma3|gemma3-1b|qa",
+            "size|gemma3|gemma3-270m|code",
+            "size|gemma3|gemma3-270m|math",
+            "size|gemma3|gemma3-270m|qa"
+          ]
+        }
+      ],
+      "metrics": {
+        "by_capability": {
+          "code": {
+            "mae": 0.09025354711846383,
+            "n": 4,
+            "relative_error": 0.25741026270862744,
+            "sign_accuracy": 0.75,
+            "sign_correct": 3
+          },
+          "math": {
+            "mae": 0.1527585586811273,
+            "n": 4,
+            "relative_error": 0.32017746310975537,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          },
+          "qa": {
+            "mae": 0.24867848540017612,
+            "n": 4,
+            "relative_error": 0.19122715817981184,
+            "sign_accuracy": 1.0,
+            "sign_correct": 4
+          }
+        },
+        "mae": 0.16389686373325577,
+        "n": 12,
+        "relative_error": 0.23103998894681277,
+        "sign_accuracy": 0.9166666666666666,
+        "sign_correct": 11
+      },
+      "protocol": "fit three Gemma sizes; predict the fourth (all rotations)",
+      "records": [
+        {
+          "absolute_error": 0.08464629739285219,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_model": "gemma3-12b",
+          "model": "gemma3-12b",
+          "observed": 0.14169760569783296,
+          "predicted": 0.05705130830498077,
+          "qa_annotation": "",
+          "r_storage": 0.445,
+          "row_id": "size|gemma3|gemma3-12b|math"
+        },
+        {
+          "absolute_error": 0.1650725800141959,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_model": "gemma3-12b",
+          "model": "gemma3-12b",
+          "observed": 0.15500442869796283,
+          "predicted": -0.010068151316233065,
+          "qa_annotation": "",
+          "r_storage": 0.445,
+          "row_id": "size|gemma3|gemma3-12b|code"
+        },
+        {
+          "absolute_error": 0.020424440843721525,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_model": "gemma3-12b",
+          "model": "gemma3-12b",
+          "observed": -1.5412101593625502,
+          "predicted": -1.5616346002062718,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.445,
+          "row_id": "size|gemma3|gemma3-12b|qa"
+        },
+        {
+          "absolute_error": 0.1824437258939039,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_model": "gemma3-1b",
+          "model": "gemma3-1b",
+          "observed": 0.7380379602970146,
+          "predicted": 0.5555942344031107,
+          "qa_annotation": "",
+          "r_storage": 0.036,
+          "row_id": "size|gemma3|gemma3-1b|math"
+        },
+        {
+          "absolute_error": 0.03019469168960337,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_model": "gemma3-1b",
+          "model": "gemma3-1b",
+          "observed": 0.46445969884853855,
+          "predicted": 0.4342650071589352,
+          "qa_annotation": "",
+          "r_storage": 0.036,
+          "row_id": "size|gemma3|gemma3-1b|code"
+        },
+        {
+          "absolute_error": 0.3500829567880921,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_model": "gemma3-1b",
+          "model": "gemma3-1b",
+          "observed": -0.9659642679282872,
+          "predicted": -1.3160472247163792,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.036,
+          "row_id": "size|gemma3|gemma3-1b|qa"
+        },
+        {
+          "absolute_error": 0.19698539846392515,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_model": "gemma3-270m",
+          "model": "gemma3-270m",
+          "observed": 0.8084463555084103,
+          "predicted": 1.0054317539723354,
+          "qa_annotation": "",
+          "r_storage": 0.01,
+          "row_id": "size|gemma3|gemma3-270m|math"
+        },
+        {
+          "absolute_error": 0.03538396681765632,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_model": "gemma3-270m",
+          "model": "gemma3-270m",
+          "observed": 0.6294840566873339,
+          "predicted": 0.5941000898696776,
+          "qa_annotation": "",
+          "r_storage": 0.01,
+          "row_id": "size|gemma3|gemma3-270m|code"
+        },
+        {
+          "absolute_error": 0.4418924237767554,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_model": "gemma3-270m",
+          "model": "gemma3-270m",
+          "observed": -1.16398468625498,
+          "predicted": -0.7220922624782247,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.01,
+          "row_id": "size|gemma3|gemma3-270m|qa"
+        },
+        {
+          "absolute_error": 0.14695881297382807,
+          "capability": "math",
+          "family": "gemma3",
+          "held_out_model": "gemma3-4b",
+          "model": "gemma3-4b",
+          "observed": 0.220241703288377,
+          "predicted": 0.36720051626220507,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "size|gemma3|gemma3-4b|math"
+        },
+        {
+          "absolute_error": 0.13036294995239972,
+          "capability": "code",
+          "family": "gemma3",
+          "held_out_model": "gemma3-4b",
+          "model": "gemma3-4b",
+          "observed": 0.15353742249778568,
+          "predicted": 0.2839003724501854,
+          "qa_annotation": "",
+          "r_storage": 0.157,
+          "row_id": "size|gemma3|gemma3-4b|code"
+        },
+        {
+          "absolute_error": 0.18231412019213544,
+          "capability": "qa",
+          "family": "gemma3",
+          "held_out_model": "gemma3-4b",
+          "model": "gemma3-4b",
+          "observed": -1.530580801792829,
+          "predicted": -1.3482666816006936,
+          "qa_annotation": "Loss-space only: V19 showed that lower QA loss does not reliably track higher QA accuracy; this row is not evidence of behavioral improvement.",
+          "r_storage": 0.157,
+          "row_id": "size|gemma3|gemma3-4b|qa"
+        }
+      ],
+      "status": "PARTIAL_ONE_FAMILY"
+    }
+  },
+  "sources": {
+    "gemma3": {
+      "losses": {
+        "code": 0.7339459698848538,
+        "math": 0.6018809668131535,
+        "qa": 5.786432395418327
+      },
+      "model": "gemma3-27b",
+      "path": "results/v6-capability-geometry/gemma3-27b/prune_losses.json"
+    },
+    "qwen3": {
+      "losses": {
+        "code": 1.5457960127130888,
+        "math": 0.9118223566308243,
+        "qa": 6.7295570514298895
+      },
+      "model": "Qwen3-4B",
+      "path": "results/v6-capability-geometry/Qwen3-4B/prune_losses.json"
+    }
+  },
+  "version": 21
+}

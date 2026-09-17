@@ -1,0 +1,47 @@
+\begin{table}[!htbp]
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+\midrule
+\textbf{pruning}: source transfer at fixed density: 3 sizes by 3 stages Pythia panel, leave-one-step-out\newline{\itshape \mbox{held-out} pretraining stage (in-range)} [Retrospective / fixed / retrospective] & Candidate: configuration-indicator ordinary least squares & \textbf{0.253} (+0.16) & \textbf{0.292} (+0.22)$^{*}$ & 0.806 (-0.31) \\
+ & Same-input baseline without pretraining tokens & 0.613 & 0.693 & 0.774 \\
+ & Simple baseline: per-configuration median; zero change & 0.413 & 0.516 & \textbf{0.500} \\
+\addlinespace[2pt]
+\midrule
+\textbf{quantization}: source transfer at fixed bit width: 3 sizes by 3 stages Pythia panel, leave-one-step-out\newline{\itshape \mbox{held-out} pretraining stage (in-range)} [Retrospective / fixed / retrospective] & Candidate: configuration-indicator ordinary least squares & \textbf{1.144} (+0.27) & \textbf{0.626} (+0.93)$^{*}$ & 1.989 (-0.52) \\
+ & Same-input baseline without pretraining tokens & 1.989 & 2.077 & 1.964 \\
+ & Simple baseline: per-configuration median & 1.410 & 1.553 & \textbf{1.473} \\
+\addlinespace[2pt]
+\midrule
+\textbf{pruning}: new stage 96 thousand on 160 million and 1.4 billion, all measured density\newline{\itshape stage 96 thousand (interpolation between 64 thousand and 143 thousand)} [Frozen / fixed / retrospective] & Candidate: configuration-indicator ordinary least squares & \textbf{0.090} (+0.25) & \textbf{0.128} (+0.05) & \textbf{0.426} (+0.01) \\
+ & Same-input baseline without pretraining tokens & 0.343 & 0.179 & 0.438 \\
+ & Simple baseline: per-configuration median & 0.367 & 0.438 & 0.832 \\
+\addlinespace[2pt]
+\midrule
+\textbf{quantization}: new stage 96 thousand on 160 million, 410 million, 1.4 billion; bit width $\ge4$ (near-zero regime)\newline{\itshape stage 96 thousand (interpolation)} [Frozen / absent / retrospective] & Candidate: configuration-indicator ordinary least squares & \textbf{0.029} (+0.06) & 0.104 (-0.01) & 0.173 (-0.04) \\
+\bottomrule\end{tabular*}
+\caption{The table tests predictions for unseen source states at fixed compression settings. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give improvement over the strongest baseline. Asterisks mark confidence intervals excluding zero. All specified forms are reported.}
+\par\smallskip{\footnotesize Entries are mean absolute errors in nats per native token per capability; bold marks the smallest error in the group; parentheses give the improvement of the candidate over the strongest listed baseline, with an asterisk where the bootstrap 95\% interval excludes zero.\par}
+\label{tab:pred_source}\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+\midrule
+ & Same-input baseline: none available & -- & -- & -- \\
+ & Simple baseline: per-bit median & 0.084 & \textbf{0.094} & \textbf{0.134} \\
+\addlinespace[2pt]
+\textbf{quantization}: new stage 96 thousand on 160 million, 410 million, 1.4 billion; 3 bits (collapse regime)\newline{\itshape stage 96 thousand (interpolation)} [Frozen / absent / retrospective] & Candidate: configuration-indicator ordinary least squares & \textbf{1.488} (+0.45) & 1.963 (-1.12) & 2.046 (-0.32) \\
+ & Same-input baseline: none available & -- & -- & -- \\
+ & Simple baseline: per-bit median & 1.934 & \textbf{0.843} & \textbf{1.727} \\
+\addlinespace[2pt]
+\midrule
+\textbf{distillation}: student loss change source transfer: 3 sizes by 3 stages low-rank adaptation panel, leave-one-step-out\newline{\itshape \mbox{held-out} pretraining stage (in-range)} [Retrospective / fixed / retrospective] & Candidate: linear source size, initial loss, and pretraining tokens & \textbf{0.014} (+0.01) & 0.057 (-0.01) & 0.263 (-0.10) \\
+ & Same-input baseline without pretraining tokens & 0.026 & \textbf{0.044} & 0.265 \\
+ & Simple baseline: constant (mean); constant (median) & 0.031 & 0.061 & \textbf{0.159} \\
+\addlinespace[2pt]
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give improvement over the strongest baseline. Asterisks mark confidence intervals excluding zero. All specified forms are reported.}
+\end{table}

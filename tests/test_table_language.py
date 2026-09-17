@@ -7,17 +7,14 @@ import sys
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-TABLES = ROOT/'paper/paper/tables'
-if not TABLES.exists():
-    TABLES = ROOT/'paper/tables'
-PRIVATE_ROOT = ROOT if (ROOT/'deliverables/TABLE_LANGUAGE_PASS_2026-09-17').exists() else ROOT.parent
+TABLES = ROOT/'results/published-tables'
 sys.path.insert(0, str(ROOT))
 from analysis.paper_table_text import plain_language, PLAIN_CAPTIONS
 
 spec = importlib.util.spec_from_file_location('numeric_table_audit', ROOT/'scripts/caption_only_diff.py')
 audit = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(audit)
-BEFORE = PRIVATE_ROOT/'deliverables/TABLE_LANGUAGE_PASS_2026-09-17/before'
+BEFORE = ROOT/'results/table-language-before'
 NAMES = sorted(p.name for p in BEFORE.glob('*.tex'))
 
 

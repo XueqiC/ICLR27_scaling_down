@@ -1,0 +1,16 @@
+\begin{table}[!htbp]\normalfont
+\centering\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.360000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.520000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.200000000\tabcolsep\relax}@{}}
+\toprule
+Predictor & Mathematics mean absolute error & Code mean absolute error & Question answering mean absolute error & Capability mean absolute error \\
+\midrule
+{Power (pruning development delivered)} & 0.292 & 0.393 & 0.679 & 0.455 \\
+{Per-density regression} & 0.425 & 0.458 & 0.437 & 0.440 \\
+{Median development curve} & 0.080 & 0.054 & 0.065 & 0.066 \\
+Zero change & 0.218 & 0.145 & 0.326 & 0.230 \\
+\bottomrule
+\end{tabular*}
+\caption{The table compares pruning prediction errors when identical model weights are measured twice. Entries are mean absolute errors in nats per native token, with equal weight per measurement. All predictors were frozen before target measurement.}
+\par\smallskip{\footnotesize Pruning repeatability on Pythia-2.8 billion at the final checkpoint, whose two cached revisions carry identical weights; the six cells per capability cover density $\in\{0.85,0.75,0.65\}$ measured on each revision.\par}
+\label{tab:prune_repeat}
+\end{table}

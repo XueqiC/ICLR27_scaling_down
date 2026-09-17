@@ -1,0 +1,44 @@
+\begin{table}[!t]\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.15cm}>{\raggedright\arraybackslash}p{1.4cm}lccc@{}}
+\toprule
+Test & unseen & origin & math & code & QA \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Source axis: seen setting, unseen source state}} \\
+prune: fixed $d$, $3{\times}3$, leave-one-stage-out & stage & RFRA & \textbf{0.253}/0.413{\scriptsize\,med} & \textbf{0.292}/0.516{\scriptsize\,med} & 0.806/\textbf{0.500}{\scriptsize\,0} \\
+\addlinespace[1.5pt]
+quant: fixed $b$, $3{\times}3$, leave-one-stage-out & stage & RFRA & \textbf{1.144}/1.410{\scriptsize\,med} & \textbf{0.626}/1.553{\scriptsize\,med} & 1.989/\textbf{1.473}{\scriptsize\,med} \\
+\addlinespace[1.5pt]
+prune: stage 96k (160M, 1.4B), all $d$ & stage & PFRA & \textbf{0.090}/0.343{\scriptsize\,nD} & \textbf{0.128}/0.179{\scriptsize\,nD} & \textbf{0.426}/0.438{\scriptsize\,nD} \\
+\addlinespace[1.5pt]
+quant: new stage 96k (160M/410M/1.4B), $b\ge4$ & stage & P–RA & \textbf{0.029}/0.084{\scriptsize\,pbm} & 0.104/\textbf{0.094}{\scriptsize\,pbm} & 0.173/\textbf{0.134}{\scriptsize\,pbm} \\
+quant: new stage 96k (160M/410M/1.4B), int3 & stage & P–RA & \textbf{1.488}/1.934{\scriptsize\,pbm} & 1.963/\textbf{0.843}{\scriptsize\,pbm} & 2.046/\textbf{1.727}{\scriptsize\,pbm} \\
+\addlinespace[1.5pt]
+distill: $\delta_c$, $3{\times}3$ LoRA, leave-one-stage-out & stage & RFRA & \textbf{0.014}/0.026{\scriptsize\,nD} & 0.057/\textbf{0.044}{\scriptsize\,nD} & 0.263/\textbf{0.159}{\scriptsize\,c} \\
+\multicolumn{6}{@{}l}{\textit{Configuration axis: unseen setting, size, stage, or pool}} \\
+prune: $d$ 0.65/0.55, dev sources + 410M@96k & $d$ & PRFA & 0.371/\textbf{0.283}{\scriptsize\,A2} & 0.524/\textbf{0.279}{\scriptsize\,A2} & \textbf{0.759}/0.818{\scriptsize\,A2} \\
+prune: 1B@96k, $d=0.65$ & size, stage, $d$ & PFFA & 0.020/\textbf{0.009}{\scriptsize\,A1} & 0.092/\textbf{0.031}{\scriptsize\,A1} & 0.466/\textbf{0.380}{\scriptsize\,A2} \\
+prune: 1B@96k, $d=0.55$ & size, stage, $d$ & PFFA & 0.930/\textbf{0.273}{\scriptsize\,so} & 1.550/\textbf{0.018}{\scriptsize\,so} & 1.426/\textbf{0.530}{\scriptsize\,so} \\
+\addlinespace[1.5pt]
+quant: 1B@96k, int4 & size, stage & PFFA & 0.116/\textbf{0.068}{\scriptsize\,pbm} & 0.046/\textbf{0.012}{\scriptsize\,pbm} & 0.059/\textbf{0.054}{\scriptsize\,nD} \\
+quant: 1B@96k, int3 & size, stage & PFFA & \textbf{0.690}/1.414{\scriptsize\,pbm} & 0.318/\textbf{0.001}{\scriptsize\,pbm} & \textbf{0.182}/0.446{\scriptsize\,pbm} \\
+\addlinespace[1.5pt]
+prune: 1B@32k+112k, $d$ 0.9--0.6 & size, stage & PFFA & 0.215/\textbf{0.169}{\scriptsize\,so} & 0.191/\textbf{0.119}{\scriptsize\,A2} & 0.261/\textbf{0.227}{\scriptsize\,med} \\
+prune: 1B@32k+112k, $d=0.55$ & size, stage, $d$ & PFFA & 1.790/\textbf{0.939}{\scriptsize\,so} & 1.488/\textbf{0.089}{\scriptsize\,so} & 2.225/\textbf{0.393}{\scriptsize\,so} \\
+\addlinespace[1.5pt]
+quant: 1B@32k+112k, $b\ge4$ (5-bit rule incl.) & size, stage, $b$ & PFFA & 0.064/\textbf{0.020}{\scriptsize\,pbm} & 0.041/\textbf{0.028}{\scriptsize\,pbm} & 0.157/\textbf{0.052}{\scriptsize\,pbm} \\
+quant: 1B@32k+112k, int3 & size, stage & PFFA & \textbf{0.256}/1.466{\scriptsize\,pba} & \textbf{0.362}/1.537{\scriptsize\,pba} & 1.972/\textbf{1.000}{\scriptsize\,pbm} \\
+\addlinespace[1.5pt]
+prune: 6.9B@32k+112k, $d$ 0.9--0.6 & size$\uparrow$, stage & PFFA & 0.299/\textbf{0.120}{\scriptsize\,med} & 0.160/\textbf{0.144}{\scriptsize\,A2} & 0.909/\textbf{0.120}{\scriptsize\,med} \\
+prune: 6.9B@32k+112k, $d=0.55$ & size$\uparrow$, stage, $d$ & PFFA & \textbf{0.615}/0.618{\scriptsize\,A2} & 0.547/\textbf{0.535}{\scriptsize\,A2} & 4.472/\textbf{0.904}{\scriptsize\,so} \\
+\addlinespace[1.5pt]
+quant: 6.9B@32k+112k, $b\ge4$ & size$\uparrow$, stage, $b$ & PFFA & 0.181/\textbf{0.036}{\scriptsize\,pbm} & 0.177/\textbf{0.043}{\scriptsize\,pbm} & 0.428/\textbf{0.034}{\scriptsize\,0} \\
+quant: 6.9B@32k+112k, int3 & size$\uparrow$, stage & PFFA & 3.233/\textbf{2.046}{\scriptsize\,pba} & 3.229/\textbf{1.805}{\scriptsize\,pba} & 5.306/\textbf{1.744}{\scriptsize\,pba} \\
+\addlinespace[1.5pt]
+distill: unseen pool U225 (Gemma-3-1B) & pool & PFFA & 0.191/\textbf{0.122}{\scriptsize\,c} & 0.117/\textbf{0.069}{\scriptsize\,c} & \textbf{0.706}/0.710{\scriptsize\,TE} \\
+\addlinespace[1.5pt]
+KD 270M, pool 375 & pool & P/F/F/A & \textbf{0.045}/0.060{\scriptsize\,c} & \textbf{0.036}/0.047{\scriptsize\,c} & \textbf{0.606}/0.862{\scriptsize\,c} \\
+KD 1B, pool 375 & pool & P/F/F/A & \textbf{0.050}/0.057{\scriptsize\,c} & \textbf{0.029}/0.069{\scriptsize\,c} & \textbf{0.444}/1.004{\scriptsize\,c} \\
+KD 4B, pool 375 & student, pool & P/F/F/A & 0.089/\textbf{0.020}{\scriptsize\,c} & 0.050/\textbf{0.038}{\scriptsize\,c} & 1.141/\textbf{1.024}{\scriptsize\,c} \\
+\bottomrule\end{tabular}
+\caption{\scriptsize Prediction tests, all three arms (MAE in nats/token per capability, candidate\,/\,strongest baseline, bold = better). The candidate is the source-conditioned predictor of each arm (configuration-indicator regression on the source axis and for quantization; shared power form for pruning on the configuration axis; $E$-only form for the U225 distillation pool test; joint form with a source term for the multi-student U375 tests). For U375, the headline is the frozen form with the lowest per-capability development MAE; this selection rule was stated after the tests (R). Each U375 group has 12 points per capability; ``student'' marks the held-out Gemma-3-4B. The baseline shown is the stronger of the same-input and the simple baseline per capability, named by code: nD = no-$D_0$ variant, med = per-configuration median or median development curve, 0 = zero change, so = strength-only curve, A1 = $\gamma{=}1$ power form, A2 = per-density regression with fixed interpolation, ct = continuous two-term form, pbm/pba = per-bit median/mean, c = constant, TE = joint $T{+}E$ form. ``unseen'' lists what the test holds out (size$\uparrow$ = five times beyond the development range). Origin code, four letters: prediction (P frozen before measurement regardless of outcome, R retrospective, including leave-one-out), same-input baseline, simple baseline (F pre-specified with the candidate, R computed after the test, -- none), selection (A: all pre-specified forms reported; S: per-capability choice made after the test). Improvements, both baselines separately, and bootstrap intervals are in Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}. Generated by \texttt{v52\_prediction\_tables.py}.}
+\label{tab:pred_main}\end{table}

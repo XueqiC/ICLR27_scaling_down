@@ -1,0 +1,36 @@
+\begin{table}[!htbp]\normalfont
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{The table shows measured compression choices available for each source state. Method columns list configuration count followed by minimum storage ratio. Counts are numbers of configurations; storage ratios are dimensionless. Unavailable entries indicate that no candidate was measured.}
+\label{tab:candidate-coverage}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-2.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}@{}}
+\toprule
+Source state & Pruning (count; minimum ratio) & {Per-channel round-to-nearest quantization (count; minimum ratio)} & {Grouped round-to-nearest quantization (count; minimum ratio)} & {distillation students (count; minimum ratio)} & {Minimum quantization storage ratio} \\
+\midrule
+{Pythia-160 million at step 16 thousand} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 0; not available & 0.1875000 \\
+{Pythia-160 million at step 64 thousand} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-160 million at step 96 thousand} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-160 million at step 143 thousand} & 6; 0.5500000 & 4; 0.1875000 & 9; 0.1914062 & 0; not available & 0.1875000 \\
+{Pythia-410 million at step 16 thousand} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 1; 0.2812500 & 0.1875000 \\
+{Pythia-410 million at step 64 thousand} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 1; 0.2812500 & 0.1875000 \\
+{Pythia-410 million at step 96 thousand} & 6; 0.5500000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-410 million at step 143 thousand} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 1; 0.2812500 & 0.1875000 \\
+{Pythia-1 billion at step 32 thousand} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-1 billion at step 96 thousand} & 2; 0.5500000 & 2; 0.1875000 & 3; 0.1953125 & 0; not available & 0.1875000 \\
+{Pythia-1 billion at step 112 thousand} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-1.4 billion at step 16 thousand} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 2; 0.0703125 & 0.1875000 \\
+{Pythia-1.4 billion at step 64 thousand} & 6; 0.5500000 & 4; 0.1875000 & 0; not available & 2; 0.0703125 & 0.1875000 \\
+{Pythia-1.4 billion at step 96 thousand} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-1.4 billion at step 143 thousand} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 2; 0.0703125 & 0.1875000 \\
+{Pythia-6.9 billion at step 32 thousand} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-6.9 billion at step 112 thousand} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+\midrule
+Total & 84 & 70 & 57 & 9 & --- \\
+\bottomrule
+\end{tabular*}
+\par\smallskip
+\begin{minipage}{\linewidth}\small
+Not available means no measured candidate. Each state also has one dense source, minimum $r=1$; it is excluded from method counts. Distillation has 0, 1 or 2 smaller same-stage measured students. Student reuse across sources counts as separate alternatives, not independent measurements. Quantization pools channel and grouped round-to-nearest quantization. Ratios: pruning $r=d$, channel round-to-nearest quantization $r=b/16$, grouped round-to-nearest quantization $r=(b+16/g)/16$, distillation $r=N_S/N_0$. Storage is nominal transformer-matrix storage; pruning requires a sparse format (index overhead excluded). No missing configurations are imputed. Coverage is measured availability, independent of the no-clear-winner heuristic.
+\end{minipage}
+\end{table}

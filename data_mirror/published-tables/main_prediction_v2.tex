@@ -1,0 +1,26 @@
+% Generated from frozen JSON; see main_prediction_v2_sources.md.
+\begin{table*}[!htbp]\normalfont
+\centering\footnotesize\fontsize{8.5}{10}\selectfont\linespread{0.85}\selectfont
+\setlength{\tabcolsep}{1.5pt}
+\renewcommand{\arraystretch}{0.92}
+\setlength{\abovecaptionskip}{4pt}
+\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}%
+\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .17\textwidth-2.04\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .16\textwidth-1.92\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .10\textwidth-1.20\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .17\textwidth-2.04\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .10\textwidth-1.20\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .17\textwidth-2.04\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr .13\textwidth-1.56\tabcolsep\relax}@{}}
+\toprule
+Prediction task & Predictor tested first & Its error (nats) & Predictor we deliver & Its error (nats) & Simplest comparison\newline Math / Code / QA & Development measurements \\
+\midrule
+Three checkpoints outside every fit, pruned to densities 0.575, 0.675 and 0.85 & Five-parameter power form & \TableOneErrors{0.24}{0.24}{0.68} & Source-free median density curve (chosen after this test) & \TableOneErrors{0.28}{0.21}{0.22} & Per-density regression; QA: median\newline \TableOneErrors{0.23}{0.22}{0.22} & 84 \\
+\midrule
+Pythia 160M to 1.4B at unseen bit width 4, group sizes 64 and 256 & Source regression across bit widths (twenty coefficients) & \TableOneErrors{0.19}{0.21}{0.44} & The same predictor & \TableOneErrors{0.19}{0.21}{0.44} & Development median\newline \TableOneErrors{0.55}{0.73}{0.54} & 24 \\
+\midrule
+Pythia 410M and 1.4B at unseen group sizes 32 and 512, bit widths 3 to 5 & Math source regression; Code development median; QA no change & \TableOneErrors{0.21}{0.56}{0.46} & Math, Code: interpolation on the measured group-size grid; QA: development median (chosen after this test) & \TableOneErrors{0.07}{0.12}{0.46} & Bilinear regression; Code: no change; QA: median\newline \TableOneErrors{0.33}{0.68}{0.46} & 54 \\
+\midrule
+A 1.4B stage unseen in fitting, bit widths 3 to 5, group sizes 32 to 512 & Math source regression; Code development median; QA no change & \TableOneErrors{0.30}{0.15}{0.22} & Development median (chosen after this test) & \TableOneErrors{0.09}{0.15}{0.14} & Bilinear regression; Code: no change; QA: median\newline \TableOneErrors{0.35}{0.56}{0.14} & 54 \\
+\midrule
+Gemma 270M and 1B distilled on six new pools at 50 to 200 thousand tokens & Reuse forms for math and code; budget-and-pool form for QA & \TableOneErrors{0.07, 0.06}{0.02, 0.05}{0.51, 0.46} & The same predictor & \TableOneErrors{0.07, 0.06}{0.02, 0.05}{0.51, 0.46} & Regressions on budget and loss, on reuse, and on reuse and size\newline \TableOneErrors{0.07, 0.03}{0.02, 0.05}{0.61, 0.45} & 100 \\
+\bottomrule
+\end{tabular*}
+\caption{\footnotesize\fontsize{8.5}{10}\selectfont Every row is a prediction frozen before measurement; errors are mean absolute errors in nats per token for Math, Code and QA. The last column counts the development configuration measurements per capability behind the tested predictor. ``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the development-selected baseline. Distillation entries give the 270M and 1B students in that order.}
+\label{tab:main-prediction-v2}
+\end{table*}

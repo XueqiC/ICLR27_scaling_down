@@ -306,4 +306,4 @@ def test_cli_reproduces_artifacts_cpu_only_without_torch(tmp_path, summary):
     assert report.read_text() == v37.render_report(summary)
     saved = v37.ROOT / "results/v37-reuse-sufficiency/summary.json"
     assert json.loads(saved.read_text()) == summary
-    assert (v37.ROOT / "paper/docs/REUSE_SUFFICIENCY.md").read_text() == report.read_text()
+    assert (v37.ROOT / "docs/REUSE_SUFFICIENCY.md").read_text() == report.read_text()

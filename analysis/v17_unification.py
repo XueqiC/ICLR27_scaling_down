@@ -71,6 +71,17 @@ QUANT_BASE = ROOT / "results/v10-quantization"
 DISTILL_BASE = ROOT / "results/v16-style-residual"
 OUT_BASE = ROOT / "results/v17-unification"
 
+# V17's original heterogeneous 12-model panel (unification_table.csv), before
+# the prospective Qwen and controlled Pythia campaigns. Shared V6/V10 storage
+# does not enroll later experiments in this historical fit. Excluded paths are
+# reported in the audit; missing counts for an in-scope model still fail closed.
+V17_MODELS = frozenset((
+    "Qwen3-0.6B", "Qwen3-1.7B", "Qwen3-4B", "gemma3-270m", "gemma3-1b",
+    "gemma3-4b", "gemma3-12b", "gemma3-27b", "gemma4-31b", "muse-30b",
+    "olmo3-7b", "olmo3-32b",
+))
+V17_BITS = frozenset((3., 4., 6., 8., 16.))
+
 DEFAULT_PRECLIFF_CAP = 1.0
 DEFAULT_STORAGE_MATCH_TOLERANCE = 0.03
 DEFAULT_LOSS_BUDGETS = (0.0, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0)
@@ -391,6 +402,9 @@ def _load_pruning_rows(base: Path) -> tuple[list[dict], list[str]]:
     rows: list[dict] = []
     notes: list[str] = []
     for model, path in _deduplicated_artifacts(base, "prune_losses.json"):
+        if model not in V17_MODELS:
+            notes.append(f"Excluded later campaign outside the V17 12-model panel: {path}")
+            continue
         payload = _json_load(path)
         if "1.0" not in payload or not isinstance(payload["1.0"], dict):
             raise ValueError(f"pruning artifact lacks the 1.0 dense anchor: {path}")
@@ -451,6 +465,9 @@ def _load_quantization_rows(base: Path) -> tuple[list[dict], list[str]]:
     rows: list[dict] = []
     notes: list[str] = []
     for model, path in _deduplicated_artifacts(base, "quant_losses.json"):
+        if model not in V17_MODELS:
+            notes.append(f"Excluded later campaign outside the V17 12-model panel: {path}")
+            continue
         payload = _json_load(path)
         if "dense" not in payload or not isinstance(payload["dense"], dict):
             raise ValueError(f"quantization artifact lacks the dense anchor: {path}")
@@ -460,6 +477,9 @@ def _load_quantization_rows(base: Path) -> tuple[list[dict], list[str]]:
         n0, count_source = _model_count(model, metadata)
         dense = payload["dense"]
         for bit_text, losses in payload.items():
+            if bit_text.startswith("_"):
+                notes.append(f"Ignored quantization metadata key {bit_text!r} in {path}")
+                continue
             if not isinstance(losses, dict):
                 raise ValueError(f"invalid quantization loss row {bit_text!r}: {path}")
             bits = (
@@ -468,6 +488,9 @@ def _load_quantization_rows(base: Path) -> tuple[list[dict], list[str]]:
                 else _finite_float(bit_text, f"bits in {path}")
             )
             coordinates = coordinate_mapping("quantization", bits)
+            if bits not in V17_BITS:
+                notes.append(f"Excluded later bit configuration outside the V17 ladder: {path}/{bit_text}")
+                continue
             for capability in CAPABILITIES:
                 if capability not in dense or capability not in losses:
                     continue

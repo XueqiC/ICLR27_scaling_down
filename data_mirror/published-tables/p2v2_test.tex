@@ -1,0 +1,27 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\caption{The table compares frozen distillation predictions for unseen pools and students. Entries are mean absolute errors in nats per native token. The selected relation minimizes development error; the best frozen form is a retrospective ranking. Pool sizes count traces per domain.}
+\par\smallskip{\footnotesize Eight forms per capability were frozen from the twelve development runs (Gemma-3-270 million and 1 billion, pool size $\in\{75,450\}$, three data seeds) ; the headline column is the frozen form with the lowest development error, a joint form with a source term $k\log(N_S/N_{\mathrm{ref}})$, under a rule stated after the tests. Gemma-3-4 billion is a \mbox{held-out} student ($\log N_S$ 1.9 above the reference; development span $\pm0.55$).\par}
+\label{tab:p2v2_test}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.240000000\textwidth-2.880000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.440000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.560000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.100000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.220000000\textwidth-2.640000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-0.960000000\tabcolsep\relax}@{}}
+\toprule
+Student, pools & Capability & {Selected on development data} & Constant & Zero change & Best frozen form (retrospective) & Measured points \\
+\midrule
+Gemma-3-270 million, unseen pool (pool size 375) & Mathematics & 0.045 & 0.060 & 0.092 & {Constant with student size (0.031)} & 12 \\
+ & Code & 0.036 & 0.047 & 0.138 & {Reuse response (0.031)} & 12 \\
+ & Question answering & 0.606 & 0.862 & 1.005 & {Joint budget and pool response (0.544)} & 12 \\
+\addlinespace
+Gemma-3-1 billion, unseen pool (pool size 375) & Mathematics & 0.050 & 0.057 & 0.095 & {Reuse response (0.026)} & 12 \\
+ & Code & 0.029 & 0.069 & 0.109 & {Reuse response (0.018)} & 12 \\
+ & Question answering & 0.444 & 1.004 & 1.148 & {Joint budget and pool response (0.301)} & 12 \\
+\addlinespace
+Gemma-3-4 billion, unseen pool (pool size 375) & Mathematics & 0.089 & 0.020 & 0.153 & Constant (0.020) & 12 \\
+ & Code & 0.050 & 0.038 & 0.178 & {Budget response (0.033)} & 12 \\
+ & Question answering & 1.141 & 1.024 & 1.167 & {Joint budget and pool response (0.272)} & 12 \\
+\addlinespace
+Gemma-3-4 billion, development pools (pool size 75,450), \mbox{held-out} student & Mathematics & 0.106 & 0.156 & 0.294 & {Joint with student size (0.106)} & 16 \\
+ & Code & 0.048 & 0.098 & 0.230 & {Joint with student size (0.048)} & 16 \\
+ & Question answering & 0.958 & 1.790 & 1.862 & {Joint budget and pool response (0.759)} & 16 \\
+\bottomrule
+\end{tabular*}
+\end{table}

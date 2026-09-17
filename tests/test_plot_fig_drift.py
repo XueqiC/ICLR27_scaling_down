@@ -104,6 +104,9 @@ def test_drift_export_preserves_legend_and_aligns_short_panels(monkeypatch):
     from paper_generator_checks import check_access
 
     legend = output_path(ROOT, "figs", "fig5_legend.pdf")
+    # Arrange the preexisting export here, independent of test ordering or a
+    # developer's generated/ directory. The subsequent call exercises refresh.
+    drift.generate()
     before = hashlib.sha256(legend.read_bytes()).hexdigest()
     save, combine = exports.save_panel, exports.combine_panels
     rectangles = []

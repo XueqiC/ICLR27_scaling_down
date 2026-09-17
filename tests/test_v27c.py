@@ -12,6 +12,7 @@ from types import SimpleNamespace
 import pytest
 
 from analysis import v27c_measurement_followups as followup
+from public_inputs import require_public_inputs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -196,7 +197,7 @@ def test_mismatched_prediction_cells_or_stale_native_values_are_rejected(saved):
 
 
 def test_report_and_source_provenance_are_current(saved):
-    assert followup.report(saved) == (ROOT / "paper/docs/MEASUREMENT_FOLLOWUPS.md").read_text()
+    assert followup.report(saved) == (ROOT / "docs/MEASUREMENT_FOLLOWUPS.md").read_text()
     for source in saved["sources"]:
         if source["path"].startswith("HF_CACHE/"):
             continue
@@ -211,6 +212,13 @@ def test_report_and_source_provenance_are_current(saved):
 
 
 def test_full_rebuild_is_deterministic_cpu_only_and_read_only():
+    saved = json.loads((ROOT / "results/v27c/summary.json").read_text())
+    require_public_inputs(
+        *(s["path"].removeprefix("HF_CACHE/") for s in saved["sources"]
+          if s["path"].startswith("HF_CACHE/")),
+        root=Path.home() / ".cache/huggingface",
+        reason="external Hugging Face dataset/tokenizer cache is not redistributed; "
+               "the 2Wiki Arrow input is 54,510,136 bytes, exceeding the 50 MB file limit")
     # Run once behind hard guards: importing model/dataset loaders or opening a
     # network connection is a failure, even if a local cached fallback exists.
     program = r'''
@@ -228,7 +236,7 @@ expected = json.loads((module.ROOT / 'results/v27c/summary.json').read_text())
 actual = module.build_summary()
 assert actual == expected
 '''
-    paths = [ROOT / "results/v27c/summary.json", ROOT / "paper/docs/MEASUREMENT_FOLLOWUPS.md",
+    paths = [ROOT / "results/v27c/summary.json", ROOT / "docs/MEASUREMENT_FOLLOWUPS.md",
              ROOT / "results/v27b-readout/summary.json", ROOT / "results/v28-new-source-pred/frozen_predictions.json"]
     before = {p: (p.stat().st_mtime_ns, hashlib.sha256(p.read_bytes()).hexdigest()) for p in paths}
     completed = subprocess.run([sys.executable, "-c", program], cwd=ROOT, capture_output=True, text=True, timeout=90)

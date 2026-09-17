@@ -105,7 +105,7 @@ V28's historical prediction endpoint is a **corpus** ratio, sum NLL / sum target
 
 V6/V10 aggregate-only losses lack per-item hashes and historical tokenizer revisions. Their conversion is conditional on the declared V6 odd64/seed0/512-target-token protocol and cached tokenizer. V27 hashes/spans and available V12 total token counts validate reconstruction, but do not retroactively certify every historical run.
 
-All 57 available final V12 evals for development models match the reconstructed per-capability token/sample totals. V27 legacy per-item token and byte counts match for its three models. The remaining historical runs retain the conditional provenance above. Full denominator manifests and tokenizer/cache SHA-256s are in summary.json.
+All 143 available final V12 evals for development models match the reconstructed per-capability token/sample totals. V27 legacy per-item token and byte counts match for its three models. The remaining historical runs retain the conditional provenance above. Full denominator manifests and tokenizer/cache SHA-256s are in summary.json.
 
 Numerical MAEs in different units naturally have different scales. To distinguish rescaling from altered prediction quality, `byte refit → token MAE` divides each held-out error by its own model's T/B before averaging over the same cells. `MAE/zero` is a dimensionless comparison against zero-change, separately in each unit. A ≥10% relative change in the converted-back MAE is flagged descriptively as material; this is not an uncertainty/significance claim. A byte score of merely rescaled frozen predictions is also saved, separately from the refit.
 

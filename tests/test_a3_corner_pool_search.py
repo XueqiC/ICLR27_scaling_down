@@ -12,6 +12,7 @@ import pytest
 
 from analysis import a3_corner_pool_search as a3
 from analysis import v12_distill as trainer
+from public_inputs import TEACHER_TRACES, require_public_inputs
 
 
 @pytest.fixture(autouse=True)
@@ -27,6 +28,8 @@ def forbid_training_and_weights(monkeypatch):
 
 @pytest.fixture(scope="module")
 def counters():
+    require_public_inputs(*TEACHER_TRACES,
+                          reason="raw teacher-trace text is deliberately not redistributed")
     return {s: a3.PoolCounter(a3.load_tokenizer(s)[0]) for s in a3.STUDENTS}
 
 
@@ -242,7 +245,9 @@ def test_hash_collision_rejected_even_with_fresh_seed(counters):
                        {"hashes": [candidate["data_pool_sha256"]], "observed_seeds": []}, "B")
 
 
-def test_inventory_finds_seeds_without_pool_metadata_and_canonical_hash_ids(tmp_path):
+def test_inventory_finds_seeds_without_pool_metadata_and_canonical_hash_ids(tmp_path, monkeypatch):
+    # Exercise the no-ripgrep fallback even when ripgrep is installed.
+    monkeypatch.setenv("PATH", "")
     result = tmp_path / "results"
     (result / "a1-development-table").mkdir(parents=True)
     digest = "a" * 64

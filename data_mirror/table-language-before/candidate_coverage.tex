@@ -1,0 +1,36 @@
+\begin{table}[!htbp]\normalfont
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Measured candidate coverage by source state on the development selection panel. Each method column gives the configuration count followed by the minimum available storage ratio $r$ (dimensionless). This is a \mbox{post-hoc} inventory of the measured candidates.}
+\label{tab:candidate-coverage}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-2.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}@{}}
+\toprule
+Source state & Pruning & {Per-channel round-to-nearest quantization} & {Grouped round-to-nearest quantization} & {distillation students} & {Minimum quantization storage ratio} \\
+\midrule
+{Pythia-160M at step 16k} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 0; not available & 0.1875000 \\
+{Pythia-160M at step 64k} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-160M at step 96k} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-160M at step 143k} & 6; 0.5500000 & 4; 0.1875000 & 9; 0.1914062 & 0; not available & 0.1875000 \\
+{Pythia-410M at step 16k} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 1; 0.2812500 & 0.1875000 \\
+{Pythia-410M at step 64k} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 1; 0.2812500 & 0.1875000 \\
+{Pythia-410M at step 96k} & 6; 0.5500000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-410M at step 143k} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 1; 0.2812500 & 0.1875000 \\
+{Pythia-1B at step 32k} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-1B at step 96k} & 2; 0.5500000 & 2; 0.1875000 & 3; 0.1953125 & 0; not available & 0.1875000 \\
+{Pythia-1B at step 112k} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-1.4B at step 16k} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 2; 0.0703125 & 0.1875000 \\
+{Pythia-1.4B at step 64k} & 6; 0.5500000 & 4; 0.1875000 & 0; not available & 2; 0.0703125 & 0.1875000 \\
+{Pythia-1.4B at step 96k} & 4; 0.6000000 & 4; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-1.4B at step 143k} & 4; 0.6000000 & 4; 0.1875000 & 9; 0.1914062 & 2; 0.0703125 & 0.1875000 \\
+{Pythia-6.9B at step 32k} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+{Pythia-6.9B at step 112k} & 7; 0.5500000 & 5; 0.1875000 & 0; not available & 0; not available & 0.1875000 \\
+\midrule
+Total & 84 & 70 & 57 & 9 & --- \\
+\bottomrule
+\end{tabular*}
+\par\smallskip
+\begin{minipage}{\linewidth}\small
+Not available means no measured candidate. Each state also has one dense source, minimum $r=1$; it is excluded from method counts. Distillation has 0, 1 or 2 smaller same-stage measured students. Student reuse across sources counts as separate alternatives, not independent measurements. Quantization pools channel and grouped round-to-nearest quantization. Ratios: pruning $r=d$, channel round-to-nearest quantization $r=b/16$, grouped round-to-nearest quantization $r=(b+16/g)/16$, distillation $r=N_S/N_0$. Storage is nominal transformer-matrix storage; pruning requires a sparse format (index overhead excluded). No missing configurations are imputed. Coverage is measured availability, independent of the no-clear-winner heuristic.
+\end{minipage}
+\end{table}

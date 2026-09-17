@@ -13,11 +13,6 @@ from analysis import a1_development_table as a1
 
 @pytest.fixture(scope="module")
 def built():
-    # The public mirror intentionally omits the private development trajectories.
-    core, external, _ = a1.expected_membership()
-    if (a1.ROOT / "data_mirror").is_dir() and not all(
-            (a1.ROOT / a1.BASE_REL / run).is_dir() for run in core | external):
-        pytest.skip("Complete private development records are not in the public mirror")
     return a1.build()
 
 

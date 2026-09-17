@@ -334,4 +334,4 @@ def test_cli_artifacts_reproducible_without_gpu_imports(tmp_path, summary):
     assert json.loads(output.read_text()) == summary
     assert report.read_text() == v.render_report(summary)
     assert json.loads((v.ROOT / "results/v37b-reuse-interaction/summary.json").read_text()) == summary
-    assert (v.ROOT / "paper/docs/REUSE_INTERACTION.md").read_text() == report.read_text()
+    assert (v.ROOT / "docs/REUSE_INTERACTION.md").read_text() == report.read_text()

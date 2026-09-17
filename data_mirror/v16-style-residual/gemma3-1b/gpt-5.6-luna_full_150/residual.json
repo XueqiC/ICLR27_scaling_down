@@ -1,0 +1,90 @@
+{
+  "version": 16,
+  "student": "gemma3-1b",
+  "resolved_student": "google/gemma-3-1b-pt",
+  "student_tag": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "n": 150,
+  "n_per_domain": 150,
+  "run_name": "gpt-5.6-luna_full_150",
+  "adapter": "results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/adapter",
+  "dtype": "bfloat16",
+  "device": "cuda:0",
+  "seed": 0,
+  "measurement_benchmarks": {
+    "math": "MATH-500",
+    "code": "MBPP",
+    "qa": "2WikiMultihopQA"
+  },
+  "probe_source": "analysis.v6_capability_geometry.build_probes",
+  "n_probe_requested": 128,
+  "probe_half": "measurement (odd indices, v[1::2])",
+  "measurement_samples": {
+    "math": 64,
+    "code": 64,
+    "qa": 64
+  },
+  "generic_corpus": {
+    "dataset": "allenai/c4",
+    "config": "en",
+    "split": "validation",
+    "selection": "streaming shuffle seed=0, buffer=10000, first 64 non-empty documents",
+    "n_documents": 64,
+    "max_tokens_per_document": 1024
+  },
+  "dense": {
+    "L_c": {
+      "math": 1.2210562206394908,
+      "code": 1.0608115589016829,
+      "qa": 5.567137699203188
+    },
+    "L_gen": 2.6133986831259612,
+    "capability_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "generic_tokens": 20874
+  },
+  "distilled": {
+    "L_c": {
+      "math": 1.2924874981057737,
+      "code": 1.1369298051372896,
+      "qa": 4.08073954183267
+    },
+    "L_gen": 2.8439105581515385,
+    "capability_tokens": {
+      "math": 13198,
+      "code": 4516,
+      "qa": 251
+    },
+    "generic_tokens": 20874
+  },
+  "deltas": {
+    "math": {
+      "dL_c": 0.07143127746628286,
+      "dL_gen": 0.23051187502557724,
+      "dL_cap": -0.15908059755929438
+    },
+    "code": {
+      "dL_c": 0.0761182462356067,
+      "dL_gen": 0.23051187502557724,
+      "dL_cap": -0.15439362878997054
+    },
+    "qa": {
+      "dL_c": -1.4863981573705178,
+      "dL_gen": 0.23051187502557724,
+      "dL_cap": -1.716910032396095
+    }
+  },
+  "interpretation": {
+    "rule": "If dL_cap is near zero while dL_c is positive, the observed probe-loss increase is consistent with global/style drift rather than capability loss. If dL_cap tracks dL_c, the change is capability-specific.",
+    "heuristic": "near=max(0.001 nats/token, 0.25*abs(dL_c))",
+    "by_capability": {
+      "math": "mixed global and capability-specific change",
+      "code": "mixed global and capability-specific change",
+      "qa": "no positive probe-loss damage to attribute"
+    }
+  }
+}

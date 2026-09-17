@@ -18,6 +18,7 @@ import math
 import os
 from pathlib import Path
 import random
+import re
 import shlex
 import subprocess
 import sys
@@ -212,11 +213,19 @@ def verify_recorded_pools(counter, student, summary=None):
 def recorded_inventory(root=ROOT, output=OUT):
     # Scan recorded JSON hash fields across results, including archived runs and
     # nested summaries. Exclude our generated plan so reruns cannot self-exclude.
-    result = subprocess.run(["rg", "-l", '"(data_pool_sha256|pool_id|data_seed|data_sampling_seed|training_seed|pool_seed|seed)"\\s*:',
-                             str(root / "results"), "-g", "*.json"],
-                            text=True, capture_output=True)
-    require(result.returncode in (0, 1), f"Recorded pool scan failed: {result.stderr}")
-    files = {Path(p) for p in result.stdout.splitlines()}
+    pattern = r'"(data_pool_sha256|pool_id|data_seed|data_sampling_seed|training_seed|pool_seed|seed)"\s*:'
+    try:
+        result = subprocess.run(["rg", "-l", pattern, str(root / "results"), "-g", "*.json"],
+                                text=True, capture_output=True)
+    except FileNotFoundError:
+        # The inventory is a correctness gate, not a ripgrep dependency. Use
+        # the same field filter before parsing JSON when rg is unavailable.
+        field = re.compile(pattern)
+        files = {p for p in (root / "results").rglob("*.json")
+                 if field.search(p.read_text(encoding="utf-8"))}
+    else:
+        require(result.returncode in (0, 1), f"Recorded pool scan failed: {result.stderr}")
+        files = {Path(p) for p in result.stdout.splitlines()}
     files.update((root / "results").rglob("train_log.json"))
     hashes, seeds, sources = set(), set(), {}
 

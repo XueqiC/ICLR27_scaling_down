@@ -421,7 +421,7 @@ def test_predict_driver_writes_report_and_costs_from_synthetic_json(tmp_path, mo
     monkeypatch.setattr(v32, "extraction_commands", lambda: commands)
     monkeypatch.setattr(v28, "METADATA", metadata_path)
     load = v32.load_panel
-    monkeypatch.setattr(v32, "load_panel", lambda m, d, v: load(m, d, v, tmp_path))
+    monkeypatch.setattr(v32, "load_panel", lambda m, d, v, **kwargs: load(m, d, v, tmp_path, **kwargs))
     args = v32.parser().parse_args(["predict", "--descriptor-dir", str(tmp_path / "features"),
                                    "--output-dir", str(tmp_path / "prediction"),
                                    "--report", str(tmp_path / "report.md"), "--n-boot", "20"])

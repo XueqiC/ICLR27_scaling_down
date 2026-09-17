@@ -1,0 +1,45 @@
+{
+ "model": "gemma3-1b",
+ "compression": "prune",
+ "density": 0.6,
+ "recovery_source": "c4",
+ "anchors": {
+  "dense": {
+   "math": 1.2205068949840885,
+   "code": 1.060091895482728,
+   "qa": 5.567791334661354
+  },
+  "damaged": {
+   "math": 5.36069859069556,
+   "code": 6.5825952170062,
+   "qa": 8.197709163346614
+  }
+ },
+ "ladder": [
+  {
+   "budget": 1000000,
+   "losses": {
+    "math": 2.3509812092741322,
+    "code": 2.6535651018600532,
+    "qa": 5.58378984063745
+   }
+  },
+  {
+   "budget": 4000000,
+   "losses": {
+    "math": 2.025628883164116,
+    "code": 2.1484167404782992,
+    "qa": 5.323331673306773
+   }
+  },
+  {
+   "budget": 16000000,
+   "losses": {
+    "math": 1.948666464615851,
+    "code": 1.9771922054915854,
+    "qa": 5.322584661354582
+   }
+  }
+ ],
+ "_note": "salvaged from log after 64M step cancelled (16M cap decision); 1M/4M/16M measured"
+}

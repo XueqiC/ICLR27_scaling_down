@@ -1,0 +1,50 @@
+\begin{table}[!htbp]
+\normalfont
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}@{}}
+\toprule
+Law & What is shared & What varies & \mbox{Held-out} MAE, shared versus specific & MAE, K0 versus K1 & 80\% prediction interval coverage and width \\
+\midrule
+Pruning power & Power family & $\beta_c,\allowbreak \gamma_c$ & 0.494 versus 0.494 & --- & --- \\
+Grouped round-to-nearest quantization & Separable family & $\beta_c,\allowbreak p_c,\allowbreak q_c$ & 2.962 versus 2.398 & --- & --- \\
+Distillation exposure & $\log(1+E)$ family & $\beta_c$; inactive $D_0$ & 0.542 versus 0.275 & --- & --- \\
+Pruning sharing & One $\gamma$ & $\beta_c$ & 0.491 versus 0.494 & --- & --- \\
+Quantization sharing & two-dimensional term vectors & Capability offsets & 3.999 versus 2.398 & --- & --- \\
+Pruning Math & Power family & Source amplitudes, $\gamma$ & $\gamma$ minimum, median, maximum: 3.00/\allowbreak 4.60/\allowbreak 6.00 & --- & --- \\
+Pruning Code & Power family & Source amplitudes, $\gamma$ & $\gamma$ minimum, median, maximum: 2.30/\allowbreak 5.95/\allowbreak 6.00 & --- & --- \\
+Pruning QA & Power family & Source amplitudes, $\gamma$ & $\gamma$ minimum, median, maximum: 0.50/\allowbreak 3.40/\allowbreak 6.00 & --- & --- \\
+\bottomrule\end{tabular*}
+\caption{Shared structure and one-point calibration, in nats pooled equally over capabilities. Rows are response families, parameter-sharing comparisons, and calibration evaluations; columns describe the shared and varying terms and compare errors and prediction-interval summaries (coverage and full width for K0, then K1). K0 uses no compressed-target measurement and K1 uses one per source, excluded from scoring. This is a \mbox{post-hoc} analysis of the development fits and their calibration.}
+\label{tab:shared_structure}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}@{}}
+\toprule
+Law & What is shared & What varies & \mbox{Held-out} MAE, shared versus specific & MAE, K0 versus K1 & 80\% prediction interval coverage and width \\
+\midrule
+Pruning development leave-one-state-out & Training $\gamma_c$ & One target amplitude & --- & 0.604 versus 31.406 & --- \\
+Pruning confirmation & Training $\gamma_c$ & One target amplitude & --- & 0.560 versus 0.415 & 77.8\%/1.621 to 100.0\%/3.629 \\
+Pruning pairs: 17-source out-of-fold predictions & Training $\gamma_c$ & One target amplitude & --- & 0.517 versus 0.763 & --- \\
+Pruning pairs: independent 13 & Training $\gamma_c$ & One target amplitude & --- & 0.707 versus 0.772 & 66.7\%/1.523 to 87.5\%/4.277 \\
+Quantization surface development leave-one-state-out & Training curve & One target amplitude & --- & 3.143 versus 26.177 & --- \\
+Quantization surface bit-width test & Training curve & One target amplitude & --- & 0.747 versus 6.442 & --- \\
+Quantization surface group-size test & Training curve & One target amplitude & --- & 1.751 versus 14.973 & --- \\
+Quantization surface joint test & Training curve & One target amplitude & --- & 0.344 versus 0.193 & --- \\
+\bottomrule\end{tabular*}
+\caption[]{Continued from the preceding table part.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}@{}}
+\toprule
+Law & What is shared & What varies & \mbox{Held-out} MAE, shared versus specific & MAE, K0 versus K1 & 80\% prediction interval coverage and width \\
+\midrule
+Separable quantization bit-width test & Training curve & One target amplitude & --- & 1.540 versus 0.183 & --- \\
+Separable quantization group-size test & Training curve & One target amplitude & --- & 2.423 versus 0.623 & --- \\
+Separable quantization joint test & Training curve & One target amplitude & --- & 0.724 versus 0.306 & --- \\
+\bottomrule\end{tabular*}
+\caption[]{Continued from the preceding table part.}
+\end{table}

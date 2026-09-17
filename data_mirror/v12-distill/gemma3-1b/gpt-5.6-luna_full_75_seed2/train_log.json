@@ -1,0 +1,339 @@
+{
+  "loss_curve": [
+    {
+      "step": 1,
+      "epoch": 1,
+      "loss": 2.495924361050129,
+      "tokens": 4504,
+      "completion_tokens": 1727,
+      "tokens_seen": 4504,
+      "completion_tokens_seen": 1727,
+      "lr": 9.968561049466214e-06
+    },
+    {
+      "step": 2,
+      "epoch": 1,
+      "loss": 2.870851293206215,
+      "tokens": 4052,
+      "completion_tokens": 1254,
+      "tokens_seen": 8556,
+      "completion_tokens_seen": 2981,
+      "lr": 9.874639560909118e-06
+    },
+    {
+      "step": 3,
+      "epoch": 1,
+      "loss": 3.099236037582159,
+      "tokens": 4941,
+      "completion_tokens": 1185,
+      "tokens_seen": 13497,
+      "completion_tokens_seen": 4166,
+      "lr": 9.719416651541839e-06
+    },
+    {
+      "step": 4,
+      "epoch": 1,
+      "loss": 2.1097045093774796,
+      "tokens": 4666,
+      "completion_tokens": 1755,
+      "tokens_seen": 18163,
+      "completion_tokens_seen": 5921,
+      "lr": 9.504844339512096e-06
+    },
+    {
+      "step": 5,
+      "epoch": 1,
+      "loss": 2.364925757050514,
+      "tokens": 4950,
+      "completion_tokens": 1276,
+      "tokens_seen": 23113,
+      "completion_tokens_seen": 7197,
+      "lr": 9.233620996141421e-06
+    },
+    {
+      "step": 6,
+      "epoch": 1,
+      "loss": 1.6502156592905521,
+      "tokens": 4949,
+      "completion_tokens": 1735,
+      "tokens_seen": 28062,
+      "completion_tokens_seen": 8932,
+      "lr": 8.90915741234015e-06
+    },
+    {
+      "step": 7,
+      "epoch": 1,
+      "loss": 2.793517403304577,
+      "tokens": 5083,
+      "completion_tokens": 1272,
+      "tokens_seen": 33145,
+      "completion_tokens_seen": 10204,
+      "lr": 8.535533905932739e-06
+    },
+    {
+      "step": 8,
+      "epoch": 1,
+      "loss": 2.44231054186821,
+      "tokens": 3704,
+      "completion_tokens": 1357,
+      "tokens_seen": 36849,
+      "completion_tokens_seen": 11561,
+      "lr": 8.117449009293668e-06
+    },
+    {
+      "step": 9,
+      "epoch": 1,
+      "loss": 2.9528993666172028,
+      "tokens": 4653,
+      "completion_tokens": 1476,
+      "tokens_seen": 41502,
+      "completion_tokens_seen": 13037,
+      "lr": 7.660160382576683e-06
+    },
+    {
+      "step": 10,
+      "epoch": 1,
+      "loss": 2.9865591414272785,
+      "tokens": 5013,
+      "completion_tokens": 861,
+      "tokens_seen": 46515,
+      "completion_tokens_seen": 13898,
+      "lr": 7.169418695587791e-06
+    },
+    {
+      "step": 11,
+      "epoch": 1,
+      "loss": 3.107740778476,
+      "tokens": 5649,
+      "completion_tokens": 1540,
+      "tokens_seen": 52164,
+      "completion_tokens_seen": 15438,
+      "lr": 6.651395309775837e-06
+    },
+    {
+      "step": 12,
+      "epoch": 1,
+      "loss": 2.349554929882288,
+      "tokens": 4928,
+      "completion_tokens": 1056,
+      "tokens_seen": 57092,
+      "completion_tokens_seen": 16494,
+      "lr": 6.112604669781572e-06
+    },
+    {
+      "step": 13,
+      "epoch": 1,
+      "loss": 1.4427711367607117,
+      "tokens": 4073,
+      "completion_tokens": 1792,
+      "tokens_seen": 61165,
+      "completion_tokens_seen": 18286,
+      "lr": 5.559822380516539e-06
+    },
+    {
+      "step": 14,
+      "epoch": 1,
+      "loss": 2.884981737534205,
+      "tokens": 5862,
+      "completion_tokens": 1281,
+      "tokens_seen": 67027,
+      "completion_tokens_seen": 19567,
+      "lr": 5e-06
+    },
+    {
+      "step": 15,
+      "epoch": 2,
+      "loss": 1.8412795141339302,
+      "tokens": 4178,
+      "completion_tokens": 1648,
+      "tokens_seen": 71205,
+      "completion_tokens_seen": 21215,
+      "lr": 4.4401776194834615e-06
+    },
+    {
+      "step": 16,
+      "epoch": 2,
+      "loss": 3.134907491505146,
+      "tokens": 6135,
+      "completion_tokens": 1199,
+      "tokens_seen": 77340,
+      "completion_tokens_seen": 22414,
+      "lr": 3.887395330218429e-06
+    },
+    {
+      "step": 17,
+      "epoch": 2,
+      "loss": 1.221347277984023,
+      "tokens": 4288,
+      "completion_tokens": 1582,
+      "tokens_seen": 81628,
+      "completion_tokens_seen": 23996,
+      "lr": 3.3486046902241663e-06
+    },
+    {
+      "step": 18,
+      "epoch": 2,
+      "loss": 1.2400871105492115,
+      "tokens": 4247,
+      "completion_tokens": 1290,
+      "tokens_seen": 85875,
+      "completion_tokens_seen": 25286,
+      "lr": 2.83058130441221e-06
+    },
+    {
+      "step": 19,
+      "epoch": 2,
+      "loss": 1.5382837690412998,
+      "tokens": 4048,
+      "completion_tokens": 1743,
+      "tokens_seen": 89923,
+      "completion_tokens_seen": 27029,
+      "lr": 2.339839617423318e-06
+    },
+    {
+      "step": 20,
+      "epoch": 2,
+      "loss": 1.7061098590493202,
+      "tokens": 4813,
+      "completion_tokens": 1256,
+      "tokens_seen": 94736,
+      "completion_tokens_seen": 28285,
+      "lr": 1.8825509907063328e-06
+    },
+    {
+      "step": 21,
+      "epoch": 2,
+      "loss": 2.043353969231248,
+      "tokens": 5409,
+      "completion_tokens": 1239,
+      "tokens_seen": 100145,
+      "completion_tokens_seen": 29524,
+      "lr": 1.4644660940672628e-06
+    },
+    {
+      "step": 22,
+      "epoch": 2,
+      "loss": 2.1745425686240196,
+      "tokens": 4466,
+      "completion_tokens": 1725,
+      "tokens_seen": 104611,
+      "completion_tokens_seen": 31249,
+      "lr": 1.0908425876598512e-06
+    },
+    {
+      "step": 23,
+      "epoch": 2,
+      "loss": 1.4475531503558159,
+      "tokens": 4459,
+      "completion_tokens": 1482,
+      "tokens_seen": 109070,
+      "completion_tokens_seen": 32731,
+      "lr": 7.663790038585794e-07
+    },
+    {
+      "step": 24,
+      "epoch": 2,
+      "loss": 2.9174509905278683,
+      "tokens": 6299,
+      "completion_tokens": 1218,
+      "tokens_seen": 115369,
+      "completion_tokens_seen": 33949,
+      "lr": 4.951556604879049e-07
+    },
+    {
+      "step": 25,
+      "epoch": 2,
+      "loss": 1.4756313227117062,
+      "tokens": 4022,
+      "completion_tokens": 1304,
+      "tokens_seen": 119391,
+      "completion_tokens_seen": 35253,
+      "lr": 2.8058334845816214e-07
+    },
+    {
+      "step": 26,
+      "epoch": 2,
+      "loss": 2.3092023469507694,
+      "tokens": 5146,
+      "completion_tokens": 1051,
+      "tokens_seen": 124537,
+      "completion_tokens_seen": 36304,
+      "lr": 1.253604390908819e-07
+    },
+    {
+      "step": 27,
+      "epoch": 2,
+      "loss": 2.2076967395842075,
+      "tokens": 5879,
+      "completion_tokens": 1367,
+      "tokens_seen": 130416,
+      "completion_tokens_seen": 37671,
+      "lr": 3.143895053378698e-08
+    },
+    {
+      "step": 28,
+      "epoch": 2,
+      "loss": 1.9811675588289896,
+      "tokens": 3638,
+      "completion_tokens": 1463,
+      "tokens_seen": 134054,
+      "completion_tokens_seen": 39134,
+      "lr": 0.0
+    }
+  ],
+  "tokens_seen": 134054,
+  "completion_tokens_seen": 39134,
+  "wall_time_seconds": 252.58233571378514,
+  "optimizer_steps": 28,
+  "total_updates_planned": 28,
+  "warmup_steps": 0,
+  "effective_batch_size_sequences": 16,
+  "max_len": 1024,
+  "seed": 2,
+  "training_seed": 2,
+  "data_sampling_seed": 2,
+  "epochs": 2,
+  "learning_rate": 1e-05,
+  "optimizer": "AdamW",
+  "scheduler": "cosine",
+  "warmup_ratio": 0.03,
+  "dtype": "bfloat16",
+  "student": "gemma3-1b",
+  "resolved_student": "google/gemma-3-1b-pt",
+  "student_tag": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "domains": [
+    "math",
+    "qa",
+    "code"
+  ],
+  "n_per_domain": 75,
+  "trace_counts": {
+    "math": {
+      "source_rows": 75,
+      "training_rows": 75,
+      "coverage_deleted_rows": 0
+    },
+    "qa": {
+      "source_rows": 75,
+      "training_rows": 74,
+      "coverage_deleted_rows": 1
+    },
+    "code": {
+      "source_rows": 75,
+      "training_rows": 74,
+      "coverage_deleted_rows": 1
+    }
+  },
+  "tokenization_deleted_rows": {
+    "math": 0,
+    "qa": 0,
+    "code": 0
+  },
+  "training_examples": 223,
+  "training_mode": "full",
+  "trainable_parameters": 999751680,
+  "total_parameters": 999885952,
+  "lora": null
+}

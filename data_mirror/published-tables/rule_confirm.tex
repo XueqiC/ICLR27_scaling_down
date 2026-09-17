@@ -1,0 +1,35 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are reported as percentages of evaluated cells.}
+\par\smallskip{\footnotesize Question answering is restricted to 2Wiki; policy predictions were frozen before the new measurements.\par}
+\label{tab:rule-confirm}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.280000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}@{}}
+\toprule
+Capability & Policy & Feasible / total cells & Regret & {Method agreement (percent)} & {Set contains oracle method (percent)} \\
+\midrule
+Mathematics & {Frozen selection rule} & 68/\allowbreak 68 & 0.0000 & 98.5 & 100.0 \\
+Mathematics & {Source-conditioned predictor} & 68/\allowbreak 68 & 0.0149 & 98.5 & 100.0 \\
+Mathematics & Quantization only & 68/\allowbreak 68 & 0.0068 & 94.1 & --- \\
+Mathematics & Cheapest feasible & 68/\allowbreak 68 & 1.7716 & 73.5 & --- \\
+\midrule
+Code & {Frozen selection rule} & 68/\allowbreak 68 & 0.0043 & 95.6 & 100.0 \\
+Code & {Source-conditioned predictor} & 68/\allowbreak 68 & 0.1124 & 100.0 & 100.0 \\
+Code & Quantization only & 68/\allowbreak 68 & 0.0102 & 97.1 & --- \\
+Code & Cheapest feasible & 68/\allowbreak 68 & 2.4346 & 75.0 & --- \\
+\midrule
+Question answering (2Wiki) & {Frozen selection rule} & 68/\allowbreak 68 & 0.1410 & 76.5 & 100.0 \\
+Question answering (2Wiki) & {Source-conditioned predictor} & 68/\allowbreak 68 & 0.2136 & 61.8 & 97.1 \\
+Question answering (2Wiki) & Quantization only & 68/\allowbreak 68 & 0.2526 & 48.5 & --- \\
+Question answering (2Wiki) & Cheapest feasible & 68/\allowbreak 68 & 1.3518 & 63.2 & --- \\
+\midrule
+{Maximum across capabilities} & {Frozen selection rule} & 68/\allowbreak 68 & 0.0020 & 100.0 & 100.0 \\
+{Maximum across capabilities} & {Source-conditioned predictor} & 68/\allowbreak 68 & 0.0019 & 97.1 & 100.0 \\
+{Maximum across capabilities} & Quantization only & 68/\allowbreak 68 & 0.0081 & 92.6 & --- \\
+{Maximum across capabilities} & Cheapest feasible & 68/\allowbreak 68 & 2.4263 & 72.1 & --- \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\linewidth}\footnotesize
+The maximum-capability objective is $\max_c(L_c-L_{0c})$. Quantization only pools both round-to-nearest quantization arms. All four headline policies share the same 68 feasible cells. Heuristic sets use frozen development errors; set coverage is retrospective, not calibrated uncertainty. Verdicts: Mathematics: confirmed; Code: confirmed; Question answering (2Wiki): confirmed. The frozen selection rule uses the locked policy, and the source-conditioned predictor uses the earlier selection laws.
+\end{minipage}
+\end{table}

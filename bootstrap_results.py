@@ -38,6 +38,11 @@ A11_RUNTIME = MIRROR / "a11-efficiency-confirmation" / "runtime"
 
 def targets(relative: Path) -> list[Path]:
     """Both spellings of a mirrored name: the portable one and the original."""
+    # V12 stores portable student_tag identifiers inside every eval. Its loaders
+    # enumerate run directories and require exact path/metadata identity; making
+    # @step aliases would both duplicate observations and violate that identity.
+    if relative.parts[0] == "v12-distill":
+        return [RESULTS / relative]
     # State tags occur in directory names as well as basenames (e.g. V53 dense
     # snapshots). Preserve every spelling a frozen loader can request.
     parts = [{part, part.replace("--step", "@step")} for part in relative.parts]
@@ -109,8 +114,8 @@ def main() -> int:
     # earlier revision of this repository used. Provide it as real directories with
     # copies: a symlink would be refused by the generators' own output guard, and
     # editing those scripts is not an option because frozen records name their digests.
-    if not dry:
-        bases = (ROOT / "code", ROOT / "paper" / "code") if legacy else (ROOT / "code",)
+    if not dry and legacy:
+        bases = (ROOT / "code", ROOT / "paper" / "code")
         for base in bases:
             for name in ("analysis", "tests", "configs"):
                 source = ROOT / name

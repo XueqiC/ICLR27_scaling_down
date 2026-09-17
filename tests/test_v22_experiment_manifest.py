@@ -1,4 +1,5 @@
 from analysis import v22_experiment_manifest as manifest
+from public_inputs import require_public_inputs
 
 
 def test_density_metadata_is_not_a_measured_configuration():
@@ -6,6 +7,8 @@ def test_density_metadata_is_not_a_measured_configuration():
 
 
 def test_every_local_artifact_has_an_index_entry_including_ignored_weights():
+    require_public_inputs("results/**/*.safetensors",
+                          reason="model weights and adapters are deliberately not redistributed")
     root = manifest.ROOT / "results"
     text = manifest.render(root)
     files = manifest.files_under(root)

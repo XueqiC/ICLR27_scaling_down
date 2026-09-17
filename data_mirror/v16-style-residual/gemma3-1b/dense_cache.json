@@ -1,0 +1,27 @@
+{
+  "version": 16,
+  "signature": {
+    "resolved_model": "google/gemma-3-1b-pt",
+    "seed": 0,
+    "n_probe_requested": 128,
+    "probe_half": "measurement (odd indices, v[1::2])",
+    "generic_dataset": "allenai/c4",
+    "generic_config": "en",
+    "generic_split": "validation",
+    "generic_shuffle_buffer": 10000,
+    "n_generic": 64,
+    "generic_tokens": 1024
+  },
+  "L_c": {
+    "math": 1.2210562206394908,
+    "code": 1.0608115589016829,
+    "qa": 5.567137699203188
+  },
+  "L_gen": 2.6133986831259612,
+  "capability_tokens": {
+    "math": 13198,
+    "code": 4516,
+    "qa": 251
+  },
+  "generic_token_count": 20874
+}

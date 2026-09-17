@@ -1,0 +1,51 @@
+\begin{sidewaystable}[p]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llp{4.6cm}lrp{3.2cm}rrl@{}}
+\toprule
+Method & Cap. & Test & Split & Cand. & Strongest same-budget baseline & Base. & Impr. & St. \\
+\midrule
+prune & math & source transfer, fixed $d$ (3$\times$3, leave-one-step-out) & source/interp & 0.253 & per-config median & 0.413 & +0.160 & R \\
+prune & code & source transfer, fixed $d$ (3$\times$3, leave-one-step-out) & source/interp & 0.292 & per-config median & 0.516 & +0.224 & R \\
+prune & qa & source transfer, fixed $d$ (3$\times$3, leave-one-step-out) & source/interp & 0.806 & per-config zero & 0.500 & -0.306 & R \\
+prune & math & unseen $d$ 0.65/0.55, incl.\ new source & strength+source/int.+ext. & 0.371 & A2: per-$d$ regr.\ + lin.\ interp & 0.283 & -0.088 & P \\
+prune & code & unseen $d$ 0.65/0.55, incl.\ new source & strength+source/int.+ext. & 0.524 & A2: per-$d$ regr.\ + lin.\ interp & 0.279 & -0.244 & P \\
+prune & qa & unseen $d$ 0.65/0.55, incl.\ new source & strength+source/int.+ext. & 0.759 & A2: per-$d$ regr.\ + lin.\ interp & 0.818 & +0.059 & P \\
+\midrule
+quant & math & source transfer, fixed bit, $\ge$4-bit (3 new sources) & source/interp & 0.029 & per-bit median & 0.084 & +0.055 & P \\
+quant & math & source transfer, fixed bit, int3 (3 new sources) & source/interp & 1.488 & per-bit median & 1.934 & +0.446 & P \\
+quant & code & source transfer, fixed bit, $\ge$4-bit (3 new sources) & source/interp & 0.104 & per-bit median & 0.094 & -0.010 & P \\
+quant & code & source transfer, fixed bit, int3 (3 new sources) & source/interp & 1.963 & per-bit median & 0.843 & -1.120 & P \\
+quant & qa & source transfer, fixed bit, $\ge$4-bit (3 new sources) & source/interp & 0.173 & per-bit median & 0.134 & -0.039 & P \\
+quant & qa & source transfer, fixed bit, int3 (3 new sources) & source/interp & 2.046 & per-bit median & 1.727 & -0.319 & P \\
+\midrule
+distill & math & $\delta$ source transfer (3$\times$3 LoRA, leave-one-step-out) & source/interp & 0.014 & constant (median) & 0.031 & +0.017 & R \\
+distill & code & $\delta$ source transfer (3$\times$3 LoRA, leave-one-step-out) & source/interp & 0.057 & constant (median) & 0.061 & +0.004 & R \\
+distill & qa & $\delta$ source transfer (3$\times$3 LoRA, leave-one-step-out) & source/interp & 0.263 & constant (mean) & 0.159 & -0.104 & R \\
+distill & math & unseen pool U225 from U75/U600 & config(pool)/interp & 0.122 & E-only & 0.191 & +0.069 & P/R \\
+distill & code & unseen pool U225 from U75/U600 & config(pool)/interp & 0.069 & E-only & 0.117 & +0.048 & P/R \\
+distill & qa & unseen pool U225 from U75/U600 & config(pool)/interp & 0.706 & constant & 1.449 & +0.743 & P/R \\
+\midrule
+prune & all & NEW source pythia-1b@96k, d=0.65 (interp) & source+strength/interp & 0.193 & strongest: A1 (gamma=1) (same-input) & 0.149 & -0.044 & P \\
+prune & all & NEW source pythia-1b@96k, d=0.55 (extrap) & source+strength/extrap & 1.302 & strongest: strength-only (same-input best A2 1.139) & 0.273 & -1.029 & P \\
+\midrule
+quant & all & NEW source pythia-1b@96k, int4 (seen bit) & source/interp & 0.074 & strongest: per-bit median & 0.111 & +0.037 & P \\
+quant & all & NEW source pythia-1b@96k, int3 (seen bit) & source/interp & 0.397 & strongest: per-bit median & 0.620 & +0.223 & P \\
+\midrule
+prune & all & NEW size 1B (in-range), 32k+112k, $d$ 0.9--0.6 & source+strength/interp & 0.187 & strongest: median curve & 0.188 & +0.002 & P \\
+prune & all & NEW size 1B (in-range), 32k+112k, $d$=0.55 & source+strength/extrap & 1.683 & strongest: strength-only & 0.474 & -1.209 & P \\
+\midrule
+quant & all & NEW size 1B (in-range), 32k+112k, $\ge$4-bit & source/interp & 0.087 & strongest: per-bit median & 0.034 & -0.054 & P \\
+quant & all & NEW size 1B (in-range), 32k+112k, int3 & source/interp & 0.863 & strongest: per-bit median & 1.334 & +0.471 & P \\
+\midrule
+prune & all & NEW size 6.9B (5$\times$ extrap.), 32k+112k, $d$ 0.9--0.6 & source+strength/interp & 0.472 & strongest: median curve & 0.128 & -0.344 & P \\
+prune & all & NEW size 6.9B (5$\times$ extrap.), 32k+112k, $d$=0.55 & source+strength/extrap & 1.681 & strongest: median curve & 0.773 & -0.908 & P \\
+\midrule
+quant & all & NEW size 6.9B (5$\times$ extrap.), 32k+112k, $\ge$4-bit & source/interp & 0.262 & strongest: per-bit median & 0.038 & -0.224 & P \\
+quant & all & NEW size 6.9B (5$\times$ extrap.), 32k+112k, int3 & source/interp & 3.923 & strongest: per-bit mean & 1.865 & -2.057 & P \\
+\bottomrule
+\end{tabular}
+\caption{Main prediction table (capability loss, nats/token); candidate forms and inputs (all K0) are given in \S\ref{sec:twoaxes}. Impr.\ $=$ baseline MAE $-$ candidate MAE (positive $=$ candidate better) against the strongest baseline at the \emph{same} information budget (K0). Three statements are kept separate: whether adding $D_0$ improves on the model without it, whether the full-input model improves on the strongest same-budget baseline, and whether a frozen model succeeds on a new source state; Impr.\ reports point-estimate error reduction, and significance is stated in the text. Status: P $=$ frozen prospective (prediction registered before measurement, regardless of outcome); R $=$ retrospective (leave-one-out on an existing panel or baseline/diagnostic added at closeout with the original prediction untouched); P/R $=$ the four candidates were frozen (P) but the per-capability choice among them was made after the test (R). Every number is generated from \texttt{results/v*/summary.json} by \texttt{analysis/v45\_main\_table.py}; per-source, per-density, and per-pool breakdowns are in the corresponding docs. Point estimates; the controlled panels have three size/step/pool clusters, so intervals are panel-conditional (see text).}
+\label{tab:main}
+\end{sidewaystable}

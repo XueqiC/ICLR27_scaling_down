@@ -1,0 +1,98 @@
+% Generated from analysis/final_rule.py. Predictor labels below quote its docstring/code.
+% The Round v7 locked rule. Prediction only: no files, fitting, or outcomes.
+% 
+% Arm                 State status                     Math/code          QA
+% ------------------  -------------------------------  -----------------  -----------------
+% pruning             seen size, unseen d in [0.6,0.9]  v53 power          v53 median curve
+% pruning             new size or stage                v53 median curve   v53 median curve
+% per-channel RTN     seen bits, new state             per-bit dev median per-bit dev median
+% per-channel RTN     seen state                       v36 regression     v36 regression
+% grouped RTN         seen state                       v69 interpolation  per-config median
+% grouped RTN         new state                        per-config median  per-config median
+% distillation        new source, smaller same-stage   linear (math),     constant; 2Wiki only
+%                                                      constant (code)
+% 
+% All returns are absolute deployed losses in native-token nats. Pruning/RTN
+% add a development response to source L0; KD adds it to STUDENT dense loss.
+% Group interpolation uses v69's frozen boundary rule: adjacent log-coordinate
+% pairs, zero floor only outside the group grid, and no bit extrapolation.
+% Selection is downstream: feasible nominal storage, argmin absolute loss per
+% capability, or max_c(L_c-source_L0c), with v64's candidate-set heuristic.
+% 
+% ``inputs`` contains ``models`` (development-fitted objects), scalar ``L0``,
+% ``N0``, ``D0`` and arm-specific ``d`` / ``bit`` / ``config``. KD instead uses
+% ``student`` with N0, D0 and a per-capability ``dense`` mapping. QA KD requires
+% ``qa_distribution='2Wiki'``. New-size/stage status takes precedence over a
+% previously seen size. Undefined table cells are rejected, never improvised.
+\begin{table}[!htbp]\normalfont
+\centering\small
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llllcl@{}}
+\toprule
+Arm & Capability & State status & Response predictor & Fit & Anchor \\
+\midrule
+% delta = float(np.dot(p["beta"], z) * prune.shape(d, p["gamma"]))
+Pruning & Math & Seen source state; new $d$ & Pruning power form & P & $L_{0,c}$ \\
+% delta = float(np.dot(p["beta"], z) * prune.shape(d, p["gamma"]))
+Pruning & Code & Seen source state; new $d$ & Pruning power form & P & $L_{0,c}$ \\
+% delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
+Pruning & QA & Seen source state; new $d$ & \shortstack[l]{Pruning development\\median curve} & P & $L_{0,c}$ \\
+% delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
+Pruning & Math & \shortstack[l]{New size or new\\stage} & \shortstack[l]{Pruning development\\median curve} & P & $L_{0,c}$ \\
+% delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
+Pruning & Code & \shortstack[l]{New size or new\\stage} & \shortstack[l]{Pruning development\\median curve} & P & $L_{0,c}$ \\
+% delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
+Pruning & QA & \shortstack[l]{New size or new\\stage} & \shortstack[l]{Pruning development\\median curve} & P & $L_{0,c}$ \\
+\addlinespace
+% delta = channel_delta(f["models"][c], inputs)
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization} & Math & Seen state & \shortstack[l]{Per-bit source\\regression} & Q & $L_{0,c}$ \\
+% delta = channel_delta(f["models"][c], inputs)
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization} & Code & Seen state & \shortstack[l]{Per-bit source\\regression} & Q & $L_{0,c}$ \\
+% delta = channel_delta(f["models"][c], inputs)
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization} & QA & Seen state & \shortstack[l]{Per-bit source\\regression} & Q & $L_{0,c}$ \\
+% delta = f["median"][c][str(inputs["bit"])]
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization} & Math & New state & \shortstack[l]{Per-bit development\\median} & Q & $L_{0,c}$ \\
+% delta = f["median"][c][str(inputs["bit"])]
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization} & Code & New state & \shortstack[l]{Per-bit development\\median} & Q & $L_{0,c}$ \\
+% delta = f["median"][c][str(inputs["bit"])]
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization} & QA & New state & \shortstack[l]{Per-bit development\\median} & Q & $L_{0,c}$ \\
+\addlinespace
+% anchors = {k: float(np.dot(beta, z)) for k, beta in
+%                        f["models"][c]["same_input_interpolation"]["anchors"].items()}
+\shortstack[l]{Grouped\\round-to-nearest\\quantization} & Math & Seen state & \shortstack[l]{Piecewise source\\interpolation} & G & $L_{0,c}$ \\
+% anchors = {k: float(np.dot(beta, z)) for k, beta in
+%                        f["models"][c]["same_input_interpolation"]["anchors"].items()}
+\shortstack[l]{Grouped\\round-to-nearest\\quantization} & Code & Seen state & \shortstack[l]{Piecewise source\\interpolation} & G & $L_{0,c}$ \\
+% anchors = f["models"][c]["median"]["anchors"]
+\shortstack[l]{Grouped\\round-to-nearest\\quantization} & QA & Seen state & \shortstack[l]{per-configuration\\median} & G & $L_{0,c}$ \\
+% anchors = f["models"][c]["median"]["anchors"]
+\shortstack[l]{Grouped\\round-to-nearest\\quantization} & Math & New state & \shortstack[l]{per-configuration\\median} & G & $L_{0,c}$ \\
+% anchors = f["models"][c]["median"]["anchors"]
+\shortstack[l]{Grouped\\round-to-nearest\\quantization} & Code & New state & \shortstack[l]{per-configuration\\median} & G & $L_{0,c}$ \\
+% anchors = f["models"][c]["median"]["anchors"]
+\shortstack[l]{Grouped\\round-to-nearest\\quantization} & QA & New state & \shortstack[l]{per-configuration\\median} & G & $L_{0,c}$ \\
+\addlinespace
+% float(distill._predict(f["linear"][c], [{**s, "L0": anchor}])[0])
+Distillation & Math & New source & \shortstack[l]{Linear source\\regression} & K & $L_{S0,c}$ \\
+% float(f["constant"][c])
+Distillation & Code & New source & Constant & K & $L_{S0,c}$ \\
+% float(f["constant"][c])
+Distillation & QA & New source & Constant & K & $L_{S0,c}$ \\
+\addlinespace
+% value = float(inputs["L0"])
+Dense & Math & Any valid status & 0 (no loss change) & --- & $L_{0,c}$ \\
+% value = float(inputs["L0"])
+Dense & Code & Any valid status & 0 (no loss change) & --- & $L_{0,c}$ \\
+% value = float(inputs["L0"])
+Dense & QA & Any valid status & 0 (no loss change) & --- & $L_{0,c}$ \\
+\bottomrule
+\end{tabular*}
+\caption{The locked selection rule, frozen before the selection confirmation. Rows are compression families, capabilities, and source-state status; columns give the response predictor, the development fit, and the dense-loss anchor, where $L_{0,c}$ is the source dense loss and $L_{S0,c}$ the dense loss of the initial student. Fit keys P, Q, G, and K denote the pruning, channel-quantization, grouped-quantization, and distillation development data.}
+\label{tab:locked_rule}
+\end{table}
+\begingroup\small
+\noindent\textbf{Development data.} P: V53 register, 17 Pythia states, 84 density responses per capability ($0.55\le d<1$, excluding 2.8B). Q: V64 frozen paired channel rows; 16/16/4/17/17 states at 8/6/5/4/3 bits. G: V69 development grid, 160M/410M/1.4B at 16k/143k, $b\in\{3,4,5\}$, $g\in\{64,128,256\}$. K: V39 fixed-recipe Pythia students frozen in V64: 160M/410M/1.4B at 16k/64k/143k, excluding both selectable students (160M@64k, 410M@64k), leaving seven. Recipe: \texttt{gpt-5.6-luna}, full pool 600, two epochs, strict LoRA, seed 0. Full rosters and literal code are in the V85 artifact.
+\par\noindent\textbf{Exact forms.} The V53 power response is $(\beta_c^\top z)[(1-d)/0.3]^{\gamma_c}$, with $z=(1,\allowbreak z(\log N_0),\allowbreak z(L_{0,c}),\allowbreak z(\log D_0))$ and development standardization. Its median curve linearly interpolates adjacent per-density medians. V36 regression is per-bit OLS on $(1,\allowbreak z(\log(N_0/10^9)),\allowbreak z(L_{0,c}),\allowbreak z(\log(D_0/10^9)))$; the new-state branch takes the median signed response at that bit. V69 interpolation uses per-configuration source-regression anchors $\beta_{c,b,g}^\top z$; its median branch uses per-configuration development medians. Both pass the anchors through the same piecewise bilinear interpolation in $(\log_2(2^{b-1}-1),\log_2(g/128))$. Outside the group grid, use the nearest boundary pair and floor only the extrapolated response at zero; no bit extrapolation. V53 power and V69 source-anchor fits use ridge $10^{-3}$ including the intercept. Distillation math uses $\beta_0+\beta_1z(\log N_S)+\beta_2z(L_{S0,c})+\beta_3z(\log D_S)$; code and QA use the per-capability arithmetic mean development response (not a median).
+\par\noindent\textbf{Domain and selection.} New status means \texttt{new\_state}, \texttt{new\_size}, \texttt{new\_stage}, or \texttt{new\_source}, taking precedence over seen size. Pruning requires $0.6\le d\le0.9$; channel RTN requires a development bit. Distillation requires a smaller same-stage student ($N_S<N_0$, $D_S=D_0$), and QA requires \texttt{qa\_distribution='2Wiki'}. Undefined cells are rejected. Dense accepts every valid status. Selection minimizes predicted absolute loss or $\max_c(\widehat L_c-L_{0,c})$ over storage-feasible candidates; multi has no separately fitted predictor. V78 invokes the new-stage branch for all four states.
+\par\noindent\textbf{Differences from the delivered-predictor table.} \texttt{tables/final\_deliverables.tex} allows power or A2 for seen-size pruning; this rule uses power for math/code and medians for QA and new size/stage. It delivers per-bit source regression on new states; selection uses that regression on seen states and per-bit medians on new states. Grouped branches agree, with the boundary rule specified above. Its distillation exposure and joint budget--pool forms are not used here: selection uses the fixed-recipe student-state math form together with the code and QA constants fixed at the same freeze.
+\endgroup

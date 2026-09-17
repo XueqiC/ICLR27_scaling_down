@@ -1,0 +1,22 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\caption{Distillation QA responses on the primary 2Wiki probe and on 128 answerable MuSiQue development questions with supporting paragraphs supplied, as changes in conditional loss from the dense loss of the student in nats per native token, for each trajectory of the uniform protocol at its final checkpoint (three data seeds per pool size) and for the early checkpoints of the \mbox{pre-specified} states. Entries give the mean over trajectories with the range across trajectories in brackets.}
+\label{tab:musique_scope}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.240000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}@{}}
+\toprule
+Student & Pool, checkpoint & Reuse count & Trajectories & $\Delta$ 2Wiki (primary) & $\Delta$ MuSiQue \\
+\midrule
+Gemma-3-270M & $U{=}75$ (development pool), final checkpoint & 14.0--14.3 & 4 & $+2.65$ [+1.98, +3.35] & $+1.66$ [+1.34, +1.89] \\
+Gemma-3-270M & $U{=}375$ (unseen pool), final checkpoint & 2.8--2.9 & 3 & $-0.76$ [-0.93, -0.67] & $+0.13$ [+0.08, +0.16] \\
+Gemma-3-270M & $U{=}450$ (development pool), final checkpoint & 2.4--2.4 & 3 & $-0.66$ [-0.68, -0.65] & $+0.15$ [+0.09, +0.19] \\
+Gemma-3-1B & $U{=}75$ (development pool), early checkpoint & 1.8--3.5 & 2 & $-1.01$ [-1.33, -0.69] & $+0.31$ [+0.17, +0.45] \\
+Gemma-3-1B & $U{=}75$ (development pool), final checkpoint & 14.0--14.3 & 3 & $+4.90$ [+4.60, +5.27] & $+3.34$ [+3.26, +3.39] \\
+Gemma-3-1B & $U{=}375$ (unseen pool), final checkpoint & 2.8--2.9 & 3 & $-0.56$ [-0.60, -0.51] & $+0.56$ [+0.52, +0.59] \\
+Gemma-3-1B & $U{=}450$ (development pool), early checkpoint & 0.3--0.6 & 2 & $-1.43$ [-1.46, -1.40] & $+0.33$ [+0.26, +0.40] \\
+Gemma-3-1B & $U{=}450$ (development pool), final checkpoint & 2.4--2.4 & 4 & $-0.63$ [-0.72, -0.58] & $+0.32$ [+0.22, +0.45] \\
+Gemma-3-4B & $U{=}75$ (development pool), final checkpoint & 14.0--14.3 & 2 & $+5.80$ [+4.88, +6.73] & $+3.41$ [+3.13, +3.69] \\
+Gemma-3-4B & $U{=}375$ (unseen pool), final checkpoint & 2.8--2.9 & 3 & $-0.40$ [-0.60, -0.18] & $+0.84$ [+0.65, +0.95] \\
+Gemma-3-4B & $U{=}450$ (development pool), final checkpoint & 2.4--2.4 & 2 & $-0.56$ [-0.82, -0.29] & $+0.56$ [+0.40, +0.71] \\
+\bottomrule
+\end{tabular*}
+\end{table}

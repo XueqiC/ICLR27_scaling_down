@@ -1,0 +1,3097 @@
+{
+  "version": 24,
+  "input_sha256": {
+    "results/prereg/quant_5bit_prereg.json": "4cd37082f100b9ba329be6c0c2963b7670daaf0771f97f56b8bc6e172f377514",
+    "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json": "7580f811b543d4fcea8da0154eac6ba30578ba7c14d4dd3d1a2de981d39f849b",
+    "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json": "eafc51455ab51bc32a046ca3ea32cf54b2e889cad75229d80593c05c4086c9df",
+    "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json": "989bc2130600d71e70bb363c9d8f4da1bfaabe601a5029584eae366e48baf788",
+    "results/v10-quantization/gemma3-12b/quant_losses.json": "af6a9a125573875ac7a7f192e1101dd5afe49162ff802331b371df723842389d",
+    "results/v10-quantization/gemma3-1b/quant_losses.json": "096bf1004f8fa90ecd0d2af3f1af6ba36d96eeb82dbef13e7d7096e008c6f898",
+    "results/v10-quantization/gemma3-270m/quant_losses.json": "26948f124e3aa77a7748495891879bf4e0a1f3998d2337d162c77c1b22ba2db7",
+    "results/v10-quantization/gemma3-27b/quant_losses.json": "12f2f913190fe4b09276b9698c637671aa1c2455506133b1d8e8634d4b360203",
+    "results/v10-quantization/gemma3-4b/quant_losses.json": "8740ee0ab725930038b5023954c11eb0e0d396544f915ab7a2e73d80006cd4b4",
+    "results/v10-quantization/gemma4-31b/quant_losses.json": "874580399c72871655d15566fbd9717e0489a70e0799d48099891511ced3c6de",
+    "results/v10-quantization/muse-30b/quant_losses.json": "b25f4a4d4edc4951f453a22c7e10b5c25053e0c0cece3c4bb6e48f6319d8c3ee",
+    "results/v10-quantization/olmo3-32b/quant_losses.json": "49bc563779437dee4e181e3fc822e37767f299eedc2e679fa852b997aac470cd",
+    "results/v10-quantization/olmo3-7b/quant_losses.json": "8f65951d747f13cd06029cdaa505397017d9f85f93bcd3279ab01982a182cb9c",
+    "results/v6-capability-geometry/Qwen3-0.6B/fisher_meta.json": "407a477a33e9b848124a3886c6cc3c74d8c529fc0d1c2ac38861dbcb51154835",
+    "results/v6-capability-geometry/Qwen3-1.7B/fisher_meta.json": "b7c92ea5c6afaed251a7b08b7471f39a7a985cb70f638a4a4aed76edab773294",
+    "results/v6-capability-geometry/Qwen3-4B/fisher_meta.json": "392a99f69f9c50166ba2e1c00ceed9d420db6786baa18f9b419973b48293b910",
+    "results/v6-capability-geometry/gemma3-12b/fisher_meta.json": "ae44527f504738e61ebdbb1fd7029d01baa2d4c3dfcba2f68de4720435f12a8c",
+    "results/v6-capability-geometry/gemma3-1b/fisher_meta.json": "c4f089f06b781f27b311648e89e83026d74eed516f74e371b260f0ca1846ce52",
+    "results/v6-capability-geometry/gemma3-270m/fisher_meta.json": "1f10885ea7fc2a1c2a2a57c9731870ee3af29bfefd4b5624edb356b48ab20d37",
+    "results/v6-capability-geometry/gemma3-27b/fisher_meta.json": "644b93f81b8d3ff2fa49f068de6f258cfc2e38fd3b7beb44d2fe90a600bdf3db",
+    "results/v6-capability-geometry/gemma3-4b/fisher_meta.json": "4e9e8464b8538a8a8b8cc1aba10514d33d6fc91ca6e41c888c7639f8799258ee",
+    "results/v6-capability-geometry/gemma4-31b/fisher_meta.json": "966af276ff83799e939a6ae7336a974088a16b193a13d963c917251f2d78b705",
+    "results/v6-capability-geometry/muse-30b/fisher_meta.json": "2151ca1008403cef9b39d63a7bb46e05117092f18c296fdff349f16cfe965396",
+    "results/v6-capability-geometry/olmo3-32b/fisher_meta.json": "ac6197dd7e10276a1cf4526a80040c071e4b4e3f761657d19f482312ee0eb081",
+    "results/v6-capability-geometry/olmo3-7b/fisher_meta.json": "91c0bb282027694bb17b728ba3a0d48e37f79a7b044f66f00902b79d4ef7355a"
+  },
+  "n_boot": 10000,
+  "bootstrap_unit": "model (12 per capability), paired; fitted predictions fixed",
+  "preregistration": {
+    "law": "\u0394L_c(b)=q_c*(4^-b - 4^-16), fit on bits {8,6,4} (exclude 3-bit collapse), predict UNSEEN 5-bit",
+    "frozen_at_commit": "cba1fe5",
+    "timestamp": "2026-09-04T20:49:33"
+  },
+  "rows": [
+    {
+      "row_id": "Qwen--Qwen3-0.6B|math|5",
+      "model": "Qwen--Qwen3-0.6B",
+      "family": "qwen3",
+      "capability": "math",
+      "N0": 595984384.0,
+      "dense_loss": 1.0042376045400239,
+      "q_calibrated": 142.96621978012618,
+      "observed": 0.07549283154121866,
+      "delta4": 0.5595411439665472,
+      "delta6": 0.01769713261648742,
+      "law_frozen": 0.1396,
+      "law_reconstructed": 0.1396154157171125,
+      "measurement_caveat": {
+        "dense_gap_vs_canonical": {
+          "math": -0.0003,
+          "code": -0.0008,
+          "qa": 0.0133
+        },
+        "note": "odd-half protocol diff, negligible vs quant damage"
+      },
+      "source_path": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.5595411439665472,
+        "linear_4_6bit": 0.2886191382915173,
+        "law_frozen": 0.1396,
+        "law_reconstructed": 0.1396154157171125,
+        "dense_only_lomo": 0.1580294963299438
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-0.6B|code|5",
+      "model": "Qwen--Qwen3-0.6B",
+      "family": "qwen3",
+      "capability": "code",
+      "N0": 595984384.0,
+      "dense_loss": 1.5910863912164115,
+      "q_calibrated": 186.30610576950264,
+      "observed": 0.10921698930944812,
+      "delta4": 0.7291245304825194,
+      "delta6": 0.023837041317538166,
+      "law_frozen": 0.1819,
+      "law_reconstructed": 0.1819395130377594,
+      "measurement_caveat": {
+        "dense_gap_vs_canonical": {
+          "math": -0.0003,
+          "code": -0.0008,
+          "qa": 0.0133
+        },
+        "note": "odd-half protocol diff, negligible vs quant damage"
+      },
+      "source_path": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.7291245304825194,
+        "linear_4_6bit": 0.37648078590002876,
+        "law_frozen": 0.1819,
+        "law_reconstructed": 0.1819395130377594,
+        "dense_only_lomo": 0.19333125802634057
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-0.6B|qa|5",
+      "model": "Qwen--Qwen3-0.6B",
+      "family": "qwen3",
+      "capability": "qa",
+      "N0": 595984384.0,
+      "dense_loss": 5.610182195571956,
+      "q_calibrated": 54.12372357056888,
+      "observed": -0.1466789667896684,
+      "delta4": 0.21338791512915112,
+      "delta6": -0.018219557195572555,
+      "law_frozen": 0.0529,
+      "law_reconstructed": 0.052855186197722274,
+      "measurement_caveat": {
+        "dense_gap_vs_canonical": {
+          "math": -0.0003,
+          "code": -0.0008,
+          "qa": 0.0133
+        },
+        "note": "odd-half protocol diff, negligible vs quant damage"
+      },
+      "source_path": "results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.21338791512915112,
+        "linear_4_6bit": 0.09758417896678928,
+        "law_frozen": 0.0529,
+        "law_reconstructed": 0.052855186197722274,
+        "dense_only_lomo": 0.13210403264693404
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-1.7B|math|5",
+      "model": "Qwen--Qwen3-1.7B",
+      "family": "qwen3",
+      "capability": "math",
+      "N0": 1720451072.0,
+      "dense_loss": 1.0080925179211468,
+      "q_calibrated": 101.96455810632956,
+      "observed": 0.01793048088411009,
+      "delta4": 0.40021094683393077,
+      "delta6": -0.005217667264038051,
+      "law_frozen": 0.0996,
+      "law_reconstructed": 0.09957474003523877,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.40021094683393077,
+        "linear_4_6bit": 0.19749663978494636,
+        "law_frozen": 0.0996,
+        "law_reconstructed": 0.09957474003523877,
+        "dense_only_lomo": 0.15365934291398992
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-1.7B|code|5",
+      "model": "Qwen--Qwen3-1.7B",
+      "family": "qwen3",
+      "capability": "code",
+      "N0": 1720451072.0,
+      "dense_loss": 1.6022103438312627,
+      "q_calibrated": 40.856398154498436,
+      "observed": -0.005273042473273648,
+      "delta4": 0.16151401329095627,
+      "delta6": -0.020080901473562562,
+      "law_frozen": 0.0399,
+      "law_reconstructed": 0.0398988168101309,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.16151401329095627,
+        "linear_4_6bit": 0.07071655590869685,
+        "law_frozen": 0.0399,
+        "law_reconstructed": 0.0398988168101309,
+        "dense_only_lomo": 0.15870147275155735
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-1.7B|qa|5",
+      "model": "Qwen--Qwen3-1.7B",
+      "family": "qwen3",
+      "capability": "qa",
+      "N0": 1720451072.0,
+      "dense_loss": 6.388722324723247,
+      "q_calibrated": -54.06967975325487,
+      "observed": -0.1484086715867159,
+      "delta4": -0.21387799815498099,
+      "delta6": 0.03309501845018481,
+      "law_frozen": -0.0528,
+      "law_reconstructed": -0.052802409044959614,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": -0.21387799815498099,
+        "linear_4_6bit": -0.09039148985239809,
+        "law_frozen": -0.0528,
+        "law_reconstructed": -0.052802409044959614,
+        "dense_only_lomo": 0.11516452808340617
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-4B|math|5",
+      "model": "Qwen--Qwen3-4B",
+      "family": "qwen3",
+      "capability": "math",
+      "N0": 4022272000.0,
+      "dense_loss": 0.9105342741935484,
+      "q_calibrated": 33.727264854040016,
+      "observed": 0.04083594683393077,
+      "delta4": 0.13237380525686981,
+      "delta6": -0.0018387843488649747,
+      "law_frozen": 0.0329,
+      "law_reconstructed": 0.03293677423128267,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.13237380525686981,
+        "linear_4_6bit": 0.06526751045400242,
+        "law_frozen": 0.0329,
+        "law_reconstructed": 0.03293677423128267,
+        "dense_only_lomo": 0.13174363736142652
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-4B|code|5",
+      "model": "Qwen--Qwen3-4B",
+      "family": "qwen3",
+      "capability": "code",
+      "N0": 4022272000.0,
+      "dense_loss": 1.5457960127130888,
+      "q_calibrated": 49.12129999753748,
+      "observed": 0.08017913897717421,
+      "delta4": 0.19134643166714826,
+      "delta6": 0.02051430222479045,
+      "law_frozen": 0.048,
+      "law_reconstructed": 0.047970008091901294,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.19134643166714826,
+        "linear_4_6bit": 0.10593036694596936,
+        "law_frozen": 0.048,
+        "law_reconstructed": 0.047970008091901294,
+        "dense_only_lomo": 0.08588289690765646
+      }
+    },
+    {
+      "row_id": "Qwen--Qwen3-4B|qa|5",
+      "model": "Qwen--Qwen3-4B",
+      "family": "qwen3",
+      "capability": "qa",
+      "N0": 4022272000.0,
+      "dense_loss": 6.734504727859779,
+      "q_calibrated": 99.09171079226812,
+      "observed": 0.07572503459409585,
+      "delta4": 0.39372405442804403,
+      "delta6": -0.08298619119003714,
+      "law_frozen": 0.0968,
+      "law_reconstructed": 0.09676922574898753,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.39372405442804403,
+        "linear_4_6bit": 0.15536893161900345,
+        "law_frozen": 0.0968,
+        "law_reconstructed": 0.09676922574898753,
+        "dense_only_lomo": -0.06614041470005783
+      }
+    },
+    {
+      "row_id": "gemma3-12b|math|5",
+      "model": "gemma3-12b",
+      "family": "gemma3",
+      "capability": "math",
+      "N0": 11765268480.0,
+      "dense_loss": 0.6443589937869374,
+      "q_calibrated": 103.28785153933838,
+      "observed": 0.0755228064858312,
+      "delta4": 0.4040384906804062,
+      "delta6": 0.016034626458554357,
+      "law_frozen": 0.1009,
+      "law_reconstructed": 0.10086701847030818,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-12b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.4040384906804062,
+        "linear_4_6bit": 0.21003655856948028,
+        "law_frozen": 0.1009,
+        "law_reconstructed": 0.10086701847030818,
+        "dense_only_lomo": 0.14882851671268263
+      }
+    },
+    {
+      "row_id": "gemma3-12b|code|5",
+      "model": "gemma3-12b",
+      "family": "gemma3",
+      "capability": "code",
+      "N0": 11765268480.0,
+      "dense_loss": 0.7505259078830824,
+      "q_calibrated": 82.73242295324447,
+      "observed": 0.028399025686448143,
+      "delta4": 0.3240699734278123,
+      "delta6": 0.005868024800708582,
+      "law_frozen": 0.0808,
+      "law_reconstructed": 0.08079336252763451,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-12b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.3240699734278123,
+        "linear_4_6bit": 0.16496899911426044,
+        "law_frozen": 0.0808,
+        "law_reconstructed": 0.08079336252763451,
+        "dense_only_lomo": 0.15554195006565158
+      }
+    },
+    {
+      "row_id": "gemma3-12b|qa|5",
+      "model": "gemma3-12b",
+      "family": "gemma3",
+      "capability": "qa",
+      "N0": 11765268480.0,
+      "dense_loss": 5.431461653386454,
+      "q_calibrated": -108.95542480443507,
+      "observed": 0.0979519422310764,
+      "delta4": -0.42448954183266885,
+      "delta6": -0.04357569721115517,
+      "law_frozen": -0.1064,
+      "law_reconstructed": -0.10640175666741944,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-12b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": -0.42448954183266885,
+        "linear_4_6bit": -0.234032619521912,
+        "law_frozen": -0.1064,
+        "law_reconstructed": -0.10640175666741944,
+        "dense_only_lomo": -0.004475728795704028
+      }
+    },
+    {
+      "row_id": "gemma3-1b|math|5",
+      "model": "gemma3-1b",
+      "family": "gemma3",
+      "capability": "math",
+      "N0": 999751680.0,
+      "dense_loss": 1.2210562206394908,
+      "q_calibrated": 242.09637827058248,
+      "observed": 0.19472647370813756,
+      "delta4": 0.9472268525534171,
+      "delta6": 0.034664343082285276,
+      "law_frozen": 0.2364,
+      "law_reconstructed": 0.2364221880374101,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-1b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.9472268525534171,
+        "linear_4_6bit": 0.4909455978178512,
+        "law_frozen": 0.2364,
+        "law_reconstructed": 0.2364221880374101,
+        "dense_only_lomo": 0.3734118899023239
+      }
+    },
+    {
+      "row_id": "gemma3-1b|code|5",
+      "model": "gemma3-1b",
+      "family": "gemma3",
+      "capability": "code",
+      "N0": 999751680.0,
+      "dense_loss": 1.0608115589016829,
+      "q_calibrated": 151.38694143777738,
+      "observed": 0.14722652790079716,
+      "delta4": 0.592338352524358,
+      "delta6": 0.021423826395039924,
+      "law_frozen": 0.1478,
+      "law_reconstructed": 0.14783877475031046,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-1b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.592338352524358,
+        "linear_4_6bit": 0.30688108945969894,
+        "law_frozen": 0.1478,
+        "law_reconstructed": 0.14783877475031046,
+        "dense_only_lomo": 0.3082619922893206
+      }
+    },
+    {
+      "row_id": "gemma3-1b|qa|5",
+      "model": "gemma3-1b",
+      "family": "gemma3",
+      "capability": "qa",
+      "N0": 999751680.0,
+      "dense_loss": 5.567137699203188,
+      "q_calibrated": 226.51480944588806,
+      "observed": -0.009929033864541914,
+      "delta4": 0.8840575199203187,
+      "delta6": 0.06685756972111534,
+      "law_frozen": 0.2212,
+      "law_reconstructed": 0.22120581585991117,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-1b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.8840575199203187,
+        "linear_4_6bit": 0.475457544820717,
+        "law_frozen": 0.2212,
+        "law_reconstructed": 0.22120581585991117,
+        "dense_only_lomo": 0.04315800649770752
+      }
+    },
+    {
+      "row_id": "gemma3-270m|math|5",
+      "model": "gemma3-270m",
+      "family": "gemma3",
+      "capability": "math",
+      "N0": 268042240.0,
+      "dense_loss": 1.3159948477041976,
+      "q_calibrated": 509.6075466396563,
+      "observed": 0.41904076375208366,
+      "delta4": 1.9930671313835429,
+      "delta6": 0.08618730110622819,
+      "law_frozen": 0.4977,
+      "law_reconstructed": 0.49766350111303626,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-270m/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 1.9930671313835429,
+        "linear_4_6bit": 1.0396272162448854,
+        "law_frozen": 0.4977,
+        "law_reconstructed": 0.49766350111303626,
+        "dense_only_lomo": 0.2194179463916842
+      }
+    },
+    {
+      "row_id": "gemma3-270m|code|5",
+      "model": "gemma3-270m",
+      "family": "gemma3",
+      "capability": "code",
+      "N0": 268042240.0,
+      "dense_loss": 1.1902956155890168,
+      "q_calibrated": 601.0914812390508,
+      "observed": 0.3727579716563332,
+      "delta4": 2.3543235163861826,
+      "delta6": 0.04583702391496902,
+      "law_frozen": 0.587,
+      "law_reconstructed": 0.5870032596949941,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-270m/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 2.3543235163861826,
+        "linear_4_6bit": 1.200080270150576,
+        "law_frozen": 0.587,
+        "law_reconstructed": 0.5870032596949941,
+        "dense_only_lomo": 0.13198071043419626
+      }
+    },
+    {
+      "row_id": "gemma3-270m|qa|5",
+      "model": "gemma3-270m",
+      "family": "gemma3",
+      "capability": "qa",
+      "N0": 268042240.0,
+      "dense_loss": 5.27574078685259,
+      "q_calibrated": 224.86031630203806,
+      "observed": 0.048088894422310346,
+      "delta4": 0.8766496513944215,
+      "delta6": 0.0822024402390431,
+      "law_frozen": 0.2196,
+      "law_reconstructed": 0.21959010028433687,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-270m/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.8766496513944215,
+        "linear_4_6bit": 0.4794260458167323,
+        "law_frozen": 0.2196,
+        "law_reconstructed": 0.21959010028433687,
+        "dense_only_lomo": 0.08378366932463167
+      }
+    },
+    {
+      "row_id": "gemma3-27b|math|5",
+      "model": "gemma3-27b",
+      "family": "gemma3",
+      "capability": "math",
+      "N0": 27007991808.0,
+      "dense_loss": 0.6018809668131535,
+      "q_calibrated": 83.66642307840495,
+      "observed": 0.03839596908622522,
+      "delta4": 0.32751174420366724,
+      "delta6": 0.009395362933777851,
+      "law_frozen": 0.0817,
+      "law_reconstructed": 0.08170547180739769,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-27b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.32751174420366724,
+        "linear_4_6bit": 0.16845355356872255,
+        "law_frozen": 0.0817,
+        "law_reconstructed": 0.08170547180739769,
+        "dense_only_lomo": 0.13196221373921135
+      }
+    },
+    {
+      "row_id": "gemma3-27b|code|5",
+      "model": "gemma3-27b",
+      "family": "gemma3",
+      "capability": "code",
+      "N0": 27007991808.0,
+      "dense_loss": 0.7339459698848538,
+      "q_calibrated": 57.91190750004961,
+      "observed": 0.03742249778565099,
+      "delta4": 0.2265555801594331,
+      "delta6": 0.00891275465013286,
+      "law_frozen": 0.0566,
+      "law_reconstructed": 0.0565545836843505,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-27b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.2265555801594331,
+        "linear_4_6bit": 0.11773416740478299,
+        "law_frozen": 0.0566,
+        "law_reconstructed": 0.0565545836843505,
+        "dense_only_lomo": 0.10077317539651497
+      }
+    },
+    {
+      "row_id": "gemma3-27b|qa|5",
+      "model": "gemma3-27b",
+      "family": "gemma3",
+      "capability": "qa",
+      "N0": 27007991808.0,
+      "dense_loss": 5.786432395418327,
+      "q_calibrated": -170.28212011814617,
+      "observed": -0.26343065239043817,
+      "delta4": -0.6651052041832672,
+      "delta6": -0.041443600597609986,
+      "law_frozen": -0.1663,
+      "law_reconstructed": -0.1662910932809815,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-27b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": -0.6651052041832672,
+        "linear_4_6bit": -0.3532744023904386,
+        "law_frozen": -0.1663,
+        "law_reconstructed": -0.1662910932809815,
+        "dense_only_lomo": -0.006154084957228249
+      }
+    },
+    {
+      "row_id": "gemma3-4b|math|5",
+      "model": "gemma3-4b",
+      "family": "gemma3",
+      "capability": "math",
+      "N0": 3879895040.0,
+      "dense_loss": 0.7404720412183664,
+      "q_calibrated": 184.7443282128567,
+      "observed": 0.09170897105622067,
+      "delta4": 0.7231777542051826,
+      "delta6": 0.02081754811335057,
+      "law_frozen": 0.1804,
+      "law_reconstructed": 0.180414340006227,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-4b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.7231777542051826,
+        "linear_4_6bit": 0.3719976511592666,
+        "law_frozen": 0.1804,
+        "law_reconstructed": 0.180414340006227,
+        "dense_only_lomo": 0.17281935332914272
+      }
+    },
+    {
+      "row_id": "gemma3-4b|code|5",
+      "model": "gemma3-4b",
+      "family": "gemma3",
+      "capability": "code",
+      "N0": 3879895040.0,
+      "dense_loss": 0.8022586359610274,
+      "q_calibrated": 127.95339743580269,
+      "observed": 0.05953830823737827,
+      "delta4": 0.5008027015057573,
+      "delta6": 0.015555801594331342,
+      "law_frozen": 0.125,
+      "law_reconstructed": 0.12495445989192917,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-4b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.5008027015057573,
+        "linear_4_6bit": 0.25817925155004434,
+        "law_frozen": 0.125,
+        "law_reconstructed": 0.12495445989192917,
+        "dense_only_lomo": 0.22446882763135448
+      }
+    },
+    {
+      "row_id": "gemma3-4b|qa|5",
+      "model": "gemma3-4b",
+      "family": "gemma3",
+      "capability": "qa",
+      "N0": 3879895040.0,
+      "dense_loss": 5.4742280876494025,
+      "q_calibrated": -67.9940719382331,
+      "observed": -0.10738296812749049,
+      "delta4": -0.26531374501992033,
+      "delta6": -0.020605079681274674,
+      "law_frozen": -0.0664,
+      "law_reconstructed": -0.06640044504607723,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma3-4b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": -0.26531374501992033,
+        "linear_4_6bit": -0.1429594123505975,
+        "law_frozen": -0.0664,
+        "law_reconstructed": -0.06640044504607723,
+        "dense_only_lomo": 0.04219981966895418
+      }
+    },
+    {
+      "row_id": "gemma4-31b|math|5",
+      "model": "gemma4-31b",
+      "family": "gemma4",
+      "capability": "math",
+      "N0": 30696013824.0,
+      "dense_loss": 0.567879602970147,
+      "q_calibrated": 239.4217160217224,
+      "observed": 0.050803151992726225,
+      "delta4": 0.9383145173511138,
+      "delta6": 0.009518487649643914,
+      "law_frozen": 0.2338,
+      "law_reconstructed": 0.23381021380775105,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma4-31b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.9383145173511138,
+        "linear_4_6bit": 0.47391650250037887,
+        "law_frozen": 0.2338,
+        "law_reconstructed": 0.23381021380775105,
+        "dense_only_lomo": 0.05710111619538207
+      }
+    },
+    {
+      "row_id": "gemma4-31b|code|5",
+      "model": "gemma4-31b",
+      "family": "gemma4",
+      "capability": "code",
+      "N0": 30696013824.0,
+      "dense_loss": 0.7221822409211692,
+      "q_calibrated": 147.7875709330282,
+      "observed": 0.053504207263064596,
+      "delta4": 0.5788585031000885,
+      "delta6": 0.011320859167404773,
+      "law_frozen": 0.1443,
+      "law_reconstructed": 0.1443237653298101,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma4-31b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.5788585031000885,
+        "linear_4_6bit": 0.2950896811337466,
+        "law_frozen": 0.1443,
+        "law_reconstructed": 0.1443237653298101,
+        "dense_only_lomo": 0.06947093415899937
+      }
+    },
+    {
+      "row_id": "gemma4-31b|qa|5",
+      "model": "gemma4-31b",
+      "family": "gemma4",
+      "capability": "qa",
+      "N0": 30696013824.0,
+      "dense_loss": 5.735339890438247,
+      "q_calibrated": 326.6739909657666,
+      "observed": 0.23614915338645392,
+      "delta4": 1.2830864043824697,
+      "delta6": -0.03308640438247057,
+      "law_frozen": 0.319,
+      "law_reconstructed": 0.3190174932427909,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/gemma4-31b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 1.2830864043824697,
+        "linear_4_6bit": 0.6249999999999996,
+        "law_frozen": 0.319,
+        "law_reconstructed": 0.3190174932427909,
+        "dense_only_lomo": -0.10110099793560345
+      }
+    },
+    {
+      "row_id": "muse-30b|math|5",
+      "model": "muse-30b",
+      "family": "muse",
+      "capability": "math",
+      "N0": 27853389824.0,
+      "dense_loss": 0.6927464616886286,
+      "q_calibrated": 403.88621988884273,
+      "observed": 0.08963722140881725,
+      "delta4": 1.583282495526273,
+      "delta6": 0.009404994306165593,
+      "law_frozen": 0.3944,
+      "law_reconstructed": 0.3944200425731094,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/muse-30b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 1.583282495526273,
+        "linear_4_6bit": 0.7963437449162193,
+        "law_frozen": 0.3944,
+        "law_reconstructed": 0.3944200425731094,
+        "dense_only_lomo": 0.06504475932145183
+      }
+    },
+    {
+      "row_id": "muse-30b|code|5",
+      "model": "muse-30b",
+      "family": "muse",
+      "capability": "code",
+      "N0": 27853389824.0,
+      "dense_loss": 0.9699093157460841,
+      "q_calibrated": 525.3198664565052,
+      "observed": 0.4181780708985985,
+      "delta4": 2.0593569661995055,
+      "delta6": 0.011679032701291558,
+      "law_frozen": 0.513,
+      "law_reconstructed": 0.5130075597758682,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/muse-30b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 2.0593569661995055,
+        "linear_4_6bit": 1.0355179994503985,
+        "law_frozen": 0.513,
+        "law_reconstructed": 0.5130075597758682,
+        "dense_only_lomo": 0.00025472771159285306
+      }
+    },
+    {
+      "row_id": "muse-30b|qa|5",
+      "model": "muse-30b",
+      "family": "muse",
+      "capability": "qa",
+      "N0": 27853389824.0,
+      "dense_loss": 5.506673836032388,
+      "q_calibrated": -28.847559051370315,
+      "observed": -0.22167573380566807,
+      "delta4": -0.10678137651821817,
+      "delta6": -0.10178390688259054,
+      "law_frozen": -0.0282,
+      "law_reconstructed": -0.02817143766950808,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/muse-30b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": -0.10678137651821817,
+        "linear_4_6bit": -0.10428264170040435,
+        "law_frozen": -0.0282,
+        "law_reconstructed": -0.02817143766950808,
+        "dense_only_lomo": -0.0426279409067221
+      }
+    },
+    {
+      "row_id": "olmo3-32b|math|5",
+      "model": "olmo3-32b",
+      "family": "olmo3",
+      "capability": "math",
+      "N0": 32232468480.0,
+      "dense_loss": 0.5828605064072874,
+      "q_calibrated": 9.20817812163237,
+      "observed": 0.007700324224177768,
+      "delta4": 0.03602169214142348,
+      "delta6": 0.00139918171993203,
+      "law_frozen": 0.009,
+      "law_reconstructed": 0.008992359302960572,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/olmo3-32b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.03602169214142348,
+        "linear_4_6bit": 0.018710436930677754,
+        "law_frozen": 0.009,
+        "law_reconstructed": 0.008992359302960572,
+        "dense_only_lomo": 0.06667399754973675
+      }
+    },
+    {
+      "row_id": "olmo3-32b|code|5",
+      "model": "olmo3-32b",
+      "family": "olmo3",
+      "capability": "code",
+      "N0": 32232468480.0,
+      "dense_loss": 1.0298842257597685,
+      "q_calibrated": 15.7102454984673,
+      "observed": 0.0018089725036178894,
+      "delta4": 0.06139652677279295,
+      "delta6": 0.0032561505065122898,
+      "law_frozen": 0.0153,
+      "law_reconstructed": 0.015342032961770401,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/olmo3-32b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.06139652677279295,
+        "linear_4_6bit": 0.03232633863965262,
+        "law_frozen": 0.0153,
+        "law_reconstructed": 0.015342032961770401,
+        "dense_only_lomo": 0.03027236386256875
+      }
+    },
+    {
+      "row_id": "olmo3-32b|qa|5",
+      "model": "olmo3-32b",
+      "family": "olmo3",
+      "capability": "qa",
+      "N0": 32232468480.0,
+      "dense_loss": 5.059972864980916,
+      "q_calibrated": 5.710282970496854,
+      "observed": -0.012121302480916363,
+      "delta4": 0.022964128101144787,
+      "delta6": -0.008930701335878588,
+      "law_frozen": 0.0056,
+      "law_reconstructed": 0.0055764468838469744,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/olmo3-32b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.022964128101144787,
+        "linear_4_6bit": 0.0070167133826331,
+        "law_frozen": 0.0056,
+        "law_reconstructed": 0.0055764468838469744,
+        "dense_only_lomo": -0.06691767949177467
+      }
+    },
+    {
+      "row_id": "olmo3-7b|math|5",
+      "model": "olmo3-7b",
+      "family": "olmo3",
+      "capability": "math",
+      "N0": 7297482752.0,
+      "dense_loss": 0.6355758838968658,
+      "q_calibrated": 40.46065235701059,
+      "observed": 0.009760498687664043,
+      "delta4": 0.1587058051567084,
+      "delta6": -0.0005741469816272771,
+      "law_frozen": 0.0395,
+      "law_reconstructed": 0.03951234639691342,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/olmo3-7b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.1587058051567084,
+        "linear_4_6bit": 0.07906582908754056,
+        "law_frozen": 0.0395,
+        "law_reconstructed": 0.03951234639691342,
+        "dense_only_lomo": 0.0990681754799575
+      }
+    },
+    {
+      "row_id": "olmo3-7b|code|5",
+      "model": "olmo3-7b",
+      "family": "olmo3",
+      "capability": "code",
+      "N0": 7297482752.0,
+      "dense_loss": 1.1295586107091171,
+      "q_calibrated": 53.33315090263821,
+      "observed": 0.00951519536903045,
+      "delta4": 0.20897250361794506,
+      "delta6": 0.002821997105644014,
+      "law_frozen": 0.0521,
+      "law_reconstructed": 0.052083142760765776,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/olmo3-7b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": 0.20897250361794506,
+        "linear_4_6bit": 0.10589725036179454,
+        "law_frozen": 0.0521,
+        "law_reconstructed": 0.052083142760765776,
+        "dense_only_lomo": 0.1450696984289811
+      }
+    },
+    {
+      "row_id": "olmo3-7b|qa|5",
+      "model": "olmo3-7b",
+      "family": "olmo3",
+      "capability": "qa",
+      "N0": 7297482752.0,
+      "dense_loss": 5.030064706583969,
+      "q_calibrated": -18.204197608243568,
+      "observed": -0.09991501669847302,
+      "delta4": -0.07109524093511421,
+      "delta6": -0.004372167223282375,
+      "law_frozen": -0.0178,
+      "law_reconstructed": -0.01777753248830531,
+      "measurement_caveat": null,
+      "source_path": "results/v10-quantization/olmo3-7b/quant_losses.json",
+      "predictions": {
+        "zero_change": 0.0,
+        "nearest_4bit": -0.07109524093511421,
+        "linear_4_6bit": -0.037733704079198294,
+        "law_frozen": -0.0178,
+        "law_reconstructed": -0.01777753248830531,
+        "dense_only_lomo": 0.06977481421629067
+      }
+    }
+  ],
+  "dense_only_folds": [
+    {
+      "capability": "math",
+      "held_out": "Qwen--Qwen3-0.6B",
+      "train_row_ids": [
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5"
+      ],
+      "center": [
+        1.8132962141781641,
+        0.8110411197490699
+      ],
+      "scale": [
+        1.5190141638834112,
+        0.25303705762353107
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.17330176820760088,
+        -0.022592805743625082,
+        0.063312453835926,
+        -0.004726198314842236,
+        0.06334392476155128,
+        0.12730469579240408,
+        -0.06902248145173571,
+        -0.11689994078737721
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "Qwen--Qwen3-1.7B",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-1.7B|math|5"
+      ],
+      "center": [
+        1.7169210031591953,
+        0.8106906730780588
+      ],
+      "scale": [
+        1.6264119021014796,
+        0.25276643101181656
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.17694183050108425,
+        -0.01826094077686281,
+        0.069212579637596,
+        -0.0069839001901766,
+        0.06183914315673091,
+        0.12450299071500404,
+        -0.06999312638099069,
+        -0.10936510730056749
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "Qwen--Qwen3-4B",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-4B|math|5"
+      ],
+      "center": [
+        1.6397155113861763,
+        0.8195596043260222
+      ],
+      "scale": [
+        1.6598245582737792,
+        0.25777598827072157
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.1829998288366923,
+        -0.01098772535310599,
+        0.07385416380436431,
+        -0.007969502214506404,
+        0.058168003073480176,
+        0.12026378334432362,
+        -0.07310599177374862,
+        -0.0973562924295486
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "gemma3-12b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "gemma3-12b|math|5"
+      ],
+      "center": [
+        1.5421423363826394,
+        0.8437573570902597
+      ],
+      "scale": [
+        1.639860336107916,
+        0.25263580585776496
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.17682435061534127,
+        -0.02006824290387274,
+        0.0613113929662383,
+        0.005063049265072626,
+        0.06017055222944032,
+        0.12472909014620476,
+        -0.07182713279083819,
+        -0.11813555884987918
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "gemma3-1b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "gemma3-1b|math|5"
+      ],
+      "center": [
+        1.7662696266539994,
+        0.7913303364673002
+      ],
+      "scale": [
+        1.5811668646450228,
+        0.22748508679642065
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.1645011504438885,
+        -0.002682931958452863,
+        0.09061049386922114,
+        0.006787360777943385,
+        0.06658277357790618,
+        0.12193715222791977,
+        -0.06269032285095155,
+        -0.1326169637328176
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "gemma3-270m",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "gemma3-270m|math|5"
+      ],
+      "center": [
+        1.8859389310279921,
+        0.7826995521886905
+      ],
+      "scale": [
+        1.3803781329325024,
+        0.20841745765928124
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.1407519345020318,
+        0.006665667302690262,
+        0.032827701170027444,
+        -0.014187611319975273,
+        0.047573689581839156,
+        0.11827940366739959,
+        -0.07838072394759937,
+        -0.07328475798166398
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "gemma3-27b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "gemma3-27b|math|5"
+      ],
+      "center": [
+        1.4665986115692282,
+        0.8476189959060583
+      ],
+      "scale": [
+        1.575183963043138,
+        0.24921054237371362
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.17856630981819405,
+        -0.013135234884764166,
+        0.064527395416177,
+        0.006347136882430226,
+        0.05903320693645939,
+        0.12276724825801577,
+        -0.07198757236629234,
+        -0.11616001971061268
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "gemma3-4b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "gemma3-4b|math|5"
+      ],
+      "center": [
+        1.6429917673304169,
+        0.835019807323766
+      ],
+      "scale": [
+        1.6592964159853483,
+        0.25766881715834217
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.16959277420611554,
+        -0.019275955126730204,
+        0.06832637111218443,
+        -0.003802377072098217,
+        0.0634913353124665,
+        0.12667625973208352,
+        -0.06773188297180999,
+        -0.11863333500064172
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "gemma4-31b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "gemma4-31b|math|5"
+      ],
+      "center": [
+        1.4549622490055534,
+        0.8507100289826951
+      ],
+      "scale": [
+        1.5610898153514308,
+        0.24591069893805484
+      ],
+      "families": [
+        "gemma3",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.1647386027031978,
+        -0.02395598479408059,
+        0.067313169654499,
+        0.013844808010765763,
+        0.14145224962342037,
+        -0.049037256722854805,
+        -0.10625980091133116
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "muse-30b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "olmo3-32b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "muse-30b|math|5"
+      ],
+      "center": [
+        1.463796624199258,
+        0.839358496371924
+      ],
+      "scale": [
+        1.571896192618077,
+        0.25563040106615115
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.15013770569794918,
+        -0.04863082774165628,
+        0.04786336167403927,
+        0.0331291888522751,
+        0.09363563458755986,
+        -0.03432920489307328,
+        -0.09243561854676158
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "olmo3-32b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-7b|math|5"
+      ],
+      "test_row_ids": [
+        "olmo3-32b|math|5"
+      ],
+      "center": [
+        1.4505221145409164,
+        0.8493481286702277
+      ],
+      "scale": [
+        1.555402864204475,
+        0.24742713730266733
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.18517659434915748,
+        -0.011875527430973538,
+        0.06886221787237225,
+        -0.006399941380330045,
+        0.058879148632023044,
+        0.1214370614858494,
+        -0.05317443524989786,
+        -0.12074183348764435
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "math",
+      "held_out": "olmo3-7b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|math|5",
+        "Qwen--Qwen3-1.7B|math|5",
+        "Qwen--Qwen3-4B|math|5",
+        "gemma3-12b|math|5",
+        "gemma3-1b|math|5",
+        "gemma3-270m|math|5",
+        "gemma3-27b|math|5",
+        "gemma3-4b|math|5",
+        "gemma4-31b|math|5",
+        "muse-30b|math|5",
+        "olmo3-32b|math|5"
+      ],
+      "test_row_ids": [
+        "olmo3-7b|math|5"
+      ],
+      "center": [
+        1.585562552923936,
+        0.8445558216257205
+      ],
+      "scale": [
+        1.6573088682276769,
+        0.2519896323481906
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.182402049406386,
+        -0.02745855452316219,
+        0.059610728133718434,
+        -0.008362008707483645,
+        0.06078189912242375,
+        0.12551253429871598,
+        -0.05299439133168207,
+        -0.12493803338197379
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "Qwen--Qwen3-0.6B",
+      "train_row_ids": [
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5"
+      ],
+      "center": [
+        1.8132962141781641,
+        1.0488525852636503
+      ],
+      "scale": [
+        1.5190141638834112,
+        0.29265230696473854
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.16452456343293678,
+        -0.0983929094644739,
+        -0.023808863334308147,
+        -0.04172620691742818,
+        0.013197823178722564,
+        0.20446942238254842,
+        -0.06671557802668494,
+        -0.10922546061715789
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "Qwen--Qwen3-1.7B",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-1.7B|code|5"
+      ],
+      "center": [
+        1.7169210031591953,
+        1.0478413168441183
+      ],
+      "scale": [
+        1.6264119021014796,
+        0.2907514625209342
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.17743735707773475,
+        -0.09701436294452824,
+        -0.008632718956505869,
+        -0.03761914105843827,
+        0.01464940073252314,
+        0.19977067698851217,
+        -0.07472414047531133,
+        -0.10207679618728564
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "Qwen--Qwen3-4B",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-4B|code|5"
+      ],
+      "center": [
+        1.6397155113861763,
+        1.0529698924003161
+      ],
+      "scale": [
+        1.6598245582737792,
+        0.29984501395399815
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.17670361224081718,
+        -0.09854259366581333,
+        -0.016157374937306304,
+        -0.03569432812826862,
+        0.013244604710128146,
+        0.2013763282470408,
+        -0.07070062616312092,
+        -0.10822597866577933
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "gemma3-12b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "gemma3-12b|code|5"
+      ],
+      "center": [
+        1.5421423363826394,
+        1.1252671746575895
+      ],
+      "scale": [
+        1.639860336107916,
+        0.31375826105401294
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.1737196702170506,
+        -0.09842312031976354,
+        -0.02728686247480021,
+        -0.029185714135108135,
+        0.007344195582218059,
+        0.19954199766974665,
+        -0.07098307026147307,
+        -0.10671740885538347
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "gemma3-1b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "gemma3-1b|code|5"
+      ],
+      "center": [
+        1.7662696266539994,
+        1.097059388201353
+      ],
+      "scale": [
+        1.5811668646450228,
+        0.3317187649765086
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.16762463128909133,
+        -0.11325317643614956,
+        -0.024538918217595882,
+        -0.024885195065888443,
+        0.015701129856155516,
+        0.20572562843748185,
+        -0.06830673490907871,
+        -0.12823482831867017
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "gemma3-270m",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "gemma3-270m|code|5"
+      ],
+      "center": [
+        1.8859389310279921,
+        1.0852881103206864
+      ],
+      "scale": [
+        1.3803781329325024,
+        0.3304965200796045
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.12770057768457488,
+        -0.016942145419379624,
+        -0.02158540803767077,
+        -0.05812250974933209,
+        -0.009083564545061654,
+        0.18275179873337694,
+        -0.07596206553538412,
+        -0.03958365890359905
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "gemma3-27b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "gemma3-27b|code|5"
+      ],
+      "center": [
+        1.4665986115692282,
+        1.1267744417483376
+      ],
+      "scale": [
+        1.575183963043138,
+        0.31190914345805093
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.17592319609180154,
+        -0.09346674051958598,
+        -0.023504566735450802,
+        -0.030829665967524827,
+        0.009714796627551363,
+        0.2005076032717965,
+        -0.07027422122855125,
+        -0.10911851270327169
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "gemma3-4b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "gemma3-4b|code|5"
+      ],
+      "center": [
+        1.6429917673304169,
+        1.1205641993777762
+      ],
+      "scale": [
+        1.6592964159853483,
+        0.3189100633247256
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.1697050240449485,
+        -0.10836005643688552,
+        -0.03439222723830451,
+        -0.0328219846739059,
+        0.006734414287572917,
+        0.20126107440219204,
+        -0.06926535856172053,
+        -0.10590814545413861
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "gemma4-31b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "gemma4-31b|code|5"
+      ],
+      "center": [
+        1.4549622490055534,
+        1.127843871654127
+      ],
+      "scale": [
+        1.5610898153514308,
+        0.3105372515134721
+      ],
+      "families": [
+        "gemma3",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.16794417767623174,
+        -0.09847270554664972,
+        -0.019704937090031443,
+        -0.0325085690516357,
+        0.20760585330451858,
+        -0.06317001111822237,
+        -0.11192727313466026
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "muse-30b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "olmo3-32b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "muse-30b|code|5"
+      ],
+      "center": [
+        1.463796624199258,
+        1.1053232284882257
+      ],
+      "scale": [
+        1.571896192618077,
+        0.3295735939330399
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.1344274610992185,
+        -0.1234478522359605,
+        -0.029568964783529796,
+        0.012829286300584794,
+        0.060732993998983416,
+        -0.00770713455386678,
+        -0.06585514574570138
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "olmo3-32b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-7b|code|5"
+      ],
+      "test_row_ids": [
+        "olmo3-32b|code|5"
+      ],
+      "center": [
+        1.4505221145409164,
+        1.099870963941527
+      ],
+      "scale": [
+        1.555402864204475,
+        0.33126824856125503
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.17966979250529433,
+        -0.09668425897992311,
+        -0.02353438529567446,
+        -0.03895756602570153,
+        0.012855800239645334,
+        0.2029771050490869,
+        -0.06344366829023011,
+        -0.11343167097280041
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "code",
+      "held_out": "olmo3-7b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|code|5",
+        "Qwen--Qwen3-1.7B|code|5",
+        "Qwen--Qwen3-4B|code|5",
+        "gemma3-12b|code|5",
+        "gemma3-1b|code|5",
+        "gemma3-270m|code|5",
+        "gemma3-27b|code|5",
+        "gemma3-4b|code|5",
+        "gemma4-31b|code|5",
+        "muse-30b|code|5",
+        "olmo3-32b|code|5"
+      ],
+      "test_row_ids": [
+        "olmo3-7b|code|5"
+      ],
+      "center": [
+        1.585562552923936,
+        1.0908096562188592
+      ],
+      "scale": [
+        1.6573088682276769,
+        0.331695202973218
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.17632969081813424,
+        -0.10516467952467713,
+        -0.022194075414519537,
+        -0.045950354490534084,
+        0.01050894636686433,
+        0.20005550400934036,
+        -0.04213798306538108,
+        -0.12247611282028935
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "Qwen--Qwen3-0.6B",
+      "train_row_ids": [
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5"
+      ],
+      "center": [
+        1.8132962141781641,
+        5.635479906648046
+      ],
+      "scale": [
+        1.5190141638834112,
+        0.49763292239673185
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.03857404627155314,
+        -0.07763464863832988,
+        -0.0024474153013789544,
+        -0.07137251026129512,
+        0.16493362005276324,
+        -0.011706507398445148,
+        -0.02273947765960186,
+        -0.059115124733421114
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "Qwen--Qwen3-1.7B",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-1.7B|qa|5"
+      ],
+      "center": [
+        1.7169210031591953,
+        5.564703531270656
+      ],
+      "scale": [
+        1.6264119021014796,
+        0.4371589439837612
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.04817928449277327,
+        -0.08278706784395684,
+        0.022903725966559797,
+        -0.07163658137544561,
+        0.15799782905387705,
+        -0.012079781153371716,
+        -0.0055164633381097694,
+        -0.0687650031869498
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "Qwen--Qwen3-4B",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "Qwen--Qwen3-4B|qa|5"
+      ],
+      "center": [
+        1.6397155113861763,
+        5.533268767349153
+      ],
+      "scale": [
+        1.6598245582737792,
+        0.3569937495717006
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.18181818181818182
+      ],
+      "coefficients": [
+        0.03458185990599038,
+        -0.07765948561112049,
+        -0.019556236627631424,
+        -0.057398127468575096,
+        0.17411967406667545,
+        -0.008011407939549606,
+        -0.0314399503040258,
+        -0.07727018835452497
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "gemma3-12b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "gemma3-12b|qa|5"
+      ],
+      "center": [
+        1.5421423363826394,
+        5.651727228664909
+      ],
+      "scale": [
+        1.639860336107916,
+        0.4936079209901215
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.05305195362018631,
+        -0.0677851319416624,
+        0.002725923978714564,
+        -0.04581702471088497,
+        0.1578192404331607,
+        -0.017152341770385306,
+        -0.02289971702966022,
+        -0.07195015692223015
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "gemma3-1b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "gemma3-1b|qa|5"
+      ],
+      "center": [
+        1.7662696266539994,
+        5.63939304268157
+      ],
+      "scale": [
+        1.5811668646450228,
+        0.4972492202911476
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.023269439926088008,
+        -0.05820901001377494,
+        0.001719452217433626,
+        -0.07752026111065742,
+        0.16191134154815667,
+        -0.0130765655994819,
+        -0.016301901827138046,
+        -0.05501261301087931
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "gemma3-270m",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "gemma3-270m|qa|5"
+      ],
+      "center": [
+        1.8859389310279921,
+        5.665883671077079
+      ],
+      "scale": [
+        1.3803781329325024,
+        0.48477579091713685
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.023416323195250832,
+        -0.04645207859802649,
+        0.01323143083912733,
+        -0.06786339598810058,
+        0.15718016423177367,
+        -0.014928851171480987,
+        -0.010177662749382902,
+        -0.0642102543228092
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "gemma3-27b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "gemma3-27b|qa|5"
+      ],
+      "center": [
+        1.4665986115692282,
+        5.619457161207467
+      ],
+      "scale": [
+        1.575183963043138,
+        0.4953468103917412
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.05849644006494048,
+        -0.05454380596534652,
+        0.016257710238865193,
+        -0.0313644913366091,
+        0.14995815644551702,
+        -0.021566332430540517,
+        -0.017714560952932844,
+        -0.07931277172543447
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "gemma3-4b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "gemma3-4b|qa|5"
+      ],
+      "center": [
+        1.6429917673304169,
+        5.6478393710046415
+      ],
+      "scale": [
+        1.6592964159853483,
+        0.4951566588729585
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.36363636363636365,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.049415469878513536,
+        -0.07669046710934026,
+        0.005807025151705823,
+        -0.047857052617483395,
+        0.16074683369952045,
+        -0.013752536858075952,
+        -0.01839923425880771,
+        -0.0807380099651534
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "gemma4-31b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "gemma4-31b|qa|5"
+      ],
+      "center": [
+        1.4549622490055534,
+        5.624101934387474
+      ],
+      "scale": [
+        1.5610898153514308,
+        0.49664947370325796
+      ],
+      "families": [
+        "gemma3",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.01437746713490562,
+        -0.09241490870474582,
+        0.004886126035367129,
+        -0.018251628284148225,
+        0.028933999930877443,
+        0.032771035584349725,
+        -0.04345340723107892
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "muse-30b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "olmo3-32b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "muse-30b|qa|5"
+      ],
+      "center": [
+        1.463796624199258,
+        5.644889757515279
+      ],
+      "scale": [
+        1.571896192618077,
+        0.4960845558531046
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.18181818181818182,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.04594010474296109,
+        -0.0730289231298929,
+        0.00720482070207756,
+        -0.06445647145430126,
+        0.16160023522188083,
+        -0.016085969523194965,
+        -0.08105779424438446
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "olmo3-32b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-7b|qa|5"
+      ],
+      "test_row_ids": [
+        "olmo3-32b|qa|5"
+      ],
+      "center": [
+        1.4505221145409164,
+        5.6854989367017765
+      ],
+      "scale": [
+        1.555402864204475,
+        0.46377252085662457
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.04287211450664475,
+        -0.07919292131687974,
+        0.012669507512635474,
+        -0.05699145267679931,
+        0.1696623823376205,
+        -0.003282632203278683,
+        -0.02567382555774631,
+        -0.08371447189979618
+      ],
+      "ridge_lambda": 1.0
+    },
+    {
+      "capability": "qa",
+      "held_out": "olmo3-7b",
+      "train_row_ids": [
+        "Qwen--Qwen3-0.6B|qa|5",
+        "Qwen--Qwen3-1.7B|qa|5",
+        "Qwen--Qwen3-4B|qa|5",
+        "gemma3-12b|qa|5",
+        "gemma3-1b|qa|5",
+        "gemma3-270m|qa|5",
+        "gemma3-27b|qa|5",
+        "gemma3-4b|qa|5",
+        "gemma4-31b|qa|5",
+        "muse-30b|qa|5",
+        "olmo3-32b|qa|5"
+      ],
+      "test_row_ids": [
+        "olmo3-7b|qa|5"
+      ],
+      "center": [
+        1.585562552923936,
+        5.688217860192408
+      ],
+      "scale": [
+        1.6573088682276769,
+        0.45999426681375577
+      ],
+      "families": [
+        "gemma3",
+        "gemma4",
+        "muse",
+        "olmo3",
+        "qwen3"
+      ],
+      "family_frequencies": [
+        0.45454545454545453,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.2727272727272727
+      ],
+      "coefficients": [
+        0.04499520404666078,
+        -0.07952499495206636,
+        0.00244870774657483,
+        -0.0706323842717794,
+        0.16067174549642588,
+        -0.014645645051704917,
+        0.006920605350938851,
+        -0.08231432152388025
+      ],
+      "ridge_lambda": 1.0
+    }
+  ],
+  "by_capability": {
+    "math": {
+      "metrics": {
+        "zero_change": {
+          "n": 12,
+          "mae": 0.09262961997176193,
+          "mae_ci95": [
+            0.043057309575752684,
+            0.1627252118036896
+          ],
+          "mae_minus_reference": 0.013444915471202058,
+          "difference_ci95": [
+            -0.05733816769424675,
+            0.09043186443899393
+          ]
+        },
+        "nearest_4bit": {
+          "n": 12,
+          "mae": 0.5909930782998284,
+          "mae_ci95": [
+            0.33751973829898607,
+            0.886769005536325
+          ],
+          "mae_minus_reference": 0.5118083737992684,
+          "difference_ci95": [
+            0.2893325851836371,
+            0.7743182019683712
+          ]
+        },
+        "linear_4_6bit": {
+          "n": 12,
+          "mae": 0.25741041163869544,
+          "mae_ci95": [
+            0.14479986282057764,
+            0.38644632884516256
+          ],
+          "mae_minus_reference": 0.1782257071381356,
+          "difference_ci95": [
+            0.09852217509967659,
+            0.27268257352585473
+          ]
+        },
+        "law_frozen": {
+          "n": 12,
+          "mae": 0.07918470450055987,
+          "mae_ci95": [
+            0.039305588982770506,
+            0.1311299453830784
+          ],
+          "mae_minus_reference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "law_reconstructed": {
+          "n": 12,
+          "mae": 0.07918144308690839,
+          "mae_ci95": [
+            0.03929641097042992,
+            0.13114005830361058
+          ],
+          "mae_minus_reference": -3.2614136514715008e-06,
+          "difference_ci95": [
+            -1.5985822061108032e-05,
+            8.886994405543282e-06
+          ]
+        },
+        "dense_only_lomo": {
+          "n": 12,
+          "mae": 0.09288629703844331,
+          "mae_ci95": [
+            0.06343687844890164,
+            0.12346868497164808
+          ],
+          "mae_minus_reference": 0.01370159253788345,
+          "difference_ci95": [
+            -0.06043674136032844,
+            0.07124096119878306
+          ]
+        }
+      },
+      "best_simple": "zero_change",
+      "gain_over_best_simple": 0.013444915471202065,
+      "gain_over_best_simple_ci95": [
+        -0.05733816769424675,
+        0.09043186443899393
+      ],
+      "calibration_cost_exact": 0.013704853951534923,
+      "calibration_cost_exact_ci95": [
+        -0.06043935595681462,
+        0.0712548484984568
+      ]
+    },
+    "code": {
+      "metrics": {
+        "zero_change": {
+          "n": 12,
+          "mae": 0.11025166233840127,
+          "mae_ci95": [
+            0.04366602681852836,
+            0.19362453050955192
+          ],
+          "mae_minus_reference": 0.04828629443506122,
+          "difference_ci95": [
+            -0.0035473094246381296,
+            0.11359505413421737
+          ]
+        },
+        "nearest_4bit": {
+          "n": 12,
+          "mae": 0.5563488113350193,
+          "mae_ci95": [
+            0.27178405706299785,
+            0.9202239569878757
+          ],
+          "mae_minus_reference": 0.49438344343167934,
+          "difference_ci95": [
+            0.23071182983841718,
+            0.8332744424700033
+          ]
+        },
+        "linear_4_6bit": {
+          "n": 12,
+          "mae": 0.22977740774211522,
+          "mae_ci95": [
+            0.115230027586119,
+            0.3758884601399896
+          ],
+          "mae_minus_reference": 0.16781203983877513,
+          "difference_ci95": [
+            0.07614974233529789,
+            0.2849950893199889
+          ]
+        },
+        "law_frozen": {
+          "n": 12,
+          "mae": 0.06196536790334004,
+          "mae_ci95": [
+            0.03587670525241368,
+            0.09615422154419187
+          ],
+          "mae_minus_reference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "law_reconstructed": {
+          "n": 12,
+          "mae": 0.061971139831125226,
+          "mae_ci95": [
+            0.03587849156304125,
+            0.09616640369081206
+          ],
+          "mae_minus_reference": 5.77192778518871e-06,
+          "difference_ci95": [
+            -1.0828410737406986e-05,
+            2.1855204939896786e-05
+          ]
+        },
+        "dense_only_lomo": {
+          "n": 12,
+          "mae": 0.1340781127807293,
+          "mae_ci95": [
+            0.0771581276360048,
+            0.20073942296647976
+          ],
+          "mae_minus_reference": 0.07211274487738925,
+          "difference_ci95": [
+            0.020197914259322807,
+            0.13184333765399392
+          ]
+        }
+      },
+      "best_simple": "zero_change",
+      "gain_over_best_simple": 0.048286294435061224,
+      "gain_over_best_simple_ci95": [
+        -0.0035473094246381296,
+        0.11359505413421737
+      ],
+      "calibration_cost_exact": 0.07210697294960405,
+      "calibration_cost_exact_ci95": [
+        0.02019169994737174,
+        0.13183989359418502
+      ]
+    },
+    "qa": {
+      "metrics": {
+        "zero_change": {
+          "n": 12,
+          "mae": 0.12228811419815407,
+          "mae_ci95": [
+            0.07710997570669745,
+            0.167864608246326
+          ],
+          "mae_minus_reference": 0.002493847067143359,
+          "difference_ci95": [
+            -0.06054236325531213,
+            0.0612209549411898
+          ]
+        },
+        "nearest_4bit": {
+          "n": 12,
+          "mae": 0.3978221805379912,
+          "mae_ci95": [
+            0.21632611592411893,
+            0.5979363908444666
+          ],
+          "mae_minus_reference": 0.27802791340698046,
+          "difference_ci95": [
+            0.11039296535372904,
+            0.4643050126862243
+          ]
+        },
+        "linear_4_6bit": {
+          "n": 12,
+          "mae": 0.1953013314810911,
+          "mae_ci95": [
+            0.10690503938064651,
+            0.29052975171673684
+          ],
+          "mae_minus_reference": 0.07550706435008041,
+          "difference_ci95": [
+            0.00971286824229672,
+            0.14758577009344448
+          ]
+        },
+        "law_frozen": {
+          "n": 12,
+          "mae": 0.11979426713101071,
+          "mae_ci95": [
+            0.07871189315133413,
+            0.1620720957213154
+          ],
+          "mae_minus_reference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "law_reconstructed": {
+          "n": 12,
+          "mae": 0.119792026077276,
+          "mae_ci95": [
+            0.07871022554831571,
+            0.16206923194702683
+          ],
+          "mae_minus_reference": -2.241053734714643e-06,
+          "difference_ci95": [
+            -1.4527427488826225e-05,
+            9.141656464686082e-06
+          ]
+        },
+        "dense_only_lomo": {
+          "n": 12,
+          "mae": 0.16858955350570914,
+          "mae_ci95": [
+            0.11633757929186472,
+            0.220815921589693
+          ],
+          "mae_minus_reference": 0.0487952863746984,
+          "difference_ci95": [
+            -0.024719413490749072,
+            0.11743273200603749
+          ]
+        }
+      },
+      "best_simple": "zero_change",
+      "gain_over_best_simple": 0.002493847067143354,
+      "gain_over_best_simple_ci95": [
+        -0.06054236325531213,
+        0.05344202657715513
+      ],
+      "calibration_cost_exact": 0.04879752742843311,
+      "calibration_cost_exact_ci95": [
+        -0.02471378362020379,
+        0.11743143205588595
+      ]
+    }
+  }
+}

@@ -1,0 +1,1649 @@
+{
+  "audit": {
+    "matched_models": [
+      "Qwen3-0.6B",
+      "Qwen3-1.7B",
+      "Qwen3-4B",
+      "gemma3-12b",
+      "gemma3-1b",
+      "gemma3-270m",
+      "gemma3-27b",
+      "gemma3-4b",
+      "gemma4-31b",
+      "muse-30b",
+      "olmo3-32b",
+      "olmo3-7b"
+    ],
+    "notes": [
+      "Ignored pruning metadata key '_infill_meta' in results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json"
+    ],
+    "pruning_files": 12,
+    "pruning_rows": 429,
+    "quantization_files": 12,
+    "quantization_rows": 180
+  },
+  "correlations": {
+    "across_family_means": {
+      "correlation": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 998,
+        "cluster_key": "family",
+        "n": 5,
+        "n_clusters": 5,
+        "pearson": 0.6331942986719724,
+        "pearson_ci95": [
+          -1.0,
+          1.0
+        ],
+        "spearman": 0.6,
+        "spearman_ci95": [
+          -1.0,
+          1.0
+        ]
+      },
+      "rows": [
+        {
+          "family": "gemma3",
+          "model": "gemma3",
+          "n_cells": 15,
+          "pruning_score": -0.8010664426563685,
+          "quantization_score": -0.0894866338465825
+        },
+        {
+          "family": "gemma4",
+          "model": "gemma4",
+          "n_cells": 3,
+          "pruning_score": -0.5923802614290216,
+          "quantization_score": -0.8808156521487782
+        },
+        {
+          "family": "muse",
+          "model": "muse",
+          "n_cells": 3,
+          "pruning_score": 0.11520265606846376,
+          "quantization_score": -1.0713538991616696
+        },
+        {
+          "family": "olmo3",
+          "model": "olmo3",
+          "n_cells": 6,
+          "pruning_score": 1.6653079279982108,
+          "quantization_score": 0.664209412215351
+        },
+        {
+          "family": "qwen3",
+          "model": "qwen3",
+          "n_cells": 9,
+          "pruning_score": 0.3839646542153265,
+          "quantization_score": 0.3570612987042171
+        }
+      ]
+    },
+    "by_capability": {
+      "code": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 12,
+        "n_clusters": 12,
+        "pearson": 0.4127448102402635,
+        "pearson_ci95": [
+          -0.0645735426217195,
+          0.7769322592737076
+        ],
+        "spearman": 0.6153846153846154,
+        "spearman_ci95": [
+          -0.0466119257086999,
+          0.947213193774962
+        ]
+      },
+      "math": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 12,
+        "n_clusters": 12,
+        "pearson": 0.5273663204405395,
+        "pearson_ci95": [
+          -0.08071915218022843,
+          0.8650035457864508
+        ],
+        "spearman": 0.6153846153846154,
+        "spearman_ci95": [
+          -0.13247394591649067,
+          0.9648256815195622
+        ]
+      },
+      "qa": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 12,
+        "n_clusters": 12,
+        "pearson": 0.3854183295903413,
+        "pearson_ci95": [
+          -0.6220271812962404,
+          0.7609783030783139
+        ],
+        "spearman": 0.15384615384615385,
+        "spearman_ci95": [
+          -0.6984313977389518,
+          0.6525987841945288
+        ]
+      }
+    },
+    "leave_one_family_out": {
+      "gemma3": {
+        "n": 21,
+        "pearson": 0.5843532691165557,
+        "spearman": 0.6285714285714287
+      },
+      "gemma4": {
+        "n": 33,
+        "pearson": 0.40423526335675447,
+        "spearman": 0.429812834224599
+      },
+      "muse": {
+        "n": 33,
+        "pearson": 0.527295879269125,
+        "spearman": 0.5705213903743316
+      },
+      "olmo3": {
+        "n": 30,
+        "pearson": 0.2942381473318029,
+        "spearman": 0.3232480533926585
+      },
+      "qwen3": {
+        "n": 27,
+        "pearson": 0.43852954324267,
+        "spearman": 0.4694749694749695
+      }
+    },
+    "model_means": {
+      "correlation": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 12,
+        "n_clusters": 12,
+        "pearson": 0.5084027511243949,
+        "pearson_ci95": [
+          0.03569855441551124,
+          0.8382193884109058
+        ],
+        "spearman": 0.5034965034965035,
+        "spearman_ci95": [
+          -0.17014851548749307,
+          0.9557276671667817
+        ]
+      },
+      "rows": [
+        {
+          "family": "qwen3",
+          "model": "Qwen3-0.6B",
+          "n_cells": 3,
+          "pruning_score": -0.10016437578976074,
+          "quantization_score": 0.01926463834734245
+        },
+        {
+          "family": "qwen3",
+          "model": "Qwen3-1.7B",
+          "n_cells": 3,
+          "pruning_score": 0.14938600634578733,
+          "quantization_score": 0.6002559909561541
+        },
+        {
+          "family": "qwen3",
+          "model": "Qwen3-4B",
+          "n_cells": 3,
+          "pruning_score": 1.102672332089953,
+          "quantization_score": 0.45166326680915486
+        },
+        {
+          "family": "gemma3",
+          "model": "gemma3-12b",
+          "n_cells": 3,
+          "pruning_score": -0.38952091819844786,
+          "quantization_score": 0.5025479117486897
+        },
+        {
+          "family": "gemma3",
+          "model": "gemma3-1b",
+          "n_cells": 3,
+          "pruning_score": -0.9071777770072668,
+          "quantization_score": -0.31874129631802356
+        },
+        {
+          "family": "gemma3",
+          "model": "gemma3-270m",
+          "n_cells": 3,
+          "pruning_score": -1.171746168973106,
+          "quantization_score": -1.5013844029414969
+        },
+        {
+          "family": "gemma3",
+          "model": "gemma3-27b",
+          "n_cells": 3,
+          "pruning_score": -1.0650706410144934,
+          "quantization_score": 0.6633769666639139
+        },
+        {
+          "family": "gemma3",
+          "model": "gemma3-4b",
+          "n_cells": 3,
+          "pruning_score": -0.471816708088528,
+          "quantization_score": 0.20676765161400443
+        },
+        {
+          "family": "gemma4",
+          "model": "gemma4-31b",
+          "n_cells": 3,
+          "pruning_score": -0.5923802614290216,
+          "quantization_score": -0.8808156521487782
+        },
+        {
+          "family": "muse",
+          "model": "muse-30b",
+          "n_cells": 3,
+          "pruning_score": 0.11520265606846376,
+          "quantization_score": -1.0713538991616696
+        },
+        {
+          "family": "olmo3",
+          "model": "olmo3-32b",
+          "n_cells": 3,
+          "pruning_score": 1.8159531996357468,
+          "quantization_score": 0.7646883635899969
+        },
+        {
+          "family": "olmo3",
+          "model": "olmo3-7b",
+          "n_cells": 3,
+          "pruning_score": 1.5146626563606749,
+          "quantization_score": 0.5637304608407051
+        }
+      ]
+    },
+    "olmo_verdict": "The association remains same-signed and at least half as large without OLMo-3, so it is not driven only by OLMo-3.",
+    "pooled_model_capability_cells": {
+      "bootstrap_requested": 1000,
+      "bootstrap_success": 1000,
+      "cluster_key": "model",
+      "n": 36,
+      "n_clusters": 12,
+      "pearson": 0.4425646540796678,
+      "pearson_ci95": [
+        0.05288203757165352,
+        0.7235431103228537
+      ],
+      "spearman": 0.47876447876447875,
+      "spearman_ci95": [
+        -0.03048599200056574,
+        0.838596055445759
+      ]
+    },
+    "within_family": {
+      "gemma3": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 15,
+        "n_clusters": 5,
+        "n_models": 5,
+        "pearson": 0.48974587940822045,
+        "pearson_ci95": [
+          -0.4504509964248998,
+          0.8407949748821004
+        ],
+        "spearman": 0.3857142857142856,
+        "spearman_ci95": [
+          -0.5155963302752292,
+          0.8815080789946138
+        ],
+        "status": "estimable"
+      },
+      "gemma4": {
+        "n_models": 1,
+        "status": "not_estimable_single_model"
+      },
+      "muse": {
+        "n_models": 1,
+        "status": "not_estimable_single_model"
+      },
+      "olmo3": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 6,
+        "n_clusters": 2,
+        "n_models": 2,
+        "pearson": 0.9766789791945367,
+        "pearson_ci95": [
+          0.9341905941332126,
+          0.9986175128735211
+        ],
+        "spearman": 0.942857142857143,
+        "spearman_ci95": [
+          0.5000000000000001,
+          1.0
+        ],
+        "status": "thin_two_models"
+      },
+      "qwen3": {
+        "bootstrap_requested": 1000,
+        "bootstrap_success": 1000,
+        "cluster_key": "model",
+        "n": 9,
+        "n_clusters": 3,
+        "n_models": 3,
+        "pearson": 0.06553241726899418,
+        "pearson_ci95": [
+          -0.9816026273768678,
+          0.4187701152443388
+        ],
+        "spearman": 0.26666666666666666,
+        "spearman_ci95": [
+          -1.0,
+          0.5384615384615383
+        ],
+        "status": "estimable"
+      }
+    }
+  },
+  "generated": "2026-09-04",
+  "low_bit_family_size": {
+    "by_bit": {
+      "3": {
+        "cliff_prediction": {
+          "family_by_size": {
+            "accuracy": 1.0,
+            "balanced_accuracy": null,
+            "majority_accuracy": 1.0,
+            "n_collapsed": 24,
+            "n_not_collapsed": 0,
+            "n_predictions": 24,
+            "n_total": 30,
+            "records": [
+              {
+                "capability": "math",
+                "family": "qwen3",
+                "model": "Qwen3-0.6B",
+                "observed": 8.827975657108722,
+                "observed_collapse": true,
+                "predicted": 9.216619150031246,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "qwen3",
+                "model": "Qwen3-0.6B",
+                "observed": 10.825556197630743,
+                "observed_collapse": true,
+                "predicted": 9.332158094997876,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "qwen3",
+                "model": "Qwen3-0.6B",
+                "observed": 6.610297509225092,
+                "observed_collapse": true,
+                "predicted": 6.729177151732852,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "qwen3",
+                "model": "Qwen3-1.7B",
+                "observed": 9.530885976702509,
+                "observed_collapse": true,
+                "predicted": 9.920931847108067,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "qwen3",
+                "model": "Qwen3-1.7B",
+                "observed": 9.456154290667437,
+                "observed_collapse": true,
+                "predicted": 10.266727706136605,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "qwen3",
+                "model": "Qwen3-1.7B",
+                "observed": 8.101821955719558,
+                "observed_collapse": true,
+                "predicted": 7.345866056931788,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "qwen3",
+                "model": "Qwen3-4B",
+                "observed": 10.730893443847073,
+                "observed_collapse": true,
+                "predicted": 9.920433307002643,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "qwen3",
+                "model": "Qwen3-4B",
+                "observed": 11.851776943080035,
+                "observed_collapse": true,
+                "predicted": 10.133383034334738,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "qwen3",
+                "model": "Qwen3-4B",
+                "observed": 5.9940469326568255,
+                "observed_collapse": true,
+                "predicted": 7.712898904627188,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-12b",
+                "observed": 20.19122215487195,
+                "observed_collapse": true,
+                "predicted": 17.606148172356605,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-12b",
+                "observed": 22.920864703277235,
+                "observed_collapse": true,
+                "predicted": 17.640346894225107,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-12b",
+                "observed": 20.746825199203187,
+                "observed_collapse": true,
+                "predicted": 14.810563819367642,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-1b",
+                "observed": 15.32675405364449,
+                "observed_collapse": true,
+                "predicted": 24.219604550585597,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-1b",
+                "observed": 14.124308015943312,
+                "observed_collapse": true,
+                "predicted": 24.690702004243708,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-1b",
+                "observed": 9.799271663346612,
+                "observed_collapse": true,
+                "predicted": 22.099918579222095,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-270m",
+                "observed": 26.145135626610095,
+                "observed_collapse": true,
+                "predicted": 13.566175707219053,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-270m",
+                "observed": 27.939908104517272,
+                "observed_collapse": true,
+                "predicted": 13.704248881365114,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-270m",
+                "observed": 25.926948456175296,
+                "observed_collapse": true,
+                "predicted": 10.85656804475964,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-27b",
+                "observed": 18.45585505379603,
+                "observed_collapse": true,
+                "predicted": 18.29521319392822,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-27b",
+                "observed": 17.150465013286095,
+                "observed_collapse": true,
+                "predicted": 18.77774887012063,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-27b",
+                "observed": 16.100519795816734,
+                "observed_collapse": true,
+                "predicted": 15.823066430084872,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-4b",
+                "observed": 21.734145325049248,
+                "observed_collapse": true,
+                "predicted": 19.788774780361173,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-4b",
+                "observed": 19.235385296722765,
+                "observed_collapse": true,
+                "predicted": 20.403907121866524,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-4b",
+                "observed": 15.303660358565738,
+                "observed_collapse": true,
+                "predicted": 17.769422428573854,
+                "predicted_collapse": true
+              }
+            ],
+            "roc_auc": null
+          },
+          "family_plus_size": {
+            "accuracy": 0.9333333333333333,
+            "balanced_accuracy": 0.7321428571428572,
+            "majority_accuracy": 0.9333333333333333,
+            "n_collapsed": 28,
+            "n_not_collapsed": 2,
+            "n_predictions": 30,
+            "n_total": 30,
+            "records": [
+              {
+                "capability": "math",
+                "family": "qwen3",
+                "model": "Qwen3-0.6B",
+                "observed": 8.827975657108722,
+                "observed_collapse": true,
+                "predicted": 11.521822714032517,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "qwen3",
+                "model": "Qwen3-0.6B",
+                "observed": 10.825556197630743,
+                "observed_collapse": true,
+                "predicted": 11.637361658999172,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "qwen3",
+                "model": "Qwen3-0.6B",
+                "observed": 6.610297509225092,
+                "observed_collapse": true,
+                "predicted": 9.034380715734102,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "qwen3",
+                "model": "Qwen3-1.7B",
+                "observed": 9.530885976702509,
+                "observed_collapse": true,
+                "predicted": 9.802013492754098,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "qwen3",
+                "model": "Qwen3-1.7B",
+                "observed": 9.456154290667437,
+                "observed_collapse": true,
+                "predicted": 10.147809351782636,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "qwen3",
+                "model": "Qwen3-1.7B",
+                "observed": 8.101821955719558,
+                "observed_collapse": true,
+                "predicted": 7.2269477025778155,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "qwen3",
+                "model": "Qwen3-4B",
+                "observed": 10.730893443847073,
+                "observed_collapse": true,
+                "predicted": 8.204638448103603,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "qwen3",
+                "model": "Qwen3-4B",
+                "observed": 11.851776943080035,
+                "observed_collapse": true,
+                "predicted": 8.41758817543572,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "qwen3",
+                "model": "Qwen3-4B",
+                "observed": 5.9940469326568255,
+                "observed_collapse": true,
+                "predicted": 5.997104045728156,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-12b",
+                "observed": 20.19122215487195,
+                "observed_collapse": true,
+                "predicted": 17.86440802713512,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-12b",
+                "observed": 22.920864703277235,
+                "observed_collapse": true,
+                "predicted": 17.89860674900363,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-12b",
+                "observed": 20.746825199203187,
+                "observed_collapse": true,
+                "predicted": 15.068823674146156,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-1b",
+                "observed": 15.32675405364449,
+                "observed_collapse": true,
+                "predicted": 23.863369992503372,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-1b",
+                "observed": 14.124308015943312,
+                "observed_collapse": true,
+                "predicted": 24.334467446161476,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-1b",
+                "observed": 9.799271663346612,
+                "observed_collapse": true,
+                "predicted": 21.743684021139867,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-270m",
+                "observed": 26.145135626610095,
+                "observed_collapse": true,
+                "predicted": 15.759374954199107,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-270m",
+                "observed": 27.939908104517272,
+                "observed_collapse": true,
+                "predicted": 15.897448128345165,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-270m",
+                "observed": 25.926948456175296,
+                "observed_collapse": true,
+                "predicted": 13.049767291739684,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-27b",
+                "observed": 18.45585505379603,
+                "observed_collapse": true,
+                "predicted": 18.491681176034124,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-27b",
+                "observed": 17.150465013286095,
+                "observed_collapse": true,
+                "predicted": 18.974216852226544,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-27b",
+                "observed": 16.100519795816734,
+                "observed_collapse": true,
+                "predicted": 16.019534412190772,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "gemma3",
+                "model": "gemma3-4b",
+                "observed": 21.734145325049248,
+                "observed_collapse": true,
+                "predicted": 19.804484356573994,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "gemma3",
+                "model": "gemma3-4b",
+                "observed": 19.235385296722765,
+                "observed_collapse": true,
+                "predicted": 20.419616698079373,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "gemma3",
+                "model": "gemma3-4b",
+                "observed": 15.303660358565738,
+                "observed_collapse": true,
+                "predicted": 17.78513200478667,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "math",
+                "family": "olmo3",
+                "model": "olmo3-32b",
+                "observed": 0.6824050486336266,
+                "observed_collapse": false,
+                "predicted": 3.6518772188557707,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "olmo3",
+                "model": "olmo3-32b",
+                "observed": 1.2212011577424022,
+                "observed_collapse": true,
+                "predicted": 3.9295033228683147,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "olmo3",
+                "model": "olmo3-32b",
+                "observed": 0.3751416388358777,
+                "observed_collapse": false,
+                "predicted": 0.9521669163255924,
+                "predicted_collapse": false
+              },
+              {
+                "capability": "math",
+                "family": "olmo3",
+                "model": "olmo3-7b",
+                "observed": 4.696020534197931,
+                "observed_collapse": true,
+                "predicted": 2.6688239482529137,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "code",
+                "family": "olmo3",
+                "model": "olmo3-7b",
+                "observed": 4.633104196816208,
+                "observed_collapse": true,
+                "predicted": 3.0133069907644194,
+                "predicted_collapse": true
+              },
+              {
+                "capability": "qa",
+                "family": "olmo3",
+                "model": "olmo3-7b",
+                "observed": 2.7581032323473282,
+                "observed_collapse": true,
+                "predicted": 0.15029741150638243,
+                "predicted_collapse": false
+              }
+            ],
+            "roc_auc": 0.9285714285714286
+          }
+        },
+        "family_parameter_bootstrap": {
+          "gemma3_intercept_4b": {
+            "ci95": [
+              14.829929098298098,
+              22.419706254009988
+            ],
+            "estimate_samples": 469
+          },
+          "gemma3_slope_per_doubling": {
+            "ci95": [
+              -2.629438870651347,
+              2.3303415375842813
+            ],
+            "estimate_samples": 469
+          },
+          "olmo3_intercept_4b": {
+            "ci95": [
+              5.232937749844157,
+              5.232937749844223
+            ],
+            "estimate_samples": 469
+          },
+          "olmo3_slope_per_doubling": {
+            "ci95": [
+              -1.4911183782578696,
+              -1.4911183782578337
+            ],
+            "estimate_samples": 469
+          },
+          "qwen3_intercept_4b": {
+            "ci95": [
+              9.25557174865485,
+              9.525572439861328
+            ],
+            "estimate_samples": 469
+          },
+          "qwen3_slope_per_doubling": {
+            "ci95": [
+              0.18303553458415944,
+              0.40175427973391875
+            ],
+            "estimate_samples": 469
+          }
+        },
+        "family_parameters": {
+          "gemma3": {
+            "mean_capability_degradation_at_4b": 19.20622728199146,
+            "slope_per_size_doubling": -0.6472195278106168
+          },
+          "olmo3": {
+            "mean_capability_degradation_at_4b": 5.232937749844181,
+            "slope_per_size_doubling": -1.4911183782578483
+          },
+          "qwen3": {
+            "mean_capability_degradation_at_4b": 9.471499754791742,
+            "slope_per_size_doubling": 0.27816077827642194
+          }
+        },
+        "full_coefficients": [
+          19.925134784903047,
+          0.30374310452218367,
+          -2.4604656132569427,
+          -13.97328953214728,
+          -9.73472752719972,
+          -0.6472195278106168,
+          -0.8438988504472316,
+          0.9253803060870387
+        ],
+        "leave_one_model_out": {
+          "capability_only": {
+            "coverage": 1.0,
+            "mae": 7.3166914121222195,
+            "n_predictions": 30,
+            "n_total": 30,
+            "r2": -0.2035275246581456,
+            "skipped_models": []
+          },
+          "family_by_size": {
+            "coverage": 0.8,
+            "mae": 4.304040837043281,
+            "n_predictions": 24,
+            "n_total": 30,
+            "r2": -0.045969277746584325,
+            "skipped_models": [
+              "olmo3-32b",
+              "olmo3-7b"
+            ]
+          },
+          "family_plus_size": {
+            "coverage": 1.0,
+            "mae": 3.760002772168606,
+            "n_predictions": 30,
+            "n_total": 30,
+            "r2": 0.5189409009500466,
+            "skipped_models": []
+          }
+        },
+        "n": 30
+      },
+      "4": {
+        "family_parameter_bootstrap": {
+          "gemma3_intercept_4b": {
+            "ci95": [
+              0.25271299528991875,
+              0.6301829840329801
+            ],
+            "estimate_samples": 423
+          },
+          "gemma3_slope_per_doubling": {
+            "ci95": [
+              -0.36488285677229815,
+              -0.12865467279426296
+            ],
+            "estimate_samples": 423
+          },
+          "olmo3_intercept_4b": {
+            "ci95": [
+              0.12048734062493602,
+              0.12048734062494128
+            ],
+            "estimate_samples": 423
+          },
+          "olmo3_slope_per_doubling": {
+            "ci95": [
+              -0.02678663053994084,
+              -0.02678663053993817
+            ],
+            "estimate_samples": 423
+          },
+          "qwen3_intercept_4b": {
+            "ci95": [
+              -0.2001525444292531,
+              0.23914809711735513
+            ],
+            "estimate_samples": 423
+          },
+          "qwen3_slope_per_doubling": {
+            "ci95": [
+              -0.25606353100765367,
+              0.09979957672448003
+            ],
+            "estimate_samples": 423
+          }
+        },
+        "family_parameters": {
+          "gemma3": {
+            "mean_capability_degradation_at_4b": 0.5066134909291784,
+            "slope_per_size_doubling": -0.25814859016277303
+          },
+          "olmo3": {
+            "mean_capability_degradation_at_4b": 0.12048734062493877,
+            "slope_per_size_doubling": -0.026786630539939432
+          },
+          "qwen3": {
+            "mean_capability_degradation_at_4b": 0.1511699325613205,
+            "slope_per_size_doubling": -0.10129140655655963
+          }
+        },
+        "full_coefficients": [
+          0.6820269930652237,
+          -0.03314312365467931,
+          -0.4930973827534567,
+          -0.38612615030423963,
+          -0.3554435583678579,
+          -0.25814859016277303,
+          0.2313619596228336,
+          0.1568571836062134
+        ],
+        "leave_one_model_out": {
+          "capability_only": {
+            "coverage": 1.0,
+            "mae": 0.45163117140765235,
+            "n_predictions": 30,
+            "n_total": 30,
+            "r2": -0.06388736358744485,
+            "skipped_models": []
+          },
+          "family_by_size": {
+            "coverage": 0.8,
+            "mae": 0.3772250023656117,
+            "n_predictions": 24,
+            "n_total": 30,
+            "r2": 0.4487706890239903,
+            "skipped_models": [
+              "olmo3-32b",
+              "olmo3-7b"
+            ]
+          },
+          "family_plus_size": {
+            "coverage": 1.0,
+            "mae": 0.35567131762094956,
+            "n_predictions": 30,
+            "n_total": 30,
+            "r2": 0.40901479099946614,
+            "skipped_models": []
+          }
+        },
+        "n": 30
+      }
+    },
+    "definition": "collapse iff int3 delta loss > 1 nat; size is nominal checkpoint label in billions",
+    "model_table": [
+      {
+        "family": "gemma3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 26.670664062434223,
+        "int3_mean_excess_over_1nat": 25.670664062434223,
+        "int4_mean_degradation": 1.741346766388049,
+        "model": "gemma3-270m",
+        "size_b": 0.27
+      },
+      {
+        "family": "gemma3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 13.083444577644805,
+        "int3_mean_excess_over_1nat": 12.083444577644805,
+        "int4_mean_degradation": 0.8078742416660312,
+        "model": "gemma3-1b",
+        "size_b": 1.0
+      },
+      {
+        "family": "gemma3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 18.75773032677925,
+        "int3_mean_excess_over_1nat": 17.75773032677925,
+        "int4_mean_degradation": 0.31955557023033987,
+        "model": "gemma3-4b",
+        "size_b": 4.0
+      },
+      {
+        "family": "gemma3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 21.286304019117456,
+        "int3_mean_excess_over_1nat": 20.286304019117456,
+        "int4_mean_degradation": 0.10120630742518322,
+        "model": "gemma3-12b",
+        "size_b": 12.0
+      },
+      {
+        "family": "gemma3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 17.235613287632955,
+        "int3_mean_excess_over_1nat": 16.235613287632955,
+        "int4_mean_degradation": -0.0370126266067223,
+        "model": "gemma3-27b",
+        "size_b": 27.0
+      },
+      {
+        "family": "olmo3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 4.029075987787156,
+        "int3_mean_excess_over_1nat": 3.029075987787156,
+        "int4_mean_degradation": 0.09886102261317975,
+        "model": "olmo3-7b",
+        "size_b": 7.0
+      },
+      {
+        "family": "olmo3",
+        "int3_cliff_indicator": "partial",
+        "int3_collapsed_capabilities": 1,
+        "int3_mean_degradation": 0.7595826150706356,
+        "int3_mean_excess_over_1nat": 0.07373371924746741,
+        "int4_mean_degradation": 0.04012744900512041,
+        "model": "olmo3-32b",
+        "size_b": 32.0
+      },
+      {
+        "family": "qwen3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 8.754609787988185,
+        "int3_mean_excess_over_1nat": 7.754609787988184,
+        "int4_mean_degradation": 0.5006845298594059,
+        "model": "Qwen3-0.6B",
+        "size_b": 0.6
+      },
+      {
+        "family": "qwen3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 9.029620741029834,
+        "int3_mean_excess_over_1nat": 8.029620741029834,
+        "int4_mean_degradation": 0.11594898732330201,
+        "model": "Qwen3-1.7B",
+        "size_b": 1.7
+      },
+      {
+        "family": "qwen3",
+        "int3_cliff_indicator": "all",
+        "int3_collapsed_capabilities": 3,
+        "int3_mean_degradation": 9.52557243986131,
+        "int3_mean_excess_over_1nat": 8.52557243986131,
+        "int4_mean_degradation": 0.23914809711735405,
+        "model": "Qwen3-4B",
+        "size_b": 4.0
+      }
+    ]
+  },
+  "score_definition": {
+    "auc": "trapezoidal tested-range AUC; first >1-nat crossing and deeper cells capped at 1 nat",
+    "cliff": "severity of first >1-nat crossing; right-censored at deepest tested point if absent",
+    "damage": "delta capability loss from each method's own dense anchor",
+    "standardization": "within method and capability across 12 models; mean of z(-AUC) and z(cliff survival)"
+  },
+  "scores": [
+    {
+      "capability": "code",
+      "family": "qwen3",
+      "model": "Qwen3-0.6B",
+      "pruning_auc": 0.5948528501258925,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.27445690633221803,
+      "quantization_auc": 0.12603627230902578,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.20154406813258324
+    },
+    {
+      "capability": "math",
+      "family": "qwen3",
+      "model": "Qwen3-0.6B",
+      "pruning_auc": 0.5819079087728282,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.24843575145587976,
+      "quantization_auc": 0.1061953606056428,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.1966557491417542
+    },
+    {
+      "capability": "qa",
+      "family": "qwen3",
+      "model": "Qwen3-0.6B",
+      "pruning_auc": 0.30421389035318946,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.7142857142857143,
+      "pruning_score": 0.22239953041881552,
+      "quantization_auc": 0.06034673928470034,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.06268223403285639
+    },
+    {
+      "capability": "code",
+      "family": "qwen3",
+      "model": "Qwen3-1.7B",
+      "pruning_auc": 0.5085067796260371,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.6071428571428572,
+      "pruning_score": 0.05187260778959117,
+      "quantization_auc": 0.05028559998221941,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.8004218792804756
+    },
+    {
+      "capability": "math",
+      "family": "qwen3",
+      "model": "Qwen3-1.7B",
+      "pruning_auc": 0.5381477747909199,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.14028229137305145,
+      "quantization_auc": 0.08148557405109827,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.47835172777159574
+    },
+    {
+      "capability": "qa",
+      "family": "qwen3",
+      "model": "Qwen3-1.7B",
+      "pruning_auc": 0.0720463231418027,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.7142857142857143,
+      "pruning_score": 0.5365677026208223,
+      "quantization_auc": -0.003611313156400571,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.521994365816391
+    },
+    {
+      "capability": "code",
+      "family": "qwen3",
+      "model": "Qwen3-4B",
+      "pruning_auc": 0.32113447806166673,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.7857142857142858,
+      "pruning_score": 1.029738970548094,
+      "quantization_auc": 0.06408496877292015,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.6178954778721042
+    },
+    {
+      "capability": "math",
+      "family": "qwen3",
+      "model": "Qwen3-4B",
+      "pruning_auc": 0.37266918416111966,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.7142857142857143,
+      "pruning_score": 0.6750704149046556,
+      "quantization_auc": 0.053933605596912015,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.7924490875261296
+    },
+    {
+      "capability": "qa",
+      "family": "qwen3",
+      "model": "Qwen3-4B",
+      "pruning_auc": -0.45026081992125755,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.8571428571428572,
+      "pruning_score": 1.6032076108171094,
+      "quantization_auc": 0.07678309280087955,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.05535476497076933
+    },
+    {
+      "capability": "code",
+      "family": "gemma3",
+      "model": "gemma3-12b",
+      "pruning_auc": 0.5816857522459825,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.23922826899909808,
+      "quantization_auc": 0.07716154527491992,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.44492956270214806
+    },
+    {
+      "capability": "math",
+      "family": "gemma3",
+      "model": "gemma3-12b",
+      "pruning_auc": 0.6161363734765007,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.33303162798028974,
+      "quantization_auc": 0.08850262860340143,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.39835605298716587
+    },
+    {
+      "capability": "qa",
+      "family": "gemma3",
+      "model": "gemma3-12b",
+      "pruning_auc": 0.6432973463289696,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.5963028576159557,
+      "quantization_auc": -0.023435105730922313,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.6643581195567552
+    },
+    {
+      "capability": "code",
+      "family": "gemma3",
+      "model": "gemma3-1b",
+      "pruning_auc": 0.6702720683601164,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -0.8574820619283918,
+      "quantization_auc": 0.10979551338829463,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.013274980977809353
+    },
+    {
+      "capability": "math",
+      "family": "gemma3",
+      "model": "gemma3-1b",
+      "pruning_auc": 0.6966163027947958,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -0.9383095815836029,
+      "quantization_auc": 0.15349062212223297,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.34251867666970043
+    },
+    {
+      "capability": "qa",
+      "family": "gemma3",
+      "model": "gemma3-1b",
+      "pruning_auc": 0.7537845270702901,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5,
+      "pruning_score": -0.9257416875098056,
+      "quantization_auc": 0.15638048766472537,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.6269801932621797
+    },
+    {
+      "capability": "code",
+      "family": "gemma3",
+      "model": "gemma3-270m",
+      "pruning_auc": 0.7899096861951158,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -1.1775731168098345,
+      "quantization_auc": 0.16413435988280983,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 0.9230769230769231,
+      "quantization_score": -2.047114195956385
+    },
+    {
+      "capability": "math",
+      "family": "gemma3",
+      "model": "gemma3-270m",
+      "pruning_auc": 0.7877329898469465,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -1.1635050752730993,
+      "quantization_auc": 0.1677832888432979,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 0.9230769230769231,
+      "quantization_score": -1.8470984157312698
+    },
+    {
+      "capability": "qa",
+      "family": "gemma3",
+      "model": "gemma3-270m",
+      "pruning_auc": 0.8043984775184974,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -1.1741603148363837,
+      "quantization_auc": 0.154007767008887,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.6099405971368355
+    },
+    {
+      "capability": "code",
+      "family": "gemma3",
+      "model": "gemma3-27b",
+      "pruning_auc": 0.7581298241174239,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -1.092545934218614,
+      "quantization_auc": 0.06527112999931864,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.6022059384860305
+    },
+    {
+      "capability": "math",
+      "family": "gemma3",
+      "model": "gemma3-27b",
+      "pruning_auc": 0.7692304569956487,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -1.1177759431595784,
+      "quantization_auc": 0.07815213843589351,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.5163534889665735
+    },
+    {
+      "capability": "qa",
+      "family": "gemma3",
+      "model": "gemma3-27b",
+      "pruning_auc": 0.6645293824701194,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -0.9848900456652878,
+      "quantization_auc": -0.052289040951578415,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.8715714725391375
+    },
+    {
+      "capability": "code",
+      "family": "gemma3",
+      "model": "gemma3-4b",
+      "pruning_auc": 0.6594252182715424,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -0.8284612593595796,
+      "quantization_auc": 0.09893775124344213,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.1568922928785899
+    },
+    {
+      "capability": "math",
+      "family": "gemma3",
+      "model": "gemma3-4b",
+      "pruning_auc": 0.6433212283246379,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.4002191762380493,
+      "quantization_auc": 0.1259565843309592,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.028625729673870892
+    },
+    {
+      "capability": "qa",
+      "family": "gemma3",
+      "model": "gemma3-4b",
+      "pruning_auc": 0.47362114043824716,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.6428571428571428,
+      "pruning_score": -0.18676968866795507,
+      "quantization_auc": 0.0005602589641434189,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.49203639163729423
+    },
+    {
+      "capability": "code",
+      "family": "gemma4",
+      "model": "gemma4-31b",
+      "pruning_auc": 0.6228607807161837,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.34939226704841775,
+      "quantization_auc": 0.10630259078830817,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.05947641252467398
+    },
+    {
+      "capability": "math",
+      "family": "gemma4",
+      "model": "gemma4-31b",
+      "pruning_auc": 0.6056125928170935,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.5714285714285715,
+      "pruning_score": -0.30702203459243116,
+      "quantization_auc": 0.14810919778054948,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": -0.2811694783264967
+    },
+    {
+      "capability": "qa",
+      "family": "gemma4",
+      "model": "gemma4-31b",
+      "pruning_auc": 0.7649113367956745,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.42857142857142866,
+      "pruning_score": -1.120726482646216,
+      "quantization_auc": 0.15425078532025727,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 0.9230769230769231,
+      "quantization_score": -2.420753890644512
+    },
+    {
+      "capability": "code",
+      "family": "muse",
+      "model": "muse-30b",
+      "pruning_auc": 0.5131487261021472,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.6428571428571428,
+      "pruning_score": 0.1347632198131068,
+      "quantization_auc": 0.15473132940156842,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 0.9230769230769231,
+      "quantization_score": -1.9227388464671518
+    },
+    {
+      "capability": "math",
+      "family": "muse",
+      "model": "muse-30b",
+      "pruning_auc": 0.5090858055032652,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.6428571428571428,
+      "pruning_score": 0.13473019606007125,
+      "quantization_auc": 0.15499978100636952,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 0.9230769230769231,
+      "quantization_score": -1.7013641439075622
+    },
+    {
+      "capability": "qa",
+      "family": "muse",
+      "model": "muse-30b",
+      "pruning_auc": 0.41231722635916734,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.7142857142857143,
+      "pruning_score": 0.07611455233221329,
+      "quantization_auc": 0.011977869043911758,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.41004129288970487
+    },
+    {
+      "capability": "code",
+      "family": "olmo3",
+      "model": "olmo3-32b",
+      "pruning_auc": 0.21450408310936525,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 1.0,
+      "pruning_score": 1.8868901150138497,
+      "quantization_auc": 0.04690944005343419,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.8450788727797425
+    },
+    {
+      "capability": "math",
+      "family": "olmo3",
+      "model": "olmo3-32b",
+      "pruning_auc": 0.09409393678731327,
+      "pruning_cliff_censored": true,
+      "pruning_cliff_survival": 1.0,
+      "pruning_score": 2.176313531985363,
+      "quantization_auc": 0.030751564708257566,
+      "quantization_cliff_censored": true,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 1.0567284927873413
+    },
+    {
+      "capability": "qa",
+      "family": "olmo3",
+      "model": "olmo3-32b",
+      "pruning_auc": -0.022822489265267483,
+      "pruning_cliff_censored": true,
+      "pruning_cliff_survival": 1.0,
+      "pruning_score": 1.3846559519080275,
+      "quantization_auc": 0.014454185857677325,
+      "quantization_cliff_censored": true,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.3922577252029072
+    },
+    {
+      "capability": "code",
+      "family": "olmo3",
+      "model": "olmo3-7b",
+      "pruning_auc": 0.20717645234649562,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.9285714285714287,
+      "pruning_score": 1.7158749015315091,
+      "quantization_auc": 0.06307747968384726,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.6312216930545405
+    },
+    {
+      "capability": "math",
+      "family": "olmo3",
+      "model": "olmo3-7b",
+      "pruning_auc": 0.2197907706389642,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 0.9285714285714287,
+      "pruning_score": 1.6624673387058957,
+      "quantization_auc": 0.05661490065438651,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.7618818451283307
+    },
+    {
+      "capability": "qa",
+      "family": "olmo3",
+      "model": "olmo3-7b",
+      "pruning_auc": 0.13902417498040442,
+      "pruning_cliff_censored": false,
+      "pruning_cliff_survival": 1.0,
+      "pruning_score": 1.1656457288446194,
+      "quantization_auc": 0.027567103548884486,
+      "quantization_cliff_censored": false,
+      "quantization_cliff_survival": 1.0,
+      "quantization_score": 0.2980878443392442
+    }
+  ]
+}

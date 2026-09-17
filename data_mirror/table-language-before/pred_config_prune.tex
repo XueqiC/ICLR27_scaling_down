@@ -1,0 +1,55 @@
+\begin{table}[!htbp]
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; \emph{\mbox{held-out} axis}; [provenance] & Predictor & Math & Code & QA \\
+\midrule
+\textbf{pruning}: unseen $d$ 0.65 and 0.55, development sources and Pythia-410M at step 96k\newline{\itshape densities 0.65 (interpolation) and 0.55 (extrapolation) pooled} [P·R·F·A] & Candidate: shared power form & 0.371 (-0.09) & 0.524 (-0.24) & \textbf{0.759} (+0.06) \\
+ & Same-input baseline: per-density regression (A2) & \textbf{0.283} & \textbf{0.279} & 0.818 \\
+ & Simple baseline: strength only & 1.369 & 1.635 & 1.608 \\
+\addlinespace[2pt]
+\textbf{pruning}: new source Pythia-1B at step 96k, $d=0.65$ (interpolation)\newline{\itshape in-range size; stage 96k} [P·F·F·A] & Candidate: shared power form & 0.020 (-0.01) & 0.092 (-0.06) & 0.466 (-0.09) \\
+ & Same-input baseline: A1 ($\gamma{=}1$); per-density regression (A2) & \textbf{0.009} & \textbf{0.031} & \textbf{0.380} \\
+ & Simple baseline: median curve & 0.147 & 0.076 & 0.569 \\
+\addlinespace[2pt]
+\textbf{pruning}: new source Pythia-1B at step 96k, $d=0.55$ (extrapolation)\newline{\itshape in-range size; stage 96k} [P·F·F·A] & Candidate: shared power form & 0.930 (-0.66) & 1.550 (-1.53) & 1.426 (-0.90) \\
+ & Same-input baseline: per-density regression (A2) & 1.051 & 1.358 & 1.009 \\
+ & Simple baseline: strength only & \textbf{0.273} & \textbf{0.018} & \textbf{0.530} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source Pythia-1B at steps 32k and 112k, $d$ 0.9--0.6 (interpolation)\newline{\itshape in-range size; stages 32k, 112k} [P·F·F·A] & Candidate: shared power form & 0.215 (-0.05) & 0.191 (-0.07) & 0.261 (-0.03) \\
+\bottomrule\end{tabular*}
+\caption{Configuration-axis tests for pruning: whether a relation fitted at seen densities and sources predicts unseen densities, sizes and stages. Protocol A (full development panel) applies to the two new-source pairs and the prospective Pythia-1B at step 96k; protocol B is in Table~\ref{tab:p1v2}. Entries are mean absolute errors in nats per native token by capability; bold marks the lowest error, parentheses give the baseline-minus-candidate improvement, and the origin code follows Table~\ref{tab:pred_source}. A1 is the linear power form and A2 the per-density regression with interpolation between densities.}
+\label{tab:pred_config_prune}\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; \emph{\mbox{held-out} axis}; [provenance] & Predictor & Math & Code & QA \\
+\midrule
+ & Same-input baseline: per-density regression (A2) & 0.205 & \textbf{0.119} & 0.237 \\
+ & Simple baseline: median curve; strength only & \textbf{0.169} & 0.128 & \textbf{0.227} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source Pythia-1B at steps 32k and 112k, $d=0.55$ (extrapolation)\newline{\itshape in-range size; stages 32k, 112k} [P·F·F·A] & Candidate: shared power form & 1.790 (-0.85) & 1.488 (-1.40) & 2.225 (-1.83) \\
+ & Same-input baseline: A1 ($\gamma{=}1$); per-density regression (A2) & 1.896 & 1.386 & 1.744 \\
+ & Simple baseline: strength only & \textbf{0.939} & \textbf{0.089} & \textbf{0.393} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source Pythia-6.9B at steps 32k and 112k, $d$ 0.9--0.6 (interpolation)\newline{\itshape size $5\times$ beyond development range; stages 32k, 112k} [P·F·F·A] & Candidate: shared power form & 0.299 (-0.18) & 0.160 (-0.02) & 0.909 (-0.79) \\
+ & Same-input baseline: per-density regression (A2) & 0.292 & \textbf{0.144} & 0.982 \\
+ & Simple baseline: median curve & \textbf{0.120} & \textbf{0.144} & \textbf{0.120} \\
+\addlinespace[2pt]
+\textbf{pruning}: new source Pythia-6.9B at steps 32k and 112k, $d=0.55$ (extrapolation)\newline{\itshape size $5\times$ beyond development range; stages 32k, 112k} [P·F·F·A] & Candidate: shared power form & \textbf{0.615} (+0.00) & 0.547 (-0.01) & 4.472 (-3.57) \\
+ & Same-input baseline: A1 ($\gamma{=}1$); per-density regression (A2) & 0.618 & \textbf{0.535} & 2.850 \\
+\bottomrule\end{tabular*}
+\caption[]{Continued from the preceding table part.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; \emph{\mbox{held-out} axis}; [provenance] & Predictor & Math & Code & QA \\
+\midrule
+ & Simple baseline: median curve; strength only & 0.703 & 0.712 & \textbf{0.904} \\
+\addlinespace[2pt]
+\bottomrule\end{tabular*}
+\caption[]{Continued from the preceding table part.}
+\end{table}

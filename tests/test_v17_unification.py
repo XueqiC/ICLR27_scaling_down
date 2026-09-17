@@ -158,6 +158,24 @@ def test_matched_storage_pairing_uses_tolerance_and_is_one_to_one() -> None:
     assert pairs[0]["absolute_gap"] == pytest.approx(5.9)
 
 
+def test_historical_quant_ladder_excludes_metadata_but_still_rejects_invalid_bits(tmp_path):
+    import json
+
+    path = tmp_path / "gemma3-1b" / "quant_losses.json"
+    path.parent.mkdir()
+    losses = dict.fromkeys(v17.CAPABILITIES, 1.)
+    for invalid in ("0", "17", "not_a_bit"):
+        path.write_text(json.dumps({"dense": losses, invalid: losses}))
+        with pytest.raises(ValueError):
+            v17._load_quantization_rows(tmp_path)
+    path.write_text(json.dumps({"dense": losses, "4": losses, "5": losses,
+                                "_5bit_meta": {"source": "later confirmation"}}))
+    rows, notes = v17._load_quantization_rows(tmp_path)
+    assert len(rows) == 6 and {r["raw_coordinate"] for r in rows} == {4., 16.}
+    assert any("Ignored quantization metadata" in n for n in notes)
+    assert any("Excluded later bit configuration" in n for n in notes)
+
+
 def test_source_referenced_delta_subtracts_source_dense_loss() -> None:
     distilled = {"math": 0.82, "code": 0.91, "qa": 4.25}
     source = {"math": 0.60, "code": 0.73, "qa": 5.79}
@@ -169,6 +187,8 @@ def test_source_referenced_delta_subtracts_source_dense_loss() -> None:
 
 def test_assembled_distillation_keeps_self_and_four_point_source_ladder() -> None:
     rows, audit = v17.assemble_table()
+    assert {row["model"] for row in rows} == v17.V17_MODELS
+    assert {row["raw_coordinate"] for row in rows if row["method"] == "quantization"} == v17.V17_BITS
     self_rows = [row for row in rows if row["method"] == v17.DISTILL_SELF]
     source_rows = [row for row in rows if row["method"] == v17.DISTILL_SOURCE]
 

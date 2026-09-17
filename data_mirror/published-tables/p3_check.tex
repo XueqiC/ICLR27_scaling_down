@@ -1,0 +1,18 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\caption{The table compares loss changes on primary and independent secondary benchmarks. Each pair lists the primary benchmark followed by the named secondary benchmark, in nats per native token. Compression states were specified before secondary measurement.}
+\par\smallskip{\footnotesize Primary and secondary benchmarks on Gemma-3-1 billion: loss change from dense in nats per native token on the main-protocol probe followed by an independent benchmark of the same capability (Mathematics: SVAMP; Question answering: TriviaQA; 128 samples, fixed probe seed). Scored completion tokens, primary then secondary, are 13198 and 260 for Mathematics, 4516 and 8393 for Code, and 251 and 328 for Question answering, in the same benchmark order.\par}
+\label{tab:p3_check}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.310000000\textwidth-1.860000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-1.380000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-1.380000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-1.380000000\tabcolsep\relax}@{}}
+\toprule
+State & Mathematics: primary / arithmetic word problems & Code: primary / HumanEval & Question answering: primary / TriviaQA \\
+\midrule
+magnitude pruning density 0.7 & $+1.31$ / $+0.51$ & $+1.23$ / $+1.41$ & $+0.83$ / $+3.30$ \\
+{Per-channel round-to-nearest quantization at 4 bits} & $+0.95$ / $+2.51$ & $+0.60$ / $+0.75$ & $+0.88$ / $+1.99$ \\
+distillation, pool size 75, first milestone & $+0.07$ / $-1.09$ & $+0.06$ / $+0.06$ & $-1.33$ / $+0.11$ \\
+distillation, pool size 75, second milestone & $+0.08$ / $+0.31$ & $+0.12$ / $+0.07$ & $-0.69$ / $+0.31$ \\
+distillation, pool size 450, first milestone & $+0.10$ / $-1.36$ & $+0.06$ / $+0.06$ & $-1.46$ / $+0.21$ \\
+distillation, pool size 450, second milestone & $+0.09$ / $-0.30$ & $+0.11$ / $+0.07$ & $-1.40$ / $+0.37$ \\
+\bottomrule
+\end{tabular*}
+\end{table}

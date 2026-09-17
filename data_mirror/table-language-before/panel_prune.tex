@@ -1,0 +1,23 @@
+\begin{table}[!htbp]\normalfont\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.210000000\textwidth-2.940000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.120000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.120000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.120000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.540000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.820000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-2.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-2.240000000\tabcolsep\relax}@{}}
+\toprule
+Model & \multicolumn{3}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.240000000\textwidth--0.640000000\tabcolsep\relax}}{$\Delta L_c$ at $d=0.7$} & Math at density 0.5 & $d^{*}_{\mathrm{math}}$ & {QA least and most damaged} & Minimum QA response ($d$) \\
+\cmidrule(lr){3-5} & Math & Code & QA & & & & \\
+\midrule
+Qwen3-0.6B & +0.49 & +0.56 & -0.26 & +4.72 & 0.60 & 3/\allowbreak 3$\,\allowbreak |\,\allowbreak $0/\allowbreak 3 & -0.26 (0.70) \\
+Qwen3-1.7B & +0.24 & +0.19 & -0.51 & +3.60 & 0.60 & 6/\allowbreak 6$\,\allowbreak |\,\allowbreak $0/\allowbreak 6 & -0.90 (0.62) \\
+Qwen3-4B & -0.00 & -0.09 & -0.79 & +1.31 & 0.50 & 5/\allowbreak 5$\,\allowbreak |\,\allowbreak $0/\allowbreak 5 & -1.96 (0.55) \\
+Qwen3-8B$^{\dagger}$ & +0.03 & +0.10 & -0.41 & -- & {Not reached by density 0.60} & 4/\allowbreak 4$\,\allowbreak |\,\allowbreak $0/\allowbreak 4 & -1.02 (0.60) \\
+Qwen3-14B$^{\dagger}$ & +0.06 & +0.03 & -0.45 & -- & {Not reached by density 0.60} & 3/\allowbreak 4$\,\allowbreak |\,\allowbreak $0/\allowbreak 4 & -0.80 (0.60) \\
+Gemma-3-270M & +3.49 & +4.04 & +2.54 & +11.21 & 0.70 & 0/\allowbreak 2$\,\allowbreak |\,\allowbreak $1/\allowbreak 2 & +0.21 (0.90) \\
+Gemma-3-1B & +1.31 & +1.23 & +0.83 & +13.78 & 0.70 & 0/\allowbreak 5$\,\allowbreak |\,\allowbreak $4/\allowbreak 5 & +0.19 (0.90) \\
+Gemma-3-4B & +0.83 & +1.47 & +0.24 & +7.00 & 0.60 & 1/\allowbreak 3$\,\allowbreak |\,\allowbreak $2/\allowbreak 3 & +0.05 (0.90) \\
+Gemma-3-12B & +0.68 & +0.46 & +0.54 & +17.10 & 0.60 & 0/\allowbreak 3$\,\allowbreak |\,\allowbreak $2/\allowbreak 3 & +0.07 (0.90) \\
+Gemma-3-27B & +4.04 & +4.69 & +3.59 & +15.21 & 0.70 & 1/\allowbreak 2$\,\allowbreak |\,\allowbreak $1/\allowbreak 2 & +0.01 (0.80) \\
+Gemma-4-31B & +0.68 & +0.77 & +2.89 & +16.06 & 0.60 & 0/\allowbreak 3$\,\allowbreak |\,\allowbreak $3/\allowbreak 3 & +0.22 (0.90) \\
+Muse-30B & +0.17 & +0.14 & +0.20 & +3.53 & 0.55 & 1/\allowbreak 4$\,\allowbreak |\,\allowbreak $3/\allowbreak 4 & +0.02 (0.90) \\
+OLMo-3-7B & +0.03 & +0.03 & +0.14 & +0.22 & 0.35 & 4/\allowbreak 8$\,\allowbreak |\,\allowbreak $3/\allowbreak 8 & -0.02 (0.55) \\
+OLMo-3-32B & +0.01 & +0.03 & +0.02 & +0.09 & {Not reached by density 0.30} & 7/\allowbreak 10$\,\allowbreak |\,\allowbreak $0/\allowbreak 10 & -0.24 (0.30) \\
+\bottomrule\end{tabular*}
+\caption{Per-capability pruning damage on the heterogeneous panel, in nats per native token within each model. $d^{*}_{\mathrm{math}}$ is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the QA ranking columns count, over the pre-cliff densities, how often QA is the least and the most damaged capability; the last column gives the most negative QA response and its density. Daggers mark prospective additions measured at four densities only; a dash marks a setting that was not measured for that model.}
+\label{tab:panel_prune}\end{table}

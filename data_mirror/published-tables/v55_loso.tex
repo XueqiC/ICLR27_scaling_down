@@ -1,0 +1,15 @@
+\begin{table}[!htbp]\normalfont\centering\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.460000000\textwidth-2.760000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.080000000\tabcolsep\relax}@{}}
+\toprule
+Candidate & Mathematics & Code & Question answering \\
+\midrule
+Separable form & 1.953 & 2.185 & 4.749 \\
+{low-order two-dimensional form} & 0.914 & 1.910 & 4.371 \\
+{Interpolation with the same inputs} & 1.230 & 1.889 & 4.333 \\
+Development mean & 2.623 & 2.566 & 2.891 \\
+Development median & 1.694 & 1.758 & 1.777 \\
+Zero change & 1.821 & 1.929 & 1.796 \\
+\bottomrule\end{tabular*}
+\caption{The table compares grouped-quantization predictors when one state is held out. Entries are mean absolute errors in nats per native token. A collapsing development state dominates the errors, strength only all candidate forms were retained for testing.}
+\par\smallskip{\footnotesize Grouped quantization: leave-one-state-out mean absolute error in nats on the 24 development cells of six states, by candidate predictor and capability. The late-stage 160 million state, which collapses at 3 bits, dominates each \mbox{held-out} error, strength only the development set does not rank the forms; all three candidates and the baselines were frozen and tested (\S\ref{sec:unseen_settings}).\par}
+\label{tab:v55_loso}\end{table}

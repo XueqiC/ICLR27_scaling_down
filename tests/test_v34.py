@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 
 from analysis import v34_c17_scope_audit as audit
+from public_inputs import require_public_inputs
 
 
 def prompt(q, context="Example: supplied passage", suffix="Answer:"):
@@ -63,6 +64,10 @@ def test_shared_article_is_distinct_from_shared_question():
 
 @pytest.fixture(scope="module")
 def summary():
+    require_public_inputs(
+        "results/traces-pilot/gpt-5.6-luna_qa.jsonl",
+        "results/traces-pilot/claude-sonnet-4-6_qa.jsonl",
+        reason="raw teacher-trace text is deliberately not redistributed")
     # Entire default audit must work with all model/network/data-loader imports
     # prohibited. Inspect existing artifacts only; no writes in build_summary.
     original = builtins.__import__

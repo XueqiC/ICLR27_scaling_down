@@ -1,0 +1,17 @@
+\begin{table}[!htbp]\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}
+\toprule
+Candidate & Parameters & \multicolumn{3}{c}{Test MAE} & \multicolumn{3}{c}{Signed bias (prediction $-$ observation)} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+ & & Math & Code & QA & Math & Code & QA \\
+\midrule
+\textbf{Power form (selected)} & 5 & 0.243 & 0.236 & 0.678 & +0.216 & +0.236 & +0.382 \\
+\shortstack[l]{Per-density\\regression} & 20 & 0.230 & 0.222 & 0.682 & +0.222 & +0.212 & +0.293 \\
+A1 & 4 & 0.363 & 0.403 & 0.738 & +0.210 & +0.206 & +0.304 \\
+\shortstack[l]{Continuous two-term\\form} & 8 & 0.313 & 0.305 & 0.746 & +0.116 & +0.107 & +0.249 \\
+Strength only & 2 & 0.450 & 0.488 & 0.579 & +0.443 & +0.486 & +0.579 \\
+\shortstack[l]{Development median\\curve} & 0 & 0.277 & 0.214 & 0.221 & +0.277 & +0.214 & +0.186 \\
+Zero change & 0 & 0.522 & 0.530 & 0.185 & -0.522 & -0.530 & +0.185 \\
+\bottomrule\end{tabular*}
+\caption{Third-round pruning confirmation on three new checkpoints (Pythia-410M at step 48k, Pythia-1.4B at step 112k, Pythia-6.9B at step 80k) at $d\in\{0.85,0.675,0.575\}$, with predictions committed before measurement: mean absolute error and mean signed error (prediction minus observation) over nine cells per capability, in nats per native token. Candidates are the power form, A2 (per-density least squares at five anchors with linear interpolation), A1 (the power form with $\gamma_c{=}1$), the continuous two-term form, and the source-free strength-only curve, development median, and zero change. Coefficients are given in Appendix Table~\ref{tab:round3_coef}.}
+\label{tab:round3_prune}\end{table}

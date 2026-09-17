@@ -1,0 +1,350 @@
+{
+  "loss_curve": [
+    {
+      "step": 1,
+      "epoch": 1,
+      "loss": 3.995660100132227,
+      "tokens": 4770,
+      "completion_tokens": 1373,
+      "tokens_seen": 4770,
+      "completion_tokens_seen": 1373,
+      "lr": 9.968561049466214e-05
+    },
+    {
+      "step": 2,
+      "epoch": 1,
+      "loss": 3.0084514506161213,
+      "tokens": 4487,
+      "completion_tokens": 1649,
+      "tokens_seen": 9257,
+      "completion_tokens_seen": 3022,
+      "lr": 9.874639560909117e-05
+    },
+    {
+      "step": 3,
+      "epoch": 1,
+      "loss": 4.524741746485233,
+      "tokens": 5746,
+      "completion_tokens": 773,
+      "tokens_seen": 15003,
+      "completion_tokens_seen": 3795,
+      "lr": 9.719416651541839e-05
+    },
+    {
+      "step": 4,
+      "epoch": 1,
+      "loss": 1.6860050596296787,
+      "tokens": 3723,
+      "completion_tokens": 1384,
+      "tokens_seen": 18726,
+      "completion_tokens_seen": 5179,
+      "lr": 9.504844339512095e-05
+    },
+    {
+      "step": 5,
+      "epoch": 1,
+      "loss": 2.308273483067751,
+      "tokens": 4643,
+      "completion_tokens": 1293,
+      "tokens_seen": 23369,
+      "completion_tokens_seen": 6472,
+      "lr": 9.233620996141421e-05
+    },
+    {
+      "step": 6,
+      "epoch": 1,
+      "loss": 2.175660317763686,
+      "tokens": 4052,
+      "completion_tokens": 1259,
+      "tokens_seen": 27421,
+      "completion_tokens_seen": 7731,
+      "lr": 8.90915741234015e-05
+    },
+    {
+      "step": 7,
+      "epoch": 1,
+      "loss": 2.830939933657646,
+      "tokens": 5950,
+      "completion_tokens": 1312,
+      "tokens_seen": 33371,
+      "completion_tokens_seen": 9043,
+      "lr": 8.535533905932738e-05
+    },
+    {
+      "step": 8,
+      "epoch": 1,
+      "loss": 3.6314816884696484,
+      "tokens": 5194,
+      "completion_tokens": 990,
+      "tokens_seen": 38565,
+      "completion_tokens_seen": 10033,
+      "lr": 8.117449009293668e-05
+    },
+    {
+      "step": 9,
+      "epoch": 1,
+      "loss": 2.781652096658945,
+      "tokens": 4515,
+      "completion_tokens": 1362,
+      "tokens_seen": 43080,
+      "completion_tokens_seen": 11395,
+      "lr": 7.660160382576683e-05
+    },
+    {
+      "step": 10,
+      "epoch": 1,
+      "loss": 1.9697373770177364,
+      "tokens": 5340,
+      "completion_tokens": 1610,
+      "tokens_seen": 48420,
+      "completion_tokens_seen": 13005,
+      "lr": 7.169418695587791e-05
+    },
+    {
+      "step": 11,
+      "epoch": 1,
+      "loss": 2.7062006294727325,
+      "tokens": 4264,
+      "completion_tokens": 1434,
+      "tokens_seen": 52684,
+      "completion_tokens_seen": 14439,
+      "lr": 6.651395309775837e-05
+    },
+    {
+      "step": 12,
+      "epoch": 1,
+      "loss": 2.635209795087576,
+      "tokens": 6055,
+      "completion_tokens": 1620,
+      "tokens_seen": 58739,
+      "completion_tokens_seen": 16059,
+      "lr": 6.112604669781572e-05
+    },
+    {
+      "step": 13,
+      "epoch": 1,
+      "loss": 1.6203784383833408,
+      "tokens": 3906,
+      "completion_tokens": 1902,
+      "tokens_seen": 62645,
+      "completion_tokens_seen": 17961,
+      "lr": 5.559822380516539e-05
+    },
+    {
+      "step": 14,
+      "epoch": 1,
+      "loss": 1.7484814961751303,
+      "tokens": 4382,
+      "completion_tokens": 1606,
+      "tokens_seen": 67027,
+      "completion_tokens_seen": 19567,
+      "lr": 5e-05
+    },
+    {
+      "step": 15,
+      "epoch": 2,
+      "loss": 1.0942772813141346,
+      "tokens": 3626,
+      "completion_tokens": 2196,
+      "tokens_seen": 70653,
+      "completion_tokens_seen": 21763,
+      "lr": 4.4401776194834613e-05
+    },
+    {
+      "step": 16,
+      "epoch": 2,
+      "loss": 2.2007642798125744,
+      "tokens": 4800,
+      "completion_tokens": 1577,
+      "tokens_seen": 75453,
+      "completion_tokens_seen": 23340,
+      "lr": 3.887395330218429e-05
+    },
+    {
+      "step": 17,
+      "epoch": 2,
+      "loss": 2.560298901051283,
+      "tokens": 5528,
+      "completion_tokens": 1343,
+      "tokens_seen": 80981,
+      "completion_tokens_seen": 24683,
+      "lr": 3.3486046902241664e-05
+    },
+    {
+      "step": 18,
+      "epoch": 2,
+      "loss": 1.7826802507042885,
+      "tokens": 4509,
+      "completion_tokens": 1576,
+      "tokens_seen": 85490,
+      "completion_tokens_seen": 26259,
+      "lr": 2.8305813044122097e-05
+    },
+    {
+      "step": 19,
+      "epoch": 2,
+      "loss": 1.8632601834833622,
+      "tokens": 4886,
+      "completion_tokens": 1149,
+      "tokens_seen": 90376,
+      "completion_tokens_seen": 27408,
+      "lr": 2.3398396174233178e-05
+    },
+    {
+      "step": 20,
+      "epoch": 2,
+      "loss": 1.2317581325769424,
+      "tokens": 3315,
+      "completion_tokens": 1815,
+      "tokens_seen": 93691,
+      "completion_tokens_seen": 29223,
+      "lr": 1.8825509907063327e-05
+    },
+    {
+      "step": 21,
+      "epoch": 2,
+      "loss": 1.8228267598897219,
+      "tokens": 4656,
+      "completion_tokens": 1840,
+      "tokens_seen": 98347,
+      "completion_tokens_seen": 31063,
+      "lr": 1.4644660940672627e-05
+    },
+    {
+      "step": 22,
+      "epoch": 2,
+      "loss": 1.832065086811781,
+      "tokens": 5641,
+      "completion_tokens": 1150,
+      "tokens_seen": 103988,
+      "completion_tokens_seen": 32213,
+      "lr": 1.090842587659851e-05
+    },
+    {
+      "step": 23,
+      "epoch": 2,
+      "loss": 2.6628190986812115,
+      "tokens": 6044,
+      "completion_tokens": 914,
+      "tokens_seen": 110032,
+      "completion_tokens_seen": 33127,
+      "lr": 7.663790038585793e-06
+    },
+    {
+      "step": 24,
+      "epoch": 2,
+      "loss": 2.134199608117342,
+      "tokens": 4351,
+      "completion_tokens": 1114,
+      "tokens_seen": 114383,
+      "completion_tokens_seen": 34241,
+      "lr": 4.951556604879048e-06
+    },
+    {
+      "step": 25,
+      "epoch": 2,
+      "loss": 2.5000960901379585,
+      "tokens": 5804,
+      "completion_tokens": 755,
+      "tokens_seen": 120187,
+      "completion_tokens_seen": 34996,
+      "lr": 2.8058334845816213e-06
+    },
+    {
+      "step": 26,
+      "epoch": 2,
+      "loss": 1.6253448761999607,
+      "tokens": 4773,
+      "completion_tokens": 1465,
+      "tokens_seen": 124960,
+      "completion_tokens_seen": 36461,
+      "lr": 1.2536043909088191e-06
+    },
+    {
+      "step": 27,
+      "epoch": 2,
+      "loss": 1.5784500166773796,
+      "tokens": 4404,
+      "completion_tokens": 1716,
+      "tokens_seen": 129364,
+      "completion_tokens_seen": 38177,
+      "lr": 3.143895053378698e-07
+    },
+    {
+      "step": 28,
+      "epoch": 2,
+      "loss": 1.7412584145863852,
+      "tokens": 4690,
+      "completion_tokens": 957,
+      "tokens_seen": 134054,
+      "completion_tokens_seen": 39134,
+      "lr": 0.0
+    }
+  ],
+  "tokens_seen": 134054,
+  "completion_tokens_seen": 39134,
+  "wall_time_seconds": 203.21284568682313,
+  "optimizer_steps": 28,
+  "total_updates_planned": 28,
+  "warmup_steps": 0,
+  "effective_batch_size_sequences": 16,
+  "max_len": 1024,
+  "seed": 0,
+  "epochs": 2,
+  "learning_rate": 0.0001,
+  "optimizer": "AdamW",
+  "scheduler": "cosine",
+  "warmup_ratio": 0.03,
+  "dtype": "bfloat16",
+  "student": "gemma3-1b",
+  "resolved_student": "google/gemma-3-1b-pt",
+  "student_tag": "gemma3-1b",
+  "teacher": "gpt-5.6-luna",
+  "recipe": "full",
+  "domains": [
+    "math",
+    "qa",
+    "code"
+  ],
+  "n_per_domain": 75,
+  "trace_counts": {
+    "math": {
+      "source_rows": 75,
+      "training_rows": 75,
+      "coverage_deleted_rows": 0
+    },
+    "qa": {
+      "source_rows": 75,
+      "training_rows": 74,
+      "coverage_deleted_rows": 1
+    },
+    "code": {
+      "source_rows": 75,
+      "training_rows": 74,
+      "coverage_deleted_rows": 1
+    }
+  },
+  "tokenization_deleted_rows": {
+    "math": 0,
+    "qa": 0,
+    "code": 0
+  },
+  "training_examples": 223,
+  "training_mode": "lora",
+  "trainable_parameters": 13045760,
+  "total_parameters": 1012931712,
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  }
+}

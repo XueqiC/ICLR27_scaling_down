@@ -1,6 +1,9 @@
 """V92 input provenance, nested holdouts, source-free baselines and fixed gate."""
 from dataclasses import replace
+from collections import Counter
 import itertools
+import json
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -197,18 +200,54 @@ def test_fragility_uses_signed_change_and_fair_ties():
     assert correct["cells"][0]["actual_most_fragile"] == ["qa"]
 
 
-def test_real_loader_uses_only_requested_sources_and_common_development_grid():
-    rows, extra, provenance = v92.load_data()
-    assert {arm: len([r for r in rows if r.query.arm == arm]) for arm in v92.ARMS} == {
-        "pruning": 108, "grouped_quantization": 162, "per_channel_quantization": 108}
-    assert len(extra) == 12
-    assert len(provenance["missing_states"]) == 3
-    assert all(item["arm"] == "grouped_quantization" and "step64000" in item["state"]
-               for item in provenance["missing_states"])
-    assert {r.query.config for r in extra} == {"0.55", "0.65"}
+@pytest.mark.parametrize("snapshot", ("current", "legacy"))
+def test_real_loader_uses_only_requested_sources_and_common_development_grid(snapshot, tmp_path):
+    root = v92.ROOT
+    artifact = root / "results/v92-input-comparison/summary.json"
+    if snapshot == "legacy":
+        # Replay the published mirror against its own registered input files.
+        mirror = root / "data_mirror"
+        artifact = mirror / "v92-input-comparison-sixstate-historical/summary.json"
+    published = json.loads(artifact.read_text())
+    if snapshot == "legacy":
+        root = tmp_path
+        for relative in published["provenance"]["input_sha256"]:
+            destination = root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.symlink_to(mirror / Path(relative).relative_to("results"))
+
+    rows, extra, provenance = v92.load_data(root)
+    primary = [r for r in published["observations"] if r["primary"]]
+    assert len(primary) == (459 if snapshot == "current" else 378)
+    assert len(provenance["input_sha256"]) == (54 if snapshot == "current" else 51)
+    additional = [r for r in published["observations"] if not r["primary"]]
+    assert Counter(r.query.arm for r in rows) == Counter(r["arm"] for r in primary)
+    assert {r.query.row_id for r in rows} == {r["id"] for r in primary}
+    for arm in v92.ARMS:
+        assert {r.query.state for r in rows if r.query.arm == arm} == {
+            r["state"] for r in primary if r["arm"] == arm}
+    assert len(extra) == len(additional)
+    assert provenance["missing_states"] == published["provenance"]["missing_states"]
+    assert {r.query.config for r in extra} == {r["config"] for r in additional}
     assert all(r.query.config in v92.COMMON[r.query.arm] for r in rows)
     assert not any("freeze" in p or "confirm" in p for p in provenance["input_sha256"])
-    assert len(provenance["input_sha256"]) == 51  # 27 descriptors + 9/6/9 response files
+    assert set(provenance["input_sha256"]) == set(published["provenance"]["input_sha256"])
+    if snapshot == "legacy":
+        # Preserve missing-state coverage even when the public mirror catches up.
+        relative = next(p for p in provenance["input_sha256"] if "/v54-quant-group/" in p)
+        (root / relative).unlink()  # Only the temporary fixture symlink.
+        reduced, _, missing = v92.load_data(root)
+        state = Path(relative).parent.name
+        expected_missing = [*provenance["missing_states"],
+            {"arm": "grouped_quantization", "state": state, "path": relative}]
+        assert sorted(missing["missing_states"], key=lambda r: r["path"]) == sorted(
+            expected_missing, key=lambda r: r["path"])
+        assert len(reduced) == len(rows) - 3 * len(v92.COMMON["grouped_quantization"])
+        assert not any(r.query.arm == "grouped_quantization" and r.query.state == state for r in reduced)
+        pruning = next(p for p in provenance["input_sha256"] if "/v6-capability-geometry/" in p)
+        (root / pruning).unlink()
+        with pytest.raises(ValueError, match="Required pruning panel missing"):
+            v92.load_data(root)
 
 
 def test_delivered_respects_locked_new_source_domain():

@@ -1,0 +1,21 @@
+\begin{table}[!htbp]\normalfont
+\centering
+\small
+\caption{QA measurement scope on Gemma-3-1B: conditional loss and $\Delta L$ from dense in native-token nats (negative is improvement) with 256 fixed references per set. 2Wiki supplies all context, MuSiQue supplies supporting paragraphs, and TriviaQA is the no-context control; distillation labels give nominal supervised-token budgets. All 24 cells of the \mbox{pre-specified} states were measured.}
+\label{tab:qa_scope}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{New 2Wiki} & \multicolumn{2}{c}{MuSiQue} & \multicolumn{2}{c}{TriviaQA} \\
+State & Loss & $\Delta L$ & Loss & $\Delta L$ & Loss & $\Delta L$ \\
+\midrule
+Dense & 5.796 & +0.000 & 1.919 & +0.000 & 2.714 & +0.000 \\
+\shortstack[l]{Pruning at density\\0.85} & 6.203 & +0.408 & 2.135 & +0.216 & 2.870 & +0.156 \\
+\shortstack[l]{Pruning at density\\0.7} & 6.510 & +0.715 & 3.186 & +1.267 & 5.619 & +2.905 \\
+\shortstack[l]{Per-channel\\round-to-nearest\\quantization at 4\\bits} & 6.594 & +0.799 & 3.324 & +1.405 & 4.360 & +1.646 \\
+\shortstack[l]{Grouped\\round-to-nearest\\quantization at 4\\bits and group size\\128} & 5.759 & -0.036 & 2.136 & +0.217 & 3.089 & +0.375 \\
+\shortstack[l]{Distillation at\\supervised budget\\35k} & 4.247 & -1.548 & 1.995 & +0.076 & 2.960 & +0.246 \\
+\shortstack[l]{Distillation at\\supervised budget\\140k} & 4.537 & -1.258 & 2.114 & +0.195 & 3.058 & +0.344 \\
+\shortstack[l]{Distillation at\\supervised budget\\280k} & 4.917 & -0.878 & 2.124 & +0.204 & 2.967 & +0.253 \\
+\bottomrule
+\end{tabular*}
+\end{table}

@@ -1,0 +1,26 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\caption{Multi-student distillation on the uniform absolute-exposure protocol. Eight forms per capability were frozen from the twelve development runs (Gemma-3-270M and 1B, $U\in\{75,450\}$, three data seeds) ; the headline column is the frozen form with the lowest development error, a joint form with a source term $k\log(N_S/N_{\mathrm{ref}})$, under a rule stated after the tests. Errors are mean absolute errors in nats over all test points of the row against the frozen constant, zero change, and the best frozen form chosen after the fact (R). Gemma-3-4B is a \mbox{held-out} student ($\log N_S$ 1.9 above the reference; development span $\pm0.55$).}
+\label{tab:p2v2_test}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.250000000\textwidth-3.000000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.440000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.560000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.100000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-2.760000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.060000000\textwidth-0.720000000\tabcolsep\relax}@{}}
+\toprule
+Student, pools & Capability & {Selected on development data} & Constant & Zero change & Best frozen form (R) & $n$ \\
+\midrule
+Gemma-3-270M, unseen pool ($U{=}375$) & Math & 0.045 & 0.060 & 0.092 & {Constant with student size (0.031)} & 12 \\
+ & Code & 0.036 & 0.047 & 0.138 & {Reuse response (0.031)} & 12 \\
+ & QA & 0.606 & 0.862 & 1.005 & {Joint budget and pool response (0.544)} & 12 \\
+\addlinespace
+Gemma-3-1B, unseen pool ($U{=}375$) & Math & 0.050 & 0.057 & 0.095 & {Reuse response (0.026)} & 12 \\
+ & Code & 0.029 & 0.069 & 0.109 & {Reuse response (0.018)} & 12 \\
+ & QA & 0.444 & 1.004 & 1.148 & {Joint budget and pool response (0.301)} & 12 \\
+\addlinespace
+Gemma-3-4B, unseen pool ($U{=}375$) & Math & 0.089 & 0.020 & 0.153 & Constant (0.020) & 12 \\
+ & Code & 0.050 & 0.038 & 0.178 & {Budget response (0.033)} & 12 \\
+ & QA & 1.141 & 1.024 & 1.167 & {Joint budget and pool response (0.272)} & 12 \\
+\addlinespace
+Gemma-3-4B, development pools ($U{=}75,\allowbreak 450$), \mbox{held-out} student & Math & 0.106 & 0.156 & 0.294 & {Joint with student size (0.106)} & 16 \\
+ & Code & 0.048 & 0.098 & 0.230 & {Joint with student size (0.048)} & 16 \\
+ & QA & 0.958 & 1.790 & 1.862 & {Joint budget and pool response (0.759)} & 16 \\
+\bottomrule
+\end{tabular*}
+\end{table}

@@ -27,7 +27,7 @@ The separate [V1 anchor result](../../results/v1-recipe-strat/summary.md) uses t
 
 [V12 source](../../analysis/v12_distill.py) declares training GSM8K/CodeAlpaca/HotpotQA and measurement MATH-500/MBPP/2WikiMultihopQA. The actual [V6 builder](../../analysis/v6_capability_geometry.py) loads `framolfese/2WikiMultihopQA`, split `validation`, after math and code draws from a shared seed-0 RNG. V12 takes `[1::2]` **after sampling 128 probes**, yielding 64 QA examples; these are odd sampled positions, not odd dataset rows. V15 saved indices 0–63 are already renumbered measurement examples and are not sliced again.
 
-Inspected 2 current QA trace files (600 rows/teacher in this snapshot), 74 V12 eval files and 16 V16 residual files. Metadata conflicts: 0. 3 saved default V15 panels contain the same ordered 64 QA prompts/references; 32 other V15 artifacts use the easy benchmark suite (QA=TriviaQA). The default panels are dense/pruned evaluations, not saved default-panel distilled behavioral results. Easy-suite behavior must not be described as 2Wiki behavior.
+Inspected 2 current QA trace files (600 rows/teacher in this snapshot), 660 V12 eval files and 16 V16 residual files. Metadata conflicts: 0. 3 saved default V15 panels contain the same ordered 64 QA prompts/references; 32 other V15 artifacts use the easy benchmark suite (QA=TriviaQA). The default panels are dense/pruned evaluations, not saved default-panel distilled behavioral results. Easy-suite behavior must not be described as 2Wiki behavior.
 
 Trace JSONLs contain prompt, response, teacher, model_version, timestamp and usage; no dataset/config/split/row IDs. V12 selects the first n rows per domain before training shuffles, so checking both full 600-row files covers the available smaller current prefixes. Historical trace bytes are not bound by an immutable run manifest. The source declaration alone does not prove HotpotQA's official training split; the optional existing-cache check supplies independent question identification.
 
@@ -59,6 +59,8 @@ Old 2Wiki evals retain task IDs but not questions; current V15 examples retain q
 HotpotQA and 2Wiki are separate QA collections with different construction procedures, not two splits of one benchmark. Both use Wikipedia; 2Wiki also uses Wikidata and explicit reasoning construction. [HotpotQA authors](https://hotpotqa.github.io/); [2Wiki authors' paper](https://aclanthology.org/2020.coling-main.580/). Thus ‘different corpora’ is defensible at question-benchmark level, not as a guarantee of disjoint source articles. Rendered current prompts share 3 title prefixes: e. v. v. satyanarayana, george gershwin, manuel romero. There are 0 identical normalized rendered context lines. Title reuse is not itself answer leakage. Truncation, serialization and title-prefix parsing prevent a full passage-overlap certificate.
 
 ## Claim disposition and minimal validation
+
+The saved V21 summary explicitly names 11 raw files (0 missing, 0 under the prior tree): V12 evaluations and V6 dense anchors, all fingerprinted by this audit. V31/V31b summaries record the training design and aggregate contrasts but no raw-path manifest; their historical item binding cannot be independently reconstructed from those summaries. See the machine-readable claim dependency inventory.
 
 | Claim | Data dependence | Disposition |
 |---|---|---|
@@ -99,7 +101,7 @@ Revalidation is a gate for independent QA behavioral/generalization claims and u
 ```bash
 python analysis/v34_c17_scope_audit.py
 # Optional read-only resolution against the existing local HotpotQA cache:
-python analysis/v34_c17_scope_audit.py --hotpot-cache $HOME/.cache/huggingface/datasets/hotpotqa___hotpot_qa
+python analysis/v34_c17_scope_audit.py --hotpot-cache /home/xueqi/.cache/huggingface/datasets/hotpotqa___hotpot_qa
 python -m pytest -q tests/test_v34.py
 ```
 

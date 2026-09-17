@@ -171,6 +171,7 @@ def test_dry_run_performs_no_artifact_or_report_writes(module, monkeypatch, caps
         pytest.fail("dry-run attempted an output write")
     monkeypatch.setattr(audit, "write_outputs", forbidden)
     monkeypatch.setattr(audit, "replace_section", forbidden)
+    monkeypatch.setattr(module, "REPORT", module.ROOT / "docs" / module.REPORT.name)
     before = hashlib.sha256(module.REPORT.read_bytes()).hexdigest()
     monkeypatch.setattr(sys, "argv", [module.__file__, "--dry-run", "--bootstrap", "50"])
     module.main()

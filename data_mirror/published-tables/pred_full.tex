@@ -1,0 +1,64 @@
+\begin{table}[!htbp]
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
+\toprule
+Test & What is held out & Fold rule: relation / input baseline / simple baseline & Mathematics & Code & Question answering \\
+\midrule
+\multicolumn{6}{@{}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 1.000000000\textwidth-0.000000000\tabcolsep\relax}@{}}{\textit{Source axis: seen setting, unseen source state}} \\
+Pruning: fixed density, 3 sizes by 3 stages, leave-one-stage-out & stage & Retrospective / fixed / retrospective & \textit{Relation / median}\newline \textbf{0.253} / 0.413 & \textit{Relation / median}\newline \textbf{0.292} / 0.516 & \textit{Relation / zero change}\newline 0.806 / \textbf{0.500} (0) \\
+\addlinespace[1.5pt]
+Quantization: fixed bit width, 3 sizes by 3 stages, leave-one-stage-out & stage & Retrospective / fixed / retrospective & \textit{Relation / median}\newline \textbf{1.144} / 1.410 & \textit{Relation / median}\newline \textbf{0.626} / 1.553 & \textit{Relation / median}\newline 1.989 / \textbf{1.473} \\
+\addlinespace[1.5pt]
+Pruning: stage 96 thousand (160 million, 1.4 billion), all densities & stage & Frozen / fixed / retrospective & \textit{Relation / no pretraining-token input}\newline \textbf{0.090} / 0.343 & \textit{Relation / no pretraining-token input}\newline \textbf{0.128} / 0.179 & \textit{Relation / no pretraining-token input}\newline \textbf{0.426} / 0.438 \\
+\addlinespace[1.5pt]
+Quantization: new stage 96 thousand (160 million, 410 million, 1.4 billion), bit width $\ge4$ & stage & Frozen / absent / retrospective & \textit{Relation / per-bit median}\newline \textbf{0.029} / 0.084 & \textit{Relation / per-bit median}\newline 0.104 / \textbf{0.094} & \textit{Relation / per-bit median}\newline 0.173 / \textbf{0.134} \\
+Quantization: new stage 96 thousand (160 million, 410 million, 1.4 billion), 3 bits & stage & Frozen / absent / retrospective & \textit{Relation / per-bit median}\newline \textbf{1.488} / 1.934 & \textit{Relation / per-bit median}\newline 1.963 / \textbf{0.843} & \textit{Relation / per-bit median}\newline 2.046 / \textbf{1.727} \\
+\addlinespace[1.5pt]
+Distillation: student loss change, 3 sizes by 3 stages low-rank adaptation, leave-one-stage-out & stage & Retrospective / fixed / retrospective & \textit{Relation / no pretraining-token input}\newline \textbf{0.014} / 0.026 & \textit{Relation / no pretraining-token input}\newline 0.057 / \textbf{0.044} & \textit{Relation / constant}\newline 0.263 / \textbf{0.159} \\
+\multicolumn{6}{@{}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 1.000000000\textwidth-0.000000000\tabcolsep\relax}@{}}{\textit{Configuration axis: unseen setting, size, stage, or pool}} \\
+Pruning: density 0.65, 0.55, development sources and Pythia-410 million at step 96 thousand & density & Frozen / retrospective / fixed & \textit{Relation / per-density regression}\newline 0.371 / \textbf{0.283} & \textit{Relation / per-density regression}\newline 0.524 / \textbf{0.279} & \textit{Relation / per-density regression}\newline \textbf{0.759} / 0.818 \\
+Pruning: Pythia-1 billion at step 96 thousand, density 0.65 & size, stage, density & Frozen / fixed / fixed & \textit{Relation / linear power form}\newline 0.020 / \textbf{0.009} & \textit{Relation / linear power form}\newline 0.092 / \textbf{0.031} & \textit{Relation / per-density regression}\newline 0.466 / \textbf{0.380} \\
+Pruning: Pythia-1 billion at step 96 thousand, density 0.55 & size, stage, density & Frozen / fixed / fixed & \textit{Relation / strength only}\newline 0.930 / \textbf{0.273} & \textit{Relation / strength only}\newline 1.550 / \textbf{0.018} & \textit{Relation / strength only}\newline 1.426 / \textbf{0.530} \\
+\addlinespace[1.5pt]
+\bottomrule\end{tabular*}
+\caption{The table compares relations with the named strongest baselines across all prediction tests. Pairs give relation error followed by baseline error, in nats per native token; bold marks the lower error. All specified forms are reported. Fold rules distinguish frozen predictions, fixed baselines, and retrospective fits.}
+\par\smallskip{\footnotesize The zero-change baseline predicts 0; the linear power form fixes $\gamma{=}1$. Improvements and uncertainty intervals appear in Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}.\par}
+\label{tab:pred_full}\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
+\toprule
+Test & What is held out & Fold rule: relation / input baseline / simple baseline & Mathematics & Code & Question answering \\
+\midrule
+Quantization: Pythia-1 billion at step 96 thousand, 4 bits & size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit median}\newline 0.116 / \textbf{0.068} & \textit{Relation / per-bit median}\newline 0.046 / \textbf{0.012} & \textit{Relation / no pretraining-token input}\newline 0.059 / \textbf{0.054} \\
+Quantization: Pythia-1 billion at step 96 thousand, 3 bits & size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit median}\newline \textbf{0.690} / 1.414 & \textit{Relation / per-bit median}\newline 0.318 / \textbf{0.001} & \textit{Relation / per-bit median}\newline \textbf{0.182} / 0.446 \\
+\addlinespace[1.5pt]
+Pruning: Pythia-1 billion at steps 32 thousand and 112 thousand, density 0.9--0.6 & size, stage & Frozen / fixed / fixed & \textit{Relation / strength only}\newline 0.215 / \textbf{0.169} & \textit{Relation / per-density regression}\newline 0.191 / \textbf{0.119} & \textit{Relation / median}\newline 0.261 / \textbf{0.227} \\
+Pruning: Pythia-1 billion at steps 32 thousand and 112 thousand, density 0.55 & size, stage, density & Frozen / fixed / fixed & \textit{Relation / strength only}\newline 1.790 / \textbf{0.939} & \textit{Relation / strength only}\newline 1.488 / \textbf{0.089} & \textit{Relation / strength only}\newline 2.225 / \textbf{0.393} \\
+\addlinespace[1.5pt]
+Quantization: Pythia-1 billion at steps 32 thousand and 112 thousand, bit width $\ge4$ (including the 5-bit rule) & size, stage, bit width & Frozen / fixed / fixed & \textit{Relation / per-bit median}\newline 0.064 / \textbf{0.020} & \textit{Relation / per-bit median}\newline 0.041 / \textbf{0.028} & \textit{Relation / per-bit median}\newline 0.157 / \textbf{0.052} \\
+Quantization: Pythia-1 billion at steps 32 thousand and 112 thousand, 3 bits & size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit mean}\newline \textbf{0.256} / 1.466 & \textit{Relation / per-bit mean}\newline \textbf{0.362} / 1.537 & \textit{Relation / per-bit median}\newline 1.972 / \textbf{1.000} \\
+\addlinespace[1.5pt]
+Pruning: Pythia-6.9 billion at steps 32 thousand and 112 thousand, density 0.9--0.6 & larger size, stage & Frozen / fixed / fixed & \textit{Relation / median}\newline 0.299 / \textbf{0.120} & \textit{Relation / per-density regression}\newline 0.160 / \textbf{0.144} & \textit{Relation / median}\newline 0.909 / \textbf{0.120} \\
+Pruning: Pythia-6.9 billion at steps 32 thousand and 112 thousand, density 0.55 & larger size, stage, density & Frozen / fixed / fixed & \textit{Relation / per-density regression}\newline \textbf{0.615} / 0.618 & \textit{Relation / per-density regression}\newline 0.547 / \textbf{0.535} & \textit{Relation / strength only}\newline 4.472 / \textbf{0.904} \\
+\addlinespace[1.5pt]
+Quantization: Pythia-6.9 billion at steps 32 thousand and 112 thousand, bit width $\ge4$ & larger size, stage, bit width & Frozen / fixed / fixed & \textit{Relation / per-bit median}\newline 0.181 / \textbf{0.036} & \textit{Relation / per-bit median}\newline 0.177 / \textbf{0.043} & \textit{Relation / zero change}\newline 0.428 / \textbf{0.034} (0) \\
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Pairs give relation error followed by baseline error, in nats per native token; bold marks the lower error. All specified forms are reported. Fold rules distinguish frozen predictions, fixed baselines, and retrospective fits.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
+\toprule
+Test & What is held out & Fold rule: relation / input baseline / simple baseline & Mathematics & Code & Question answering \\
+\midrule
+Quantization: Pythia-6.9 billion at steps 32 thousand and 112 thousand, 3 bits & larger size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit mean}\newline 3.233 / \textbf{2.046} & \textit{Relation / per-bit mean}\newline 3.229 / \textbf{1.805} & \textit{Relation / per-bit mean}\newline 5.306 / \textbf{1.744} \\
+\addlinespace[1.5pt]
+Distillation: unseen pool of 225 traces per domain (Gemma-3-1 billion) & pool & Frozen / fixed / fixed & \textit{Relation / constant}\newline 0.191 / \textbf{0.122} & \textit{Relation / constant}\newline 0.117 / \textbf{0.069} & \textit{Relation / joint budget and reuse}\newline \textbf{0.706} / 0.710 \\
+\addlinespace[1.5pt]
+distillation 270 million, pool 375 & pool & Frozen / fixed / fixed & \textit{Relation / constant}\newline \textbf{0.045} / 0.060 & \textit{Relation / constant}\newline \textbf{0.036} / 0.047 & \textit{Relation / constant}\newline \textbf{0.606} / 0.862 \\
+distillation 1 billion, pool 375 & pool & Frozen / fixed / fixed & \textit{Relation / constant}\newline \textbf{0.050} / 0.057 & \textit{Relation / constant}\newline \textbf{0.029} / 0.069 & \textit{Relation / constant}\newline \textbf{0.444} / 1.004 \\
+distillation 4 billion, pool 375 & student, pool & Frozen / fixed / fixed & \textit{Relation / constant}\newline 0.089 / \textbf{0.020} & \textit{Relation / constant}\newline 0.050 / \textbf{0.038} & \textit{Relation / constant}\newline 1.141 / \textbf{1.024} \\
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Pairs give relation error followed by baseline error, in nats per native token; bold marks the lower error. All specified forms are reported. Fold rules distinguish frozen predictions, fixed baselines, and retrospective fits.}
+\end{table}

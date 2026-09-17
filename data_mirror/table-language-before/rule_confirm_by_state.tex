@@ -1,0 +1,63 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Regret by source state and objective on the independent panel: the mean over the 17 nominal storage budgets (0.20--1.00 in steps of 0.05), in nats, and $K$, the number of distinct configurations selected by the frozen rule across these budgets. This is a \mbox{post-hoc} decomposition of frozen selection predictions.}
+\label{tab:rule-confirm-by-state}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-2.760000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.920000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.560000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.060000000\textwidth-0.720000000\tabcolsep\relax}@{}}
+\toprule
+State & Objective & {Frozen selection rule} & {Source-conditioned predictor} & Quantization only & {Cheapest feasible} & $K$ \\
+\midrule
+{Pythia-160M at step 32k} & Math & 0.000000 & 0.000512 & 0.000035 & 2.902545 & 7 \\
+ & Code & 0.000000 & 0.000000 & 0.000035 & 3.767303 & 7 \\
+ & QA (2Wiki) & 0.220466 & 0.141708 & 0.126440 & 1.882328 & 4 \\
+ & {Maximum across capabilities} & 0.001169 & 0.003603 & 0.001204 & 3.764622 & 7 \\
+\midrule
+{Pythia-410M at step 32k} & Math & 0.000000 & 0.028442 & 0.000009 & 1.607308 & 7 \\
+ & Code & 0.001014 & 0.410475 & 0.000923 & 2.053675 & 7 \\
+ & QA (2Wiki) & 0.046997 & 0.183243 & 0.216010 & 1.459195 & 4 \\
+ & {Maximum across capabilities} & 0.002180 & 0.001677 & 0.002334 & 2.050533 & 7 \\
+\midrule
+{Pythia-1.4B at step 32k} & Math & 0.000024 & 0.030380 & 0.000000 & 2.248675 & 7 \\
+ & Code & 0.011972 & 0.013315 & 0.012025 & 3.526863 & 7 \\
+ & QA (2Wiki) & 0.244136 & 0.523932 & 0.387497 & 2.013168 & 4 \\
+ & {Maximum across capabilities} & 0.004743 & 0.002122 & 0.005323 & 3.507343 & 7 \\
+\midrule
+{Pythia-1B at step 64k} & Math & 0.000000 & 0.000434 & 0.026970 & 0.327902 & 7 \\
+ & Code & 0.004321 & 0.025644 & 0.027814 & 0.390606 & 7 \\
+ & QA (2Wiki) & 0.052428 & 0.005406 & 0.280362 & 0.052428 & 1 \\
+ & {Maximum across capabilities} & 0.000000 & 0.000000 & 0.023494 & 0.382624 & 7 \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\linewidth}\footnotesize
+All four policies are feasible on all 68 state--budget cells per objective. The maximum-capability objective minimizes $\max_c[L_c(M)-L_c(M_0)]$. QA uses 2Wiki. The Pythia-1B at step 64k state includes two historical distillation students, which were excluded from the prediction fits. The frozen selection rule uses the locked policy, and the source-conditioned predictor uses the earlier selection laws for every state.
+\end{minipage}
+\end{table}
+
+\begin{table}[!htbp]\normalfont
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\caption{Heuristic candidate-set sizes and oracle coverage on all 68 cells per objective. Size columns count methods in the no-clear-winner candidate set, including singletons; coverage columns give the count out of 68 and the percentage of sets containing the oracle method. This is a \mbox{post-hoc} diagnostic based on frozen development errors, without new measurements.}
+\label{tab:rule-confirm-candidate-sizes}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-2.240000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-3.640000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.060000000\textwidth-0.840000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.060000000\textwidth-0.840000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.060000000\textwidth-0.840000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.060000000\textwidth-0.840000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-2.380000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-2.380000000\tabcolsep\relax}@{}}
+\toprule
+& & \multicolumn{4}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.240000000\textwidth--2.640000000\tabcolsep\relax}}{Set size (methods)} & \multicolumn{2}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.760000000\tabcolsep\relax}@{}}{Oracle coverage} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-8}
+Objective & Policy & 1 & 2 & 3 & 4 & {Set contains oracle method} & {Set contains oracle configuration} \\
+\midrule
+Math & {Frozen selection rule} & 30 & 28 & 10 & 0 & 68/\allowbreak 68 (100.0) & 68/\allowbreak 68 (100.0) \\
+ & {Source-conditioned predictor} & 31 & 27 & 10 & 0 & 68/\allowbreak 68 (100.0) & 39/\allowbreak 68 (57.4) \\
+\midrule
+Code & {Frozen selection rule} & 30 & 28 & 10 & 0 & 68/\allowbreak 68 (100.0) & 37/\allowbreak 68 (54.4) \\
+ & {Source-conditioned predictor} & 30 & 26 & 11 & 1 & 68/\allowbreak 68 (100.0) & 23/\allowbreak 68 (33.8) \\
+\midrule
+QA (2Wiki) & {Frozen selection rule} & 24 & 32 & 12 & 0 & 68/\allowbreak 68 (100.0) & 18/\allowbreak 68 (26.5) \\
+ & {Source-conditioned predictor} & 26 & 30 & 12 & 0 & 66/\allowbreak 68 (97.1) & 23/\allowbreak 68 (33.8) \\
+\midrule
+{Maximum across capabilities} & {Frozen selection rule} & 30 & 28 & 10 & 0 & 68/\allowbreak 68 (100.0) & 54/\allowbreak 68 (79.4) \\
+ & {Source-conditioned predictor} & 32 & 26 & 10 & 0 & 68/\allowbreak 68 (100.0) & 62/\allowbreak 68 (91.2) \\
+\bottomrule
+\end{tabular*}
+\par\smallskip\begin{minipage}{\linewidth}\footnotesize
+Sets reuse frozen development leave-one-state-out MAE thresholds; coverage is retrospective, not calibrated uncertainty. On this panel the no-clear-winner flag holds exactly for sets of size $\geq2$. The Source-conditioned predictor for Code at Pythia-1B at step 64k and budget 1.00 has four candidates (quantization, dense, pruning, distillation); it is retained explicitly. Set contains oracle method tests whether the measured oracle's method belongs to the candidate methods. Set contains oracle configuration tests whether its exact configuration identifier belongs to the set of one predicted best configuration per included method. Neither column tests the single selected configuration. The frozen selection rule uses the locked policy, and the source-conditioned predictor uses the earlier selection laws for every state.
+\end{minipage}
+\end{table}

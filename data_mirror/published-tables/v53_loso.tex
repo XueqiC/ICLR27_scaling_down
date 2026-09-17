@@ -1,0 +1,23 @@
+\begin{table}[!htbp]\normalfont\centering\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-2.000000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}@{}}
+\toprule
+Subset & Candidate & Mathematics & Code & Question answering & Capability mean \\
+\midrule
+All densities & Power form & 0.328 & 0.355 & 0.798 & 0.494 \\
+All densities & linear power form & 0.610 & 0.608 & 0.905 & 0.708 \\
+All densities & {Per-density regression} & 0.345 & 0.295 & 0.796 & 0.479 \\
+All densities & {Continuous two-term form} & 0.440 & 0.394 & 0.828 & 0.554 \\
+All densities & Strength only & 0.492 & 0.601 & 0.692 & 0.595 \\
+All densities & {Development median curve} & 0.410 & 0.455 & 0.540 & 0.468 \\
+All densities & Zero change & 0.812 & 0.852 & 0.602 & 0.755 \\
+{Densities off the coarse grid} & Power form & 0.592 & 0.649 & 1.370 & 0.870 \\
+{Densities off the coarse grid} & linear power form & 1.090 & 1.068 & 1.343 & 1.167 \\
+{Densities off the coarse grid} & {Per-density regression} & 0.959 & 0.704 & 1.459 & 1.041 \\
+{Densities off the coarse grid} & {Continuous two-term form} & 0.758 & 0.638 & 1.306 & 0.900 \\
+{Densities off the coarse grid} & Strength only & 0.909 & 1.077 & 1.163 & 1.050 \\
+{Densities off the coarse grid} & {Development median curve} & 0.758 & 0.790 & 0.901 & 0.816 \\
+{Densities off the coarse grid} & Zero change & 1.715 & 1.725 & 1.090 & 1.510 \\
+\bottomrule\end{tabular*}
+\caption{The table compares pruning predictors when one source is held out. Entries are mean absolute errors in nats per native token. The rows separate all measured densities from densities outside the coarse development grid.}
+\par\smallskip{\footnotesize Pruning development on 17 Pythia states: leave-one-source-out mean absolute error in nats over all \mbox{held-out} densities and over the densities off the coarse grid (0.75, 0.65, 0.55). The \mbox{pre-committed} rule selects the lowest capability mean among the four source-conditioned candidates, resolving gaps below 0.02 nats toward the continuous zero-at-density 1 form with fewer parameters, which selected the power form over per-density regression (gap 0.015 in mean absolute error).\par}
+\label{tab:v53_loso}\end{table}

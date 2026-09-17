@@ -83,17 +83,38 @@ then need the current file back. `data_mirror/ANONYMIZATION_DIGESTS.json` record
 published file whose bytes differ from the working-tree original, with the reason, and marks
 which of those a digest check may accept.
 
-Run the offline test suite:
+Run the offline test suite (the complete suite also imports the packages in
+`requirements-gpu.txt`, but uses only CPU fixtures and never loads model weights):
 
 ```
 python3 -m pytest tests
 ```
 
+Pytest automatically runs `bootstrap_results.py` before collection, so this command
+works in a fresh checkout. Bare `python3 -m pytest` selects the same `tests/` tree;
+`pytest.ini` excludes the manuscript, generated outputs and old `code/` copies.
+The shared helper in `tests/public_inputs.py` skips only explicitly named absent
+prerequisites: raw teacher traces under `results/traces-pilot/` (third-party text
+deliberately not redistributed), model/adapter tensors (`results/**/*.safetensors`,
+deliberately excluded), and external Hugging Face dataset/tokenizer caches when
+absent (the required 2Wiki Arrow file alone is 54,510,136 bytes). The existing
+five unavailable full-grid Pythia checks and one CUDA-only check also skip on CPU.
+Use `python3 -m pytest tests -rs` to see each absent input and its reason.
+All remaining measurement inputs, JSON adapter configuration metadata (no adapter
+tensors), and read-only table-check snapshots are mirrored. Missing mirrored inputs
+still fail; assertions are not converted to skips. See
+[A17_PUBLIC_SUITE.md](docs/A17_PUBLIC_SUITE.md) for validation counts, the complete
+change inventory and mirror byte totals.
+
+`code/` is a disposable legacy copy, ignored by Git and unnecessary for the public
+suite and current generators. It should stay out of the public repository and can
+be removed locally. Bootstrap now creates it only with `--legacy-layout`, for older
+generators that explicitly verify their historical code copies.
+
 Each generated file names its inputs and their SHA-256 digests in a header comment, so a
-regenerated table can be compared line by line with the one that was published. Tests that
-reach for model weights, adapters, dataset caches or credentials cannot pass from a checkout
-alone, since those are not part of the repository, and inputs that were never mirrored cannot
-be reconstructed; `docs/RESULTS_LEDGER.md` names the artifact behind every reported number.
+regenerated table can be compared line by line with the one that was published.
+API tests use mocked credentials and HTTP responses. `docs/RESULTS_LEDGER.md` names
+the artifact behind every reported number.
 
 ## Experiment index: measurement efficiency and data requirements
 

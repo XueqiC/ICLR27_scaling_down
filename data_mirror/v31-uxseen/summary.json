@@ -1,0 +1,221 @@
+{
+  "design": {
+    "student": "gemma3-1b",
+    "teacher": "gpt-5.6-luna",
+    "recipe": "full",
+    "pools_U": [
+      75,
+      600
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "milestones_seen_tokens": [
+      500000,
+      1000000
+    ],
+    "note": "U=75 reaches a milestone via repetition (many epochs); U=600 via more unique data. Paired contrast = U75 - U600 at matched seen-tokens. delta_c = L_c(KD) - L_c(S0).",
+    "checkpoints_paired_not_independent": true
+  },
+  "milestones": {
+    "500000": {
+      "math": {
+        "U75_deltaL_mean": 0.3877860281860888,
+        "U75_ci95_halfwidth": 0.038076306882764824,
+        "U600_deltaL_mean": 0.09130171238066372,
+        "U600_ci95_halfwidth": 0.03178001303210846,
+        "paired_U75_minus_U600_mean": 0.2964843158054251,
+        "paired_ci95": [
+          0.2357779996253745,
+          0.35719063198547574
+        ],
+        "paired_seed_sd": 0.024435608636808808,
+        "excludes_zero": true,
+        "n_seeds": 3
+      },
+      "code": {
+        "U75_deltaL_mean": 0.38430949217596694,
+        "U75_ci95_halfwidth": 0.026897654218226597,
+        "U600_deltaL_mean": 0.09704384410983173,
+        "U600_ci95_halfwidth": 0.020452673467352456,
+        "paired_U75_minus_U600_mean": 0.28726564806613525,
+        "paired_ci95": [
+          0.24942812133656728,
+          0.3251031747957032
+        ],
+        "paired_seed_sd": 0.015230424989160392,
+        "excludes_zero": true,
+        "n_seeds": 3
+      },
+      "qa": {
+        "U75_deltaL_mean": 2.3606926460823368,
+        "U75_ci95_halfwidth": 0.5728091707178485,
+        "U600_deltaL_mean": -1.2381411852589645,
+        "U600_ci95_halfwidth": 0.41990257485908405,
+        "paired_U75_minus_U600_mean": 3.598833831341301,
+        "paired_ci95": [
+          3.1015576439197563,
+          4.096110018762846
+        ],
+        "paired_seed_sd": 0.20016444852620482,
+        "excludes_zero": true,
+        "n_seeds": 3
+      }
+    },
+    "1000000": {
+      "math": {
+        "U75_deltaL_mean": 1.0660074758801839,
+        "U75_ci95_halfwidth": 0.08143388396375927,
+        "U600_deltaL_mean": 0.11107112188715466,
+        "U600_ci95_halfwidth": 0.025059490362701328,
+        "paired_U75_minus_U600_mean": 0.9549363539930292,
+        "paired_ci95": [
+          0.8874042928234618,
+          1.0224684151625967
+        ],
+        "paired_seed_sd": 0.0271831190066326,
+        "excludes_zero": true,
+        "n_seeds": 3
+      },
+      "code": {
+        "U75_deltaL_mean": 0.7969903306761146,
+        "U75_ci95_halfwidth": 0.14156956140673999,
+        "U600_deltaL_mean": 0.13658842633599058,
+        "U600_ci95_halfwidth": 0.021007572947534473,
+        "paired_U75_minus_U600_mean": 0.660401904340124,
+        "paired_ci95": [
+          0.5215605531705622,
+          0.7992432555096859
+        ],
+        "paired_seed_sd": 0.055886654524098016,
+        "excludes_zero": true,
+        "n_seeds": 3
+      },
+      "qa": {
+        "U75_deltaL_mean": 5.180009130146082,
+        "U75_ci95_halfwidth": 0.6580515598496303,
+        "U600_deltaL_mean": -0.6191691567065076,
+        "U600_ci95_halfwidth": 0.45278937987044016,
+        "paired_U75_minus_U600_mean": 5.79917828685259,
+        "paired_ci95": [
+          4.689846306578458,
+          6.908510267126722
+        ],
+        "paired_seed_sd": 0.44653017715449517,
+        "excludes_zero": true,
+        "n_seeds": 3
+      }
+    }
+  },
+  "D_U_accounting": {
+    "75": {
+      "D_U_pool_tokens": 67027,
+      "pool_examples": 223,
+      "processed_tokens_total": 1139459,
+      "supervised_tokens_total": 332639
+    },
+    "600": {
+      "D_U_pool_tokens": 533869,
+      "pool_examples": 1781,
+      "processed_tokens_total": 1067738,
+      "supervised_tokens_total": 316782
+    }
+  },
+  "reuse_count_E": {
+    "75": {
+      "500000": 7.459680427290495,
+      "1000000": 14.91936085458099
+    },
+    "600": {
+      "500000": 0.9365593432096638,
+      "1000000": 1.8731186864193277
+    }
+  },
+  "same_E_U75_milestones": {
+    "500000": 62775,
+    "1000000": 125550
+  },
+  "seed_subset_caveat": "data_selection='first n rows' with per-seed shuffle only -> all 3 seeds SHARE the same U-subset; intervals reflect training/shuffle randomness on a FIXED subset, not data-subset resampling. Next round: stratified pool resample by domain+length, separate data-subset seed from training seed.",
+  "T_direction_paired": {
+    "75": {
+      "math": {
+        "mean": 0.678221447694095,
+        "ci95": [
+          0.6087957303099045,
+          0.7476471650782854
+        ],
+        "excludes_zero": true
+      },
+      "code": {
+        "mean": 0.41268083850014764,
+        "ci95": [
+          0.2979123005036177,
+          0.5274493764966776
+        ],
+        "excludes_zero": true
+      },
+      "qa": {
+        "mean": 2.8193164840637457,
+        "ci95": [
+          2.2555010938011533,
+          3.383131874326338
+        ],
+        "excludes_zero": true
+      }
+    },
+    "600": {
+      "math": {
+        "mean": 0.019769409506490938,
+        "ci95": [
+          0.01030969406818511,
+          0.029229124944796764
+        ],
+        "excludes_zero": true
+      },
+      "code": {
+        "mean": 0.039544582226158864,
+        "ci95": [
+          0.03140085170387104,
+          0.04768831274844669
+        ],
+        "excludes_zero": true
+      },
+      "qa": {
+        "mean": 0.618972028552457,
+        "ci95": [
+          0.16700619835526098,
+          1.070937858749653
+        ],
+        "excludes_zero": true
+      }
+    }
+  },
+  "interaction_I_c": {
+    "math": {
+      "mean": 0.6584520381876041,
+      "ci95": [
+        0.5856513697537566,
+        0.7312527066214516
+      ],
+      "excludes_zero": true
+    },
+    "code": {
+      "mean": 0.3731362562739888,
+      "ci95": [
+        0.2665037086954054,
+        0.47976880385257215
+      ],
+      "excludes_zero": true
+    },
+    "qa": {
+      "mean": 2.2003444555112885,
+      "ci95": [
+        1.5721440961319115,
+        2.8285448148906656
+      ],
+      "excludes_zero": true
+    }
+  }
+}

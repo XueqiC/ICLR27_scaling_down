@@ -1,0 +1,89 @@
+\begin{table}[!htbp]
+\normalfont\centering\scriptsize\setlength{\tabcolsep}{1.6pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.800000000\tabcolsep\relax}@{}}
+\toprule
+Source & Development data & Regime & Power form & {Per-density regression} & linear power form & {Continuous two-term form} & Strength only & Development median & Zero change & {Lowest-error predictor} \\
+\midrule
+{Pythia-1 billion at step 32000} & Full development panel & {Pruning interpolation at densities 0.9 to 0.6} & 0.254 & 0.261 & 0.393 & 0.275 & 0.363 & 0.204 & 0.412 & {Development median curve} \\
+{Pythia-1 billion at step 32000} & Full development panel & {Pruning extrapolation at density 0.55} & 2.272 & 2.130 & 2.394 & 2.221 & 0.637 & 1.509 & 2.434 & Strength only \\
+{Pythia-1 billion at step 32000} & Early stages only & {Pruning interpolation at densities 0.9 to 0.6} & 0.249 & 0.218 & 0.321 & 0.239 & 0.236 & 0.224 & 0.412 & {Per-density regression} \\
+{Pythia-1 billion at step 32000} & Early stages only & {Pruning extrapolation at density 0.55} & 1.772 & 1.777 & 2.151 & 1.863 & 1.531 & 1.645 & 2.434 & Strength only \\
+{Pythia-1 billion at step 112000} & Full development panel & {Pruning interpolation at densities 0.9 to 0.6} & 0.191 & 0.112 & 0.300 & 0.175 & 0.365 & 0.173 & 0.400 & {Per-density regression} \\
+{Pythia-1 billion at step 112000} & Full development panel & {Pruning extrapolation at density 0.55} & 1.398 & 1.235 & 1.838 & 1.356 & 0.311 & 1.311 & 2.237 & Strength only \\
+{Pythia-1 billion at step 112000} & Early stages only & {Pruning interpolation at densities 0.9 to 0.6} & 0.223 & 0.177 & 0.355 & 0.235 & 0.219 & 0.195 & 0.400 & {Per-density regression} \\
+{Pythia-1 billion at step 112000} & Early stages only & {Pruning extrapolation at density 0.55} & 0.957 & 0.995 & 1.685 & 1.127 & 1.333 & 1.447 & 2.237 & Power form \\
+\bottomrule\end{tabular*}
+\caption{The table compares frozen predictors on new source states under two development-data rules. Entries are mean absolute errors over capabilities, in nats per native token. The last column reports the retrospective winner, selected by the lowest observed error.}
+\par\smallskip{\footnotesize The full-development protocol fits on the full nine-state development panel; the early-stage protocol fits on steps $\le$64 thousand only, strength only its 112 thousand rows are training-stage extrapolations. The 1 billion sources are in-range sizes and 6.9 billion is a $\sim$5$\times$ size extrapolation.\par}
+\label{tab:p1v2}\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\scriptsize\setlength{\tabcolsep}{1.6pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.800000000\tabcolsep\relax}@{}}
+\toprule
+Source & Development data & Regime & Power form & {Per-density regression} & linear power form & {Continuous two-term form} & Strength only & Development median & Zero change & {Lowest-error predictor} \\
+\midrule
+{Pythia-6.9 billion at step 32000} & Full development panel & {Pruning interpolation at densities 0.9 to 0.6} & 0.476 & 0.482 & 0.608 & 0.501 & 0.483 & 0.165 & 0.160 & Zero change \\
+{Pythia-6.9 billion at step 32000} & Full development panel & {Pruning extrapolation at density 0.55} & 1.635 & 1.423 & 0.939 & 1.457 & 1.493 & 0.275 & 0.889 & {Development median curve} \\
+{Pythia-6.9 billion at step 32000} & Early stages only & {Pruning interpolation at densities 0.9 to 0.6} & 0.160 & 0.166 & 0.249 & 0.187 & 0.163 & 0.136 & 0.160 & {Development median curve} \\
+{Pythia-6.9 billion at step 32000} & Early stages only & {Pruning extrapolation at density 0.55} & 0.705 & 0.549 & 0.677 & 0.630 & 0.252 & 0.148 & 0.889 & {Development median curve} \\
+{Pythia-6.9 billion at step 112000} & Full development panel & {Pruning interpolation at densities 0.9 to 0.6} & 0.436 & 0.463 & 0.610 & 0.479 & 0.376 & 0.092 & 0.294 & {Development median curve} \\
+{Pythia-6.9 billion at step 112000} & Full development panel & {Pruning extrapolation at density 0.55} & 2.121 & 1.939 & 2.224 & 2.061 & 0.191 & 1.272 & 2.198 & Strength only \\
+{Pythia-6.9 billion at step 112000} & Early stages only & {Pruning interpolation at densities 0.9 to 0.6} & 0.131 & 0.106 & 0.235 & 0.140 & 0.111 & 0.095 & 0.294 & {Development median curve} \\
+{Pythia-6.9 billion at step 112000} & Early stages only & {Pruning extrapolation at density 0.55} & 1.441 & 1.387 & 1.892 & 1.525 & 1.294 & 1.408 & 2.198 & Strength only \\
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Entries are mean absolute errors over capabilities, in nats per native token. The last column reports the retrospective winner, selected by the lowest observed error.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\scriptsize\setlength{\tabcolsep}{1.6pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.800000000\tabcolsep\relax}@{}}
+
+\toprule
+Source & Development data & Regime & {Full source regression} & {without pretraining tokens} & Development mean & Development median & Zero change & & & {Lowest-error predictor} \\
+\midrule
+{Pythia-1 billion at step 32000} & Full development panel & Quantization at $\ge$4 bits & 0.103 & 0.174 & 0.197 & 0.031 & 0.046 & & & {Per-bit development median} \\
+{Pythia-1 billion at step 32000} & Full development panel & {Quantization at 3 bits} & 1.050 & 2.648 & 2.903 & 1.438 & 3.108 & & & {Full source regression} \\
+{Pythia-1 billion at step 32000} & Full development panel & {Quantization at 5 bits (fixed interpolation rule)} & 0.179 & 0.272 & 0.254 & 0.044 & 0.017 & & & Zero change \\
+{Pythia-1 billion at step 32000} & Early stages only & Quantization at $\ge$4 bits & 0.028 & 0.032 & 0.027 & 0.026 & 0.046 & & & {Per-bit development median} \\
+{Pythia-1 billion at step 32000} & Early stages only & {Quantization at 3 bits} & 0.606 & 1.004 & 0.627 & 0.803 & 3.108 & & & {Full source regression} \\
+{Pythia-1 billion at step 32000} & Early stages only & {Quantization at 5 bits (fixed interpolation rule)} & 0.025 & 0.013 & 0.035 & 0.034 & 0.017 & & & {without pretraining tokens} \\
+{Pythia-1 billion at step 112000} & Full development panel & Quantization at $\ge$4 bits & 0.071 & 0.111 & 0.183 & 0.036 & 0.063 & & & {Per-bit development median} \\
+{Pythia-1 billion at step 112000} & Full development panel & {Quantization at 3 bits} & 0.676 & 3.805 & 0.802 & 1.231 & 5.777 & & & {Full source regression} \\
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Entries are mean absolute errors over capabilities, in nats per native token. The last column reports the retrospective winner, selected by the lowest observed error.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\scriptsize\setlength{\tabcolsep}{1.6pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.800000000\tabcolsep\relax}@{}}
+
+\toprule
+Source & Development data & Regime & {Full source regression} & {without pretraining tokens} & Development mean & Development median & Zero change & & & {Lowest-error predictor} \\
+\midrule
+{Pythia-1 billion at step 112000} & Full development panel & {Quantization at 5 bits (fixed interpolation rule)} & 0.151 & 0.138 & 0.251 & 0.035 & 0.025 & & & Zero change \\
+{Pythia-1 billion at step 112000} & Early stages only & Quantization at $\ge$4 bits & 0.038 & 0.042 & 0.038 & 0.039 & 0.063 & & & {Per-bit development mean} \\
+{Pythia-1 billion at step 112000} & Early stages only & {Quantization at 3 bits} & 1.120 & 1.981 & 3.106 & 3.472 & 5.777 & & & {Full source regression} \\
+{Pythia-1 billion at step 112000} & Early stages only & {Quantization at 5 bits (fixed interpolation rule)} & 0.046 & 0.019 & 0.027 & 0.025 & 0.025 & & & {without pretraining tokens} \\
+{Pythia-6.9 billion at step 32000} & Full development panel & Quantization at $\ge$4 bits & 0.253 & 0.317 & 0.190 & 0.034 & 0.033 & & & Zero change \\
+{Pythia-6.9 billion at step 32000} & Full development panel & {Quantization at 3 bits} & 3.973 & 5.103 & 3.300 & 1.835 & 2.711 & & & {Per-bit development median} \\
+{Pythia-6.9 billion at step 32000} & Full development panel & {Quantization at 5 bits (fixed interpolation rule)} & 0.373 & 0.457 & 0.237 & 0.067 & 0.029 & & & Zero change \\
+{Pythia-6.9 billion at step 32000} & Early stages only & Quantization at $\ge$4 bits & 0.033 & 0.050 & 0.029 & 0.025 & 0.033 & & & {Per-bit development median} \\
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Entries are mean absolute errors over capabilities, in nats per native token. The last column reports the retrospective winner, selected by the lowest observed error.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\scriptsize\setlength{\tabcolsep}{1.6pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-2.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.070000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.800000000\tabcolsep\relax}@{}}
+
+\toprule
+Source & Development data & Regime & {Full source regression} & {without pretraining tokens} & Development mean & Development median & Zero change & & & {Lowest-error predictor} \\
+\midrule
+{Pythia-6.9 billion at step 32000} & Early stages only & {Quantization at 3 bits} & 0.489 & 1.792 & 0.174 & 0.407 & 2.711 & & & {Per-bit development mean} \\
+{Pythia-6.9 billion at step 32000} & Early stages only & {Quantization at 5 bits (fixed interpolation rule)} & 0.046 & 0.052 & 0.058 & 0.057 & 0.029 & & & Zero change \\
+{Pythia-6.9 billion at step 112000} & Full development panel & Quantization at $\ge$4 bits & 0.271 & 0.183 & 0.155 & 0.042 & 0.061 & & & {Per-bit development median} \\
+{Pythia-6.9 billion at step 112000} & Full development panel & {Quantization at 3 bits} & 3.873 & 3.550 & 0.430 & 1.896 & 6.442 & & & {Per-bit development mean} \\
+{Pythia-6.9 billion at step 112000} & Full development panel & {Quantization at 5 bits (fixed interpolation rule)} & 0.402 & 0.247 & 0.253 & 0.033 & 0.027 & & & Zero change \\
+{Pythia-6.9 billion at step 112000} & Early stages only & Quantization at $\ge$4 bits & 0.048 & 0.060 & 0.042 & 0.045 & 0.061 & & & {Per-bit development mean} \\
+{Pythia-6.9 billion at step 112000} & Early stages only & {Quantization at 3 bits} & 1.294 & 4.033 & 3.770 & 4.137 & 6.442 & & & {Full source regression} \\
+{Pythia-6.9 billion at step 112000} & Early stages only & {Quantization at 5 bits (fixed interpolation rule)} & 0.043 & 0.025 & 0.025 & 0.023 & 0.027 & & & {Per-bit development median} \\
+\bottomrule\end{tabular*}
+\caption[]{The table continues the preceding comparison. Entries are mean absolute errors over capabilities, in nats per native token. The last column reports the retrospective winner, selected by the lowest observed error.}
+\end{table}

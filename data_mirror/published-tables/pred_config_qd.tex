@@ -1,0 +1,68 @@
+\begin{table}[!htbp]
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+\midrule
+\textbf{quantization}: new source Pythia-1 billion at step 96 thousand, 4 bits\newline{\itshape in-range size; stage 96 thousand; seen bit} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & 0.116 (-0.05) & 0.046 (-0.03) & 0.059 (-0.00) \\
+ & Same-input baseline without pretraining tokens & 0.184 & 0.394 & \textbf{0.054} \\
+ & Simple baseline: per-bit median & \textbf{0.068} & \textbf{0.012} & 0.253 \\
+\addlinespace[2pt]
+\textbf{quantization}: new source Pythia-1 billion at step 96 thousand, 3 bits\newline{\itshape in-range size; stage 96 thousand; seen bit} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & \textbf{0.690} (+0.72) & 0.318 (-0.32) & \textbf{0.182} (+0.26) \\
+ & Same-input baseline without pretraining tokens & 2.324 & 3.423 & 1.635 \\
+ & Simple baseline: per-bit median & 1.414 & \textbf{0.001} & 0.446 \\
+\addlinespace[2pt]
+\textbf{quantization}: new source Pythia-1 billion at steps 32 thousand and 112 thousand, bit width $\ge4$ (including 5-bit rule)\newline{\itshape in-range size; stages 32 thousand, 112 thousand} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & 0.064 (-0.04) & 0.041 (-0.01) & 0.157 (-0.10) \\
+ & Same-input baseline without pretraining tokens & 0.118 & 0.156 & 0.153 \\
+ & Simple baseline: per-bit median & \textbf{0.020} & \textbf{0.028} & \textbf{0.052} \\
+\addlinespace[2pt]
+\textbf{quantization}: new source Pythia-1 billion at steps 32 thousand and 112 thousand, 3 bits\newline{\itshape in-range size; stages 32 thousand, 112 thousand} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & \textbf{0.256} (+1.21) & \textbf{0.362} (+1.18) & 1.972 (-0.97) \\
+ & Same-input baseline without pretraining tokens & 3.218 & 3.565 & 2.897 \\
+ & Simple baseline: per-bit mean; per-bit median & 1.466 & 1.537 & \textbf{1.000} \\
+\addlinespace[2pt]
+\bottomrule\end{tabular*}
+\caption*{The table tests quantization and distillation predictions on unseen settings, source states, and pools. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported, including each baseline frozen before testing.}
+\end{table}
+\begin{table}[!htbp]
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+\midrule
+\textbf{quantization}: new source Pythia-6.9 billion at steps 32 thousand and 112 thousand, bit width $\ge4$ (including 5-bit rule)\newline{\itshape size $5\times$ beyond development range; stages 32 thousand, 112 thousand} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & 0.181 (-0.14) & 0.177 (-0.13) & 0.428 (-0.39) \\
+ & Same-input baseline without pretraining tokens & 0.169 & 0.154 & 0.426 \\
+ & Simple baseline: per-bit median; zero change & \textbf{0.036} & \textbf{0.043} & \textbf{0.034} \\
+\addlinespace[2pt]
+\textbf{quantization}: new source Pythia-6.9 billion at steps 32 thousand and 112 thousand, 3 bits\newline{\itshape size $5\times$ beyond development range; stages 32 thousand, 112 thousand} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & 3.233 (-1.19) & 3.229 (-1.42) & 5.306 (-3.56) \\
+ & Same-input baseline without pretraining tokens & 4.199 & 3.176 & 5.605 \\
+ & Simple baseline: per-bit mean & \textbf{2.046} & \textbf{1.805} & \textbf{1.744} \\
+\addlinespace[2pt]
+\midrule
+\textbf{distillation}: unseen pool of 225 traces per domain from endpoint pools of 75 and 600 traces per domain (Gemma-3-1 billion)\newline{\itshape pool (reuse ratio in-range; sampling protocol differs)} [Frozen / fixed / fixed] & Candidate: reuse only & 0.191 (-0.07) & 0.117 (-0.05) & \textbf{0.706} (+0.00) \\
+ & Same-input baseline: joint budget and reuse response & 0.215 & 0.145 & 0.710 \\
+ & Simple baseline: constant & \textbf{0.122} & \textbf{0.069} & 1.449 \\
+\addlinespace[2pt]
+\bottomrule\end{tabular*}
+\caption*{The table continues the preceding comparison. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported, including each baseline frozen before testing.}
+\end{table}
+\begin{table}[!htbp]\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
+\toprule
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+\midrule
+\textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool of 375 traces per domain, Gemma-3-270 million\newline{\itshape pool} [Frozen / fixed / fixed] & Candidate: joint form with source term (selected on development data; rule chosen \mbox{post-hoc}) & \textbf{0.045} (+0.02) & \textbf{0.036} (+0.01) & \textbf{0.606} (+0.26) \\
+ & Same-input baseline: constant & 0.060 & 0.047 & 0.862 \\
+ & Simple baseline: zero change & 0.092 & 0.138 & 1.005 \\
+\addlinespace[2pt]
+\textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool of 375 traces per domain, Gemma-3-1 billion\newline{\itshape pool} [Frozen / fixed / fixed] & Candidate: joint form with source term (selected on development data; rule chosen \mbox{post-hoc}) & \textbf{0.050} (+0.01) & \textbf{0.029} (+0.04) & \textbf{0.444} (+0.56) \\
+ & Same-input baseline: constant & 0.057 & 0.069 & 1.004 \\
+ & Simple baseline: zero change & 0.095 & 0.109 & 1.148 \\
+\addlinespace[2pt]
+\textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool of 375 traces per domain, \mbox{held-out} student Gemma-3-4 billion\newline{\itshape pool; \mbox{held-out} student} [Frozen / fixed / fixed] & Candidate: joint form with source term (selected on development data; rule chosen \mbox{post-hoc}) & 0.089 (-0.07) & 0.050 (-0.01) & 1.141 (-0.12) \\
+ & Same-input baseline: constant & \textbf{0.020} & \textbf{0.038} & \textbf{1.024} \\
+ & Simple baseline: zero change & 0.153 & 0.178 & 1.167 \\
+\addlinespace[2pt]
+\bottomrule\end{tabular*}
+\caption{The table tests quantization and distillation predictions on unseen settings, source states, and pools. Entries are mean absolute errors in nats per native token. Bold marks the lowest error; parentheses give baseline error minus relation error. All specified forms are reported, including each baseline frozen before testing.}
+\par\smallskip{\footnotesize Configuration-axis tests for quantization and distillation: unseen sizes and stages at seen bit-widths (protocol A; the 5-bit prediction is a fixed interpolation rule) and unseen distillation pools. For the pool of 375 traces per domain the headline is the frozen form with the lowest per-capability development error, a rule stated after the tests (R), with 12 points per capability and Gemma-3-4 billion \mbox{held-out}.\par}
+\label{tab:pred_config_qd}\end{table}

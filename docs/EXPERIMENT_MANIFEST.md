@@ -24,8 +24,11 @@ These are available checkpoint panels, not a complete cross-product of every arm
 
 | Family | Model | Recorded checkpoint ID | Language weight parameters in scope | Densities (1=dense) | Status | Loss artifact |
 |---|---|---|---|---|---|---|
+| qwen3 | Qwen--Qwen3-14B | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/Qwen--Qwen3-14B/prune_losses.json` |
+| qwen3 | Qwen--Qwen3-8B | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/Qwen--Qwen3-8B/prune_losses.json` |
 | qwen3 | Qwen3-0.6B | Qwen/Qwen3-0.6B | 595984384 | 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/Qwen3-0.6B/prune_losses.json` |
 | qwen3 | Qwen3-1.7B | Qwen/Qwen3-1.7B | 1720451072 | 1.0, 0.9, 0.8, 0.7, 0.675, 0.65, 0.625, 0.6, 0.575, 0.55, 0.525, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/Qwen3-1.7B/prune_losses.json` |
+| qwen3 | Qwen3-14B | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/Qwen3-14B/prune_losses.json` |
 | qwen3 | Qwen3-4B | Qwen/Qwen3-4B | 4022272000 | 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/Qwen3-4B/prune_losses.json` |
 | gemma3 | gemma3-12b | google/gemma-3-12b-pt | 11765268480 | 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/gemma3-12b/prune_losses.json` |
 | gemma3 | gemma3-1b | google/gemma-3-1b-pt | 999751680 | 1.0, 0.9, 0.8, 0.775, 0.75, 0.725, 0.7, 0.675, 0.65, 0.625, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/gemma3-1b/prune_losses.json` |
@@ -36,27 +39,64 @@ These are available checkpoint panels, not a complete cross-product of every arm
 | muse | muse-30b | meta-models/Muse-Glimmer-30B | 27853389824 | 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/muse-30b/prune_losses.json` |
 | olmo3 | olmo3-32b | allenai/Olmo-3-1125-32B | 32232468480 | 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/olmo3-32b/prune_losses.json` |
 | olmo3 | olmo3-7b | allenai/Olmo-3-1025-7B | 7297482752 | 1.0, 0.9, 0.8, 0.7, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3 | REUSABLE | `results/v6-capability-geometry/olmo3-7b/prune_losses.json` |
+| legacy / unspecified | pythia-1.4b--step112000 | not recorded | not recorded | 1.0, 0.85, 0.675, 0.575 | REUSABLE | `results/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json` |
+| legacy / unspecified | pythia-1.4b--step143000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json` |
+| legacy / unspecified | pythia-1.4b--step16000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json` |
+| legacy / unspecified | pythia-1.4b--step64000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json` |
+| legacy / unspecified | pythia-1.4b--step96000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-1.4b--step96000/prune_losses.json` |
+| legacy / unspecified | pythia-160m--step143000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json` |
+| legacy / unspecified | pythia-160m--step16000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json` |
+| legacy / unspecified | pythia-160m--step64000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json` |
+| legacy / unspecified | pythia-160m--step96000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-160m--step96000/prune_losses.json` |
+| legacy / unspecified | pythia-1b--step112000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-1b--step112000/prune_losses.json` |
+| legacy / unspecified | pythia-1b--step32000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-1b--step32000/prune_losses.json` |
+| legacy / unspecified | pythia-1b--step96000 | not recorded | not recorded | 1.0, 0.65, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-1b--step96000/prune_losses.json` |
+| legacy / unspecified | pythia-410m--step143000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json` |
+| legacy / unspecified | pythia-410m--step16000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json` |
+| legacy / unspecified | pythia-410m--step48000 | not recorded | not recorded | 1.0, 0.85, 0.675, 0.575 | REUSABLE | `results/v6-capability-geometry/pythia-410m--step48000/prune_losses.json` |
+| legacy / unspecified | pythia-410m--step64000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.6 | REUSABLE | `results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json` |
+| legacy / unspecified | pythia-410m--step96000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-410m--step96000/prune_losses.json` |
+| legacy / unspecified | pythia-6.9b--step112000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-6.9b--step112000/prune_losses.json` |
+| legacy / unspecified | pythia-6.9b--step32000 | not recorded | not recorded | 1.0, 0.9, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55 | REUSABLE | `results/v6-capability-geometry/pythia-6.9b--step32000/prune_losses.json` |
+| legacy / unspecified | pythia-6.9b--step80000 | not recorded | not recorded | 1.0, 0.85, 0.675, 0.575 | REUSABLE | `results/v6-capability-geometry/pythia-6.9b--step80000/prune_losses.json` |
 
-Metrics/artifacts per model: `prune_losses.json` (L and derived ΔL), `alignment.json` (signed first-order / second-order diagnostics), `spectrum_bins.npz` and `fisher_meta.json` (binned Fisher/magnitude spectra and weight scope), `probes.json` (counts, not frozen item IDs), `report.md` / `report_b.md`. Available raw alignment/spectrum caches are individually indexed below. Preserve infill densities: Gemma 1B has six extra points; Qwen 1.7B has five. `_infill_meta` is metadata, not a density. **TO-ANALYZE:** provenance-limited `Qwen3-0.6B/archive-v1-sameprobe/` is an older same-probe variant; exclude it from the current disjoint Fisher/measurement analysis.
+Later response-only panels may lack `fisher_meta.json`; their checkpoint ID and weight count are marked not recorded rather than inferred from a directory name. All files remain indexed. Metrics/artifacts per model: `prune_losses.json` (L and derived ΔL), `alignment.json` (signed first-order / second-order diagnostics), `spectrum_bins.npz` and `fisher_meta.json` (binned Fisher/magnitude spectra and weight scope), `probes.json` (counts, not frozen item IDs), `report.md` / `report_b.md`. Available raw alignment/spectrum caches are individually indexed below. Preserve infill densities: Gemma 1B has six extra points; Qwen 1.7B has five. `_infill_meta` is metadata, not a density. **TO-ANALYZE:** provenance-limited `Qwen3-0.6B/archive-v1-sameprobe/` is an older same-probe variant; exclude it from the current disjoint Fisher/measurement analysis.
 
 ## Quantization — V10
 
 | Family | Model | Configs | Metric / method | Status | Artifact |
 |---|---|---|---|---|---|
-| qwen3 | Qwen--Qwen3-0.6B | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json` |
-| qwen3 | Qwen--Qwen3-1.7B | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json` |
-| qwen3 | Qwen--Qwen3-4B | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json` |
-| qwen3 | Qwen3-0.6B | dense; bits 5 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen3-0.6B/quant_losses.json` |
-| qwen3 | Qwen3-1.7B | dense; bits 5 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen3-1.7B/quant_losses.json` |
-| gemma3 | gemma3-12b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-12b/quant_losses.json` |
-| gemma3 | gemma3-1b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-1b/quant_losses.json` |
-| gemma3 | gemma3-270m | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-270m/quant_losses.json` |
-| gemma3 | gemma3-27b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-27b/quant_losses.json` |
-| gemma3 | gemma3-4b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-4b/quant_losses.json` |
-| gemma4 | gemma4-31b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma4-31b/quant_losses.json` |
-| muse | muse-30b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/muse-30b/quant_losses.json` |
-| olmo3 | olmo3-32b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/olmo3-32b/quant_losses.json` |
-| olmo3 | olmo3-7b | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/olmo3-7b/quant_losses.json` |
+| qwen3 | Qwen--Qwen3-0.6B | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json` |
+| qwen3 | Qwen--Qwen3-1.7B | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json` |
+| qwen3 | Qwen--Qwen3-4B | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json` |
+| qwen3 | Qwen3-14B | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen3-14B/quant_losses.json` |
+| qwen3 | Qwen3-8B | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/Qwen3-8B/quant_losses.json` |
+| gemma3 | gemma3-12b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-12b/quant_losses.json` |
+| gemma3 | gemma3-1b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-1b/quant_losses.json` |
+| gemma3 | gemma3-270m | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-270m/quant_losses.json` |
+| gemma3 | gemma3-27b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-27b/quant_losses.json` |
+| gemma3 | gemma3-4b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma3-4b/quant_losses.json` |
+| gemma4 | gemma4-31b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/gemma4-31b/quant_losses.json` |
+| muse | muse-30b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/muse-30b/quant_losses.json` |
+| olmo3 | olmo3-32b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/olmo3-32b/quant_losses.json` |
+| olmo3 | olmo3-7b | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/olmo3-7b/quant_losses.json` |
+| legacy / unspecified | pythia-1.4b--step143000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1.4b--step143000/quant_losses.json` |
+| legacy / unspecified | pythia-1.4b--step16000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1.4b--step16000/quant_losses.json` |
+| legacy / unspecified | pythia-1.4b--step64000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1.4b--step64000/quant_losses.json` |
+| legacy / unspecified | pythia-1.4b--step96000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1.4b--step96000/quant_losses.json` |
+| legacy / unspecified | pythia-160m--step143000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-160m--step143000/quant_losses.json` |
+| legacy / unspecified | pythia-160m--step16000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-160m--step16000/quant_losses.json` |
+| legacy / unspecified | pythia-160m--step64000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-160m--step64000/quant_losses.json` |
+| legacy / unspecified | pythia-160m--step96000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-160m--step96000/quant_losses.json` |
+| legacy / unspecified | pythia-1b--step112000 | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1b--step112000/quant_losses.json` |
+| legacy / unspecified | pythia-1b--step32000 | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1b--step32000/quant_losses.json` |
+| legacy / unspecified | pythia-1b--step96000 | dense; bits 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-1b--step96000/quant_losses.json` |
+| legacy / unspecified | pythia-410m--step143000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-410m--step143000/quant_losses.json` |
+| legacy / unspecified | pythia-410m--step16000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-410m--step16000/quant_losses.json` |
+| legacy / unspecified | pythia-410m--step64000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-410m--step64000/quant_losses.json` |
+| legacy / unspecified | pythia-410m--step96000 | dense; bits 8, 6, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-410m--step96000/quant_losses.json` |
+| legacy / unspecified | pythia-6.9b--step112000 | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-6.9b--step112000/quant_losses.json` |
+| legacy / unspecified | pythia-6.9b--step32000 | dense; bits 8, 6, 5, 4, 3 | L / within-model ΔL; per-output-channel symmetric RTN fake quantization | REUSABLE | `results/v10-quantization/pythia-6.9b--step32000/quant_losses.json` |
 
 All 12 models already have dense plus int8/int6/int4/int3. Existing `report.md` siblings are HAVE. The final scan additionally includes separate Qwen 0.6B/1.7B int5 artifacts under `Qwen3-*` tags. These use their own newly recorded dense anchors: do not merge aliases by overwriting anchors or subtracting a different run's dense loss. The `results/prereg/quant_5bit_prereg.json` predictions are a separate derived artifact; they are not measurements. No packed-weight size, memory, or latency measurement is implied.
 
@@ -68,27 +108,158 @@ Every row is an existing run, not a request to repeat it. All train on math/QA/c
 |---|---|---|---|---|---|---|---|---|---|---|
 | qwen3 | Qwen3-0.6B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-0.6B/gpt-5.6-luna_full_600/eval.json` |
 | qwen3 | Qwen3-1.7B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/eval.json` |
-| gemma3 | gemma3-12b | claude-sonnet-4-6 | full | 600 | full | unknown | unknown | no local weight file | REUSABLE | `results/v12-distill/gemma3-12b/claude-sonnet-4-6_full_600/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed1/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed2/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 600 | lora | 1781 | 295740 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 75 | lora | 223 | 36508 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 75 | lora | 223 | 36508 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed1/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 75 | lora | 223 | 36508 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed2/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 75 | lora | 223 | 292064 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 75 | lora | 223 | 292064 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/eval.json` |
+| qwen3 | Qwen3-4B | gpt-5.6-luna | full | 75 | lora | 223 | 292064 | 1 weight files present | REUSABLE | `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/eval.json` |
+| gemma3 | gemma3-12b | claude-sonnet-4-6 | full | 600 | full | 1800 | 753104 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-12b/claude-sonnet-4-6_full_600/eval.json` |
 | gemma3 | gemma3-12b | gpt-5.6-luna | full | 600 | full | 1781 | 316782 | 49 weight files present | REUSABLE | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/eval.json` |
 | gemma3 | gemma3-1b | claude-sonnet-4-6 | answer_only | 600 | lora | 1798 | 145384 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/claude-sonnet-4-6_answer_only_600/eval.json` |
 | gemma3 | gemma3-1b | claude-sonnet-4-6 | full | 600 | lora | 1800 | 753104 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/claude-sonnet-4-6_full_600/eval.json` |
 | gemma3 | gemma3-1b | gpt-5.6-luna | answer_only | 600 | lora | 1780 | 93788 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_answer_only_600/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 130 | lora | 387 | 108709 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 130 | lora | 387 | 108709 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 132 | lora | 392 | 198773 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 132 | lora | 392 | 201230 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/eval.json` |
 | gemma3 | gemma3-1b | gpt-5.6-luna | full | 150 | lora | 447 | 82000 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 198 | lora | 589 | 198736 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 198 | lora | 587 | 199848 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 597 | 296771 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 594 | 302781 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 595 | 293958 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 592 | 301610 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 592 | 297635 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 592 | 301189 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 200 | lora | 597 | 51385 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 225 | lora | 671 | 359940 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 225 | lora | 671 | 359940 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 225 | lora | 667 | 360756 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 225 | lora | 667 | 360756 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 225 | lora | 672 | 352164 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 225 | lora | 672 | 352164 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 279 | lora | 828 | 110140 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/eval.json` |
 | gemma3 | gemma3-1b | gpt-5.6-luna | full | 300 | lora | 893 | 159358 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 300 | full | 893 | 159358 | no local weight file | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 300 | full | 893 | 159358 | no local weight file | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed2/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 375 | lora | 1108 | 300036 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 375 | lora | 1110 | 299401 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 375 | lora | 1114 | 306590 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 450 | lora | 1338 | 295139 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 450 | lora | 1338 | 296387 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 450 | lora | 1336 | 299780 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 450 | lora | 1338 | 295139 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 594 | lora | 1763 | 198722 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 594 | lora | 1764 | 201946 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/eval.json` |
 | gemma3 | gemma3-1b | gpt-5.6-luna | full | 600 | lora | 1781 | 316782 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 600 | full | 1781 | 316782 | no local weight file | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 600 | full | 1781 | 316782 | no local weight file | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed2/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 600 | lora | 1781 | 316782 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 600 | lora | 1781 | 316782 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 600 | lora | 1781 | 316782 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 66 | lora | 197 | 199166 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 66 | lora | 197 | 199673 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/eval.json` |
 | gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 39134 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 224 | 60030 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 224 | 60030 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 224 | 60030 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 224 | 300150 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 224 | 294023 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 292678 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 224 | 303908 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | full | 223 | 39134 | no local weight file | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | full | 223 | 39134 | no local weight file | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed2/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 332639 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 39134 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 39134 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 39134 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 332639 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/eval.json` |
+| gemma3 | gemma3-1b | gpt-5.6-luna | full | 75 | lora | 223 | 332639 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/eval.json` |
 | gemma3 | gemma3-1b | gpt-5.6-luna | no_code_fence | 600 | lora | 1781 | 187634 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-1b/gpt-5.6-luna_no_code_fence_600/eval.json` |
 | gemma3 | gemma3-270m | claude-sonnet-4-6 | answer_only | 600 | lora | 1798 | 145384 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/claude-sonnet-4-6_answer_only_600/eval.json` |
 | gemma3 | gemma3-270m | claude-sonnet-4-6 | full | 600 | lora | 1800 | 753104 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/claude-sonnet-4-6_full_600/eval.json` |
 | gemma3 | gemma3-270m | gpt-5.6-luna | answer_only | 600 | lora | 1780 | 93788 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_answer_only_600/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 150 | lora | 447 | 82000 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_150/eval.json` |
 | gemma3 | gemma3-270m | gpt-5.6-luna | full | 16 | lora | 16 | 1664 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_16/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 198 | lora | 589 | 198736 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 198 | lora | 587 | 199848 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 198 | lora | 589 | 612780 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 198 | lora | 587 | 621744 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 200 | lora | 597 | 296771 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 200 | lora | 594 | 302781 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 200 | lora | 595 | 293958 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 200 | lora | 592 | 301610 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 200 | lora | 592 | 297635 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 200 | lora | 592 | 301189 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 300 | lora | 893 | 159358 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_300/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 375 | lora | 1108 | 300036 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 375 | lora | 1110 | 299401 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 375 | lora | 1114 | 306590 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 450 | lora | 1338 | 295139 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 450 | lora | 1338 | 296387 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 450 | lora | 1336 | 299780 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 594 | lora | 1763 | 198722 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 594 | lora | 1764 | 201946 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/eval.json` |
 | gemma3 | gemma3-270m | gpt-5.6-luna | full | 600 | lora | 1781 | 316782 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/eval.json` |
-| gemma3 | gemma3-4b | claude-sonnet-4-6 | full | 600 | full | unknown | unknown | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/claude-sonnet-4-6_full_600/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 66 | lora | 197 | 199166 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 66 | lora | 197 | 199673 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 66 | lora | 197 | 203544 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 66 | lora | 197 | 205248 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 75 | lora | 223 | 39134 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 75 | lora | 224 | 294023 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 75 | lora | 223 | 292678 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 75 | lora | 224 | 303908 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/eval.json` |
+| gemma3 | gemma3-270m | gpt-5.6-luna | full | 75 | lora | 224 | 294023 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/eval.json` |
+| gemma3 | gemma3-4b | claude-sonnet-4-6 | full | 600 | full | 1800 | 753104 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/claude-sonnet-4-6_full_600/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 130 | lora | 387 | 108709 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 132 | lora | 392 | 198773 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 132 | lora | 392 | 201230 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/eval.json` |
 | gemma3 | gemma3-4b | gpt-5.6-luna | full | 150 | lora | 447 | 82000 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 198 | lora | 589 | 198736 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 198 | lora | 587 | 199848 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 279 | lora | 828 | 110140 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/eval.json` |
 | gemma3 | gemma3-4b | gpt-5.6-luna | full | 300 | lora | 893 | 159358 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/eval.json` |
-| gemma3 | gemma3-4b | gpt-5.6-luna | full | 600 | full | unknown | unknown | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 300 | full | 893 | 159358 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed1/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 300 | full | 893 | 159358 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed2/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 375 | lora | 1108 | 300036 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 375 | lora | 1110 | 299401 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 375 | lora | 1114 | 306590 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 450 | lora | 1338 | 295139 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 450 | lora | 1338 | 296387 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 594 | lora | 1763 | 198722 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 594 | lora | 1764 | 201946 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 600 | full | 1781 | 316782 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 600 | full | 1781 | 316782 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed1/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 600 | full | 1781 | 316782 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed2/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 66 | lora | 197 | 199166 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 66 | lora | 197 | 199673 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/eval.json` |
 | gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | lora | 223 | 39134 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/eval.json` |
-| olmo3 | olmo3-7b | gpt-5.6-luna | full | 600 | full | unknown | unknown | no local weight file | REUSABLE | `results/v12-distill/olmo3-7b/gpt-5.6-luna_full_600/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | lora | 224 | 60030 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | lora | 224 | 60030 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | lora | 224 | 60030 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | lora | 224 | 294023 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | lora | 223 | 292678 | 1 weight files present | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | full | 223 | 39134 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed1/eval.json` |
+| gemma3 | gemma3-4b | gpt-5.6-luna | full | 75 | full | 223 | 39134 | no local weight file | REUSABLE | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed2/eval.json` |
+| olmo3 | olmo3-7b | gpt-5.6-luna | full | 600 | full | 1781 | 277788 | no local weight file | REUSABLE | `results/v12-distill/olmo3-7b/gpt-5.6-luna_full_600/eval.json` |
+| legacy / unspecified | pythia-1.4b--step143000 | gpt-5.6-luna | full | 600 | full | unknown | unknown | no local weight file | REUSABLE | `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600/eval.json` |
+| legacy / unspecified | pythia-1.4b--step143000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-1.4b--step16000 | gpt-5.6-luna | full | 600 | full | unknown | unknown | no local weight file | REUSABLE | `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600/eval.json` |
+| legacy / unspecified | pythia-1.4b--step16000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-1.4b--step64000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-1.4b--step64000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-160m--step143000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-160m--step143000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-160m--step16000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-160m--step16000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-160m--step64000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-410m--step143000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-410m--step143000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-410m--step16000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-410m--step16000/gpt-5.6-luna_full_600_lora/eval.json` |
+| legacy / unspecified | pythia-410m--step64000 | gpt-5.6-luna | full | 600 | lora | 1781 | 307496 | 1 weight files present | REUSABLE | `results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/eval.json` |
 
 Metric: paired `dense`, `post_training`, `delta` capability CE. All 23 run evaluations are reusable even where local weights/logs are absent. `pilot_summary.{json,md}` is HAVE as a historical subset, not the master completed-run count. Adapter configs, LoRA weights, and Gemma-12B full-delta shards are indexed below; presence alone is not reload validation.
 
@@ -234,23 +405,647 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 
 ## Exhaustive local file index
 
-575 files. Each local results file is indexed exactly once below; configurations, models, and metrics inherit the owning experiment/run table above. File sizes are logical bytes from stat, not serialized compression ratios or reload validation. Large binary files were not read. No result inputs were modified.
+4321 files. Each local results file is indexed exactly once below; configurations, models, and metrics inherit the owning experiment/run table above. File sizes are logical bytes from stat, not serialized compression ratios or reload validation. Large binary files were not read. No result inputs were modified.
 
-### figs (4 files)
+### a1-development-table (5 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a1-development-table/development_table.csv` | 410608 | REUSABLE |
+| `results/a1-development-table/external_diagnostic_table.csv` | 478384 | REUSABLE |
+| `results/a1-development-table/row_metadata.csv` | 435670 | REUSABLE |
+| `results/a1-development-table/summary.json` | 3890918 | REUSABLE |
+| `results/a1-development-table/summary.md` | 161020 | HAVE |
+
+
+### a10-data-requirement (41 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a10-data-requirement/exact_cells.json` | 5444523 | REUSABLE |
+| `results/a10-data-requirement/figs/code_mbpp_1b.pdf` | 24230 | HAVE |
+| `results/a10-data-requirement/figs/code_mbpp_1b.png` | 56689 | HAVE |
+| `results/a10-data-requirement/figs/code_mbpp_270m.pdf` | 24816 | HAVE |
+| `results/a10-data-requirement/figs/code_mbpp_270m.png` | 53992 | HAVE |
+| `results/a10-data-requirement/figs/code_mbpp_4b.pdf` | 24212 | HAVE |
+| `results/a10-data-requirement/figs/code_mbpp_4b.png` | 55938 | HAVE |
+| `results/a10-data-requirement/figs/math_math-500_1b.pdf` | 24909 | HAVE |
+| `results/a10-data-requirement/figs/math_math-500_1b.png` | 56462 | HAVE |
+| `results/a10-data-requirement/figs/math_math-500_270m.pdf` | 24887 | HAVE |
+| `results/a10-data-requirement/figs/math_math-500_270m.png` | 53073 | HAVE |
+| `results/a10-data-requirement/figs/math_math-500_4b.pdf` | 25184 | HAVE |
+| `results/a10-data-requirement/figs/math_math-500_4b.png` | 57132 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-fresh_1b.pdf` | 22403 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-fresh_1b.png` | 44065 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-fresh_270m.pdf` | 22716 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-fresh_270m.png` | 41118 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-fresh_4b.pdf` | 22431 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-fresh_4b.png` | 43904 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-probe_1b.pdf` | 23614 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-probe_1b.png` | 53444 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-probe_270m.pdf` | 24002 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-probe_270m.png` | 52809 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-probe_4b.pdf` | 23326 | HAVE |
+| `results/a10-data-requirement/figs/qa_2wiki-probe_4b.png` | 51687 | HAVE |
+| `results/a10-data-requirement/figs/qa_musique_1b.pdf` | 22377 | HAVE |
+| `results/a10-data-requirement/figs/qa_musique_1b.png` | 46182 | HAVE |
+| `results/a10-data-requirement/figs/qa_musique_270m.pdf` | 22972 | HAVE |
+| `results/a10-data-requirement/figs/qa_musique_270m.png` | 40768 | HAVE |
+| `results/a10-data-requirement/figs/qa_musique_4b.pdf` | 22880 | HAVE |
+| `results/a10-data-requirement/figs/qa_musique_4b.png` | 48341 | HAVE |
+| `results/a10-data-requirement/figs/qa_triviaqa_1b.pdf` | 23524 | HAVE |
+| `results/a10-data-requirement/figs/qa_triviaqa_1b.png` | 47148 | HAVE |
+| `results/a10-data-requirement/figs/qa_triviaqa_270m.pdf` | 23659 | HAVE |
+| `results/a10-data-requirement/figs/qa_triviaqa_270m.png` | 42135 | HAVE |
+| `results/a10-data-requirement/figs/qa_triviaqa_4b.pdf` | 23137 | HAVE |
+| `results/a10-data-requirement/figs/qa_triviaqa_4b.png` | 47723 | HAVE |
+| `results/a10-data-requirement/matched_cells.json` | 916327 | REUSABLE |
+| `results/a10-data-requirement/observations.csv` | 1008428 | REUSABLE |
+| `results/a10-data-requirement/summary.json` | 90695032 | REUSABLE |
+| `results/a10-data-requirement/summary.md` | 11625 | HAVE |
+
+
+### a11-efficiency-confirmation (26 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/metadata.json` | 2714 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/prune_losses.json` | 699 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-1.4b--step48000/started.json` | 587 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-160m--step80000/metadata.json` | 2710 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-160m--step80000/prune_losses.json` | 702 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-160m--step80000/started.json` | 584 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-1b--step48000/metadata.json` | 2705 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-1b--step48000/prune_losses.json` | 701 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-1b--step48000/started.json` | 580 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-410m--step112000/metadata.json` | 2717 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-410m--step112000/prune_losses.json` | 703 | REUSABLE |
+| `results/a11-efficiency-confirmation/measurements/pythia-410m--step112000/started.json` | 589 | REUSABLE |
+| `results/a11-efficiency-confirmation/per_state.json` | 32947 | REUSABLE |
+| `results/a11-efficiency-confirmation/plan.json` | 14988 | REUSABLE |
+| `results/a11-efficiency-confirmation/predictions.json` | 417898 | REUSABLE |
+| `results/a11-efficiency-confirmation/predictions.json.sha256` | 83 | REUSABLE |
+| `results/a11-efficiency-confirmation/premeasurement_archive/a11_score.py` | 11336 | REUSABLE |
+| `results/a11-efficiency-confirmation/premeasurement_archive/predictions.json` | 417292 | REUSABLE |
+| `results/a11-efficiency-confirmation/premeasurement_archive/predictions.json.sha256` | 83 | REUSABLE |
+| `results/a11-efficiency-confirmation/premeasurement_archive/predictions.original.json` | 417292 | REUSABLE |
+| `results/a11-efficiency-confirmation/premeasurement_archive/predictions.original.json.sha256` | 83 | REUSABLE |
+| `results/a11-efficiency-confirmation/prereg.md` | 5487 | HAVE |
+| `results/a11-efficiency-confirmation/prereg_note_host.md` | 678 | HAVE |
+| `results/a11-efficiency-confirmation/summary.json` | 56983 | REUSABLE |
+| `results/a11-efficiency-confirmation/summary.md` | 732 | HAVE |
+| `results/a11-efficiency-confirmation/validation.json` | 2427 | REUSABLE |
+
+
+### a12-data-requirement-confirmation (318 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a12-data-requirement-confirmation/inputs/fresh-qa-panels.json` | 1352713 | REUSABLE |
+| `results/a12-data-requirement-confirmation/inputs/v6-probes.json` | 636701 | REUSABLE |
+| `results/a12-data-requirement-confirmation/inputs/v71-register.json` | 30020 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_0.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_0.out` | 10388 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_1.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_1.out` | 10386 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_10.err` | 1987 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_10.out` | 15413 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_11.err` | 2070 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_11.out` | 15409 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_12.err` | 1894 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_12.out` | 15409 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_13.err` | 2080 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_13.out` | 15407 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_14.err` | 1904 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_14.out` | 15410 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_15.err` | 1904 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_15.out` | 15410 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_16.err` | 1811 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_16.out` | 15411 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_17.err` | 1811 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_17.out` | 15411 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_2.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_2.out` | 10388 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_3.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_3.out` | 10388 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_4.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_4.out` | 10388 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_5.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_5.out` | 10387 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_6.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_6.out` | 10385 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_7.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_7.out` | 10387 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_8.err` | 221 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_8.out` | 10388 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_9.err` | 2070 | REUSABLE |
+| `results/a12-data-requirement-confirmation/loni_logs/a12-1029799_9.out` | 15409 | REUSABLE |
+| `results/a12-data-requirement-confirmation/parser-validation.json` | 54093 | REUSABLE |
+| `results/a12-data-requirement-confirmation/plan.json` | 10503114 | REUSABLE |
+| `results/a12-data-requirement-confirmation/prereg.md` | 9718 | HAVE |
+| `results/a12-data-requirement-confirmation/prereg_amendment_1.md` | 5296 | HAVE |
+| `results/a12-data-requirement-confirmation/registration_0/plan.json` | 9661040 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/eval.json` | 14023 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/train_log.json` | 79432 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000000/eval.json` | 42627 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000037/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000037/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000037/eval.json` | 42884 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000072/eval.json` | 42891 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000142/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000142/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r1/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r1_lora_seed72004/trajectory/update-00000142/eval.json` | 42897 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/eval.json` | 14023 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/train_log.json` | 78975 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000000/eval.json` | 42627 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000036/eval.json` | 42890 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000071/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000071/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000071/eval.json` | 42894 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000141/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000141/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r2/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r2_lora_seed82001/trajectory/update-00000141/eval.json` | 42895 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/eval.json` | 14023 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/train_log.json` | 78974 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000000/eval.json` | 42627 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000035/eval.json` | 42886 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000070/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000070/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000070/eval.json` | 42897 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000141/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000141/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-above-r3/v12/gemma3-1b/gpt-5.6-luna_full_600_gemma3-1b-above-r3_lora_seed92014/trajectory/update-00000141/eval.json` | 42898 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/eval.json` | 14029 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/train_log.json` | 85139 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000000/eval.json` | 42637 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000039/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000039/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000039/eval.json` | 42901 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000078/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000078/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000078/eval.json` | 42890 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000156/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000156/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r1/v12/gemma3-1b/gpt-5.6-luna_full_33_gemma3-1b-below-r1_lora_dseed12016/trajectory/update-00000156/eval.json` | 42892 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/eval.json` | 14028 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/train_log.json` | 84534 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000000/eval.json` | 42638 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000038/eval.json` | 42899 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000077/eval.json` | 42898 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000154/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000154/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r2/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r2_lora_dseed22021/trajectory/update-00000154/eval.json` | 42890 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/eval.json` | 14028 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/train_log.json` | 84485 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000000/eval.json` | 42638 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000038/eval.json` | 42903 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000077/eval.json` | 42892 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000154/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000154/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-below-r3/v12/gemma3-1b/gpt-5.6-luna_full_34_gemma3-1b-below-r3_lora_dseed32011/trajectory/update-00000154/eval.json` | 42873 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/complete.json` | 159 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/eval.json` | 14036 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/train_log.json` | 76900 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000000/eval.json` | 42640 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000035/eval.json` | 42908 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000069/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000069/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000069/eval.json` | 42904 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000137/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000137/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r1/v12/gemma3-1b/gpt-5.6-luna_full_117_gemma3-1b-near-r1_lora_dseed42002/trajectory/update-00000137/eval.json` | 42905 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/complete.json` | 159 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/eval.json` | 14037 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/train_log.json` | 80086 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000000/eval.json` | 42640 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000035/eval.json` | 42906 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000072/eval.json` | 42905 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000144/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000144/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r2/v12/gemma3-1b/gpt-5.6-luna_full_119_gemma3-1b-near-r2_lora_dseed52001/trajectory/update-00000144/eval.json` | 42907 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/complete.json` | 159 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/eval.json` | 14037 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/train_log.json` | 81929 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000000/eval.json` | 42640 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000036/eval.json` | 42900 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000074/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000074/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000074/eval.json` | 42904 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000148/adapter/README.md` | 5164 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000148/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-1b-near-r3/v12/gemma3-1b/gpt-5.6-luna_full_126_gemma3-1b-near-r3_lora_dseed62001/trajectory/update-00000148/eval.json` | 42909 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/eval.json` | 19385 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/train_log.json` | 84337 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000000/eval.json` | 47984 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000034/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000034/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000034/eval.json` | 48250 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000069/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000069/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000069/eval.json` | 48257 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000141/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000141/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r1/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r1_lora_seed162001/trajectory/update-00000141/eval.json` | 48259 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/eval.json` | 19385 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/train_log.json` | 84349 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000000/eval.json` | 47984 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000034/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000034/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000034/eval.json` | 48253 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000069/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000069/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000069/eval.json` | 48258 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000141/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000141/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r2/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r2_lora_seed172001/trajectory/update-00000141/eval.json` | 48258 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/eval.json` | 19385 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/train_log.json` | 84336 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000000/eval.json` | 47984 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000036/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000036/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000036/eval.json` | 48250 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000071/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000071/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000071/eval.json` | 48253 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000141/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000141/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-above-r3/v12/gemma3-4b/gpt-5.6-luna_full_600_gemma3-4b-above-r3_lora_seed182001/trajectory/update-00000141/eval.json` | 48257 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/eval.json` | 19387 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/train_log.json` | 81104 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000000/eval.json` | 47994 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000034/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000034/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000034/eval.json` | 48265 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000068/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000068/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000068/eval.json` | 48251 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000135/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000135/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r1/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r1_lora_dseed102004/trajectory/update-00000135/eval.json` | 48247 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/eval.json` | 19393 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/train_log.json` | 79695 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000000/eval.json` | 47994 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000033/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000033/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000033/eval.json` | 48263 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000066/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000066/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000066/eval.json` | 48258 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000132/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000132/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r2/v12/gemma3-4b/gpt-5.6-luna_full_32_gemma3-4b-below-r2_lora_dseed112003/trajectory/update-00000132/eval.json` | 48258 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/complete.json` | 160 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/eval.json` | 19389 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/train_log.json` | 89229 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000000/eval.json` | 47994 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000038/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000038/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000038/eval.json` | 48253 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000076/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000076/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000076/eval.json` | 48253 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000153/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000153/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-below-r3/v12/gemma3-4b/gpt-5.6-luna_full_33_gemma3-4b-below-r3_lora_dseed122005/trajectory/update-00000153/eval.json` | 48249 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/complete.json` | 159 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/eval.json` | 19395 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/train_log.json` | 80484 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000000/eval.json` | 47997 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000033/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000033/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000033/eval.json` | 48265 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000067/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000067/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000067/eval.json` | 48274 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000133/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000133/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r1/v12/gemma3-4b/gpt-5.6-luna_full_134_gemma3-4b-near-r1_lora_dseed132001/trajectory/update-00000133/eval.json` | 48259 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/complete.json` | 159 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/eval.json` | 19394 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/train_log.json` | 83225 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000000/eval.json` | 47997 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000034/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000034/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000034/eval.json` | 48261 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000069/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000069/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000069/eval.json` | 48267 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000139/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000139/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r2/v12/gemma3-4b/gpt-5.6-luna_full_145_gemma3-4b-near-r2_lora_dseed142002/trajectory/update-00000139/eval.json` | 48249 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/complete.json` | 159 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/eval.json` | 19397 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/train_log.json` | 81840 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000000/eval.json` | 47997 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000034/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000034/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000034/eval.json` | 48268 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000068/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000068/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000068/eval.json` | 48268 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000136/adapter/README.md` | 5149 | HAVE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000136/adapter/adapter_config.json` | 1148 | REUSABLE |
+| `results/a12-data-requirement-confirmation/runs/gemma3-4b-near-r3/v12/gemma3-4b/gpt-5.6-luna_full_139_gemma3-4b-near-r3_lora_dseed152002/trajectory/update-00000136/eval.json` | 48263 | REUSABLE |
+| `results/a12-data-requirement-confirmation/score.json` | 2962327 | REUSABLE |
+| `results/a12-data-requirement-confirmation/summary.md` | 3316 | HAVE |
+| `results/a12-data-requirement-confirmation/task-table.md` | 1799 | HAVE |
+| `results/a12-data-requirement-confirmation/tests.xml` | 9426 | REUSABLE |
+
+
+### a13-dreq-accounting (17 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a13-dreq-accounting/accounting.json` | 2162515 | REUSABLE |
+| `results/a13-dreq-accounting/dreq_review.pdf` | 25493 | HAVE |
+| `results/a13-dreq-accounting/dreq_review.png` | 31331 | HAVE |
+| `results/a13-dreq-accounting/dreq_table_review.pdf` | 65102 | HAVE |
+| `results/a13-dreq-accounting/files_written.json` | 2519 | REUSABLE |
+| `results/a13-dreq-accounting/median_distances.json` | 17826 | REUSABLE |
+| `results/a13-dreq-accounting/recommendations.csv` | 636058 | REUSABLE |
+| `results/a13-dreq-accounting/recommendations.json` | 1523795 | REUSABLE |
+| `results/a13-dreq-accounting/requests.json` | 1903894 | REUSABLE |
+| `results/a13-dreq-accounting/run.log` | 12138 | REUSABLE |
+| `results/a13-dreq-accounting/same_denominator.csv` | 55658 | REUSABLE |
+| `results/a13-dreq-accounting/same_denominator.json` | 67030 | REUSABLE |
+| `results/a13-dreq-accounting/summary.md` | 11723 | HAVE |
+| `results/a13-dreq-accounting/table-compile.log` | 2620 | REUSABLE |
+| `results/a13-dreq-accounting/tests-a13.log` | 99 | REUSABLE |
+| `results/a13-dreq-accounting/tests-integration.log` | 1107 | REUSABLE |
+| `results/a13-dreq-accounting/validation.json` | 2682 | REUSABLE |
+
+
+### a2-curvature-interaction (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a2-curvature-interaction/nonembedding_counts.json` | 1993 | REUSABLE |
+| `results/a2-curvature-interaction/summary.json` | 19620520 | REUSABLE |
+| `results/a2-curvature-interaction/summary.md` | 69695 | HAVE |
+
+
+### a3-corner-pools (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a3-corner-pools/plan.json` | 469503 | REUSABLE |
+| `results/a3-corner-pools/plan.md` | 13193 | HAVE |
+
+
+### a4-shrunk-source (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a4-shrunk-source/summary.json` | 7542501 | REUSABLE |
+| `results/a4-shrunk-source/summary.md` | 11959 | HAVE |
+
+
+### a5-corner-second-difference (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a5-corner-second-difference/summary.json` | 262405 | REUSABLE |
+| `results/a5-corner-second-difference/summary.md` | 20406 | HAVE |
+
+
+### a5-training-seed-noise (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a5-training-seed-noise/summary.json` | 3894 | REUSABLE |
+
+
+### a7-closeout-audit (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a7-closeout-audit/summary.json` | 85840 | REUSABLE |
+| `results/a7-closeout-audit/summary.md` | 18349 | HAVE |
+
+
+### a9-measurement-efficiency (41 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/a9-measurement-efficiency/a9_efficiency.pdf` | 60701 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_a.pdf` | 24036 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_a.png` | 32525 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_a_data.json` | 8930 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_b.pdf` | 24100 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_b.png` | 31956 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_b_data.json` | 8925 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_c.pdf` | 24233 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_c.png` | 35479 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_c_data.json` | 8908 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_d.pdf` | 23993 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_d.png` | 40196 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_d_data.json` | 8793 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_e.pdf` | 24083 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_e.png` | 39146 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_e_data.json` | 8798 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_f.pdf` | 24408 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_f.png` | 47197 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_f_data.json` | 8748 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_g.pdf` | 24393 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_g.png` | 38639 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_g_data.json` | 8993 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_h.pdf` | 24398 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_h.png` | 42415 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_h_data.json` | 8987 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_i.pdf` | 24519 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_i.png` | 40801 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_i_data.json` | 8966 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_j.pdf` | 24240 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_j.png` | 40280 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_j_data.json` | 8863 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_k.pdf` | 24279 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_k.png` | 44199 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_k_data.json` | 8862 | REUSABLE |
+| `results/a9-measurement-efficiency/figs/a9_l.pdf` | 24448 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_l.png` | 44325 | HAVE |
+| `results/a9-measurement-efficiency/figs/a9_l_data.json` | 8819 | REUSABLE |
+| `results/a9-measurement-efficiency/plan.json` | 444512 | REUSABLE |
+| `results/a9-measurement-efficiency/run.log` | 16253 | REUSABLE |
+| `results/a9-measurement-efficiency/summary.json` | 25005103 | REUSABLE |
+| `results/a9-measurement-efficiency/summary.md` | 16252 | HAVE |
+
+
+### figs (26 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
 | `results/figs/v11_geometry_gemma3-1b.pdf` | 27879 | HAVE |
 | `results/figs/v11_geometry_gemma3-1b.png` | 369461 | HAVE |
-| `results/figs/v9_blocks.pdf` | 78467 | HAVE |
-| `results/figs/v9_blocks.png` | 455490 | HAVE |
+| `results/figs/v9_blocks.pdf` | 78480 | HAVE |
+| `results/figs/v9_blocks.png` | 435440 | HAVE |
+| `results/figs/v9_blocks_Qwen-Qwen3-0.6B.pdf` | 22664 | HAVE |
+| `results/figs/v9_blocks_Qwen-Qwen3-0.6B.png` | 171409 | HAVE |
+| `results/figs/v9_blocks_Qwen-Qwen3-1.7B.pdf` | 22631 | HAVE |
+| `results/figs/v9_blocks_Qwen-Qwen3-1.7B.png` | 170740 | HAVE |
+| `results/figs/v9_blocks_Qwen-Qwen3-4B.pdf` | 22590 | HAVE |
+| `results/figs/v9_blocks_Qwen-Qwen3-4B.png` | 169800 | HAVE |
+| `results/figs/v9_blocks_gemma3-12b.pdf` | 22667 | HAVE |
+| `results/figs/v9_blocks_gemma3-12b.png` | 170970 | HAVE |
+| `results/figs/v9_blocks_gemma3-1b.pdf` | 22683 | HAVE |
+| `results/figs/v9_blocks_gemma3-1b.png` | 170190 | HAVE |
+| `results/figs/v9_blocks_gemma3-270m.pdf` | 22654 | HAVE |
+| `results/figs/v9_blocks_gemma3-270m.png` | 172059 | HAVE |
+| `results/figs/v9_blocks_gemma3-4b.pdf` | 22699 | HAVE |
+| `results/figs/v9_blocks_gemma3-4b.png` | 170401 | HAVE |
+| `results/figs/v9_blocks_gemma4-31b.pdf` | 22697 | HAVE |
+| `results/figs/v9_blocks_gemma4-31b.png` | 171054 | HAVE |
+| `results/figs/v9_blocks_main.pdf` | 24774 | HAVE |
+| `results/figs/v9_blocks_main.png` | 611857 | HAVE |
+| `results/figs/v9_blocks_muse-30b.pdf` | 22638 | HAVE |
+| `results/figs/v9_blocks_muse-30b.png` | 170151 | HAVE |
+| `results/figs/v9_blocks_olmo3-7b.pdf` | 22667 | HAVE |
+| `results/figs/v9_blocks_olmo3-7b.png` | 169706 | HAVE |
 
 
-### prereg (1 files)
+### prereg (3 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
+| `results/prereg/distill_270m_Dladder_prereg.json` | 619 | HAVE |
 | `results/prereg/quant_5bit_prereg.json` | 1137 | HAVE |
+| `results/prereg/quant_shape_ratio_prereg.json` | 384 | HAVE |
+
+
+### pythia-smoke (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/pythia-smoke/distill_summary.json` | 727 | REUSABLE |
+| `results/pythia-smoke/lora_vs_fullft.json` | 896 | REUSABLE |
+| `results/pythia-smoke/summary.json` | 2178 | REUSABLE |
+
+
+### s3-selection-validation (46 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/s3-selection-validation/LONI_OPERATIONS_v2.md` | 4580 | HAVE |
+| `results/s3-selection-validation/PRINTED_PREPARATION.md` | 21417 | HAVE |
+| `results/s3-selection-validation/SHA256SUMS` | 29782 | REUSABLE |
+| `results/s3-selection-validation/SHA256SUMS_v2` | 8753 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-1b__reference.json` | 1042 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-1b__reference.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-1b__student.json` | 1038 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-1b__student.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-4b__reference.json` | 1041 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-4b__reference.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-4b__student.json` | 1040 | REUSABLE |
+| `results/s3-selection-validation/anchors/gemma3-4b__student.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-1.4b--step120000__reference.json` | 1030 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-1.4b--step120000__reference.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-1.4b--step120000__student.json` | 1026 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-1.4b--step120000__student.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-410m--step120000__reference.json` | 1028 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-410m--step120000__reference.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-410m--step120000__student.json` | 1027 | REUSABLE |
+| `results/s3-selection-validation/anchors/pythia-410m--step120000__student.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/downloads.md` | 2564 | HAVE |
+| `results/s3-selection-validation/identity.json` | 2231660 | REUSABLE |
+| `results/s3-selection-validation/identity.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/inputs/locked_models.json` | 57274 | REUSABLE |
+| `results/s3-selection-validation/inputs/probes.json` | 636701 | REUSABLE |
+| `results/s3-selection-validation/loni-cache-inventory.json` | 853 | REUSABLE |
+| `results/s3-selection-validation/opportunity.json` | 2764155 | REUSABLE |
+| `results/s3-selection-validation/parser-validation.json` | 35286 | REUSABLE |
+| `results/s3-selection-validation/parser-validation_v2.json` | 28606 | REUSABLE |
+| `results/s3-selection-validation/plan.json` | 333005 | REUSABLE |
+| `results/s3-selection-validation/plan.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/plan_v2.json` | 905197 | REUSABLE |
+| `results/s3-selection-validation/plan_v2.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/plan_v2.registered.json` | 251810 | REUSABLE |
+| `results/s3-selection-validation/plan_v2.registered.json.sha256` | 65 | REUSABLE |
+| `results/s3-selection-validation/prereg.md` | 7558 | HAVE |
+| `results/s3-selection-validation/prereg_amendment_1.md` | 12757 | HAVE |
+| `results/s3-selection-validation/reference-candidates.md` | 1482 | HAVE |
+| `results/s3-selection-validation/score.json` | 1263 | REUSABLE |
+| `results/s3-selection-validation/score_v2.json` | 769 | REUSABLE |
+| `results/s3-selection-validation/summary.md` | 6789 | HAVE |
+| `results/s3-selection-validation/tests.xml` | 1396 | REUSABLE |
+| `results/s3-selection-validation/tests_v2.xml` | 5265 | REUSABLE |
+| `results/s3-selection-validation/trainer-parser-validation.json` | 14929 | REUSABLE |
+| `results/s3-selection-validation/validation.json` | 831 | REUSABLE |
+| `results/s3-selection-validation/validation_v2.json` | 1708 | REUSABLE |
+
+
+### sign-matrix (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/sign-matrix/summary.json` | 1387 | REUSABLE |
 
 
 ### traces-pilot (12 files)
@@ -280,79 +1075,130 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v1-recipe-strat/summary.md` | 2893 | HAVE |
 
 
-### v10-quantization (28 files)
+### v10-quant-shape512 (14 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
-| `results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quant-shape512/gemma3-12b/quant_losses.json` | 322 | REUSABLE |
+| `results/v10-quant-shape512/gemma3-12b/report.md` | 1015 | HAVE |
+| `results/v10-quant-shape512/gemma3-1b/quant_losses.json` | 325 | REUSABLE |
+| `results/v10-quant-shape512/gemma3-1b/report.md` | 1013 | HAVE |
+| `results/v10-quant-shape512/gemma3-270m/quant_losses.json` | 219 | REUSABLE |
+| `results/v10-quant-shape512/gemma3-270m/report.md` | 940 | HAVE |
+| `results/v10-quant-shape512/gemma3-4b/quant_losses.json` | 219 | REUSABLE |
+| `results/v10-quant-shape512/gemma3-4b/report.md` | 941 | HAVE |
+| `results/v10-quant-shape512/gemma4-31b/quant_losses.json` | 324 | REUSABLE |
+| `results/v10-quant-shape512/gemma4-31b/report.md` | 1037 | HAVE |
+| `results/v10-quant-shape512/muse-30b/quant_losses.json` | 323 | REUSABLE |
+| `results/v10-quant-shape512/muse-30b/report.md` | 1026 | HAVE |
+| `results/v10-quant-shape512/olmo3-7b/quant_losses.json` | 217 | REUSABLE |
+| `results/v10-quant-shape512/olmo3-7b/report.md` | 943 | HAVE |
+
+
+### v10-quant-shape512-fill5 (6 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v10-quant-shape512-fill5/gemma3-270m/quant_losses.json` | 219 | REUSABLE |
+| `results/v10-quant-shape512-fill5/gemma3-270m/report.md` | 940 | HAVE |
+| `results/v10-quant-shape512-fill5/gemma3-4b/quant_losses.json` | 218 | REUSABLE |
+| `results/v10-quant-shape512-fill5/gemma3-4b/report.md` | 941 | HAVE |
+| `results/v10-quant-shape512-fill5/olmo3-7b/quant_losses.json` | 218 | REUSABLE |
+| `results/v10-quant-shape512-fill5/olmo3-7b/report.md` | 943 | HAVE |
+
+
+### v10-quantization (63 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v10-quantization/Qwen--Qwen3-0.6B/quant_losses.json` | 831 | REUSABLE |
 | `results/v10-quantization/Qwen--Qwen3-0.6B/report.md` | 1110 | HAVE |
-| `results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/Qwen--Qwen3-1.7B/quant_losses.json` | 638 | REUSABLE |
 | `results/v10-quantization/Qwen--Qwen3-1.7B/report.md` | 1117 | HAVE |
-| `results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json` | 538 | REUSABLE |
+| `results/v10-quantization/Qwen--Qwen3-4B/quant_losses.json` | 642 | REUSABLE |
 | `results/v10-quantization/Qwen--Qwen3-4B/report.md` | 1106 | HAVE |
-| `results/v10-quantization/Qwen3-0.6B/quant_losses.json` | 219 | REUSABLE |
-| `results/v10-quantization/Qwen3-0.6B/report.md` | 936 | HAVE |
-| `results/v10-quantization/Qwen3-1.7B/quant_losses.json` | 217 | REUSABLE |
-| `results/v10-quantization/Qwen3-1.7B/report.md` | 936 | HAVE |
-| `results/v10-quantization/gemma3-12b/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quantization/Qwen3-14B/prospective_summary.json` | 936 | REUSABLE |
+| `results/v10-quantization/Qwen3-14B/quant_losses.json` | 537 | REUSABLE |
+| `results/v10-quantization/Qwen3-14B/report.md` | 1094 | HAVE |
+| `results/v10-quantization/Qwen3-8B/quant_losses.json` | 642 | REUSABLE |
+| `results/v10-quantization/Qwen3-8B/report.md` | 1139 | HAVE |
+| `results/v10-quantization/gemma3-12b/quant_losses.json` | 638 | REUSABLE |
 | `results/v10-quantization/gemma3-12b/report.md` | 1103 | HAVE |
-| `results/v10-quantization/gemma3-1b/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quantization/gemma3-1b/quant_losses.json` | 637 | REUSABLE |
 | `results/v10-quantization/gemma3-1b/report.md` | 1116 | HAVE |
-| `results/v10-quantization/gemma3-270m/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quantization/gemma3-270m/quant_losses.json` | 635 | REUSABLE |
 | `results/v10-quantization/gemma3-270m/report.md` | 1117 | HAVE |
-| `results/v10-quantization/gemma3-27b/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/gemma3-27b/quant_losses.json` | 640 | REUSABLE |
 | `results/v10-quantization/gemma3-27b/report.md` | 1105 | HAVE |
-| `results/v10-quantization/gemma3-4b/quant_losses.json` | 536 | REUSABLE |
+| `results/v10-quantization/gemma3-4b/quant_losses.json` | 641 | REUSABLE |
 | `results/v10-quantization/gemma3-4b/report.md` | 1102 | HAVE |
-| `results/v10-quantization/gemma4-31b/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quantization/gemma4-31b/quant_losses.json` | 639 | REUSABLE |
 | `results/v10-quantization/gemma4-31b/report.md` | 1119 | HAVE |
-| `results/v10-quantization/muse-30b/quant_losses.json` | 536 | REUSABLE |
+| `results/v10-quantization/muse-30b/quant_losses.json` | 640 | REUSABLE |
 | `results/v10-quantization/muse-30b/report.md` | 1128 | HAVE |
-| `results/v10-quantization/olmo3-32b/quant_losses.json` | 536 | REUSABLE |
+| `results/v10-quantization/olmo3-32b/quant_losses.json` | 636 | REUSABLE |
 | `results/v10-quantization/olmo3-32b/report.md` | 1115 | HAVE |
-| `results/v10-quantization/olmo3-7b/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/olmo3-7b/quant_losses.json` | 640 | REUSABLE |
 | `results/v10-quantization/olmo3-7b/report.md` | 1103 | HAVE |
+| `results/v10-quantization/pythia-1.4b--step143000/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/pythia-1.4b--step143000/report.md` | 1126 | HAVE |
+| `results/v10-quantization/pythia-1.4b--step16000/quant_losses.json` | 533 | REUSABLE |
+| `results/v10-quantization/pythia-1.4b--step16000/report.md` | 1129 | HAVE |
+| `results/v10-quantization/pythia-1.4b--step64000/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/pythia-1.4b--step64000/report.md` | 1111 | HAVE |
+| `results/v10-quantization/pythia-1.4b--step96000/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quantization/pythia-1.4b--step96000/report.md` | 1127 | HAVE |
+| `results/v10-quantization/pythia-160m--step143000/quant_losses.json` | 532 | REUSABLE |
+| `results/v10-quantization/pythia-160m--step143000/report.md` | 1129 | HAVE |
+| `results/v10-quantization/pythia-160m--step16000/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/pythia-160m--step16000/report.md` | 1123 | HAVE |
+| `results/v10-quantization/pythia-160m--step64000/quant_losses.json` | 532 | REUSABLE |
+| `results/v10-quantization/pythia-160m--step64000/report.md` | 1126 | HAVE |
+| `results/v10-quantization/pythia-160m--step96000/quant_losses.json` | 533 | REUSABLE |
+| `results/v10-quantization/pythia-160m--step96000/report.md` | 1124 | HAVE |
+| `results/v10-quantization/pythia-1b--step112000/quant_losses.json` | 637 | REUSABLE |
+| `results/v10-quantization/pythia-1b--step112000/report.md` | 1165 | HAVE |
+| `results/v10-quantization/pythia-1b--step32000/quant_losses.json` | 641 | REUSABLE |
+| `results/v10-quantization/pythia-1b--step32000/report.md` | 1149 | HAVE |
+| `results/v10-quantization/pythia-1b--step96000/quant_losses.json` | 320 | REUSABLE |
+| `results/v10-quantization/pythia-1b--step96000/report.md` | 1030 | HAVE |
+| `results/v10-quantization/pythia-410m--step143000/quant_losses.json` | 534 | REUSABLE |
+| `results/v10-quantization/pythia-410m--step143000/report.md` | 1125 | HAVE |
+| `results/v10-quantization/pythia-410m--step16000/quant_losses.json` | 531 | REUSABLE |
+| `results/v10-quantization/pythia-410m--step16000/report.md` | 1121 | HAVE |
+| `results/v10-quantization/pythia-410m--step64000/quant_losses.json` | 535 | REUSABLE |
+| `results/v10-quantization/pythia-410m--step64000/report.md` | 1126 | HAVE |
+| `results/v10-quantization/pythia-410m--step96000/quant_losses.json` | 531 | REUSABLE |
+| `results/v10-quantization/pythia-410m--step96000/report.md` | 1124 | HAVE |
+| `results/v10-quantization/pythia-6.9b--step112000/quant_losses.json` | 637 | REUSABLE |
+| `results/v10-quantization/pythia-6.9b--step112000/report.md` | 1157 | HAVE |
+| `results/v10-quantization/pythia-6.9b--step32000/quant_losses.json` | 635 | REUSABLE |
+| `results/v10-quantization/pythia-6.9b--step32000/report.md` | 1167 | HAVE |
 
 
-### v11-geometry-damage (32 files)
+### v100-critical-region (2 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
-| `results/v11-geometry-damage/Qwen--Qwen3-1.7B/dense_top_residual_code.pt` | 13765337 | REUSABLE |
-| `results/v11-geometry-damage/Qwen--Qwen3-1.7B/dense_top_residual_math.pt` | 13765337 | REUSABLE |
-| `results/v11-geometry-damage/Qwen--Qwen3-1.7B/dense_top_residual_qa.pt` | 13765259 | REUSABLE |
-| `results/v11-geometry-damage/Qwen--Qwen3-1.7B/fisher_dense_code.pt` | 6881805987 | REUSABLE |
-| `results/v11-geometry-damage/Qwen--Qwen3-1.7B/fisher_dense_math.pt` | 6881805987 | REUSABLE |
-| `results/v11-geometry-damage/Qwen--Qwen3-1.7B/fisher_dense_qa.pt` | 6881805973 | REUSABLE |
+| `results/v100-critical-region/summary.json` | 22792658 | REUSABLE |
+| `results/v100-critical-region/summary.md` | 120032 | HAVE |
+
+
+### v11-geometry-damage (8 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
 | `results/v11-geometry-damage/Qwen--Qwen3-1.7B/geometry_damage.json` | 24371 | REUSABLE |
 | `results/v11-geometry-damage/Qwen--Qwen3-1.7B/report.md` | 3032 | HAVE |
-| `results/v11-geometry-damage/gemma3-1b/dense_top_residual_code.pt` | 7999769 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-1b/dense_top_residual_math.pt` | 7999769 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-1b/dense_top_residual_qa.pt` | 7999691 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-1b/fisher_dense_code.pt` | 3999008367 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-1b/fisher_dense_math.pt` | 3999008367 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-1b/fisher_dense_qa.pt` | 3999008353 | REUSABLE |
 | `results/v11-geometry-damage/gemma3-1b/geometry_damage.json` | 23801 | REUSABLE |
 | `results/v11-geometry-damage/gemma3-1b/report.md` | 3051 | HAVE |
-| `results/v11-geometry-damage/gemma3-4b/dense_top_residual_code.pt` | 31040921 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-4b/dense_top_residual_math.pt` | 31040921 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-4b/dense_top_residual_qa.pt` | 31040843 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-4b/fisher_dense_code.pt` | 15519581859 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-4b/fisher_dense_math.pt` | 15519581859 | REUSABLE |
-| `results/v11-geometry-damage/gemma3-4b/fisher_dense_qa.pt` | 15519581845 | REUSABLE |
 | `results/v11-geometry-damage/gemma3-4b/geometry_damage.json` | 28648 | REUSABLE |
 | `results/v11-geometry-damage/gemma3-4b/report.md` | 3053 | HAVE |
-| `results/v11-geometry-damage/olmo3-7b/dense_top_residual_code.pt` | 58381593 | REUSABLE |
-| `results/v11-geometry-damage/olmo3-7b/dense_top_residual_math.pt` | 58381593 | REUSABLE |
-| `results/v11-geometry-damage/olmo3-7b/dense_top_residual_qa.pt` | 58381515 | REUSABLE |
-| `results/v11-geometry-damage/olmo3-7b/fisher_dense_code.pt` | 29189932707 | REUSABLE |
-| `results/v11-geometry-damage/olmo3-7b/fisher_dense_math.pt` | 29189932707 | REUSABLE |
-| `results/v11-geometry-damage/olmo3-7b/fisher_dense_qa.pt` | 29189932693 | REUSABLE |
 | `results/v11-geometry-damage/olmo3-7b/geometry_damage.json` | 16483 | REUSABLE |
 | `results/v11-geometry-damage/olmo3-7b/report.md` | 1771 | HAVE |
 
 
-### v12-distill (147 files)
+### v12-distill (2518 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
@@ -366,7 +1212,150 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/adapter/adapter_model.safetensors` | 69782384 | REUSABLE |
 | `results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/eval.json` | 1207 | REUSABLE |
 | `results/v12-distill/Qwen3-1.7B/gpt-5.6-luna_full_600/train_log.json` | 55305 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600/eval.json` | 3134 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600/train_log.json` | 104832 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed1/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed1/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed1/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed1/eval.json` | 3157 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed1/train_log.json` | 104833 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed2/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed2/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed2/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed2/eval.json` | 3151 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_seed2/train_log.json` | 104825 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/eval.json` | 3190 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/train_log.json` | 105786 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000000/eval.json` | 3192 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000108/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000108/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000108/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000108/eval.json` | 3303 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000214/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000214/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000214/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000214/eval.json` | 3307 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/eval.json` | 3207 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/train_log.json` | 105794 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000000/eval.json` | 3210 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000107/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000107/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000107/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000107/eval.json` | 3322 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000215/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000215/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000215/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000215/eval.json` | 3326 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/eval.json` | 3201 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/train_log.json` | 105789 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000000/eval.json` | 3210 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000107/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000107/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000107/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000107/eval.json` | 3321 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000215/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000215/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000215/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000215/eval.json` | 3324 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75/eval.json` | 3124 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75/train_log.json` | 14961 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed1/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed1/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed1/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed1/eval.json` | 3136 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed1/train_log.json` | 14965 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed2/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed2/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed2/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed2/eval.json` | 3138 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_seed2/train_log.json` | 14955 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/eval.json` | 3206 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/train_log.json` | 106161 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000000/eval.json` | 3210 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000014/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000014/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000014/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000014/eval.json` | 3314 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000027/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000027/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000027/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000027/eval.json` | 3319 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000107/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000107/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000107/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000107/eval.json` | 3320 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000214/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000214/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000214/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000214/eval.json` | 3319 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/eval.json` | 3224 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/train_log.json` | 106174 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000000/eval.json` | 3228 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000014/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000014/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000014/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000014/eval.json` | 3330 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000027/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000027/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000027/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000027/eval.json` | 3339 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000107/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000107/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000107/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000107/eval.json` | 3337 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000214/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000214/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000214/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000214/eval.json` | 3338 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/eval.json` | 3224 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/train_log.json` | 106166 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000000/eval.json` | 3228 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000014/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000014/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000014/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000014/eval.json` | 3333 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000027/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000027/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000027/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000027/eval.json` | 3336 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000107/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000107/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000107/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000107/eval.json` | 3340 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000214/adapter/README.md` | 5150 | HAVE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000214/adapter/adapter_config.json` | 1146 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000214/adapter/adapter_model.safetensors` | 132187888 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000214/eval.json` | 3339 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/matched_controls_summary.json` | 2144 | REUSABLE |
+| `results/v12-distill/Qwen3-4B/prospective_summary.json` | 966 | REUSABLE |
+| `results/v12-distill/gemma3-12b/claude-sonnet-4-6_full_600/adapter/delta-00000.pt` | 4027516485 | REUSABLE |
+| `results/v12-distill/gemma3-12b/claude-sonnet-4-6_full_600/adapter/delta_manifest.json` | 63335 | REUSABLE |
 | `results/v12-distill/gemma3-12b/claude-sonnet-4-6_full_600/eval.json` | 1216 | REUSABLE |
+| `results/v12-distill/gemma3-12b/claude-sonnet-4-6_full_600/train_log.json` | 55836 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta-00000.pt` | 4027516485 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta-00001.pt` | 62916165 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta-00002.pt` | 31458885 | REUSABLE |
@@ -416,6 +1405,7 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta-00046.pt` | 62916165 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta-00047.pt` | 235931205 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta-00048.pt` | 235931205 | REUSABLE |
+| `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/adapter/delta_manifest.json` | 63335 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/eval.json` | 1214 | REUSABLE |
 | `results/v12-distill/gemma3-12b/gpt-5.6-luna_full_600/train_log.json` | 55181 | REUSABLE |
 | `results/v12-distill/gemma3-1b/claude-sonnet-4-6_answer_only_600/adapter/README.md` | 5164 | HAVE |
@@ -433,26 +1423,1059 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_answer_only_600/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_answer_only_600/eval.json` | 1223 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_answer_only_600/train_log.json` | 54910 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/eval.json` | 14172 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/train_log.json` | 54690 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000000/eval.json` | 14177 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/eval.json` | 14283 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/eval.json` | 14284 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/eval.json` | 14281 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/eval.json` | 14282 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/eval.json` | 14279 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/eval.json` | 14284 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/eval.json` | 14281 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/eval.json` | 14285 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/eval.json` | 14282 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/eval.json` | 14283 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/eval.json` | 14285 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/eval.json` | 14281 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/eval.json` | 14286 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/eval.json` | 14284 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/eval.json` | 14216 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/train_log.json` | 54710 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000000/eval.json` | 14226 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000033/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000033/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000033/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000033/eval.json` | 14331 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000034/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000034/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000034/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000034/eval.json` | 14329 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000035/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000035/eval.json` | 14331 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000036/eval.json` | 14328 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000037/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000037/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000037/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000037/eval.json` | 14331 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000038/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000038/eval.json` | 14331 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000039/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000039/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000039/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000039/eval.json` | 14330 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000071/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000071/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000071/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000071/eval.json` | 14329 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000072/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000072/eval.json` | 14331 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000073/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000073/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000073/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000073/eval.json` | 14333 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000074/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000074/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000074/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000074/eval.json` | 14327 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000075/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000075/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000075/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000075/eval.json` | 14332 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000076/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000076/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000076/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000076/eval.json` | 14330 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000077/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_tseed1_lora_dseed101_seed1/trajectory/update-00000077/eval.json` | 14328 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/eval.json` | 14115 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/train_log.json` | 85283 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000000/eval.json` | 14118 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/eval.json` | 14226 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/eval.json` | 14230 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/eval.json` | 14228 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/eval.json` | 14225 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/eval.json` | 14227 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/eval.json` | 14224 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/eval.json` | 14227 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/eval.json` | 14227 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/eval.json` | 14224 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/eval.json` | 14228 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/eval.json` | 14226 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/eval.json` | 14228 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/eval.json` | 14229 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/eval.json` | 14213 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/eval.json` | 14115 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/train_log.json` | 85274 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000000/eval.json` | 14118 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/eval.json` | 14223 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/eval.json` | 14227 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/eval.json` | 14222 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/eval.json` | 14220 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/eval.json` | 14229 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/eval.json` | 14223 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/eval.json` | 14223 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/eval.json` | 14230 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/eval.json` | 14227 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/eval.json` | 14228 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/eval.json` | 14230 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/eval.json` | 14228 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/eval.json` | 14231 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/eval.json` | 14213 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/adapter/README.md` | 5164 | HAVE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/adapter/adapter_config.json` | 1156 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/eval.json` | 1210 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_150/train_log.json` | 14757 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_16_blackwell_smoke_lora_dseed91/train_log.json` | 11998 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_16_blackwell_smoke_lora_dseed91/trajectory/update-00000000/eval.json` | 13978 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/eval.json` | 13986 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/train_log.json` | 80524 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 13994 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/eval.json` | 14101 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/eval.json` | 14100 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/eval.json` | 14084 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/eval.json` | 13990 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/train_log.json` | 80082 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 13994 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/eval.json` | 14094 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/eval.json` | 14106 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/eval.json` | 14088 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/eval.json` | 13984 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/train_log.json` | 111161 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000000/eval.json` | 13993 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/eval.json` | 14100 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/eval.json` | 14098 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/v70_timing.json` | 596 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/eval.json` | 13984 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/train_log.json` | 112539 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000000/eval.json` | 13993 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/eval.json` | 14099 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/eval.json` | 14093 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/v70_timing.json` | 594 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/eval.json` | 13987 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/train_log.json` | 112566 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000000/eval.json` | 13993 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/eval.json` | 14098 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/eval.json` | 14098 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/v70_timing.json` | 595 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/eval.json` | 13983 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/train_log.json` | 109356 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000000/eval.json` | 13993 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/eval.json` | 14101 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/eval.json` | 14100 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/eval.json` | 14097 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/v70_timing.json` | 594 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/eval.json` | 13987 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/train_log.json` | 109352 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000000/eval.json` | 13993 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/eval.json` | 14099 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/eval.json` | 14101 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/v70_timing.json` | 597 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/eval.json` | 13988 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/train_log.json` | 109366 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000000/eval.json` | 13993 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/eval.json` | 14100 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/eval.json` | 14102 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/eval.json` | 14099 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/v70_timing.json` | 593 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/eval.json` | 14003 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/train_log.json` | 29921 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/trajectory/update-00000000/eval.json` | 14012 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/trajectory/update-00000036/eval.json` | 14119 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_200_p2v3conf_throughput_lora_dseed31/v70_timing.json` | 593 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/eval.json` | 13865 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/train_log.json` | 129127 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000000/eval.json` | 13873 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000098/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000098/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000098/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000098/eval.json` | 13982 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000196/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000196/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000196/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1/trajectory/update-00000196/eval.json` | 13983 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/eval.json` | 13885 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/train_log.json` | 129122 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000000/eval.json` | 13891 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000098/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000098/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000098/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000098/eval.json` | 14000 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000196/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000196/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000196/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed1_seed1/trajectory/update-00000196/eval.json` | 13996 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/eval.json` | 13866 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/train_log.json` | 129133 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000000/eval.json` | 13873 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000098/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000098/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000098/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000098/eval.json` | 13979 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000198/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000198/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000198/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2/trajectory/update-00000198/eval.json` | 13983 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/eval.json` | 13884 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/train_log.json` | 129116 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000000/eval.json` | 13891 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000098/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000098/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000098/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000098/eval.json` | 13998 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000198/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000198/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000198/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed2_seed1/trajectory/update-00000198/eval.json` | 13997 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/eval.json` | 13865 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/train_log.json` | 129100 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000000/eval.json` | 13873 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000099/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000099/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000099/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000099/eval.json` | 13983 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000197/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000197/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000197/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3/trajectory/update-00000197/eval.json` | 13975 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/eval.json` | 13886 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/train_log.json` | 129110 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000000/eval.json` | 13891 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000099/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000099/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000099/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000099/eval.json` | 14000 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000197/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000197/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000197/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_225_lora_dseed3_seed1/trajectory/update-00000197/eval.json` | 13999 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/eval.json` | 14077 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/train_log.json` | 51365 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000000/eval.json` | 14085 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/eval.json` | 14193 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/eval.json` | 14193 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/eval.json` | 14173 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/eval.json` | 14195 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/eval.json` | 14194 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/eval.json` | 14193 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/eval.json` | 14190 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300/adapter/README.md` | 5164 | HAVE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300/adapter/adapter_config.json` | 1156 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300/eval.json` | 1209 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300/train_log.json` | 28259 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed1/adapter/delta_manifest.json` | 32627 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed1/eval.json` | 1360 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed1/train_log.json` | 28092 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed2/adapter/delta_manifest.json` | 32627 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed2/eval.json` | 1361 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_300_seed2/train_log.json` | 28086 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/eval.json` | 13964 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/train_log.json` | 111531 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000000/eval.json` | 13969 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/eval.json` | 14078 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/eval.json` | 14081 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/eval.json` | 14082 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/eval.json` | 14081 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/eval.json` | 13963 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/train_log.json` | 111522 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000000/eval.json` | 13969 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/eval.json` | 14077 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/eval.json` | 14074 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/eval.json` | 14082 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/eval.json` | 14077 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/eval.json` | 13969 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/train_log.json` | 110608 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000000/eval.json` | 13969 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/eval.json` | 14076 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/eval.json` | 14074 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/eval.json` | 14080 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/eval.json` | 14078 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/eval.json` | 13949 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/train_log.json` | 111036 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000000/eval.json` | 13953 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/eval.json` | 14063 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/eval.json` | 14063 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/eval.json` | 14066 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/eval.json` | 14065 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/eval.json` | 13952 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/train_log.json` | 111050 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000000/eval.json` | 13953 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/eval.json` | 14059 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/eval.json` | 14063 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/eval.json` | 14066 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/eval.json` | 14064 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/eval.json` | 13952 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/train_log.json` | 110591 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000000/eval.json` | 13953 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/eval.json` | 14061 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/eval.json` | 14061 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/eval.json` | 14059 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/eval.json` | 14062 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/eval.json` | 13980 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/train_log.json` | 111048 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000000/eval.json` | 13983 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000026/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000026/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000026/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000026/eval.json` | 14093 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000050/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000050/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000050/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000050/eval.json` | 14093 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000100/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000100/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000100/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000100/eval.json` | 14093 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000199/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000199/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000199/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_450_p2v2rep_lora_dseed11_seed1/trajectory/update-00000199/eval.json` | 14096 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/eval.json` | 13988 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/train_log.json` | 79879 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 13995 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/eval.json` | 14098 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/eval.json` | 14104 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/eval.json` | 14106 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/eval.json` | 14105 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/eval.json` | 13988 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/train_log.json` | 80316 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 13995 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/eval.json` | 14099 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/eval.json` | 14104 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/eval.json` | 14106 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/eval.json` | 14086 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/adapter/README.md` | 5164 | HAVE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/adapter/adapter_config.json` | 1156 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/eval.json` | 1208 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600/train_log.json` | 55322 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed1/adapter/delta_manifest.json` | 32627 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed1/eval.json` | 1359 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed1/train_log.json` | 55169 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed2/adapter/delta_manifest.json` | 32627 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed2/eval.json` | 1361 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_seed2/train_log.json` | 55164 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/eval.json` | 3196 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/train_log.json` | 105822 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000000/eval.json` | 3203 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000105/eval.json` | 3313 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000209/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000209/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000209/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen/trajectory/update-00000209/eval.json` | 3312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/eval.json` | 3218 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/train_log.json` | 105807 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000000/eval.json` | 3221 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000104/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000104/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000104/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000104/eval.json` | 3331 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000210/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000210/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000210/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed1/trajectory/update-00000210/eval.json` | 3332 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/eval.json` | 3217 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/train_log.json` | 105823 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000000/eval.json` | 3221 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000105/eval.json` | 3315 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000210/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000210/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000210/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_600_uxseen_seed2/trajectory/update-00000210/eval.json` | 3335 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/eval.json` | 13980 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/train_log.json` | 83971 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 13988 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/eval.json` | 14094 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/eval.json` | 14092 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/eval.json` | 14095 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/eval.json` | 14097 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/eval.json` | 13977 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/train_log.json` | 83496 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 13988 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/eval.json` | 14094 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/eval.json` | 14097 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/eval.json` | 14095 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/eval.json` | 14076 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75/adapter/README.md` | 5164 | HAVE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75/adapter/adapter_config.json` | 1156 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75/eval.json` | 1209 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75/train_log.json` | 8040 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/eval.json` | 13962 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/train_log.json` | 32574 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json` | 13969 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json` | 14077 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/eval.json` | 13962 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/train_log.json` | 32586 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json` | 13969 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json` | 14077 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/eval.json` | 13963 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/train_log.json` | 32583 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json` | 13968 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json` | 14078 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/eval.json` | 13891 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/train_log.json` | 109535 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000000/eval.json` | 13897 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000103/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000103/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000103/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000103/eval.json` | 14001 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000206/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000206/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000206/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2dev_lora_dseed11/trajectory/update-00000206/eval.json` | 14008 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/eval.json` | 13941 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/train_log.json` | 108632 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000000/eval.json` | 13947 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/eval.json` | 14054 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/eval.json` | 14052 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/eval.json` | 14052 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/eval.json` | 14056 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/eval.json` | 13941 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/train_log.json` | 110956 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000000/eval.json` | 13947 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/eval.json` | 14057 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/eval.json` | 14053 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/eval.json` | 14054 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/eval.json` | 14053 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/eval.json` | 13935 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/train_log.json` | 109095 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000000/eval.json` | 13947 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/eval.json` | 14054 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/eval.json` | 14056 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/eval.json` | 14053 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/eval.json` | 14058 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed1/adapter/delta_manifest.json` | 32627 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed1/eval.json` | 1363 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed1/train_log.json` | 7892 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed2/adapter/delta_manifest.json` | 32627 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed2/eval.json` | 1360 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_seed2/train_log.json` | 7886 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/eval.json` | 3188 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/train_log.json` | 111705 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000000/eval.json` | 3198 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000105/eval.json` | 3306 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000209/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000209/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000209/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen/trajectory/update-00000209/eval.json` | 3304 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/eval.json` | 3190 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/train_log.json` | 15894 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000000/eval.json` | 3198 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000014/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000014/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000014/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000014/eval.json` | 3285 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000027/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000027/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000027/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE/trajectory/update-00000027/eval.json` | 3308 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/eval.json` | 3206 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/train_log.json` | 15911 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000000/eval.json` | 3216 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000013/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000013/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000013/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000013/eval.json` | 3316 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000027/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000027/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000027/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed1/trajectory/update-00000027/eval.json` | 3322 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/eval.json` | 3209 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/train_log.json` | 15896 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000000/eval.json` | 3216 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000014/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000014/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000014/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000014/eval.json` | 3305 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000027/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000027/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000027/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseenE_seed2/trajectory/update-00000027/eval.json` | 3322 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/eval.json` | 3209 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/train_log.json` | 111704 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000000/eval.json` | 3216 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000105/eval.json` | 3320 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000209/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000209/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000209/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed1/trajectory/update-00000209/eval.json` | 3326 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/eval.json` | 3207 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/train_log.json` | 111706 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000000/eval.json` | 3216 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000105/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000105/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000105/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000105/eval.json` | 3324 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000209/adapter/README.md` | 5164 | HAVE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000209/adapter/adapter_config.json` | 1156 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000209/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
+| `results/v12-distill/gemma3-1b/gpt-5.6-luna_full_75_uxseen_seed2/trajectory/update-00000209/eval.json` | 3325 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_no_code_fence_600/adapter/README.md` | 5164 | HAVE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_no_code_fence_600/adapter/adapter_config.json` | 1156 | REUSABLE |
 | `results/v12-distill/gemma3-1b/gpt-5.6-luna_no_code_fence_600/adapter/adapter_model.safetensors` | 52231312 | REUSABLE |
@@ -473,36 +2496,1230 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_answer_only_600/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_answer_only_600/eval.json` | 1227 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_answer_only_600/train_log.json` | 54888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_150/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_150/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_150/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_150/eval.json` | 1356 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_150/train_log.json` | 14812 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_16/adapter/README.md` | 5162 | HAVE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_16/adapter/adapter_config.json` | 1155 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_16/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_16/eval.json` | 1147 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_16/train_log.json` | 1353 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/eval.json` | 10776 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/train_log.json` | 77288 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 10783 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/eval.json` | 10885 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/eval.json` | 10883 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/eval.json` | 10893 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/eval.json` | 10874 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/eval.json` | 10777 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/train_log.json` | 76860 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 10783 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/eval.json` | 10876 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/eval.json` | 10890 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/eval.json` | 10894 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/eval.json` | 10875 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/eval.json` | 10770 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/train_log.json` | 215266 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000000/eval.json` | 10776 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000006/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000006/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000006/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000006/eval.json` | 10881 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000011/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000011/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000011/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000011/eval.json` | 10884 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000021/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000021/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000021/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000021/eval.json` | 10889 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000043/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000043/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000043/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed41/trajectory/update-00000043/eval.json` | 10886 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/eval.json` | 10770 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/train_log.json` | 215276 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000000/eval.json` | 10776 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000006/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000006/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000006/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000006/eval.json` | 10887 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000011/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000011/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000011/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000011/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000021/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000021/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000021/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000021/eval.json` | 10885 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000043/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000043/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000043/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_198_matrix_lora_dseed42/trajectory/update-00000043/eval.json` | 10882 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/eval.json` | 10774 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/train_log.json` | 107932 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000000/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000036/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000072/eval.json` | 10882 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/trajectory/update-00000144/eval.json` | 10890 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed31/v70_timing.json` | 598 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/eval.json` | 10775 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/train_log.json` | 109294 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000000/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000036/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000071/eval.json` | 10886 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/trajectory/update-00000144/eval.json` | 10886 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed32/v70_timing.json` | 596 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/eval.json` | 10775 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/train_log.json` | 109307 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000000/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000036/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000074/eval.json` | 10890 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/trajectory/update-00000146/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed33/v70_timing.json` | 597 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/eval.json` | 10773 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/train_log.json` | 106101 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000000/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000035/eval.json` | 10883 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000070/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/trajectory/update-00000139/eval.json` | 10892 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed34/v70_timing.json` | 597 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/eval.json` | 10776 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/train_log.json` | 106098 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000000/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000035/eval.json` | 10884 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000070/eval.json` | 10887 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/trajectory/update-00000139/eval.json` | 10892 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed35/v70_timing.json` | 597 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/eval.json` | 10777 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/train_log.json` | 106112 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000000/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000035/eval.json` | 10889 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000070/eval.json` | 10890 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/trajectory/update-00000139/eval.json` | 10894 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_200_p2v3conf_lora_dseed36/v70_timing.json` | 600 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_300/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_300/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_300/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_300/eval.json` | 1355 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_300/train_log.json` | 28279 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/eval.json` | 10752 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/train_log.json` | 108294 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000000/eval.json` | 10758 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/eval.json` | 10867 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/eval.json` | 10870 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/eval.json` | 10869 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/eval.json` | 10871 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/eval.json` | 10751 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/train_log.json` | 108289 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000000/eval.json` | 10758 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/eval.json` | 10866 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/eval.json` | 10866 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/eval.json` | 10867 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/eval.json` | 10867 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/eval.json` | 10752 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/train_log.json` | 107379 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000000/eval.json` | 10758 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/eval.json` | 10867 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/eval.json` | 10863 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/eval.json` | 10870 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/eval.json` | 10870 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/eval.json` | 10736 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/train_log.json` | 107803 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000000/eval.json` | 10742 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000026/eval.json` | 10849 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000050/eval.json` | 10851 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000100/eval.json` | 10853 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed11/trajectory/update-00000199/eval.json` | 10854 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/eval.json` | 10741 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/train_log.json` | 107807 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000000/eval.json` | 10742 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000025/eval.json` | 10850 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000049/eval.json` | 10851 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000099/eval.json` | 10855 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed12/trajectory/update-00000199/eval.json` | 10853 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/eval.json` | 10737 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/train_log.json` | 107363 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000000/eval.json` | 10742 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000025/eval.json` | 10852 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000049/eval.json` | 10846 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000099/eval.json` | 10852 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_450_p2v2_lora_dseed13/trajectory/update-00000198/eval.json` | 10850 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/eval.json` | 10779 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/train_log.json` | 76669 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 10784 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/eval.json` | 10890 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/eval.json` | 10894 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/eval.json` | 10893 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/eval.json` | 10896 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/eval.json` | 10781 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/train_log.json` | 77090 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 10784 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/eval.json` | 10890 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/eval.json` | 10891 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/eval.json` | 10894 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/eval.json` | 10879 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/train_log.json` | 8786 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000000/eval.json` | 10778 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000006/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000006/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000006/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000006/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000012/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000012/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000012/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000012/eval.json` | 10889 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000023/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000023/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000023/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000023/eval.json` | 10891 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000043/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000043/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000043/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_594_matrix_lora_dseed41/trajectory/update-00000043/eval.json` | 10884 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/adapter/README.md` | 5162 | HAVE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/adapter/adapter_config.json` | 1155 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/eval.json` | 1213 | REUSABLE |
 | `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_600/train_log.json` | 55306 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/eval.json` | 10770 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/train_log.json` | 80721 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 10777 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/eval.json` | 10881 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/eval.json` | 10885 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/eval.json` | 10888 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/eval.json` | 10887 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/eval.json` | 10771 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/train_log.json` | 80230 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 10777 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/eval.json` | 10882 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/eval.json` | 10881 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/eval.json` | 10882 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/eval.json` | 10870 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/eval.json` | 10765 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/train_log.json` | 82497 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000000/eval.json` | 10771 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000006/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000006/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000006/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000006/eval.json` | 10880 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000011/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000011/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000011/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000011/eval.json` | 10881 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000022/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000022/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000022/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000022/eval.json` | 10879 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000045/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000045/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000045/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed41/trajectory/update-00000045/eval.json` | 10880 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/eval.json` | 10765 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/train_log.json` | 82509 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000000/eval.json` | 10771 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000006/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000006/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000006/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000006/eval.json` | 10879 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000011/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000011/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000011/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000011/eval.json` | 10879 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000022/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000022/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000022/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000022/eval.json` | 10876 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000044/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000044/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000044/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_66_matrix_lora_dseed42/trajectory/update-00000044/eval.json` | 10876 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75/eval.json` | 1213 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75/train_log.json` | 8039 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/eval.json` | 10731 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/train_log.json` | 105339 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000000/eval.json` | 10736 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000025/eval.json` | 10844 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000049/eval.json` | 10844 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000098/eval.json` | 10843 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed11/trajectory/update-00000196/eval.json` | 10845 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/eval.json` | 10729 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/train_log.json` | 107637 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000000/eval.json` | 10736 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000025/eval.json` | 10845 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000050/eval.json` | 10844 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000100/eval.json` | 10840 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed12/trajectory/update-00000200/eval.json` | 10844 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/eval.json` | 10730 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/train_log.json` | 105805 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000000/eval.json` | 10736 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000025/eval.json` | 10842 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000049/eval.json` | 10843 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000099/eval.json` | 10844 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2_lora_dseed13/trajectory/update-00000197/eval.json` | 10848 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/eval.json` | 10757 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/train_log.json` | 105330 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000000/eval.json` | 10766 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000025/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000025/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000025/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000025/eval.json` | 10870 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000049/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000049/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000049/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000049/eval.json` | 10873 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000098/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000098/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000098/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000098/eval.json` | 10876 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000196/adapter/README.md` | 5162 | HAVE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000196/adapter/adapter_config.json` | 1155 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000196/adapter/adapter_model.safetensors` | 15220968 | REUSABLE |
+| `results/v12-distill/gemma3-270m/gpt-5.6-luna_full_75_p2v2rep_lora_dseed11_seed1/trajectory/update-00000196/eval.json` | 10876 | REUSABLE |
+| `results/v12-distill/gemma3-4b/claude-sonnet-4-6_full_600/adapter/delta_manifest.json` | 44924 | REUSABLE |
 | `results/v12-distill/gemma3-4b/claude-sonnet-4-6_full_600/eval.json` | 1219 | REUSABLE |
+| `results/v12-distill/gemma3-4b/claude-sonnet-4-6_full_600/train_log.json` | 55795 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/eval.json` | 19530 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/train_log.json` | 60054 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000000/eval.json` | 19538 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000033/eval.json` | 19645 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000034/eval.json` | 19642 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000035/eval.json` | 19643 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000036/eval.json` | 19641 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000037/eval.json` | 19643 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000038/eval.json` | 19643 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000039/eval.json` | 19644 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000071/eval.json` | 19642 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000072/eval.json` | 19644 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000073/eval.json` | 19642 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000074/eval.json` | 19640 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000075/eval.json` | 19642 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000076/eval.json` | 19641 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101/trajectory/update-00000077/eval.json` | 19642 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/eval.json` | 19474 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/train_log.json` | 90691 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000000/eval.json` | 19479 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000019/eval.json` | 19583 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000029/eval.json` | 19589 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000039/eval.json` | 19585 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000047/eval.json` | 19584 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000058/eval.json` | 19587 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000067/eval.json` | 19586 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000077/eval.json` | 19589 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000086/eval.json` | 19587 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000095/eval.json` | 19559 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000105/eval.json` | 19589 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000114/eval.json` | 19588 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000124/eval.json` | 19586 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000134/eval.json` | 19589 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed51/trajectory/update-00000144/eval.json` | 19572 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/eval.json` | 19471 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/train_log.json` | 90680 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000000/eval.json` | 19479 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000019/eval.json` | 19580 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000029/eval.json` | 19588 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000038/eval.json` | 19583 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000048/eval.json` | 19587 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000057/eval.json` | 19586 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000067/eval.json` | 19588 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000077/eval.json` | 19586 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000086/eval.json` | 19588 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000095/eval.json` | 19585 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000105/eval.json` | 19584 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000115/eval.json` | 19586 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000124/eval.json` | 19584 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000134/eval.json` | 19587 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_132_critical_lora_dseed52/trajectory/update-00000144/eval.json` | 19569 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/adapter/README.md` | 5089 | HAVE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/adapter/adapter_config.json` | 1121 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/eval.json` | 1210 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_150/train_log.json` | 14764 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/eval.json` | 19346 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/train_log.json` | 85891 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 19355 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000018/eval.json` | 19456 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000036/eval.json` | 19443 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000073/eval.json` | 19464 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41/trajectory/update-00000144/eval.json` | 19444 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/eval.json` | 19348 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/train_log.json` | 85464 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 19355 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000018/eval.json` | 19457 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000036/eval.json` | 19464 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000072/eval.json` | 19461 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42/trajectory/update-00000143/eval.json` | 19446 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/eval.json` | 19437 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/train_log.json` | 56719 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000000/eval.json` | 19446 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000071/eval.json` | 19550 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000072/eval.json` | 19540 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000073/eval.json` | 19535 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000074/eval.json` | 19547 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000075/eval.json` | 19552 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000076/eval.json` | 19550 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234/trajectory/update-00000077/eval.json` | 19550 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/adapter/README.md` | 5089 | HAVE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/adapter/adapter_config.json` | 1121 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/eval.json` | 1211 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300/train_log.json` | 28252 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed1/adapter/delta_manifest.json` | 44924 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed1/eval.json` | 1360 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed1/train_log.json` | 28120 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed2/adapter/delta_manifest.json` | 44924 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed2/eval.json` | 1359 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_300_seed2/train_log.json` | 28099 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/eval.json` | 19327 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/train_log.json` | 116911 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000025/eval.json` | 19440 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000050/eval.json` | 19436 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000100/eval.json` | 19437 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed21/trajectory/update-00000199/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/eval.json` | 19328 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/train_log.json` | 116912 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000026/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000050/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000100/eval.json` | 19439 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed22/trajectory/update-00000200/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/eval.json` | 19328 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/train_log.json` | 115995 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000025/eval.json` | 19437 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000050/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000099/eval.json` | 19439 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_375_p2v2test_lora_dseed23/trajectory/update-00000197/eval.json` | 19440 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/eval.json` | 19324 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/train_log.json` | 116428 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000026/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000026/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000026/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000026/eval.json` | 19437 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000050/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000050/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000050/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000050/eval.json` | 19434 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000100/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000100/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000100/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000100/eval.json` | 19440 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000199/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000199/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000199/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed11/trajectory/update-00000199/eval.json` | 19443 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/eval.json` | 19326 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/train_log.json` | 116420 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000025/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000025/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000025/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000025/eval.json` | 19425 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000049/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000049/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000049/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000049/eval.json` | 19440 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000099/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000099/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000099/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000099/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000199/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000199/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000199/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_450_p2v2test_lora_dseed12/trajectory/update-00000199/eval.json` | 19441 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/eval.json` | 19351 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/train_log.json` | 85251 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 19356 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000019/eval.json` | 19460 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000037/eval.json` | 19464 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000073/eval.json` | 19462 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41/trajectory/update-00000142/eval.json` | 19468 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/eval.json` | 19349 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/train_log.json` | 85674 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 19356 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000018/eval.json` | 19460 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000036/eval.json` | 19460 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000072/eval.json` | 19466 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42/trajectory/update-00000143/eval.json` | 19447 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/adapter/delta_manifest.json` | 44924 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/eval.json` | 1209 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600/train_log.json` | 55140 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed1/adapter/delta_manifest.json` | 44924 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed1/eval.json` | 1358 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed1/train_log.json` | 55189 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed2/adapter/delta_manifest.json` | 44924 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed2/eval.json` | 1358 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_600_seed2/train_log.json` | 55193 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/eval.json` | 19336 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/train_log.json` | 89393 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000000/eval.json` | 19349 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000019/eval.json` | 19451 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000038/eval.json` | 19455 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000076/eval.json` | 19454 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41/trajectory/update-00000152/eval.json` | 19453 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/eval.json` | 19339 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/train_log.json` | 88931 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000000/eval.json` | 19349 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000019/eval.json` | 19453 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000038/eval.json` | 19454 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000075/eval.json` | 19453 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42/trajectory/update-00000151/eval.json` | 19438 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/adapter/README.md` | 5089 | HAVE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/adapter/adapter_config.json` | 1121 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/eval.json` | 1209 | REUSABLE |
 | `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75/train_log.json` | 8041 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/eval.json` | 19319 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/train_log.json` | 37935 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_1e-4_lora_dseed11/trajectory/update-00000008/eval.json` | 19437 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/eval.json` | 19320 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/train_log.json` | 37953 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000000/eval.json` | 19330 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_2e-4_lora_dseed11/trajectory/update-00000008/eval.json` | 19435 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/eval.json` | 19320 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/train_log.json` | 37940 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000000/eval.json` | 19329 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_lrpilot_5e-5_lora_dseed11/trajectory/update-00000008/eval.json` | 19438 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/eval.json` | 19315 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/train_log.json` | 114123 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000000/eval.json` | 19324 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000025/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000025/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000025/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000025/eval.json` | 19429 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000049/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000049/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000049/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000049/eval.json` | 19427 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000098/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000098/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000098/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000098/eval.json` | 19426 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000196/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000196/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000196/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed11/trajectory/update-00000196/eval.json` | 19431 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/eval.json` | 19314 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/train_log.json` | 116444 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000000/eval.json` | 19324 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000025/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000025/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000025/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000025/eval.json` | 19428 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000050/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000050/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000050/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000050/eval.json` | 19432 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000100/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000100/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000100/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000100/eval.json` | 19428 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000200/adapter/README.md` | 5089 | HAVE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000200/adapter/adapter_config.json` | 1121 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000200/adapter/adapter_model.safetensors` | 119277856 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_p2v2test_lora_dseed12/trajectory/update-00000200/eval.json` | 19431 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed1/adapter/delta_manifest.json` | 44924 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed1/eval.json` | 1357 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed1/train_log.json` | 7892 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed2/adapter/delta_manifest.json` | 44924 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed2/eval.json` | 1358 | REUSABLE |
+| `results/v12-distill/gemma3-4b/gpt-5.6-luna_full_75_seed2/train_log.json` | 7898 | REUSABLE |
+| `results/v12-distill/olmo3-7b/gpt-5.6-luna_full_600/adapter/delta_manifest.json` | 40428 | REUSABLE |
 | `results/v12-distill/olmo3-7b/gpt-5.6-luna_full_600/eval.json` | 1215 | REUSABLE |
+| `results/v12-distill/olmo3-7b/gpt-5.6-luna_full_600/train_log.json` | 55085 | REUSABLE |
 | `results/v12-distill/pilot_summary.json` | 5057 | REUSABLE |
 | `results/v12-distill/pilot_summary.md` | 2327 | HAVE |
+| `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600/eval.json` | 3228 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1144 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 50358496 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600_lora/eval.json` | 9645 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step143000/gpt-5.6-luna_full_600_lora/train_log.json` | 111350 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600/eval.json` | 3230 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1143 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 50358496 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600_lora/eval.json` | 3237 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step16000/gpt-5.6-luna_full_600_lora/train_log.json` | 104831 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step64000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-1.4b--step64000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1143 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step64000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 50358496 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step64000/gpt-5.6-luna_full_600_lora/eval.json` | 9637 | REUSABLE |
+| `results/v12-distill/pythia-1.4b--step64000/gpt-5.6-luna_full_600_lora/train_log.json` | 111353 | REUSABLE |
+| `results/v12-distill/pythia-160m--step143000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-160m--step143000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1144 | REUSABLE |
+| `results/v12-distill/pythia-160m--step143000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 9450352 | REUSABLE |
+| `results/v12-distill/pythia-160m--step143000/gpt-5.6-luna_full_600_lora/eval.json` | 6542 | REUSABLE |
+| `results/v12-distill/pythia-160m--step143000/gpt-5.6-luna_full_600_lora/train_log.json` | 108197 | REUSABLE |
+| `results/v12-distill/pythia-160m--step16000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-160m--step16000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1143 | REUSABLE |
+| `results/v12-distill/pythia-160m--step16000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 9450352 | REUSABLE |
+| `results/v12-distill/pythia-160m--step16000/gpt-5.6-luna_full_600_lora/eval.json` | 6539 | REUSABLE |
+| `results/v12-distill/pythia-160m--step16000/gpt-5.6-luna_full_600_lora/train_log.json` | 108222 | REUSABLE |
+| `results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1143 | REUSABLE |
+| `results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 9450352 | REUSABLE |
+| `results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/eval.json` | 6538 | REUSABLE |
+| `results/v12-distill/pythia-160m--step64000/gpt-5.6-luna_full_600_lora/train_log.json` | 108219 | REUSABLE |
+| `results/v12-distill/pythia-410m--step143000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-410m--step143000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1144 | REUSABLE |
+| `results/v12-distill/pythia-410m--step143000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 25192592 | REUSABLE |
+| `results/v12-distill/pythia-410m--step143000/gpt-5.6-luna_full_600_lora/eval.json` | 9639 | REUSABLE |
+| `results/v12-distill/pythia-410m--step143000/gpt-5.6-luna_full_600_lora/train_log.json` | 111321 | REUSABLE |
+| `results/v12-distill/pythia-410m--step16000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-410m--step16000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1143 | REUSABLE |
+| `results/v12-distill/pythia-410m--step16000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 25192592 | REUSABLE |
+| `results/v12-distill/pythia-410m--step16000/gpt-5.6-luna_full_600_lora/eval.json` | 9635 | REUSABLE |
+| `results/v12-distill/pythia-410m--step16000/gpt-5.6-luna_full_600_lora/train_log.json` | 111314 | REUSABLE |
+| `results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/adapter/README.md` | 5168 | HAVE |
+| `results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/adapter/adapter_config.json` | 1143 | REUSABLE |
+| `results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/adapter/adapter_model.safetensors` | 25192592 | REUSABLE |
+| `results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/eval.json` | 9636 | REUSABLE |
+| `results/v12-distill/pythia-410m--step64000/gpt-5.6-luna_full_600_lora/train_log.json` | 111336 | REUSABLE |
 
 
 ### v13-recovery (15 files)
@@ -629,7 +3846,7 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v17-unification/matched_storage_pruning_vs_quant.csv` | 11890 | HAVE |
 | `results/v17-unification/matched_storage_pruning_vs_quant.png` | 74891 | HAVE |
 | `results/v17-unification/method_selection_map.csv` | 44309 | HAVE |
-| `results/v17-unification/summary.md` | 15929 | HAVE |
+| `results/v17-unification/summary.md` | 25514 | HAVE |
 | `results/v17-unification/unification_table.csv` | 199336 | HAVE |
 
 
@@ -678,6 +3895,113 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v22-distill-decomp/summary.json` | 243495 | HAVE |
 
 
+### v23-loss-validity (36 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v23-loss-validity/gemma3-12b/dense/loss_validity.json` | 100049 | REUSABLE |
+| `results/v23-loss-validity/gemma3-12b/dense_prune-d0.7/loss_validity.json` | 100129 | REUSABLE |
+| `results/v23-loss-validity/gemma3-12b/dense_prune-d0.75/loss_validity.json` | 100255 | REUSABLE |
+| `results/v23-loss-validity/gemma3-12b/dense_prune-d0.8/loss_validity.json` | 100191 | REUSABLE |
+| `results/v23-loss-validity/gemma3-12b/dense_prune-d0.85/loss_validity.json` | 100257 | REUSABLE |
+| `results/v23-loss-validity/gemma3-12b/dense_prune-d0.9/loss_validity.json` | 100293 | REUSABLE |
+| `results/v23-loss-validity/gemma3-27b/dense/loss_validity.json` | 100040 | REUSABLE |
+| `results/v23-loss-validity/gemma3-27b/dense_prune-d0.7/loss_validity.json` | 99887 | REUSABLE |
+| `results/v23-loss-validity/gemma3-27b/dense_prune-d0.75/loss_validity.json` | 100159 | REUSABLE |
+| `results/v23-loss-validity/gemma3-27b/dense_prune-d0.8/loss_validity.json` | 100132 | REUSABLE |
+| `results/v23-loss-validity/gemma3-27b/dense_prune-d0.85/loss_validity.json` | 100236 | REUSABLE |
+| `results/v23-loss-validity/gemma3-27b/dense_prune-d0.9/loss_validity.json` | 100186 | REUSABLE |
+| `results/v23-loss-validity/gemma3-4b/dense/loss_validity.json` | 100067 | REUSABLE |
+| `results/v23-loss-validity/gemma3-4b/dense_prune-d0.7/loss_validity.json` | 100146 | REUSABLE |
+| `results/v23-loss-validity/gemma3-4b/dense_prune-d0.75/loss_validity.json` | 100280 | REUSABLE |
+| `results/v23-loss-validity/gemma3-4b/dense_prune-d0.8/loss_validity.json` | 100198 | REUSABLE |
+| `results/v23-loss-validity/gemma3-4b/dense_prune-d0.85/loss_validity.json` | 100146 | REUSABLE |
+| `results/v23-loss-validity/gemma3-4b/dense_prune-d0.9/loss_validity.json` | 100160 | REUSABLE |
+| `results/v23-loss-validity/muse-30b/dense/loss_validity.json` | 100094 | REUSABLE |
+| `results/v23-loss-validity/muse-30b/dense_prune-d0.7/loss_validity.json` | 100188 | REUSABLE |
+| `results/v23-loss-validity/muse-30b/dense_prune-d0.75/loss_validity.json` | 100318 | REUSABLE |
+| `results/v23-loss-validity/muse-30b/dense_prune-d0.8/loss_validity.json` | 100288 | REUSABLE |
+| `results/v23-loss-validity/muse-30b/dense_prune-d0.85/loss_validity.json` | 100262 | REUSABLE |
+| `results/v23-loss-validity/muse-30b/dense_prune-d0.9/loss_validity.json` | 100374 | REUSABLE |
+| `results/v23-loss-validity/olmo3-32b/dense/loss_validity.json` | 100027 | REUSABLE |
+| `results/v23-loss-validity/olmo3-32b/dense_prune-d0.7/loss_validity.json` | 100174 | REUSABLE |
+| `results/v23-loss-validity/olmo3-32b/dense_prune-d0.75/loss_validity.json` | 100245 | REUSABLE |
+| `results/v23-loss-validity/olmo3-32b/dense_prune-d0.8/loss_validity.json` | 100365 | REUSABLE |
+| `results/v23-loss-validity/olmo3-32b/dense_prune-d0.85/loss_validity.json` | 100229 | REUSABLE |
+| `results/v23-loss-validity/olmo3-32b/dense_prune-d0.9/loss_validity.json` | 100249 | REUSABLE |
+| `results/v23-loss-validity/olmo3-7b/dense/loss_validity.json` | 100014 | REUSABLE |
+| `results/v23-loss-validity/olmo3-7b/dense_prune-d0.7/loss_validity.json` | 100167 | REUSABLE |
+| `results/v23-loss-validity/olmo3-7b/dense_prune-d0.75/loss_validity.json` | 100261 | REUSABLE |
+| `results/v23-loss-validity/olmo3-7b/dense_prune-d0.8/loss_validity.json` | 100258 | REUSABLE |
+| `results/v23-loss-validity/olmo3-7b/dense_prune-d0.85/loss_validity.json` | 100261 | REUSABLE |
+| `results/v23-loss-validity/olmo3-7b/dense_prune-d0.9/loss_validity.json` | 100290 | REUSABLE |
+
+
+### v24-quant-baselines (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v24-quant-baselines/report.md` | 4266 | HAVE |
+| `results/v24-quant-baselines/summary.json` | 85602 | REUSABLE |
+
+
+### v25-distill-delta (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v25-distill-delta/report.md` | 10419 | HAVE |
+| `results/v25-distill-delta/summary.json` | 535489 | REUSABLE |
+
+
+### v26-loss-validity-pred (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v26-loss-validity-pred/report.md` | 10055 | HAVE |
+| `results/v26-loss-validity-pred/summary.json` | 679047 | REUSABLE |
+
+
+### v27-scoring-units (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v27-scoring-units/gemma3-1b/dense_prune-d0.7/all-L_full-scoring-units.json` | 2085843 | REUSABLE |
+| `results/v27-scoring-units/gemma3-4b/dense_prune-d0.7/all-L_full-scoring-units.json` | 2086297 | REUSABLE |
+| `results/v27-scoring-units/olmo3-7b/dense_prune-d0.7/all-L_full-scoring-units.json` | 2085822 | REUSABLE |
+
+
+### v27b-readout (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v27b-readout/summary.json` | 534031 | REUSABLE |
+
+
+### v27c (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v27c/summary.json` | 1672901 | REUSABLE |
+
+
+### v28-new-source-pred (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v28-new-source-pred/frozen_predictions.json` | 461362 | REUSABLE |
+
+
+### v29-prune-diagnosis (5 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v29-prune-diagnosis/diagnosis.pdf` | 26990 | HAVE |
+| `results/v29-prune-diagnosis/diagnosis.png` | 194217 | HAVE |
+| `results/v29-prune-diagnosis/predictions.csv` | 652628 | REUSABLE |
+| `results/v29-prune-diagnosis/report.md` | 30850 | HAVE |
+| `results/v29-prune-diagnosis/summary.json` | 2958122 | REUSABLE |
+
+
 ### v3-measurement-audit (3 files)
 
 | Artifact | Bytes | Status |
@@ -687,10 +4011,329 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v3-measurement-audit/summary.md` | 2028 | HAVE |
 
 
-### v6-capability-geometry (120 files)
+### v30-quant-candidates (3 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
+| `results/v30-quant-candidates/predictions.csv` | 24083 | REUSABLE |
+| `results/v30-quant-candidates/report.md` | 23953 | HAVE |
+| `results/v30-quant-candidates/summary.json` | 860618 | REUSABLE |
+
+
+### v30b-quant-regions (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v30b-quant-regions/report.md` | 29912 | HAVE |
+| `results/v30b-quant-regions/summary.json` | 1114279 | REUSABLE |
+
+
+### v31-uxseen (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v31-uxseen/sameE_summary.json` | 2467 | REUSABLE |
+| `results/v31-uxseen/summary.json` | 6017 | REUSABLE |
+
+
+### v32-descriptors (18 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v32-descriptors/Qwen3-0.6B/features.json` | 19880 | REUSABLE |
+| `results/v32-descriptors/Qwen3-1.7B/features.json` | 19896 | REUSABLE |
+| `results/v32-descriptors/Qwen3-4B/features.json` | 24172 | REUSABLE |
+| `results/v32-descriptors/Qwen3-8B/features.json` | 24702 | REUSABLE |
+| `results/v32-descriptors/gemma3-12b/features.json` | 31563 | REUSABLE |
+| `results/v32-descriptors/gemma3-1b/features.json` | 18809 | REUSABLE |
+| `results/v32-descriptors/gemma3-270m/features.json` | 14499 | REUSABLE |
+| `results/v32-descriptors/gemma3-27b/features.json` | 39374 | REUSABLE |
+| `results/v32-descriptors/gemma3-4b/features.json` | 23658 | REUSABLE |
+| `results/v32-descriptors/muse-30b/features.json` | 34243 | REUSABLE |
+| `results/v32-descriptors/olmo3-32b/features.json` | 39897 | REUSABLE |
+| `results/v32-descriptors/olmo3-7b/features.json` | 22664 | REUSABLE |
+| `results/v32-descriptors/prediction/report.md` | 10922 | HAVE |
+| `results/v32-descriptors/prediction/summary.json` | 360418 | REUSABLE |
+| `results/v32-descriptors/prediction-11/report.md` | 10924 | HAVE |
+| `results/v32-descriptors/prediction-11/summary.json` | 402618 | REUSABLE |
+| `results/v32-descriptors/prediction-v3/report.md` | 11463 | HAVE |
+| `results/v32-descriptors/prediction-v3/summary.json` | 752588 | REUSABLE |
+
+
+### v33-selection (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v33-selection/report.md` | 14164 | HAVE |
+| `results/v33-selection/summary.json` | 7665467 | REUSABLE |
+
+
+### v33b-selection-pareto (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v33b-selection-pareto/report.md` | 18042 | HAVE |
+| `results/v33b-selection-pareto/summary.json` | 10583611 | REUSABLE |
+
+
+### v34-c17-scope (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v34-c17-scope/summary.json` | 1148187 | REUSABLE |
+
+
+### v35-info-budget (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v35-info-budget/report.md` | 32676 | HAVE |
+| `results/v35-info-budget/summary.json` | 2308353 | REUSABLE |
+
+
+### v36-pythia-controlled (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v36-pythia-controlled/summary.json` | 949891 | REUSABLE |
+
+
+### v36b-input-comparison (13 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v36b-input-comparison/curves_pruning_code.csv` | 3507 | REUSABLE |
+| `results/v36b-input-comparison/curves_pruning_code.png` | 259157 | HAVE |
+| `results/v36b-input-comparison/curves_pruning_math.csv` | 3511 | REUSABLE |
+| `results/v36b-input-comparison/curves_pruning_math.png` | 259184 | HAVE |
+| `results/v36b-input-comparison/curves_pruning_qa.csv` | 3488 | REUSABLE |
+| `results/v36b-input-comparison/curves_pruning_qa.png` | 269224 | HAVE |
+| `results/v36b-input-comparison/curves_quantization_code.csv` | 3463 | REUSABLE |
+| `results/v36b-input-comparison/curves_quantization_code.png` | 230098 | HAVE |
+| `results/v36b-input-comparison/curves_quantization_math.csv` | 3448 | REUSABLE |
+| `results/v36b-input-comparison/curves_quantization_math.png` | 226670 | HAVE |
+| `results/v36b-input-comparison/curves_quantization_qa.csv` | 3402 | REUSABLE |
+| `results/v36b-input-comparison/curves_quantization_qa.png` | 226529 | HAVE |
+| `results/v36b-input-comparison/summary.json` | 1029226 | REUSABLE |
+
+
+### v37-reuse-sufficiency (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v37-reuse-sufficiency/summary.json` | 364411 | REUSABLE |
+
+
+### v37b-reuse-interaction (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v37b-reuse-interaction/summary.json` | 503293 | REUSABLE |
+
+
+### v38-prospective (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v38-prospective/compare.json` | 5975 | REUSABLE |
+| `results/v38-prospective/register.json` | 609 | REUSABLE |
+
+
+### v39-distill-controlled (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v39-distill-controlled/summary.json` | 6482 | REUSABLE |
+
+
+### v40-prune-strength (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v40-prune-strength/compare.json` | 5955 | REUSABLE |
+| `results/v40-prune-strength/register.json` | 2399 | REUSABLE |
+
+
+### v41-distill-newpool (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v41-distill-newpool/summary.json` | 2176 | REUSABLE |
+
+
+### v42-prune-sameinput (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v42-prune-sameinput/summary.json` | 12082 | REUSABLE |
+
+
+### v43-distill-residuals (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v43-distill-residuals/summary.json` | 11696 | REUSABLE |
+
+
+### v44-quant-partition (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v44-quant-partition/summary.json` | 13780 | REUSABLE |
+
+
+### v45-main-table (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v45-main-table/main_table.csv` | 11262 | REUSABLE |
+| `results/v45-main-table/main_table.json` | 19201 | REUSABLE |
+
+
+### v46-p1-newsource (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v46-p1-newsource/compare.json` | 9613 | REUSABLE |
+| `results/v46-p1-newsource/dense.json` | 419 | REUSABLE |
+| `results/v46-p1-newsource/predictions_frozen.json` | 5700 | REUSABLE |
+
+
+### v47-p2-register (5 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v47-p2-register/FREEZE2_COMMITTED` | 0 | REUSABLE |
+| `results/v47-p2-register/PAIR_OK` | 0 | REUSABLE |
+| `results/v47-p2-register/STAGE_B_DONE` | 0 | REUSABLE |
+| `results/v47-p2-register/contamination_audit.json` | 339 | REUSABLE |
+| `results/v47-p2-register/register.json` | 35782 | REUSABLE |
+
+
+### v48-p3-measure (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v48-p3-measure/measurements.json` | 4253 | REUSABLE |
+
+
+### v49-p1v2 (15 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v49-p1v2/compare_pythia-1b@step112000.json` | 87848 | REUSABLE |
+| `results/v49-p1v2/compare_pythia-1b@step32000.json` | 87909 | REUSABLE |
+| `results/v49-p1v2/compare_pythia-6.9b@step112000.json` | 87580 | REUSABLE |
+| `results/v49-p1v2/compare_pythia-6.9b@step32000.json` | 87776 | REUSABLE |
+| `results/v49-p1v2/dense_pythia-1b@step112000.json` | 422 | REUSABLE |
+| `results/v49-p1v2/dense_pythia-1b@step32000.json` | 423 | REUSABLE |
+| `results/v49-p1v2/dense_pythia-6.9b@step112000.json` | 431 | REUSABLE |
+| `results/v49-p1v2/dense_pythia-6.9b@step32000.json` | 427 | REUSABLE |
+| `results/v49-p1v2/p1v2_table.csv` | 6096 | REUSABLE |
+| `results/v49-p1v2/p1v2_table.json` | 15585 | REUSABLE |
+| `results/v49-p1v2/predictions_pythia-1b@step112000.json` | 20236 | REUSABLE |
+| `results/v49-p1v2/predictions_pythia-1b@step32000.json` | 20255 | REUSABLE |
+| `results/v49-p1v2/predictions_pythia-6.9b@step112000.json` | 20201 | REUSABLE |
+| `results/v49-p1v2/predictions_pythia-6.9b@step32000.json` | 20250 | REUSABLE |
+| `results/v49-p1v2/register.json` | 34721 | REUSABLE |
+
+
+### v50-p2v2 (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v50-p2v2/compare_test.json` | 233146 | REUSABLE |
+| `results/v50-p2v2/freeze.json` | 77455 | REUSABLE |
+
+
+### v51-panel (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v51-panel/counts.json` | 508 | REUSABLE |
+| `results/v51-panel/panel.json` | 11025 | REUSABLE |
+
+
+### v52-prediction-tables (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v52-prediction-tables/groups.json` | 25897 | REUSABLE |
+| `results/v52-prediction-tables/rows.csv` | 15628 | REUSABLE |
+
+
+### v53-prune-dev (14 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v53-prune-dev/compare_pythia-1.4b@step112000.json` | 5137 | REUSABLE |
+| `results/v53-prune-dev/compare_pythia-410m@step48000.json` | 5139 | REUSABLE |
+| `results/v53-prune-dev/compare_pythia-6.9b@step80000.json` | 5125 | REUSABLE |
+| `results/v53-prune-dev/dense_dir_pythia-1.4b@step112000/dense.json` | 429 | REUSABLE |
+| `results/v53-prune-dev/dense_dir_pythia-410m@step48000/dense.json` | 424 | REUSABLE |
+| `results/v53-prune-dev/dense_dir_pythia-6.9b@step80000/dense.json` | 426 | REUSABLE |
+| `results/v53-prune-dev/dense_pythia-1.4b@step112000.json` | 189 | REUSABLE |
+| `results/v53-prune-dev/dense_pythia-410m@step48000.json` | 186 | REUSABLE |
+| `results/v53-prune-dev/dense_pythia-6.9b@step80000.json` | 186 | REUSABLE |
+| `results/v53-prune-dev/loso_table.csv` | 1449 | REUSABLE |
+| `results/v53-prune-dev/predictions_pythia-1.4b@step112000.json` | 3245 | REUSABLE |
+| `results/v53-prune-dev/predictions_pythia-410m@step48000.json` | 3232 | REUSABLE |
+| `results/v53-prune-dev/predictions_pythia-6.9b@step80000.json` | 3242 | REUSABLE |
+| `results/v53-prune-dev/register.json` | 150573 | REUSABLE |
+
+
+### v54-quant-group (14 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v54-quant-group/DEV_DONE` | 0 | REUSABLE |
+| `results/v54-quant-group/FREEZE_COMMITTED` | 0 | REUSABLE |
+| `results/v54-quant-group/V55_REVIEWED` | 0 | REUSABLE |
+| `results/v54-quant-group/pythia-1.4b--step112000/quant_group_losses.json` | 6095 | REUSABLE |
+| `results/v54-quant-group/pythia-1.4b--step143000/quant_group_losses.json` | 6084 | REUSABLE |
+| `results/v54-quant-group/pythia-1.4b--step16000/quant_group_losses.json` | 9297 | REUSABLE |
+| `results/v54-quant-group/pythia-1.4b--step64000/quant_group_losses.json` | 2361317 | REUSABLE |
+| `results/v54-quant-group/pythia-160m--step143000/quant_group_losses.json` | 6080 | REUSABLE |
+| `results/v54-quant-group/pythia-160m--step16000/quant_group_losses.json` | 6076 | REUSABLE |
+| `results/v54-quant-group/pythia-160m--step64000/quant_group_losses.json` | 1784001 | REUSABLE |
+| `results/v54-quant-group/pythia-1b--step96000/quant_group_losses.json` | 2869 | REUSABLE |
+| `results/v54-quant-group/pythia-410m--step143000/quant_group_losses.json` | 9297 | REUSABLE |
+| `results/v54-quant-group/pythia-410m--step16000/quant_group_losses.json` | 6083 | REUSABLE |
+| `results/v54-quant-group/pythia-410m--step64000/quant_group_losses.json` | 2359548 | REUSABLE |
+
+
+### v55-quant-group (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v55-quant-group/compare.json` | 98123 | REUSABLE |
+| `results/v55-quant-group/predictions.json` | 48531 | REUSABLE |
+| `results/v55-quant-group/register.json` | 137500 | REUSABLE |
+
+
+### v56-distill-forms (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v56-distill-forms/summary.json` | 15809610 | REUSABLE |
+| `results/v56-distill-forms/summary.md` | 6195 | HAVE |
+
+
+### v59-shared-structure (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v59-shared-structure/summary.json` | 3992631 | REUSABLE |
+| `results/v59-shared-structure/summary.md` | 8267 | HAVE |
+
+
+### v6-capability-geometry (144 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v6-capability-geometry/Qwen--Qwen3-14B/prospective_summary.json` | 847 | REUSABLE |
+| `results/v6-capability-geometry/Qwen--Qwen3-14B/prune_losses.json` | 500 | REUSABLE |
+| `results/v6-capability-geometry/Qwen--Qwen3-8B/prune_losses.json` | 502 | REUSABLE |
 | `results/v6-capability-geometry/Qwen3-0.6B/alignment.json` | 3146 | REUSABLE |
 | `results/v6-capability-geometry/Qwen3-0.6B/archive-v1-sameprobe/alignment.json` | 3146 | TO-ANALYZE |
 | `results/v6-capability-geometry/Qwen3-0.6B/archive-v1-sameprobe/fisher_meta.json` | 8710 | TO-ANALYZE |
@@ -714,6 +4357,7 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v6-capability-geometry/Qwen3-1.7B/report.md` | 1181 | HAVE |
 | `results/v6-capability-geometry/Qwen3-1.7B/report_b.md` | 1428 | HAVE |
 | `results/v6-capability-geometry/Qwen3-1.7B/spectrum_bins.npz` | 53839 | REUSABLE |
+| `results/v6-capability-geometry/Qwen3-14B/prune_losses.json` | 500 | REUSABLE |
 | `results/v6-capability-geometry/Qwen3-4B/alignment.json` | 3131 | REUSABLE |
 | `results/v6-capability-geometry/Qwen3-4B/fisher_meta.json` | 11167 | REUSABLE |
 | `results/v6-capability-geometry/Qwen3-4B/probes.json` | 34 | REUSABLE |
@@ -811,82 +4455,772 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v6-capability-geometry/olmo3-7b/report.md` | 1219 | HAVE |
 | `results/v6-capability-geometry/olmo3-7b/report_b.md` | 1415 | HAVE |
 | `results/v6-capability-geometry/olmo3-7b/spectrum_bins.npz` | 113596 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json` | 402 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json` | 499 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json` | 501 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json` | 700 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1.4b--step96000/prune_losses.json` | 499 | REUSABLE |
+| `results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json` | 695 | REUSABLE |
+| `results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json` | 499 | REUSABLE |
+| `results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json` | 499 | REUSABLE |
+| `results/v6-capability-geometry/pythia-160m--step96000/prune_losses.json` | 486 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1b--step112000/prune_losses.json` | 798 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1b--step32000/prune_losses.json` | 799 | REUSABLE |
+| `results/v6-capability-geometry/pythia-1b--step96000/prune_losses.json` | 300 | REUSABLE |
+| `results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json` | 499 | REUSABLE |
+| `results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json` | 499 | REUSABLE |
+| `results/v6-capability-geometry/pythia-410m--step48000/prune_losses.json` | 407 | REUSABLE |
+| `results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json` | 500 | REUSABLE |
+| `results/v6-capability-geometry/pythia-410m--step96000/prune_losses.json` | 698 | REUSABLE |
+| `results/v6-capability-geometry/pythia-6.9b--step112000/prune_losses.json` | 801 | REUSABLE |
+| `results/v6-capability-geometry/pythia-6.9b--step32000/prune_losses.json` | 802 | REUSABLE |
+| `results/v6-capability-geometry/pythia-6.9b--step80000/prune_losses.json` | 406 | REUSABLE |
 
 
-### v9-capability-regions (90 files)
+### v60-selection-maps (2 files)
 
 | Artifact | Bytes | Status |
 |---|---|---|
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_2wiki.pt` | 2383939148 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_c4.pt` | 2383939127 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_gsm8k.pt` | 2383939148 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_hotpotqa.pt` | 2383939169 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_humaneval.pt` | 2383939176 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_math500.pt` | 2383939162 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_mbpp.pt` | 2383939141 | REUSABLE |
+| `results/v60-selection-maps/summary.json` | 4644157 | REUSABLE |
+| `results/v60-selection-maps/summary.md` | 26399 | HAVE |
+
+
+### v63-quant-identifiability (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v63-quant-identifiability/quant_ident.tex` | 2652 | REUSABLE |
+| `results/v63-quant-identifiability/summary.json` | 444953 | REUSABLE |
+| `results/v63-quant-identifiability/summary.md` | 12703 | HAVE |
+
+
+### v64-selection-feasible (7 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v64-selection-feasible/paper/code/analysis/v64_selection_feasible.py` | 62635 | REUSABLE |
+| `results/v64-selection-feasible/paper/figs/selection_feasible.pdf` | 48111 | HAVE |
+| `results/v64-selection-feasible/paper/figs/selection_feasible.png` | 435719 | HAVE |
+| `results/v64-selection-feasible/paper/tables/candidate_coverage.tex` | 2529 | REUSABLE |
+| `results/v64-selection-feasible/paper/tables/selection_feasible.tex` | 2910 | REUSABLE |
+| `results/v64-selection-feasible/summary.json` | 4578544 | REUSABLE |
+| `results/v64-selection-feasible/summary.md` | 32630 | HAVE |
+
+
+### v65-distill-paired (4 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v65-distill-paired/paper/code/analysis/v65_distill_paired.py` | 15029 | REUSABLE |
+| `results/v65-distill-paired/paper/tables/distill_paired.tex` | 3803 | REUSABLE |
+| `results/v65-distill-paired/summary.json` | 30057 | REUSABLE |
+| `results/v65-distill-paired/summary.md` | 3470 | HAVE |
+
+
+### v67-musique-qa (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v67-musique-qa/measurements.json` | 109495 | REUSABLE |
+| `results/v67-musique-qa/summary.md` | 5685 | HAVE |
+
+
+### v67-musique-qa-4b (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v67-musique-qa-4b/measurements.json` | 2565 | REUSABLE |
+| `results/v67-musique-qa-4b/summary.md` | 938 | HAVE |
+
+
+### v67-musique-qa-small (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v67-musique-qa-small/measurements.json` | 2567 | REUSABLE |
+| `results/v67-musique-qa-small/summary.md` | 941 | HAVE |
+
+
+### v69-quant-confirm (5 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v69-quant-confirm/compare.json` | 113156 | REUSABLE |
+| `results/v69-quant-confirm/compare.md` | 2204 | HAVE |
+| `results/v69-quant-confirm/develop.json` | 408195 | REUSABLE |
+| `results/v69-quant-confirm/develop.md` | 4521 | HAVE |
+| `results/v69-quant-confirm/freeze.json` | 101105 | REUSABLE |
+
+
+### v70-distill-confirm (7 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v70-distill-confirm/FREEZE_V70` | 65 | REUSABLE |
+| `results/v70-distill-confirm/compare.json` | 337627 | REUSABLE |
+| `results/v70-distill-confirm/compare.md` | 1546 | HAVE |
+| `results/v70-distill-confirm/dense_drift.json` | 3536 | REUSABLE |
+| `results/v70-distill-confirm/develop.json` | 1677435 | REUSABLE |
+| `results/v70-distill-confirm/develop.md` | 2346 | HAVE |
+| `results/v70-distill-confirm/freeze.json` | 195223 | REUSABLE |
+
+
+### v71-qa-scope (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v71-qa-scope/measurements.json` | 39839 | REUSABLE |
+| `results/v71-qa-scope/register.json` | 30020 | REUSABLE |
+| `results/v71-qa-scope/summary.md` | 5410 | HAVE |
+
+
+### v72-prune-repeat (19 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v72-prune-repeat/.measure.lock` | 0 | REUSABLE |
+| `results/v72-prune-repeat/compare.json` | 17912 | REUSABLE |
+| `results/v72-prune-repeat/dense_dir_pythia-2.8b@step143000/dense.json` | 425 | REUSABLE |
+| `results/v72-prune-repeat/dense_dir_pythia-2.8b@step16000/dense.json` | 423 | REUSABLE |
+| `results/v72-prune-repeat/freeze.json` | 59366 | REUSABLE |
+| `results/v72-prune-repeat/logs/dense_pythia-2.8b@step143000.log` | 4036 | REUSABLE |
+| `results/v72-prune-repeat/logs/dense_pythia-2.8b@step16000.log` | 4032 | REUSABLE |
+| `results/v72-prune-repeat/logs/prune_pythia-2.8b@step143000_d0.65.log` | 1954 | REUSABLE |
+| `results/v72-prune-repeat/logs/prune_pythia-2.8b@step143000_d0.75.log` | 1954 | REUSABLE |
+| `results/v72-prune-repeat/logs/prune_pythia-2.8b@step143000_d0.85.log` | 1955 | REUSABLE |
+| `results/v72-prune-repeat/logs/prune_pythia-2.8b@step16000_d0.65.log` | 1952 | REUSABLE |
+| `results/v72-prune-repeat/logs/prune_pythia-2.8b@step16000_d0.75.log` | 1952 | REUSABLE |
+| `results/v72-prune-repeat/logs/prune_pythia-2.8b@step16000_d0.85.log` | 1953 | REUSABLE |
+| `results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.65/prune_losses.json` | 200 | REUSABLE |
+| `results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.75/prune_losses.json` | 200 | REUSABLE |
+| `results/v72-prune-repeat/measurements/pythia-2.8b--step143000/d0.85/prune_losses.json` | 201 | REUSABLE |
+| `results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.65/prune_losses.json` | 200 | REUSABLE |
+| `results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.75/prune_losses.json` | 200 | REUSABLE |
+| `results/v72-prune-repeat/measurements/pythia-2.8b--step16000/d0.85/prune_losses.json` | 201 | REUSABLE |
+
+
+### v74-quant-threeway (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v74-quant-threeway/median_algorithm.md` | 8523 | HAVE |
+| `results/v74-quant-threeway/quant_threeway.json` | 23828 | REUSABLE |
+| `results/v74-quant-threeway/quant_threeway.tex` | 2448 | REUSABLE |
+
+
+### v75-distill-audit (6 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v75-distill-audit/distill_forms_audit.tex` | 6688 | REUSABLE |
+| `results/v75-distill-audit/paper/code/analysis/v75_distill_audit.py` | 38835 | REUSABLE |
+| `results/v75-distill-audit/paper/paper/tables/distill_forms_audit.tex` | 6688 | REUSABLE |
+| `results/v75-distill-audit/summary.json` | 1679701 | REUSABLE |
+| `results/v75-distill-audit/summary.md` | 15922 | HAVE |
+| `results/v75-distill-audit/validation.json` | 495 | REUSABLE |
+
+
+### v76-cap-conditioning (4 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v76-cap-conditioning/paper/code/analysis/v76_cap_conditioning.py` | 46134 | REUSABLE |
+| `results/v76-cap-conditioning/paper/paper/tables/cap_conditioning.tex` | 2662 | REUSABLE |
+| `results/v76-cap-conditioning/summary.json` | 784213 | REUSABLE |
+| `results/v76-cap-conditioning/summary.md` | 14795 | HAVE |
+
+
+### v77-model-arch (14 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v77-model-arch/model_arch.json` | 1715954 | REUSABLE |
+| `results/v77-model-arch/paper/code/analysis/v77_model_arch.py` | 45797 | REUSABLE |
+| `results/v77-model-arch/paper/paper/tables/model_arch.tex` | 2935 | REUSABLE |
+| `results/v77-model-arch/pythia_2_8b_tensor_identity.json` | 247872 | REUSABLE |
+| `results/v77-model-arch/summary.md` | 7910 | HAVE |
+| `results/v77-model-arch/validation/float.sty` | 6749 | REUSABLE |
+| `results/v77-model-arch/validation/layout_preview.tex` | 2935 | REUSABLE |
+| `results/v77-model-arch/validation/table_check.log` | 3217 | REUSABLE |
+| `results/v77-model-arch/validation/table_check.pdf` | 58102 | HAVE |
+| `results/v77-model-arch/validation/table_check.png` | 245526 | HAVE |
+| `results/v77-model-arch/validation/table_check.tex` | 466 | REUSABLE |
+| `results/v77-model-arch/validation_checks.json` | 1078 | REUSABLE |
+| `results/v77-model-arch/weight_identity.json` | 356313 | REUSABLE |
+| `results/v77-model-arch/weight_identity.md` | 6703 | HAVE |
+
+
+### v78-rule-confirm (233 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v78-rule-confirm/compare.json` | 1133523 | REUSABLE |
+| `results/v78-rule-confirm/compare.md` | 3828 | HAVE |
+| `results/v78-rule-confirm/figs/rule_maps.pdf` | 38980 | HAVE |
+| `results/v78-rule-confirm/freeze-independent.json` | 244116 | REUSABLE |
+| `results/v78-rule-confirm/freeze-independent.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/freeze.json` | 1321496 | REUSABLE |
+| `results/v78-rule-confirm/freeze.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/dense__source.json` | 1109 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/dense__source.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.6.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.7.json` | 1185 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.7.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.8.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.9.json` | 1186 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/prune__d0.9.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b3_g128.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b3_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b3_g256.json` | 1223 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b3_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b3_g64.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b3_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b4_g128.json` | 1219 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b4_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b4_g256.json` | 1223 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b4_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b4_g64.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b4_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b5_g128.json` | 1221 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b5_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b5_g256.json` | 1220 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b5_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b5_g64.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__b5_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b3.json` | 1203 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b3.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b4.json` | 1203 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b4.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b5.json` | 1205 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b5.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b6.json` | 1203 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b8.json` | 1202 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1.4b--step32000/quant__channel_b8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/dense__source.json` | 1109 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/dense__source.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.6.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.7.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.7.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.8.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.9.json` | 1185 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/prune__d0.9.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b3_g128.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b3_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b3_g256.json` | 1221 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b3_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b3_g64.json` | 1218 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b3_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b4_g128.json` | 1221 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b4_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b4_g256.json` | 1223 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b4_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b4_g64.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b4_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b5_g128.json` | 1221 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b5_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b5_g256.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b5_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b5_g64.json` | 1218 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__b5_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b3.json` | 1202 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b3.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b4.json` | 1201 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b4.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b5.json` | 1204 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b5.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b6.json` | 1203 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b8.json` | 1200 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-160m--step32000/quant__channel_b8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/dense__source.json` | 1102 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/dense__source.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.6.json` | 1183 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.7.json` | 1182 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.7.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.8.json` | 1181 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.9.json` | 1181 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/prune__d0.9.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b3_g128.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b3_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b3_g256.json` | 1216 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b3_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b3_g64.json` | 1213 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b3_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b4_g128.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b4_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b4_g256.json` | 1218 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b4_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b4_g64.json` | 1214 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b4_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b5_g128.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b5_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b5_g256.json` | 1218 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b5_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b5_g64.json` | 1215 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__b5_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b3.json` | 1198 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b3.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b4.json` | 1196 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b4.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b5.json` | 1198 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b5.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b6.json` | 1198 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b8.json` | 1197 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-1b--step64000/quant__channel_b8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/dense__source.json` | 1109 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/dense__source.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.6.json` | 1186 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.7.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.7.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.8.json` | 1186 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.9.json` | 1187 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/prune__d0.9.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b3_g128.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b3_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b3_g256.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b3_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b3_g64.json` | 1216 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b3_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b4_g128.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b4_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b4_g256.json` | 1223 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b4_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b4_g64.json` | 1218 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b4_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b5_g128.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b5_g128.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b5_g256.json` | 1222 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b5_g256.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b5_g64.json` | 1217 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__b5_g64.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b3.json` | 1204 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b3.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b4.json` | 1202 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b4.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b5.json` | 1202 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b5.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b6.json` | 1202 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b6.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b8.json` | 1201 | REUSABLE |
+| `results/v78-rule-confirm/measurements/pythia-410m--step32000/quant__channel_b8.json.sha256` | 65 | REUSABLE |
+| `results/v78-rule-confirm/plan.json` | 23359 | REUSABLE |
+| `results/v78-rule-confirm/reading-rule.md` | 1303 | HAVE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/0204ed10c186a4c7c68f55dff8f26087a45898d6.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/0a687f7f2a867fa2e2622a1aa984a3fc230c4635.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/76f45dd29f6ae40ae5d4960a8df6386aa9cd8d5a.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/a485538a70ea4f15feb0cd2b3804e9aef666f5ebdda5ada202cc2000420de786.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/e2cc40f3d4e821305999826e670dcb8414a986ee7f197a490b61aa946f3750de.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/f1860edb10f80bcaf7b023fce47c68a23b724c23.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1.4b/f74dfbfab8f97770a87769c739fb080c21c8bacc.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-160m/0204ed10c186a4c7c68f55dff8f26087a45898d6.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-160m/837a7b56674b9563583343fb532f92704cc394da5970b19f8ac1a443aaeb6f0a.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-160m/b55403a0ae8108a8b375ac24fa3be92a15f1f0db.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-160m/b8368ff94f3bcf3088de5e9912251fc0208ae524.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-160m/f74dfbfab8f97770a87769c739fb080c21c8bacc.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1b/0204ed10c186a4c7c68f55dff8f26087a45898d6.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1b/2d4b40480e0989af60da04f7ec7cad5f609aef14d9aa43e3847847a9368d2ef0.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1b/631d0e859247ad69414b72e657e7471a07403090.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1b/f1860edb10f80bcaf7b023fce47c68a23b724c23.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-1b/f74dfbfab8f97770a87769c739fb080c21c8bacc.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-410m/0204ed10c186a4c7c68f55dff8f26087a45898d6.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-410m/0425fa136ba3f95d9428d832cfd7bfd82c78bf1f.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-410m/c30a2dd44723938b277e5e563b2277ed4b4118220c350be7dfa6094a8dc8e5b2.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-410m/f1860edb10f80bcaf7b023fce47c68a23b724c23.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/.locks/models--EleutherAI--pythia-410m/f74dfbfab8f97770a87769c739fb080c21c8bacc.lock` | 0 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/0204ed10c186a4c7c68f55dff8f26087a45898d6` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/0a687f7f2a867fa2e2622a1aa984a3fc230c4635` | 25565 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/76f45dd29f6ae40ae5d4960a8df6386aa9cd8d5a` | 570 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/a485538a70ea4f15feb0cd2b3804e9aef666f5ebdda5ada202cc2000420de786` | 671429088 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/e2cc40f3d4e821305999826e670dcb8414a986ee7f197a490b61aa946f3750de` | 4987196512 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/f1860edb10f80bcaf7b023fce47c68a23b724c23` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/blobs/f74dfbfab8f97770a87769c739fb080c21c8bacc` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/refs/step32000` | 40 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/config.json` | 570 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/model-00001-of-00002.safetensors` | 4987196512 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/model-00002-of-00002.safetensors` | 671429088 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/model.safetensors.index.json` | 25565 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/special_tokens_map.json` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/tokenizer.json` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1.4b/snapshots/4d615cf6cea07d28784f3b6e47ef6e2b03d97be2/tokenizer_config.json` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/0204ed10c186a4c7c68f55dff8f26087a45898d6` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/837a7b56674b9563583343fb532f92704cc394da5970b19f8ac1a443aaeb6f0a` | 649308728 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/b55403a0ae8108a8b375ac24fa3be92a15f1f0db` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/b8368ff94f3bcf3088de5e9912251fc0208ae524` | 569 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/blobs/f74dfbfab8f97770a87769c739fb080c21c8bacc` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/refs/step32000` | 40 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d/config.json` | 569 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d/model.safetensors` | 649308728 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d/special_tokens_map.json` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d/tokenizer.json` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-160m/snapshots/dfead30ed6021412baa93aac4dbb31f1ee82033d/tokenizer_config.json` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/0204ed10c186a4c7c68f55dff8f26087a45898d6` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/2d4b40480e0989af60da04f7ec7cad5f609aef14d9aa43e3847847a9368d2ef0` | 4047149576 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/631d0e859247ad69414b72e657e7471a07403090` | 569 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/f1860edb10f80bcaf7b023fce47c68a23b724c23` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/blobs/f74dfbfab8f97770a87769c739fb080c21c8bacc` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/refs/step64000` | 40 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b/config.json` | 569 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b/model.safetensors` | 4047149576 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b/special_tokens_map.json` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b/tokenizer.json` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-1b/snapshots/d8a21ab8f2de9e94f9b5344f2f15e6cbc3dfdf5b/tokenizer_config.json` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/0204ed10c186a4c7c68f55dff8f26087a45898d6` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/0425fa136ba3f95d9428d832cfd7bfd82c78bf1f` | 570 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/c30a2dd44723938b277e5e563b2277ed4b4118220c350be7dfa6094a8dc8e5b2` | 1621370224 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/f1860edb10f80bcaf7b023fce47c68a23b724c23` | 396 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/blobs/f74dfbfab8f97770a87769c739fb080c21c8bacc` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/refs/step32000` | 40 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac/config.json` | 570 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac/model.safetensors` | 1621370224 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac/special_tokens_map.json` | 99 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac/tokenizer.json` | 2113710 | REUSABLE |
+| `results/v78-rule-confirm/snapshots/models--EleutherAI--pythia-410m/snapshots/e96fca70a425a39753c9f54a2cf74421606a33ac/tokenizer_config.json` | 396 | REUSABLE |
+| `results/v78-rule-confirm/verification.json` | 9166 | REUSABLE |
+| `results/v78-rule-confirm/verification.json.sha256` | 65 | REUSABLE |
+
+
+### v79-cond-audit (4 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v79-cond-audit/paper/code/analysis/v79_cond_audit.py` | 40902 | REUSABLE |
+| `results/v79-cond-audit/paper/paper/tables/cond_audit.tex` | 2636 | REUSABLE |
+| `results/v79-cond-audit/summary.json` | 168737 | REUSABLE |
+| `results/v79-cond-audit/summary.md` | 12557 | HAVE |
+
+
+### v80-rule-addenda (14 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v80-rule-addenda/.mplconfig/fontlist-v390.json` | 133375 | REUSABLE |
+| `results/v80-rule-addenda/figs/rule_maps_full.pdf` | 40000 | HAVE |
+| `results/v80-rule-addenda/figs/rule_maps_full.png` | 271573 | HAVE |
+| `results/v80-rule-addenda/figs/rule_maps_main.pdf` | 22925 | HAVE |
+| `results/v80-rule-addenda/figs/rule_maps_main.png` | 70309 | HAVE |
+| `results/v80-rule-addenda/figs/rule_maps_main_pdf_render.png` | 70306 | HAVE |
+| `results/v80-rule-addenda/figs/rule_regret.pdf` | 15133 | HAVE |
+| `results/v80-rule-addenda/figs/rule_regret.png` | 41623 | HAVE |
+| `results/v80-rule-addenda/figs/rule_regret_pdf_render.png` | 63652 | HAVE |
+| `results/v80-rule-addenda/manifest.json` | 63439 | REUSABLE |
+| `results/v80-rule-addenda/rule_confirm_by_state.tex` | 3439 | REUSABLE |
+| `results/v80-rule-addenda/summary.json` | 16293 | REUSABLE |
+| `results/v80-rule-addenda/summary.md` | 23523 | HAVE |
+| `results/v80-rule-addenda/validation.json` | 18979 | REUSABLE |
+
+
+### v81-rule-labels (14 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v81-rule-labels/.mplconfig/fontlist-v390.json` | 133375 | REUSABLE |
+| `results/v81-rule-labels/artifact_checks.json` | 1185 | REUSABLE |
+| `results/v81-rule-labels/figs/rule_maps_full.pdf` | 40331 | HAVE |
+| `results/v81-rule-labels/figs/rule_maps_full.png` | 287280 | HAVE |
+| `results/v81-rule-labels/figs/rule_maps_main.pdf` | 22947 | HAVE |
+| `results/v81-rule-labels/figs/rule_maps_main.png` | 68694 | HAVE |
+| `results/v81-rule-labels/figs/rule_regret.pdf` | 17412 | HAVE |
+| `results/v81-rule-labels/figs/rule_regret.png` | 85153 | HAVE |
+| `results/v81-rule-labels/manifest.json` | 63656 | REUSABLE |
+| `results/v81-rule-labels/rule_confirm.tex` | 2078 | REUSABLE |
+| `results/v81-rule-labels/rule_confirm_by_state.tex` | 4198 | REUSABLE |
+| `results/v81-rule-labels/summary.json` | 25762 | REUSABLE |
+| `results/v81-rule-labels/summary.md` | 9836 | HAVE |
+| `results/v81-rule-labels/validation.json` | 22265 | REUSABLE |
+
+
+### v82-fig1 (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v82-fig1/notes.md` | 6431 | HAVE |
+
+
+### v83-fig2 (1 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v83-fig2/notes.md` | 15313 | HAVE |
+
+
+### v85-selection-decomp (5 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v85-selection-decomp/cell_regrets.csv` | 45800 | REUSABLE |
+| `results/v85-selection-decomp/decomposition.csv` | 1458 | REUSABLE |
+| `results/v85-selection-decomp/decomposition.json` | 12942 | REUSABLE |
+| `results/v85-selection-decomp/rule_spec.json` | 49222 | REUSABLE |
+| `results/v85-selection-decomp/summary.md` | 14612 | HAVE |
+
+
+### v86-main-table (3 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v86-main-table/fig_notes.md` | 25732 | HAVE |
+| `results/v86-main-table/summary.json` | 283307 | REUSABLE |
+| `results/v86-main-table/summary.md` | 151875 | HAVE |
+
+
+### v87-prep (4 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v87-prep/baseline_hashes.json` | 411 | REUSABLE |
+| `results/v87-prep/descriptor_selftest.json` | 7184 | REUSABLE |
+| `results/v87-prep/summary.md` | 3624 | HAVE |
+| `results/v87-prep/validation.json` | 965 | REUSABLE |
+
+
+### v88-displacement (121 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v88-displacement/BUILD_NOTES.md` | 14995 | HAVE |
+| `results/v88-displacement/FINDINGS.md` | 10079 | HAVE |
+| `results/v88-displacement/pythia-1.4b--step143000/b3_g0.json` | 512927 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b3_g128.json` | 515937 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b4_g0.json` | 517973 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b4_g128.json` | 520477 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b5_g0.json` | 521902 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b5_g128.json` | 524343 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b6_g0.json` | 525692 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/b8_g0.json` | 527367 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.6.json` | 516167 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.65.json` | 516943 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.7.json` | 518140 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.75.json` | 519220 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.8.json` | 520757 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.85.json` | 522337 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step143000/prune_d0.9.json` | 524657 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b3_g0.json` | 516089 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b3_g128.json` | 518551 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b4_g0.json` | 521862 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b4_g128.json` | 523939 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b4_g32.json` | 525247 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b4_g512.json` | 522339 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b5_g0.json` | 526484 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b5_g128.json` | 528402 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b6_g0.json` | 529565 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/b8_g0.json` | 533325 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.6.json` | 517902 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.65.json` | 519369 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.7.json` | 521378 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.75.json` | 523367 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.8.json` | 525354 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.85.json` | 527535 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step16000/prune_d0.9.json` | 530567 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/b3_g128.json` | 517109 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/b4_g0.json` | 519794 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/b4_g128.json` | 522510 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/b5_g128.json` | 525695 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/b6_g0.json` | 527253 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/b8_g0.json` | 530646 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/prune_d0.6.json` | 516374 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/prune_d0.7.json` | 519037 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/prune_d0.8.json` | 522711 | REUSABLE |
+| `results/v88-displacement/pythia-1.4b--step64000/prune_d0.9.json` | 527273 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b3_g0.json` | 511593 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b3_g128.json` | 510525 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b4_g0.json` | 512285 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b4_g128.json` | 513196 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b5_g0.json` | 514185 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b5_g128.json` | 514668 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b6_g0.json` | 515159 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/b8_g0.json` | 516233 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.6.json` | 508834 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.65.json` | 509572 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.7.json` | 510945 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.75.json` | 511442 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.8.json` | 512831 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.85.json` | 513270 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step143000/prune_d0.9.json` | 514977 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b3_g0.json` | 514843 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b3_g128.json` | 516459 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b4_g0.json` | 520036 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b4_g128.json` | 521282 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b4_g32.json` | 522649 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b4_g512.json` | 520385 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b5_g0.json` | 524064 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b5_g128.json` | 525396 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b6_g0.json` | 528079 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/b8_g0.json` | 532760 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.6.json` | 515886 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.65.json` | 516874 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.7.json` | 518347 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.75.json` | 519767 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.8.json` | 522074 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.85.json` | 524193 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step16000/prune_d0.9.json` | 527556 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/b3_g128.json` | 515588 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/b4_g0.json` | 519173 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/b4_g128.json` | 520800 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/b5_g128.json` | 524419 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/b6_g0.json` | 526339 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/b8_g0.json` | 529330 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/prune_d0.6.json` | 515058 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/prune_d0.7.json` | 516937 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/prune_d0.8.json` | 519838 | REUSABLE |
+| `results/v88-displacement/pythia-160m--step64000/prune_d0.9.json` | 524570 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b3_g0.json` | 512549 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b3_g128.json` | 514464 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b4_g0.json` | 516718 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b4_g128.json` | 518463 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b5_g0.json` | 519918 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b5_g128.json` | 521245 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b6_g0.json` | 523083 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/b8_g0.json` | 524638 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.6.json` | 515078 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.65.json` | 515813 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.7.json` | 516701 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.75.json` | 517642 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.8.json` | 518856 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.85.json` | 520512 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step143000/prune_d0.9.json` | 522421 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/b3_g128.json` | 517686 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/b4_g0.json` | 521649 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/b4_g128.json` | 522543 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/b5_g128.json` | 527202 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/b6_g0.json` | 529372 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/b8_g0.json` | 532927 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/prune_d0.6.json` | 517728 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/prune_d0.7.json` | 520970 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/prune_d0.8.json` | 525099 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step16000/prune_d0.9.json` | 530120 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/b3_g128.json` | 516295 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/b4_g0.json` | 520421 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/b4_g128.json` | 521894 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/b5_g128.json` | 525159 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/b6_g0.json` | 528183 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/b8_g0.json` | 531927 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/prune_d0.6.json` | 516315 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/prune_d0.7.json` | 518971 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/prune_d0.8.json` | 521838 | REUSABLE |
+| `results/v88-displacement/pythia-410m--step64000/prune_d0.9.json` | 527294 | REUSABLE |
+
+
+### v88-displacement-cluster (21 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/b4_g32.json` | 521854 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/b4_g512.json` | 519156 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/b5_g32.json` | 524518 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/b5_g512.json` | 523140 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.65.json` | 516895 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.75.json` | 519171 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-1.4b--step143000/prune_d0.85.json` | 522358 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/b4_g32.json` | 522606 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/b4_g512.json` | 520353 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/b5_g32.json` | 525786 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/b5_g512.json` | 524703 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/prune_d0.65.json` | 516843 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/prune_d0.75.json` | 519723 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-160m--step16000/prune_d0.85.json` | 524088 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/b4_g32.json` | 519167 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/b4_g512.json` | 517290 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/b5_g32.json` | 521754 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/b5_g512.json` | 520293 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/prune_d0.65.json` | 515939 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/prune_d0.75.json` | 517496 | REUSABLE |
+| `results/v88-displacement-cluster/pythia-410m--step143000/prune_d0.85.json` | 520090 | REUSABLE |
+
+
+### v88-displacement-uncentred-run (39 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v88-displacement-uncentred-run/BUILD_NOTES.md` | 14995 | HAVE |
+| `results/v88-displacement-uncentred-run/FINDINGS.md` | 7096 | HAVE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/b3_g128.json` | 415410 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/b4_g128.json` | 418909 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/b5_g128.json` | 421983 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/prune_d0.6.json` | 415619 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/prune_d0.7.json` | 417027 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/prune_d0.8.json` | 418915 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step143000/prune_d0.9.json` | 422004 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/b3_g128.json` | 417480 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/b4_g128.json` | 421696 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/b5_g128.json` | 425010 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/prune_d0.6.json` | 416943 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/prune_d0.7.json` | 419702 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/prune_d0.8.json` | 422824 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-1.4b--step16000/prune_d0.9.json` | 426748 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/b3_g128.json` | 411610 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/b4_g128.json` | 413399 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/b5_g128.json` | 414259 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/prune_d0.6.json` | 409885 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/prune_d0.7.json` | 411581 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/prune_d0.8.json` | 412865 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step143000/prune_d0.9.json` | 414234 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/b3_g128.json` | 415911 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/b4_g128.json` | 419579 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/b5_g128.json` | 422794 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/prune_d0.6.json` | 415436 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/prune_d0.7.json` | 417242 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/prune_d0.8.json` | 420274 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-160m--step16000/prune_d0.9.json` | 424340 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/b3_g128.json` | 414189 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/b4_g128.json` | 417476 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/b5_g128.json` | 419397 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/prune_d0.6.json` | 414794 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/prune_d0.7.json` | 416090 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/prune_d0.8.json` | 417674 | REUSABLE |
+| `results/v88-displacement-uncentred-run/pythia-410m--step143000/prune_d0.9.json` | 420326 | REUSABLE |
+| `results/v88-displacement-uncentred-run/summary.json` | 364257 | REUSABLE |
+| `results/v88-displacement-uncentred-run/summary.md` | 11296 | HAVE |
+
+
+### v89-intervention-retro (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v89-intervention-retro/summary.json` | 13572079 | REUSABLE |
+| `results/v89-intervention-retro/summary.md` | 251637 | HAVE |
+
+
+### v89b-intervention-controls (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v89b-intervention-controls/summary.json` | 51503382 | REUSABLE |
+| `results/v89b-intervention-controls/summary.md` | 283112 | HAVE |
+
+
+### v9-capability-regions (30 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
 | `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_meta.json` | 13028 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_svamp.pt` | 2383939148 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-0.6B/fisher_triviaqa.pt` | 2383939169 | REUSABLE |
 | `results/v9-capability-regions/Qwen--Qwen3-0.6B/report.md` | 5437 | HAVE |
 | `results/v9-capability-regions/Qwen--Qwen3-0.6B/similarity.json` | 25954 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_2wiki.pt` | 6881805952 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_c4.pt` | 6881805931 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_gsm8k.pt` | 6881805952 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_hotpotqa.pt` | 6881805973 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_humaneval.pt` | 6881805980 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_math500.pt` | 6881805966 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_mbpp.pt` | 6881805945 | REUSABLE |
 | `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_meta.json` | 13113 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_svamp.pt` | 6881805952 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-1.7B/fisher_triviaqa.pt` | 6881805973 | REUSABLE |
 | `results/v9-capability-regions/Qwen--Qwen3-1.7B/report.md` | 5437 | HAVE |
 | `results/v9-capability-regions/Qwen--Qwen3-1.7B/similarity.json` | 25962 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_2wiki.pt` | 16089089664 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_c4.pt` | 16089089643 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_gsm8k.pt` | 16089089664 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_hotpotqa.pt` | 16089089685 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_humaneval.pt` | 16089089692 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_math500.pt` | 16089089678 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_mbpp.pt` | 16089089657 | REUSABLE |
 | `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_meta.json` | 16479 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_svamp.pt` | 16089089664 | REUSABLE |
-| `results/v9-capability-regions/Qwen--Qwen3-4B/fisher_triviaqa.pt` | 16089089685 | REUSABLE |
 | `results/v9-capability-regions/Qwen--Qwen3-4B/report.md` | 5435 | HAVE |
 | `results/v9-capability-regions/Qwen--Qwen3-4B/similarity.json` | 25977 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_2wiki.pt` | 3999008332 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_c4.pt` | 3999008311 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_gsm8k.pt` | 3999008332 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_hotpotqa.pt` | 3999008353 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_humaneval.pt` | 3999008360 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_math500.pt` | 3999008346 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_mbpp.pt` | 3999008325 | REUSABLE |
+| `results/v9-capability-regions/gemma3-12b/fisher_meta.json` | 24490 | REUSABLE |
+| `results/v9-capability-regions/gemma3-12b/report.md` | 5433 | HAVE |
+| `results/v9-capability-regions/gemma3-12b/similarity.json` | 26100 | REUSABLE |
 | `results/v9-capability-regions/gemma3-1b/fisher_meta.json` | 12163 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_svamp.pt` | 3999008332 | REUSABLE |
-| `results/v9-capability-regions/gemma3-1b/fisher_triviaqa.pt` | 3999008353 | REUSABLE |
 | `results/v9-capability-regions/gemma3-1b/report.md` | 5442 | HAVE |
 | `results/v9-capability-regions/gemma3-1b/similarity.json` | 26002 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_2wiki.pt` | 1072170572 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_c4.pt` | 1072170551 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_gsm8k.pt` | 1072170572 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_hotpotqa.pt` | 1072170593 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_humaneval.pt` | 1072170600 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_math500.pt` | 1072170586 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_mbpp.pt` | 1072170565 | REUSABLE |
 | `results/v9-capability-regions/gemma3-270m/fisher_meta.json` | 8870 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_svamp.pt` | 1072170572 | REUSABLE |
-| `results/v9-capability-regions/gemma3-270m/fisher_triviaqa.pt` | 1072170593 | REUSABLE |
 | `results/v9-capability-regions/gemma3-270m/report.md` | 5428 | HAVE |
 | `results/v9-capability-regions/gemma3-270m/similarity.json` | 26041 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_2wiki.pt` | 15519581824 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_c4.pt` | 15519581803 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_gsm8k.pt` | 15519581824 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_hotpotqa.pt` | 15519581845 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_humaneval.pt` | 15519581852 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_math500.pt` | 15519581838 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_mbpp.pt` | 15519581817 | REUSABLE |
 | `results/v9-capability-regions/gemma3-4b/fisher_meta.json` | 17741 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_svamp.pt` | 15519581824 | REUSABLE |
-| `results/v9-capability-regions/gemma3-4b/fisher_triviaqa.pt` | 15519581845 | REUSABLE |
 | `results/v9-capability-regions/gemma3-4b/report.md` | 5442 | HAVE |
 | `results/v9-capability-regions/gemma3-4b/similarity.json` | 26047 | REUSABLE |
 | `results/v9-capability-regions/gemma4-31b/fisher_meta.json` | 29812 | REUSABLE |
@@ -895,18 +5229,165 @@ No absent cell is labeled failed or running. These gaps are documentation only; 
 | `results/v9-capability-regions/muse-30b/fisher_meta.json` | 30385 | REUSABLE |
 | `results/v9-capability-regions/muse-30b/report.md` | 5440 | HAVE |
 | `results/v9-capability-regions/muse-30b/similarity.json` | 26070 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_2wiki.pt` | 29189932672 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_c4.pt` | 29189932651 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_gsm8k.pt` | 29189932672 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_hotpotqa.pt` | 29189932693 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_humaneval.pt` | 29189932700 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_math500.pt` | 29189932686 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_mbpp.pt` | 29189932665 | REUSABLE |
 | `results/v9-capability-regions/olmo3-7b/fisher_meta.json` | 14933 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_svamp.pt` | 29189932672 | REUSABLE |
-| `results/v9-capability-regions/olmo3-7b/fisher_triviaqa.pt` | 29189932693 | REUSABLE |
 | `results/v9-capability-regions/olmo3-7b/report.md` | 5444 | HAVE |
 | `results/v9-capability-regions/olmo3-7b/similarity.json` | 26159 | REUSABLE |
+
+
+### v91-dense-stats (30 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v91-dense-stats/probes/code.json` | 40874 | REUSABLE |
+| `results/v91-dense-stats/probes/math.json` | 52998 | REUSABLE |
+| `results/v91-dense-stats/probes/qa.json` | 226860 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json` | 71626 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json` | 72067 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json` | 71135 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json` | 71614 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json` | 71934 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json` | 71122 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json` | 71630 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json` | 71991 | REUSABLE |
+| `results/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json` | 71200 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json` | 70639 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json` | 71229 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json` | 69574 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json` | 71574 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json` | 71924 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json` | 71144 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json` | 71527 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json` | 71992 | REUSABLE |
+| `results/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json` | 71085 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json` | 71617 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json` | 72031 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json` | 71141 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json` | 71637 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json` | 71928 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json` | 71108 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json` | 71669 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json` | 71991 | REUSABLE |
+| `results/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json` | 71066 | REUSABLE |
+
+
+### v92-input-comparison (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v92-input-comparison/summary.json` | 29301785 | REUSABLE |
+| `results/v92-input-comparison/summary.md` | 61359 | HAVE |
+
+
+### v93-confirm-inputs (12 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v93-confirm-inputs/pythia-1.4b--step32000/code/descriptor_bv.json` | 71649 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-1.4b--step32000/math/descriptor_bv.json` | 72018 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-1.4b--step32000/qa/descriptor_bv.json` | 71123 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-160m--step32000/code/descriptor_bv.json` | 71595 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-160m--step32000/math/descriptor_bv.json` | 71963 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-160m--step32000/qa/descriptor_bv.json` | 71177 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-1b--step64000/code/descriptor_bv.json` | 71647 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-1b--step64000/math/descriptor_bv.json` | 72060 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-1b--step64000/qa/descriptor_bv.json` | 71165 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-410m--step32000/code/descriptor_bv.json` | 71631 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-410m--step32000/math/descriptor_bv.json` | 71993 | REUSABLE |
+| `results/v93-confirm-inputs/pythia-410m--step32000/qa/descriptor_bv.json` | 71208 | REUSABLE |
+
+
+### v95-matrix-intervention (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v95-matrix-intervention/summary.json` | 2338358 | REUSABLE |
+| `results/v95-matrix-intervention/summary.md` | 70923 | HAVE |
+
+
+### v96-joint-response (2 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v96-joint-response/summary.json` | 8265106 | REUSABLE |
+| `results/v96-joint-response/summary.md` | 143400 | HAVE |
+
+
+### v99-scope (72 files)
+
+| Artifact | Bytes | Status |
+|---|---|---|
+| `results/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000000.json` | 76955 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000038.json` | 77463 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000152.json` | 77460 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolA/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000000.json` | 77127 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000036.json` | 77648 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000074.json` | 77650 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-f8defe2cc5d54af5/update-00000077.json` | 77651 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolB/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-98e5d57052842e92/update-00000000.json` | 77107 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-98e5d57052842e92/update-00000074.json` | 77630 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-98e5d57052842e92/update-00000077.json` | 77629 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-1b-poolC/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000000.json` | 76879 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000038.json` | 77383 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000152.json` | 77379 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolA/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000000.json` | 77051 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000036.json` | 77574 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000074.json` | 77575 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolB/gpt-5.6-luna_full_130_a3b_corners_1_4_poolB_lora_dseed101-15fadb650795b560/update-00000077.json` | 77575 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolB/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-2da4fe4688510efb/update-00000000.json` | 77031 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-2da4fe4688510efb/update-00000074.json` | 77551 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolC/gpt-5.6-luna_full_279_a3b_corners_3_poolC_lora_dseed234-2da4fe4688510efb/update-00000077.json` | 77551 | REUSABLE |
+| `results/v99-scope/a5-corners-gemma3-4b-poolC/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000000.json` | 76981 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed51-0a7117757aa76562/update-00000144.json` | 77454 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000000.json` | 76981 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_132_critical_lora_dseed52-c8d50f32e2b2cbd9/update-00000144.json` | 77456 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000000.json` | 76971 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-2a7569d5e141ce14/update-00000144.json` | 77445 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000000.json` | 76913 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed41-f96eda2adeb06192/update-00000144.json` | 77390 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000000.json` | 76971 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-46eebeb8cf1e2cc9/update-00000143.json` | 77446 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000000.json` | 76913 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_198_matrix2_lora_dseed42-a6b065403cc9480e/update-00000143.json` | 77390 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000000.json` | 76979 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-a37d4fd0468bba8f/update-00000142.json` | 77453 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000000.json` | 76923 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed41-ddcfd303b4f111ac/update-00000142.json` | 77400 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000000.json` | 76979 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-ccf3ff421860dcb2/update-00000143.json` | 77453 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000000.json` | 76923 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_594_matrix2_lora_dseed42-fb8244763da6c155/update-00000143.json` | 77400 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000000.json` | 76955 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000152.json` | 77424 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000000.json` | 76899 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed41-62875c58e8349129/update-00000152.json` | 77368 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000000.json` | 76899 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-9748c7ab921458b7/update-00000151.json` | 77370 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000000.json` | 76955 | REUSABLE |
+| `results/v99-scope/gpt-5.6-luna_full_66_matrix2_lora_dseed42-bc62ad11c4996fad/update-00000151.json` | 77425 | REUSABLE |
+| `results/v99-scope/protocol.json` | 22239 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000000.json` | 76905 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed51-a3548a8c20d0b875/update-00000144.json` | 77409 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000000.json` | 76905 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_132_critical_lora_dseed52-d2914d8f4b975313/update-00000144.json` | 77410 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000000.json` | 76895 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed41-4f08c95fcd88c746/update-00000144.json` | 77404 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000000.json` | 76895 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_198_matrix2_lora_dseed42-ca3eee3ab8df78e6/update-00000143.json` | 77405 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000000.json` | 76903 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed41-0131d13083b224cc/update-00000142.json` | 77411 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000000.json` | 76903 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_594_matrix2_lora_dseed42-0f46d5394ed5fe23/update-00000143.json` | 77409 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000000.json` | 76879 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed41-0e02d1102f506ae9/update-00000152.json` | 77379 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000000.json` | 76879 | REUSABLE |
+| `results/v99-scope/rerun-4b/gpt-5.6-luna_full_66_matrix2_lora_dseed42-3131955f709d02ca/update-00000151.json` | 77383 | REUSABLE |
+| `results/v99-scope/rerun-4b/protocol.json` | 22239 | REUSABLE |
 
 
 ### v9b-subspaces (14 files)

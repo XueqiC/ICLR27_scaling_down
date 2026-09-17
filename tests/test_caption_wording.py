@@ -9,9 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "analysis"))
 from paper_table_text import _academic_caption  # noqa: E402
 
-TABLES = ROOT / "paper" / "paper" / "tables"
-if not TABLES.exists():
-    TABLES = ROOT / "paper" / "tables"
+TABLES = ROOT / "results" / "published-tables"
 USED = """candidate_coverage cap_conditioning cond_audit distill_confirm distill_forms_audit distill_paired
 final_deliverables locked_rule main_context main_final main_prediction_v2 model_arch models_domains musique_scope
 p1v2 p2v2_test p3_check panel_prune panel_quant pred_config_prune pred_config_qd pred_full pred_source prune_repeat

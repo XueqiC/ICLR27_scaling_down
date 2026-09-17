@@ -35,7 +35,7 @@ def axes_defaults(ax):
     ax.yaxis.set_major_locator(MaxNLocator(4))
 
 
-def export(plt, audit, stem, panels, caption, *, columns=None, width=None, legend=None, preserve_legend=False):
+def export(plt, audit, stem, panels, caption, *, columns=None, width=None, legend=None, preserve_legend=False, center=False):
     """panels: (filename, size_inches, draw_callable, records, caption) tuples."""
     specs, manifest = [], []
     columns = columns or len(panels)
@@ -53,7 +53,9 @@ def export(plt, audit, stem, panels, caption, *, columns=None, width=None, legen
         height += legend[1][1]
     for row, i in enumerate(range(0, len(panels), columns)):
         top -= heights[row]
-        x = 0.
+        row_panels = panels[i:i+columns]
+        row_width = sum(p[1][0] for p in row_panels) + gap*(len(row_panels)-1)
+        x = (width-row_width)/2 if center else 0.
         for name, size, draw, records, panel_caption in panels[i:i+columns]:
             kind = kind_for_width(size[0])
             apply_style(kind)

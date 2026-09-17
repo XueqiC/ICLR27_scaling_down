@@ -1,0 +1,22 @@
+\begin{table}[!htbp]\normalfont
+\centering
+\small
+\caption{The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count the supervised tokens used for training.}
+\par\smallskip{\footnotesize Question answering measurement scope on Gemma-3-1 billion: conditional loss and Loss change from dense in native-token nats (negative is improvement) with 256 fixed references per set. 2Wiki supplies all context, MuSiQue supplies supporting paragraphs, and TriviaQA is the no-context control; distillation labels give nominal supervised-token budgets. All 24 cells of the \mbox{pre-specified} states were measured.\par}
+\label{tab:qa_scope}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-4.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}@{}}
+\toprule
+& \multicolumn{2}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.220000000\textwidth-0.640000000\tabcolsep\relax}}{New 2Wiki} & \multicolumn{2}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.220000000\textwidth-0.640000000\tabcolsep\relax}}{MuSiQue} & \multicolumn{2}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.220000000\textwidth-0.640000000\tabcolsep\relax}@{}}{TriviaQA} \\
+State & Loss & Loss change & Loss & Loss change & Loss & Loss change \\
+\midrule
+Dense & 5.796 & +0.000 & 1.919 & +0.000 & 2.714 & +0.000 \\
+{Pruning at density 0.85} & 6.203 & +0.408 & 2.135 & +0.216 & 2.870 & +0.156 \\
+{Pruning at density 0.7} & 6.510 & +0.715 & 3.186 & +1.267 & 5.619 & +2.905 \\
+{Per-channel round-to-nearest quantization at 4 bits} & 6.594 & +0.799 & 3.324 & +1.405 & 4.360 & +1.646 \\
+{Grouped round-to-nearest quantization at 4 bits and group size 128} & 5.759 & -0.036 & 2.136 & +0.217 & 3.089 & +0.375 \\
+{Distillation at supervised budget 35 thousand} & 4.247 & -1.548 & 1.995 & +0.076 & 2.960 & +0.246 \\
+{Distillation at supervised budget 140 thousand} & 4.537 & -1.258 & 2.114 & +0.195 & 3.058 & +0.344 \\
+{Distillation at supervised budget 280 thousand} & 4.917 & -0.878 & 2.124 & +0.204 & 2.967 & +0.253 \\
+\bottomrule
+\end{tabular*}
+\end{table}

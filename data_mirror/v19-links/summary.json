@@ -1,0 +1,1972 @@
+{
+  "cliff_coincidence": {
+    "definition": "first pruning cell with L-L_dense > 1 nat; exact-like floor <=1/64, F1 floor <=0.05",
+    "records": [
+      {
+        "accuracy_at_loss_cliff": 0.0,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": true,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 1.9669231620903453,
+        "loss_cliff_density": 0.6,
+        "model": "gemma3-12b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.0,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": true,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 2.4348227944926055,
+        "loss_cliff_density": 0.6,
+        "model": "gemma3-12b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.171875,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 2.976054346838663,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-12b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.28986198646125116,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": 2.976054346838663,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-12b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.015625,
+        "accuracy_floor_density": 0.7,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": true,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 4.690987599645704,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-27b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.015625,
+        "accuracy_floor_density": 0.7,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": true,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 2.4158592554818967,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-27b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.234375,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 4.719172987827035,
+        "loss_cliff_density": 0.8,
+        "model": "gemma3-27b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.32742824883449884,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": 4.719172987827035,
+        "loss_cliff_density": 0.8,
+        "model": "gemma3-27b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.0625,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 1.477884189548273,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-4b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.015625,
+        "accuracy_floor_density": 0.7,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 1.9119071902090772,
+        "loss_cliff_density": 0.6,
+        "model": "gemma3-4b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.078125,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 3.8310603651889537,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-4b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.1430946940287973,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma3",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": 3.8310603651889537,
+        "loss_cliff_density": 0.7,
+        "model": "gemma3-4b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.0,
+        "accuracy_floor_density": 0.7,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": false,
+        "family": "gemma4",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 9.90337134632418,
+        "loss_cliff_density": 0.6,
+        "model": "gemma4-31b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.0,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": true,
+        "family": "gemma4",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 13.318762748597655,
+        "loss_cliff_density": 0.6,
+        "model": "gemma4-31b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.0,
+        "accuracy_floor_density": 0.7,
+        "at_floor_at_loss_cliff": true,
+        "density_coincides": true,
+        "family": "gemma4",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 2.1109221702398253,
+        "loss_cliff_density": 0.7,
+        "model": "gemma4-31b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.16166844663119811,
+        "accuracy_floor_density": 0.6,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "gemma4",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": 2.1109221702398253,
+        "loss_cliff_density": 0.7,
+        "model": "gemma4-31b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "muse",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "muse-30b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "muse",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "muse-30b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.140625,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "muse",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": 3.3089141038359786,
+        "loss_cliff_density": 0.6,
+        "model": "muse-30b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": 0.18043157356816245,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": false,
+        "density_coincides": false,
+        "family": "muse",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": 3.3089141038359786,
+        "loss_cliff_density": 0.6,
+        "model": "muse-30b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-32b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-32b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-32b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-32b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-7b",
+        "outcome": "code"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-7b",
+        "outcome": "math"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.015625,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-7b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_at_loss_cliff": null,
+        "accuracy_floor_density": null,
+        "at_floor_at_loss_cliff": null,
+        "density_coincides": false,
+        "family": "olmo3",
+        "floor_threshold": 0.05,
+        "loss_cliff_delta": null,
+        "loss_cliff_density": null,
+        "model": "olmo3-7b",
+        "outcome": "qa_f1"
+      }
+    ],
+    "summary": {
+      "code": {
+        "n_density_coincidences": 2,
+        "n_loss_cliff_censored": 3,
+        "n_loss_cliffs_at_accuracy_floor": 3,
+        "n_observed_loss_cliffs": 4,
+        "n_trajectories": 7
+      },
+      "math": {
+        "n_density_coincidences": 3,
+        "n_loss_cliff_censored": 3,
+        "n_loss_cliffs_at_accuracy_floor": 4,
+        "n_observed_loss_cliffs": 4,
+        "n_trajectories": 7
+      },
+      "qa_em": {
+        "n_density_coincidences": 1,
+        "n_loss_cliff_censored": 2,
+        "n_loss_cliffs_at_accuracy_floor": 1,
+        "n_observed_loss_cliffs": 5,
+        "n_trajectories": 7
+      },
+      "qa_f1": {
+        "n_density_coincidences": 0,
+        "n_loss_cliff_censored": 2,
+        "n_loss_cliffs_at_accuracy_floor": 0,
+        "n_observed_loss_cliffs": 5,
+        "n_trajectories": 7
+      }
+    }
+  },
+  "counts": {
+    "checkpoints": 28,
+    "families": 4,
+    "files": 28,
+    "models": 7,
+    "outcome_rows": 112
+  },
+  "generated": "2026-09-04",
+  "outcomes": {
+    "code": {
+      "label": "MBPP pass@1",
+      "leave_one_family_out": {
+        "family_specific_transport_mae": 0.11623136117575915,
+        "folds": [
+          {
+            "family_specific_transport_mae": 0.18260889354777277,
+            "held_out_family": "gemma3",
+            "n_predictions": 12,
+            "n_test": 12,
+            "n_train": 16,
+            "shared_mae": 0.13713211762086025,
+            "training_family_fits": {
+              "gemma4": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.08270390892823679,
+            "held_out_family": "gemma4",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.11892851162319598,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.07049905765829408,
+            "held_out_family": "muse",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.08986161565918761,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.056294940500232434,
+            "held_out_family": "olmo3",
+            "n_predictions": 8,
+            "n_test": 8,
+            "n_train": 20,
+            "shared_mae": 0.13766073982322208,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "muse": "ok"
+            }
+          }
+        ],
+        "n": 28,
+        "paired_error_difference": 0.01169834736587064,
+        "paired_shared_minus_family_ci95": [
+          -0.013399988774313388,
+          0.03745481460342773
+        ],
+        "records": [
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7768507173143416,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.390625,
+            "shared_predicted": 0.6695558971668754
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7141582452575735,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.359375,
+            "shared_predicted": 0.6595340733772337
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.0026819864035706725,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.0625,
+            "shared_predicted": 1.6515664324073235e-06
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 1.6908814295468689e-06,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.0,
+            "shared_predicted": 1.914713568325141e-15
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7979910209509523,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.5625,
+            "shared_predicted": 0.671112134976052
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7558283450721403,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.40625,
+            "shared_predicted": 0.6672476089572447
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.47026351615847445,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.109375,
+            "shared_predicted": 0.37097519902889453
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.000378536717461501,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.0,
+            "shared_predicted": 7.478763319551383e-09
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.803982482868963,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.65625,
+            "shared_predicted": 0.6714394784809362
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.07859084354550976,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.34375,
+            "shared_predicted": 0.01740233644924618
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 2.698980394214391e-09,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.015625,
+            "shared_predicted": 2.3804373079711057e-23
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 2.156044394072212e-15,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.015625,
+            "shared_predicted": 5.892138322818145e-27
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7636649223175401,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.640625,
+            "shared_predicted": 0.5640645675030216
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7144607418614258,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.65625,
+            "shared_predicted": 0.5566490760130447
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.14956497123551973,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.0,
+            "shared_predicted": 0.2995526900088502
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 2.9846149694115287e-10,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.0,
+            "shared_predicted": 5.925319555457291e-19
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.5736709265897157,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.6875,
+            "shared_predicted": 0.5369215356181654
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.5622846799674334,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.6875,
+            "shared_predicted": 0.5303604545410061
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.5054567386899751,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.484375,
+            "shared_predicted": 0.483410846548624
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.0406299014996497,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.0625,
+            "shared_predicted": 0.011735700655454116
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.4748177045562152,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.484375,
+            "shared_predicted": 0.39368735946564226
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.46416836744422,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.484375,
+            "shared_predicted": 0.3821580934466375
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.4567603299664241,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.5,
+            "shared_predicted": 0.37401311401168186
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.4387302063451879,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.484375,
+            "shared_predicted": 0.3539151247500623
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.5397078481843531,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.609375,
+            "shared_predicted": 0.4593616401804902
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.5326126026296701,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.625,
+            "shared_predicted": 0.45251756984800173
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.5187557091509158,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.625,
+            "shared_predicted": 0.4389371890350324
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.49908770772115424,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.5625,
+            "shared_predicted": 0.4191239906766751
+          }
+        ],
+        "shared_mae": 0.1279297085416298
+      },
+      "parameter_bootstrap": {
+        "ci95": {
+          "A_max": [
+            0.48883038244435456,
+            1.0
+          ],
+          "L_half": [
+            0.8880759692897021,
+            1.6810758766105836
+          ],
+          "k": [
+            2.301125160923027,
+            100.00000000000004
+          ]
+        },
+        "n_resamples": 500,
+        "n_success": 500
+      },
+      "shared_fit": {
+        "mae": 0.08262636484117385,
+        "n": 28,
+        "n_models": 7,
+        "parameters": {
+          "A_max": 0.5957099691589848,
+          "L_half": 1.3219610113328315,
+          "k": 7.590079943790604
+        },
+        "sse": 0.3652081636197698,
+        "status": "ok"
+      },
+      "verdict": "compatible with a shared form; no resolved family-specific gain"
+    },
+    "math": {
+      "label": "GSM8K accuracy",
+      "leave_one_family_out": {
+        "family_specific_transport_mae": 0.06842876709126987,
+        "folds": [
+          {
+            "family_specific_transport_mae": 0.05261872846751329,
+            "held_out_family": "gemma3",
+            "n_predictions": 12,
+            "n_test": 12,
+            "n_train": 16,
+            "shared_mae": 0.07565942088202343,
+            "training_family_fits": {
+              "gemma4": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.02777489841175807,
+            "held_out_family": "gemma4",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.06664868080434086,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.15762673058665935,
+            "held_out_family": "muse",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.11520240354352201,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.06787177761896587,
+            "held_out_family": "olmo3",
+            "n_predictions": 8,
+            "n_test": 8,
+            "n_train": 20,
+            "shared_mae": 0.06472281329472933,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "muse": "ok"
+            }
+          }
+        ],
+        "n": 28,
+        "paired_error_difference": 0.00846765770635754,
+        "paired_shared_minus_family_ci95": [
+          -0.008756193994938955,
+          0.027305872284316395
+        ],
+        "records": [
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.4153386253411673,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.28125,
+            "shared_predicted": 0.5969439446859124
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.2835791327376961,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.21875,
+            "shared_predicted": 0.37770477989400325
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.030051389776571482,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.015625,
+            "shared_predicted": 0.027007286547208766
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 1.032660270115165e-05,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.015625,
+            "shared_predicted": 3.9817896746769065e-06
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7239778452635296,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.640625,
+            "shared_predicted": 0.7494287244601109
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.3907346565380651,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.484375,
+            "shared_predicted": 0.558837761144101
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.08510962744243904,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.078125,
+            "shared_predicted": 0.08873677502673484
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 8.165135087882054e-07,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.0,
+            "shared_predicted": 2.408553076575573e-07
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.782904455880359,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.75,
+            "shared_predicted": 0.7766603804021703
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.06441611844355322,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.234375,
+            "shared_predicted": 0.06427754260709014
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 1.0497608000763378e-06,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.015625,
+            "shared_predicted": 3.18034503556281e-07
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 7.802089216375774e-15,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.0,
+            "shared_predicted": 2.9296860549345287e-16
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.8940131825299074,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.890625,
+            "shared_predicted": 0.9445881661790205
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.8579110518517495,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.796875,
+            "shared_predicted": 0.8905044183577044
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.1720746407346246,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.21875,
+            "shared_predicted": 0.0997478613193615
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 8.407787392858821e-27,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.0,
+            "shared_predicted": 8.75651076269652e-27
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7876123490154588,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.90625,
+            "shared_predicted": 0.8029256072292587
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7698016079614889,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.875,
+            "shared_predicted": 0.7777806383866683
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.3331955300661899,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.6875,
+            "shared_predicted": 0.48618199947663887
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.010133590610224988,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.0625,
+            "shared_predicted": 0.0035521407333460957
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7197954015716396,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.71875,
+            "shared_predicted": 0.7136463663281161
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7131872977717211,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.703125,
+            "shared_predicted": 0.7057264761019972
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.7102836956912864,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.734375,
+            "shared_predicted": 0.7022397224942182
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.6882825991665372,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.546875,
+            "shared_predicted": 0.6757014460916609
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7924130103699016,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.875,
+            "shared_predicted": 0.7988346924660006
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7910894937941237,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.84375,
+            "shared_predicted": 0.7973193921184847
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.7903668302160872,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.890625,
+            "shared_predicted": 0.7964913214575433
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.7441380474867719,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.875,
+            "shared_predicted": 0.7426139209714607
+          }
+        ],
+        "shared_mae": 0.07689642479762739
+      },
+      "parameter_bootstrap": {
+        "ci95": {
+          "A_max": [
+            0.948012367152834,
+            1.0
+          ],
+          "L_half": [
+            0.8354578364806917,
+            0.9975245194678959
+          ],
+          "k": [
+            4.745532644243876,
+            11.729336004321155
+          ]
+        },
+        "n_resamples": 500,
+        "n_success": 500
+      },
+      "shared_fit": {
+        "mae": 0.06019694368221045,
+        "n": 28,
+        "n_models": 7,
+        "parameters": {
+          "A_max": 1.0,
+          "L_half": 0.8810897793415248,
+          "k": 7.910507808134783
+        },
+        "sse": 0.20910404088496998,
+        "status": "ok"
+      },
+      "verdict": "compatible with a shared form; no resolved family-specific gain"
+    },
+    "qa_em": {
+      "label": "TriviaQA exact match",
+      "leave_one_family_out": {
+        "family_specific_transport_mae": 0.15390694289136694,
+        "folds": [
+          {
+            "family_specific_transport_mae": 0.06979319906562945,
+            "held_out_family": "gemma3",
+            "n_predictions": 12,
+            "n_test": 12,
+            "n_train": 16,
+            "shared_mae": 0.08622249983034476,
+            "training_family_fits": {
+              "gemma4": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.0859973081917995,
+            "held_out_family": "gemma4",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.12424378218344585,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.18898177724551019,
+            "held_out_family": "muse",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.07202280655921788,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.2964949588026854,
+            "held_out_family": "olmo3",
+            "n_predictions": 8,
+            "n_test": 8,
+            "n_train": 20,
+            "shared_mae": 0.31270669609640456,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "muse": "ok"
+            }
+          }
+        ],
+        "n": 28,
+        "paired_error_difference": 0.00042841145527691097,
+        "paired_shared_minus_family_ci95": [
+          -0.037952854113056454,
+          0.036369808919245544
+        ],
+        "records": [
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.4439650059135886,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.609375,
+            "shared_predicted": 0.6865457296954417
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.3990972857240876,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.40625,
+            "shared_predicted": 0.6755089867879327
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.02414219234086595,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.078125,
+            "shared_predicted": 4.809091159875561e-10
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.0027568107915283426,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.0,
+            "shared_predicted": 3.411360343990578e-19
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7271371663670392,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.734375,
+            "shared_predicted": 0.6866845846014188
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.4517804351480866,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.65625,
+            "shared_predicted": 0.6866325115081352
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.06548682525014266,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.171875,
+            "shared_predicted": 2.1620943429641412e-05
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.005929381368092735,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.0,
+            "shared_predicted": 5.06930728672449e-16
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7424101242401893,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.765625,
+            "shared_predicted": 0.6866860239190413
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.02027348287137698,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.234375,
+            "shared_predicted": 8.257408490620214e-11
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 7.540534813752268e-07,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.046875,
+            "shared_predicted": 6.012981152093351e-27
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 4.685367903514387e-07,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.0,
+            "shared_predicted": 6.012981152093351e-27
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7196464222337012,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.78125,
+            "shared_predicted": 0.7312135548893635
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7057452620243287,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.71875,
+            "shared_predicted": 0.7213793387611019
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.2693792906341968,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.0,
+            "shared_predicted": 0.44430910257935313
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 1.626391031181505e-06,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.0,
+            "shared_predicted": 2.4228269182087074e-07
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.45324000401320713,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.71875,
+            "shared_predicted": 0.6794164721069302
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.4457367800867887,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.6875,
+            "shared_predicted": 0.6793726519654101
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.4221058691140773,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.578125,
+            "shared_predicted": 0.6781324047197506
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.047990237803886136,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.140625,
+            "shared_predicted": 2.0544105387294e-06
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.32340417925073345,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.640625,
+            "shared_predicted": 0.2958242892899692
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.3215389781683457,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.625,
+            "shared_predicted": 0.2891064684945113
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.3062893937147494,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.5625,
+            "shared_predicted": 0.23681476122647543
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.2921900894390503,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.515625,
+            "shared_predicted": 0.19340034234700593
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.3444575276932376,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.671875,
+            "shared_predicted": 0.3749842764267645
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.34618892750114894,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.671875,
+            "shared_predicted": 0.38167111565834183
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.3529276131133534,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.65625,
+            "shared_predicted": 0.4077729735598305
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.325418620697898,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.640625,
+            "shared_predicted": 0.3031472042258647
+          }
+        ],
+        "shared_mae": 0.1543353543466439
+      },
+      "parameter_bootstrap": {
+        "ci95": {
+          "A_max": [
+            0.6374207026649971,
+            1.0
+          ],
+          "L_half": [
+            2.1713757273394454,
+            3.6689675129110335
+          ],
+          "k": [
+            0.6133325648948953,
+            15.19502702810971
+          ]
+        },
+        "n_resamples": 500,
+        "n_success": 500
+      },
+      "shared_fit": {
+        "mae": 0.057817447124795696,
+        "n": 28,
+        "n_models": 7,
+        "parameters": {
+          "A_max": 0.6742960204410744,
+          "L_half": 2.793064376680447,
+          "k": 6.909074302582984
+        },
+        "sse": 0.22258296544216852,
+        "status": "ok"
+      },
+      "verdict": "compatible with a shared form; no resolved family-specific gain"
+    },
+    "qa_f1": {
+      "label": "TriviaQA token F1",
+      "leave_one_family_out": {
+        "family_specific_transport_mae": 0.09511232054143116,
+        "folds": [
+          {
+            "family_specific_transport_mae": 0.07563941533085591,
+            "held_out_family": "gemma3",
+            "n_predictions": 12,
+            "n_test": 12,
+            "n_train": 16,
+            "shared_mae": 0.11444739152630586,
+            "training_family_fits": {
+              "gemma4": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.06927045378149592,
+            "held_out_family": "gemma4",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.09722309877831416,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "muse": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.03288915669002421,
+            "held_out_family": "muse",
+            "n_predictions": 4,
+            "n_test": 4,
+            "n_train": 24,
+            "shared_mae": 0.0407377423594834,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "olmo3": "ok"
+            }
+          },
+          {
+            "family_specific_transport_mae": 0.16835419366296514,
+            "held_out_family": "olmo3",
+            "n_predictions": 8,
+            "n_test": 8,
+            "n_train": 20,
+            "shared_mae": 0.1270651456359026,
+            "training_family_fits": {
+              "gemma3": "ok",
+              "gemma4": "ok",
+              "muse": "ok"
+            }
+          }
+        ],
+        "n": 28,
+        "paired_error_difference": 0.009949580456928881,
+        "paired_shared_minus_family_ci95": [
+          -0.00998280123275204,
+          0.0293300805615911
+        ],
+        "records": [
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.6853075668309968,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.6645089285714285,
+            "shared_predicted": 0.7356379403064557
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.5684234843320163,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.48600045787545787,
+            "shared_predicted": 0.7052454547669564
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.036306794684711,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.1430946940287973,
+            "shared_predicted": 2.8248987664498607e-06
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.0047845787947036564,
+            "held_out_family": "gemma3",
+            "model": "gemma3-4b",
+            "observed": 0.01833296741384977,
+            "shared_predicted": 6.350439386025152e-12
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7675304154811031,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.76875,
+            "shared_predicted": 0.7377277745214932
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7065991462603342,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.7095238095238094,
+            "shared_predicted": 0.7366462960599249
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.0995293757186822,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.28986198646125116,
+            "shared_predicted": 0.0020998076486512182
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.009739727260506146,
+            "held_out_family": "gemma3",
+            "model": "gemma3-12b",
+            "observed": 0.060689303213548894,
+            "shared_predicted": 5.768258591456264e-10
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7833337563132451,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.7947916666666667,
+            "shared_predicted": 0.737809129211019
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.030757441162800256,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.32742824883449884,
+            "shared_predicted": 9.519133035853962e-07
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 2.4010483469616266e-06,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.12571596346872083,
+            "shared_predicted": 6.4614928015764926e-27
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 1.5454746713465862e-06,
+            "held_out_family": "gemma3",
+            "model": "gemma3-27b",
+            "observed": 0.004847861842105263,
+            "shared_predicted": 6.4614928015764926e-27
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7591668981922854,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.8182291666666667,
+            "shared_predicted": 0.7753554181967148
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.747998459789387,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.7635416666666667,
+            "shared_predicted": 0.763425795960486
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.3641089555992764,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.16166844663119811,
+            "shared_predicted": 0.5075519651249092
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 3.58308062444056e-05,
+            "held_out_family": "gemma4",
+            "model": "gemma4-31b",
+            "observed": 0.0,
+            "shared_predicted": 1.9257443413031477e-05
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.7262816254131111,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.740625,
+            "shared_predicted": 0.7497006051959442
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.7141109573816623,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.7171875,
+            "shared_predicted": 0.7390058596367032
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.6510341256917377,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.6216145833333333,
+            "shared_predicted": 0.6862965152666535
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.0957144063716965,
+            "held_out_family": "muse",
+            "model": "muse-30b",
+            "observed": 0.18043157356816245,
+            "shared_predicted": 0.2478066462401285
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.48932517209281573,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.66875,
+            "shared_predicted": 0.532118084593133
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.48616116107115465,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.653125,
+            "shared_predicted": 0.529528766697571
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.46057501314170796,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.5984375,
+            "shared_predicted": 0.5082601983008073
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.4374035018719001,
+            "held_out_family": "olmo3",
+            "model": "olmo3-7b",
+            "observed": 0.5625,
+            "shared_predicted": 0.48842997203988275
+          },
+          {
+            "checkpoint": "dense",
+            "family_specific_transport_predicted": 0.5254915824107506,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.7167997758670713,
+            "shared_predicted": 0.561175327979486
+          },
+          {
+            "checkpoint": "prune-d0.8",
+            "family_specific_transport_predicted": 0.5284986007919747,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.7151738505289786,
+            "shared_predicted": 0.5635517665951549
+          },
+          {
+            "checkpoint": "prune-d0.7",
+            "family_specific_transport_predicted": 0.5402411768978105,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.7060323478442084,
+            "shared_predicted": 0.5727830291953667
+          },
+          {
+            "checkpoint": "prune-d0.6",
+            "family_specific_transport_predicted": 0.4927502849814043,
+            "held_out_family": "olmo3",
+            "model": "olmo3-32b",
+            "observed": 0.6864615683229813,
+            "shared_predicted": 0.5349117320746171
+          }
+        ],
+        "shared_mae": 0.10506190099836006
+      },
+      "parameter_bootstrap": {
+        "ci95": {
+          "A_max": [
+            0.7364236115503351,
+            1.0
+          ],
+          "L_half": [
+            2.444963309062097,
+            3.8359185974813017
+          ],
+          "k": [
+            0.5152473852136433,
+            4.473354628989194
+          ]
+        },
+        "n_resamples": 500,
+        "n_success": 500
+      },
+      "shared_fit": {
+        "mae": 0.057318037891641645,
+        "n": 28,
+        "n_models": 7,
+        "parameters": {
+          "A_max": 1.0,
+          "L_half": 2.9677772778587084,
+          "k": 0.6841284367984783
+        },
+        "sse": 0.22151543936807147,
+        "status": "ok"
+      },
+      "verdict": "compatible with a shared form; no resolved family-specific gain"
+    }
+  },
+  "provenance": [
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "gemma3-4b",
+      "sha256": "cbcb9abe12a52490c0dc46927c51ce45559bb1a22b0818991996d7755ee5619f",
+      "source_path": "results/v15-accuracy/gemma3-4b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "gemma3-4b",
+      "sha256": "3f11bb732fa719c1c6a9da18cb9af1abd4514b8488952000cea8b9ebb55eba6d",
+      "source_path": "results/v15-accuracy/gemma3-4b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "gemma3-4b",
+      "sha256": "c95500b7aaad126bf7bd8ef376b3327122a1a801eadd5c6859ed9fb710f0cbb9",
+      "source_path": "results/v15-accuracy/gemma3-4b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "gemma3-4b",
+      "sha256": "e6e51605092ae28b07068709244dcd290caa6502aafee3a8e2fad3612e3de311",
+      "source_path": "results/v15-accuracy/gemma3-4b/prune-d0.6__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "gemma3-12b",
+      "sha256": "3131eee825ad085510ec0e6efb0731dcb8278540551902af2af3e9d7bff977c9",
+      "source_path": "results/v15-accuracy/gemma3-12b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "gemma3-12b",
+      "sha256": "d5dd1cd0fc843acdd3475d562d007d3807ac3760251fd58656c1c3d1ccfe889a",
+      "source_path": "results/v15-accuracy/gemma3-12b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "gemma3-12b",
+      "sha256": "9c3950ca55744abf0055ed47264e945899320cb09b94240a640488f6a894cb29",
+      "source_path": "results/v15-accuracy/gemma3-12b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "gemma3-12b",
+      "sha256": "520cd99bf13ddb01ddad1def52afec6388aad4973b7d18622f9f500a825e36f6",
+      "source_path": "results/v15-accuracy/gemma3-12b/prune-d0.6__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "gemma3-27b",
+      "sha256": "12a6de83b649cb8bdc3b5dffa181b6f3fc029666d0e62d215542f49eda6ca69e",
+      "source_path": "results/v15-accuracy/gemma3-27b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "gemma3-27b",
+      "sha256": "cc9c24a47444e33adb5cc7906bbe842207327c4ed64ee05ecdb38ec377fb3b39",
+      "source_path": "results/v15-accuracy/gemma3-27b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "gemma3-27b",
+      "sha256": "2a1ade766dbf11a4c2295125e249523415df4700e0400e3387d2009cad675c01",
+      "source_path": "results/v15-accuracy/gemma3-27b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "gemma3-27b",
+      "sha256": "5a87dde56e75e5364c4b6dc9ab07373189194a0737e75ac3d718d29060a716a4",
+      "source_path": "results/v15-accuracy/gemma3-27b/prune-d0.6__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "gemma4-31b",
+      "sha256": "4f42e6d031af28d8ead491a65d2463358efa0f08adea64e4b6b73871ae627079",
+      "source_path": "results/v15-accuracy/gemma4-31b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "gemma4-31b",
+      "sha256": "103095b35f52e80ea992715b4c716b6b479901d6baf33415cb7415819a8c1567",
+      "source_path": "results/v15-accuracy/gemma4-31b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "gemma4-31b",
+      "sha256": "695ca041727605e85b5bc7f592be8e845280f247eb7f8b8c711c0f684c6a2b85",
+      "source_path": "results/v15-accuracy/gemma4-31b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "gemma4-31b",
+      "sha256": "246a79ab3a44cf1dfb176133add4e1ab56a0ad82f0e879db862c1caa809fad8e",
+      "source_path": "results/v15-accuracy/gemma4-31b/prune-d0.6__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "muse-30b",
+      "sha256": "6b135c0075e1285b5a47d08eecca1910c8277269f7e36e7c79ec1e14eba5716d",
+      "source_path": "results/v15-accuracy/muse-30b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "muse-30b",
+      "sha256": "8ce09bbf2aafa3a6c03c694636c1f8a69f93f7987b78e8f2fee8140eccb9ea73",
+      "source_path": "results/v15-accuracy/muse-30b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "muse-30b",
+      "sha256": "1b757fcabda56bcfa12d11f9f4953547a910bce5bb10b936ed0820ab33d701de",
+      "source_path": "results/v15-accuracy/muse-30b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "muse-30b",
+      "sha256": "ffdd8fb30c3400722b389d036dec412d6d8a3c8dd08e1e02b614865d78bf66bd",
+      "source_path": "results/v15-accuracy/muse-30b/prune-d0.6__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "olmo3-7b",
+      "sha256": "b624879b51b3858a720e610e6be7293efb3406c961bb1c244c4049a1d904a9ab",
+      "source_path": "results/v15-accuracy/olmo3-7b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "olmo3-7b",
+      "sha256": "de939370e3808935c765539654970a72fdf89cafef530e8370e274670de31fed",
+      "source_path": "results/v15-accuracy/olmo3-7b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "olmo3-7b",
+      "sha256": "e854d69aa99250d2e70c65bf0b01650227b1595c8b442f62e1c9efe8ee3b2d31",
+      "source_path": "results/v15-accuracy/olmo3-7b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "olmo3-7b",
+      "sha256": "300d717117e764ff2466459ce86b07662e25e82e3df756f0f1f0f79338d7b6b3",
+      "source_path": "results/v15-accuracy/olmo3-7b/prune-d0.6__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "dense",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 1.0,
+      "fixed_eval": true,
+      "model": "olmo3-32b",
+      "sha256": "7592c7b962ee9f47eb79968569d19dce29b4294acf0e951caff5cb3f57ff24b9",
+      "source_path": "results/v15-accuracy/olmo3-32b/dense__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.8",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.8,
+      "fixed_eval": true,
+      "model": "olmo3-32b",
+      "sha256": "ba3302d5975cd6d6fee8378699d3be6f774e5d0ef7abc067c84166e4548b1746",
+      "source_path": "results/v15-accuracy/olmo3-32b/prune-d0.8__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.7",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.7,
+      "fixed_eval": true,
+      "model": "olmo3-32b",
+      "sha256": "fa09fa39ce78ff25005c691b0f333c86a72d0190f66cc1f96656b54430d3dfde",
+      "source_path": "results/v15-accuracy/olmo3-32b/prune-d0.7__easy/accuracy.json"
+    },
+    {
+      "checkpoint": "prune-d0.6",
+      "decoding": "greedy, batched, left padding, EOS and domain-delimiter stopping, post-hoc first-block truncation, no chat template",
+      "density": 0.6,
+      "fixed_eval": true,
+      "model": "olmo3-32b",
+      "sha256": "0280d68137678a57b62b39b4627e8f04d983577b5e1ef2c37020690b4f551be9",
+      "source_path": "results/v15-accuracy/olmo3-32b/prune-d0.6__easy/accuracy.json"
+    }
+  ],
+  "qa_free_lunch": {
+    "flag": true,
+    "n_accuracy_improving_metric_cells": 0,
+    "n_loss_improving_metric_cells": 4,
+    "records": [
+      {
+        "accuracy_delta": 0.0,
+        "accuracy_improved": false,
+        "density": 0.8,
+        "loss_delta": -0.013338129571143664,
+        "model": "olmo3-32b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_delta": -0.015625,
+        "accuracy_improved": false,
+        "density": 0.7,
+        "loss_delta": -0.06531151304853688,
+        "model": "olmo3-32b",
+        "outcome": "qa_em"
+      },
+      {
+        "accuracy_delta": -0.001625925338092693,
+        "accuracy_improved": false,
+        "density": 0.8,
+        "loss_delta": -0.013338129571143664,
+        "model": "olmo3-32b",
+        "outcome": "qa_f1"
+      },
+      {
+        "accuracy_delta": -0.010767428022862902,
+        "accuracy_improved": false,
+        "density": 0.7,
+        "loss_delta": -0.06531151304853688,
+        "model": "olmo3-32b",
+        "outcome": "qa_f1"
+      }
+    ]
+  }
+}

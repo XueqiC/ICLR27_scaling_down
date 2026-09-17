@@ -1,0 +1,63 @@
+\begin{table}[!htbp]
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.310000000\textwidth-3.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
+\toprule
+Test & \mbox{Held-out} axis & Provenance & Math & Code & QA \\
+\midrule
+\multicolumn{6}{@{}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 1.000000000\textwidth-0.000000000\tabcolsep\relax}@{}}{\textit{Source axis: seen setting, unseen source state}} \\
+Pruning: fixed $d$, $3{\times}3$, leave-one-stage-out & stage & RFRA & \textbf{0.253}/\allowbreak 0.413{\scriptsize\,med} & \textbf{0.292}/\allowbreak 0.516{\scriptsize\,med} & 0.806/\allowbreak \textbf{0.500}{\scriptsize\,0} \\
+\addlinespace[1.5pt]
+Quantization: fixed $b$, $3{\times}3$, leave-one-stage-out & stage & RFRA & \textbf{1.144}/\allowbreak 1.410{\scriptsize\,med} & \textbf{0.626}/\allowbreak 1.553{\scriptsize\,med} & 1.989/\allowbreak \textbf{1.473}{\scriptsize\,med} \\
+\addlinespace[1.5pt]
+Pruning: stage 96k (160M, 1.4B), all $d$ & stage & PFRA & \textbf{0.090}/\allowbreak 0.343{\scriptsize\,nD} & \textbf{0.128}/\allowbreak 0.179{\scriptsize\,nD} & \textbf{0.426}/\allowbreak 0.438{\scriptsize\,nD} \\
+\addlinespace[1.5pt]
+Quantization: new stage 96k (160M, 410M, 1.4B), $b\ge4$ & stage & P–RA & \textbf{0.029}/\allowbreak 0.084{\scriptsize\,pbm} & 0.104/\allowbreak \textbf{0.094}{\scriptsize\,pbm} & 0.173/\allowbreak \textbf{0.134}{\scriptsize\,pbm} \\
+Quantization: new stage 96k (160M, 410M, 1.4B), 3 bits & stage & P–RA & \textbf{1.488}/\allowbreak 1.934{\scriptsize\,pbm} & 1.963/\allowbreak \textbf{0.843}{\scriptsize\,pbm} & 2.046/\allowbreak \textbf{1.727}{\scriptsize\,pbm} \\
+\addlinespace[1.5pt]
+Distillation: $\delta_c$, $3{\times}3$ low-rank adaptation, leave-one-stage-out & stage & RFRA & \textbf{0.014}/\allowbreak 0.026{\scriptsize\,nD} & 0.057/\allowbreak \textbf{0.044}{\scriptsize\,nD} & 0.263/\allowbreak \textbf{0.159}{\scriptsize\,c} \\
+\multicolumn{6}{@{}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 1.000000000\textwidth-0.000000000\tabcolsep\relax}@{}}{\textit{Configuration axis: unseen setting, size, stage, or pool}} \\
+Pruning: $d$ 0.65, 0.55, development sources + Pythia-410M at step 96k & $d$ & PRFA & 0.371/\allowbreak \textbf{0.283}{\scriptsize\,A2} & 0.524/\allowbreak \textbf{0.279}{\scriptsize\,A2} & \textbf{0.759}/\allowbreak 0.818{\scriptsize\,A2} \\
+Pruning: Pythia-1B at step 96k, $d=0.65$ & size, stage, $d$ & PFFA & 0.020/\allowbreak \textbf{0.009}{\scriptsize\,A1} & 0.092/\allowbreak \textbf{0.031}{\scriptsize\,A1} & 0.466/\allowbreak \textbf{0.380}{\scriptsize\,A2} \\
+Pruning: Pythia-1B at step 96k, $d=0.55$ & size, stage, $d$ & PFFA & 0.930/\allowbreak \textbf{0.273}{\scriptsize\,so} & 1.550/\allowbreak \textbf{0.018}{\scriptsize\,so} & 1.426/\allowbreak \textbf{0.530}{\scriptsize\,so} \\
+\addlinespace[1.5pt]
+\bottomrule\end{tabular*}
+\caption{\scriptsize All prediction tests across the three arms. Each error pair gives the mean absolute error in nats per native token of the candidate followed by the strongest baseline, per capability; bold marks the lower error. The unseen column names what the test holds out. The origin code gives the prediction origin, the same-input baseline origin, the simple baseline origin (P frozen before measurement, R retrospective, F \mbox{pre-specified}, -- none), and the selection (A all \mbox{pre-specified} forms reported, S chosen after the test). Baseline codes: nD without pretraining tokens, med the per-configuration or development median, 0 zero change, so the strength-only curve, A1 the power form with $\gamma{=}1$, A2 per-density regression with interpolation, ct the continuous two-term form, pbm and pba the per-bit median and mean, c a constant, and TE the joint budget and reuse form. Improvements, both baselines, and bootstrap intervals are in Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}.}
+\label{tab:pred_full}\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.310000000\textwidth-3.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
+\toprule
+Test & \mbox{Held-out} axis & Provenance & Math & Code & QA \\
+\midrule
+Quantization: Pythia-1B at step 96k, 4 bits & size, stage & PFFA & 0.116/\allowbreak \textbf{0.068}{\scriptsize\,pbm} & 0.046/\allowbreak \textbf{0.012}{\scriptsize\,pbm} & 0.059/\allowbreak \textbf{0.054}{\scriptsize\,nD} \\
+Quantization: Pythia-1B at step 96k, 3 bits & size, stage & PFFA & \textbf{0.690}/\allowbreak 1.414{\scriptsize\,pbm} & 0.318/\allowbreak \textbf{0.001}{\scriptsize\,pbm} & \textbf{0.182}/\allowbreak 0.446{\scriptsize\,pbm} \\
+\addlinespace[1.5pt]
+Pruning: Pythia-1B at steps 32k and 112k, $d$ 0.9--0.6 & size, stage & PFFA & 0.215/\allowbreak \textbf{0.169}{\scriptsize\,so} & 0.191/\allowbreak \textbf{0.119}{\scriptsize\,A2} & 0.261/\allowbreak \textbf{0.227}{\scriptsize\,med} \\
+Pruning: Pythia-1B at steps 32k and 112k, $d=0.55$ & size, stage, $d$ & PFFA & 1.790/\allowbreak \textbf{0.939}{\scriptsize\,so} & 1.488/\allowbreak \textbf{0.089}{\scriptsize\,so} & 2.225/\allowbreak \textbf{0.393}{\scriptsize\,so} \\
+\addlinespace[1.5pt]
+Quantization: Pythia-1B at steps 32k and 112k, $b\ge4$ (including the 5-bit rule) & size, stage, $b$ & PFFA & 0.064/\allowbreak \textbf{0.020}{\scriptsize\,pbm} & 0.041/\allowbreak \textbf{0.028}{\scriptsize\,pbm} & 0.157/\allowbreak \textbf{0.052}{\scriptsize\,pbm} \\
+Quantization: Pythia-1B at steps 32k and 112k, 3 bits & size, stage & PFFA & \textbf{0.256}/\allowbreak 1.466{\scriptsize\,pba} & \textbf{0.362}/\allowbreak 1.537{\scriptsize\,pba} & 1.972/\allowbreak \textbf{1.000}{\scriptsize\,pbm} \\
+\addlinespace[1.5pt]
+Pruning: Pythia-6.9B at steps 32k and 112k, $d$ 0.9--0.6 & size$\uparrow$, stage & PFFA & 0.299/\allowbreak \textbf{0.120}{\scriptsize\,med} & 0.160/\allowbreak \textbf{0.144}{\scriptsize\,A2} & 0.909/\allowbreak \textbf{0.120}{\scriptsize\,med} \\
+Pruning: Pythia-6.9B at steps 32k and 112k, $d=0.55$ & size$\uparrow$, stage, $d$ & PFFA & \textbf{0.615}/\allowbreak 0.618{\scriptsize\,A2} & 0.547/\allowbreak \textbf{0.535}{\scriptsize\,A2} & 4.472/\allowbreak \textbf{0.904}{\scriptsize\,so} \\
+\addlinespace[1.5pt]
+Quantization: Pythia-6.9B at steps 32k and 112k, $b\ge4$ & size$\uparrow$, stage, $b$ & PFFA & 0.181/\allowbreak \textbf{0.036}{\scriptsize\,pbm} & 0.177/\allowbreak \textbf{0.043}{\scriptsize\,pbm} & 0.428/\allowbreak \textbf{0.034}{\scriptsize\,0} \\
+\bottomrule\end{tabular*}
+\caption[]{Continued from the preceding table part.}
+\end{table}
+\begin{table}[!htbp]\ContinuedFloat
+\normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.310000000\textwidth-3.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
+\toprule
+Test & \mbox{Held-out} axis & Provenance & Math & Code & QA \\
+\midrule
+Quantization: Pythia-6.9B at steps 32k and 112k, 3 bits & size$\uparrow$, stage & PFFA & 3.233/\allowbreak \textbf{2.046}{\scriptsize\,pba} & 3.229/\allowbreak \textbf{1.805}{\scriptsize\,pba} & 5.306/\allowbreak \textbf{1.744}{\scriptsize\,pba} \\
+\addlinespace[1.5pt]
+Distillation: unseen pool of 225 traces per domain (Gemma-3-1B) & pool & PFFA & 0.191/\allowbreak \textbf{0.122}{\scriptsize\,c} & 0.117/\allowbreak \textbf{0.069}{\scriptsize\,c} & \textbf{0.706}/\allowbreak 0.710{\scriptsize\,TE} \\
+\addlinespace[1.5pt]
+distillation 270M, pool 375 & pool & P/F/F/A & \textbf{0.045}/\allowbreak 0.060{\scriptsize\,c} & \textbf{0.036}/\allowbreak 0.047{\scriptsize\,c} & \textbf{0.606}/\allowbreak 0.862{\scriptsize\,c} \\
+distillation 1B, pool 375 & pool & P/F/F/A & \textbf{0.050}/\allowbreak 0.057{\scriptsize\,c} & \textbf{0.029}/\allowbreak 0.069{\scriptsize\,c} & \textbf{0.444}/\allowbreak 1.004{\scriptsize\,c} \\
+distillation 4B, pool 375 & student, pool & P/F/F/A & 0.089/\allowbreak \textbf{0.020}{\scriptsize\,c} & 0.050/\allowbreak \textbf{0.038}{\scriptsize\,c} & 1.141/\allowbreak \textbf{1.024}{\scriptsize\,c} \\
+\bottomrule\end{tabular*}
+\caption[]{Continued from the preceding table part.}
+\end{table}

@@ -1,0 +1,38 @@
+\begin{table}[!htbp]\normalfont\centering\scriptsize\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-2.660000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.260000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}@{}}
+\toprule
+Form & Parameters & {leave-one-run-out Math} & {leave-one-run-out Code} & leave-one-run-out QA & {leave-one-student-out Math} & {leave-one-student-out Code} & {leave-one-student-out QA} \\
+\midrule
+Zero change & 0 & 0.152; -0.152 & 0.178; -0.178 & 1.429; +0.143 & 0.152; -0.152 & 0.178; -0.178 & 1.429; +0.143 \\
+Constant & 3 & 0.095; +0.000 & 0.103; +0.000 & 1.400; +0.000 & 0.093; +0.000 & 0.100; +0.000 & 1.358; -0.000 \\
+Budget only & 6 & 0.082; +0.000 & 0.072; +0.000 & 1.092; -0.000 & 0.089; +0.000 & 0.070; +0.000 & 1.075; -0.000 \\
+Reuse only & 6 & 0.073; -0.003 & 0.055; -0.002 & 0.798; -0.029 & 0.091; +0.000 & 0.056; +0.000 & 0.949; +0.000 \\
+{Response surface with initial loss} & 12 & 0.072; +0.000 & 0.054; -0.000 & 0.812; +0.001 & 0.091; +0.000 & 0.054; +0.000 & 0.944; -0.000 \\
+{Response surface with student size} & 12 & 0.072; +0.000 & 0.054; -0.000 & 0.812; +0.001 & 0.091; +0.000 & 0.054; +0.000 & 0.944; +0.000 \\
+F1 with initial loss & 6 & 0.057; +0.003 & 0.052; +0.003 & 1.518; +0.662 & 0.152; -0.152 & 0.178; -0.178 & 1.429; +0.143 \\
+F1 with student size & 6 & 0.057; +0.003 & 0.052; +0.003 & 1.518; +0.662 & 0.152; -0.152 & 0.178; -0.178 & 1.429; +0.143 \\
+F2 with initial loss & 12 & 0.062; -0.007 & 0.057; -0.005 & 0.706; -0.069 & 0.152; -0.152 & 0.178; -0.178 & 1.429; +0.143 \\
+F2 with student size & 12 & 0.062; -0.007 & 0.057; -0.005 & 0.706; -0.069 & 0.152; -0.152 & 0.178; -0.178 & 1.429; +0.143 \\
+\bottomrule\end{tabular*}
+\caption{Distillation development matrix (12 runs, 48 points): \mbox{held-out} mean absolute error followed by signed bias, in nats, per form and capability under leave-one-run-out and leave-one-student-out evaluation. Forms use $t=\log(1+T_c/35000)$, $e=\log(1+E)$, and $s=1-e^{-T_c/T_*}$: budget only $a+bt$, reuse only $a+be$, surface $a+bt+ce+dz$, F1 $(a+\lambda z)e$, and F2 $(a+\lambda z)s+(b+\mu z)e$, with $z$ the standardized $L_{0,c}$ or $\log N_S$. Under leave-one-student-out the descriptor forms reduce to zero change.}
+\label{tab:v56_forms}\end{table}
+\begin{table}[!htbp]\normalfont\centering\scriptsize\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-2.280000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-2.040000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-2.040000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.320000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.560000000\tabcolsep\relax}@{}}
+\toprule
+Structure & {Parameters, shared and specific} & Capability & Shared MAE & {Capability-specific MAE} & Gain & Gain exceeds 0.02 \\
+\midrule
+Reuse only & 4; 4 & Math & 0.431 & 0.409 & 0.022 & Yes \\
+Reuse only & 4; 4 & Code & 0.417 & 0.412 & 0.006 & No \\
+Reuse only & 4; 4 & QA & 0.967 & 1.150 & -0.183 & No \\
+Reuse only & 4; 4 & Capability mean & 0.605 & 0.657 & -0.052 & No \\
+Budget and reuse & 5; 5 & Math & 0.439 & 0.327 & 0.111 & Yes \\
+Budget and reuse & 5; 5 & Code & 0.419 & 0.314 & 0.105 & Yes \\
+Budget and reuse & 5; 5 & QA & 0.979 & 0.853 & 0.126 & Yes \\
+Budget and reuse & 5; 5 & Capability mean & 0.612 & 0.498 & 0.114 & Yes \\
+F2 & 7; 7 & Math & 0.536 & 0.145 & 0.390 & Yes \\
+F2 & 7; 7 & Code & 0.527 & 0.107 & 0.420 & Yes \\
+F2 & 7; 7 & QA & 1.044 & 0.826 & 0.219 & Yes \\
+F2 & 7; 7 & Capability mean & 0.702 & 0.359 & 0.343 & Yes \\
+\bottomrule\end{tabular*}
+\caption{Capability conditioning at matched parameter count (leave-one-run-out mean absolute error, nats): a shared response shape with per-capability offsets against per-capability models with the same total count. Paired parameter counts give the shared and capability-specific totals; a gain above 0.02 nats is a descriptive threshold. F2 is the saturating budget response plus a logarithmic reuse response with a student descriptor.}
+\label{tab:v56_condition}\end{table}

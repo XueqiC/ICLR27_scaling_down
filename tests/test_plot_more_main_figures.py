@@ -22,7 +22,7 @@ from paper_generator_checks import check_access, refuses_symlink, refuses_output
 from test_paper_figure_style import check_artists, EXPECTED_PANEL_SIZES
 
 GENERATORS = (lr, pythia, drift, heterogeneity, selection)
-PANELS = ("fig1_c", "fig4_a", "fig4_b", "fig4_c", "fig5_a", "fig5_b",
+PANELS = ("lr_pilot_a", "lr_pilot_legend", "fig4_a", "fig4_b", "fig4_c", "fig5_a", "fig5_b",
           "fig4_legend", "fig5_legend", "fig8_a", "fig8_b", "fig8_legend",
           "fig7_a", "fig7_b", "fig7_c", "fig7_d", "fig7_legend")
 PREVIEWS = ("lr_pilot", "pythia_responses", "drift", "heterogeneity", "selection_maps")
@@ -70,7 +70,7 @@ def generated(tmp_path_factory):
                 assert ax.bbox.contains(box.x0, box.y0) and ax.bbox.contains(box.x1, box.y1)
             assert all(line.get_markersize() == 3.8
                        for line in ax.lines if line.get_marker() in ("o", "s", "^"))
-            if stem.startswith("fig4_") or stem == "fig1_c":
+            if stem.startswith("fig4_") or stem == "lr_pilot_a":
                 data_lines = [line for line in ax.lines if line.get_color() != ".55"]
                 assert all(line.get_linewidth() == 1.1
                            for line in data_lines)
@@ -289,6 +289,6 @@ def test_new_generators_refuse_symlinked_output(tmp_path, gen, component):
     refuses_symlink(gen, tmp_path, "figs", component)
 
 
-@pytest.mark.parametrize("name", ("fig1_c.pdf", "fig4_a_data.json", "drift.png", "fig8_b_caption.txt", "selection_maps_files.json"))
+@pytest.mark.parametrize("name", ("lr_pilot_a.pdf", "fig4_a_data.json", "drift.png", "fig8_b_caption.txt", "selection_maps_files.json"))
 def test_new_output_files_refuse_symlinks(tmp_path, name):
     refuses_output_file_symlink(tmp_path, "figs", name)

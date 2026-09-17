@@ -1,0 +1,49 @@
+\begin{table}[!htbp]\normalfont
+\centering\small
+\caption{Retrospective audit of quantization identifiability; the delivered predictions are unchanged. The four forms use the same 24 development cells per capability, pooled standardization, and ridge $\lambda=10^{-3}$. The upper panel reports rank and effective degrees of freedom; the delivered 20-coefficient design has rank 16 because two development bit levels make $u^2=(u_3+u_5)u-u_3u_5$. The lower panel reports mean absolute errors in nats on the frozen bit-width test (12 cells per capability), the group-size test (18), the joint test on Pythia-1B at step 96k (3), and development leave-one-state-out evaluation (24).}
+\label{tab:quant_ident}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+Control & Rank & df (Math) & df (Code) & df (QA) \\
+\midrule
+Delivered (20) & 16 & 15.9790 & 15.9801 & 15.9220 \\
+Without $u^2$ (16) & 16 & 15.9742 & 15.9756 & 15.9045 \\
+Bit width only (8) & 8 & 7.9871 & 7.9878 & 7.9523 \\
+\shortstack[l]{Additive bit width\\and group size (12)} & 12 & 11.9797 & 11.9808 & 11.9249 \\
+\bottomrule
+\end{tabular*}
+\par\medskip
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llrrr@{}}
+\toprule
+Evaluation & Control & Math & Code & QA \\
+\midrule
+Bit & Delivered (20) & 0.1934 & 0.2136 & 0.4364 \\
+ & Without $u^2$ (16) & 1.2996 & 1.3863 & 1.9441 \\
+ & Bit width only (8) & 1.2996 & 1.3863 & 1.9441 \\
+ & \shortstack[l]{Additive bit width\\and group size (12)} & 1.2996 & 1.3863 & 1.9441 \\
+ & V55 median & 0.5533 & 0.7258 & 0.5371 \\
+ & Zero change & 0.4499 & 0.5318 & 0.4805 \\
+\addlinespace
+Granularity & Delivered (20) & 0.2189 & 0.3192 & 0.9857 \\
+ & Without $u^2$ (16) & 0.6092 & 0.7183 & 1.4759 \\
+ & Bit width only (8) & 0.6092 & 0.7183 & 1.4759 \\
+ & \shortstack[l]{Additive bit width\\and group size (12)} & 0.6092 & 0.7183 & 1.4759 \\
+ & V55 median & 1.1225 & 1.2219 & 1.2202 \\
+ & Zero change & 1.2387 & 1.3457 & 1.2390 \\
+\addlinespace
+Joint & Delivered (20) & 0.3450 & 0.0969 & 0.2689 \\
+ & Without $u^2$ (16) & 0.5271 & 0.2225 & 0.3197 \\
+ & Bit width only (8) & 0.5271 & 0.2225 & 0.3197 \\
+ & \shortstack[l]{Additive bit width\\and group size (12)} & 0.5271 & 0.2225 & 0.3197 \\
+ & V55 median & 0.1515 & 0.2698 & 0.3017 \\
+ & Zero change & 0.2997 & 0.3385 & 0.1039 \\
+\addlinespace
+\shortstack[l]{Development\\leave-one-state-out} & Delivered (20) & 0.9135 & 1.9098 & 4.3712 \\
+ & Without $u^2$ (16) & 0.9804 & 1.9014 & 4.3649 \\
+ & Bit width only (8) & 1.0630 & 1.9014 & 4.3649 \\
+ & \shortstack[l]{Additive bit width\\and group size (12)} & 1.0998 & 1.9745 & 4.3768 \\
+ & V55 median & 1.6939 & 1.7582 & 1.7765 \\
+ & Zero change & 1.8215 & 1.9291 & 1.7958 \\
+\bottomrule
+\end{tabular*}
+\end{table}

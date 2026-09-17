@@ -1,5 +1,13 @@
 {
   "files": {
+    "analysis/a3_corner_pool_search.py@live": {
+      "frozen_sha256": "94f51d48cb4b3fe24c8a7736524c60f76579be68f06b980e1bb5e7750eb6ac22",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/a3_corner_pool_search.py",
+      "published_at": "analysis/a3_corner_pool_search.py",
+      "published_sha256": "94f51d48cb4b3fe24c8a7736524c60f76579be68f06b980e1bb5e7750eb6ac22",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
+    },
     "analysis/a5_corner_second_difference.py@live": {
       "frozen_sha256": "498ef3ebfa49f190fdc45401893b5cee515aa475dfc6377d12d022292614843f",
       "pairable": false,
@@ -25,11 +33,27 @@
       "reason": "anonymisation of author, host, institution or path strings"
     },
     "analysis/paper_artifacts.py@live": {
-      "frozen_sha256": "8b7914bd32444375ad939acd369eeabd8ecf7ab7a26215c5b49cf5fd955b47ce",
+      "frozen_sha256": "45e9ad8db425b63dcd394113161098012e31959904dbd0c7c749ad1a4c21d75b",
       "pairable": false,
       "path_in_frozen_record": "analysis/paper_artifacts.py",
       "published_at": "analysis/paper_artifacts.py",
-      "published_sha256": "2dd0ee2a97b91cd6f229a3701e3b9dc0cc4c87663f599103d8722914623078e5",
+      "published_sha256": "d962aa213459e59caa76a5e41aefe85c88b03efb36c0069110e70bf1c41346e6",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "analysis/paper_panel_exports.py@live": {
+      "frozen_sha256": "3eda07029fb3850fd366e0b6afbc4b4b2082aebb231e4cc9f76af3befb7dfb3d",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/paper_panel_exports.py",
+      "published_at": "analysis/paper_panel_exports.py",
+      "published_sha256": "3eda07029fb3850fd366e0b6afbc4b4b2082aebb231e4cc9f76af3befb7dfb3d",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
+    },
+    "analysis/plot_fig1_responses.py@live": {
+      "frozen_sha256": "bcc7c26fb324b56e8b3047710f53c4e538bfb870016097f01bb458462a007923",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/plot_fig1_responses.py",
+      "published_at": "analysis/plot_fig1_responses.py",
+      "published_sha256": "c04fa68c080fce46fb1ea5a9891c5f61754b0cfef016d70946de58418ac35e44",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/plot_fig_efficiency.py@live": {
@@ -38,14 +62,14 @@
       "path_in_frozen_record": "analysis/plot_fig_efficiency.py",
       "published_at": "analysis/plot_fig_efficiency.py",
       "published_sha256": "d67db04691ab643dcbb7eef1c2c30d769fb87da01678e3c33e4aa68d9fdaca9d",
-      "reason": "publication digest adapter; frozen scorer and numerical analysis unchanged; not a scrub-only correspondence"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/plot_fig_generalization_cells.py@live": {
-      "frozen_sha256": "972ec6d496e2b93dc0e1e5500a75dd126dea34ddc6f8025938bdd2a60934f9d2",
+      "frozen_sha256": "b16d358577fa882ac4f96675d8c89e1825bebfb3242a63b317f3a797b425c2a8",
       "pairable": false,
       "path_in_frozen_record": "analysis/plot_fig_generalization_cells.py",
       "published_at": "analysis/plot_fig_generalization_cells.py",
-      "published_sha256": "f7e9ae22cc02e2734dc7295c5828aea56a1dac01d0960205edbba8876e9fc1c7",
+      "published_sha256": "73747d90d90645e648c55965ed21942432c6526003fa0356d68028df3e917dec",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/provenance.py@live": {
@@ -64,6 +88,14 @@
       "published_sha256": "934718f6fc28e1ab850a7914dca9d2707d2929afc1173a01b4ca9bbec91a09f1",
       "reason": "anonymisation of author, host, institution or path strings"
     },
+    "analysis/v17_unification.py@live": {
+      "frozen_sha256": "a884aba9e1c203f4fdd461fe387dbc7971096a3f2b16a3f14b76045c74b80003",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/v17_unification.py",
+      "published_at": "analysis/v17_unification.py",
+      "published_sha256": "a884aba9e1c203f4fdd461fe387dbc7971096a3f2b16a3f14b76045c74b80003",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
+    },
     "analysis/v1_recipe_strat.py@live": {
       "frozen_sha256": "b0468bbea7323c1fb389529471ba4c2fcbfa30a616e72a1a938dd19f213e419c",
       "pairable": true,
@@ -71,6 +103,14 @@
       "published_at": "analysis/v1_recipe_strat.py",
       "published_sha256": "fb11c7f2476edfd9ac1d8246ef313e025385f4a9e788aed55fe18b49fd034aea",
       "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "analysis/v22_experiment_manifest.py@live": {
+      "frozen_sha256": "5359163390272f131bac604398e6bb2463b321377364f24c50a27c8303083995",
+      "pairable": false,
+      "path_in_frozen_record": "analysis/v22_experiment_manifest.py",
+      "published_at": "analysis/v22_experiment_manifest.py",
+      "published_sha256": "b3a2271286a80f184814a5086d0ffb7c948c8a0a0812b80e6727863c2465114f",
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "analysis/v2_damage_spectrum.py@live": {
       "frozen_sha256": "5d15429fef7873c6ffa6a94c03f6c4600c102b3df86cc5095393eac8ae5e9024",
@@ -838,7 +878,7 @@
       "path_in_frozen_record": "data_mirror/a13-dreq-accounting/recommendations.csv",
       "published_at": "data_mirror/a13-dreq-accounting/recommendations.csv",
       "published_sha256": "c9801de918ca14f9455cd61f93cf3dcf74b53bfe7a6317b0cc7e915fcf129e18",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
     },
     "data_mirror/a13-dreq-accounting/same_denominator.csv@live": {
       "frozen_sha256": "f9579c004a7597d036cde5646e2be7782f697b3284f69caebe39bcf36f8cadc3",
@@ -846,7 +886,7 @@
       "path_in_frozen_record": "data_mirror/a13-dreq-accounting/same_denominator.csv",
       "published_at": "data_mirror/a13-dreq-accounting/same_denominator.csv",
       "published_sha256": "e5eaf77d478fc2615e25322ce3494ae8149e46df7e78a2a39ee14a0e1441585a",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; the ledger identifies the authoritative one"
     },
     "data_mirror/a3-corner-pools/plan.json@live": {
       "frozen_sha256": "fc5fb5a7623d502e25bd8a5ef31a85226a3ff3944edf408bb6968ce8149dd505",
@@ -870,6 +910,558 @@
       "path_in_frozen_record": "data_mirror/a9-measurement-efficiency/summary.json.gz",
       "published_at": "data_mirror/a9-measurement-efficiency/summary.json.gz",
       "published_sha256": "8dad352de7b50f8e369834b162185a472dd689474bb5968bc2297460876a2579",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v13-recovery/gemma3-1b/prune_0.6_traces/recovery.json@live": {
+      "frozen_sha256": "270cb7135c3e70f0711477c297e8e179161fb25861afa8873aeb1f77bbc44c6e",
+      "pairable": true,
+      "path_in_frozen_record": "results/v13-recovery/gemma3-1b/prune_0.6_traces/recovery.json",
+      "published_at": "data_mirror/v13-recovery/gemma3-1b/prune_0.6_traces/recovery.json",
+      "published_sha256": "cc196317568b9e3d882fbd97a4696e271a8029a430e155ce1943279162eafce2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json@live": {
+      "frozen_sha256": "fae21cb4eb0af935a3cedff97457916bd63dd6d8e340f5f6b367bc194485530d",
+      "pairable": true,
+      "path_in_frozen_record": "results/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json",
+      "published_at": "data_mirror/v13-recovery/gemma3-270m/prune_0.6_traces/recovery.json",
+      "published_sha256": "57b7304d6f753e7624b145aaf0e7a4edf5943814d1d87e42b78e707e71617e47",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v13-recovery/gemma3-270m/quant_3_traces/recovery.json@live": {
+      "frozen_sha256": "ad0519895e916a0ff2221071983b4933b3a850dc00a60557d07b007f05a96820",
+      "pairable": true,
+      "path_in_frozen_record": "results/v13-recovery/gemma3-270m/quant_3_traces/recovery.json",
+      "published_at": "data_mirror/v13-recovery/gemma3-270m/quant_3_traces/recovery.json",
+      "published_sha256": "f3244b70a4430de7edc08133bf26cf1f0f65c9427e7cb7ebe229f7750e05fcc1",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-12b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "3131eee825ad085510ec0e6efb0731dcb8278540551902af2af3e9d7bff977c9",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-12b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-12b/dense__easy/accuracy.json",
+      "published_sha256": "638d26c29d47600add168e658f168a8da9a3031aff1a368a5e0dc020c9a95ac2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-12b/gpt-5.6-luna_full_600__easy/accuracy.json@live": {
+      "frozen_sha256": "a331aaa0866e90d23463dddd0908e2180af837adf328555290ee0fe18ec24528",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-12b/gpt-5.6-luna_full_600__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-12b/gpt-5.6-luna_full_600__easy/accuracy.json",
+      "published_sha256": "eda4d951da3ea008448b5f355443d5dc83ba2a319c449ff3e07dec04de895f15",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-12b/prune-d0.5__easy/accuracy.json@live": {
+      "frozen_sha256": "f6603031c7db229aec8c13486e3fd48b1b250e1fe724d5c89a154f644ef5cb5e",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-12b/prune-d0.5__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-12b/prune-d0.5__easy/accuracy.json",
+      "published_sha256": "766e6ece0553d681420e5d41b591159a9c7eb019c2ec931ef823402d44c325fb",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-12b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "520cd99bf13ddb01ddad1def52afec6388aad4973b7d18622f9f500a825e36f6",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-12b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-12b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "0582a8a2b0bd4711bb7007b118ea88ed1c983d932ccced38ae89f8ace9f3d0fa",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-12b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "9c3950ca55744abf0055ed47264e945899320cb09b94240a640488f6a894cb29",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-12b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-12b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "48d04b9d8202e4f077a32b0ad6672422226128512561958a7883814c82dc541d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-12b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "d5dd1cd0fc843acdd3475d562d007d3807ac3760251fd58656c1c3d1ccfe889a",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-12b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-12b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "618deca1823281974295b8314ade221a7c57c24c5b033091a523b98fd3619f04",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-27b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "12a6de83b649cb8bdc3b5dffa181b6f3fc029666d0e62d215542f49eda6ca69e",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-27b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-27b/dense__easy/accuracy.json",
+      "published_sha256": "d547d25dce76da784a456a9972360e9c0b2e8d5d8371b440266832471821f5cd",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-27b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "5a87dde56e75e5364c4b6dc9ab07373189194a0737e75ac3d718d29060a716a4",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-27b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-27b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "10129b71bd54c6a6da47d81c65296264def3547697a5f42ea75539528baa6562",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-27b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "2a1ade766dbf11a4c2295125e249523415df4700e0400e3387d2009cad675c01",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-27b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-27b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "6bc1350b2d73fb7c308da97fe9fe274b011923d67da92c39d994ab9d941f6a52",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-27b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "cc9c24a47444e33adb5cc7906bbe842207327c4ed64ee05ecdb38ec377fb3b39",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-27b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-27b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "ffa1e03c63eca3df49a6be26d419b3d9f1018d117156051b6615ec8a93b2c0bc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-4b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "cbcb9abe12a52490c0dc46927c51ce45559bb1a22b0818991996d7755ee5619f",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-4b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-4b/dense__easy/accuracy.json",
+      "published_sha256": "e753d34cf42a48e230f0f68a18c95b0ae1fc84ddd1734156931c2d58370e6720",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-4b/gpt-5.6-luna_full_600__easy/accuracy.json@live": {
+      "frozen_sha256": "b83d48493cf6604ff51382de840526e80e516fcdc7520e73f36ae8cf2b890618",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-4b/gpt-5.6-luna_full_600__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-4b/gpt-5.6-luna_full_600__easy/accuracy.json",
+      "published_sha256": "7c91b91cbf258afc2e2d4040afd3c33669f8eaf3c4a1aaa038445899f5cb06f4",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-4b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "e6e51605092ae28b07068709244dcd290caa6502aafee3a8e2fad3612e3de311",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-4b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-4b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "de3cbf546d7412a8019ac64d6adec6bf4fe51633546e3b3c013199d04ea89307",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-4b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "c95500b7aaad126bf7bd8ef376b3327122a1a801eadd5c6859ed9fb710f0cbb9",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-4b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-4b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "4b757dcbf52fc4a668491b181210b5535516716e6aa5d349ff3e689de8c6c2de",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma3-4b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "3f11bb732fa719c1c6a9da18cb9af1abd4514b8488952000cea8b9ebb55eba6d",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma3-4b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma3-4b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "fcddcd1551be32c03a8450fcbb947d6fd0ad2d0c8732cfafde62840ee0f1a6c6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma4-31b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "4f42e6d031af28d8ead491a65d2463358efa0f08adea64e4b6b73871ae627079",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma4-31b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma4-31b/dense__easy/accuracy.json",
+      "published_sha256": "751e782018a57cad17dc9cbdf5f5b36f48c5587e2202e218bce875959a3a93e4",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma4-31b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "246a79ab3a44cf1dfb176133add4e1ab56a0ad82f0e879db862c1caa809fad8e",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma4-31b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma4-31b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "fd74947ac4c3068dd30402ac9b66a7b741f32c16392850c450c8fcf0c5eee871",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma4-31b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "695ca041727605e85b5bc7f592be8e845280f247eb7f8b8c711c0f684c6a2b85",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma4-31b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma4-31b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "0f79044fd2522184f1a53e99ae381fc5d65510aa1ee8455ad2fe6befc165071b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/gemma4-31b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "103095b35f52e80ea992715b4c716b6b479901d6baf33415cb7415819a8c1567",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/gemma4-31b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/gemma4-31b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "774de15adf0e7afffba6dd17ec6d43f9d37ccf9425461899520224c2d0dfabc2",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/muse-30b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "6b135c0075e1285b5a47d08eecca1910c8277269f7e36e7c79ec1e14eba5716d",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/muse-30b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/muse-30b/dense__easy/accuracy.json",
+      "published_sha256": "b0e53068b147840ca4ef67f21f738df6f5268d7e0d8d43613edaf44491d9c3a8",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/muse-30b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "ffdd8fb30c3400722b389d036dec412d6d8a3c8dd08e1e02b614865d78bf66bd",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/muse-30b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/muse-30b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "3aecbae3153705c72e7afe436a109023d4261270297bab392c4c16f829985cea",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/muse-30b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "1b757fcabda56bcfa12d11f9f4953547a910bce5bb10b936ed0820ab33d701de",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/muse-30b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/muse-30b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "0a8b60adc5cf99fbdea9bf55a2d07cb11a505fc4e9c2b33bb6dbb247645ea5aa",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/muse-30b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "8ce09bbf2aafa3a6c03c694636c1f8a69f93f7987b78e8f2fee8140eccb9ea73",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/muse-30b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/muse-30b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "5ba25235fa312d7f3dda906c235abcf4df953cf3c491d49011d21c325a08e621",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-32b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "7592c7b962ee9f47eb79968569d19dce29b4294acf0e951caff5cb3f57ff24b9",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-32b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-32b/dense__easy/accuracy.json",
+      "published_sha256": "6744d60078e6caa20f47350b6e3198e91e5881ec2729ccb21166536a4305ebd5",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-32b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "0280d68137678a57b62b39b4627e8f04d983577b5e1ef2c37020690b4f551be9",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-32b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-32b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "cf9dd36080bc24f00395ccdfac26074c2ee165bf4d2bedcf225bde33dea34c96",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-32b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "fa09fa39ce78ff25005c691b0f333c86a72d0190f66cc1f96656b54430d3dfde",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-32b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-32b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "a7ae15433c500aec19cc8c2da5097105af3de2114fea44c6edab62729f7597cf",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-32b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "ba3302d5975cd6d6fee8378699d3be6f774e5d0ef7abc067c84166e4548b1746",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-32b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-32b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "cba7bdf6762f7a705a37a2fa3563a8b4d699f79616ad121597bb20dd06479b81",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-7b/dense__easy/accuracy.json@live": {
+      "frozen_sha256": "b624879b51b3858a720e610e6be7293efb3406c961bb1c244c4049a1d904a9ab",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-7b/dense__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-7b/dense__easy/accuracy.json",
+      "published_sha256": "866bc865d647318a21cc2cd60fd6e495397fe8dc0dadf0b603bc0d4673c3ba68",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-7b/gpt-5.6-luna_full_600__easy/accuracy.json@live": {
+      "frozen_sha256": "1002bdf32a77797a688736c84c411cbe8b588aa53900cb667cda272a5873ea23",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-7b/gpt-5.6-luna_full_600__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-7b/gpt-5.6-luna_full_600__easy/accuracy.json",
+      "published_sha256": "d34fbe8ae0d85d552278b06dfe21e9758a06f6b60c2fb5c04ab914d294e3722b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-7b/prune-d0.6__easy/accuracy.json@live": {
+      "frozen_sha256": "300d717117e764ff2466459ce86b07662e25e82e3df756f0f1f0f79338d7b6b3",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-7b/prune-d0.6__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-7b/prune-d0.6__easy/accuracy.json",
+      "published_sha256": "23301b5ba6e111a34a8fa6bf7a751924973fe96e5fcb34e6b536f4c7d9bd74ad",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-7b/prune-d0.7__easy/accuracy.json@live": {
+      "frozen_sha256": "e854d69aa99250d2e70c65bf0b01650227b1595c8b442f62e1c9efe8ee3b2d31",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-7b/prune-d0.7__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-7b/prune-d0.7__easy/accuracy.json",
+      "published_sha256": "73dc420c2037b20d6b407d6f829a019b72dfecf71961eb26fdd74151893249cd",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v15-accuracy/olmo3-7b/prune-d0.8__easy/accuracy.json@live": {
+      "frozen_sha256": "de939370e3808935c765539654970a72fdf89cafef530e8370e274670de31fed",
+      "pairable": true,
+      "path_in_frozen_record": "results/v15-accuracy/olmo3-7b/prune-d0.8__easy/accuracy.json",
+      "published_at": "data_mirror/v15-accuracy/olmo3-7b/prune-d0.8__easy/accuracy.json",
+      "published_sha256": "479528d21abb26c49c594aa4d79fda35ec155b1e56433144b08600d70d1a7ec6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-12b/gpt-5.6-luna_full_600/residual.json@live": {
+      "frozen_sha256": "abc988156166c6efac442027179f8081cfad1508e05a2153a7b48cd67ce094b3",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-12b/gpt-5.6-luna_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-12b/gpt-5.6-luna_full_600/residual.json",
+      "published_sha256": "a5600282f72dd1db820e9a7c4ee31528f8ca9e0ef5fa2c9fcbb7eefa427b89a5",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/claude-sonnet-4-6_answer_only_600/residual.json@live": {
+      "frozen_sha256": "e0451e919e7381126a1668fd96cc31cce50386fea28246701fa19f9ce1d37633",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/claude-sonnet-4-6_answer_only_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/claude-sonnet-4-6_answer_only_600/residual.json",
+      "published_sha256": "bb64c4e8ec19998b4d137496cc9fd448fb4f1ddc38f8fdc8c351cbc96c8c2cbe",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/claude-sonnet-4-6_full_600/residual.json@live": {
+      "frozen_sha256": "879ec1bb68688af2dd2039b4c34e9f8ea72d287523c50121030f65d025705cf3",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/claude-sonnet-4-6_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/claude-sonnet-4-6_full_600/residual.json",
+      "published_sha256": "a59addc276f737d1b5e7acb8d6dba478a462bb39ed56e6e1cf97ca7c46e12869",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_answer_only_600/residual.json@live": {
+      "frozen_sha256": "7df30997c0cbc944b0bb356dd628b8b19a8be1bfae57895abb95352c2d9d7d24",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/gpt-5.6-luna_answer_only_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_answer_only_600/residual.json",
+      "published_sha256": "138410dd0ac726460446d28fa1321e810bf07559d8aea5912bcb472d573c74f9",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_150/residual.json@live": {
+      "frozen_sha256": "3e70570cdc25f6fbbc808f306a141544eaf5a674a27dfd7a181686ccd1e4cf4c",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_150/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_150/residual.json",
+      "published_sha256": "b910430b02c49daf0f4b199b95f9b8db0f516f7ce27f27678a7ba43f8d2c7614",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_300/residual.json@live": {
+      "frozen_sha256": "8d5b3e7abb3c0e11fc877e7d9a8e8529c3d4a95a58027c9012fa810d116bbf01",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_300/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_300/residual.json",
+      "published_sha256": "372901285e29e0f266cda16be21073036fdb77aa238f5e133e9ff40e8bb1c644",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_600/residual.json@live": {
+      "frozen_sha256": "c56705c3155a78e8a329a712b818e39efb2621847146d9e997a4f8ae46c3770c",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_600/residual.json",
+      "published_sha256": "faa8c1af25ad4b3b9aaf4dfa0105b8fe2c7c3f45eb76eea189e0076012f82d5d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_75/residual.json@live": {
+      "frozen_sha256": "9319a4973faf217b8470f71ffabf7248ec8b1093f9846651248e85118c5bc154",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_75/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_full_75/residual.json",
+      "published_sha256": "c8c1bcd40e5e1cd2235bb0c5515b618a2802920267d44f2865755ffe9e000086",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_no_code_fence_600/residual.json@live": {
+      "frozen_sha256": "aae8ec0a67e0fbec76abb6ed373f278e47bb9a64b2055c61c6f908e836b544ec",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-1b/gpt-5.6-luna_no_code_fence_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-1b/gpt-5.6-luna_no_code_fence_600/residual.json",
+      "published_sha256": "12258b608360e7ec5ac4437b9c57604af6f3f376d31c6200a5ac34eb1f71d3b4",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-270m/claude-sonnet-4-6_answer_only_600/residual.json@live": {
+      "frozen_sha256": "d1bb7900dbf4abc71597196d29f0c36a9d54642f2248c9ae963358fbcd501ffd",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-270m/claude-sonnet-4-6_answer_only_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-270m/claude-sonnet-4-6_answer_only_600/residual.json",
+      "published_sha256": "ed15752b0eefbc96cfd99268c979c82ec73aa93e82c438ca61bd255f297e4bd0",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-270m/claude-sonnet-4-6_full_600/residual.json@live": {
+      "frozen_sha256": "a327989583c51508848b1fa3edf33ab80d809c2dadfb639d5c4cbfac3cf257e7",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-270m/claude-sonnet-4-6_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-270m/claude-sonnet-4-6_full_600/residual.json",
+      "published_sha256": "bd78607346d00822a7352b50f0718156f8baf5e7c629332cb0d85fbe02dc5b7b",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-270m/gpt-5.6-luna_answer_only_600/residual.json@live": {
+      "frozen_sha256": "19a5812478ecb560367fed6a49335a93766bec97db4cb2f07e0afacb355df0dc",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-270m/gpt-5.6-luna_answer_only_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-270m/gpt-5.6-luna_answer_only_600/residual.json",
+      "published_sha256": "a864bc6eada7bbb22ba57d0cb3f5e7c693035c77f7ad34db61e721559eedfbcc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-270m/gpt-5.6-luna_full_16/residual.json@live": {
+      "frozen_sha256": "f7003b37ff725dafeb4dd73f5a670b0b6214f0d7ae446b4421df4b2eb53666f2",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-270m/gpt-5.6-luna_full_16/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-270m/gpt-5.6-luna_full_16/residual.json",
+      "published_sha256": "795384ba0f99cce065a2194c4db0ed92843bef713bbfd38bb4b1facd37745c3d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-270m/gpt-5.6-luna_full_600/residual.json@live": {
+      "frozen_sha256": "7bdbc8569eb868c62895b4132657f22b8345c5ce5d2391a0719de139b40bcdc3",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-270m/gpt-5.6-luna_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-270m/gpt-5.6-luna_full_600/residual.json",
+      "published_sha256": "2c02ffdcbc4e9804eec14ad6adc75e08fce3d965363ba28254052d52ebcb626f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/gemma3-4b/gpt-5.6-luna_full_600/residual.json@live": {
+      "frozen_sha256": "ff75253a389dbfcf20af4f93d1ee6f582ff48d41b803cda48e43bc375f3c671a",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/gemma3-4b/gpt-5.6-luna_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/gemma3-4b/gpt-5.6-luna_full_600/residual.json",
+      "published_sha256": "f54f914533e93faf4d886ae79c896332cbda77d8a2e8dee5994e1cb837734e47",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v16-style-residual/olmo3-7b/gpt-5.6-luna_full_600/residual.json@live": {
+      "frozen_sha256": "2d651982808f6ac4bc4ec5e0672111d2a471a0e91f4d140de9d0d845a5f59fca",
+      "pairable": true,
+      "path_in_frozen_record": "results/v16-style-residual/olmo3-7b/gpt-5.6-luna_full_600/residual.json",
+      "published_at": "data_mirror/v16-style-residual/olmo3-7b/gpt-5.6-luna_full_600/residual.json",
+      "published_sha256": "1efd716b4529abd9ab1c0128e19de937e1b489a3d1111d66be1752808dac1fe6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v20-robustness-corr/summary.json@live": {
+      "frozen_sha256": "bfae5d41b6788ed027beb33e18d19503ce133a7f184ef3a395a09d901ff0af7b",
+      "pairable": true,
+      "path_in_frozen_record": "results/v20-robustness-corr/summary.json",
+      "published_at": "data_mirror/v20-robustness-corr/summary.json",
+      "published_sha256": "e2c47ab2b073195035363c63060f98a634630fad5a190cd0d56d9202e54f8d96",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v30b-quant-regions/summary.json@live": {
+      "frozen_sha256": "6677a572998a587dc5249686324a3051df523784718350243105f51207ec973d",
+      "pairable": true,
+      "path_in_frozen_record": "results/v30b-quant-regions/summary.json",
+      "published_at": "data_mirror/v30b-quant-regions/summary.json",
+      "published_sha256": "2267cb3b3de5c7f82eb9d9ffc83b43ef50f41c92b56ce5cd9504afd2f09d7a4f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/Qwen3-0.6B/features.json@live": {
+      "frozen_sha256": "2cf540627bceefe0748ac3f0238c3ed1753e2fe9f6e282d77a2c2979b474cfcd",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/Qwen3-0.6B/features.json",
+      "published_at": "data_mirror/v32-descriptors/Qwen3-0.6B/features.json",
+      "published_sha256": "ff7382d230ecd78cd23107ff281afe8c0a064b34bf4691fce227d3ca1381a99a",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/Qwen3-1.7B/features.json@live": {
+      "frozen_sha256": "e9740d6cb716ffb7ae40a2a0867f8b7aac76b21450c60c9c35a02afbad726fe4",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/Qwen3-1.7B/features.json",
+      "published_at": "data_mirror/v32-descriptors/Qwen3-1.7B/features.json",
+      "published_sha256": "a492b79d7f33de15ac69b6630cb054b4c4aa3aa176443098fd4584782841394f",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/Qwen3-4B/features.json@live": {
+      "frozen_sha256": "be7e0223a087055b9b651aa51c00e81bc600a928446ba2927184eb430a90f4bb",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/Qwen3-4B/features.json",
+      "published_at": "data_mirror/v32-descriptors/Qwen3-4B/features.json",
+      "published_sha256": "8a0fc5dfd6bbbba1f06a044b9d574217b1759a3bbe5eef68b67a9576611f243d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/Qwen3-8B/features.json@live": {
+      "frozen_sha256": "1a5e7f2a017c6b4356ef509cf4181500cef1dc77ed2c6155df30ab7281c78256",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/Qwen3-8B/features.json",
+      "published_at": "data_mirror/v32-descriptors/Qwen3-8B/features.json",
+      "published_sha256": "fb60414f8a779ed1b0c18841da21a2302db1f19a78b07bef3ea0e3a676bd23c6",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/gemma3-12b/features.json@live": {
+      "frozen_sha256": "32a66e63e0330de4c59f9905bb8e119a05d3e16d43cd1f8cde3432eb45660b05",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/gemma3-12b/features.json",
+      "published_at": "data_mirror/v32-descriptors/gemma3-12b/features.json",
+      "published_sha256": "91d1601d1c2994cd026700c49359395a1bbda47e3dd66907ffccdf354e523e2d",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/gemma3-1b/features.json@live": {
+      "frozen_sha256": "78089cdf355fd120daba954530a610e12d4e6a661a00688f8740fc0e2c0960ac",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/gemma3-1b/features.json",
+      "published_at": "data_mirror/v32-descriptors/gemma3-1b/features.json",
+      "published_sha256": "4144c4357f485303640bbc1ed34e2a44fee08b6ecf8618e1967a67b7212161a9",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/gemma3-270m/features.json@live": {
+      "frozen_sha256": "a65c9278d35f5d4efe4049334e8d6823be3820ba5f118c978d48bc1677832b40",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/gemma3-270m/features.json",
+      "published_at": "data_mirror/v32-descriptors/gemma3-270m/features.json",
+      "published_sha256": "1be24944f9e0d043c0586bd74fa96031e4883eeb1aa395059b0d7309c06adb46",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/gemma3-27b/features.json@live": {
+      "frozen_sha256": "34d603a57596385c3c2a9592abc2b16035008b12a29494039cc7078cdfc6ad23",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/gemma3-27b/features.json",
+      "published_at": "data_mirror/v32-descriptors/gemma3-27b/features.json",
+      "published_sha256": "ec52f0f89e9a4f091bb934d20832978bba6f942bddcf17602be05f6a1098be54",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/gemma3-4b/features.json@live": {
+      "frozen_sha256": "9aca1a8a28dc664121ac3d2f3c793d8aa27e9ad1319027b7d4ca608d719df627",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/gemma3-4b/features.json",
+      "published_at": "data_mirror/v32-descriptors/gemma3-4b/features.json",
+      "published_sha256": "716cc0800f7b92ce4d0d823786b24d0d9e2fe1c2fe56c60f36eb2f43beb408ba",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/muse-30b/features.json@live": {
+      "frozen_sha256": "0bcfaa46f543e61668977deeb308f4c77e29d68c56385dfd80f7cd066d6bc21a",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/muse-30b/features.json",
+      "published_at": "data_mirror/v32-descriptors/muse-30b/features.json",
+      "published_sha256": "86fd1a127c764fb703843f4cb2fa23e30963a6edcd3628a8f4b7d8ba8253f0fc",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/olmo3-32b/features.json@live": {
+      "frozen_sha256": "daaa35a847b2ad36a144181edc5737dc8e1c56660a00f9e25e43ba7f73c70486",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/olmo3-32b/features.json",
+      "published_at": "data_mirror/v32-descriptors/olmo3-32b/features.json",
+      "published_sha256": "49fbcebed712d0c0b6a0f67a69dd1a38dd626111f7694126fa8d6bc63626d790",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/olmo3-7b/features.json@live": {
+      "frozen_sha256": "aca99f9baecefb2e7f9c6c9f534b298f716bdb0834c581d71d4a409aba1c759f",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/olmo3-7b/features.json",
+      "published_at": "data_mirror/v32-descriptors/olmo3-7b/features.json",
+      "published_sha256": "619cec69c9a136e9e13cf80a4fe58b2a7cff6d00f206aee8cbfd8f0712bbfa60",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/prediction-11/summary.json@live": {
+      "frozen_sha256": "cc760b137e417e0bd7ea579ef1664f51f49ff6447d917cb7ae4a8ff60cecfe99",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/prediction-11/summary.json",
+      "published_at": "data_mirror/v32-descriptors/prediction-11/summary.json",
+      "published_sha256": "40859f4c06c0a945f8fcfc5c52c8bc4f317abf2bf795881b69fd160823c6a90e",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/prediction-v3/summary.json@live": {
+      "frozen_sha256": "020b74260cff1676e9e97af71e971a6445033f06c4379d63981f865617811128",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/prediction-v3/summary.json",
+      "published_at": "data_mirror/v32-descriptors/prediction-v3/summary.json",
+      "published_sha256": "fbf49bdfdd6d998714876dbd17dbe5bf97e0f0f76e0690a9f350700f0c0aa399",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v32-descriptors/prediction/summary.json@live": {
+      "frozen_sha256": "b69ea1c1a2486b994b02df563a13588f050cf634e5fa1dfcb8246d3f193f9086",
+      "pairable": true,
+      "path_in_frozen_record": "results/v32-descriptors/prediction/summary.json",
+      "published_at": "data_mirror/v32-descriptors/prediction/summary.json",
+      "published_sha256": "5af2014c5207ba6be13a6ca3ade24248aa8b1aab86f03fe505d68e5d2f0accff",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/v34-c17-scope/summary.json@live": {
+      "frozen_sha256": "b1fc58c83f9d4b57e50a35b15197e3c23e35fe5535da5bfe051ab4a015bd32b5",
+      "pairable": true,
+      "path_in_frozen_record": "results/v34-c17-scope/summary.json",
+      "published_at": "data_mirror/v34-c17-scope/summary.json",
+      "published_sha256": "ce692f47f44981678efb468e47cfb37c3df810c0b442ca4bc4c42e0f13b630d6",
       "reason": "anonymisation of author, host, institution or path strings"
     },
     "data_mirror/v45-main-table/main_table.json@live": {
@@ -938,11 +1530,11 @@
     },
     "data_mirror/v67-musique-qa/measurements.json@live": {
       "frozen_sha256": "4dd03ac164f0c16129ac8f135af05f46516e26de48160aa51cea4e89e94b8c23",
-      "pairable": true,
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v67-musique-qa/measurements.json",
       "published_at": "data_mirror/v67-musique-qa/measurements.json",
       "published_sha256": "9d319a74eb94146b9b0f95002dd2074b6f55a768c945362ce7f8ff5c0b3cec77",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v69-quant-confirm/freeze.json@live": {
       "frozen_sha256": "6ade0a3ff576781cf286978519b6a922500d37e3bc72cef4e3e635e826cccdc2",
@@ -962,11 +1554,11 @@
     },
     "data_mirror/v71-qa-scope/measurements.json@live": {
       "frozen_sha256": "d127e75abaea9d7d401c8dd3d61dfd6f9ff4f00017548dc55e4ad9aec43df9e1",
-      "pairable": true,
+      "pairable": false,
       "path_in_frozen_record": "data_mirror/v71-qa-scope/measurements.json",
       "published_at": "data_mirror/v71-qa-scope/measurements.json",
       "published_sha256": "2150e6c79d4047f53b9695f8585f9a0071f0d822fa2f9fad2c070d8b4e0fc2bc",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "data_mirror/v71-qa-scope/register.json@live": {
       "frozen_sha256": "79cdd66f16a85be13b1080b295f4170c688d575b6ee4c9914fbf272ccd4dd561",
@@ -2008,222 +2600,6 @@
       "published_sha256": "c6a058841b9da79d126a0e8e0ba6c66855daa5f556c005c663f9fdc8a4a15f46",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "87f81b4de206a6cfb72a2ea4013ab64c136e5c70408092930925bae1e18b8e21",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/code/descriptor_bv.json",
-      "published_sha256": "cc99dc3e7a79b07c7d6afbfc80642ea14084b4035890f20ef6d9135172e485cf",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "c0dee0b0ba4529cf271d744de266667a1911262fa2bd30bd33c2e19b255e9699",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/math/descriptor_bv.json",
-      "published_sha256": "1d07dfecb3b1815faa5b66f3067f5595a940747d71921ada97960104d138c3fc",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "f5cd61034aa2b2ce24c6a3b4c1b69bd80838bf4e0c94a700cbceee3c277f2b90",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step143000/qa/descriptor_bv.json",
-      "published_sha256": "1534691e51683f2f6ba206747757667849686eb52ed529c6ea8597465a189611",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "a3ffb3a97b4d1fdf5caf9c6911adc4e133afce204518516b50f78b2973e15a4b",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/code/descriptor_bv.json",
-      "published_sha256": "b1940306b9d08e2853955c9453685b7526fdc7ec338312b68beefb20f1d13185",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "5b4803b295c6b7050db15dccbc7553840885f746c6ac097b0b8578ff81a1322f",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/math/descriptor_bv.json",
-      "published_sha256": "bb1e0545fbd030711f895191a3b17dfca0de1e89e35a42fb4c066c7c4252a485",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "201f74e4fb26c0e585e1c2d584b23db6eae12beec50f68ee9aa161bf265db2e0",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step16000/qa/descriptor_bv.json",
-      "published_sha256": "1159c9129452fd923d379d26c7fb240da04b86c8a884ac1aa8f445f6098d39ac",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "5c5d6cf1984feee54705def00b1540f49380c7200450229a3223a378f097ee82",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/code/descriptor_bv.json",
-      "published_sha256": "8983856833fe7925dc9a97e79d646775aef1543154f462ffb7095232597545ed",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "8f1a6db51a45d349627f36a26b10cb209a6b9d0c48162243a3330ce72f759236",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/math/descriptor_bv.json",
-      "published_sha256": "00b3fa33cb77328f3e166d27053e2578c9dd95e8d5fb454d1d7728332e3f598f",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "82bd52a1dd199b79c89bca22e7c02ac128c9b797927b62c1497d07e3814b7f0b",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-1.4b--step64000/qa/descriptor_bv.json",
-      "published_sha256": "9f70866e1f2a43ea002e8f218fb8f3342ea07135b5faaf890c8f37fa66c069a0",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "4a3037f746499d6b92200187fe907a47c411a787362d42c536d765423887d9a5",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step143000/code/descriptor_bv.json",
-      "published_sha256": "5470318d71ca4fd10b1a55bdd00babc44d38f6382d7d5c88f617e6c14bff2734",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "9afb1736c913ec2b29ba53e17e3fe5e13d74292a7edcb2db994cc66b80e9b07a",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step143000/math/descriptor_bv.json",
-      "published_sha256": "6252753df990dd2f36f0b5d4cbe214d571eec6f25ccc02b12c300fe8f62af02b",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "573d983f1c8ace9dfd5ed392d867cae01ea63a7f97ec5251eb27cfe1695345b1",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step143000/qa/descriptor_bv.json",
-      "published_sha256": "a76157c643d319ca1b53783896c5028d2ae0f6515e69a9ea7d4971820a7b2ad4",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "ed8ddb2f36066b0b7da7f5e75ff95b62a77df0b5ecdd84d420f709df2c610a3e",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step16000/code/descriptor_bv.json",
-      "published_sha256": "679d58c5c884fe2474cd96275f90e71cfc8a9bce0d75e513d69e2b42d3f58a73",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "c412125d045560946c82b1dcae0ff4d33ca3e4f5fd1225056211005343faf69f",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step16000/math/descriptor_bv.json",
-      "published_sha256": "e9e29545c474332e58ba4ad2fb2293153f3173b41e8a55f15cb67dbacc6a047d",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "7bc656dc9af8fe544a5488f24ce5ccc4aef7a5554c87f489e4f90adff53a9bdc",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step16000/qa/descriptor_bv.json",
-      "published_sha256": "c22f2ae874a5491f77437e06c5370088dcf63643d27eae84db0b62aab6972bb9",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "41b42ed497a9afb8f32e91949660792c83e9ccff63c78d1635861159f28bf185",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step64000/code/descriptor_bv.json",
-      "published_sha256": "2199831afe27f53d1c4bd617c77dbece0c1d78a07be444f541a8108be965d92b",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "6f81249c25321c1908ebb0c22f62cbf6de2bd2810e55a628265a821380bd0036",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step64000/math/descriptor_bv.json",
-      "published_sha256": "841756de3a05387d4dd5b38f079e014ec47e10e4c78763aeeb713726579e091a",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "31585a989b3bc538ca724cc19c474ac99877f354f9930ba0b3757943c70441fd",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-160m--step64000/qa/descriptor_bv.json",
-      "published_sha256": "6fcd32e312133bb02065b7701894c99e05f0219c536879948a92587e311bb2f2",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "2867a3c3888a71a3ddfcb096abe20a94167623833c5bc4619451e60fc35fd9ce",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step143000/code/descriptor_bv.json",
-      "published_sha256": "168511414f5df899370f4cc40841686775c17ba3c4ca9e4e6d6203f6c3940659",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "9c1afb1d25d367a19fefef3c7edc0ba6a7c94a166e267e9f45557416494ca576",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step143000/math/descriptor_bv.json",
-      "published_sha256": "b878a6c81127581607ae191011505ea900f894c29c88bb5eb3e3baaa24cbae96",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "79933de5efc166945a6ec2502a31e8a09f09a1aee2d3bc72f610f6b86217189b",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step143000/qa/descriptor_bv.json",
-      "published_sha256": "4459dee0bd7e54e84ca8a696d089f2bd311b3e8a0828d96491a86ecb9c17ebb5",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "e23b68fa417532331c18274486451fca2653405363fe966dfe8d19c6da88560e",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step16000/code/descriptor_bv.json",
-      "published_sha256": "a1ccc024820e15079e653515eaf01b42655d5bda4f7a4bda928ffbdf09a68d2e",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "1b5986561d8e546cb4c3ca23030628b6f862ce21572653dfc77aa35c670a2a2d",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step16000/math/descriptor_bv.json",
-      "published_sha256": "c415c3b4b6c59ba56fd357daf211bb6fc7858a15dc976223433f9a045c3cf188",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "eb88f920b03adced1e7147a846fa36c3691ce079db4014553ae70de3b76f60bb",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step16000/qa/descriptor_bv.json",
-      "published_sha256": "3092ceb11c43d569ba5b02285f2cf06f08497bd128fca7a7ba0d292dcf764b9a",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json@live": {
-      "frozen_sha256": "f3c18ade127792bb3e9b88217d0183f2237a27cb51a70c1f05cc27a5fa9ee5b0",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step64000/code/descriptor_bv.json",
-      "published_sha256": "3d252cbf2dba39f3c32cb9787d0bcc03bc12f090b6c4521569e6d66b12cfe9c7",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json@live": {
-      "frozen_sha256": "974a1b911fa94742c610c68caf87c727910cb9872785a36204694c8c44c2095f",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step64000/math/descriptor_bv.json",
-      "published_sha256": "115d2e57d9ff86d85022fd2ba63326f33a5ba0a29cf103c3a347daacce103e26",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
-    "data_mirror/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json@live": {
-      "frozen_sha256": "46726f873110930b091fb557c100aac1f8659d68e0262733ca4f8f358d55da5e",
-      "pairable": false,
-      "path_in_frozen_record": "data_mirror/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json",
-      "published_at": "data_mirror/v91-dense-stats/pythia-410m--step64000/qa/descriptor_bv.json",
-      "published_sha256": "aacfae023d96ff1b9ea65762015d36bdb456483cb620eaf2e171f29228f9706c",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
-    },
     "data_mirror/v99-scope/a5-corners-gemma3-1b-poolA/gpt-5.6-luna_full_66_matrix2_lora_dseed41-01b39086b0f5e684/update-00000038.json@live": {
       "frozen_sha256": "6ba2a9cb65bdc5d35272d41af785034a24fe4e40928bf433780f585a519f4a43",
       "pairable": true,
@@ -2720,21 +3096,29 @@
       "published_sha256": "e09a596c2c72179058888d494daa9dfa930f2c60ea101ca95ff17fb008dfdb99",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "scripts/job_cluster_v10shape.slurm@live": {
+      "frozen_sha256": "acb4a749b6ba9731e67fcba91ba62ae26d8b473dc9faeb58f029ea08bfbcf74c",
+      "pairable": true,
+      "path_in_frozen_record": "scripts/job_cluster_v10shape.slurm",
+      "published_at": "scripts/job_cluster_v10shape.slurm",
+      "published_sha256": "a3ddea0344cfe0908d57571677c7e01b379dc45b622fe73d4bccdc8a1cf93b38",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "scripts/run_v71_after_v70.sh@live": {
       "frozen_sha256": "9489e8c4ace429ab45ffb22360b79679da85d1b65da7422101212590f559c512",
-      "pairable": true,
+      "pairable": false,
       "path_in_frozen_record": "scripts/run_v71_after_v70.sh",
       "published_at": "scripts/run_v71_after_v70.sh",
       "published_sha256": "4a31e1298975f7a587f91e608f7bf9d6a4a887595a16bbfb1f19fc7e9218d654",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "scripts/run_v72_after_v71.sh@live": {
       "frozen_sha256": "6f649f765e70ed00ee416e3b3b9a4a5bcfca7db29b4bfa36acf96e3ed68b8b4d",
-      "pairable": true,
+      "pairable": false,
       "path_in_frozen_record": "scripts/run_v72_after_v71.sh",
       "published_at": "scripts/run_v72_after_v71.sh",
       "published_sha256": "6d98e4c67e5961481894b85798683050af51c920d418f1f3984d8544c6554f48",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "tests/paper_generator_checks.py@live": {
       "frozen_sha256": "c32a8e55aaeda464140ee62463b9120de0461c2303679c344ac1e2074a12a22c",
@@ -2744,13 +3128,21 @@
       "published_sha256": "35d7db8cca7d514b364eb80367ecf16dcf2cc6b91fe3457d7b64b384308b0e18",
       "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
+    "tests/test_a3_corner_pool_search.py@live": {
+      "frozen_sha256": "ebf7f13313bdc59a0a9009a1fe5b9c9a098d6429e625f26d6a4f082a405e762a",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_a3_corner_pool_search.py",
+      "published_at": "tests/test_a3_corner_pool_search.py",
+      "published_sha256": "1da8ccd0096d076fc17959971727ac2dca8d4024917934d9fe47265377e420dd",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
+    },
     "tests/test_final_prediction_table.py@live": {
       "frozen_sha256": "9013d6b4ede3b7ab97d4fe8d9457bde012f8443731295f5684836f9247a0ba8e",
       "pairable": false,
       "path_in_frozen_record": "tests/test_final_prediction_table.py",
       "published_at": "tests/test_final_prediction_table.py",
       "published_sha256": "2629af66e859238fdc53d3f83a22f7a5efb209d733b73913b8729e1012105fd9",
-      "reason": "public-checkout preview test preserves absent generated outputs; not a scrub-only correspondence"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
     },
     "tests/test_plot_fig_efficiency.py@live": {
       "frozen_sha256": "c963bf96c9d81b0cc8685dbfb3443d23d73e11720d65d8f628964189dc914a28",
@@ -2758,7 +3150,15 @@
       "path_in_frozen_record": "tests/test_plot_fig_efficiency.py",
       "published_at": "tests/test_plot_fig_efficiency.py",
       "published_sha256": "30641e5b033936c03991120284cc73c4a631a1a109ae6da4f57779da606bf6f9",
-      "reason": "publication digest rejection tests added; not a scrub-only correspondence"
+      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+    },
+    "tests/test_plot_more_main_figures.py@live": {
+      "frozen_sha256": "9a9862347929cdcce54ff49da4a21f9d36c88e5b86348ac77657906ee5a59db0",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_plot_more_main_figures.py",
+      "published_at": "tests/test_plot_more_main_figures.py",
+      "published_sha256": "9a9862347929cdcce54ff49da4a21f9d36c88e5b86348ac77657906ee5a59db0",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
     },
     "tests/test_pythia_revision.py@live": {
       "frozen_sha256": "559e26517afc88f309cf0443bf002cad825ea449aee6e85a1ec15e4c2d1eff3b",
@@ -2775,6 +3175,14 @@
       "published_at": "tests/test_registry.py",
       "published_sha256": "b75ae25d736bd85fd24ebabd266ff123efb4e4984f01065c1cafa6e2037d5498",
       "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "tests/test_v17_unification.py@live": {
+      "frozen_sha256": "85c03cdf1b1ed6a64d7c450e1346031b667a461b9b4ee11c8d4cd7021fec7174",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_v17_unification.py",
+      "published_at": "tests/test_v17_unification.py",
+      "published_sha256": "85c03cdf1b1ed6a64d7c450e1346031b667a461b9b4ee11c8d4cd7021fec7174",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
     },
     "tests/test_v23_loss_validity.py@live": {
       "frozen_sha256": "edd01cd295ebc2cbeef15c15769f31c7661622086784eac7c82e95994845aca2",
@@ -2793,20 +3201,28 @@
       "reason": "anonymisation of author, host, institution or path strings"
     },
     "tests/test_v32.py@live": {
-      "frozen_sha256": "1b793ac5fe951c4e74a076100b96f9dc2695b5aa6c557e21fe647f1a3c7cf9d7",
-      "pairable": true,
+      "frozen_sha256": "c9f76a263414056789b07a9750093c4f6f729e28bec782b62546a904a06fc230",
+      "pairable": false,
       "path_in_frozen_record": "tests/test_v32.py",
       "published_at": "tests/test_v32.py",
-      "published_sha256": "260a4168b80273e90fdc05c730cd10553fcf8e4cb433dc07c3dc4d9d951d87dc",
-      "reason": "anonymisation of author, host, institution or path strings"
+      "published_sha256": "95459181fce43c09773cb628699bc7f3898105edae1e3019b42ee6e9fce1cafc",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
+    },
+    "tests/test_v34.py@live": {
+      "frozen_sha256": "d55eeb3f9fcd40965e9d6421b431da12e4ad4af6b87ac126a71108db5ad92a0e",
+      "pairable": false,
+      "path_in_frozen_record": "tests/test_v34.py",
+      "published_at": "tests/test_v34.py",
+      "published_sha256": "e330dcaf3d23bafe3d9c869ea5b25951a0821e4d0f2830507906ca74ec022fab",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
     },
     "tests/test_v92_input_comparison.py@live": {
-      "frozen_sha256": "36953b6e336e28044a00a3f1c365793e62f2fc2ab88543c908de5832902f1f8a",
+      "frozen_sha256": "a4d684ee3c73ed19f7897993875c8429951404025f457dd297f58a79304c5c0f",
       "pairable": false,
       "path_in_frozen_record": "tests/test_v92_input_comparison.py",
       "published_at": "tests/test_v92_input_comparison.py",
-      "published_sha256": "e478c39cd5d1ce40b5032ded18cf53f98342fbd0b1d546eb448f4d3f825ef3fb",
-      "reason": "published copy was taken from an earlier state of this artifact; a digest check must still fail against it"
+      "published_sha256": "32b2cb807b2e5698bfffd84b1409d370ed3ca8f3a2359c63c8814b4782076f95",
+      "reason": "A17 executable/test maintenance after the frozen version; not an anonymisation-only change and must not satisfy a frozen code digest"
     },
     "tests/test_v99_scope_eval.py@live": {
       "frozen_sha256": "f202b53ccba945a8ea0dc71cb11f9791ce6f9ece3dbdd5fddc884d1d83dc3b95",
