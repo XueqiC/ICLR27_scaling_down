@@ -21,7 +21,7 @@ else:
     import v51_panel_tables as tables
 
 SOURCE = "results/v51-panel/panel.json"
-PANEL_SIZE = (2.7, 2.0)
+PANEL_SIZE = (2.7, 1.6)
 BAR_WIDTH = 0.95 / 3
 SHORT_NAMES = {"Gemma-3": "G3", "Gemma-4": "G4", "OLMo-3": "OL3", "Qwen3": "Q3", "Muse": "Muse"}
 CAPTION = """Heterogeneity across the original twelve-model panel, ordered by
@@ -37,7 +37,7 @@ Tick abbreviations: G3 = Gemma-3, G4 = Gemma-4, OL3 = OLMo-3, Q3 = Qwen3;
 Muse is written in full. The complete display names and JSON pointers are in
 the per-panel data sidecars. No seed averaging or uncertainty intervals.
 The three touching capability bars fill 0.95 of each model slot; the remaining
-0.05 separates model groups. The two 2.7 x 2.0-inch panels form one row at
+0.05 separates model groups. The two 2.7 x 1.6-inch panels form one row at
 5.5-inch text width; model labels are rotated 45 degrees at 7.5 pt.
 The shared key fig8_legend.pdf sits above the panels.
 """

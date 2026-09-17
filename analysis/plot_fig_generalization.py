@@ -27,15 +27,32 @@ else:
     from paper_artifacts import ROOT, CAPS, COLORS, Artifacts, frozen_run, pyplot, save_figure, write_notes, output_path
 
 P53 = "results/v53-prune-dev/register.json"
+P40 = "results/v40-prune-strength/register.json"
+F46 = "results/v46-p1-newsource/predictions_frozen.json"
 Q69 = "results/v69-quant-confirm/develop.json"
+D70_DEV = "results/v70-distill-confirm/develop.json"
 D70 = "results/v70-distill-confirm/compare.json"
 F70 = "results/v70-distill-confirm/freeze.json"
 GREY = PALETTE["reference"]
 MARKERS = {c: "o" for c in CAPS}
-PANEL_SIZES = {"a": (5.5, 1.5), "b": (5.5, .85)}
+PANEL_SIZES = {"a": (5.5, 1.), "b": (5.5, 1.35)}
 KINDS = {p: "double" for p in "ab"}
 LEGEND_SIZE = (5.5, .3)
 FIGSIZE = (5.5, 2.65)
+SUBCAPTIONS = {
+    "a": "New configurations of model states that entered the fit.",
+    "b": "Model states that entered no fit.",
+}
+ROW_ORDER = (
+    ("Pruning: density inside range", "V72"),
+    ("Pruning: density inside range", "V46"),
+    ("Pruning: density outside range", "V46"),
+    ("Quantization: new group size", ""),
+    ("Distillation: new-pool budgets", "gemma3-270m"),
+    ("Distillation: new-pool budgets", "gemma3-1b"),
+    ("Pythia: new stages (power)", ""),
+    ("Pythia: new quantization state", ""),
+)
 SUBROW_OFFSETS = {"math": -.25, "code": 0., "qa": .25}
 AXIS_MARGINS = dict(left=2.62, bottom=.32, right=.08, top=.025)
 MAE_TICKS = (.03, .1, .3, 1.)
@@ -89,18 +106,87 @@ def baseline_choices(audit):
     return pruning, quantization
 
 
+def fit_membership(audit, cell):
+    """Check source states against the development records for that frozen fit.
+
+    Neither the legacy panel/group nor a confirmation test-set label determines
+    membership. Distillation's source is the pretrained student, not the
+    adapted checkpoint produced by the held-out pool/budget configuration.
+    """
+    source, cap = cell["source"], cell["capability"]
+    if source.startswith("results/v53-prune-dev/"):
+        path = source.split("#", 1)[0]
+        state_source = f"{path}#/target/tag"
+        state = resolve(audit, state_source)
+        configuration = float(source.split("/")[-2])
+        fit_source = f"{P53}#/dev_states"
+        states = resolve(audit, fit_source)
+        seen = any(s["tag"] == state for s in states)
+        config_seen = any(s["tag"] == state and configuration in s["densities"] for s in states)
+    elif source.startswith("results/v72-prune-repeat/"):
+        stored = resolve(audit, source)
+        state_source = source + "/source"
+        state, configuration = stored["source"], stored["density"]
+        fit_source = f"{P53}#/dev_states"
+        states = resolve(audit, fit_source)
+        seen = any(s["tag"] == state for s in states)
+        config_seen = any(s["tag"] == state and configuration in s["densities"] for s in states)
+    elif source.startswith("results/v46-p1-newsource/"):
+        state_source = f"{F46}#/target"
+        target = resolve(audit, state_source)
+        state = f"pythia-{target['size']}@step{target['step']}"
+        configuration = resolve(audit, source)["d"]
+        fit_source = f"{P40}#/dev"
+        dev = resolve(audit, fit_source)
+        states = {f"pythia-{size}@step{step}" for size in dev["sizes"] for step in dev["steps"]}
+        recorded = {path.split("/")[-2].replace("--", "@")
+                    for path in resolve(audit, f"{F46}#/provenance/dev_file_hashes")
+                    if path.endswith("/prune_losses.json")}
+        if states != recorded:
+            raise ValueError("V46 original fit state manifest mismatch")
+        seen = state in states
+        config_seen = seen and configuration in dev["seen_densities"]
+    elif source.startswith("results/v69-quant-confirm/"):
+        stored = resolve(audit, source)
+        state_source = source + "/state"
+        state, configuration = stored["state"], stored["config"]
+        fit_source = f"{Q69}#/dev_rows"
+        dev = [r for r in resolve(audit, fit_source) if r["capability"] == cap]
+        seen = any(r["state"] == state for r in dev)
+        config_seen = any((r["state"], r["config"]) == (state, configuration) for r in dev)
+    elif source.startswith(D70):
+        stored = resolve(audit, source)
+        state_source = source + "/student"
+        state, configuration = stored["student"], stored["pool"]
+        fit_source = f"{D70_DEV}#/points"
+        dev = resolve(audit, fit_source)
+        seen = any(r["student"] == state for r in dev)
+        config_seen = any((r["student"], r["pool"]) == (state, configuration) for r in dev)
+    else:
+        raise ValueError(f"No frozen fit membership evidence: {source}")
+    if config_seen:
+        raise ValueError(f"Generalization cell configuration already entered the fit: {source}")
+    return dict(model_state=state, model_state_source=state_source,
+                model_state_seen_in_fit=seen, configuration=configuration,
+                configuration_seen_in_fit=config_seen, fit_membership_source=fit_source)
+
+
 def summarize(part):
     """Score both predictors on exactly the same cells, with equal cell weights."""
     first = part[0]
     baseline = first["baseline"]
     if any(r["baseline"] != baseline or r["relation"] != first["relation"] for r in part):
         raise ValueError("Cannot pool different predictor selections")
+    if any(r["model_state_seen_in_fit"] != first["model_state_seen_in_fit"] for r in part):
+        raise ValueError("Cannot pool seen and unseen model states")
     relation_mae = mean(abs(r["predicted"] - r["measured"]) for r in part)
     baseline_mae = None if baseline is None else mean(
         abs(r["baseline_prediction"] - r["measured"]) for r in part)
     return {"kind": "mae", "panel": first["panel"], "group": first["group"],
             "stratum": first["stratum"], "capability": first["capability"],
             "status": first["status"], "relation": first["relation"], "baseline": baseline,
+            "model_state_seen_in_fit": first["model_state_seen_in_fit"],
+            "model_states": sorted({r["model_state"] for r in part}),
             "relation_mae": relation_mae, "baseline_mae": baseline_mae, "n": len(part),
             "below_baseline": None if baseline_mae is None else relation_mae < baseline_mae,
             "paired_gain_interval": None, "whisker": None, "interval_source": None,
@@ -122,6 +208,8 @@ def build(audit):
             continue
         r = {**original, "baseline": None, "baseline_prediction": None,
              "baseline_source": None, "selection_source": None, "stratum": ""}
+        r.update(fit_membership(audit, original))
+        r["panel"] = "A" if r["model_state_seen_in_fit"] else "B"
         cap, source = r["capability"], r["source"]
         if source.startswith("results/v53-prune-dev/"):
             r["relation"] = "power"
@@ -129,6 +217,7 @@ def build(audit):
             r["baseline_source"] = source.rsplit("/", 1)[0] + "/" + r["baseline"]
         elif source.startswith("results/v72-prune-repeat/"):
             r["relation"], r["stratum"] = "power", "V72"
+            r["previous_row_label"] = "Pruning, unseen densities of development states"
             r["baseline"], r["selection_source"] = pruning[cap]
             r["baseline_source"] = source + "/predictions/" + r["baseline"]
         elif source.startswith("results/v46-p1-newsource/"):
@@ -173,6 +262,20 @@ def build(audit):
             row["interval_source"] = f"{D70}#/groups/{i}/paired_difference/ci95"
         result.append(row)
 
+    result.sort(key=lambda r: (r["panel"], ROW_ORDER.index((r["group"], r["stratum"])),
+                               CAPS.index(r["capability"])))
+    audit.rule("Panels classify the source MODEL STATE against the development records of its own "
+               "frozen fit: A = state entered the fit, configuration did not; B = state entered no fit. "
+               "Cell sidecars record state identity, membership, configuration and evidence pointers. "
+               "V53/V72 use V53 dev_states; V46 uses the original V40 dev grid cross-checked with "
+               "its frozen dev_file_hashes, not the later V53 fit; V69 uses capability-specific "
+               "dev_rows; V70 uses development points' source students and pools.")
+    audit.rule("Corrected old label: 'Pruning, unseen densities of development states' was V72's "
+               "pythia-2.8b@step16000 and pythia-2.8b@step143000, both excluded from V53 dev_states. "
+               "It is now 'Pruning, held-out size inside the density range' in B. No eligible "
+               "seen-state pruning-density row exists in these records. V46's inside/outside rows "
+               "also move to B; their new-checkpoint labels were correct. V69's group-size row and "
+               "both V70 new-pool student rows remain in A; V53's new stages and V69's new state remain in B.")
     audit.rule("Same loss-prediction cells as generalization_cells, excluding locked-rule selection rows and corner contrasts. MAE is mean absolute "
                "prediction-minus-measurement error in native-token nats. Paired markers use identical cells "
                "and equal cell weights; n is the cell count per capability, not independent sample size.")
@@ -181,7 +284,7 @@ def build(audit):
                "V70 uses freeze.strongest_baseline[student][cap].method, never confirmation ranking.")
     audit.rule("V46 has no recorded development-selected baseline. Keep its relation MAEs "
                "capability-coloured and label baseline unavailable. Do not transport the later V53 "
-               "selection to V46. Split V46/V72 within the inside-range row to keep paired cells identical. "
+               "selection to V46. Keep V46/V72 as separate inside-range rows with identical paired cells. "
                "Locked-rule selection rows are excluded from this loss-prediction MAE figure.")
     audit.rule("V70 remains split by student within the new-pool budgets row: paired_difference.ci95 "
                "covers one student/capability's 18 checkpoints (6 equally sized pools). Never average "
@@ -229,7 +332,7 @@ def is_coincident(row):
 
 def row_label(group, stratum):
     labels = {
-        "Pruning: density inside range": "Pruning, unseen densities of development states",
+        "Pruning: density inside range": "Pruning, held-out size inside the density range",
         "Pruning: density outside range": "Pruning, new checkpoints outside the range",
         "Quantization: new group size": "Quantization, unseen group sizes",
         "Distillation: new-pool budgets": "Distillation, new pools,",
@@ -462,9 +565,13 @@ def plot(rows, plt):
     return fig
 
 
-CAPTION_TEXT = """Generalization across pruning densities and checkpoints, quantization
-group sizes, and distillation pools (a), and new training stages or a new
-quantization model state (b). MAE axes are logarithmic in native-token nats and share
+CAPTION_TEXT = """New configurations of model states that entered the fit (a), and
+model states that entered no fit (b). Membership is checked against the development
+records of the fit that produced each frozen prediction, not a later fit or a row label.
+Panel a contains unseen quantization group sizes and the two distillation new-pool
+student rows. Panel b contains pruning at a held-out size, new checkpoints inside
+and outside the density range, new training stages of a seen size, and a new
+quantization model state. MAE axes are logarithmic in native-token nats and share
 one range. Paired markers compare relation and development-selected baseline
 on identical cells with equal cell weights. Math, Code and QA retain their
 capability hues. A hollow circle denotes the development-selected baseline;
@@ -474,8 +581,13 @@ are in generalization_mae_pairs.md and record sidecars.
 Pruning, new checkpoints inside the density range and Pruning, new checkpoints
 outside the range are frozen new-state pruning predictions. These rows have no stored
 development-selected baseline and retain unpaired capability-coloured markers.
-Pruning, unseen densities of development states remains a separate row, as do
-Distillation, new pools, 270M student and Distillation, new pools, 1B student.
+The former label 'Pruning, unseen densities of development states' contradicted the
+records: both V72 Pythia-2.8B targets were excluded from the V53 fit. The corrected
+row is 'Pruning, held-out size inside the density range' in panel b; no seen-state
+pruning-density row remains. Its two revision labels have identical measured
+weights and remain repeated records, not independent source states. Distillation
+classifies the pretrained source student; new pools and budgets are configurations.
+V46 is checked against its original V40 fit, even though its target entered V53 later.
 Within each row, Math, Code and QA occupy sub-rows at -0.25, 0 and +0.25 row units;
 each connecting segment and interval follows its capability's sub-row. Markers
 retain thin white outer edges. Small horizontal display offsets, bounded by the
@@ -490,7 +602,7 @@ MAE: [lo, hi] for baseline-minus-relation is drawn at
 marginal MAE confidence intervals; no intervals are averaged across students.
 No A2 development-holdout interval is transplanted to confirmation cells.
 Two 5.5-inch-wide panels are stacked with matching left margins: fig3_a is
-1.5 inches high (six rows), and fig3_b is 0.85 inches high (two rows).
+1.0 inches high (three rows), and fig3_b is 1.35 inches high (five rows).
 The 5.5 x 0.3-inch fig3_legend.pdf strip sits above them:
 Baseline, Relation and Lower of pair distinguish the paired MAEs. The locked-rule
 selection row is excluded. Corner second differences and fresh-distribution
@@ -514,7 +626,8 @@ def generate(root=ROOT):
         audit = Artifacts(root)
         plt = pyplot(root)
         rows = build(audit)
-        audit.rule("Display mapping: fig3_a = MAE A, fig3_b = MAE B. "
+        audit.rule("Display mapping: fig3_a = new configurations of fitted model states (MAE A), "
+                   "fig3_b = model states absent from their frozen fits (MAE B). "
                    "Locked-rule selection rows and corner contrasts are excluded from MAEs.")
         for letter in "ab":
             apply_style(KINDS[letter])
@@ -522,7 +635,7 @@ def generate(root=ROOT):
             draw_panel(fig, rows, letter)
             panel_rows = [r for r in rows if r["panel"] == letter.upper()]
             save_panel(fig, f"fig3_{letter}", KINDS[letter], audit, panel_rows)
-            write_caption(f"fig3_{letter}", audit, CAPTION_TEXT)
+            write_caption(f"fig3_{letter}", audit, SUBCAPTIONS[letter] + "\n\n" + CAPTION_TEXT)
             plt.close(fig)
         apply_style("legend")
         fig = plt.figure(figsize=LEGEND_SIZE)

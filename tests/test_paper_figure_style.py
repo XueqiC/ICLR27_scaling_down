@@ -12,7 +12,7 @@ from analysis.paper_artifacts import ROOT, pyplot, output_path
 EXPECTED_PANEL_SIZES = {
     **{f"fig1_{p}": (1.35, 1.25) for p in "abcd"}, "fig1_legend": (5.5, .42),
     **{f"fig2_{p}": (2.7, 1.45) for p in "ab"}, "fig2_legend": (5.5, .42),
-    "fig3_a": (5.5, 1.5), "fig3_b": (5.5, .85), "fig3_legend": (5.5, .3),
+    "fig3_a": (5.5, 1.0), "fig3_b": (5.5, 1.35), "fig3_legend": (5.5, .3),
     "lr_pilot_a": (2.7, 1.45), "lr_pilot_legend": (5.5, .42),
     **{p: (2.7, 1.6) for p in ("corner_test_a", "corner_test_b", "corner_contrasts_a")},
     "corner_legend": (5.5, .42),
@@ -21,7 +21,7 @@ EXPECTED_PANEL_SIZES = {
     "fig5_legend": (5.5, .3),
     "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
     "fig7_legend": (5.5, .3),
-    "fig8_a": (2.7, 2.0), "fig8_b": (2.7, 2.0), "fig8_legend": (5.5, .3),
+    "fig8_a": (2.7, 1.6), "fig8_b": (2.7, 1.6), "fig8_legend": (5.5, .3),
 }
 
 
@@ -155,7 +155,7 @@ def test_panel_files_and_artist_contract(monkeypatch, gen, prefix, letters):
         assert len(row_positions) == (2 if gen is generalization else 1)
         if gen is generalization:
             assert tuple(fig.get_size_inches()) == pytest.approx((5.5, 2.65))
-            for panel, size in zip(panels, [(5.5, 1.5), (5.5, .85)]):
+            for panel, size in zip(panels, [(5.5, 1.0), (5.5, 1.35)]):
                 assert panel.bbox.size/fig.dpi == pytest.approx(size)
             assert panels[0].bbox.y0 == pytest.approx(panels[1].bbox.y1)
             assert panels[0].axes[0].bbox.x0 == pytest.approx(panels[1].axes[0].bbox.x0)

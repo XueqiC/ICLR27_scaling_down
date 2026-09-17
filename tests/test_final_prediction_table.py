@@ -10,11 +10,12 @@ from paper_generator_checks import check_access, refuses_symlink, refuses_extern
 
 
 TASKS = [
-    "Three checkpoints outside every fit, pruned to densities 0.575, 0.675 and 0.85",
-    "Pythia 160M to 1.4B at unseen bit width 4, group sizes 64 and 256",
-    "Pythia 410M and 1.4B at unseen group sizes 32 and 512, bit widths 3 to 5",
-    "A 1.4B stage unseen in fitting, bit widths 3 to 5, group sizes 32 to 512",
-    "Gemma 270M and 1B distilled on six new pools at 50 to 200 thousand tokens",
+    "Three unseen checkpoints pruned to densities 0.575, 0.675 and 0.85",
+    "Pythia 160 million to 1.4 billion at unseen bit width 4, group sizes 64 and 256",
+    "Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 3 to 5",
+    "An unseen 1.4 billion stage at bit widths 3 to 5, group sizes 32 to 512",
+    "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
+    "Four unseen Pythia states pruned at six densities",
 ]
 
 
@@ -32,15 +33,13 @@ def raw_source(ref):
 def generated():
     tex_path = gen.output_path(ROOT, "tables", "main_prediction_v2.tex")
     side_path = gen.output_path(ROOT, "tables", "main_prediction_v2_sources.md")
-    # A clean public checkout has no generated canonical pair yet. Preview
-    # generation must preserve both existing contents and an absent file.
-    snapshot = lambda path: path.read_bytes() if path.exists() else None
-    original_tex, original_side = snapshot(tex_path), snapshot(side_path)
+    existing = lambda path: path.read_bytes() if path.exists() else None
+    original_tex, original_side = existing(tex_path), existing(side_path)
     rows, audit, access = gen.generate(write_tex=False)
     check_access(audit, access)
     tex = gen.render_table(rows, audit, sidecar="main_prediction_v2_preview_sources.md")
-    assert snapshot(tex_path) == original_tex
-    assert snapshot(side_path) == original_side
+    assert existing(tex_path) == original_tex
+    assert existing(side_path) == original_side
     assert all(not p.endswith(".tex") for p in access[1])
     side = (gen.output_path(ROOT, "tables", "main_prediction_v2_preview_sources.md")).read_text()
     blocks = re.findall(r"```json\n(.*?)\n```", side, re.S)
@@ -49,12 +48,12 @@ def generated():
 
 def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
     rows, audit, tex, recipes, caption = generated
-    assert len(rows) == 5 and len(recipes) == 35
+    assert len(rows) == 6 and len(recipes) == 42
     body = tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0]
     table_rows = [line.removesuffix(r" \\").split(" & ") for line in body.splitlines() if line.strip() != r"\midrule"]
-    assert len(table_rows) == 5 and all(len(row) == 7 for row in table_rows)
+    assert len(table_rows) == 6 and all(len(row) == 7 for row in table_rows)
     assert {(r["row"], r["column"]) for r in recipes} == {
-        (i, j) for i in range(5) for j in range(7)}
+        (i, j) for i in range(6) for j in range(7)}
     for record in [*recipes, caption]:
         # Independently resolve every JSON pointer and operation, then compare
         # with the actual TeX cell at the sidecar's physical row/column.
@@ -105,7 +104,7 @@ def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
         if "row" in record:
             actual = table_rows[record["row"]][record["column"]]
         else:
-            actual = next(line for line in tex.splitlines() if line.startswith(r"\caption{"))[9:-1].removeprefix(gen.TABLE_FONT + " ")
+            actual = next(line for line in tex.splitlines() if line.startswith(r"\caption{"))[9:-1].removeprefix(gen.CAPTION_FONT + " ")
         assert actual == expected == record["rendered"]
     sources = [s for r in recipes for p in r["parts"] if isinstance(p, dict) for s in p["sources"]]
     assert not any(forbidden in s for s in sources for forbidden in (
@@ -127,7 +126,7 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert "unseen density" not in tex
     assert gen.HEADERS == (
         "Prediction task", "Predictor tested first", "Its error (nats)",
-        "Predictor we deliver", "Its error (nats)", "Simplest comparison\nMath / Code / QA",
+        "Predictor we deliver", "Its error (nats)", "Simplest comparison",
         "Development measurements")
     assert " & ".join(gen.render_text(h) for h in gen.HEADERS) + r" \\" in tex
     assert r"\centering\footnotesize" in tex and r"\tiny" not in tex
@@ -136,28 +135,39 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert r"\extracolsep{\fill}" in tex
     assert tex.count(r">{\raggedright\arraybackslash\hspace{0pt}}p{") == 7
     assert sum(map(float, gen.COLUMN_WIDTHS)) == pytest.approx(1)
-    assert all(float(gen.COLUMN_WIDTHS[i]) >= .10 for i in (2, 4))
+    assert all(float(gen.COLUMN_WIDTHS[i]) >= .09 for i in (2, 4))
     assert float(gen.COLUMN_WIDTHS[5]) < .215
     assert r"\setlength{\tabcolsep}{1.5pt}" in tex
-    assert r"\fontsize{8.5}{10}\selectfont" in tex
+    assert gen.COLUMN_WIDTHS == (".20", ".15", ".09", ".17", ".09", ".17", ".13")
+    assert gen.TABLE_FONT == r"\footnotesize\fontsize{8}{9.5}\selectfont"
+    assert gen.CAPTION_FONT == r"\footnotesize\fontsize{8.5}{10}\selectfont"
+    assert r"\centering" + gen.TABLE_FONT in tex
+    assert r"\caption{" + gen.CAPTION_FONT in tex
     assert r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}" in tex
     assert r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}" in tex
-    assert tex.count(r"\TableOneErrors{") == 15
+    assert tex.count(r"\TableOneErrors{") == 17
     assert not re.search(r"\\(?:resizebox|scalebox|rotatebox|multicolumn|dagger)", tex)
     assert r"\label{tab:main-prediction-v2}" in tex
     assert caption["rendered"] == gen.caption_cell(audit).render(audit)
-    assert len(caption["rendered"].split()) <= 70
-    assert caption["rendered"] == (
-        "Every row is a prediction frozen before measurement; errors are mean absolute errors in nats per token for Math, Code and QA. "
-        "The last column counts the development configuration measurements per capability behind the tested predictor. "
-        "``Chosen after this test'' marks a delivered rule fixed after seeing these results; the comparison is the development-selected baseline. "
-        "Distillation entries give the 270M and 1B students in that order.")
+    assert len(caption["rendered"].split()) <= 105
+    assert "math, code and question answering" in caption["rendered"]
+    assert "in math, code and question answering order" in caption["rendered"]
+    assert "chosen after seeing the result" in caption["rendered"]
+    assert "Interpolation is piecewise on the measured grid" in caption["rendered"]
+    assert "a median curve uses no source inputs" in caption["rendered"]
+    assert "development configuration measurements" in caption["rendered"]
+    assert tex.count(r"\midrule") == len(rows)
+    assert not re.search(r"\b(?:QA|MAE|A2|[0-9.]+[MB])\b", tex)
     assert "[" not in caption["rendered"]
     assert "Source-free median density curve" in tex
     assert not re.search(r"\b(?:bit-width|bits|groups|step|[bg] [0-9]|[0-9]+k)\b|\$", tex)
     assert all("\n" not in row[0].plain(audit) for row in rows)
     for i, row in enumerate(rows):
         for j in (2, 4, 5):
+            if (i, j) == (1, 4):
+                assert row[j].plain(audit) == "No stored error on these test cells"
+                assert not row[j].compact_scores
+                continue
             lines = row[j].plain(audit).splitlines()
             if j == 5:
                 assert lines.pop(0)  # Baseline identity precedes its scores.
@@ -171,11 +181,9 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
                     assert re.fullmatch(prefix + r"\d+\.\d{2}", line)
             assert row[j].compact_scores == ("comparison" if j == 5 else "ordered")
         assert "[" not in row[2].plain(audit)
-        if i in (0, 2, 3):
-            assert row[3].plain(audit).endswith("(chosen after this test)")
-        else:
+        if i == 4:
             assert row[3].plain(audit) == "The same predictor"
-        assert "chosen after this test" not in row[4].plain(audit)
+        assert all("chosen after this test" not in c.plain(audit) for c in row)
 
 
 def test_frozen_errors_and_development_baselines_unchanged(generated):
@@ -185,30 +193,31 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
         return " / ".join(lines)
     assert [scores(row, 2) for row in rows] == [
         "0.24 / 0.24 / 0.68", "0.19 / 0.21 / 0.44", "0.21 / 0.56 / 0.46",
-        "0.30 / 0.15 / 0.22", "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
+        "0.30 / 0.15 / 0.22", "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46", "0.07 / 0.10 / 0.18",
     ]
     assert [scores(row, 5) for row in rows] == [
         "0.23 / 0.22 / 0.22", "0.55 / 0.73 / 0.54", "0.33 / 0.68 / 0.46",
-        "0.35 / 0.56 / 0.14", "0.07, 0.03 / 0.02, 0.05 / 0.61, 0.45",
+        "0.35 / 0.56 / 0.14", "0.07, 0.03 / 0.02, 0.05 / 0.61, 0.45", "0.06 / 0.08 / 0.18",
     ]
     assert [scores(row, 4) for row in rows] == [
-        "0.28 / 0.21 / 0.22", "0.19 / 0.21 / 0.44", "0.07 / 0.12 / 0.46", "0.09 / 0.15 / 0.14",
-        "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
+        "0.28 / 0.21 / 0.22", "No stored error on these test cells", "0.07 / 0.12 / 0.46", "0.09 / 0.15 / 0.14",
+        "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46", "0.07 / 0.10 / 0.18",
     ]
-    assert "270M and 1B" in gen.caption_cell(audit).plain(audit)
-    assert "no student averaging" in rows[-1][2].note
+    assert "270 million and 1 billion" in gen.caption_cell(audit).plain(audit)
+    assert "no student averaging" in rows[4][2].note
     assert [row[5].plain(audit).splitlines()[0] for row in rows] == [
-        "Per-density regression; QA: median",
+        "Per-density regression; question answering: median",
         "Development median",
-        "Bilinear regression; Code: no change; QA: median",
-        "Bilinear regression; Code: no change; QA: median",
-        "Regressions on budget and loss, on reuse, and on reuse and size",
+        "Bilinear regression, no change and the median",
+        "Bilinear regression, no change and the median",
+        "Regressions on budget and loss, reuse, and reuse and size",
+        "Per-density regression at full budget (36)",
     ]
 
 
 def test_development_measurements_count_configurations_per_capability(generated):
     rows, audit, _, recipes, _ = generated
-    assert [int(row[6].plain(audit)) for row in rows] == [84, 24, 54, 54, 100]
+    assert [int(row[6].plain(audit)) for row in rows] == [84, 24, 54, 54, 100, 18]
     prune = raw_source(gen.P53 + "#")
     assert int(rows[0][6].plain(audit)) == sum(len(s["densities"]) for s in prune["dev_states"])
     assert prune["n_dev_rows"] == 3 * int(rows[0][6].plain(audit))
@@ -241,24 +250,34 @@ def test_delivery_identities_and_bit_candidate_as_tested(generated):
     old_test = raw_source(gen.Q55 + "#/test_sets/bit_test/configs")
     later_dev = raw_source(gen.Q69 + "#/dev_configs")
     assert set(old_test) <= set(later_dev)
-    assert rows[1][3].plain(audit) == "The same predictor"
-    assert rows[1][4].plain(audit) == rows[1][2].plain(audit)
+    assert rows[1][3].plain(audit) == "Interpolate math and code on seen states; use the median otherwise"
+    assert "Interpolation is piecewise on the measured grid" in gen.caption_cell(audit).plain(audit)
+    assert "Interpolation is piecewise on the measured grid" in gen.caption_cell(audit).plain(audit)
+    assert rows[3][3].plain(audit) == "Development median"
+    assert rows[1][4].plain(audit) == "No stored error on these test cells"
     candidate = next(r for r in recipes if (r["row"], r["column"]) == (1, 2))
     delivered = next(r for r in recipes if (r["row"], r["column"]) == (1, 4))
-    assert candidate["parts"] == delivered["parts"]
-    assert all(r"\dagger" not in c.plain(audit) for c in rows[1])
+    assert candidate["parts"] != delivered["parts"]
+    assert not any(isinstance(p, dict) and p["format"] for p in delivered["parts"])
+    assert gen.pointer(gen.R74, "recommendation_rule") in delivered["context"]
+    earlier = raw_source(gen.Q55 + "#/candidate_definitions/same_input_interpolation")
+    later = raw_source(gen.Q69 + "#/boundary_rule")
+    assert "Bilinear" in earlier and earlier != later
+    bit_cells = {(s, cfg) for s in raw_source(gen.Q55 + "#/test_sets/bit_test/states") for cfg in old_test}
+    later_cells = {(r["state"], r["config"]) for r in raw_source("results/v69-quant-confirm/compare.json#/rows")}
+    assert not bit_cells.intersection(later_cells)
     assert "different models and boundary rules" in rows[1][4].note
-    assert rows[-1][3].plain(audit) == "The same predictor"
+    assert rows[4][3].plain(audit) == "The same predictor"
 
 
-def test_composite_relations_name_each_capability(generated):
+def test_composite_relations_follow_caption_capability_order(generated):
     rows, audit, tex, _, _ = generated
     for i in (2, 3):
-        assert rows[i][1].plain(audit) == "Math source regression; Code development median; QA no change"
+        assert rows[i][1].plain(audit) == "Source regression, the median and no change"
     assert rows[2][3].plain(audit) == (
-        "Math, Code: interpolation on the measured group-size grid; QA: development median (chosen after this test)")
-    assert rows[-1][1].plain(audit) == (
-        "Reuse forms for math and code; budget-and-pool form for QA")
+        "Interpolate math and code; use the median for question answering")
+    assert rows[4][1].plain(audit) == (
+        "Reuse forms, with a budget and pool form for question answering")
     assert rows[0][1].plain(audit) == "Five-parameter power form"
     assert raw_source(gen.P53 + "#/n_params_per_capability/power") == 5
     assert raw_source(gen.P53 + "#/n_dev_states") == len(raw_source(gen.P53 + "#/dev_states")) == 17
@@ -299,6 +318,65 @@ def test_test_sets_match_frozen_membership(generated):
     assert all(not re.search(r"\b[bg] \d", row[0].plain(audit)) for row in rows)
 
 
+def test_efficiency_confirmation_uses_registered_cells_and_budgets(generated):
+    rows, audit, _, recipes, _ = generated
+    summary = raw_source(gen.E11 + "#")
+    states = raw_source(gen.E11_STATE + "#")
+    row = rows[5]
+    assert states["state_order"] == ["pythia-160m@step80000", "pythia-410m@step112000",
+                                     "pythia-1.4b@step48000", "pythia-1b@step48000"]
+    plan = raw_source("results/a11-efficiency-confirmation/plan.json#")
+    assert not set(states["state_order"]) & set(plan["exclusion_audit"]["a9_states"])
+    assert not set(states["state_order"]) & set(plan["exclusion_audit"]["selection_rule_states"])
+    assert len(states["records"]) == 12
+    assert len(summary["cells"]) == len({(r["state"], r["density"], r["capability"])
+                                       for r in summary["cells"]}) == 72
+    assert int(row[6].plain(audit)) == states["development_measurements_per_capability"]["power_18"] == 18
+    assert int(row[6].plain(audit)) * 2 == states["development_measurements_per_capability"]["A2_36"] == 36
+    assert row[1].plain(audit) == "Compact power form using half the measurements"
+    assert row[3].plain(audit) == (
+        "The same power form, with a median density curve for question answering")
+    assert row[5].plain(audit).splitlines()[0] == "Per-density regression at full budget (36)"
+    for column in (2, 4, 5):
+        recipe = next(r for r in recipes if (r["row"], r["column"]) == (5, column))
+        numbers = [p for p in recipe["parts"] if isinstance(p, dict) and p["format"]]
+        for cap, part in zip(gen.CAPS, numbers):
+            method = "A2_36" if column == 5 else "median_curve_36" if column == 4 and cap == "qa" else "power_18"
+            assert part["sources"] == [gen.pointer(gen.E11, "by_capability", cap, "mae", method)]
+            per_state = [r for r in states["records"] if r["capability"] == cap]
+            assert len(per_state) == 4
+            for r in per_state:
+                assert r["densities"] == [0.9, 0.85, 0.8, 0.75, 0.7, 0.65]
+                assert r["n_cells"] == 6
+                assert r["mae"][method] == pytest.approx(mean(r["absolute_errors"][method]))
+            assert raw_source(part["sources"][0]) == pytest.approx(mean(r["mae"][method] for r in per_state))
+    for recipe in (r for r in recipes if r["row"] == 5):
+        sources = [s for p in recipe["parts"] if isinstance(p, dict) for s in p["sources"]]
+        assert sources and all(s.startswith((gen.E11 + "#", gen.E11_STATE + "#")) for s in sources)
+    # Retain the specified median even though this panel's QA power mean is smaller.
+    assert summary["by_capability"]["qa"]["mae"]["power_18"] < summary["by_capability"]["qa"]["mae"]["median_curve_36"]
+    assert "not a claim that the median wins" in row[3].note
+
+
+@pytest.mark.parametrize("corruption, message", [
+    ("mean", "per-state errors"), ("duplicate", "missing or duplicate"),
+    ("budget", "half-budget"), ("digest", "digest mismatch"),
+])
+def test_efficiency_rejects_inconsistent_records(monkeypatch, corruption, message):
+    read = gen.Artifacts.read
+    def changed_read(audit, path):
+        data = read(audit, path)
+        if path == gen.E11_STATE:
+            if corruption == "mean": data["records"][0]["mae"]["power_18"] += 0.1
+            elif corruption == "duplicate": data["records"].append(data["records"][0])
+            elif corruption == "budget": data["development_measurements_per_capability"]["power_18"] += 1
+            elif corruption == "digest": data["input_sha256"][gen.E11] = "0" * 64
+        return data
+    monkeypatch.setattr(gen.Artifacts, "read", changed_read)
+    with pytest.raises(ValueError, match=message):
+        gen.efficiency_row(gen.Artifacts())
+
+
 def test_paired_intervals_remain_frozen_and_are_omitted_from_table(generated):
     rows, audit, _, recipes, caption = generated
     groups = raw_source(gen.D70 + "#/groups")
@@ -323,7 +401,7 @@ def test_every_numeric_occurrence_is_in_inventory(generated):
     rows, audit, tex, recipes, caption = generated
     numbers = gen.numeric_inventory([*recipes, caption], audit)
     body = "\n".join(l for l in tex.split("\\midrule\n", 1)[1].split("\\bottomrule")[0].splitlines() if l.strip() != r"\midrule")
-    assert [n["number"] for n in numbers] == re.findall(r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|five|six|seventeen|twenty)\b", body + caption["rendered"], re.I)
+    assert [n["number"] for n in numbers] == re.findall(r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|four|five|six|seventeen|twenty|half)\b", body + caption["rendered"], re.I)
     assert all(n["sources"] for n in numbers)
     caption_numbers = [n for n in numbers if n.get("location") == "caption"]
     assert [n["number"] for n in caption_numbers[:2]] == ["270", "1"]

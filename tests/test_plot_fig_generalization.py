@@ -13,14 +13,18 @@ from paper_generator_checks import (
 )
 
 ROW_LABELS = {
-    "a": ["Pruning, unseen densities of development states",
-          "Pruning, new checkpoints inside the density range",
-          "Pruning, new checkpoints outside the range",
-          "Quantization, unseen group sizes",
+    "a": ["Quantization, unseen group sizes",
           "Distillation, new pools, 270M student",
           "Distillation, new pools, 1B student"],
-    "b": ["Pruning, new training stages of a seen size",
+    "b": ["Pruning, held-out size inside the density range",
+          "Pruning, new checkpoints inside the density range",
+          "Pruning, new checkpoints outside the range",
+          "Pruning, new training stages of a seen size",
           "Quantization, new model state"],
+}
+SUBCAPTIONS = {
+    "a": "New configurations of model states that entered the fit.",
+    "b": "Model states that entered no fit.",
 }
 
 
@@ -58,12 +62,81 @@ def test_maes_preserve_exact_eligible_cell_coverage(generated):
     original = [r for r in original if r["measurement_interval"] is None
                 and r["group"] != "Pythia: locked rule on new states"]
     cells = [c for r in rows for c in r["cells"]]
-    identity = lambda r: (r["panel"], r["group"], r["capability"], r["source"])
+    # Panel membership is intentionally corrected without changing cell coverage.
+    identity = lambda r: (r["group"], r["capability"], r["source"])
     assert Counter(map(identity, cells)) == Counter(map(identity, original))
     assert len(cells) == 222
     assert all(r["kind"] == "mae" for r in rows)
     assert not any("locked" in r["group"] for r in rows)
     assert any("A2 frozen_prediction_error_interval" in note for note in audit.notes)
+
+
+def test_panels_follow_recorded_fit_membership_not_legacy_labels(generated, frozen):
+    rows, audit, _ = generated
+    assert Counter(r["panel"] for r in rows) == {"A": 9, "B": 15}
+    assert Counter(c["panel"] for r in rows for c in r["cells"]) == {"A": 144, "B": 78}
+    for row in rows:
+        for c in row["cells"]:
+            source = c["source"]
+            stored = frozen(source)
+            if "v46-p1-newsource" in source:
+                target = frozen("results/v46-p1-newsource/predictions_frozen.json#/target")
+                state = f"pythia-{target['size']}@step{target['step']}"
+                dev = frozen("results/v40-prune-strength/register.json#/dev")
+                seen = target["size"] in dev["sizes"] and target["step"] in dev["steps"]
+                assert state == "pythia-1b@step96000" and not seen
+                # The later V53 fit includes V46's target; it cannot determine
+                # whether the target was seen by the earlier frozen predictor.
+                assert state in {s["tag"] for s in frozen(gen.P53)["dev_states"]}
+            elif "v53-prune-dev" in source or "v72-prune-repeat" in source:
+                state = (stored["source"] if isinstance(stored, dict) else
+                         frozen(source.split("#")[0])["target"]["tag"])
+                dev = frozen(gen.P53)["dev_states"]
+                seen = state in {s["tag"] for s in dev}
+                assert not seen
+                if "v72-prune-repeat" in source:
+                    assert state in {"pythia-2.8b@step16000", "pythia-2.8b@step143000"}
+                    assert c["previous_row_label"] == "Pruning, unseen densities of development states"
+                    assert row["display"]["row_label"] == ROW_LABELS["b"][0]
+                else:
+                    assert state.split("@")[0] in {s["tag"].split("@")[0] for s in dev}
+            elif "v69-quant-confirm" in source:
+                state = stored["state"]
+                dev = [r for r in frozen(gen.Q69)["dev_rows"] if r["capability"] == c["capability"]]
+                seen = state in {r["state"] for r in dev}
+                assert (state, stored["config"]) not in {(r["state"], r["config"]) for r in dev}
+                assert seen == (stored["test_set"] == "development_state_boundary")
+            else:
+                assert source.startswith(gen.D70)
+                state = stored["student"]
+                dev = frozen("results/v70-distill-confirm/develop.json")["points"]
+                seen = state in {r["student"] for r in dev}
+                assert seen
+                assert stored["pool"] not in {r["pool"] for r in dev}
+            assert frozen(c["fit_membership_source"])
+            assert frozen(c["model_state_source"])
+            assert c["model_state"] == state
+            assert c["model_state_seen_in_fit"] == row["model_state_seen_in_fit"] == seen
+            assert c["configuration_seen_in_fit"] is False
+            assert c["panel"] == row["panel"] == ("A" if seen else "B")
+        assert row["model_states"] == sorted({c["model_state"] for c in row["cells"]})
+    assert any("Corrected old label" in note and "V72" in note for note in audit.notes)
+
+
+def test_membership_ignores_labels_and_rejects_seen_configuration():
+    from analysis.paper_artifacts import Artifacts
+    audit = Artifacts()
+    cell = dict(source="results/v72-prune-repeat/compare.json#/rows/0", capability="math",
+                panel="A", group="seen states", state="invented development state")
+    assert gen.fit_membership(audit, cell)["model_state_seen_in_fit"] is False
+    source = "results/v69-quant-confirm/compare.json"
+    stored = audit.read(source)["rows"][0]
+    assert gen.fit_membership(audit, dict(source=source + "#/rows/0", capability=stored["capability"]))[
+        "model_state_seen_in_fit"] is True
+    # A regression that accidentally plots a development configuration must fail.
+    stored["config"] = "b3_g64"
+    with pytest.raises(ValueError, match="configuration already entered the fit"):
+        gen.fit_membership(audit, dict(source=source + "#/rows/0", capability=stored["capability"]))
 
 
 def test_maes_recompute_from_frozen_predictions_on_identical_cells(generated, frozen):
@@ -187,7 +260,7 @@ def test_exported_sizes_labels_subrows_and_coincidences(generated):
     rows, _, _ = generated
     directory = output_path(ROOT, "figs")
     limits, margins = [], []
-    for panel, size in (("a", [5.5, 1.5]), ("b", [5.5, .85]), ("legend", [5.5, .3])):
+    for panel, size in (("a", [5.5, 1.]), ("b", [5.5, 1.35]), ("legend", [5.5, .3])):
         data = json.loads((directory / f"fig3_{panel}_data.json").read_text())
         assert data["size_inches"] == size
         raw = (directory / f"fig3_{panel}.pdf").read_bytes()
@@ -202,6 +275,9 @@ def test_exported_sizes_labels_subrows_and_coincidences(generated):
         if panel == "legend":
             assert data["legend_entries"] == ["Math", "Code", "QA", "Baseline", "Relation", "Lower of pair"]
             continue
+        assert caption.splitlines()[0] == SUBCAPTIONS[panel]
+        assert data["font"] == dict(family="Times New Roman", weight="bold", ticks_pt=8.5,
+                                    labels_pt=9.5, legend_pt=8.5)
         axis = data["axes"][0]
         assert axis["row_labels"] == ROW_LABELS[panel]
         assert all("\n" not in label for label in axis["row_labels"])
