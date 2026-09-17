@@ -1056,7 +1056,8 @@ PLAIN_CAPTIONS = {
  'tab:v56_forms': 'The table compares distillation forms under run and student holdouts. Each pair gives mean absolute error followed by signed bias, in nats per native token. Parameter counts cover all capabilities.',
  'tab:v56_condition': 'The table compares shared and capability-specific distillation responses at matched parameter counts. Errors and gains are in nats per native token. Paired parameter counts list the shared response followed by the capability-specific response.',
  'tab:distill_forms_audit': 'The table records the frozen distillation formulas and their fitted coefficients. Responses are loss changes in nats per native token. The first panel specifies the fit; the second lists coefficients in the stated order. The notes define the model inputs and the procedure used to fit each form.',
- 'tab:shared_structure': 'The table compares shared response structure and calibration with one target measurement. Mean absolute errors and interval widths are in nats per native token; coverage is a percentage. Calibration pairs list no target measurement followed by one target measurement, which is excluded from scoring.',
+ 'tab:shared_structure': 'The table compares a shared response family with capability-specific responses, and reports the spread of exponents fitted separately per source. Errors are mean absolute errors in nats per native token, pooled equally over capabilities. Distillation carries no pretraining-token input, so that term is inactive.',
+ 'tab:calibration_k1': 'The table reports what one target measurement buys. Errors are mean absolute errors in nats per native token, interval widths are in the same units, and coverage is a percentage. The calibration cell itself is excluded from scoring.',
  'tab:cap_conditioning': 'The table compares separate capability responses with shared responses on frozen confirmation panels. Mean absolute errors and gains are in nats per native token. Positive gains favor separate responses; brackets give paired confidence intervals for the error differences.',
  'tab:cond_audit': 'The table compares separate capability responses with a shared response and fitted capability scales. Scales and squared correlations are dimensionless. Errors and improvements are in nats per native token; brackets give confidence intervals for the error differences.',
  'tab:main_final': 'The table compares frozen relations, alternatives, and delivered rules on confirmation tests. Mean absolute errors and gains are in nats per native token. Lists follow mathematics, code, and question answering. Gain is alternative error minus relation error; retrospective rules were chosen after testing.',
@@ -1230,8 +1231,6 @@ def _reader_body(block, label):
         block = block.replace('Bit &', 'Bit-width test &').replace('Granularity &', 'Group-size test &').replace('Joint &', 'Joint test &')
         block = block.replace(r'Without $u^2$', r'Without squared bit response ($u^2$)')
     if label == 'tab:shared_structure':
-        block = block.replace('80\\% prediction interval coverage and width', '80\\% interval: coverage / width; no target measurement then one target measurement')
-        block = block.replace(' versus ', ' / ')
         block = block.replace(r'$\beta_c,\gamma_c$', 'Source coefficients and exponent').replace(r'$\beta_c,p_c,q_c$', 'Source coefficients and exponents')
         block = block.replace(r'$\beta_c$', 'Source coefficients').replace(r'$\gamma$', 'Exponent')
     if label == 'tab:p3_check':
@@ -1396,10 +1395,6 @@ def _reader_details(block, label):
         block = block.replace('all density', 'all densities').replace('sources +', 'sources and')
     block = block.replace(r'$3{\times}3$', '3 sizes by 3 stages').replace(r'$3\times3$', '3 sizes by 3 stages')
     block = block.replace('Mean mean absolute error', 'Capability mean absolute error')
-    if label == 'tab:shared_structure':
-        block = block.replace('Held-out mean absolute error, shared / specific', 'Held-out error: shared / capability-specific; exponent minimum / median / maximum')
-        block = block.replace('mean absolute error, no target measurement / one target measurement', 'Error: no target measurement / one target measurement')
-        block = block.replace(' to ', '; ')
     if label == 'tab:v56_condition':
         block = re.sub(r'(?<=\d); (?=\d)', ' / ', block)
     if label == 'tab:panel_prune':

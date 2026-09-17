@@ -13,6 +13,14 @@ import json
 from pathlib import Path
 
 try:
+    from .paper_table_layout import house_style
+except ImportError:  # run as a script
+    import sys, pathlib
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from paper_table_layout import house_style
+
+
+try:
     from .paper_artifacts import ROOT, Artifacts, output_path
 except ImportError:
     from paper_artifacts import ROOT, Artifacts, output_path
@@ -208,7 +216,7 @@ def generate(root=ROOT, accounting=None):
         path = output_path(root, "tables", stem + ".tex")
         path.parent.mkdir(parents=True, exist_ok=True)
         text = render(requests)
-        path.write_text(text)
+        path.write_text(house_style(text))
         sidecar = path.with_suffix(".json")
         sidecar.write_text(json.dumps({
             "generator": "analysis/a13_dreq_table.py",

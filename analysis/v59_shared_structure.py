@@ -666,41 +666,56 @@ def markdown(summary, tables):
 
 @proofread_table
 def latex(summary, panels):
-    lines = [r"\begin{table}[!htbp]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
-             r"\begin{tabular}{@{}p{1.9cm}p{1.9cm}p{2.0cm}p{2.5cm}p{2.1cm}p{2.5cm}@{}}", r"\toprule",
-             r"Law & What is shared & What varies & Held-out MAE shared vs specific & K0 vs K1 MAE & 80\% PI coverage \& width \\", r"\midrule"]
-    for arm, law, shared, varies in (
+    """Two tables: shared structure, then one-point calibration.
+
+    They were one table with two disjoint halves, which printed a column of
+    dashes on each page of the split. Each half now stands on its own.
+    """
+    shared = [r"\begin{table}[!htbp]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
+              r"\begin{tabular}{@{}p{2.3cm}p{2.3cm}p{2.6cm}p{5.0cm}@{}}", r"\toprule",
+              r"Law & What is shared & What varies & Held-out error, shared against capability-specific \\",
+              r"\midrule"]
+    for arm, law, sh, varies in (
         ("pruning", "Pruning power", "Power family", r"$\beta_c,\gamma_c$"),
         ("quantization", "Grouped RTN", "Separable family", r"$\beta_c,p_c,q_c$"),
         ("distillation", "Distill exposure", r"$\log(1+E)$ family", r"$\beta_c$; inactive $D_0$")):
         comp = summary["part1"][arm]["comparison"]["macro"]
-        lines.append(f"{law} & {shared} & {varies} & {comp['shared_mae']:.3f} vs {comp['specific_mae']:.3f} & --- & ---" + r" \\")
-    for arm, shared, varies in (("pruning", r"One $\gamma$", r"$\beta_c$"), ("quantization", "2D term vectors", "Capability offsets")):
+        shared.append(f"{law} & {sh} & {varies} & {comp['shared_mae']:.3f} against {comp['specific_mae']:.3f}" + r" \\")
+    for arm, sh, varies in (("pruning", r"One $\gamma$", r"$\beta_c$"), ("quantization", "2D term vectors", "Capability offsets")):
         comp = summary["part2"][arm]["sharing"]["macro"]
-        lines.append(f"{arm.title()} sharing & {shared} & {varies} & {comp['shared_mae']:.3f} vs {comp['specific_mae']:.3f} & --- & ---" + r" \\")
+        shared.append(f"{arm.title()} sharing & {sh} & {varies} & {comp['shared_mae']:.3f} against {comp['specific_mae']:.3f}" + r" \\")
     gd = summary["part2"]["pruning"]["gamma_distribution"]
     for c in CAPS:
-        val = "/".join(f"{gd[c][k]:.2f}" for k in ("min", "median", "max"))
-        lines.append(f"Prune {c} & Power family & Source amplitudes, $\\gamma$ & $\\gamma$ min/med/max {val} & --- & ---" + r" \\")
-    lines.append(r"\midrule")
+        val = ", ".join(f"{gd[c][k]:.2f}" for k in ("min", "median", "max"))
+        shared.append(f"Prune {c} & Power family & Source amplitudes, $\\gamma$ & Exponent minimum, median, maximum: {val}" + r" \\")
+    shared += [r"\bottomrule", r"\end{tabular}",
+               r"\caption{Shared response structure. Errors are mean absolute errors in nats per native token, "
+               r"pooled equally over capabilities. Family comparisons use the registered development splits: 17 pruning "
+               r"sources, six quantization states and 12 distillation runs. Distillation carries no pretraining-token "
+               r"input, so that term is inactive. The exponent rows describe within-source fits.}",
+               r"\label{tab:shared_structure}", r"\end{table}", ""]
+
+    calib = [r"\begin{table}[!htbp]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
+             r"\begin{tabular}{@{}p{3.0cm}p{2.2cm}p{3.0cm}p{4.0cm}@{}}", r"\toprule",
+             r"Panel & What is shared & Error without and with one target measurement & "
+             r"80\% interval: coverage and width, without then with that measurement \\",
+             r"\midrule"]
     for label, result, k0, k1 in panels:
         a, b = (result["metrics"][m]["macro"]["mae"] for m in (k0, k1))
         name = label.replace("_", r"\_").replace("17-state OOF", "17-source OOF")
         share = r"Training $\gamma_c$" if label.startswith("Prune") else "Training curve"
         width = pi_cell(result, "0.8").replace("—", "---").replace("%", r"\%").replace(" → ", " to ")
-        lines.append(f"{name} & {share} & One target amplitude & --- & {a:.3f} vs {b:.3f} & {width}" + r" \\")
-    assert sum(line.endswith(r"\\") for line in lines) <= 30
-    lines += [r"\bottomrule", r"\end{tabular}",
-              r"\caption{Shared structure and one-point calibration. MAE and PI widths are nats, pooled equally over capabilities. "
-              r"Family comparisons use registered dev splits: 17 pruning sources, six quantization states, 12 distillation runs. "
-              r"Specific forms: v53 power, v55 low-order 2D, v56 F2 with $L_0$. Distillation $D_0$ is unavailable (inactive column). "
-              r"Gamma ranges describe within-source fits. Bootstrap parameter CIs are in the accompanying summary. "
-              r"K1 costs one compressed measurement per source; scores exclude that cell. "
-              r"PI entries give coverage/full width for K0 then K1, from per-capability absolute LOSO residual quantiles. "
-              r"Confirmation excludes three new sources; independent pair evaluation excludes all four pair sources from fitting and its 13-source interval bank. "
-              r"Quantization tests omit the target source from fitting; 2D K1 scales its predicted curve and sep K1 calibrates the separable amplitude.}",
-              r"\label{tab:shared_structure}", r"\end{table}", ""]
-    return "\n".join(lines)
+        calib.append(f"{name} & {share} & {a:.3f} against {b:.3f} & {width}" + r" \\")
+    calib += [r"\bottomrule", r"\end{tabular}",
+              r"\caption{One-point calibration against the uncalibrated predictor. Errors are mean absolute errors in "
+              r"nats per native token and interval widths are in the same units; coverage is a percentage. Calibration "
+              r"costs one compressed measurement per source, and that cell is excluded from scoring. Intervals come from "
+              r"per-capability absolute leave-one-source-out residual quantiles. The confirmation panel excludes three "
+              r"new sources, and the independent pair panel excludes all four pair sources from fitting and from its "
+              r"13-source interval bank.}",
+              r"\label{tab:calibration_k1}", r"\end{table}", ""]
+    assert sum(line.endswith(r"\\") for line in shared + calib) <= 30
+    return "\n".join(shared + calib)
 
 
 def main(argv=None):

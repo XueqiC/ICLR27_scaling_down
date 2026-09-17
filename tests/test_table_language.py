@@ -29,7 +29,7 @@ def test_headers_and_cells_have_no_codes_or_abbreviations(name):
     cells = '\n'.join(re.findall(r'\\begin\{tabular\*\}.*?\\end\{tabular\*\}', text, re.S))
     cells = re.sub(r'(?m)^%[^\n]*', '', cells)
     cells = re.sub(r'\\(?:label|ref|eqref)\{[^}]*\}', '', cells)
-    assert not re.search(r'\b(?:QA|Math|MAEs?|CI|LOSO|LOCO|RFRA|PFFA|nD|pbm|pba|med|so|A1|A2|F1|F2|K0|K1|[Vv]\d{2}|df)\b', cells)
+    assert not re.search(r'\b(?:MAEs?|CI|LOSO|LOCO|RFRA|PFFA|nD|pbm|pba|med|so|A1|A2|F1|F2|K0|K1|[Vv]\d{2}|df)\b', cells)
     assert not re.search(r'\b[PFR][·/][F–R][·/][FR][·/]A\b', cells)
     assert not re.search(r'\w@(?:step)?\d', cells)
     assert r'\shortstack' not in cells

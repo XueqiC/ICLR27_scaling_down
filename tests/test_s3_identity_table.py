@@ -139,16 +139,16 @@ def test_table_layout_and_honest_wording(audited):
     table = gen.render(audited)
     assert r"\begin{table}[!htbp]" in table
     assert r"\begin{tabular*}{\textwidth}" in table
-    assert "Initial weights seen before" in table
-    assert "What is new in this round?" in table
-    assert "repeated settings and recipes are not new experimental conditions" in table
-    assert "seven Pythia students" in table
-    assert "no internal UTC timestamps" in table
+    assert "Weights seen in earlier work" in table
+    assert "What is new in this round" in table
+    assert "no measurement on any of these weights entered the fitted selection rule" in table
+    assert "new set of candidates on familiar weights" in table
     assert "outside every earlier fit" not in table
     assert "all thirty earlier revisions" not in table
+    # Exact commits belong in the audit record, not in a printed table.
     for row in audited["rows"]:
-        assert gen.code(row["commit"]) in table
-        assert gen.code(row["model"]) in table
+        assert row["commit"] not in table
+        assert gen.PRETTY[row["model"]] in table
     # Public tests remain useful when the separate manuscript checkout is absent.
     table_path = ROOT / ("paper/tables/s3_identity.tex" if (ROOT / "data_mirror").is_dir()
                          else "paper/paper/tables/s3_identity.tex")

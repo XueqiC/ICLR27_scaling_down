@@ -13,6 +13,14 @@ import hashlib
 import json
 import math
 from pathlib import Path
+
+try:
+    from .paper_table_layout import house_style
+except ImportError:  # run as a script
+    import sys, pathlib
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from paper_table_layout import house_style
+
 from statistics import mean
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -400,6 +408,10 @@ def markdown(result):
 
 
 def render(result=None):
+    return house_style(_render(result))
+
+
+def _render(result=None):
     result = analyze() if result is None else result
     rows = []
     for ref in result["references"]:

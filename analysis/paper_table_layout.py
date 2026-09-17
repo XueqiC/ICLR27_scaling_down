@@ -151,6 +151,61 @@ def _tabular(block, weights, *, wrap=True):
             + spec + r'@{}}' + body + r'\end{tabular*}')
 
 
+# Capability names are declared as Math, Code and QA in Section 2, so table
+# bodies use the short forms; captions keep the full words.
+CAPABILITY_SHORT = ((r"Question answering", "QA"), (r"question answering", "QA"),
+                    (r"Mathematics", "Math"), (r"mathematics", "Math"))
+
+
+def _abbreviate(body):
+    for long, short in CAPABILITY_SHORT:
+        body = re.sub(r"(?<![\\\w-])" + long + r"(?![\w-])", short, body)
+    return body
+
+
+# Tables whose cells hold sentences rather than numbers read better with a rule
+# between rows; without one the wrapped lines of adjacent rows run together.
+ROW_RULES = {
+    'tab:cohorts', 'tab:models', 'tab:final', 'tab:shared_structure',
+    'tab:cap_conditioning', 'tab:budgets', 'tab:s3-identity', 'tab:locked_rule',
+    'tab:disp_boundary', 'tab:panel_prune', 'tab:panel_quant',
+}
+
+
+def _rule_between_rows(body):
+    """Insert a rule between body rows, leaving the head and the last row alone."""
+    marker = chr(92) * 2          # the LaTeX row separator
+    rule = chr(92) + "midrule"
+    if body.count(rule) > 1:      # rules are already in place
+        return body
+    head, sep, rest = body.partition(rule)
+    if not sep:
+        return body
+    tail_index = rest.rfind(chr(92) + "bottomrule")
+    if tail_index < 0:
+        return body
+    rows, tail = rest[:tail_index], rest[tail_index:]
+    parts = [p.strip() for p in rows.split(marker) if p.strip()]
+    if len(parts) < 2:
+        return body
+    joined = (marker + "\n" + rule + "\n").join(parts)
+    return head + sep + "\n" + joined + marker + "\n" + tail
+
+
+def _abbreviate_body(block):
+    """Shorten capability names inside the tabular; captions keep the full words."""
+    return TABULAR.sub(lambda m: _abbreviate(m.group()), block)
+
+
+def house_style(text):
+    """Capability short forms in the body, and a rule between rows where declared."""
+    text = _abbreviate_body(text)
+    label = next((m for m in re.findall(r"\\label\{([^}]+)\}", text) if m in ROW_RULES), None)
+    if label:
+        text = TABULAR.sub(lambda m: _rule_between_rows(m.group()), text)
+    return text
+
+
 def table_layout(text):
     """Set full-width floating tables without changing fonts or cell contents."""
     all_labels = re.findall(r"\\label\{([^}]+)\}", text)
@@ -166,13 +221,15 @@ def table_layout(text):
         if label == 'tab:v55_loso':
             block = block.replace(r'\centering', r'\centering\setlength{\tabcolsep}{8pt}', 1)
         block = TABULAR.sub(lambda m: _tabular(m.group(), next(profiles, None), wrap=label != "tab:main-prediction-v2"), block)
+        block = _abbreviate_body(block)
+        if label in ROW_RULES:
+            block = TABULAR.sub(lambda m: _rule_between_rows(m.group()), block)
         return _paginate(block, label)
     return TABLE.sub(layout, text)
 
 # Page breaks are part of layout: these bodies cannot fit at their existing font
 # size on a single page. Continue their caption number and repeat column heads.
 PAGE_ROWS = {
-    'tab:shared_structure': 8,
     'tab:pred_full': 9,
     'tab:pred_source': 10,
     'tab:pred_config_prune': 10,

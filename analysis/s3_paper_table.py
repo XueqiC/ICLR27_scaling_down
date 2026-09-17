@@ -6,6 +6,14 @@ paper/paper/tables/s3_selection.tex. CPU only; no fitting, no measurement.
 import json
 from pathlib import Path
 
+try:
+    from .paper_table_layout import house_style
+except ImportError:  # run as a script
+    import sys, pathlib
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from paper_table_layout import house_style
+
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "paper" / "paper" / "tables" / "s3_selection.tex"
 ORDER = ["pythia-410m--step120000", "pythia-1.4b--step120000", "gemma3-1b", "gemma3-4b"]
@@ -21,6 +29,10 @@ def fmt(x):
 
 
 def render():
+    return house_style(_render())
+
+
+def _render():
     score = json.loads((ROOT / "results/s3-selection-validation/score_v2.json").read_text())
     plan = json.loads((ROOT / "results/s3-selection-validation/plan_v2.json").read_text())
     if score["status"] != "COMPLETE":
@@ -41,9 +53,9 @@ def render():
         if key != ORDER[-1]:
             rows.append(r"\midrule")
     caption = (
-        "Independent cross-method selection validation on four references that entered no earlier "
-        "fit, each with twelve candidates at seventeen storage budgets and a distillation candidate "
-        "trained in this round. The opportunity is the loss of the best feasible quantization "
+        "Independent cross-method selection validation. None of the four references supplied a "
+        "measurement to the rule, and each carries twelve candidates at seventeen storage budgets, "
+        "including a distillation candidate trained in this round. "
         "candidate minus the loss of the best feasible candidate of any method; the regret of a "
         "policy is the loss of its own frozen choice minus that same best candidate. All values are "
         "means in nats per native token of that family over the sixteen budgets at which both "
