@@ -1,0 +1,15 @@
+{
+  "candidate": "prune:d0.7",
+  "family": "gemma3",
+  "fresh_s3_run": true,
+  "losses": {
+    "code": 2.2798937112488926,
+    "math": 1.5716017578420973,
+    "qa": 5.721302290836653
+  },
+  "plan_sha256": "302efd715f307d6127e1025796f8a15419820790534c5a3df44b28af7d2139d9",
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "reference": "gemma3-4b",
+  "slurm_job_id": "1030761",
+  "units": "nats per native gemma3 token"
+}

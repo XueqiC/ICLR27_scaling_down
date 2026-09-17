@@ -1,0 +1,29 @@
+{
+  "commit": "4e056d657ceede13435146a8126bbf7bda0a1b0e",
+  "compression_applied": false,
+  "family": "pythia",
+  "identity_sha256": "2b6a3b5d31a2a19c88a1a5cea7515345ec357d2163564d515979cb1f2ba5788a",
+  "losses": {
+    "code": 1.2885072498217256,
+    "math": 1.2395594400063277,
+    "qa": 5.1489127851711025
+  },
+  "measurement_tokens": {
+    "code": 4207,
+    "math": 12643,
+    "qa": 263
+  },
+  "model": "EleutherAI/pythia-1.4b",
+  "model_dtype": "bf16",
+  "pristine": true,
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "reference": "pythia-1.4b--step120000",
+  "registration_sha256": "af3c1c7734fa15c835bd8463dcb313c51c1d0b31109fc606c053dee392c7d5b9",
+  "revision": "step120000",
+  "role": "reference",
+  "slurm_job_id": "1030747",
+  "tensor_sha256": "a5fdcd5b2c8148e507abba63f6be9ec95f4788f7fc29b9fda0cb4a2a62adf860",
+  "tokenizer_sha256": "5950b0c9b1024cbbb7c92332fda7d87a99db0d864a8511b63ddd34d44b96d50c",
+  "training_performed": false,
+  "units": "nats per native pythia token"
+}

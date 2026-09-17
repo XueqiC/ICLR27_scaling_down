@@ -1,0 +1,15 @@
+{
+  "candidate": "prune:d0.7",
+  "family": "pythia",
+  "fresh_s3_run": true,
+  "losses": {
+    "code": 2.1389945329213216,
+    "math": 2.0686941390492763,
+    "qa": 5.063212927756654
+  },
+  "plan_sha256": "302efd715f307d6127e1025796f8a15419820790534c5a3df44b28af7d2139d9",
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "reference": "pythia-410m--step120000",
+  "slurm_job_id": "1030761",
+  "units": "nats per native pythia token"
+}

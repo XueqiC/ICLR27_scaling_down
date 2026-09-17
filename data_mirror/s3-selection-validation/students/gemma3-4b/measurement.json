@@ -1,0 +1,23 @@
+{
+  "candidate": "distill:new_s3",
+  "data_pool_sha256": "b859dc6db0b59c26919a1d46a1da46bf793d1b5350618e203403808c92141b27",
+  "data_seed": null,
+  "eval_path": "results/s3-selection-validation/students/gemma3-4b/v12/google--gemma-3-1b-pt--fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/gpt-5.6-luna_full_600_s3-gemma3-4b_lora/eval.json",
+  "eval_sha256": "b10d773893728c761bf5ac0d15c2dad8585ae20882865a624514871776db49f8",
+  "family": "gemma3",
+  "fresh_s3_run": true,
+  "losses": {
+    "code": 1.2033325952170062,
+    "math": 1.3436694953780877,
+    "qa": 4.794135956175299
+  },
+  "plan_sha256": "302efd715f307d6127e1025796f8a15419820790534c5a3df44b28af7d2139d9",
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "processed_tokens": 1067738,
+  "reference": "gemma3-4b",
+  "slurm_job_id": "1030757",
+  "supervised_tokens": 316782,
+  "training_seed": 0,
+  "units": "nats per native gemma3 token",
+  "updates": 224
+}

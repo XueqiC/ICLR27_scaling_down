@@ -116,7 +116,7 @@ regenerated table can be compared line by line with the one that was published.
 API tests use mocked credentials and HTTP responses. `docs/RESULTS_LEDGER.md` names
 the artifact behind every reported number.
 
-## Experiment index: measurement efficiency and data requirements
+## Experiment index: measurement efficiency, data requirements and selection
 
 | Experiment | Published evidence | CPU consumer |
 |---|---|---|
@@ -124,9 +124,10 @@ the artifact behind every reported number.
 | A11 / C83 | Preregistration, frozen predictions, four states' losses and metadata, premeasurement archive, frozen runtime inputs | `analysis.plot_fig_efficiency` |
 | A12 / C84 | Preregistration and amendment, current and `registration_0` plans, task table, scores, 90 eval files and 18 training-metrics files | `analysis.a13_dreq_accounting` |
 | A13 / C85 | Saved accounting, request/recommendation records, CSVs and validation | `analysis.a13_dreq_table` |
+| S3 / C86 | Original and amended plans, numeric freeze, identity audit, eight anchors, 48 candidate measurements, four student evals and training-metrics files | `analysis.s3_paper_table` |
 | V53 / V55 / V69 / V70 | Existing registers, freezes, comparisons and development records | `analysis.final_prediction_table`, including Development measurements |
 
-A10 / C82 is described in the ledger; none of these four consumers opens its
+A10 / C82 is described in the ledger; none of A15's four consumers opens its
 artifacts, so A15 does not add its 90 MB summary. The A12 serialized dataset
 inputs are also unnecessary for these consumers; all scored eval JSON is included.
 Adapters, model weights and execution logs are excluded. Large inputs retain their
@@ -137,6 +138,27 @@ stored/expanded byte sizes and digests are in
 ```
 python3 -m pytest -q tests/test_plot_fig_efficiency.py tests/test_a13_dreq_accounting.py tests/test_a13_dreq_tables.py tests/test_final_prediction_table.py tests/paper_generator_checks.py
 ```
+
+S3's independent cross-method selection appendix table regenerates from
+`data_mirror/s3-selection-validation/{score_v2.json,plan_v2.json}`. From this
+repository root, write a preview and check its bytes with:
+
+```
+python3 bootstrap_results.py
+python3 -c 'from analysis.s3_paper_table import render; from pathlib import Path; Path("generated/tables/s3_selection.tex").write_bytes(render().encode("utf-8"))'
+python3 -m pytest -q tests/test_s3_paper_table.py -rs
+```
+
+The test uses an isolated copy of the mirrored inputs and checks the published
+table snapshot even in a standalone checkout. A second comparison checks
+`paper/tables/s3_selection.tex` when the separate manuscript checkout is present;
+otherwise it skips with the named reason `S3_MANUSCRIPT_NOT_DISTRIBUTED`. Missing
+mirrored evidence or the published snapshot is a failure. The original generator
+is preserved byte-for-byte; its direct module entry point uses the historical
+output layout, so the preview command above writes to `generated/tables/`.
+See [A18_MIRROR_VALIDATION.md](docs/A18_MIRROR_VALIDATION.md), the complete
+[file/size/digest inventory](docs/A18_MIRROR_INVENTORY.csv), and the
+[omitted-file reasons](docs/A18_MIRROR_EXCLUSIONS.csv).
 
 ## Layout
 

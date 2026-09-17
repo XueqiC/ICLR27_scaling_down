@@ -1,0 +1,29 @@
+{
+  "commit": "ade882a342507b4be34455393ba750fee7a513b8",
+  "compression_applied": false,
+  "family": "pythia",
+  "identity_sha256": "2b6a3b5d31a2a19c88a1a5cea7515345ec357d2163564d515979cb1f2ba5788a",
+  "losses": {
+    "code": 1.4307701449964345,
+    "math": 1.476133038044768,
+    "qa": 4.970175855513308
+  },
+  "measurement_tokens": {
+    "code": 4207,
+    "math": 12643,
+    "qa": 263
+  },
+  "model": "EleutherAI/pythia-410m",
+  "model_dtype": "bf16",
+  "pristine": true,
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "reference": "pythia-1.4b--step120000",
+  "registration_sha256": "af3c1c7734fa15c835bd8463dcb313c51c1d0b31109fc606c053dee392c7d5b9",
+  "revision": "step120000",
+  "role": "student",
+  "slurm_job_id": "1030747",
+  "tensor_sha256": "d7b0ef50fdec1ce830dfc652bdd02aab09104b97df31c71df9626c61f81d8e7f",
+  "tokenizer_sha256": "5950b0c9b1024cbbb7c92332fda7d87a99db0d864a8511b63ddd34d44b96d50c",
+  "training_performed": false,
+  "units": "nats per native pythia token"
+}

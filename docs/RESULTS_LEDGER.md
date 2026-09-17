@@ -1,8 +1,77 @@
 # Results ledger
 
-Entries C81–C85 are copied from the working results ledger. C83 applies the
+Entries C81–C86 are copied from the working results ledger. C83 applies the
 publication anonymizer to two workstation-name occurrences; all other entry text
 is verbatim.
+
+### C86. S3 independent cross-method selection validation (LONI, 2026-09-16; results/s3-selection-validation)
+
+QUESTION AND REGISTRATION. Does the locked capability-specific selection rule capture a real
+cross-method opportunity on references that entered no earlier fit, when every reference carries a
+distillation candidate trained in this round? `prereg.md` plus `prereg_amendment_1.md` fix four
+references in two families, twelve candidates each and seventeen nominal storage budgets:
+EleutherAI/pythia-410m and pythia-1.4b at step120000 with new students initialized from
+pythia-160m@step120000 and pythia-410m@step120000, and google/gemma-3-1b-pt and gemma-3-4b-pt with
+students from gemma-3-270m and gemma-3-1b-pt. The Pythia-2.8B slot was dropped for the recorded
+learned-tensor identity problem. The new students follow the historical V12 recipe on which the
+locked distillation branch was fitted. No A12 checkpoint, adapter or evaluation enters S3.
+
+GATES BEFORE OUTCOMES. `analysis/s3_identity.py` compared the learned values of all six target
+snapshots against all thirty historical revisions, 180 comparisons, aliases normalized and signed
+zeros removed: every target is distinct (`identity.json`, status PASS). Dense reference and
+pristine student anchors were then measured on the frozen probes under SLURM job 1030747, and
+`analysis/s3_freeze.py` sealed 144 capability predictions, 48 largest-increase predictions and 272
+selection cells per policy with predictions SHA256 d28986ca6b13 and maps SHA256 5f976cca5a6f
+(`plan_v2.json`, status FROZEN_BEFORE_OUTCOMES). Only then were the four students trained (array
+1030757) and the compression panels measured (job 1030761).
+
+OPPORTUNITY AND REGRET. Opportunity is the oracle gap, the best feasible quantization candidate
+minus the best feasible candidate of any method; regret is the measured loss of each policy's
+frozen selection minus that same oracle. Both are computed per reference, objective and budget, in
+nats per native token of that family, and never pooled across tokenizers.
+
+| Reference | Objective | Opportunity | Rule regret | Quantization-only regret |
+|---|---|---:|---:|---:|
+| Pythia-410M step120000 | Mathematics | 0.0000 | 0.0000 | 0.0000 |
+| Pythia-410M step120000 | Code | 0.0002 | 0.0000 | 0.0002 |
+| Pythia-410M step120000 | Question answering | 0.1165 | 0.0271 | 0.5915 |
+| Pythia-410M step120000 | Largest increase | 0.0009 | 0.0000 | 0.0009 |
+| Pythia-1.4B step120000 | Mathematics | 0.0000 | 0.0000 | 0.0000 |
+| Pythia-1.4B step120000 | Code | 0.0000 | 0.0000 | 0.0000 |
+| Pythia-1.4B step120000 | Question answering | 0.5722 | 0.0000 | 0.5722 |
+| Pythia-1.4B step120000 | Largest increase | 0.0001 | 0.0000 | 0.0001 |
+| Gemma-3-1B | Mathematics | 0.0473 | 0.0000 | 0.0473 |
+| Gemma-3-1B | Code | 0.0184 | 0.0185 | 0.0184 |
+| Gemma-3-1B | Question answering | 0.8855 | 0.0000 | 1.8354 |
+| Gemma-3-1B | Largest increase | 0.0412 | 0.0405 | 0.0412 |
+| Gemma-3-4B | Mathematics | 0.0001 | 0.0151 | 0.0152 |
+| Gemma-3-4B | Code | 0.0002 | 0.0095 | 0.0097 |
+| Gemma-3-4B | Question answering | 0.2201 | 0.0000 | 0.4132 |
+| Gemma-3-4B | Largest increase | 0.0001 | 0.0151 | 0.0152 |
+
+DECISION. All four references are SUPPORTED: mean paired regret over the complete budget set is
+0.0068 against 0.1482 for pythia-410m, 0.0000 against 0.1431 for pythia-1.4b, 0.0147 against 0.4856
+for gemma-3-1b, and 0.0099 against 0.1133 for gemma-3-4b.
+
+WHAT THE RESULT MEANS. The cross-method opportunity is concentrated in question answering: the
+measured oracle is the new distillation candidate in 59 of 68 question-answering cells, and the
+mean opportunity there is 0.43 to 0.52 nats at every storage budget. The rule selects the oracle
+candidate in 63 of 68 of those cells and gives up 0.000 nats on three references and 0.027 on
+pythia-410m, while quantization-only gives up 0.41 to 1.84 nats, its own within-quantization
+selection error on top of the oracle gap. For mathematics, code and the largest-increase objective
+the opportunity is 0.000 to 0.047 nats, so quantization already supplies a near-oracle candidate
+and cross-method selection cannot help; the rule loses to quantization-only in 3 of 256 cells, by
+at most 0.019 nats. The prospective claim is therefore capability-specific: cross-method selection
+pays where a capability responds to added data, and is neutral elsewhere.
+
+SEALS. `SHA256SUMS_v2` seals the registration as it stood at the freeze, so its entry for
+`score_v2.json` records the pre-scoring placeholder; every other entry in the S3 packet validates
+against the delivered files. Scoring reads `plan_v2.json` and the per-candidate measurement seals
+and refuses any record whose plan digest or probe digest differs.
+
+SCOPE. Four references, two families, seventeen budgets sharing one panel of candidates per
+reference; budgets are not independent replicates. Storage is the nominal text-decoder matrix
+convention of the selection section, not measured file size or memory.
 
 ### C85. A13 unified data-requirement accounting and measured map (CPU only, 2026-09-16; results/a13-dreq-accounting)
 

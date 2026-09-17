@@ -912,6 +912,22 @@
       "published_sha256": "8dad352de7b50f8e369834b162185a472dd689474bb5968bc2297460876a2579",
       "reason": "anonymisation of author, host, institution or path strings"
     },
+    "data_mirror/s3-selection-validation/identity.json@live": {
+      "frozen_sha256": "2b6a3b5d31a2a19c88a1a5cea7515345ec357d2163564d515979cb1f2ba5788a",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/s3-selection-validation/identity.json",
+      "published_at": "data_mirror/s3-selection-validation/identity.json",
+      "published_sha256": "ab31d10985e5da6f90f00270123f71312f192b400a3713ce4ac6378ffd46da99",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
+    "data_mirror/s3-selection-validation/plan_v2.json@live": {
+      "frozen_sha256": "302efd715f307d6127e1025796f8a15419820790534c5a3df44b28af7d2139d9",
+      "pairable": true,
+      "path_in_frozen_record": "data_mirror/s3-selection-validation/plan_v2.json",
+      "published_at": "data_mirror/s3-selection-validation/plan_v2.json",
+      "published_sha256": "83e9d0879757ddc7aa72b3cbec0d991f8e61ddb06a09c903e7901410ddc94a51",
+      "reason": "anonymisation of author, host, institution or path strings"
+    },
     "data_mirror/v13-recovery/gemma3-1b/prune_0.6_traces/recovery.json@live": {
       "frozen_sha256": "270cb7135c3e70f0711477c297e8e179161fb25861afa8873aeb1f77bbc44c6e",
       "pairable": true,

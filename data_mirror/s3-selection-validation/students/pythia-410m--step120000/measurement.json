@@ -1,0 +1,23 @@
+{
+  "candidate": "distill:new_s3",
+  "data_pool_sha256": "1f5229398ab9cb615768917bc27c80f9f00e33921565a61a95b0a9b415268369",
+  "data_seed": null,
+  "eval_path": "results/s3-selection-validation/students/pythia-410m--step120000/v12/EleutherAI--pythia-160m--step120000/gpt-5.6-luna_full_600_s3-pythia-410m--step120000_lora/eval.json",
+  "eval_sha256": "4a2a602add75439c1d15dce3062066043a8296752ed9cd265b42d95942a897f1",
+  "family": "pythia",
+  "fresh_s3_run": true,
+  "losses": {
+    "code": 2.0012479201331117,
+    "math": 1.959186901842917,
+    "qa": 4.890743821292776
+  },
+  "plan_sha256": "302efd715f307d6127e1025796f8a15419820790534c5a3df44b28af7d2139d9",
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "processed_tokens": 1054358,
+  "reference": "pythia-410m--step120000",
+  "slurm_job_id": "1030758",
+  "supervised_tokens": 307496,
+  "training_seed": 0,
+  "units": "nats per native pythia token",
+  "updates": 224
+}

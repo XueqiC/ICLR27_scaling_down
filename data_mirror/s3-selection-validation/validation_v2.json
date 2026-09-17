@@ -1,0 +1,64 @@
+{
+  "a12_result_files_unchanged": 318,
+  "commit_created": false,
+  "cpu_only": true,
+  "fail_closed_cli_checks": [
+    {
+      "argv": [
+        "analysis/s3_freeze.py"
+      ],
+      "expected_refusal": "Missing required artifact",
+      "returncode": 1
+    },
+    {
+      "argv": [
+        "analysis/s3_run.py",
+        "--mode",
+        "students",
+        "--task",
+        "0",
+        "--execute"
+      ],
+      "expected_refusal": "numeric seal missing",
+      "returncode": 1
+    },
+    {
+      "argv": [
+        "analysis/s3_run.py",
+        "--mode",
+        "panels",
+        "--task",
+        "0",
+        "--execute"
+      ],
+      "expected_refusal": "numeric seal missing",
+      "returncode": 1
+    }
+  ],
+  "freeze_selftest_passed": 17,
+  "gpu_used": false,
+  "jobs_submitted": false,
+  "launch_ready": false,
+  "original_packet_files_unchanged": 6,
+  "parser_checks": 33,
+  "plan_sha256": "804fbfb6f795af7fd86ee859a46bf69b82cc5f58c148096557f7382dce794132",
+  "pretrained_weight_payloads_loaded": false,
+  "registration_sha256": "af3c1c7734fa15c835bd8463dcb313c51c1d0b31109fc606c053dee392c7d5b9",
+  "remaining_gates": [
+    "LONI learned-tensor identity report required.",
+    "All eight dense role anchors required.",
+    "CPU numeric predictions/maps must be sealed before student/panel execution."
+  ],
+  "schema_header_checks": {
+    "gemma-3-1b-pt": "PASS",
+    "gemma-3-270m": "PASS",
+    "gemma-3-4b-pt": "PASS",
+    "pythia-160m": "PASS",
+    "pythia-410m": "PASS"
+  },
+  "scope_note": "Header/meta checks are local format checks, not LONI learned-tensor independence verification.",
+  "shell_checks": 3,
+  "status": "PASS",
+  "synthetic_tensor_tests": true,
+  "tests_passed": 40
+}

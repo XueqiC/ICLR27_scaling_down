@@ -1,0 +1,37 @@
+file,source_bytes,reason
+results/s3-selection-validation/LONI_OPERATIONS_v2.md,4580,Cluster execution/download/cache record; not required for CPU table regeneration or auditing saved outcomes.
+results/s3-selection-validation/PRINTED_PREPARATION.md,21417,Cluster execution/download/cache record; not required for CPU table regeneration or auditing saved outcomes.
+results/s3-selection-validation/downloads.md,2564,Cluster execution/download/cache record; not required for CPU table regeneration or auditing saved outcomes.
+results/s3-selection-validation/loni-cache-inventory.json,853,Cluster execution/download/cache record; not required for CPU table regeneration or auditing saved outcomes.
+results/s3-selection-validation/opportunity.json,2764155,"Retrospective preparation diagnostic, not the independent S3 outcome; score_v2.json and the registered plans are mirrored."
+results/s3-selection-validation/parser-validation.json,35286,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.
+results/s3-selection-validation/parser-validation_v2.json,28606,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.
+results/s3-selection-validation/reference-candidates.md,1482,"Retrospective preparation diagnostic, not the independent S3 outcome; score_v2.json and the registered plans are mirrored."
+results/s3-selection-validation/s3-anchors-1030747.err,746,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-anchors-1030747.out,0,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-identity-1030713.err,3362,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-identity-1030713.out,96,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-panels-1030761.err,653,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-panels-1030761.out,30,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_0.err,223,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_0.out,3477,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_1.err,223,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_1.out,6284,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_2.err,220,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_2.out,7116,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_3.err,221,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/s3-students-1030757_3.out,10000,Execution log excluded; sealed measurement and eval JSON are mirrored.
+results/s3-selection-validation/score.json,1263,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.
+results/s3-selection-validation/students/gemma3-1b/v12/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_s3-gemma3-1b_lora/adapter/README.md,5162,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/gemma3-1b/v12/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_s3-gemma3-1b_lora/adapter/adapter_config.json,1193,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/gemma3-4b/v12/google--gemma-3-1b-pt--fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/gpt-5.6-luna_full_600_s3-gemma3-4b_lora/adapter/README.md,5164,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/gemma3-4b/v12/google--gemma-3-1b-pt--fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/gpt-5.6-luna_full_600_s3-gemma3-4b_lora/adapter/adapter_config.json,1194,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/pythia-1.4b--step120000/v12/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_s3-pythia-1.4b--step120000_lora/adapter/README.md,5168,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/pythia-1.4b--step120000/v12/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_s3-pythia-1.4b--step120000_lora/adapter/adapter_config.json,1144,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/pythia-410m--step120000/v12/EleutherAI--pythia-160m--step120000/gpt-5.6-luna_full_600_s3-pythia-410m--step120000_lora/adapter/README.md,5168,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/students/pythia-410m--step120000/v12/EleutherAI--pythia-160m--step120000/gpt-5.6-luna_full_600_s3-pythia-410m--step120000_lora/adapter/adapter_config.json,1144,Entire adapter directory excluded; neither adapter metadata nor tensors are needed to regenerate or audit saved losses.
+results/s3-selection-validation/summary.md,6789,"Retrospective preparation diagnostic, not the independent S3 outcome; score_v2.json and the registered plans are mirrored."
+results/s3-selection-validation/tests.xml,1396,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.
+results/s3-selection-validation/tests_v2.xml,5265,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.
+results/s3-selection-validation/trainer-parser-validation.json,14929,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.
+results/s3-selection-validation/validation.json,831,Superseded score or parser/test preparation output; final score_v2.json and validation_v2.json are mirrored.

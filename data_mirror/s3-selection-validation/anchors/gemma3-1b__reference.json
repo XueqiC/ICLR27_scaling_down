@@ -1,0 +1,29 @@
+{
+  "commit": "fcf18a2a879aab110ca39f8bffbccd5d49d8eb29",
+  "compression_applied": false,
+  "family": "gemma3",
+  "identity_sha256": "2b6a3b5d31a2a19c88a1a5cea7515345ec357d2163564d515979cb1f2ba5788a",
+  "losses": {
+    "code": 1.060700841452613,
+    "math": 1.2208099712077587,
+    "qa": 5.568880727091633
+  },
+  "measurement_tokens": {
+    "code": 4516,
+    "math": 13198,
+    "qa": 251
+  },
+  "model": "google/gemma-3-1b-pt",
+  "model_dtype": "bf16",
+  "pristine": true,
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "reference": "gemma3-1b",
+  "registration_sha256": "af3c1c7734fa15c835bd8463dcb313c51c1d0b31109fc606c053dee392c7d5b9",
+  "revision": "fcf18a2a879aab110ca39f8bffbccd5d49d8eb29",
+  "role": "reference",
+  "slurm_job_id": "1030747",
+  "tensor_sha256": "e59def3faa3040cdaa750e741edb4bfa85318c666e4b10457df77f325071e8dd",
+  "tokenizer_sha256": "02b6d5a1bf826fe71304797060d26101f3f95c6fd3f5e171cd7beda715b93755",
+  "training_performed": false,
+  "units": "nats per native gemma3 token"
+}

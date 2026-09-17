@@ -1,0 +1,29 @@
+{
+  "commit": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+  "compression_applied": false,
+  "family": "gemma3",
+  "identity_sha256": "2b6a3b5d31a2a19c88a1a5cea7515345ec357d2163564d515979cb1f2ba5788a",
+  "losses": {
+    "code": 1.191153675819309,
+    "math": 1.3162979239278678,
+    "qa": 5.26839516932271
+  },
+  "measurement_tokens": {
+    "code": 4516,
+    "math": 13198,
+    "qa": 251
+  },
+  "model": "google/gemma-3-270m",
+  "model_dtype": "bf16",
+  "pristine": true,
+  "probe_sha256": "33d118c7527efed5add888c367a8627796de6c1e94562723aba734b83e9472a1",
+  "reference": "gemma3-1b",
+  "registration_sha256": "af3c1c7734fa15c835bd8463dcb313c51c1d0b31109fc606c053dee392c7d5b9",
+  "revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+  "role": "student",
+  "slurm_job_id": "1030747",
+  "tensor_sha256": "adff50538e191d87e2bfafe6236eef6ea651d17fe107ed54d6f9bfd928c4fa9b",
+  "tokenizer_sha256": "02b6d5a1bf826fe71304797060d26101f3f95c6fd3f5e171cd7beda715b93755",
+  "training_performed": false,
+  "units": "nats per native gemma3 token"
+}
