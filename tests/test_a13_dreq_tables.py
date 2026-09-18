@@ -71,9 +71,9 @@ def test_primary_table_uses_boundary_recommendations_only(accounting):
         row["recommendations"]["delta"] = {}
     assert render_main_table(changed) == text
     example = next(r for r in rows if r[:3] == ["Math", "4 billion", "50"])
-    assert example[3:5] == ["upper bound at the smallest pool", r"$\leq 9.105$"]
-    assert example[5] == r"38.133\newline ($\geq 1.432$)"
-    assert example[6] == r"9.004\newline (inside)"
+    assert example[3:5] == ["upper bound at the smallest pool", r"$\leq 9.1$"]
+    assert example[5] == r"38.1, $\geq 1.43$"
+    assert example[6] == r"9.0, inside"
 
 
 def test_full_table_is_one_continuous_longtable(accounting):
@@ -96,11 +96,11 @@ def test_full_table_is_one_continuous_longtable(accounting):
 
 @pytest.mark.parametrize("size,distance,inside,status,expected", [
     (None, None, None, "no_recommendation", "none"),
-    (32000, None, None, "unresolved_interval", r"32.000\newline (unresolved)"),
-    (32000, 0., True, "interval_distance", r"32.000\newline (inside)"),
-    (32000, 0., True, "censored_distance_lower_bound", r"32.000\newline (inside)"),
-    (32000, 1.25, False, "interval_distance", r"32.000\newline ($1.250$)"),
-    (32000, 1.25, False, "censored_distance_lower_bound", r"32.000\newline ($\geq 1.250$)"),
+    (32000, None, None, "unresolved_interval", r"32.0, unresolved"),
+    (32000, 0., True, "interval_distance", r"32.0, inside"),
+    (32000, 0., True, "censored_distance_lower_bound", r"32.0, inside"),
+    (32000, 1.25, False, "interval_distance", r"32.0, $1.25$"),
+    (32000, 1.25, False, "censored_distance_lower_bound", r"32.0, $\geq 1.25$"),
 ])
 def test_recommendations_preserve_abstention_unresolved_and_censoring(size, distance, inside, status, expected):
     assert recommendation_cell(dict(recommended_D_U=size, log_distance=distance,
@@ -110,9 +110,9 @@ def test_recommendations_preserve_abstention_unresolved_and_censoring(size, dist
 def test_full_accounting_keeps_censored_zero_distinct_from_finite_zero():
     row = dict(recommended_D_U=32000, log_distance=0., inside_interval=True,
                distance_status="censored_distance_lower_bound")
-    assert distance_cell(row) == r"$\geq 0.000$"
+    assert distance_cell(row) == r"$\geq 0.00$"
     row["distance_status"] = "interval_distance"
-    assert distance_cell(row) == "$0.000$"
+    assert distance_cell(row) == "$0.00$"
 
 
 def test_generate_writes_both_outputs_with_exact_evidence_and_provenance(accounting, tmp_path):

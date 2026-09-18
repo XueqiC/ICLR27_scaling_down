@@ -317,9 +317,10 @@ def latex_confirm(compare):
     lines = [r"\begin{table}[!htbp]", r"\centering\small", r"\setlength{\tabcolsep}{3pt}",
         r"\caption{Independent V78 selection panel. Regret is in nats. Agreement is the percentage "
         r"of single choices matching the oracle method; set coverage is the percentage of heuristic "
-        r"candidate sets containing that method. QA is restricted to 2Wiki; KD reuses V39 students.}",
-        r"\label{tab:rule-confirm}", r"\begin{tabularx}{\linewidth}{lXrrrr}", r"\toprule",
-        r"Capability & Policy & Feasible & Regret & \shortstack{Method\\agreement} & "
+        r"candidate sets containing that method. All 68 cells are feasible for every policy. "
+        r"QA is restricted to 2Wiki, and the distillation candidates are the historical students.}",
+        r"\label{tab:rule-confirm}", r"\begin{tabularx}{\linewidth}{lXrrr}", r"\toprule",
+        r"Capability & Policy & Regret & \shortstack{Method\\agreement} & "
         r"\shortstack{Set contains\\oracle method} \\", r"\midrule"]
     for cap in OBJECTIVES:
         for r in compare["tables"][cap]:
@@ -327,7 +328,7 @@ def latex_confirm(compare):
                 continue
             cov = compare["candidate_set_coverage"][cap].get(r["policy"])
             coverage = f"{100*cov['method_coverage']:.1f}" if cov else "---"
-            lines.append(f"{TABLE_LABELS[cap]} & {POLICY_LABELS[r['policy']]} & {r['n_feasible']}/68 & "
+            lines.append(f"{TABLE_LABELS[cap]} & {POLICY_LABELS[r['policy']]} & "
                          f"{v64.number(r['mean_regret'], 4)} & {100*r['method_agreement']:.1f} & {coverage}" + r" \\")
         lines.append(r"\midrule")
     lines[-1] = r"\bottomrule"

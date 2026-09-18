@@ -55,7 +55,7 @@ CAPTION_NOTES = {
     "tab:rule-confirm-by-state": "Rows identify source states and objectives; columns compare policy regret and selected-configuration counts. This is a post-hoc decomposition of frozen selection predictions.",
     "tab:rule-confirm-candidate-sizes": "Rows identify objectives and policies; columns give method-count distributions and oracle coverage. This is a post-hoc diagnostic of candidate sets based on frozen development errors.",
     "tab:candidate-coverage": "Rows identify source states; columns give availability by compression method and the minimum quantization storage ratio. Counts are numbers of configurations and storage ratios are dimensionless. This is a post-hoc inventory of the development selection panel.",
-    "tab:locked_rule": "Rows identify compression families, capabilities, and source-state status; columns specify the response predictor, development fit, and dense-loss anchor. Absolute losses are in nats per native token. This rule was frozen before selection confirmation. Fit keys P, Q, G, and K denote pruning, channel quantization, grouped quantization, and distillation development data, respectively.",
+    "tab:locked_rule": "Rows identify compression families, capabilities and source-state status; the last column specifies the response predictor. Absolute losses are in nats per native token. This rule was frozen before selection confirmation. Fit keys P, Q, G, and K denote pruning, channel quantization, grouped quantization, and distillation development data, respectively.",
     "tab:final": "Rows identify compression families; columns give delivered predictors, inputs, prediction and rule-selection status, observed gains, and excluded settings. This is a post-hoc summary of frozen prediction evidence; A2 denotes per-density regression with interpolation.",
 }
 
@@ -409,13 +409,13 @@ CONCISE_CAPTIONS = {
         r"intervals from 5,000 paired pool-cluster bootstrap resamples."),
     "tab:locked_rule": (
         r"The locked selection rule, frozen before the selection confirmation. Rows are compression families, "
-        r"capabilities, and source-state status; columns give the response predictor, the development fit, and "
-        r"the dense-loss anchor, where $L_{0,c}$ is the source dense loss and $L_{S0,c}$ the dense loss of the "
-        r"initial student. Fit keys P, Q, G, and K denote the pruning, channel-quantization, grouped-quantization, "
-        r"and distillation development data."),
+        r"capabilities and source-state status; the last column gives the response predictor. Each absolute "
+        r"prediction adds that response to a dense anchor: the source dense loss for pruning and quantization, "
+        r"and the initial student's dense loss for distillation. Every method is fitted on its own development "
+        r"panel, listed below the table."),
     "tab:rule-confirm": (
-        r"The independent selection panel. Rows are objectives and policies; columns give the number of feasible "
-        r"cells, mean regret in nats, agreement (the percentage of single choices matching the oracle method), and "
+        r"The independent selection panel. Rows are objectives and policies; columns give "
+        r"mean regret in nats, agreement (the percentage of single choices matching the oracle method), and "
         r"set coverage (the percentage of heuristic candidate sets containing that method, a \mbox{post-hoc} "
         r"diagnostic). QA is restricted to 2Wiki; policy predictions were frozen before the new measurements."),
     "tab:model_arch": (
@@ -1085,7 +1085,7 @@ PLAIN_CAPTIONS = {
  'tab:rule-confirm-by-state': 'The table compares policy regret for each source state and objective. Mean regret is in nats per native token, averaged over storage budgets. The final column counts distinct configurations selected by the frozen rule.',
  'tab:rule-confirm-candidate-sizes': 'The table shows candidate-set sizes and coverage of the measured oracle. Set sizes count compression methods. Coverage entries give covered cells out of total cells, followed by the percentage in parentheses. This is a retrospective diagnostic of frozen predictions.',
  'tab:candidate-coverage': 'The table shows measured compression choices available for each source state. Method columns list configuration count followed by minimum storage ratio. Counts are numbers of configurations; storage ratios are dimensionless. Unavailable entries indicate that no candidate was measured.',
- 'tab:locked_rule': 'The table specifies the selection predictor for each compression method, capability, and source-state status. Absolute losses are in nats per native token. Development-data columns name the fitting panel, and anchor columns identify the dense reference loss. The rule was frozen before confirmation.',
+ 'tab:locked_rule': 'The table gives the selection predictor for each compression method, capability and source-state status. A prediction adds the listed response, in nats per native token, to a dense anchor: the source loss for pruning and quantization, the initial student\'s loss for distillation. Each method is fitted on its own development panel, listed below. The rule was frozen before confirmation.',
  'tab:final': 'The table summarizes delivered predictors, their inputs, evidence, and applicable settings. Prediction errors and gains are in nats per native token, relative to the strongest baseline using the same information. Rules chosen after testing are marked retrospective.',
 }
 

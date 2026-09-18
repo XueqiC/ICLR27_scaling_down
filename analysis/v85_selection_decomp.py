@@ -330,14 +330,27 @@ def decomp_table(aggregates):
     return "\n".join(lines) + "\n"
 
 
+PREDICTOR_NAMES = {
+    "v53 power": "Pruning power form",
+    "v53 median curve": "Pruning development median curve",
+    "v36 regression": "Per-bit source regression",
+    "per-bit dev median": "Per-bit development median",
+    "v69 interpolation": "Piecewise source interpolation",
+    "per-config median": "Per-configuration development median",
+    "linear (math)": "Linear source regression",
+    "linear (Math)": "Linear source regression",
+    "constant": "Frozen constant",
+}
+
+
 @proofread_table
 def locked_table(spec):
     lines = [r"% Generated from analysis/final_rule.py. Predictor labels below quote its docstring/code."]
     lines += ["% " + line for line in spec["docstring_verbatim"].splitlines()]
     lines += [r"\begin{table}[!htbp]", r"\centering\small",
               r"\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}",
-              r"\begin{tabular}{@{}llllcl@{}}", r"\toprule",
-              r"Arm & Cap. & State status & Response predictor & Fit & Anchor \\", r"\midrule"]
+              r"\begin{tabular}{@{}llll@{}}", r"\toprule",
+              r"Arm & Cap. & State status & Response predictor \\", r"\midrule"]
     arms = {"pruning": "Pruning", "per-channel": "Channel RTN", "grouped": "Grouped RTN",
             "distillation": "Distillation", "dense": "Dense"}
     previous = None
@@ -348,15 +361,16 @@ def locked_table(spec):
         for line in row["code_verbatim"].splitlines():
             lines.append("% " + line)
         anchor = r"$L_{0,c}$" if row["reference_anchor"] == "source" else r"$L_{S0,c}$"
-        predictor = row["predictor_verbatim"] if arm != "dense" else "0 (no response)"
+        predictor = PREDICTOR_NAMES.get(row["predictor_verbatim"], row["predictor_verbatim"]) \
+            if arm != "dense" else "0 (no loss change)"
         lines.append(" & ".join((arms[arm], NAMES[row["capability"]], row["state_label"],
-                                 predictor, row["development"] if arm != "dense" else "---", anchor)) + r" \\")
+                                 predictor)) + r" \\")
         previous = arm
     lines += [r"\bottomrule", r"\end{tabular}",
         r"\caption{Exact locked selection rule in \texttt{analysis/final\_rule.py}. "
-        r"Each absolute prediction is the listed anchor plus the response. "
-        r"$L_{0,c}$ is source dense loss; $L_{S0,c}$ is the initial student's dense loss. "
-        r"The fit keys identify the frozen development data below.}",
+        r"Each absolute prediction adds the listed response to a dense anchor: the source dense loss "
+        r"$L_{0,c}$ for pruning and quantization, and the initial student's dense loss $L_{S0,c}$ for "
+        r"distillation. Every method is fitted on its own development panel, described below.}",
         r"\label{tab:locked_rule}", r"\end{table}",
         r"\begingroup\small", r"\noindent\textbf{Development data.} "
         r"P: V53 register, 17 Pythia states, 84 density responses per capability "

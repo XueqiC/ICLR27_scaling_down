@@ -197,9 +197,46 @@ def _abbreviate_body(block):
     return TABULAR.sub(lambda m: _abbreviate(m.group()), block)
 
 
+# Cell text is compressed once, in one place, so a phrase reads the same in
+# every table. Captions keep the long form, which is where a term is defined.
+CELL_COMPRESSIONS = (
+    ("Grouped round-to-nearest quantization", "Grouped quantization"),
+    ("Per-channel round-to-nearest quantization", "Per-channel quantization"),
+    ("Channel quantization development", "Channel development"),
+    ("Grouped quantization development", "Grouped development"),
+    ("Pruning development median curve", "Pruning median curve"),
+    ("Fixed-recipe student development", "Fixed-recipe students"),
+    ("crossed inside the tested pools", "Crossed in range"),
+    ("upper bound at the smallest pool", "Upper bound"),
+    ("lower bound at the largest pool", "Lower bound"),
+    ("Seen source state; new density", "Seen state, new density"),
+    ("Maximum across capabilities", "Largest increase"),
+    ("Source-conditioned predictor", "Source-conditioned"),
+    ("A model state with no earlier recorded use, compressed here for the first time",
+     "No earlier use; first compression"),
+    ("A base with no earlier recorded use, trained here for the first time",
+     "No earlier use; first training"),
+    ("A new set of candidates on familiar weights", "New candidates, familiar weights"),
+    ("A student trained again from familiar weights", "Retrained from familiar weights"),
+    ("Yes, in earlier development", "Yes"),
+    ("Not reached by density 0.60", "Not reached by 0.60"),
+    ("Piecewise source interpolation", "Piecewise interpolation"),
+)
+
+
+def _compress_cells(block):
+    """Shorten recurring phrases inside a tabular; captions are untouched."""
+    def one(match):
+        body = match.group()
+        for long, short in CELL_COMPRESSIONS:
+            body = body.replace(long, short)
+        return body
+    return TABULAR.sub(one, block)
+
+
 def house_style(text):
-    """Capability short forms in the body, and a rule between rows where declared."""
-    text = _abbreviate_body(text)
+    """Capability short forms and compressed phrases in the body, rules where declared."""
+    text = _compress_cells(_abbreviate_body(text))
     label = next((m for m in re.findall(r"\\label\{([^}]+)\}", text) if m in ROW_RULES), None)
     if label:
         text = TABULAR.sub(lambda m: _rule_between_rows(m.group()), text)
@@ -221,7 +258,7 @@ def table_layout(text):
         if label == 'tab:v55_loso':
             block = block.replace(r'\centering', r'\centering\setlength{\tabcolsep}{8pt}', 1)
         block = TABULAR.sub(lambda m: _tabular(m.group(), next(profiles, None), wrap=label != "tab:main-prediction-v2"), block)
-        block = _abbreviate_body(block)
+        block = _compress_cells(_abbreviate_body(block))
         if label in ROW_RULES:
             block = TABULAR.sub(lambda m: _rule_between_rows(m.group()), block)
         return _paginate(block, label)

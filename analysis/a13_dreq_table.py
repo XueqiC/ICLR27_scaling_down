@@ -103,10 +103,10 @@ def interval_cell(request):
         return "unresolved"
     lo, hi = crossing["interval"]
     if crossing["status"] == "crossed":
-        return rf"$[{lo/1000:.3f},\allowbreak\,{hi/1000:.3f}]$"
+        return rf"$[{lo/1000:.1f},\allowbreak\,{hi/1000:.1f}]$"
     if crossing["status"] == "lower_bound":
-        return rf"$>{lo/1000:.3f}$"
-    return rf"$\leq {hi/1000:.3f}$"
+        return rf"$>{lo/1000:.1f}$"
+    return rf"$\leq {hi/1000:.1f}$"
 
 
 def distance_cell(row, *, describe_inside=False):
@@ -117,14 +117,14 @@ def distance_cell(row, *, describe_inside=False):
     if describe_inside and row["inside_interval"]:
         return "inside"
     prefix = r"\geq " if row["distance_status"] == "censored_distance_lower_bound" else ""
-    return "$" + prefix + f"{row['log_distance']:.3f}" + "$"
+    return "$" + prefix + f"{row['log_distance']:.2f}" + "$"
 
 
 def recommendation_cell(row):
+    """One line per recommendation: the pool size, then how far it sits from the interval."""
     if row["recommended_D_U"] is None:
         return "none"
-    return (f"{row['recommended_D_U']/1000:.3f}" + r"\newline ("
-            + distance_cell(row, describe_inside=True) + ")")
+    return f"{row['recommended_D_U']/1000:.1f}, " + distance_cell(row, describe_inside=True)
 
 
 def columns(weights, *, elastic=False):
@@ -215,8 +215,8 @@ def generate(root=ROOT, accounting=None):
     ):
         path = output_path(root, "tables", stem + ".tex")
         path.parent.mkdir(parents=True, exist_ok=True)
-        text = render(requests)
-        path.write_text(house_style(text))
+        text = house_style(render(requests))
+        path.write_text(text)
         sidecar = path.with_suffix(".json")
         sidecar.write_text(json.dumps({
             "generator": "analysis/a13_dreq_table.py",

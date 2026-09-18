@@ -255,6 +255,10 @@ def parameters(count):
 
 
 def render(data):
+    return house_style(_render(data))
+
+
+def _render(data):
     caption = (
         "Identity of the eight roles in the selection validation. All are pretrained base releases, "
         "none instruction tuned, and the eight roles draw on six distinct snapshots because two "
@@ -310,7 +314,7 @@ def main():
         require(not path.resolve().is_relative_to((ROOT / "results").resolve()), "Results are read-only")
     data = audit(args.evidence_root)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(house_style(render(data)))
+    args.output.write_text(render(data))
     args.audit_output.parent.mkdir(parents=True, exist_ok=True)
     args.audit_output.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
     print(f"Wrote {args.output} and {args.audit_output}")
