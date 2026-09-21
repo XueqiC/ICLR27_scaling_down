@@ -10,6 +10,8 @@
 \toprule
 Prediction task & Frozen candidate & Candidate error (nats) & Delivered relation & Delivered error (nats) & Development baseline & Development measurements \\
 \midrule
+Four unseen Pythia states pruned at six densities & Compact power form using half the measurements & \TableOneErrors{0.07}{0.10}{0.18} & The same power form, with a median density curve for question answering & \TableOneErrors{0.07}{0.10}{0.18} & Per-density regression at full budget (36)\newline \TableOneErrors{0.06}{0.08}{0.18} & 18 \\
+\midrule
 Three unseen checkpoints pruned to densities 0.575, 0.675 and 0.85 & Five-parameter power form & \TableOneErrors{0.24}{0.24}{0.68} & Source-free median density curve\newline Retrospective & \TableOneErrors{0.28}{0.21}{0.22} & Per-density regression; question answering: median\newline \TableOneErrors{0.23}{0.22}{0.22} & 84 \\
 \midrule
 Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 3 to 5 & Source regression, the median and no change & \TableOneErrors{0.21}{0.56}{0.46} & Interpolate math and code; use the median for question answering\newline Retrospective & \TableOneErrors{0.07}{0.12}{0.46} & Bilinear regression, no change and the median\newline \TableOneErrors{0.33}{0.68}{0.46} & 54 \\
@@ -17,8 +19,6 @@ Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 
 An unseen 1.4 billion stage at bit widths 3 to 5, group sizes 32 to 512 & Source regression, the median and no change & \TableOneErrors{0.30}{0.15}{0.22} & Development median\newline Retrospective & \TableOneErrors{0.09}{0.15}{0.14} & Bilinear regression, no change and the median\newline \TableOneErrors{0.35}{0.56}{0.14} & 54 \\
 \midrule
 Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens & Reuse forms, with a budget and pool form for question answering & \TableOneErrors{0.07, 0.06}{0.02, 0.05}{0.51, 0.46} & The same predictor & \TableOneErrors{0.07, 0.06}{0.02, 0.05}{0.51, 0.46} & Regressions on budget and loss, reuse, and reuse and size\newline \TableOneErrors{0.07, 0.03}{0.02, 0.05}{0.61, 0.45} & 100 \\
-\midrule
-Four unseen Pythia states pruned at six densities & Compact power form using half the measurements & \TableOneErrors{0.07}{0.10}{0.18} & The same power form, with a median density curve for question answering & \TableOneErrors{0.07}{0.10}{0.18} & Per-density regression at full budget (36)\newline \TableOneErrors{0.06}{0.08}{0.18} & 18 \\
 \bottomrule
 \end{tabular*}
 \caption{\footnotesize\fontsize{8.5}{10}\selectfont Errors are mean absolute errors in nats per token, in math, code and question answering order. The frozen candidate was fixed before that row was measured; the delivered relation is the predictor recommended on all the evidence. A delivered relation marked Retrospective was chosen after seeing the result, so its error there is not an independent test. Interpolation is piecewise on the measured grid, and a median curve uses no source inputs. The last column counts the development configuration measurements per capability behind the frozen candidate. Distillation entries give the 270 million and 1 billion students in that order.}

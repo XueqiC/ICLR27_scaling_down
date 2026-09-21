@@ -412,8 +412,10 @@ def locked_table(spec):
         r"\par\noindent\textbf{Differences from the delivered-predictor table.} "
         r"\texttt{tables/final\_deliverables.tex} allows power or A2 for seen-size "
         r"pruning; this rule uses power for math/code and medians for QA and new "
-        r"size/stage. It delivers per-bit source regression on new states; selection "
-        r"uses that regression on seen states and per-bit medians on new states. "
+        r"size/stage. The channel-quantization branches now agree: both take the "
+        r"per-bit source regression on states in the fit and the per-bit development "
+        r"median on new ones. This rule was frozen with that branch before the "
+        r"confirmation panel was measured, and is unchanged. "
         r"Grouped branches agree, with the boundary rule specified above. "
         r"Its distillation exposure and joint budget--pool forms are not used here: "
         r"selection uses the fixed-recipe student-state math form and code/QA constants.",

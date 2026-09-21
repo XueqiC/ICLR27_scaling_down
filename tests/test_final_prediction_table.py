@@ -10,11 +10,11 @@ from paper_generator_checks import check_access, refuses_symlink, refuses_extern
 
 
 TASKS = [
+    "Four unseen Pythia states pruned at six densities",
     "Three unseen checkpoints pruned to densities 0.575, 0.675 and 0.85",
     "Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 3 to 5",
     "An unseen 1.4 billion stage at bit widths 3 to 5, group sizes 32 to 512",
     "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
-    "Four unseen Pythia states pruned at six densities",
 ]
 
 
@@ -171,13 +171,13 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
             for cap, line in zip(("Math", "Code", "QA"), lines):
                 prefix = ""
                 assert line.startswith(prefix)
-                if i == 3:
+                if i == 4:
                     assert re.fullmatch(prefix + r"\d+\.\d{2}, \d+\.\d{2}", line)
                 else:
                     assert re.fullmatch(prefix + r"\d+\.\d{2}", line)
             assert row[j].compact_scores == ("comparison" if j == 5 else "ordered")
         assert "[" not in row[2].plain(audit)
-        if i == 3:
+        if i == 4:
             assert row[3].plain(audit) == "The same predictor"
         assert all("chosen after this test" not in c.plain(audit) for c in row)
 
@@ -188,35 +188,35 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
         lines = row[column].plain(audit).splitlines()[column == 5:]
         return " / ".join(lines)
     assert [scores(row, 2) for row in rows] == [
-        "0.24 / 0.24 / 0.68", "0.21 / 0.56 / 0.46",
-        "0.30 / 0.15 / 0.22", "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46", "0.07 / 0.10 / 0.18",
+        "0.07 / 0.10 / 0.18", "0.24 / 0.24 / 0.68", "0.21 / 0.56 / 0.46",
+        "0.30 / 0.15 / 0.22", "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
     ]
     assert [scores(row, 5) for row in rows] == [
-        "0.23 / 0.22 / 0.22", "0.33 / 0.68 / 0.46",
-        "0.35 / 0.56 / 0.14", "0.07, 0.03 / 0.02, 0.05 / 0.61, 0.45", "0.06 / 0.08 / 0.18",
+        "0.06 / 0.08 / 0.18", "0.23 / 0.22 / 0.22", "0.33 / 0.68 / 0.46",
+        "0.35 / 0.56 / 0.14", "0.07, 0.03 / 0.02, 0.05 / 0.61, 0.45",
     ]
     assert [scores(row, 4) for row in rows] == [
-        "0.28 / 0.21 / 0.22", "0.07 / 0.12 / 0.46", "0.09 / 0.15 / 0.14",
-        "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46", "0.07 / 0.10 / 0.18",
+        "0.07 / 0.10 / 0.18", "0.28 / 0.21 / 0.22", "0.07 / 0.12 / 0.46", "0.09 / 0.15 / 0.14",
+        "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
     ]
     assert "270 million and 1 billion" in gen.caption_cell(audit).plain(audit)
-    assert "no student averaging" in rows[3][2].note
+    assert "no student averaging" in rows[4][2].note
     assert [row[5].plain(audit).splitlines()[0] for row in rows] == [
+        "Per-density regression at full budget (36)",
         "Per-density regression; question answering: median",
         "Bilinear regression, no change and the median",
         "Bilinear regression, no change and the median",
         "Regressions on budget and loss, reuse, and reuse and size",
-        "Per-density regression at full budget (36)",
     ]
 
 
 def test_development_measurements_count_configurations_per_capability(generated):
     rows, audit, _, recipes, _ = generated
-    assert [int(row[6].plain(audit)) for row in rows] == [84, 54, 54, 100, 18]
+    assert [int(row[6].plain(audit)) for row in rows] == [18, 84, 54, 54, 100]
     prune = raw_source(gen.P53 + "#")
-    assert int(rows[0][6].plain(audit)) == sum(len(s["densities"]) for s in prune["dev_states"])
-    assert prune["n_dev_rows"] == 3 * int(rows[0][6].plain(audit))
-    for index, path in ((1, gen.Q69), (2, gen.Q69)):
+    assert int(rows[1][6].plain(audit)) == sum(len(s["densities"]) for s in prune["dev_states"])
+    assert prune["n_dev_rows"] == 3 * int(rows[1][6].plain(audit))
+    for index, path in ((2, gen.Q69), (3, gen.Q69)):
         frozen = raw_source(path + "#")
         count = int(rows[index][6].plain(audit))
         assert count == len(frozen["dev_states"]) * len(frozen["dev_configs"])
@@ -226,8 +226,8 @@ def test_development_measurements_count_configurations_per_capability(generated)
     distill = raw_source("results/v70-distill-confirm/develop.json#")
     assert len(distill["points"]) == len({(p["cluster"], p["Tc"]) for p in distill["points"]}) == 100
     assert all(set(p["delta"]) == set(gen.CAPS) for p in distill["points"])
-    assert "selection of QA's zero rule" in rows[1][6].note
-    assert "not 100 per test student" in rows[3][6].note
+    assert "selection of QA's zero rule" in rows[2][6].note
+    assert "not 100 per test student" in rows[4][6].note
     assert all(r["parts"][0]["sources"] for r in recipes if r["column"] == 6)
 
 
@@ -246,7 +246,7 @@ def test_delivery_identities_and_bit_test_moved_to_the_appendix(generated):
     later_dev = raw_source(gen.Q69 + "#/dev_configs")
     assert set(old_test) <= set(later_dev)
     assert "Interpolation is piecewise on the measured grid" in gen.caption_cell(audit).plain(audit)
-    assert rows[2][3].plain(audit).splitlines()[0] == "Development median"
+    assert rows[3][3].plain(audit).splitlines()[0] == "Development median"
     assert "unseen bit width" not in tex and "No stored error" not in tex
     earlier = raw_source(gen.Q55 + "#/candidate_definitions/same_input_interpolation")
     later = raw_source(gen.Q69 + "#/boundary_rule")
@@ -258,14 +258,14 @@ def test_delivery_identities_and_bit_test_moved_to_the_appendix(generated):
     note = next(n for n in audit.notes if "earlier unseen-bit-width test" in n)
     assert "0.19 / 0.21 / 0.44" in note and "0.55 / 0.73 / 0.54" in note
     assert "24 development configuration measurements per capability" in note
-    assert rows[3][3].plain(audit) == "The same predictor"
+    assert rows[4][3].plain(audit) == "The same predictor"
 
 
 def test_delivered_relations_carry_their_timing(generated):
     rows, audit, tex, recipes, _ = generated
     summary = {r["row"]: r["delivered_timing"] for r in raw_source(gen.S86 + "#/main_rows")}
     marked = [i for i, row in enumerate(rows) if row[3].plain(audit).endswith("\nRetrospective")]
-    assert marked == [0, 1, 2]
+    assert marked == [1, 2, 3]
     assert [summary[k] for k in ("C35", "C44", "C46")] == [
         "fixed after test; reused frozen in Sec. 5", "fixed after test", "fixed after test"]
     assert summary["C47"] == summary["C48"] == "fixed before test"
@@ -274,18 +274,18 @@ def test_delivered_relations_carry_their_timing(generated):
     for i in marked:
         part = next(p for p in rows[i][3].parts if isinstance(p, dict) and p.get("label") == "Retrospective")
         assert part["sources"] == [gen.pointer(gen.S86, "main_rows", list(summary).index(
-            {0: "C35", 1: "C44", 2: "C46"}[i]), "delivered_timing")]
+            {1: "C35", 2: "C44", 3: "C46"}[i]), "delivered_timing")]
 
 
 def test_composite_relations_follow_caption_capability_order(generated):
     rows, audit, tex, _, _ = generated
-    for i in (1, 2):
+    for i in (2, 3):
         assert rows[i][1].plain(audit) == "Source regression, the median and no change"
-    assert rows[1][3].plain(audit).splitlines()[0] == (
+    assert rows[2][3].plain(audit).splitlines()[0] == (
         "Interpolate math and code; use the median for question answering")
-    assert rows[3][1].plain(audit) == (
+    assert rows[4][1].plain(audit) == (
         "Reuse forms, with a budget and pool form for question answering")
-    assert rows[0][1].plain(audit) == "Five-parameter power form"
+    assert rows[1][1].plain(audit) == "Five-parameter power form"
     assert raw_source(gen.P53 + "#/n_params_per_capability/power") == 5
     assert raw_source(gen.P53 + "#/n_dev_states") == len(raw_source(gen.P53 + "#/dev_states")) == 17
     for c, count in (("math", 1), ("code", 1), ("qa", 3)):
@@ -303,21 +303,21 @@ def test_test_sets_match_frozen_membership(generated):
             assert raw_source(path + "#/densities") == [0.85, 0.675, 0.575]
     # The 6.9B checkpoint is new; its model size was already in development.
     assert any(t.startswith("pythia-6.9b@") for t in dev)
-    assert "outside the size range" not in rows[0][0].plain(audit)
+    assert "outside the size range" not in rows[1][0].plain(audit)
     bits = raw_source(gen.Q55 + "#/test_sets/bit_test")
     assert bits["configs"] == ["b4_g64", "b4_g256"]
     assert {s.split("@")[0] for s in bits["states"]} == {"pythia-160m", "pythia-410m", "pythia-1.4b"}
     quant = raw_source("results/v69-quant-confirm/compare.json#/rows")
-    for i, new in [(1, False), (2, True)]:
+    for i, new in [(2, False), (3, True)]:
         rr = [r for r in quant if (r["test_set"] != "development_state_boundary") == new]
         assert {r["state"] for r in rr} == ({"pythia-1.4b@step112000"} if new else
                {"pythia-410m@step143000", "pythia-1.4b@step16000"})
         assert {r["config"] for r in rr} == {f"b{b}_g{g}" for b in (3,4,5)
                                              for g in ((32,128,512) if new else (32,512))}
     assert all("group sizes 64 and 256" not in row[0].plain(audit) for row in rows)
-    assert "group sizes 32 and 512" in rows[1][0].plain(audit)
-    assert "group sizes 32 to 512" in rows[2][0].plain(audit)
-    for i in (1, 2):
+    assert "group sizes 32 and 512" in rows[2][0].plain(audit)
+    assert "group sizes 32 to 512" in rows[3][0].plain(audit)
+    for i in (2, 3):
         assert "bit widths 3 to 5" in rows[i][0].plain(audit)
     assert all("@" not in row[0].plain(audit) for row in rows)
     assert all(not re.search(r"\b[bg] \d", row[0].plain(audit)) for row in rows)
@@ -327,7 +327,7 @@ def test_efficiency_confirmation_uses_registered_cells_and_budgets(generated):
     rows, audit, _, recipes, _ = generated
     summary = raw_source(gen.E11 + "#")
     states = raw_source(gen.E11_STATE + "#")
-    row = rows[4]
+    row = rows[0]
     assert states["state_order"] == ["pythia-160m@step80000", "pythia-410m@step112000",
                                      "pythia-1.4b@step48000", "pythia-1b@step48000"]
     plan = raw_source("results/a11-efficiency-confirmation/plan.json#")
@@ -343,7 +343,7 @@ def test_efficiency_confirmation_uses_registered_cells_and_budgets(generated):
         "The same power form, with a median density curve for question answering")
     assert row[5].plain(audit).splitlines()[0] == "Per-density regression at full budget (36)"
     for column in (2, 4, 5):
-        recipe = next(r for r in recipes if (r["row"], r["column"]) == (4, column))
+        recipe = next(r for r in recipes if (r["row"], r["column"]) == (0, column))
         numbers = [p for p in recipe["parts"] if isinstance(p, dict) and p["format"]]
         for cap, part in zip(gen.CAPS, numbers):
             method = "A2_36" if column == 5 else "median_curve_36" if column == 4 and cap == "qa" else "power_18"
@@ -355,7 +355,7 @@ def test_efficiency_confirmation_uses_registered_cells_and_budgets(generated):
                 assert r["n_cells"] == 6
                 assert r["mae"][method] == pytest.approx(mean(r["absolute_errors"][method]))
             assert raw_source(part["sources"][0]) == pytest.approx(mean(r["mae"][method] for r in per_state))
-    for recipe in (r for r in recipes if r["row"] == 4):
+    for recipe in (r for r in recipes if r["row"] == 0):
         sources = [s for p in recipe["parts"] if isinstance(p, dict) for s in p["sources"]]
         assert sources and all(s.startswith((gen.E11 + "#", gen.E11_STATE + "#")) for s in sources)
     # Retain the specified median even though this panel's QA power mean is smaller.
@@ -418,7 +418,7 @@ def test_every_numeric_occurrence_is_in_inventory(generated):
     assert json.loads(blocks[2]) == numbers
 
 
-@pytest.mark.parametrize("task_index", [0, 3])
+@pytest.mark.parametrize("task_index", [1, 4])
 @pytest.mark.parametrize("column", [2, 5])
 def test_absent_score_omits_whole_task(generated, monkeypatch, task_index, column):
     rows, _, _, _, _ = generated

@@ -605,6 +605,10 @@ def build(audit):
     for row, count in zip(result, counts):
         row.append(count)
     result.append(efficiency_row(audit))
+    # The measurement-efficiency confirmation leads: it is the row that carries an
+    # independent delivered error at half the development budget, and a reader
+    # meeting the table should meet that first.
+    result.insert(0, result.pop())
     complete = []
     for row in result:
         try:
