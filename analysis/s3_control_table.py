@@ -427,9 +427,11 @@ def _render(result=None):
         "This analysis is retrospective. The pristine student $S_0$ was not in the frozen candidate set, "
         "and the rule's selections remain unchanged. Both student states use the registered nominal "
         "student-to-reference matrix storage ratio. Pristine opportunity is the best measured quantization "
-        "loss minus the best loss after adding the pristine student. Distillation change is the signed "
-        "difference between the best loss with the pristine student and the best loss with the distilled "
-        "student, with quantization available in both cases. A negative change means lost opportunity. "
+        "loss minus the best loss after adding the pristine student. Distillation opportunity change is the "
+        "signed difference between the best loss with the pristine student and the best loss with the "
+        "distilled student, with quantization available in both cases; it is a change in the opportunity "
+        "available to the candidate set, not the loss change of a student against its own starting point. "
+        "A negative change means lost opportunity. "
         "Other methods measure the further gain from registered pruning and the dense reference. "
         "These three columns sum to registered opportunity before rounding. All means use the same sixteen of seventeen "
         "budgets, from 25\\% to 100\\%; 20\\% is excluded because quantization is infeasible. "
@@ -443,7 +445,7 @@ def _render(result=None):
             f"\\caption{{{caption}}}\n\\label{{tab:s3-retrospective-control}}\n"
             "\\begin{tabular*}{\\textwidth}{@{\\extracolsep{\\fill}}llrrrr@{}}\n\\toprule\n"
             "Reference & Objective & \\shortstack{Pristine\\\\opportunity} & "
-            "\\shortstack{Distillation\\\\change} & \\shortstack{Other\\\\methods} & "
+            "\\shortstack{Distillation opportunity\\\\change} & \\shortstack{Other\\\\methods} & "
             "\\shortstack{Registered\\\\opportunity} \\\\\n\\midrule\n" +
             "\n".join(rows) + "\n\\bottomrule\n\\end{tabular*}\n\\end{table}\n")
 

@@ -40,6 +40,10 @@ RELATIONS = {
     "same_input_interpolation": "Interpolation",
     "zero": "no change",
 }
+# A delivered relation chosen after its test was observed carries this word in
+# its own cell; the caption says what it means. The label is mapped from the
+# stored delivery timing, never asserted by the generator.
+RETROSPECTIVE = "Retrospective"
 BASELINES = {
     "A2": "per-density regression", "median_curve": "development median", "median": "development median",
     "bilinear": "bilinear regression", "zero": "no change",
@@ -48,7 +52,6 @@ BASELINES = {
 }
 RANGES = {
     "prune_new": "Three unseen checkpoints pruned to densities 0.575, 0.675 and 0.85",
-    "quant_bit": "Pythia 160 million to 1.4 billion at unseen bit width 4, group sizes 64 and 256",
     "quant_group": "Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 3 to 5",
     "quant_new": "An unseen 1.4 billion stage at bit widths 3 to 5, group sizes 32 to 512",
     "pool": "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
@@ -62,10 +65,12 @@ TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
     "Errors are mean absolute errors in nats per token, in math, code and question answering order. "
-    "The first predictor of a row was frozen before its measurement; a delivered rule marked as later "
-    "was chosen after seeing the result. Interpolation is piecewise on the measured grid, and a median "
+    "The frozen candidate was fixed before that row was measured; the delivered relation is the "
+    "predictor recommended on all the evidence. A delivered relation marked Retrospective "
+    "was chosen after seeing the result, so its error there is not an independent test. "
+    "Interpolation is piecewise on the measured grid, and a median "
     "curve uses no source inputs. The last column counts the development configuration measurements "
-    "per capability behind the first predictor. Distillation entries give the {students} students in "
+    "per capability behind the frozen candidate. Distillation entries give the {students} students in "
     "that order."
 )
 
@@ -266,14 +271,17 @@ def composite_label(names):
     raise ValueError(f"Unmapped mixed predictor: {names}")
 
 
-def delivered_cells(audit, names, refs, scores, *, note=""):
+def delivered_cells(audit, names, refs, scores, *, note="", timing=None):
     """Keep rule identity/timing separate; incomplete tasks are omitted below."""
     if len(set(names.values())) == 1:
         label = RELATIONS[names[CAPS[0]]]
     else:
         label = composite_label(names)
+    identity = [mapped(audit, label, *refs)]
+    if timing is not None and resolve(audit, timing).startswith("fixed after test"):
+        identity += ["\n", mapped(audit, RETROSPECTIVE, timing)]
     return [
-        cell(mapped(audit, label, *refs), note=note),
+        cell(*identity, note=note),
         cell(*score_parts(scores), refs=refs, note=note),
     ]
 
@@ -422,8 +430,11 @@ def build(audit):
     delivery_indices = {r["row"]: i for i, r in enumerate(delivery["main_rows"])}
     def delivery_refs(key):
         i = delivery_indices[key]
-        return [pointer(S86, "main_rows", i, "delivered_timing"),
+        return [delivery_timing(key),
                 *[pointer(S86, "main_rows", i, "capabilities", c, "delivered") for c in CAPS]]
+
+    def delivery_timing(key):
+        return pointer(S86, "main_rows", delivery_indices[key], "delivered_timing")
 
     result = []
     pbase = {}
@@ -450,6 +461,7 @@ def build(audit):
         cell(*score_parts(lambda c: [scored_number(row.scores[c]["power"])])),
         *delivered_cells(audit, dict.fromkeys(CAPS, "median_curve"), delivery_refs("C35"),
                          lambda c: [scored_number(row.scores[c]["median_curve"])],
+                         timing=delivery_timing("C35"),
                          note="New-state source-free median curve, fixed after test; scores use the same three checkpoints and densities as the frozen candidate."),
         cell(*baseline_parts(audit, lambda c: [
                  baseline(audit, pbase[c][1]["candidate"], pointer(P53, "loso_table", pbase[c][0], "candidate")),
@@ -457,47 +469,37 @@ def build(audit):
              refs=[pointer(P53, "loso_table")], note="Minimum development LOSO MAE excluding power, per capability: " +
              " / ".join(BASELINES[pbase[c][1]["candidate"]] for c in CAPS) + "; no test ranking.")])
 
-    # V55 predates V69 and is the actual unseen-bit test. V69 bits were all seen.
+    # The earlier unseen-bit-width test predates the confirmation round and is the
+    # only genuine unseen-bit test; the later round's bit widths were all seen. It
+    # is reported in the candidate-form appendix rather than as a row here: its
+    # cells were added to the later development grid, so the delivered rule can
+    # show no independent error on them, and the earlier interpolation carries
+    # different models and boundary rules and cannot stand in for it. The
+    # membership audit that licenses that statement still runs, and the numbers
+    # the appendix prints are recorded below from the same frozen JSON.
     bp = "results/v55-quant-group/compare.json"
     entries = comp55["test_sets"]["bit_test"]["mae_table"]
-    candidate_index = next(i for i,r in enumerate(entries) if r["candidate"] == "low_order_2d")
-    base55 = {c: min(((i,r) for i,r in enumerate(q55["loso_table"]) if r["candidate"] in q55["baselines"]),
-                    key=lambda ir: ir[1]["mae"][c]) for c in CAPS}
-    def bit_baseline(c):
-        i, r = base55[c]
-        j = next(j for j,e in enumerate(entries) if e["candidate"] == r["candidate"])
-        return [baseline(audit, r["candidate"], pointer(Q55,"loso_table",i,"candidate")),
-                number(bp,"test_sets","bit_test","mae_table",j,"mae",c)]
-    bit_scores = score_parts(lambda c: [number(bp,"test_sets","bit_test","mae_table",candidate_index,"mae",c)])
-    bit_delivery_note = (
-        "The low-order surface is a tested candidate, not a delivered relation (Appendix E.1: design rank 16 of 20). "
-        "The later delivered rule has no matching stored score for this earlier bit test, "
-        "whose configurations entered its development grid. V55 alternatives use different "
-        "models and boundary rules and are not substituted for that later rule."
-    )
+    base55 = {c: min(((i, r) for i, r in enumerate(q55["loso_table"]) if r["candidate"] in q55["baselines"]),
+                     key=lambda ir: ir[1]["mae"][c]) for c in CAPS}
     bit_cells = {(s, cfg, c) for s in q55["test_sets"]["bit_test"]["states"]
                  for cfg in q55["test_sets"]["bit_test"]["configs"] for c in CAPS}
     later_cells = {(r["state"], r["config"], r["capability"])
                    for r in audit.data["results/v69-quant-confirm/compare.json"]["rows"]}
     if bit_cells & later_cells or not set(q55["test_sets"]["bit_test"]["configs"]) <= set(quant["dev_configs"]):
         raise ValueError("Earlier bit-test membership changed; re-audit delivered-score availability")
-    bit_delivery_refs = [pointer(R74, "recommendation_rule"), pointer(Q69, "dev_configs"),
-                         pointer(Q69, "boundary_rule"), pointer(Q55, "dev_configs"),
-                         pointer(Q55, "candidate_definitions", "same_input_interpolation"),
-                         pointer(bp, "test_sets", "bit_test", "mae_table"),
-                         pointer("results/v69-quant-confirm/compare.json", "test_sets")]
-    result.append([
-        cell(tested_range(audit, "quant_bit", pointer(Q55,"test_sets","bit_test","states"),
-                         pointer(Q55,"test_sets","bit_test","configs")), refs=[pointer(Q55,"precommitted_rule")]),
-        cell(relation(audit, "low_order_2d", pointer(Q55,"candidate_definitions","low_order_2d"),
-                      pointer(Q55,"n_params_per_capability","low_order_2d")), refs=[pointer(Q55,"feature_names")]),
-        cell(*bit_scores),
-        cell(mapped(audit, "Interpolate math and code on seen states; use the median otherwise",
-                    pointer(R74, "recommendation_rule")),
-             refs=bit_delivery_refs, note=bit_delivery_note),
-        cell("No stored error on these test cells", refs=bit_delivery_refs, note=bit_delivery_note),
-        cell(*baseline_parts(audit, bit_baseline), refs=[pointer(Q55,"loso_table")], note="Development minimum over registered baselines mean/median/zero: " +
-             " / ".join(BASELINES[base55[c][1]["candidate"]] for c in CAPS) + ".")])
+
+    def bit_mae(candidate, cap):
+        index = next(j for j, e in enumerate(entries) if e["candidate"] == candidate)
+        return format(resolve(audit, pointer(bp, "test_sets", "bit_test", "mae_table", index, "mae", cap)), ".2f")
+
+    audit.omit(
+        "The earlier unseen-bit-width test moves to the candidate-form appendix: its cells entered the "
+        "later development grid, so the delivered rule has no independent error on them. Frozen "
+        "low-order surface: " + " / ".join(bit_mae("low_order_2d", c) for c in CAPS) + " nats against " +
+        " / ".join(bit_mae(base55[c][1]["candidate"], c) for c in CAPS) + " for the development-selected "
+        "baseline (" + " / ".join(BASELINES[base55[c][1]["candidate"]] for c in CAPS) + "), from " +
+        str(resolve(audit, pointer(Q55, "n_dev_cells"))) +
+        " development configuration measurements per capability.")
     for key in ("C44", "C46"):
         row = rows[key]
         selected_baseline = {c: min((m for m in quant["methods"] if m != row.candidates[c]),
@@ -536,6 +538,7 @@ def build(audit):
             *delivered_cells(audit, {c: "median" if key == "C46" or c == "qa" else "same_input_interpolation" for c in CAPS},
                              [*delivery_refs(key), pointer(R74,"recommendation_rule")],
                              lambda c: [quant_score(c, "median" if key == "C46" or c == "qa" else "same_input_interpolation")],
+                             timing=delivery_timing(key),
                              note="Post-test rule on the identical frozen cells, never a test-error minimum. New-state errors pool boundary and interior cells equally per cell."),
             cell(*baseline_parts(audit, lambda c: [
                      baseline(audit, selected_baseline[c], pointer(Q69,"loso","scores",selected_baseline[c],c)),
@@ -593,8 +596,6 @@ def build(audit):
         cell(value(pointer(P53, "n_dev_rows"), pointer(P53, "models"), op="per_capability"),
              refs=[pointer(P53, "dev_states")],
              note="252 recorded scalar rows / three capability models = 84 state-density configurations per capability; cross-checked against dev_states[*].densities. This is the V53 17-state fit, not A9/A11's 36-cell panel. Dense anchors excluded."),
-        cell(value(pointer(Q55, "n_dev_cells")), refs=[pointer(Q55, "dev_states"), pointer(Q55, "dev_configs")],
-             note="Recorded configuration count; six states times four configurations per capability. Dense anchors excluded."),
         *[cell(value(pointer(Q69, "n_dev_cells")), refs=[pointer(Q69, "dev_states"), pointer(Q69, "dev_configs"), pointer(Q69, "selection_rule")],
                note="Recorded configuration count; six states times nine configurations per capability. Includes development selection of QA's zero rule, which fits no coefficients. The same development panel supports both tests; counts are not additive.") for _ in range(2)],
         cell(value(pointer(d70, "development_structure", "n_points")),
