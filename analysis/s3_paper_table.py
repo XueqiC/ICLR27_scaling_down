@@ -53,8 +53,8 @@ def _render():
         if key != ORDER[-1]:
             rows.append(r"\midrule")
     caption = (
-        "Independent cross-method selection validation. None of the four references supplied a "
-        "measurement to the rule, and each carries twelve candidates at seventeen storage budgets, "
+        "Independent cross-method selection validation. None of the four references supplied an "
+        "intervention outcome to the rule, and each carries twelve candidates at seventeen storage budgets, "
         "including a distillation candidate trained in this round. Opportunity is the loss of the "
         "best feasible quantization candidate minus that of the best feasible candidate across all "
         "methods; policy regret is the loss of the candidate that policy selected minus that same "
