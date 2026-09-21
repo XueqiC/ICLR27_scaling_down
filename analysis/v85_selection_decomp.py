@@ -60,6 +60,20 @@ CODE = (RULE, "analysis/v78_rule_confirm.py", "analysis/v53_prune_dev.py",
         "analysis/v36_pythia_controlled_fit.py", "analysis/v55_quant_group_fit.py",
         "analysis/v69_quant_confirm.py", "analysis/v39_distill_controlled.py",
         "analysis/v64_selection_feasible.py")
+# Two of those files were edited after V78 was frozen, in 80a41ce, and the whole change is
+# \begin{table}[H] becoming \begin{table}[!htbp] in the LaTeX each one emits. No computation is
+# touched, so the frozen results are still the results these files produced. The exact bytes V78
+# recorded are preserved beside its evidence and checked here, so the provenance check verifies the
+# implementation that produced the numbers rather than whichever float specifier the manuscript
+# currently wants. See results/v78-rule-confirm/frozen_implementation/README.md.
+FROZEN_CODE = {
+    "analysis/v78_rule_confirm.py":
+        "results/v78-rule-confirm/frozen_implementation/v78_rule_confirm.py",
+    "analysis/v69_quant_confirm.py":
+        "results/v78-rule-confirm/frozen_implementation/v69_quant_confirm.py",
+    "analysis/v64_selection_feasible.py":
+        "results/v78-rule-confirm/frozen_implementation/v64_selection_feasible.py",
+}
 
 
 def require(condition, message):
@@ -82,7 +96,7 @@ class Inputs:
 
     def text(self, path):
         if path not in self.raw:
-            self.raw[path] = (ROOT / path).read_bytes()
+            self.raw[path] = (ROOT / FROZEN_CODE.get(path, path)).read_bytes()
         return self.raw[path].decode()
 
     def json(self, path):
@@ -93,7 +107,8 @@ class Inputs:
 
     def unchanged(self):
         for path, raw in self.raw.items():
-            require((ROOT / path).read_bytes() == raw, f"Input changed during generation: {path}")
+            require((ROOT / FROZEN_CODE.get(path, path)).read_bytes() == raw,
+                    f"Input changed during generation: {path}")
 
 
 def decompose(comp, frozen):
@@ -492,8 +507,9 @@ def summary(aggregates, spec, hashes):
               "Outputs: `decomposition.json` (full precision, method counts and contributions), "
               "`decomposition.csv` (12 aggregate rows), `cell_regrets.csv` (272 original cells with JSON "
               "pointers), `rule_spec.json` (24 rule rows, provenance, literal code), this summary, "
-              "and the two requested LaTeX tables. The new script is mirrored under `paper/code/analysis/`; "
-              "the existing mirrored `final_rule.py` and `v78_rule_confirm.py` already match their originals.", "",
+              "and the two requested LaTeX tables. Implementations that changed after V78 only in "
+              "presentation are read from the preserved frozen copies beside its evidence, so the "
+              "excerpts below quote the code that produced these numbers.", "",
               "## Input SHA256", ""]
     lines += [f"- `{path}`: `{value}`" for path, value in hashes.items()]
     return "\n".join(lines) + "\n"
@@ -513,8 +529,9 @@ def build_outputs():
     for path, raw in inputs.raw.items():
         if path in comp["input_sha256"]:
             require(sha(raw) == comp["input_sha256"][path], f"Development input changed since V78: {path}")
-    for path in (RULE, "analysis/v78_rule_confirm.py"):
-        require((ROOT / "paper/code" / path).read_bytes() == inputs.raw[path], f"Existing mirror differs: {path}")
+    for path, preserved in FROZEN_CODE.items():
+        require(provenance.matches(comp["input_sha256"][path], sha((ROOT / preserved).read_bytes())),
+                f"Preserved frozen implementation differs from the V78 record: {path}")
     flat = [{"subset": subset, "objective": cap, "n_cells": row["n_cells"],
              **row["mean_regret"], "frozen_minus_quant": row["frozen_minus_quant"]}
             for subset, caps in aggregates.items() for cap, row in caps.items()]
