@@ -58,20 +58,19 @@ RANGES = {
     "efficiency": "Four unseen Pythia states pruned at six densities",
 }
 HEADERS = ("Prediction task", "Frozen candidate", "Candidate error (nats)",
-           "Delivered relation", "Delivered error (nats)", "Development baseline",
+           "Delivered relation", "Delivered error (nats)",
            "Development measurements")
-COLUMN_WIDTHS = (".20", ".15", ".10", ".16", ".10", ".16", ".13")
+COLUMN_WIDTHS = (".24", ".18", ".11", ".20", ".11", ".16")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
     "Errors are mean absolute errors in nats per token, in math, code and question answering order. "
     "The frozen candidate was fixed before that row was measured; the delivered relation is the "
-    "predictor recommended on all the evidence. A delivered relation marked Retrospective "
-    "was chosen after seeing the result, so its error there is not an independent test. "
-    "Interpolation is piecewise on the measured grid, and a median "
-    "curve uses no source inputs. The last column counts the development configuration measurements "
-    "per capability behind the frozen candidate. Distillation entries give the {students} students in "
-    "that order."
+    "predictor recommended on all the evidence, and a Retrospective label marks a predictor chosen "
+    "after seeing the result, whose error there is not an independent test. Appendix "
+    "Fig.~\\ref{fig:generalization} compares each row with the strongest baseline chosen inside the "
+    "development folds. The last column counts development configuration measurements per capability "
+    "behind the frozen candidate, and distillation entries give the {students} students in that order."
 )
 
 NUMBER_PATTERN = r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|four|five|six|seventeen|twenty|half)\b"
@@ -605,6 +604,13 @@ def build(audit):
     for row, count in zip(result, counts):
         row.append(count)
     result.append(efficiency_row(audit))
+    # The development baseline column moves to the appendix, where the generalization
+    # figure compares every row with it on the same cells. Its selection is still read
+    # and audited above, and each row's baseline is recorded in the sidecar.
+    for row in result:
+        audit.omit("Development baseline for " + row[0].plain(audit).split("\n")[0] + ": "
+                   + " | ".join(row[5].plain(audit).splitlines()))
+        del row[5]
     # The measurement-efficiency confirmation leads: it is the row that carries an
     # independent delivered error at half the development budget, and a reader
     # meeting the table should meet that first.
@@ -623,7 +629,6 @@ def build(audit):
             for index in (2, 4):
                 if len(row[index].plain(audit).splitlines()) == len(CAPS):
                     row[index].compact_scores = "ordered"
-            row[5].compact_scores = "comparison"
             complete.append(row)
     return complete
 
