@@ -2,7 +2,7 @@
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
 \toprule
-Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Math & Code & QA \\
 \midrule
 \textbf{quantization}: new source Pythia-1 billion at step 96 thousand, 4 bits\newline{\itshape in-range size; stage 96 thousand; seen bit} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & 0.116 (-0.05) & 0.046 (-0.03) & 0.059 (-0.00) \\
  & Same-input baseline without pretraining tokens & 0.184 & 0.394 & \textbf{0.054} \\
@@ -27,7 +27,7 @@ Test; what is held out; fold rule (relation / input baseline / simple baseline) 
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
 \toprule
-Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Math & Code & QA \\
 \midrule
 \textbf{quantization}: new source Pythia-6.9 billion at steps 32 thousand and 112 thousand, bit width $\ge4$ (including 5-bit rule)\newline{\itshape size $5\times$ beyond development range; stages 32 thousand, 112 thousand} [Frozen / fixed / fixed] & Candidate: configuration-indicator ordinary least squares & 0.181 (-0.14) & 0.177 (-0.13) & 0.428 (-0.39) \\
  & Same-input baseline without pretraining tokens & 0.169 & 0.154 & 0.426 \\
@@ -48,7 +48,7 @@ Test; what is held out; fold rule (relation / input baseline / simple baseline) 
 \begin{table}[!htbp]\normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
 \toprule
-Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Math & Code & QA \\
 \midrule
 \textbf{distillation (uniform absolute-exposure protocol)}: multi-student distillation, unseen pool of 375 traces per domain, Gemma-3-270 million\newline{\itshape pool} [Frozen / fixed / fixed] & Candidate: joint form with source term (selected on development data; rule chosen \mbox{post-hoc}) & \textbf{0.045} (+0.02) & \textbf{0.036} (+0.01) & \textbf{0.606} (+0.26) \\
  & Same-input baseline: constant & 0.060 & 0.047 & 0.862 \\

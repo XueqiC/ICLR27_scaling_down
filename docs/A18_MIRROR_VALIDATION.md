@@ -39,6 +39,11 @@ comparison. The documented preview command also regenerated the exact 1,836-byte
 manuscript table, SHA-256
 `8c4c6f3922e249778a9d5a0d7050b57e0977599db4391ccb12943d561e8360df`.
 
+That byte count and digest describe the table as A18 published it. The caption
+regained a truncated sentence on 2026-09-21, so the snapshot and the manuscript
+table are now 1,975 bytes; the current digests for this and every other published
+table are in `docs/A21_PUBLISHED_TABLES_INVENTORY.csv`.
+
 Full-suite results from `paper/`:
 
 | Command | Passed | Skipped | Failed / errors | Time |

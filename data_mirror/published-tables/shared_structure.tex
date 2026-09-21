@@ -1,50 +1,60 @@
-\begin{table}[!htbp]
-\normalfont
+\begin{table}[!htbp]\normalfont
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-2.000000000\tabcolsep\relax}@{}}
 \toprule
-Law & What is shared & What varies & Held-out error: shared / capability-specific; exponent minimum / median / maximum & Error: no target measurement / one target measurement & 80\% interval: coverage / width; no target measurement then one target measurement \\
+Law & What is shared & What varies & \mbox{Held-out} error, shared against capability-specific \\
 \midrule
-Pruning power & Power family & Source coefficients and exponent & 0.494 / 0.494 & --- & --- \\
-Grouped round-to-nearest quantization & Separable family & Source coefficients and exponents & 2.962 / 2.398 & --- & --- \\
-Distillation exposure & $\log(1+E)$ family & Source coefficients; inactive $D_0$ & 0.542 / 0.275 & --- & --- \\
-Pruning sharing & One Exponent & Source coefficients & 0.491 / 0.494 & --- & --- \\
-Quantization sharing & two-dimensional term vectors & Capability offsets & 3.999 / 2.398 & --- & --- \\
-Pruning Mathematics & Power family & Source amplitudes, Exponent & Exponent minimum, median, maximum: 3.00/\allowbreak 4.60/\allowbreak 6.00 & --- & --- \\
-Pruning Code & Power family & Source amplitudes, Exponent & Exponent minimum, median, maximum: 2.30/\allowbreak 5.95/\allowbreak 6.00 & --- & --- \\
-Pruning Question answering & Power family & Source amplitudes, Exponent & Exponent minimum, median, maximum: 0.50/\allowbreak 3.40/\allowbreak 6.00 & --- & --- \\
-\bottomrule\end{tabular*}
-\caption{The table compares shared response structure and calibration with one target measurement. Mean absolute errors and interval widths are in nats per native token; coverage is a percentage. Calibration pairs list no target measurement followed by one target measurement, which is excluded from scoring.}
+Pruning power & Power family & Source coefficients and exponent & 0.494 against 0.494\\
+\midrule
+Grouped quantization & Separable family & Source coefficients and exponents & 2.962 against 2.398\\
+\midrule
+Distillation exposure & $\log(1+E)$ family & Source coefficients; inactive $D_0$ & 0.542 against 0.275\\
+\midrule
+Pruning sharing & One Exponent & Source coefficients & 0.491 against 0.494\\
+\midrule
+Quantization sharing & two-dimensional term vectors & Capability offsets & 3.999 against 2.398\\
+\midrule
+Pruning Math & Power family & Source amplitudes, Exponent & Exponent minimum, median, maximum: 3.00, 4.60, 6.00\\
+\midrule
+Pruning Code & Power family & Source amplitudes, Exponent & Exponent minimum, median, maximum: 2.30, 5.95, 6.00\\
+\midrule
+Pruning QA & Power family & Source amplitudes, Exponent & Exponent minimum, median, maximum: 0.50, 3.40, 6.00\\
+\bottomrule
+\end{tabular*}
+\caption{The table compares a shared response family with capability-specific responses, and reports the spread of exponents fitted separately per source. Errors are mean absolute errors in nats per native token, pooled equally over capabilities. Distillation carries no pretraining-token input, strength only that term is inactive.}
 \label{tab:shared_structure}
 \end{table}
-\begin{table}[!htbp]\ContinuedFloat
-\normalfont
+
+\begin{table}[!htbp]\normalfont
 \centering\footnotesize\setlength{\tabcolsep}{3pt}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-2.000000000\tabcolsep\relax}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}@{}}
 \toprule
-Law & What is shared & What varies & Held-out error: shared / capability-specific; exponent minimum / median / maximum & Error: no target measurement / one target measurement & 80\% interval: coverage / width; no target measurement then one target measurement \\
+Panel & What is shared & Error without and with one target measurement & 80\% interval: coverage and width, without then with that measurement \\
 \midrule
-Pruning development leave-one-state-out & Training Exponent & One target amplitude & --- & 0.604 / 31.406 & --- \\
-Pruning confirmation & Training Exponent & One target amplitude & --- & 0.560 / 0.415 & 77.8\%/1.621; 100.0\%/3.629 \\
-Pruning pairs: 17-source out-of-fold predictions & Training Exponent & One target amplitude & --- & 0.517 / 0.763 & --- \\
-Pruning pairs: independent 13 & Training Exponent & One target amplitude & --- & 0.707 / 0.772 & 66.7\%/1.523; 87.5\%/4.277 \\
-Quantization surface development leave-one-state-out & Training curve & One target amplitude & --- & 3.143 / 26.177 & --- \\
-Quantization surface bit-width test & Training curve & One target amplitude & --- & 0.747 / 6.442 & --- \\
-Quantization surface group-size test & Training curve & One target amplitude & --- & 1.751 / 14.973 & --- \\
-Quantization surface joint test & Training curve & One target amplitude & --- & 0.344 / 0.193 & --- \\
-\bottomrule\end{tabular*}
-\caption[]{The table continues the preceding comparison. Mean absolute errors and interval widths are in nats per native token; coverage is a percentage. Calibration pairs list no target measurement followed by one target measurement, which is excluded from scoring.}
-\end{table}
-\begin{table}[!htbp]\ContinuedFloat
-\normalfont
-\centering\footnotesize\setlength{\tabcolsep}{3pt}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.180000000\textwidth-1.800000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-2.000000000\tabcolsep\relax}@{}}
-\toprule
-Law & What is shared & What varies & Held-out error: shared / capability-specific; exponent minimum / median / maximum & Error: no target measurement / one target measurement & 80\% interval: coverage / width; no target measurement then one target measurement \\
+Pruning development leave-one-state-out & Training Exponent & 0.604 against 31.406 & ---\\
 \midrule
-Separable quantization bit-width test & Training curve & One target amplitude & --- & 1.540 / 0.183 & --- \\
-Separable quantization group-size test & Training curve & One target amplitude & --- & 2.423 / 0.623 & --- \\
-Separable quantization joint test & Training curve & One target amplitude & --- & 0.724 / 0.306 & --- \\
-\bottomrule\end{tabular*}
-\caption[]{The table continues the preceding comparison. Mean absolute errors and interval widths are in nats per native token; coverage is a percentage. Calibration pairs list no target measurement followed by one target measurement, which is excluded from scoring.}
+Pruning confirmation & Training Exponent & 0.560 against 0.415 & 77.8\%/1.621 to 100.0\%/3.629\\
+\midrule
+Pruning pairs: 17-source out-of-fold predictions & Training Exponent & 0.517 against 0.763 & ---\\
+\midrule
+Pruning pairs: independent 13 & Training Exponent & 0.707 against 0.772 & 66.7\%/1.523 to 87.5\%/4.277\\
+\midrule
+Quantization surface development leave-one-state-out & Training curve & 3.143 against 26.177 & ---\\
+\midrule
+Quantization surface bit-width test & Training curve & 0.747 against 6.442 & ---\\
+\midrule
+Quantization surface group-size test & Training curve & 1.751 against 14.973 & ---\\
+\midrule
+Quantization surface joint test & Training curve & 0.344 against 0.193 & ---\\
+\midrule
+Separable quantization bit-width test & Training curve & 1.540 against 0.183 & ---\\
+\midrule
+Separable quantization group-size test & Training curve & 2.423 against 0.623 & ---\\
+\midrule
+Separable quantization joint test & Training curve & 0.724 against 0.306 & ---\\
+\bottomrule
+\end{tabular*}
+\caption{The table reports what one target measurement buys. Errors are mean absolute errors in nats per native token, interval widths are in the same units, and coverage is a percentage. The calibration cell itself is excluded from scoring.}
+\par\smallskip{\footnotesize The confirmation panel excludes three new sources, and the independent pair panel excludes all four pair sources from fitting and from its 13-source interval bank.\par}
+\label{tab:calibration_k1}
 \end{table}

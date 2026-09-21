@@ -2,7 +2,7 @@
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
 \toprule
-Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Math & Code & QA \\
 \midrule
 \textbf{pruning}: source transfer at fixed density: 3 sizes by 3 stages Pythia panel, leave-one-step-out\newline{\itshape \mbox{held-out} pretraining stage (in-range)} [Retrospective / fixed / retrospective] & Candidate: configuration-indicator ordinary least squares & \textbf{0.253} (+0.16) & \textbf{0.292} (+0.22)$^{*}$ & 0.806 (-0.31) \\
  & Same-input baseline without pretraining tokens & 0.613 & 0.693 & 0.774 \\
@@ -28,7 +28,7 @@ Test; what is held out; fold rule (relation / input baseline / simple baseline) 
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.340000000\textwidth-2.720000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.260000000\textwidth-2.080000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333330\textwidth-1.066666640\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.133333340\textwidth-1.066666720\tabcolsep\relax}@{}}
 \toprule
-Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Mathematics & Code & Question answering \\
+Test; what is held out; fold rule (relation / input baseline / simple baseline) & Predictor & Math & Code & QA \\
 \midrule
  & Same-input baseline: none available & -- & -- & -- \\
  & Simple baseline: per-bit median & 0.084 & \textbf{0.094} & \textbf{0.134} \\

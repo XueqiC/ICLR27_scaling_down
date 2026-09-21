@@ -1,7 +1,7 @@
 \begin{table}[!htbp]\normalfont\centering\scriptsize\setlength{\tabcolsep}{2pt}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-2.660000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.090000000\textwidth-1.260000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.680000000\tabcolsep\relax}@{}}
 \toprule
-Form & Parameters & {Run held out: Mathematics (error / signed bias)} & {Run held out: Code (error / signed bias)} & Run held out: Question answering (error / signed bias) & {Student held out: Mathematics (error / signed bias)} & {Student held out: Code (error / signed bias)} & {Student held out: Question answering (error / signed bias)} \\
+Form & Parameters & {Run held out: Math (error / signed bias)} & {Run held out: Code (error / signed bias)} & Run held out: QA (error / signed bias) & {Student held out: Math (error / signed bias)} & {Student held out: Code (error / signed bias)} & {Student held out: QA (error / signed bias)} \\
 \midrule
 Zero change & 0 & 0.152 / -0.152 & 0.178 / -0.178 & 1.429 / +0.143 & 0.152 / -0.152 & 0.178 / -0.178 & 1.429 / +0.143 \\
 Constant & 3 & 0.095 / +0.000 & 0.103 / +0.000 & 1.400 / +0.000 & 0.093 / +0.000 & 0.100 / +0.000 & 1.358 / -0.000 \\
@@ -22,17 +22,17 @@ saturating budget and reuse with student size & 12 & 0.062 / -0.007 & 0.057 / -0
 \toprule
 Structure & {Parameters: shared / capability-specific} & Capability & Shared mean absolute error & {Capability-specific mean absolute error} & Gain & Gain exceeds 0.02 \\
 \midrule
-Reuse only & 4 / 4 & Mathematics & 0.431 & 0.409 & 0.022 & Yes \\
+Reuse only & 4 / 4 & Math & 0.431 & 0.409 & 0.022 & Yes \\
 Reuse only & 4 / 4 & Code & 0.417 & 0.412 & 0.006 & No \\
-Reuse only & 4 / 4 & Question answering & 0.967 & 1.150 & -0.183 & No \\
+Reuse only & 4 / 4 & QA & 0.967 & 1.150 & -0.183 & No \\
 Reuse only & 4 / 4 & Capability mean & 0.605 & 0.657 & -0.052 & No \\
-Budget and reuse & 5 / 5 & Mathematics & 0.439 & 0.327 & 0.111 & Yes \\
+Budget and reuse & 5 / 5 & Math & 0.439 & 0.327 & 0.111 & Yes \\
 Budget and reuse & 5 / 5 & Code & 0.419 & 0.314 & 0.105 & Yes \\
-Budget and reuse & 5 / 5 & Question answering & 0.979 & 0.853 & 0.126 & Yes \\
+Budget and reuse & 5 / 5 & QA & 0.979 & 0.853 & 0.126 & Yes \\
 Budget and reuse & 5 / 5 & Capability mean & 0.612 & 0.498 & 0.114 & Yes \\
-saturating budget and reuse & 7 / 7 & Mathematics & 0.536 & 0.145 & 0.390 & Yes \\
+saturating budget and reuse & 7 / 7 & Math & 0.536 & 0.145 & 0.390 & Yes \\
 saturating budget and reuse & 7 / 7 & Code & 0.527 & 0.107 & 0.420 & Yes \\
-saturating budget and reuse & 7 / 7 & Question answering & 1.044 & 0.826 & 0.219 & Yes \\
+saturating budget and reuse & 7 / 7 & QA & 1.044 & 0.826 & 0.219 & Yes \\
 saturating budget and reuse & 7 / 7 & Capability mean & 0.702 & 0.359 & 0.343 & Yes \\
 \bottomrule\end{tabular*}
 \caption{The table compares shared and capability-specific distillation responses at matched parameter counts. Errors and gains are in nats per native token. Paired parameter counts list the shared response followed by the capability-specific response.}

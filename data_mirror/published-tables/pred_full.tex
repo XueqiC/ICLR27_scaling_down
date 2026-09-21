@@ -2,7 +2,7 @@
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
 \toprule
-Test & What is held out & Fold rule: relation / input baseline / simple baseline & Mathematics & Code & Question answering \\
+Test & What is held out & Fold rule: relation / input baseline / simple baseline & Math & Code & QA \\
 \midrule
 \multicolumn{6}{@{}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 1.000000000\textwidth-0.000000000\tabcolsep\relax}@{}}{\textit{Source axis: seen setting, unseen source state}} \\
 Pruning: fixed density, 3 sizes by 3 stages, leave-one-stage-out & stage & Retrospective / fixed / retrospective & \textit{Relation / median}\newline \textbf{0.253} / 0.413 & \textit{Relation / median}\newline \textbf{0.292} / 0.516 & \textit{Relation / zero change}\newline 0.806 / \textbf{0.500} (0) \\
@@ -28,7 +28,7 @@ Pruning: Pythia-1 billion at step 96 thousand, density 0.55 & size, stage, densi
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
 \toprule
-Test & What is held out & Fold rule: relation / input baseline / simple baseline & Mathematics & Code & Question answering \\
+Test & What is held out & Fold rule: relation / input baseline / simple baseline & Math & Code & QA \\
 \midrule
 Quantization: Pythia-1 billion at step 96 thousand, 4 bits & size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit median}\newline 0.116 / \textbf{0.068} & \textit{Relation / per-bit median}\newline 0.046 / \textbf{0.012} & \textit{Relation / no pretraining-token input}\newline 0.059 / \textbf{0.054} \\
 Quantization: Pythia-1 billion at step 96 thousand, 3 bits & size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit median}\newline \textbf{0.690} / 1.414 & \textit{Relation / per-bit median}\newline 0.318 / \textbf{0.001} & \textit{Relation / per-bit median}\newline \textbf{0.182} / 0.446 \\
@@ -50,7 +50,7 @@ Quantization: Pythia-6.9 billion at steps 32 thousand and 112 thousand, bit widt
 \normalfont\centering\footnotesize\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.02}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.270000000\textwidth-2.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}@{}}
 \toprule
-Test & What is held out & Fold rule: relation / input baseline / simple baseline & Mathematics & Code & Question answering \\
+Test & What is held out & Fold rule: relation / input baseline / simple baseline & Math & Code & QA \\
 \midrule
 Quantization: Pythia-6.9 billion at steps 32 thousand and 112 thousand, 3 bits & larger size, stage & Frozen / fixed / fixed & \textit{Relation / per-bit mean}\newline 3.233 / \textbf{2.046} & \textit{Relation / per-bit mean}\newline 3.229 / \textbf{1.805} & \textit{Relation / per-bit mean}\newline 5.306 / \textbf{1.744} \\
 \addlinespace[1.5pt]

@@ -7,21 +7,21 @@
 \toprule
 Student, pools & Capability & {Selected on development data} & Constant & Zero change & Best frozen form (retrospective) & Measured points \\
 \midrule
-Gemma-3-270 million, unseen pool (pool size 375) & Mathematics & 0.045 & 0.060 & 0.092 & {Constant with student size (0.031)} & 12 \\
+Gemma-3-270 million, unseen pool (pool size 375) & Math & 0.045 & 0.060 & 0.092 & {Constant with student size (0.031)} & 12 \\
  & Code & 0.036 & 0.047 & 0.138 & {Reuse response (0.031)} & 12 \\
- & Question answering & 0.606 & 0.862 & 1.005 & {Joint budget and pool response (0.544)} & 12 \\
+ & QA & 0.606 & 0.862 & 1.005 & {Joint budget and pool response (0.544)} & 12 \\
 \addlinespace
-Gemma-3-1 billion, unseen pool (pool size 375) & Mathematics & 0.050 & 0.057 & 0.095 & {Reuse response (0.026)} & 12 \\
+Gemma-3-1 billion, unseen pool (pool size 375) & Math & 0.050 & 0.057 & 0.095 & {Reuse response (0.026)} & 12 \\
  & Code & 0.029 & 0.069 & 0.109 & {Reuse response (0.018)} & 12 \\
- & Question answering & 0.444 & 1.004 & 1.148 & {Joint budget and pool response (0.301)} & 12 \\
+ & QA & 0.444 & 1.004 & 1.148 & {Joint budget and pool response (0.301)} & 12 \\
 \addlinespace
-Gemma-3-4 billion, unseen pool (pool size 375) & Mathematics & 0.089 & 0.020 & 0.153 & Constant (0.020) & 12 \\
+Gemma-3-4 billion, unseen pool (pool size 375) & Math & 0.089 & 0.020 & 0.153 & Constant (0.020) & 12 \\
  & Code & 0.050 & 0.038 & 0.178 & {Budget response (0.033)} & 12 \\
- & Question answering & 1.141 & 1.024 & 1.167 & {Joint budget and pool response (0.272)} & 12 \\
+ & QA & 1.141 & 1.024 & 1.167 & {Joint budget and pool response (0.272)} & 12 \\
 \addlinespace
-Gemma-3-4 billion, development pools (pool size 75,450), \mbox{held-out} student & Mathematics & 0.106 & 0.156 & 0.294 & {Joint with student size (0.106)} & 16 \\
+Gemma-3-4 billion, development pools (pool size 75,450), \mbox{held-out} student & Math & 0.106 & 0.156 & 0.294 & {Joint with student size (0.106)} & 16 \\
  & Code & 0.048 & 0.098 & 0.230 & {Joint with student size (0.048)} & 16 \\
- & Question answering & 0.958 & 1.790 & 1.862 & {Joint budget and pool response (0.759)} & 16 \\
+ & QA & 0.958 & 1.790 & 1.862 & {Joint budget and pool response (0.759)} & 16 \\
 \bottomrule
 \end{tabular*}
 \end{table}

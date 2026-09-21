@@ -7,7 +7,7 @@
 \label{tab:cond_audit}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.400000000\textwidth-2.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-1.200000000\tabcolsep\relax}@{}}
 \toprule
-{Response family or diagnostic} & Mathematics & Code & Question answering \\
+{Response family or diagnostic} & Math & Code & QA \\
 \midrule
 Pruning & 1.287773 & 1.270559 & 0.327894 \\
 Quantization & 1.069770 & 1.431306 & 0.556505 \\
@@ -22,9 +22,9 @@ Pruning anchor squared correlation ($R^2$) & 0.9382 & 0.9739 & 0.4894 \\
 \toprule
 Capability & Separate response, 4 states & Scaled shared response, 4 states & Gain, 5 labels [95\% confidence interval] & Gain, 4 states [95\% confidence interval] \\
 \midrule
-Mathematics & 0.2279 & 0.2328 & {0.0190 [-0.0291, 0.0690]} & {0.0048 [-0.0495, 0.0591]} \\
+Math & 0.2279 & 0.2328 & {0.0190 [-0.0291, 0.0690]} & {0.0048 [-0.0495, 0.0591]} \\
 Code & 0.1736 & 0.1776 & {0.0092 [-0.0116, 0.0273]} & {0.0040 [-0.0181, 0.0228]} \\
-Question answering & 0.1818 & 0.3500 & {0.1899 [0.1252, 0.2545]} & {0.1683 [0.1054, 0.2434]} \\
+QA & 0.1818 & 0.3500 & {0.1899 [0.1252, 0.2545]} & {0.1683 [0.1054, 0.2434]} \\
 Capability mean & 0.1944 & 0.2535 & {0.0727 [0.0300, 0.1154]} & {0.0590 [0.0206, 0.1025]} \\
 \bottomrule
 \end{tabular*}

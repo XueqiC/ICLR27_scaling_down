@@ -3,9 +3,9 @@
 \toprule
 Capability & Exponent & Intercept & Source size & Initial loss & Pretraining tokens \\
 \midrule
-Mathematics & 3.75 & +3.275 & +0.319 & +3.850 & +0.250 \\
+Math & 3.75 & +3.275 & +0.319 & +3.850 & +0.250 \\
 Code & 3.05 & +4.499 & +0.273 & +5.357 & +0.347 \\
-Question answering & 3.05 & -7.409 & -0.481 & +5.486 & +0.106 \\
+QA & 3.05 & -7.409 & -0.481 & +5.486 & +0.106 \\
 \bottomrule\end{tabular*}
 \caption{The table gives the frozen pruning exponent and coefficients for each capability. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the prediction formula and the constants used to standardize each input.}
 \par\smallskip{\footnotesize Frozen coefficients of the selected pruning form $\widehat{\Delta L}_c=(\beta_c\cdot\phi)((1-d)/0.3)^{\gamma_c}$ with $\phi=[1,z(\log N_0),z(L_{0,c}),z(\log D_0)]$, standardized with centers 20.248, 2.661, 25.614 and scales 1.407, 1.691, 0.739 for $(\log N_0, L_{0,c}, \log D_0)$.\par}

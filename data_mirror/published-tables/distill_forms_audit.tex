@@ -51,29 +51,29 @@ $T=T_c$ is supervised completion-token exposure; $D_U$ is unique-pool completion
 \toprule
 Form & Capability & Coefficient or budget & Value \\
 \midrule
-Constant & Mathematics & Intercept & 0.16073202 \\
+Constant & Math & Intercept & 0.16073202 \\
 Constant & Code & Intercept & 0.17320167 \\
-Constant & Question answering & Intercept & -0.43217131 \\
-Constant with student size & Mathematics & Intercept & 0.16572843 \\
-Constant with student size & Mathematics & Student size & 0.04964662 \\
+Constant & QA & Intercept & -0.43217131 \\
+Constant with student size & Math & Intercept & 0.16572843 \\
+Constant with student size & Math & Student size & 0.04964662 \\
 Constant with student size & Code & Intercept & 0.17493450 \\
 Constant with student size & Code & Student size & 0.01721817 \\
-Constant with student size & Question answering & Intercept & -0.42464251 \\
-Constant with student size & Question answering & Student size & 0.07480966 \\
-Budget response & Mathematics & Budget & 0.11411461 \\
+Constant with student size & QA & Intercept & -0.42464251 \\
+Constant with student size & QA & Student size & 0.07480966 \\
+Budget response & Math & Budget & 0.11411461 \\
 Budget response & Code & Budget & 0.12407374 \\
-Budget response & Question answering & Budget & -0.05168564 \\
-Budget with student size & Mathematics & Budget & 0.11798308 \\
-Budget with student size & Mathematics & Student interaction & 0.03807590 \\
+Budget response & QA & Budget & -0.05168564 \\
+Budget with student size & Math & Budget & 0.11798308 \\
+Budget with student size & Math & Student interaction & 0.03807590 \\
 Budget with student size & Code & Budget & 0.12520775 \\
 Budget with student size & Code & Student interaction & 0.01116157 \\
-Budget with student size & Question answering & Budget & -0.04198703 \\
-Budget with student size & Question answering & Student interaction & 0.09545971 \\
-Reuse response & Mathematics & Reuse & 0.15127841 \\
+Budget with student size & QA & Budget & -0.04198703 \\
+Budget with student size & QA & Student interaction & 0.09545971 \\
+Reuse response & Math & Reuse & 0.15127841 \\
 Reuse response & Code & Reuse & 0.15508921 \\
-Reuse response & Question answering & Reuse & 0.32731726 \\
-Reuse with student size & Mathematics & Reuse & 0.15911482 \\
-Reuse with student size & Mathematics & Student interaction & 0.05972830 \\
+Reuse response & QA & Reuse & 0.32731726 \\
+Reuse with student size & Math & Reuse & 0.15911482 \\
+Reuse with student size & Math & Student interaction & 0.05972830 \\
 Reuse with student size & Code & Reuse & 0.15742770 \\
 \bottomrule
 \end{tabular*}
@@ -85,29 +85,29 @@ Reuse with student size & Code & Reuse & 0.15742770 \\
 Form & Capability & Coefficient or budget & Value \\
 \midrule
 Reuse with student size & Code & Student interaction & 0.01782373 \\
-Reuse with student size & Question answering & Reuse & 0.35588711 \\
-Reuse with student size & Question answering & Student interaction & 0.21775647 \\
-Joint budget and pool response & Mathematics & Budget & 0.05743700 \\
-Joint budget and pool response & Mathematics & Budget curvature & 0.01079328 \\
-Joint budget and pool response & Mathematics & Pool interaction & -0.08234767 \\
+Reuse with student size & QA & Reuse & 0.35588711 \\
+Reuse with student size & QA & Student interaction & 0.21775647 \\
+Joint budget and pool response & Math & Budget & 0.05743700 \\
+Joint budget and pool response & Math & Budget curvature & 0.01079328 \\
+Joint budget and pool response & Math & Pool interaction & -0.08234767 \\
 Joint budget and pool response & Code & Budget & 0.08274500 \\
 Joint budget and pool response & Code & Budget curvature & 0.00732763 \\
 Joint budget and pool response & Code & Pool interaction & -0.06222617 \\
-Joint budget and pool response & Question answering & Budget & -2.96881165 \\
-Joint budget and pool response & Question answering & Budget curvature & 1.35615826 \\
-Joint budget and pool response & Question answering & Pool interaction & -1.02368379 \\
-Joint with student size & Mathematics & Budget & 0.06050775 \\
-Joint with student size & Mathematics & Budget curvature & 0.01095617 \\
-Joint with student size & Mathematics & Pool interaction & -0.08397982 \\
-Joint with student size & Mathematics & Student interaction & 0.04037152 \\
+Joint budget and pool response & QA & Budget & -2.96881165 \\
+Joint budget and pool response & QA & Budget curvature & 1.35615826 \\
+Joint budget and pool response & QA & Pool interaction & -1.02368379 \\
+Joint with student size & Math & Budget & 0.06050775 \\
+Joint with student size & Math & Budget curvature & 0.01095617 \\
+Joint with student size & Math & Pool interaction & -0.08397982 \\
+Joint with student size & Math & Student interaction & 0.04037152 \\
 Joint with student size & Code & Budget & 0.08372438 \\
 Joint with student size & Code & Budget curvature & 0.00737958 \\
 Joint with student size & Code & Pool interaction & -0.06274673 \\
 Joint with student size & Code & Student interaction & 0.01287603 \\
-Joint with student size & Question answering & Budget & -2.95932583 \\
-Joint with student size & Question answering & Budget curvature & 1.35666142 \\
-Joint with student size & Question answering & Pool interaction & -1.02872563 \\
-Joint with student size & Question answering & Student interaction & 0.12471092 \\
+Joint with student size & QA & Budget & -2.95932583 \\
+Joint with student size & QA & Budget curvature & 1.35666142 \\
+Joint with student size & QA & Pool interaction & -1.02872563 \\
+Joint with student size & QA & Student interaction & 0.12471092 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -117,30 +117,30 @@ Joint with student size & Question answering & Student interaction & 0.12471092 
 \toprule
 Form & Capability & Coefficient or budget & Value \\
 \midrule
-descriptor-modulated reuse with initial loss & Mathematics & Reuse & 0.15978098 \\
-descriptor-modulated reuse with initial loss & Mathematics & Initial-loss interaction & -0.05836587 \\
+descriptor-modulated reuse with initial loss & Math & Reuse & 0.15978098 \\
+descriptor-modulated reuse with initial loss & Math & Initial-loss interaction & -0.05836587 \\
 descriptor-modulated reuse with initial loss & Code & Reuse & 0.15769119 \\
 descriptor-modulated reuse with initial loss & Code & Initial-loss interaction & -0.01869393 \\
-descriptor-modulated reuse with initial loss & Question answering & Reuse & 0.33395979 \\
-descriptor-modulated reuse with initial loss & Question answering & Initial-loss interaction & 0.20951497 \\
-descriptor-modulated reuse with student size & Mathematics & Reuse & 0.15911426 \\
-descriptor-modulated reuse with student size & Mathematics & Student-size interaction & 0.05945300 \\
+descriptor-modulated reuse with initial loss & QA & Reuse & 0.33395979 \\
+descriptor-modulated reuse with initial loss & QA & Initial-loss interaction & 0.20951497 \\
+descriptor-modulated reuse with student size & Math & Reuse & 0.15911426 \\
+descriptor-modulated reuse with student size & Math & Student-size interaction & 0.05945300 \\
 descriptor-modulated reuse with student size & Code & Reuse & 0.15742720 \\
 descriptor-modulated reuse with student size & Code & Student-size interaction & 0.01774153 \\
-descriptor-modulated reuse with student size & Question answering & Reuse & 0.35588576 \\
-descriptor-modulated reuse with student size & Question answering & Student-size interaction & 0.21675290 \\
-saturating budget and reuse with initial loss & Mathematics & Saturation & -0.05119545 \\
-saturating budget and reuse with initial loss & Mathematics & Initial-loss saturation & 0.05905389 \\
-saturating budget and reuse with initial loss & Mathematics & Reuse & 0.18753466 \\
-saturating budget and reuse with initial loss & Mathematics & Initial-loss reuse & -0.09061204 \\
-saturating budget and reuse with initial loss & Mathematics & Saturation budget in tokens & 70000 \\
+descriptor-modulated reuse with student size & QA & Reuse & 0.35588576 \\
+descriptor-modulated reuse with student size & QA & Student-size interaction & 0.21675290 \\
+saturating budget and reuse with initial loss & Math & Saturation & -0.05119545 \\
+saturating budget and reuse with initial loss & Math & Initial-loss saturation & 0.05905389 \\
+saturating budget and reuse with initial loss & Math & Reuse & 0.18753466 \\
+saturating budget and reuse with initial loss & Math & Initial-loss reuse & -0.09061204 \\
+saturating budget and reuse with initial loss & Math & Saturation budget in tokens & 70000 \\
 saturating budget and reuse with initial loss & Code & Saturation & 0.06095288 \\
 saturating budget and reuse with initial loss & Code & Initial-loss saturation & 0.00410248 \\
 saturating budget and reuse with initial loss & Code & Reuse & 0.13252972 \\
 saturating budget and reuse with initial loss & Code & Initial-loss reuse & -0.01996365 \\
 saturating budget and reuse with initial loss & Code & Saturation budget in tokens & 140000 \\
-saturating budget and reuse with initial loss & Question answering & Saturation & -2.91040842 \\
-saturating budget and reuse with initial loss & Question answering & Initial-loss saturation & -0.51055670 \\
+saturating budget and reuse with initial loss & QA & Saturation & -2.91040842 \\
+saturating budget and reuse with initial loss & QA & Initial-loss saturation & -0.51055670 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -150,30 +150,30 @@ saturating budget and reuse with initial loss & Question answering & Initial-los
 \toprule
 Form & Capability & Coefficient or budget & Value \\
 \midrule
-saturating budget and reuse with initial loss & Question answering & Reuse & 2.19442302 \\
-saturating budget and reuse with initial loss & Question answering & Initial-loss reuse & 0.53857193 \\
-saturating budget and reuse with initial loss & Question answering & Saturation budget in tokens & 17500 \\
-saturating budget and reuse with student size & Mathematics & Saturation & -0.05088944 \\
-saturating budget and reuse with student size & Mathematics & Student-size saturation & -0.06884615 \\
-saturating budget and reuse with student size & Mathematics & Reuse & 0.18669419 \\
-saturating budget and reuse with student size & Mathematics & Student-size reuse & 0.09668063 \\
-saturating budget and reuse with student size & Mathematics & Saturation budget in tokens & 70000 \\
+saturating budget and reuse with initial loss & QA & Reuse & 2.19442302 \\
+saturating budget and reuse with initial loss & QA & Initial-loss reuse & 0.53857193 \\
+saturating budget and reuse with initial loss & QA & Saturation budget in tokens & 17500 \\
+saturating budget and reuse with student size & Math & Saturation & -0.05088944 \\
+saturating budget and reuse with student size & Math & Student-size saturation & -0.06884615 \\
+saturating budget and reuse with student size & Math & Reuse & 0.18669419 \\
+saturating budget and reuse with student size & Math & Student-size reuse & 0.09668063 \\
+saturating budget and reuse with student size & Math & Saturation budget in tokens & 70000 \\
 saturating budget and reuse with student size & Code & Saturation & 0.06055806 \\
 saturating budget and reuse with student size & Code & Student-size saturation & -0.01138197 \\
 saturating budget and reuse with student size & Code & Reuse & 0.13248325 \\
 saturating budget and reuse with student size & Code & Student-size reuse & 0.02207299 \\
 saturating budget and reuse with student size & Code & Saturation budget in tokens & 140000 \\
-saturating budget and reuse with student size & Question answering & Saturation & -2.96471959 \\
-saturating budget and reuse with student size & Question answering & Student-size saturation & -0.55124327 \\
-saturating budget and reuse with student size & Question answering & Reuse & 2.25944091 \\
-saturating budget and reuse with student size & Question answering & Student-size reuse & 0.60266669 \\
-saturating budget and reuse with student size & Question answering & Saturation budget in tokens & 17500 \\
-Budget only & Mathematics & Intercept & -0.00354162 \\
-Budget only & Mathematics & Budget & 0.11628241 \\
+saturating budget and reuse with student size & QA & Saturation & -2.96471959 \\
+saturating budget and reuse with student size & QA & Student-size saturation & -0.55124327 \\
+saturating budget and reuse with student size & QA & Reuse & 2.25944091 \\
+saturating budget and reuse with student size & QA & Student-size reuse & 0.60266669 \\
+saturating budget and reuse with student size & QA & Saturation budget in tokens & 17500 \\
+Budget only & Math & Intercept & -0.00354162 \\
+Budget only & Math & Budget & 0.11628241 \\
 Budget only & Code & Intercept & -0.01537157 \\
 Budget only & Code & Budget & 0.13348307 \\
-Budget only & Question answering & Intercept & -2.65593552 \\
-Budget only & Question answering & Budget & 1.57410920 \\
+Budget only & QA & Intercept & -2.65593552 \\
+Budget only & QA & Budget & 1.57410920 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -183,28 +183,28 @@ Budget only & Question answering & Budget & 1.57410920 \\
 \toprule
 Form & Capability & Coefficient or budget & Value \\
 \midrule
-Reuse only & Mathematics & Intercept & -0.01118478 \\
-Reuse only & Mathematics & Reuse & 0.15855937 \\
+Reuse only & Math & Intercept & -0.01118478 \\
+Reuse only & Math & Reuse & 0.15855937 \\
 Reuse only & Code & Intercept & 0.01716105 \\
 Reuse only & Code & Reuse & 0.14391673 \\
-Reuse only & Question answering & Intercept & -2.67574528 \\
-Reuse only & Question answering & Reuse & 2.06925492 \\
-Response surface with initial loss & Mathematics & Intercept & 0.01215786 \\
-Response surface with initial loss & Mathematics & Budget & -0.02297507 \\
-Response surface with initial loss & Mathematics & Reuse & 0.17248101 \\
-Response surface with initial loss & Mathematics & Initial loss & -0.05351151 \\
+Reuse only & QA & Intercept & -2.67574528 \\
+Reuse only & QA & Reuse & 2.06925492 \\
+Response surface with initial loss & Math & Intercept & 0.01215786 \\
+Response surface with initial loss & Math & Budget & -0.02297507 \\
+Response surface with initial loss & Math & Reuse & 0.17248101 \\
+Response surface with initial loss & Math & Initial loss & -0.05351151 \\
 Response surface with initial loss & Code & Intercept & -0.00565072 \\
 Response surface with initial loss & Code & Budget & 0.02838148 \\
 Response surface with initial loss & Code & Reuse & 0.13012030 \\
 Response surface with initial loss & Code & Initial loss & -0.02176736 \\
-Response surface with initial loss & Question answering & Intercept & -2.52991953 \\
-Response surface with initial loss & Question answering & Budget & -0.16894242 \\
-Response surface with initial loss & Question answering & Reuse & 2.15704634 \\
-Response surface with initial loss & Question answering & Initial loss & 0.09644470 \\
-Response surface with student size & Mathematics & Intercept & 0.01149039 \\
-Response surface with student size & Mathematics & Budget & -0.02267648 \\
-Response surface with student size & Mathematics & Reuse & 0.17209450 \\
-Response surface with student size & Mathematics & Student size & 0.05257119 \\
+Response surface with initial loss & QA & Intercept & -2.52991953 \\
+Response surface with initial loss & QA & Budget & -0.16894242 \\
+Response surface with initial loss & QA & Reuse & 2.15704634 \\
+Response surface with initial loss & QA & Initial loss & 0.09644470 \\
+Response surface with student size & Math & Intercept & 0.01149039 \\
+Response surface with student size & Math & Budget & -0.02267648 \\
+Response surface with student size & Math & Reuse & 0.17209450 \\
+Response surface with student size & Math & Student size & 0.05257119 \\
 Response surface with student size & Code & Intercept & -0.00599991 \\
 Response surface with student size & Code & Budget & 0.02853769 \\
 \bottomrule
@@ -218,10 +218,10 @@ Form & Capability & Coefficient or budget & Value \\
 \midrule
 Response surface with student size & Code & Reuse & 0.12991810 \\
 Response surface with student size & Code & Student size & 0.01955100 \\
-Response surface with student size & Question answering & Intercept & -2.52068482 \\
-Response surface with student size & Question answering & Budget & -0.17307350 \\
-Response surface with student size & Question answering & Reuse & 2.16239389 \\
-Response surface with student size & Question answering & Student size & 0.11416459 \\
+Response surface with student size & QA & Intercept & -2.52068482 \\
+Response surface with student size & QA & Budget & -0.17307350 \\
+Response surface with student size & QA & Reuse & 2.16239389 \\
+Response surface with student size & QA & Student size & 0.11416459 \\
 \bottomrule
 \end{tabular*}%
 

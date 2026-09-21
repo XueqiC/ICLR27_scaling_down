@@ -3,11 +3,11 @@
 \toprule
 Capability & Term & Intercept & Source size & Initial loss & Pretraining tokens \\
 \midrule
-Mathematics & Constant (1) & +5.664 & +0.569 & +7.260 & +0.577 \\
-Mathematics & Bit response & -13.029 & -1.306 & -16.698 & -1.326 \\
-Mathematics & Group-size response & +0.297 & -0.026 & +0.117 & +0.152 \\
-Mathematics & Bit and group interaction & -0.162 & +0.030 & +0.017 & -0.119 \\
-Mathematics & Squared bit response ($u^2$) & +7.634 & +0.767 & +9.786 & +0.777 \\
+Math & Constant (1) & +5.664 & +0.569 & +7.260 & +0.577 \\
+Math & Bit response & -13.029 & -1.306 & -16.698 & -1.326 \\
+Math & Group-size response & +0.297 & -0.026 & +0.117 & +0.152 \\
+Math & Bit and group interaction & -0.162 & +0.030 & +0.017 & -0.119 \\
+Math & Squared bit response ($u^2$) & +7.634 & +0.767 & +9.786 & +0.777 \\
 \midrule
 Code & Constant (1) & +5.304 & +0.349 & +6.539 & +0.534 \\
 Code & Bit response & -12.130 & -0.796 & -14.945 & -1.223 \\
@@ -15,11 +15,11 @@ Code & Group-size response & +0.753 & -0.006 & +0.619 & +0.231 \\
 Code & Bit and group interaction & -0.560 & +0.011 & -0.425 & -0.188 \\
 Code & Squared bit response ($u^2$) & +7.149 & +0.470 & +8.813 & +0.720 \\
 \midrule
-Question answering & Constant (1) & -9.723 & -0.684 & +7.403 & +0.141 \\
-Question answering & Bit response & +21.703 & +1.561 & -16.563 & -0.359 \\
-Question answering & Group-size response & +1.825 & -0.011 & -1.220 & +0.126 \\
-Question answering & Bit and group interaction & -1.561 & +0.022 & +1.028 & -0.125 \\
-Question answering & Squared bit response ($u^2$) & -13.105 & -0.922 & +9.978 & +0.190 \\
+QA & Constant (1) & -9.723 & -0.684 & +7.403 & +0.141 \\
+QA & Bit response & +21.703 & +1.561 & -16.563 & -0.359 \\
+QA & Group-size response & +1.825 & -0.011 & -1.220 & +0.126 \\
+QA & Bit and group interaction & -1.561 & +0.022 & +1.028 & -0.125 \\
+QA & Squared bit response ($u^2$) & -13.105 & -0.922 & +9.978 & +0.190 \\
 \bottomrule\end{tabular*}
 \caption{The table gives frozen grouped-quantization coefficients by capability and response term. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the prediction formula and the constants used to standardize each input.}
 \par\smallskip{\footnotesize Frozen coefficients of the grouped-quantization form $\widehat{\Delta L}_c=\sum_k \beta_{c,k}\cdot\phi(\mathbf x)\,t_k(b,g)$ with $t_k\in\{1,u,v,uv,u^2\}$, $u=\log_2 q_{\max}(b)$ centred at the development mean, and $v=\log_2(g/128)$; standardization uses centers 19.565, 2.746, 25.332 and scales 1.084, 1.623, 1.095 for $(\log N_0, L_{0,c}, \log D_0)$, with ridge penalty $10^{-3}$ in the fit on standardized inputs.\par}

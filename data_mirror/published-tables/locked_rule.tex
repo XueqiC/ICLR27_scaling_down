@@ -30,38 +30,50 @@
 \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.220000000\textwidth-2.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}@{}}
 \toprule
-Compression method & Capability & State status & Response predictor & Development data & Dense reference loss \\
+Compression method & Capability & State status & Response predictor \\
 \midrule
 % delta = float(np.dot(p["beta"], z) * prune.shape(d, p["gamma"]))
-Pruning & Mathematics & Seen source state; new density & Pruning power form & Pruning development & Source dense loss \\
+Pruning & Math & Seen source state; new density & Pruning power form\\
+\midrule
 % delta = float(np.dot(p["beta"], z) * prune.shape(d, p["gamma"]))
-Pruning & Code & Seen source state; new density & Pruning power form & Pruning development & Source dense loss \\
+Pruning & Code & Seen source state; new density & Pruning power form\\
+\midrule
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & Question answering & Seen source state; new density & {Pruning development median curve} & Pruning development & Source dense loss \\
+Pruning & QA & Seen source state; new density & {Pruning development median curve}\\
+\midrule
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & Mathematics & {New size or new stage} & {Pruning development median curve} & Pruning development & Source dense loss \\
+Pruning & Math & {New size or new stage} & {Pruning development median curve}\\
+\midrule
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & Code & {New size or new stage} & {Pruning development median curve} & Pruning development & Source dense loss \\
+Pruning & Code & {New size or new stage} & {Pruning development median curve}\\
+\midrule
 % delta = prune.linear_curve(f["models"][c]["median_curve"]["anchors"], d)
-Pruning & Question answering & {New size or new stage} & {Pruning development median curve} & Pruning development & Source dense loss \\
+Pruning & QA & {New size or new stage} & {Pruning development median curve}\\
+\midrule
 \addlinespace
 % delta = channel_delta(f["models"][c], inputs)
-{Per-channel round-to-nearest quantization} & Mathematics & Seen state & {Per-bit source regression} & Channel quantization development & Source dense loss \\
+{Per-channel round-to-nearest quantization} & Math & Seen state & {Per-bit source regression}\\
+\midrule
 % delta = channel_delta(f["models"][c], inputs)
-{Per-channel round-to-nearest quantization} & Code & Seen state & {Per-bit source regression} & Channel quantization development & Source dense loss \\
+{Per-channel round-to-nearest quantization} & Code & Seen state & {Per-bit source regression}\\
+\midrule
 % delta = channel_delta(f["models"][c], inputs)
-{Per-channel round-to-nearest quantization} & Question answering & Seen state & {Per-bit source regression} & Channel quantization development & Source dense loss \\
+{Per-channel round-to-nearest quantization} & QA & Seen state & {Per-bit source regression}\\
+\midrule
 % delta = f["median"][c][str(inputs["bit"])]
-{Per-channel round-to-nearest quantization} & Mathematics & New state & {Per-bit development median} & Channel quantization development & Source dense loss \\
+{Per-channel round-to-nearest quantization} & Math & New state & {Per-bit development median}\\
+\midrule
 % delta = f["median"][c][str(inputs["bit"])]
-{Per-channel round-to-nearest quantization} & Code & New state & {Per-bit development median} & Channel quantization development & Source dense loss \\
+{Per-channel round-to-nearest quantization} & Code & New state & {Per-bit development median}\\
+\midrule
 % delta = f["median"][c][str(inputs["bit"])]
-{Per-channel round-to-nearest quantization} & Question answering & New state & {Per-bit development median} & Channel quantization development & Source dense loss \\
+{Per-channel round-to-nearest quantization} & QA & New state & {Per-bit development median}\\
+\midrule
 \addlinespace
 % anchors = {k: float(np.dot(beta, z)) for k, beta in
-%                        f["models"][c]["same_input_interpolation"]["anchors"].items()}
+%                        f["models"][c]["same_input_interpolation"]["anchors"].items()}\\
 \bottomrule\end{tabular*}
-\caption{The table specifies the selection predictor for each compression method, capability, and source-state status. Absolute losses are in nats per native token. Development-data columns name the fitting panel, and anchor columns identify the dense reference loss. The rule was frozen before confirmation.}
+\caption{The table gives the selection predictor for each compression method, capability and source-state status. A prediction adds the listed response, in nats per native token, to a dense anchor: the source loss for pruning and quantization, the initial student's loss for distillation. Each method is fitted on its own development panel, listed below. The rule was frozen before confirmation.}
 \label{tab:locked_rule}
 \end{table}
 \begin{table}[!htbp]\ContinuedFloat
@@ -70,34 +82,45 @@ Pruning & Question answering & {New size or new stage} & {Pruning development me
 \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.220000000\textwidth-2.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.300000000\tabcolsep\relax}@{}}
 \toprule
-Compression method & Capability & State status & Response predictor & Development data & Dense reference loss \\
+Compression method & Capability & State status & Response predictor \\
 \midrule
-{Grouped round-to-nearest quantization} & Mathematics & Seen state & {Piecewise source interpolation} & Grouped quantization development & Source dense loss \\
+{Grouped round-to-nearest quantization} & Math & Seen state & {Piecewise source interpolation}\\
+\midrule
 % anchors = {k: float(np.dot(beta, z)) for k, beta in
 %                        f["models"][c]["same_input_interpolation"]["anchors"].items()}
-{Grouped round-to-nearest quantization} & Code & Seen state & {Piecewise source interpolation} & Grouped quantization development & Source dense loss \\
+{Grouped round-to-nearest quantization} & Code & Seen state & {Piecewise source interpolation}\\
+\midrule
 % anchors = f["models"][c]["median"]["anchors"]
-{Grouped round-to-nearest quantization} & Question answering & Seen state & {per-configuration median} & Grouped quantization development & Source dense loss \\
+{Grouped round-to-nearest quantization} & QA & Seen state & {Per-configuration development median}\\
+\midrule
 % anchors = f["models"][c]["median"]["anchors"]
-{Grouped round-to-nearest quantization} & Mathematics & New state & {per-configuration median} & Grouped quantization development & Source dense loss \\
+{Grouped round-to-nearest quantization} & Math & New state & {Per-configuration development median}\\
+\midrule
 % anchors = f["models"][c]["median"]["anchors"]
-{Grouped round-to-nearest quantization} & Code & New state & {per-configuration median} & Grouped quantization development & Source dense loss \\
+{Grouped round-to-nearest quantization} & Code & New state & {Per-configuration development median}\\
+\midrule
 % anchors = f["models"][c]["median"]["anchors"]
-{Grouped round-to-nearest quantization} & Question answering & New state & {per-configuration median} & Grouped quantization development & Source dense loss \\
+{Grouped round-to-nearest quantization} & QA & New state & {Per-configuration development median}\\
+\midrule
 \addlinespace
 % float(distill._predict(f["linear"][c], [{**s, "L0": anchor}])[0])
-Distillation & Mathematics & New source & {Linear source regression} & Fixed-recipe student development & Initial student dense loss \\
+Distillation & Math & New source & {Linear source regression}\\
+\midrule
 % float(f["constant"][c])
-Distillation & Code & New source & Constant & Fixed-recipe student development & Initial student dense loss \\
+Distillation & Code & New source & Frozen constant\\
+\midrule
 % float(f["constant"][c])
-Distillation & Question answering & New source & Constant & Fixed-recipe student development & Initial student dense loss \\
+Distillation & QA & New source & Frozen constant\\
+\midrule
 \addlinespace
 % value = float(inputs["L0"])
-Dense & Mathematics & Any valid status & 0 (no loss change) & --- & Source dense loss \\
+Dense & Math & Any valid status & 0 (no loss change)\\
+\midrule
 % value = float(inputs["L0"])
-Dense & Code & Any valid status & 0 (no loss change) & --- & Source dense loss \\
+Dense & Code & Any valid status & 0 (no loss change)\\
+\midrule
 % value = float(inputs["L0"])
-Dense & Question answering & Any valid status & 0 (no loss change) & --- & Source dense loss \\
+Dense & QA & Any valid status & 0 (no loss change)\\
 \bottomrule\end{tabular*}
 \caption[]{The table continues the frozen selection rules. Absolute losses are in nats per native token.}
 \end{table}

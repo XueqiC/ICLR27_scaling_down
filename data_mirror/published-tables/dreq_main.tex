@@ -11,47 +11,47 @@
 Readout & Student & Budget (k tokens) & Outcome & Measured interval (k independent tokens) & \multicolumn{3}{c@{}}{Recommended pool (k independent tokens)} \\
  & & & & & Boundary relation & Fixed reuse & Per-student interpolation \\
 \midrule
-Math & 1 billion & 50 & non-monotone & unresolved & 32.157\newline (unresolved) & 9.050\newline (unresolved) & 158.391\newline (unresolved) \\
-Math & 1 billion & 100 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 32.157\newline (inside) & 32.157\newline (inside) & 32.157\newline (inside) \\
-Math & 1 billion & 200 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 32.157\newline (inside) & 32.157\newline (inside) & 32.157\newline (inside) \\
-Math & 4 billion & 50 & upper bound at the smallest pool & $\leq 9.105$ & 38.133\newline ($\geq 1.432$) & 9.004\newline (inside) & 158.391\newline ($\geq 2.856$) \\
-Math & 4 billion & 100 & crossed inside the tested pools & $[8.852,\allowbreak\,38.703]$ & 38.133\newline (inside) & 38.133\newline (inside) & none \\
-Math & 4 billion & 200 & crossed inside the tested pools & $[37.465,\allowbreak\,158.391]$ & 38.133\newline (inside) & 38.133\newline (inside) & 38.133\newline (inside) \\
+Math & 1 billion & 50 & non-monotone & unresolved & 32.2, unresolved & 9.0, unresolved & 158.4, unresolved \\
+Math & 1 billion & 100 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 32.2, inside & 32.2, inside & 32.2, inside \\
+Math & 1 billion & 200 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 32.2, inside & 32.2, inside & 32.2, inside \\
+Math & 4 billion & 50 & Upper bound & $\leq 9.1$ & 38.1, $\geq 1.43$ & 9.0, inside & 158.4, $\geq 2.86$ \\
+Math & 4 billion & 100 & Crossed in range & $[8.9,\allowbreak\,38.7]$ & 38.1, inside & 38.1, inside & none \\
+Math & 4 billion & 200 & Crossed in range & $[37.5,\allowbreak\,158.4]$ & 38.1, inside & 38.1, inside & 38.1, inside \\
 \addlinespace[2pt]
-Code & 1 billion & 50 & non-monotone & unresolved & 32.157\newline (unresolved) & 9.050\newline (unresolved) & 158.391\newline (unresolved) \\
-Code & 1 billion & 100 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 32.157\newline (inside) & 32.157\newline (inside) & 32.157\newline (inside) \\
-Code & 1 billion & 200 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 158.391\newline ($1.584$) & 32.157\newline (inside) & 32.157\newline (inside) \\
-Code & 4 billion & 50 & upper bound at the smallest pool & $\leq 9.105$ & none & none & 158.391\newline ($\geq 2.856$) \\
-Code & 4 billion & 100 & crossed inside the tested pools & $[8.852,\allowbreak\,38.703]$ & none & none & none \\
-Code & 4 billion & 200 & seeds disagree & unresolved & none & none & 38.133\newline (unresolved) \\
+Code & 1 billion & 50 & non-monotone & unresolved & 32.2, unresolved & 9.0, unresolved & 158.4, unresolved \\
+Code & 1 billion & 100 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 32.2, inside & 32.2, inside & 32.2, inside \\
+Code & 1 billion & 200 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 158.4, $1.58$ & 32.2, inside & 32.2, inside \\
+Code & 4 billion & 50 & Upper bound & $\leq 9.1$ & none & none & 158.4, $\geq 2.86$ \\
+Code & 4 billion & 100 & Crossed in range & $[8.9,\allowbreak\,38.7]$ & none & none & none \\
+Code & 4 billion & 200 & seeds disagree & unresolved & none & none & 38.1, unresolved \\
 \addlinespace[2pt]
-Original 2Wiki & 1 billion & 50 & upper bound at the smallest pool & $\leq 9.106$ & 32.157\newline ($\geq 1.262$) & 32.157\newline ($\geq 1.262$) & 158.391\newline ($\geq 2.856$) \\
-Original 2Wiki & 1 billion & 100 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 32.157\newline (inside) & 32.157\newline (inside) & 32.157\newline (inside) \\
-Original 2Wiki & 1 billion & 200 & seeds disagree & unresolved & 32.157\newline (unresolved) & 158.391\newline (unresolved) & 32.157\newline (unresolved) \\
-Original 2Wiki & 4 billion & 50 & seeds disagree & unresolved & 38.133\newline (unresolved) & 38.133\newline (unresolved) & 158.391\newline (unresolved) \\
-Original 2Wiki & 4 billion & 100 & crossed inside the tested pools & $[8.852,\allowbreak\,38.703]$ & 38.133\newline (inside) & 38.133\newline (inside) & none \\
-Original 2Wiki & 4 billion & 200 & crossed inside the tested pools & $[37.465,\allowbreak\,158.391]$ & 38.133\newline (inside) & 158.391\newline (inside) & 158.391\newline (inside) \\
+Original 2Wiki & 1 billion & 50 & Upper bound & $\leq 9.1$ & 32.2, $\geq 1.26$ & 32.2, $\geq 1.26$ & 158.4, $\geq 2.86$ \\
+Original 2Wiki & 1 billion & 100 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 32.2, inside & 32.2, inside & 32.2, inside \\
+Original 2Wiki & 1 billion & 200 & seeds disagree & unresolved & 32.2, unresolved & 158.4, unresolved & 32.2, unresolved \\
+Original 2Wiki & 4 billion & 50 & seeds disagree & unresolved & 38.1, unresolved & 38.1, unresolved & 158.4, unresolved \\
+Original 2Wiki & 4 billion & 100 & Crossed in range & $[8.9,\allowbreak\,38.7]$ & 38.1, inside & 38.1, inside & none \\
+Original 2Wiki & 4 billion & 200 & Crossed in range & $[37.5,\allowbreak\,158.4]$ & 38.1, inside & 158.4, inside & 158.4, inside \\
 \addlinespace[2pt]
-Fresh 2Wiki & 1 billion & 50 & upper bound at the smallest pool & $\leq 9.106$ & 32.157\newline ($\geq 1.262$) & 9.050\newline (inside) & 32.157\newline ($\geq 1.262$) \\
-Fresh 2Wiki & 1 billion & 100 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 32.157\newline (inside) & 32.157\newline (inside) & 158.391\newline ($1.584$) \\
-Fresh 2Wiki & 1 billion & 200 & crossed inside the tested pools & $[8.971,\allowbreak\,32.503]$ & 158.391\newline ($1.584$) & 32.157\newline (inside) & 32.157\newline (inside) \\
-Fresh 2Wiki & 4 billion & 50 & seeds disagree & unresolved & 38.133\newline (unresolved) & 9.004\newline (unresolved) & 38.133\newline (unresolved) \\
-Fresh 2Wiki & 4 billion & 100 & crossed inside the tested pools & $[8.852,\allowbreak\,38.703]$ & 38.133\newline (inside) & 38.133\newline (inside) & 38.133\newline (inside) \\
-Fresh 2Wiki & 4 billion & 200 & crossed inside the tested pools & $[37.465,\allowbreak\,158.391]$ & 38.133\newline (inside) & 38.133\newline (inside) & 158.391\newline (inside) \\
+Fresh 2Wiki & 1 billion & 50 & Upper bound & $\leq 9.1$ & 32.2, $\geq 1.26$ & 9.0, inside & 32.2, $\geq 1.26$ \\
+Fresh 2Wiki & 1 billion & 100 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 32.2, inside & 32.2, inside & 158.4, $1.58$ \\
+Fresh 2Wiki & 1 billion & 200 & Crossed in range & $[9.0,\allowbreak\,32.5]$ & 158.4, $1.58$ & 32.2, inside & 32.2, inside \\
+Fresh 2Wiki & 4 billion & 50 & seeds disagree & unresolved & 38.1, unresolved & 9.0, unresolved & 38.1, unresolved \\
+Fresh 2Wiki & 4 billion & 100 & Crossed in range & $[8.9,\allowbreak\,38.7]$ & 38.1, inside & 38.1, inside & 38.1, inside \\
+Fresh 2Wiki & 4 billion & 200 & Crossed in range & $[37.5,\allowbreak\,158.4]$ & 38.1, inside & 38.1, inside & 158.4, inside \\
 \addlinespace[2pt]
-MuSiQue & 1 billion & 50 & seeds disagree & unresolved & 32.157\newline (unresolved) & 32.157\newline (unresolved) & 32.157\newline (unresolved) \\
-MuSiQue & 1 billion & 100 & seeds disagree & unresolved & 158.391\newline (unresolved) & 158.391\newline (unresolved) & none \\
-MuSiQue & 1 billion & 200 & seeds disagree & unresolved & none & 158.391\newline (unresolved) & none \\
-MuSiQue & 4 billion & 50 & crossed inside the tested pools & $[8.852,\allowbreak\,38.703]$ & 38.133\newline (inside) & 38.133\newline (inside) & 38.133\newline (inside) \\
-MuSiQue & 4 billion & 100 & seeds disagree & unresolved & 158.391\newline (unresolved) & 38.133\newline (unresolved) & 158.391\newline (unresolved) \\
-MuSiQue & 4 billion & 200 & seeds disagree & unresolved & 158.391\newline (unresolved) & 158.391\newline (unresolved) & none \\
+MuSiQue & 1 billion & 50 & seeds disagree & unresolved & 32.2, unresolved & 32.2, unresolved & 32.2, unresolved \\
+MuSiQue & 1 billion & 100 & seeds disagree & unresolved & 158.4, unresolved & 158.4, unresolved & none \\
+MuSiQue & 1 billion & 200 & seeds disagree & unresolved & none & 158.4, unresolved & none \\
+MuSiQue & 4 billion & 50 & Crossed in range & $[8.9,\allowbreak\,38.7]$ & 38.1, inside & 38.1, inside & 38.1, inside \\
+MuSiQue & 4 billion & 100 & seeds disagree & unresolved & 158.4, unresolved & 38.1, unresolved & 158.4, unresolved \\
+MuSiQue & 4 billion & 200 & seeds disagree & unresolved & 158.4, unresolved & 158.4, unresolved & none \\
 \addlinespace[2pt]
-TriviaQA & 1 billion & 50 & non-monotone & unresolved & 158.391\newline (unresolved) & 32.157\newline (unresolved) & 32.157\newline (unresolved) \\
-TriviaQA & 1 billion & 100 & non-monotone & unresolved & 158.391\newline (unresolved) & 158.391\newline (unresolved) & none \\
-TriviaQA & 1 billion & 200 & seeds disagree & unresolved & 158.391\newline (unresolved) & 158.391\newline (unresolved) & none \\
-TriviaQA & 4 billion & 50 & lower bound at the largest pool & $>158.391$ & none & none & none \\
-TriviaQA & 4 billion & 100 & lower bound at the largest pool & $>158.391$ & none & none & none \\
-TriviaQA & 4 billion & 200 & lower bound at the largest pool & $>158.391$ & none & none & none \\
+TriviaQA & 1 billion & 50 & non-monotone & unresolved & 158.4, unresolved & 32.2, unresolved & 32.2, unresolved \\
+TriviaQA & 1 billion & 100 & non-monotone & unresolved & 158.4, unresolved & 158.4, unresolved & none \\
+TriviaQA & 1 billion & 200 & seeds disagree & unresolved & 158.4, unresolved & 158.4, unresolved & none \\
+TriviaQA & 4 billion & 50 & Lower bound & $>158.4$ & none & none & none \\
+TriviaQA & 4 billion & 100 & Lower bound & $>158.4$ & none & none & none \\
+TriviaQA & 4 billion & 200 & Lower bound & $>158.4$ & none & none & none \\
 \bottomrule
 \end{tabular*}
 \end{table}
