@@ -650,7 +650,7 @@ def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
         r"\textwidth-" + f"{gaps * float(width):.2f}" + r"\tabcolsep\relax}"
         for width in COLUMN_WIDTHS)
     lines = [f"% Generated from frozen JSON; see {sidecar}.",
-             r"\begin{table*}[!htbp]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
+             r"\begin{table*}[t]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
              r"\setlength{\tabcolsep}{1.5pt}", r"\renewcommand{\arraystretch}{0.92}",
              r"\setlength{\abovecaptionskip}{4pt}",
              r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}%",

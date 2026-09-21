@@ -129,7 +129,7 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
         "Development measurements")
     assert " & ".join(gen.render_text(h) for h in gen.HEADERS) + r" \\" in tex
     assert r"\centering\footnotesize" in tex and r"\tiny" not in tex
-    assert tex.count(r"\begin{table*}[!htbp]") == 1
+    assert tex.count(r"\begin{table*}[t]") == 1
     assert tex.count(r"\begin{tabular*}{\textwidth}") == 1
     assert r"\extracolsep{\fill}" in tex
     assert tex.count(r">{\raggedright\arraybackslash\hspace{0pt}}p{") == 7

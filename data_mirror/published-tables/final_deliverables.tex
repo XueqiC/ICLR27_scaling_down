@@ -2,15 +2,15 @@
 \centering\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.120000000\textwidth-1.200000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.230000000\textwidth-2.300000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.170000000\textwidth-1.700000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.200000000\textwidth-2.000000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.140000000\textwidth-1.400000000\tabcolsep\relax}@{}}
 \toprule
-Compression method & Delivered predictor & Inputs & Not applicable to \\
+Compression method & Delivered predictor & Inputs & Evaluation domain \\
 \midrule
-Pruning & Mathematics and Code at unseen density $\in[0.6,\allowbreak 0.9]$ of states in the fit: power form of Eq.~\ref{eq:power}. New sizes or stages, and Question answering: the frozen development median curve $L_{0,\allowbreak c}+\widetilde f_c(d)$. & source parameter count, pretraining tokens, initial loss (source forms); initial loss only (median curve) & density $\le0.55$; Question answering source terms; source-conditioned forms on new sizes\\
-\midrule
-\addlinespace
-Quantization & Per-channel on new states: per-bit development median. Grouped on seen states: same-input piecewise interpolation over the measured bit-width and group-size grid, linear in $\log_2 g$ (Mathematics, Code); per-configuration median (Question answering, and every capability on new states). & Measured development grid; source parameter count, pretraining tokens, initial loss for the interpolation & The parametric surface; source conditioning on new states; Question answering\\
+Pruning & Mathematics and Code at unseen density $\in[0.6,\allowbreak 0.9]$ of states in the fit: power form of Eq.~\ref{eq:power}. New sizes or stages, and Question answering: the frozen development median curve $L_{0,\allowbreak c}+\widetilde f_c(d)$. & source parameter count, pretraining tokens, initial loss (source forms); initial loss only (median curve) & Pythia 160 million--1.4 billion at three pretraining stages; densities 0.6--0.9, tested to 0.55\\
 \midrule
 \addlinespace
-Distillation & On development students: $\widehat\delta_c=a_c\log(1+E)$ (Mathematics, Code) and the joint budget-pool form (Question answering); reference is the initial student. & supervised tokens, unique-pool tokens (reuse is supervised tokens divided by unique-pool tokens); initial loss of the student & Student size (4 billion); Question answering outside the 2Wiki distribution; reuse ratios near 14\\
+Quantization & Per-channel on new states: per-bit development median. Grouped on seen states: same-input piecewise interpolation over the measured bit-width and group-size grid, linear in $\log_2 g$ (Mathematics, Code); per-configuration median (Question answering, and every capability on new states). & Measured development grid; source parameter count, pretraining tokens, initial loss for the interpolation & The same Pythia states on the measured grid: 3--8 bits, groups of 32--512 weights\\
+\midrule
+\addlinespace
+Distillation & On development students: $\widehat\delta_c=a_c\log(1+E)$ (Mathematics, Code) and the joint budget-pool form (Question answering); reference is the initial student. & supervised tokens, unique-pool tokens (reuse is supervised tokens divided by unique-pool tokens); initial loss of the student & Gemma-3 270 million and 1 billion students, one recipe; pools to 158 thousand tokens, budgets 50 thousand--200 thousand; Question answering on 2Wiki\\
 \bottomrule
 \end{tabular*}
 \caption{The table summarizes delivered predictors, their inputs, evidence, and applicable settings. Prediction errors and gains are in nats per native token, relative to the strongest baseline using the same information. Rules chosen after testing are marked retrospective.}
