@@ -47,7 +47,7 @@ CAPTION_NOTES = {
     "tab:p3_check": "Rows identify measured compression states; columns give capability loss changes, with the primary benchmark followed by the secondary benchmark. This is a post-hoc measurement-scope check, with states specified before secondary measurement. Pool sizes count traces per domain.",
     "tab:musique_scope": "Rows identify students, pools, and checkpoints; columns give dimensionless reuse counts, trajectory counts, and benchmark loss changes. This is a post-hoc measurement-scope audit. Pool sizes count traces per domain.",
     "tab:qa_scope": "Rows identify compression states; paired columns give loss and change from dense for each benchmark. This is a post-hoc measurement-scope audit of pre-specified states.",
-    "tab:panel_prune": "Rows identify models; columns give capability loss changes, the Math damage threshold, QA damage rankings, and the minimum QA response. This is a descriptive development panel with prospective additions marked by daggers. A dash denotes an unmeasured setting.",
+    "tab:panel_prune": "Rows identify models; columns give capability loss changes, the Math loss-increase threshold, QA rankings, and the minimum QA response. This is a descriptive development panel with prospective additions marked by daggers. A dash denotes an unmeasured setting.",
     "tab:panel_quant": "Rows identify models and series; columns give capability loss changes at the displayed bit widths and list all measured bit widths in bits. This is a descriptive development panel with prospective additions marked by daggers.",
     "tab:selection-feasible": "Rows identify policies and objectives; columns give feasibility coverage, mean regret, and oracle-method agreement. This is a post-hoc development evaluation. Own means the cells feasible for that policy; common means cells feasible for every policy.",
     "tab:rule-confirm": "Rows identify objectives and policies; columns give feasible-cell counts, mean regret, oracle-method agreement, and candidate-set coverage. Policy predictions were frozen before the new measurements; set coverage is a post-hoc diagnostic.",
@@ -354,11 +354,11 @@ CONCISE_CAPTIONS = {
     "tab:panel_prune": (
         r"Per-capability pruning damage on the heterogeneous panel, in nats per native token within each model. "
         r"$d^{*}_{\mathrm{math}}$ is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the QA "
-        r"ranking columns count, over the pre-cliff densities, how often QA is the least and the most damaged "
+        r"ranking columns count, over the pre-cliff densities, how often QA is the least and the most affected "
         r"capability; the last column gives the most negative QA response and its density. Daggers mark "
         r"prospective additions measured at four densities only; a dash marks an unmeasured setting."),
     "tab:panel_quant": (
-        r"Per-capability damage under per-output-channel symmetric round-to-nearest weight quantization, in nats "
+        r"Per-capability loss change under per-output-channel symmetric round-to-nearest weight quantization, in nats "
         r"per native token, at the displayed bit widths; 8 and 6 bits lie within 0.01 nats of dense for each "
         r"model and are omitted. The last column lists all measured bit widths. Daggers mark prospective additions."),
     "tab:round3_coef": (
@@ -1077,8 +1077,8 @@ PLAIN_CAPTIONS = {
  'tab:p3_check': 'The table compares loss changes on primary and independent secondary benchmarks. Each pair lists the primary benchmark followed by the named secondary benchmark, in nats per native token. Compression states were specified before secondary measurement.',
  'tab:musique_scope': 'The table compares question-answering loss changes across two benchmarks and distillation checkpoints. Loss changes are in nats per native token. Entries give trajectory means with ranges in brackets; reuse is dimensionless and pool sizes count traces per domain.',
  'tab:qa_scope': 'The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count the supervised tokens used for training.',
- 'tab:panel_prune': 'The table compares pruning damage across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-damaged and most-damaged outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.',
- 'tab:panel_quant': 'The table compares quantization damage across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths. Daggers mark prospective additions.',
+ 'tab:panel_prune': 'The table compares the pruning loss change across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-affected and most-affected outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.',
+ 'tab:panel_quant': 'The table compares the quantization loss change across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths. Daggers mark prospective additions.',
  'tab:selection-feasible': 'The table compares selection policies on their feasible compression choices. Coverage and agreement with the measured oracle are percentages; mean regret is in nats per native token. Results distinguish each policy\'s feasible cells from the cells shared by all policies.',
  'tab:rule-confirm': 'The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are reported as percentages of evaluated cells.',
  'tab:rule_decomp': 'The table separates selection regret by source-state subset and policy. Mean regret and policy differences are in nats per native token, with equal weight per state and storage budget. Negative differences favor the frozen rule.',
@@ -1237,7 +1237,7 @@ def _reader_body(block, label):
         block = block.replace('State & Math & Code & QA', 'State & Mathematics: primary / arithmetic word problems & Code: primary / HumanEval & Question answering: primary / TriviaQA')
         block = block.replace('; $', ' / $')
     if label == 'tab:panel_prune':
-        block = block.replace(r'$d^{*}_{\mathrm{math}}$', 'Density at damage threshold')
+        block = block.replace(r'$d^{*}_{\mathrm{math}}$', 'Density at loss-increase threshold')
         block = block.replace(r'$\Delta L_c$ at $d=0.7$', 'Loss change at density 0.7')
         block = block.replace('QA least and most damaged', 'Question answering: least / measured; most / measured')
         block = block.replace(r'$\,|\,$', '; ')

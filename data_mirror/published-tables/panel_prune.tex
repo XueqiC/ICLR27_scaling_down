@@ -1,7 +1,7 @@
 \begin{table}[!htbp]\normalfont\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.210000000\textwidth-2.940000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.120000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.120000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.080000000\textwidth-1.120000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.110000000\textwidth-1.540000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.130000000\textwidth-1.820000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-2.100000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-2.240000000\tabcolsep\relax}@{}}
 \toprule
-Model & \multicolumn{3}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.240000000\textwidth--0.640000000\tabcolsep\relax}}{Loss change at density 0.7} & Math at density 0.5 & Density at damage threshold & {QA: least / measured; most / measured} & Minimum question-answering response (density) \\
+Model & \multicolumn{3}{>{\centering\arraybackslash\hspace{0pt}}p{\dimexpr 0.240000000\textwidth--0.640000000\tabcolsep\relax}}{Loss change at density 0.7} & Math at density 0.5 & Density at loss-increase threshold & {QA: least / measured; most / measured} & Minimum question-answering response (density) \\
 \cmidrule(lr){3-5} & Math & Code & QA & & & & \\
 \midrule
 Qwen3-0.6 billion & +0.49 & +0.56 & -0.26 & +4.72 & 0.60 & 3/\allowbreak 3; 0/\allowbreak 3 & -0.26 (0.70)\\
@@ -32,6 +32,6 @@ OLMo-3-7 billion & +0.03 & +0.03 & +0.14 & +0.22 & 0.35 & 4/\allowbreak 8; 3/\al
 \midrule
 OLMo-3-32 billion & +0.01 & +0.03 & +0.02 & +0.09 & {Not reached by density 0.30} & 7/\allowbreak 10; 0/\allowbreak 10 & -0.24 (0.30)\\
 \bottomrule\end{tabular*}
-\caption{The table compares pruning damage across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-damaged and most-damaged outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.}
-\par\smallskip{\footnotesize Density at damage threshold is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the Question answering ranking columns count, over the pre-cliff densities, how often Question answering is the least and the most damaged capability; the last column gives the most negative Question answering response and its density.\par}
+\caption{The table compares the pruning loss change across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-affected and most-affected outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.}
+\par\smallskip{\footnotesize Density at loss-increase threshold is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the Question answering ranking columns count, over the pre-cliff densities, how often Question answering is the least and the most affected capability; the last column gives the most negative Question answering response and its density.\par}
 \label{tab:panel_prune}\end{table}
