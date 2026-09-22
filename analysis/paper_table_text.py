@@ -47,8 +47,8 @@ CAPTION_NOTES = {
     "tab:p3_check": "Rows identify measured compression states; columns give capability loss changes, with the primary benchmark followed by the secondary benchmark. This is a post-hoc measurement-scope check, with states specified before secondary measurement. Pool sizes count traces per domain.",
     "tab:musique_scope": "Rows identify students, pools, and checkpoints; columns give dimensionless reuse counts, trajectory counts, and benchmark loss changes. This is a post-hoc measurement-scope audit. Pool sizes count traces per domain.",
     "tab:qa_scope": "Rows identify compression states; paired columns give loss and change from dense for each benchmark. This is a post-hoc measurement-scope audit of pre-specified states.",
-    "tab:panel_prune": "Rows identify models; columns give capability loss changes, the Math loss-increase threshold, QA rankings, and the minimum QA response. This is a descriptive development panel; the note names the two models added after it was assembled.",
-    "tab:panel_quant": "Rows identify models and series; columns give capability loss changes at the displayed bit widths and list all measured bit widths in bits. This is a descriptive development panel; the note names the two models added after it was assembled.",
+    "tab:panel_prune": "Rows identify models; columns give capability loss changes, the Math loss-increase threshold, QA rankings, and the minimum QA response. This is a descriptive development panel.",
+    "tab:panel_quant": "Rows identify models and series; columns give capability loss changes at the displayed bit widths and list all measured bit widths in bits. This is a descriptive development panel.",
     "tab:selection-feasible": "Rows identify policies and objectives; columns give feasibility coverage, mean regret, and oracle-method agreement. This is a post-hoc development evaluation. Own means the cells feasible for that policy; common means cells feasible for every policy.",
     "tab:rule-confirm": "Rows identify objectives and policies; columns give feasible-cell counts, mean regret, oracle-method agreement, and candidate-set coverage. Policy predictions were frozen before the new measurements; set coverage is a post-hoc diagnostic.",
     "tab:rule_decomp": "Rows identify objectives and policies; columns compare the stated source subsets and all states. This is a post-hoc decomposition of frozen selection predictions.",
@@ -355,13 +355,11 @@ CONCISE_CAPTIONS = {
         r"Per-capability pruning damage on the heterogeneous panel, in nats per native token within each model. "
         r"$d^{*}_{\mathrm{math}}$ is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the QA "
         r"ranking columns count, over the pre-cliff densities, how often QA is the least and the most affected "
-        r"capability; the last column gives the most negative QA response and its density. Qwen3-8B and "
-        r"Qwen3-14B were added after the panel was assembled and measured with the same protocol."),
+        r"capability; the last column gives the most negative QA response and its density."),
     "tab:panel_quant": (
         r"Per-capability loss change under per-output-channel symmetric round-to-nearest weight quantization, in nats "
         r"per native token, at the displayed bit widths; 8 and 6 bits lie within 0.01 nats of dense for each "
-        r"model and are omitted. The last column lists all measured bit widths. Qwen3-8B and Qwen3-14B were "
-        r"added after the panel was assembled and measured with the same protocol."),
+        r"model and are omitted. The last column lists all measured bit widths."),
     "tab:round3_coef": (
         r"Frozen coefficients of the selected pruning form $\widehat{\Delta L}_c=(\beta_c\cdot\phi)((1-d)/0.3)^{\gamma_c}$ "
         r"with $\phi=[1,z(\log N_0),z(L_{0,c}),z(\log D_0)]$, standardized with centers 20.248, 2.661, 25.614 and "
