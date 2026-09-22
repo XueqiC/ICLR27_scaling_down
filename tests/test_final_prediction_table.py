@@ -47,16 +47,30 @@ def generated():
 
 def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
     rows, audit, tex, recipes, caption = generated
-    assert len(rows) == 5 and len(recipes) == 25
+    assert len(rows) == 5 and len(recipes) == 30
     body = tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0]
     table_rows = [line.removesuffix(r" \\").split(" & ") for line in body.splitlines() if line.strip() != r"\midrule"]
-    assert len(table_rows) == 5 and all(len(row) == 5 for row in table_rows)
+    assert len(table_rows) == 5 and all(len(row) == 6 for row in table_rows)
     assert {(r["row"], r["column"]) for r in recipes} == {
-        (i, j) for i in range(5) for j in range(5)}
+        (i, j) for i in range(5) for j in range(6)}
     for record in [*recipes, caption]:
         # Independently resolve every JSON pointer and operation, then compare
         # with the actual TeX cell at the sidecar's physical row/column.
         parts = []
+
+        def independent(p):
+            assert p["sources"]
+            vals = [raw_source(s) for s in p["sources"]]
+            op = p["op"]
+            if op == "identity": return vals[0]
+            if op == "mean": return mean(vals)
+            if op == "weighted_mean": return sum(vals[i] * vals[i+1] for i in range(0,len(vals),2)) / sum(vals[1::2])
+            if op == "difference":
+                b, d = p["parts"]
+                assert list(p["sources"]) == list(d["sources"]) + list(b["sources"])
+                return independent(b) - independent(d)
+            pytest.fail(f"Unhandled numeric operation {op}")
+
         for p in record["parts"]:
             if isinstance(p, str):
                 assert not re.search(r"\d", p), "Printed numeric literals need JSON provenance"
@@ -65,7 +79,8 @@ def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
             assert p["sources"]
             vals = [raw_source(s) for s in p["sources"]]
             op = p["op"]
-            if op == "identity": v = vals[0]
+            if op == "difference": v = independent(p)
+            elif op == "identity": v = vals[0]
             elif op == "mean": v = mean(vals)
             elif op == "weighted_mean": v = sum(vals[i] * vals[i+1] for i in range(0,len(vals),2)) / sum(vals[1::2])
             elif op == "length": v = len(vals[0])
@@ -116,7 +131,7 @@ def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
 def test_only_complete_frozen_tasks_and_compact_layout(generated):
     rows, audit, tex, recipes, caption = generated
     assert [row[0].plain(audit).split("\n")[0] for row in rows] == TASKS
-    assert all(len(row) == 7 for row in rows)
+    assert all(len(row) == 8 for row in rows)
     assert all(c.plain(audit).strip() for row in rows for c in row)
     assert all(c.strip() for line in tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0].splitlines() if line.strip() != r"\midrule"
                for c in line.removesuffix(r" \\").split(" & "))
@@ -124,26 +139,26 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert "unseen density" not in tex
     assert gen.HEADERS == (
         "Prediction task", "Delivered relation", "Delivered error (nats)",
-        "Strongest development baseline (nats)", "Development measurements")
-    assert gen.MAIN_COLUMNS == (0, 3, 4, 5, 6) and gen.CANDIDATE_COLUMNS == (0, 1, 2, 3)
+        "Strongest development baseline (nats)", "Improvement (nats)", "Development measurements")
+    assert gen.MAIN_COLUMNS == (0, 3, 4, 5, 7, 6) and gen.CANDIDATE_COLUMNS == (0, 1, 2, 3)
     assert " & ".join(gen.render_text(h) for h in gen.HEADERS) + r" \\" in tex
     assert r"\centering\footnotesize" in tex and r"\tiny" not in tex
     assert tex.count(r"\begin{table*}[t]") == 1
     assert tex.count(r"\begin{tabular*}{\textwidth}") == 1
     assert r"\extracolsep{\fill}" in tex
-    assert tex.count(r">{\raggedright\arraybackslash\hspace{0pt}}p{") == 5
+    assert tex.count(r">{\raggedright\arraybackslash\hspace{0pt}}p{") == 6
     assert sum(map(float, gen.COLUMN_WIDTHS)) == pytest.approx(1)
     assert sum(map(float, gen.CANDIDATE_WIDTHS)) == pytest.approx(1)
     assert float(gen.COLUMN_WIDTHS[2]) >= .09
     assert r"\setlength{\tabcolsep}{1.5pt}" in tex
-    assert gen.COLUMN_WIDTHS == (".22", ".22", ".12", ".28", ".16")
+    assert gen.COLUMN_WIDTHS == (".20", ".20", ".12", ".24", ".12", ".12")
     assert gen.TABLE_FONT == r"\footnotesize\fontsize{8}{9.5}\selectfont"
     assert gen.CAPTION_FONT == r"\footnotesize\fontsize{8.5}{10}\selectfont"
     assert r"\centering" + gen.TABLE_FONT in tex
     assert r"\caption{" + gen.CAPTION_FONT in tex
     assert r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}" in tex
     assert r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}" in tex
-    assert tex.count(r"\TableOneErrors{") == 10  # delivered error and baseline scores, five rows
+    assert tex.count(r"\TableOneErrors{") == 15  # delivered error, baseline scores and improvement, five rows
     assert not re.search(r"\\(?:resizebox|scalebox|rotatebox|multicolumn|dagger)", tex)
     assert r"\label{tab:main-prediction-v2}" in tex
     assert caption["rendered"] == gen.caption_cell(audit).render(audit)
@@ -172,9 +187,9 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
                 prefix = ""
                 assert line.startswith(prefix)
                 if i == 4:
-                    assert re.fullmatch(prefix + r"\d+\.\d{2}, \d+\.\d{2}", line)
+                    assert re.fullmatch(prefix + r"[+-]?\d+\.\d{3}, [+-]?\d+\.\d{3}", line)
                 else:
-                    assert re.fullmatch(prefix + r"\d+\.\d{2}", line)
+                    assert re.fullmatch(prefix + r"[+-]?\d+\.\d{3}", line)
             assert row[j].compact_scores == "ordered"
         assert "[" not in row[2].plain(audit)
         if i == 4:
@@ -187,12 +202,16 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
     def scores(row, column):
         return " / ".join(row[column].plain(audit).splitlines())
     assert [scores(row, 2) for row in rows] == [
-        "0.07 / 0.10 / 0.18", "0.24 / 0.24 / 0.68", "0.21 / 0.56 / 0.46",
-        "0.30 / 0.15 / 0.22", "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
+        "0.073 / 0.104 / 0.179", "0.243 / 0.236 / 0.678", "0.215 / 0.557 / 0.457",
+        "0.303 / 0.153 / 0.222", "0.074, 0.057 / 0.019, 0.049 / 0.515, 0.463",
     ]
     assert [scores(row, 4) for row in rows] == [
-        "0.07 / 0.10 / 0.18", "0.28 / 0.21 / 0.22", "0.07 / 0.12 / 0.46", "0.09 / 0.15 / 0.14",
-        "0.07, 0.06 / 0.02, 0.05 / 0.51, 0.46",
+        "0.073 / 0.104 / 0.183", "0.277 / 0.214 / 0.221", "0.065 / 0.116 / 0.458", "0.088 / 0.153 / 0.141",
+        "0.074, 0.057 / 0.019, 0.049 / 0.515, 0.463",
+    ]
+    assert [scores(row, 7) for row in rows] == [
+        "-0.013 / -0.020 / -0.005", "-0.047 / +0.008 / +0.000", "+0.268 / +0.562 / +0.000",
+        "+0.262 / +0.410 / +0.000", "+0.005 / +0.095 / -0.013",
     ]
     assert "270 million and 1 billion" in gen.caption_cell(audit).plain(audit)
     assert "no student averaging" in rows[4][2].note
@@ -251,7 +270,7 @@ def test_delivery_identities_and_bit_test_moved_to_the_appendix(generated):
     assert not bit_cells.intersection(later_cells)
     # The appendix prints these numbers; the audit note is where they come from.
     note = next(n for n in audit.notes if "earlier unseen-bit-width test" in n)
-    assert "0.19 / 0.21 / 0.44" in note and "0.55 / 0.73 / 0.54" in note
+    assert "0.193 / 0.214 / 0.436" in note and "0.553 / 0.726 / 0.537" in note
     assert "24 development configuration measurements per capability" in note
     assert rows[4][3].plain(audit) == "The same predictor"
 

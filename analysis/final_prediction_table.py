@@ -62,10 +62,10 @@ RANGES = {
 # and the development budget. The main table prints the delivered relation
 # against its baseline; the appendix candidates table prints how the frozen
 # candidate became the delivered relation.
-MAIN_COLUMNS = (0, 3, 4, 5, 6)
+MAIN_COLUMNS = (0, 3, 4, 5, 7, 6)
 HEADERS = ("Prediction task", "Delivered relation", "Delivered error (nats)",
-           "Strongest development baseline (nats)", "Development measurements")
-COLUMN_WIDTHS = (".22", ".22", ".12", ".28", ".16")
+           "Strongest development baseline (nats)", "Improvement (nats)", "Development measurements")
+COLUMN_WIDTHS = (".20", ".20", ".12", ".24", ".12", ".12")
 CANDIDATE_COLUMNS = (0, 1, 2, 3)
 CANDIDATE_HEADERS = ("Prediction task", "Pre-specified candidate", "Candidate error (nats)",
                      "Delivered relation")
@@ -73,10 +73,11 @@ CANDIDATE_WIDTHS = (".30", ".28", ".14", ".28")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
+    "Delivered relations and their errors against the strongest development baseline. "
     "Errors are mean absolute errors in nats per token, in math, code and question answering order. "
     "The delivered relation is the predictor recommended on all evidence; a Retrospective label "
-    "marks a predictor chosen after seeing the result, whose error is not an independent test. "
-    "The strongest development baseline was chosen inside the development folds, before the test, "
+    "marks a predictor chosen after seeing the result. "
+    "The strongest development baseline was chosen inside the development folds "
     "and scored on the same cells. The last column counts development configuration "
     "measurements per capability; distillation entries give the {students} students in that "
     "order. Appendix Table~\\ref{tab:main-prediction-candidates} lists each task's pre-specified candidate; "
@@ -162,6 +163,12 @@ def evaluate(audit, part):
         if vals != part["expected"]:
             raise ValueError("Presentation label no longer matches its frozen sources")
         result = part["label"]
+    elif op == "difference":
+        # Signed improvement: the baseline value minus the delivered value, each evaluated by its own recorded part.
+        b_part, d_part = part["parts"]
+        b_val = float(evaluate(audit, {**b_part, "format": None}))
+        d_val = float(evaluate(audit, {**d_part, "format": None}))
+        result = b_val - d_val
     else:
         raise ValueError(f"Unknown source operation: {op}")
     if result is None:
@@ -221,15 +228,15 @@ def cell(*parts, refs=(), note=""):
 
 
 def number(path, *keys):
-    return value(pointer(path, *keys), fmt=".2f")
+    return value(pointer(path, *keys), fmt=".3f")
 
 
 def scored_number(n):
     # Reuse V86's source-carrying Number, including its equal-weight means.
     if n.source.startswith("mean("):
         refs = n.source[5:-1].split("; ")
-        return value(*refs, op="mean", fmt=".2f")
-    return value(n.source, fmt=".2f")
+        return value(*refs, op="mean", fmt=".3f")
+    return value(n.source, fmt=".3f")
 
 
 def cap_lines(fn, separator="; ", label_separator=" "):
@@ -507,7 +514,7 @@ def build(audit):
 
     def bit_mae(candidate, cap):
         index = next(j for j, e in enumerate(entries) if e["candidate"] == candidate)
-        return format(resolve(audit, pointer(bp, "test_sets", "bit_test", "mae_table", index, "mae", cap)), ".2f")
+        return format(resolve(audit, pointer(bp, "test_sets", "bit_test", "mae_table", index, "mae", cap)), ".3f")
 
     audit.omit(
         "The earlier unseen-bit-width test moves to the candidate-form appendix: its cells entered the "
@@ -532,8 +539,8 @@ def build(audit):
                 part = number(qp, "test_sets", subsets[0], "scores", method, c, "mae")
             else:
                 part = value(*[pointer(qp, "test_sets", s, "scores", method, c, field)
-                               for s in subsets for field in ("mae", "n")], op="weighted_mean", fmt=".2f")
-            if evaluate(audit, part) != format(row.scores[c][method].value, ".2f"):
+                               for s in subsets for field in ("mae", "n")], op="weighted_mean", fmt=".3f")
+            if evaluate(audit, part) != format(row.scores[c][method].value, ".3f"):
                 raise ValueError("Stored quantization score differs from the frozen-cell mean")
             return part
         range_refs, seen_values = [], set()
@@ -643,6 +650,23 @@ def build(audit):
             # The baseline cell names the comparison, then its three scores.
             if len(row[5].plain(audit).splitlines()) == len(CAPS) + 1:
                 row[5].compact_scores = "comparison"
+            # Signed improvement per capability: baseline minus delivered, from the two cells' own recorded parts.
+            d_parts = [q for q in row[4].parts if isinstance(q, dict) and q.get("format")][-len(CAPS):]
+            b_parts = [q for q in row[5].parts if isinstance(q, dict) and q.get("format")][-len(CAPS):]
+            if len(d_parts) == len(CAPS) and len(b_parts) == len(CAPS):
+                parts = []
+                for d, b in zip(d_parts, b_parts):
+                    if parts:
+                        parts.append("\n")
+                    parts.append({"sources": list(d["sources"]) + list(b["sources"]), "op": "difference",
+                                  "parts": [b, d], "format": "+.3f"})
+                improvement = Cell(parts, list(row[4].context) + list(row[5].context),
+                                   "baseline error minus delivered error, per capability", "ordered")
+            else:
+                improvement = Cell(["not comparable"], list(row[4].context) + list(row[5].context),
+                                   "the two cells do not list one score per capability")
+            while len(row) < 8:
+                row.append(improvement)
             complete.append(row)
     return complete
 
