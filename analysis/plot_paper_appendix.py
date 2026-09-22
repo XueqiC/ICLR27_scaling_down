@@ -14,13 +14,13 @@ import numpy as np
 if __package__:
     from .paper_artifacts import ROOT, CAPS, Artifacts, frozen_run, pyplot, save_figure, write_notes
     from .paper_figure_style import (PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS,
-        BIT_COLORS, STUDENT_STYLES, HATCHES, darker, apply_style, panel_axes,
+        BIT_COLORS, STUDENT_STYLES, HATCHES, darker, surface, apply_style, panel_axes,
         legend_strip, PANEL_BANDS, combine_panels, save_panel, write_caption)
     from .paper_panel_exports import export
 else:
     from paper_artifacts import ROOT, CAPS, Artifacts, frozen_run, pyplot, save_figure, write_notes
     from paper_figure_style import (PALETTE, CAPABILITY_COLORS, QA_COLORS, METHOD_COLORS,
-        BIT_COLORS, STUDENT_STYLES, HATCHES, darker, apply_style, panel_axes,
+        BIT_COLORS, STUDENT_STYLES, HATCHES, darker, surface, apply_style, panel_axes,
         legend_strip, PANEL_BANDS, combine_panels, save_panel, write_caption)
     from paper_panel_exports import export
 
@@ -290,7 +290,8 @@ def maps(audit,plt,stem):
     caps=CAPS if old else (*CAPS,"multi")
     policies=("MAP",) if old else ("locked-rule","v64-law") if full else ("locked-rule",)
     specs=[];size=(1.8,2.4) if old else (2.7,1.45)
-    colors=[METHOD_COLORS[m] for m in METHODS]+[PALETTE["dense"]]
+    inks=[METHOD_COLORS[m] for m in METHODS]+[PALETTE["reference"]]
+    colors=[surface(c) for c in inks[:-1]]+[PALETTE["background"]]
     for cap in caps:
         records=data["cells"][cap]
         def draw(f,records=records):
@@ -308,7 +309,7 @@ def maps(audit,plt,stem):
                         ambiguity=r["no_clear_winner_heuristic"] if old else r["candidate_sets"][p]["no_clear_winner_heuristic"]
                         hatch=HATCHES["infeasible"] if not feasible else HATCHES["oracle_differs"] if mismatch else HATCHES["ambiguous"] if ambiguity and (old or full) else None
                         if hatch:
-                            ax.add_patch(Rectangle((x-.5,y-.5),1,1,facecolor=PALETTE["transparent"],edgecolor=darker(colors[value]),hatch=hatch,linewidth=0,zorder=2))
+                            ax.add_patch(Rectangle((x-.5,y-.5),1,1,facecolor=PALETTE["transparent"],edgecolor=inks[value],hatch=hatch,linewidth=0,zorder=2))
                         if mismatch:ax.plot(x,y,marker="o",ls="",color=PALETTE["black"],mfc=PALETTE["transparent"],zorder=4)
             ax.imshow(matrix,cmap=ListedColormap(colors),vmin=-.5,vmax=4.5,aspect="auto",interpolation="nearest",zorder=0)
             labels=[]
@@ -317,12 +318,17 @@ def maps(audit,plt,stem):
                 for p in policies:labels.append(f"{size_name.upper()}/{int(step)//1000}k"+(" F" if p=="locked-rule" else " L") if full else f"{size_name.upper()}/{int(step)//1000}k")
             ax.set(yticks=range(len(labels)),yticklabels=labels,xlabel="Storage budget (%)",xlim=(-.5,len(budgets)-.5),ylim=(len(labels)-.5,-.5))
             ax.set_xticks([0,8,16],["20","60","100"])
-            ax.grid(False);ax.tick_params(length=0)
+            ax.set_xticks(np.arange(-.5,len(budgets)),minor=True)
+            ax.set_yticks(np.arange(-.5,len(labels)),minor=True)
+            ax.grid(which="minor",color=PALETTE["white"],lw=.35,alpha=.7)
+            ax.tick_params(length=0,which="both")
             for spine in ax.spines.values():spine.set_visible(False)
         specs.append((CAP_NAMES[cap],size,draw,records))
-    handles=[Patch(facecolor=METHOD_COLORS[m],label=m.title() if m!="quant" else "Quant") for m in METHODS]
-    handles += [key("Oracle differs",PALETTE["black"],hollow=True),Patch(facecolor=PALETTE["white"],edgecolor=PALETTE["reference"],hatch=HATCHES["oracle_differs"],label="Oracle differs"),Patch(facecolor=PALETTE["white"],edgecolor=PALETTE["reference"],hatch=HATCHES["ambiguous"],label="No clear winner")]
-    return publish(plt,audit,stem,specs,handles,"Saved selection maps; colour denotes the predicted compression method. A hollow black circle AND cross-hatching mark an oracle method mismatch. Diagonal hatching marks no-clear-winner cells without mismatch; both flags remain in sidecars when they coincide. Infeasible cells use grey cross-hatching without a circle. F = frozen rule; L = earlier source-conditioned laws. Native nominal storage budgets and all states retained; no selection rule is executed.",columns=3 if old else 2)
+    handles=[Patch(facecolor=surface(METHOD_COLORS[m]),edgecolor=METHOD_COLORS[m],label=m.title() if m!="quant" else "Quant") for m in METHODS]
+    handles += [key("Oracle differs",PALETTE["black"],hollow=True)]
+    # The mismatch hatch repeats the ring, and ambiguity is drawn only on the full maps.
+    if old or full:handles += [Patch(facecolor=PALETTE["white"],edgecolor=PALETTE["reference"],hatch=HATCHES["ambiguous"],label="No clear winner")]
+    return publish(plt,audit,stem,specs,handles,"Saved selection maps; colour denotes the predicted compression method. A hollow black circle and cross-hatching in the cell colour both mark an oracle method mismatch. Diagonal hatching marks no-clear-winner cells without mismatch; both flags remain in sidecars when they coincide. Infeasible cells use grey cross-hatching without a circle. F = frozen rule; L = earlier source-conditioned laws. Native nominal storage budgets and all states retained; no selection rule is executed.",columns=3 if old else 2)
 
 
 def rule_regret(audit,plt):

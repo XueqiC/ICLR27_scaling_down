@@ -43,6 +43,12 @@ def darker(color):
     return tuple(.55*v for v in to_rgb(color))
 
 
+def surface(color, weight=.45):
+    """Large categorical fills carry the hue at reduced strength; ink keeps it whole."""
+    from matplotlib.colors import to_rgb
+    return tuple(weight*v + (1 - weight) for v in to_rgb(color))
+
+
 def neutral_cmap():
     """Continuous diagnostics outside the capability/method colour vocabulary."""
     from matplotlib.colors import LinearSegmentedColormap
