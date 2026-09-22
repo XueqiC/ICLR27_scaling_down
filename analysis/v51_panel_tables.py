@@ -40,8 +40,16 @@ def load_quant(m, *, root=ROOT, read=None):
 
 
 def short_capability_subheaders(text):
-    """Author's preference (Overleaf, 2026-09-22): the capability sub-header row of the panel tables reads Math / Code / QA."""
-    return text.replace("Mathematics & Code & Question answering", "Math & Code & QA")
+    """Author's preferences (2026-09-22): capability sub-headers read Math / Code / QA and the panel column names stay short."""
+    for long, short in (("Mathematics & Code & Question answering", "Math & Code & QA"),
+                        ("Mathematics loss change at density 0.5", "Math at density 0.5"),
+                        ("Density where mathematics loss has risen by one nat", "Threshold density"),
+                        ("Question answering least affected; most affected, out of measured densities", "QA least; most affected"),
+                        ("Smallest question-answering loss change (density)", "Lowest QA change (density)"),
+                        ("Loss change at 4 bits per weight", "Loss change at 4 bits"),
+                        ("Loss change at 3 bits per weight", "Loss change at 3 bits")):
+        text = text.replace(long, short)
+    return text
 
 
 def main():
