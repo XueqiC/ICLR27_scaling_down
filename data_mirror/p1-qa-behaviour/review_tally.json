@@ -1,0 +1,60 @@
+{
+ "protocol": "20 sampled items per model (seed 2026, identical items), read by the assistant on 2026-09-22; an item counts as content-correct when the first answer the model commits to names the gold entity or decision, whatever its formatting; partial names that identify the entity (e.g. 'The New Batch', 'Kuei-Mei') count as correct; a correct fact later in the block after a wrong first answer does not",
+ "items": [
+  60,
+  163,
+  257,
+  262,
+  331,
+  52,
+  114,
+  307,
+  318,
+  284,
+  215,
+  293,
+  280,
+  374,
+  251,
+  300,
+  225,
+  122,
+  1,
+  314
+ ],
+ "models": {
+  "pythia-410m--step120000|quant:channel_b4": {
+   "content_correct": 3,
+   "notes": "yes/no items and 'William F. Brown' (initial split by the v1 rule); the rest degenerate or wrong"
+  },
+  "pythia-1.4b--step120000|quant:channel_b4": {
+   "content_correct": 4,
+   "notes": "The Yob, two no's, Kuei-Mei (partial); coherent but wrong elsewhere"
+  },
+  "gemma3-1b|quant:channel_b4": {
+   "content_correct": 2,
+   "notes": "Scott Mckenna and one no; most generations degenerate repetition"
+  },
+  "gemma3-4b|quant:channel_b4": {
+   "content_correct": 5,
+   "notes": "Gremlins 2, Kastellaun inside a hedged sentence, William F. Brown, two no's"
+  },
+  "pythia-410m--step120000|distill:new_s3": {
+   "content_correct": 4,
+   "notes": "The Yob, Antonieta, no, 'The New Batch' (partial); many degenerate continuations after the first answer"
+  },
+  "gemma3-1b|distill:new_s3": {
+   "content_correct": 5,
+   "notes": "Gremlins 2, The Yob, No, Marc Burrows and Scott McKenna as run-on sentences ('Marc Burrows.Marc Burrows was born...'); wrong first answers elsewhere, sometimes with the right fact later in the block"
+  },
+  "pythia-1.4b--step120000|distill:new_s3": {
+   "content_correct": 7,
+   "notes": "Antonieta, Marc Burrows, No, plus William Brown, Scott McKenna, Gremlins 2 and Conquest as run-on or unspaced text"
+  },
+  "gemma3-4b|distill:new_s3": {
+   "content_correct": 6,
+   "notes": "Conquest, The Yob, No, plus Gremlins 2, William F. Brown and Marc Burrows as run-on sentences; wrong first answers include the composer instead of the spouse and 'Yes' on a no item"
+  }
+ },
+ "reading": "On the sampled items the distilled student's content-correct count is at least the quantization-only choice's on every reference (4 vs 3, 7 vs 4, 5 vs 2, 6 vs 5). The gap between content-correct and exact match for the students came from run-on sentences without a space after the period and from initials, which the v1 first-sentence rule cut; the v2 rule (sentence end followed by whitespace or an uppercase letter, initials exempt) addresses both. The remaining student errors are wrong answers, not formatting."
+}

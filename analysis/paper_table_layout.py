@@ -43,7 +43,7 @@ PROFILES = {
     'tab:budgets': [[2.5, 5.7, 4.9]],
     'tab:s3-ablation': [[22, 14, 13, 9, 9, 11, 8, 14]],
     'tab:a14-baselines': [[28, 20, 8.67, 8.67, 8.67, 8.67, 8.66, 8.66]],
-    'tab:p1-behaviour': [[17, 33, 8, 9, 8, 25]],
+    'tab:p1-behaviour': [[13, 28, 7, 8, 8, 8, 8, 20]],
     'tab:storage-accounting': [[26, 26, 48]],
     'tab:accuracy-comparison': [[34, 26, 10, 10, 10, 10]],
     'tab:wanda-panel': [[16, 12, 12, 12, 12, 12, 12, 12]],

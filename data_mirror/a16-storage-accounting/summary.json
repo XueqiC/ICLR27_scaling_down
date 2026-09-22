@@ -644,5 +644,323 @@
   "material_choices": [
    "distill:new_s3"
   ]
+ },
+ "regret_under_bytes": {
+  "per_reference": {
+   "pythia-410m--step120000": {
+    "math": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0,
+      "rule_regret": 4.57268844419878e-05,
+      "quant_only_regret": 0.0,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0,
+      "rule_regret": 4.57268844419878e-05,
+      "quant_only_regret": 0.0,
+      "student_chosen": 0
+     }
+    },
+    "code": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.00022655692892797896,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.00022655692892797896,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.00022655692892797896,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.00022655692892797896,
+      "student_chosen": 0
+     }
+    },
+    "qa": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.11653398288973371,
+      "rule_regret": 0.027124673241444852,
+      "quant_only_regret": 0.591507248098859,
+      "student_chosen": 15
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.07727468512357405,
+      "rule_regret": 0.10074189044676801,
+      "quant_only_regret": 0.5522479503326994,
+      "student_chosen": 12
+     }
+    },
+    "multi": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0009394308460075607,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.0009394308460075607,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0009394308460075607,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.0009394308460075607,
+      "student_chosen": 0
+     }
+    }
+   },
+   "pythia-1.4b--step120000": {
+    "math": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0,
+      "rule_regret": 1.2358617416760587e-05,
+      "quant_only_regret": 0.0,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0,
+      "rule_regret": 1.2358617416760587e-05,
+      "quant_only_regret": 0.0,
+      "student_chosen": 0
+     }
+    },
+    "code": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 3.714048015213134e-05,
+      "rule_regret": 0.0,
+      "quant_only_regret": 3.714048015213134e-05,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 3.714048015213134e-05,
+      "rule_regret": 0.0,
+      "quant_only_regret": 3.714048015213134e-05,
+      "student_chosen": 0
+     }
+    },
+    "qa": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.5722433460076051,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.5722433460076051,
+      "student_chosen": 16
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.5364781368821298,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.5364781368821298,
+      "student_chosen": 15
+     }
+    },
+    "multi": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 5.56974809886035e-05,
+      "rule_regret": 0.0,
+      "quant_only_regret": 5.56974809886035e-05,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 5.56974809886035e-05,
+      "rule_regret": 0.0,
+      "quant_only_regret": 5.56974809886035e-05,
+      "student_chosen": 0
+     }
+    }
+   },
+   "gemma3-1b": {
+    "math": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.047295281482042734,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.047295281482042734,
+      "student_chosen": 1
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 7.340127292014553e-05,
+      "rule_regret": 0.0,
+      "quant_only_regret": 7.340127292014553e-05,
+      "student_chosen": 0
+     }
+    },
+    "code": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.01841023582816652,
+      "rule_regret": 0.018503653675819312,
+      "quant_only_regret": 0.01841023582816652,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0,
+      "rule_regret": 9.34178476527936e-05,
+      "quant_only_regret": 0.0,
+      "student_chosen": 0
+     }
+    },
+    "qa": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.8855009648904376,
+      "rule_regret": 0.0,
+      "quant_only_regret": 1.8354083665338639,
+      "student_chosen": 16
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.8044384960159356,
+      "rule_regret": 0.0,
+      "quant_only_regret": 1.7206953436254975,
+      "student_chosen": 15
+     }
+    },
+    "multi": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.041199749652330725,
+      "rule_regret": 0.040483863198147424,
+      "quant_only_regret": 0.041199749652330725,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.000715886454183301,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.000715886454183301,
+      "student_chosen": 0
+     }
+    }
+   },
+   "gemma3-4b": {
+    "math": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0001249005531141073,
+      "rule_regret": 0.015110007198060313,
+      "quant_only_regret": 0.01523490775117442,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.0001249005531141073,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.0001249005531141073,
+      "student_chosen": 0
+     }
+    },
+    "code": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.00018164581488043507,
+      "rule_regret": 0.009526890500442878,
+      "quant_only_regret": 0.00965317759078832,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.00012628709034544217,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.00012628709034544217,
+      "student_chosen": 0
+     }
+    },
+    "qa": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.22005727091633442,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.4131598605577693,
+      "student_chosen": 16
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.20630369148406352,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.38733736927290874,
+      "student_chosen": 15
+     }
+    },
+    "multi": {
+     "nominal": {
+      "n_paired": 16,
+      "mean_opportunity": 0.00012628709034544217,
+      "rule_regret": 0.015110007198060313,
+      "quant_only_regret": 0.015236294288405755,
+      "student_chosen": 0
+     },
+     "bytes": {
+      "n_paired": 16,
+      "mean_opportunity": 0.00012628709034544217,
+      "rule_regret": 0.0,
+      "quant_only_regret": 0.00012628709034544217,
+      "student_chosen": 0
+     }
+    }
+   }
+  },
+  "pooled": {
+   "math": {
+    "nominal": {
+     "mean_opportunity": 0.01185504550878921,
+     "rule_regret": 0.0037920231749797653,
+     "quant_only_regret": 0.01563254730830429
+    },
+    "bytes": {
+     "mean_opportunity": 4.957545650856321e-05,
+     "rule_regret": 1.4521375464687097e-05,
+     "quant_only_regret": 4.957545650856321e-05
+    }
+   },
+   "code": {
+    "nominal": {
+     "mean_opportunity": 0.004713894763031766,
+     "rule_regret": 0.0070076360440655475,
+     "quant_only_regret": 0.007081777707008737
+    },
+    "bytes": {
+     "mean_opportunity": 9.749612485638812e-05,
+     "rule_regret": 2.33544619131984e-05,
+     "quant_only_regret": 9.749612485638812e-05
+    }
+   },
+   "qa": {
+    "nominal": {
+     "mean_opportunity": 0.4485838911760277,
+     "rule_regret": 0.006781168310361213,
+     "quant_only_regret": 0.8530797052995243
+    },
+    "bytes": {
+     "mean_opportunity": 0.40612375237642573,
+     "rule_regret": 0.025185472611692003,
+     "quant_only_regret": 0.7991897000283088
+    }
+   },
+   "multi": {
+    "nominal": {
+     "mean_opportunity": 0.010580291267418083,
+     "rule_regret": 0.013898467599051934,
+     "quant_only_regret": 0.014357793066933161
+    },
+    "bytes": {
+     "mean_opportunity": 0.00045932546788122683,
+     "rule_regret": 0.0,
+     "quant_only_regret": 0.00045932546788122683
+    }
+   }
+  }
  }
 }

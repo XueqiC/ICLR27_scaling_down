@@ -153,11 +153,80 @@ def render(summary):
     return house_style(table_layout(text))
 
 
+def regret_under_bytes():
+    """Re-run the selection with the feasible set counted in bytes, and report regret against the byte-feasible oracle.
+
+    The policies are re-decided from the development-median predictions (on these four new states the
+    final rule's pruning and quantization predictions are those medians; its student prediction differs
+    only in the mathematics term, which never selects the student), once under the nominal ratios and
+    once under the byte ratios, so that the two regrets are like for like.
+    """
+    import copy
+    import statistics
+    from analysis import s3_common as common
+    from analysis import s3_policy_ablation as ab
+    summary = json.loads((OUT / "summary.json").read_text())
+    plan = json.loads(PLAN.read_text())
+    models = json.loads((ab.S3 / "inputs/locked_models.json").read_text())
+    v70_freeze = json.loads((ROOT / "results/v70-distill-confirm/freeze.json").read_text())
+    price = {rid: {c["id"]: c["actual"] for c in e["candidates"]} for rid, e in summary["references"].items()}
+    out = {"per_reference": {}, "pooled": {}}
+    for ref in plan["references"]:
+        configs = copy.deepcopy(ref["candidates"])
+        for q in configs:
+            q["actual"] = common.losses(json.loads(Path(ab.measure_path(ref, q, ab.S3)).read_text())["losses"])
+        preds = ab.predictions(ref, models, v70_freeze)
+        for q in configs:
+            q["median"] = preds[q["id"]]["median"]
+        dense = ref["dense"]
+        entry = {}
+        for objective in ab.OBJECTIVES:
+            cells = {"nominal": [], "bytes": []}
+            for budget in ab.BUDGETS:
+                for unit in ("nominal", "bytes"):
+                    cfgs = copy.deepcopy(configs)
+                    if unit == "bytes":
+                        for q in cfgs:
+                            q["r"] = price[ref["id"]][q["id"]]
+                    available = common.feasible(cfgs, budget)
+                    quant = [q for q in available if q["method"] == "quant"]
+                    oracle = common.choose(available, objective, dense, "actual")
+                    q_oracle = common.choose(quant, objective, dense, "actual")
+                    if not oracle or not q_oracle:
+                        continue
+                    best = common.score(oracle["actual"], objective, dense)
+                    rule = common.choose(available, objective, dense, "median")
+                    qonly = common.choose(quant, objective, dense, "median")
+                    cells[unit].append({"budget": budget, "opportunity": common.score(q_oracle["actual"], objective, dense) - best,
+                                        "rule_regret": common.score(rule["actual"], objective, dense) - best,
+                                        "quant_only_regret": common.score(qonly["actual"], objective, dense) - best,
+                                        "rule_id": rule["id"]})
+            entry[objective] = {unit: {"n_paired": len(c), "mean_opportunity": statistics.mean(x["opportunity"] for x in c),
+                                       "rule_regret": statistics.mean(x["rule_regret"] for x in c),
+                                       "quant_only_regret": statistics.mean(x["quant_only_regret"] for x in c),
+                                       "student_chosen": sum(1 for x in c if x["rule_id"].startswith("distill"))}
+                                for unit, c in cells.items()}
+        out["per_reference"][ref["id"]] = entry
+    for objective in ab.OBJECTIVES:
+        out["pooled"][objective] = {unit: {k: statistics.mean(out["per_reference"][r][objective][unit][k] for r in out["per_reference"])
+                                          for k in ("mean_opportunity", "rule_regret", "quant_only_regret")}
+                                    for unit in ("nominal", "bytes")}
+    summary["regret_under_bytes"] = out
+    (OUT / "summary.json").write_text(json.dumps(summary, indent=1))
+    for objective, e in out["pooled"].items():
+        print(objective, {u: {k: round(v, 4) for k, v in d.items()} for u, d in e.items()})
+    for rid, e in out["per_reference"].items():
+        print(rid, "qa", {u: {k: (round(v, 4) if isinstance(v, float) else v) for k, v in d.items()} for u, d in e["qa"].items()})
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--table", action="store_true"); ap.add_argument("--feasibility", action="store_true")
+    ap.add_argument("--regret", action="store_true")
     a = ap.parse_args()
     if a.feasibility:
         feasibility()
+    elif a.regret:
+        regret_under_bytes()
     else:
         main(a.table)
