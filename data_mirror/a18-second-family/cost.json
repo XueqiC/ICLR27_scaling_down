@@ -1,0 +1,155 @@
+{
+ "development": {
+  "olmo2-1b@399B": {
+   "anchor": {
+    "seconds": 56.7,
+    "tokens": 31829
+   },
+   "full": {
+    "seconds": 277.2,
+    "tokens": 159145,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 165.8,
+    "tokens": 95487,
+    "configurations": 2
+   }
+  },
+  "olmo2-1b@1993B": {
+   "anchor": {
+    "seconds": 53.300000000000004,
+    "tokens": 31829
+   },
+   "full": {
+    "seconds": 629.6999999999999,
+    "tokens": 159145,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 308.3,
+    "tokens": 95487,
+    "configurations": 2
+   }
+  },
+  "olmo2-1b@3608B": {
+   "anchor": {
+    "seconds": 103.3,
+    "tokens": 31829
+   },
+   "full": {
+    "seconds": 820.0999999999999,
+    "tokens": 159145,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 431.09999999999997,
+    "tokens": 95487,
+    "configurations": 2
+   }
+  },
+  "olmo2-7b@391B": {
+   "anchor": {
+    "seconds": 262.0,
+    "tokens": 31829
+   },
+   "full": {
+    "seconds": 1761.8000000000002,
+    "tokens": 159145,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 1055.6,
+    "tokens": 95487,
+    "configurations": 2
+   }
+  },
+  "olmo2-7b@1947B": {
+   "anchor": {
+    "seconds": 396.29999999999995,
+    "tokens": 31829
+   },
+   "full": {
+    "seconds": 1643.3,
+    "tokens": 159145,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 1097.6999999999998,
+    "tokens": 95487,
+    "configurations": 2
+   }
+  },
+  "olmo2-7b@3507B": {
+   "anchor": {
+    "seconds": 136.4,
+    "tokens": 31829
+   },
+   "full": {
+    "seconds": 1064.2,
+    "tokens": 159145,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 609.8,
+    "tokens": 95487,
+    "configurations": 2
+   }
+  }
+ },
+ "test": {
+  "olmo2-1b@1196B": {
+   "anchor": {
+    "seconds": 119.19999999999999,
+    "tokens": 31829
+   },
+   "seconds": 468.0,
+   "tokens": 127316,
+   "configurations": 3
+  },
+  "olmo2-1b@2811B": {
+   "anchor": {
+    "seconds": 120.8,
+    "tokens": 31829
+   },
+   "seconds": 471.6,
+   "tokens": 127316,
+   "configurations": 3
+  },
+  "olmo2-7b@1167B": {
+   "anchor": {
+    "seconds": 135.9,
+    "tokens": 31829
+   },
+   "seconds": 585.7,
+   "tokens": 127316,
+   "configurations": 3
+  },
+  "olmo2-7b@2727B": {
+   "anchor": {
+    "seconds": 132.1,
+    "tokens": 31829
+   },
+   "seconds": 581.0,
+   "tokens": 127316,
+   "configurations": 3
+  }
+ },
+ "totals": {
+  "full": {
+   "seconds": 6196.3,
+   "tokens": 954870,
+   "configurations": 24
+  },
+  "reduced": {
+   "seconds": 3668.3,
+   "tokens": 572922,
+   "configurations": 12
+  },
+  "reduced_over_full": {
+   "seconds": 0.5920145893517099,
+   "tokens": 0.6,
+   "configurations": 0.5
+  }
+ }
+}

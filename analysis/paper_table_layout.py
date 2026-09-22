@@ -47,6 +47,7 @@ PROFILES = {
     'tab:storage-accounting': [[26, 26, 48]],
     'tab:accuracy-comparison': [[34, 26, 10, 10, 10, 10]],
     'tab:wanda-panel': [[16, 12, 12, 12, 12, 12, 12, 12]],
+    'tab:second-family': [[26, 14, 10, 10, 10, 10, 10, 10]],
     'tab:s3-ablation-body': [[19, 13, 11, 11, 11, 11, 11, 13]],
 }
 

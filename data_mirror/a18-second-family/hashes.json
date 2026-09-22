@@ -1,0 +1,142 @@
+{
+ "olmo2-1b@399B": {
+  "repo": "allenai/OLMo-2-0425-1B",
+  "revision": "stage1-step190000-tokens399B",
+  "role": "dev",
+  "shards": [
+   "model-00001-of-00002.safetensors",
+   "model-00002-of-00002.safetensors"
+  ],
+  "bytes": 5939687552,
+  "sha256": "516f96f8fe5b3db086857759bd97e8683f711aa38e19855b70825a29a6787d7b",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-0425-1B/snapshots/7439d5c49253e0cf956616b511d783c0c407cb81"
+ },
+ "olmo2-1b@1993B": {
+  "repo": "allenai/OLMo-2-0425-1B",
+  "revision": "stage1-step950000-tokens1993B",
+  "role": "dev",
+  "shards": [
+   "model-00001-of-00002.safetensors",
+   "model-00002-of-00002.safetensors"
+  ],
+  "bytes": 5939687552,
+  "sha256": "72674cc99263c386409082e237360900454c21b85c2f8fa3627d590245e5f8a1",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-0425-1B/snapshots/3e09b708b744a47d1ea3dc139ff91e1d1b9edd72"
+ },
+ "olmo2-1b@3608B": {
+  "repo": "allenai/OLMo-2-0425-1B",
+  "revision": "stage1-step1720000-tokens3608B",
+  "role": "dev",
+  "shards": [
+   "model-00001-of-00002.safetensors",
+   "model-00002-of-00002.safetensors"
+  ],
+  "bytes": 5939687552,
+  "sha256": "468e1089f7df0f271c38761157236ca19867e85d2af036f3acdce15446bd8ba9",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-0425-1B/snapshots/613ce0f8d203a5ba9728e7f1e746e87246ab381a"
+ },
+ "olmo2-1b@1196B": {
+  "repo": "allenai/OLMo-2-0425-1B",
+  "revision": "stage1-step570000-tokens1196B",
+  "role": "test",
+  "shards": [
+   "model-00001-of-00002.safetensors",
+   "model-00002-of-00002.safetensors"
+  ],
+  "bytes": 5939687552,
+  "sha256": "2fb4333a5524bd0655095eeefb364a71aa53462ef039e714239cfeafd7e64493",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-0425-1B/snapshots/b68fdae08159651ef2d4e78c040f084abf88fdab"
+ },
+ "olmo2-1b@2811B": {
+  "repo": "allenai/OLMo-2-0425-1B",
+  "revision": "stage1-step1340000-tokens2811B",
+  "role": "test",
+  "shards": [
+   "model-00001-of-00002.safetensors",
+   "model-00002-of-00002.safetensors"
+  ],
+  "bytes": 5939687552,
+  "sha256": "53036a1b81ae35bca7f56fa38029f4c4e591940edf9b84a62b75d784841a7504",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-0425-1B/snapshots/d7029f7126797d066b1d47e8adc67de536b71d8e"
+ },
+ "olmo2-7b@391B": {
+  "repo": "allenai/OLMo-2-1124-7B",
+  "revision": "stage1-step93000-tokens391B",
+  "role": "dev",
+  "shards": [
+   "model-00001-of-00006.safetensors",
+   "model-00002-of-00006.safetensors",
+   "model-00003-of-00006.safetensors",
+   "model-00004-of-00006.safetensors",
+   "model-00005-of-00006.safetensors",
+   "model-00006-of-00006.safetensors"
+  ],
+  "bytes": 29194510544,
+  "sha256": "2bc2a3c12b0c8a62f67b18a205cfd39a0cdf9ae055edd63f2bf6f771331824c9",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-1124-7B/snapshots/ebee110f42239c33f87b113880d5acd077e45016"
+ },
+ "olmo2-7b@1947B": {
+  "repo": "allenai/OLMo-2-1124-7B",
+  "revision": "stage1-step464000-tokens1947B",
+  "role": "dev",
+  "shards": [
+   "model-00001-of-00006.safetensors",
+   "model-00002-of-00006.safetensors",
+   "model-00003-of-00006.safetensors",
+   "model-00004-of-00006.safetensors",
+   "model-00005-of-00006.safetensors",
+   "model-00006-of-00006.safetensors"
+  ],
+  "bytes": 29194510544,
+  "sha256": "625bb8e4214099db2cd1db9d3f85891e89c2d98848c1d3af9c1f0e54578f1216",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-1124-7B/snapshots/6ecc7876827127db6123b2e62197376513154ed9"
+ },
+ "olmo2-7b@3507B": {
+  "repo": "allenai/OLMo-2-1124-7B",
+  "revision": "stage1-step836000-tokens3507B",
+  "role": "dev",
+  "shards": [
+   "model-00001-of-00006.safetensors",
+   "model-00002-of-00006.safetensors",
+   "model-00003-of-00006.safetensors",
+   "model-00004-of-00006.safetensors",
+   "model-00005-of-00006.safetensors",
+   "model-00006-of-00006.safetensors"
+  ],
+  "bytes": 29194510544,
+  "sha256": "84f545420f1ca440dd26e82f7e4cb4951d626ee7366d29b3edf873346b2ae326",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-1124-7B/snapshots/c9639d08409e134fd58d6b88699cadd6200ce440"
+ },
+ "olmo2-7b@1167B": {
+  "repo": "allenai/OLMo-2-1124-7B",
+  "revision": "stage1-step278000-tokens1167B",
+  "role": "test",
+  "shards": [
+   "model-00001-of-00006.safetensors",
+   "model-00002-of-00006.safetensors",
+   "model-00003-of-00006.safetensors",
+   "model-00004-of-00006.safetensors",
+   "model-00005-of-00006.safetensors",
+   "model-00006-of-00006.safetensors"
+  ],
+  "bytes": 29194510544,
+  "sha256": "e50b2d2286a05a13147f3cd954e7b70d117ee00103a684e768f98066da328553",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-1124-7B/snapshots/a3f56a98e3dd2aaf99332ae3cd92989be4d7fa1f"
+ },
+ "olmo2-7b@2727B": {
+  "repo": "allenai/OLMo-2-1124-7B",
+  "revision": "stage1-step650000-tokens2727B",
+  "role": "test",
+  "shards": [
+   "model-00001-of-00006.safetensors",
+   "model-00002-of-00006.safetensors",
+   "model-00003-of-00006.safetensors",
+   "model-00004-of-00006.safetensors",
+   "model-00005-of-00006.safetensors",
+   "model-00006-of-00006.safetensors"
+  ],
+  "bytes": 29194510544,
+  "sha256": "124b4111d6d1880e7f38b89a2c42564c54160d4b4e32a6ca17e91a438af3032c",
+  "path": "<project>/envs/hf_cache_a18/hub/models--allenai--OLMo-2-1124-7B/snapshots/50004ba0f5dd224bfdbeb47d5622d64ae6591dde"
+ }
+}

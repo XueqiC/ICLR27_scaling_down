@@ -129,6 +129,7 @@ the artifact behind every reported number.
 | P1 (retrospective) | Fresh-item plan (384 2Wiki items), per-item losses, generations and scores for 22 models, paired summary; `data_mirror/p1-qa-behaviour/` | `analysis.p1_qa_behaviour --analyse --table` |
 | P2 / A16 (retrospective) | Wanda panel losses and summary (`data_mirror/p2-wanda-panel/`); byte accounting of the selection candidates (`data_mirror/a16-storage-accounting/`) | `analysis.p2_wanda_panel --analyse --table`, `analysis.a16_storage_accounting --table` |
 | A17 (retrospective) | V15 accuracy cells for the four panel models at five densities (`data_mirror/v15-accuracy/`), comparison summary (`data_mirror/a17-accuracy-comparison/`) | `analysis.a17_accuracy_comparison --table` |
+| A18 (pre-registered) | Second-family measurement-efficiency confirmation on OLMo-2: preregistration, item sets, checkpoint hashes, six development and four test measurements with per-item losses and GPU seconds, the freeze and its digest, scores with the item bootstrap, cost accounting (`data_mirror/a18-second-family/`) | `analysis.a18_second_family --score --table` |
 
 A10 / C82 is described in the ledger; none of A15's four consumers opens its
 artifacts, so A15 does not add its 90 MB summary. The A12 serialized dataset
