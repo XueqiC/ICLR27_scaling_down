@@ -239,7 +239,11 @@ def _compress_cells(block):
 
 def house_style(text):
     """Capability short forms and compressed phrases in the body, rules where declared."""
-    text = _compress_cells(_abbreviate_body(text))
+    if __package__:
+        from .paper_table_text import plain_process_words
+    else:
+        from paper_table_text import plain_process_words
+    text = plain_process_words(_compress_cells(_abbreviate_body(text)))
     label = next((m for m in re.findall(r"\\label\{([^}]+)\}", text) if m in ROW_RULES), None)
     if label:
         text = TABULAR.sub(lambda m: _rule_between_rows(m.group()), text)

@@ -15,7 +15,7 @@ from analysis import s3_control_table as gen
 
 ROOT = Path(__file__).resolve().parents[1]
 # Set from the reviewed retrospective table, checked even without manuscript files.
-TABLE_SHA256 = "aab591f0d9a917488a25ad028b29bf30fdf083dd11184e18c25782b281d81cdd"
+TABLE_SHA256 = "0b4da01097516b140d05cd414be32f48b12fcafab2328fbe929f7be1a2cb6dc9"
 
 
 @pytest.fixture(scope="module")
@@ -239,7 +239,7 @@ def test_retrospective_table_is_byte_identical(result):
     assert "\\begin{table}[tb]" in text
     assert "\\begin{tabular*}{\\textwidth}" in text
     assert "This analysis is retrospective." in text
-    assert "was not in the frozen candidate set" in text
+    assert "was not in the pre-specified candidate set" in text
     assert "sixteen of seventeen" in text
 
 

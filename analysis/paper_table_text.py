@@ -667,6 +667,73 @@ def _concise(text):
 FLOAT_PLACEMENT = re.compile(r"(\\begin\{table\*?\})\[[^\]]*\]")
 
 
+# Process vocabulary reads as engineering, not as method: what was fixed, when.
+# The same rules were applied once to every hand-written .tex file (2026-09-22).
+PROCESS_RULES = [
+    # explicit phrases first
+    (r"Reproducibility and Prediction Registration", "Reproducibility and Timing of Predictions"),
+    (r"\bfreeze commits\b", "the revisions at which each was fixed"),
+    (r"\bfifteen freeze records names the commit it was registered at\b", "fifteen records names the revision at which its predictions were fixed"),
+    (r"\bfreeze records\b", "records"),
+    (r"\bat the freeze\b", "when the predictions were fixed"),
+    (r"\bunder the same freeze\b", "at the same time"),
+    (r"\bafter a freeze\b", "after its predictions were fixed"),
+    (r"\bWe then locked a complete rule and froze its maps\b", "We then fixed a complete rule and its maps in advance"),
+    (r"\bIt was then locked and confirmed\b", "It was then fixed and confirmed"),
+    (r"\bthen froze that form\b", "then fixed that form in advance"),
+    (r"\bwere sealed before any outcome was observed\b", "were fixed before any outcome was observed"),
+    (r"\bwere sealed\b", "were fixed before any outcome was observed"),
+    (r"\bsealed\b", "fixed in advance"),
+    (r"\bcommitted beforehand\b", "fixed beforehand"),
+    (r"\bcommitted with their hash\b", "recorded with their hash"),
+    (r"\bfixed and committed\b", "fixed and recorded"),
+    (r"\brule committed before\b", "rule fixed before"),
+    (r"\bcommitted\b", "fixed in advance"),
+    (r"\bpre-registered\b", "pre-specified"), (r"\bpre-committed\b", "pre-specified"),
+    (r"\bPre-registered\b", "Pre-specified"),
+    (r"\bregistration records\b", "records of what was fixed and when"),
+    (r"\bregistration order\b", "order in which the predictions were fixed"),
+    (r"\boutside the registration\b", "outside the pre-specified analysis"),
+    (r"\bthe registered records\b", "the earlier records"),
+    (r"\bwas registered on\b", "was specified on"), (r"\bwere registered on\b", "were specified on"),
+    (r"\bwere registered as\b", "were specified in advance as"), (r"\bwas registered as\b", "was specified in advance as"),
+    (r"\bwas registered\b", "was specified in advance"), (r"\bwere registered\b", "were specified in advance"),
+    (r"\bregistered\b", "pre-specified"), (r"\bRegistered\b", "Pre-specified"),
+    (r"\bregistration\b", "pre-specification"),
+    (r"\bdevelopment register\b", "development set"), (r"\bregister files\b", "development files"),
+    (r"\bfroze\b", "fixed"),
+    (r"\bfrozen candidate(s?)\b", r"pre-specified candidate\1"), (r"\bFrozen candidate(s?)\b", r"Pre-specified candidate\1"),
+    (r"\bfrozen confirmation (cells|panels?)\b", r"held-out confirmation \1"),
+    (r"\bfrozen round\b", "confirmation round"), (r"\bfrozen artifact\b", "fixed result file"),
+    (r"\bfrozen probes\b", "fixed probes"),
+    (r"\bfrozen selection rule\b", "final selection rule"), (r"\bFrozen selection rule\b", "Final selection rule"),
+    (r"\bfrozen rule\b", "final rule"), (r"\bFrozen rule\b", "Final rule"),
+    (r"\bthe rule as frozen\b", "the rule as fixed"),
+    (r"\btests that choice frozen\b", "tests that choice, fixed in advance,"),
+    (r"\bfrozen\b", "pre-specified"), (r"\bFrozen\b", "Pre-specified"),
+    (r"\blocked rule\b", "final rule"), (r"\bLocked rule\b", "Final rule"),
+    (r"\blocked policy\b", "final policy"), (r"\blocked selection rule(s?)\b", r"final selection rule\1"),
+    (r"\bExact locked\b", "Exact final"),
+    (r"\blocked\b", "fixed"),
+]
+
+
+def plain_process_words(text):
+    """Apply the process-vocabulary rules to prose, leaving TeX references alone."""
+    protected = re.compile(r"\\\\(?:label|ref|input|cite[pt]?)\\{[^}]*\\}|%[^\\n]*")
+    out, start = [], 0
+    for m in protected.finditer(text):
+        seg = text[start:m.start()]
+        for pat, rep in PROCESS_RULES:
+            seg = re.sub(pat, rep, seg)
+        out.extend([seg, m.group()]); start = m.end()
+    seg = text[start:]
+    for pat, rep in PROCESS_RULES:
+        seg = re.sub(pat, rep, seg)
+    out.append(seg)
+    return "".join(out)
+
+
 def table_text(text):
     """Apply editorial changes to tables without touching surrounding prose."""
     text = FLOAT_PLACEMENT.sub(r"\1[tb]", text)
@@ -678,7 +745,7 @@ def table_text(text):
         text = text.replace(phrase, "")
     for old, new in NOTE_ENDINGS:
         text = text.replace(old, new)
-    return plain_language(fit_table_height(text))
+    return plain_process_words(plain_language(fit_table_height(text)))
 
 
 # Method restatement that a table note does not need: the fitting rules are in

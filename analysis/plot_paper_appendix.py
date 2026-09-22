@@ -158,7 +158,7 @@ def final_relations(audit, plt):
         ax.set_xticks([1,2,4],["1","2","4"]);ax.minorticks_off()
     for student in old.STUDENTS:
         specs.append(("C: "+student.split("-")[-1].upper(),SIZES["three"],lambda f,s=student:distill(f,s),[r for r in dc["rows"] if r["student"]==student]))
-    handles=capability_keys()+[key("Frozen",marker="D",hollow=True),key("Median",marker="",ls="--"),key("270M",marker="",ls=":"),key("1B",marker="",ls="--")]
+    handles=capability_keys()+[key("Pre-specified",marker="D",hollow=True),key("Median",marker="",ls="--"),key("270M",marker="",ls=":"),key("1B",marker="",ls="--")]
     return publish(plt,audit,"final_relations",specs,handles,"Measured responses and frozen relations. A: pruning; B: Math by bit width (410M/143k circles and solid lines; 1.4B/16k squares and dotted lines); C: the twelve U=200 trajectories, separated by student. All original measurements and frozen objects are retained. Colour always denotes capability; grey denotes baseline. Frozen predictions are hollow diamonds. Student line styles: 270M dotted, 1B dashed. No data or fits changed.",legend_artist_sizes=(1.5,6.,1.))
 
 
@@ -212,7 +212,7 @@ def gains(audit,plt,stem):
     caption="Paired improvements; positive favours the first-named model. Each integer test index refers to the corresponding row in the panel sidecar, in the original test order; capabilities are horizontally dodged. All original tests, values, counts and comparator identities are retained. Whiskers are stored 95% intervals, only where computed. Hollow diamonds denote frozen prospective predictions; filled circles denote leave-one-out estimates.\n"
     for label,rows in zip(labels,groups):
         caption+=label+": "+"; ".join(f"{i+1} = {r['label']}"+(f" / {r['baseline']}" if 'baseline'in r else '') for i,r in enumerate(rows))+".\n"
-    return publish(plt,audit,stem,specs,capability_keys()+[key("Frozen",marker="D",hollow=True),key("Leave-one-out")],caption)
+    return publish(plt,audit,stem,specs,capability_keys()+[key("Pre-specified",marker="D",hollow=True),key("Leave-one-out")],caption)
 
 
 def measurement_support(audit,plt):
@@ -343,7 +343,7 @@ def rule_regret(audit,plt):
                 hatch=("",HATCHES["prediction"],HATCHES["code"],HATCHES["qa"])[i]
                 ax.bar(j+(i-1.5)*.18,data[c][p],width=.16,color=color,edgecolor=darker(color),hatch=hatch)
         ax.set(yscale="log",ylabel="Mean regret (nats)",xticks=range(4),xticklabels=["Math","Code","QA","Maximum"],xlabel="Objective")
-    handles=[Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),hatch=h,label=l) for h,l in zip(("","///","...","xx"),("Frozen rule","Earlier laws","Quant only","Cheapest"))]
+    handles=[Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),hatch=h,label=l) for h,l in zip(("","///","...","xx"),("Final rule","Earlier laws","Quant only","Cheapest"))]
     return publish(plt,audit,"rule_regret",[("Mean regret",SIZES["full"],draw,[data])],handles,"Mean regret on four fresh states; the saved pooled means are plotted without recomputation. Colour denotes objective; policy uses plain / diagonal / dotted / cross-hatched bars. Logarithmic axis, native-token nats.",columns=1)
 
 
@@ -386,7 +386,7 @@ def s3_validation(audit,plt):
             ax.grid(axis="y",color=PALETTE["grid"],lw=.4,zorder=0)
         specs.append((CAP_NAMES[cap],SIZES["four"],draw,data[cap]))
     handles=[Patch(facecolor=PALETTE["white"],edgecolor=PALETTE["reference"],label="Opportunity"),
-             Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),label="Frozen rule"),
+             Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),label="Final rule"),
              Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),hatch=HATCHES["code"],label="Quantization only")]
     return publish(plt,audit,"s3_validation",specs,handles,"Independent selection validation on four references that supplied the rule no outcome, one panel per objective. Bars per reference: the opportunity that choosing across methods opens over the best feasible quantization candidate (open), the regret of the frozen rule (solid) and the regret of a quantization-only policy (dotted), each a mean in nats per native token over the sixteen budgets at which both policies find a feasible candidate; nothing is pooled across tokenizers. Colour denotes objective. References are numbered as in the identity table: R1 Pythia 410M at step 120000, R2 Pythia 1.4B at step 120000, R3 Gemma 3 1B, R4 Gemma 3 4B.",columns=4)
 

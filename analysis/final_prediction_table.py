@@ -67,7 +67,7 @@ HEADERS = ("Prediction task", "Delivered relation", "Delivered error (nats)",
            "Strongest development baseline (nats)", "Development measurements")
 COLUMN_WIDTHS = (".22", ".22", ".12", ".28", ".16")
 CANDIDATE_COLUMNS = (0, 1, 2, 3)
-CANDIDATE_HEADERS = ("Prediction task", "Frozen candidate", "Candidate error (nats)",
+CANDIDATE_HEADERS = ("Prediction task", "Pre-specified candidate", "Candidate error (nats)",
                      "Delivered relation")
 CANDIDATE_WIDTHS = (".30", ".28", ".14", ".28")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
@@ -79,11 +79,11 @@ CAPTION = (
     "The strongest development baseline was chosen inside the development folds, before the test, "
     "and scored on the same cells. The last column counts development configuration "
     "measurements per capability; distillation entries give the {students} students in that "
-    "order. Appendix Table~\\ref{tab:main-prediction-candidates} lists each task's frozen candidate; "
+    "order. Appendix Table~\\ref{tab:main-prediction-candidates} lists each task's pre-specified candidate; "
     "Fig.~\\ref{fig:generalization} compares each row with its baseline."
 )
 CANDIDATE_CAPTION = (
-    "Frozen candidate of each prediction task in Table~\\ref{tab:main-prediction-v2}, its error on "
+    "Pre-specified candidate of each prediction task in Table~\\ref{tab:main-prediction-v2}, its error on "
     "the same cells, and the relation delivered after the test. Errors are mean absolute errors in "
     "nats per token, in math, code and question answering order, and distillation entries give the "
     "{students} students in that order."
