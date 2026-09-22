@@ -24,37 +24,3 @@ Pruning QA & Power family & Source amplitudes, Exponent & Exponent minimum, medi
 \caption{The table compares a shared response family with capability-specific responses, and reports the spread of exponents fitted separately per source. Errors are mean absolute errors in nats per native token, pooled equally over capabilities. Distillation carries no pretraining-token input, strength only that term is inactive.}
 \label{tab:shared_structure}
 \end{table}
-
-\begin{table}[tb]\normalfont
-\centering\footnotesize\setlength{\tabcolsep}{3pt}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}@{\extracolsep{\fill}}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.150000000\textwidth-1.500000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.160000000\textwidth-1.600000000\tabcolsep\relax}>{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr 0.190000000\textwidth-1.900000000\tabcolsep\relax}@{}}
-\toprule
-Panel & What is shared & Error without and with one target measurement & 80\% interval: coverage and width, without then with that measurement \\
-\midrule
-Pruning development leave-one-state-out & Training Exponent & 0.604 against 31.406 & ---\\
-\midrule
-Pruning confirmation & Training Exponent & 0.560 against 0.415 & 77.8\%/1.621 to 100.0\%/3.629\\
-\midrule
-Pruning pairs: 17-source out-of-fold predictions & Training Exponent & 0.517 against 0.763 & ---\\
-\midrule
-Pruning pairs: independent 13 & Training Exponent & 0.707 against 0.772 & 66.7\%/1.523 to 87.5\%/4.277\\
-\midrule
-Quantization surface development leave-one-state-out & Training curve & 3.143 against 26.177 & ---\\
-\midrule
-Quantization surface bit-width test & Training curve & 0.747 against 6.442 & ---\\
-\midrule
-Quantization surface group-size test & Training curve & 1.751 against 14.973 & ---\\
-\midrule
-Quantization surface joint test & Training curve & 0.344 against 0.193 & ---\\
-\midrule
-Separable quantization bit-width test & Training curve & 1.540 against 0.183 & ---\\
-\midrule
-Separable quantization group-size test & Training curve & 2.423 against 0.623 & ---\\
-\midrule
-Separable quantization joint test & Training curve & 0.724 against 0.306 & ---\\
-\bottomrule
-\end{tabular*}
-\caption{The table reports what one target measurement buys. Errors are mean absolute errors in nats per native token, interval widths are in the same units, and coverage is a percentage. The calibration cell itself is excluded from scoring.}
-\par\smallskip{\footnotesize The confirmation panel excludes three new sources, and the independent pair panel excludes all four pair sources from fitting and from its 13-source interval bank.\par}
-\label{tab:calibration_k1}
-\end{table}
