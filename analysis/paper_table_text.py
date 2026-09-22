@@ -674,10 +674,29 @@ def table_text(text):
     fallback = next((label for label in labels if label in CAPTION_NOTES), None)
     text = TABLE.sub(lambda m: _concise(_table(m.group(), fallback)), text)
     text = text.replace("reuse count", "reuse ratio")
+    for phrase in NOTE_TRIMS:
+        text = text.replace(phrase, "")
     for old, new in NOTE_ENDINGS:
         text = text.replace(old, new)
     return plain_language(fit_table_height(text))
 
+
+# Method restatement that a table note does not need: the fitting rules are in
+# the appendix section the table sits in, and keeping them here made the float
+# tall enough to leave the rest of its page empty. What stays is what a reader
+# needs to read the numbers: the panel sizes, the interval basis, the reason a
+# distillation gain is exactly zero, and the retrospective status.
+NOTE_TRIMS = [
+    "All capabilities receive equal Capability mean weight. ",
+    "Shared anchors are medians of statewise capability means; scales and offsets "
+    "minimize development median-anchor squared error. ",
+    "pruning development interpolation and grouped-quantization interpolation boundary "
+    "flooring are retained. Distillation uses development ordinary least squares and "
+    "frozen planned reuse ratios. ",
+    "State intervals are descriptive because clusters are few. ",
+    "The two development state labels record identical response vectors; counting that "
+    "vector once is reported as a sensitivity in the accompanying summary. ",
+]
 
 NOTE_ENDINGS = [
     ("and supports no conclusion about conditioning.",
@@ -1059,12 +1078,12 @@ PLAIN_CAPTIONS = {
  'tab:quant2d_coef': 'The table gives frozen grouped-quantization coefficients by capability and response term. Coefficients act on standardized inputs; the resulting loss change is in nats per native token. The note gives the prediction formula and the constants used to standardize each input.',
  'tab:v53_loso': 'The table compares pruning predictors when one source is held out. Entries are mean absolute errors in nats per native token. The rows separate all measured densities from densities outside the coarse development grid.',
  'tab:v55_loso': 'The table compares grouped-quantization predictors when one state is held out. Entries are mean absolute errors in nats per native token. A collapsing development state dominates the errors, so all candidate forms were retained for testing.',
- 'tab:quant_ident': 'The table shows how many independent coefficients the quantization designs support and how accurately they predict held-out measurements. The upper panel gives dimensionless rank and effective degrees of freedom. The lower panel gives mean absolute errors in nats per native token.',
+ 'tab:quant_ident': 'The table gives the number of independent coefficients the quantization designs support and how accurately they predict held-out measurements. The upper panel gives dimensionless rank and effective degrees of freedom. The lower panel gives mean absolute errors in nats per native token.',
  'tab:v56_forms': 'The table compares distillation forms under run and student holdouts. Each pair gives mean absolute error followed by signed bias, in nats per native token. Parameter counts cover all capabilities.',
  'tab:v56_condition': 'The table compares shared and capability-specific distillation responses at matched parameter counts. Errors and gains are in nats per native token. Paired parameter counts list the shared response followed by the capability-specific response.',
  'tab:distill_forms_audit': 'The table records the frozen distillation formulas and their fitted coefficients. Responses are loss changes in nats per native token. The first panel specifies the fit; the second lists coefficients in the stated order. The notes define the model inputs and the procedure used to fit each form.',
  'tab:shared_structure': 'The table compares a shared response family with capability-specific responses, and reports the spread of exponents fitted separately per source. Errors are mean absolute errors in nats per native token, pooled equally over capabilities. Distillation carries no pretraining-token input, so that term is inactive.',
- 'tab:calibration_k1': 'The table reports what one target measurement buys. Errors are mean absolute errors in nats per native token, interval widths are in the same units, and coverage is a percentage. The calibration cell itself is excluded from scoring.',
+ 'tab:calibration_k1': 'The table reports the effect of one target measurement. Errors are mean absolute errors in nats per native token, interval widths are in the same units, and coverage is a percentage. The calibration cell itself is excluded from scoring.',
  'tab:cap_conditioning': 'The table compares separate capability responses with shared responses on frozen confirmation panels. Mean absolute errors and gains are in nats per native token. Positive gains favor separate responses; brackets give paired confidence intervals for the error differences.',
  'tab:cond_audit': 'The table compares separate capability responses with a shared response and fitted capability scales. Scales and squared correlations are dimensionless. Errors and improvements are in nats per native token; brackets give confidence intervals for the error differences.',
  'tab:main_final': 'The table compares frozen relations, alternatives, and delivered rules on confirmation tests. Mean absolute errors and gains are in nats per native token. Lists follow mathematics, code, and question answering. Gain is alternative error minus relation error; retrospective rules were chosen after testing.',
