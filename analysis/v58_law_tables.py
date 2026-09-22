@@ -51,7 +51,7 @@ if isinstance(lo, dict):
     for k, v in lo.items(): L.append(f"{k.replace('_',' ')} & " + " & ".join(f"{float(getm(v,c)):.3f}" for c in C) + r" \\")
 elif isinstance(lo, list):
     for e in lo: L.append(f"{str(e.get('candidate','')).replace('_',' ')} & " + " & ".join(f"{float(e.get(c, e.get('mae',{}).get(c))):.3f}" for c in C) + r" \\")
-L += [r"\bottomrule\end{tabular}", r"\caption{Grouped quantization: leave-one-state-out MAE (nats) on the 24 development cells (six states). The late-stage 160M state, which collapses at 3 bits, dominates every held-out error, so the development set does not rank the forms; all three candidates and the baselines were frozen and tested (\S\ref{sec:unseen_settings}).}", r"\label{tab:v55_loso}\end{table}"]
+L += [r"\bottomrule\end{tabular}", r"\caption{Grouped quantization: leave-one-state-out MAE (nats) on the 24 development cells (six states). The late-stage 160M state, which collapses at 3 bits, dominates every held-out error, so the development set does not rank the forms; all three candidates and the baselines were frozen and tested (Section~\ref{sec:unseen_settings}).}", r"\label{tab:v55_loso}\end{table}"]
 (TAB / "v55_loso.tex").write_text(publication_table_text("\n".join(L) + "\n"))
 # ---- v56 forms tables from summary.md (already tabulated there)
 md = (ROOT / "results/v56-distill-forms/summary.md").read_text()

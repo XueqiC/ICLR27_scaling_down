@@ -9,7 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "analysis"))
 from paper_table_text import _academic_caption  # noqa: E402
 
-TABLES = ROOT / "results" / "published-tables"
+TABLES = ROOT / "paper" / "paper" / "tables"
+if not TABLES.exists():
+    TABLES = ROOT / "paper" / "tables"
 USED = """candidate_coverage cap_conditioning cond_audit distill_confirm distill_forms_audit distill_paired
 final_deliverables locked_rule main_context main_final main_prediction_v2 model_arch models_domains musique_scope
 p1v2 p2v2_test p3_check panel_prune panel_quant pred_config_prune pred_config_qd pred_full pred_source prune_repeat
@@ -18,7 +20,7 @@ rule_confirm_by_state rule_decomp selection_feasible shared_structure v53_loso v
 PATCHED = {
     "models_domains": r"Eq.~\ref{eq:quant2d}",
     "pred_full": r"Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}",
-    "v55_loso": r"\S\ref{sec:unseen_settings}",
+    "v55_loso": r"Section~\ref{sec:unseen_settings}",
     "round3_prune": r"Appendix Table~\ref{tab:round3_coef}",
 }
 FORBIDDEN = {

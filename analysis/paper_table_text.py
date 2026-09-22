@@ -437,7 +437,7 @@ CONCISE_CAPTIONS = {
         r"Grouped quantization: leave-one-state-out mean absolute error in nats on the 24 development cells of "
         r"six states, by candidate predictor and capability. The late-stage 160M state, which collapses at 3 bits, "
         r"dominates each \mbox{held-out} error, so the development set does not rank the forms; all three "
-        r"candidates and the baselines were frozen and tested (\S\ref{sec:unseen_settings})."),
+        r"candidates and the baselines were frozen and tested (Section~\ref{sec:unseen_settings})."),
     "tab:quant_ident": (
         r"Retrospective audit of quantization identifiability; the delivered predictions are unchanged. The four "
         r"forms use the same 24 development cells per capability, pooled standardization, and ridge "
@@ -1170,7 +1170,7 @@ def _reader_caption(block, label):
                 kept = []
                 for sentence in sentences:
                     probe = re.sub(r'\\(?:ref|eqref)\{[^}]*\}|\b(?:[AFKGVv]\d+|L0)\b|_(?:\{[^{}]*\}|\d)', '', sentence)
-                    if re.search(r'\d', probe) or r'\S\ref{sec:unseen_settings}' in sentence or r'Appendix Table~\ref{tab:round3_coef}' in sentence:
+                    if re.search(r'\d', probe) or r'Section~\ref{sec:unseen_settings}' in sentence or r'Appendix Table~\ref{tab:round3_coef}' in sentence:
                         kept.append(sentence)
                 old = ' '.join(kept)
             # A minipage keeps the note justified: inside the table's \centering
