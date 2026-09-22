@@ -65,7 +65,7 @@ POLICY_LABELS = {
 INTERNAL_NOTE = "Policy internal names: locked-rule, v64-law (respectively)."
 MAPS = POLICIES[:2]
 METHODS = v64.METHODS
-TITLES = {"math": "Math", "code": "Code", "qa": "QA (2Wiki)", "multi": "Multi (max ΔL)"}
+TITLES = {"math": "Math", "code": "Code", "qa": "QA", "multi": "Multi (max ΔL)"}
 TABLE_LABELS = {**TITLES, "multi": "Multi"}
 COLORS = (style.COLORS["pruning"], style.COLORS["quantization"],
           style.COLORS["distillation"], PALETTE["grid"])
@@ -320,8 +320,7 @@ def latex_confirm(compare):
         r"candidate sets containing that method. All 68 cells are feasible for every policy. "
         r"QA is restricted to 2Wiki, and the distillation candidates are the historical students.}",
         r"\label{tab:rule-confirm}", r"\begin{tabularx}{\linewidth}{lXrrr}", r"\toprule",
-        r"Capability & Policy & Regret & \shortstack{Method\\agreement} & "
-        r"\shortstack{Set contains\\oracle method} \\", r"\midrule"]
+        r"Capability & Policy & Regret & \shortstack{Method\\agreement} \\", r"\midrule"]
     for cap in OBJECTIVES:
         for r in compare["tables"][cap]:
             if r["policy"] not in POLICIES:
@@ -329,7 +328,7 @@ def latex_confirm(compare):
             cov = compare["candidate_set_coverage"][cap].get(r["policy"])
             coverage = f"{100*cov['method_coverage']:.1f}" if cov else "---"
             lines.append(f"{TABLE_LABELS[cap]} & {POLICY_LABELS[r['policy']]} & "
-                         f"{v64.number(r['mean_regret'], 4)} & {100*r['method_agreement']:.1f} & {coverage}" + r" \\")
+                         f"{v64.number(r['mean_regret'], 4)} & {100*r['method_agreement']:.1f}" + r" \\")
         lines.append(r"\midrule")
     lines[-1] = r"\bottomrule"
     lines += [r"\end{tabularx}", r"\par\smallskip\begin{minipage}{\linewidth}\footnotesize",

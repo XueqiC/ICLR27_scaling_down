@@ -729,7 +729,7 @@ def latex_candidate_coverage(summary):
         lines.append(tag + " & " + " & ".join(values) + " & " +
                      number(row["minimum_r_by_method"]["quant"], 7) + r" \\")
     lines += [r"\midrule", "Total & " + " & ".join(str(summary["config_totals"][law]) for law in LAWS[:-1]) +
-              r" & --- \\", r"\bottomrule", r"\end{tabular}", r"\par\smallskip",
+              " & " + number(min(row["minimum_r_by_method"]["quant"] for row in summary["candidate_coverage"]), 7) + r" \\", r"\bottomrule", r"\end{tabular}", r"\par\smallskip",
               r"\begin{minipage}{\linewidth}\small",
               r"N/A means no measured candidate. Each state also has one dense source, minimum $r=1$; "
               r"it is excluded from method counts. KD has 0, 1 or 2 smaller same-stage measured students. "

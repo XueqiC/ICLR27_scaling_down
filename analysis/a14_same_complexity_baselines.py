@@ -128,7 +128,7 @@ def render(results):
         cells = [LABELS[form], str(PARAMETERS[form])]
         for budget in ("18", "36"):
             mae = results["budgets"][budget]["mae"].get(form)
-            cells += [fmt(mae[c]) for c in CAPS] if mae else ["--"] * 3
+            cells += [fmt(mae[c]) for c in CAPS] if mae else [r"\multicolumn{3}{c}{underdetermined with 18 measurements}"]
         rows.append(" & ".join(cells) + r" \\")
     k1 = results["k1"]
     rows.append(r"\midrule")

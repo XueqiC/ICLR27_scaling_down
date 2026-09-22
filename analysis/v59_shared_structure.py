@@ -696,23 +696,26 @@ def latex(summary, panels):
                r"\label{tab:shared_structure}", r"\end{table}", ""]
 
     calib = [r"\begin{table}[!htbp]", r"\centering\footnotesize\setlength{\tabcolsep}{3pt}",
-             r"\begin{tabular}{@{}p{3.0cm}p{2.2cm}p{3.0cm}p{4.0cm}@{}}", r"\toprule",
-             r"Panel & What is shared & Error without and with one target measurement & "
-             r"80\% interval: coverage and width, without then with that measurement \\",
+             r"\begin{tabular}{@{}p{4.0cm}p{3.0cm}p{5.0cm}@{}}", r"\toprule",
+             r"Panel & What is shared & Error without and with one target measurement \\",
              r"\midrule"]
+    intervals = []
     for label, result, k0, k1 in panels:
         a, b = (result["metrics"][m]["macro"]["mae"] for m in (k0, k1))
         name = label.replace("_", r"\_").replace("17-state OOF", "17-source OOF")
         share = r"Training $\gamma_c$" if label.startswith("Prune") else "Training curve"
         width = pi_cell(result, "0.8").replace("—", "---").replace("%", r"\%").replace(" → ", " to ")
-        calib.append(f"{name} & {share} & {a:.3f} against {b:.3f} & {width}" + r" \\")
+        if width != "---":
+            intervals.append(f"{name}: {width}")
+        calib.append(f"{name} & {share} & {a:.3f} against {b:.3f}" + r" \\")
     calib += [r"\bottomrule", r"\end{tabular}",
               r"\caption{One-point calibration against the uncalibrated predictor. Errors are mean absolute errors in "
               r"nats per native token and interval widths are in the same units; coverage is a percentage. Calibration "
               r"costs one compressed measurement per source, and that cell is excluded from scoring. Intervals come from "
               r"per-capability absolute leave-one-source-out residual quantiles. The confirmation panel excludes three "
               r"new sources, and the independent pair panel excludes all four pair sources from fitting and from its "
-              r"13-source interval bank.}",
+              r"13-source interval bank. Eighty-percent interval coverage and width, without then with the "
+              r"measurement, exist for: " + "; ".join(intervals) + ".}",
               r"\label{tab:calibration_k1}", r"\end{table}", ""]
     assert sum(line.endswith(r"\\") for line in shared + calib) <= 30
     return "\n".join(shared + calib)
