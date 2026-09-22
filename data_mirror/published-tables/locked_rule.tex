@@ -24,7 +24,7 @@
 % ``student`` with N0, D0 and a per-capability ``dense`` mapping. QA KD requires
 % ``qa_distribution='2Wiki'``. New-size/stage status takes precedence over a
 % previously seen size. Undefined table cells are rejected, never improvised.
-\begin{table}[!htbp]
+\begin{table}[tb]
 \normalfont
 \centering\small
 \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
@@ -64,7 +64,7 @@ Pruning & Question answering & {New size or new stage} & {Pruning development me
 \caption{The table gives the selection predictor for each compression method, capability and source-state status. A prediction adds the listed response, in nats per native token, to a dense anchor: the source loss for pruning and quantization, the initial student's loss for distillation. Each method is fitted on its own development panel, listed below. The rule was frozen before confirmation.}
 \label{tab:locked_rule}
 \end{table}
-\begin{table}[!htbp]\ContinuedFloat
+\begin{table}[tb]\ContinuedFloat
 \normalfont
 \centering\small
 \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}

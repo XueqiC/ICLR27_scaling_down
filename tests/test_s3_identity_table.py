@@ -137,7 +137,7 @@ def test_anonymization_requires_a_matching_pair_and_path(tmp_path):
 
 def test_table_layout_and_honest_wording(audited):
     table = gen.render(audited)
-    assert r"\begin{table}[!htbp]" in table
+    assert r"\begin{table}[tb]" in table
     assert r"\begin{tabular*}{\textwidth}" in table
     assert "Weights seen in earlier work" in table
     assert "What is new in this round" in table

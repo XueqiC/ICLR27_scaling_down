@@ -661,8 +661,15 @@ def _concise(text):
     return re.sub(r"\\caption\*\{(?:[^{}]|\{[^{}]*\})*\}\n?", drop, text)
 
 
+# No table gets a page to itself: [!htbp] both allows a float page and tells
+# LaTeX to ignore the fractions that would otherwise prevent one, so the
+# published tables float to the top or bottom of a page that also carries text.
+FLOAT_PLACEMENT = re.compile(r"(\\begin\{table\*?\})\[[^\]]*\]")
+
+
 def table_text(text):
     """Apply editorial changes to tables without touching surrounding prose."""
+    text = FLOAT_PLACEMENT.sub(r"\1[tb]", text)
     labels = re.findall(r"\\label\{([^}]+)\}", text)
     fallback = next((label for label in labels if label in CAPTION_NOTES), None)
     text = TABLE.sub(lambda m: _concise(_table(m.group(), fallback)), text)
