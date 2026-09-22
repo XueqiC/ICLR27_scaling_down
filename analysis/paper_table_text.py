@@ -402,7 +402,7 @@ CONCISE_CAPTIONS = {
         r"budget and reuse form. Improvements, both baselines, and bootstrap intervals are in "
         r"Appendix Tables~\ref{tab:pred_source}--\ref{tab:pred_config_qd}."),
     "tab:distill_confirm": (
-        r"Frozen distillation confirmation at pool $U=200$ and supervised budgets $T=50,100,200$k. Each student and "
+        r"Frozen distillation confirmation at $U=200$ and $T=50,100,200$k. Each student and "
         r"capability is scored on six sampled pools with three dependent checkpoints per pool. Columns give the "
         r"selected and baseline forms, chosen by development leave-one-run-out before confirmation, their mean "
         r"absolute errors in nats, and the paired improvement (baseline minus selected) with 95\% percentile "
@@ -1173,7 +1173,10 @@ def _reader_caption(block, label):
                     if re.search(r'\d', probe) or r'\S\ref{sec:unseen_settings}' in sentence or r'Appendix Table~\ref{tab:round3_coef}' in sentence:
                         kept.append(sentence)
                 old = ' '.join(kept)
-            note = ('\n'+r'\par\smallskip{\footnotesize '+old+r'\par}') if old else ''
+            # A minipage keeps the note justified: inside the table's \centering
+            # a bare paragraph centres its last line, which reads as an error.
+            note = ('\n'+r'\par\smallskip\begin{minipage}{\linewidth}\footnotesize '
+                    + old + r'\end{minipage}') if old else ''
         edits.append((match.end(), end-1, caption, note))
     for start, end, caption, note in reversed(edits):
         block = block[:start]+caption+'}'+note+block[end+1:]

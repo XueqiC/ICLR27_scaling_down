@@ -30,7 +30,7 @@ PROFILES = {
     'tab:round3_quant': [[23, 8] + [7.6666666667] * 9],
     'tab:p2v2_test': [[25, 12, 13, 10, 11, 23, 6]],
     'tab:distill_paired': [[15, 10, 8, 8, 14, 14, 8, 14, 14]],
-    'tab:distill_confirm': [[17, 12, 17, 12, 9, 11, 22]],
+    'tab:distill_confirm': [[13, 12, 17, 17, 10, 10, 21]],
     'tab:musique_scope': [[18, 24, 12, 12, 17, 17]],
     'tab:panel_prune': [[21, 8, 8, 8, 11, 13, 15, 16]],
     'tab:panel_quant': [[19, 12, 8, 8, 8, 8, 8, 8, 15]],
@@ -221,6 +221,9 @@ CELL_COMPRESSIONS = (
     ("Yes, in earlier development", "Yes"),
     ("Not reached by density 0.60", "Not reached by 0.60"),
     ("Piecewise source interpolation", "Piecewise interpolation"),
+    ("Response surface with initial loss", "Response surface, initial loss"),
+    ("Response surface with student size", "Response surface, student size"),
+    ("Joint budget and pool response", "Joint budget-pool response"),
 )
 
 
@@ -249,8 +252,10 @@ def table_layout(text):
     fallback = next((s for s in all_labels if s in PROFILES), None)
     def layout(match):
         block = unscale(match.group())
+        # Top or bottom only: a float page or a float in the middle of a column
+        # leaves the blank bands this appendix was rewritten to remove.
         block = re.sub(r'(\\begin\{table\*?\})(?:\[[^]]*\])?',
-                       r'\1[!htbp]', block, count=1)
+                       r'\1[tb]', block, count=1)
         block = re.sub(r'(\\begin\{table\*?\}(?:\[[^]]*\])?)', r'\1\\normalfont', block, count=1)
         labels = re.findall(r'\\label\{([^}]+)\}', block)
         label = next((s for s in labels if s in PROFILES), fallback)
