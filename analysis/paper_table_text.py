@@ -1110,7 +1110,7 @@ PLAIN_WORDS = {
     'F1': 'descriptor-modulated reuse', 'F2': 'saturating budget and reuse',
     'K0': 'no target measurement', 'K1': 'one target measurement',
     'nD': 'no pretraining-token input', 'pbm': 'per-bit median',
-    'pba': 'per-bit mean', 'med': 'median', 'so': 'strength only',
+    'pba': 'per-bit mean', 'med': 'median',
     'TE': 'joint budget and reuse', 'ct': 'continuous two-term form',
     'L0': 'initial loss', 'logN': 'logarithmic student size',
     'Arm': 'Compression method', 'df': 'effective degrees of freedom',

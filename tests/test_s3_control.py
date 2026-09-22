@@ -15,7 +15,7 @@ from analysis import s3_control_table as gen
 
 ROOT = Path(__file__).resolve().parents[1]
 # Set from the reviewed retrospective table, checked even without manuscript files.
-TABLE_SHA256 = "0b4da01097516b140d05cd414be32f48b12fcafab2328fbe929f7be1a2cb6dc9"
+TABLE_SHA256 = "acfcd16374a6f51f28a0d1189522db1383fc6d2ffbe46668f33efa71bcd11c50"
 
 
 @pytest.fixture(scope="module")

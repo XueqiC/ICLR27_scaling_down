@@ -1,0 +1,648 @@
+{
+ "formats": "The paper's nominal storage ratio counts stored matrix parameters: density d for pruning, b/16 for\nb-bit quantization plus the 16-bit group scales for grouped quantization, and the student's matrix\nparameter count for distillation, all relative to the dense reference in 16-bit weights. This\nscript prices the same candidates in bytes under explicit storage formats and reports the ratio of\nthose bytes to the dense reference's 16-bit bytes:",
+ "references": {
+  "pythia-410m--step120000": {
+   "model": "EleutherAI/pythia-410m",
+   "student": "EleutherAI/pythia-160m",
+   "matrix_parameters": 405012480,
+   "student_matrix_parameters": 162201600,
+   "rows": 321792,
+   "candidates": [
+    {
+     "id": "dense:source",
+     "nominal": 1.0,
+     "actual": 1.0
+    },
+    {
+     "id": "prune:d0.9",
+     "nominal": 0.9,
+     "actual": 0.9625,
+     "actual_csr": 1.801589047330097
+    },
+    {
+     "id": "prune:d0.8",
+     "nominal": 0.8,
+     "actual": 0.8625,
+     "actual_csr": 1.601589047330097
+    },
+    {
+     "id": "prune:d0.7",
+     "nominal": 0.7,
+     "actual": 0.7625,
+     "actual_csr": 1.4015890473300971
+    },
+    {
+     "id": "prune:d0.6",
+     "nominal": 0.6,
+     "actual": 0.6625,
+     "actual_csr": 1.2015890473300972
+    },
+    {
+     "id": "quant:channel_b8",
+     "nominal": 0.5,
+     "actual": 0.5007945236650485
+    },
+    {
+     "id": "quant:channel_b6",
+     "nominal": 0.375,
+     "actual": 0.37579452366504856
+    },
+    {
+     "id": "quant:channel_b4",
+     "nominal": 0.25,
+     "actual": 0.25079452366504856
+    },
+    {
+     "id": "quant:b4_g32",
+     "nominal": 0.28125,
+     "actual": 0.28125
+    },
+    {
+     "id": "quant:b4_g128",
+     "nominal": 0.2578125,
+     "actual": 0.2578125
+    },
+    {
+     "id": "quant:b3_g32",
+     "nominal": 0.21875,
+     "actual": 0.21875
+    },
+    {
+     "id": "distill:new_s3",
+     "nominal": 0.28125,
+     "actual": 0.40048543689320387
+    }
+   ]
+  },
+  "pythia-1.4b--step120000": {
+   "model": "EleutherAI/pythia-1.4b",
+   "student": "EleutherAI/pythia-410m",
+   "matrix_parameters": 1414004736,
+   "student_matrix_parameters": 405012480,
+   "rows": 542976,
+   "candidates": [
+    {
+     "id": "dense:source",
+     "nominal": 1.0,
+     "actual": 1.0
+    },
+    {
+     "id": "prune:d0.9",
+     "nominal": 0.9,
+     "actual": 0.9625,
+     "actual_csr": 1.8007679974276976
+    },
+    {
+     "id": "prune:d0.8",
+     "nominal": 0.8,
+     "actual": 0.8624999999999999,
+     "actual_csr": 1.6007679974276974
+    },
+    {
+     "id": "prune:d0.7",
+     "nominal": 0.7,
+     "actual": 0.7624999999999998,
+     "actual_csr": 1.4007679974276974
+    },
+    {
+     "id": "prune:d0.6",
+     "nominal": 0.6,
+     "actual": 0.6625,
+     "actual_csr": 1.2007679974276975
+    },
+    {
+     "id": "quant:channel_b8",
+     "nominal": 0.5,
+     "actual": 0.5003839987138488
+    },
+    {
+     "id": "quant:channel_b6",
+     "nominal": 0.375,
+     "actual": 0.3753839987138487
+    },
+    {
+     "id": "quant:channel_b4",
+     "nominal": 0.25,
+     "actual": 0.2503839987138487
+    },
+    {
+     "id": "quant:b4_g32",
+     "nominal": 0.28125,
+     "actual": 0.28125
+    },
+    {
+     "id": "quant:b4_g128",
+     "nominal": 0.2578125,
+     "actual": 0.2578125
+    },
+    {
+     "id": "quant:b3_g32",
+     "nominal": 0.21875,
+     "actual": 0.21875
+    },
+    {
+     "id": "distill:new_s3",
+     "nominal": 0.25,
+     "actual": 0.2864293659621802
+    }
+   ]
+  },
+  "gemma3-1b": {
+   "model": "google/gemma-3-1b-pt",
+   "student": "google/gemma-3-270m",
+   "matrix_parameters": 999751680,
+   "student_matrix_parameters": 268042240,
+   "rows": 721408,
+   "candidates": [
+    {
+     "id": "dense:source",
+     "nominal": 1.0,
+     "actual": 1.0
+    },
+    {
+     "id": "prune:d0.9",
+     "nominal": 0.9,
+     "actual": 0.9625,
+     "actual_csr": 1.8014431743690593
+    },
+    {
+     "id": "prune:d0.8",
+     "nominal": 0.8,
+     "actual": 0.8625,
+     "actual_csr": 1.6014431743690594
+    },
+    {
+     "id": "prune:d0.7",
+     "nominal": 0.7,
+     "actual": 0.7625,
+     "actual_csr": 1.4014431743690594
+    },
+    {
+     "id": "prune:d0.6",
+     "nominal": 0.6,
+     "actual": 0.6625,
+     "actual_csr": 1.2014431743690592
+    },
+    {
+     "id": "quant:channel_b8",
+     "nominal": 0.5,
+     "actual": 0.5007215871845296
+    },
+    {
+     "id": "quant:channel_b6",
+     "nominal": 0.375,
+     "actual": 0.37572158718452964
+    },
+    {
+     "id": "quant:channel_b4",
+     "nominal": 0.25,
+     "actual": 0.25072158718452964
+    },
+    {
+     "id": "quant:b4_g32",
+     "nominal": 0.28125,
+     "actual": 0.28125
+    },
+    {
+     "id": "quant:b4_g128",
+     "nominal": 0.2578125,
+     "actual": 0.2578125
+    },
+    {
+     "id": "quant:b3_g32",
+     "nominal": 0.21875,
+     "actual": 0.21875
+    },
+    {
+     "id": "distill:new_s3",
+     "nominal": 0.1437024513947591,
+     "actual": 0.26810881678138315
+    }
+   ]
+  },
+  "gemma3-4b": {
+   "model": "google/gemma-3-4b-pt",
+   "student": "google/gemma-3-1b-pt",
+   "matrix_parameters": 3879895040,
+   "student_matrix_parameters": 999751680,
+   "rows": 1271872,
+   "candidates": [
+    {
+     "id": "dense:source",
+     "nominal": 1.0,
+     "actual": 1.0
+    },
+    {
+     "id": "prune:d0.9",
+     "nominal": 0.9,
+     "actual": 0.9625,
+     "actual_csr": 1.8006556218592964
+    },
+    {
+     "id": "prune:d0.8",
+     "nominal": 0.8,
+     "actual": 0.8625,
+     "actual_csr": 1.6006556218592964
+    },
+    {
+     "id": "prune:d0.7",
+     "nominal": 0.7,
+     "actual": 0.7625,
+     "actual_csr": 1.4006556218592965
+    },
+    {
+     "id": "prune:d0.6",
+     "nominal": 0.6,
+     "actual": 0.6625,
+     "actual_csr": 1.2006556218592965
+    },
+    {
+     "id": "quant:channel_b8",
+     "nominal": 0.5,
+     "actual": 0.5003278109296483
+    },
+    {
+     "id": "quant:channel_b6",
+     "nominal": 0.375,
+     "actual": 0.37532781092964823
+    },
+    {
+     "id": "quant:channel_b4",
+     "nominal": 0.25,
+     "actual": 0.25032781092964823
+    },
+    {
+     "id": "quant:b4_g32",
+     "nominal": 0.28125,
+     "actual": 0.28125
+    },
+    {
+     "id": "quant:b4_g128",
+     "nominal": 0.2578125,
+     "actual": 0.2578125
+    },
+    {
+     "id": "quant:b3_g32",
+     "nominal": 0.21875,
+     "actual": 0.21875
+    },
+    {
+     "id": "distill:new_s3",
+     "nominal": 0.21746323529411765,
+     "actual": 0.2576749292681897
+    }
+   ]
+  }
+ },
+ "feasibility_under_bytes": {
+  "cells": 272,
+  "rule_choice_over_budget": [
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "math",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2508,
+    "excess": 0.0032,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "math",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5008,
+    "excess": 0.0016,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "code",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2508,
+    "excess": 0.0032,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "code",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5008,
+    "excess": 0.0016,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "qa",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2508,
+    "excess": 0.0032,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "qa",
+    "budget": 0.3,
+    "choice": "distill:new_s3",
+    "bytes": 0.4005,
+    "excess": 0.335,
+    "material": true
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "qa",
+    "budget": 0.35,
+    "choice": "distill:new_s3",
+    "bytes": 0.4005,
+    "excess": 0.1442,
+    "material": true
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "qa",
+    "budget": 0.4,
+    "choice": "distill:new_s3",
+    "bytes": 0.4005,
+    "excess": 0.0012,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "multi",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2508,
+    "excess": 0.0032,
+    "material": false
+   },
+   {
+    "reference": "pythia-410m--step120000",
+    "objective": "multi",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5008,
+    "excess": 0.0016,
+    "material": false
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "math",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2504,
+    "excess": 0.0015,
+    "material": false
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "math",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5004,
+    "excess": 0.0008,
+    "material": false
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "code",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2504,
+    "excess": 0.0015,
+    "material": false
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "code",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5004,
+    "excess": 0.0008,
+    "material": false
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "qa",
+    "budget": 0.25,
+    "choice": "distill:new_s3",
+    "bytes": 0.2864,
+    "excess": 0.1457,
+    "material": true
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "multi",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2504,
+    "excess": 0.0015,
+    "material": false
+   },
+   {
+    "reference": "pythia-1.4b--step120000",
+    "objective": "multi",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5004,
+    "excess": 0.0008,
+    "material": false
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "math",
+    "budget": 0.2,
+    "choice": "distill:new_s3",
+    "bytes": 0.2681,
+    "excess": 0.3405,
+    "material": true
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "math",
+    "budget": 0.25,
+    "choice": "distill:new_s3",
+    "bytes": 0.2681,
+    "excess": 0.0724,
+    "material": true
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "math",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5007,
+    "excess": 0.0014,
+    "material": false
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "code",
+    "budget": 0.2,
+    "choice": "distill:new_s3",
+    "bytes": 0.2681,
+    "excess": 0.3405,
+    "material": true
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "code",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2507,
+    "excess": 0.0029,
+    "material": false
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "code",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5007,
+    "excess": 0.0014,
+    "material": false
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "qa",
+    "budget": 0.2,
+    "choice": "distill:new_s3",
+    "bytes": 0.2681,
+    "excess": 0.3405,
+    "material": true
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "qa",
+    "budget": 0.25,
+    "choice": "distill:new_s3",
+    "bytes": 0.2681,
+    "excess": 0.0724,
+    "material": true
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "multi",
+    "budget": 0.2,
+    "choice": "distill:new_s3",
+    "bytes": 0.2681,
+    "excess": 0.3405,
+    "material": true
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "multi",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2507,
+    "excess": 0.0029,
+    "material": false
+   },
+   {
+    "reference": "gemma3-1b",
+    "objective": "multi",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5007,
+    "excess": 0.0014,
+    "material": false
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "math",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2503,
+    "excess": 0.0013,
+    "material": false
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "math",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5003,
+    "excess": 0.0007,
+    "material": false
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "code",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2503,
+    "excess": 0.0013,
+    "material": false
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "code",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5003,
+    "excess": 0.0007,
+    "material": false
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "qa",
+    "budget": 0.25,
+    "choice": "distill:new_s3",
+    "bytes": 0.2577,
+    "excess": 0.0307,
+    "material": true
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "multi",
+    "budget": 0.25,
+    "choice": "quant:channel_b4",
+    "bytes": 0.2503,
+    "excess": 0.0013,
+    "material": false
+   },
+   {
+    "reference": "gemma3-4b",
+    "objective": "multi",
+    "budget": 0.5,
+    "choice": "quant:channel_b8",
+    "bytes": 0.5003,
+    "excess": 0.0007,
+    "material": false
+   }
+  ],
+  "feasible_set_changes": 176,
+  "by_reference": {
+   "pythia-410m--step120000": {
+    "cells": 68,
+    "rule_choice_over_budget": 10,
+    "feasible_set_changes": 52,
+    "material": 2
+   },
+   "pythia-1.4b--step120000": {
+    "cells": 68,
+    "rule_choice_over_budget": 7,
+    "feasible_set_changes": 40,
+    "material": 1
+   },
+   "gemma3-1b": {
+    "cells": 68,
+    "rule_choice_over_budget": 11,
+    "feasible_set_changes": 44,
+    "material": 6
+   },
+   "gemma3-4b": {
+    "cells": 68,
+    "rule_choice_over_budget": 7,
+    "feasible_set_changes": 40,
+    "material": 1
+   }
+  },
+  "material": 10,
+  "material_choices": [
+   "distill:new_s3"
+  ]
+ }
+}

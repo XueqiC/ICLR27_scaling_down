@@ -44,6 +44,9 @@ PROFILES = {
     'tab:s3-ablation': [[22, 14, 13, 9, 9, 11, 8, 14]],
     'tab:a14-baselines': [[28, 20, 8.67, 8.67, 8.67, 8.67, 8.66, 8.66]],
     'tab:p1-behaviour': [[17, 33, 8, 9, 8, 25]],
+    'tab:storage-accounting': [[26, 26, 48]],
+    'tab:accuracy-comparison': [[34, 26, 10, 10, 10, 10]],
+    'tab:wanda-panel': [[16, 12, 12, 12, 12, 12, 12, 12]],
 }
 
 
@@ -240,6 +243,63 @@ def _compress_cells(block):
     return TABULAR.sub(one, block)
 
 
+TABLE_ENV = re.compile(r'\\begin\{table\}(\[[^\]]*\])?')
+
+
+def _reorder_table(block):
+    """Inside one table body: preamble, caption, label, tabular, notes, anything else, in that order."""
+    m = re.search(r'\\caption\{', block)
+    tm = re.search(r'\\begin\{tabular\*?\}', block)
+    if not m or not tm:
+        return block
+    _, cap_end = group(block, m.end() - 1)
+    segs = [(m.start(), cap_end, 'caption')]
+    te = re.search(r'\\end\{tabular\*?\}', block[tm.end():])
+    segs.append((tm.start(), tm.end() + te.end(), 'tabular'))
+    for lm in re.finditer(r'\\label\{[^}]*\}', block):
+        if not (m.start() <= lm.start() < cap_end):
+            segs.append((lm.start(), lm.end(), 'label'))
+            break
+    for nm in re.finditer(r'(?:\\par\\smallskip\s*)?\\begin\{minipage\}', block):
+        ne = block.find('\\end{minipage}', nm.end())
+        if ne >= 0:
+            segs.append((nm.start(), ne + len('\\end{minipage}'), 'note'))
+    segs.sort()
+    pieces, last = [], 0
+    for start, end, kind in segs:
+        if start < last:
+            continue
+        pieces.append((block[last:start], 'other'))
+        pieces.append((block[start:end], kind))
+        last = end
+    pieces.append((block[last:], 'other'))
+    found = {k: [] for k in ('caption', 'label', 'tabular', 'note', 'other')}
+    before_tabular, seen_tabular = [], False
+    for body, kind in pieces:
+        if kind == 'tabular':
+            seen_tabular = True
+        if kind == 'other':
+            if body.strip():
+                (before_tabular if not seen_tabular else found['other']).append(body.strip('\n'))
+        else:
+            found[kind].append(body.strip('\n'))
+    ordered = before_tabular + found['caption'] + found['label'] + found['tabular'] + found['note'] + found['other']
+    return '\n' + '\n'.join(ordered) + '\n'
+
+
+def caption_above(text):
+    """Every table caption above its tabular, every note below it (author's rule, 2026-09-22)."""
+    out, pos = [], 0
+    while (m := TABLE_ENV.search(text, pos)):
+        end = text.find('\\end{table}', m.end())
+        if end < 0:
+            break
+        out += [text[pos:m.end()], _reorder_table(text[m.end():end]), '\\end{table}']
+        pos = end + len('\\end{table}')
+    out.append(text[pos:])
+    return ''.join(out)
+
+
 def house_style(text):
     """Capability short forms and compressed phrases in the body, rules where declared."""
     if __package__:
@@ -250,7 +310,7 @@ def house_style(text):
     label = next((m for m in re.findall(r"\\label\{([^}]+)\}", text) if m in ROW_RULES), None)
     if label:
         text = TABULAR.sub(lambda m: _rule_between_rows(m.group()), text)
-    return text
+    return caption_above(text)
 
 
 def table_layout(text):

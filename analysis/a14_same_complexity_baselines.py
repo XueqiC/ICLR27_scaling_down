@@ -128,7 +128,7 @@ def render(results):
         cells = [LABELS[form], str(PARAMETERS[form])]
         for budget in ("18", "36"):
             mae = results["budgets"][budget]["mae"].get(form)
-            cells += [fmt(mae[c]) for c in CAPS] if mae else [r"\multicolumn{3}{c}{underdetermined with 18 measurements}"]
+            cells += [fmt(mae[c]) for c in CAPS] if mae else ["/"] * 3
         rows.append(" & ".join(cells) + r" \\")
     k1 = results["k1"]
     rows.append(r"\midrule")
@@ -147,7 +147,7 @@ def render(results):
         "and one scale per capability and no calibration on the target. The last two rows calibrate one number "
         "on each target's mildest pruned measurement and are scored on the remaining five densities, twenty cells "
         "per capability, so they are not comparable with the rows above. All forms other than the compact power "
-        "form, the median curve and the per-density regression were fitted after the confirmation.")
+        "form, the median curve and the per-density regression were fitted after the confirmation. A slash marks a form that is underdetermined with 18 measurements.")
     header = ("\\begin{tabular*}{\\textwidth}{@{\\extracolsep{\\fill}}llrrrrrr@{}}\n\\toprule\n"
               " & & \\multicolumn{3}{c}{18 measurements} & \\multicolumn{3}{c}{36 measurements} \\\\\n"
               "\\cmidrule(lr){3-5}\\cmidrule(lr){6-8}\n"

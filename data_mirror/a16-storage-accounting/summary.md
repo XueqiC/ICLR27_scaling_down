@@ -1,0 +1,52 @@
+# A16 storage accounting (bytes beside nominal storage)
+
+| Reference | Candidate | Nominal | Bytes, bitmap or packed | Bytes, CSR |
+|---|---|---:|---:|---:|
+| pythia-410m--step120000 | dense:source | 1.0000 | 1.0000 | nan |
+| pythia-410m--step120000 | prune:d0.9 | 0.9000 | 0.9625 | 1.8016 |
+| pythia-410m--step120000 | prune:d0.8 | 0.8000 | 0.8625 | 1.6016 |
+| pythia-410m--step120000 | prune:d0.7 | 0.7000 | 0.7625 | 1.4016 |
+| pythia-410m--step120000 | prune:d0.6 | 0.6000 | 0.6625 | 1.2016 |
+| pythia-410m--step120000 | quant:channel_b8 | 0.5000 | 0.5008 | nan |
+| pythia-410m--step120000 | quant:channel_b6 | 0.3750 | 0.3758 | nan |
+| pythia-410m--step120000 | quant:channel_b4 | 0.2500 | 0.2508 | nan |
+| pythia-410m--step120000 | quant:b4_g32 | 0.2812 | 0.2812 | nan |
+| pythia-410m--step120000 | quant:b4_g128 | 0.2578 | 0.2578 | nan |
+| pythia-410m--step120000 | quant:b3_g32 | 0.2188 | 0.2188 | nan |
+| pythia-410m--step120000 | distill:new_s3 | 0.2812 | 0.4005 | nan |
+| pythia-1.4b--step120000 | dense:source | 1.0000 | 1.0000 | nan |
+| pythia-1.4b--step120000 | prune:d0.9 | 0.9000 | 0.9625 | 1.8008 |
+| pythia-1.4b--step120000 | prune:d0.8 | 0.8000 | 0.8625 | 1.6008 |
+| pythia-1.4b--step120000 | prune:d0.7 | 0.7000 | 0.7625 | 1.4008 |
+| pythia-1.4b--step120000 | prune:d0.6 | 0.6000 | 0.6625 | 1.2008 |
+| pythia-1.4b--step120000 | quant:channel_b8 | 0.5000 | 0.5004 | nan |
+| pythia-1.4b--step120000 | quant:channel_b6 | 0.3750 | 0.3754 | nan |
+| pythia-1.4b--step120000 | quant:channel_b4 | 0.2500 | 0.2504 | nan |
+| pythia-1.4b--step120000 | quant:b4_g32 | 0.2812 | 0.2812 | nan |
+| pythia-1.4b--step120000 | quant:b4_g128 | 0.2578 | 0.2578 | nan |
+| pythia-1.4b--step120000 | quant:b3_g32 | 0.2188 | 0.2188 | nan |
+| pythia-1.4b--step120000 | distill:new_s3 | 0.2500 | 0.2864 | nan |
+| gemma3-1b | dense:source | 1.0000 | 1.0000 | nan |
+| gemma3-1b | prune:d0.9 | 0.9000 | 0.9625 | 1.8014 |
+| gemma3-1b | prune:d0.8 | 0.8000 | 0.8625 | 1.6014 |
+| gemma3-1b | prune:d0.7 | 0.7000 | 0.7625 | 1.4014 |
+| gemma3-1b | prune:d0.6 | 0.6000 | 0.6625 | 1.2014 |
+| gemma3-1b | quant:channel_b8 | 0.5000 | 0.5007 | nan |
+| gemma3-1b | quant:channel_b6 | 0.3750 | 0.3757 | nan |
+| gemma3-1b | quant:channel_b4 | 0.2500 | 0.2507 | nan |
+| gemma3-1b | quant:b4_g32 | 0.2812 | 0.2812 | nan |
+| gemma3-1b | quant:b4_g128 | 0.2578 | 0.2578 | nan |
+| gemma3-1b | quant:b3_g32 | 0.2188 | 0.2188 | nan |
+| gemma3-1b | distill:new_s3 | 0.1437 | 0.2681 | nan |
+| gemma3-4b | dense:source | 1.0000 | 1.0000 | nan |
+| gemma3-4b | prune:d0.9 | 0.9000 | 0.9625 | 1.8007 |
+| gemma3-4b | prune:d0.8 | 0.8000 | 0.8625 | 1.6007 |
+| gemma3-4b | prune:d0.7 | 0.7000 | 0.7625 | 1.4007 |
+| gemma3-4b | prune:d0.6 | 0.6000 | 0.6625 | 1.2007 |
+| gemma3-4b | quant:channel_b8 | 0.5000 | 0.5003 | nan |
+| gemma3-4b | quant:channel_b6 | 0.3750 | 0.3753 | nan |
+| gemma3-4b | quant:channel_b4 | 0.2500 | 0.2503 | nan |
+| gemma3-4b | quant:b4_g32 | 0.2812 | 0.2812 | nan |
+| gemma3-4b | quant:b4_g128 | 0.2578 | 0.2578 | nan |
+| gemma3-4b | quant:b3_g32 | 0.2188 | 0.2188 | nan |
+| gemma3-4b | distill:new_s3 | 0.2175 | 0.2577 | nan |

@@ -425,7 +425,9 @@ def _render(result=None):
                         " & ".join(values) + r" \\")
     caption = (
         "This analysis is retrospective. The pristine student $S_0$ was not in the frozen candidate set, "
-        "and the rule's selections remain unchanged. Both student states use the registered nominal "
+        "and the rule's selections remain unchanged.")
+    note = (
+        "Both student states use the registered nominal "
         "student-to-reference matrix storage ratio. Pristine opportunity is the best measured quantization "
         "loss minus the best loss after adding the pristine student. Distillation opportunity change is the "
         "signed difference between the best loss with the pristine student and the best loss with the "
@@ -447,7 +449,8 @@ def _render(result=None):
             "Reference & Objective & \\shortstack{Pristine\\\\opportunity} & "
             "\\shortstack{Distillation opportunity\\\\change} & \\shortstack{Other\\\\methods} & "
             "\\shortstack{Registered\\\\opportunity} \\\\\n\\midrule\n" +
-            "\n".join(rows) + "\n\\bottomrule\n\\end{tabular*}\n\\end{table}\n")
+            "\n".join(rows) + "\n\\bottomrule\n\\end{tabular*}\n"
+            f"\\par\\smallskip\\begin{{minipage}}{{\\linewidth}}\\footnotesize {note}\\end{{minipage}}\n\\end{{table}}\n")
 
 
 def generate(root=None):
