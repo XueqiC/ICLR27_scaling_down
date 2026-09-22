@@ -26,7 +26,7 @@ else:
 
 STEMS = ("final_relations", "frozen_candidates", "generalization_cells", "input_form_compact",
          "input_form_gain", "measurement_support", "rule_maps_full", "rule_maps_main",
-         "rule_regret", "selection_feasible")
+         "rule_regret", "s3_validation", "selection_feasible")
 CAP_NAMES = {"math": "Math", "code": "Code", "qa": "QA", "multi": "Maximum loss change"}
 METHODS = ("prune", "quant", "distill", "dense")
 SIZES = PANEL_BANDS
@@ -345,6 +345,50 @@ def rule_regret(audit,plt):
         ax.set(yscale="log",ylabel="Mean regret (nats)",xticks=range(4),xticklabels=["Math","Code","QA","Maximum"],xlabel="Objective")
     handles=[Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),hatch=h,label=l) for h,l in zip(("","///","...","xx"),("Frozen rule","Earlier laws","Quant only","Cheapest"))]
     return publish(plt,audit,"rule_regret",[("Mean regret",SIZES["full"],draw,[data])],handles,"Mean regret on four fresh states; the saved pooled means are plotted without recomputation. Colour denotes objective; policy uses plain / diagonal / dotted / cross-hatched bars. Logarithmic axis, native-token nats.",columns=1)
+
+
+# Numbered as in the identity table: R1 Pythia 410M, R2 Pythia 1.4B, R3 Gemma 3 1B, R4 Gemma 3 4B.
+S3_REFERENCES = (("pythia-410m--step120000", "R1"), ("pythia-1.4b--step120000", "R2"),
+                 ("gemma3-1b", "R3"), ("gemma3-4b", "R4"))
+
+
+def s3_validation(audit,plt):
+    """Per-reference opportunity and policy regrets of the independent selection validation."""
+    from matplotlib.patches import Patch
+    score=audit.read("results/s3-selection-validation/score_v2.json")
+    if score["status"]!="COMPLETE":raise ValueError("S3 scoring is not complete")
+    refs={r["reference"]:r for r in score["references"]}
+    if set(refs)!={k for k,_ in S3_REFERENCES}:raise ValueError("S3 references differ from the registered four")
+    caps=(*CAPS,"multi")
+    def values(cap):
+        out=[]
+        for key,_ in S3_REFERENCES:
+            o=refs[key]["objectives"][cap]
+            row=(o["mean_opportunity"],o["policies"]["rule"]["mean_paired_regret"],o["policies"]["quant-only"]["mean_paired_regret"])
+            if any(v is None for v in row):raise ValueError(f"S3 {key}/{cap} has an undefined mean")
+            out.append(row)
+        return out
+    data={cap:values(cap) for cap in caps}
+    audit.rule("Saved S3 means are plotted without recomputation: mean_opportunity and the two policies' "
+               "mean_paired_regret per reference and objective, over the sixteen budgets at which both policies find a candidate.")
+    specs=[]
+    for cap in caps:
+        def draw(f,cap=cap):
+            ax=axes(f,SIZES["four"],left=.42,bottom=.36,right=.05)
+            color=CAPABILITY_COLORS.get(cap,PALETTE["reference"])
+            for j,row in enumerate(data[cap]):
+                ax.bar(j-.26,row[0],width=.24,color=PALETTE["white"],edgecolor=color,zorder=3)
+                ax.bar(j,row[1],width=.24,color=color,edgecolor=darker(color),zorder=3)
+                ax.bar(j+.26,row[2],width=.24,color=color,edgecolor=darker(color),hatch=HATCHES["code"],zorder=3)
+            ax.set(xticks=range(len(S3_REFERENCES)),xticklabels=[label for _,label in S3_REFERENCES],xlim=(-.6,len(S3_REFERENCES)-.4))
+            ax.set_ylim(bottom=0)
+            if cap==caps[0]:ax.set_ylabel("Nats per token")
+            ax.grid(axis="y",color=PALETTE["grid"],lw=.4,zorder=0)
+        specs.append((CAP_NAMES[cap],SIZES["four"],draw,data[cap]))
+    handles=[Patch(facecolor=PALETTE["white"],edgecolor=PALETTE["reference"],label="Opportunity"),
+             Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),label="Frozen rule"),
+             Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),hatch=HATCHES["code"],label="Quantization only")]
+    return publish(plt,audit,"s3_validation",specs,handles,"Independent selection validation on four references that supplied the rule no outcome, one panel per objective. Bars per reference: the opportunity that choosing across methods opens over the best feasible quantization candidate (open), the regret of the frozen rule (solid) and the regret of a quantization-only policy (dotted), each a mean in nats per native token over the sixteen budgets at which both policies find a feasible candidate; nothing is pooled across tokenizers. Colour denotes objective. References are numbered as in the identity table: R1 Pythia 410M at step 120000, R2 Pythia 1.4B at step 120000, R3 Gemma 3 1B, R4 Gemma 3 4B.",columns=4)
 
 
 def generate(stem=None,root=ROOT):

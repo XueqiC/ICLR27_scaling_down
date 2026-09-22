@@ -620,8 +620,12 @@ def latex(result):
              r"Arm & Capability & A & B & C & D & $\Delta_B$ [95\% CI] \\", r"\midrule"]
     names = {"pruning": "Pruning", "quantization": "Grouped quant.", "distillation": "Distillation"}
     for arm, data in result["arms"].items():
+        # The two pruning labels 2.8B@16k and 2.8B@143k carry one identical response
+        # vector; the printed panel counts it once, as the appendix text does.
+        # The primary panel with both labels stays in summary.json.
+        panel = (data["unique_outcome_sensitivity"] if arm == "pruning" else data)["panels"]["all"]
         for c in (*CAPS, "macro"):
-            s = data["panels"]["all"]["scores"][c]
+            s = panel["scores"][c]
             g = s["gains_of_A"]["B"]
             ci = g["ci95_nats"]
             fmt = lambda x: f"{0.0 if abs(x) < .00005 else x:.4f}"
@@ -633,7 +637,8 @@ def latex(result):
     lines += [r"\bottomrule", r"\end{tabular}", r"\par\smallskip",
               r"\begin{minipage}{0.99\linewidth}\footnotesize "
               r"Development: pruning 17 states (84 cells); quantization 54 cells; distillation 25 trajectories. "
-              r"Confirmation: pruning 15 cells in 5 states; quantization 21 cells in 3 states; "
+              r"Confirmation: pruning 12 cells in 4 states, the two identical 2.8B labels counted once; "
+              r"quantization 21 cells in 3 states; "
               r"distillation 12 trajectories sharing 6 pools. All capabilities receive equal macro weight. "
               r"Shared anchors are medians of statewise capability means; scales/offsets minimize development "
               r"median-anchor squared error. V53 interpolation and V69 boundary flooring are retained. "

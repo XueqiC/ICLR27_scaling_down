@@ -57,20 +57,36 @@ RANGES = {
     "pool": "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
     "efficiency": "Four unseen Pythia states pruned at six densities",
 }
-HEADERS = ("Prediction task", "Frozen candidate", "Candidate error (nats)",
-           "Delivered relation", "Delivered error (nats)",
-           "Development measurements")
-COLUMN_WIDTHS = (".24", ".18", ".11", ".20", ".11", ".16")
+# Every row is assembled once with seven cells: task, frozen candidate, its
+# error, the delivered relation, its error, the strongest development baseline
+# and the development budget. The main table prints the delivered relation
+# against its baseline; the appendix candidates table prints how the frozen
+# candidate became the delivered relation.
+MAIN_COLUMNS = (0, 3, 4, 5, 6)
+HEADERS = ("Prediction task", "Delivered relation", "Delivered error (nats)",
+           "Strongest development baseline (nats)", "Development measurements")
+COLUMN_WIDTHS = (".22", ".22", ".12", ".28", ".16")
+CANDIDATE_COLUMNS = (0, 1, 2, 3)
+CANDIDATE_HEADERS = ("Prediction task", "Frozen candidate", "Candidate error (nats)",
+                     "Delivered relation")
+CANDIDATE_WIDTHS = (".30", ".28", ".14", ".28")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
     "Errors are mean absolute errors in nats per token, in math, code and question answering order. "
-    "The frozen candidate was fixed before that row was measured; the delivered relation is the "
-    "predictor recommended on all the evidence, and a Retrospective label marks a predictor chosen "
-    "after seeing the result, whose error there is not an independent test. Appendix "
-    "Fig.~\\ref{fig:generalization} compares each row with the strongest baseline chosen inside the "
-    "development folds. The last column counts development configuration measurements per capability "
-    "behind the frozen candidate, and distillation entries give the {students} students in that order."
+    "The delivered relation is the predictor recommended on all evidence; a Retrospective label "
+    "marks a predictor chosen after seeing the result, whose error is not an independent test. "
+    "The strongest development baseline was chosen inside the development folds, before the test, "
+    "and scored on the same cells. The last column counts development configuration "
+    "measurements per capability; distillation entries give the {students} students in that "
+    "order. Appendix Table~\\ref{tab:main-prediction-candidates} lists each task's frozen candidate; "
+    "Fig.~\\ref{fig:generalization} compares each row with its baseline."
+)
+CANDIDATE_CAPTION = (
+    "Frozen candidate of each prediction task in Table~\\ref{tab:main-prediction-v2}, its error on "
+    "the same cells, and the relation delivered after the test. Errors are mean absolute errors in "
+    "nats per token, in math, code and question answering order, and distillation entries give the "
+    "{students} students in that order."
 )
 
 NUMBER_PATTERN = r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|four|five|six|seventeen|twenty|half)\b"
@@ -161,9 +177,11 @@ def tex_escape(text):
 
 
 def render_text(text):
+    # Mathematics and cross-references pass through; everything else is escaped.
+    protected = r"(\$[^$]+\$|(?:Fig\.|Table|Section|Appendix|Eq\.)?~?\\ref\{[^}]*\})"
     return r"\newline ".join("".join(
-        token if token.startswith("$") else tex_escape(token)
-        for token in re.split(r"(\$[^$]+\$)", line)) for line in text.split("\n"))
+        token if token.startswith("$") or "\\ref{" in token else tex_escape(token)
+        for token in re.split(protected, line)) for line in text.split("\n"))
 
 
 def baseline_names(names):
@@ -604,13 +622,6 @@ def build(audit):
     for row, count in zip(result, counts):
         row.append(count)
     result.append(efficiency_row(audit))
-    # The development baseline column moves to the appendix, where the generalization
-    # figure compares every row with it on the same cells. Its selection is still read
-    # and audited above, and each row's baseline is recorded in the sidecar.
-    for row in result:
-        audit.omit("Development baseline for " + row[0].plain(audit).split("\n")[0] + ": "
-                   + " | ".join(row[5].plain(audit).splitlines()))
-        del row[5]
     # The measurement-efficiency confirmation leads: it is the row that carries an
     # independent delivered error at half the development budget, and a reader
     # meeting the table should meet that first.
@@ -629,16 +640,24 @@ def build(audit):
             for index in (2, 4):
                 if len(row[index].plain(audit).splitlines()) == len(CAPS):
                     row[index].compact_scores = "ordered"
+            # The baseline cell names the comparison, then its three scores.
+            if len(row[5].plain(audit).splitlines()) == len(CAPS) + 1:
+                row[5].compact_scores = "comparison"
             complete.append(row)
     return complete
+
+
+def printed(rows, columns):
+    """Select the cells one table prints, in its column order."""
+    return [[row[i] for i in columns] for row in rows]
 
 
 def student_label(audit, ref):
     return mapped(audit, {"gemma3-270m": "270M", "gemma3-1b": "1B"}[resolve(audit, ref)], ref)
 
 
-def caption_cell(audit):
-    before, after = CAPTION.split("{students}")
+def caption_cell(audit, text=CAPTION):
+    before, after = text.split("{students}")
     return cell(before, mapped(audit, "270 million and 1 billion",
                               pointer("results/v70-distill-confirm/freeze.json","confirmation_register","students")), after, refs=[
         pointer(P53,"feature_names"), pointer(Q55,"feature_names"),
@@ -647,35 +666,48 @@ def caption_cell(audit):
         pointer("results/v70-distill-confirm/freeze.json","models")])
 
 
-def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
+def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md", columns=MAIN_COLUMNS,
+                 headers=HEADERS, widths=COLUMN_WIDTHS, label="tab:main-prediction-v2",
+                 caption=CAPTION, environment="table*"):
+    rows = printed(rows, columns)
     # Empty outer padding leaves two tabcolseps per interior gap.
-    gaps = 2 * (len(HEADERS) - 1)
-    columns = "".join(
+    gaps = 2 * (len(headers) - 1)
+    column_spec = "".join(
         r">{\raggedright\arraybackslash\hspace{0pt}}p{\dimexpr " + width +
         r"\textwidth-" + f"{gaps * float(width):.2f}" + r"\tabcolsep\relax}"
-        for width in COLUMN_WIDTHS)
+        for width in widths)
     lines = [f"% Generated from frozen JSON; see {sidecar}.",
-             r"\begin{table*}[t]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
+             r"\begin{" + environment + r"}[t]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
              r"\setlength{\tabcolsep}{1.5pt}", r"\renewcommand{\arraystretch}{0.92}",
              r"\setlength{\abovecaptionskip}{4pt}",
              r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}%",
              r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}",
-             r"\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}" + columns + "@{}}",
-             r"\toprule", " & ".join(render_text(h) for h in HEADERS) + r" \\", r"\midrule"]
+             r"\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}" + column_spec + "@{}}",
+             r"\toprule", " & ".join(render_text(h) for h in headers) + r" \\", r"\midrule"]
     body = [" & ".join(c.render(audit) for c in row) + r" \\" for row in rows]
     lines += [("\n" + r"\midrule" + "\n").join(body)]
-    lines += [r"\bottomrule", r"\end{tabular*}", r"\caption{"+CAPTION_FONT+" "+caption_cell(audit).render(audit)+"}",
-              r"\label{tab:main-prediction-v2}", r"\end{table*}"]
+    lines += [r"\bottomrule", r"\end{tabular*}",
+              r"\caption{"+CAPTION_FONT+" "+caption_cell(audit, caption).render(audit)+"}",
+              r"\label{" + label + "}", r"\end{" + environment + "}"]
     return "\n".join(lines)+"\n"
+
+
+def render_candidates(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
+    return render_table(rows, audit, sidecar=sidecar, columns=CANDIDATE_COLUMNS,
+                        headers=CANDIDATE_HEADERS, widths=CANDIDATE_WIDTHS,
+                        label="tab:main-prediction-candidates", caption=CANDIDATE_CAPTION,
+                        environment="table")
 
 
 def numeric_inventory(records, audit):
     """List every printed numeric occurrence, including numbers in test labels."""
     entries = []
+    # A cross-reference label is not a printed number.
+    unreferenced = lambda text: re.sub(r"\\ref\{[^}]*\}", "", text)
     for record in records:
         for index, part in enumerate(record["parts"]):
             if isinstance(part, str):
-                if re.search(r"\d", part):
+                if re.search(r"\d", unreferenced(part)):
                     raise ValueError("Printed numeric literal lacks a JSON recipe")
                 continue
             displayed = evaluate(audit, part)
@@ -694,10 +726,16 @@ def generate(root=ROOT, *, write_tex=True):
         caption = caption_cell(audit)
         sidecar = "main_prediction_v2_sources.md" if write_tex else "main_prediction_v2_preview_sources.md"
         tex = render_table(rows, audit, sidecar=sidecar)
-        records = [{"row":i,"column":j,**c.record(audit)} for i,row in enumerate(rows) for j,c in enumerate(row)]
-        numbers = numeric_inventory([*records, caption.record(audit)], audit)
+        candidates_tex = render_candidates(rows, audit, sidecar=sidecar)
+        candidate_caption = caption_cell(audit, CANDIDATE_CAPTION)
+        records = [{"row":i,"column":j,**c.record(audit)}
+                   for i,row in enumerate(printed(rows, MAIN_COLUMNS)) for j,c in enumerate(row)]
+        candidate_records = [{"row":i,"column":j,**c.record(audit)}
+                             for i,row in enumerate(printed(rows, CANDIDATE_COLUMNS)) for j,c in enumerate(row)]
+        numbers = numeric_inventory([*records, caption.record(audit), *candidate_records, candidate_caption.record(audit)], audit)
         side = ["# Main prediction table: cell sources", "", "Columns: " + "; ".join(HEADERS) + ".",
-                "Rendered layout: one row per frozen prediction task. Cell coordinates match the seven printed columns; every cell is populated.",
+                "Rendered layout: one row per frozen prediction task. Cell coordinates match the five printed columns of the main table; every cell is populated. "
+                "The appendix candidates table prints columns " + "; ".join(CANDIDATE_HEADERS) + " from the same assembled rows; its recipes follow the main table's.",
                 "Development measurements are distinct development configuration measurements per capability for fitting or selecting the tested candidate, excluding dense anchors and held-out measurements. Counts do not describe the post-test delivered predictor. V53 divides recorded scalar rows by the recorded capability-model count; V55/V69 use n_dev_cells; V70 uses development_structure.n_points authenticated by freeze.json. Shared development sets are not additive across rows.",
                 "Numeric error cells use one math / code / question answering line if it fits the actual column, otherwise three lines in that order. The earlier bit test explicitly states that the delivered error is not stored. Distillation pairs follow student order 270 million, 1 billion as stated in the caption. Baseline names precede their scores, in the capability order named in the caption. Development or registration selection pointers are recorded in each baseline cell's note/context. Short task labels retain the full state and configuration definitions in their source recipes.",
                 "The caption identifies deliveries preceding distillation as chosen after testing; first predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test the delivered interpolation/median rule has no matching stored score; its development includes those cells. The source surface is not delivered, and the older interpolation's different model and boundary rules cannot supply the missing error.",
@@ -713,6 +751,8 @@ def generate(root=ROOT, *, write_tex=True):
             side += [f"- Cell ({r['row']}, {r['column']}): " + "; ".join(f"`{s}`" for s in dict.fromkeys(refs))]
         side += ["", "## Machine-readable cell recipes", "", "```json",json.dumps(records,indent=2),"```",
                  "", "## Caption recipe", "", "```json",json.dumps(caption.record(audit),indent=2),"```",
+                 "", "## Candidates table cell recipes", "", "```json",json.dumps(candidate_records,indent=2),"```",
+                 "", "## Candidates table caption recipe", "", "```json",json.dumps(candidate_caption.record(audit),indent=2),"```",
                  "", "## Every printed number", ""]
         side += [(f"- Cell ({n['row']}, {n['column']})" if "row" in n else "- Caption") +
                  f", `{n['number']}` ({n['op']}): " +
@@ -723,6 +763,7 @@ def generate(root=ROOT, *, write_tex=True):
         outputs = [(sidecar, "\n".join(side)+"\n")]
         if write_tex:
             outputs.insert(0, ("main_prediction_v2.tex", tex))
+            outputs.insert(1, ("main_prediction_candidates.tex", candidates_tex))
         for name, content in outputs:
             path=output_path(root,"tables",name);path.parent.mkdir(parents=True,exist_ok=True);path.write_text(content)
         return rows,audit,access
