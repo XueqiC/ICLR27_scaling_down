@@ -47,8 +47,8 @@ CAPTION_NOTES = {
     "tab:p3_check": "Rows identify measured compression states; columns give capability loss changes, with the primary benchmark followed by the secondary benchmark. This is a post-hoc measurement-scope check, with states specified before secondary measurement. Pool sizes count traces per domain.",
     "tab:musique_scope": "Rows identify students, pools, and checkpoints; columns give dimensionless reuse counts, trajectory counts, and benchmark loss changes. This is a post-hoc measurement-scope audit. Pool sizes count traces per domain.",
     "tab:qa_scope": "Rows identify compression states; paired columns give loss and change from dense for each benchmark. This is a post-hoc measurement-scope audit of pre-specified states.",
-    "tab:panel_prune": "Rows identify models; columns give capability loss changes, the Math loss-increase threshold, QA rankings, and the minimum QA response. This is a descriptive development panel with prospective additions marked by daggers. A dash denotes an unmeasured setting.",
-    "tab:panel_quant": "Rows identify models and series; columns give capability loss changes at the displayed bit widths and list all measured bit widths in bits. This is a descriptive development panel with prospective additions marked by daggers.",
+    "tab:panel_prune": "Rows identify models; columns give capability loss changes, the Math loss-increase threshold, QA rankings, and the minimum QA response. This is a descriptive development panel; the note names the two models added after it was assembled.",
+    "tab:panel_quant": "Rows identify models and series; columns give capability loss changes at the displayed bit widths and list all measured bit widths in bits. This is a descriptive development panel; the note names the two models added after it was assembled.",
     "tab:selection-feasible": "Rows identify policies and objectives; columns give feasibility coverage, mean regret, and oracle-method agreement. This is a post-hoc development evaluation. Own means the cells feasible for that policy; common means cells feasible for every policy.",
     "tab:rule-confirm": "Rows identify objectives and policies; columns give feasible-cell counts, mean regret, oracle-method agreement, and candidate-set coverage. Policy predictions were frozen before the new measurements; set coverage is a post-hoc diagnostic.",
     "tab:rule_decomp": "Rows identify objectives and policies; columns compare the stated source subsets and all states. This is a post-hoc decomposition of frozen selection predictions.",
@@ -274,7 +274,7 @@ def _replace_words(text):
         "dev.": "development", "Dev.": "Development", "dev": "development", "cfg": "configuration",
         "interp.": "interpolation", "extrap.": "extrapolation", "interp": "interpolation",
         "extrap": "extrapolation", "incl.": "including", "regr.": "regression",
-        "min QA": "Minimum QA response", "math@0.5": "Math at density 0.5",
+        "min QA": "Minimum QA response", "math@0.5": "Mathematics loss change at density 0.5",
         "noD0": "without pretraining tokens", "no-D0": "without pretraining tokens",
         "D/O": "development ordinary least squares", "D/R": "development ridge regression",
         "LM head": "language-model head", "LOCO": "leave-one-run-out",
@@ -355,12 +355,13 @@ CONCISE_CAPTIONS = {
         r"Per-capability pruning damage on the heterogeneous panel, in nats per native token within each model. "
         r"$d^{*}_{\mathrm{math}}$ is the largest measured density with $\Delta L_{\mathrm{math}}\ge 1$; the QA "
         r"ranking columns count, over the pre-cliff densities, how often QA is the least and the most affected "
-        r"capability; the last column gives the most negative QA response and its density. Daggers mark "
-        r"prospective additions measured at four densities only; a dash marks an unmeasured setting."),
+        r"capability; the last column gives the most negative QA response and its density. Qwen3-8B and "
+        r"Qwen3-14B were added after the panel was assembled and measured with the same protocol."),
     "tab:panel_quant": (
         r"Per-capability loss change under per-output-channel symmetric round-to-nearest weight quantization, in nats "
         r"per native token, at the displayed bit widths; 8 and 6 bits lie within 0.01 nats of dense for each "
-        r"model and are omitted. The last column lists all measured bit widths. Daggers mark prospective additions."),
+        r"model and are omitted. The last column lists all measured bit widths. Qwen3-8B and Qwen3-14B were "
+        r"added after the panel was assembled and measured with the same protocol."),
     "tab:round3_coef": (
         r"Frozen coefficients of the selected pruning form $\widehat{\Delta L}_c=(\beta_c\cdot\phi)((1-d)/0.3)^{\gamma_c}$ "
         r"with $\phi=[1,z(\log N_0),z(L_{0,c}),z(\log D_0)]$, standardized with centers 20.248, 2.661, 25.614 and "
@@ -607,8 +608,6 @@ CONCISE_CAPTIONS = {
 
 # Endings adjusted so that no numbered caption leaves a short last line on the pdfLaTeX build.
 _CAPTION_ENDING_FIXES = {
-    "tab:panel_prune": ("a dash marks an unmeasured setting.",
-                        "a dash marks a setting that was not measured for that model."),
     "tab:quant2d_coef": ("initial loss, and pretraining tokens.",
                          "initial loss, and pretraining tokens, in standardized units."),
     "tab:shared_structure": (r"This is a \mbox{post-hoc} analysis.",
@@ -1170,8 +1169,8 @@ PLAIN_CAPTIONS = {
  'tab:p3_check': 'The table compares loss changes on primary and independent secondary benchmarks. Each pair lists the primary benchmark followed by the named secondary benchmark, in nats per native token. Compression states were specified before secondary measurement.',
  'tab:musique_scope': 'The table compares question-answering loss changes across two benchmarks and distillation checkpoints. Loss changes are in nats per native token. Entries give trajectory means with ranges in brackets; reuse is dimensionless and pool sizes count traces per domain.',
  'tab:qa_scope': 'The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count the supervised tokens used for training.',
- 'tab:panel_prune': 'The table compares the pruning loss change across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-affected and most-affected outcomes out of measured densities. Daggers mark prospective additions; dashes mark unmeasured settings.',
- 'tab:panel_quant': 'The table compares the quantization loss change across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths. Daggers mark prospective additions.',
+ 'tab:panel_prune': 'The table compares the pruning loss change across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-affected and most-affected outcomes out of measured densities.',
+ 'tab:panel_quant': 'The table compares the quantization loss change across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths.',
  'tab:selection-feasible': 'The table compares selection policies on their feasible compression choices. Coverage and agreement with the measured oracle are percentages; mean regret is in nats per native token. Results distinguish each policy\'s feasible cells from the cells shared by all policies.',
  'tab:rule-confirm': 'The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are reported as percentages of evaluated cells.',
  'tab:rule_decomp': 'The table separates selection regret by source-state subset and policy. Mean regret and policy differences are in nats per native token, with equal weight per state and storage budget. Negative differences favor the frozen rule.',
@@ -1333,13 +1332,19 @@ def _reader_body(block, label):
         block = block.replace('State & Math & Code & QA', 'State & Mathematics: primary / arithmetic word problems & Code: primary / HumanEval & Question answering: primary / TriviaQA')
         block = block.replace('; $', ' / $')
     if label == 'tab:panel_prune':
-        block = block.replace(r'$d^{*}_{\mathrm{math}}$', 'Density at loss-increase threshold')
+        block = block.replace(r'$d^{*}_{\mathrm{math}}$', 'Density where mathematics loss has risen by one nat')
         block = block.replace(r'$\Delta L_c$ at $d=0.7$', 'Loss change at density 0.7')
-        block = block.replace('QA least and most damaged', 'Question answering: least / measured; most / measured')
+        block = block.replace('math@0.5', 'Mathematics loss change at density 0.5')
+        block = block.replace('Mathematics loss change at density 0.5', 'Mathematics loss change at density 0.5')
+        block = block.replace('QA least and most damaged', 'Question answering least affected; most affected, out of measured densities')
         block = block.replace(r'$\,|\,$', '; ')
-        block = block.replace('Minimum QA response ($d$)', 'Minimum question-answering response (density)')
+        block = block.replace('Minimum QA response ($d$)', 'Smallest question-answering loss change (density)')
+        block = block.replace('Minimum question-answering response (density)', 'Smallest question-answering loss change (density)')
     if label == 'tab:panel_quant':
+        block = block.replace(r'$\Delta L_c$ at int4', 'Loss change at 4 bits per weight').replace(r'$\Delta L_c$ at int3', 'Loss change at 3 bits per weight')
         block = block.replace(r'$\Delta L_c$ at', 'Loss change at')
+        block = block.replace('Loss change at 4 bits}', 'Loss change at 4 bits per weight}').replace('Loss change at 3 bits}', 'Loss change at 3 bits per weight}')
+        block = block.replace('Measured bit widths', 'All measured bit widths')
     if label == 'tab:rule-confirm':
         block = block.replace(' & Feasible &', ' & Feasible / total cells &')
         block = block.replace('Method agreement', 'Method agreement (percent)').replace('Set contains oracle method', 'Set contains oracle method (percent)')
@@ -1493,8 +1498,8 @@ def _reader_details(block, label):
     block = block.replace('Mean mean absolute error', 'Capability mean absolute error')
     if label == 'tab:v56_condition':
         block = re.sub(r'(?<=\d); (?=\d)', ' / ', block)
-    if label == 'tab:panel_prune':
-        block = block.replace('least / measured; most / measured', 'least / measured; most / measured')
+    if label in ('tab:panel_prune', 'tab:panel_quant'):
+        block = block.replace('& Mathematics & Code & Question answering &', '& Math & Code & QA &')
     return block
 
 

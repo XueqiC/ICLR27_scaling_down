@@ -2,7 +2,7 @@
 
 **Offline existing-data analysis; no new runs, no refitting, no prospective calibration.** The frozen selector is miscalibrated due to prediction error on this replay. Its pruning failures do not establish pruning domination.
 
-Across 12 development models and 2210 total budget vectors, pruning has **24 measured Pareto-frontier configurations across 6/12 models**. The selector's 31 pruning picks have 0 actual successes, while feasible pruning configurations are wrongly excluded at rate **0.45975 [0.28683, 0.60554]**. These are distinct statements about measured candidates and predictor decisions.
+Across 12 development models and 2210 total budget vectors, pruning has **24 measured Pareto-frontier configurations across 6/12 models**. The selector's 31 pruning picks have 0 actual successes, while feasible pruning configurations are wrongly excluded at rate **0.46201 [0.28820, 0.60804]**. These are distinct statements about measured candidates and predictor decisions.
 
 ## Measured frontier and true domination
 
@@ -55,8 +55,8 @@ Signed gaps above use all decisions; lower cost obtained by violating a constrai
 
 | Frozen-predictor exclusion | Rate [95% model CI] |
 |---|---|
-| all_compressed | 0.32706 [0.21361, 0.42409] |
-| pruning | 0.45975 [0.28683, 0.60554] |
+| all_compressed | 0.32855 [0.21439, 0.42602] |
+| pruning | 0.46201 [0.28820, 0.60804] |
 | quantization | 0.20947 [0.13551, 0.28228] |
 
 V33 predicted-infeasible AND actually-feasible compressed configuration-budget pairs / actually-feasible pairs; normalize counts by each model's budget count before pooling; zero denominators undefined.

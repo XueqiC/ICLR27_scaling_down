@@ -618,7 +618,7 @@ def latex(result):
              r"brackets give 95\% paired cluster-bootstrap intervals.}",
              r"\label{tab:cap_conditioning}", r"\begin{tabular}{llrrrrl}", r"\toprule",
              r"Arm & Capability & A & B & C & D & $\Delta_B$ [95\% CI] \\", r"\midrule"]
-    names = {"pruning": "Pruning", "quantization": "Grouped quant.", "distillation": "Distillation"}
+    names = {"pruning": "Pruning", "quantization": "Grouped quant.", "distillation": r"Distillation$^{\dagger}$"}
     for arm, data in result["arms"].items():
         # The two pruning labels 2.8B@16k and 2.8B@143k carry one identical response
         # vector; the printed panel counts it once, as the appendix text does.
@@ -636,6 +636,8 @@ def latex(result):
             lines.append(r"\midrule")
     lines += [r"\bottomrule", r"\end{tabular}", r"\par\smallskip",
               r"\begin{minipage}{0.99\linewidth}\footnotesize "
+              r"$^{\dagger}$Distillation gains are identically zero: the per-capability reuse form and the shared reuse "
+              r"curve with a per-capability scale are the same function family, so A and B coincide. "
               r"Development: pruning 17 states (84 cells); quantization 54 cells; distillation 25 trajectories. "
               r"Confirmation: pruning 12 cells in 4 states, the two identical 2.8B labels counted once; "
               r"quantization 21 cells in 3 states; "

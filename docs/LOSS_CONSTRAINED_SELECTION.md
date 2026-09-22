@@ -38,12 +38,12 @@ The advisor's four evidence columns are below. Baseline improvements distinguish
 
 | Response amplitude context | Improvement vs always-cheapest and always-dense | Calibration points used | Which candidate excluded |
 |---|---|---|---|
-| Mean absolute actual compressed delta 4.99725 [3.26070, 6.73312] nats | vs always_cheapest: satisfaction gain 0.70184 [0.60988, 0.78781], nominal storage saving -0.37195 [-0.42408, -0.31714]; vs always_dense: satisfaction gain -0.29111 [-0.38386, -0.20470], nominal storage saving 0.44055 [0.38842, 0.49536] | **0** | pruning wrongly excluded 0.45975 [0.28683, 0.60554]; quantization wrongly excluded 0.20947 [0.13551, 0.28228]; method never selected: none; exact configuration IDs and failed capabilities recorded for every budget |
+| Mean absolute actual compressed delta 5.00873 [3.28057, 6.73501] nats | vs always_cheapest: satisfaction gain 0.70184 [0.60988, 0.78781], nominal storage saving -0.37195 [-0.42408, -0.31714]; vs always_dense: satisfaction gain -0.29111 [-0.38386, -0.20470], nominal storage saving 0.44055 [0.38842, 0.49536] | **0** | pruning wrongly excluded 0.46201 [0.28820, 0.60804]; quantization wrongly excluded 0.20947 [0.13551, 0.28228]; method never selected: none; exact configuration IDs and failed capabilities recorded for every budget |
 
 | Method | Mean absolute actual delta, nats [95% CI] | Mean predicted minus actual delta, nats [95% CI] | Actually-feasible configurations wrongly excluded [95% CI] |
 |---|---|---|---|
-| all_compressed | 4.99725 [3.26070, 6.73312] | 3.29185 [0.75606, 5.64178] | 0.32706 [0.21361, 0.42409] |
-| pruning | 6.06396 [3.85840, 8.28599] | 4.89077 [1.36163, 8.24971] | 0.45975 [0.28683, 0.60554] |
+| all_compressed | 5.00873 [3.28057, 6.73501] | 3.53869 [0.91523, 6.01987] | 0.32855 [0.21439, 0.42602] |
+| pruning | 6.08058 [3.88883, 8.28942] | 5.23160 [1.53145, 8.76711] | 0.46201 [0.28820, 0.60804] |
 | quantization | 2.77713 [1.93340, 3.63904] | -0.03762 [-0.73280, 0.59691] | 0.20947 [0.13551, 0.28228] |
 
 Positive mean prediction-minus-actual indicates overprediction of damage on this panel. The wrongly-excluded fraction measures its decision consequence directly; it is not inferred from prediction error alone.
@@ -72,7 +72,7 @@ Pruning is never selected for 10 of the 12 development models. Of its 31 selecte
 | gemma3-4b | 245 | 0.71429 | -0.02066 | 0.34444 | 0.15285 | pruning |
 | gemma4-31b | 216 | 0.60185 | 0.13571 | 0.19588 | 0.19241 | pruning |
 | muse-30b | 180 | 0.68333 | 0.16146 | 0.47489 | 0.33651 | pruning |
-| olmo3-32b | 147 | 0.72789 | 0.02883 | 0.81152 | 0.43558 | pruning |
+| olmo3-32b | 147 | 0.72789 | 0.02883 | 0.80952 | 0.43558 | pruning |
 | olmo3-7b | 120 | 0.86667 | 0.01302 | 0.70968 | 0.15472 | dense, pruning |
 
 ## Reference and measurement caveats
@@ -89,9 +89,9 @@ Pruning is never selected for 10 of the 12 development models. Of its 31 selecte
 | gemma3-4b | 0.0000284 / 0.0005536 / -0.0029258 | 10 / 5 | 6 |
 | gemma4-31b | 0.0000000 / 0.0000000 / 0.0000000 | 10 / 5 | 6 |
 | muse-30b | 0.0000000 / 0.0000000 / 0.0000000 | 10 / 5 | 6 |
-| olmo3-32b | 0.0000000 / 0.0000000 / 0.0000000 | 10 / 5 | 6 |
+| olmo3-32b | 0.0000000 / 0.0000000 / 0.0000000 | 11 / 5 | 7 |
 | olmo3-7b | -0.0001013 / -0.0004342 / -0.0025980 | 10 / 5 | 6 |
-| Qwen3-8B | 0.0001867 / 0.0000000 / 0.0035747 | 4 / 5 | 1 |
+| Qwen3-8B | 0.0001867 / 0.0000000 / 0.0035747 | 5 / 5 | 2 |
 
 Qwen3-0.6B's saved 5-bit metadata records an odd-half protocol discrepancy (reported dense-gap QA +0.0133 nats). It remains included and flagged; no invented correction is applied. Infill metadata is preserved in the JSON. Aggregate loss files cannot verify item identities or estimate measurement uncertainty, so tight-budget outcomes inherit these limits.
 
@@ -103,7 +103,7 @@ Qwen3-8B: 72 budgets, V28 frozen full-development Mode A coefficients for both m
 
 | Response amplitude context | Improvement vs always-cheapest and always-dense | Calibration points used | Which candidate excluded |
 |---|---|---|---|
-| 1.48895 [1.48895, 1.48895] nats | vs always_cheapest: satisfaction gain 0.84722 [0.84722, 0.84722], nominal storage saving -0.58507 [-0.58507, -0.58507]; vs always_dense: satisfaction gain -0.13889 [-0.13889, -0.13889], nominal storage saving 0.22743 [0.22743, 0.22743] | **0** | pruning: wrongly excluded 0.70732 [0.70732, 0.70732]; quantization: wrongly excluded 0.62617 [0.62617, 0.62617] |
+| 1.46336 [1.46336, 1.46336] nats | vs always_cheapest: satisfaction gain 0.84722 [0.84722, 0.84722], nominal storage saving -0.58507 [-0.58507, -0.58507]; vs always_dense: satisfaction gain -0.13889 [-0.13889, -0.13889], nominal storage saving 0.22743 [0.22743, 0.22743] | **0** | pruning: wrongly excluded 0.69048 [0.69048, 0.69048]; quantization: wrongly excluded 0.62617 [0.62617, 0.62617] |
 
 Actual satisfaction: 0.86111 [0.86111, 0.86111]; signed nominal gap: 0.32378 [0.32378, 0.32378]. Methods never selected: pruning.
 
@@ -111,6 +111,44 @@ Actual satisfaction: 0.86111 [0.86111, 0.86111]; signed nominal gap: 0.32378 [0.
 
 - `results/v6-capability-geometry/Qwen--Qwen3-14B/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
 - `results/v6-capability-geometry/Qwen3-14B/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1.4b--step112000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1.4b--step143000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1.4b--step16000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1.4b--step64000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1.4b--step96000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-160m--step143000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-160m--step16000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-160m--step64000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-160m--step96000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1b--step112000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1b--step32000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-1b--step96000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-410m--step143000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-410m--step16000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-410m--step48000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-410m--step64000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-410m--step96000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-6.9b--step112000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-6.9b--step32000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v6-capability-geometry/pythia-6.9b--step80000/prune_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/Qwen3-14B/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1.4b--step143000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1.4b--step16000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1.4b--step64000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1.4b--step96000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-160m--step143000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-160m--step16000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-160m--step64000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-160m--step96000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1b--step112000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1b--step32000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-1b--step96000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-410m--step143000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-410m--step16000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-410m--step64000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-410m--step96000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-6.9b--step112000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
+- `results/v10-quantization/pythia-6.9b--step32000/quant_losses.json`: No complete paired panel with supported frozen basic-input prediction.
 
 Qwen3-14B currently has pruning results but no paired quantization loss table and no supported saved basic-input prediction panel; it cannot support the same cross-method comparison. Duplicate aliases are not additional models.
 

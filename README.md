@@ -126,6 +126,7 @@ the artifact behind every reported number.
 | A13 / C85 | Saved accounting, request/recommendation records, CSVs and validation | `analysis.a13_dreq_table` |
 | S3 / C86 | Original and amended plans, numeric freeze, identity audit, eight anchors, 48 candidate measurements, four student evals and training-metrics files | `analysis.s3_paper_table` |
 | V53 / V55 / V69 / V70 | Existing registers, freezes, comparisons and development records | `analysis.final_prediction_table`, including Development measurements |
+| P1 (retrospective) | Fresh-item plan (384 2Wiki items), per-item losses, generations and scores for 22 models, paired summary; `data_mirror/p1-qa-behaviour/` | `analysis.p1_qa_behaviour --analyse --table` |
 
 A10 / C82 is described in the ledger; none of A15's four consumers opens its
 artifacts, so A15 does not add its 90 MB summary. The A12 serialized dataset
