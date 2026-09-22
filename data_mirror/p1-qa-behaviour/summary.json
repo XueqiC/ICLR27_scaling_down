@@ -15,10 +15,18 @@
      "lenient_exact_match": 0.044270833333333336,
      "vs_dense": {
       "loss": {
+       "mean": 0.6575463849380014,
+       "ci95": [
+        0.49729488158838536,
+        0.8163982685092857
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.32359872793222405,
        "ci95": [
-        0.10477567774564843,
-        0.5367836179820428
+        0.10393818688771085,
+        0.5338779133498066
        ]
       },
       "exact_match": {
@@ -48,10 +56,18 @@
      "lenient_exact_match": 0.026041666666666668,
      "vs_dense": {
       "loss": {
+       "mean": 0.1733423367979574,
+       "ci95": [
+        -0.0056433158663674945,
+        0.3503248747246654
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.2499590632891414,
        "ci95": [
-        -0.48331982009395946,
-        -0.02059144761827297
+        -0.4937554147049691,
+        -0.01806183066833703
        ]
       },
       "exact_match": {
@@ -71,10 +87,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.48420404814004403,
+       "ci95": [
+        -0.6293002315495348,
+        -0.33626669528075165
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.5735577912213654,
        "ci95": [
-        -0.7719558064074055,
-        -0.3754992226604776
+        -0.7685794870322459,
+        -0.38142464333626447
        ]
       },
       "exact_match": {
@@ -104,10 +128,18 @@
      "lenient_exact_match": 0.1875,
      "vs_dense": {
       "loss": {
+       "mean": -0.04273084199489485,
+       "ci95": [
+        -0.12508196564341667,
+        0.03933300395256939
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.20443178133760406,
        "ci95": [
-        -0.3286085825668269,
-        -0.08381278265090221
+        -0.32922426364122526,
+        -0.08389844900831248
        ]
       },
       "exact_match": {
@@ -127,10 +159,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.7002772269328963,
+       "ci95": [
+        -0.840146125719325,
+        -0.5581647219661132
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.5280305092698281,
        "ci95": [
-        -0.7057599007595956,
-        -0.34609154263157454
+        -0.7065108607421994,
+        -0.3476886973855817
        ]
       },
       "exact_match": {
@@ -160,10 +200,18 @@
      "lenient_exact_match": 0.2109375,
      "vs_quant_only": {
       "loss": {
+       "mean": -0.6575463849380014,
+       "ci95": [
+        -0.8174358257327652,
+        -0.50124529263112
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.32359872793222405,
        "ci95": [
-        -0.5376147433047458,
-        -0.10819844938115813
+        -0.5340360552488237,
+        -0.11210450084809215
        ]
       },
       "exact_match": {
@@ -193,10 +241,18 @@
      "lenient_exact_match": 0.13802083333333334,
      "vs_dense": {
       "loss": {
+       "mean": -0.11044914752005841,
+       "ci95": [
+        -0.23288114033808271,
+        0.007216602140791652
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.27840428501439246,
        "ci95": [
-        -0.4560426893504896,
-        -0.10103567089467969
+        -0.465950939844525,
+        -0.09423299704107214
        ]
       },
       "exact_match": {
@@ -216,10 +272,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.7679955324580598,
+       "ci95": [
+        -0.9348465304063606,
+        -0.6003098404470887
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.6020030129466165,
        "ci95": [
-        -0.839059850372564,
-        -0.36167943458135116
+        -0.841926640909185,
+        -0.3442749015364068
        ]
       },
       "exact_match": {
@@ -251,10 +315,18 @@
      "lenient_exact_match": 0.08333333333333333,
      "vs_dense": {
       "loss": {
+       "mean": -1.1635240016411386,
+       "ci95": [
+        -1.4095688109696498,
+        -0.9367547390776186
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -2.104822734412578,
        "ci95": [
-        -2.450386989386165,
-        -1.7567648910661917
+        -2.458873408447383,
+        -1.7508318643354353
        ]
       },
       "exact_match": {
@@ -274,10 +346,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -1.82107038657914,
+       "ci95": [
+        -2.0592355247486935,
+        -1.595470750329026
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -2.428421462344802,
        "ci95": [
-        -2.73312706767968,
-        -2.1261614292983313
+        -2.746084181513564,
+        -2.119412228656308
        ]
       },
       "exact_match": {
@@ -297,10 +377,18 @@
      },
      "vs_pristine": {
       "loss": {
+       "mean": -1.0530748541210802,
+       "ci95": [
+        -1.2562961327963658,
+        -0.8591955903718865
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -1.8264184493981859,
        "ci95": [
-        -2.143829391061141,
-        -1.5160014440142922
+        -2.144450762713397,
+        -1.5198647443763105
        ]
       },
       "exact_match": {
@@ -334,10 +422,18 @@
      "lenient_exact_match": 0.08854166666666667,
      "vs_dense": {
       "loss": {
+       "mean": -0.29827965444930715,
+       "ci95": [
+        -0.4661304271461319,
+        -0.1385927463313367
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -1.1718735086166727,
        "ci95": [
-        -1.4618934615200787,
-        -0.8948343379913816
+        -1.4499478600058433,
+        -0.8970751368902006
        ]
       },
       "exact_match": {
@@ -367,10 +463,18 @@
      "lenient_exact_match": 0.140625,
      "vs_dense": {
       "loss": {
+       "mean": -0.11377701039387311,
+       "ci95": [
+        -0.22816861541736652,
+        -0.004300988049882934
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.4887511208861306,
        "ci95": [
-        -0.6842255744732245,
-        -0.3094302100272865
+        -0.6786339881386878,
+        -0.305920963039646
        ]
       },
       "exact_match": {
@@ -390,10 +494,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": 0.18450264405543404,
+       "ci95": [
+        0.0479620086271876,
+        0.3268721200612217
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.6831223877305419,
        "ci95": [
-        0.47940422582878645,
-        0.8907455462684647
+        0.48483271346979845,
+        0.888763768433263
        ]
       },
       "exact_match": {
@@ -423,10 +535,18 @@
      "lenient_exact_match": 0.2708333333333333,
      "vs_quant_only": {
       "loss": {
+       "mean": 0.29827965444930715,
+       "ci95": [
+        0.1387674544138577,
+        0.4677780861964191
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 1.1718735086166727,
        "ci95": [
-        0.9031733012233807,
-        1.4613822459945203
+        0.8955732115671692,
+        1.4521199825373097
        ]
       },
       "exact_match": {
@@ -456,10 +576,18 @@
      "lenient_exact_match": 0.2109375,
      "vs_dense": {
       "loss": {
+       "mean": 0.42128236688548526,
+       "ci95": [
+        0.30085879614415045,
+        0.545701942300072
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.4319613047091074,
        "ci95": [
-        0.240157418299203,
-        0.6220126625343605
+        0.24263084818962502,
+        0.6231170298331858
        ]
       },
       "exact_match": {
@@ -479,10 +607,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": 0.7195620213347924,
+       "ci95": [
+        0.5241233311308462,
+        0.9194099302895745
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 1.6038348133257803,
        "ci95": [
-        1.3127691001580162,
-        1.9045458836851352
+        1.3142112574868616,
+        1.9015347240130553
        ]
       },
       "exact_match": {
@@ -514,10 +650,18 @@
      "lenient_exact_match": 0.15885416666666666,
      "vs_dense": {
       "loss": {
+       "mean": -0.4904352434354484,
+       "ci95": [
+        -0.7145192531674754,
+        -0.26938876605948403
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -1.2115562273826435,
        "ci95": [
-        -1.560940872419907,
-        -0.879066725635024
+        -1.5375977057915227,
+        -0.8795763286023603
        ]
       },
       "exact_match": {
@@ -537,10 +681,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.19215558898614127,
+       "ci95": [
+        -0.39417863910449863,
+        0.020622390562720635
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.03968271876597073,
        "ci95": [
-        -0.30302276442519976,
-        0.22605744171509543
+        -0.29226114989588503,
+        0.22101036457100287
        ]
       },
       "exact_match": {
@@ -560,10 +712,18 @@
      },
      "vs_pristine": {
       "loss": {
+       "mean": -0.9117176103209337,
+       "ci95": [
+        -1.1379967945580096,
+        -0.6976531390955717
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -1.643517532091751,
        "ci95": [
-        -1.9840581956856982,
-        -1.3090442442790768
+        -1.980776487995421,
+        -1.3062732235980528
        ]
       },
       "exact_match": {
@@ -598,10 +758,18 @@
      "lenient_exact_match": 0.16927083333333334,
      "vs_dense": {
       "loss": {
+       "mean": -0.0803177966101698,
+       "ci95": [
+        -0.15814211643326687,
+        -0.004622562387291552
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.31973175953278493,
        "ci95": [
-        -0.43360045520659535,
-        -0.21103490694181312
+        -0.4294497037527586,
+        -0.21095912335040462
        ]
       },
       "exact_match": {
@@ -631,10 +799,18 @@
      "lenient_exact_match": 0.19791666666666666,
      "vs_quant_only": {
       "loss": {
+       "mean": 0.0803177966101698,
+       "ci95": [
+        0.0047421414806523305,
+        0.15682190418241612
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.31973175953278493,
        "ci95": [
-        0.21465147165998608,
-        0.42957618048873236
+        0.21127004816709716,
+        0.4310288111891046
        ]
       },
       "exact_match": {
@@ -664,10 +840,18 @@
      "lenient_exact_match": 0.19010416666666666,
      "vs_dense": {
       "loss": {
+       "mean": -0.15817266949152575,
+       "ci95": [
+        -0.24470737445190624,
+        -0.07273820591012735
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.24606402305376915,
        "ci95": [
-        -0.3600647908158284,
-        -0.13059258388062406
+        -0.36040152952956606,
+        -0.1358670534815708
        ]
       },
       "exact_match": {
@@ -687,10 +871,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.07785487288135595,
+       "ci95": [
+        -0.17382019189799372,
+        0.014710306210811076
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.07366773647901578,
        "ci95": [
-        -0.06238608474722977,
-        0.21055212118475058
+        -0.0625236027558415,
+        0.20933799093543345
        ]
       },
       "exact_match": {
@@ -722,10 +914,18 @@
      "lenient_exact_match": 0.08333333333333333,
      "vs_dense": {
       "loss": {
+       "mean": -0.525911016949153,
+       "ci95": [
+        -0.6547429920266292,
+        -0.4030579616567136
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.918615832635608,
        "ci95": [
-        -1.1039794232302165,
-        -0.7474322428636092
+        -1.096598524540419,
+        -0.7398042279748519
        ]
       },
       "exact_match": {
@@ -745,10 +945,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.4455932203389832,
+       "ci95": [
+        -0.5672613382177182,
+        -0.3289435249518593
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.5988840731028232,
        "ci95": [
-        -0.7685881355142524,
-        -0.4377594493903089
+        -0.7623281435000184,
+        -0.4338683399628529
        ]
       },
       "exact_match": {
@@ -768,10 +976,18 @@
      },
      "vs_pristine": {
       "loss": {
+       "mean": -0.36773834745762723,
+       "ci95": [
+        -0.46730452130712785,
+        -0.27199428488355676
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.6725518095818389,
        "ci95": [
-        -0.8239863499819858,
-        -0.5250671281764117
+        -0.8223161467111357,
+        -0.5254725632406603
        ]
       },
       "exact_match": {
@@ -809,10 +1025,18 @@
      "lenient_exact_match": 0.041666666666666664,
      "vs_dense": {
       "loss": {
+       "mean": 0.5692213983050847,
+       "ci95": [
+        0.4490386050637914,
+        0.6794558170600687
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.13510822244342752,
        "ci95": [
-        -0.06766508380399985,
-        0.33599694307518996
+        -0.07578692136675536,
+        0.3316929293760348
        ]
       },
       "exact_match": {
@@ -842,10 +1066,18 @@
      "lenient_exact_match": 0.09114583333333333,
      "vs_dense": {
       "loss": {
+       "mean": 0.15993114406779707,
+       "ci95": [
+        0.08279906072065221,
+        0.23344808515226773
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.00501758283130356,
        "ci95": [
-        -0.12312514473464184,
-        0.10702218214547307
+        -0.12714817951146076,
+        0.10959506829456134
        ]
       },
       "exact_match": {
@@ -865,10 +1097,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.4092902542372876,
+       "ci95": [
+        -0.5147261546106489,
+        -0.30098091191995363
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.14012580527473106,
        "ci95": [
-        -0.29776138988236156,
-        0.028856118732522494
+        -0.29847228220275096,
+        0.02337423638418508
        ]
       },
       "exact_match": {
@@ -898,10 +1138,18 @@
      "lenient_exact_match": 0.171875,
      "vs_dense": {
       "loss": {
+       "mean": -0.003813559322034088,
+       "ci95": [
+        -0.03380025387530143,
+        0.026724445191306033
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.001078056736015726,
        "ci95": [
-        -0.05105252558133419,
-        0.05005024985661581
+        -0.05003154654567618,
+        0.04792705348308364
        ]
       },
       "exact_match": {
@@ -921,10 +1169,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.5730349576271188,
+       "ci95": [
+        -0.6852809862402041,
+        -0.4552187517315803
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.13618627917944323,
        "ci95": [
-        -0.3297289448233967,
-        0.06599970499674479
+        -0.3298090674843909,
+        0.06755692064102696
        ]
       },
       "exact_match": {
@@ -954,10 +1210,18 @@
      "lenient_exact_match": 0.11979166666666667,
      "vs_dense": {
       "loss": {
+       "mean": -0.0898834745762711,
+       "ci95": [
+        -0.1651623735417563,
+        -0.016386740257044046
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.35586012633742126,
        "ci95": [
-        -0.4784481314640311,
-        -0.2400804157209798
+        -0.4775457401722356,
+        -0.235473187960676
        ]
       },
       "exact_match": {
@@ -977,10 +1241,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.6591048728813558,
+       "ci95": [
+        -0.7506977908728519,
+        -0.5655932931590324
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.4909683487808488,
        "ci95": [
-        -0.627118482024793,
-        -0.350997634940201
+        -0.6288180631533903,
+        -0.3567004220754834
        ]
       },
       "exact_match": {
@@ -1010,10 +1282,18 @@
      "lenient_exact_match": 0.19010416666666666,
      "vs_quant_only": {
       "loss": {
+       "mean": -0.5692213983050847,
+       "ci95": [
+        -0.6802284744034324,
+        -0.4546031684173917
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.13510822244342752,
        "ci95": [
-        -0.3309461397028535,
-        0.06781718958644607
+        -0.3327843752407351,
+        0.05856216408645601
        ]
       },
       "exact_match": {
@@ -1043,10 +1323,18 @@
      "lenient_exact_match": 0.07552083333333333,
      "vs_dense": {
       "loss": {
+       "mean": -0.008405720338982903,
+       "ci95": [
+        -0.11435116594695671,
+        0.09188707206277298
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.33884440777140973,
        "ci95": [
-        -0.4945124088874088,
-        -0.18638239058237235
+        -0.500176989842975,
+        -0.18921196523903444
        ]
       },
       "exact_match": {
@@ -1066,10 +1354,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.5776271186440676,
+       "ci95": [
+        -0.6959322033636222,
+        -0.4644222717465635
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.4739526302148373,
        "ci95": [
-        -0.6456235803968348,
-        -0.30792017093195084
+        -0.642243336260365,
+        -0.31041633141028896
        ]
       },
       "exact_match": {
@@ -1101,10 +1397,18 @@
      "lenient_exact_match": 0.07291666666666667,
      "vs_dense": {
       "loss": {
+       "mean": 0.01808792372881385,
+       "ci95": [
+        -0.10914978948896682,
+        0.14371675475363307
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.3352107137202352,
        "ci95": [
-        -0.5285074379231789,
-        -0.14169717173943866
+        -0.5330170190764368,
+        -0.14494497909994747
        ]
       },
       "exact_match": {
@@ -1124,10 +1428,18 @@
      },
      "vs_quant_only": {
       "loss": {
+       "mean": -0.5511334745762708,
+       "ci95": [
+        -0.6802514536531482,
+        -0.4226785731713967
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": -0.47031893616366266,
        "ci95": [
-        -0.6603126321107278,
-        -0.281985405494164
+        -0.6632214492208999,
+        -0.28200614394263696
        ]
       },
       "exact_match": {
@@ -1147,10 +1459,18 @@
      },
      "vs_pristine": {
       "loss": {
+       "mean": 0.02649364406779675,
+       "ci95": [
+        -0.05252665735038968,
+        0.10317688719555328
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "loss_item_mean": {
        "mean": 0.003633694051174532,
        "ci95": [
-        -0.11322728202809378,
-        0.1190968160607747
+        -0.11182378352757988,
+        0.11862841042940522
        ]
       },
       "exact_match": {

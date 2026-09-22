@@ -247,8 +247,29 @@ def lenient_answer(generation):
     return text.strip().rstrip(".")
 
 
+def bootstrap_weighted_difference(items_a, items_b, seed, resamples=5000):
+    """Token-weighted mean loss of A minus that of B (the statistic of the Loss column), bootstrapped over items.
+
+    Each resample draws items with replacement and recomputes both token-weighted means on the same items,
+    so the difference column uses the same statistic as the Loss column and the same paired items.
+    """
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    sa = np.asarray([x["loss_sum"] for x in items_a], float); ta = np.asarray([x["tokens"] for x in items_a], float)
+    sb = np.asarray([x["loss_sum"] for x in items_b], float); tb = np.asarray([x["tokens"] for x in items_b], float)
+    point = float(sa.sum() / ta.sum() - sb.sum() / tb.sum())
+    idx = rng.integers(0, len(sa), size=(resamples, len(sa)))
+    diffs = sa[idx].sum(axis=1) / ta[idx].sum(axis=1) - sb[idx].sum(axis=1) / tb[idx].sum(axis=1)
+    return {"mean": point, "ci95": [float(np.quantile(diffs, .025)), float(np.quantile(diffs, .975))],
+            "statistic": "difference of token-weighted mean losses, bootstrapped over items"}
+
+
 def analyse():
-    """Paired per-item differences against the dense reference and the quantization-only choice."""
+    """Paired differences against the dense reference and the quantization-only choice.
+
+    Loss differences are differences of token-weighted mean losses (the Loss column's statistic, Eq. 1);
+    exact match and token F1 differences are means over items of per-item differences.
+    """
     from analysis import v15_accuracy_link as v15
     p1 = read(OUT / "plan.json"); res = read(OUT / "results.json")
     ev = res["evaluations"]
@@ -275,15 +296,20 @@ def analyse():
                     continue
                 paired = {}
                 for metric in metrics:
-                    a = [it[metric] for it in v["items"]]; b = [it[metric] for it in base["items"]]
-                    paired[metric] = bootstrap_mean([x - y for x, y in zip(a, b)], seed=zlib.crc32(f"{ref}|{key}|{metric}".encode()))
+                    if metric == "loss":
+                        paired[metric] = bootstrap_weighted_difference(v["items"], base["items"], seed=zlib.crc32(f"{ref}|{key}|{metric}".encode()))
+                        a = [it[metric] for it in v["items"]]; b = [it[metric] for it in base["items"]]
+                        paired["loss_item_mean"] = bootstrap_mean([x - y for x, y in zip(a, b)], seed=zlib.crc32(f"{ref}|{key}|{metric}|item".encode()))
+                    else:
+                        a = [it[metric] for it in v["items"]]; b = [it[metric] for it in base["items"]]
+                        paired[metric] = bootstrap_mean([x - y for x, y in zip(a, b)], seed=zlib.crc32(f"{ref}|{key}|{metric}".encode()))
                 row[name] = paired
             entry["models"][v["candidate"]] = row
         summary["references"][ref] = entry
     (OUT / "summary.json").write_text(json.dumps(summary, indent=1))
     lines = ["# P1 QA behaviour on fresh 2Wiki items (retrospective)", "",
              f"{summary['n_items']} fresh items; per model: mean completion loss (nats/token), exact match, token F1; "
-             "paired differences against the dense reference, the quantization-only choice and, for the distilled student, its pristine initialisation, with 95% bootstrap intervals. "
+             "paired differences against the dense reference, the quantization-only choice and, for the distilled student, its pristine initialisation, with 95% bootstrap intervals; loss differences are differences of token-weighted mean losses (the statistic of the loss column), EM/F1 differences are item means. "
              "Lenient EM (post-hoc readout) strips markdown emphasis and keeps the first sentence before the same normalisation.", ""]
     for ref, e in summary["references"].items():
         lines += [f"## {ref}", "", "| Model | Roles | Loss | EM | Lenient EM | F1 | dLoss vs dense [95%] | dEM vs dense | dF1 vs dense | dLoss vs quant-only | dEM vs quant-only | dF1 vs quant-only | dLoss vs pristine | dEM vs pristine | dF1 vs pristine |", "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
@@ -346,9 +372,9 @@ def render_table(summary):
             "Fresh-item check of the models the policies chose for question answering, on 384 unused 2WikiMultihopQA "
             "items: completion loss in nats per native token; exact match under the 32-token readout and under the "
             "96-token readout with the gold-blind extraction rule, with that readout's token F1 and the percentage of "
-            "generations reaching the cap without a stop marker; and the paired loss difference from the "
-            "quantization-only choice with its 95\\% bootstrap interval, negative favouring the row. Parentheses "
-            "name the policies that chose the model.")
+            "generations reaching the cap without a stop marker; and the difference of token-weighted mean losses "
+            "from the quantization-only choice, the statistic of the loss column, with its 95\\% bootstrap interval "
+            "over items, negative favouring the row. Parentheses name the policies that chose the model.")
     else:
         caption = (
             "Fresh-item check, after the selection round, of the models the policies chose for question answering, on "
