@@ -57,7 +57,16 @@ def cell(model, density):
     if not p.exists():
         return None
     d = read(p)
-    return {c: {"accuracy": float(d["aggregates"][c]["accuracy"]), "loss": float(d["losses"][c])} for c in CAPS}
+
+    def accuracy(agg):
+        for key in ("accuracy", "exact_match", "pass_at_1"):
+            if key in agg:
+                return float(agg[key])
+        for key in ("correct", "passed", "exact_matches"):
+            if key in agg and "n" in agg:
+                return float(agg[key]) / float(agg["n"])
+        raise KeyError(f"no accuracy field in {sorted(agg)}")
+    return {c: {"accuracy": accuracy(d["aggregates"][c]), "loss": float(d["losses"][c])} for c in CAPS}
 
 
 def load_panel():

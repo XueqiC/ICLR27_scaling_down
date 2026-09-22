@@ -1912,7 +1912,7 @@
         "status": "failed",
         "returncode": 1,
         "stdout": "",
-        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n  File \"<string>\", line 3, in freq_element\n  File \"$HOME/.local/share/uv/python/cpython-3.11.16-linux-x86_64-gnu/lib/python3.11/collections/__init__.py\", line 599, in __init__\n    self.update(iterable, **kwds)\n  File \"$HOME/.local/share/uv/python/cpython-3.11.16-linux-x86_64-gnu/lib/python3.11/collections/__init__.py\", line 690, in update\n    _count_elements(self, iterable)\nTypeError: unhashable type: 'list'\n"
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n  File \"<string>\", line 3, in freq_element\n  File \"~/.local/share/uv/python/cpython-3.11.16-linux-x86_64-gnu/lib/python3.11/collections/__init__.py\", line 599, in __init__\n    self.update(iterable, **kwds)\n  File \"~/.local/share/uv/python/cpython-3.11.16-linux-x86_64-gnu/lib/python3.11/collections/__init__.py\", line 690, in update\n    _count_elements(self, iterable)\nTypeError: unhashable type: 'list'\n"
       }
     },
     {
@@ -4185,7 +4185,7 @@
         "Hong Kong/infobox",
         "Hong Kong China",
         "Hong Kong Special Administrative Region of the People's Republic of China",
-        "HKSAROrestricted",
+        "HKSAROPRC",
         "\u9999\u6e2f\u7279\u5340",
         "Heung-gong",
         "Hong Kong SAR",
