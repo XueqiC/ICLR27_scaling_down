@@ -41,6 +41,8 @@ PROFILES = {
     'tab:cohorts': [[2.3, 4, 3.3, 3.4]],
     'tab:disp_boundary': [[25, 75]],
     'tab:budgets': [[2.5, 5.7, 4.9]],
+    'tab:s3-ablation': [[22, 14, 13, 9, 9, 11, 8, 14]],
+    'tab:a14-baselines': [[28, 20, 8.67, 8.67, 8.67, 8.67, 8.66, 8.66]],
 }
 
 

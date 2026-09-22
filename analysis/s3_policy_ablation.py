@@ -171,7 +171,7 @@ TABLE = ROOT / "paper/paper/tables/s3_ablation.tex"
 
 def render(summary):
     """Appendix table: mean regret per policy beside the opportunity and the rule's gain over the quantization oracle."""
-    from analysis.paper_table_layout import house_style
+    from analysis.paper_table_layout import house_style, table_layout
     fmt = lambda x: f"{0.0 if abs(x) < 5e-4 else x:.3f}"  # no signed zero
     rows = []
     order = list(NAMES)
@@ -204,7 +204,7 @@ def render(summary):
             "Reference & Objective & Opportunity & Priority & Median & Relations & Rule & Rule gain \\\\\n"
             "\\midrule\n" + "\n".join(rows) +
             "\n\\bottomrule\n\\end{tabular*}\n\\end{table}\n")
-    return house_style(text)
+    return house_style(table_layout(text))
 
 
 def main():
