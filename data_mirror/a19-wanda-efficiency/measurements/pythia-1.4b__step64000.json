@@ -1,0 +1,7919 @@
+{
+ "tag": "pythia-1.4b@step64000",
+ "repo": "EleutherAI/pythia-1.4b",
+ "revision": "step64000",
+ "role": "dev",
+ "size": "1.4b",
+ "D0": 134217728000,
+ "N0_block_matrices": 1207959552,
+ "prune_scope_parameters": 1207959552,
+ "criterion": "wanda",
+ "calibration_sha256": "69c3411221a983f2ce62a85b66cc5dba4b4c200c2954d0d58e5696d417dc3d42",
+ "densities": [
+  0.9,
+  0.8,
+  0.7,
+  0.6
+ ],
+ "load_seconds": 43.5,
+ "measurements": {
+  "1.0": {
+   "probes": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 115.5,
+       "tokens": 104
+      },
+      {
+       "loss_sum": 312.0,
+       "tokens": 218
+      },
+      {
+       "loss_sum": 164.0,
+       "tokens": 125
+      },
+      {
+       "loss_sum": 153.0,
+       "tokens": 149
+      },
+      {
+       "loss_sum": 370.0,
+       "tokens": 253
+      },
+      {
+       "loss_sum": 58.75,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 229.0,
+       "tokens": 152
+      },
+      {
+       "loss_sum": 83.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 201.0,
+       "tokens": 118
+      },
+      {
+       "loss_sum": 207.0,
+       "tokens": 86
+      },
+      {
+       "loss_sum": 116.0,
+       "tokens": 165
+      },
+      {
+       "loss_sum": 107.5,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 434.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 86.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 404.0,
+       "tokens": 348
+      },
+      {
+       "loss_sum": 288.0,
+       "tokens": 173
+      },
+      {
+       "loss_sum": 330.0,
+       "tokens": 150
+      },
+      {
+       "loss_sum": 470.0,
+       "tokens": 442
+      },
+      {
+       "loss_sum": 448.0,
+       "tokens": 204
+      },
+      {
+       "loss_sum": 118.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 444.0,
+       "tokens": 158
+      },
+      {
+       "loss_sum": 548.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 382.0,
+       "tokens": 167
+      },
+      {
+       "loss_sum": 220.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 290.0,
+       "tokens": 175
+      },
+      {
+       "loss_sum": 340.0,
+       "tokens": 223
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 67
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 492.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 187.0,
+       "tokens": 168
+      },
+      {
+       "loss_sum": 241.0,
+       "tokens": 331
+      },
+      {
+       "loss_sum": 103.5,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 88.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 203.0,
+       "tokens": 243
+      },
+      {
+       "loss_sum": 97.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 160.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 156.0,
+       "tokens": 244
+      },
+      {
+       "loss_sum": 322.0,
+       "tokens": 174
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 73
+      },
+      {
+       "loss_sum": 352.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 446.0,
+       "tokens": 492
+      },
+      {
+       "loss_sum": 308.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 648.0,
+       "tokens": 387
+      },
+      {
+       "loss_sum": 213.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 146.0,
+       "tokens": 123
+      },
+      {
+       "loss_sum": 191.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 174.0,
+       "tokens": 143
+      },
+      {
+       "loss_sum": 144.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 272.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 672.0,
+       "tokens": 488
+      },
+      {
+       "loss_sum": 490.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 820.0,
+       "tokens": 421
+      },
+      {
+       "loss_sum": 282.0,
+       "tokens": 384
+      },
+      {
+       "loss_sum": 252.0,
+       "tokens": 181
+      },
+      {
+       "loss_sum": 190.0,
+       "tokens": 208
+      },
+      {
+       "loss_sum": 342.0,
+       "tokens": 234
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 362.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 266.0,
+       "tokens": 228
+      }
+     ],
+     "mean_loss": 1.3138495610219094,
+     "tokens": 12643
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 53.75,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 95.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 52.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 73.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 93.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 71.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 57.25,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 95.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 177.0,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 166.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 100.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 79.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 60.0,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 23
+      },
+      {
+       "loss_sum": 132.0,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 94.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 34.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 53.25,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 67.5,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 50.75,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 145.0,
+       "tokens": 82
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 75.0,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 256.0,
+       "tokens": 268
+      },
+      {
+       "loss_sum": 85.0,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 46.75,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 63.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 110.5,
+       "tokens": 83
+      },
+      {
+       "loss_sum": 57.25,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 57.0,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 114
+      },
+      {
+       "loss_sum": 109.0,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 75.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 148.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 37.0,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 76.0,
+       "tokens": 71
+      },
+      {
+       "loss_sum": 58.25,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 78.0,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 186
+      },
+      {
+       "loss_sum": 52.0,
+       "tokens": 24
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 65.5,
+       "tokens": 77
+      },
+      {
+       "loss_sum": 36.5,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 91.5,
+       "tokens": 72
+      },
+      {
+       "loss_sum": 91.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 130
+      },
+      {
+       "loss_sum": 58.25,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 48.75,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 44.0,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 170.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 127.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 59.0,
+       "tokens": 50
+      }
+     ],
+     "mean_loss": 1.3517946280009507,
+     "tokens": 4207
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 18.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 23.75,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 6.78125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 27.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 40.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 24.125,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 37.5,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 50.75,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 27.125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 47.5,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 31.375,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 14.0,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 18.375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 25.75,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 23.875,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 16.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 8.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 6.15625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 28.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 30.625,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 2.03125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 10.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 10.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 36.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 18.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 7.84375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 19.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 23.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 20.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 15.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 22.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 20.125,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 15.1875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 43.0,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 7.5625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 30.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 11.625,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 15.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 27.375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 27.125,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 20.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 21.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 16.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 22.625,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 15.1875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 14.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 20.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 7.4375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.0,
+       "tokens": 15
+      }
+     ],
+     "mean_loss": 5.10717680608365,
+     "tokens": 263
+    }
+   },
+   "new": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 178.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 34
+      },
+      {
+       "loss_sum": 500.0,
+       "tokens": 343
+      },
+      {
+       "loss_sum": 276.0,
+       "tokens": 108
+      },
+      {
+       "loss_sum": 216.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 322.0,
+       "tokens": 214
+      },
+      {
+       "loss_sum": 306.0,
+       "tokens": 188
+      },
+      {
+       "loss_sum": 328.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 83.0,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 704.0,
+       "tokens": 433
+      },
+      {
+       "loss_sum": 108.5,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 177.0,
+       "tokens": 94
+      },
+      {
+       "loss_sum": 41.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 59.75,
+       "tokens": 50
+      },
+      {
+       "loss_sum": 232.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 164.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 404.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 306.0,
+       "tokens": 200
+      },
+      {
+       "loss_sum": 166.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 115
+      },
+      {
+       "loss_sum": 474.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 118.0,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 320.0,
+       "tokens": 219
+      },
+      {
+       "loss_sum": 196.0,
+       "tokens": 160
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 239.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 378.0,
+       "tokens": 267
+      },
+      {
+       "loss_sum": 186.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 105.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 140.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 231.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 145.0,
+       "tokens": 133
+      },
+      {
+       "loss_sum": 420.0,
+       "tokens": 202
+      },
+      {
+       "loss_sum": 119.5,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 230.0,
+       "tokens": 213
+      },
+      {
+       "loss_sum": 253.0,
+       "tokens": 194
+      },
+      {
+       "loss_sum": 466.0,
+       "tokens": 422
+      },
+      {
+       "loss_sum": 282.0,
+       "tokens": 272
+      },
+      {
+       "loss_sum": 286.0,
+       "tokens": 275
+      },
+      {
+       "loss_sum": 452.0,
+       "tokens": 231
+      },
+      {
+       "loss_sum": 160.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 308.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 386.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 86.5,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 131.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 51
+      },
+      {
+       "loss_sum": 246.0,
+       "tokens": 146
+      },
+      {
+       "loss_sum": 664.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 205.0,
+       "tokens": 170
+      },
+      {
+       "loss_sum": 199.0,
+       "tokens": 126
+      },
+      {
+       "loss_sum": 250.0,
+       "tokens": 309
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 180.0,
+       "tokens": 157
+      },
+      {
+       "loss_sum": 374.0,
+       "tokens": 230
+      },
+      {
+       "loss_sum": 47.25,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 612.0,
+       "tokens": 352
+      },
+      {
+       "loss_sum": 115.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 474.0,
+       "tokens": 445
+      }
+     ],
+     "mean_loss": 1.3612406511218653,
+     "tokens": 11365
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 98.5,
+       "tokens": 62
+      },
+      {
+       "loss_sum": 43.0,
+       "tokens": 26
+      },
+      {
+       "loss_sum": 62.25,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 27.75,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 87.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 115.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 114.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 98.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 127.0,
+       "tokens": 142
+      },
+      {
+       "loss_sum": 63.75,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 50.0,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 115.5,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 116.0,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 63.75,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 47.75,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 212.0,
+       "tokens": 119
+      },
+      {
+       "loss_sum": 61.0,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 72.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 85.5,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 300.0,
+       "tokens": 279
+      },
+      {
+       "loss_sum": 71.0,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 87.5,
+       "tokens": 59
+      },
+      {
+       "loss_sum": 79.0,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 63.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 60.25,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 62.5,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 37.5,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 43.75,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 77.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 47.5,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 38.25,
+       "tokens": 19
+      },
+      {
+       "loss_sum": 103.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 175.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 157.0,
+       "tokens": 85
+      },
+      {
+       "loss_sum": 79.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 85.0,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 60.75,
+       "tokens": 29
+      },
+      {
+       "loss_sum": 160.0,
+       "tokens": 162
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 43.5,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 69.0,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 127.0,
+       "tokens": 81
+      },
+      {
+       "loss_sum": 111.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 107
+      },
+      {
+       "loss_sum": 60.0,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 149.0,
+       "tokens": 105
+      },
+      {
+       "loss_sum": 51.0,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 72.5,
+       "tokens": 48
+      },
+      {
+       "loss_sum": 59.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 82.0,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 125.0,
+       "tokens": 140
+      },
+      {
+       "loss_sum": 64.0,
+       "tokens": 68
+      },
+      {
+       "loss_sum": 64.0,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 76.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 76.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 89.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 106.5,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 59.75,
+       "tokens": 48
+      }
+     ],
+     "mean_loss": 1.3532187802516942,
+     "tokens": 4132
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 27.375,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 32.0,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 34.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 11.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.125,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 12.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 17.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 9.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 14.0625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.9375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 21.875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 9.3125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 11.9375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 16.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 7.59375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 13.6875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 17.125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 35.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 23.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 30.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 1.3203125,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 14.1875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.9375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 18.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.125,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.875,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 13.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 19.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 25.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 24.375,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 38.75,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 1.9609375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.75,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.3125,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 12.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 27.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 22.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 18.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 29.125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 7.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 26.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 14.6875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 10.0625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 6.1875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 54.75,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 19.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 15.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 2.8125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 15.0,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.0625,
+       "tokens": 1
+      }
+     ],
+     "mean_loss": 4.352928321678322,
+     "tokens": 286
+    }
+   },
+   "seconds": 14.7
+  },
+  "0.9": {
+   "probes": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 116.0,
+       "tokens": 104
+      },
+      {
+       "loss_sum": 312.0,
+       "tokens": 218
+      },
+      {
+       "loss_sum": 165.0,
+       "tokens": 125
+      },
+      {
+       "loss_sum": 153.0,
+       "tokens": 149
+      },
+      {
+       "loss_sum": 370.0,
+       "tokens": 253
+      },
+      {
+       "loss_sum": 58.75,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 228.0,
+       "tokens": 152
+      },
+      {
+       "loss_sum": 83.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 200.0,
+       "tokens": 118
+      },
+      {
+       "loss_sum": 206.0,
+       "tokens": 86
+      },
+      {
+       "loss_sum": 116.0,
+       "tokens": 165
+      },
+      {
+       "loss_sum": 107.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 434.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 85.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 404.0,
+       "tokens": 348
+      },
+      {
+       "loss_sum": 284.0,
+       "tokens": 173
+      },
+      {
+       "loss_sum": 332.0,
+       "tokens": 150
+      },
+      {
+       "loss_sum": 470.0,
+       "tokens": 442
+      },
+      {
+       "loss_sum": 450.0,
+       "tokens": 204
+      },
+      {
+       "loss_sum": 118.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 444.0,
+       "tokens": 158
+      },
+      {
+       "loss_sum": 548.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 384.0,
+       "tokens": 167
+      },
+      {
+       "loss_sum": 218.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 292.0,
+       "tokens": 175
+      },
+      {
+       "loss_sum": 342.0,
+       "tokens": 223
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 67
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 492.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 187.0,
+       "tokens": 168
+      },
+      {
+       "loss_sum": 243.0,
+       "tokens": 331
+      },
+      {
+       "loss_sum": 103.5,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 88.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 203.0,
+       "tokens": 243
+      },
+      {
+       "loss_sum": 97.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 156.0,
+       "tokens": 244
+      },
+      {
+       "loss_sum": 322.0,
+       "tokens": 174
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 73
+      },
+      {
+       "loss_sum": 352.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 448.0,
+       "tokens": 492
+      },
+      {
+       "loss_sum": 308.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 648.0,
+       "tokens": 387
+      },
+      {
+       "loss_sum": 214.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 123
+      },
+      {
+       "loss_sum": 192.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 174.0,
+       "tokens": 143
+      },
+      {
+       "loss_sum": 144.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 272.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 676.0,
+       "tokens": 488
+      },
+      {
+       "loss_sum": 490.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 820.0,
+       "tokens": 421
+      },
+      {
+       "loss_sum": 280.0,
+       "tokens": 384
+      },
+      {
+       "loss_sum": 252.0,
+       "tokens": 181
+      },
+      {
+       "loss_sum": 190.0,
+       "tokens": 208
+      },
+      {
+       "loss_sum": 342.0,
+       "tokens": 234
+      },
+      {
+       "loss_sum": 39.0,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 360.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 264.0,
+       "tokens": 228
+      }
+     ],
+     "mean_loss": 1.3143439057185795,
+     "tokens": 12643
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 52.75,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 96.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 143.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 51.75,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 74.0,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 94.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 57.25,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 140.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 95.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 177.0,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 167.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 100.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 78.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 60.5,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 80.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 117.0,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 23
+      },
+      {
+       "loss_sum": 131.0,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 94.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 34.5,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 53.0,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 68.0,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 51.0,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 145.0,
+       "tokens": 82
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 258.0,
+       "tokens": 268
+      },
+      {
+       "loss_sum": 85.5,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 46.25,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 65.0,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 76.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 110.5,
+       "tokens": 83
+      },
+      {
+       "loss_sum": 56.5,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 56.75,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 56.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 114
+      },
+      {
+       "loss_sum": 109.5,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 74.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 55.25,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 76.0,
+       "tokens": 71
+      },
+      {
+       "loss_sum": 58.0,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 90.5,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 78.5,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 186
+      },
+      {
+       "loss_sum": 51.75,
+       "tokens": 24
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 66.0,
+       "tokens": 77
+      },
+      {
+       "loss_sum": 35.5,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 91.5,
+       "tokens": 72
+      },
+      {
+       "loss_sum": 92.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 130
+      },
+      {
+       "loss_sum": 58.5,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 48.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 44.25,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 170.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 128.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 58.75,
+       "tokens": 50
+      }
+     ],
+     "mean_loss": 1.353161397670549,
+     "tokens": 4207
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 18.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 23.625,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 6.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 26.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 41.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 24.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 37.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 51.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 27.5,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 47.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 31.375,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 13.875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 18.0,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.375,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 24.0,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 16.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 8.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 6.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 28.625,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 21.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 30.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 2.015625,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 10.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 10.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 36.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 18.625,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 7.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 19.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 23.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 20.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 15.0625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 21.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 20.125,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 15.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 42.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 7.34375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 29.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 11.4375,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 15.1875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 27.625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 27.125,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 19.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 21.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 16.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 21.875,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 15.3125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 13.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 20.625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 7.3125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.125,
+       "tokens": 15
+      }
+     ],
+     "mean_loss": 5.1016516159695815,
+     "tokens": 263
+    }
+   },
+   "new": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 177.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 34
+      },
+      {
+       "loss_sum": 500.0,
+       "tokens": 343
+      },
+      {
+       "loss_sum": 276.0,
+       "tokens": 108
+      },
+      {
+       "loss_sum": 215.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 322.0,
+       "tokens": 214
+      },
+      {
+       "loss_sum": 308.0,
+       "tokens": 188
+      },
+      {
+       "loss_sum": 328.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 55.75,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 704.0,
+       "tokens": 433
+      },
+      {
+       "loss_sum": 108.5,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 177.0,
+       "tokens": 94
+      },
+      {
+       "loss_sum": 41.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 59.5,
+       "tokens": 50
+      },
+      {
+       "loss_sum": 232.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 164.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 404.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 306.0,
+       "tokens": 200
+      },
+      {
+       "loss_sum": 166.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 115
+      },
+      {
+       "loss_sum": 474.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 118.0,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 322.0,
+       "tokens": 219
+      },
+      {
+       "loss_sum": 196.0,
+       "tokens": 160
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 239.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 378.0,
+       "tokens": 267
+      },
+      {
+       "loss_sum": 187.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 106.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 140.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 230.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 133
+      },
+      {
+       "loss_sum": 418.0,
+       "tokens": 202
+      },
+      {
+       "loss_sum": 119.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 229.0,
+       "tokens": 213
+      },
+      {
+       "loss_sum": 252.0,
+       "tokens": 194
+      },
+      {
+       "loss_sum": 468.0,
+       "tokens": 422
+      },
+      {
+       "loss_sum": 282.0,
+       "tokens": 272
+      },
+      {
+       "loss_sum": 284.0,
+       "tokens": 275
+      },
+      {
+       "loss_sum": 454.0,
+       "tokens": 231
+      },
+      {
+       "loss_sum": 160.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 310.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 386.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 86.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 131.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 51
+      },
+      {
+       "loss_sum": 247.0,
+       "tokens": 146
+      },
+      {
+       "loss_sum": 668.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 204.0,
+       "tokens": 170
+      },
+      {
+       "loss_sum": 198.0,
+       "tokens": 126
+      },
+      {
+       "loss_sum": 251.0,
+       "tokens": 309
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 182.0,
+       "tokens": 157
+      },
+      {
+       "loss_sum": 374.0,
+       "tokens": 230
+      },
+      {
+       "loss_sum": 47.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 612.0,
+       "tokens": 352
+      },
+      {
+       "loss_sum": 116.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 474.0,
+       "tokens": 445
+      }
+     ],
+     "mean_loss": 1.3620985481742192,
+     "tokens": 11365
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 99.0,
+       "tokens": 62
+      },
+      {
+       "loss_sum": 42.25,
+       "tokens": 26
+      },
+      {
+       "loss_sum": 61.25,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 27.5,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 88.0,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 116.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 72.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 113.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 98.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 127.0,
+       "tokens": 142
+      },
+      {
+       "loss_sum": 63.75,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 49.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 43.25,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 64.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 48.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 210.0,
+       "tokens": 119
+      },
+      {
+       "loss_sum": 61.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 70.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 86.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 300.0,
+       "tokens": 279
+      },
+      {
+       "loss_sum": 72.0,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 87.5,
+       "tokens": 59
+      },
+      {
+       "loss_sum": 78.5,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 59.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 81.5,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 62.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 36.75,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 42.0,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 77.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 46.75,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 38.25,
+       "tokens": 19
+      },
+      {
+       "loss_sum": 103.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 174.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 155.0,
+       "tokens": 85
+      },
+      {
+       "loss_sum": 78.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 60.75,
+       "tokens": 29
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 162
+      },
+      {
+       "loss_sum": 88.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 43.25,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 69.0,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 127.0,
+       "tokens": 81
+      },
+      {
+       "loss_sum": 111.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 90.5,
+       "tokens": 107
+      },
+      {
+       "loss_sum": 61.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 105
+      },
+      {
+       "loss_sum": 51.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 73.0,
+       "tokens": 48
+      },
+      {
+       "loss_sum": 59.5,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 82.0,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 124.0,
+       "tokens": 140
+      },
+      {
+       "loss_sum": 63.75,
+       "tokens": 68
+      },
+      {
+       "loss_sum": 65.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 76.0,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 63.75,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 105.5,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 58.25,
+       "tokens": 48
+      }
+     ],
+     "mean_loss": 1.3504356243949662,
+     "tokens": 4132
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 27.75,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 31.875,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 18.25,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 33.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 11.4375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 24.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.25,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 12.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 9.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.9375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.8125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 21.875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 8.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.0625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 16.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 6.71875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 13.4375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 17.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 39.5,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 22.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 31.625,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 1.6328125,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 22.125,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 23.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 14.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.0,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 18.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.625,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 13.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 19.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 25.125,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 24.0,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 1.875,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.3125,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 12.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 27.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 22.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 29.125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 7.4375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 26.125,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 14.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 10.0625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 6.03125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 54.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 19.25,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 21.875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 15.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 2.890625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 13.4375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 14.9375,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.0625,
+       "tokens": 1
+      }
+     ],
+     "mean_loss": 4.3569438374125875,
+     "tokens": 286
+    }
+   },
+   "seconds": 14.8
+  },
+  "0.8": {
+   "probes": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 115.0,
+       "tokens": 104
+      },
+      {
+       "loss_sum": 312.0,
+       "tokens": 218
+      },
+      {
+       "loss_sum": 167.0,
+       "tokens": 125
+      },
+      {
+       "loss_sum": 154.0,
+       "tokens": 149
+      },
+      {
+       "loss_sum": 370.0,
+       "tokens": 253
+      },
+      {
+       "loss_sum": 59.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 229.0,
+       "tokens": 152
+      },
+      {
+       "loss_sum": 83.5,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 201.0,
+       "tokens": 118
+      },
+      {
+       "loss_sum": 207.0,
+       "tokens": 86
+      },
+      {
+       "loss_sum": 117.5,
+       "tokens": 165
+      },
+      {
+       "loss_sum": 108.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 440.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 87.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 408.0,
+       "tokens": 348
+      },
+      {
+       "loss_sum": 290.0,
+       "tokens": 173
+      },
+      {
+       "loss_sum": 334.0,
+       "tokens": 150
+      },
+      {
+       "loss_sum": 472.0,
+       "tokens": 442
+      },
+      {
+       "loss_sum": 456.0,
+       "tokens": 204
+      },
+      {
+       "loss_sum": 118.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 446.0,
+       "tokens": 158
+      },
+      {
+       "loss_sum": 556.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 386.0,
+       "tokens": 167
+      },
+      {
+       "loss_sum": 218.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 294.0,
+       "tokens": 175
+      },
+      {
+       "loss_sum": 342.0,
+       "tokens": 223
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 104.5,
+       "tokens": 67
+      },
+      {
+       "loss_sum": 82.0,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 492.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 188.0,
+       "tokens": 168
+      },
+      {
+       "loss_sum": 240.0,
+       "tokens": 331
+      },
+      {
+       "loss_sum": 104.5,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 89.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 208.0,
+       "tokens": 243
+      },
+      {
+       "loss_sum": 98.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 162.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 244
+      },
+      {
+       "loss_sum": 328.0,
+       "tokens": 174
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 73
+      },
+      {
+       "loss_sum": 354.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 454.0,
+       "tokens": 492
+      },
+      {
+       "loss_sum": 316.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 652.0,
+       "tokens": 387
+      },
+      {
+       "loss_sum": 216.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 150.0,
+       "tokens": 123
+      },
+      {
+       "loss_sum": 197.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 172.0,
+       "tokens": 143
+      },
+      {
+       "loss_sum": 144.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 272.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 680.0,
+       "tokens": 488
+      },
+      {
+       "loss_sum": 494.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 148.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 824.0,
+       "tokens": 421
+      },
+      {
+       "loss_sum": 286.0,
+       "tokens": 384
+      },
+      {
+       "loss_sum": 251.0,
+       "tokens": 181
+      },
+      {
+       "loss_sum": 193.0,
+       "tokens": 208
+      },
+      {
+       "loss_sum": 346.0,
+       "tokens": 234
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 360.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 264.0,
+       "tokens": 228
+      }
+     ],
+     "mean_loss": 1.3240330617733134,
+     "tokens": 12643
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 53.5,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 96.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 141.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 52.0,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 73.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 73.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 92.5,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 74.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 56.25,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 93.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 178.0,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 164.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 101.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 78.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 60.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 79.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 54.5,
+       "tokens": 23
+      },
+      {
+       "loss_sum": 131.0,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 96.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 31.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 53.75,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 67.0,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 49.5,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 82
+      },
+      {
+       "loss_sum": 82.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 75.0,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 260.0,
+       "tokens": 268
+      },
+      {
+       "loss_sum": 86.0,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 69.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 46.0,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 62.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 75.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 112.5,
+       "tokens": 83
+      },
+      {
+       "loss_sum": 57.0,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 56.75,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 114
+      },
+      {
+       "loss_sum": 110.0,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 75.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 54.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 76.0,
+       "tokens": 71
+      },
+      {
+       "loss_sum": 59.25,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 78.5,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 186
+      },
+      {
+       "loss_sum": 51.5,
+       "tokens": 24
+      },
+      {
+       "loss_sum": 83.0,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 66.5,
+       "tokens": 77
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 92.5,
+       "tokens": 72
+      },
+      {
+       "loss_sum": 91.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 141.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 130
+      },
+      {
+       "loss_sum": 58.0,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 48.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 169.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 127.5,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 59.25,
+       "tokens": 50
+      }
+     ],
+     "mean_loss": 1.3519134775374375,
+     "tokens": 4207
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 18.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 23.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 6.8125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 27.375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 41.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 24.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 51.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 27.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 47.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 31.375,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 14.5625,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 18.875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 25.5,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 24.5,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 16.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 8.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 6.0,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 28.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 21.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 30.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 1.8828125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 10.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 10.3125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 36.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 19.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 8.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 18.625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 23.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 19.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 15.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 30.625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 21.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 20.375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 15.0625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.0,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 42.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 7.28125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 29.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 12.0625,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 15.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 27.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 27.75,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 19.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 21.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 16.5,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.0,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 15.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 13.4375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 20.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 7.15625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.5,
+       "tokens": 15
+      }
+     ],
+     "mean_loss": 5.125029705323194,
+     "tokens": 263
+    }
+   },
+   "new": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 179.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 141.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 34
+      },
+      {
+       "loss_sum": 498.0,
+       "tokens": 343
+      },
+      {
+       "loss_sum": 278.0,
+       "tokens": 108
+      },
+      {
+       "loss_sum": 212.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 322.0,
+       "tokens": 214
+      },
+      {
+       "loss_sum": 308.0,
+       "tokens": 188
+      },
+      {
+       "loss_sum": 328.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 56.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 716.0,
+       "tokens": 433
+      },
+      {
+       "loss_sum": 109.5,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 180.0,
+       "tokens": 94
+      },
+      {
+       "loss_sum": 41.5,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 60.25,
+       "tokens": 50
+      },
+      {
+       "loss_sum": 234.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 167.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 408.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 308.0,
+       "tokens": 200
+      },
+      {
+       "loss_sum": 167.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 115
+      },
+      {
+       "loss_sum": 476.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 119.5,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 320.0,
+       "tokens": 219
+      },
+      {
+       "loss_sum": 198.0,
+       "tokens": 160
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 240.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 378.0,
+       "tokens": 267
+      },
+      {
+       "loss_sum": 185.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 105.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 140.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 234.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 152.0,
+       "tokens": 133
+      },
+      {
+       "loss_sum": 420.0,
+       "tokens": 202
+      },
+      {
+       "loss_sum": 120.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 231.0,
+       "tokens": 213
+      },
+      {
+       "loss_sum": 253.0,
+       "tokens": 194
+      },
+      {
+       "loss_sum": 472.0,
+       "tokens": 422
+      },
+      {
+       "loss_sum": 284.0,
+       "tokens": 272
+      },
+      {
+       "loss_sum": 286.0,
+       "tokens": 275
+      },
+      {
+       "loss_sum": 456.0,
+       "tokens": 231
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 310.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 392.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 87.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 132.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 51
+      },
+      {
+       "loss_sum": 245.0,
+       "tokens": 146
+      },
+      {
+       "loss_sum": 676.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 204.0,
+       "tokens": 170
+      },
+      {
+       "loss_sum": 196.0,
+       "tokens": 126
+      },
+      {
+       "loss_sum": 254.0,
+       "tokens": 309
+      },
+      {
+       "loss_sum": 128.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 184.0,
+       "tokens": 157
+      },
+      {
+       "loss_sum": 374.0,
+       "tokens": 230
+      },
+      {
+       "loss_sum": 48.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 616.0,
+       "tokens": 352
+      },
+      {
+       "loss_sum": 118.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 478.0,
+       "tokens": 445
+      }
+     ],
+     "mean_loss": 1.3699296084469863,
+     "tokens": 11365
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 99.0,
+       "tokens": 62
+      },
+      {
+       "loss_sum": 42.0,
+       "tokens": 26
+      },
+      {
+       "loss_sum": 61.0,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 25.875,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 86.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 117.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 73.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 115.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 96.5,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 127.0,
+       "tokens": 142
+      },
+      {
+       "loss_sum": 64.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 49.25,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 79.5,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 41.75,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 117.5,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 49.25,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 211.0,
+       "tokens": 119
+      },
+      {
+       "loss_sum": 61.0,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 136.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 69.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 85.5,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 302.0,
+       "tokens": 279
+      },
+      {
+       "loss_sum": 72.0,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 87.5,
+       "tokens": 59
+      },
+      {
+       "loss_sum": 79.0,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 63.25,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 60.0,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 62.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 37.75,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 43.75,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 77.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 47.5,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 38.25,
+       "tokens": 19
+      },
+      {
+       "loss_sum": 101.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 174.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 156.0,
+       "tokens": 85
+      },
+      {
+       "loss_sum": 78.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 81.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 59.5,
+       "tokens": 29
+      },
+      {
+       "loss_sum": 162.0,
+       "tokens": 162
+      },
+      {
+       "loss_sum": 87.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 125.5,
+       "tokens": 81
+      },
+      {
+       "loss_sum": 111.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 90.5,
+       "tokens": 107
+      },
+      {
+       "loss_sum": 61.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 105
+      },
+      {
+       "loss_sum": 51.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 72.5,
+       "tokens": 48
+      },
+      {
+       "loss_sum": 59.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 122.5,
+       "tokens": 140
+      },
+      {
+       "loss_sum": 63.5,
+       "tokens": 68
+      },
+      {
+       "loss_sum": 65.0,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 75.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 89.5,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 105.5,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 58.0,
+       "tokens": 48
+      }
+     ],
+     "mean_loss": 1.3496793320425944,
+     "tokens": 4132
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 27.75,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 32.75,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 19.0,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 33.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 11.4375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.75,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 12.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 9.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.8125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 8.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 15.875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 7.6875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 13.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 17.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 35.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 38.5,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 22.75,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 31.875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 1.375,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 21.625,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 23.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 14.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 21.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.5,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 13.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 19.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 24.0,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 25.25,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 39.75,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 1.9921875,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.5625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 27.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 22.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 18.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 17.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 29.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 7.0625,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 27.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.0,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 13.9375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 9.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 6.15625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 54.0,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 20.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 22.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 15.3125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 3.21875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.0625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 16.0,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 43.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.375,
+       "tokens": 1
+      }
+     ],
+     "mean_loss": 4.362079326923077,
+     "tokens": 286
+    }
+   },
+   "seconds": 15.4
+  },
+  "0.7": {
+   "probes": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 119.0,
+       "tokens": 104
+      },
+      {
+       "loss_sum": 318.0,
+       "tokens": 218
+      },
+      {
+       "loss_sum": 169.0,
+       "tokens": 125
+      },
+      {
+       "loss_sum": 156.0,
+       "tokens": 149
+      },
+      {
+       "loss_sum": 378.0,
+       "tokens": 253
+      },
+      {
+       "loss_sum": 57.25,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 235.0,
+       "tokens": 152
+      },
+      {
+       "loss_sum": 88.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 201.0,
+       "tokens": 118
+      },
+      {
+       "loss_sum": 207.0,
+       "tokens": 86
+      },
+      {
+       "loss_sum": 121.5,
+       "tokens": 165
+      },
+      {
+       "loss_sum": 110.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 458.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 87.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 414.0,
+       "tokens": 348
+      },
+      {
+       "loss_sum": 296.0,
+       "tokens": 173
+      },
+      {
+       "loss_sum": 336.0,
+       "tokens": 150
+      },
+      {
+       "loss_sum": 488.0,
+       "tokens": 442
+      },
+      {
+       "loss_sum": 466.0,
+       "tokens": 204
+      },
+      {
+       "loss_sum": 119.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 454.0,
+       "tokens": 158
+      },
+      {
+       "loss_sum": 560.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 388.0,
+       "tokens": 167
+      },
+      {
+       "loss_sum": 223.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 298.0,
+       "tokens": 175
+      },
+      {
+       "loss_sum": 348.0,
+       "tokens": 223
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 106.0,
+       "tokens": 67
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 500.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 190.0,
+       "tokens": 168
+      },
+      {
+       "loss_sum": 248.0,
+       "tokens": 331
+      },
+      {
+       "loss_sum": 106.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 214.0,
+       "tokens": 243
+      },
+      {
+       "loss_sum": 100.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 169.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 166.0,
+       "tokens": 244
+      },
+      {
+       "loss_sum": 334.0,
+       "tokens": 174
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 73
+      },
+      {
+       "loss_sum": 358.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 464.0,
+       "tokens": 492
+      },
+      {
+       "loss_sum": 326.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 652.0,
+       "tokens": 387
+      },
+      {
+       "loss_sum": 217.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 153.0,
+       "tokens": 123
+      },
+      {
+       "loss_sum": 204.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 178.0,
+       "tokens": 143
+      },
+      {
+       "loss_sum": 147.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 272.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 680.0,
+       "tokens": 488
+      },
+      {
+       "loss_sum": 502.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 844.0,
+       "tokens": 421
+      },
+      {
+       "loss_sum": 294.0,
+       "tokens": 384
+      },
+      {
+       "loss_sum": 260.0,
+       "tokens": 181
+      },
+      {
+       "loss_sum": 195.0,
+       "tokens": 208
+      },
+      {
+       "loss_sum": 350.0,
+       "tokens": 234
+      },
+      {
+       "loss_sum": 41.25,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 358.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 268.0,
+       "tokens": 228
+      }
+     ],
+     "mean_loss": 1.3463972158506683,
+     "tokens": 12643
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 54.0,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 98.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 143.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 52.0,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 74.0,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 93.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 143.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 93.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 181.0,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 80.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 62.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 79.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 117.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 55.0,
+       "tokens": 23
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 100.0,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 32.5,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 58.75,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 67.5,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 49.75,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 148.0,
+       "tokens": 82
+      },
+      {
+       "loss_sum": 83.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 73.5,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 268.0,
+       "tokens": 268
+      },
+      {
+       "loss_sum": 86.0,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 45.5,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 76.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 114.5,
+       "tokens": 83
+      },
+      {
+       "loss_sum": 59.0,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 56.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 57.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 114
+      },
+      {
+       "loss_sum": 111.0,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 76.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 76.5,
+       "tokens": 71
+      },
+      {
+       "loss_sum": 58.5,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 93.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 186
+      },
+      {
+       "loss_sum": 51.25,
+       "tokens": 24
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 67.0,
+       "tokens": 77
+      },
+      {
+       "loss_sum": 36.0,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 95.0,
+       "tokens": 72
+      },
+      {
+       "loss_sum": 94.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 140.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 130
+      },
+      {
+       "loss_sum": 56.75,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 48.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 171.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 58.75,
+       "tokens": 50
+      }
+     ],
+     "mean_loss": 1.3667696695982885,
+     "tokens": 4207
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 18.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 23.375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 6.5,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 26.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 40.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 24.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 36.75,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 50.75,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 29.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 48.0,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 32.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 13.9375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 18.375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 25.875,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 25.125,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 16.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 8.5625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 6.0625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 25.75,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 21.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 1.7734375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 10.6875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 10.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 36.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 20.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 24.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 8.4375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 23.625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 19.625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 29.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 15.0625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 22.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 20.0,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 14.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 41.75,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 7.5625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 30.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 12.4375,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 15.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 31.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 26.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 28.75,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 20.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 16.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 24.0,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 16.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 13.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 6.96875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 14.25,
+       "tokens": 15
+      }
+     ],
+     "mean_loss": 5.12021744296578,
+     "tokens": 263
+    }
+   },
+   "new": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 183.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 149.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 34
+      },
+      {
+       "loss_sum": 498.0,
+       "tokens": 343
+      },
+      {
+       "loss_sum": 278.0,
+       "tokens": 108
+      },
+      {
+       "loss_sum": 219.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 330.0,
+       "tokens": 214
+      },
+      {
+       "loss_sum": 318.0,
+       "tokens": 188
+      },
+      {
+       "loss_sum": 330.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 57.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 84.0,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 165.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 740.0,
+       "tokens": 433
+      },
+      {
+       "loss_sum": 112.5,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 185.0,
+       "tokens": 94
+      },
+      {
+       "loss_sum": 43.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 62.25,
+       "tokens": 50
+      },
+      {
+       "loss_sum": 240.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 170.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 418.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 316.0,
+       "tokens": 200
+      },
+      {
+       "loss_sum": 169.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 115
+      },
+      {
+       "loss_sum": 488.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 123.0,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 326.0,
+       "tokens": 219
+      },
+      {
+       "loss_sum": 202.0,
+       "tokens": 160
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 245.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 386.0,
+       "tokens": 267
+      },
+      {
+       "loss_sum": 187.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 109.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 242.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 160.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 155.0,
+       "tokens": 133
+      },
+      {
+       "loss_sum": 428.0,
+       "tokens": 202
+      },
+      {
+       "loss_sum": 120.5,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 231.0,
+       "tokens": 213
+      },
+      {
+       "loss_sum": 254.0,
+       "tokens": 194
+      },
+      {
+       "loss_sum": 484.0,
+       "tokens": 422
+      },
+      {
+       "loss_sum": 288.0,
+       "tokens": 272
+      },
+      {
+       "loss_sum": 294.0,
+       "tokens": 275
+      },
+      {
+       "loss_sum": 464.0,
+       "tokens": 231
+      },
+      {
+       "loss_sum": 166.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 314.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 400.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 86.5,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 140.0,
+       "tokens": 51
+      },
+      {
+       "loss_sum": 251.0,
+       "tokens": 146
+      },
+      {
+       "loss_sum": 696.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 209.0,
+       "tokens": 170
+      },
+      {
+       "loss_sum": 199.0,
+       "tokens": 126
+      },
+      {
+       "loss_sum": 262.0,
+       "tokens": 309
+      },
+      {
+       "loss_sum": 125.5,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 186.0,
+       "tokens": 157
+      },
+      {
+       "loss_sum": 376.0,
+       "tokens": 230
+      },
+      {
+       "loss_sum": 47.75,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 620.0,
+       "tokens": 352
+      },
+      {
+       "loss_sum": 121.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 484.0,
+       "tokens": 445
+      }
+     ],
+     "mean_loss": 1.3948966124065112,
+     "tokens": 11365
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 98.5,
+       "tokens": 62
+      },
+      {
+       "loss_sum": 41.25,
+       "tokens": 26
+      },
+      {
+       "loss_sum": 67.0,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 25.875,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 85.0,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 117.0,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 75.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 100.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 142
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 49.25,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 80.0,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 40.75,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 118.5,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 66.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 47.25,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 210.0,
+       "tokens": 119
+      },
+      {
+       "loss_sum": 61.25,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 68.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 85.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 316.0,
+       "tokens": 279
+      },
+      {
+       "loss_sum": 76.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 87.5,
+       "tokens": 59
+      },
+      {
+       "loss_sum": 80.5,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 63.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 60.25,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 84.5,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 37.0,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 43.0,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 50.0,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 38.75,
+       "tokens": 19
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 177.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 156.0,
+       "tokens": 85
+      },
+      {
+       "loss_sum": 78.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 87.0,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 60.0,
+       "tokens": 29
+      },
+      {
+       "loss_sum": 163.0,
+       "tokens": 162
+      },
+      {
+       "loss_sum": 86.5,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 42.0,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 71.0,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 132.0,
+       "tokens": 81
+      },
+      {
+       "loss_sum": 111.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 95.0,
+       "tokens": 107
+      },
+      {
+       "loss_sum": 60.5,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 154.0,
+       "tokens": 105
+      },
+      {
+       "loss_sum": 49.75,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 70.5,
+       "tokens": 48
+      },
+      {
+       "loss_sum": 59.75,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 84.0,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 124.5,
+       "tokens": 140
+      },
+      {
+       "loss_sum": 64.0,
+       "tokens": 68
+      },
+      {
+       "loss_sum": 65.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 78.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 65.5,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 75.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 95.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 106.5,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 61.5,
+       "tokens": 48
+      }
+     ],
+     "mean_loss": 1.368979912875121,
+     "tokens": 4132
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 27.25,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 31.25,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 17.0,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 32.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 12.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 22.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 23.25,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 12.5625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 9.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.9375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 23.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 8.5625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 11.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 15.9375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 7.34375,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 13.3125,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 34.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 38.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 22.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 33.0,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 25.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 1.0390625,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 22.125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 14.5625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 22.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 16.75,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 13.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 19.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 24.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 24.375,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 1.75,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 12.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 28.75,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 29.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 6.8125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 27.875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 26.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 14.5625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 10.9375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 6.21875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 54.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 20.875,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 23.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 14.8125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 3.65625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 13.1875,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 17.25,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 41.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.625,
+       "tokens": 1
+      }
+     ],
+     "mean_loss": 4.336565777972028,
+     "tokens": 286
+    }
+   },
+   "seconds": 15.6
+  },
+  "0.6": {
+   "probes": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 123.5,
+       "tokens": 104
+      },
+      {
+       "loss_sum": 326.0,
+       "tokens": 218
+      },
+      {
+       "loss_sum": 180.0,
+       "tokens": 125
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 149
+      },
+      {
+       "loss_sum": 388.0,
+       "tokens": 253
+      },
+      {
+       "loss_sum": 58.0,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 246.0,
+       "tokens": 152
+      },
+      {
+       "loss_sum": 97.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 205.0,
+       "tokens": 118
+      },
+      {
+       "loss_sum": 213.0,
+       "tokens": 86
+      },
+      {
+       "loss_sum": 124.0,
+       "tokens": 165
+      },
+      {
+       "loss_sum": 114.5,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 480.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 91.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 428.0,
+       "tokens": 348
+      },
+      {
+       "loss_sum": 306.0,
+       "tokens": 173
+      },
+      {
+       "loss_sum": 354.0,
+       "tokens": 150
+      },
+      {
+       "loss_sum": 512.0,
+       "tokens": 442
+      },
+      {
+       "loss_sum": 490.0,
+       "tokens": 204
+      },
+      {
+       "loss_sum": 124.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 468.0,
+       "tokens": 158
+      },
+      {
+       "loss_sum": 580.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 396.0,
+       "tokens": 167
+      },
+      {
+       "loss_sum": 234.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 312.0,
+       "tokens": 175
+      },
+      {
+       "loss_sum": 366.0,
+       "tokens": 223
+      },
+      {
+       "loss_sum": 142.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 109.5,
+       "tokens": 67
+      },
+      {
+       "loss_sum": 79.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 528.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 206.0,
+       "tokens": 168
+      },
+      {
+       "loss_sum": 258.0,
+       "tokens": 331
+      },
+      {
+       "loss_sum": 110.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 92.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 164.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 231.0,
+       "tokens": 243
+      },
+      {
+       "loss_sum": 100.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 175.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 174.0,
+       "tokens": 244
+      },
+      {
+       "loss_sum": 338.0,
+       "tokens": 174
+      },
+      {
+       "loss_sum": 143.0,
+       "tokens": 73
+      },
+      {
+       "loss_sum": 362.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 478.0,
+       "tokens": 492
+      },
+      {
+       "loss_sum": 344.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 680.0,
+       "tokens": 387
+      },
+      {
+       "loss_sum": 223.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 162.0,
+       "tokens": 123
+      },
+      {
+       "loss_sum": 215.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 186.0,
+       "tokens": 143
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 101
+      },
+      {
+       "loss_sum": 274.0,
+       "tokens": 238
+      },
+      {
+       "loss_sum": 712.0,
+       "tokens": 488
+      },
+      {
+       "loss_sum": 524.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 141.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 141.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 888.0,
+       "tokens": 421
+      },
+      {
+       "loss_sum": 318.0,
+       "tokens": 384
+      },
+      {
+       "loss_sum": 278.0,
+       "tokens": 181
+      },
+      {
+       "loss_sum": 200.0,
+       "tokens": 208
+      },
+      {
+       "loss_sum": 360.0,
+       "tokens": 234
+      },
+      {
+       "loss_sum": 45.0,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 356.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 272.0,
+       "tokens": 228
+      }
+     ],
+     "mean_loss": 1.399746895515305,
+     "tokens": 12643
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 55.5,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 146.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 55.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 75.5,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 77.0,
+       "tokens": 37
+      },
+      {
+       "loss_sum": 97.5,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 75.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 56.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 151.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 100.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 183.0,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 174.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 103.0,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 80.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 62.25,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 81.5,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 119.0,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 56.5,
+       "tokens": 23
+      },
+      {
+       "loss_sum": 130.0,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 69
+      },
+      {
+       "loss_sum": 31.625,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 61.5,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 66.0,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 50.5,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 149.0,
+       "tokens": 82
+      },
+      {
+       "loss_sum": 94.5,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 80.5,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 282.0,
+       "tokens": 268
+      },
+      {
+       "loss_sum": 93.5,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 72.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 48.25,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 67.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 75.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 120.0,
+       "tokens": 83
+      },
+      {
+       "loss_sum": 61.5,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 54.75,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 65.0,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 146.0,
+       "tokens": 114
+      },
+      {
+       "loss_sum": 113.5,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 82.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 25
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 77.0,
+       "tokens": 71
+      },
+      {
+       "loss_sum": 63.5,
+       "tokens": 32
+      },
+      {
+       "loss_sum": 96.5,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 84.0,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 168.0,
+       "tokens": 186
+      },
+      {
+       "loss_sum": 55.0,
+       "tokens": 24
+      },
+      {
+       "loss_sum": 82.5,
+       "tokens": 52
+      },
+      {
+       "loss_sum": 70.5,
+       "tokens": 77
+      },
+      {
+       "loss_sum": 36.75,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 94.5,
+       "tokens": 72
+      },
+      {
+       "loss_sum": 99.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 150.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 135.0,
+       "tokens": 130
+      },
+      {
+       "loss_sum": 60.25,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 48.75,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 43.0,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 176.0,
+       "tokens": 124
+      },
+      {
+       "loss_sum": 133.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 59.0,
+       "tokens": 50
+      }
+     ],
+     "mean_loss": 1.4171321606845733,
+     "tokens": 4207
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 18.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 23.625,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 6.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 25.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 35.25,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 24.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 39.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 52.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 33.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 46.25,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 27.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 14.625,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 19.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 23.75,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 26.625,
+       "tokens": 11
+      },
+      {
+       "loss_sum": 16.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 8.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 16.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 5.8125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 26.375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 22.0,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 29.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 1.703125,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 12.1875,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 10.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 36.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 20.875,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 23.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 8.0625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 21.375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 24.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 20.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 29.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 21.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 20.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 15.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 23.125,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 16.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 43.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 5.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 32.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 13.5,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 15.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 29.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 24.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 28.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 20.75,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 23.25,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 17.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 24.0,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 18.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 13.375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 19.875,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 17.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 7.28125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 14.125,
+       "tokens": 15
+      }
+     ],
+     "mean_loss": 5.156309410646388,
+     "tokens": 263
+    }
+   },
+   "new": {
+    "math": {
+     "items": [
+      {
+       "loss_sum": 181.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 144.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 149.0,
+       "tokens": 76
+      },
+      {
+       "loss_sum": 67.0,
+       "tokens": 34
+      },
+      {
+       "loss_sum": 512.0,
+       "tokens": 343
+      },
+      {
+       "loss_sum": 282.0,
+       "tokens": 108
+      },
+      {
+       "loss_sum": 225.0,
+       "tokens": 112
+      },
+      {
+       "loss_sum": 344.0,
+       "tokens": 214
+      },
+      {
+       "loss_sum": 340.0,
+       "tokens": 188
+      },
+      {
+       "loss_sum": 338.0,
+       "tokens": 187
+      },
+      {
+       "loss_sum": 57.0,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 86.5,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 137.0,
+       "tokens": 79
+      },
+      {
+       "loss_sum": 169.0,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 776.0,
+       "tokens": 433
+      },
+      {
+       "loss_sum": 115.0,
+       "tokens": 54
+      },
+      {
+       "loss_sum": 188.0,
+       "tokens": 94
+      },
+      {
+       "loss_sum": 45.5,
+       "tokens": 53
+      },
+      {
+       "loss_sum": 66.0,
+       "tokens": 50
+      },
+      {
+       "loss_sum": 250.0,
+       "tokens": 102
+      },
+      {
+       "loss_sum": 178.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 442.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 328.0,
+       "tokens": 200
+      },
+      {
+       "loss_sum": 183.0,
+       "tokens": 148
+      },
+      {
+       "loss_sum": 141.0,
+       "tokens": 115
+      },
+      {
+       "loss_sum": 512.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 126.0,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 334.0,
+       "tokens": 219
+      },
+      {
+       "loss_sum": 203.0,
+       "tokens": 160
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 256.0,
+       "tokens": 177
+      },
+      {
+       "loss_sum": 398.0,
+       "tokens": 267
+      },
+      {
+       "loss_sum": 188.0,
+       "tokens": 145
+      },
+      {
+       "loss_sum": 114.5,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 148.0,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 262.0,
+       "tokens": 350
+      },
+      {
+       "loss_sum": 168.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 167.0,
+       "tokens": 133
+      },
+      {
+       "loss_sum": 440.0,
+       "tokens": 202
+      },
+      {
+       "loss_sum": 128.0,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 246.0,
+       "tokens": 213
+      },
+      {
+       "loss_sum": 266.0,
+       "tokens": 194
+      },
+      {
+       "loss_sum": 496.0,
+       "tokens": 422
+      },
+      {
+       "loss_sum": 302.0,
+       "tokens": 272
+      },
+      {
+       "loss_sum": 312.0,
+       "tokens": 275
+      },
+      {
+       "loss_sum": 474.0,
+       "tokens": 231
+      },
+      {
+       "loss_sum": 171.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 324.0,
+       "tokens": 241
+      },
+      {
+       "loss_sum": 414.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 92.0,
+       "tokens": 64
+      },
+      {
+       "loss_sum": 143.0,
+       "tokens": 91
+      },
+      {
+       "loss_sum": 139.0,
+       "tokens": 51
+      },
+      {
+       "loss_sum": 262.0,
+       "tokens": 146
+      },
+      {
+       "loss_sum": 720.0,
+       "tokens": 512
+      },
+      {
+       "loss_sum": 224.0,
+       "tokens": 170
+      },
+      {
+       "loss_sum": 204.0,
+       "tokens": 126
+      },
+      {
+       "loss_sum": 280.0,
+       "tokens": 309
+      },
+      {
+       "loss_sum": 129.0,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 189.0,
+       "tokens": 157
+      },
+      {
+       "loss_sum": 390.0,
+       "tokens": 230
+      },
+      {
+       "loss_sum": 52.25,
+       "tokens": 36
+      },
+      {
+       "loss_sum": 640.0,
+       "tokens": 352
+      },
+      {
+       "loss_sum": 125.0,
+       "tokens": 171
+      },
+      {
+       "loss_sum": 496.0,
+       "tokens": 445
+      }
+     ],
+     "mean_loss": 1.4465244170699516,
+     "tokens": 11365
+    },
+    "code": {
+     "items": [
+      {
+       "loss_sum": 104.0,
+       "tokens": 62
+      },
+      {
+       "loss_sum": 43.75,
+       "tokens": 26
+      },
+      {
+       "loss_sum": 70.0,
+       "tokens": 38
+      },
+      {
+       "loss_sum": 28.125,
+       "tokens": 33
+      },
+      {
+       "loss_sum": 87.0,
+       "tokens": 44
+      },
+      {
+       "loss_sum": 122.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 83.0,
+       "tokens": 49
+      },
+      {
+       "loss_sum": 126.5,
+       "tokens": 78
+      },
+      {
+       "loss_sum": 100.0,
+       "tokens": 88
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 142
+      },
+      {
+       "loss_sum": 65.0,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 51.25,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 84.5,
+       "tokens": 45
+      },
+      {
+       "loss_sum": 40.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 125.0,
+       "tokens": 117
+      },
+      {
+       "loss_sum": 115.5,
+       "tokens": 65
+      },
+      {
+       "loss_sum": 69.0,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 50.25,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 212.0,
+       "tokens": 119
+      },
+      {
+       "loss_sum": 65.0,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 138.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 67.5,
+       "tokens": 42
+      },
+      {
+       "loss_sum": 91.0,
+       "tokens": 99
+      },
+      {
+       "loss_sum": 342.0,
+       "tokens": 279
+      },
+      {
+       "loss_sum": 81.5,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 87.0,
+       "tokens": 59
+      },
+      {
+       "loss_sum": 79.5,
+       "tokens": 57
+      },
+      {
+       "loss_sum": 64.0,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 63.5,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 86.0,
+       "tokens": 113
+      },
+      {
+       "loss_sum": 69.5,
+       "tokens": 80
+      },
+      {
+       "loss_sum": 38.25,
+       "tokens": 20
+      },
+      {
+       "loss_sum": 44.75,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 81.0,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 57.5,
+       "tokens": 40
+      },
+      {
+       "loss_sum": 39.75,
+       "tokens": 19
+      },
+      {
+       "loss_sum": 105.5,
+       "tokens": 60
+      },
+      {
+       "loss_sum": 181.0,
+       "tokens": 96
+      },
+      {
+       "loss_sum": 159.0,
+       "tokens": 85
+      },
+      {
+       "loss_sum": 78.0,
+       "tokens": 75
+      },
+      {
+       "loss_sum": 90.0,
+       "tokens": 74
+      },
+      {
+       "loss_sum": 58.0,
+       "tokens": 29
+      },
+      {
+       "loss_sum": 168.0,
+       "tokens": 162
+      },
+      {
+       "loss_sum": 85.5,
+       "tokens": 41
+      },
+      {
+       "loss_sum": 42.75,
+       "tokens": 28
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 27
+      },
+      {
+       "loss_sum": 132.0,
+       "tokens": 81
+      },
+      {
+       "loss_sum": 116.5,
+       "tokens": 56
+      },
+      {
+       "loss_sum": 100.5,
+       "tokens": 107
+      },
+      {
+       "loss_sum": 59.75,
+       "tokens": 43
+      },
+      {
+       "loss_sum": 161.0,
+       "tokens": 105
+      },
+      {
+       "loss_sum": 51.0,
+       "tokens": 35
+      },
+      {
+       "loss_sum": 69.0,
+       "tokens": 48
+      },
+      {
+       "loss_sum": 61.5,
+       "tokens": 30
+      },
+      {
+       "loss_sum": 91.5,
+       "tokens": 61
+      },
+      {
+       "loss_sum": 131.0,
+       "tokens": 140
+      },
+      {
+       "loss_sum": 72.0,
+       "tokens": 68
+      },
+      {
+       "loss_sum": 65.5,
+       "tokens": 31
+      },
+      {
+       "loss_sum": 86.0,
+       "tokens": 39
+      },
+      {
+       "loss_sum": 71.5,
+       "tokens": 70
+      },
+      {
+       "loss_sum": 74.5,
+       "tokens": 55
+      },
+      {
+       "loss_sum": 102.5,
+       "tokens": 46
+      },
+      {
+       "loss_sum": 109.5,
+       "tokens": 92
+      },
+      {
+       "loss_sum": 64.5,
+       "tokens": 48
+      }
+     ],
+     "mean_loss": 1.4207708131655372,
+     "tokens": 4132
+    },
+    "qa": {
+     "items": [
+      {
+       "loss_sum": 26.125,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 28.0,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 17.125,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 29.5,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 13.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 20.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 17.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 25.625,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 12.0625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.9375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 11.9375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 9.375,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 12.5,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 13.75,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 22.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 9.3125,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 11.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 17.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 8.6875,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 13.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 20.0,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 39.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 39.0,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 24.625,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 33.5,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 25.75,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 1.1328125,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 23.125,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 21.375,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 14.25,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 15.625,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 18.125,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 24.75,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 17.25,
+       "tokens": 12
+      },
+      {
+       "loss_sum": 14.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 20.875,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 21.875,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 9
+      },
+      {
+       "loss_sum": 39.0,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 2.34375,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 18.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 13.0,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 18.75,
+       "tokens": 1
+      },
+      {
+       "loss_sum": 29.25,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 26.25,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 19.5,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 16.625,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 29.625,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 8.5,
+       "tokens": 4
+      },
+      {
+       "loss_sum": 26.25,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 27.125,
+       "tokens": 7
+      },
+      {
+       "loss_sum": 15.4375,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 9.375,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 5.75,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 53.75,
+       "tokens": 6
+      },
+      {
+       "loss_sum": 22.875,
+       "tokens": 8
+      },
+      {
+       "loss_sum": 22.75,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 15.9375,
+       "tokens": 2
+      },
+      {
+       "loss_sum": 3.390625,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.0,
+       "tokens": 3
+      },
+      {
+       "loss_sum": 18.625,
+       "tokens": 10
+      },
+      {
+       "loss_sum": 42.0,
+       "tokens": 5
+      },
+      {
+       "loss_sum": 14.625,
+       "tokens": 1
+      }
+     ],
+     "mean_loss": 4.4075338723776225,
+     "tokens": 286
+    }
+   },
+   "seconds": 15.5
+  }
+ },
+ "calibration_seconds": 2.6,
+ "total_seconds": 123.2,
+ "tokens_evaluated": 164480
+}

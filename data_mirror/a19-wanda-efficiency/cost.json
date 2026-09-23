@@ -1,0 +1,216 @@
+{
+ "development": {
+  "pythia-160m@step16000": {
+   "anchor": {
+    "seconds": 16.299999999999997,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 66.3,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 42.199999999999996,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 1.6
+  },
+  "pythia-160m@step64000": {
+   "anchor": {
+    "seconds": 24.6,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 74.10000000000001,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 50.400000000000006,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 1.7
+  },
+  "pythia-160m@step143000": {
+   "anchor": {
+    "seconds": 19.9,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 69.4,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 45.4,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 1.4
+  },
+  "pythia-410m@step16000": {
+   "anchor": {
+    "seconds": 30.7,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 99.2,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 66.60000000000001,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 3.2
+  },
+  "pythia-410m@step64000": {
+   "anchor": {
+    "seconds": 29.0,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 90.6,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 61.3,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 2.8
+  },
+  "pythia-410m@step143000": {
+   "anchor": {
+    "seconds": 28.4,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 90.3,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 60.5,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 2.7
+  },
+  "pythia-1.4b@step16000": {
+   "anchor": {
+    "seconds": 59.8,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 124.39999999999999,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 93.3,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 2.8
+  },
+  "pythia-1.4b@step64000": {
+   "anchor": {
+    "seconds": 58.2,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 122.1,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 91.19999999999999,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 2.6
+  },
+  "pythia-1.4b@step143000": {
+   "anchor": {
+    "seconds": 57.4,
+    "tokens": 32896
+   },
+   "full": {
+    "seconds": 121.1,
+    "tokens": 164480,
+    "configurations": 4
+   },
+   "reduced": {
+    "seconds": 90.3,
+    "tokens": 98688,
+    "configurations": 2
+   },
+   "calibration_seconds": 2.6
+  }
+ },
+ "test": {
+  "pythia-160m@step80000": {
+   "anchor": {
+    "seconds": 39.2,
+    "tokens": 32896
+   },
+   "seconds": 133.6,
+   "tokens": 230272,
+   "configurations": 6,
+   "calibration_seconds": 1.8
+  },
+  "pythia-410m@step112000": {
+   "anchor": {
+    "seconds": 30.0,
+    "tokens": 32896
+   },
+   "seconds": 120.1,
+   "tokens": 230272,
+   "configurations": 6,
+   "calibration_seconds": 2.7
+  },
+  "pythia-1.4b@step48000": {
+   "anchor": {
+    "seconds": 60.3,
+    "tokens": 32896
+   },
+   "seconds": 157.4,
+   "tokens": 230272,
+   "configurations": 6,
+   "calibration_seconds": 2.7
+  },
+  "pythia-1b@step48000": {
+   "anchor": {
+    "seconds": 36.400000000000006,
+    "tokens": 32896
+   },
+   "seconds": 123.2,
+   "tokens": 230272,
+   "configurations": 6,
+   "calibration_seconds": 1.8
+  }
+ },
+ "totals": {
+  "full": {
+   "seconds": 857.5000000000001,
+   "tokens": 1480320,
+   "configurations": 36
+  },
+  "reduced": {
+   "seconds": 601.2000000000002,
+   "tokens": 888192,
+   "configurations": 18
+  },
+  "reduced_over_full": {
+   "seconds": 0.7011078717201167,
+   "tokens": 0.6,
+   "configurations": 0.5
+  }
+ }
+}

@@ -130,6 +130,8 @@ the artifact behind every reported number.
 | P2 / A16 (retrospective) | Wanda panel losses and summary (`data_mirror/p2-wanda-panel/`); byte accounting of the selection candidates (`data_mirror/a16-storage-accounting/`) | `analysis.p2_wanda_panel --analyse --table`, `analysis.a16_storage_accounting --table` |
 | A17 (retrospective) | V15 accuracy cells for the four panel models at five densities (`data_mirror/v15-accuracy/`), comparison summary (`data_mirror/a17-accuracy-comparison/`) | `analysis.a17_accuracy_comparison --table` |
 | A18 (pre-registered) | Second-family measurement-efficiency confirmation on OLMo-2: preregistration, item sets, checkpoint hashes, six development and four test measurements with per-item losses and GPU seconds, the freeze and its digest, scores with the item bootstrap, cost accounting (`data_mirror/a18-second-family/`) | `analysis.a18_second_family --score --table` |
+| A19 (pre-registered) | Measurement-efficiency confirmation under Wanda pruning on the Pythia design: preregistration, calibration ids, nine development and four test measurements with per-item losses and GPU seconds, the freeze and its digest, scores with the item bootstrap, cost accounting (`data_mirror/a19-wanda-efficiency/`) | `analysis.a19_wanda_efficiency --score --table` |
+| P3 (control) | End-marker audit of the four selection-round students and the paired control student (training record and both readouts on the 384 fresh items; `data_mirror/p3-eos-control/`, `data_mirror/v12-distill/…p3-eos…/`) | `analysis.p3_eos_control --analyse --table` |
 
 A10 / C82 is described in the ledger; none of A15's four consumers opens its
 artifacts, so A15 does not add its 90 MB summary. The A12 serialized dataset

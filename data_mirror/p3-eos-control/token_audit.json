@@ -1,0 +1,498 @@
+[
+ {
+  "reference": "pythia-410m--step120000",
+  "student": "EleutherAI/pythia-160m@step120000",
+  "eval_json": "results/s3-selection-validation/students/pythia-410m--step120000/v12/EleutherAI--pythia-160m--step120000/gpt-5.6-luna_full_600_s3-pythia-410m--step120000_lora/eval.json",
+  "config": {
+   "student": "EleutherAI/pythia-160m@step120000",
+   "teacher": "gpt-5.6-luna",
+   "recipe": "full",
+   "domains": [
+    "math",
+    "qa",
+    "code"
+   ],
+   "n_per_domain": 600,
+   "epochs": 2,
+   "seed": 0,
+   "data_seed": null,
+   "learning_rate": 0.0001,
+   "training_mode": "lora"
+  },
+  "rows_per_domain": {
+   "math": {
+    "source_rows": 600,
+    "training_rows": 600,
+    "coverage_deleted_rows": 0
+   },
+   "qa": {
+    "source_rows": 600,
+    "training_rows": 590,
+    "coverage_deleted_rows": 10
+   },
+   "code": {
+    "source_rows": 600,
+    "training_rows": 591,
+    "coverage_deleted_rows": 9
+   }
+  },
+  "n_examples": 1781,
+  "eos_token_id": 0,
+  "eos_token": "<|endoftext|>",
+  "inference_stop": {
+   "eos_ids": [
+    0
+   ],
+   "stop_sequences": [
+    "\nQuestion:",
+    "\nContext:"
+   ]
+  },
+  "targets_with_eos_supervised": 0,
+  "targets_ending_in_newline": 4,
+  "targets_ending_in_sentence_end": 1437,
+  "supervised_tokens_per_epoch": 153748,
+  "extra_supervised_tokens_per_epoch_with_eos": 1781,
+  "examples": [
+   {
+    "domain": "qa",
+    "n_tokens": 530,
+    "n_prompt_masked": 512,
+    "n_supervised": 18,
+    "last_supervised_ids": [
+     432,
+     26402,
+     281,
+     1884,
+     12895,
+     15
+    ],
+    "last_supervised_tokens": [
+     "\u0120from",
+     "\u0120305",
+     "\u0120to",
+     "\u012030",
+     "\u0120BC",
+     "."
+    ],
+    "target_tail_text": "The Ptolemaic dynasty ruled for 275 years, from 305 to 30 BC.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "qa",
+    "n_tokens": 514,
+    "n_prompt_masked": 512,
+    "n_supervised": 2,
+    "last_supervised_ids": [
+     35364,
+     15
+    ],
+    "last_supervised_tokens": [
+     "1957",
+     "."
+    ],
+    "target_tail_text": "1957.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "math",
+    "n_tokens": 187,
+    "n_prompt_masked": 70,
+    "n_supervised": 117,
+    "last_supervised_ids": [
+     342,
+     1401,
+     1549,
+     2304,
+     9143,
+     12530
+    ],
+    "last_supervised_tokens": [
+     "\u0120with",
+     "\u0120**",
+     "60",
+     "\u0120mar",
+     "bles",
+     "**."
+    ],
+    "target_tail_text": "tal marbles:\n   \\[\n   20 + 40 = 60\n   \\]\n\n#### Baez ends up with **60 marbles**.",
+    "first_label_is_first_completion_token": true
+   }
+  ]
+ },
+ {
+  "reference": "pythia-1.4b--step120000",
+  "student": "EleutherAI/pythia-410m@step120000",
+  "eval_json": "results/s3-selection-validation/students/pythia-1.4b--step120000/v12/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_s3-pythia-1.4b--step120000_lora/eval.json",
+  "config": {
+   "student": "EleutherAI/pythia-410m@step120000",
+   "teacher": "gpt-5.6-luna",
+   "recipe": "full",
+   "domains": [
+    "math",
+    "qa",
+    "code"
+   ],
+   "n_per_domain": 600,
+   "epochs": 2,
+   "seed": 0,
+   "data_seed": null,
+   "learning_rate": 0.0001,
+   "training_mode": "lora"
+  },
+  "rows_per_domain": {
+   "math": {
+    "source_rows": 600,
+    "training_rows": 600,
+    "coverage_deleted_rows": 0
+   },
+   "qa": {
+    "source_rows": 600,
+    "training_rows": 590,
+    "coverage_deleted_rows": 10
+   },
+   "code": {
+    "source_rows": 600,
+    "training_rows": 591,
+    "coverage_deleted_rows": 9
+   }
+  },
+  "n_examples": 1781,
+  "eos_token_id": 0,
+  "eos_token": "<|endoftext|>",
+  "inference_stop": {
+   "eos_ids": [
+    0
+   ],
+   "stop_sequences": [
+    "\nQuestion:",
+    "\nContext:"
+   ]
+  },
+  "targets_with_eos_supervised": 0,
+  "targets_ending_in_newline": 4,
+  "targets_ending_in_sentence_end": 1437,
+  "supervised_tokens_per_epoch": 153748,
+  "extra_supervised_tokens_per_epoch_with_eos": 1781,
+  "examples": [
+   {
+    "domain": "qa",
+    "n_tokens": 530,
+    "n_prompt_masked": 512,
+    "n_supervised": 18,
+    "last_supervised_ids": [
+     432,
+     26402,
+     281,
+     1884,
+     12895,
+     15
+    ],
+    "last_supervised_tokens": [
+     "\u0120from",
+     "\u0120305",
+     "\u0120to",
+     "\u012030",
+     "\u0120BC",
+     "."
+    ],
+    "target_tail_text": "The Ptolemaic dynasty ruled for 275 years, from 305 to 30 BC.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "qa",
+    "n_tokens": 514,
+    "n_prompt_masked": 512,
+    "n_supervised": 2,
+    "last_supervised_ids": [
+     35364,
+     15
+    ],
+    "last_supervised_tokens": [
+     "1957",
+     "."
+    ],
+    "target_tail_text": "1957.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "math",
+    "n_tokens": 187,
+    "n_prompt_masked": 70,
+    "n_supervised": 117,
+    "last_supervised_ids": [
+     342,
+     1401,
+     1549,
+     2304,
+     9143,
+     12530
+    ],
+    "last_supervised_tokens": [
+     "\u0120with",
+     "\u0120**",
+     "60",
+     "\u0120mar",
+     "bles",
+     "**."
+    ],
+    "target_tail_text": "tal marbles:\n   \\[\n   20 + 40 = 60\n   \\]\n\n#### Baez ends up with **60 marbles**.",
+    "first_label_is_first_completion_token": true
+   }
+  ]
+ },
+ {
+  "reference": "gemma3-1b",
+  "student": "google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+  "eval_json": "results/s3-selection-validation/students/gemma3-1b/v12/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_s3-gemma3-1b_lora/eval.json",
+  "config": {
+   "student": "google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+   "teacher": "gpt-5.6-luna",
+   "recipe": "full",
+   "domains": [
+    "math",
+    "qa",
+    "code"
+   ],
+   "n_per_domain": 600,
+   "epochs": 2,
+   "seed": 0,
+   "data_seed": null,
+   "learning_rate": 0.0001,
+   "training_mode": "lora"
+  },
+  "rows_per_domain": {
+   "math": {
+    "source_rows": 600,
+    "training_rows": 600,
+    "coverage_deleted_rows": 0
+   },
+   "qa": {
+    "source_rows": 600,
+    "training_rows": 590,
+    "coverage_deleted_rows": 10
+   },
+   "code": {
+    "source_rows": 600,
+    "training_rows": 591,
+    "coverage_deleted_rows": 9
+   }
+  },
+  "n_examples": 1781,
+  "eos_token_id": 1,
+  "eos_token": "<eos>",
+  "inference_stop": {
+   "eos_ids": [
+    1
+   ],
+   "stop_sequences": [
+    "\nQuestion:",
+    "\nContext:"
+   ]
+  },
+  "targets_with_eos_supervised": 0,
+  "targets_ending_in_newline": 4,
+  "targets_ending_in_sentence_end": 1437,
+  "supervised_tokens_per_epoch": 158391,
+  "extra_supervised_tokens_per_epoch_with_eos": 1781,
+  "examples": [
+   {
+    "domain": "qa",
+    "n_tokens": 536,
+    "n_prompt_masked": 512,
+    "n_supervised": 24,
+    "last_supervised_ids": [
+     531,
+     236743,
+     236800,
+     236771,
+     19339,
+     236761
+    ],
+    "last_supervised_tokens": [
+     "\u2581to",
+     "\u2581",
+     "3",
+     "0",
+     "\u2581BC",
+     "."
+    ],
+    "target_tail_text": "The Ptolemaic dynasty ruled for 275 years, from 305 to 30 BC.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "qa",
+    "n_tokens": 517,
+    "n_prompt_masked": 512,
+    "n_supervised": 5,
+    "last_supervised_ids": [
+     236770,
+     236819,
+     236810,
+     236832,
+     236761
+    ],
+    "last_supervised_tokens": [
+     "1",
+     "9",
+     "5",
+     "7",
+     "."
+    ],
+    "target_tail_text": "1957.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "math",
+    "n_tokens": 203,
+    "n_prompt_masked": 69,
+    "n_supervised": 134,
+    "last_supervised_ids": [
+     607,
+     5213,
+     236825,
+     236771,
+     147437,
+     84750
+    ],
+    "last_supervised_tokens": [
+     "\u2581with",
+     "\u2581**",
+     "6",
+     "0",
+     "\u2581marbles",
+     "**."
+    ],
+    "target_tail_text": "tal marbles:\n   \\[\n   20 + 40 = 60\n   \\]\n\n#### Baez ends up with **60 marbles**.",
+    "first_label_is_first_completion_token": true
+   }
+  ]
+ },
+ {
+  "reference": "gemma3-4b",
+  "student": "google/gemma-3-1b-pt@fcf18a2a879aab110ca39f8bffbccd5d49d8eb29",
+  "eval_json": "results/s3-selection-validation/students/gemma3-4b/v12/google--gemma-3-1b-pt--fcf18a2a879aab110ca39f8bffbccd5d49d8eb29/gpt-5.6-luna_full_600_s3-gemma3-4b_lora/eval.json",
+  "config": {
+   "student": "google/gemma-3-1b-pt@fcf18a2a879aab110ca39f8bffbccd5d49d8eb29",
+   "teacher": "gpt-5.6-luna",
+   "recipe": "full",
+   "domains": [
+    "math",
+    "qa",
+    "code"
+   ],
+   "n_per_domain": 600,
+   "epochs": 2,
+   "seed": 0,
+   "data_seed": null,
+   "learning_rate": 0.0001,
+   "training_mode": "lora"
+  },
+  "rows_per_domain": {
+   "math": {
+    "source_rows": 600,
+    "training_rows": 600,
+    "coverage_deleted_rows": 0
+   },
+   "qa": {
+    "source_rows": 600,
+    "training_rows": 590,
+    "coverage_deleted_rows": 10
+   },
+   "code": {
+    "source_rows": 600,
+    "training_rows": 591,
+    "coverage_deleted_rows": 9
+   }
+  },
+  "n_examples": 1781,
+  "eos_token_id": 1,
+  "eos_token": "<eos>",
+  "inference_stop": {
+   "eos_ids": [
+    1
+   ],
+   "stop_sequences": [
+    "\nQuestion:",
+    "\nContext:"
+   ]
+  },
+  "targets_with_eos_supervised": 0,
+  "targets_ending_in_newline": 4,
+  "targets_ending_in_sentence_end": 1437,
+  "supervised_tokens_per_epoch": 158391,
+  "extra_supervised_tokens_per_epoch_with_eos": 1781,
+  "examples": [
+   {
+    "domain": "qa",
+    "n_tokens": 536,
+    "n_prompt_masked": 512,
+    "n_supervised": 24,
+    "last_supervised_ids": [
+     531,
+     236743,
+     236800,
+     236771,
+     19339,
+     236761
+    ],
+    "last_supervised_tokens": [
+     "\u2581to",
+     "\u2581",
+     "3",
+     "0",
+     "\u2581BC",
+     "."
+    ],
+    "target_tail_text": "The Ptolemaic dynasty ruled for 275 years, from 305 to 30 BC.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "qa",
+    "n_tokens": 517,
+    "n_prompt_masked": 512,
+    "n_supervised": 5,
+    "last_supervised_ids": [
+     236770,
+     236819,
+     236810,
+     236832,
+     236761
+    ],
+    "last_supervised_tokens": [
+     "1",
+     "9",
+     "5",
+     "7",
+     "."
+    ],
+    "target_tail_text": "1957.",
+    "first_label_is_first_completion_token": true
+   },
+   {
+    "domain": "math",
+    "n_tokens": 203,
+    "n_prompt_masked": 69,
+    "n_supervised": 134,
+    "last_supervised_ids": [
+     607,
+     5213,
+     236825,
+     236771,
+     147437,
+     84750
+    ],
+    "last_supervised_tokens": [
+     "\u2581with",
+     "\u2581**",
+     "6",
+     "0",
+     "\u2581marbles",
+     "**."
+    ],
+    "target_tail_text": "tal marbles:\n   \\[\n   20 + 40 = 60\n   \\]\n\n#### Baez ends up with **60 marbles**.",
+    "first_label_is_first_completion_token": true
+   }
+  ]
+ }
+]

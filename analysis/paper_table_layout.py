@@ -49,6 +49,7 @@ PROFILES = {
     'tab:wanda-panel': [[16, 12, 12, 12, 12, 12, 12, 12]],
     'tab:second-family': [[26, 14, 10, 10, 10, 10, 10, 10]],
     'tab:efficiency-body': [[36, 16, 16, 16, 16]],
+    'tab:eos-control': [[40, 18, 20, 22]],
     'tab:s3-ablation-body': [[19, 13, 11, 11, 11, 11, 11, 13]],
 }
 
