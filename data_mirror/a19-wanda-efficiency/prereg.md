@@ -28,8 +28,8 @@ magnitude pruning does not pay).
 - Test (4): the A11 states, 160M at step 80000, 410M at step 112000, 1.4B at step 48000 and 1B at
   step 48000, in no development fit, at the A11 densities 0.9, 0.85, 0.8, 0.75, 0.7, 0.65 (three
   seen and three unseen densities), pruned only after the freeze.
-- Every checkpoint is a public EleutherAI revision; weights are read from the local cache (rai) or
-  downloaded on hpg (no PRC-developed model is involved).
+- Every checkpoint is a public EleutherAI revision; weights are read from the local cache or
+  downloaded on the shared cluster (no restricted model is involved).
 
 ## Predictors (all refitted on Wanda measurements, same labels, same tuning budget)
 
