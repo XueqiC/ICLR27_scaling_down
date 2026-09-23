@@ -359,7 +359,7 @@ CONCISE_CAPTIONS = {
     "tab:panel_quant": (
         r"Per-capability loss change under per-output-channel symmetric round-to-nearest weight quantization, in nats "
         r"per native token, at the displayed bit widths; 8 and 6 bits lie within 0.01 nats of dense for each "
-        r"model and are omitted. The last column lists all measured bit widths."),
+        r"model and are omitted from the table as indistinguishable from dense. The last column lists all measured bit widths."),
     "tab:round3_coef": (
         r"Frozen coefficients of the selected pruning form $\widehat{\Delta L}_c=(\beta_c\cdot\phi)((1-d)/0.3)^{\gamma_c}$ "
         r"with $\phi=[1,z(\log N_0),z(L_{0,c}),z(\log D_0)]$, standardized with centers 20.248, 2.661, 25.614 and "
@@ -1167,7 +1167,7 @@ PLAIN_CAPTIONS = {
  'tab:p3_check': 'The table compares loss changes on primary and independent secondary benchmarks. Each pair lists the primary benchmark followed by the named secondary benchmark, in nats per native token. Compression states were specified before secondary measurement.',
  'tab:musique_scope': 'The table compares question-answering loss changes across two benchmarks and distillation checkpoints. Loss changes are in nats per native token. Entries give trajectory means with ranges in brackets; reuse is dimensionless and pool sizes count traces per domain.',
  'tab:qa_scope': 'The table compares question-answering loss across benchmarks and compression states. Loss and change from the dense model are in nats per native token. Negative changes indicate improvement. Distillation budgets count the supervised tokens used for training.',
- 'tab:panel_prune': 'The table compares the pruning loss change across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-affected and most-affected outcomes out of measured densities.',
+ 'tab:panel_prune': 'The table compares the pruning loss change across models and capabilities. Loss changes are in nats per native token; density is dimensionless. Ranking cells count least-affected and most-affected outcomes out of the set of densities measured for each model.',
  'tab:panel_quant': 'The table compares the quantization loss change across models and capabilities. Loss changes are in nats per native token, and bit widths are in bits. The last column lists all measured widths.',
  'tab:selection-feasible': 'The table compares selection policies on their feasible compression choices. Coverage and agreement with the measured oracle are percentages; mean regret is in nats per native token. Results distinguish each policy\'s feasible cells from the cells shared by all policies.',
  'tab:rule-confirm': 'The table compares frozen selection policies on the independent confirmation panel. Mean regret is in nats per native token. Feasibility entries give feasible cells out of total cells; agreement and candidate-set coverage are reported as percentages of evaluated cells.',
