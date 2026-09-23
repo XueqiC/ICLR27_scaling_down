@@ -156,7 +156,7 @@ def render():
                  f"Share reaching the 96-token cap & {s['truncated_96']:.3f} & {c['truncated_96']:.3f} & {ci(d['truncated_96'])} \\\\",
                  f"Generated tokens, mean & {s['tokens_96']:.1f} & {c['tokens_96']:.1f} & {ci(d['tokens_96'])} \\\\"]
         if len(refs) > 1 and ref != refs[-1]:
-            rows.append(r"\\midrule")
+            rows.append(r"\midrule")
     who = (f"student of the {WORDS.get(refs[0], refs[0])}" if len(refs) == 1
            else "students of the " + " and ".join(WORDS.get(x, x).split(",")[0].replace(" reference", "") for x in refs) + " references")
     caption = (f"End-marker control on the 384 fresh question-answering items for the selection-round {who}: the original "
