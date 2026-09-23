@@ -157,8 +157,9 @@ def render():
                  f"Generated tokens, mean & {s['tokens_96']:.1f} & {c['tokens_96']:.1f} & {ci(d['tokens_96'])} \\\\"]
         if len(refs) > 1 and ref != refs[-1]:
             rows.append(r"\\midrule")
-    who = (WORDS.get(refs[0], refs[0]) if len(refs) == 1 else " and ".join(WORDS.get(x, x).split(",")[0] for x in refs))
-    caption = (f"End-marker control on the 384 fresh question-answering items for the selection-round student of the {who}: the original "
+    who = (f"student of the {WORDS.get(refs[0], refs[0])}" if len(refs) == 1
+           else "students of the " + " and ".join(WORDS.get(x, x).split(",")[0].replace(" reference", "") for x in refs) + " references")
+    caption = (f"End-marker control on the 384 fresh question-answering items for the selection-round {who}: the original "
                "student against a student retrained on the same 1,800 teacher answers, recipe, seed and schedule with the tokenizer's "
                "end-of-sequence token appended to every target and supervised, 1,781 extra supervised tokens per epoch. Differences "
                "are control minus original, with 95 percent intervals from a paired item bootstrap; the loss is token-weighted as in Eq. 1.")
