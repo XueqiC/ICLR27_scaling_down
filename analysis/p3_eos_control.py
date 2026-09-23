@@ -141,7 +141,7 @@ def render():
     from analysis.paper_table_layout import house_style, table_layout
     summary = p1.read(OUT / "summary.json")
     rows = []
-    def ci(d): return f"{d['mean']:+.3f} [{d['ci95'][0]:+.3f}, {d['ci95'][1]:+.3f}]"
+    def ci(d, f="+.3f"): return f"{d['mean']:{f}} [{d['ci95'][0]:{f}}, {d['ci95'][1]:{f}}]"
     WORDS = {"pythia-1.4b--step120000": "Pythia 1.4B reference, student Pythia 410M", "gemma3-1b": "Gemma 3 1B reference, student Gemma 3 270M",
              "pythia-410m--step120000": "Pythia 410M reference, student Pythia 160M", "gemma3-4b": "Gemma 3 4B reference, student Gemma 3 1B"}
     refs = list(summary["references"])
@@ -149,12 +149,12 @@ def render():
         r = summary["references"][ref]; c, s, d = r["control"], r["s3_student"], r["paired_control_minus_s3"]
         if len(refs) > 1:
             rows.append(f"\\multicolumn{{4}}{{l}}{{\\emph{{{WORDS.get(ref, ref)}}}}} \\\\")
-        rows += [f"Reference-completion loss (nats per token) & {s['loss']:.3f} & {c['loss']:.3f} & {ci(d['loss'])} \\\\",
+        rows += [f"Loss, nats per token & {s['loss']:.3f} & {c['loss']:.3f} & {ci(d['loss'])} \\\\",
                  f"Exact match, 32 new tokens & {s['em_32']:.3f} & {c['em_32']:.3f} & {ci(d['em_32'])} \\\\",
                  f"Exact match, 96 new tokens & {s['em_96']:.3f} & {c['em_96']:.3f} & {ci(d['em_96'])} \\\\",
                  f"Token F1, 96 new tokens & {s['f1_96']:.3f} & {c['f1_96']:.3f} & {ci(d['f1_96'])} \\\\",
-                 f"Share reaching the 96-token cap & {s['truncated_96']:.3f} & {c['truncated_96']:.3f} & {ci(d['truncated_96'])} \\\\",
-                 f"Generated tokens, mean & {s['tokens_96']:.1f} & {c['tokens_96']:.1f} & {ci(d['tokens_96'])} \\\\"]
+                 f"Reached the 96-token cap & {s['truncated_96']:.3f} & {c['truncated_96']:.3f} & {ci(d['truncated_96'])} \\\\",
+                 f"Generated tokens, mean & {s['tokens_96']:.1f} & {c['tokens_96']:.1f} & {ci(d['tokens_96'], '+.1f')} \\\\"]
         if len(refs) > 1 and ref != refs[-1]:
             rows.append(r"\midrule")
     who = (f"student of the {WORDS.get(refs[0], refs[0])}" if len(refs) == 1
@@ -167,7 +167,7 @@ def render():
             "\\begin{table}[tb]\n\\centering\\footnotesize\n"
             f"\\caption{{{caption}}}\n\\label{{tab:eos-control}}\n"
             "\\begin{tabular*}{\\textwidth}{lrrr}\n\\toprule\n"
-            "Readout & Original student & Control with end marker & Difference [95\\%] \\\\\n\\midrule\n" + "\n".join(rows) +
+            "Readout & Original & With end marker & Difference [95\\%] \\\\\n\\midrule\n" + "\n".join(rows) +
             "\n\\bottomrule\n\\end{tabular*}\n\\end{table}\n")
     target = ROOT / "paper/paper/tables/eos_control.tex"
     target.write_text(house_style(table_layout(text))); print(target.read_text())
