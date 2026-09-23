@@ -14,7 +14,8 @@ TASKS = [
     "Three unseen checkpoints pruned to densities 0.575, 0.675 and 0.85",
     "Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 3 to 5",
     "An unseen 1.4 billion stage at bit widths 3 to 5, group sizes 32 to 512",
-    "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
+    "Gemma 270 million distilled on six new pools at 50 to 200 thousand tokens",
+    "Gemma 1 billion distilled on six new pools at 50 to 200 thousand tokens",
 ]
 
 
@@ -47,12 +48,12 @@ def generated():
 
 def test_table_every_cell_matches_sidecar_and_frozen_json(generated):
     rows, audit, tex, recipes, caption = generated
-    assert len(rows) == 5 and len(recipes) == 30
+    assert len(rows) == 6 and len(recipes) == 36
     body = tex.split("\\midrule\n", 1)[1].split("\\bottomrule", 1)[0]
     table_rows = [line.removesuffix(r" \\").split(" & ") for line in body.splitlines() if line.strip() != r"\midrule"]
-    assert len(table_rows) == 5 and all(len(row) == 6 for row in table_rows)
+    assert len(table_rows) == 6 and all(len(row) == 6 for row in table_rows)
     assert {(r["row"], r["column"]) for r in recipes} == {
-        (i, j) for i in range(5) for j in range(6)}
+        (i, j) for i in range(6) for j in range(6)}
     for record in [*recipes, caption]:
         # Independently resolve every JSON pointer and operation, then compare
         # with the actual TeX cell at the sidecar's physical row/column.
@@ -158,7 +159,7 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
     assert r"\caption{" + gen.CAPTION_FONT in tex
     assert r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}" in tex
     assert r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}" in tex
-    assert tex.count(r"\TableOneErrors{") == 15  # delivered error, baseline scores and improvement, five rows
+    assert tex.count(r"\TableOneErrors{") == 18  # delivered error, baseline scores and improvement, six rows
     assert not re.search(r"\\(?:resizebox|scalebox|rotatebox|multicolumn|dagger)", tex)
     assert r"\label{tab:main-prediction-v2}" in tex
     assert caption["rendered"] == gen.caption_cell(audit).render(audit)
@@ -187,7 +188,7 @@ def test_only_complete_frozen_tasks_and_compact_layout(generated):
                 prefix = ""
                 assert line.startswith(prefix)
                 if i == 4:
-                    assert re.fullmatch(prefix + r"[+-]?\d+\.\d{3}, [+-]?\d+\.\d{3}", line)
+                    assert re.fullmatch(prefix + r"[+-]?\d+\.\d{3}", line)
                 else:
                     assert re.fullmatch(prefix + r"[+-]?\d+\.\d{3}", line)
             assert row[j].compact_scores == "ordered"
@@ -203,15 +204,15 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
         return " / ".join(row[column].plain(audit).splitlines())
     assert [scores(row, 2) for row in rows] == [
         "0.073 / 0.104 / 0.179", "0.243 / 0.236 / 0.678", "0.215 / 0.557 / 0.457",
-        "0.303 / 0.153 / 0.222", "0.074, 0.057 / 0.019, 0.049 / 0.515, 0.463",
+        "0.303 / 0.153 / 0.222", "0.074 / 0.019 / 0.515", "0.057 / 0.049 / 0.463",
     ]
     assert [scores(row, 4) for row in rows] == [
         "0.073 / 0.104 / 0.183", "0.277 / 0.214 / 0.221", "0.065 / 0.116 / 0.458", "0.088 / 0.153 / 0.141",
-        "0.074, 0.057 / 0.019, 0.049 / 0.515, 0.463",
+        "0.074 / 0.019 / 0.515", "0.057 / 0.049 / 0.463",
     ]
     assert [scores(row, 7) for row in rows] == [
         "-0.013 / -0.020 / -0.005", "-0.047 / +0.008 / +0.000", "+0.268 / +0.562 / +0.000",
-        "+0.262 / +0.410 / +0.000", "+0.005 / +0.095 / -0.013",
+        "+0.262 / +0.410 / +0.000", "-0.009 / +0.004 / +0.095", "-0.023 / +0.005 / -0.013",
     ]
     assert "270 million and 1 billion" in gen.caption_cell(audit).plain(audit)
     assert "no student averaging" in rows[4][2].note
@@ -221,13 +222,14 @@ def test_frozen_errors_and_development_baselines_unchanged(generated):
         "Per-density regression; question answering: median",
         "Bilinear regression, no change and the median",
         "Bilinear regression, no change and the median",
-        "Regressions on budget and loss, reuse, and reuse and size"]
+        "Budget regression; reuse regression for code and question answering", "Regressions on loss, reuse and size"]
     assert all(len(b) == 4 for b in baselines)
 
 
 def test_development_measurements_count_configurations_per_capability(generated):
     rows, audit, _, recipes, _ = generated
-    assert [int(row[6].plain(audit)) for row in rows] == [18, 84, 54, 54, 100]
+    assert [int(row[6].plain(audit).split()[0]) for row in rows] == [18, 84, 54, 54, 100, 100]
+    assert rows[0][6].plain(audit) == "18 (math, code); 36 (question answering)"
     prune = raw_source(gen.P53 + "#")
     assert int(rows[1][6].plain(audit)) == sum(len(s["densities"]) for s in prune["dev_states"])
     assert prune["n_dev_rows"] == 3 * int(rows[1][6].plain(audit))
@@ -350,8 +352,9 @@ def test_efficiency_confirmation_uses_registered_cells_and_budgets(generated):
     assert len(states["records"]) == 12
     assert len(summary["cells"]) == len({(r["state"], r["density"], r["capability"])
                                        for r in summary["cells"]}) == 72
-    assert int(row[6].plain(audit)) == states["development_measurements_per_capability"]["power_18"] == 18
-    assert int(row[6].plain(audit)) * 2 == states["development_measurements_per_capability"]["A2_36"] == 36
+    assert int(row[6].plain(audit).split()[0]) == states["development_measurements_per_capability"]["power_18"] == 18
+    assert int(row[6].plain(audit).split()[0]) * 2 == states["development_measurements_per_capability"]["A2_36"] == 36
+    assert int(row[6].plain(audit).split()[-3]) == states["development_measurements_per_capability"]["median_curve_36"] == 36
     assert row[1].plain(audit) == "Compact power form using half the measurements"
     assert row[3].plain(audit) == (
         "The same power form, with a median density curve for question answering")

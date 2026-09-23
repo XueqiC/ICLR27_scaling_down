@@ -8,22 +8,26 @@ plus A11 per_state.json. No fitting, model loading, or manuscript edits.
 from __future__ import annotations
 
 import math
-from unittest.mock import patch
 
 if __package__:
     from . import a11_score as score
     from .paper_artifacts import ROOT, Artifacts, no_symlinks, pyplot
-    from .paper_figure_style import (CAPABILITY_COLORS, PALETTE, apply_style,
+    from .paper_figure_style import (CAPABILITY_COLORS, PALETTE, SIZES, apply_style,
         legend_strip, panel_axes, row_axis_style, save_panel, write_caption)
 else:
     import a11_score as score
     from paper_artifacts import ROOT, Artifacts, no_symlinks, pyplot
-    from paper_figure_style import (CAPABILITY_COLORS, PALETTE, apply_style,
+    from paper_figure_style import (CAPABILITY_COLORS, PALETTE, SIZES, apply_style,
         legend_strip, panel_axes, row_axis_style, save_panel, write_caption)
 
 A9 = "results/a9-measurement-efficiency/summary.json"
 A11 = "results/a11-efficiency-confirmation"
+A18 = "results/a18-second-family/score.json"
+A18_COST = "results/a18-second-family/cost.json"
 PANEL_SIZE = (2.7, 1.3)
+THIRD_SIZE = (1.8, 1.05)
+SECOND_FAMILY = (("power_reduced", "power"), ("per_density_full", "A2"))
+COST_ITEMS = (("configurations", "Cells"), ("tokens", "Tokens"), ("seconds", "Seconds"))
 LEGEND_SIZE = (5.5, .3)
 METHODS = ("power", "A2", "median_curve")
 CONFIRM_METHODS = ("power_18", "A2_36", "median_curve_36")
@@ -31,7 +35,14 @@ MARKERS = {"power": "o", "A2": "s", "median_curve": "^"}
 LINES = {"power": "-", "A2": "--", "median_curve": ":"}
 LABELS = {"power": "Power form", "A2": "Per-density regression", "median_curve": "Median curve"}
 CAPTION = """Measurement efficiency for Math (blue) and Code (orange); QA is
-shown separately in the appendix panels eff_qa_a and eff_qa_b. (a) Retrospective
+shown separately in the appendix panels eff_qa_a and eff_qa_b. Main panels: (a) the retrospective
+A9 learning curves below; (b) the pre-registered second-family confirmation on OLMo-2 (A18): mean
+absolute error of the compact power form fitted on the reduced grid of 12 configurations (circles)
+against the per-density regression fitted on the full grid of 24 (squares), over the four test
+states at densities 0.85, 0.75 and 0.65, on the development probes and on the new items; (c) the
+recorded cost of the reduced grid as a share of the full grid: configuration cells, evaluation tokens and
+GPU seconds, dense anchors and model loading included. The Pythia confirmation panel (eff_confirm)
+is the former main panel (b) and now sits in the appendix. (a) Retrospective
 A9 learning curves on the 42 new-state, in-range cells per capability, along the
 densities-reduction axis. The nine development states are retained; the budgets
 are 9, 18 and 36 state-density measurements per capability, excluding dense
@@ -92,21 +103,9 @@ def learning_curves(audit):
 def confirmation(audit):
     """Reuse all A11 validation and scoring; aggregate its six errors per state."""
     out = audit.root / A11
-    # The frozen scorer remains byte-identical. Translate only authenticated
-    # publication digests back to their registered identities during validation;
-    # the artifact audit below records the actual published bytes.
-    pairs = audit.published_pairs()
-    registered = {published: original for original, (published, _) in pairs.items()}
-    raw_digest = score.digest
-
-    def registered_digest(path):
-        actual = raw_digest(path)
-        return registered.get(actual, actual)
-
-    with patch.object(score, "digest", registered_digest):
-        plan, frozen = score.load_registration(out, audit.root)
-        prediction_hash = score.digest(out / "predictions.json")
-        tables, provenance, missing = score.read_measurements(plan, frozen, out / "measurements", prediction_hash)
+    plan, frozen = score.load_registration(out, audit.root)
+    prediction_hash = score.digest(out / "predictions.json")
+    tables, provenance, missing = score.read_measurements(plan, frozen, out / "measurements", prediction_hash)
     score.require(not missing, "Incomplete A11 measurements: " + ", ".join(missing))
     scored = score.score_tables(plan, frozen, tables)
     stored = audit.read(f"{A11}/summary.json")
@@ -117,8 +116,7 @@ def confirmation(audit):
     for name in ("plan.json", "predictions.json", "predictions.json.sha256", "prereg.md"):
         audit.read(f"{A11}/{name}")
     # Record the validation-only runtime inputs, too; never import model code.
-    audit.inputs.update({relative: raw_digest(audit.root / relative)
-                         for relative in frozen["runtime_sha256"]})
+    audit.inputs.update(frozen["runtime_sha256"])
     for target in plan["targets"]:
         for name in ("prune_losses.json", "metadata.json"):
             audit.read(f"{A11}/measurements/{target['state'].replace('@', '--')}/{name}")
@@ -146,9 +144,9 @@ def confirmation(audit):
                 by_capability=scored["by_capability"], records=rows)
 
 
-def draw_learning(fig, rows, capabilities):
+def draw_learning(fig, rows, capabilities, size=PANEL_SIZE):
     import numpy as np
-    ax = panel_axes(fig, PANEL_SIZE, left=.43, bottom=.53, top=.06)
+    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.53, top=.06)
     for cap in capabilities:
         for method in METHODS:
             part = sorted((r for r in rows if (r["cap"], r["method"]) == (cap, method)),
@@ -166,15 +164,16 @@ def draw_learning(fig, rows, capabilities):
     ymax = max(r["q75"] for r in rows if r["cap"] in capabilities and r["q75"] is not None)
     row_axis_style(ax)
     ax.set(xlim=(7, 38), ylim=(-.04 * ymax, 1.08 * ymax), xticks=[9, 18, 36],
-           xlabel="Development measurements\nper capability", ylabel="MAE (nats)")
+           xlabel=("Measurements\nper capability" if size[0] < 2.2 else "Development measurements\nper capability"),
+           ylabel="MAE (nats)")
     from matplotlib.ticker import MaxNLocator
     ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
     return ax
 
 
-def draw_confirmation(fig, result, capabilities):
+def draw_confirmation(fig, result, capabilities, size=PANEL_SIZE):
     from matplotlib.ticker import MaxNLocator
-    ax = panel_axes(fig, PANEL_SIZE, left=.43, bottom=.49, top=.06)
+    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.49, top=.06)
     labels = []
     for index, state in enumerate(result["state_order"]):
         for ci, cap in enumerate(capabilities):
@@ -186,8 +185,68 @@ def draw_confirmation(fig, result, capabilities):
     ymax = max(r["mae"][m] for r in result["records"] if r["capability"] in capabilities for m in CONFIRM_METHODS)
     row_axis_style(ax)
     ax.set(xlim=(-.5, 3.5), ylim=(0, ymax * 1.12), xticks=range(4), xticklabels=labels,
-           xlabel="Pythia size / training step", ylabel="MAE (nats)")
+           xlabel=("Pythia state" if size[0] < 2.2 else "Pythia size / training step"), ylabel="MAE (nats)")
     ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
+    return ax
+
+
+def second_family(audit):
+    """Frozen A18 scores: the reduced-grid compact form against the full-grid regression on the four OLMo-2 test
+    states, on the development probes and on the new items; no refit, no reordering."""
+    sc = audit.read(A18)
+    score.require(len(sc["per_state"]) == 4 and sc["bootstrap"]["pair"] == ["power_reduced", "per_density_full"],
+                  "A18 score must cover four test states with the registered primary pair")
+    rows = []
+    for cap in score.CAPS:
+        for block in ("probes", "new"):
+            entry = {"capability": cap, "block": block, "mae": {}, "sources": []}
+            for key, method in SECOND_FAMILY:
+                entry["mae"][method] = sc["summary"][cap][key][block]
+                entry["sources"].append(f"{A18}#/summary/{cap}/{key}/{block}")
+            entry["zero_change"] = sc["summary"][cap]["zero_change"][block]
+            rows.append(entry)
+    return rows
+
+
+def measurement_cost(audit):
+    """Recorded cost of the reduced development grid relative to the full grid, dense anchors and loading included."""
+    cost = audit.read(A18_COST)
+    ratio = cost["totals"]["reduced_over_full"]
+    score.require(cost["totals"]["full"]["configurations"] == 24 and cost["totals"]["reduced"]["configurations"] == 12,
+                  "A18 cost must compare the 12- and 24-configuration grids")
+    return [{"item": key, "label": label, "ratio": ratio[key], "sources": [f"{A18_COST}#/totals/reduced_over_full/{key}"]}
+            for key, label in COST_ITEMS]
+
+
+def draw_second_family(fig, rows, capabilities, size=THIRD_SIZE):
+    from matplotlib.ticker import MaxNLocator
+    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.49, top=.06)
+    labels = []
+    groups = [(cap, block) for cap in capabilities for block in ("probes", "new")]
+    for index, (cap, block) in enumerate(groups):
+        row = next(r for r in rows if (r["capability"], r["block"]) == (cap, block))
+        for mi, (_, method) in enumerate(SECOND_FAMILY):
+            x = index + (mi - .5) * .28
+            ax.plot(x, row["mae"][method], ls="", marker=MARKERS[method], color=CAPABILITY_COLORS[cap])
+        labels.append("Probes" if block == "probes" else "New")
+    ymax = max(r["mae"][m] for r in rows if r["capability"] in capabilities for _, m in SECOND_FAMILY)
+    row_axis_style(ax)
+    ax.set(xlim=(-.5, len(groups) - .5), ylim=(0, ymax * 1.15), xticks=range(len(groups)), xticklabels=labels,
+           xlabel="OLMo-2 test items", ylabel="MAE (nats)")
+    ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
+    return ax
+
+
+def draw_cost(fig, items, size=THIRD_SIZE):
+    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.49, top=.06)
+    xs = list(range(len(items)))
+    ax.bar(xs, [100 * it["ratio"] for it in items], width=.6, color=PALETTE["reference"], linewidth=0)
+    for x, it in zip(xs, items):
+        ax.text(x, 100 * it["ratio"] + 3, f"{100 * it['ratio']:.0f}", ha="center", va="bottom",
+                fontsize=SIZES["panel"][0], fontweight="bold")
+    row_axis_style(ax)
+    ax.set(xlim=(-.6, len(items) - .4), ylim=(0, 100), xticks=xs, xticklabels=[it["label"] for it in items],
+           yticks=[0, 50, 100], xlabel="Share of full grid", ylabel="Percent")
     return ax
 
 
@@ -204,28 +263,46 @@ def generate(root=ROOT):
     audit = Artifacts(root)
     curves = learning_curves(audit)
     result = confirmation(audit)
+    family = second_family(audit)
+    cost = measurement_cost(audit)
     result["input_sha256"] = dict(audit.inputs)
     score.write_json(no_symlinks(audit.root / A11 / "per_state.json"), result)
     audit.rule(CAPTION)
     plt = pyplot(root)
-    for prefix, caps in (("eff", ("math", "code")), ("eff_qa", ("qa",))):
-        caption = CAPTION if prefix == "eff" else CAPTION.replace(
-            "for Math (blue) and Code (orange); QA is\nshown separately in the appendix panels eff_qa_a and eff_qa_b.",
-            "for QA (green), the descriptive appendix counterpart of the main Math/Code figure.").replace(
-            "Math precedes Code", "only QA is shown")
-        panel_rows = [r for r in curves if r["cap"] in caps]
-        confirm_rows = [r for r in result["records"] if r["capability"] in caps]
-        for suffix, size, kind, draw, records in (
-            ("a", PANEL_SIZE, "double", lambda f: draw_learning(f, curves, caps), panel_rows),
-            ("b", PANEL_SIZE, "double", lambda f: draw_confirmation(f, result, caps), confirm_rows),
-            ("legend", LEGEND_SIZE, "legend", lambda f: draw_legend(f, caps), [])):
-            apply_style(kind)
-            fig = plt.figure(figsize=size)
-            draw(fig)
-            save_panel(fig, f"{prefix}_{suffix}", kind, audit, records)
-            write_caption(f"{prefix}_{suffix}", audit, caption)
-            plt.close(fig)
-        write_caption(prefix, audit, caption)
+    caps = ("math", "code")
+    main_rows = [r for r in curves if r["cap"] in caps]
+    family_rows = [r for r in family if r["capability"] in caps]
+    confirm_rows = [r for r in result["records"] if r["capability"] in caps]
+    for suffix, size, kind, draw, records in (
+        ("a", THIRD_SIZE, "panel", lambda f: draw_learning(f, curves, caps, THIRD_SIZE), main_rows),
+        ("b", THIRD_SIZE, "panel", lambda f: draw_second_family(f, family, caps), family_rows),
+        ("c", THIRD_SIZE, "panel", lambda f: draw_cost(f, cost), cost),
+        ("confirm", PANEL_SIZE, "double", lambda f: draw_confirmation(f, result, caps), confirm_rows),
+        ("legend", LEGEND_SIZE, "legend", lambda f: draw_legend(f, caps), [])):
+        apply_style(kind)
+        fig = plt.figure(figsize=size)
+        draw(fig)
+        save_panel(fig, f"eff_{suffix}", kind, audit, records)
+        write_caption(f"eff_{suffix}", audit, CAPTION)
+        plt.close(fig)
+    write_caption("eff", audit, CAPTION)
+    qa_caption = CAPTION.replace(
+        "for Math (blue) and Code (orange); QA is\nshown separately in the appendix panels eff_qa_a and eff_qa_b.",
+        "for QA (green), the descriptive appendix counterpart of the main Math/Code figure.").replace(
+        "Math precedes Code", "only QA is shown")
+    qa = ("qa",)
+    for suffix, size, kind, draw, records in (
+        ("a", THIRD_SIZE, "panel", lambda f: draw_learning(f, curves, qa, THIRD_SIZE), [r for r in curves if r["cap"] == "qa"]),
+        ("b", THIRD_SIZE, "panel", lambda f: draw_confirmation(f, result, qa, THIRD_SIZE), [r for r in result["records"] if r["capability"] == "qa"]),
+        ("c", THIRD_SIZE, "panel", lambda f: draw_second_family(f, family, qa), [r for r in family if r["capability"] == "qa"]),
+        ("legend", LEGEND_SIZE, "legend", lambda f: draw_legend(f, qa), [])):
+        apply_style(kind)
+        fig = plt.figure(figsize=size)
+        draw(fig)
+        save_panel(fig, f"eff_qa_{suffix}", kind, audit, records)
+        write_caption(f"eff_qa_{suffix}", audit, qa_caption)
+        plt.close(fig)
+    write_caption("eff_qa", audit, qa_caption)
     return result
 
 

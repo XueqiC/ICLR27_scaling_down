@@ -55,6 +55,8 @@ RANGES = {
     "quant_group": "Pythia 410 million and 1.4 billion at unseen group sizes 32 and 512, bit widths 3 to 5",
     "quant_new": "An unseen 1.4 billion stage at bit widths 3 to 5, group sizes 32 to 512",
     "pool": "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
+    "pool_270m": "Gemma 270 million distilled on six new pools at 50 to 200 thousand tokens",
+    "pool_1b": "Gemma 1 billion distilled on six new pools at 50 to 200 thousand tokens",
     "efficiency": "Four unseen Pythia states pruned at six densities",
 }
 # Every row is assembled once with seven cells: task, frozen candidate, its
@@ -86,8 +88,8 @@ CAPTION = (
 CANDIDATE_CAPTION = (
     "Pre-specified candidate of each prediction task in Table~\\ref{tab:main-prediction-v2}, its error on "
     "the same cells, and the relation delivered after the test. Errors are mean absolute errors in "
-    "nats per token, in math, code and question answering order, and distillation entries give the "
-    "{students} students in that order."
+    "nats per token, in math, code and question answering order; the two distillation rows are the "
+    "{students} students."
 )
 
 NUMBER_PATTERN = r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|four|five|six|seventeen|twenty|half)\b"
@@ -270,6 +272,10 @@ def baseline_parts(audit, fn):
         label = "Bilinear regression, no change and the median"
     elif names == ["budget regression, loss regression", "reuse regression", "reuse regression, size regression"]:
         label = "Regressions on budget and loss, reuse, and reuse and size"
+    elif names == ["budget regression", "reuse regression", "reuse regression"]:
+        label = "Budget regression; reuse regression for code and question answering"
+    elif names == ["loss regression", "reuse regression", "size regression"]:
+        label = "Regressions on loss, reuse and size"
     else:
         grouped = {}
         for cap, name in zip(CAPS, names):
@@ -408,9 +414,10 @@ def efficiency_row(audit):
         cell(mapped(audit, "Per-density regression at full budget", pointer(E11, "decision", "comparator")),
              " (", value(pointer(E11_STATE, "development_measurements_per_capability", comparator)), ")\n",
              *errors(lambda c: comparator), refs=[pointer(E11, "decision"), *score_refs], note=score_note),
-        cell(value(pointer(E11_STATE, "development_measurements_per_capability", candidate)),
+        cell(value(pointer(E11_STATE, "development_measurements_per_capability", candidate)), " (math, code); ",
+             value(pointer(E11_STATE, "development_measurements_per_capability", "median_curve_36")), " (question answering)",
              refs=[pointer(E11_STATE, "development_measurements_per_capability", comparator)],
-             note="18 recorded development configuration measurements per capability for power_18, half the comparator's 36; excludes dense anchors and test measurements."),
+             note="18 recorded development configuration measurements per capability for power_18, half the comparator's 36, on math and code; the delivered QA median curve is median_curve_36, fitted on all 36; excludes dense anchors and test measurements."),
     ]
 
 
@@ -575,36 +582,35 @@ def build(audit):
     students = audit.data[f70]["confirmation_register"]["students"]
     pool_inds = {c: [next(i for i,g in enumerate(groups) if g["student"]==s and g["capability"]==c)
                      for s in students] for c in CAPS}
-    def pool_numbers(c, key):
-        parts = []
-        for i in pool_inds[c]:
-            if parts:
-                parts.append(", ")
-            parts.append(number(D70,"groups",i,key))
-        return parts
+    def pool_numbers(c, key, j):
+        """One student's frozen number for capability c (student j of the confirmation register)."""
+        return [number(D70,"groups",pool_inds[c][j],key)]
     pool_relation = cell(mapped(audit, composite_label({c: audit.data[f70]["selected"][c]["method"] for c in CAPS}),
                                 *[pointer(f70,"selected",c,k) for c in CAPS for k in ("method", "n_params")]),
                          refs=[pointer(f70,"selected"), pointer(f70,"models")],
                          note="The frozen and delivered forms are identical: one-coefficient zero-anchored reuse for Math/Code, joint budget/pool for QA; fixed before test.")
-    result.append([
-        cell(tested_range(audit, "pool", pointer(f70,"confirmation_register","students"),
-                         pointer(f70,"confirmation_register","pools"),pointer(D70,"groups",0,"clusters",0,"T_planned")),
-             refs=[pointer(f70,"confirmation_register","unused_U_assertion"),
-                    pointer(f70,"frozen_at_utc"),pointer("results/v47-p2-register/register.json","v5_confirm","registered_at_utc")]),
-        pool_relation,
-        cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae")),
-             refs=[pointer(f70,"confirmation_register","students"),pointer(f70,"bootstrap")],
-             note="Scores follow student order 270M, 1B; no student averaging. Stored paired baseline-minus-candidate intervals do not fit beside these scores and remain in the appendix tables; each baseline identity is checked by the reused frozen loader."),
-        cell(mapped(audit, "The same predictor", *pool_relation.parts[0]["sources"]),
-             refs=pool_relation.context, note=pool_relation.note),
-        cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae")), refs=delivery_refs("C47") + delivery_refs("C48"),
-             note="Same candidate, same cells; repeat the stored MAEs without the candidate-versus-baseline intervals."),
-        cell(*baseline_parts(audit, lambda c: [
-                 mapped(audit, baseline_names(groups[i]["strongest_baseline"] for i in pool_inds[c]),
-                        *[pointer(f70,"strongest_baseline",groups[i]["student"],c,"method") for i in pool_inds[c]]),
-                 *pool_numbers(c,"baseline_mae")]), refs=[pointer(f70,"baseline_rule"),pointer(f70,"strongest_baseline")],
-             note="Development-fixed baseline identities, student order 270M, 1B: " +
-             " / ".join(baseline_names(groups[i]["strongest_baseline"] for i in pool_inds[c]) for c in CAPS) + ".")])
+    for j, student in enumerate(students):
+        label = {"gemma3-270m": "pool_270m", "gemma3-1b": "pool_1b"}[resolve(audit, pointer(f70,"confirmation_register","students",j))]
+        word = {"gemma3-270m": "270M", "gemma3-1b": "1B"}[resolve(audit, pointer(f70,"confirmation_register","students",j))]
+        result.append([
+            cell(tested_range(audit, label, pointer(f70,"confirmation_register","students",j),
+                             pointer(f70,"confirmation_register","pools"),pointer(D70,"groups",0,"clusters",0,"T_planned")),
+                 refs=[pointer(f70,"confirmation_register","unused_U_assertion"),
+                        pointer(f70,"frozen_at_utc"),pointer("results/v47-p2-register/register.json","v5_confirm","registered_at_utc")]),
+            pool_relation,
+            cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae",j)),
+                 refs=[pointer(f70,"confirmation_register","students"),pointer(f70,"bootstrap")],
+                 note="Scores of one student, " + word + "; no student averaging. Stored paired baseline-minus-candidate intervals do not fit beside these scores and remain in the frozen record."),
+            cell(mapped(audit, "The same predictor", *pool_relation.parts[0]["sources"]),
+                 refs=pool_relation.context, note=pool_relation.note),
+            cell(*score_parts(lambda c: pool_numbers(c,"candidate_mae",j)), refs=delivery_refs("C47") + delivery_refs("C48"),
+                 note="Same candidate, same cells; repeat the stored MAEs without the candidate-versus-baseline intervals."),
+            cell(*baseline_parts(audit, lambda c: [
+                     mapped(audit, baseline_names([groups[pool_inds[c][j]]["strongest_baseline"]]),
+                            pointer(f70,"strongest_baseline",groups[pool_inds[c][j]]["student"],c,"method")),
+                     *pool_numbers(c,"baseline_mae",j)]), refs=[pointer(f70,"baseline_rule"),pointer(f70,"strongest_baseline")],
+                 note="Development-fixed baseline identities for this student: " +
+                 " / ".join(baseline_names([groups[pool_inds[c][j]]["strongest_baseline"]]) for c in CAPS) + ".")])
     # Configuration measurements exclude dense anchors, repeats and test cells.
     # V53 counts scalar capability rows, whereas V55/V69 count configurations.
     # In V69 the QA zero rule still used the development panel for selection.
@@ -626,6 +632,7 @@ def build(audit):
              refs=[pointer(d70, "development_structure"), pointer(d70, "points"), pointer(f70, "inputs_sha256", d70)],
              note="100 registered checkpoints (25 trajectories times four) per capability, pooled across development students for the shared fit; not 100 per test student. The freeze authenticates develop.json; dense anchors excluded."),
     ]
+    counts.append(counts[-1])   # the second student row shares the distillation development count
     for row, count in zip(result, counts):
         row.append(count)
     result.append(efficiency_row(audit))
@@ -702,7 +709,7 @@ def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md", column
         for width in widths)
     lines = [f"% Generated from frozen JSON; see {sidecar}.",
              r"\begin{" + environment + r"}[t]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
-             r"\setlength{\tabcolsep}{1.5pt}", r"\renewcommand{\arraystretch}{0.92}",
+             r"\setlength{\tabcolsep}{1.5pt}", r"\renewcommand{\arraystretch}{0.88}",
              r"\setlength{\abovecaptionskip}{4pt}",
              r"\newcommand{\TableOneErrors}[3]{\setbox0=\hbox{#1 / #2 / #3}%",
              r"\ifdim\wd0>\linewidth #1\newline #2\newline #3\else\box0\fi}",

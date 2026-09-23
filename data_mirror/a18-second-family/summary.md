@@ -13,6 +13,7 @@
 | math | median_reduced | 0.026 | 0.030 |
 | math | per_density_reduced | 0.025 | 0.030 |
 | math | pythia_zero_calibration | 0.724 | 0.717 |
+| math | zero_change | 0.080 | 0.087 |
 | code | power_full | 0.028 | 0.037 |
 | code | quadratic_full | 0.062 | 0.064 |
 | code | strength_full | 0.031 | 0.037 |
@@ -24,6 +25,7 @@
 | code | median_reduced | 0.039 | 0.051 |
 | code | per_density_reduced | 0.035 | 0.046 |
 | code | pythia_zero_calibration | 1.883 | 1.864 |
+| code | zero_change | 0.091 | 0.108 |
 | qa | power_full | 0.055 | 0.051 |
 | qa | quadratic_full | 0.057 | 0.053 |
 | qa | strength_full | 0.069 | 0.060 |
@@ -35,6 +37,7 @@
 | qa | median_reduced | 0.074 | 0.048 |
 | qa | per_density_reduced | 0.062 | 0.043 |
 | qa | pythia_zero_calibration | 0.382 | 0.412 |
+| qa | zero_change | 0.132 | 0.161 |
 
 Item bootstrap (1000 resamples, seed 2027; states fixed): 95 percent interval of the mean absolute error and of the difference power_reduced minus per_density_full
 

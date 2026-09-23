@@ -18,7 +18,8 @@
        "strength_reduced": 0.00956499848819117,
        "median_reduced": 0.027098290103442946,
        "per_density_reduced": 0.03438819329690339,
-       "pythia_zero_calibration": 0.07524072264598917
+       "pythia_zero_calibration": 0.07524072264598917,
+       "zero_change": 0.0
       }
      },
      {
@@ -36,7 +37,8 @@
        "strength_reduced": 0.05716833310380169,
        "median_reduced": 0.07795613324069783,
        "per_density_reduced": 0.09749263599093934,
-       "pythia_zero_calibration": 0.5109586657835763
+       "pythia_zero_calibration": 0.5109586657835763,
+       "zero_change": 0.0
       }
      },
      {
@@ -54,7 +56,8 @@
        "strength_reduced": 0.18561097593624745,
        "median_reduced": 0.12881397637795272,
        "per_density_reduced": 0.16059707868497528,
-       "pythia_zero_calibration": 1.804537464156892
+       "pythia_zero_calibration": 1.804537464156892,
+       "zero_change": 0.0
       }
      }
     ],
@@ -69,7 +72,8 @@
      "strength_reduced": 0.005247825763868939,
      "median_reduced": 0.02645820467294528,
      "per_density_reduced": 0.024805972551838407,
-     "pythia_zero_calibration": 0.7077892334003645
+     "pythia_zero_calibration": 0.7077892334003645,
+     "zero_change": 0.08912305079512135
     },
     "mae_new": {
      "power_full": 0.014358766135039341,
@@ -82,7 +86,8 @@
      "strength_reduced": 0.010746149568148905,
      "median_reduced": 0.030543907068138365,
      "per_density_reduced": 0.028891674947031497,
-     "pythia_zero_calibration": 0.7020513654512568
+     "pythia_zero_calibration": 0.7020513654512568,
+     "zero_change": 0.09486091874422901
     }
    },
    "code": {
@@ -102,7 +107,8 @@
        "strength_reduced": 0.01317279765578329,
        "median_reduced": 0.03280571635311143,
        "per_density_reduced": 0.033940706144956576,
-       "pythia_zero_calibration": 0.32194692495501953
+       "pythia_zero_calibration": 0.32194692495501953,
+       "zero_change": 0.0
       }
      },
      {
@@ -120,7 +126,8 @@
        "strength_reduced": 0.07108515169151691,
        "median_reduced": 0.09251989869753978,
        "per_density_reduced": 0.09381852728768625,
-       "pythia_zero_calibration": 1.529054508573208
+       "pythia_zero_calibration": 1.529054508573208,
+       "zero_change": 0.0
       }
      },
      {
@@ -138,7 +145,8 @@
        "strength_reduced": 0.21577514257881167,
        "median_reduced": 0.15223408104196812,
        "per_density_reduced": 0.1536963484304159,
-       "pythia_zero_calibration": 4.26690994002395
+       "pythia_zero_calibration": 4.26690994002395,
+       "zero_change": 0.0
       }
      }
     ],
@@ -153,7 +161,8 @@
      "strength_reduced": 0.023477115369344274,
      "median_reduced": 0.027427038109020734,
      "per_density_reduced": 0.027750821773535342,
-     "pythia_zero_calibration": 1.9586236175226988
+     "pythia_zero_calibration": 1.9586236175226988,
+     "zero_change": 0.08068017366136042
     },
     "mae_new": {
      "power_full": 0.038454610524803895,
@@ -166,7 +175,8 @@
      "strength_reduced": 0.014627946513401607,
      "median_reduced": 0.027838564893381917,
      "per_density_reduced": 0.028162348557896524,
-     "pythia_zero_calibration": 1.9413946185221889
+     "pythia_zero_calibration": 1.9413946185221889,
+     "zero_change": 0.09790917266187053
     }
    },
    "qa": {
@@ -186,7 +196,8 @@
        "strength_reduced": 0.03852416682524867,
        "median_reduced": 0.05881366292938896,
        "per_density_reduced": 0.05750292745170184,
-       "pythia_zero_calibration": -0.05638700786126268
+       "pythia_zero_calibration": -0.05638700786126268,
+       "zero_change": 0.0
       }
      },
      {
@@ -204,7 +215,8 @@
        "strength_reduced": 0.1126200275012675,
        "median_reduced": 0.13803450023854988,
        "per_density_reduced": 0.12172231339037197,
-       "pythia_zero_calibration": -0.26780441716367565
+       "pythia_zero_calibration": -0.26780441716367565,
+       "zero_change": 0.0
       }
      },
      {
@@ -222,7 +234,8 @@
        "strength_reduced": 0.2282887467745984,
        "median_reduced": 0.21725533754771081,
        "per_density_reduced": 0.1859416993290421,
-       "pythia_zero_calibration": -0.7473228215024738
+       "pythia_zero_calibration": -0.7473228215024738,
+       "zero_change": 0.0
       }
      }
     ],
@@ -237,7 +250,8 @@
      "strength_reduced": 0.07719727171563891,
      "median_reduced": 0.08875412492048394,
      "per_density_reduced": 0.07244193807230602,
-     "pythia_zero_calibration": 0.40645179082720334
+     "pythia_zero_calibration": 0.40645179082720334,
+     "zero_change": 0.04928037531806595
     },
     "mae_new": {
      "power_full": 0.06074735978911968,
@@ -250,7 +264,8 @@
      "strength_reduced": 0.04004741254442234,
      "median_reduced": 0.033048003324969724,
      "per_density_reduced": 0.0221520365622226,
-     "pythia_zero_calibration": 0.46215791242271753
+     "pythia_zero_calibration": 0.46215791242271753,
+     "zero_change": 0.10498649691358015
     }
    },
    "cost": {
@@ -277,7 +292,8 @@
        "strength_reduced": 0.00956499848819117,
        "median_reduced": 0.027098290103442946,
        "per_density_reduced": 0.0369935984801151,
-       "pythia_zero_calibration": 0.08905200505996334
+       "pythia_zero_calibration": 0.08905200505996334,
+       "zero_change": 0.0
       }
      },
      {
@@ -295,7 +311,8 @@
        "strength_reduced": 0.05716833310380169,
        "median_reduced": 0.07795613324069783,
        "per_density_reduced": 0.10487790442012221,
-       "pythia_zero_calibration": 0.6047508860976724
+       "pythia_zero_calibration": 0.6047508860976724,
+       "zero_change": 0.0
       }
      },
      {
@@ -313,7 +330,8 @@
        "strength_reduced": 0.18561097593624745,
        "median_reduced": 0.12881397637795272,
        "per_density_reduced": 0.1727622103601293,
-       "pythia_zero_calibration": 2.13578064826786
+       "pythia_zero_calibration": 2.13578064826786,
+       "zero_change": 0.0
       }
      }
     ],
@@ -328,7 +346,8 @@
      "strength_reduced": 0.01907729505118572,
      "median_reduced": 0.03602410452369923,
      "per_density_reduced": 0.033647053048339225,
-     "pythia_zero_calibration": 0.8400024489145661
+     "pythia_zero_calibration": 0.8400024489145661,
+     "zero_change": 0.10319206422726583
     },
     "mae_new": {
      "power_full": 0.012136526492638326,
@@ -341,7 +360,8 @@
      "strength_reduced": 0.028405429346542263,
      "median_reduced": 0.04283615083545141,
      "per_density_reduced": 0.0404590993600914,
-     "pythia_zero_calibration": 0.8306743146192095
+     "pythia_zero_calibration": 0.8306743146192095,
+     "zero_change": 0.11252019852262236
     }
    },
    "code": {
@@ -361,7 +381,8 @@
        "strength_reduced": 0.01317279765578329,
        "median_reduced": 0.03280571635311143,
        "per_density_reduced": 0.04085851494316234,
-       "pythia_zero_calibration": 0.349591517150519
+       "pythia_zero_calibration": 0.349591517150519,
+       "zero_change": 0.0
       }
      },
      {
@@ -379,7 +400,8 @@
        "strength_reduced": 0.07108515169151691,
        "median_reduced": 0.09251989869753978,
        "per_density_reduced": 0.11065209785869173,
-       "pythia_zero_calibration": 1.6603497161298633
+       "pythia_zero_calibration": 1.6603497161298633,
+       "zero_change": 0.0
       }
      },
      {
@@ -397,7 +419,8 @@
        "strength_reduced": 0.21577514257881167,
        "median_reduced": 0.15223408104196812,
        "per_density_reduced": 0.18044568077422113,
-       "pythia_zero_calibration": 4.633296372332212
+       "pythia_zero_calibration": 4.633296372332212,
+       "zero_change": 0.0
       }
      }
     ],
@@ -412,7 +435,8 @@
      "strength_reduced": 0.034718581513278106,
      "median_reduced": 0.06958815726000962,
      "per_density_reduced": 0.06891262326632625,
-     "pythia_zero_calibration": 2.103872255416451
+     "pythia_zero_calibration": 2.103872255416451,
+     "zero_change": 0.1180173661360348
     },
     "mae_new": {
      "power_full": 0.033808393285197164,
@@ -425,7 +449,8 @@
      "strength_reduced": 0.05595308865846086,
      "median_reduced": 0.08513023156004866,
      "per_density_reduced": 0.08445469756636527,
-     "pythia_zero_calibration": 2.0668306007517603
+     "pythia_zero_calibration": 2.0668306007517603,
+     "zero_change": 0.14758193445243797
     }
    },
    "qa": {
@@ -445,7 +470,8 @@
        "strength_reduced": 0.03852416682524867,
        "median_reduced": 0.05881366292938896,
        "per_density_reduced": 0.06641650080112874,
-       "pythia_zero_calibration": 0.0035126145984503416
+       "pythia_zero_calibration": 0.0035126145984503416,
+       "zero_change": 0.0
       }
      },
      {
@@ -463,7 +489,8 @@
        "strength_reduced": 0.1126200275012675,
        "median_reduced": 0.13803450023854988,
        "per_density_reduced": 0.15361967754700037,
-       "pythia_zero_calibration": 0.016682809408386068
+       "pythia_zero_calibration": 0.016682809408386068,
+       "zero_change": 0.0
       }
      },
      {
@@ -481,7 +508,8 @@
        "strength_reduced": 0.2282887467745984,
        "median_reduced": 0.21725533754771081,
        "per_density_reduced": 0.24082285429287198,
-       "pythia_zero_calibration": 0.04655428887135677
+       "pythia_zero_calibration": 0.04655428887135677,
+       "zero_change": 0.0
       }
      }
     ],
@@ -496,7 +524,8 @@
      "strength_reduced": 0.11864202535815305,
      "median_reduced": 0.10708517215330803,
      "per_density_reduced": 0.09149999484485755,
-     "pythia_zero_calibration": 0.22286976809912687
+     "pythia_zero_calibration": 0.22286976809912687,
+     "zero_change": 0.24511967239185792
     },
     "mae_new": {
      "power_full": 0.035055672300055636,
@@ -509,7 +538,8 @@
      "strength_reduced": 0.0783545288922214,
      "median_reduced": 0.06679767568737636,
      "per_density_reduced": 0.051212498378925886,
-     "pythia_zero_calibration": 0.1825822716331952
+     "pythia_zero_calibration": 0.1825822716331952,
+     "zero_change": 0.20483217592592626
     }
    },
    "cost": {
@@ -536,7 +566,8 @@
        "strength_reduced": 0.00956499848819117,
        "median_reduced": 0.027098290103442946,
        "per_density_reduced": 0.0214951557540093,
-       "pythia_zero_calibration": 0.06387011366661653
+       "pythia_zero_calibration": 0.06387011366661653,
+       "zero_change": 0.0
       }
      },
      {
@@ -554,7 +585,8 @@
        "strength_reduced": 0.05716833310380169,
        "median_reduced": 0.07795613324069783,
        "per_density_reduced": 0.0612906719329355,
-       "pythia_zero_calibration": 0.43374102367528766
+       "pythia_zero_calibration": 0.43374102367528766,
+       "zero_change": 0.0
       }
      },
      {
@@ -572,7 +604,8 @@
        "strength_reduced": 0.18561097593624745,
        "median_reduced": 0.12881397637795272,
        "per_density_reduced": 0.1010861881118617,
-       "pythia_zero_calibration": 1.5318302230250118
+       "pythia_zero_calibration": 1.5318302230250118,
+       "zero_change": 0.0
       }
      }
     ],
@@ -587,7 +620,8 @@
      "strength_reduced": 0.029980910908363592,
      "median_reduced": 0.02444466960012348,
      "per_density_reduced": 0.026264400469755162,
-     "pythia_zero_calibration": 0.6223465951879222
+     "pythia_zero_calibration": 0.6223465951879222,
+     "zero_change": 0.054133858267716516
     },
     "mae_new": {
      "power_full": 0.004652019912573186,
@@ -600,7 +634,8 @@
      "strength_reduced": 0.01782754618439034,
      "median_reduced": 0.029267071888082974,
      "per_density_reduced": 0.031086802757714655,
-     "pythia_zero_calibration": 0.6101932304639489
+     "pythia_zero_calibration": 0.6101932304639489,
+     "zero_change": 0.06628722299168976
     }
    },
    "code": {
@@ -620,7 +655,8 @@
        "strength_reduced": 0.01317279765578329,
        "median_reduced": 0.03280571635311143,
        "per_density_reduced": 0.025600840731976895,
-       "pythia_zero_calibration": 0.26900693597059633
+       "pythia_zero_calibration": 0.26900693597059633,
+       "zero_change": 0.0
       }
      },
      {
@@ -638,7 +674,8 @@
        "strength_reduced": 0.07108515169151691,
        "median_reduced": 0.09251989869753978,
        "per_density_reduced": 0.07390879701213607,
-       "pythia_zero_calibration": 1.2776213605418738
+       "pythia_zero_calibration": 1.2776213605418738,
+       "zero_change": 0.0
       }
      },
      {
@@ -656,7 +693,8 @@
        "strength_reduced": 0.21577514257881167,
        "median_reduced": 0.15223408104196812,
        "per_density_reduced": 0.12221675329229523,
-       "pythia_zero_calibration": 3.565272037273508
+       "pythia_zero_calibration": 3.565272037273508,
+       "zero_change": 0.0
       }
      }
     ],
@@ -671,7 +709,8 @@
      "strength_reduced": 0.04107470647416457,
      "median_reduced": 0.03358357452966706,
      "per_density_reduced": 0.015043117779163567,
-     "pythia_zero_calibration": 1.6450304537607867
+     "pythia_zero_calibration": 1.6450304537607867,
+     "zero_change": 0.05893632416787272
     },
     "mae_new": {
      "power_full": 0.024191590771935768,
@@ -684,7 +723,8 @@
      "strength_reduced": 0.04521736557409153,
      "median_reduced": 0.03772623362959401,
      "per_density_reduced": 0.019115131944190292,
-     "pythia_zero_calibration": 1.6491731128607137
+     "pythia_zero_calibration": 1.6491731128607137,
+     "zero_change": 0.05479366506794577
     }
    },
    "qa": {
@@ -704,7 +744,8 @@
        "strength_reduced": 0.03852416682524867,
        "median_reduced": 0.05881366292938896,
        "per_density_reduced": 0.03926717840598183,
-       "pythia_zero_calibration": -0.08115024987694985
+       "pythia_zero_calibration": -0.08115024987694985,
+       "zero_change": 0.0
       }
      },
      {
@@ -722,7 +763,8 @@
        "strength_reduced": 0.1126200275012675,
        "median_reduced": 0.13803450023854988,
        "per_density_reduced": 0.10521860357049659,
-       "pythia_zero_calibration": -0.38541494211671296
+       "pythia_zero_calibration": -0.38541494211671296,
+       "zero_change": 0.0
       }
      },
      {
@@ -740,7 +782,8 @@
        "strength_reduced": 0.2282887467745984,
        "median_reduced": 0.21725533754771081,
        "per_density_reduced": 0.17117002873501133,
-       "pythia_zero_calibration": -1.0755214011867393
+       "pythia_zero_calibration": -1.0755214011867393,
+       "zero_change": 0.0
       }
      }
     ],
@@ -755,7 +798,8 @@
      "strength_reduced": 0.040182322606224036,
      "median_reduced": 0.05173917581106907,
      "per_density_reduced": 0.029372585686086753,
-     "pythia_zero_calibration": 0.6003241888209482
+     "pythia_zero_calibration": 0.6003241888209482,
+     "zero_change": 0.08629532442748082
     },
     "mae_new": {
      "power_full": 0.06615287112520254,
@@ -768,7 +812,8 @@
      "strength_reduced": 0.009064405435430604,
      "median_reduced": 0.01722345730550813,
      "per_density_reduced": 0.030323448898638874,
-     "pythia_zero_calibration": 0.6495709168626028
+     "pythia_zero_calibration": 0.6495709168626028,
+     "zero_change": 0.13554205246913545
     }
    },
    "cost": {
@@ -795,7 +840,8 @@
        "strength_reduced": 0.00956499848819117,
        "median_reduced": 0.027098290103442946,
        "per_density_reduced": 0.024192688231764098,
-       "pythia_zero_calibration": 0.07536032177337758
+       "pythia_zero_calibration": 0.07536032177337758,
+       "zero_change": 0.0
       }
      },
      {
@@ -813,7 +859,8 @@
        "strength_reduced": 0.05716833310380169,
        "median_reduced": 0.07795613324069783,
        "per_density_reduced": 0.06893753658473883,
-       "pythia_zero_calibration": 0.5117708617382428
+       "pythia_zero_calibration": 0.5117708617382428,
+       "zero_change": 0.0
       }
      },
      {
@@ -831,7 +878,8 @@
        "strength_reduced": 0.18561097593624745,
        "median_reduced": 0.12881397637795272,
        "per_density_reduced": 0.11368238493771356,
-       "pythia_zero_calibration": 1.8074058723600976
+       "pythia_zero_calibration": 1.8074058723600976,
+       "zero_change": 0.0
       }
      }
     ],
@@ -846,7 +894,8 @@
      "strength_reduced": 0.01919615525880118,
      "median_reduced": 0.01596595002830529,
      "per_density_reduced": 0.017035080999172395,
-     "pythia_zero_calibration": 0.7258397154485676
+     "pythia_zero_calibration": 0.7258397154485676,
+     "zero_change": 0.07233930317533839
     },
     "mae_new": {
      "power_full": 0.00929903124729873,
@@ -859,7 +908,8 @@
      "strength_reduced": 0.017299003708910285,
      "median_reduced": 0.01773948647718737,
      "per_density_reduced": 0.01880861744805448,
-     "pythia_zero_calibration": 0.7250675804890953
+     "pythia_zero_calibration": 0.7250675804890953,
+     "zero_change": 0.07311143813481073
     }
    },
    "code": {
@@ -879,7 +929,8 @@
        "strength_reduced": 0.01317279765578329,
        "median_reduced": 0.03280571635311143,
        "per_density_reduced": 0.032288373058298764,
-       "pythia_zero_calibration": 0.30522129149780136
+       "pythia_zero_calibration": 0.30522129149780136,
+       "zero_change": 0.0
       }
      },
      {
@@ -897,7 +948,8 @@
        "strength_reduced": 0.07108515169151691,
        "median_reduced": 0.09251989869753978,
        "per_density_reduced": 0.09011514585964772,
-       "pythia_zero_calibration": 1.4496177962950105
+       "pythia_zero_calibration": 1.4496177962950105,
+       "zero_change": 0.0
       }
      },
      {
@@ -915,7 +967,8 @@
        "strength_reduced": 0.21577514257881167,
        "median_reduced": 0.15223408104196812,
        "per_density_reduced": 0.14794191866099668,
-       "pythia_zero_calibration": 4.045237465091095
+       "pythia_zero_calibration": 4.045237465091095,
+       "zero_change": 0.0
       }
      }
     ],
@@ -930,7 +983,8 @@
      "strength_reduced": 0.015112581053050916,
      "median_reduced": 0.02614266763145202,
      "per_density_reduced": 0.028202524939468964,
-     "pythia_zero_calibration": 1.8261953198469751
+     "pythia_zero_calibration": 1.8261953198469751,
+     "zero_change": 0.10716353111432715
     },
     "mae_new": {
      "power_full": 0.05340519754596811,
@@ -943,7 +997,8 @@
      "strength_reduced": 0.03349466480160774,
      "median_reduced": 0.0519150273124481,
      "per_density_reduced": 0.05397488462046504,
-     "pythia_zero_calibration": 1.7998531555176571
+     "pythia_zero_calibration": 1.7998531555176571,
+     "zero_change": 0.13350569544364502
     }
    },
    "qa": {
@@ -963,7 +1018,8 @@
        "strength_reduced": 0.03852416682524867,
        "median_reduced": 0.05881366292938896,
        "per_density_reduced": 0.04802586926174468,
-       "pythia_zero_calibration": -0.024213052223625957
+       "pythia_zero_calibration": -0.024213052223625957,
+       "zero_change": 0.0
       }
      },
      {
@@ -981,7 +1037,8 @@
        "strength_reduced": 0.1126200275012675,
        "median_reduced": 0.13803450023854988,
        "per_density_reduced": 0.13667255571140918,
-       "pythia_zero_calibration": -0.11499745392513516
+       "pythia_zero_calibration": -0.11499745392513516,
+       "zero_change": 0.0
       }
      },
      {
@@ -999,7 +1056,8 @@
        "strength_reduced": 0.2282887467745984,
        "median_reduced": 0.21725533754771081,
        "per_density_reduced": 0.22531924216107369,
-       "pythia_zero_calibration": -0.32090666256788486
+       "pythia_zero_calibration": -0.32090666256788486,
+       "zero_change": 0.0
       }
      }
     ],
@@ -1014,7 +1072,8 @@
      "strength_reduced": 0.0687332986531776,
      "median_reduced": 0.04982083929707417,
      "per_density_reduced": 0.05655872023312345,
-     "pythia_zero_calibration": 0.2990864480963883
+     "pythia_zero_calibration": 0.2990864480963883,
+     "zero_change": 0.14571405852417296
     },
     "mae_new": {
      "power_full": 0.040550406899132946,
@@ -1027,7 +1086,8 @@
      "strength_reduced": 0.07323782364530737,
      "median_reduced": 0.07300620560326503,
      "per_density_reduced": 0.06717628768530953,
-     "pythia_zero_calibration": 0.35308786025122757
+     "pythia_zero_calibration": 0.35308786025122757,
+     "zero_change": 0.1997154706790122
     }
    },
    "cost": {
@@ -1082,6 +1142,10 @@
    "pythia_zero_calibration": {
     "probes": 0.7239944982378551,
     "new": 0.7169966227558776
+   },
+   "zero_change": {
+    "probes": 0.07969706911636053,
+    "new": 0.08669494459833797
    }
   },
   "code": {
@@ -1128,6 +1192,10 @@
    "pythia_zero_calibration": {
     "probes": 1.8834304116367278,
     "new": 1.8643128719130801
+   },
+   "zero_change": {
+    "probes": 0.09119934876989877,
+    "new": 0.10844761690647481
    }
   },
   "qa": {
@@ -1174,6 +1242,10 @@
    "pythia_zero_calibration": {
     "probes": 0.3821830489609167,
     "new": 0.41184974029243576
+   },
+   "zero_change": {
+    "probes": 0.1316023576653944,
+    "new": 0.16126904899691352
    }
   }
  },
