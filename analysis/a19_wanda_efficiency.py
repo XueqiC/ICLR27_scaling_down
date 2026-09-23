@@ -18,8 +18,8 @@ Stages
   --score            score the frozen predictions on the measured test states (score.json, summary.md)
   --table            cost.json, per_state.md and paper/paper/tables/wanda_efficiency.tex
 
-Hosts: any machine with the Pythia checkpoints in its HF cache (rai) or network access to download them (hpg);
-set HF_HUB_CACHE for a project-local cache. Development states may be measured on several hosts and the
+Hosts: any machine with the Pythia checkpoints in its HF cache or network access to download them; set
+HF_HUB_CACHE for a project-local cache. Development states may be measured on several hosts and the
 measurement files gathered before --freeze.
 """
 from __future__ import annotations
