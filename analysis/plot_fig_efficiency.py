@@ -26,8 +26,10 @@ A18 = "results/a18-second-family/score.json"
 A18_COST = "results/a18-second-family/cost.json"
 PANEL_SIZE = (2.7, 1.3)
 THIRD_SIZE = (1.8, 0.95)
+FOUR_SIZE = (1.35, 0.95)
 SECOND_FAMILY = (("power_reduced", "power"), ("per_density_full", "A2"))
-COST_ITEMS = (("configurations", "Cells"), ("tokens", "Tokens"), ("seconds", "Seconds"))
+# The configuration count halves by construction (12 of 24), so the panel shows the two measured costs.
+COST_ITEMS = (("tokens", "Tokens"), ("seconds", "Seconds"))
 LEGEND_SIZE = (5.5, .3)
 METHODS = ("power", "A2", "median_curve")
 CONFIRM_METHODS = ("power_18", "A2_36", "median_curve_36")
@@ -36,13 +38,11 @@ LINES = {"power": "-", "A2": "--", "median_curve": ":"}
 LABELS = {"power": "Power form", "A2": "Per-density regression", "median_curve": "Median curve"}
 CAPTION = """Measurement efficiency for Math (blue) and Code (orange); QA is
 shown separately in the appendix panels eff_qa_a and eff_qa_b. Main panels: (a) the retrospective
-A9 learning curves below; (b) the pre-registered second-family confirmation on OLMo-2 (A18): mean
-absolute error of the compact power form fitted on the reduced grid of 12 configurations (circles)
-against the per-density regression fitted on the full grid of 24 (squares), over the four test
-states at densities 0.85, 0.75 and 0.65, on the development probes and on the new items; (c) the
-recorded cost of the reduced grid as a share of the full grid: configuration cells, evaluation tokens and
-GPU seconds, dense anchors and model loading included. The Pythia confirmation panel (eff_confirm)
-is the former main panel (b) and now sits in the appendix. (a) Retrospective
+A9 learning curves below; (b) the registered A11 confirmation, one group per Pythia test state in the
+order named below; (c) the pre-registered second-family confirmation on OLMo-2 (A18): mean absolute
+error of the compact power form fitted on the reduced grid of 12 configurations (circles) against the
+per-density regression fitted on the full grid of 24 (squares), over the four test states at densities
+0.85, 0.75 and 0.65, on the development probes (P) and on the new items (N). (a) Retrospective
 A9 learning curves on the 42 new-state, in-range cells per capability, along the
 densities-reduction axis. The nine development states are retained; the budgets
 are 9, 18 and 36 state-density measurements per capability, excluding dense
@@ -181,11 +181,13 @@ def draw_confirmation(fig, result, capabilities, size=PANEL_SIZE):
             for mi, (method, frozen_method) in enumerate(zip(METHODS, CONFIRM_METHODS)):
                 x = index + (ci - (len(capabilities)-1)/2) * .30 + (mi-1) * .085
                 ax.plot(x, row["mae"][frozen_method], ls="", marker=MARKERS[method], color=CAPABILITY_COLORS[cap])
-        labels.append(row["size"].upper() + "\n" + str(row["step"] // 1000) + "k")
+        labels.append(str(index + 1) if size[0] < 2.2 else row["size"].upper() + "\n" + str(row["step"] // 1000) + "k")
     ymax = max(r["mae"][m] for r in result["records"] if r["capability"] in capabilities for m in CONFIRM_METHODS)
     row_axis_style(ax)
     ax.set(xlim=(-.5, 3.5), ylim=(0, ymax * 1.12), xticks=range(4), xticklabels=labels,
            xlabel=("Pythia state" if size[0] < 2.2 else "Pythia size / training step"), ylabel="MAE (nats)")
+    if size[0] < 2.2:   # narrow panels: the states are numbered and named in the caption
+        ax.set_xlabel("Pythia test state")
     ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
     return ax
 
@@ -228,11 +230,11 @@ def draw_second_family(fig, rows, capabilities, size=THIRD_SIZE):
         for mi, (_, method) in enumerate(SECOND_FAMILY):
             x = index + (mi - .5) * .28
             ax.plot(x, row["mae"][method], ls="", marker=MARKERS[method], color=CAPABILITY_COLORS[cap])
-        labels.append("Probes" if block == "probes" else "New")
+        labels.append(("Probes" if block == "probes" else "New") if size[0] >= 1.6 else ("P" if block == "probes" else "N"))
     ymax = max(r["mae"][m] for r in rows if r["capability"] in capabilities for _, m in SECOND_FAMILY)
     row_axis_style(ax)
     ax.set(xlim=(-.5, len(groups) - .5), ylim=(0, ymax * 1.15), xticks=range(len(groups)), xticklabels=labels,
-           xlabel="OLMo-2 test items", ylabel="MAE (nats)")
+           xlabel=("OLMo-2 test items" if size[0] >= 1.6 else "OLMo-2 items"), ylabel="MAE (nats)")
     ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
     return ax
 
@@ -275,9 +277,8 @@ def generate(root=ROOT):
     confirm_rows = [r for r in result["records"] if r["capability"] in caps]
     for suffix, size, kind, draw, records in (
         ("a", THIRD_SIZE, "panel", lambda f: draw_learning(f, curves, caps, THIRD_SIZE), main_rows),
-        ("b", THIRD_SIZE, "panel", lambda f: draw_second_family(f, family, caps), family_rows),
-        ("c", THIRD_SIZE, "panel", lambda f: draw_cost(f, cost), cost),
-        ("confirm", PANEL_SIZE, "double", lambda f: draw_confirmation(f, result, caps), confirm_rows),
+        ("b", THIRD_SIZE, "panel", lambda f: draw_confirmation(f, result, caps, THIRD_SIZE), confirm_rows),
+        ("c", THIRD_SIZE, "panel", lambda f: draw_second_family(f, family, caps, THIRD_SIZE), family_rows),
         ("legend", LEGEND_SIZE, "legend", lambda f: draw_legend(f, caps), [])):
         apply_style(kind)
         fig = plt.figure(figsize=size)
