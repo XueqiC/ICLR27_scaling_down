@@ -7328,6 +7328,7335 @@
      }
     ]
    }
+  },
+  "gemma3-1b|distill:eos_control": {
+   "reference": "gemma3-1b",
+   "candidate": "distill:eos_control",
+   "run": "results/v12-distill/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora",
+   "seconds": 251.7,
+   "training": {
+    "student": "google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "teacher": "gpt-5.6-luna",
+    "recipe": "full",
+    "n_per_domain": 600,
+    "epochs": 2,
+    "seed": 0,
+    "data_seed": null,
+    "learning_rate": 0.0001,
+    "training_mode": "lora",
+    "append_eos": true
+   },
+   "short": {
+    "exact_match": 0.11979166666666667,
+    "token_f1": 0.17141565032190031,
+    "loss_token_weighted": 5.465410740335521,
+    "items": [
+     {
+      "loss_sum": 19.375,
+      "tokens": 1,
+      "loss": 19.375,
+      "generation": " **Ed Red**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.875,
+      "tokens": 3,
+      "loss": 4.958333333333333,
+      "generation": " **William D. Russell**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.5,
+      "tokens": 1,
+      "loss": 15.5,
+      "generation": " Both films are directed and **produced by** **The Knockout Kid**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 40.75,
+      "tokens": 6,
+      "loss": 6.791666666666667,
+      "generation": " **Somewhere I\u2019ll Find You**.",
+      "exact_match": false,
+      "token_f1": 0.75
+     },
+     {
+      "loss_sum": 13.375,
+      "tokens": 1,
+      "loss": 13.375,
+      "generation": " Austria-Hungary",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.4375,
+      "tokens": 2,
+      "loss": 7.71875,
+      "generation": " **Bada Kabutar**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 24.875,
+      "tokens": 6,
+      "loss": 4.145833333333333,
+      "generation": "",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.625,
+      "tokens": 8,
+      "loss": 1.828125,
+      "generation": " Cane Toads: An Unnatural History.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 24.25,
+      "tokens": 4,
+      "loss": 6.0625,
+      "generation": " **Miracle of Marcelino**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 13.3125,
+      "tokens": 2,
+      "loss": 6.65625,
+      "generation": " The place of death of the director of film was **Canada**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.3125,
+      "tokens": 1,
+      "loss": 11.3125,
+      "generation": " **United States**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.375,
+      "tokens": 6,
+      "loss": 3.2291666666666665,
+      "generation": " Margaret of Valois.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.625,
+      "tokens": 7,
+      "loss": 2.232142857142857,
+      "generation": " **The Gentle Art of Burglary**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 34.75,
+      "tokens": 3,
+      "loss": 11.583333333333334,
+      "generation": " Denis-Benjamin Papineau.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.125,
+      "tokens": 4,
+      "loss": 2.53125,
+      "generation": " **Damian Harris**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.5625,
+      "tokens": 3,
+      "loss": 3.8541666666666665,
+      "generation": " **The Color of Money**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.375,
+      "tokens": 6,
+      "loss": 3.3958333333333335,
+      "generation": " **My Husband\u2019s Other Wife**.",
+      "exact_match": false,
+      "token_f1": 0.75
+     },
+     {
+      "loss_sum": 16.375,
+      "tokens": 3,
+      "loss": 5.458333333333333,
+      "generation": " **The Wonderful World of Captain Kuhio**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 7.46875,
+      "tokens": 1,
+      "loss": 7.46875,
+      "generation": " Anne Lennard, Countess of Sussex.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.8125,
+      "tokens": 1,
+      "loss": 14.8125,
+      "generation": " Yes.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 15.3125,
+      "tokens": 3,
+      "loss": 5.104166666666667,
+      "generation": " **Mani Madhava Chakyar**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.9375,
+      "tokens": 1,
+      "loss": 12.9375,
+      "generation": " Both are located in **Bolivia**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.375,
+      "tokens": 1,
+      "loss": 23.375,
+      "generation": " The director of **The Phantom Carriage** was **Arne Mattsson**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.125,
+      "tokens": 9,
+      "loss": 3.4583333333333335,
+      "generation": " Georg Ludwig Hartig.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.25,
+      "tokens": 4,
+      "loss": 4.8125,
+      "generation": " A WomanForLife.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.4375,
+      "tokens": 1,
+      "loss": 14.4375,
+      "generation": " **United States**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.625,
+      "tokens": 1,
+      "loss": 13.625,
+      "generation": " **Berkan Emir** was born in **1988**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 22.375,
+      "tokens": 3,
+      "loss": 7.458333333333333,
+      "generation": " Sally Bercow studied at **University of Bedfordshire**.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 12.8125,
+      "tokens": 2,
+      "loss": 6.40625,
+      "generation": " Oleg Kerensky was born in **1970**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.125,
+      "tokens": 2,
+      "loss": 4.5625,
+      "generation": " **Lord Frederick Cavendish-Bentinck**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.75,
+      "tokens": 5,
+      "loss": 2.95,
+      "generation": " The date of birth of Iseabail N\u00ed Mheic Cail\u00e9in is unknown.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 25.875,
+      "tokens": 6,
+      "loss": 4.3125,
+      "generation": " Anne Russell.",
+      "exact_match": false,
+      "token_f1": 0.5714285714285715
+     },
+     {
+      "loss_sum": 14.6875,
+      "tokens": 1,
+      "loss": 14.6875,
+      "generation": " Both buildings, El Adobe De Capistrano and Haberkorn House And Farmstead, are **Historic Houses and Farmstead** in **South Carolina**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.0,
+      "tokens": 3,
+      "loss": 9.0,
+      "generation": " **California**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 3,
+      "loss": 5.333333333333333,
+      "generation": " **Denys Desjardins**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.125,
+      "tokens": 7,
+      "loss": 4.446428571428571,
+      "generation": " **No, No, Nanette**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 38.25,
+      "tokens": 6,
+      "loss": 6.375,
+      "generation": " Ludovico Sabbatini.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.625,
+      "tokens": 4,
+      "loss": 5.15625,
+      "generation": " The **Cruel Truth**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 18.0,
+      "tokens": 2,
+      "loss": 9.0,
+      "generation": " Lowell Bergman.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.375,
+      "tokens": 2,
+      "loss": 9.1875,
+      "generation": " **William Paget, 5th Baron Paget**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.5,
+      "tokens": 1,
+      "loss": 11.5,
+      "generation": " **William Logan**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.125,
+      "tokens": 2,
+      "loss": 8.0625,
+      "generation": " **To Grab The Ring**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.75,
+      "tokens": 4,
+      "loss": 2.9375,
+      "generation": " Claudio O'Connor.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 26.0,
+      "tokens": 3,
+      "loss": 8.666666666666666,
+      "generation": " **Under The Lantern**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 12.1875,
+      "tokens": 2,
+      "loss": 6.09375,
+      "generation": " James Murdoch.",
+      "exact_match": false,
+      "token_f1": 0.5
+     },
+     {
+      "loss_sum": 17.375,
+      "tokens": 1,
+      "loss": 17.375,
+      "generation": " Both are **British-based**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.75,
+      "tokens": 1,
+      "loss": 13.75,
+      "generation": " Both directors are from **England**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.25,
+      "tokens": 4,
+      "loss": 4.3125,
+      "generation": " Me and You Versus the World.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.625,
+      "tokens": 4,
+      "loss": 4.40625,
+      "generation": " **Los Angeles, California**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 29.375,
+      "tokens": 2,
+      "loss": 14.6875,
+      "generation": " Teen Maar.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 18.875,
+      "tokens": 1,
+      "loss": 18.875,
+      "generation": " Richie Mehta.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 9,
+      "loss": 1.7777777777777777,
+      "generation": " Simon de Montfort, 6th Earl of Leicester.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 6.6875,
+      "tokens": 4,
+      "loss": 1.671875,
+      "generation": " Both were born in **1939**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 6.96875,
+      "tokens": 1,
+      "loss": 6.96875,
+      "generation": " **Prince Nikolaus Wilhelm of Nassau**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.125,
+      "tokens": 2,
+      "loss": 5.5625,
+      "generation": " **Captain Fury**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 13.625,
+      "tokens": 2,
+      "loss": 6.8125,
+      "generation": " **Prince Bhanurangsi Savangwongse**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 44.75,
+      "tokens": 6,
+      "loss": 7.458333333333333,
+      "generation": " **Light And The Sufferer**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 16.5,
+      "tokens": 4,
+      "loss": 4.125,
+      "generation": " Radu Duda.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.5625,
+      "tokens": 1,
+      "loss": 12.5625,
+      "generation": " **The Communist**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.3125,
+      "tokens": 2,
+      "loss": 7.15625,
+      "generation": " **Taiwanese **Edward Yang.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.8125,
+      "tokens": 3,
+      "loss": 4.270833333333333,
+      "generation": "",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 35.75,
+      "tokens": 4,
+      "loss": 8.9375,
+      "generation": " **The Hitler Gang**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.25,
+      "tokens": 2,
+      "loss": 7.125,
+      "generation": " Iulla Antonia is a **French** politician.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 1,
+      "loss": 16.0,
+      "generation": " Kongakut River and Wetbutt Creek both are located in **Alaska**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.625,
+      "tokens": 2,
+      "loss": 11.8125,
+      "generation": " Godan Khan is a **British** politician.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.875,
+      "tokens": 9,
+      "loss": 2.2083333333333335,
+      "generation": " Humphrey de Bohun, 7Th Earl of Hereford.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.625,
+      "tokens": 9,
+      "loss": 1.9583333333333333,
+      "generation": " Albert John Charles Frederick Alfred George.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.0,
+      "tokens": 3,
+      "loss": 6.0,
+      "generation": " **Anjan Choudhury**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.125,
+      "tokens": 3,
+      "loss": 3.375,
+      "generation": " Peggy Pettitt.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 15.25,
+      "tokens": 1,
+      "loss": 15.25,
+      "generation": " Both Caracu River and South Fork Rogue River are located in theUnited States.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.5,
+      "tokens": 2,
+      "loss": 9.25,
+      "generation": " Mary Ann Angell.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.25,
+      "tokens": 2,
+      "loss": 10.625,
+      "generation": " Sibylla of Armenia.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.9375,
+      "tokens": 4,
+      "loss": 2.984375,
+      "generation": " Konrad III the Old.",
+      "exact_match": false,
+      "token_f1": 0.3333333333333333
+     },
+     {
+      "loss_sum": 16.375,
+      "tokens": 2,
+      "loss": 8.1875,
+      "generation": " Elisabeth Magdalena of Pomerania.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.0,
+      "tokens": 4,
+      "loss": 4.25,
+      "generation": " **A Night of Adventure**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.625,
+      "tokens": 1,
+      "loss": 12.625,
+      "generation": " **Norway**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.25,
+      "tokens": 2,
+      "loss": 9.625,
+      "generation": " The director of film Bangalore Naatkal was **S.N. Mathur**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 25.75,
+      "tokens": 5,
+      "loss": 5.15,
+      "generation": " **The Heat\u2019s On**.",
+      "exact_match": false,
+      "token_f1": 0.5
+     },
+     {
+      "loss_sum": 18.875,
+      "tokens": 3,
+      "loss": 6.291666666666667,
+      "generation": " End of Watch.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 30.25,
+      "tokens": 6,
+      "loss": 5.041666666666667,
+      "generation": " **Blue Demon**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 41.5,
+      "tokens": 7,
+      "loss": 5.928571428571429,
+      "generation": " Marie Th\u00e9r\u00e8se de Bourbon.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 22.0,
+      "tokens": 1,
+      "loss": 22.0,
+      "generation": " **Olav Aaraas**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.75,
+      "tokens": 1,
+      "loss": 17.75,
+      "generation": " Jean-Pierre Eckmann was born in **1923**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.5,
+      "tokens": 2,
+      "loss": 10.75,
+      "generation": " Bogislaw XIII, Duke of Pomerania.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.3125,
+      "tokens": 3,
+      "loss": 4.770833333333333,
+      "generation": " Parthamasiris was born in **114.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.875,
+      "tokens": 7,
+      "loss": 2.8392857142857144,
+      "generation": " **Don Juan in a Girls\u2019 School**.",
+      "exact_match": false,
+      "token_f1": 0.8000000000000002
+     },
+     {
+      "loss_sum": 48.0,
+      "tokens": 6,
+      "loss": 8.0,
+      "generation": " **Jack Lee**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.875,
+      "tokens": 1,
+      "loss": 14.875,
+      "generation": " **Sweden**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.875,
+      "tokens": 3,
+      "loss": 5.958333333333333,
+      "generation": " Live Now, Pay Later",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 30.125,
+      "tokens": 3,
+      "loss": 10.041666666666666,
+      "generation": " **The BBC**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.5625,
+      "tokens": 2,
+      "loss": 6.28125,
+      "generation": " Andrea Di Vito and Barbara FairchildBoth were born in **1915**.",
+      "exact_match": false,
+      "token_f1": 0.16666666666666669
+     },
+     {
+      "loss_sum": 21.875,
+      "tokens": 7,
+      "loss": 3.125,
+      "generation": " Both are younger brothers.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.6875,
+      "tokens": 4,
+      "loss": 3.921875,
+      "generation": " **Messalina Vs. The Son of Hercules**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.375,
+      "tokens": 3,
+      "loss": 5.125,
+      "generation": " Ernst I, Prince of Hohenlohe-Langenburg.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 37.25,
+      "tokens": 5,
+      "loss": 7.45,
+      "generation": " John I of Brienne.",
+      "exact_match": false,
+      "token_f1": 0.28571428571428575
+     },
+     {
+      "loss_sum": 18.5,
+      "tokens": 10,
+      "loss": 1.85,
+      "generation": " **Stage Fright (1989 Film)**",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.75,
+      "tokens": 1,
+      "loss": 9.75,
+      "generation": " **James Benning**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 22.5,
+      "tokens": 4,
+      "loss": 5.625,
+      "generation": " **Oru Swakaryam**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.375,
+      "tokens": 3,
+      "loss": 7.791666666666667,
+      "generation": "",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.6875,
+      "tokens": 2,
+      "loss": 6.84375,
+      "generation": " **Captain Kidd and the Slave Girl**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 24.875,
+      "tokens": 8,
+      "loss": 3.109375,
+      "generation": " Prince Henri of Orl\u00e9ans.",
+      "exact_match": false,
+      "token_f1": 0.6
+     },
+     {
+      "loss_sum": 19.375,
+      "tokens": 6,
+      "loss": 3.2291666666666665,
+      "generation": " Aleksander Dominik Lubomirski.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.875,
+      "tokens": 3,
+      "loss": 10.625,
+      "generation": " The child of the performer of song Buckaroo is **Carl Van Doren**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.25,
+      "tokens": 1,
+      "loss": 17.25,
+      "generation": " **Carl Gustav Adolf** (Carl Gustav Adolf).",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 22.125,
+      "tokens": 2,
+      "loss": 11.0625,
+      "generation": " **The Avenging Rider**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.0625,
+      "tokens": 1,
+      "loss": 13.0625,
+      "generation": " Princess Isabella of Bavaria was born in **1944**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 26.875,
+      "tokens": 3,
+      "loss": 8.958333333333334,
+      "generation": " **Running for Grace**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 42.5,
+      "tokens": 9,
+      "loss": 4.722222222222222,
+      "generation": " William I, Duke of Brunswick-L\u00fcneburg died on **1279**.",
+      "exact_match": false,
+      "token_f1": 0.18181818181818182
+     },
+     {
+      "loss_sum": 11.875,
+      "tokens": 2,
+      "loss": 5.9375,
+      "generation": "",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.25,
+      "tokens": 1,
+      "loss": 13.25,
+      "generation": " Both are **American high schools**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.6875,
+      "tokens": 1,
+      "loss": 10.6875,
+      "generation": " **John De Margheriti**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 3.625,
+      "tokens": 1,
+      "loss": 3.625,
+      "generation": " Louis Alexandre, Prince of Lamballe.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 46.0,
+      "tokens": 5,
+      "loss": 9.2,
+      "generation": " **Frank Lesiputty**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 18.625,
+      "tokens": 4,
+      "loss": 4.65625,
+      "generation": " The performer of song Mermaid\u2019s Avenue died.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.375,
+      "tokens": 3,
+      "loss": 10.458333333333334,
+      "generation": " **Robert Vadra**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.0,
+      "tokens": 1,
+      "loss": 9.0,
+      "generation": " **England**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.6875,
+      "tokens": 2,
+      "loss": 5.84375,
+      "generation": " **Rumbi Katedza**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.0,
+      "tokens": 7,
+      "loss": 2.142857142857143,
+      "generation": " **The Nurse in the Military Madhouse**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 9.625,
+      "tokens": 1,
+      "loss": 9.625,
+      "generation": " **Kolpa\u00e7ino**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.75,
+      "tokens": 1,
+      "loss": 17.75,
+      "generation": " The founder of **University of Los Andes (Colombia)** is **Mario Laserna Pinz\u00f3n**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 22.375,
+      "tokens": 3,
+      "loss": 7.458333333333333,
+      "generation": " The director of film Random Encounter is **Jason Moore**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.5,
+      "tokens": 10,
+      "loss": 2.05,
+      "generation": " Sir William Monson.",
+      "exact_match": false,
+      "token_f1": 0.5
+     },
+     {
+      "loss_sum": 13.6875,
+      "tokens": 1,
+      "loss": 13.6875,
+      "generation": " **Both films were directed by **Scott Pembroke**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.875,
+      "tokens": 10,
+      "loss": 1.3875,
+      "generation": " George I, Prince of Anhalt-Dessau.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 15.5,
+      "tokens": 2,
+      "loss": 7.75,
+      "generation": " **Daniel Grodnik**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.3125,
+      "tokens": 1,
+      "loss": 12.3125,
+      "generation": " **Myra Song** was born in **1919**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 2.40625,
+      "tokens": 3,
+      "loss": 0.8020833333333334,
+      "generation": " Vicente Borge.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 14.125,
+      "tokens": 1,
+      "loss": 14.125,
+      "generation": " Merle Haggard.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.0,
+      "tokens": 5,
+      "loss": 4.0,
+      "generation": " **The Mill of Good Luck**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 19.125,
+      "tokens": 3,
+      "loss": 6.375,
+      "generation": " Alberto Casado Cervi\u00f1o",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.0625,
+      "tokens": 4,
+      "loss": 3.015625,
+      "generation": " Eberhard of Limburg.",
+      "exact_match": false,
+      "token_f1": 0.6666666666666666
+     },
+     {
+      "loss_sum": 17.0,
+      "tokens": 1,
+      "loss": 17.0,
+      "generation": " Dorothy Macmillan was born in **1868**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 68.0,
+      "tokens": 11,
+      "loss": 6.181818181818182,
+      "generation": " William X.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.0,
+      "tokens": 2,
+      "loss": 10.0,
+      "generation": " The Grammy.",
+      "exact_match": false,
+      "token_f1": 0.6666666666666666
+     },
+     {
+      "loss_sum": 22.25,
+      "tokens": 4,
+      "loss": 5.5625,
+      "generation": " Jehoahaz of Israel.",
+      "exact_match": false,
+      "token_f1": 0.5714285714285715
+     },
+     {
+      "loss_sum": 14.5625,
+      "tokens": 9,
+      "loss": 1.6180555555555556,
+      "generation": " **1982**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.5,
+      "tokens": 1,
+      "loss": 16.5,
+      "generation": " Both are located in the United States.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 40.5,
+      "tokens": 7,
+      "loss": 5.785714285714286,
+      "generation": " **Breaking The Silence: Truth And Lies In TheWar on Terror**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 5.03125,
+      "tokens": 1,
+      "loss": 5.03125,
+      "generation": " The song was performed by Anita Thallaug.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.4375,
+      "tokens": 1,
+      "loss": 9.4375,
+      "generation": " The **founder of Horseshoe Gaming Holding Corporation is **Jack Binion**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 8.1875,
+      "tokens": 4,
+      "loss": 2.046875,
+      "generation": " **Hombisilu**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 15.6875,
+      "tokens": 4,
+      "loss": 3.921875,
+      "generation": " Brahima Ciss\u00e9.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 11.625,
+      "tokens": 1,
+      "loss": 11.625,
+      "generation": " Calvin Coolidge was born in Plymouth, Vermont.",
+      "exact_match": false,
+      "token_f1": 0.25
+     },
+     {
+      "loss_sum": 26.75,
+      "tokens": 7,
+      "loss": 3.8214285714285716,
+      "generation": " The **Menacing Eye**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 7.71875,
+      "tokens": 2,
+      "loss": 3.859375,
+      "generation": " **Rakka (film)**",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.625,
+      "tokens": 6,
+      "loss": 2.7708333333333335,
+      "generation": " **The Mask of Fu Manchu**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 16.25,
+      "tokens": 3,
+      "loss": 5.416666666666667,
+      "generation": " **Robert Adetuyi**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.0,
+      "tokens": 4,
+      "loss": 5.75,
+      "generation": " **Gang Of Four (Film)**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 38.0,
+      "tokens": 5,
+      "loss": 7.6,
+      "generation": " **Kid With The Golden Arm**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.125,
+      "tokens": 6,
+      "loss": 2.6875,
+      "generation": " **Germany**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 40.25,
+      "tokens": 6,
+      "loss": 6.708333333333333,
+      "generation": " **William K. Howard**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 25.125,
+      "tokens": 2,
+      "loss": 12.5625,
+      "generation": " Thomas Henty died in **1810**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 28.875,
+      "tokens": 5,
+      "loss": 5.775,
+      "generation": " Ferdinand of Portugal.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.4375,
+      "tokens": 1,
+      "loss": 15.4375,
+      "generation": " Both Gonebiskari and Khalifeh Kandi are located in **Nazarkahrizi Rural District**, **Zanjan Province**, Iran.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.75,
+      "tokens": 2,
+      "loss": 10.875,
+      "generation": " China",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 25.125,
+      "tokens": 12,
+      "loss": 2.09375,
+      "generation": " **Deeper and Deeper (1951)**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 30.125,
+      "tokens": 6,
+      "loss": 5.020833333333333,
+      "generation": " **Manoj Bajpayee**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.9375,
+      "tokens": 1,
+      "loss": 13.9375,
+      "generation": " Both are historic churches.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 46.75,
+      "tokens": 8,
+      "loss": 5.84375,
+      "generation": " **The Left-Hand Side of the Fridge**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 45.75,
+      "tokens": 4,
+      "loss": 11.4375,
+      "generation": " The place of death of the director of filmKiller\u2019s Kiss.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.0625,
+      "tokens": 2,
+      "loss": 6.03125,
+      "generation": " Chiyo\u014dtori Y\u016bki was born in **1992**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 29.75,
+      "tokens": 3,
+      "loss": 9.916666666666666,
+      "generation": " Emperor Gaozu.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 33.0,
+      "tokens": 4,
+      "loss": 8.25,
+      "generation": " Stanley Kwan.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.0625,
+      "tokens": 9,
+      "loss": 1.3402777777777777,
+      "generation": " **Gremlins 2: The New Batch**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 16.875,
+      "tokens": 3,
+      "loss": 5.625,
+      "generation": " **Canada**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.875,
+      "tokens": 2,
+      "loss": 9.4375,
+      "generation": " **Richard L. Bare**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.625,
+      "tokens": 9,
+      "loss": 3.0694444444444446,
+      "generation": " Charles Sackville-West, 6th Earl De La Warr.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.5,
+      "tokens": 2,
+      "loss": 11.75,
+      "generation": " The place of death of Hugh, Count Of Burgundy\u2019s wife was in France.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.8125,
+      "tokens": 1,
+      "loss": 15.8125,
+      "generation": " **Israel**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.5,
+      "tokens": 4,
+      "loss": 4.875,
+      "generation": " **Lawrence Kent**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 30.125,
+      "tokens": 9,
+      "loss": 3.3472222222222223,
+      "generation": " George Waldegrave, 5Th Earl Waldegrave.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.0625,
+      "tokens": 1,
+      "loss": 13.0625,
+      "generation": " Both are located in **Australia**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.25,
+      "tokens": 1,
+      "loss": 9.25,
+      "generation": " Paleologo Zaccaria was born in 1235.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.1875,
+      "tokens": 2,
+      "loss": 6.59375,
+      "generation": " Fred Frith.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.625,
+      "tokens": 9,
+      "loss": 2.0694444444444446,
+      "generation": " Harold C. Edwards\u2019 father\u2019s birthday is **1935**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.125,
+      "tokens": 1,
+      "loss": 16.125,
+      "generation": " Both Russell High School and Westside Christian High School are located in **Canada**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.5,
+      "tokens": 1,
+      "loss": 9.5,
+      "generation": " The place of death of Michael Grieve\u2019s father was in **Montrose, Scotland**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.875,
+      "tokens": 4,
+      "loss": 3.46875,
+      "generation": " **John Farrow**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 8.875,
+      "tokens": 1,
+      "loss": 8.875,
+      "generation": " **England**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 24.5,
+      "tokens": 10,
+      "loss": 2.45,
+      "generation": " Dean Paul Martin Jr. was born on **1951**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 2.65625,
+      "tokens": 2,
+      "loss": 1.328125,
+      "generation": " Harry Collett was born in **17 January 2004**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 8.875,
+      "tokens": 1,
+      "loss": 8.875,
+      "generation": " **Femi Kuti** was born in **1962**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 50.0,
+      "tokens": 5,
+      "loss": 10.0,
+      "generation": " **Beyond the Last Frontier**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.25,
+      "tokens": 1,
+      "loss": 13.25,
+      "generation": " Both are **1914 films**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 22.0,
+      "tokens": 5,
+      "loss": 4.4,
+      "generation": " John Scott (Died 1533).",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.0,
+      "tokens": 5,
+      "loss": 3.4,
+      "generation": " Gustav von H\u00fcfner.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 16.75,
+      "tokens": 2,
+      "loss": 8.375,
+      "generation": " Burchard III.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 6.4375,
+      "tokens": 5,
+      "loss": 1.2875,
+      "generation": " Peder Per Veggum.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 52.5,
+      "tokens": 5,
+      "loss": 10.5,
+      "generation": " **The Marriage of Maria Braun**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 24.625,
+      "tokens": 9,
+      "loss": 2.736111111111111,
+      "generation": " Charlotte Stuart was born in **1769**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.125,
+      "tokens": 1,
+      "loss": 19.125,
+      "generation": " Both are **films from the same country**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 4,
+      "loss": 4.0,
+      "generation": " Peter Levin.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.375,
+      "tokens": 5,
+      "loss": 3.475,
+      "generation": " **Victor Man**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.75,
+      "tokens": 4,
+      "loss": 5.9375,
+      "generation": " **John Westley**.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 22.25,
+      "tokens": 3,
+      "loss": 7.416666666666667,
+      "generation": " **S.N. Mathur**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 24.0,
+      "tokens": 5,
+      "loss": 4.8,
+      "generation": " **Beavis and Butt-Head**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.6875,
+      "tokens": 1,
+      "loss": 15.6875,
+      "generation": " Both films were directed by **Michael Curtiz**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 5.5625,
+      "tokens": 2,
+      "loss": 2.78125,
+      "generation": " Isaac Deutscher.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 8.1875,
+      "tokens": 1,
+      "loss": 8.1875,
+      "generation": " **Edmund Mortimer was born in **11 April 1374**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.6875,
+      "tokens": 1,
+      "loss": 11.6875,
+      "generation": " The founder of Morgans Hotel Group is from **New York**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 26.75,
+      "tokens": 9,
+      "loss": 2.9722222222222223,
+      "generation": " **1954**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 41.75,
+      "tokens": 10,
+      "loss": 4.175,
+      "generation": " Dis-moi que tu m\u2019aimes.",
+      "exact_match": false,
+      "token_f1": 0.75
+     },
+     {
+      "loss_sum": 29.875,
+      "tokens": 4,
+      "loss": 7.46875,
+      "generation": " Cecil Dumond.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.75,
+      "tokens": 8,
+      "loss": 3.46875,
+      "generation": " Archduke Karl Pius of Austria, Prince of Tuscany.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 25.375,
+      "tokens": 7,
+      "loss": 3.625,
+      "generation": " **The Wild Bull**.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 11.9375,
+      "tokens": 1,
+      "loss": 11.9375,
+      "generation": " Frederick, Hereditary Prince of Baden-Durlach.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.3125,
+      "tokens": 1,
+      "loss": 14.3125,
+      "generation": " **Los Angeles, California**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 48.75,
+      "tokens": 9,
+      "loss": 5.416666666666667,
+      "generation": " Georg Friedrich, Margrave of Baden-Durlach\u2019s mother\u2019s birthday is on **September 9, 1928**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.25,
+      "tokens": 1,
+      "loss": 10.25,
+      "generation": " **Germany**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 42.5,
+      "tokens": 3,
+      "loss": 14.166666666666666,
+      "generation": " Tem\u00fcge died in **1953**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 2.921875,
+      "tokens": 3,
+      "loss": 0.9739583333333334,
+      "generation": " **Something Like Happiness**",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 9,
+      "loss": 1.7777777777777777,
+      "generation": " The director of filmGermany.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.875,
+      "tokens": 3,
+      "loss": 4.625,
+      "generation": " **Lord Byron**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.25,
+      "tokens": 4,
+      "loss": 4.5625,
+      "generation": " **Land of the Dead**.",
+      "exact_match": false,
+      "token_f1": 0.6666666666666666
+     },
+     {
+      "loss_sum": 16.75,
+      "tokens": 6,
+      "loss": 2.7916666666666665,
+      "generation": " Jon Bon Jovi.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 28.125,
+      "tokens": 4,
+      "loss": 7.03125,
+      "generation": " Scott McKenna.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 11.5,
+      "tokens": 1,
+      "loss": 11.5,
+      "generation": " John II, Duke ofCleves.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.25,
+      "tokens": 7,
+      "loss": 3.0357142857142856,
+      "generation": " **O Segredo Do Corcunda**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 20.125,
+      "tokens": 3,
+      "loss": 6.708333333333333,
+      "generation": " The Girl in White.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 40.25,
+      "tokens": 4,
+      "loss": 10.0625,
+      "generation": " **Carnage**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.75,
+      "tokens": 4,
+      "loss": 4.1875,
+      "generation": " Both.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 7.90625,
+      "tokens": 6,
+      "loss": 1.3177083333333333,
+      "generation": " Gunnar Wiklund.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.625,
+      "tokens": 6,
+      "loss": 3.6041666666666665,
+      "generation": " **Sheriff of Redwood Valley**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.25,
+      "tokens": 2,
+      "loss": 15.625,
+      "generation": " **Complete Unknown**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 13.6875,
+      "tokens": 1,
+      "loss": 13.6875,
+      "generation": " Josiah Boothby is born in **England**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 43.0,
+      "tokens": 5,
+      "loss": 8.6,
+      "generation": " Robert Woodrow Levering.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.625,
+      "tokens": 2,
+      "loss": 7.8125,
+      "generation": " **Marco Antonio Bottoni**.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 15.125,
+      "tokens": 1,
+      "loss": 15.125,
+      "generation": " Both Barnum Museum and Alfred Ceramic Art Museum are located in **New York State College of Ceramics**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.75,
+      "tokens": 1,
+      "loss": 11.75,
+      "generation": " **The Grammy Award**.",
+      "exact_match": false,
+      "token_f1": 0.6666666666666666
+     },
+     {
+      "loss_sum": 12.375,
+      "tokens": 1,
+      "loss": 12.375,
+      "generation": " Both directors are from **France**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 28.125,
+      "tokens": 6,
+      "loss": 4.6875,
+      "generation": " **The Crime Doctor\u2019s Warning**.",
+      "exact_match": false,
+      "token_f1": 0.3333333333333333
+     },
+     {
+      "loss_sum": 14.125,
+      "tokens": 5,
+      "loss": 2.825,
+      "generation": " Agnes of Waiblingen.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.625,
+      "tokens": 3,
+      "loss": 7.875,
+      "generation": " **Basu Bhattacharya**.",
+      "exact_match": false,
+      "token_f1": 0.5
+     },
+     {
+      "loss_sum": 11.5625,
+      "tokens": 3,
+      "loss": 3.8541666666666665,
+      "generation": " **John Quinn**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.5,
+      "tokens": 3,
+      "loss": 7.166666666666667,
+      "generation": " Both films were released in **1961**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.0,
+      "tokens": 5,
+      "loss": 2.4,
+      "generation": " **1866**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.5,
+      "tokens": 7,
+      "loss": 3.0714285714285716,
+      "generation": " **The Perfect Candidate**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.375,
+      "tokens": 3,
+      "loss": 5.458333333333333,
+      "generation": " **Frank Wartenberg**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.25,
+      "tokens": 7,
+      "loss": 3.892857142857143,
+      "generation": " Teresa Korwin Gosiewska.",
+      "exact_match": false,
+      "token_f1": 0.3333333333333333
+     },
+     {
+      "loss_sum": 13.8125,
+      "tokens": 1,
+      "loss": 13.8125,
+      "generation": " Both directors are from **Italy**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.3125,
+      "tokens": 1,
+      "loss": 15.3125,
+      "generation": " Both directors are from **China**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.75,
+      "tokens": 1,
+      "loss": 11.75,
+      "generation": "Both are **American** bands.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 3.84375,
+      "tokens": 3,
+      "loss": 1.28125,
+      "generation": " Yes, both are **2003** films.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 30.125,
+      "tokens": 3,
+      "loss": 10.041666666666666,
+      "generation": "Both are **films**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.125,
+      "tokens": 6,
+      "loss": 1.6875,
+      "generation": " Nikolai Bent Paus.",
+      "exact_match": false,
+      "token_f1": 0.3333333333333333
+     },
+     {
+      "loss_sum": 69.0,
+      "tokens": 11,
+      "loss": 6.2727272727272725,
+      "generation": " **The Last Paradises: On The Track of Rare Animals**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 36.0,
+      "tokens": 3,
+      "loss": 12.0,
+      "generation": " **The Perfect Candidate**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 29.5,
+      "tokens": 3,
+      "loss": 9.833333333333334,
+      "generation": " Mark of the Frog.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.8125,
+      "tokens": 2,
+      "loss": 4.90625,
+      "generation": " **Nell\u2019s Eugenic Wedding**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.25,
+      "tokens": 2,
+      "loss": 10.625,
+      "generation": " The Hot Angel is **American**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.0,
+      "tokens": 2,
+      "loss": 9.0,
+      "generation": " Philip William Dudley.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.875,
+      "tokens": 3,
+      "loss": 7.291666666666667,
+      "generation": " Marc Burrows.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 4.5625,
+      "tokens": 3,
+      "loss": 1.5208333333333333,
+      "generation": " **The Brand of Hate**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 7.0,
+      "tokens": 2,
+      "loss": 3.5,
+      "generation": " Jonathan Gregg.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.25,
+      "tokens": 3,
+      "loss": 4.75,
+      "generation": " **Beyonc\u00e9**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 21.75,
+      "tokens": 5,
+      "loss": 4.35,
+      "generation": " The Pumpkin Eater.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.375,
+      "tokens": 1,
+      "loss": 13.375,
+      "generation": " Yes.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.375,
+      "tokens": 1,
+      "loss": 10.375,
+      "generation": " **United States**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 35.75,
+      "tokens": 5,
+      "loss": 7.15,
+      "generation": " Thomas Johannes Lauritz Parr.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.875,
+      "tokens": 2,
+      "loss": 7.9375,
+      "generation": " Zeenat Mahal\u2019s husband was buried in **Sarre Anglo-Saxon cemetery**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.75,
+      "tokens": 1,
+      "loss": 13.75,
+      "generation": " **Michael Govan**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.625,
+      "tokens": 6,
+      "loss": 2.7708333333333335,
+      "generation": " Sam Newfield.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.125,
+      "tokens": 4,
+      "loss": 6.78125,
+      "generation": " **Namma Ooru Nayagan**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.6875,
+      "tokens": 1,
+      "loss": 14.6875,
+      "generation": " Yes.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 20.0,
+      "tokens": 6,
+      "loss": 3.3333333333333335,
+      "generation": " Ana Patricia Rojo.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.875,
+      "tokens": 4,
+      "loss": 4.46875,
+      "generation": " **The Pearl of Africa**.",
+      "exact_match": false,
+      "token_f1": 0.6666666666666666
+     },
+     {
+      "loss_sum": 13.8125,
+      "tokens": 1,
+      "loss": 13.8125,
+      "generation": "Both films are **British** and both are **silent** comedies.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.125,
+      "tokens": 1,
+      "loss": 13.125,
+      "generation": " Both are **British** comedies.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.625,
+      "tokens": 2,
+      "loss": 7.3125,
+      "generation": " **Lord Fitzwilliam Shirley**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 42.75,
+      "tokens": 4,
+      "loss": 10.6875,
+      "generation": " **Ride The High Country**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 19.0,
+      "tokens": 4,
+      "loss": 4.75,
+      "generation": " **The Daughters of Helena**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 6.46875,
+      "tokens": 1,
+      "loss": 6.46875,
+      "generation": " **Barrie Penrose**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.3125,
+      "tokens": 1,
+      "loss": 11.3125,
+      "generation": " **Berengaria of Portugal**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.625,
+      "tokens": 1,
+      "loss": 11.625,
+      "generation": " Yes.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.375,
+      "tokens": 3,
+      "loss": 4.791666666666667,
+      "generation": " Marcel Ha\u00ebntjens.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.4375,
+      "tokens": 3,
+      "loss": 3.4791666666666665,
+      "generation": " Poland.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.625,
+      "tokens": 1,
+      "loss": 18.625,
+      "generation": " Both directors are from **England**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.125,
+      "tokens": 5,
+      "loss": 2.025,
+      "generation": " Jean-Baptiste Le Prince was born in **1763**.",
+      "exact_match": false,
+      "token_f1": 0.6
+     },
+     {
+      "loss_sum": 18.25,
+      "tokens": 1,
+      "loss": 18.25,
+      "generation": " Both are **American** films.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.25,
+      "tokens": 8,
+      "loss": 3.90625,
+      "generation": " **Alexandra Hasluck\u2019s husband was **Sir Paul Hasluck**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.9375,
+      "tokens": 3,
+      "loss": 5.3125,
+      "generation": " **The Yob**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 20.0,
+      "tokens": 1,
+      "loss": 20.0,
+      "generation": " **George Albert Smith**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 7.8125,
+      "tokens": 2,
+      "loss": 3.90625,
+      "generation": " **The Lion and the Mouse**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 34.75,
+      "tokens": 4,
+      "loss": 8.6875,
+      "generation": " **Poland**",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.25,
+      "tokens": 5,
+      "loss": 3.65,
+      "generation": " Juan Luis de la Cerda, 6th Duke of Medinaceli.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 30.75,
+      "tokens": 7,
+      "loss": 4.392857142857143,
+      "generation": " Kanjon Opasnih Igara.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 9,
+      "loss": 1.7777777777777777,
+      "generation": " Henry Grey, 4Th Earl of Kent.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.125,
+      "tokens": 1,
+      "loss": 17.125,
+      "generation": " Both Dent du G\u00e9ant and Monte Matto are located in France.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 35.5,
+      "tokens": 6,
+      "loss": 5.916666666666667,
+      "generation": " Jean Poiret.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.4375,
+      "tokens": 1,
+      "loss": 11.4375,
+      "generation": " George I of Greece.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 34.25,
+      "tokens": 7,
+      "loss": 4.892857142857143,
+      "generation": " **Bangladesh National Film Award for Best Director**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 25.625,
+      "tokens": 2,
+      "loss": 12.8125,
+      "generation": " David Box.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 12.4375,
+      "tokens": 1,
+      "loss": 12.4375,
+      "generation": " The song Life Marathon (Eason Chan) was written byEason Chan.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 32.25,
+      "tokens": 8,
+      "loss": 4.03125,
+      "generation": " **Battle for the Planet of the Apes**.",
+      "exact_match": false,
+      "token_f1": 0.6
+     },
+     {
+      "loss_sum": 9.1875,
+      "tokens": 2,
+      "loss": 4.59375,
+      "generation": " **Sitting Bull**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.25,
+      "tokens": 5,
+      "loss": 3.85,
+      "generation": " David Dhawan.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.125,
+      "tokens": 6,
+      "loss": 3.8541666666666665,
+      "generation": " **Gents Without Cents**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 33.0,
+      "tokens": 5,
+      "loss": 6.6,
+      "generation": " Charles E. Rushmore",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.4375,
+      "tokens": 1,
+      "loss": 13.4375,
+      "generation": " The father of Louise Borgia, Count Guillaume de Cl\u00e9rieu l\u2019Abbaye.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.3125,
+      "tokens": 3,
+      "loss": 4.770833333333333,
+      "generation": " **She was born in **1999**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.75,
+      "tokens": 1,
+      "loss": 16.75,
+      "generation": " No.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 11.5625,
+      "tokens": 1,
+      "loss": 11.5625,
+      "generation": " Both villages, Chausy and Lyapunovo, are located in Bryansk Oblast.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.9375,
+      "tokens": 1,
+      "loss": 10.9375,
+      "generation": " Herman I, Duke of Swabia.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.4375,
+      "tokens": 2,
+      "loss": 6.71875,
+      "generation": " **Albert Einstein**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.75,
+      "tokens": 3,
+      "loss": 4.583333333333333,
+      "generation": " Louis Leterrier.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.5625,
+      "tokens": 2,
+      "loss": 5.78125,
+      "generation": " **Germany**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.9375,
+      "tokens": 7,
+      "loss": 1.4196428571428572,
+      "generation": " **The Moon and Sixpence (1942)**",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.875,
+      "tokens": 8,
+      "loss": 3.484375,
+      "generation": " Hi Diddle Diddle.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.875,
+      "tokens": 2,
+      "loss": 8.4375,
+      "generation": " Kim Utzon was born in **1957**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 4.96875,
+      "tokens": 2,
+      "loss": 2.484375,
+      "generation": " Uncharted Seas",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.5,
+      "tokens": 6,
+      "loss": 1.9166666666666667,
+      "generation": " Henri, Duke of Verneuil.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 9.0625,
+      "tokens": 4,
+      "loss": 2.265625,
+      "generation": " Dialogues of Exiles.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.4375,
+      "tokens": 6,
+      "loss": 1.90625,
+      "generation": " Yolanda of Vianden.",
+      "exact_match": false,
+      "token_f1": 0.28571428571428575
+     },
+     {
+      "loss_sum": 16.75,
+      "tokens": 3,
+      "loss": 5.583333333333333,
+      "generation": " The place of Prince Adarnase of Kartli was **Georgia**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.4375,
+      "tokens": 1,
+      "loss": 15.4375,
+      "generation": " Yes.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.25,
+      "tokens": 5,
+      "loss": 3.85,
+      "generation": " **California**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.5625,
+      "tokens": 1,
+      "loss": 12.5625,
+      "generation": " **Zelda Fitzgerald**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.875,
+      "tokens": 5,
+      "loss": 2.975,
+      "generation": " The Big Gusher.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 10.625,
+      "tokens": 3,
+      "loss": 3.5416666666666665,
+      "generation": " Robert Sidney, 1St Earl of Leicester.",
+      "exact_match": false,
+      "token_f1": 0.2222222222222222
+     },
+     {
+      "loss_sum": 17.75,
+      "tokens": 2,
+      "loss": 8.875,
+      "generation": " Richard White.",
+      "exact_match": false,
+      "token_f1": 0.5
+     },
+     {
+      "loss_sum": 13.75,
+      "tokens": 1,
+      "loss": 13.75,
+      "generation": "Both National Archeologic Museum of Pontecagnano and Museum ofContemporary Art.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 39.5,
+      "tokens": 5,
+      "loss": 7.9,
+      "generation": " **Kisses And Hugs**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 13.875,
+      "tokens": 1,
+      "loss": 13.875,
+      "generation": " **Canada**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.25,
+      "tokens": 1,
+      "loss": 15.25,
+      "generation": " Andrew Balding is a British racehorse trainer.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.375,
+      "tokens": 6,
+      "loss": 2.7291666666666665,
+      "generation": " **Leopoldo de Austria**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.625,
+      "tokens": 5,
+      "loss": 2.925,
+      "generation": " Anne Calthorpe, Countess of Sussex\u2019s husband\u2019s birthday is **1555**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.625,
+      "tokens": 3,
+      "loss": 5.208333333333333,
+      "generation": " **David Shute**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.375,
+      "tokens": 1,
+      "loss": 16.375,
+      "generation": " **The **Men\u2019s Club**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 8.4375,
+      "tokens": 3,
+      "loss": 2.8125,
+      "generation": " Ian Barry.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.0,
+      "tokens": 1,
+      "loss": 18.0,
+      "generation": " **1932**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.625,
+      "tokens": 2,
+      "loss": 7.8125,
+      "generation": " **John Browne, 1St Marquess of Sligo**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 15.6875,
+      "tokens": 3,
+      "loss": 5.229166666666667,
+      "generation": " Walram, Count of Sponheim-Kreuznach.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.6875,
+      "tokens": 1,
+      "loss": 13.6875,
+      "generation": " Yes.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 23.5,
+      "tokens": 2,
+      "loss": 11.75,
+      "generation": " Sir Arthur Gore.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 14.125,
+      "tokens": 2,
+      "loss": 7.0625,
+      "generation": " **The Spirit Moves**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 29.25,
+      "tokens": 7,
+      "loss": 4.178571428571429,
+      "generation": " **1940**",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.25,
+      "tokens": 2,
+      "loss": 8.125,
+      "generation": " Investors Chronicle.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 29.375,
+      "tokens": 8,
+      "loss": 3.671875,
+      "generation": " Frederick III, Landgrave of Hesse-Homburg.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.875,
+      "tokens": 4,
+      "loss": 3.46875,
+      "generation": " Joan of Valois, Duchess of Bourbon.",
+      "exact_match": false,
+      "token_f1": 0.2
+     },
+     {
+      "loss_sum": 49.0,
+      "tokens": 5,
+      "loss": 9.8,
+      "generation": " **Raadha Aur Seeta**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 22.875,
+      "tokens": 9,
+      "loss": 2.5416666666666665,
+      "generation": " Princess Pauline of Saxe-Weimar-Eisenach was married toCharles Augustus, Hereditary Grand Duke of Saxe-Weimar-Eisenach.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.625,
+      "tokens": 5,
+      "loss": 5.525,
+      "generation": " **Marie Z\u00e9phyrine of France**.",
+      "exact_match": false,
+      "token_f1": 0.3333333333333333
+     },
+     {
+      "loss_sum": 12.0,
+      "tokens": 5,
+      "loss": 2.4,
+      "generation": " The performer of song TillIt\u2019s Gone.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.75,
+      "tokens": 2,
+      "loss": 6.375,
+      "generation": " Grand Duke Vladimir Alexandrovich of Russia.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 41.5,
+      "tokens": 7,
+      "loss": 5.928571428571429,
+      "generation": " **La Souriante Madame Beudet**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 8.5625,
+      "tokens": 2,
+      "loss": 4.28125,
+      "generation": " Gustavo Machado Morales.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 26.5,
+      "tokens": 5,
+      "loss": 5.3,
+      "generation": " Joseph-\u00c9douard Perrault was born in 1846.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.25,
+      "tokens": 2,
+      "loss": 8.125,
+      "generation": " Magnus Ii.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 19.625,
+      "tokens": 4,
+      "loss": 4.90625,
+      "generation": " **Full Length LP**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.625,
+      "tokens": 3,
+      "loss": 6.208333333333333,
+      "generation": " **Both **A Revolutionary Family**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 18.75,
+      "tokens": 3,
+      "loss": 6.25,
+      "generation": " **Benny Rubinstein**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.375,
+      "tokens": 5,
+      "loss": 3.475,
+      "generation": " Jakub W\u0119grzynkiewicz.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.3125,
+      "tokens": 5,
+      "loss": 2.6625,
+      "generation": " **Bhajantrilu**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 35.0,
+      "tokens": 2,
+      "loss": 17.5,
+      "generation": " **Edmond T. Gr\u00e9ville**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 8.625,
+      "tokens": 4,
+      "loss": 2.15625,
+      "generation": " Princess Sophie of Greece and Denmark.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 37.25,
+      "tokens": 9,
+      "loss": 4.138888888888889,
+      "generation": " **Chris Lane** was born on **November 9, 1984**.",
+      "exact_match": false,
+      "token_f1": 0.5454545454545454
+     },
+     {
+      "loss_sum": 34.0,
+      "tokens": 5,
+      "loss": 6.8,
+      "generation": " **Jingle All the Way**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 33.75,
+      "tokens": 3,
+      "loss": 11.25,
+      "generation": " **Milo\u0161 Zli\u010di\u0107**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.1875,
+      "tokens": 2,
+      "loss": 6.59375,
+      "generation": " **Thomas Edison**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 29.0,
+      "tokens": 2,
+      "loss": 14.5,
+      "generation": " Sir Thomas Strickland.",
+      "exact_match": false,
+      "token_f1": 0.4
+     },
+     {
+      "loss_sum": 16.625,
+      "tokens": 9,
+      "loss": 1.8472222222222223,
+      "generation": " Zoran Belo\u0161evi\u0107.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.0,
+      "tokens": 2,
+      "loss": 10.0,
+      "generation": " Hungary.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 12.6875,
+      "tokens": 1,
+      "loss": 12.6875,
+      "generation": " Paul Richter\u2019s wife is **Aud Egede-Nissen**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 17.125,
+      "tokens": 1,
+      "loss": 17.125,
+      "generation": " No.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 11.1875,
+      "tokens": 3,
+      "loss": 3.7291666666666665,
+      "generation": " **The Vein**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 20.0,
+      "tokens": 4,
+      "loss": 5.0,
+      "generation": " Gillian Blake.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 31.5,
+      "tokens": 4,
+      "loss": 7.875,
+      "generation": " **King of the Zombies**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 66.0,
+      "tokens": 12,
+      "loss": 5.5,
+      "generation": " **The Great White Hope**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 20.75,
+      "tokens": 5,
+      "loss": 4.15,
+      "generation": " **A Monster and a Half**.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 23.5,
+      "tokens": 2,
+      "loss": 11.75,
+      "generation": " The place of death of Meritaten was in **Set Maat**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.4375,
+      "tokens": 1,
+      "loss": 13.4375,
+      "generation": " **Hawaii**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 33.75,
+      "tokens": 5,
+      "loss": 6.75,
+      "generation": " **Munni Begum**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.9375,
+      "tokens": 2,
+      "loss": 7.46875,
+      "generation": " **France**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.0,
+      "tokens": 3,
+      "loss": 5.333333333333333,
+      "generation": " **The Boy Turns Man**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 16.625,
+      "tokens": 2,
+      "loss": 8.3125,
+      "generation": " **Un Samayal Arayil**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 3.21875,
+      "tokens": 4,
+      "loss": 0.8046875,
+      "generation": " Peter Elmsley.",
+      "exact_match": true,
+      "token_f1": 1.0
+     },
+     {
+      "loss_sum": 19.75,
+      "tokens": 7,
+      "loss": 2.8214285714285716,
+      "generation": " Maria Isabella of Austria.",
+      "exact_match": false,
+      "token_f1": 0.4444444444444445
+     },
+     {
+      "loss_sum": 13.3125,
+      "tokens": 1,
+      "loss": 13.3125,
+      "generation": " Both Beauty And The Bad Man and Wild Child (Film) films have **both directors from the same country**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 7.125,
+      "tokens": 2,
+      "loss": 3.5625,
+      "generation": " Yuen Shun-Yi was born in 1953.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 13.6875,
+      "tokens": 1,
+      "loss": 13.6875,
+      "generation": " **Germany**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.4375,
+      "tokens": 1,
+      "loss": 14.4375,
+      "generation": " Both directors are from Australia.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 14.0625,
+      "tokens": 1,
+      "loss": 14.0625,
+      "generation": " Yes. Both are **international airports**.",
+      "exact_match": false,
+      "token_f1": 0.33333333333333337
+     },
+     {
+      "loss_sum": 15.375,
+      "tokens": 2,
+      "loss": 7.6875,
+      "generation": " **Catherine of Lancaster**.",
+      "exact_match": false,
+      "token_f1": 0.0
+     },
+     {
+      "loss_sum": 27.5,
+      "tokens": 6,
+      "loss": 4.583333333333333,
+      "generation": " Schwechater received the Austrian Decoration forScience and Art.",
+      "exact_match": false,
+      "token_f1": 0.6153846153846153
+     }
+    ]
+   },
+   "long": {
+    "exact_match_span": 0.12760416666666666,
+    "token_f1_span": 0.18176613606301106,
+    "truncated_rate": 0,
+    "tokens_mean": 7.877604166666667,
+    "items": [
+     {
+      "raw": " **Ed Red**.",
+      "block": " **Ed Red**.",
+      "span": "Ed Red",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **William D. Russell**.",
+      "block": " **William D. Russell**.",
+      "span": "William D. Russell",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both **The Knockout Kid** and **One Nine Nine Four** are directed by **Albert S. Rogell**.",
+      "block": " Both **The Knockout Kid** and **One Nine Nine Four** are directed by **Albert S. Rogell**.",
+      "span": "Both The Knockout Kid and One Nine Nine Four are directed by Albert S. Rogell",
+      "tokens": 24,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Somewhere I\u2019ll Find You**.",
+      "block": " **Somewhere I\u2019ll Find You**.",
+      "span": "Somewhere I\u2019ll Find You",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.75,
+      "em_line": false,
+      "f1_line": 0.75
+     },
+     {
+      "raw": " Austria-Hungary",
+      "block": " Austria-Hungary",
+      "span": "Austria-Hungary",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Bada Kabutar**.",
+      "block": " **Bada Kabutar**.",
+      "span": "Bada Kabutar",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Games of Love and Loneliness**.",
+      "block": " **Games of Love and Loneliness**.",
+      "span": "Games of Love and Loneliness",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Cane Toads.",
+      "block": " Cane Toads.",
+      "span": "Cane Toads",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.6666666666666666,
+      "em_line": false,
+      "f1_line": 0.6666666666666666
+     },
+     {
+      "raw": " **Miracle of Marcelino**.",
+      "block": " **Miracle of Marcelino**.",
+      "span": "Miracle of Marcelino",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Frank Aquila**.",
+      "block": " **Frank Aquila**.",
+      "span": "Frank Aquila",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **United States**.",
+      "block": " **United States**.",
+      "span": "United States",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Margaret of Valois.",
+      "block": " Margaret of Valois.",
+      "span": "Margaret of Valois",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Gentle Art of Burglary**.",
+      "block": " **The Gentle Art of Burglary**.",
+      "span": "The Gentle Art of Burglary",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Denis-Benjamin Papineau.",
+      "block": " Denis-Benjamin Papineau.",
+      "span": "Denis-Benjamin Papineau",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Damian Harris**.",
+      "block": " **Damian Harris**.",
+      "span": "Damian Harris",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Color of Money**.",
+      "block": " **The Color of Money**.",
+      "span": "The Color of Money",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **My Husband\u2019s Other Wife**.",
+      "block": " **My Husband\u2019s Other Wife**.",
+      "span": "My Husband\u2019s Other Wife",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.75,
+      "em_line": false,
+      "f1_line": 0.75
+     },
+     {
+      "raw": " **The Wonderful World of Captain Kuhio**.",
+      "block": " **The Wonderful World of Captain Kuhio**.",
+      "span": "The Wonderful World of Captain Kuhio",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Anne Lennard, Countess of Sussex.",
+      "block": " Anne Lennard, Countess of Sussex.",
+      "span": "Anne Lennard, Countess of Sussex",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yes.",
+      "block": " Yes.",
+      "span": "Yes",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Mani Madhava Chakyar**.",
+      "block": " **Mani Madhava Chakyar**.",
+      "span": "Mani Madhava Chakyar",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are located in **Bolivia**.",
+      "block": " Both are located in **Bolivia**.",
+      "span": "Both are located in Bolivia",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The director of **The Phantom Carriage** was **Arne Mattsson**.",
+      "block": " The director of **The Phantom Carriage** was **Arne Mattsson**.",
+      "span": "The director of The Phantom Carriage was Arne Mattsson",
+      "tokens": 15,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Georg Ludwig von Bar.",
+      "block": " Georg Ludwig von Bar.",
+      "span": "Georg Ludwig von Bar",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " A WomanForLife.",
+      "block": " A WomanForLife.",
+      "span": "A WomanForLife",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **United States**.",
+      "block": " **United States**.",
+      "span": "United States",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Berkan Emir** was born in **1988**.",
+      "block": " **Berkan Emir** was born in **1988**.",
+      "span": "Berkan Emir was born in 1988",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Sally Bercow studied at **University of Bedfordshire**.",
+      "block": " Sally Bercow studied at **University of Bedfordshire**.",
+      "span": "Sally Bercow studied at University of Bedfordshire",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " Oleg Kerensky was born in **1970**.",
+      "block": " Oleg Kerensky was born in **1970**.",
+      "span": "Oleg Kerensky was born in 1970",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Lord Frederick Cavendish-Bentinck**.",
+      "block": " **Lord Frederick Cavendish-Bentinck**.",
+      "span": "Lord Frederick Cavendish-Bentinck",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The date of birth of Iseabail N\u00ed Mheic Cail\u00e9in is unknown.",
+      "block": " The date of birth of Iseabail N\u00ed Mheic Cail\u00e9in is unknown.",
+      "span": "The date of birth of Iseabail N\u00ed Mheic Cail\u00e9in is unknown",
+      "tokens": 20,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Anne Russell, Countess of BedfordAnne Russell.",
+      "block": " Anne Russell, Countess of BedfordAnne Russell.",
+      "span": "Anne Russell, Countess of BedfordAnne Russell",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.7272727272727272,
+      "em_line": false,
+      "f1_line": 0.7272727272727272
+     },
+     {
+      "raw": " Both buildings, El Adobe De Capistrano and Haberkorn House And Farmstead, are **historic homes and farmstead**s.",
+      "block": " Both buildings, El Adobe De Capistrano and Haberkorn House And Farmstead, are **historic homes and farmstead**s.",
+      "span": "Both buildings, El Adobe De Capistrano and Haberkorn House And Farmstead, are historic homes and farmsteads",
+      "tokens": 27,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **John Anderson**.",
+      "block": " **John Anderson**.",
+      "span": "John Anderson",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Denys Desjardins**.",
+      "block": " **Denys Desjardins**.",
+      "span": "Denys Desjardins",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **No, No, Nanette**.",
+      "block": " **No, No, Nanette**.",
+      "span": "No, No, Nanette",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Charles Manuel da Gra\u00e7a.",
+      "block": " Charles Manuel da Gra\u00e7a.",
+      "span": "Charles Manuel da Gra\u00e7a",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.75,
+      "em_line": false,
+      "f1_line": 0.75
+     },
+     {
+      "raw": " **The Cruel Truth**.",
+      "block": " **The Cruel Truth**.",
+      "span": "The Cruel Truth",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Lowell Bergman.",
+      "block": " Lowell Bergman.",
+      "span": "Lowell Bergman",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **William Paget, 5th Baron Paget**.",
+      "block": " **William Paget, 5th Baron Paget**.",
+      "span": "William Paget, 5th Baron Paget",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Billy Milano**.",
+      "block": " **Billy Milano**.",
+      "span": "Billy Milano",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Murder Tomorrow**.",
+      "block": " **Murder Tomorrow**.",
+      "span": "Murder Tomorrow",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Claudio O'Connor.",
+      "block": " Claudio O'Connor.",
+      "span": "Claudio O'Connor",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Under The Lantern**.",
+      "block": " **Under The Lantern**.",
+      "span": "Under The Lantern",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " James Murdoch.",
+      "block": " James Murdoch.",
+      "span": "James Murdoch",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5,
+      "em_line": false,
+      "f1_line": 0.5
+     },
+     {
+      "raw": "Both are **American films**.",
+      "block": "Both are **American films**.",
+      "span": "Both are American films",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both directors are British.",
+      "block": " Both directors are British.",
+      "span": "Both directors are British",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Me and You Versus the World.",
+      "block": " Me and You Versus the World.",
+      "span": "Me and You Versus the World",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Los Angeles, California**.",
+      "block": " **Los Angeles, California**.",
+      "span": "Los Angeles, California",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Teen Maar.",
+      "block": " Teen Maar.",
+      "span": "Teen Maar",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Richie Mehta.",
+      "block": " Richie Mehta.",
+      "span": "Richie Mehta",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Simon de Montfort, 6th Earl of Leicester.",
+      "block": " Simon de Montfort, 6th Earl of Leicester.",
+      "span": "Simon de Montfort, 6th Earl of Leicester",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both were born in **1939**.",
+      "block": " Both were born in **1939**.",
+      "span": "Both were born in 1939",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Prince Nikolaus Wilhelm of Nassau**.",
+      "block": " **Prince Nikolaus Wilhelm of Nassau**.",
+      "span": "Prince Nikolaus Wilhelm of Nassau",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Captain Fury**.",
+      "block": " **Captain Fury**.",
+      "span": "Captain Fury",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Prince Bhanurangsi Savangwongse**.",
+      "block": " **Prince Bhanurangsi Savangwongse**.",
+      "span": "Prince Bhanurangsi Savangwongse",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Light And The Sufferer**.",
+      "block": " **Light And The Sufferer**.",
+      "span": "Light And The Sufferer",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Radu Duda.",
+      "block": " Radu Duda.",
+      "span": "Radu Duda",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Communist**.",
+      "block": " **The Communist**.",
+      "span": "The Communist",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Taiwanese **Edward Yang.",
+      "block": " **Taiwanese **Edward Yang.",
+      "span": "Taiwanese Edward Yang",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The song was written byThe Decemberists.",
+      "block": " The song was written byThe Decemberists.",
+      "span": "The song was written byThe Decemberists",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Hitler Gang**.",
+      "block": " **The Hitler Gang**.",
+      "span": "The Hitler Gang",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Iulla Antonia.",
+      "block": " Iulla Antonia.",
+      "span": "Iulla Antonia",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Kongakut River and Wetbutt Creek both are located in **Alaska**.",
+      "block": " Kongakut River and Wetbutt Creek both are located in **Alaska**.",
+      "span": "Kongakut River and Wetbutt Creek both are located in Alaska",
+      "tokens": 15,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Godan Khan is a **British** politician.",
+      "block": " Godan Khan is a **British** politician.",
+      "span": "Godan Khan is a British politician",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Humphrey De Bohun, 7Th Earl of Hereford.",
+      "block": " Humphrey De Bohun, 7Th Earl of Hereford.",
+      "span": "Humphrey De Bohun, 7Th Earl of Hereford",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Albert John Charles Frederick Alfred George.",
+      "block": " Albert John Charles Frederick Alfred George.",
+      "span": "Albert John Charles Frederick Alfred George",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Anjan Choudhury**.",
+      "block": " **Anjan Choudhury**.",
+      "span": "Anjan Choudhury",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Peggy Pettitt.",
+      "block": " Peggy Pettitt.",
+      "span": "Peggy Pettitt",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Both Caracu River and South Fork Rogue River are located in the United States.",
+      "block": " Both Caracu River and South Fork Rogue River are located in the United States.",
+      "span": "Both Caracu River and South Fork Rogue River are located in the United States",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Mary Ann Angell.",
+      "block": " Mary Ann Angell.",
+      "span": "Mary Ann Angell",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Sibylla of Armenia.",
+      "block": " Sibylla of Armenia.",
+      "span": "Sibylla of Armenia",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Konrad V Kantner.",
+      "block": " Konrad V Kantner.",
+      "span": "Konrad V Kantner",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.3333333333333333,
+      "em_line": false,
+      "f1_line": 0.3333333333333333
+     },
+     {
+      "raw": " Elisabeth Magdalena of Pomerania.",
+      "block": " Elisabeth Magdalena of Pomerania.",
+      "span": "Elisabeth Magdalena of Pomerania",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **A Night of Adventure**.",
+      "block": " **A Night of Adventure**.",
+      "span": "A Night of Adventure",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Denmark**.",
+      "block": " **Denmark**.",
+      "span": "Denmark",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The director of film Bangalore Naatkal was **S.N. Mathur**.",
+      "block": " The director of film Bangalore Naatkal was **S.N. Mathur**.",
+      "span": "The director of film Bangalore Naatkal was S.N. Mathur",
+      "tokens": 17,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Heat\u2019s On**.",
+      "block": " **The Heat\u2019s On**.",
+      "span": "The Heat\u2019s On",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5,
+      "em_line": false,
+      "f1_line": 0.5
+     },
+     {
+      "raw": " End of Watch.",
+      "block": " End of Watch.",
+      "span": "End of Watch",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Blue Demon**.",
+      "block": " **Blue Demon**.",
+      "span": "Blue Demon",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Marie Th\u00e9r\u00e8se de Bourbon.",
+      "block": " Marie Th\u00e9r\u00e8se de Bourbon.",
+      "span": "Marie Th\u00e9r\u00e8se de Bourbon",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Olav Aaraas**.",
+      "block": " **Olav Aaraas**.",
+      "span": "Olav Aaraas",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Jean-Pierre Eckmann was born in **1944**.",
+      "block": " Jean-Pierre Eckmann was born in **1944**.",
+      "span": "Jean-Pierre Eckmann was born in 1944",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Clara Maria Pope.",
+      "block": " Clara Maria Pope.",
+      "span": "Clara Maria Pope",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Parthamasiris was born in **114.",
+      "block": " Parthamasiris was born in **114.",
+      "span": "Parthamasiris was born in 114",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Don Juan in a Girls\u2019 School**.",
+      "block": " **Don Juan in a Girls\u2019 School**.",
+      "span": "Don Juan in a Girls\u2019 School",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.8000000000000002,
+      "em_line": false,
+      "f1_line": 0.8000000000000002
+     },
+     {
+      "raw": " **Jack Lee**.",
+      "block": " **Jack Lee**.",
+      "span": "Jack Lee",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Sweden**.",
+      "block": " **Sweden**.",
+      "span": "Sweden",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Live Now, Pay Later",
+      "block": " Live Now, Pay Later",
+      "span": "Live Now, Pay Later",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **David Shute**.",
+      "block": " **David Shute**.",
+      "span": "David Shute",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Andrea Di Vito and Barbara FairchildBoth were born in **1919**.",
+      "block": " Andrea Di Vito and Barbara FairchildBoth were born in **1919**.",
+      "span": "Andrea Di Vito and Barbara FairchildBoth were born in 1919",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.16666666666666669,
+      "em_line": false,
+      "f1_line": 0.16666666666666669
+     },
+     {
+      "raw": " Curuppumullage Jinarajadasa.",
+      "block": " Curuppumullage Jinarajadasa.",
+      "span": "Curuppumullage Jinarajadasa",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Charlie\u2019s Country**.",
+      "block": " **Charlie\u2019s Country**.",
+      "span": "Charlie\u2019s Country",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5,
+      "em_line": false,
+      "f1_line": 0.5
+     },
+     {
+      "raw": " Ernst I, Prince of Hohenlohe-Langenburg.",
+      "block": " Ernst I, Prince of Hohenlohe-Langenburg.",
+      "span": "Ernst I, Prince of Hohenlohe-Langenburg",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " John I of Brienne.",
+      "block": " John I of Brienne.",
+      "span": "John I of Brienne",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.28571428571428575,
+      "em_line": false,
+      "f1_line": 0.28571428571428575
+     },
+     {
+      "raw": " **La Muerte Camina En La Lluvia**.",
+      "block": " **La Muerte Camina En La Lluvia**.",
+      "span": "La Muerte Camina En La Lluvia",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **James Benning**.",
+      "block": " **James Benning**.",
+      "span": "James Benning",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Louis Leterrier**.",
+      "block": " **Louis Leterrier**.",
+      "span": "Louis Leterrier",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " \u00c1d\u00e1m Forg\u00e1ch was born in Hungary.",
+      "block": " \u00c1d\u00e1m Forg\u00e1ch was born in Hungary.",
+      "span": "\u00c1d\u00e1m Forg\u00e1ch was born in Hungary",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Captain Kidd and the Slave Girl**.",
+      "block": " **Captain Kidd and the Slave Girl**.",
+      "span": "Captain Kidd and the Slave Girl",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Princess Anne of Orl\u00e9ans.",
+      "block": " Princess Anne of Orl\u00e9ans.",
+      "span": "Princess Anne of Orl\u00e9ans",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " Aleksander Dominik Lubomirski.",
+      "block": " Aleksander Dominik Lubomirski.",
+      "span": "Aleksander Dominik Lubomirski",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The child of the performer of song Buckaroo is **Carl Van Vechten**.",
+      "block": " The child of the performer of song Buckaroo is **Carl Van Vechten**.",
+      "span": "The child of the performer of song Buckaroo is Carl Van Vechten",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Gustaf Heinrich Arnold Gr\u00fcndgens**.",
+      "block": " **Gustaf Heinrich Arnold Gr\u00fcndgens**.",
+      "span": "Gustaf Heinrich Arnold Gr\u00fcndgens",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Chad Hanna.",
+      "block": " Chad Hanna.",
+      "span": "Chad Hanna",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Princess Isabella of Bavaria was born in **1863**.",
+      "block": " Princess Isabella of Bavaria was born in **1863**.",
+      "span": "Princess Isabella of Bavaria was born in 1863",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Irulum Oliyum",
+      "block": " Irulum Oliyum",
+      "span": "Irulum Oliyum",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " William I, Duke of Brunswick-L\u00fcneburg died on **1279**.",
+      "block": " William I, Duke of Brunswick-L\u00fcneburg died on **1279**.",
+      "span": "William I, Duke of Brunswick-L\u00fcneburg died on 1279",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.18181818181818182,
+      "em_line": false,
+      "f1_line": 0.18181818181818182
+     },
+     {
+      "raw": "",
+      "block": "",
+      "span": "",
+      "tokens": 0,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are located in **Indiana**.",
+      "block": " Both are located in **Indiana**.",
+      "span": "Both are located in Indiana",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " John DeMargheriti.",
+      "block": " John DeMargheriti.",
+      "span": "John DeMargheriti",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Louis Alexandre, Prince of Lamballe.",
+      "block": " Louis Alexandre, Prince of Lamballe.",
+      "span": "Louis Alexandre, Prince of Lamballe",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Frank Lesiputty**.",
+      "block": " **Frank Lesiputty**.",
+      "span": "Frank Lesiputty",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The performer of song Mermaid\u2019s Avenue died.",
+      "block": " The performer of song Mermaid\u2019s Avenue died.",
+      "span": "The performer of song Mermaid\u2019s Avenue died",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Robert Vadra**.",
+      "block": " **Robert Vadra**.",
+      "span": "Robert Vadra",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The performer ofDon\u2019t Let Me Be the Last to Know is **George Harrison**.",
+      "block": " The performer ofDon\u2019t Let Me Be the Last to Know is **George Harrison**.",
+      "span": "The performer ofDon\u2019t Let Me Be the Last to Know is George Harrison",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Rumbi Katedza**.",
+      "block": " **Rumbi Katedza**.",
+      "span": "Rumbi Katedza",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Nurse in the Military Madhouse**.",
+      "block": " **The Nurse in the Military Madhouse**.",
+      "span": "The Nurse in the Military Madhouse",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Kolpa\u00e7ino**.",
+      "block": " **Kolpa\u00e7ino**.",
+      "span": "Kolpa\u00e7ino",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The founder of the **University of Los Andes (Colombia)** is **Mario Laserna Pinz\u00f3n**.",
+      "block": " The founder of the **University of Los Andes (Colombia)** is **Mario Laserna Pinz\u00f3n**.",
+      "span": "The founder of the University of Los Andes (Colombia) is Mario Laserna Pinz\u00f3n",
+      "tokens": 20,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The director of film Random Encounter is **Jason Moore**.",
+      "block": " The director of film Random Encounter is **Jason Moore**.",
+      "span": "The director of film Random Encounter is Jason Moore",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Sir William Monson.",
+      "block": " Sir William Monson.",
+      "span": "Sir William Monson",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5,
+      "em_line": false,
+      "f1_line": 0.5
+     },
+     {
+      "raw": " **Both films were directed by **Herbert Blache**.",
+      "block": " **Both films were directed by **Herbert Blache**.",
+      "span": "Both films were directed by Herbert Blache",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " George I, Prince of Anhalt-Dessau.",
+      "block": " George I, Prince of Anhalt-Dessau.",
+      "span": "George I, Prince of Anhalt-Dessau",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Daniel Grodnik**.",
+      "block": " **Daniel Grodnik**.",
+      "span": "Daniel Grodnik",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Myra Song** was born in **1919**.",
+      "block": " **Myra Song** was born in **1919**.",
+      "span": "Myra Song was born in 1919",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Vicente Borge.",
+      "block": " Vicente Borge.",
+      "span": "Vicente Borge",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Merle Haggard.",
+      "block": " Merle Haggard.",
+      "span": "Merle Haggard",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Mill of Good Luck**.",
+      "block": " **The Mill of Good Luck**.",
+      "span": "The Mill of Good Luck",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Alberto Casado Cervi\u00f1o.",
+      "block": " Alberto Casado Cervi\u00f1o.",
+      "span": "Alberto Casado Cervi\u00f1o",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Eberhard of Limburg.",
+      "block": " Eberhard of Limburg.",
+      "span": "Eberhard of Limburg",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.6666666666666666,
+      "em_line": false,
+      "f1_line": 0.6666666666666666
+     },
+     {
+      "raw": " Dorothy Macmillan was born in **1900**.",
+      "block": " Dorothy Macmillan was born in **1900**.",
+      "span": "Dorothy Macmillan was born in 1900",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " William X.",
+      "block": " William X.",
+      "span": "William X",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The Grammy.",
+      "block": " The Grammy.",
+      "span": "The Grammy",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.6666666666666666,
+      "em_line": false,
+      "f1_line": 0.6666666666666666
+     },
+     {
+      "raw": " Jehoahaz of Israel.",
+      "block": " Jehoahaz of Israel.",
+      "span": "Jehoahaz of Israel",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5714285714285715,
+      "em_line": false,
+      "f1_line": 0.5714285714285715
+     },
+     {
+      "raw": " **1982**.",
+      "block": " **1982**.",
+      "span": "1982",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both Kennecott Land and Al Mar Knives are located in **California**.",
+      "block": " Both Kennecott Land and Al Mar Knives are located in **California**.",
+      "span": "Both Kennecott Land and Al Mar Knives are located in California",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Breaking The Silence: Truth And Lies**",
+      "block": " **Breaking The Silence: Truth And Lies**",
+      "span": "Breaking The Silence: Truth And Lies",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Norway.",
+      "block": " Norway.",
+      "span": "Norway",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The founder of Horseshoe Gaming Holding Corporation is Jack Binion.",
+      "block": " The founder of Horseshoe Gaming Holding Corporation is Jack Binion.",
+      "span": "The founder of Horseshoe Gaming Holding Corporation is Jack Binion",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Hombisilu**.",
+      "block": " **Hombisilu**.",
+      "span": "Hombisilu",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Brahima Ciss\u00e9.",
+      "block": " Brahima Ciss\u00e9.",
+      "span": "Brahima Ciss\u00e9",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " John Coolidge was born in Plymouth, Vermont.",
+      "block": " John Coolidge was born in Plymouth, Vermont.",
+      "span": "John Coolidge was born in Plymouth, Vermont",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.25,
+      "em_line": false,
+      "f1_line": 0.25
+     },
+     {
+      "raw": " **The Shout**.",
+      "block": " **The Shout**.",
+      "span": "The Shout",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Rakka**.",
+      "block": " **Rakka**.",
+      "span": "Rakka",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Mask of Fu Manchu**.",
+      "block": " **The Mask of Fu Manchu**.",
+      "span": "The Mask of Fu Manchu",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Robert Adetuyi**.",
+      "block": " **Robert Adetuyi**.",
+      "span": "Robert Adetuyi",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The director of **Gang Of Four (Film)** is **Nathalie Richard**.",
+      "block": " **The director of **Gang Of Four (Film)** is **Nathalie Richard**.",
+      "span": "The director of Gang Of Four (Film) is Nathalie Richard",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Kid With The Golden Arm**.",
+      "block": " **Kid With The Golden Arm**.",
+      "span": "Kid With The Golden Arm",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Germany**.",
+      "block": " **Germany**.",
+      "span": "Germany",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **William K. Howard**.",
+      "block": " **William K. Howard**.",
+      "span": "William K. Howard",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Thomas Henty died in **1810**.",
+      "block": " Thomas Henty died in **1810**.",
+      "span": "Thomas Henty died in 1810",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Ferdinand of Portugal.",
+      "block": " Ferdinand of Portugal.",
+      "span": "Ferdinand of Portugal",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both Gonebiskari and Khalifeh Kandi are located in **Nazarkahrizi Rural District, **Zanjan Province, Iran.",
+      "block": " Both Gonebiskari and Khalifeh Kandi are located in **Nazarkahrizi Rural District, **Zanjan Province, Iran.",
+      "span": "Both Gonebiskari and Khalifeh Kandi are located in Nazarkahrizi Rural District, Zanjan Province, Iran",
+      "tokens": 30,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " China.",
+      "block": " China.",
+      "span": "China",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Deeper and Deeper (Film)**",
+      "block": " **Deeper and Deeper (Film)**",
+      "span": "Deeper and Deeper (Film)",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Thammudu**.",
+      "block": " **Thammudu**.",
+      "span": "Thammudu",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are located in Canada.",
+      "block": " Both are located in Canada.",
+      "span": "Both are located in Canada",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Left-Hand Side of the Fridge**.",
+      "block": " **The Left-Hand Side of the Fridge**.",
+      "span": "The Left-Hand Side of the Fridge",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The place of death of the director of filmKiller\u2019s Kiss.",
+      "block": " The place of death of the director of filmKiller\u2019s Kiss.",
+      "span": "The place of death of the director of filmKiller\u2019s Kiss",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Chiyo\u014dtori Y\u016bki was born in **1992**.",
+      "block": " Chiyo\u014dtori Y\u016bki was born in **1992**.",
+      "span": "Chiyo\u014dtori Y\u016bki was born in 1992",
+      "tokens": 17,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Emperor Gaozu.",
+      "block": " Emperor Gaozu.",
+      "span": "Emperor Gaozu",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Stanley Kwan.",
+      "block": " Stanley Kwan.",
+      "span": "Stanley Kwan",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Gremlins 2: The New Batch**.",
+      "block": " **Gremlins 2: The New Batch**.",
+      "span": "Gremlins 2: The New Batch",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Canada**.",
+      "block": " **Canada**.",
+      "span": "Canada",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Richard L. Bare**.",
+      "block": " **Richard L. Bare**.",
+      "span": "Richard L. Bare",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Charles Sackville-West, 6Th Earl De La Warr.",
+      "block": " Charles Sackville-West, 6Th Earl De La Warr.",
+      "span": "Charles Sackville-West, 6Th Earl De La Warr",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The place of death of Hugh, Count Of Burgundy\u2019s wife was in France.",
+      "block": " The place of death of Hugh, Count Of Burgundy\u2019s wife was in France.",
+      "span": "The place of death of Hugh, Count Of Burgundy\u2019s wife was in France",
+      "tokens": 17,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Israel**.",
+      "block": " **Israel**.",
+      "span": "Israel",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Canada**.",
+      "block": " **Canada**.",
+      "span": "Canada",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " George Waldegrave, 5Th Earl Waldegrave.",
+      "block": " George Waldegrave, 5Th Earl Waldegrave.",
+      "span": "George Waldegrave, 5Th Earl Waldegrave",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are located in **Australia**.",
+      "block": " Both are located in **Australia**.",
+      "span": "Both are located in Australia",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Paleologo Zaccaria was born in **1235**.",
+      "block": " Paleologo Zaccaria was born in **1235**.",
+      "span": "Paleologo Zaccaria was born in 1235",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Fred Frith**.",
+      "block": " **Fred Frith**.",
+      "span": "Fred Frith",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Harold C. Edwards\u2019 father\u2019s birthday is **1989**.",
+      "block": " Harold C. Edwards\u2019 father\u2019s birthday is **1989**.",
+      "span": "Harold C. Edwards\u2019 father\u2019s birthday is 1989",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both Russell High School and Westside Christian High School are located in **Canada**.",
+      "block": " Both Russell High School and Westside Christian High School are located in **Canada**.",
+      "span": "Both Russell High School and Westside Christian High School are located in Canada",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Michael Grieve was born in **1978**.",
+      "block": " Michael Grieve was born in **1978**.",
+      "span": "Michael Grieve was born in 1978",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **John Farrow**.",
+      "block": " **John Farrow**.",
+      "span": "John Farrow",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " England.",
+      "block": " England.",
+      "span": "England",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Dean Paul Martin Jr. was born on **1951**.",
+      "block": " Dean Paul Martin Jr. was born on **1951**.",
+      "span": "Dean Paul Martin Jr",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Harry Collett was born in **17 January 2004**.",
+      "block": " Harry Collett was born in **17 January 2004**.",
+      "span": "Harry Collett was born in 17 January 2004",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Femi Kuti** was born in **1962**.",
+      "block": " **Femi Kuti** was born in **1962**.",
+      "span": "Femi Kuti was born in 1962",
+      "tokens": 15,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Beyond the Last Frontier**.",
+      "block": " **Beyond the Last Frontier**.",
+      "span": "Beyond the Last Frontier",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are **1914 films**.",
+      "block": " Both are **1914 films**.",
+      "span": "Both are 1914 films",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " John Scott (Died 1533) was born in **1747**.",
+      "block": " John Scott (Died 1533) was born in **1747**.",
+      "span": "John Scott (Died 1533) was born in 1747",
+      "tokens": 20,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Gustav von H\u00fcfner.",
+      "block": " Gustav von H\u00fcfner.",
+      "span": "Gustav von H\u00fcfner",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Burchard III.",
+      "block": " Burchard III.",
+      "span": "Burchard III",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Peder Per Veggum.",
+      "block": " Peder Per Veggum.",
+      "span": "Peder Per Veggum",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **The Marriage of Maria Braun**.",
+      "block": " **The Marriage of Maria Braun**.",
+      "span": "The Marriage of Maria Braun",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Charlotte Stuart.",
+      "block": " Charlotte Stuart.",
+      "span": "Charlotte Stuart",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are **films from the same country**.",
+      "block": " Both are **films from the same country**.",
+      "span": "Both are films from the same country",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Peter Levin.",
+      "block": " Peter Levin.",
+      "span": "Peter Levin",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Victor Man**.",
+      "block": " **Victor Man**.",
+      "span": "Victor Man",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **John Westley**.",
+      "block": " **John Westley**.",
+      "span": "John Westley",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " **S.N. Mathur**.",
+      "block": " **S.N. Mathur**.",
+      "span": "S.N. Mathur",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Beavis and Butt-Head**.",
+      "block": " **Beavis and Butt-Head**.",
+      "span": "Beavis and Butt-Head",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both films were directed by **Michael Curtiz**.",
+      "block": " Both films were directed by **Michael Curtiz**.",
+      "span": "Both films were directed by Michael Curtiz",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Isaac Deutscher.",
+      "block": " Isaac Deutscher.",
+      "span": "Isaac Deutscher",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The place of death of Edmund Mortimer (Died 1331).",
+      "block": " The place of death of Edmund Mortimer (Died 1331).",
+      "span": "The place of death of Edmund Mortimer (Died 1331)",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The founder of Morgans Hotel Group is fromThe founder of Morgans Hotel Group is from **SBE Entertainment Group**.",
+      "block": " The founder of Morgans Hotel Group is fromThe founder of Morgans Hotel Group is from **SBE Entertainment Group**.",
+      "span": "The founder of Morgans Hotel Group is fromThe founder of Morgans Hotel Group is from SBE Entertainment Group",
+      "tokens": 24,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Jeff Garlin was born on **1954**.",
+      "block": " Jeff Garlin was born on **1954**.",
+      "span": "Jeff Garlin was born on 1954",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Dis-Moi Que Tu M\u2019Aimes**.",
+      "block": " **Dis-Moi Que Tu M\u2019Aimes**.",
+      "span": "Dis-Moi Que Tu M\u2019Aimes",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.75,
+      "em_line": false,
+      "f1_line": 0.75
+     },
+     {
+      "raw": " Cecil Dumond",
+      "block": " Cecil Dumond",
+      "span": "Cecil Dumond",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Archduke Karl Pius of Austria, Prince of Tuscany.",
+      "block": " Archduke Karl Pius of Austria, Prince of Tuscany.",
+      "span": "Archduke Karl Pius of Austria, Prince of Tuscany",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Wild Bull**.",
+      "block": " **The Wild Bull**.",
+      "span": "The Wild Bull",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " Frederick, Hereditary Prince of Baden-Durlach.",
+      "block": " Frederick, Hereditary Prince of Baden-Durlach.",
+      "span": "Frederick, Hereditary Prince of Baden-Durlach",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Los Angeles, California**.",
+      "block": " **Los Angeles, California**.",
+      "span": "Los Angeles, California",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Georg Friedrich, Margrave of Baden-Durlach\u2019s mother\u2019s birthday is on **September 24, 1638**.",
+      "block": " Georg Friedrich, Margrave of Baden-Durlach\u2019s mother\u2019s birthday is on **September 24, 1638**.",
+      "span": "Georg Friedrich, Margrave of Baden-Durlach\u2019s mother\u2019s birthday is on September 24, 1638",
+      "tokens": 31,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Germany**.",
+      "block": " **Germany**.",
+      "span": "Germany",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Tem\u00fcge died in **1947**.",
+      "block": " Tem\u00fcge died in **1947**.",
+      "span": "Tem\u00fcge died in 1947",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Something Like Happiness**",
+      "block": " **Something Like Happiness**",
+      "span": "Something Like Happiness",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The **director of film** is **Simon Verhoeven**.",
+      "block": " The **director of film** is **Simon Verhoeven**.",
+      "span": "The director of film is Simon Verhoeven",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Lord Byron**.",
+      "block": " **Lord Byron**.",
+      "span": "Lord Byron",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Don't Lean Out the Window**.",
+      "block": " **Don't Lean Out the Window**.",
+      "span": "Don't Lean Out the Window",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Jon Bon Jovi.",
+      "block": " Jon Bon Jovi.",
+      "span": "Jon Bon Jovi",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Scott McKenna.",
+      "block": " Scott McKenna.",
+      "span": "Scott McKenna",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " John II, Duke ofCleves.",
+      "block": " John II, Duke ofCleves.",
+      "span": "John II, Duke ofCleves",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " O Segredo Do Corcunda.",
+      "block": " O Segredo Do Corcunda.",
+      "span": "O Segredo Do Corcunda",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The Girl in White.",
+      "block": " The Girl in White.",
+      "span": "The Girl in White",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Carnage**.",
+      "block": " **Carnage**.",
+      "span": "Carnage",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both.",
+      "block": " Both.",
+      "span": "Both",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Gunnar Wiklund.",
+      "block": " Gunnar Wiklund.",
+      "span": "Gunnar Wiklund",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Sheriff of Redwood Valley**.",
+      "block": " **Sheriff of Redwood Valley**.",
+      "span": "Sheriff of Redwood Valley",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Dr. Goldfoot.",
+      "block": " Dr. Goldfoot.",
+      "span": "Dr",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Josiah Boothby is a **British** citizen.",
+      "block": " Josiah Boothby is a **British** citizen.",
+      "span": "Josiah Boothby is a British citizen",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.33333333333333337,
+      "em_line": false,
+      "f1_line": 0.33333333333333337
+     },
+     {
+      "raw": " Robert Woodrow Levering.",
+      "block": " Robert Woodrow Levering.",
+      "span": "Robert Woodrow Levering",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Marco Antonio Bottoni**.",
+      "block": " **Marco Antonio Bottoni**.",
+      "span": "Marco Antonio Bottoni",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " Both Barnum Museum and Alfred Ceramic Art Museum are located in **New York State College of Ceramics**.",
+      "block": " Both Barnum Museum and Alfred Ceramic Art Museum are located in **New York State College of Ceramics**.",
+      "span": "Both Barnum Museum and Alfred Ceramic Art Museum are located in New York State College of Ceramics",
+      "tokens": 20,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Grammy Award for Best Female Pop Vocal Performance**.",
+      "block": " **The Grammy Award for Best Female Pop Vocal Performance**.",
+      "span": "The Grammy Award for Best Female Pop Vocal Performance",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.2222222222222222,
+      "em_line": false,
+      "f1_line": 0.2222222222222222
+     },
+     {
+      "raw": " Both directors are from **France**.",
+      "block": " Both directors are from **France**.",
+      "span": "Both directors are from France",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Crime Doctor\u2019s Courage**.",
+      "block": " **The Crime Doctor\u2019s Courage**.",
+      "span": "The Crime Doctor\u2019s Courage",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.6666666666666666,
+      "em_line": false,
+      "f1_line": 0.6666666666666666
+     },
+     {
+      "raw": " Agnes of Waiblingen.",
+      "block": " Agnes of Waiblingen.",
+      "span": "Agnes of Waiblingen",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Daniel Grodnik**.",
+      "block": " **Daniel Grodnik**.",
+      "span": "Daniel Grodnik",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Cheerleader Camp**.",
+      "block": " **Cheerleader Camp**.",
+      "span": "Cheerleader Camp",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Eager Bodies",
+      "block": " Eager Bodies",
+      "span": "Eager Bodies",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **1866**.",
+      "block": " **1866**.",
+      "span": "1866",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Voyage to the End of the Universe**.",
+      "block": " **Voyage to the End of the Universe**.",
+      "span": "Voyage to the End of the Universe",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Frank Wartenberg\u2019s wife is **Germany**.",
+      "block": " Frank Wartenberg\u2019s wife is **Germany**.",
+      "span": "Frank Wartenberg\u2019s wife is Germany",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Teresa Korwin Gosiewska.",
+      "block": " Teresa Korwin Gosiewska.",
+      "span": "Teresa Korwin Gosiewska",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.3333333333333333,
+      "em_line": false,
+      "f1_line": 0.3333333333333333
+     },
+     {
+      "raw": " Both directors are from the same country.",
+      "block": " Both directors are from the same country.",
+      "span": "Both directors are from the same country",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both directors are from **China**.",
+      "block": " Both directors are from **China**.",
+      "span": "Both directors are from China",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The **Crown** was founded in **1987**.",
+      "block": " The **Crown** was founded in **1987**.",
+      "span": "The Crown was founded in 1987",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yes, both are **2003**.",
+      "block": " Yes, both are **2003**.",
+      "span": "Yes, both are 2003",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": "Both were **American action/adventure films**.",
+      "block": "Both were **American action/adventure films**.",
+      "span": "Both were American action/adventure films",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Nikolai Bent Paus**.",
+      "block": " **Nikolai Bent Paus**.",
+      "span": "Nikolai Bent Paus",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.3333333333333333,
+      "em_line": false,
+      "f1_line": 0.3333333333333333
+     },
+     {
+      "raw": " **The Last Paradises: On The Track of Rare Animals**.",
+      "block": " **The Last Paradises: On The Track of Rare Animals**.",
+      "span": "The Last Paradises: On The Track of Rare Animals",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **The InBetweeners**.",
+      "block": " **The InBetweeners**.",
+      "span": "The InBetweeners",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Mark of the Frog.",
+      "block": " Mark of the Frog.",
+      "span": "Mark of the Frog",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Nell\u2019s Eugenic Wedding**.",
+      "block": " **Nell\u2019s Eugenic Wedding**.",
+      "span": "Nell\u2019s Eugenic Wedding",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The Hot Angel is **American**.",
+      "block": " The Hot Angel is **American**.",
+      "span": "The Hot Angel is American",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **William the Silent**.",
+      "block": " **William the Silent**.",
+      "span": "William the Silent",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Marc Burrows.",
+      "block": " Marc Burrows.",
+      "span": "Marc Burrows",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **The Brand of Hate**.",
+      "block": " **The Brand of Hate**.",
+      "span": "The Brand of Hate",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Jonathan Gregg.",
+      "block": " Jonathan Gregg.",
+      "span": "Jonathan Gregg",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Beyonc\u00e9**.",
+      "block": " **Beyonc\u00e9**.",
+      "span": "Beyonc\u00e9",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Pumpkin Eater**.",
+      "block": " **The Pumpkin Eater**.",
+      "span": "The Pumpkin Eater",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yes.",
+      "block": " Yes.",
+      "span": "Yes",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **United States**.",
+      "block": " **United States**.",
+      "span": "United States",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Thomas Johannes Lauritz Parr.",
+      "block": " Thomas Johannes Lauritz Parr.",
+      "span": "Thomas Johannes Lauritz Parr",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Zeenat Mahal\u2019s husband was buried in **Deir el-Medina**, Egypt.",
+      "block": " Zeenat Mahal\u2019s husband was buried in **Deir el-Medina**, Egypt.",
+      "span": "Zeenat Mahal\u2019s husband was buried in Deir el-Medina, Egypt",
+      "tokens": 20,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Michael Govan**.",
+      "block": " **Michael Govan**.",
+      "span": "Michael Govan",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Sam Newfield.",
+      "block": " Sam Newfield.",
+      "span": "Sam Newfield",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Namma Ooru Nayagan**.",
+      "block": " **Namma Ooru Nayagan**.",
+      "span": "Namma Ooru Nayagan",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yes.",
+      "block": " Yes.",
+      "span": "Yes",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Ana Patricia Rojo.",
+      "block": " Ana Patricia Rojo.",
+      "span": "Ana Patricia Rojo",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Pearl of Love**.",
+      "block": " **The Pearl of Love**.",
+      "span": "The Pearl of Love",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.6666666666666666,
+      "em_line": false,
+      "f1_line": 0.6666666666666666
+     },
+     {
+      "raw": "Both are **British** films.",
+      "block": "Both are **British** films.",
+      "span": "Both are British films",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both.",
+      "block": " Both.",
+      "span": "Both",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Lord Fitzwilliam Shirley**.",
+      "block": " **Lord Fitzwilliam Shirley**.",
+      "span": "Lord Fitzwilliam Shirley",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Ride The High Country**.",
+      "block": " **Ride The High Country**.",
+      "span": "Ride The High Country",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **The Daughters of Helena**.",
+      "block": " **The Daughters of Helena**.",
+      "span": "The Daughters of Helena",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Oliver Penrose\u2019s father was **Barrie Penrose**.",
+      "block": " Oliver Penrose\u2019s father was **Barrie Penrose**.",
+      "span": "Oliver Penrose\u2019s father was Barrie Penrose",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Berengaria of Portugal**.",
+      "block": " **Berengaria of Portugal**.",
+      "span": "Berengaria of Portugal",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yes.",
+      "block": " Yes.",
+      "span": "Yes",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Mark Abley.",
+      "block": " Mark Abley.",
+      "span": "Mark Abley",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Poland.",
+      "block": " Poland.",
+      "span": "Poland",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both directors are from **England**.",
+      "block": " Both directors are from **England**.",
+      "span": "Both directors are from England",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both were born in **1768**.",
+      "block": " Both were born in **1768**.",
+      "span": "Both were born in 1768",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are **films directed by **Henry Koster**.",
+      "block": " Both are **films directed by **Henry Koster**.",
+      "span": "Both are films directed by Henry Koster",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Sir Paul Hasluck**.",
+      "block": " **Sir Paul Hasluck**.",
+      "span": "Sir Paul Hasluck",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Yob**.",
+      "block": " **The Yob**.",
+      "span": "The Yob",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **George Albert Smith**.",
+      "block": " **George Albert Smith**.",
+      "span": "George Albert Smith",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Lion and the Mouse**.",
+      "block": " **The Lion and the Mouse**.",
+      "span": "The Lion and the Mouse",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Poland**.",
+      "block": " **Poland**.",
+      "span": "Poland",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Juan Francisco de la Cerda, 5th Duke of Medinaceli.",
+      "block": " Juan Francisco de la Cerda, 5th Duke of Medinaceli.",
+      "span": "Juan Francisco de la Cerda, 5th Duke of Medinaceli",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both were **1975**.",
+      "block": " Both were **1975**.",
+      "span": "Both were 1975",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Henry Grey, 4Th Earl of Kent.",
+      "block": " Henry Grey, 4Th Earl of Kent.",
+      "span": "Henry Grey, 4Th Earl of Kent",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both Dent Du G\u00e9ant and Monte Matto are located in France.",
+      "block": " Both Dent Du G\u00e9ant and Monte Matto are located in France.",
+      "span": "Both Dent Du G\u00e9ant and Monte Matto are located in France",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Jean Poiret**.",
+      "block": " **Jean Poiret**.",
+      "span": "Jean Poiret",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " George I.",
+      "block": " George I.",
+      "span": "George I",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Bangladesh National Film Award for Best Director**.",
+      "block": " **Bangladesh National Film Award for Best Director**.",
+      "span": "Bangladesh National Film Award for Best Director",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " David Box.",
+      "block": " David Box.",
+      "span": "David Box",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The song Life Marathon (Eason Chan) was written byEason Chan.",
+      "block": " The song Life Marathon (Eason Chan) was written byEason Chan.",
+      "span": "The song Life Marathon (Eason Chan) was written byEason Chan",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Battle for the Planet of the Apes**.",
+      "block": " **Battle for the Planet of the Apes**.",
+      "span": "Battle for the Planet of the Apes",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.6,
+      "em_line": false,
+      "f1_line": 0.6
+     },
+     {
+      "raw": " Crow Foot died in **1890**.",
+      "block": " Crow Foot died in **1890**.",
+      "span": "Crow Foot died in 1890",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " David Dhawan.",
+      "block": " David Dhawan.",
+      "span": "David Dhawan",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Gents Without Cents**.",
+      "block": " **Gents Without Cents**.",
+      "span": "Gents Without Cents",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Charles E. Rushmore.",
+      "block": " Charles E. Rushmore.",
+      "span": "Charles E. Rushmore",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The father of Louise Borgia, Count Raymond V of Toulouse.",
+      "block": " The father of Louise Borgia, Count Raymond V of Toulouse.",
+      "span": "The father of Louise Borgia, Count Raymond V of Toulouse",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **She was born in **1999**.",
+      "block": " **She was born in **1999**.",
+      "span": "She was born in 1999",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " No.",
+      "block": " No.",
+      "span": "No",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Both villages, Chausy and Lyapunovo, are located in Bryansk Oblast.",
+      "block": " Both villages, Chausy and Lyapunovo, are located in Bryansk Oblast.",
+      "span": "Both villages, Chausy and Lyapunovo, are located in Bryansk Oblast",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Herman I, Duke of Swabia.",
+      "block": " Herman I, Duke of Swabia.",
+      "span": "Herman I, Duke of Swabia",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Albert Einstein**.",
+      "block": " **Albert Einstein**.",
+      "span": "Albert Einstein",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Philipp III of Hanau-Lichtenberg.",
+      "block": " Philipp III of Hanau-Lichtenberg.",
+      "span": "Philipp III of Hanau-Lichtenberg",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Daniel Grodnik**.",
+      "block": " **Daniel Grodnik**.",
+      "span": "Daniel Grodnik",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Moon and Sixpence (1942)**",
+      "block": " **The Moon and Sixpence (1942)**",
+      "span": "The Moon and Sixpence (1942)",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Hi Diddle Diddle.",
+      "block": " Hi Diddle Diddle.",
+      "span": "Hi Diddle Diddle",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Kim Utzon.",
+      "block": " Kim Utzon.",
+      "span": "Kim Utzon",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Uncharted Seas",
+      "block": " Uncharted Seas",
+      "span": "Uncharted Seas",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Henri III**.",
+      "block": " **Henri III**.",
+      "span": "Henri III",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Dialogues of Exiles.",
+      "block": " Dialogues of Exiles.",
+      "span": "Dialogues of Exiles",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yolanda of Vianden.",
+      "block": " Yolanda of Vianden.",
+      "span": "Yolanda of Vianden",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.28571428571428575,
+      "em_line": false,
+      "f1_line": 0.28571428571428575
+     },
+     {
+      "raw": " Prince Adarnase of Kartli was born in **1618**.",
+      "block": " Prince Adarnase of Kartli was born in **1618**.",
+      "span": "Prince Adarnase of Kartli was born in 1618",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both are **American directors**.",
+      "block": " Both are **American directors**.",
+      "span": "Both are American directors",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **California**.",
+      "block": " **California**.",
+      "span": "California",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Zelda Fitzgerald**.",
+      "block": " **Zelda Fitzgerald**.",
+      "span": "Zelda Fitzgerald",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The **Big Gusher**.",
+      "block": " The **Big Gusher**.",
+      "span": "The Big Gusher",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Robert Sidney, 1St Earl of Leicester.",
+      "block": " Robert Sidney, 1St Earl of Leicester.",
+      "span": "Robert Sidney, 1St Earl of Leicester",
+      "tokens": 10,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.2222222222222222,
+      "em_line": false,
+      "f1_line": 0.2222222222222222
+     },
+     {
+      "raw": " Richard White.",
+      "block": " Richard White.",
+      "span": "Richard White",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5,
+      "em_line": false,
+      "f1_line": 0.5
+     },
+     {
+      "raw": " Both National Archeologic Museum of Pontecagnano and Museum ofContemporary Art.",
+      "block": " Both National Archeologic Museum of Pontecagnano and Museum ofContemporary Art.",
+      "span": "Both National Archeologic Museum of Pontecagnano and Museum ofContemporary Art",
+      "tokens": 16,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Kisses And Hugs**.",
+      "block": " **Kisses And Hugs**.",
+      "span": "Kisses And Hugs",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Canada**.",
+      "block": " **Canada**.",
+      "span": "Canada",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Andrew Matthews Balding.",
+      "block": " Andrew Matthews Balding.",
+      "span": "Andrew Matthews Balding",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Leopoldo De Austria.",
+      "block": " Leopoldo De Austria.",
+      "span": "Leopoldo De Austria",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Anne Calthorpe, Countess of Sussex, was married to **Henry Radcliffe**.",
+      "block": " **Anne Calthorpe, Countess of Sussex, was married to **Henry Radcliffe**.",
+      "span": "Anne Calthorpe, Countess of Sussex, was married to Henry Radcliffe",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **David Shute**.",
+      "block": " **David Shute**.",
+      "span": "David Shute",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The **Men\u2019s Club**.",
+      "block": " **The **Men\u2019s Club**.",
+      "span": "The Men\u2019s Club",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Ian Barry.",
+      "block": " Ian Barry.",
+      "span": "Ian Barry",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **James Randall Marsh**.",
+      "block": " **James Randall Marsh**.",
+      "span": "James Randall Marsh",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " John Browne, 1St Marquess of Sligo.",
+      "block": " John Browne, 1St Marquess of Sligo.",
+      "span": "John Browne, 1St Marquess of Sligo",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Walram, Count of Sponheim-Kreuznach.",
+      "block": " Walram, Count of Sponheim-Kreuznach.",
+      "span": "Walram, Count of Sponheim-Kreuznach",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " The two bands are both **American progressive rock bands**.",
+      "block": " The two bands are both **American progressive rock bands**.",
+      "span": "The two bands are both American progressive rock bands",
+      "tokens": 11,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Sir Arthur Gore.",
+      "block": " Sir Arthur Gore.",
+      "span": "Sir Arthur Gore",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " **The Spirit Moves**.",
+      "block": " **The Spirit Moves**.",
+      "span": "The Spirit Moves",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **1940**",
+      "block": " **1940**",
+      "span": "1940",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Investors Chronicle.",
+      "block": " Investors Chronicle.",
+      "span": "Investors Chronicle",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Frederick III, Landgrave of Hesse-Homburg.",
+      "block": " Frederick III, Landgrave of Hesse-Homburg.",
+      "span": "Frederick III, Landgrave of Hesse-Homburg",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Joan of Valois, Duchess of Bourbon.",
+      "block": " Joan of Valois, Duchess of Bourbon.",
+      "span": "Joan of Valois, Duchess of Bourbon",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.2,
+      "em_line": false,
+      "f1_line": 0.2
+     },
+     {
+      "raw": " **Raadha Aur Seeta**.",
+      "block": " **Raadha Aur Seeta**.",
+      "span": "Raadha Aur Seeta",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Princess Pauline of Saxe-Weimar-Eisenach was married toCharles Augustus, Hereditary Grand Duke of Saxe-Weimar-Eisenach.",
+      "block": " Princess Pauline of Saxe-Weimar-Eisenach was married toCharles Augustus, Hereditary Grand Duke of Saxe-Weimar-Eisenach.",
+      "span": "Princess Pauline of Saxe-Weimar-Eisenach was married toCharles Augustus, Hereditary Grand Duke of Saxe-Weimar-Eisenach",
+      "tokens": 31,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Marie Z\u00e9phyrine.",
+      "block": " Marie Z\u00e9phyrine.",
+      "span": "Marie Z\u00e9phyrine",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5,
+      "em_line": false,
+      "f1_line": 0.5
+     },
+     {
+      "raw": " The singer of **Astrid North**.",
+      "block": " The singer of **Astrid North**.",
+      "span": "The singer of Astrid North",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Grand Duke Vladimir Alexandrovich of Russia.",
+      "block": " Grand Duke Vladimir Alexandrovich of Russia.",
+      "span": "Grand Duke Vladimir Alexandrovich of Russia",
+      "tokens": 9,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Smiling Madame Beudet**.",
+      "block": " **The Smiling Madame Beudet**.",
+      "span": "The Smiling Madame Beudet",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5714285714285715,
+      "em_line": false,
+      "f1_line": 0.5714285714285715
+     },
+     {
+      "raw": " Gustavo Machado Morales.",
+      "block": " Gustavo Machado Morales.",
+      "span": "Gustavo Machado Morales",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Joseph-\u00c9douard Perrault was born in 1846.",
+      "block": " Joseph-\u00c9douard Perrault was born in 1846.",
+      "span": "Joseph-\u00c9douard Perrault was born in 1846",
+      "tokens": 17,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Magnus Ii.",
+      "block": " Magnus Ii.",
+      "span": "Magnus Ii",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Full Length LP**.",
+      "block": " **Full Length LP**.",
+      "span": "Full Length LP",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Both **A Revolutionary Family**.",
+      "block": " **Both **A Revolutionary Family**.",
+      "span": "Both A Revolutionary Family",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Benny Rubinstein**.",
+      "block": " **Benny Rubinstein**.",
+      "span": "Benny Rubinstein",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Jakub W\u0119grzynkiewicz.",
+      "block": " Jakub W\u0119grzynkiewicz.",
+      "span": "Jakub W\u0119grzynkiewicz",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Bhajantrilu**.",
+      "block": " **Bhajantrilu**.",
+      "span": "Bhajantrilu",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **Edmond T. Gr\u00e9ville**.",
+      "block": " **Edmond T. Gr\u00e9ville**.",
+      "span": "Edmond T. Gr\u00e9ville",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Princess Sophie of Greece and Denmark.",
+      "block": " Princess Sophie of Greece and Denmark.",
+      "span": "Princess Sophie of Greece and Denmark",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " **Chris Lane** was born on **November 9, 1984**.",
+      "block": " **Chris Lane** was born on **November 9, 1984**.",
+      "span": "Chris Lane was born on November 9, 1984",
+      "tokens": 18,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.5454545454545454,
+      "em_line": false,
+      "f1_line": 0.5454545454545454
+     },
+     {
+      "raw": " **Jingle All the Way**.",
+      "block": " **Jingle All the Way**.",
+      "span": "Jingle All the Way",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Gladiators Seven**.",
+      "block": " **Gladiators Seven**.",
+      "span": "Gladiators Seven",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Thomas Edison**.",
+      "block": " **Thomas Edison**.",
+      "span": "Thomas Edison",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Sir Thomas Strickland.",
+      "block": " Sir Thomas Strickland.",
+      "span": "Sir Thomas Strickland",
+      "tokens": 4,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4,
+      "em_line": false,
+      "f1_line": 0.4
+     },
+     {
+      "raw": " Zoran Belo\u0161evi\u0107.",
+      "block": " Zoran Belo\u0161evi\u0107.",
+      "span": "Zoran Belo\u0161evi\u0107",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Hungary.",
+      "block": " Hungary.",
+      "span": "Hungary",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Paul Richter\u2019s wife is Aud Egede-Nissen.",
+      "block": " Paul Richter\u2019s wife is Aud Egede-Nissen.",
+      "span": "Paul Richter\u2019s wife is Aud Egede-Nissen",
+      "tokens": 13,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " No.",
+      "block": " No.",
+      "span": "No",
+      "tokens": 2,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Vein**.",
+      "block": " **The Vein**.",
+      "span": "The Vein",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Gillian Blake.",
+      "block": " Gillian Blake.",
+      "span": "Gillian Blake",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Mon Oncle Benjamin**.",
+      "block": " **Mon Oncle Benjamin**.",
+      "span": "Mon Oncle Benjamin",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Mu\u017e, Kter\u00fd Stoupl V Cen\u011b**.",
+      "block": " **Mu\u017e, Kter\u00fd Stoupl V Cen\u011b**.",
+      "span": "Mu\u017e, Kter\u00fd Stoupl V Cen\u011b",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " **A Monster and a Half**.",
+      "block": " **A Monster and a Half**.",
+      "span": "A Monster and a Half",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " The place of death of Meritaten was in **Set Maat**.",
+      "block": " The place of death of Meritaten was in **Set Maat**.",
+      "span": "The place of death of Meritaten was in Set Maat",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The **Director of Film**.",
+      "block": " **The **Director of Film**.",
+      "span": "The Director of Film",
+      "tokens": 7,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Munni Begum**.",
+      "block": " **Munni Begum**.",
+      "span": "Munni Begum",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **France**.",
+      "block": " **France**.",
+      "span": "France",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **The Swedish Kings**.",
+      "block": " **The Swedish Kings**.",
+      "span": "The Swedish Kings",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Un Samayal Arayil**.",
+      "block": " **Un Samayal Arayil**.",
+      "span": "Un Samayal Arayil",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Peter Elmsley.",
+      "block": " Peter Elmsley.",
+      "span": "Peter Elmsley",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": true,
+      "f1_span": 1.0,
+      "em_line": true,
+      "f1_line": 1.0
+     },
+     {
+      "raw": " Maria Isabella of Austria.",
+      "block": " Maria Isabella of Austria.",
+      "span": "Maria Isabella of Austria",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.4444444444444445,
+      "em_line": false,
+      "f1_line": 0.4444444444444445
+     },
+     {
+      "raw": " Both Beauty And The Bad Man and Wild Child (Film) films have **both directors from the same country**.",
+      "block": " Both Beauty And The Bad Man and Wild Child (Film) films have **both directors from the same country**.",
+      "span": "Both Beauty And The Bad Man and Wild Child (Film) films have both directors from the same country",
+      "tokens": 22,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Yuen Shun-Yi was born in 1953.",
+      "block": " Yuen Shun-Yi was born in 1953.",
+      "span": "Yuen Shun-Yi was born in 1953",
+      "tokens": 14,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Canada**.",
+      "block": " **Canada**.",
+      "span": "Canada",
+      "tokens": 3,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Both directors are from Australia.",
+      "block": " Both directors are from Australia.",
+      "span": "Both directors are from Australia",
+      "tokens": 6,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Both are located in **Florida**.",
+      "block": " **Both are located in **Florida**.",
+      "span": "Both are located in Florida",
+      "tokens": 8,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " **Catherine of Lancaster**.",
+      "block": " **Catherine of Lancaster**.",
+      "span": "Catherine of Lancaster",
+      "tokens": 5,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.0,
+      "em_line": false,
+      "f1_line": 0.0
+     },
+     {
+      "raw": " Schwechater received the Austrian Decoration for Science and Art.",
+      "block": " Schwechater received the Austrian Decoration for Science and Art.",
+      "span": "Schwechater received the Austrian Decoration for Science and Art",
+      "tokens": 12,
+      "truncated": false,
+      "em_span": false,
+      "f1_span": 0.8571428571428571,
+      "em_line": false,
+      "f1_line": 0.8571428571428571
+     }
+    ]
+   }
   }
  }
 }

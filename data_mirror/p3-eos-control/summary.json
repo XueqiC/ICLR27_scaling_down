@@ -139,6 +139,146 @@
      }
     }
    }
+  },
+  "gemma3-1b": {
+   "control_run": "results/v12-distill/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora",
+   "training": {
+    "student": "google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+    "teacher": "gpt-5.6-luna",
+    "recipe": "full",
+    "n_per_domain": 600,
+    "epochs": 2,
+    "seed": 0,
+    "data_seed": null,
+    "learning_rate": 0.0001,
+    "training_mode": "lora",
+    "append_eos": true
+   },
+   "probe_losses": {
+    "s3_student": {
+     "math": 1.4116343385361418,
+     "code": 1.3593334809565987,
+     "qa": 4.618152390438247
+    },
+    "control": {
+     "math": 1.422450371268374,
+     "code": 1.3557351638618247,
+     "qa": 4.608939243027889
+    }
+   },
+   "control": {
+    "loss": 5.465410740335521,
+    "em_32": 0.11979166666666667,
+    "f1_32": 0.17141565032190031,
+    "em_96": 0.12760416666666666,
+    "f1_96": 0.18176613606301106,
+    "truncated_96": 0,
+    "tokens_96": 7.877604166666667
+   },
+   "s3_student": {
+    "loss": 5.457729303428154,
+    "em_32": 0,
+    "f1_32": 0.08061640877686947,
+    "em_96": 0.08333333333333333,
+    "f1_96": 0.13448146630476907,
+    "truncated_96": 0.9895833333333334,
+    "tokens_96": 96.02083333333333
+   },
+   "paired_control_minus_s3": {
+    "loss": {
+     "mean": 0.007681436907367001,
+     "ci95": [
+      -0.02172822501919889,
+      0.036844017139819586
+     ],
+     "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+    },
+    "em_32": {
+     "mean": 0.11979166666666667,
+     "ci95": [
+      0.08854166666666667,
+      0.15364583333333334
+     ]
+    },
+    "em_96": {
+     "mean": 0.044270833333333336,
+     "ci95": [
+      0.020833333333333332,
+      0.06777343749999905
+     ]
+    },
+    "f1_96": {
+     "mean": 0.047284669758242005,
+     "ci95": [
+      0.024883299155590677,
+      0.0711237785721453
+     ]
+    },
+    "truncated_96": {
+     "mean": -0.9895833333333334,
+     "ci95": [
+      -0.9973958333333334,
+      -0.9791666666666666
+     ]
+    },
+    "tokens_96": {
+     "mean": -88.14322916666667,
+     "ci95": [
+      -88.60677083333333,
+      -87.62239583333333
+     ]
+    }
+   },
+   "comparators": {
+    "quant_only": {
+     "candidate": "quant:channel_b4",
+     "loss": 7.278799690007294,
+     "em_32": 0.036458333333333336,
+     "em_96": 0.041666666666666664,
+     "truncated_96": 0.8828125,
+     "control_minus_this": {
+      "loss": {
+       "mean": -1.813388949671773,
+       "ci95": [
+        -2.0498030269990837,
+        -1.586931257045187
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "em_96": {
+       "mean": 0.0859375,
+       "ci95": [
+        0.049479166666666664,
+        0.12239583333333333
+       ]
+      }
+     }
+    },
+    "pristine": {
+     "candidate": "pristine:student",
+     "loss": 6.510804157549234,
+     "em_32": 0.12760416666666666,
+     "em_96": 0.13020833333333334,
+     "truncated_96": 0.3463541666666667,
+     "control_minus_this": {
+      "loss": {
+       "mean": -1.0453934172137131,
+       "ci95": [
+        -1.2514799972467967,
+        -0.8542860869334795
+       ],
+       "statistic": "difference of token-weighted mean losses, bootstrapped over items"
+      },
+      "em_96": {
+       "mean": -0.0026041666666666665,
+       "ci95": [
+        -0.041666666666666664,
+        0.036458333333333336
+       ]
+      }
+     }
+    }
+   }
   }
  }
 }
