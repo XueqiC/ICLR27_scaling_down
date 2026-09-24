@@ -14,7 +14,6 @@ from dataclasses import dataclass, field
 import json
 import re
 from statistics import mean
-from math import isclose
 
 if __package__:
     from .paper_artifacts import ROOT, CAPS, Artifacts, frozen_run, output_path, legacy_rows
@@ -27,8 +26,6 @@ Q55 = "results/v55-quant-group/register.json"
 D70 = "results/v70-distill-confirm/compare.json"
 R74 = "results/v74-quant-threeway/quant_threeway.json"
 S86 = "results/v86-main-table/summary.json"
-E11 = "results/a11-efficiency-confirmation/summary.json"
-E11_STATE = "results/a11-efficiency-confirmation/per_state.json"
 
 # Presentation vocabulary only. Coefficient counts and scores still come from
 # JSON fields; each mapped phrase carries the source values in its recipe.
@@ -57,7 +54,6 @@ RANGES = {
     "pool": "Gemma 270 million and 1 billion distilled on six new pools at 50 to 200 thousand tokens",
     "pool_270m": "Gemma 270 million distilled on six new pools at 50 to 200 thousand tokens",
     "pool_1b": "Gemma 1 billion distilled on six new pools at 50 to 200 thousand tokens",
-    "efficiency": "Four unseen Pythia states pruned at six densities",
 }
 # Every row is assembled once with seven cells: task, frozen candidate, its
 # error, the delivered relation, its error, the strongest development baseline
@@ -75,11 +71,11 @@ CANDIDATE_WIDTHS = (".30", ".28", ".14", ".28")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
-    "Delivered relations and their errors against the strongest development baseline. "
-    "Errors are mean absolute errors in nats per token, in math, code and question answering order. "
+    "Delivered relations and their errors against the strongest development baseline at equal budget. "
+    "Errors: mean absolute errors in nats per token, in math, code and question answering order. "
     "The delivered relation is the predictor recommended on all evidence; a Retrospective label "
     "marks a predictor chosen after seeing the result. "
-    "The strongest development baseline was chosen inside the development folds "
+    "The baseline was chosen inside the development folds "
     "and scored on the same cells. The last column counts development configuration "
     "measurements per capability; distillation entries give the {students} students in that "
     "order. Appendix Table~\\ref{tab:main-prediction-candidates} lists each task's pre-specified candidate; "
@@ -330,97 +326,6 @@ def paired_interval(audit, path, *keys):
             ", ", value(pointer(path, *keys, "paired_difference", "ci95", 1), fmt=".4f"), "]"]
 
 
-def efficiency_row(audit):
-    """Authenticate the registered panel and reconcile both recorded score levels."""
-    summary = audit.read(E11)
-    states = audit.read(E11_STATE)
-    plan_path = "results/a11-efficiency-confirmation/plan.json"
-    predictions_path = "results/a11-efficiency-confirmation/predictions.json"
-    plan = audit.read(plan_path)
-    frozen = audit.read(predictions_path)
-    for path in (E11, plan_path, predictions_path):
-        if not audit.matches_digest(states["input_sha256"][path], audit.inputs[path]):
-            raise ValueError("Efficiency record digest mismatch: " + path)
-    if (summary["status"] != "complete" or states["status"] != "complete"
-            or summary["predictions_sha256"] != states["predictions_sha256"]
-            or not audit.matches_digest(summary["predictions_sha256"], audit.inputs[predictions_path])
-            or summary["measurement_sha256"] != states["measurement_sha256"]):
-        raise ValueError("Efficiency confirmation is incomplete or has mismatched provenance")
-    targets = states["state_order"]
-    excluded = set(plan["exclusion_audit"]["a9_states"] + plan["exclusion_audit"]["selection_rule_states"])
-    if (targets != [t["state"] for t in plan["targets"]] or len(set(targets)) != 4
-            or excluded.intersection(targets) or plan["exclusion_audit"]["target_overlap"]):
-        raise ValueError("Efficiency states must be outside every earlier fit and test")
-    budget = states["development_measurements_per_capability"]
-    candidate, comparator = summary["decision"]["candidate"], summary["decision"]["comparator"]
-    if (candidate != "power_18" or comparator != "A2_36"
-            or budget[candidate] * 2 != budget[comparator]
-            or budget["median_curve_36"] != budget[comparator]):
-        raise ValueError("Efficiency confirmation must retain the registered half-budget comparison")
-    # The delivered QA fallback is the original full-development median, not
-    # the half-budget sensitivity curve or whichever test error happens to win.
-    methods = (candidate, comparator, "median_curve_36")
-    if any(budget[m] != frozen["coefficients"][m]["budget_per_capability"] for m in methods):
-        raise ValueError("Efficiency development budget disagrees with frozen coefficients")
-    cells = {(r["state"], r["density"], r["capability"]): r for r in summary["cells"]}
-    expected = {(s, d, c) for s in targets for d in plan["densities"] for c in CAPS}
-    if len(plan["densities"]) != 6 or set(cells) != expected or len(cells) != len(summary["cells"]):
-        raise ValueError("Efficiency confirmation must contain exactly the registered cells")
-    records = {(r["state"], r["capability"]): r for r in states["records"]}
-    if set(records) != {(s, c) for s in targets for c in CAPS} or len(records) != len(states["records"]):
-        raise ValueError("Efficiency per-state records have missing or duplicate groups")
-    for (state, cap), record in records.items():
-        densities = record["densities"]
-        if densities != plan["densities"] or record["n_cells"] != len(densities):
-            raise ValueError("Efficiency per-state density membership mismatch")
-        for method in methods:
-            errors = [cells[state, d, cap]["absolute_errors"][method] for d in densities]
-            if (errors != record["absolute_errors"][method]
-                    or not isclose(mean(errors), record["mae"][method], abs_tol=1e-12)):
-                raise ValueError("Efficiency per-state errors disagree with summary cells")
-            for d, error in zip(densities, errors):
-                observed = cells[state, d, cap]
-                if not isclose(error, abs(observed["predicted_delta_L"][method] - observed["observed_delta_L"]), abs_tol=1e-12):
-                    raise ValueError("Efficiency absolute error disagrees with recorded prediction")
-    for cap in CAPS:
-        if summary["by_capability"][cap] != states["by_capability"][cap]:
-            raise ValueError("Efficiency aggregate records disagree")
-        if summary["by_capability"][cap]["n_cells"] != len(targets) * len(plan["densities"]):
-            raise ValueError("Efficiency aggregate cell count mismatch")
-        for method in methods:
-            if not isclose(mean(records[s, cap]["mae"][method] for s in targets),
-                           summary["by_capability"][cap]["mae"][method], abs_tol=1e-12):
-                raise ValueError("Efficiency aggregate error disagrees with per-state means")
-    def errors(method_for_cap):
-        return score_parts(lambda c: [number(E11, "by_capability", c, "mae", method_for_cap(c))])
-    score_refs = [pointer(E11_STATE, "records", i, "mae") for i in range(len(states["records"]))]
-    score_note = "Stored unweighted per-capability MAEs, checked against all four per-state means and the identical six-density cells; no refit or test ranking."
-    return [
-        cell(tested_range(audit, "efficiency", pointer(E11_STATE, "state_order"),
-                         pointer(E11_STATE, "records", 0, "densities")),
-             refs=[pointer(plan_path, "created_utc"), pointer(plan_path, "exclusion_audit"),
-                   pointer(E11, "predictions_sha256")]),
-        cell(mapped(audit, "Compact power form using half the measurements",
-                    pointer(E11, "decision", "candidate"),
-                    pointer(E11_STATE, "development_measurements_per_capability", candidate),
-                    pointer(E11_STATE, "development_measurements_per_capability", comparator))),
-        cell(*errors(lambda c: candidate), refs=score_refs, note=score_note),
-        cell(mapped(audit, "The same power form, with a median density curve for question answering",
-                    pointer(E11, "decision", "primary_capabilities"), pointer(E11, "decision", "candidate"),
-                    pointer(E11, "decision", "descriptive_capabilities"),
-                    pointer(E11_STATE, "development_measurements_per_capability", "median_curve_36")),
-             note="Section 6 measurement-efficiency scope and Appendix E retain the source-free median for QA. Use the full-development median_curve_36 (36 measurements), not median_curve_18; the last column counts the first predictor only. This is the specified delivery, not a claim that the median wins this test."),
-        cell(*errors(lambda c: "median_curve_36" if c == "qa" else candidate), refs=score_refs, note=score_note),
-        cell(mapped(audit, "Per-density regression at full budget", pointer(E11, "decision", "comparator")),
-             " (", value(pointer(E11_STATE, "development_measurements_per_capability", comparator)), ")\n",
-             *errors(lambda c: comparator), refs=[pointer(E11, "decision"), *score_refs], note=score_note),
-        cell(value(pointer(E11_STATE, "development_measurements_per_capability", candidate)), " (math, code); ",
-             value(pointer(E11_STATE, "development_measurements_per_capability", "median_curve_36")), " (question answering)",
-             refs=[pointer(E11_STATE, "development_measurements_per_capability", comparator)],
-             note="18 recorded development configuration measurements per capability for power_18, half the comparator's 36, on math and code; the delivered QA median curve is median_curve_36, fitted on all 36; excludes dense anchors and test measurements."),
-    ]
-
-
 def build(audit):
     rows = legacy_rows(audit)
     prune = audit.data[P53]
@@ -635,11 +540,6 @@ def build(audit):
     counts.append(counts[-1])   # the second student row shares the distillation development count
     for row, count in zip(result, counts):
         row.append(count)
-    result.append(efficiency_row(audit))
-    # The measurement-efficiency confirmation leads: it is the row that carries an
-    # independent delivered error at half the development budget, and a reader
-    # meeting the table should meet that first.
-    result.insert(0, result.pop())
     complete = []
     for row in result:
         try:
@@ -770,7 +670,6 @@ def generate(root=ROOT, *, write_tex=True):
                 "Development measurements are distinct development configuration measurements per capability for fitting or selecting the tested candidate, excluding dense anchors and held-out measurements. Counts do not describe the post-test delivered predictor. V53 divides recorded scalar rows by the recorded capability-model count; V55/V69 use n_dev_cells; V70 uses development_structure.n_points authenticated by freeze.json. Shared development sets are not additive across rows.",
                 "Numeric error cells use one math / code / question answering line if it fits the actual column, otherwise three lines in that order. The earlier bit test explicitly states that the delivered error is not stored. Distillation pairs follow student order 270 million, 1 billion as stated in the caption. Baseline names precede their scores, in the capability order named in the caption. Development or registration selection pointers are recorded in each baseline cell's note/context. Short task labels retain the full state and configuration definitions in their source recipes.",
                 "The caption identifies deliveries preceding distillation as chosen after testing; first predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test the delivered interpolation/median rule has no matching stored score; its development includes those cells. The source surface is not delivered, and the older interpolation's different model and boundary rules cannot supply the missing error.",
-                "The efficiency confirmation reads summary.json and per_state.json, authenticates their frozen prediction identity, and checks all per-state means against the same recorded cells. The first predictor uses the reduced budget; the registered regression comparison and the delivered QA median use the full budget. Each new cell has its own executable recipe and context pointers.",
                 "Stored V70 paired_difference.ci95 endpoints are omitted from Table 1 because they do not fit on the same line as the score. They remain in the appendix tables. The sign is baseline minus candidate; these are not MAE intervals. No refits, resampling or invented intervals.",
                 "All indices are zero-based JSON pointers. `mean` is equal-weight arithmetic; `weighted_mean` pairs each stored subset MAE with its stored cell count, preserving equal cell weights. No refits or resampling.",
                 "Numeric values are formatted directly from the following executable source recipes. Context pointers justify textual labels and freeze identities; incomplete tasks are omitted.",

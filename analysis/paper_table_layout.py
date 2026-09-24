@@ -48,7 +48,7 @@ PROFILES = {
     'tab:accuracy-comparison': [[34, 26, 10, 10, 10, 10]],
     'tab:wanda-panel': [[16, 12, 12, 12, 12, 12, 12, 12]],
     'tab:second-family': [[26, 14, 10, 10, 10, 10, 10, 10]],
-    'tab:efficiency-body': [[36, 16, 16, 16, 16]],
+    'tab:efficiency-body': [[27, 9, 10.67, 10.67, 10.67, 10.67, 10.66, 10.66]],
     'tab:eos-control': [[29, 13, 18, 40]],
     'tab:s3-ablation-body': [[19, 13, 11, 11, 11, 11, 11, 13]],
 }

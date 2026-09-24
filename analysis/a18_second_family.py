@@ -33,6 +33,7 @@ import os
 import statistics
 import sys
 import time
+from math import isclose
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -531,35 +532,112 @@ def render():
     print(text); print("cost", json.dumps(c["totals"]))
 
 
+E11 = "results/a11-efficiency-confirmation/summary.json"
+E11_STATE = "results/a11-efficiency-confirmation/per_state.json"
 A14 = ROOT / "results/a14-same-complexity/summary.json"
 BODY_FORMS = (("power", "Compact power form"), ("quadratic", "Quadratic strength form"), ("strength", "Strength only"),
               ("median", "Median density curve"), ("per_density", "Per-density regression"))
 
 
-def render_body():
-    """Condensed body table: the same-complexity forms at half the development budget on the Pythia confirmation
-    (18 measurements, retrospective refits of A14) and on the OLMo-2 confirmation (12 configurations, pre-registered),
-    mathematics and code on the probes; question answering and the full grids stay in the appendix."""
+def read_efficiency_confirmation():
+    """Authenticate the registered panel and reconcile both recorded score levels."""
+    from analysis.paper_artifacts import Artifacts
+
+    audit = Artifacts(ROOT)
+    summary = audit.read(E11)
+    states = audit.read(E11_STATE)
+    plan_path = "results/a11-efficiency-confirmation/plan.json"
+    predictions_path = "results/a11-efficiency-confirmation/predictions.json"
+    plan = audit.read(plan_path)
+    frozen = audit.read(predictions_path)
+    for path in (E11, plan_path, predictions_path):
+        if not audit.matches_digest(states["input_sha256"][path], audit.inputs[path]):
+            raise ValueError("Efficiency record digest mismatch: " + path)
+    if (summary["status"] != "complete" or states["status"] != "complete"
+            or summary["predictions_sha256"] != states["predictions_sha256"]
+            or not audit.matches_digest(summary["predictions_sha256"], audit.inputs[predictions_path])
+            or summary["measurement_sha256"] != states["measurement_sha256"]):
+        raise ValueError("Efficiency confirmation is incomplete or has mismatched provenance")
+    targets = states["state_order"]
+    excluded = set(plan["exclusion_audit"]["a9_states"] + plan["exclusion_audit"]["selection_rule_states"])
+    if (targets != [t["state"] for t in plan["targets"]] or len(set(targets)) != 4
+            or excluded.intersection(targets) or plan["exclusion_audit"]["target_overlap"]):
+        raise ValueError("Efficiency states must be outside every earlier fit and test")
+    budget = states["development_measurements_per_capability"]
+    candidate, comparator = summary["decision"]["candidate"], summary["decision"]["comparator"]
+    if (candidate != "power_18" or comparator != "A2_36"
+            or budget[candidate] != 18 or budget[comparator] != 36
+            or budget["median_curve_36"] != budget[comparator]):
+        raise ValueError("Efficiency confirmation must retain the registered half-budget comparison")
+    # Retain the registered QA checks even though the body prints only math and code.
+    methods = (candidate, comparator, "median_curve_36")
+    if any(budget[m] != frozen["coefficients"][m]["budget_per_capability"] for m in methods):
+        raise ValueError("Efficiency development budget disagrees with frozen coefficients")
+    cells = {(r["state"], r["density"], r["capability"]): r for r in summary["cells"]}
+    expected = {(s, d, c) for s in targets for d in plan["densities"] for c in CAPS}
+    if len(plan["densities"]) != 6 or set(cells) != expected or len(cells) != len(summary["cells"]):
+        raise ValueError("Efficiency confirmation must contain exactly the registered cells")
+    records = {(r["state"], r["capability"]): r for r in states["records"]}
+    if set(records) != {(s, c) for s in targets for c in CAPS} or len(records) != len(states["records"]):
+        raise ValueError("Efficiency per-state records have missing or duplicate groups")
+    for (state, cap), record in records.items():
+        densities = record["densities"]
+        if densities != plan["densities"] or record["n_cells"] != len(densities):
+            raise ValueError("Efficiency per-state density membership mismatch")
+        for method in methods:
+            errors = [cells[state, d, cap]["absolute_errors"][method] for d in densities]
+            if (errors != record["absolute_errors"][method]
+                    or not isclose(statistics.mean(errors), record["mae"][method], abs_tol=1e-12)):
+                raise ValueError("Efficiency per-state errors disagree with summary cells")
+            for d, error in zip(densities, errors):
+                observed = cells[state, d, cap]
+                if not isclose(error, abs(observed["predicted_delta_L"][method] - observed["observed_delta_L"]), abs_tol=1e-12):
+                    raise ValueError("Efficiency absolute error disagrees with recorded prediction")
+    for cap in CAPS:
+        if summary["by_capability"][cap] != states["by_capability"][cap]:
+            raise ValueError("Efficiency aggregate records disagree")
+        if summary["by_capability"][cap]["n_cells"] != len(targets) * len(plan["densities"]):
+            raise ValueError("Efficiency aggregate cell count mismatch")
+        for method in methods:
+            if not isclose(statistics.mean(records[s, cap]["mae"][method] for s in targets),
+                           summary["by_capability"][cap]["mae"][method], abs_tol=1e-12):
+                raise ValueError("Efficiency aggregate error disagrees with per-state means")
+    return summary
+
+
+def render_body(target=None):
+    """Measurement efficiency across Pythia magnitude, OLMo-2 magnitude and Pythia Wanda:
+    five half-grid forms and the full-grid per-density comparator, math and code on the probes."""
     from analysis.paper_table_layout import house_style, table_layout
-    a14 = read(A14)["budgets"]["18"]["mae"]; sc = read(OUT / "score.json")["summary"]
+    a11 = read_efficiency_confirmation()["by_capability"]
+    a14 = read(A14)["budgets"]
+    sc = read(OUT / "score.json")["summary"]
+    wanda = read(ROOT / "results/a19-wanda-efficiency/score.json")["summary"]
+    for cap in ("math", "code"):
+        for budget, form, method in (("18", "power", "power_18"), ("36", "per_density", "A2_36")):
+            if not isclose(a14[budget]["mae"][form][cap], a11[cap]["mae"][method], rel_tol=0, abs_tol=1e-6):
+                raise ValueError(f"Efficiency A14 {budget} {form} disagrees with registered A11 {method}: {cap}")
     rows = []
     for form, word in BODY_FORMS:
-        py = [a14[form][c] if form in a14 else None for c in ("math", "code")]
-        ol = [sc[c][f"{form}_reduced"]["probes"] for c in ("math", "code")]
-        rows.append(" & ".join([word] + [("/" if v is None else f"{v:.3f}") for v in py] + [f"{v:.3f}" for v in ol]) + r" \\")
-    caption = ("Same-complexity forms at half the development budget, mean absolute error in nats per token, on the four "
-               "Pythia confirmation states with 18 measurements (retrospective refits except the power form) and on the four "
-               "OLMo-2 test states with 12 configurations, where every form was frozen before the test.")
+        py = [a11[c]["mae"]["power_18"] if form == "power" else a14["18"]["mae"][form][c]
+              for c in ("math", "code")]
+        vals = py + [panel[c][f"{form}_reduced"]["probes"] for panel in (sc, wanda) for c in ("math", "code")]
+        rows.append(" & ".join([word, "Half"] + [f"{v:.3f}" for v in vals]) + r" \\")
+    rows.append(r"\midrule")
+    vals = ([a11[c]["mae"]["A2_36"] for c in ("math", "code")]
+            + [panel[c]["per_density_full"]["probes"] for panel in (sc, wanda) for c in ("math", "code")])
+    rows.append(" & ".join(["Per-density regression", "Full"] + [f"{v:.3f}" for v in vals]) + r" \\")
+    caption = "Measurement efficiency of the compact pruning form in three evaluations, mean absolute error in nats per token on four test states in no fit. The half grid keeps every development state at half the densities, 18 of 36 configurations per capability on Pythia and 12 of 24 on OLMo-2; the full-grid per-density regression is the pre-specified comparator. On OLMo-2 and under Wanda every form was pre-specified before the test; on the Pythia magnitude panel the forms other than the compact form are retrospective refits."
     text = ("% Generated by analysis/a18_second_family.py --body; do not edit.\n"
             "\\begin{table}[tb]\n\\centering\n\\small\n"   # the author's Overleaf edit (2026-09-24): \\small, not \\scriptsize
             f"\\caption{{{caption}}}\n\\label{{tab:efficiency-body}}\n"
-            "\\begin{tabular*}{\\textwidth}{lrrrr}\n\\toprule\n"
-            "& \\multicolumn{2}{c}{Pythia, 18 measurements} & \\multicolumn{2}{c}{OLMo-2, 12 configurations} \\\\\n"
-            "\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}\n"
-            "Form & Math & Code & Math & Code \\\\\n\\midrule\n" + "\n".join(rows) +
+            "\\begin{tabular*}{\\textwidth}{llrrrrrr}\n\\toprule\n"
+            "& & \\multicolumn{2}{c}{Pythia, magnitude} & \\multicolumn{2}{c}{OLMo-2, magnitude} & \\multicolumn{2}{c}{Pythia, Wanda} \\\\\n"
+            "\\cmidrule(lr){3-4}\\cmidrule(lr){5-6}\\cmidrule(lr){7-8}\n"
+            "Form & Grid & Math & Code & Math & Code & Math & Code \\\\\n\\midrule\n" + "\n".join(rows) +
             "\n\\bottomrule\n\\end{tabular*}\n\\end{table}\n")
     text = house_style(table_layout(text))
-    target = ROOT / "paper/paper/tables/efficiency_body.tex"
+    target = Path(target) if target is not None else ROOT / "paper/paper/tables/efficiency_body.tex"
     target.write_text(text); print(text)
 
 
@@ -570,7 +648,7 @@ if __name__ == "__main__":
     ap.add_argument("--device", default="cuda:0"); ap.add_argument("--purge", action="store_true")
     ap.add_argument("--freeze", action="store_true"); ap.add_argument("--score", action="store_true")
     ap.add_argument("--table", action="store_true", help="cost.json, per_state.md and paper/paper/tables/second_family.tex from score.json")
-    ap.add_argument("--body", action="store_true", help="paper/paper/tables/efficiency_body.tex: same-complexity forms at half budget on Pythia and OLMo-2")
+    ap.add_argument("--body", action="store_true", help="paper/paper/tables/efficiency_body.tex: measurement efficiency in three evaluations: Pythia magnitude, OLMo-2 magnitude and Pythia Wanda")
     a = ap.parse_args()
     # The OLMo-2 checkpoints live in a project-local cache. Setting it here, and not at import, keeps
     # modules that import this one (A19, the tests) on the default Hugging Face cache.
