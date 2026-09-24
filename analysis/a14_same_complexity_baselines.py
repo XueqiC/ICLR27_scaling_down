@@ -85,8 +85,9 @@ def fit_forms(rows, cap, stats, budget):
             best = {"A": A, "gamma": float(gamma), "sse": sse}
     fits["strength"] = best
     fits["median"] = {"anchors": {str(v): float(np.median(y[d == v])) for v in sorted(set(d.tolist()))}}
-    if budget == 36:
-        fits["per_density"] = {"anchors": {str(v): lstsq(z[d == v], y[d == v]).tolist() for v in sorted(set(d.tolist()))}}
+    # One regression per development density (nine states each at either budget), linearly interpolated
+    # between densities and extended from the boundary pair, as for the median curve.
+    fits["per_density"] = {"anchors": {str(v): lstsq(z[d == v], y[d == v]).tolist() for v in sorted(set(d.tolist()))}}
     # Pruning-law form on loss: L = L0 P0 d^alpha, so log((L0+y)/L0) = log P0 + alpha log d.
     X = np.c_[np.ones(len(d)), np.log(d)]; target = np.log((L0 + y) / L0)
     coef, *_ = np.linalg.lstsq(X, target, rcond=None)
@@ -147,7 +148,8 @@ def render(results):
         "and one scale per capability and no calibration on the target. The last two rows calibrate one number "
         "on each target's mildest pruned measurement and are scored on the remaining five densities, twenty cells "
         "per capability, so they are not comparable with the rows above. All forms other than the compact power "
-        "form, the median curve and the per-density regression were fitted after the confirmation. A slash marks a form that is underdetermined with 18 measurements.")
+        "form, the median curve and the per-density regression at 36 measurements were fitted after the confirmation, "
+        "on its stored development rows.")
     header = ("\\begin{tabular*}{\\textwidth}{@{\\extracolsep{\\fill}}llrrrrrr@{}}\n\\toprule\n"
               " & & \\multicolumn{3}{c}{18 measurements} & \\multicolumn{3}{c}{36 measurements} \\\\\n"
               "\\cmidrule(lr){3-5}\\cmidrule(lr){6-8}\n"
@@ -169,8 +171,9 @@ def main():
     targets = {t["state"]: t for t in plan["targets"]}
     cells = summary["cells"]
     results = {"status": "RETROSPECTIVE", "forms": FORMS, "parameters": PARAMETERS,
-               "note": "Forms other than power, median and per-density were fitted after the A11 confirmation "
-                       "on its stored development rows; A11's own predictions are reproduced first as a check.",
+               "note": "Forms other than power, median and the per-density regression at 36 measurements were fitted "
+                       "after the A11 confirmation on its stored development rows; A11's own predictions are reproduced "
+                       "first as a check.",
                "budgets": {}, "k1": {}}
     for budget, sub in subsets.items():
         stats = p53.zstats(sub)
@@ -182,7 +185,7 @@ def main():
             if abs(fits[cap]["power"]["gamma"] - stored[key]["fits"][cap]["gamma"]) > 1e-12 or \
                not np.allclose(fits[cap]["power"]["beta"], stored[key]["fits"][cap]["beta"], atol=1e-9):
                 raise ValueError(f"Refit of {key}/{cap} differs from the stored A11 coefficients")
-        errors = {form: {cap: [] for cap in CAPS} for form in FORMS if form != "per_density" or budget == 36}
+        errors = {form: {cap: [] for cap in CAPS} for form in FORMS}
         for cell in cells:
             cap, state, d = cell["capability"], cell["state"], cell["density"]
             t = targets[state]
@@ -193,7 +196,7 @@ def main():
                     raise ValueError("Power prediction differs from the stored A11 prediction")
                 if form == "median" and abs(pred - cell["predicted_delta_L"][f"median_curve_{budget}"]) > 1e-9:
                     raise ValueError("Median prediction differs from the stored A11 prediction")
-                if form == "per_density" and abs(pred - cell["predicted_delta_L"]["A2_36"]) > 1e-9:
+                if form == "per_density" and budget == 36 and abs(pred - cell["predicted_delta_L"]["A2_36"]) > 1e-9:
                     raise ValueError("Per-density prediction differs from the stored A11 prediction")
                 errors[form][cap].append(abs(pred - cell["observed_delta_L"]))
         results["budgets"][str(budget)] = {
