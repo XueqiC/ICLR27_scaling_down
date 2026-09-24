@@ -26,7 +26,8 @@ A11 = "results/a11-efficiency-confirmation"
 A18 = "results/a18-second-family/score.json"
 A18_COST = "results/a18-second-family/cost.json"
 PANEL_SIZE = (2.7, 1.3)
-THIRD_SIZE = (1.8, 0.95)
+THIRD_SIZE = (1.8, 1.3)
+QA_SIZE = (1.8, 1.0)   # appendix counterpart: same margins and labels, slightly shorter to keep the appendix page flow
 FOUR_SIZE = (1.35, 0.95)
 SECOND_FAMILY = (("power_reduced", "power"), ("per_density_full", "A2"))
 # The configuration count halves by construction (12 of 24), so the panel shows the two measured costs.
@@ -160,7 +161,7 @@ def confirmation(audit):
 
 def draw_learning(fig, rows, capabilities, size=PANEL_SIZE):
     import numpy as np
-    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.53, top=.06)
+    ax = panel_axes(fig, size, left=.43, bottom=(.53 if size[0] >= 2.2 else .38), top=.06)
     for cap in capabilities:
         for method in METHODS:
             part = sorted((r for r in rows if (r["cap"], r["method"]) == (cap, method)),
@@ -178,7 +179,7 @@ def draw_learning(fig, rows, capabilities, size=PANEL_SIZE):
     ymax = max(r["q75"] for r in rows if r["cap"] in capabilities and r["q75"] is not None)
     row_axis_style(ax)
     ax.set(xlim=(7, 38), ylim=(-.04 * ymax, 1.08 * ymax), xticks=[9, 18, 36],
-           xlabel=("Measurements\nper capability" if size[0] < 2.2 else "Development measurements\nper capability"),
+           xlabel=("Measurements" if size[0] < 2.2 else "Development measurements\nper capability"),
            ylabel="MAE (nats)")
     from matplotlib.ticker import MaxNLocator
     ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
@@ -187,7 +188,7 @@ def draw_learning(fig, rows, capabilities, size=PANEL_SIZE):
 
 def draw_confirmation(fig, result, capabilities, size=PANEL_SIZE):
     from matplotlib.ticker import MaxNLocator
-    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.49, top=.06)
+    ax = panel_axes(fig, size, left=.43, bottom=(.49 if size[0] >= 2.2 else .38), top=.06)
     labels = []
     for index, state in enumerate(result["state_order"]):
         for ci, cap in enumerate(capabilities):
@@ -199,7 +200,7 @@ def draw_confirmation(fig, result, capabilities, size=PANEL_SIZE):
     ymax = max(r["mae"][m] for r in result["records"] if r["capability"] in capabilities for m in CONFIRM_METHODS)
     row_axis_style(ax)
     ax.set(xlim=(-.5, 3.5), ylim=(0, ymax * 1.12), xticks=range(4), xticklabels=labels,
-           xlabel=("Pythia state" if size[0] < 2.2 else "Pythia size / training step"), ylabel="MAE (nats)")
+           xlabel=("Pythia test state" if size[0] < 2.2 else "Pythia size / training step"), ylabel="MAE (nats)")
     if size[0] < 2.2:   # narrow panels: the states are numbered and named in the caption
         ax.set_xlabel("Pythia test state")
     ax.yaxis.set_major_locator(MaxNLocator(4, min_n_ticks=3))
@@ -236,7 +237,7 @@ def measurement_cost(audit):
 
 def draw_second_family(fig, rows, capabilities, size=THIRD_SIZE):
     from matplotlib.ticker import MaxNLocator
-    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.49, top=.06)
+    ax = panel_axes(fig, size, left=.43, bottom=(.49 if size[0] >= 2.2 else .38), top=.06)
     labels = []
     groups = [(cap, block) for cap in capabilities for block in ("probes", "new")]
     for index, (cap, block) in enumerate(groups):
@@ -254,7 +255,7 @@ def draw_second_family(fig, rows, capabilities, size=THIRD_SIZE):
 
 
 def draw_cost(fig, items, size=THIRD_SIZE):
-    ax = panel_axes(fig, size, left=.43 * PANEL_SIZE[0] / size[0], bottom=.49, top=.06)
+    ax = panel_axes(fig, size, left=.43, bottom=(.49 if size[0] >= 2.2 else .38), top=.06)
     xs = list(range(len(items)))
     ax.bar(xs, [100 * it["ratio"] for it in items], width=.6, color=PALETTE["reference"], linewidth=0)
     for x, it in zip(xs, items):
@@ -307,9 +308,9 @@ def generate(root=ROOT):
         "Math precedes Code", "only QA is shown")
     qa = ("qa",)
     for suffix, size, kind, draw, records in (
-        ("a", THIRD_SIZE, "panel", lambda f: draw_learning(f, curves, qa, THIRD_SIZE), [r for r in curves if r["cap"] == "qa"]),
-        ("b", THIRD_SIZE, "panel", lambda f: draw_confirmation(f, result, qa, THIRD_SIZE), [r for r in result["records"] if r["capability"] == "qa"]),
-        ("c", THIRD_SIZE, "panel", lambda f: draw_second_family(f, family, qa), [r for r in family if r["capability"] == "qa"]),
+        ("a", QA_SIZE, "panel", lambda f: draw_learning(f, curves, qa, QA_SIZE), [r for r in curves if r["cap"] == "qa"]),
+        ("b", QA_SIZE, "panel", lambda f: draw_confirmation(f, result, qa, QA_SIZE), [r for r in result["records"] if r["capability"] == "qa"]),
+        ("c", QA_SIZE, "panel", lambda f: draw_second_family(f, family, qa, QA_SIZE), [r for r in family if r["capability"] == "qa"]),
         ("legend", LEGEND_SIZE, "legend", lambda f: draw_legend(f, qa), [])):
         apply_style(kind)
         fig = plt.figure(figsize=size)
