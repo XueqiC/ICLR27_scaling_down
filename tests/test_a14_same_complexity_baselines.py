@@ -27,7 +27,15 @@ def test_stored_a11_errors_are_reproduced(results):
             assert results["budgets"][budget]["mae"]["median"][cap] == pytest.approx(a11["by_capability"][cap]["mae"][f"median_curve_{budget}"])
     for cap in ("math", "code", "qa"):
         assert results["budgets"]["36"]["mae"]["per_density"][cap] == pytest.approx(a11["by_capability"][cap]["mae"]["A2_36"])
-    assert "per_density" not in results["budgets"]["18"]["mae"]
+    # The reduced grid keeps all nine states at each of its two densities, so the per-density regression is
+    # determined at 18 measurements as well: two anchors of four coefficients each, scored on the same cells.
+    per18 = results["budgets"]["18"]["mae"]["per_density"]
+    for cap in ("math", "code", "qa"):
+        anchors = results["budgets"]["18"]["fits"][cap]["per_density"]["anchors"]
+        assert sorted(anchors) == ["0.7", "0.9"] and all(len(b) == 4 for b in anchors.values())
+    for cap in ("math", "code"):   # the paper's claim: the compact form leads at 18, the regression at 36
+        assert per18[cap] > results["budgets"]["18"]["mae"]["power"][cap]
+        assert results["budgets"]["36"]["mae"]["per_density"][cap] < results["budgets"]["36"]["mae"]["power"][cap]
 
 
 def test_forms_parameters_and_status(results):
