@@ -4,7 +4,7 @@
 The selection round's distilled students were trained on teacher answers with no end-of-answer marker
 (results/p3-eos-control/token_audit.md). This control retrains the same student with the same data, recipe,
 seed and schedule and one change, the tokenizer's end-of-sequence id appended to every target and supervised
-(`v12_distill.py --append-eos`), then reads both students out on the 384 fresh question-answering items of
+(`analysis/p3_eos_train.py`, which runs the frozen trainer with a patched tokenisation), then reads both students out on the 384 fresh question-answering items of
 the fresh-item check with the two protocols of that check: 32 new tokens under the V15 rule (loss on the
 reference completion, exact match on the block) and 96 new tokens with the gold-blind first-sentence
 extraction (exact match, token F1, cap rate, generated tokens). The original student's readouts are the
@@ -36,7 +36,7 @@ CONTROL_SUFFIX = "p3-eos-s3-"
 
 def control_run_dir(ref):
     base = STUDENT_BASE[ref].replace("/", "--")
-    runs = [d for d in (ROOT / "results/v12-distill").glob(f"{base}*/*{CONTROL_SUFFIX}{ref}*") if (d / "adapter" / "adapter_model.safetensors").is_file()]
+    runs = [d for d in (ROOT / "results/p3-eos-control/runs").glob(f"{base}*/*{CONTROL_SUFFIX}{ref}*") if (d / "adapter" / "adapter_model.safetensors").is_file()]
     if len(runs) != 1:
         raise SystemExit(f"expected one control run for {ref}, found {runs}")
     return runs[0]

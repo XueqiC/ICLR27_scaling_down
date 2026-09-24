@@ -391,12 +391,8 @@ def tokenize_sft_example(
     prompt: str,
     completion: str,
     max_len: int = MAX_LEN,
-    append_eos: bool = False,
 ) -> dict[str, torch.Tensor | int]:
     """Tokenize one pair and mask every prompt label with ``-100``.
-
-    With ``append_eos`` the tokenizer's end-of-sequence id follows the completion tokens and is
-    supervised like them (the P3 end-marker control); the default protocol appends nothing.
 
     This mirrors :func:`v6_capability_geometry.completion_loss`: direct
     tokenization, at most half the sequence for each segment, prompt special
@@ -432,16 +428,10 @@ def tokenize_sft_example(
             completion,
             return_tensors="pt",
             truncation=True,
-            max_length=half_len - (1 if append_eos else 0),
+            max_length=half_len,
             add_special_tokens=False,
         )
     )
-    if append_eos:
-        eos_id = getattr(tokenizer, "eos_token_id", None)
-        if eos_id is None:
-            raise ValueError("--append-eos needs a tokenizer with an end-of-sequence id")
-        eos = torch.tensor([[eos_id]], dtype=completion_ids.dtype)
-        completion_ids = torch.cat((completion_ids, eos), dim=1)
     input_ids = torch.cat((prompt_ids, completion_ids), dim=1)[:, -max_len:]
     n_prompt = (
         min(prompt_ids.shape[1], input_ids.shape[1] - completion_ids.shape[1])
@@ -988,7 +978,6 @@ def run_distillation(
     data_seed: int | None = None,
     schedule_tokens: int | None = None,
     stop_after_trajectory: bool = False,
-    append_eos: bool = False,
 ) -> dict:
     """Run dense evaluation, SFT, post-training evaluation, and persistence."""
     if not 0 <= seed < 2**32:
@@ -1026,7 +1015,7 @@ def run_distillation(
     if dry_run:
         plan = {"dry_run": True, "student": model_name, "teacher": teacher,
                 "recipe": recipe, "domains": list(parsed_domains),
-                "n_per_domain": n_per_domain, "epochs": epochs, "seed": seed, "append_eos": append_eos,
+                "n_per_domain": n_per_domain, "epochs": epochs, "seed": seed,
                 "requested_training_mode": training_mode,
                 "output": str(output_paths[training_mode]) if training_mode != "auto" else None,
                 "output_candidates": {mode: str(path) for mode, path in output_paths.items()},
@@ -1097,7 +1086,7 @@ def run_distillation(
     tokenization_deleted = {domain: 0 for domain in parsed_domains}
     for record in records:
         example = tokenize_sft_example(
-            tokenizer, record["prompt"], record["completion"], max_len=MAX_LEN, append_eos=append_eos
+            tokenizer, record["prompt"], record["completion"], max_len=MAX_LEN
         )
         if int(example["n_completion_tokens"]) == 0:
             tokenization_deleted[record["domain"]] += 1
@@ -1117,7 +1106,7 @@ def run_distillation(
         "domains": list(parsed_domains), "n_per_domain": n_per_domain,
         "output_suffix": output_suffix, "run_name": run_name,
         "seed": seed, "training_seed": seed, "data_sampling_seed": data_sampling_seed,
-        "data_seed": data_seed, "schedule_tokens": schedule_tokens, "append_eos": append_eos,
+        "data_seed": data_seed, "schedule_tokens": schedule_tokens,
         "stop_after_trajectory": stop_after_trajectory,
         "training_mode": training_mode, "probe_seed": SEED,
         "training_manifest": training_manifest,
@@ -1329,8 +1318,6 @@ def main() -> None:
                         help="strictly increasing processed-input-token milestones (not unique tokens)")
     parser.add_argument("--stop-after-trajectory", action="store_true",
                         help="stop after the last requested checkpoint, retaining the full --schedule-tokens cosine/warmup horizon")
-    parser.add_argument("--append-eos", action="store_true",
-                        help="append the tokenizer's end-of-sequence id to every training target (P3 control)")
     parser.add_argument("--dry-run", action="store_true",
                         help="print the protocol without data/model loads or writes")
     args = parser.parse_args()
@@ -1352,7 +1339,6 @@ def main() -> None:
         save_trajectory=args.save_trajectory,
         trajectory_tokens=args.trajectory_tokens,
         stop_after_trajectory=args.stop_after_trajectory,
-        append_eos=args.append_eos,
         dry_run=args.dry_run,
     )
 

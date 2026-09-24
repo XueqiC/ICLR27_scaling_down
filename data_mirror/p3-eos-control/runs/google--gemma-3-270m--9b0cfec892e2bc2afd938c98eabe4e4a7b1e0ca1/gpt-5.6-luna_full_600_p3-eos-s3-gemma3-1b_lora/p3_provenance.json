@@ -1,0 +1,6 @@
+{
+ "trained_with": "analysis/v12_distill.py as edited during the control round (sha256 16ddc46e50504d8e383f4fc88f0f883d5d515186d273d311d96b5dd89a99c4e8): the frozen trainer plus an append_eos option, since reverted",
+ "reproduce_with": "analysis/p3_eos_train.py, which patches the tokenisation of the frozen trainer (sha256 2d1d78b3562583a38fd15cda5f61ed9fbec7563ace7d44d9ddad7bd22225bc3a) and leaves the file unchanged",
+ "equivalence_check": "2026-09-24: on all 1,781 training examples of this student's tokenizer the wrapper's tokenisation equals the edited trainer's append_eos tokenisation, and the edited trainer's default tokenisation equals the frozen trainer's",
+ "output_location": "moved from results/v12-distill/ to results/p3-eos-control/runs/ on 2026-09-24 so control students stay outside the registered distillation namespace"
+}

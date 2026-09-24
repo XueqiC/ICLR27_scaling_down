@@ -1,7 +1,7 @@
 {
  "references": {
   "pythia-1.4b--step120000": {
-   "control_run": "results/v12-distill/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora",
+   "control_run": "results/p3-eos-control/runs/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora",
    "training": {
     "student": "EleutherAI/pythia-410m@step120000",
     "teacher": "gpt-5.6-luna",
@@ -141,7 +141,7 @@
    }
   },
   "gemma3-1b": {
-   "control_run": "results/v12-distill/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora",
+   "control_run": "results/p3-eos-control/runs/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora",
    "training": {
     "student": "google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
     "teacher": "gpt-5.6-luna",

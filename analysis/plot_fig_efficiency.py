@@ -8,6 +8,7 @@ plus A11 per_state.json. No fitting, model loading, or manuscript edits.
 from __future__ import annotations
 
 import math
+from unittest.mock import patch
 
 if __package__:
     from . import a11_score as score
@@ -103,9 +104,21 @@ def learning_curves(audit):
 def confirmation(audit):
     """Reuse all A11 validation and scoring; aggregate its six errors per state."""
     out = audit.root / A11
-    plan, frozen = score.load_registration(out, audit.root)
-    prediction_hash = score.digest(out / "predictions.json")
-    tables, provenance, missing = score.read_measurements(plan, frozen, out / "measurements", prediction_hash)
+    # The frozen scorer remains byte-identical. Translate only authenticated
+    # publication digests back to their registered identities during validation;
+    # the artifact audit below records the actual published bytes.
+    pairs = audit.published_pairs()
+    registered = {published: original for original, (published, _) in pairs.items()}
+    raw_digest = score.digest
+
+    def registered_digest(path):
+        actual = raw_digest(path)
+        return registered.get(actual, actual)
+
+    with patch.object(score, "digest", registered_digest):
+        plan, frozen = score.load_registration(out, audit.root)
+        prediction_hash = score.digest(out / "predictions.json")
+        tables, provenance, missing = score.read_measurements(plan, frozen, out / "measurements", prediction_hash)
     score.require(not missing, "Incomplete A11 measurements: " + ", ".join(missing))
     scored = score.score_tables(plan, frozen, tables)
     stored = audit.read(f"{A11}/summary.json")
@@ -116,7 +129,8 @@ def confirmation(audit):
     for name in ("plan.json", "predictions.json", "predictions.json.sha256", "prereg.md"):
         audit.read(f"{A11}/{name}")
     # Record the validation-only runtime inputs, too; never import model code.
-    audit.inputs.update(frozen["runtime_sha256"])
+    audit.inputs.update({relative: raw_digest(audit.root / relative)
+                         for relative in frozen["runtime_sha256"]})
     for target in plan["targets"]:
         for name in ("prune_losses.json", "metadata.json"):
             audit.read(f"{A11}/measurements/{target['state'].replace('@', '--')}/{name}")

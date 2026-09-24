@@ -3,7 +3,7 @@
   "pythia-1.4b--step120000|distill:eos_control": {
    "reference": "pythia-1.4b--step120000",
    "candidate": "distill:eos_control",
-   "run": "results/v12-distill/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora",
+   "run": "results/p3-eos-control/runs/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora",
    "seconds": 101.9,
    "training": {
     "student": "EleutherAI/pythia-410m@step120000",
@@ -7327,12 +7327,13 @@
       "f1_line": 0.2
      }
     ]
-   }
+   },
+   "run_moved_from": "results/v12-distill/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora"
   },
   "gemma3-1b|distill:eos_control": {
    "reference": "gemma3-1b",
    "candidate": "distill:eos_control",
-   "run": "results/v12-distill/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora",
+   "run": "results/p3-eos-control/runs/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora",
    "seconds": 251.7,
    "training": {
     "student": "google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
@@ -14656,7 +14657,8 @@
       "f1_line": 0.8571428571428571
      }
     ]
-   }
+   },
+   "run_moved_from": "results/v12-distill/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora"
   }
  }
 }

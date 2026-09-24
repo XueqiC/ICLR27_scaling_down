@@ -38,8 +38,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 OUT = ROOT / "results/a18-second-family"
-CACHE = ROOT / "envs/hf_cache_a18"
-os.environ.setdefault("HF_HUB_CACHE", str(CACHE / "hub"))
+CACHE = ROOT / "envs/hf_cache_a18"   # project-local cache for the OLMo-2 checkpoints; set only by the command line
 
 import numpy as np  # noqa: E402
 from analysis import v53_prune_dev as p53  # noqa: E402
@@ -574,6 +573,9 @@ if __name__ == "__main__":
     ap.add_argument("--table", action="store_true", help="cost.json, per_state.md and paper/paper/tables/second_family.tex from score.json")
     ap.add_argument("--body", action="store_true", help="paper/paper/tables/efficiency_body.tex: same-complexity forms at half budget on Pythia and OLMo-2")
     a = ap.parse_args()
+    # The OLMo-2 checkpoints live in a project-local cache. Setting it here, and not at import, keeps
+    # modules that import this one (A19, the tests) on the default Hugging Face cache.
+    os.environ.setdefault("HF_HUB_CACHE", str(CACHE / "hub"))
     tags = [t for t in a.states.split(",") if t] or list(STATES)
     if a.items:
         build_items()

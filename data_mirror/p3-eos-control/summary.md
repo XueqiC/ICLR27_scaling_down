@@ -1,6 +1,6 @@
 # P3b end-marker control: paired readouts on the 384 fresh items
 
-## pythia-1.4b--step120000: student EleutherAI/pythia-410m@step120000, control run results/v12-distill/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora
+## pythia-1.4b--step120000: student EleutherAI/pythia-410m@step120000, control run results/p3-eos-control/runs/EleutherAI--pythia-410m--step120000/gpt-5.6-luna_full_600_p3-eos-s3-pythia-1.4b--step120000_lora
 
 | Readout | S3 student (no marker) | Control (marker) | Control minus S3 [95%] |
 |---|---:|---:|---:|
@@ -15,7 +15,7 @@
 - Control minus pristine (pristine:student): loss -0.375 [-0.474, -0.274], exact match 96 -0.104 [-0.143, -0.065] (pristine: loss 5.228, EM96 0.180, cap 0.219)
 - Probe losses after training (math / code / qa): S3 student {'math': 1.5731036937435736, 'code': 1.5841454718326597, 'qa': 4.4326283269961975}; control {'math': 1.5998378549394923, 'code': 1.6420846208699786, 'qa': 4.403160646387833}
 
-## gemma3-1b: student google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1, control run results/v12-distill/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora
+## gemma3-1b: student google/gemma-3-270m@9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1, control run results/p3-eos-control/runs/google--gemma-3-270m--9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1/gpt-5.6-luna_full_600_p3-eos-s3-gemma3-1b_lora
 
 | Readout | S3 student (no marker) | Control (marker) | Control minus S3 [95%] |
 |---|---:|---:|---:|

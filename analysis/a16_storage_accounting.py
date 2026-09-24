@@ -92,6 +92,8 @@ def main(write_table):
     plan = json.loads(PLAN.read_text())
     refs = plan["references"] if "references" in plan else plan["a12_candidates"]
     OUT.mkdir(parents=True, exist_ok=True)
+    # Blocks written by later stages (--feasibility, --regret) are carried over, so a re-pricing never drops them.
+    previous = json.loads((OUT / "summary.json").read_text()) if (OUT / "summary.json").exists() else {}
     summary = {"formats": __doc__.split("\n\n")[1], "references": {}}
     for ref in refs:
         rs = shapes(ref["model"], ref.get("revision")); ss = shapes(ref["student"]["model"], None)
@@ -101,6 +103,9 @@ def main(write_table):
                                             "student_matrix_parameters": sum(r * c for r, c in ss),
                                             "rows": sum(r for r, _ in rs), "candidates": rows}
         print(ref["id"], "done", flush=True)
+    for key in ("feasibility_under_bytes", "regret_under_bytes"):
+        if key in previous:
+            summary[key] = previous[key]
     (OUT / "summary.json").write_text(json.dumps(summary, indent=1))
     lines = ["# A16 storage accounting (bytes beside nominal storage)", "",
              "| Reference | Candidate | Nominal | Bytes, bitmap or packed | Bytes, CSR |", "|---|---|---:|---:|---:|"]
@@ -152,6 +157,60 @@ def render(summary):
             "Candidate & Nominal storage ratio & Bytes as a fraction of the dense reference \\\\\n\\midrule\n" +
             "\n".join(rows) + "\n\\bottomrule\n\\end{tabular*}\n\\end{table}\n")
     return house_style(table_layout(text))
+
+
+MATERIAL_EXCESS = 0.01   # an over-budget choice is material when its bytes exceed the budget by more than 1 percent
+
+
+def feasibility():
+    """Read every selection cell (reference x objective x budget, 4 x 4 x 17 = 272) with the feasible set counted
+    in bytes beside the nominal one: count the cells whose feasible set changes, and list the cells where the rule's
+    nominal choice (the development-median decision, as in `regret_under_bytes`) costs more bytes than the budget,
+    with its relative excess; an excess above MATERIAL_EXCESS is material, because the choice would then leave the
+    byte-feasible set. Adds `feasibility_under_bytes` to the summary and keeps every other block."""
+    import copy
+    from analysis import s3_common as common
+    from analysis import s3_policy_ablation as ab
+    summary = json.loads((OUT / "summary.json").read_text())
+    plan = json.loads(PLAN.read_text())
+    models = json.loads((ab.S3 / "inputs/locked_models.json").read_text())
+    v70_freeze = json.loads((ROOT / "results/v70-distill-confirm/freeze.json").read_text())
+    price = {rid: {c["id"]: c["actual"] for c in e["candidates"]} for rid, e in summary["references"].items()}
+    over, changes, by_reference = [], 0, {}
+    for ref in plan["references"]:
+        rid, dense = ref["id"], ref["dense"]
+        configs = copy.deepcopy(ref["candidates"])
+        preds = ab.predictions(ref, models, v70_freeze)
+        for q in configs:
+            q["median"] = preds[q["id"]]["median"]
+        stats = {"cells": 0, "rule_choice_over_budget": 0, "feasible_set_changes": 0, "material": 0}
+        for objective in ab.OBJECTIVES:
+            for budget in ab.BUDGETS:
+                stats["cells"] += 1
+                nominal = common.feasible(configs, budget)
+                in_bytes = [q for q in configs if price[rid][q["id"]] <= budget + common.EPS]
+                if {q["id"] for q in nominal} != {q["id"] for q in in_bytes}:
+                    stats["feasible_set_changes"] += 1
+                rule = common.choose(nominal, objective, dense, "median")
+                if rule is None or price[rid][rule["id"]] <= budget + common.EPS:
+                    continue
+                excess = (price[rid][rule["id"]] - budget) / budget
+                row = {"reference": rid, "objective": objective, "budget": budget, "choice": rule["id"],
+                       "bytes": round(price[rid][rule["id"]], 4), "excess": round(excess, 4), "material": excess > MATERIAL_EXCESS}
+                over.append(row)
+                stats["rule_choice_over_budget"] += 1
+                stats["material"] += row["material"]
+        changes += stats["feasible_set_changes"]
+        by_reference[rid] = stats
+    summary["feasibility_under_bytes"] = {
+        "cells": sum(s["cells"] for s in by_reference.values()), "rule_choice_over_budget": over,
+        "feasible_set_changes": changes, "by_reference": by_reference,
+        "material": sum(r["material"] for r in over), "material_choices": sorted({r["choice"] for r in over if r["material"]})}
+    (OUT / "summary.json").write_text(json.dumps(summary, indent=1))
+    f = summary["feasibility_under_bytes"]
+    print(f"cells {f['cells']}, feasible-set changes {f['feasible_set_changes']}, rule choice over budget "
+          f"{len(over)} (material {f['material']}: {f['material_choices']}), largest non-material excess "
+          f"{max((r['excess'] for r in over if not r['material']), default=0):.4f}")
 
 
 def regret_under_bytes():
