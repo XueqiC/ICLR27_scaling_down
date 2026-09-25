@@ -354,7 +354,7 @@ S3_REFERENCES = (("pythia-410m--step120000", "R1"), ("pythia-1.4b--step120000", 
 
 # Body Figure 4: no x-axis label, so the bottom margin only holds the tick labels, and the one-row
 # legend strip needs .2 in, not the .42 in reserved for two-row keys.
-S3_PANEL = (1.35, 1.12)
+S3_PANEL = (1.35, 1.3)
 
 
 def s3_validation(audit,plt):
