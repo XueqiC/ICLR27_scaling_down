@@ -56,7 +56,7 @@ def axes(fig, size=SIZES["three"], *, left=.52, bottom=.33, right=.12):
     return ax
 
 
-def publish(plt, audit, stem, specs, handles, caption, columns=3, legend_artist_sizes=None):
+def publish(plt, audit, stem, specs, handles, caption, columns=3, legend_artist_sizes=None, legend_size=(5.5, .42)):
     """specs=(subcaption,size,draw,records); all explanations go in sidecars."""
     panels = [(f"{stem}_{letter}", size, draw, records, label+".\n"+caption)
               for letter, (label, size, draw, records) in zip(string.ascii_lowercase, specs)]
@@ -70,7 +70,7 @@ def publish(plt, audit, stem, specs, handles, caption, columns=3, legend_artist_
                 handle.set_markersize(ms)
                 handle.set_markeredgewidth(mew)
         return legend
-    legend = (f"{stem}_legend", (5.5, .42), draw_legend, [], caption)
+    legend = (f"{stem}_legend", legend_size, draw_legend, [], caption)
     manifest = export(plt, audit, stem, panels, caption, columns=columns, width=5.5, legend=legend)
     audit.rule("Uniform appendix exports: top legend strip, no in-panel titles; source records unchanged. "
                "Marker dodging is bounded to 1.5% of the axis range; crowded clusters stay at true coordinates with white edges.")
@@ -352,6 +352,11 @@ S3_REFERENCES = (("pythia-410m--step120000", "R1"), ("pythia-1.4b--step120000", 
                  ("gemma3-1b", "R3"), ("gemma3-4b", "R4"))
 
 
+# Body Figure 4: no x-axis label, so the bottom margin only holds the tick labels, and the one-row
+# legend strip needs .2 in, not the .42 in reserved for two-row keys.
+S3_PANEL = (1.35, 1.12)
+
+
 def s3_validation(audit,plt):
     """Per-reference opportunity and policy regrets of the independent selection validation."""
     from matplotlib.patches import Patch
@@ -374,7 +379,7 @@ def s3_validation(audit,plt):
     specs=[]
     for cap in caps:
         def draw(f,cap=cap):
-            ax=axes(f,SIZES["four"],left=.42,bottom=.36,right=.05)
+            ax=axes(f,S3_PANEL,left=.42,bottom=.23,right=.05)
             color=CAPABILITY_COLORS.get(cap,PALETTE["reference"])
             for j,row in enumerate(data[cap]):
                 ax.bar(j-.26,row[0],width=.24,color=PALETTE["white"],edgecolor=color,zorder=3)
@@ -384,11 +389,11 @@ def s3_validation(audit,plt):
             ax.set_ylim(bottom=0)
             if cap==caps[0]:ax.set_ylabel("Nats per token")
             ax.grid(axis="y",color=PALETTE["grid"],lw=.4,zorder=0)
-        specs.append((CAP_NAMES[cap],SIZES["four"],draw,data[cap]))
+        specs.append((CAP_NAMES[cap],S3_PANEL,draw,data[cap]))
     handles=[Patch(facecolor=PALETTE["white"],edgecolor=PALETTE["reference"],label="Opportunity"),
              Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),label="Final rule"),
              Patch(facecolor=PALETTE["dense"],edgecolor=darker(PALETTE["dense"]),hatch=HATCHES["code"],label="Quantization only")]
-    return publish(plt,audit,"s3_validation",specs,handles,"Independent selection validation on four references that supplied the rule no outcome, one panel per objective. Bars per reference: the opportunity that choosing across methods opens over the best feasible quantization candidate (open), the regret of the frozen rule (solid) and the regret of a quantization-only policy (dotted), each a mean in nats per native token over the sixteen budgets at which both policies find a feasible candidate; nothing is pooled across tokenizers. Colour denotes objective. References are numbered as in the identity table: R1 Pythia 410M at step 120000, R2 Pythia 1.4B at step 120000, R3 Gemma 3 1B, R4 Gemma 3 4B.",columns=4)
+    return publish(plt,audit,"s3_validation",specs,handles,"Independent selection validation on four references that supplied the rule no outcome, one panel per objective. Bars per reference: the opportunity that choosing across methods opens over the best feasible quantization candidate (open), the regret of the frozen rule (solid) and the regret of a quantization-only policy (dotted), each a mean in nats per native token over the sixteen budgets at which both policies find a feasible candidate; nothing is pooled across tokenizers. Colour denotes objective. References are numbered as in the identity table: R1 Pythia 410M at step 120000, R2 Pythia 1.4B at step 120000, R3 Gemma 3 1B, R4 Gemma 3 4B.",columns=4,legend_size=(5.5,.2))
 
 
 def generate(stem=None,root=ROOT):
