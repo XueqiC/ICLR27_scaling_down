@@ -23,7 +23,7 @@ from test_paper_figure_style import check_artists, EXPECTED_PANEL_SIZES
 
 GENERATORS = (lr, pythia, drift, heterogeneity, selection)
 PANELS = ("lr_pilot_a", "lr_pilot_legend", "fig4_a", "fig4_b", "fig4_c", "fig5_a", "fig5_b",
-          "fig4_legend", "fig5_legend", "fig8_a", "fig8_b", "fig8_legend",
+          "fig4_legend", "fig5_legend", "fig8_a", "fig8_legend",
           "fig7_a", "fig7_b", "fig7_c", "fig7_d", "fig7_legend")
 PREVIEWS = ("lr_pilot", "pythia_responses", "drift", "heterogeneity", "selection_maps")
 
@@ -51,15 +51,16 @@ def generated(tmp_path_factory):
                        for t in ax.get_yticklabels())
             assert all(t.get_fontsize() == (7.5 if stem.startswith("fig8_") else tick)
                        for t in ax.get_xticklabels())
-            if stem.startswith("fig8_"):
-                assert ax.get_xlabel() == "Loss change (nats)" and ax.get_ylabel() == ""
-                assert ax.get_xscale() == "symlog" and ax.yaxis_inverted()
+            if stem == "fig8_a":
+                assert len(fig.axes) == 1
+                assert ax.get_xlabel() == "" and ax.get_ylabel() == "Loss change (nats)"
+                assert ax.get_xscale() == "linear" and ax.get_yscale() == "symlog"
+                assert not ax.yaxis_inverted()
                 assert not ax.patches
-                if stem == "fig8_a":
-                    assert ax.get_yticklabels()[0].get_text() == "Gemma 3 270M"
-                    assert ax.get_yticklabels()[-1].get_text() == "Qwen3 4B"
-                else:
-                    assert not ax.get_yticklabels()
+                assert list(ax.get_xticks()) == list(range(12))
+                ordered = sorted((r for r in records if r["panel"] == "a" and r["capability"] == "math"),
+                                 key=lambda r: r["order"])
+                assert [t.get_text() for t in ax.get_xticklabels()] == [r["model"].rsplit("-", 1)[1] for r in ordered]
             for legend in ax.findobj(Legend):
                 box = legend.get_window_extent(renderer)
                 assert ax.bbox.contains(box.x0, box.y0) and ax.bbox.contains(box.x1, box.y1)
@@ -101,7 +102,7 @@ def generated(tmp_path_factory):
     assert not {m for m in set(sys.modules)-new_modules if m.split(".")[0] in ("torch", "transformers", "datasets")}
     assert all(hashlib.sha256(p.read_bytes()).hexdigest() == digest for p, digest in tex.items())
     assert set(saved) == set(PANELS)
-    assert len(previews) == 5
+    assert len(previews) == len(PREVIEWS)
     for stem, size in saved.items():
         raw = (directory / f"{stem}.pdf").read_bytes()
         assert raw.startswith(b"%PDF-") and len(raw) > 1000
@@ -115,6 +116,12 @@ def generated(tmp_path_factory):
     for stem in PREVIEWS:
         manifest = json.loads((directory / f"{stem}_files.json").read_text())
         preview = next(f for f in manifest if f["file"].endswith(".png"))
+        if stem == "heterogeneity":
+            assert manifest == [
+                {"file": "fig8_a.pdf", "size_inches": [5.5, 1.8]},
+                {"file": "fig8_legend.pdf", "size_inches": [5.5, .3]},
+                {"file": "heterogeneity.png", "size_inches": [5.5, 2.1], "dpi": 220},
+            ]
         with Image.open(directory / preview["file"]) as image:
             # Agg truncates fractional pixels, including 2.05*220=450.999... .
             assert all(abs(pixels - inches*220) < 1.01 for pixels, inches in zip(image.size, preview["size_inches"]))
@@ -296,18 +303,40 @@ def test_heterogeneity_original_twelve_exact_dots_and_family_order(response_rows
     rows, _ = response_rows[heterogeneity]
     assert len(rows) == 72
     originals = [r for r in frozen(heterogeneity.SOURCE) if r["cohort"] == "panel"]
+    source_indices = {r["model"]: i for i, r in enumerate(frozen(heterogeneity.SOURCE)) if r["cohort"] == "panel"}
     for panel, key in (("a", "dl07"), ("b", "dl4")):
         part = [r for r in rows if r["panel"] == panel]
         assert {r["model"] for r in part} == {r["model"] for r in originals}
         assert len(part) == 36
+        assert Counter((r["model"], r["capability"]) for r in part) == Counter(
+            {(r["model"], cap): 1 for r in originals for cap in ("math", "code", "qa")})
         ordered = sorted((r for r in part if r["capability"] == "math"), key=lambda r: r["order"])
+        assert [r["order"] for r in ordered] == list(range(12))
         assert [r["series"] for r in ordered] == sorted(r["series"] for r in ordered)
         for r in part:
+            index = source_indices[r["model"]]
+            assert r["delta_source"] == exports.ref(heterogeneity.SOURCE, index, key, r["capability"])
+            assert r["model_source"] == exports.ref(heterogeneity.SOURCE, index, "model")
+            assert r["cohort_source"] == exports.ref(heterogeneity.SOURCE, index, "cohort")
+            assert r["model"] == frozen(r["model_source"])
+            assert r["series"] == frozen(exports.ref(heterogeneity.SOURCE, index, "series"))
             assert r["delta"] == frozen(r["delta_source"])
             assert f"/{key}/" in r["delta_source"] and frozen(r["cohort_source"]) == "panel"
 
 
-def test_heterogeneity_dot_positions_labels_and_aligned_rows(response_rows):
+def test_heterogeneity_exports_both_methods_in_one_panel(generated, response_rows):
+    rows, _, _ = generated[heterogeneity]
+    assert rows == response_rows[heterogeneity][0]
+    directory = output_path(ROOT, "figs")
+    sidecar = json.loads((directory / "fig8_a_data.json").read_text())
+    assert sidecar["records"] == rows
+    assert Counter(r["panel"] for r in sidecar["records"]) == {"a": 36, "b": 36}
+    assert len(sidecar["axes"]) == 1
+    legend = json.loads((directory / "fig8_legend_data.json").read_text())
+    assert legend["legend_entries"] == ["Math", "Code", "QA", "Pruning at $d=0.7$", "Per-channel int4"]
+
+
+def test_heterogeneity_dot_positions_labels_and_method_spreads(response_rows):
     import numpy as np
     from matplotlib.collections import LineCollection, PathCollection
     from matplotlib.colors import to_rgba
@@ -315,71 +344,87 @@ def test_heterogeneity_dot_positions_labels_and_aligned_rows(response_rows):
     from analysis.paper_artifacts import pyplot
     rows, _ = response_rows[heterogeneity]
     plt = pyplot()
-    expected_labels = ["Gemma 3 270M", "Gemma 3 1B", "Gemma 3 4B", "Gemma 3 12B",
-                       "Gemma 3 27B", "Gemma 4 31B", "Muse 30B", "OLMo 3 7B",
-                       "OLMo 3 32B", "Qwen3 0.6B", "Qwen3 1.7B", "Qwen3 4B"]
-    bounds = []
-    for panel in "ab":
-        size = heterogeneity.PANEL_SIZES[panel]
-        assert size == EXPECTED_PANEL_SIZES[f"fig8_{panel}"]
-        style.apply_style(style.kind_for_width(size[0]))
-        fig = plt.figure(figsize=size)
-        try:
-            ax = heterogeneity.draw_panel(fig, rows, panel)
-            style.prepare_figure(fig)
-            check_artists(fig)
-            bounds.append((ax.bbox.y0 / fig.dpi, ax.bbox.y1 / fig.dpi))
-            assert ax.get_xlabel() == "Loss change (nats)" and not ax.get_ylabel()
-            assert ax.get_xscale() == "symlog" and ax.yaxis_inverted()
-            assert ax.xaxis.get_transform().linthresh == .1
-            assert ax.xaxis.get_transform().linscale == .6
-            assert list(ax.get_xticks()) == [-1, -.1, 0, .1, 1, 5]
-            assert [t.get_text() for t in ax.get_xticklabels()] == ["−1", "−0.1", "0", "0.1", "1", "5"]
-            assert list(ax.get_yticks()) == list(range(12))
-            assert [t.get_text() for t in ax.get_yticklabels()] == (expected_labels if panel == "a" else [])
-            assert all(t.get_rotation() == 0 for t in ax.get_yticklabels())
-            assert not ax.patches
-            dots = [c for c in ax.collections if isinstance(c, PathCollection)]
-            assert len(dots) == 3
-            for points, cap, marker, offset in zip(dots, heterogeneity.CAPS, ("o", "s", "^"), (-.18, 0, .18)):
+    expected_sizes = ["270M", "1B", "4B", "12B", "27B", "31B", "30B", "7B", "32B", "0.6B", "1.7B", "4B"]
+    expected_families = ["Gemma 3", "Gemma 4", "Muse", "OLMo 3", "Qwen3"]
+    size = heterogeneity.PANEL_SIZE
+    assert size == EXPECTED_PANEL_SIZES["fig8_a"] == (5.5, 1.8)
+    style.apply_style(style.kind_for_width(size[0]))
+    fig = plt.figure(figsize=size)
+    try:
+        ax = heterogeneity.draw_panel(fig, rows)
+        style.prepare_figure(fig)
+        assert len(fig.axes) == 1
+        assert ax.get_xlabel() == "" and ax.get_ylabel() == "Loss change (nats)"
+        assert ax.get_xscale() == "linear" and ax.get_yscale() == "symlog"
+        assert not ax.yaxis_inverted()
+        assert ax.yaxis.get_transform().linthresh == .1
+        assert ax.yaxis.get_transform().linscale == .6
+        assert list(ax.get_yticks()) == [-1, -.1, 0, .1, 1, 5]
+        assert [t.get_text() for t in ax.get_yticklabels()] == ["−1", "−0.1", "0", "0.1", "1", "5"]
+        assert not len(ax.yaxis.get_minorticklocs())
+        assert list(ax.get_xticks()) == list(range(12))
+        assert [t.get_text() for t in ax.get_xticklabels()] == expected_sizes
+        assert [t.get_text() for t in ax.texts] == expected_families
+        assert all(t.get_rotation() == 0 and t.get_fontsize() == 7.5
+                   for t in ax.get_xticklabels() + ax.get_yticklabels() + list(ax.texts))
+        assert ax.get_xlim() == (-.55, 11.55) and ax.get_ylim() == (-1.25, 5.9)
+        assert not ax.patches and not ax.lines
+        dots = [c for c in ax.collections if isinstance(c, PathCollection)]
+        assert len(dots) == 6
+        for method_index, (panel, method_offset) in enumerate((("a", -.2), ("b", .2))):
+            for points, cap, marker, offset in zip(dots[method_index*3:(method_index+1)*3],
+                                                 ("math", "code", "qa"), ("o", "s", "^"), (-.075, 0, .075)):
                 part = sorted((r for r in rows if r["panel"] == panel and r["capability"] == cap),
                               key=lambda r: r["order"])
-                np.testing.assert_array_equal(points.get_offsets()[:, 0], [r["delta"] for r in part])
-                np.testing.assert_allclose(points.get_offsets()[:, 1], np.arange(12) + offset)
+                assert [r["order"] for r in part] == list(range(12))
+                assert [r["model"].rsplit("-", 1)[1] for r in part] == expected_sizes
+                np.testing.assert_array_equal(points.get_offsets()[:, 0], np.arange(12) + method_offset + offset)
+                np.testing.assert_array_equal(points.get_offsets()[:, 1], [r["delta"] for r in part])
                 glyph = MarkerStyle(marker)
+                assert len(points.get_paths()) == 1 and points.get_zorder() == 3
                 np.testing.assert_array_equal(points.get_paths()[0].vertices,
                                               glyph.get_path().transformed(glyph.get_transform()).vertices)
-                np.testing.assert_allclose(points.get_facecolors(), [to_rgba(heterogeneity.COLORS[cap])])
-                np.testing.assert_allclose(points.get_edgecolors(), [to_rgba(style.PALETTE["white"])])
-                assert list(points.get_sizes()) == [3.8**2] and list(points.get_linewidths()) == [.4]
-                assert all(ax.get_xlim()[0] < r["delta"] < ax.get_xlim()[1] for r in part)
-            rules = [c for c in ax.collections if isinstance(c, LineCollection)]
-            assert len(rules) == 17
-            spread = [c for c in rules if c.get_zorder() == 2]
-            assert len(spread) == 12
-            for order, bar in enumerate(spread):
+                face = style.CAPABILITY_COLORS[cap] if panel == "a" else style.PALETTE["white"]
+                edge = style.PALETTE["white"] if panel == "a" else style.CAPABILITY_COLORS[cap]
+                np.testing.assert_allclose(points.get_facecolors(), [to_rgba(face)])
+                np.testing.assert_allclose(points.get_edgecolors(), [to_rgba(edge)])
+                assert list(points.get_sizes()) == [3.8**2]
+                assert list(points.get_linewidths()) == ([.4] if panel == "a" else [.8])
+                assert all(ax.get_ylim()[0] < r["delta"] < ax.get_ylim()[1] for r in part)
+        rules = [c for c in ax.collections if isinstance(c, LineCollection)]
+        assert len(rules) == 29 and len(ax.collections) == 35
+        spread = [c for c in rules if c.get_zorder() == 2]
+        assert len(spread) == 24
+        for method_index, (panel, offset) in enumerate((("a", -.2), ("b", .2))):
+            for order, bar in enumerate(spread[method_index*12:(method_index+1)*12]):
                 values = [r["delta"] for r in rows if r["panel"] == panel and r["order"] == order]
                 assert len(values) == 3 and len(bar.get_segments()) == 1
                 np.testing.assert_array_equal(bar.get_segments()[0],
-                                              [[min(values), order], [max(values), order]])
+                                              [[order + offset, min(values)], [order + offset, max(values)]])
                 np.testing.assert_allclose(bar.get_colors(), [to_rgba(style.PALETTE["dense"])])
                 assert list(bar.get_linewidths()) == [.7]
                 assert bar.get_linestyles()[0][1] is None
-            rules = [c for c in rules if c.get_zorder() != 2]
-            assert [list(c.get_segments()[0][:, 1]) for c in rules[:-1]] == [[v, v] for v in (4.5, 5.5, 6.5, 8.5)]
-            assert all(list(c.get_linewidths()) == [.5] for c in rules[:-1])
-            assert list(rules[-1].get_segments()[0][:, 0]) == [0, 0]
-            assert list(rules[-1].get_linewidths()) == [.7]
-            assert all(line.get_visible() and line.get_alpha() <= .3 for line in ax.get_ygridlines())
-            renderer = fig.canvas.get_renderer()
-            for labels in (ax.get_xticklabels(), ax.get_yticklabels()):
-                boxes = [t.get_window_extent(renderer) for t in labels]
-                assert all(not a.overlaps(b) for i, a in enumerate(boxes) for b in boxes[i+1:])
-        finally:
-            plt.close(fig)
-    assert bounds[0] == pytest.approx(bounds[1])
+        separators = [c for c in rules if c.get_zorder() == 0]
+        assert len(separators) == 4
+        for separator, x in zip(separators, (4.5, 5.5, 6.5, 8.5)):
+            assert len(separator.get_segments()) == 1
+            np.testing.assert_array_equal(separator.get_segments()[0], [[x, -1.25], [x, 5.9]])
+            np.testing.assert_allclose(separator.get_colors(), [to_rgba(style.PALETTE["grid"])])
+            assert list(separator.get_linewidths()) == [.5]
+            assert separator.get_linestyles()[0][1] is None
+        zero = [c for c in rules if c.get_zorder() == 1]
+        assert len(zero) == 1 and len(zero[0].get_segments()) == 1
+        np.testing.assert_array_equal(zero[0].get_segments()[0], [[-.55, 0], [11.55, 0]])
+        np.testing.assert_allclose(zero[0].get_colors(), [to_rgba(style.PALETTE["reference"])])
+        assert list(zero[0].get_linewidths()) == [.7]
+        assert zero[0].get_linestyles()[0][1] is None
+        assert all(line.get_visible() and line.get_alpha() == .3 and line.get_linewidth() == .4
+                   for line in ax.get_ygridlines())
+        check_artists(fig)
+    finally:
+        plt.close(fig)
     assert "Grouped bars" not in heterogeneity.CAPTION and "rotated" not in heterogeneity.CAPTION
-    assert "grey spread bar" in heterogeneity.CAPTION
+    assert "thin grey bar spans each method's three capability loss changes" in " ".join(heterogeneity.CAPTION.split())
 
 
 @pytest.mark.parametrize("panel", "abc")
@@ -504,14 +549,27 @@ def test_response_figure_legends_fit_and_explain_marks(gen):
             for bit, marker in zip((3, 4, 5), ("o", "s", "^")):
                 assert labels[f"{bit} bit"].get_color() == pythia.BIT_COLORS[bit]
                 assert labels[f"{bit} bit"].get_marker() == marker
+        else:
+            expected |= {"Pruning at $d=0.7$", "Per-channel int4"}
+            for name, face, edge, width in (
+                ("Pruning at $d=0.7$", style.PALETTE["reference"], style.PALETTE["white"], .4),
+                ("Per-channel int4", style.PALETTE["white"], style.PALETTE["reference"], .8),
+            ):
+                handle = labels[name]
+                assert isinstance(handle, Line2D) and handle.get_marker() == "o"
+                assert handle.get_linestyle() == "None" and handle.get_markersize() == 3.8
+                assert handle.get_markerfacecolor() == face and handle.get_markeredgecolor() == edge
+                assert handle.get_markeredgewidth() == width
         for name, cap, marker in zip(("Math", "Code", "QA"), gen.CAPS, ("o", "s", "^")):
             handle = labels[name]
             assert isinstance(handle, Line2D) and handle.get_color() == gen.COLORS[cap]
             if gen is heterogeneity:
                 assert handle.get_marker() == marker and handle.get_linestyle() == "None"
+                assert handle.get_markerfacecolor() == style.CAPABILITY_COLORS[cap]
                 assert handle.get_markeredgecolor() == style.PALETTE["white"]
-                assert handle.get_markeredgewidth() == .4
+                assert handle.get_markeredgewidth() == .4 and handle.get_markersize() == 3.8
         assert set(labels) == expected
+        assert len(legend.get_texts()) == len(expected)
         assert all(t.get_fontsize() == 8.5 for t in legend.get_texts())
     finally:
         plt.close(fig)
@@ -572,6 +630,6 @@ def test_new_generators_refuse_symlinked_output(tmp_path, gen, component):
     refuses_symlink(gen, tmp_path, "figs", component)
 
 
-@pytest.mark.parametrize("name", ("lr_pilot_a.pdf", "fig4_a_data.json", "drift.png", "fig8_b_caption.txt", "selection_maps_files.json"))
+@pytest.mark.parametrize("name", ("lr_pilot_a.pdf", "fig4_a_data.json", "drift.png", "fig8_a_caption.txt", "selection_maps_files.json"))
 def test_new_output_files_refuse_symlinks(tmp_path, name):
     refuses_output_file_symlink(tmp_path, "figs", name)

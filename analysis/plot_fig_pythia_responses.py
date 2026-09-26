@@ -19,7 +19,7 @@ else:
 P36 = "results/v36-pythia-controlled/summary.json"
 P53 = "results/v53-prune-dev/register.json"
 Q69 = "results/v69-quant-confirm/"
-PANEL_SIZE = (1.8, 1.35)
+PANEL_SIZE = (1.8, 1.5)
 LEGEND_SIZE = (5.5, .3)
 BIT_MARKERS = {3: "o", 4: "s", 5: "^"}
 CAPTIONS = {
@@ -201,7 +201,7 @@ def generate(root=ROOT):
         panels = [(f"fig4_{p}", PANEL_SIZE, lambda f, p=p: draw_panel(f, rows, p),
                    [r for r in rows if r["panel"] == p], CAPTIONS[p]) for p in "abc"]
         layout = (
-            "Three 1.8 x 1.35-inch panels in one 5.5-inch row; fig4_legend.pdf "
+            "Three 1.8 x 1.5-inch panels in one 5.5-inch row; fig4_legend.pdf "
             "is the shared capability, bit-width and one-state key above the panels. "
             "State traces are 0.5 pt at alpha 0.3; median lines are 1.5 pt with 3.2-pt markers.\n")
         caption = "\n".join(CAPTIONS.values()) + layout

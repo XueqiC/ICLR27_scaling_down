@@ -16,12 +16,12 @@ EXPECTED_PANEL_SIZES = {
     "lr_pilot_a": (2.7, 1.45), "lr_pilot_legend": (5.5, .42),
     **{p: (2.7, 1.6) for p in ("corner_test_a", "corner_test_b", "corner_contrasts_a")},
     "corner_legend": (5.5, .42),
-    **{f"fig4_{p}": (1.8, 1.35) for p in "abc"}, "fig4_legend": (5.5, .3),
+    **{f"fig4_{p}": (1.8, 1.5) for p in "abc"}, "fig4_legend": (5.5, .3),
     **{f"fig5_{p}": (2.7, 1.15) for p in "ab"},
     "fig5_legend": (5.5, .3),
     "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
     "fig7_legend": (5.5, .3),
-    "fig8_a": (3.0, 1.9), "fig8_b": (2.45, 1.9), "fig8_legend": (5.5, .3),
+    "fig8_a": (5.5, 1.8), "fig8_legend": (5.5, .3),
 }
 
 
@@ -69,10 +69,21 @@ def check_artists(fig):
     for ax in fig.axes:
         assert ax.get_legend() is None, "All legends belong in strips above the panels"
         assert not any(ax.get_title(loc) for loc in ("left", "center", "right"))
-        assert not ax.texts, "Titles and explanatory text belong in captions"
+        model_axis = (ax.get_ylabel() == "Loss change (nats)" and ax.get_yscale() == "symlog"
+                      and list(ax.get_xticks()) == list(range(12)))
+        if model_axis:
+            assert [t.get_text() for t in ax.texts] == ["Gemma 3", "Gemma 4", "Muse", "OLMo 3", "Qwen3"]
+            for text, center in zip(ax.texts, (2, 5, 6, 7.5, 10)):
+                assert text.get_position()[0] == center and text.get_position()[1] < 0
+                assert text.get_transform() == ax.get_xaxis_transform()
+                assert text.get_ha() == "center" and text.get_va() == "top"
+                assert text.get_fontsize() == 7.5
+            assert all(t.get_rotation() == 0 for t in ax.get_xticklabels())
+        else:
+            assert not ax.texts, "Titles and explanatory text belong in captions"
         assert ax.get_xlabel() or ([t.get_text() for t in ax.get_xticklabels()] == ["Math", "Code", "QA"]
                                   and all(t.get_rotation() == 0 for t in ax.get_xticklabels())) or (len(ax.get_xticklabels()) == 12 and
-                                  all(t.get_rotation() == 45 for t in ax.get_xticklabels()))
+                                  all(t.get_rotation() == 45 for t in ax.get_xticklabels())) or model_axis
         assert "\n" not in ax.get_xlabel() + ax.get_ylabel(), "Axis labels must stay on one line"
         canvas = ax.get_figure()
         for label in (ax.xaxis.label, ax.yaxis.label):
@@ -82,15 +93,18 @@ def check_artists(fig):
                 assert bounds.x1 <= canvas.bbox.x1+.5 and bounds.y1 <= canvas.bbox.y1+.5
         assert ax.bbox.height / canvas.bbox.height >= .58, "Preserve usable plot height"
         assert (ax.get_ylabel() or any(t.get_text() for t in ax.get_yticklabels())
-                or (len(ax.images) == 1 and ax.images[0].get_array().shape == (4, 17))
-                or (ax.get_xlabel() == "Loss change (nats)" and ax.yaxis_inverted()
-                    and list(ax.get_yticks()) == list(range(12)))), \
+                or (len(ax.images) == 1 and ax.images[0].get_array().shape == (4, 17))), \
             "Only aligned row panels may omit repeated state labels"
         text = ax.get_xticklabels(which="both") + ax.get_yticklabels(which="both")
-        text += [ax.xaxis.label, ax.yaxis.label]
+        text += [ax.xaxis.label, ax.yaxis.label] + list(ax.texts)
         if ax.get_legend():
             text += ax.get_legend().get_texts()
         assert all(t.get_weight() == "bold" and t.get_family() == ["serif"] for t in text)
+        if model_axis:
+            boxes = [t.get_window_extent(renderer) for t in text if t.get_text()]
+            assert all(not a.overlaps(b) for i, a in enumerate(boxes) for b in boxes[i+1:])
+            tick_bottom = min(t.get_window_extent(renderer).y0 for t in ax.get_xticklabels())
+            assert all(t.get_window_extent(renderer).y1 < tick_bottom for t in ax.texts)
     # A full-canvas PDF must not clip labels or row names at a page edge.
     box = fig.get_tightbbox(renderer).transformed(fig.dpi_scale_trans)
     assert box.x0 >= -.5 and box.y0 >= -.5, (box.bounds, fig.bbox.bounds)
