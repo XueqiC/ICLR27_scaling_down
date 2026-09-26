@@ -21,7 +21,7 @@ EXPECTED_PANEL_SIZES = {
     "fig5_legend": (5.5, .3),
     "fig7_a": (1.75, 1.5), **{f"fig7_{p}": (1.25, 1.5) for p in "bcd"},
     "fig7_legend": (5.5, .3),
-    "fig8_a": (2.7, 1.6), "fig8_b": (2.7, 1.6), "fig8_legend": (5.5, .3),
+    "fig8_a": (3.0, 1.9), "fig8_b": (2.45, 1.9), "fig8_legend": (5.5, .3),
 }
 
 
@@ -82,8 +82,10 @@ def check_artists(fig):
                 assert bounds.x1 <= canvas.bbox.x1+.5 and bounds.y1 <= canvas.bbox.y1+.5
         assert ax.bbox.height / canvas.bbox.height >= .58, "Preserve usable plot height"
         assert (ax.get_ylabel() or any(t.get_text() for t in ax.get_yticklabels())
-                or (len(ax.images) == 1 and ax.images[0].get_array().shape == (4, 17))), \
-            "Only aligned selection maps may omit repeated state labels"
+                or (len(ax.images) == 1 and ax.images[0].get_array().shape == (4, 17))
+                or (ax.get_xlabel() == "Loss change (nats)" and ax.yaxis_inverted()
+                    and list(ax.get_yticks()) == list(range(12)))), \
+            "Only aligned row panels may omit repeated state labels"
         text = ax.get_xticklabels(which="both") + ax.get_yticklabels(which="both")
         text += [ax.xaxis.label, ax.yaxis.label]
         if ax.get_legend():

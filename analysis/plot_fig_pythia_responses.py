@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Nine-state Pythia response panels from frozen V36/V53/V69 artifacts."""
+"""Pythia measured state traces and medians from frozen V36/V53/V69 artifacts."""
 from __future__ import annotations
 
 if __package__:
@@ -21,48 +21,46 @@ P53 = "results/v53-prune-dev/register.json"
 Q69 = "results/v69-quant-confirm/"
 PANEL_SIZE = (1.8, 1.35)
 LEGEND_SIZE = (5.5, .3)
-GROUP_STATE = "pythia-410m@step143000"
+BIT_MARKERS = {3: "o", 4: "s", 5: "^"}
 CAPTIONS = {
     "a": """Pruning responses on the original nine development states: Pythia
-160M, 410M and 1.4B at steps 16k, 64k and 143k. Light coloured lines are each
-state's measured loss minus its own dense loss, including every saved density.
-Opaque Math/Code lines are the pointwise median of the nine state-conditioned
-V53 power predictions; the opaque QA line is the delivered V53 median curve.
-These summaries evaluate frozen coefficients without fitting. Delivered curves
-are shown only on their [0.6, 0.9] domain. V53's fit used 17 development states;
-the nine states displayed are selected by the original V36 input manifest.
-The register and V6 loss artifacts are the pruning sources used by
-plot_fig1_final.py; no held-out source is presented as a development state.
+160M, 410M and 1.4B at steps 16k, 64k and 143k. Thin faint lines show each
+development state's measured loss change from its own dense loss. A bold line
+with markers shows the pointwise median over the nine states. Both use only
+densities measured in all nine states. Colour identifies Math, Code and QA;
+positive loss change means worse performance. The loss axis is symmetric log
+with a 0.1-nat linear threshold. Every saved measurement remains in the data
+sidecar, including densities without all nine states. The original V36 input
+manifest selects the states; the V53 register verifies the V6 loss artifacts'
+digests. No held-out source is presented as a development state.
 """,
     "b": """Per-output-channel symmetric round-to-nearest quantization on the
-same nine V36 development states. Light lines show each state's per-capability
-loss change from its own dense anchor across every saved bit-width. The full
-loss range is retained, including 3-bit collapse. The inputs are the frozen
+same nine V36 development states. Thin faint lines show each development
+state's measured loss change from its own dense loss. A bold line with markers
+shows the pointwise median over the nine states. Both use only bit-widths
+measured in all nine states. The full loss range is retained, including 3-bit
+collapse, on a symmetric log axis with a 0.1-nat linear threshold. The inputs are the frozen
 V10 quant_losses.json files listed in V36's summary; plot_fig1_final.py does
 not itself read a per-channel panel, so V36 supplies this additional artifact.
 Colour follows Figure 1; positive loss change means worse performance.
 """,
-    "c": """Grouped symmetric RTN Math responses for Pythia 410M at step143k.
-Colour and marker identify 3, 4 and 5 bits. Connected markers are measured
-loss changes against group size, with no fitted curve. V69 develop.json supplies
-groups 64, 128 and 256; V69 compare.json supplies groups 32 and 512. The latter
-were unseen group sizes at the V69 freeze. These are the same frozen grouped
-quantization artifacts read by plot_fig1_final.py. All three bit-widths share
-one linear loss axis and a logarithmic group-size axis.
+    "c": """Grouped symmetric RTN mathematics responses over all six development
+states in V69 develop.json: Pythia 160M, 410M and 1.4B at steps 16k and 143k.
+Colour and marker identify 3, 4 and 5 bits. Thin faint lines show each
+development state's measured loss change from its own dense loss. A bold line
+with markers shows the pointwise median over the six states. Both use group
+sizes 64, 128 and 256, measured in all six states. All 54 measured rows come
+from develop.json; compare.json is excluded. These are the frozen development artifacts
+read by plot_fig1_final.py. Group size uses a base-2 logarithmic axis and loss
+uses a symmetric log axis with a 0.1-nat linear threshold.
 """,
 }
 
 
 def build(audit):
-    import numpy as np
-    if __package__:
-        from .plot_fig1_final import prune_curve
-    else:
-        from plot_fig1_final import prune_curve
     manifest, register = audit.read(P36), audit.read(P53)
     paths = list(manifest["input_sha256"])
-    states = {s["path"]: (i, s) for i, s in enumerate(register["dev_states"])}
-    rows, prune_states = [], []
+    rows = []
     for arm, directory, dense, panel in (("pruning", "v6-capability-geometry", "1.0", "a"),
                                          ("quantization", "v10-quantization", "dense", "b")):
         selected = [p for p in paths if p.startswith(f"results/{directory}/")]
@@ -74,8 +72,6 @@ def build(audit):
             if not audit.matches_digest(expected_hash, audit.inputs[path]):
                 raise ValueError(f"Frozen {arm} digest mismatch: {path}")
             state = path.split("/")[-2].replace("--step", "@step")
-            if panel == "a":
-                prune_states.append(states[path])
             # The original manifest's file digests may predate appended densities;
             # current exact bytes are recorded by Artifacts; never hide additions.
             for key in sorted((k for k in data if not k.startswith("_") and (k != "dense")), key=float):
@@ -85,67 +81,95 @@ def build(audit):
                                  "delta": data[key][cap] - data[dense][cap],
                                  "loss_source": ref(path, key, cap), "dense_source": ref(path, dense, cap),
                                  "cohort_source": ref(P36, "input_sha256", path)})
-    for cap in CAPS:
-        method = "median_curve" if cap == "qa" else "power"
-        for d in np.linspace(.6, .9, 121):
-            values = [float(prune_curve(register, s, cap, float(d), method)) for _, s in prune_states]
-            rows.append({"panel": "a", "kind": "delivered", "capability": cap,
-                         "x": float(d), "delta": float(np.median(values)), "method": method,
-                         "state_predictions": values,
-                         "model_source": ref(P53, "models", cap, method),
-                         "standardization_source": ref(P53, "standardization"),
-                         "state_sources": [ref(P53, "dev_states", i) for i, _ in prune_states],
-                         "formula": "median_state(prune_curve(register,state,cap,d,method))"})
-    develop, freeze, compare = [audit.read(Q69 + name + ".json") for name in ("develop", "freeze", "compare")]
+    develop, freeze = [audit.read(Q69 + name + ".json") for name in ("develop", "freeze")]
     if not audit.matches_digest(freeze["provenance"]["develop_sha256"], audit.inputs[Q69 + "develop.json"]):
         raise ValueError("V69 development digest mismatch")
-    if not audit.matches_digest(compare["provenance"]["freeze_sha256"], audit.inputs[Q69 + "freeze.json"]):
-        raise ValueError("V69 freeze digest mismatch")
-    for data, section, name in ((develop, "dev_rows", "develop"), (compare, "rows", "compare")):
-        for i, r in enumerate(data[section]):
-            if r["state"] != GROUP_STATE or r["capability"] != "math":
-                continue
-            bit, group = map(int, r["config"].replace("b", "").split("_g"))
-            rows.append({"panel": "c", "kind": "measured", "state": r["state"], "capability": "math",
-                         "bit": bit, "x": group, "delta": r["dL"],
-                         "delta_source": ref(Q69 + name + ".json", section, i, "dL"),
-                         "config_source": ref(Q69 + name + ".json", section, i, "config")})
-    if len([r for r in rows if r["panel"] == "c"]) != 15:
-        raise ValueError("Incomplete 3-bit-width by 5-group panel")
+    group_states = {s["tag"] for s in develop["dev_states"]}
+    if len(group_states) != 6:
+        raise ValueError("Expected six V69 development states")
+    for i, r in enumerate(develop["dev_rows"]):
+        if r["capability"] != "math":
+            continue
+        bit, group = map(int, r["config"].replace("b", "").split("_g"))
+        rows.append({"panel": "c", "kind": "measured", "state": r["state"], "capability": "math",
+                     "bit": bit, "x": group, "delta": r["dL"],
+                     "delta_source": ref(Q69 + "develop.json", "dev_rows", i, "dL"),
+                     "config_source": ref(Q69 + "develop.json", "dev_rows", i, "config")})
+    grouped = [r for r in rows if r["panel"] == "c"]
+    expected = {(s, b, g) for s in group_states for b in (3, 4, 5) for g in (64, 128, 256)}
+    if len(grouped) != 54 or {(r["state"], r["bit"], r["x"]) for r in grouped} != expected:
+        raise ValueError("Incomplete six-state by three-bit-width by three-group panel")
     audit.rule("a/b: delta = loss_source - dense_source; x parsed from the JSON configuration key. "
-               "a delivered: reuse plot_fig1_final.prune_curve; pointwise median of nine frozen "
-               "state predictions for power, source-free median_curve for QA; no fitting. "
-               "c: delta = V69 dL; bit and group parsed from config.")
+               "V36 selects nine states per arm; V53 dev_hashes validate measured pruning inputs, "
+               "and V36 input_sha256 validates measured per-channel quantization inputs. "
+               "c: delta = V69 develop.json dL for all six development states; "
+               "bit and group parsed from config; compare.json excluded. "
+               "Plots summarize measured rows only at x shared by all states: "
+               "thin faint lines for each state's measured loss change from its own dense loss, "
+               "and a bold pointwise median line with markers; all measured rows are retained. "
+               "All three loss axes are symmetric log with a 0.1-nat linear threshold.")
     return rows
 
 
+def state_summary(rows, state_count):
+    """Summarize complete state cohorts without changing the provenance rows: the shared
+    coordinates, each state's values there, and their median."""
+    import numpy as np
+    states = sorted({r["state"] for r in rows})
+    if len(states) != state_count:
+        raise ValueError(f"Expected {state_count} states for response summary")
+    cells = {}
+    for r in rows:
+        values = cells.setdefault(r["x"], {})
+        if r["state"] in values:
+            raise ValueError("Duplicate state at the same response coordinate")
+        values[r["state"]] = r["delta"]
+    xs = sorted(x for x, values in cells.items() if set(values) == set(states))
+    if not xs:
+        raise ValueError("No response coordinates shared by all states")
+    values = np.array([[cells[x][s] for s in states] for x in xs])
+    return xs, values, np.median(values, axis=1)
+
+
+def draw_summary(ax, rows, state_count, color, marker="o"):
+    """Each state as a thin faint trace, the median over states as a bold line with markers."""
+    from matplotlib.collections import LineCollection
+    xs, values, median = state_summary(rows, state_count)
+    ax.add_collection(LineCollection([list(zip(xs, values[:, j])) for j in range(values.shape[1])],
+                                     colors=[color], linewidths=.5, alpha=.3, zorder=2))
+    # Keep the requested widths and exact median coordinates through export's
+    # legacy Line2D normalization and marker-dodging pass.
+    ax.add_collection(LineCollection([list(zip(xs, median))], colors=[color], linewidths=1.5, zorder=3))
+    ax.scatter(xs, median, color=color, marker=marker, s=3.2**2, linewidths=.4, zorder=4)
+
+
 def draw_panel(fig, rows, panel):
-    from matplotlib.ticker import NullLocator, MaxNLocator
+    from matplotlib.ticker import NullLocator
     ax = panel_axes(fig, PANEL_SIZE, left=.35, bottom=.30, right=.07)
     part = [r for r in rows if r["panel"] == panel]
+    axes_defaults(ax)
     if panel in ("a", "b"):
         for cap in CAPS:
             measured = [r for r in part if r["kind"] == "measured" and r["capability"] == cap]
-            for state in sorted({r["state"] for r in measured}):
-                line = sorted((r for r in measured if r["state"] == state), key=lambda r: r["x"])
-                ax.plot([r["x"] for r in line], [r["delta"] for r in line],
-                        color=COLORS[cap], lw=1.1, alpha=.45)
-            heavy = [r for r in part if r["kind"] == "delivered" and r["capability"] == cap]
-            if heavy:
-                ax.plot([r["x"] for r in heavy], [r["delta"] for r in heavy], color=COLORS[cap], lw=1.1)
+            draw_summary(ax, measured, 9, COLORS[cap])
+        ax.set_yscale("symlog", linthresh=.1)
         if panel == "a":
-            ax.set(xlabel="Retained density", xlim=(.535, 1.02), ylim=(-1, 10), xticks=[.6, .8, 1.])
+            ax.set(xlabel="Retained density", xlim=(.535, 1.02), ylim=(-1.2, 12), xticks=[.6, .8, 1.])
         else:
-            ax.set(xlabel="Bit-width", xlim=(2.7, 8.3), ylim=(-1, 27), xticks=[3, 4, 6, 8])
+            ax.set(xlabel="Bit-width", xlim=(2.7, 8.3), ylim=(-1.2, 30), xticks=[3, 4, 6, 8])
     else:
-        for bit, marker, color in zip((3, 4, 5), ("o", "s", "^"), tuple(BIT_COLORS.values())):
-            line = sorted((r for r in part if r["bit"] == bit), key=lambda r: r["x"])
-            ax.plot([r["x"] for r in line], [r["delta"] for r in line], color=color, marker=marker, lw=1.1, ms=3.8)
-        ax.set(xscale="log", xlabel="Group size", xlim=(26, 640), ylim=(-.25, 5.4))
-        ax.set_xticks([32, 128, 512], ["32", "128", "512"])
+        for bit in (3, 4, 5):
+            draw_summary(ax, [r for r in part if r["bit"] == bit], 6, BIT_COLORS[bit], BIT_MARKERS[bit])
+        ax.set_xscale("log", base=2)
+        ax.set_yscale("symlog", linthresh=.1)
+        ax.set(xlabel="Group size", xlim=(56, 292), ylim=(-.025, 22))
+        ax.set_xticks([64, 128, 256], ["64", "128", "256"])
         ax.xaxis.set_minor_locator(NullLocator())
-    axes_defaults(ax)
-    ax.yaxis.set_major_locator(MaxNLocator(3, integer=True))
+    if panel in ("a", "b"):
+        ax.set_yticks([-1, 0, .1, 1, 10], ["$-$1", "0", "0.1", "1", "10"])
+    else:
+        ax.set_yticks([0, .1, 1, 10], ["0", "0.1", "1", "10"])
+        ax.yaxis.set_minor_locator(NullLocator())
     ax.set_ylabel("Loss change (nats)")
     return finish_panel(ax)
 
@@ -157,11 +181,17 @@ def draw_legend(fig):
     else:
         from paper_figure_style import legend_strip
     handles = capability_handles()
-    for handle in handles:
-        handle.set_linewidth(1.1)
-    handles += [Line2D([], [], color=c, marker=m, lw=1.1, ms=3.8, label=f"{b} bit")
-                for b, m, c in zip((3, 4, 5), ("o", "s", "^"), tuple(BIT_COLORS.values()))]
-    return legend_strip(fig, handles)
+    handles += [Line2D([], [], color=BIT_COLORS[b], marker=BIT_MARKERS[b], label=f"{b} bit")
+                for b in (3, 4, 5)]
+    handles += [Line2D([], [], color=PALETTE["dense"], lw=.5, label="One state")]
+    # Measure the compact two-row strip with the exported preview's glyph
+    # metrics; rounding at the default 100 dpi overestimates its height.
+    fig.set_dpi(220)
+    legend = legend_strip(fig, handles)
+    for handle, label in zip(legend.legend_handles, legend.get_texts()):
+        if label.get_text() == "One state":
+            handle.set_linewidth(.5)
+    return legend
 
 
 def generate(root=ROOT):
@@ -170,12 +200,12 @@ def generate(root=ROOT):
         rows = build(audit)
         panels = [(f"fig4_{p}", PANEL_SIZE, lambda f, p=p: draw_panel(f, rows, p),
                    [r for r in rows if r["panel"] == p], CAPTIONS[p]) for p in "abc"]
-        caption = "\n".join(CAPTIONS.values()) + (
+        layout = (
             "Three 1.8 x 1.35-inch panels in one 5.5-inch row; fig4_legend.pdf "
-            "is the shared capability and bit-width key above the panels. "
-            "Lines are 1.1 pt; markers, where present, are 3.8 pt.\n")
-        panels = [(name, size, draw, records, text + "Shared key: fig4_legend.pdf above the panels; "
-                   "panels are 1.8 x 1.35 inches in one row. Lines 1.1 pt; markers 3.8 pt.\n")
+            "is the shared capability, bit-width and one-state key above the panels. "
+            "State traces are 0.5 pt at alpha 0.3; median lines are 1.5 pt with 3.2-pt markers.\n")
+        caption = "\n".join(CAPTIONS.values()) + layout
+        panels = [(name, size, draw, records, text + layout)
                   for name, size, draw, records, text in panels]
         export(plt, audit, "pythia_responses", panels, caption, width=5.5,
                legend=("fig4_legend", LEGEND_SIZE, draw_legend, [], caption))

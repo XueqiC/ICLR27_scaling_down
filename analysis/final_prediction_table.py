@@ -39,9 +39,8 @@ RELATIONS = {
     "E": "Reuse form",
     "joint": "Budget and pool form",
 }
-# A delivered relation chosen after its test was observed carries this word in
-# task's group line; the caption says what it means. The label is mapped from the
-# stored delivery timing, never asserted by the generator.
+# The appendix retains this word; the main table maps the same stored delivery
+# timing to a dagger beside the delivered relation.
 RETROSPECTIVE = "Retrospective"
 BASELINES = {
     "A2": "per-density regression", "median_curve": "development median", "median": "development median",
@@ -57,37 +56,50 @@ RANGES = {
     "pool_270m": "Gemma 270 million distilled on six new pools at 50 to 200 thousand tokens",
     "pool_1b": "Gemma 1 billion distilled on six new pools at 50 to 200 thousand tokens",
 }
+SHORT_RANGES = {
+    "prune_new": "Three new checkpoints",
+    "quant_group": "Group sizes 32 and 512",
+    "quant_new": "A new 1.4 billion stage",
+    "pool_270m": "Six new pools, 270 million student",
+    "pool_1b": "Six new pools, 1 billion student",
+}
+METHODS = {"prune_new": "Pruning", "quant_group": "Quantization", "quant_new": "Quantization",
+           "pool_270m": "Distillation", "pool_1b": "Distillation"}
+SHORT_RELATIONS = {
+    ("median_curve",) * 3: "Median density curve",
+    ("same_input_interpolation", "same_input_interpolation", "median"): "Interpolation; median for QA",
+    ("median",) * 3: "Development median",
+    ("E", "E", "joint"): "Reuse; budget and pool for QA",
+}
 # Every task is assembled once with eight cells: task, frozen candidate, its
 # error, the delivered relation, its error, the strongest development baseline
 # and the development budget and improvement. The main table prints the delivered relation
 # against its baseline; the appendix candidates table prints how the frozen
 # candidate became the delivered relation.
-HEADERS = ("Capability", "Delivered relation", "Error",
-           "Strongest development baseline", "Error", "Improvement")
-CAPABILITY_NAMES = {"math": "Mathematics", "code": "Code", "qa": "Question answering"}
-ERROR_COLUMN = r">{\centering\arraybackslash}p{.075\textwidth}"
-GROUP_SPEC = r"@{}>{\raggedright\arraybackslash}p{\dimexpr\textwidth-0pt\relax}@{}"
-CANDIDATE_COLUMNS = (0, 1, 2, 3)
+HEADERS = ("Test", "Delivered relation", "Math", "Code", "QA", "Math", "Code", "QA")
+# Method lines are short; a natural-width span keeps tabular* from adding the table width to the last column.
+GROUP_SPEC = r"@{}l@{}"
+CANDIDATE_COLUMNS = (0, 1, 2, 3, 5)
 CANDIDATE_HEADERS = ("Prediction task", "Pre-specified candidate", "Candidate error (nats)",
-                     "Delivered relation")
-CANDIDATE_WIDTHS = (".30", ".28", ".14", ".28")
+                     "Delivered relation", "Strongest development baseline")
+CANDIDATE_WIDTHS = (".24", ".22", ".12", ".22", ".20")
 TABLE_FONT = r"\footnotesize\fontsize{8}{9.5}\selectfont"
 CAPTION_FONT = r"\footnotesize\fontsize{8.5}{10}\selectfont"
 CAPTION = (
-    "Delivered relations versus baselines at equal budget, by capability. "
-    "Errors are mean absolute errors in nats per token; improvement is baseline minus delivered. "
-    "Group lines give the task, development configuration measurements per capability, "
-    "and Retrospective for a relation chosen after seeing the result. "
-    "The baseline was chosen inside the development folds "
-    "and scored on the same cells. Distillation students: {students}. "
-    "Appendix Table~\\ref{tab:main-prediction-candidates} lists each task's pre-specified candidate; "
+    "Prediction at equal development budget. Test: configurations or states unseen by the relation. "
+    "Delivered relation: predictor recommended on all evidence; a dagger marks selection after seeing test results. "
+    "Error: test mean absolute error in nats per token, per capability (QA: question answering). "
+    "Gain: strongest development baseline error minus delivered error; positive favours the delivered relation. "
+    "Baselines are chosen inside the development folds and scored on the same cells. "
+    "$n$, on each method line: development configuration measurements per capability. "
+    "Appendix Table~\\ref{tab:main-prediction-candidates} names baselines and pre-specified candidates; "
     "Fig.~\\ref{fig:generalization} compares each row with its baseline."
 )
 CANDIDATE_CAPTION = (
-    "Pre-specified candidate of each prediction task in Table~\\ref{tab:main-prediction-v2}, its error on "
-    "the same cells, and the relation delivered after the test. Errors are mean absolute errors in "
-    "nats per token, in math, code and question answering order; the two distillation rows are the "
-    "{students} students."
+    "Pre-specified candidates for Table~\\ref{tab:main-prediction-v2}, their errors on the same cells, "
+    "delivered relations, and strongest development baselines. Errors are mean absolute errors in "
+    "nats per token; errors and baseline names follow math, code and question answering order unless qualified. "
+    "The distillation rows are the {students} students."
 )
 
 NUMBER_PATTERN = r"[-+]?\d+(?:\.\d+)?|\b(?:one|three|four|five|six|seventeen|twenty|half)\b"
@@ -127,8 +139,8 @@ def baseline(audit, name, *sources):
     return mapped(audit, BASELINES[name], *sources)
 
 
-def tested_range(audit, name, *sources):
-    return mapped(audit, RANGES[name], *sources)
+def tested_range(audit, name, *sources, short=False):
+    return mapped(audit, (SHORT_RANGES if short else RANGES)[name], *sources)
 
 
 def evaluate(audit, part):
@@ -616,69 +628,106 @@ def student_label(audit, ref):
 
 
 def caption_cell(audit, text=CAPTION):
-    before, after = text.split("{students}")
-    return cell(before, mapped(audit, "270 million and 1 billion",
-                              pointer("results/v70-distill-confirm/freeze.json","confirmation_register","students")), after, refs=[
+    parts = [text]
+    if "{students}" in text:
+        before, after = text.split("{students}")
+        parts = [before, mapped(audit, "270 million and 1 billion",
+                               pointer("results/v70-distill-confirm/freeze.json", "confirmation_register", "students")), after]
+    return cell(*parts, refs=[
         pointer(P53,"feature_names"), pointer(Q55,"feature_names"),
         pointer("results/v70-distill-confirm/freeze.json","reference_rule"),
         pointer(P53,"candidate_definitions","power"), pointer(Q55,"candidate_definitions","low_order_2d"),
         pointer("results/v70-distill-confirm/freeze.json","models")])
 
 
-def main_rows(rows):
-    """Physical body rows: one spanning task heading, then three capabilities.
+def compact_delivered(audit, delivered):
+    """Summarize the resolved capability identities, retaining their sources."""
+    refs = [ref for cap in CAPS for ref in delivered.capabilities[cap].parts[0]["sources"]]
+    names = tuple(resolve(audit, ref) for ref in refs)
+    parts = [mapped(audit, SHORT_RELATIONS[names], *refs)]
+    for part in delivered.parts:
+        if isinstance(part, dict) and part.get("label") == RETROSPECTIVE:
+            parts.append(mapped(audit, r"$^{\dagger}$", *part["sources"]))
+    return cell(*parts, refs=delivered.context, note=delivered.note)
+
+
+def compact_baseline(audit, baseline_):
+    """Print names only, in capability order or with explicit qualifications."""
+    identities = [baseline_.capabilities[cap].parts[0] for cap in CAPS]
+    names = [evaluate(audit, part).replace("Development median", "Median") for part in identities]
+    if len(set(names)) == 1:
+        label = names[0]
+    elif names[0] == names[1]:
+        label = names[0] + "; " + names[2].lower() + " for QA"
+    elif names[1] == names[2]:
+        label = names[0] + "; " + names[1].lower() + " for Code and QA"
+    else:
+        label = "; ".join([names[0], *[name.lower() for name in names[1:]]])
+    return cell(mapped(audit, label, *[ref for part in identities for ref in part["sources"]]),
+                refs=baseline_.context, note=baseline_.note)
+
+
+def candidate_rows(rows, audit):
+    selected = printed(rows, CANDIDATE_COLUMNS)
+    return [[*row[:-1], compact_baseline(audit, row[-1])] for row in selected]
+
+
+def main_rows(rows, audit):
+    """Physical body rows: an italic method heading followed by one row per task.
 
     Move the original score recipes intact, including the unrounded operands of
     each improvement; never subtract already formatted table values.
     """
     physical = []
+    previous_method = None
+    counts = {}
     for row in rows:
-        task, delivered, scores, baseline_, count, improvement = (row[i] for i in (0, 3, 4, 5, 6, 7))
-        heading = cell(*task.parts, "; ", *count.parts, " measurements",
-                       refs=task.context + count.context, note=task.note + " " + count.note)
-        for part in delivered.parts:
-            if isinstance(part, dict) and part.get("label") == RETROSPECTIVE:
-                heading.parts += ["; ", part]
-        physical.append([heading])
+        task_key = next(key for key in SHORT_RANGES if RANGES[key] == row[0].plain(audit))
+        counts.setdefault(METHODS[task_key], set()).add(row[6].plain(audit))
+    if any(len(values) != 1 for values in counts.values()):
+        raise ValueError("Tasks of one method must share their development measurement count")
+    for row in rows:
+        task, delivered, scores, count, improvement = (row[i] for i in (0, 3, 4, 6, 7))
+        task_key = next(key for key in SHORT_RANGES if RANGES[key] == task.plain(audit))
+        sources = task.parts[0]["sources"]
+        method = METHODS[task_key]
+        if method != previous_method:
+            # The method line carries the development count its tasks share.
+            physical.append([cell(mapped(audit, method, *sources), ", $n={}$".format(""), refs=task.context + count.context)])
+            physical[-1][0].parts[-1:] = [", $n=", *count.parts, "$"]
+            previous_method = method
         d_parts = [p for p in scores.parts if isinstance(p, dict)]
         i_parts = [p for p in improvement.parts if isinstance(p, dict)]
         if len(d_parts) != len(CAPS) or len(i_parts) != len(CAPS):
             raise ValueError("Main table requires one error and improvement per capability")
-        for cap, d, delta in zip(CAPS, d_parts, i_parts):
-            identity = delivered.capabilities[cap]
-            comparison = baseline_.capabilities[cap]
-            physical.append([
-                cell(CAPABILITY_NAMES[cap], refs=identity.parts[0]["sources"]),
-                identity,
-                cell(d, refs=scores.context, note=scores.note),
-                cell(comparison.parts[0], refs=comparison.context, note=comparison.note),
-                cell(*comparison.parts[1:], refs=comparison.context, note=comparison.note),
-                cell(delta, refs=improvement.context, note=improvement.note),
-            ])
+        physical.append([
+            cell(tested_range(audit, task_key, *sources, short=True), refs=task.context, note=task.note),
+            compact_delivered(audit, delivered),
+            *[cell(d, refs=scores.context, note=scores.note) for d in d_parts],
+            *[cell(delta, refs=improvement.context, note=improvement.note) for delta in i_parts],
+        ])
     return physical
 
 
 def render_group(content):
-    return r"\multicolumn{6}{" + GROUP_SPEC + r"}{\textit{" + content + "}}"
+    return r"\multicolumn{8}{" + GROUP_SPEC + r"}{\textit{" + content + "}}"
 
 
 def main_records(rows, audit):
     records = []
-    for i, row in enumerate(main_rows(rows)):
+    for i, row in enumerate(main_rows(rows, audit)):
         for j, c in enumerate(row):
             record = {"table": "tab:main-prediction-v2", "row": i, "column": j, **c.record(audit)}
             if len(row) == 1:
-                record.update(column_span=6, rendered=render_group(record["rendered"]))
+                record.update(column_span=8, rendered=render_group(record["rendered"]))
             records.append(record)
     return records
 
 
 def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
-    # Every entry is one line, so natural-width text columns keep the rows aligned and
-    # \extracolsep{\fill} spreads the spare width between the columns; the two error
-    # columns are fixed-width and centred so each score sits clear of the names on both sides;
-    # scores share one format, so centring keeps their decimal points aligned.
-    column_spec = "".join(ERROR_COLUMN if i in (2, 4) else "c" if i == 5 else "l" for i in range(len(HEADERS)))
+    # Short one-line labels in natural-width text columns; equal-precision scores in
+    # right-aligned columns share decimal positions; \extracolsep{\fill} spreads the spare width.
+    column_spec = "ll" + "r" * 6
     lines = [f"% Generated from frozen JSON; see {sidecar}.",
              r"\begin{table*}[t]\normalfont", r"\centering" + TABLE_FONT + r"\linespread{0.85}\selectfont",
              r"\setlength{\tabcolsep}{1.5pt}", r"\renewcommand{\arraystretch}{0.88}",
@@ -686,8 +735,11 @@ def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
              r"\caption{" + CAPTION_FONT + " " + caption_cell(audit).render(audit) + "}",
              r"\label{tab:main-prediction-v2}",
              r"\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}" + column_spec + "@{}}",
-             r"\toprule", " & ".join(render_text(h) for h in HEADERS) + r" \\", r"\midrule"]
-    for i, row in enumerate(main_rows(rows)):
+             r"\toprule",
+             r"& & \multicolumn{3}{c}{Error} & \multicolumn{3}{c}{Gain over baseline} \\",
+             r"\cmidrule(lr){3-5}\cmidrule(lr){6-8}",
+             " & ".join(render_text(h) for h in HEADERS) + r" \\", r"\midrule"]
+    for i, row in enumerate(main_rows(rows, audit)):
         if len(row) == 1:
             if i:
                 lines.append(r"\midrule")
@@ -698,9 +750,9 @@ def render_table(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
     return "\n".join(lines) + "\n"
 
 
-def _render_candidates_table(rows, audit, *, sidecar, columns,
+def _render_candidates_table(rows, audit, *, sidecar,
                              headers, widths, label, caption, environment):
-    rows = printed(rows, columns)
+    rows = candidate_rows(rows, audit)
     # Empty outer padding leaves two tabcolseps per interior gap.
     gaps = 2 * (len(headers) - 1)
     column_spec = "".join(
@@ -724,7 +776,7 @@ def _render_candidates_table(rows, audit, *, sidecar, columns,
 
 
 def render_candidates(rows, audit, *, sidecar="main_prediction_v2_sources.md"):
-    return _render_candidates_table(rows, audit, sidecar=sidecar, columns=CANDIDATE_COLUMNS,
+    return _render_candidates_table(rows, audit, sidecar=sidecar,
                         headers=CANDIDATE_HEADERS, widths=CANDIDATE_WIDTHS,
                         label="tab:main-prediction-candidates", caption=CANDIDATE_CAPTION,
                         environment="table")
@@ -763,15 +815,16 @@ def generate(root=ROOT, *, write_tex=True):
         caption_record = {"table": "tab:main-prediction-v2", **caption.record(audit)}
         candidate_caption_record = {"table": "tab:main-prediction-candidates", **candidate_caption.record(audit)}
         candidate_records = [{"table": "tab:main-prediction-candidates", "row":i,"column":j,**c.record(audit)}
-                             for i,row in enumerate(printed(rows, CANDIDATE_COLUMNS)) for j,c in enumerate(row)]
+                             for i,row in enumerate(candidate_rows(rows, audit)) for j,c in enumerate(row)]
         numbers = numeric_inventory([*records, caption_record, *candidate_records, candidate_caption_record], audit)
         side = ["# Main prediction table: cell sources", "", "Columns: " + "; ".join(HEADERS) + ".",
-                "Rendered layout: six columns, with an italic task group line spanning all six columns followed by Mathematics, Code and Question answering rows. "
-                "Coordinates are zero-based physical body rows and columns, excluding headers and rules: group lines occupy rows 0, 4, 8, 12 and 16 at column 0 with column_span 6; capability rows occupy the following three rows. Every cell is populated. "
+                "Rendered layout: nine columns: Test, Delivered relation, Error (Math, Code, QA), Gain over baseline (Math, Code, QA), n. "
+                "Italic method headings span all nine columns, followed by one row per task. "
+                "Coordinates are zero-based physical body rows and columns, excluding headers and rules. With all tasks present, method headings occupy rows 0, 2 and 5 at column 0 with column_span 9; task rows occupy rows 1, 3, 4, 6 and 7. Every cell is populated. "
                 "The appendix candidates table prints columns " + "; ".join(CANDIDATE_HEADERS) + " from the same assembled rows; its recipes follow the main table's.",
                 "Development measurements are distinct development configuration measurements per capability for fitting or selecting the tested candidate, excluding dense anchors and held-out measurements. Counts do not describe the post-test delivered predictor. V53 divides recorded scalar rows by the recorded capability-model count; V55/V69 use n_dev_cells; V70 uses development_structure.n_points authenticated by freeze.json. Shared development sets are not additive across rows.",
-                "Each capability row has a delivered identity, delivered error, baseline identity, baseline error and signed improvement (baseline minus delivered, computed before rounding). These cells retain their individual frozen JSON recipes. The group line retains the task's configuration numbers and development measurement count. Development or registration selection pointers are recorded in each baseline cell's note/context. Short task labels retain the full state and configuration definitions in their source recipes.",
-                "Retrospective appears in the group line only when the stored delivered timing says fixed after test; first predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test the delivered interpolation/median rule has no matching stored score; its development includes those cells. The source surface is not delivered, and the older interpolation's different model and boundary rules cannot supply the missing error.",
+                "Each task row has a short test label (column 0), a delivered identity summarized from its three capability selections (column 1), delivered errors (columns 2--4), signed gains (columns 5--7), and a development measurement count (column 8). Gains retain both recorded operands and compute baseline minus delivered before rounding. The appendix's baseline column preserves each capability's development-selected identity and selection pointers; its original four columns are unchanged. Short test labels retain the full state and configuration definitions in their source recipes.",
+                "A dagger follows the main-table delivered relation only when the stored delivered timing says fixed after test; the appendix retains the word Retrospective. First predictors were frozen before measurement. Delivered scores reuse the same frozen test cells, not test-error winners. For the earlier bit test the delivered interpolation/median rule has no matching stored score; its development includes those cells. The source surface is not delivered, and the older interpolation's different model and boundary rules cannot supply the missing error.",
                 "Stored V70 paired_difference.ci95 endpoints are omitted from Table 1 because they do not fit on the same line as the score. They remain in the appendix tables. The sign is baseline minus candidate; these are not MAE intervals. No refits, resampling or invented intervals.",
                 "All indices are zero-based. The numeric inventory identifies the table, physical row/column and recipe part, so appendix and main-table coordinates are distinct. `mean` is equal-weight arithmetic; `weighted_mean` pairs each stored subset MAE with its stored cell count, preserving equal cell weights. No refits or resampling.",
                 "Numeric values are formatted directly from the following executable source recipes. Context pointers justify textual labels and freeze identities; incomplete tasks are omitted.",
