@@ -1,4 +1,4 @@
-# Capability-conditioned scaling-down laws for LLM compression
+# Capability Scaling-Down Laws for LLM Compression
 
 Measurement and analysis code for studying how compressing a language model changes what
 it can do. Three compression families are treated under one protocol, pruning, post-training
