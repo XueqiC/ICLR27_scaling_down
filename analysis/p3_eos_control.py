@@ -34,17 +34,21 @@ STUDENT_BASE = {"pythia-1.4b--step120000": "EleutherAI/pythia-410m", "pythia-410
 CONTROL_SUFFIX = "p3-eos-s3-"
 
 
-def control_run_dir(ref):
+def _canonical(runs, need):
+    """Keep run directories that hold ``need``; drop the '@' revision aliases that mirror the '--' directories."""
+    return [d for d in runs if (d / need).is_file() and "@" not in str(d)]
+
+
+def control_run_dir(ref, need="adapter/adapter_model.safetensors"):
     base = STUDENT_BASE[ref].replace("/", "--")
-    runs = [d for d in (ROOT / "results/p3-eos-control/runs").glob(f"{base}*/*{CONTROL_SUFFIX}{ref}*") if (d / "adapter" / "adapter_model.safetensors").is_file()]
+    runs = _canonical((ROOT / "results/p3-eos-control/runs").glob(f"{base}*/*{CONTROL_SUFFIX}{ref}*"), need)
     if len(runs) != 1:
         raise SystemExit(f"expected one control run for {ref}, found {runs}")
     return runs[0]
 
 
-def s3_run_dir(ref):
-    runs = list((ROOT / "results/s3-selection-validation/students" / ref / "v12").glob("*/*"))
-    runs = [d for d in runs if (d / "adapter" / "adapter_model.safetensors").is_file()]
+def s3_run_dir(ref, need="adapter/adapter_model.safetensors"):
+    runs = _canonical((ROOT / "results/s3-selection-validation/students" / ref / "v12").glob("*/*"), need)
     if len(runs) != 1:
         raise SystemExit(f"expected one S3 run for {ref}, found {runs}")
     return runs[0]
@@ -86,6 +90,13 @@ def analyse():
     import zlib
     control = p1.read(OUT / "results.json")["evaluations"]
     short_all = p1.read(p1.OUT / "results.json")["evaluations"]; long_all = p1.read(p1l.RESULTS)["evaluations"]
+    # One extraction rule for every compared model: the stored spans of the fresh-item run predate the current
+    # rule, so both the original students' and the comparators' 96-token readouts are rescored from their stored
+    # generation blocks exactly as the fresh-item table (p1_long_generation --analyse) does; the control is
+    # rescored the same way.
+    answers = [it["answer"] for it in p1.read(p1.OUT / "plan.json")["items"]]
+    p1l.rescore_long(long_all, answers)
+    p1l.rescore_long({k: e["long"] for k, e in control.items()}, answers)
     summary = {"references": {}}
     for key, e in control.items():
         ref = e["reference"]
@@ -95,7 +106,7 @@ def analyse():
                    ("pristine", "pristine:student"))}
         seed = zlib.crc32(f"{ref}|eos".encode())
         entry = {"control_run": e["run"], "training": e["training"],
-                 "probe_losses": {"s3_student": p1.read(s3_run_dir(ref) / "eval.json").get("post_training"), "control": p1.read(ROOT / e["run"] / "eval.json").get("post_training")},
+                 "probe_losses": {"s3_student": p1.read(s3_run_dir(ref, "eval.json") / "eval.json").get("post_training"), "control": p1.read(ROOT / e["run"] / "eval.json").get("post_training")},
                  "control": {"loss": e["short"]["loss_token_weighted"], "em_32": e["short"]["exact_match"], "f1_32": e["short"]["token_f1"],
                              "em_96": e["long"]["exact_match_span"], "f1_96": e["long"]["token_f1_span"], "truncated_96": e["long"]["truncated_rate"], "tokens_96": e["long"]["tokens_mean"]},
                  "s3_student": {"loss": sum(r["loss_sum"] for r in s3_short["items"]) / sum(r["tokens"] for r in s3_short["items"]), "em_32": s3_short["exact_match"], "f1_32": s3_short["token_f1"],
@@ -151,8 +162,10 @@ def render():
             rows.append(f"\\multicolumn{{4}}{{l}}{{\\emph{{{WORDS.get(ref, ref)}}}}} \\\\")
         rows += [f"Loss, nats per token & {s['loss']:.3f} & {c['loss']:.3f} & {ci(d['loss'])} \\\\",
                  f"Exact match, 32 new tokens & {s['em_32']:.3f} & {c['em_32']:.3f} & {ci(d['em_32'])} \\\\",
-                 f"Exact match, 96 new tokens & {s['em_96']:.3f} & {c['em_96']:.3f} & {ci(d['em_96'])} \\\\",
-                 f"Token F1, 96 new tokens & {s['f1_96']:.3f} & {c['f1_96']:.3f} & {ci(d['f1_96'])} \\\\",
+                 # Rebuttal round (2026-11-06): the original column and the contrast of these two rows were rescored
+                 # with the shared extraction rule; \rev marks them (identity once main.tex redefines \rev).
+                 f"Exact match, 96 new tokens & \\rev{{{s['em_96']:.3f}}} & {c['em_96']:.3f} & \\rev{{{ci(d['em_96'])}}} \\\\",
+                 f"Token F1, 96 new tokens & \\rev{{{s['f1_96']:.3f}}} & {c['f1_96']:.3f} & \\rev{{{ci(d['f1_96'])}}} \\\\",
                  f"Reached the 96-token cap & {s['truncated_96']:.3f} & {c['truncated_96']:.3f} & {ci(d['truncated_96'])} \\\\",
                  f"Generated tokens, mean & {s['tokens_96']:.1f} & {c['tokens_96']:.1f} & {ci(d['tokens_96'], '+.1f')} \\\\"]
         if len(refs) > 1 and ref != refs[-1]:

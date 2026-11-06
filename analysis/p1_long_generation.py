@@ -114,16 +114,28 @@ def run(half):
         print(json.dumps({k: e[k] for k in ("reference", "candidate", "roles", "exact_match_span", "token_f1_span", "exact_match_line", "truncated_rate", "seconds")}), flush=True)
 
 
-def analyse():
+def rescore_long(evaluations, answers):
+    """Rescore every 96-token evaluation from its stored generation block with the current EXTRACTION_RULE.
+
+    The stored per-item spans and scores were written at run time; the rule was revised afterwards (initials,
+    run-on sentences). Every table that reads the 96-token readout must go through this function, so that all
+    compared models share one extraction rule. Mutates and returns ``evaluations``.
+    """
     from analysis import v15_accuracy_link as v15
-    plan = p1.read(OUT / "plan.json"); short = p1.read(OUT / "results.json")["evaluations"]; long = p1.read(RESULTS)["evaluations"]
-    answers = [it["answer"] for it in plan["items"]]
-    for v in long.values():   # rescore from the stored blocks with the current extraction rule
+    for v in evaluations.values():
         for r, answer in zip(v["items"], answers):
             r["span"] = extract_span(r["block"])
             r["em_span"] = bool(v15.qa_exact_match(r["span"], answer)); r["f1_span"] = float(v15.qa_token_f1(r["span"], answer))
         v["exact_match_span"] = statistics.mean(r["em_span"] for r in v["items"])
         v["token_f1_span"] = statistics.mean(r["f1_span"] for r in v["items"])
+    return evaluations
+
+
+def analyse():
+    from analysis import v15_accuracy_link as v15
+    plan = p1.read(OUT / "plan.json"); short = p1.read(OUT / "results.json")["evaluations"]; long = p1.read(RESULTS)["evaluations"]
+    answers = [it["answer"] for it in plan["items"]]
+    rescore_long(long, answers)   # rescore from the stored blocks with the current extraction rule
     # truncation of the 32-token run: re-tokenise its kept block with each model's tokenizer is not available here;
     # a block of 32 or more whitespace tokens is a conservative proxy recorded as `cap_proxy`.
     summary = {"n_items": len(answers), "max_new_tokens": MAX_NEW, "extraction_rule": EXTRACTION_RULE, "references": {}}
